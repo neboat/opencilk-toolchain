@@ -1,0 +1,13 @@
+Index: include/lldb/Target/StopInfo.h
+===================================================================
+--- include/lldb/Target/StopInfo.h	(revision 168826)
++++ include/lldb/Target/StopInfo.h	(revision 168827)
+@@ -23,7 +23,7 @@
+ 
+ class StopInfo
+ {
+-    friend Process::ProcessEventData;
++    friend class Process::ProcessEventData;
+     friend class ThreadPlanBase;
+     
+ public:
