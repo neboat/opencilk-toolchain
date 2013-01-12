@@ -1,7 +1,7 @@
-Index: source/Core/cxa_demangle.cpp
+Index: lldb-3.2/lldb/source/Core/cxa_demangle.cpp
 ===================================================================
---- source/Core/cxa_demangle.cpp	(revision 167708)
-+++ source/Core/cxa_demangle.cpp	(working copy)
+--- lldb-3.2.orig/lldb/source/Core/cxa_demangle.cpp	(revision 167708)
++++ lldb-3.2/lldb/source/Core/cxa_demangle.cpp	(working copy)
 @@ -133,9 +133,14 @@
      {
          for (int i = 0; i < 2*indent; ++i)

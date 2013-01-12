@@ -1,7 +1,7 @@
-Index: clang-3.2/tools/clang/lib/Driver/ToolChains.cpp
+Index: llvm-3.2.src/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- clang-3.2.orig/tools/clang/lib/Driver/ToolChains.cpp	2013-01-06 09:30:46.047046507 +0100
-+++ clang-3.2/tools/clang/lib/Driver/ToolChains.cpp	2013-01-06 11:22:09.982805979 +0100
+--- llvm-3.2.src.orig/clang/lib/Driver/ToolChains.cpp	2013-01-12 15:33:39.427064577 +0100
++++ llvm-3.2.src/clang/lib/Driver/ToolChains.cpp	2013-01-12 15:34:27.855063496 +0100
 @@ -2124,7 +2124,7 @@
      const llvm::Triple &GCCTriple = GCCInstallation.getTriple();
      const std::string &LibPath = GCCInstallation.getParentLibPath();

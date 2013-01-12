@@ -13,7 +13,13 @@ profile_rt.diff
 50-lldb-segfaultgcc.diff
 51-lldb-hasBCPLComments.diff
 52-lldb-declaration.diff
-53-lldb-lambda.diff
 54-lldb-cpp-declaration.diff
 55-lldb-cpp-declaration.diff
 56-lldb-python-path.diff
+0003-Debian-version-info-and-bugreport.patch
+0021-shared-lib-debian.patch
+0023-link-libopagent.patch
+0041-undef-PPC-macro.diff
+0044-soname.diff
+0046-Revert-Patch-to-set-is_stmt-a-little-better-for-prol.patch
+0047-version-name.diff

@@ -1,7 +1,7 @@
-Index: source/Symbol/ClangASTContext.cpp
+Index: llvm-3.2.src/lldb/source/Symbol/ClangASTContext.cpp
 ===================================================================
---- source/Symbol/ClangASTContext.cpp	(revision 167750)
-+++ source/Symbol/ClangASTContext.cpp	(revision 167751)
+--- llvm-3.2.src.orig/lldb/source/Symbol/ClangASTContext.cpp	2013-01-10 17:51:58.000000000 +0100
++++ llvm-3.2.src/lldb/source/Symbol/ClangASTContext.cpp	2013-01-12 15:38:43.799057785 +0100
 @@ -257,7 +257,7 @@
      }
  

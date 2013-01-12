@@ -1,7 +1,7 @@
-Index: source/Core/cxa_demangle.cpp
+Index: lldb-3.2/lldb/source/Core/cxa_demangle.cpp
 ===================================================================
---- source/Core/cxa_demangle.cpp	(revision 168834)
-+++ source/Core/cxa_demangle.cpp	(revision 168835)
+--- lldb-3.2.orig/lldb/source/Core/cxa_demangle.cpp	(revision 168834)
++++ lldb-3.2/lldb/source/Core/cxa_demangle.cpp	(revision 168835)
 @@ -3932,11 +3932,11 @@
      }
  };

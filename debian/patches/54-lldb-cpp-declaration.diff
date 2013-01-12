@@ -1,7 +1,7 @@
-Index: scripts/Python/python-wrapper.swig
+Index: lldb-3.2/lldb/scripts/Python/python-wrapper.swig
 ===================================================================
---- scripts/Python/python-wrapper.swig	(revision 168900)
-+++ scripts/Python/python-wrapper.swig	(revision 168901)
+--- lldb-3.2.orig/lldb/scripts/Python/python-wrapper.swig	(revision 168900)
++++ lldb-3.2/lldb/scripts/Python/python-wrapper.swig	(revision 168901)
 @@ -964,6 +964,10 @@
  #include "lldb/API/SBInputReader.h"
  #include "lldb/API/SBDebugger.h"

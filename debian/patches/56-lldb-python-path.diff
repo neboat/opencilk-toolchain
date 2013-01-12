@@ -1,7 +1,7 @@
-Index: source/Utility/Makefile
+Index: lldb-3.2/lldb/source/Utility/Makefile
 ===================================================================
---- source/Utility/Makefile	(revision 169766)
-+++ source/Utility/Makefile	(revision 169767)
+--- lldb-3.2.orig/lldb/source/Utility/Makefile	(revision 169766)
++++ lldb-3.2/lldb/source/Utility/Makefile	(revision 169767)
 @@ -12,4 +12,11 @@
  BUILD_ARCHIVE = 1
  NO_PEDANTIC = 1
@@ -14,10 +14,10 @@ Index: source/Utility/Makefile
 +
 +
  include $(LLDB_LEVEL)/Makefile
-Index: source/Core/Makefile
+Index: lldb-3.2/lldb/source/Core/Makefile
 ===================================================================
---- source/Core/Makefile	(revision 169766)
-+++ source/Core/Makefile	(revision 169767)
+--- lldb-3.2.orig/lldb/source/Core/Makefile	(revision 169766)
++++ lldb-3.2/lldb/source/Core/Makefile	(revision 169767)
 @@ -11,4 +11,15 @@
  LIBRARYNAME := lldbCore
  BUILD_ARCHIVE = 1
@@ -34,10 +34,10 @@ Index: source/Core/Makefile
 +endif
 +
  include $(LLDB_LEVEL)/Makefile
-Index: lib/Makefile
+Index: lldb-3.2/lldb/lib/Makefile
 ===================================================================
---- lib/Makefile	(revision 169766)
-+++ lib/Makefile	(revision 169767)
+--- lldb-3.2.orig/lldb/lib/Makefile	(revision 169766)
++++ lldb-3.2/lldb/lib/Makefile	(revision 169767)
 @@ -67,6 +67,14 @@
  	lldbPluginPlatformLinux.a \
  	lldbPluginPlatformFreeBSD.a

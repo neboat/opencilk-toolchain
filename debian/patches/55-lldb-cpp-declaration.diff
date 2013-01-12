@@ -1,7 +1,7 @@
-Index: source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.cpp
+Index: lldb-3.2/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.cpp
 ===================================================================
---- source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.cpp	(revision 169184)
-+++ source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.cpp	(revision 169185)
+--- lldb-3.2.orig/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.cpp	(revision 169184)
++++ lldb-3.2/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.cpp	(revision 169185)
 @@ -344,7 +344,7 @@
          
          while (*name_cursor != '\0')
@@ -11,10 +11,10 @@ Index: source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.
              if (!colon_loc)
              {
                  selector_components.push_back(&ast_ctx.Idents.get(llvm::StringRef(name_cursor)));
-Index: source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.cpp
+Index: lldb-3.2/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.cpp
 ===================================================================
---- source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.cpp	(revision 169184)
-+++ source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.cpp	(revision 169185)
+--- lldb-3.2.orig/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.cpp	(revision 169184)
++++ lldb-3.2/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.cpp	(revision 169185)
 @@ -727,7 +727,8 @@
                     lldb::addr_t load_addr) :
          m_process(process),
@@ -34,10 +34,10 @@ Index: source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.c
  };
  
  class ClassDescriptorV2 : public ObjCLanguageRuntime::ClassDescriptor
-Index: source/Interpreter/CommandObject.cpp
+Index: lldb-3.2/lldb/source/Interpreter/CommandObject.cpp
 ===================================================================
---- source/Interpreter/CommandObject.cpp	(revision 169184)
-+++ source/Interpreter/CommandObject.cpp	(revision 169185)
+--- lldb-3.2.orig/lldb/source/Interpreter/CommandObject.cpp	(revision 169184)
++++ lldb-3.2/lldb/source/Interpreter/CommandObject.cpp	(revision 169185)
 @@ -752,9 +752,9 @@
      StreamString sstr;
      sstr << "One of the following languages:\n";
