@@ -15,4 +15,6 @@
 
 * add the soname
 
-* bootstrap of clang with itslef
+* bootstrap of clang with itself
+
+* in the control, use variable instead of hardcoded 3.2
