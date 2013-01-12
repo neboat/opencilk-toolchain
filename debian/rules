@@ -34,9 +34,12 @@ endif
 
 
 %:
-	dh $@ --buildsystem=cmake --builddirectory=$(TARGET_BUILD)
+	dh $@
+# --buildsystem=cmake --builddirectory=$(TARGET_BUILD)
+debian/%: debian/%.in
+	sed -e 's|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|g' -e "s|@OCAML_STDLIB_DIR@|$(OCAML_STDLIB_DIR)|g" -e "s|@LLVM_VERSION@|$(LLVM_VERSION)|g" $< > $@
 
-override_dh_auto_configure:
+override_dh_auto_configure: debian/libllvm$(LLVM_VERSION).install debian/llvm-$(LLVM_VERSION)-dev.links debian/libllvm-$(LLVM_VERSION)-ocaml-dev.dirs debian/llvm-$(LLVM_VERSION)-runtime.binfmt debian/llvm-$(LLVM_VERSION)-runtime.prerm
 	mkdir -p $(TARGET_BUILD)
 	mkdir -p clang/include/clang/Debian
 	sed -e "s|@DEB_HOST_MULTIARCH@|$(dpkg-architecture -qDEB_HOST_MULTIARCH)|" \
@@ -65,30 +68,57 @@ override_dh_auto_configure:
 	readlink compiler-rt
 
 # Start the actual configure
-#	cd $(TARGET_BUILD) && \
-#	  ../configure $(confargs) \
-#	--prefix=/usr/ \
-#	--disable-assertions --enable-shared --enable-optimized \
-#	--with-optimize-option=' $(opt_flags)' --enable-pic --enable-libffi \
-#	CLANG_VENDOR=Debian || { cat config.log; exit 1; }
-	cd $(TARGET_BUILD) && cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON
+	cd $(TARGET_BUILD) && \
+	  ../configure $(confargs) \
+	--prefix=/usr/lib/llvm-$(LLVM_VERSION) \
+	--disable-assertions \
+	--enable-shared \
+	--enable-optimized \
+	--with-optimize-option=' $(opt_flags)' \
+	--enable-pic \
+	--enable-libffi \
+	--with-ocaml-libdir=/usr/lib/ocaml/llvm-$(LLVM_VERSION) \
+	--libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
+	--with-binutils-include=/usr/include \
+	--with-bug-report-url=http://bugs.debian.org/ \
+	--enable-shared \
+	CLANG_VENDOR=Debian || { cat config.log; exit 1; }
+#	cd $(TARGET_BUILD) && cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON
+#	mkdir build-compiler-rt && cd build-compiler-rt && cmake ../compiler-rt
 
 override_dh_auto_build:
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 ONLY_TOOLS="clang lldb" CLANG_VENDOR=Debian CXXFLAGS=-std=c++0x
+	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=Debian CXXFLAGS=-std=c++0x
+#	$(MAKE) $(NJOBS) -C build-compiler-rt VERBOSE=1
 # Only available in clang 3.3
 #	cd $(CURDIR)/tools/clang/docs && make -f Makefile.sphinx
 # && make -f Makefile.sphinx man
 
 override_dh_auto_install:
+	chrpath -d `find $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable`
 	chrpath -d $(TARGET_BUILD)/Release/bin/clang
-	$(MAKE) -C $(TARGET_BUILD)  VERBOSE=1  ONLY_TOOLS="clang lldb" install DESTDIR=$(CURDIR)/debian/tmp/
-	cd debian/tmp/usr/lib/&& mv libclang.so libclang.so.$(SONAME_EXT) && ln -s libclang.so.$(SONAME_EXT) libclang.so
+	$(MAKE) -C $(TARGET_BUILD)  VERBOSE=1  install DESTDIR=$(CURDIR)/debian/tmp/
+	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && mv libclang.so libclang.so.$(SONAME_EXT) && ln -s libclang.so.$(SONAME_EXT) libclang.so
 #	cd $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/ && rm -rf $$(find . -iname "SubDir.lib*" -o -iname .dir) && rm -rf $$(find -empty)
 	mkdir -p $(CURDIR)/debian/compiler-rt/usr/bin/
 	cp compiler-rt/lib/asan/scripts/asan_symbolize.py $(CURDIR)/debian/compiler-rt/usr/bin/asan_symbolize
 # Create this fake directory to make the install libclang-common-dev happy
 # under the unsupported archs of compiler-rt
 	mkdir -p $(CURDIR)/debian/tmp/usr/lib/clang/$(LLVM_VERSION)/lib
+
+# Rename binaries
+	mkdir -p $(CURDIR)/debian/tmp/usr/bin/
+	cd $(CURDIR)/debian/tmp/usr/bin/; rm -f *; \
+	for f in $(CURDIR)/debian/tmp/usr/lib/llvm-3.2/bin/*; do \
+		ln -s $$f `basename $$f`-$(LLVM_VERSION); \
+		echo "Link $$f to `basename $$f`-$(LLVM_VERSION)"; \
+	done
+
+# Rename manpages
+#	d=$(CURDIR)/docs/_build/man/; \
+#	cd $$d; \
+#	for f in *.1; do \
+#		echo "$$f"|grep "3\.2" || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
+#	done
 
 .PHONY: override_dh_strip
 override_dh_strip:
