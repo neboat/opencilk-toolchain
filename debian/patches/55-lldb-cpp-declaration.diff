@@ -1,7 +1,7 @@
-Index: lldb-3.2/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.cpp
+Index: llvm-3.2.src/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.cpp
 ===================================================================
---- lldb-3.2.orig/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.cpp	(revision 169184)
-+++ lldb-3.2/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.cpp	(revision 169185)
+--- llvm-3.2.src.orig/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.cpp	2013-01-12 15:49:01.575044001 +0100
++++ llvm-3.2.src/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCTypeVendor.cpp	2013-01-12 15:49:03.095043967 +0100
 @@ -344,7 +344,7 @@
          
          while (*name_cursor != '\0')
@@ -11,10 +11,10 @@ Index: lldb-3.2/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleO
              if (!colon_loc)
              {
                  selector_components.push_back(&ast_ctx.Idents.get(llvm::StringRef(name_cursor)));
-Index: lldb-3.2/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.cpp
+Index: llvm-3.2.src/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.cpp
 ===================================================================
---- lldb-3.2.orig/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.cpp	(revision 169184)
-+++ lldb-3.2/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.cpp	(revision 169185)
+--- llvm-3.2.src.orig/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.cpp	2013-01-12 15:49:01.575044001 +0100
++++ llvm-3.2.src/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleObjCRuntimeV2.cpp	2013-01-12 15:49:03.095043967 +0100
 @@ -727,7 +727,8 @@
                     lldb::addr_t load_addr) :
          m_process(process),
@@ -34,10 +34,10 @@ Index: lldb-3.2/lldb/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime/AppleO
  };
  
  class ClassDescriptorV2 : public ObjCLanguageRuntime::ClassDescriptor
-Index: lldb-3.2/lldb/source/Interpreter/CommandObject.cpp
+Index: llvm-3.2.src/lldb/source/Interpreter/CommandObject.cpp
 ===================================================================
---- lldb-3.2.orig/lldb/source/Interpreter/CommandObject.cpp	(revision 169184)
-+++ lldb-3.2/lldb/source/Interpreter/CommandObject.cpp	(revision 169185)
+--- llvm-3.2.src.orig/lldb/source/Interpreter/CommandObject.cpp	2013-01-12 15:49:01.575044001 +0100
++++ llvm-3.2.src/lldb/source/Interpreter/CommandObject.cpp	2013-01-12 15:49:03.095043967 +0100
 @@ -752,9 +752,9 @@
      StreamString sstr;
      sstr << "One of the following languages:\n";
