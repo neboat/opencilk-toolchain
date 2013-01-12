@@ -88,6 +88,7 @@ override_dh_auto_configure: debian/libllvm$(LLVM_VERSION).install debian/llvm-$(
 
 override_dh_auto_build:
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=Debian CXXFLAGS=-std=c++0x
+	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 #	$(MAKE) $(NJOBS) -C build-compiler-rt VERBOSE=1
 # Only available in clang 3.3
 #	cd $(CURDIR)/tools/clang/docs && make -f Makefile.sphinx
