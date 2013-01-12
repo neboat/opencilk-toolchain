@@ -1,2 +1,18 @@
-* moved the header at the right place in libclang-dev
+* apply the patches:
+ * llvm
+ * clang 
+ * lldb
+
+* regarder pour les alternatives
+
+* appliquer le patch de c++ i386
+
+* remove of clang & llvm 3.2
+
+* look at the bugs of llvm 3.2
+
+* move the header at the right place in libclang-dev
+
 * add the soname
+
+* bootstrap of clang with itslef

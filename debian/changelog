@@ -1,5 +1,7 @@
-clang (3.2-1~exp4) experimental; urgency=low
+llvm-toolchain-3.2 (3.2-1) unstable; urgency=low
 
+  * Build the whole LLVM toolchain at once.
+  TODO
   * Build using cmake instead of the autotools
   * Also install clang-check & clang-tblgen in the clang-3.2 package
 
