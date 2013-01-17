@@ -1,6 +1,9 @@
-debian/tmp//usr/lib/llvm-3.2/lib/*		/usr/lib/llvm-3.2/lib/
-debian/tmp//usr/lib/llvm-3.2/include/llvm/	usr/include/llvm-3.2/
-debian/tmp//usr/lib/llvm-3.2/include/llvm-c/	usr/include/llvm-c-3.2/
+usr/lib/llvm-3.2/lib/libLLVM*.a
+usr/lib/llvm-3.2/lib/libllvm*.a
+usr/lib/llvm-3.2/lib/LLVM*.so
+usr/lib/llvm-3.2/lib/libLTO.*
+usr/lib/llvm-3.2/include/llvm/	usr/include/llvm-3.2/
+usr/lib/llvm-3.2/include/llvm-c/	usr/include/llvm-c-3.2/
 
 build-llvm/Makefile.common		/usr/lib/llvm-3.2/build/
 build-llvm/Makefile.config		/usr/lib/llvm-3.2/build/
