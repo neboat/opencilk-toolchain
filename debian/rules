@@ -14,6 +14,7 @@ DEB_HOST_GNU_TYPE   = $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_HOST_ARCH_BITS  = $(shell dpkg-architecture -qDEB_HOST_ARCH_BITS)
 DEB_HOST_ARCH       = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
+OCAML_STDLIB_DIR    ?= $(shell ocamlc -where)
 
 confargs := \
         --with-c-include-dirs=/usr/include/$(DEB_HOST_MULTIARCH):/usr/include/$(DEB_HOST_GNU_TYPE):/usr/include \
@@ -39,7 +40,7 @@ endif
 debian/%: debian/%.in
 	sed -e 's|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|g' -e "s|@OCAML_STDLIB_DIR@|$(OCAML_STDLIB_DIR)|g" -e "s|@LLVM_VERSION@|$(LLVM_VERSION)|g" $< > $@
 
-override_dh_auto_configure: debian/libllvm$(LLVM_VERSION).install debian/llvm-$(LLVM_VERSION)-dev.links debian/libllvm-$(LLVM_VERSION)-ocaml-dev.dirs debian/llvm-$(LLVM_VERSION)-runtime.binfmt debian/llvm-$(LLVM_VERSION)-runtime.prerm
+override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LLVM_VERSION).links debian/libllvm$(LLVM_VERSION).install debian/llvm-$(LLVM_VERSION)-dev.links debian/libllvm-$(LLVM_VERSION)-ocaml-dev.dirs debian/llvm-$(LLVM_VERSION)-runtime.binfmt debian/llvm-$(LLVM_VERSION)-runtime.prerm
 	mkdir -p $(TARGET_BUILD)
 	mkdir -p clang/include/clang/Debian
 	sed -e "s|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|" \
@@ -101,6 +102,7 @@ override_dh_auto_install:
 	$(MAKE) -C $(TARGET_BUILD)  VERBOSE=1  install DESTDIR=$(CURDIR)/debian/tmp/
 	chrpath -d `find $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable`
 	mv $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION)*.so $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION).so.$(SONAME_EXT)
+	mv $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/liblldb.so $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/liblldb.so.$(SONAME_EXT)
 
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && mv libclang.so libclang.so.$(SONAME_EXT) && ln -s libclang.so.$(SONAME_EXT) libclang.so
 #	cd $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/ && rm -rf $$(find . -iname "SubDir.lib*" -o -iname .dir) && rm -rf $$(find -empty)
@@ -113,7 +115,7 @@ override_dh_auto_install:
 # Rename binaries
 	mkdir -p $(CURDIR)/debian/tmp/usr/bin/
 	cd $(CURDIR)/debian/tmp/usr/bin/; rm -f *; \
-	for f in $(CURDIR)/debian/tmp/usr/lib/llvm-3.2/bin/*; do \
+	for f in ../lib/llvm-$(LLVM_VERSION)/bin/*; do \
 		ln -s $$f `basename $$f`-$(LLVM_VERSION); \
 		echo "Link $$f to `basename $$f`-$(LLVM_VERSION)"; \
 	done
@@ -128,6 +130,9 @@ override_dh_auto_install:
 .PHONY: override_dh_strip
 override_dh_strip:
 	dh_strip --dbg-package=libclang$(SONAME_EXT)-dbg
+
+override_dh_shlibdeps:
+	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_shlibdeps
 
 override_dh_auto_test:
 	$(MAKE) -C $(TARGET_BUILD)  check || true
