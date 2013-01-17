@@ -23,3 +23,5 @@ profile_rt.diff
 0044-soname.diff
 0046-Revert-Patch-to-set-is_stmt-a-little-better-for-prol.patch
 0047-version-name.diff
+debian_path.diff
+scan-build-clang-path.diff
