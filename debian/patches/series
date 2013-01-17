@@ -25,3 +25,4 @@ profile_rt.diff
 0047-version-name.diff
 debian_path.diff
 scan-build-clang-path.diff
+57-lldb-soname.diff
