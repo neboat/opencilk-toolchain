@@ -2,8 +2,8 @@ llvm-toolchain-3.2 (3.2-1) unstable; urgency=low
 
   * Build the whole LLVM toolchain at once.
   TODO
-  * Build using cmake instead of the autotools
   * Also install clang-check & clang-tblgen in the clang-3.2 package
+  * Fix the patch detection of clang from scan-build (Closes: #698352)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 07 Jan 2013 15:45:54 +0100
 
