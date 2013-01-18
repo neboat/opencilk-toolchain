@@ -121,21 +121,27 @@ override_dh_auto_install:
 	done
 
 # Rename manpages
-#	d=$(CURDIR)/docs/_build/man/; \
-#	cd $$d; \
-#	for f in *.1; do \
-#		echo "$$f"|grep "3\.2" || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
-#	done
+	d=$(CURDIR)/docs/_build/man/; \
+	cd $$d; \
+	for f in *.1; do \
+		echo "$$f"|grep "3\.2" || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
+	done
+
+# Remove some license files
+	rm $(CURDIR)/debian/tmp/usr/lib/llvm-3.2/include/llvm/Support/LICENSE.TXT
 
 .PHONY: override_dh_strip
 override_dh_strip:
-	dh_strip --dbg-package=libclang$(SONAME_EXT)-dbg
+	dh_strip -p libclang$(SONAME_EXT) --dbg-package=libclang$(SONAME_EXT)-dbg
+	dh_strip -p libllvm$(LLVM_VERSION) --dbg-package=libllvm$(LLVM_VERSION)-dbg
+	dh_strip -a
 
 override_dh_shlibdeps:
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_shlibdeps
 
 override_dh_auto_test:
-	$(MAKE) -C $(TARGET_BUILD)  check || true
+	$(MAKE) -C $(TARGET_BUILD) check || true
 
 override_dh_auto_clean:
 	rm -rf $(TARGET_BUILD) tools/clang/include/clang/Debian/debian_path.h
+	rm -f `ls debian/*.in|sed -e "s|.in$$||g"`
