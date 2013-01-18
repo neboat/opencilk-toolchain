@@ -1,10 +1,10 @@
-Index: clang-3.2/tools/clang/lib/Driver/ToolChains.cpp
+Index: llvm-3.2.src/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- clang-3.2~rc1.orig/tools/clang/lib/Driver/ToolChains.cpp	2012-11-27 12:21:42.000000000 +0100
-+++ clang-3.2~rc1/tools/clang/lib/Driver/ToolChains.cpp	2012-11-29 09:47:06.000000000 +0100
+--- llvm-3.2.src.orig/clang/lib/Driver/ToolChains.cpp	2013-01-18 15:57:25.240901367 +0100
++++ llvm-3.2.src/clang/lib/Driver/ToolChains.cpp	2013-01-18 15:57:49.752900485 +0100
 @@ -36,6 +36,9 @@
  #include <cstdlib> // ::getenv
-
+ 
  #include "clang/Config/config.h" // for GCC_INSTALL_PREFIX
 +#include "clang/Debian/debian_path.h"
 +
@@ -12,7 +12,7 @@ Index: clang-3.2/tools/clang/lib/Driver/ToolChains.cpp
  
  using namespace clang::driver;
  using namespace clang::driver::toolchains;
-@@ -2316,6 +2318,10 @@
+@@ -2379,6 +2382,10 @@
  
    const std::string IncludePathCandidates[] = {
      LibDir.str() + "/../include/c++/" + Version.str(),

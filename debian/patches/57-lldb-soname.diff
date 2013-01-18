@@ -1,7 +1,7 @@
-Index: llvm-toolchain-3.2-3.2/tools/lldb/lib/Makefile
+Index: llvm-toolchain-3.2-3.2/lldb/lib/Makefile
 ===================================================================
---- llvm-toolchain-3.2-3.2.orig/tools/lldb/lib/Makefile	2013-01-13 09:30:41.000000000 +0100
-+++ llvm-toolchain-3.2-3.2/tools/lldb/lib/Makefile	2013-01-17 18:01:01.000000000 +0100
+--- llvm-toolchain-3.2-3.2.orig/lldb/lib/Makefile	2013-01-13 09:30:41.000000000 +0100
++++ llvm-toolchain-3.2-3.2/lldb/lib/Makefile	2013-01-17 18:01:01.000000000 +0100
 @@ -135,7 +135,7 @@
      endif
  endif
