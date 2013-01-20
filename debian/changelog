@@ -9,6 +9,7 @@ llvm-toolchain-3.2 (3.2-1) unstable; urgency=low
     (Closes: #696474)
   * libLLVM-3.2.so.1 is now shipped only once (Closes: #696913)
   * Enable RTTI (Closes: #697754)
+  * Introduce lldb as a new package (Closes: #698601)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 07 Jan 2013 15:45:54 +0100
 
