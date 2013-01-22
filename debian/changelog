@@ -1,4 +1,4 @@
-llvm-toolchain-3.2 (3.2-1) unstable; urgency=low
+llvm-toolchain-3.2 (3.2-1~exp1) experimental; urgency=low
 
   * Build the whole LLVM toolchain at once.
   * Also install clang-check & clang-tblgen in the clang-3.2 package
