@@ -1,6 +1,11 @@
 llvm-toolchain-3.2 (3.2-1~exp1) experimental; urgency=low
 
-  * Build the whole LLVM toolchain at once.
+  * Build the whole LLVM toolchain at once. This includes:
+    - LLVM
+    - Clang
+    - compiler-rt
+    - lldb
+    - polly
   * Also install clang-check & clang-tblgen in the clang-3.2 package
   * Fix the patch detection of clang from scan-build (Closes: #698352)
   * debian/patches/0050-powerpcspe-fp.diff: Add, hopefully fix FTBFS on
@@ -10,6 +15,7 @@ llvm-toolchain-3.2 (3.2-1~exp1) experimental; urgency=low
   * libLLVM-3.2.so.1 is now shipped only once (Closes: #696913)
   * Enable RTTI (Closes: #697754)
   * Introduce lldb as a new package (Closes: #698601)
+  * Add a script pollycc which will call clang with the right arguments.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 07 Jan 2013 15:45:54 +0100
 
