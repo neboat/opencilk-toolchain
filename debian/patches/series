@@ -27,4 +27,3 @@ scan-build-clang-path.diff
 57-lldb-soname.diff
 0050-powerpcspe-fp.diff
 polly-c++0x.diff
-
