@@ -89,7 +89,7 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 	--with-cloog --with-isl \
 	--with-bug-report-url=http://bugs.debian.org/ \
 	--enable-shared \
-	CLANG_VENDOR=Debian || { cat config.log; exit 1; }
+	CLANG_VENDOR=Debian || { cat config.log tools/polly/config.log; exit 1; }
 #	cd $(TARGET_BUILD) && cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON
 #	mkdir build-compiler-rt && cd build-compiler-rt && cmake ../compiler-rt
 
