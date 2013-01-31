@@ -16,6 +16,8 @@ llvm-toolchain-3.2 (3.2-1~exp1) experimental; urgency=low
   * Enable RTTI (Closes: #697754)
   * Introduce lldb as a new package (Closes: #698601)
   * Add a script pollycc which will call clang with the right arguments.
+  * Use __builtin___clear_cache on ARM to fix a clang bug.
+    Thanks to Matthias Klose.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 07 Jan 2013 15:45:54 +0100
 
