@@ -133,7 +133,7 @@ override_dh_auto_install:
 	done
 
 # Remove some license files
-	rm $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/llvm/Support/LICENSE.TXT $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/build/autoconf/LICENSE.TXT 
+	rm $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/llvm/Support/LICENSE.TXT
 
 .PHONY: override_dh_strip
 override_dh_strip:
