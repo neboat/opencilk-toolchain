@@ -88,6 +88,7 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 	--with-binutils-include=/usr/include \
 	--with-cloog --with-isl \
 	--with-bug-report-url=http://bugs.debian.org/ \
+	--enable-experimental-targets=R600 \
 	--enable-shared \
 	CLANG_VENDOR=Debian || { cat config.log tools/polly/config.log; exit 1; }
 #	cd $(TARGET_BUILD) && cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON
