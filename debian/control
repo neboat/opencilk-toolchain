@@ -173,7 +173,9 @@ Package: libclang-dev
 Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, libstdc++6-4.7-dev,
- libclang1 (= ${binary:Version}), libclang-common-dev
+ libclang1 (= ${binary:Version}), libclang-common-dev (= ${binary:Version})
+Replaces: llvm-3.2-dev (<< 3.2-2repack)
+Breaks: llvm-3.2-dev (<< 3.2-2repack)
 Description: clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Some of its goals include the following:
