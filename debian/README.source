@@ -1,7 +1,6 @@
 
-In the repack script (orig-tar.sh), we are creating a subdirectory tools/clang/
-and storing all the sources of clang in it. 
-After that, the llvm sources are unpack, its patches applied
+The tarball are basically the one from upstream, renamed and recompressed using
+tar.bz2
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 12 Apr 2011 21:21:24 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>, Sat,  9 Feb 2013 11:36:37 +0100
 

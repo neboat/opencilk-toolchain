@@ -233,7 +233,8 @@ Description: clang library - Common development package
     * A single unified parser for C, Objective C, C++, and Objective C++
     * Conformance with C/C++/ObjC and their variants
  .
- This package contains the clang generic headers.
+ This package contains the clang generic headers and some libraries
+ (profiling, etc).
 
 
 # Package: compiler-rt

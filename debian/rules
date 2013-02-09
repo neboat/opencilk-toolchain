@@ -17,7 +17,7 @@ DEB_HOST_ARCH       = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 OCAML_STDLIB_DIR    ?= $(shell ocamlc -where)
 
 confargs := \
-        --with-c-include-dirs=/usr/include/$(DEB_HOST_MULTIARCH):/usr/include/$(DEB_HOST_GNU_TYPE):/usr/include \
+        --with-c-include-dirs=/usr/include/$(DEB_HOST_MULTIARCH):/usr/include/$(DEB_HOST_GNU_TYPE):/usr/include:/usr/lib/gcc/$(DEB_HOST_MULTIARCH)/$(GCC_VERSION)/include/ \
 	--with-cxx-include-root=/usr/include/c++/$(GCC_VERSION) \
 	--with-cxx-include-arch=$(DEB_HOST_GNU_TYPE) \
 	--host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE)
