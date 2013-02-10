@@ -17,7 +17,7 @@ DEB_HOST_ARCH       = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 OCAML_STDLIB_DIR    ?= $(shell ocamlc -where)
 
 confargs := \
-        --with-c-include-dirs=/usr/include/$(DEB_HOST_MULTIARCH):/usr/include/$(DEB_HOST_GNU_TYPE):/usr/include:/usr/lib/gcc/$(DEB_HOST_MULTIARCH)/$(GCC_VERSION)/include/ \
+        --with-c-include-dirs=/usr/include/$(DEB_HOST_MULTIARCH):/usr/include/$(DEB_HOST_GNU_TYPE):/usr/include \
 	--with-cxx-include-root=/usr/include/c++/$(GCC_VERSION) \
 	--with-cxx-include-arch=$(DEB_HOST_GNU_TYPE) \
 	--host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE)
@@ -88,11 +88,11 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 	--with-binutils-include=/usr/include \
 	--with-cloog --with-isl \
 	--with-bug-report-url=http://bugs.debian.org/ \
-	--enable-experimental-targets=R600 \
 	--enable-shared \
 	CLANG_VENDOR=Debian || { cat config.log tools/polly/config.log; exit 1; }
 #	cd $(TARGET_BUILD) && cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON
 #	mkdir build-compiler-rt && cd build-compiler-rt && cmake ../compiler-rt
+#        --enable-experimental-targets=R600 
 
 override_dh_auto_build:
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=Debian CXXFLAGS=-std=c++0x  REQUIRES_RTTI=1

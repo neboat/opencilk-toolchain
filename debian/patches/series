@@ -28,4 +28,4 @@ scan-build-clang-path.diff
 0050-powerpcspe-fp.diff
 polly-c++0x.diff
 declare_clear_cache.diff
-r600-snapshot.diff
+#r600-snapshot.diff
