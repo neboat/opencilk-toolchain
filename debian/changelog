@@ -1,7 +1,8 @@
-llvm-toolchain-3.2 (3.2repack-1~exp2) experimental; urgency=low
+llvm-toolchain-3.2 (1:3.2repack-1~exp2) experimental; urgency=low
 
   * Install the python files for lldb. Thanks to Daniel Malea for spotting this.
   * Update of the clean target
+  * Introduce an epoch to match the changes in bug #699899
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 13 Feb 2013 12:22:30 +0100
 
