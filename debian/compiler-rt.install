@@ -1,2 +1,0 @@
-build-clang/lib/clang/3.3/lib/linux/*.a /usr/lib/clang/3.3/
-build-clang/lib/libprofile_rt.a /usr/lib/clang/3.3/
