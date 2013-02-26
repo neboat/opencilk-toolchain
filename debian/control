@@ -1,4 +1,4 @@
-Source: llvm-toolchain-3.2
+Source: llvm-toolchain
 Section: devel
 Priority: optional
 Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
@@ -12,12 +12,12 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl8.5, expect,
 Build-Conflicts: oprofile, ocaml
 Standards-Version: 3.9.3
 Homepage: http://www.llvm.org/
-Vcs-Svn: svn://svn.debian.org/svn/pkg-llvm/llvm-toolchain/trunk/
-Vcs-Browser: http://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/trunk/
+Vcs-Svn: svn://svn.debian.org/svn/pkg-llvm/llvm-toolchain/branches/snapshot/
+Vcs-Browser: http://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/snapshot/
 
 Package: clang
 Architecture: all
-Depends: clang-3.2 (>= ${source:Version}), ${misc:Depends}
+Depends: clang-3.3 (>= ${source:Version}), ${misc:Depends}
 Description: C, C++ and Objective-C compiler (LLVM based)
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Some of its goals include the following:
@@ -43,12 +43,12 @@ Description: C, C++ and Objective-C compiler (LLVM based)
     * A single unified parser for C, Objective C, C++, and Objective C++
     * Conformance with C/C++/ObjC and their variants
 
-Package: clang-3.2
+Package: clang-3.3
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, libstdc++6-4.7-dev, libgcc-4.7-dev,
  libobjc-4.7-dev, libclang-common-dev (= ${binary:Version})
 Provides: c-compiler, objc-compiler, c++-compiler
-Recommends: llvm-3.2-dev, python
+Recommends: llvm-3.3-dev, python
 Replaces: clang (<< 1:3.1), clang-3.1, compiler-rt
 Breaks: clang (<< 1:3.1), clang-3.1, compiler-rt
 Description: C, C++ and Objective-C compiler (LLVM based)
@@ -76,7 +76,7 @@ Description: C, C++ and Objective-C compiler (LLVM based)
     * A single unified parser for C, Objective C, C++, and Objective C++
     * Conformance with C/C++/ObjC and their variants
 
-Package: clang-3.2-doc
+Package: clang-3.3-doc
 Architecture: all
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -205,8 +205,8 @@ Package: libclang-common-dev
 Architecture: any
 Section: libdevel
 Depends: ${misc:Depends}
-Replaces: llvm-3.2-dev (<< 1:3.2repack), libclang-dev
-Breaks: llvm-3.2-dev (<< 1:3.2repack)
+Replaces: llvm-3.3-dev (<< 1:3.2repack), libclang-dev
+Breaks: llvm-3.3-dev (<< 1:3.2repack)
 Description: clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Some of its goals include the following:
@@ -257,7 +257,7 @@ Description: clang library - Common development package
 #       libgcc implementations.
 #  .
 
-Package: libllvm3.2
+Package: libllvm3.3
 Architecture: any
 Section: libs
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -270,11 +270,11 @@ Description: Low-Level Virtual Machine (LLVM), runtime library
  .
  This package contains the LLVM runtime library.
 
-Package: libllvm3.2-dbg
+Package: libllvm3.3-dbg
 Architecture: any
 Section: debug
 Priority: extra
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.2
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.3
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Description: Low-Level Virtual Machine (LLVM), debugging symbols library
@@ -284,11 +284,11 @@ Description: Low-Level Virtual Machine (LLVM), debugging symbols library
  .
  This package contains the LLVM runtime library debug symbols.
 
-Package: llvm-3.2
+Package: llvm-3.3
 Architecture: any
-Suggests: llvm-3.2-doc
-Depends: llvm-3.2-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Recommends: llvm-3.2-dev
+Suggests: llvm-3.3-doc
+Depends: llvm-3.3-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Recommends: llvm-3.3-dev
 Conflicts: llvm (<< 2.7-1)
 Replaces: llvm (<< 2.7-1)
 Description: Low-Level Virtual Machine (LLVM)
@@ -316,7 +316,7 @@ Description: Low-Level Virtual Machine (LLVM)
  LLVM is the key component of the clang compiler and the gcc plugin called
  dragonegg.
 
-Package: llvm-3.2-runtime
+Package: llvm-3.3-runtime
 Architecture: any
 Depends: binfmt-support, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: llvm (<< 2.7-1)
@@ -336,9 +336,9 @@ Description: Low-Level Virtual Machine (LLVM), bytecode interpreter
  This package provides the minimal required to execute programs in LLVM
  format.
 
-Package: llvm-3.2-dev
+Package: llvm-3.3-dev
 Architecture: any
-Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends}, llvm-3.2 (= ${binary:Version})
+Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends}, llvm-3.3 (= ${binary:Version})
 Replaces: llvm (<< 2.2-3)
 Description: Low-Level Virtual Machine (LLVM), libraries and headers
  The Low-Level Virtual Machine (LLVM) is a collection of libraries and
@@ -355,13 +355,13 @@ Description: Low-Level Virtual Machine (LLVM), libraries and headers
  This package provides the libraries and headers to develop applications
  using llvm.
 
-Package: libllvm-3.2-ocaml-dev
+Package: libllvm-3.3-ocaml-dev
 Section: ocaml
 Architecture: any
-Suggests: llvm-3.2-doc
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-3.2-dev (= ${binary:Version})
-Replaces: libllvm-ocaml-3.2-dev
-Conflicts: libllvm-ocaml-3.2-dev
+Suggests: llvm-3.3-doc
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-3.3-dev (= ${binary:Version})
+Replaces: libllvm-ocaml-3.3-dev
+Conflicts: libllvm-ocaml-3.3-dev
 Provides: ${ocaml:Provides}
 Description: Low-Level Virtual Machine (LLVM), bindings for OCaml
  The Low-Level Virtual Machine (LLVM) is a collection of libraries and
@@ -377,7 +377,7 @@ Description: Low-Level Virtual Machine (LLVM), bindings for OCaml
  .
  This package provides the OCaml bindings to develop applications using llvm.
 
-Package: llvm-3.2-doc
+Package: llvm-3.3-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}
@@ -395,10 +395,10 @@ Description: Low-Level Virtual Machine (LLVM), documentation
  .
  This package contains all documentation (extensive).
 
-Package: llvm-3.2-examples
+Package: llvm-3.3-examples
 Section: doc
 Architecture: all
-Depends: ${misc:Depends}, llvm-3.2-dev (>= ${source:Version}), llvm-3.2-dev (<< ${source:Version}+c~)
+Depends: ${misc:Depends}, llvm-3.3-dev (>= ${source:Version}), llvm-3.3-dev (<< ${source:Version}+c~)
 Description: Low-Level Virtual Machine (LLVM), examples
  The Low-Level Virtual Machine (LLVM) is a collection of libraries and
  tools that make it easy to build compilers, optimizers, Just-In-Time
@@ -414,7 +414,7 @@ Description: Low-Level Virtual Machine (LLVM), examples
  This package contains examples for using LLVM, both in developing
  extensions to LLVM and in using it to compile code.
 
-# Package: llvm-3.2-source
+# Package: llvm-3.3-source
 # Architecture: all
 # Depends: ${shlibs:Depends}, ${misc:Depends}
 # Description: Low-Level Virtual Machine (LLVM), source code
@@ -433,7 +433,7 @@ Description: Low-Level Virtual Machine (LLVM), examples
 
 
 
-Package: lldb-3.2
+Package: lldb-3.3
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
 Pre-Depends: ${misc:Pre-Depends}

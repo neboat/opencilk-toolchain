@@ -1,9 +1,9 @@
-Index: llvm-3.2.src/clang/lib/Lex/HeaderSearch.cpp
+Index: llvm-toolchain_3.3~svn176083/clang/lib/Lex/HeaderSearch.cpp
 ===================================================================
---- llvm-3.2.src.orig/clang/lib/Lex/HeaderSearch.cpp	2012-11-06 20:39:40.000000000 +0100
-+++ llvm-3.2.src/clang/lib/Lex/HeaderSearch.cpp	2013-01-12 15:34:28.831063474 +0100
-@@ -25,6 +25,11 @@
- #include <cstdio>
+--- llvm-toolchain_3.3~svn176083.orig/clang/lib/Lex/HeaderSearch.cpp	2013-02-08 01:10:48.000000000 +0100
++++ llvm-toolchain_3.3~svn176083/clang/lib/Lex/HeaderSearch.cpp	2013-02-26 14:11:46.000000000 +0100
+@@ -28,6 +28,11 @@
+ #endif
  using namespace clang;
  
 +// For GNU Hurd
@@ -14,12 +14,12 @@ Index: llvm-3.2.src/clang/lib/Lex/HeaderSearch.cpp
  const IdentifierInfo *
  HeaderFileInfo::getControllingMacro(ExternalIdentifierLookup *External) {
    if (ControllingMacro)
-Index: llvm-3.2.src/clang/lib/Lex/ModuleMap.cpp
+Index: llvm-toolchain_3.3~svn176083/clang/lib/Lex/ModuleMap.cpp
 ===================================================================
---- llvm-3.2.src.orig/clang/lib/Lex/ModuleMap.cpp	2012-11-06 20:41:11.000000000 +0100
-+++ llvm-3.2.src/clang/lib/Lex/ModuleMap.cpp	2013-01-12 15:34:28.831063474 +0100
-@@ -30,6 +30,11 @@
- #include <stdlib.h>
+--- llvm-toolchain_3.3~svn176083.orig/clang/lib/Lex/ModuleMap.cpp	2013-02-19 20:58:45.000000000 +0100
++++ llvm-toolchain_3.3~svn176083/clang/lib/Lex/ModuleMap.cpp	2013-02-26 14:11:46.000000000 +0100
+@@ -34,6 +34,11 @@
+ #endif
  using namespace clang;
  
 +// For GNU Hurd

@@ -12,11 +12,11 @@ This reverts commit 60b35f408bc3194e7ea4e96367c0b42dc5e7f850.
  test/DebugInfo/X86/ending-run.ll      |    6 ++----
  2 files changed, 4 insertions(+), 9 deletions(-)
 
-diff --git a/lib/CodeGen/AsmPrinter/DwarfDebug.cpp b/lib/CodeGen/AsmPrinter/DwarfDebug.cpp
-index 3e79a6d..24aedfb 100644
---- a/lib/CodeGen/AsmPrinter/DwarfDebug.cpp
-+++ b/lib/CodeGen/AsmPrinter/DwarfDebug.cpp
-@@ -1093,15 +1093,12 @@ void DwarfDebug::beginInstruction(const MachineInstr *MI) {
+Index: llvm-toolchain_3.3~svn176083/lib/CodeGen/AsmPrinter/DwarfDebug.cpp
+===================================================================
+--- llvm-toolchain_3.3~svn176083.orig/lib/CodeGen/AsmPrinter/DwarfDebug.cpp	2013-02-23 00:50:08.000000000 +0100
++++ llvm-toolchain_3.3~svn176083/lib/CodeGen/AsmPrinter/DwarfDebug.cpp	2013-02-26 14:12:18.000000000 +0100
+@@ -1299,15 +1299,12 @@
    if (!MI->isDebugValue()) {
      DebugLoc DL = MI->getDebugLoc();
      if (DL != PrevInstLoc && (!DL.isUnknown() || UnknownLocations)) {
@@ -33,22 +33,13 @@ index 3e79a6d..24aedfb 100644
        if (!DL.isUnknown()) {
          const MDNode *Scope = DL.getScope(Asm->MF->getFunction()->getContext());
          recordSourceLine(DL.getLine(), DL.getCol(), Scope, Flags);
-@@ -1382,7 +1379,7 @@ void DwarfDebug::beginFunction(const MachineFunction *MF) {
-                                        MF->getFunction()->getContext());
-     recordSourceLine(FnStartDL.getLine(), FnStartDL.getCol(),
-                      FnStartDL.getScope(MF->getFunction()->getContext()),
--                     0);
-+                     DWARF2_FLAG_IS_STMT);
-   }
- }
- 
-diff --git a/test/DebugInfo/X86/ending-run.ll b/test/DebugInfo/X86/ending-run.ll
-index 6935c47..0cd3de1 100644
---- a/test/DebugInfo/X86/ending-run.ll
-+++ b/test/DebugInfo/X86/ending-run.ll
+Index: llvm-toolchain_3.3~svn176083/test/DebugInfo/X86/ending-run.ll
+===================================================================
+--- llvm-toolchain_3.3~svn176083.orig/test/DebugInfo/X86/ending-run.ll	2013-02-02 06:56:24.000000000 +0100
++++ llvm-toolchain_3.3~svn176083/test/DebugInfo/X86/ending-run.ll	2013-02-26 14:12:18.000000000 +0100
 @@ -1,11 +1,9 @@
  ; RUN: llc -mtriple=x86_64-apple-darwin %s -o %t -filetype=obj
- ; RUN: llvm-dwarfdump %t | FileCheck %s
+ ; RUN: llvm-dwarfdump -debug-dump=line %t | FileCheck %s
  
 -; Check that the line table starts at 7, not 4, but that the first
 -; statement isn't until line 8.
@@ -60,6 +51,3 @@ index 6935c47..0cd3de1 100644
  ; CHECK: 0x0000000000000004      8     18      1   0  is_stmt prologue_end
  
  define i32 @callee(i32 %x) nounwind uwtable ssp {
--- 
-1.7.10
-

@@ -1,18 +1,18 @@
-Index: llvm-3.2.src/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain_3.3~svn176083/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-3.2.src.orig/clang/lib/Driver/ToolChains.cpp	2013-01-18 15:57:25.240901367 +0100
-+++ llvm-3.2.src/clang/lib/Driver/ToolChains.cpp	2013-01-18 15:57:49.752900485 +0100
-@@ -36,6 +36,9 @@
- #include <cstdlib> // ::getenv
- 
+--- llvm-toolchain_3.3~svn176083.orig/clang/lib/Driver/ToolChains.cpp	2013-02-26 14:10:01.000000000 +0100
++++ llvm-toolchain_3.3~svn176083/clang/lib/Driver/ToolChains.cpp	2013-02-26 14:11:45.000000000 +0100
+@@ -33,6 +33,9 @@
+ // FIXME: This needs to be listed last until we fix the broken include guards
+ // in these files and the LLVM config.h files.
  #include "clang/Config/config.h" // for GCC_INSTALL_PREFIX
 +#include "clang/Debian/debian_path.h"
 +
 +#include <iostream>
  
- using namespace clang::driver;
- using namespace clang::driver::toolchains;
-@@ -2379,6 +2382,10 @@
+ #include <cstdlib> // ::getenv
+ 
+@@ -2634,6 +2637,10 @@
  
    const std::string IncludePathCandidates[] = {
      LibDir.str() + "/../include/c++/" + Version.str(),
@@ -23,7 +23,7 @@ Index: llvm-3.2.src/clang/lib/Driver/ToolChains.cpp
      // Gentoo is weird and places its headers inside the GCC install, so if the
      // first attempt to find the headers fails, try this pattern.
      InstallDir.str() + "/include/g++-v4",
-@@ -2390,10 +2397,10 @@
+@@ -2645,10 +2652,10 @@
    };
  
    for (unsigned i = 0; i < llvm::array_lengthof(IncludePathCandidates); ++i) {

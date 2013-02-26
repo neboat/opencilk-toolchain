@@ -1,8 +1,8 @@
-Index: llvm-3.2-3.2~rc1/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h
+Index: llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h
 ===================================================================
---- llvm-3.2-3.2~rc1.orig/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h	2012-11-13 21:14:34.000000000 +0100
-+++ llvm-3.2-3.2~rc1/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h	2012-11-15 11:04:00.000000000 +0100
-@@ -44,6 +44,10 @@
+--- llvm-toolchain_3.3~svn176083.orig/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h	2012-12-20 06:13:09.000000000 +0100
++++ llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h	2013-02-26 14:12:06.000000000 +0100
+@@ -47,6 +47,10 @@
                                           uint8_t OSABI);
  } // End llvm namespace
  
@@ -13,13 +13,13 @@ Index: llvm-3.2-3.2~rc1/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h
  // Defines symbolic names for PowerPC registers.  This defines a mapping from
  // register name to register number.
  //
-Index: llvm-3.2-3.2~rc1/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h
+Index: llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h
 ===================================================================
---- llvm-3.2-3.2~rc1.orig/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h	2012-11-13 21:14:34.000000000 +0100
-+++ llvm-3.2-3.2~rc1/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h	2012-11-15 11:04:00.000000000 +0100
-@@ -14,6 +14,10 @@
- #ifndef LLVM_TARGET_POWERPC_PPCPREDICATES_H
- #define LLVM_TARGET_POWERPC_PPCPREDICATES_H
+--- llvm-toolchain_3.3~svn176083.orig/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h	2012-12-20 06:13:09.000000000 +0100
++++ llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h	2013-02-26 14:12:06.000000000 +0100
+@@ -17,6 +17,10 @@
+ // GCC #defines PPC on Linux but we use it as our namespace name
+ #undef PPC
  
 +// Generated files will use "namespace PPC". To avoid symbol clash,
 +// undefine PPC here. PPC may be predefined on some hosts.
@@ -28,10 +28,10 @@ Index: llvm-3.2-3.2~rc1/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h
  namespace llvm {
  namespace PPC {
    /// Predicate - These are "(BI << 5) | BO"  for various predicates.
-Index: llvm-3.2-3.2~rc1/lib/Target/PowerPC/MCTargetDesc/PPCFixupKinds.h
+Index: llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCFixupKinds.h
 ===================================================================
---- llvm-3.2-3.2~rc1.orig/lib/Target/PowerPC/MCTargetDesc/PPCFixupKinds.h	2012-11-13 21:14:34.000000000 +0100
-+++ llvm-3.2-3.2~rc1/lib/Target/PowerPC/MCTargetDesc/PPCFixupKinds.h	2012-11-15 11:04:00.000000000 +0100
+--- llvm-toolchain_3.3~svn176083.orig/lib/Target/PowerPC/MCTargetDesc/PPCFixupKinds.h	2012-12-12 20:29:35.000000000 +0100
++++ llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCFixupKinds.h	2013-02-26 14:12:06.000000000 +0100
 @@ -12,6 +12,8 @@
  
  #include "llvm/MC/MCFixup.h"

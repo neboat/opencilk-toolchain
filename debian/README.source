@@ -1,6 +1,5 @@
 
-The tarball are basically the one from upstream, renamed and recompressed using
-tar.bz2
+Repack of the snapshot release are done with orig-tar.sh which will checkout the sources.
 
- -- Sylvestre Ledru <sylvestre@debian.org>, Sat,  9 Feb 2013 11:36:37 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>, Tue, 26 Feb 2013 14:57:56 +0100
 
