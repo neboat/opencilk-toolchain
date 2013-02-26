@@ -99,8 +99,7 @@ override_dh_auto_build:
 	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 #	$(MAKE) $(NJOBS) -C build-compiler-rt VERBOSE=1
 # Only available in clang 3.3
-#	cd $(CURDIR)/tools/clang/docs && make -f Makefile.sphinx
-# && make -f Makefile.sphinx man
+	cd $(CURDIR)/tools/clang/docs && make -f Makefile.sphinx
 
 override_dh_auto_install:
 	chrpath -d `find $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable`
@@ -150,7 +149,7 @@ override_dh_auto_test:
 
 override_dh_auto_clean:
 	dh_auto_clean
-	rm -rf $(TARGET_BUILD) tools/clang/include/clang/Debian/debian_path.h docs/_build/
+	rm -rf $(TARGET_BUILD) tools/clang/include/clang/Debian/debian_path.h docs/_build/ tools/clang/docs/_html/
 	rm -f `ls debian/*.in|sed -e "s|.in$$||g"`
 	find utils -name '*.pyc' | xargs -r rm -f
 	find test -name '*.pyc' -o -name '*.o' -o -name '*.cm[ix]' | xargs -r rm -f
