@@ -16,6 +16,12 @@ DEB_HOST_ARCH       = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 OCAML_STDLIB_DIR    ?= $(shell ocamlc -where)
 
+distribution := $(shell lsb_release --id --short)
+distrel := $(shell lsb_release --codename --short)
+ifeq ($(distrel),n/a)
+  distrel := sid
+endif
+
 confargs := \
         --with-c-include-dirs=/usr/include/$(DEB_HOST_MULTIARCH):/usr/include/$(DEB_HOST_GNU_TYPE):/usr/include \
 	--with-cxx-include-root=/usr/include/c++/$(GCC_VERSION) \
@@ -33,10 +39,27 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   opt_flags += -marm
 endif
 
+ifeq ($(distribution),Ubuntu)
+	ifeq ($(distrel),precise)
+		control_vars = '-Vdep:devlibs=libstdc++6-4.6-dev'
+	endif
+	ifeq ($(distrel),quantal)
+		control_vars = '-Vdep:devlibs=libstdc++6-4.7-dev'
+	endif
+	ifeq ($(distrel),raring)
+		control_vars = '-Vdep:devlibs=libstdc++6-4.7-dev, libgcc-4.7-dev, libobjc-4.7-dev'
+	endif
+
+else
+	# Debian experimental
+	control_vars = '-Vdep:devlibs=libstdc++6-4.7-dev, libgcc-4.7-dev, libobjc-4.7-dev'
+endif
+
 
 %:
 	dh $@
 # --buildsystem=cmake --builddirectory=$(TARGET_BUILD)
+
 debian/%: debian/%.in
 	sed -e 's|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|g' -e "s|@OCAML_STDLIB_DIR@|$(OCAML_STDLIB_DIR)|g" -e "s|@LLVM_VERSION@|$(LLVM_VERSION)|g" $< > $@
 
@@ -146,6 +169,9 @@ override_dh_shlibdeps:
 
 override_dh_auto_test:
 	$(MAKE) -C $(TARGET_BUILD) check || true
+
+override_dh_gencontrol:
+	dh_gencontrol -- $(control_vars)
 
 override_dh_auto_clean:
 	dh_auto_clean
