@@ -15,34 +15,6 @@ Homepage: http://www.llvm.org/
 Vcs-Svn: svn://svn.debian.org/svn/pkg-llvm/llvm-toolchain/trunk/
 Vcs-Browser: http://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/trunk/
 
-Package: clang
-Architecture: all
-Depends: clang-3.2 (>= ${source:Version}), ${misc:Depends}
-Description: C, C++ and Objective-C compiler (LLVM based)
- Clang project is a C, C++, Objective C and Objective C++ front-end
- for the LLVM compiler. Some of its goals include the following:
- .
- End-User Features:
- .
-    * Fast compiles and low memory use
-    * Expressive diagnostics (examples)
-    * GCC compatibility
- .
- Utility and Applications:
- .
-    * Modular library based architecture
-    * Support diverse clients (refactoring, static analysis, code
-      generation, etc)
-    * Allow tight integration with IDEs
-    * Use the LLVM 'BSD' License
- .
- Internal Design and Implementation:
- .
-    * A real-world, production quality compiler
-    * A simple and hackable code base
-    * A single unified parser for C, Objective C, C++, and Objective C++
-    * Conformance with C/C++/ObjC and their variants
-
 Package: clang-3.2
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, libstdc++6-4.7-dev, libgcc-4.7-dev,
@@ -287,7 +259,7 @@ Description: Low-Level Virtual Machine (LLVM), debugging symbols library
 Package: llvm-3.2
 Architecture: any
 Suggests: llvm-3.2-doc
-Depends: llvm-3.2-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: llvm-3.2-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
 Recommends: llvm-3.2-dev
 Conflicts: llvm (<< 2.7-1)
 Replaces: llvm (<< 2.7-1)
@@ -380,7 +352,7 @@ Description: Low-Level Virtual Machine (LLVM), bindings for OCaml
 Package: llvm-3.2-doc
 Section: doc
 Architecture: all
-Depends: ${misc:Depends}, libjs-jquery
+Depends: ${misc:Depends}
 Description: Low-Level Virtual Machine (LLVM), documentation
  The Low-Level Virtual Machine (LLVM) is a collection of libraries and
  tools that make it easy to build compilers, optimizers, Just-In-Time
