@@ -380,7 +380,7 @@ Description: Low-Level Virtual Machine (LLVM), bindings for OCaml
 Package: llvm-3.2-doc
 Section: doc
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, libjs-jquery
 Description: Low-Level Virtual Machine (LLVM), documentation
  The Low-Level Virtual Machine (LLVM) is a collection of libraries and
  tools that make it easy to build compilers, optimizers, Just-In-Time

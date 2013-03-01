@@ -136,6 +136,12 @@ override_dh_auto_install:
 # Remove some license files
 	rm $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/llvm/Support/LICENSE.TXT
 
+# Managed in lldb-X.Y.links.in
+	rm -f build-llvm/Release/lib/python*/site-packages/lldb/_lldb.so
+
+# Remove the copy of jquery. See bug #701087
+	cd ./docs/_build/html/_static/ && rm -f jquery.js && ln -s /usr/share/javascript/jquery/jquery.js
+
 .PHONY: override_dh_strip
 override_dh_strip:
 	dh_strip -p libclang$(SONAME_EXT) --dbg-package=libclang$(SONAME_EXT)-dbg
