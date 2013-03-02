@@ -15,34 +15,6 @@ Homepage: http://www.llvm.org/
 Vcs-Svn: svn://svn.debian.org/svn/pkg-llvm/llvm-toolchain/branches/snapshot/
 Vcs-Browser: http://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/snapshot/
 
-Package: clang
-Architecture: all
-Depends: clang-3.3 (>= ${source:Version}), ${misc:Depends}
-Description: C, C++ and Objective-C compiler (LLVM based)
- Clang project is a C, C++, Objective C and Objective C++ front-end
- for the LLVM compiler. Some of its goals include the following:
- .
- End-User Features:
- .
-    * Fast compiles and low memory use
-    * Expressive diagnostics (examples)
-    * GCC compatibility
- .
- Utility and Applications:
- .
-    * Modular library based architecture
-    * Support diverse clients (refactoring, static analysis, code
-      generation, etc)
-    * Allow tight integration with IDEs
-    * Use the LLVM 'BSD' License
- .
- Internal Design and Implementation:
- .
-    * A real-world, production quality compiler
-    * A simple and hackable code base
-    * A single unified parser for C, Objective C, C++, and Objective C++
-    * Conformance with C/C++/ObjC and their variants
-
 Package: clang-3.3
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
@@ -287,7 +259,7 @@ Description: Low-Level Virtual Machine (LLVM), debugging symbols library
 Package: llvm-3.3
 Architecture: any
 Suggests: llvm-3.3-doc
-Depends: llvm-3.3-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: llvm-3.3-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
 Recommends: llvm-3.3-dev
 Conflicts: llvm (<< 2.7-1)
 Replaces: llvm (<< 2.7-1)

@@ -1,1 +1,2 @@
-debian/tmp//usr/lib/llvm-3.3/share/man/man1/lli*
+docs/_build/man/lli*
+
