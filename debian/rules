@@ -147,8 +147,8 @@ override_dh_auto_install:
 	cd $(CURDIR)/docs/_build/html/_static/ && rm -f jquery.js && ln -s /usr/share/javascript/jquery/jquery.js
 
 
-override_dh_install:
-	dh_install
+override_dh_installman:
+	dh_installman
 # Make sure that lli manpage is only in llvm-3.2-runtime (See #697117)
 	rm -f $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/share/man/man1/lli*
 
