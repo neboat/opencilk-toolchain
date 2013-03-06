@@ -1,3 +1,10 @@
+llvm-toolchain-3.2 (1:3.2repack-1~exp4) UNRELEASED; urgency=low
+
+  * Apply patch from upstream (r176557) to detect new search path for recent
+    Debian changes and Ubuntu 13.04
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Mar 2013 19:06:05 +0100
+
 llvm-toolchain-3.2 (1:3.2repack-1~exp3) experimental; urgency=low
 
   * Remove package "clang". It is now provided by llvm-defaults.
