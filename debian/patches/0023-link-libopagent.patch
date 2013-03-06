@@ -1,7 +1,7 @@
-Index: llvm-toolchain_3.3~svn176083/configure
+Index: llvm-toolchain_3.3~svn176561/configure
 ===================================================================
---- llvm-toolchain_3.3~svn176083.orig/configure	2013-02-13 22:19:39.000000000 +0100
-+++ llvm-toolchain_3.3~svn176083/configure	2013-02-26 14:12:05.000000000 +0100
+--- llvm-toolchain_3.3~svn176561.orig/configure	2013-02-13 22:19:39.000000000 +0100
++++ llvm-toolchain_3.3~svn176561/configure	2013-03-06 18:51:26.196715176 +0100
 @@ -13574,7 +13574,7 @@
        case $llvm_cv_os_type in
          Linux)

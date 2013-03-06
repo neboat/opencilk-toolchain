@@ -1,7 +1,7 @@
-Index: llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h
+Index: llvm-toolchain_3.3~svn176561/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h
 ===================================================================
---- llvm-toolchain_3.3~svn176083.orig/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h	2012-12-20 06:13:09.000000000 +0100
-+++ llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h	2013-02-26 14:12:06.000000000 +0100
+--- llvm-toolchain_3.3~svn176561.orig/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h	2012-12-20 06:13:09.000000000 +0100
++++ llvm-toolchain_3.3~svn176561/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.h	2013-03-06 18:51:26.640715166 +0100
 @@ -47,6 +47,10 @@
                                           uint8_t OSABI);
  } // End llvm namespace
@@ -13,10 +13,10 @@ Index: llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetD
  // Defines symbolic names for PowerPC registers.  This defines a mapping from
  // register name to register number.
  //
-Index: llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h
+Index: llvm-toolchain_3.3~svn176561/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h
 ===================================================================
---- llvm-toolchain_3.3~svn176083.orig/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h	2012-12-20 06:13:09.000000000 +0100
-+++ llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h	2013-02-26 14:12:06.000000000 +0100
+--- llvm-toolchain_3.3~svn176561.orig/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h	2012-12-20 06:13:09.000000000 +0100
++++ llvm-toolchain_3.3~svn176561/lib/Target/PowerPC/MCTargetDesc/PPCPredicates.h	2013-03-06 18:51:26.640715166 +0100
 @@ -17,6 +17,10 @@
  // GCC #defines PPC on Linux but we use it as our namespace name
  #undef PPC
@@ -28,10 +28,10 @@ Index: llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCPredicate
  namespace llvm {
  namespace PPC {
    /// Predicate - These are "(BI << 5) | BO"  for various predicates.
-Index: llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCFixupKinds.h
+Index: llvm-toolchain_3.3~svn176561/lib/Target/PowerPC/MCTargetDesc/PPCFixupKinds.h
 ===================================================================
---- llvm-toolchain_3.3~svn176083.orig/lib/Target/PowerPC/MCTargetDesc/PPCFixupKinds.h	2012-12-12 20:29:35.000000000 +0100
-+++ llvm-toolchain_3.3~svn176083/lib/Target/PowerPC/MCTargetDesc/PPCFixupKinds.h	2013-02-26 14:12:06.000000000 +0100
+--- llvm-toolchain_3.3~svn176561.orig/lib/Target/PowerPC/MCTargetDesc/PPCFixupKinds.h	2012-12-12 20:29:35.000000000 +0100
++++ llvm-toolchain_3.3~svn176561/lib/Target/PowerPC/MCTargetDesc/PPCFixupKinds.h	2013-03-06 18:51:26.640715166 +0100
 @@ -12,6 +12,8 @@
  
  #include "llvm/MC/MCFixup.h"

@@ -1,8 +1,8 @@
-Index: llvm-toolchain_3.3~svn176083/clang/tools/scan-build/scan-build
+Index: llvm-toolchain_3.3~svn176561/clang/tools/scan-build/scan-build
 ===================================================================
---- llvm-toolchain_3.3~svn176083.orig/clang/tools/scan-build/scan-build	2013-02-26 14:15:04.000000000 +0100
-+++ llvm-toolchain_3.3~svn176083/clang/tools/scan-build/scan-build	2013-02-26 14:15:06.000000000 +0100
-@@ -1512,7 +1512,7 @@
+--- llvm-toolchain_3.3~svn176561.orig/clang/tools/scan-build/scan-build	2013-03-05 03:33:08.000000000 +0100
++++ llvm-toolchain_3.3~svn176561/clang/tools/scan-build/scan-build	2013-03-06 18:51:28.688715126 +0100
+@@ -1513,7 +1513,7 @@
  
  # Find 'clang'
  if (!defined $AnalyzerDiscoveryMethod) {

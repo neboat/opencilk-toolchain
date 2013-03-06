@@ -1,7 +1,7 @@
-Index: llvm-toolchain_3.3~svn176083/clang/unittests/Tooling/CompilationDatabaseTest.cpp
+Index: llvm-toolchain_3.3~svn176561/clang/unittests/Tooling/CompilationDatabaseTest.cpp
 ===================================================================
---- llvm-toolchain_3.3~svn176083.orig/clang/unittests/Tooling/CompilationDatabaseTest.cpp	2013-01-12 20:30:44.000000000 +0100
-+++ llvm-toolchain_3.3~svn176083/clang/unittests/Tooling/CompilationDatabaseTest.cpp	2013-02-26 14:10:45.000000000 +0100
+--- llvm-toolchain_3.3~svn176561.orig/clang/unittests/Tooling/CompilationDatabaseTest.cpp	2013-03-02 07:00:16.000000000 +0100
++++ llvm-toolchain_3.3~svn176561/clang/unittests/Tooling/CompilationDatabaseTest.cpp	2013-03-06 18:48:57.144718103 +0100
 @@ -302,19 +302,6 @@
    return FoundCommand.CommandLine;
  }
