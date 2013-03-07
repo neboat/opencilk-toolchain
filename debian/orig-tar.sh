@@ -46,6 +46,10 @@ echo "going into $PATH_DEBIAN"
 export DEBFULLNAME="Sylvestre Ledru"
 export DEBEMAIL="sylvestre@debian.org"
 cd $PATH_DEBIAN
-dch --distribution experimental --newversion 1:$MAJOR_VERSION~svn$REVISION-1~exp1 "New snapshot release"
+
+if test -z "$DISTRIBUTION"; then
+    DISTRIBUTION="experimental"
+fi
+dch --distribution $DISTRIBUTION --newversion 1:$MAJOR_VERSION~svn$REVISION-1~exp1 "New snapshot release"
 
 exit 0
