@@ -13,9 +13,8 @@ llvm-toolchain-3.2 (1:3.2repack-1~exp3) experimental; urgency=low
   * Install cmake files to build LLVM extensions (Closes: #701153)
   * Remove the embedded copy of libjs-jquery (Closes: #701087)
   * Fix the install of lli manpage (Closes: #697117)
-  * Sync lldb against the current trunk (too buggy in 3.2)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 02 Mar 2013 19:23:56 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 17 Feb 2013 12:05:15 +0100
 
 llvm-toolchain-3.2 (1:3.2repack-1~exp2) experimental; urgency=low
 
