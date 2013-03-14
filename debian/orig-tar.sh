@@ -24,8 +24,22 @@ get_svn_url() {
     echo $SVN_URL
 }
 
+get_higher_revision() {
+    PROJECTS="llvm cfe compiler-rt polly lldb"
+    REVISION_MAX=0
+    for f in $PROJECTS; do
+        REVISION=$(LANG=C svn info $(get_svn_url $f $BRANCH)|grep "^Last Changed Rev:"|awk '{print $4}')
+        if test $REVISION -gt $REVISION_MAX; then
+            REVISION_MAX=$REVISION
+        fi
+    done
+    echo $REVISION_MAX
+}
+
+
+
 if test -n "$BRANCH"; then
-    REVISION=$(LANG=C svn info $(get_svn_url llvm $BRANCH)|grep "^Last Changed Rev:"|awk '{print $4}')
+    REVISION=$(get_higher_revision)
     # Do not use the revision when exporting branch. We consider that all the
     # branch are sync
     SVN_CMD="svn export"
