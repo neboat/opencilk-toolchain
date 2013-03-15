@@ -1,7 +1,7 @@
-Index: llvm-toolchain_3.3~svn176561/clang/lib/Headers/stdint.h
+Index: llvm-toolchain-build/clang/lib/Headers/stdint.h
 ===================================================================
---- llvm-toolchain_3.3~svn176561.orig/clang/lib/Headers/stdint.h	2011-04-30 21:02:59.000000000 +0200
-+++ llvm-toolchain_3.3~svn176561/clang/lib/Headers/stdint.h	2013-03-06 18:48:57.960718087 +0100
+--- llvm-toolchain-build.orig/clang/lib/Headers/stdint.h	2013-03-15 09:40:16.000000000 +0100
++++ llvm-toolchain-build/clang/lib/Headers/stdint.h	2013-03-15 09:43:04.000000000 +0100
 @@ -22,8 +22,6 @@
   *
  \*===----------------------------------------------------------------------===*/

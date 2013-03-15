@@ -1,7 +1,7 @@
-Index: llvm-toolchain_3.3~svn176083/clang/lib/Lex/HeaderSearch.cpp
+Index: llvm-toolchain-build/clang/lib/Lex/HeaderSearch.cpp
 ===================================================================
---- llvm-toolchain_3.3~svn176083.orig/clang/lib/Lex/HeaderSearch.cpp	2013-02-08 01:10:48.000000000 +0100
-+++ llvm-toolchain_3.3~svn176083/clang/lib/Lex/HeaderSearch.cpp	2013-02-26 14:11:46.000000000 +0100
+--- llvm-toolchain-build.orig/clang/lib/Lex/HeaderSearch.cpp	2013-03-15 09:40:16.000000000 +0100
++++ llvm-toolchain-build/clang/lib/Lex/HeaderSearch.cpp	2013-03-15 09:43:07.000000000 +0100
 @@ -28,6 +28,11 @@
  #endif
  using namespace clang;
@@ -14,11 +14,11 @@ Index: llvm-toolchain_3.3~svn176083/clang/lib/Lex/HeaderSearch.cpp
  const IdentifierInfo *
  HeaderFileInfo::getControllingMacro(ExternalIdentifierLookup *External) {
    if (ControllingMacro)
-Index: llvm-toolchain_3.3~svn176083/clang/lib/Lex/ModuleMap.cpp
+Index: llvm-toolchain-build/clang/lib/Lex/ModuleMap.cpp
 ===================================================================
---- llvm-toolchain_3.3~svn176083.orig/clang/lib/Lex/ModuleMap.cpp	2013-02-19 20:58:45.000000000 +0100
-+++ llvm-toolchain_3.3~svn176083/clang/lib/Lex/ModuleMap.cpp	2013-02-26 14:11:46.000000000 +0100
-@@ -34,6 +34,11 @@
+--- llvm-toolchain-build.orig/clang/lib/Lex/ModuleMap.cpp	2013-03-15 09:40:16.000000000 +0100
++++ llvm-toolchain-build/clang/lib/Lex/ModuleMap.cpp	2013-03-15 09:43:07.000000000 +0100
+@@ -33,6 +33,11 @@
  #endif
  using namespace clang;
  

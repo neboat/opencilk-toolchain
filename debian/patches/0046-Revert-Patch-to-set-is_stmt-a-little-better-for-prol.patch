@@ -12,11 +12,11 @@ This reverts commit 60b35f408bc3194e7ea4e96367c0b42dc5e7f850.
  test/DebugInfo/X86/ending-run.ll      |    6 ++----
  2 files changed, 4 insertions(+), 9 deletions(-)
 
-Index: llvm-toolchain_3.3~svn176561/lib/CodeGen/AsmPrinter/DwarfDebug.cpp
+Index: llvm-toolchain-build/lib/CodeGen/AsmPrinter/DwarfDebug.cpp
 ===================================================================
---- llvm-toolchain_3.3~svn176561.orig/lib/CodeGen/AsmPrinter/DwarfDebug.cpp	2013-02-23 00:50:08.000000000 +0100
-+++ llvm-toolchain_3.3~svn176561/lib/CodeGen/AsmPrinter/DwarfDebug.cpp	2013-03-06 18:51:27.448715150 +0100
-@@ -1299,15 +1299,12 @@
+--- llvm-toolchain-build.orig/lib/CodeGen/AsmPrinter/DwarfDebug.cpp	2013-03-15 09:40:14.000000000 +0100
++++ llvm-toolchain-build/lib/CodeGen/AsmPrinter/DwarfDebug.cpp	2013-03-15 09:43:14.000000000 +0100
+@@ -1313,15 +1313,12 @@
    if (!MI->isDebugValue()) {
      DebugLoc DL = MI->getDebugLoc();
      if (DL != PrevInstLoc && (!DL.isUnknown() || UnknownLocations)) {
@@ -33,10 +33,10 @@ Index: llvm-toolchain_3.3~svn176561/lib/CodeGen/AsmPrinter/DwarfDebug.cpp
        if (!DL.isUnknown()) {
          const MDNode *Scope = DL.getScope(Asm->MF->getFunction()->getContext());
          recordSourceLine(DL.getLine(), DL.getCol(), Scope, Flags);
-Index: llvm-toolchain_3.3~svn176561/test/DebugInfo/X86/ending-run.ll
+Index: llvm-toolchain-build/test/DebugInfo/X86/ending-run.ll
 ===================================================================
---- llvm-toolchain_3.3~svn176561.orig/test/DebugInfo/X86/ending-run.ll	2013-02-02 06:56:24.000000000 +0100
-+++ llvm-toolchain_3.3~svn176561/test/DebugInfo/X86/ending-run.ll	2013-03-06 18:51:27.448715150 +0100
+--- llvm-toolchain-build.orig/test/DebugInfo/X86/ending-run.ll	2013-03-15 09:40:14.000000000 +0100
++++ llvm-toolchain-build/test/DebugInfo/X86/ending-run.ll	2013-03-15 09:43:14.000000000 +0100
 @@ -1,11 +1,9 @@
  ; RUN: llc -mtriple=x86_64-apple-darwin %s -o %t -filetype=obj
  ; RUN: llvm-dwarfdump -debug-dump=line %t | FileCheck %s

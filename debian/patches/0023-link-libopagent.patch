@@ -1,8 +1,8 @@
-Index: llvm-toolchain_3.3~svn176561/configure
+Index: llvm-toolchain-build/configure
 ===================================================================
---- llvm-toolchain_3.3~svn176561.orig/configure	2013-02-13 22:19:39.000000000 +0100
-+++ llvm-toolchain_3.3~svn176561/configure	2013-03-06 18:51:26.196715176 +0100
-@@ -13574,7 +13574,7 @@
+--- llvm-toolchain-build.orig/configure	2013-03-15 09:42:49.000000000 +0100
++++ llvm-toolchain-build/configure	2013-03-15 09:43:11.000000000 +0100
+@@ -13571,7 +13571,7 @@
        case $llvm_cv_os_type in
          Linux)
            if test -n "$llvm_cv_oppath" ; then
@@ -11,7 +11,7 @@ Index: llvm-toolchain_3.3~svn176561/configure
                                                              { echo "$as_me:$LINENO: checking for library containing bfd_init" >&5
  echo $ECHO_N "checking for library containing bfd_init... $ECHO_C" >&6; }
  if test "${ac_cv_search_bfd_init+set}" = set; then
-@@ -13670,7 +13670,7 @@
+@@ -13667,7 +13667,7 @@
  echo "${ECHO_T}$ac_cv_search_bfd_init" >&6; }
  ac_res=$ac_cv_search_bfd_init
  if test "$ac_res" != no; then
@@ -20,7 +20,7 @@ Index: llvm-toolchain_3.3~svn176561/configure
  
  fi
  
-@@ -13706,8 +13706,8 @@
+@@ -13703,8 +13703,8 @@
    if test -z "$ac_lib"; then
      ac_res="none required"
    else
