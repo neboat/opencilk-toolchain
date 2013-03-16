@@ -1,8 +1,8 @@
-Index: clang-3.2/tools/clang/lib/Driver/ToolChains.cpp
+Index: llvm-3.2.src/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- clang-3.2.orig/tools/clang/lib/Driver/ToolChains.cpp	2013-03-15 14:54:26.000000000 +0100
-+++ clang-3.2/tools/clang/lib/Driver/ToolChains.cpp	2013-03-15 14:55:53.000000000 +0100
-@@ -1103,6 +1103,7 @@
+--- llvm-3.2.src.orig/clang/lib/Driver/ToolChains.cpp	2013-03-16 12:14:53.019000384 +0100
++++ llvm-3.2.src/clang/lib/Driver/ToolChains.cpp	2013-03-16 12:16:22.806998380 +0100
+@@ -1113,6 +1113,7 @@
    static const char *const PPCTriples[] = {
      "powerpc-linux-gnu",
      "powerpc-unknown-linux-gnu",
@@ -10,7 +10,7 @@ Index: clang-3.2/tools/clang/lib/Driver/ToolChains.cpp
      "powerpc-suse-linux",
      "powerpc-montavista-linuxspe"
    };
-@@ -2003,6 +2004,8 @@
+@@ -2013,6 +2014,8 @@
        return "mipsel-linux-gnu";
      return TargetTriple.str();
    case llvm::Triple::ppc:
@@ -19,10 +19,10 @@ Index: clang-3.2/tools/clang/lib/Driver/ToolChains.cpp
      if (llvm::sys::fs::exists(SysRoot + "/lib/powerpc-linux-gnu"))
        return "powerpc-linux-gnu";
      return TargetTriple.str();
-Index: clang-3.2/tools/clang/lib/Lex/Makefile
+Index: llvm-3.2.src/clang/lib/Lex/Makefile
 ===================================================================
---- clang-3.2.orig/tools/clang/lib/Lex/Makefile	2013-03-15 14:54:26.000000000 +0100
-+++ clang-3.2/tools/clang/lib/Lex/Makefile	2013-03-15 14:54:55.000000000 +0100
+--- llvm-3.2.src.orig/clang/lib/Lex/Makefile	2010-07-18 02:14:47.000000000 +0200
++++ llvm-3.2.src/clang/lib/Lex/Makefile	2013-03-16 12:16:22.806998380 +0100
 @@ -17,8 +17,10 @@
  LIBRARYNAME := clangLex
  
