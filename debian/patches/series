@@ -30,4 +30,3 @@ polly-c++0x.diff
 declare_clear_cache.diff
 #r600-snapshot.diff
 31-powerpcspe.diff
-32-scan-build-path.diff
