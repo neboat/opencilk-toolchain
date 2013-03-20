@@ -18,5 +18,4 @@ profile_rt.diff
 scan-build-clang-path.diff
 0050-powerpcspe-fp.diff
 declare_clear_cache.diff
-polly-c++0x.diff
 31-powerpcspe.diff
