@@ -1,8 +1,8 @@
 Index: llvm-toolchain-build/clang/lib/Driver/ToolChains.h
 ===================================================================
---- llvm-toolchain-build.orig/clang/lib/Driver/ToolChains.h	2013-03-15 09:40:15.000000000 +0100
-+++ llvm-toolchain-build/clang/lib/Driver/ToolChains.h	2013-03-15 09:43:08.000000000 +0100
-@@ -129,6 +129,8 @@
+--- llvm-toolchain-build.orig/clang/lib/Driver/ToolChains.h	2013-03-20 08:53:53.000000000 +0100
++++ llvm-toolchain-build/clang/lib/Driver/ToolChains.h	2013-03-20 08:53:56.000000000 +0100
+@@ -124,6 +124,8 @@
    virtual bool IsUnwindTablesDefault() const;
    virtual bool isPICDefault() const;
    virtual bool isPICDefaultForced() const;
@@ -10,12 +10,12 @@ Index: llvm-toolchain-build/clang/lib/Driver/ToolChains.h
 +                                        ArgStringList &CC1Args) const;
  
  protected:
-   /// \name ToolChain Implementation Helper Functions
+   virtual Tool *getTool(Action::ActionClass AC) const;
 Index: llvm-toolchain-build/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-build.orig/clang/lib/Driver/ToolChains.cpp	2013-03-15 09:42:55.000000000 +0100
-+++ llvm-toolchain-build/clang/lib/Driver/ToolChains.cpp	2013-03-15 09:43:08.000000000 +0100
-@@ -960,6 +960,13 @@
+--- llvm-toolchain-build.orig/clang/lib/Driver/ToolChains.cpp	2013-03-20 08:53:53.000000000 +0100
++++ llvm-toolchain-build/clang/lib/Driver/ToolChains.cpp	2013-03-20 08:53:56.000000000 +0100
+@@ -937,6 +937,13 @@
    return GoodVersion;
  }
  
