@@ -81,7 +81,7 @@ Description: C, C++ and Objective-C compiler (LLVM based) - Documentation
 
 Package: libclang1
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libstdc++6-4.7-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}
 Description: clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Some of its goals include the following:
@@ -113,7 +113,7 @@ Package: libclang1-dbg
 Architecture: any
 Section: debug
 Priority: extra
-Depends: ${shlibs:Depends}, ${misc:Depends}, libstdc++6-4.7-dev, libclang1
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libclang1
 Description: clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Some of its goals include the following:
@@ -144,7 +144,7 @@ Description: clang library
 Package: libclang-dev
 Architecture: any
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libstdc++6-4.7-dev,
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  libclang1 (= ${binary:Version}), libclang-common-dev (= ${binary:Version})
 Description: clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
