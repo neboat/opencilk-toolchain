@@ -53,8 +53,12 @@ ifeq ($(distribution),Ubuntu)
 	endif
 
 else
-	# Debian experimental
-	control_vars = '-Vdep:devlibs=libstdc++6-4.7-dev, libgcc-4.7-dev, libobjc-4.7-dev'
+    ifeq ($(distrel),wheezy)
+        control_vars = '-Vdep:devlibs=libstdc++6-4.7-dev'
+	else
+		# Debian experimental
+		control_vars = '-Vdep:devlibs=libstdc++6-4.7-dev, libgcc-4.7-dev, libobjc-4.7-dev'
+	endif
 endif
 
 
