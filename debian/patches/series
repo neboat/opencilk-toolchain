@@ -33,4 +33,6 @@ declare_clear_cache.diff
 0101-LegalizeDAG-Allow-type-promotion-for-scalar-stores.patch
 0102-LegalizeDAG-Allow-type-promotion-of-scalar-loads.patch
 0103-DAGCombiner-Avoid-generating-illegal-vector-INT_TO_F.patch
+33-armhf-defaults.diff
+34-powerpc-no-altivec.diff
 
