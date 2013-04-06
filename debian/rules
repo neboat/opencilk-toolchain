@@ -9,7 +9,7 @@ ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
   NJOBS := -j $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
 endif
 
-VENDOR=$(lsb_release -is)
+VENDOR=$(shell lsb_release -is)
 
 DEB_HOST_MULTIARCH  = $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 DEB_HOST_GNU_TYPE   = $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
