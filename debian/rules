@@ -62,6 +62,14 @@ else
 endif
 
 
+ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
+# enable the code coverage
+	CODECOVERAGE=yes
+	CXXFLAGS_EXTRA="-fprofile-arcs -ftest-coverage"
+	LDFLAGS_EXTRA="-coverage -lgcov"
+	control_vars = "$(control_vars) -Vdep:codecoverage=lcov"
+endif
+
 %:
 	dh $@
 # --buildsystem=cmake --builddirectory=$(TARGET_BUILD)
@@ -94,6 +102,14 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
     ln -s ../polly .; \
 
 
+	# cd clang/tools/ && \
+	# if test -h extra; then \
+	# 	rm extra; \
+	# fi; \
+	# ln -s ../../clang-extra extra; \
+	# readlink extra
+
+
 	cd projects/ && \
 	if test -h compiler-rt; then \
 		rm compiler-rt; \
@@ -124,7 +140,7 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 
 
 override_dh_auto_build:
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=$(VENDOR) CXXFLAGS=-std=c++0x  REQUIRES_RTTI=1
+	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=$(VENDOR) CXXFLAGS="$(CXXFLAGS_EXTRA) -std=c++0x"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1
 	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 #	$(MAKE) $(NJOBS) -C build-compiler-rt VERBOSE=1
 # Only available in clang 3.3
@@ -191,7 +207,21 @@ override_dh_shlibdeps:
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_shlibdeps
 
 override_dh_auto_test:
+# LLVM tests
 	$(MAKE) -C $(TARGET_BUILD) check || true
+# clang tests
+	cd build-llvm/ && $(MAKE) -C tools/clang/ test || true
+# lldb tests
+	cd build-llvm/Release/lib/python2.7/site-packages/lldb && if test ! -h _lldb.so -o -f _lldb.so; then ln -s ../../../liblldb.so _lldb.so; fi
+	cd build-llvm/ && $(MAKE) -C tools/lldb/test
+# polly tests
+	cd build-llvm/ && $(MAKE) polly-test -C tools/polly/test/
+
+	if test "$(CODECOVERAGE)" = "yes"; then \
+		mkdir -p reports/; \
+		lcov --directory build-llvm/ --capture --ignore-errors source --output-file reports/scilab-code-coverage.info; \
+		genhtml -o reports/coverage --show-details --highlight --legend reports/scilab-code-coverage.info; \
+	fi
 
 override_dh_gencontrol:
 	dh_gencontrol -- $(control_vars)
