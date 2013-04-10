@@ -65,8 +65,8 @@ endif
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 # enable the code coverage
 	CODECOVERAGE=yes
-	CXXFLAGS_EXTRA="-fprofile-arcs -ftest-coverage"
-	LDFLAGS_EXTRA="-coverage -lgcov"
+	CXXFLAGS_EXTRA=-fprofile-arcs -ftest-coverage
+	LDFLAGS_EXTRA=-coverage -lgcov
 endif
 
 %:
