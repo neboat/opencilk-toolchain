@@ -67,7 +67,6 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 	CODECOVERAGE=yes
 	CXXFLAGS_EXTRA="-fprofile-arcs -ftest-coverage"
 	LDFLAGS_EXTRA="-coverage -lgcov"
-	control_vars = "$(control_vars) -Vdep:codecoverage=lcov"
 endif
 
 %:
