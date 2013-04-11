@@ -214,7 +214,7 @@ override_dh_auto_test:
 	cd build-llvm/Release/lib/python2.7/site-packages/lldb && if test ! -h _lldb.so -o ! -f _lldb.so; then ln -s ../../../liblldb.so _lldb.so; fi
 	cd build-llvm/ && $(MAKE) -C tools/lldb/test
 # Managed by debian build system
-        rm -f $(CURDIR)/build-llvm/Release/lib/python*/site-packages/lldb/_lldb.so
+	rm -f $(CURDIR)/build-llvm/Release/lib/python*/site-packages/lldb/_lldb.so
 # polly tests
 	cd build-llvm/ && $(MAKE) polly-test -C tools/polly/test/
 
