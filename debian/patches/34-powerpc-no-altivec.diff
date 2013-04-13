@@ -6,10 +6,10 @@ Reviewed-By: Colin Watson <cjwatson@ubuntu.com>
 
 Last-Update: 2013-04-01
 
-Index: clang-3.2.new/clang/lib/Lex/Makefile
+Index: llvm-toolchain_3.3~svn179457/clang/lib/Lex/Makefile
 ===================================================================
---- clang-3.2.new.orig/clang/lib/Lex/Makefile	2013-04-01 02:32:35.000000000 +0000
-+++ clang-3.2.new/clang/lib/Lex/Makefile	2013-04-01 02:32:03.000000000 +0000
+--- llvm-toolchain_3.3~svn179457.orig/clang/lib/Lex/Makefile	2013-04-13 10:29:49.861931633 +0200
++++ llvm-toolchain_3.3~svn179457/clang/lib/Lex/Makefile	2013-04-13 10:29:57.785931326 +0200
 @@ -16,11 +16,5 @@
  
  LIBRARYNAME := clangLex

@@ -1,7 +1,7 @@
-Index: llvm-toolchain-build/autoconf/configure.ac
+Index: llvm-toolchain_3.3~svn179457/autoconf/configure.ac
 ===================================================================
---- llvm-toolchain-build.orig/autoconf/configure.ac	2013-03-15 09:40:27.000000000 +0100
-+++ llvm-toolchain-build/autoconf/configure.ac	2013-03-15 09:43:15.000000000 +0100
+--- llvm-toolchain_3.3~svn179457.orig/autoconf/configure.ac	2013-03-25 14:13:33.000000000 +0100
++++ llvm-toolchain_3.3~svn179457/autoconf/configure.ac	2013-04-13 10:29:43.485931880 +0200
 @@ -31,7 +31,7 @@
  dnl===-----------------------------------------------------------------------===
  dnl Initialize autoconf and define the package name, version number and
@@ -11,10 +11,10 @@ Index: llvm-toolchain-build/autoconf/configure.ac
  AC_DEFINE([LLVM_VERSION_MAJOR], [3], [Major version of the LLVM API])
  AC_DEFINE([LLVM_VERSION_MINOR], [3], [Minor version of the LLVM API])
  
-Index: llvm-toolchain-build/configure
+Index: llvm-toolchain_3.3~svn179457/configure
 ===================================================================
---- llvm-toolchain-build.orig/configure	2013-03-15 09:43:11.000000000 +0100
-+++ llvm-toolchain-build/configure	2013-03-15 09:43:15.000000000 +0100
+--- llvm-toolchain_3.3~svn179457.orig/configure	2013-04-13 10:29:39.953932017 +0200
++++ llvm-toolchain_3.3~svn179457/configure	2013-04-13 10:29:43.493931880 +0200
 @@ -561,8 +561,8 @@
  # Identity of this package.
  PACKAGE_NAME='LLVM'

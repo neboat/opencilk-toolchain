@@ -1,8 +1,8 @@
-Index: llvm-toolchain-build/lib/Support/CommandLine.cpp
+Index: llvm-toolchain_3.3~svn179457/lib/Support/CommandLine.cpp
 ===================================================================
---- llvm-toolchain-build.orig/lib/Support/CommandLine.cpp	2013-03-15 09:40:15.000000000 +0100
-+++ llvm-toolchain-build/lib/Support/CommandLine.cpp	2013-03-15 09:43:09.000000000 +0100
-@@ -1347,6 +1347,10 @@
+--- llvm-toolchain_3.3~svn179457.orig/lib/Support/CommandLine.cpp	2013-03-10 00:29:37.000000000 +0100
++++ llvm-toolchain_3.3~svn179457/lib/Support/CommandLine.cpp	2013-04-13 10:29:35.189932201 +0200
+@@ -1343,6 +1343,10 @@
      OS << LLVM_VERSION_INFO;
  #endif
      OS << "\n  ";
