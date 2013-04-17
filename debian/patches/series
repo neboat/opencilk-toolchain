@@ -19,5 +19,3 @@ declare_clear_cache.diff
 31-powerpcspe.diff
 33-armhf-defaults.diff
 34-powerpc-no-altivec.diff
-include_uuid.diff
-
