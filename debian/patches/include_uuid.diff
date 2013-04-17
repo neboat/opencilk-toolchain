@@ -1,0 +1,13 @@
+Index: source/Plugins/DynamicLoader/MacOSX-DYLD/DynamicLoaderMacOSXDYLD.cpp
+===================================================================
+--- source/Plugins/DynamicLoader/MacOSX-DYLD/DynamicLoaderMacOSXDYLD.cpp	(révision 179680)
++++ source/Plugins/DynamicLoader/MacOSX-DYLD/DynamicLoaderMacOSXDYLD.cpp	(copie de travail)
+@@ -30,6 +30,8 @@
+ 
+ #include "DynamicLoaderMacOSXDYLD.h"
+ 
++#include <uuid/uuid.h>
++
+ //#define ENABLE_DEBUG_PRINTF // COMMENT THIS LINE OUT PRIOR TO CHECKIN
+ #ifdef ENABLE_DEBUG_PRINTF
+ #include <stdio.h>
