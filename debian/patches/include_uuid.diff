@@ -1,7 +1,7 @@
-Index: source/Plugins/DynamicLoader/MacOSX-DYLD/DynamicLoaderMacOSXDYLD.cpp
+Index: llvm-toolchain_3.3~svn176083/lldb/source/Plugins/DynamicLoader/MacOSX-DYLD/DynamicLoaderMacOSXDYLD.cpp
 ===================================================================
---- source/Plugins/DynamicLoader/MacOSX-DYLD/DynamicLoaderMacOSXDYLD.cpp	(révision 179680)
-+++ source/Plugins/DynamicLoader/MacOSX-DYLD/DynamicLoaderMacOSXDYLD.cpp	(copie de travail)
+--- llvm-toolchain_3.3~svn176083.orig/lldb/source/Plugins/DynamicLoader/MacOSX-DYLD/DynamicLoaderMacOSXDYLD.cpp	(révision 179680)
++++ llvm-toolchain_3.3~svn176083/lldb/source/Plugins/DynamicLoader/MacOSX-DYLD/DynamicLoaderMacOSXDYLD.cpp	(copie de travail)
 @@ -30,6 +30,8 @@
  
  #include "DynamicLoaderMacOSXDYLD.h"
