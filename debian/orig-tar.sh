@@ -1,10 +1,12 @@
 #!/bin/sh
 # This script will create the following tarballs:
 # llvm-toolchain-3.2_3.2repack.orig-clang.tar.bz2
+# llvm-toolchain-3.2_3.2repack.orig-clang-extra.tar.bz2
 # llvm-toolchain-3.2_3.2repack.orig-compiler-rt.tar.bz2
 # llvm-toolchain-3.2_3.2repack.orig-lldb.tar.bz2
 # llvm-toolchain-3.2_3.2repack.orig-polly.tar.bz2
 # llvm-toolchain-3.2_3.2repack.orig.tar.bz2
+set -e
 
 SVN_BASE_URL=http://llvm.org/svn/llvm-project/
 
@@ -61,6 +63,13 @@ rm -rf $LLVM_TARGET
 CLANG_TARGET=clang_$MAJOR_VERSION~svn$REVISION
 $SVN_CMD $(get_svn_url cfe $BRANCH) $CLANG_TARGET
 tar jcvf llvm-toolchain_$MAJOR_VERSION~svn$REVISION.orig-clang.tar.bz2 $CLANG_TARGET
+rm -rf $CLANG_TARGET
+
+
+# Clang extra
+CLANG_TARGET=clang-tools-extra_$MAJOR_VERSION~svn$REVISION
+$SVN_CMD $(get_svn_url clang-tools-extra $BRANCH) $CLANG_TARGET
+tar jcvf llvm-toolchain_$MAJOR_VERSION~svn$REVISION.orig-clang-tools-extra.tar.bz2 $CLANG_TARGET
 rm -rf $CLANG_TARGET
 
 # Compiler-rt
