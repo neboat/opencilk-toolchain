@@ -27,7 +27,7 @@ get_svn_url() {
 }
 
 get_higher_revision() {
-    PROJECTS="llvm cfe compiler-rt polly lldb"
+    PROJECTS="llvm cfe compiler-rt polly lldb clang-tools-extra"
     REVISION_MAX=0
     for f in $PROJECTS; do
         REVISION=$(LANG=C svn info $(get_svn_url $f $BRANCH)|grep "^Last Changed Rev:"|awk '{print $4}')
