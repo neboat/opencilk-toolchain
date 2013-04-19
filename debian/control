@@ -1,4 +1,4 @@
-Source: llvm-toolchain
+Source: llvm-toolchain-snapshot
 Section: devel
 Priority: optional
 Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
