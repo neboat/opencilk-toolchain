@@ -36,3 +36,4 @@ declare_clear_cache.diff
 33-armhf-defaults.diff
 34-powerpc-no-altivec.diff
 
+clang-fix-std-thread.diff
