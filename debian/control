@@ -11,7 +11,7 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl8.5, expect,
     libisl-dev (>= 0.11.1), binutils-gold [amd64 armel armhf i386 powerpc powerpcspe ppc64 sparc sparc64 x32],
     lcov
 Build-Conflicts: oprofile, ocaml
-Standards-Version: 3.9.3
+Standards-Version: 3.9.4
 Homepage: http://www.llvm.org/
 Vcs-Svn: svn://svn.debian.org/svn/pkg-llvm/llvm-toolchain/branches/snapshot/
 Vcs-Browser: http://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/snapshot/
