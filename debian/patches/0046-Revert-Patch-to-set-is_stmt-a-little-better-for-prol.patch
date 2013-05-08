@@ -12,11 +12,11 @@ This reverts commit 60b35f408bc3194e7ea4e96367c0b42dc5e7f850.
  test/DebugInfo/X86/ending-run.ll      |    6 ++----
  2 files changed, 4 insertions(+), 9 deletions(-)
 
-Index: llvm-toolchain_3.3~svn179457/lib/CodeGen/AsmPrinter/DwarfDebug.cpp
+Index: llvm-toolchain-snapshot_3.3~svn181457/lib/CodeGen/AsmPrinter/DwarfDebug.cpp
 ===================================================================
---- llvm-toolchain_3.3~svn179457.orig/lib/CodeGen/AsmPrinter/DwarfDebug.cpp	2013-04-09 21:23:15.000000000 +0200
-+++ llvm-toolchain_3.3~svn179457/lib/CodeGen/AsmPrinter/DwarfDebug.cpp	2013-04-13 10:29:42.077931934 +0200
-@@ -1244,15 +1244,12 @@
+--- llvm-toolchain-snapshot_3.3~svn181457.orig/lib/CodeGen/AsmPrinter/DwarfDebug.cpp	2013-05-08 08:01:41.000000000 +0200
++++ llvm-toolchain-snapshot_3.3~svn181457/lib/CodeGen/AsmPrinter/DwarfDebug.cpp	2013-05-08 20:26:03.000000000 +0200
+@@ -1319,15 +1319,12 @@
    if (!MI->isDebugValue()) {
      DebugLoc DL = MI->getDebugLoc();
      if (DL != PrevInstLoc && (!DL.isUnknown() || UnknownLocations)) {
@@ -33,10 +33,10 @@ Index: llvm-toolchain_3.3~svn179457/lib/CodeGen/AsmPrinter/DwarfDebug.cpp
        if (!DL.isUnknown()) {
          const MDNode *Scope = DL.getScope(Asm->MF->getFunction()->getContext());
          recordSourceLine(DL.getLine(), DL.getCol(), Scope, Flags);
-Index: llvm-toolchain_3.3~svn179457/test/DebugInfo/X86/ending-run.ll
+Index: llvm-toolchain-snapshot_3.3~svn181457/test/DebugInfo/X86/ending-run.ll
 ===================================================================
---- llvm-toolchain_3.3~svn179457.orig/test/DebugInfo/X86/ending-run.ll	2013-03-28 03:44:59.000000000 +0100
-+++ llvm-toolchain_3.3~svn179457/test/DebugInfo/X86/ending-run.ll	2013-04-13 10:29:42.081931934 +0200
+--- llvm-toolchain-snapshot_3.3~svn181457.orig/test/DebugInfo/X86/ending-run.ll	2013-04-22 08:12:31.000000000 +0200
++++ llvm-toolchain-snapshot_3.3~svn181457/test/DebugInfo/X86/ending-run.ll	2013-05-08 20:26:03.000000000 +0200
 @@ -1,11 +1,9 @@
  ; RUN: llc -mtriple=x86_64-apple-darwin %s -o %t -filetype=obj
  ; RUN: llvm-dwarfdump -debug-dump=line %t | FileCheck %s
