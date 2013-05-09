@@ -19,7 +19,8 @@ Vcs-Browser: http://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/snap
 Package: clang-3.3
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- libclang-common-dev (= ${binary:Version})
+ libclang-common-dev (= ${binary:Version}),
+ libclang1 (= ${binary:Version})
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-3.3-dev, python
 Replaces: clang (<< 1:3.3), clang-3.1, clang-3.2, compiler-rt
