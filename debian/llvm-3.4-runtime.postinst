@@ -2,7 +2,7 @@
 
 if test "$1" = "configure"; then
     if test -x /usr/sbin/update-binfmts; then
-        update-binfmts --import llvm-3.3-runtime.binfmt || true
+        update-binfmts --import llvm-3.4-runtime.binfmt || true
     fi
 fi
 

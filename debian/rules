@@ -2,7 +2,7 @@
 
 TARGET_BUILD	:= build-llvm
 GCC_VERSION     := 4.7
-LLVM_VERSION	:= 3.3
+LLVM_VERSION	:= 3.4
 SONAME_EXT      := 1
 DEBIAN_REVISION := $(shell dpkg-parsechangelog | sed -rne 's,^Version: .*-(.*),\1,p')
 ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))

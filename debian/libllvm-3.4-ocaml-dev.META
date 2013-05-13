@@ -1,7 +1,7 @@
 description = "Low Level Virtual Machine bindings"
-version = "3.3"
+version = "3.4"
 
-directory = "+llvm-3.3"
+directory = "+llvm-3.4"
 
 archive(byte)   = "llvm.cma"
 archive(native) = "llvm.cmxa"
@@ -9,8 +9,8 @@ linkopts = "-cclib -lstdc++ -cclib -lllvm"
 
 package "executionengine"
 (
-  requires = "llvm-3_3"
-  version = "3.3"
+  requires = "llvm-3_4"
+  version = "3.4"
   archive(native) = "llvm_executionengine.cmxa"
   archive(byte)   = "llvm_executionengine.cma"
   linkopts = "-cclib -lllvm_executionengine"
@@ -18,8 +18,8 @@ package "executionengine"
 
 package "target"
 (
-  requires = "llvm-3_3"
-  version = "3.3"
+  requires = "llvm-3_4"
+  version = "3.4"
   archive(native) = "llvm_target.cmxa"
   archive(byte)   = "llvm_target.cma"
   linkopts = "-cclib -lllvm_target"
@@ -27,8 +27,8 @@ package "target"
 
 package "scalar_opts"
 (
-  requires = "llvm-3_3 llvm-3_3.target"
-  version = "3.3"
+  requires = "llvm-3_4 llvm-3_4.target"
+  version = "3.4"
   archive(native) = "llvm_scalar_opts.cmxa"
   archive(byte)   = "llvm_scalar_opts.cma"
   linkopts = "-cclib -lllvm_scalar_opts"
@@ -36,8 +36,8 @@ package "scalar_opts"
 
 package "analysis"
 (
-  requires = "llvm-3_3"
-  version = "3.3"
+  requires = "llvm-3_4"
+  version = "3.4"
   archive(native) = "llvm_analysis.cmxa"
   archive(byte)   = "llvm_analysis.cma"
   linkopts = "-cclib -lllvm_analysis"
@@ -45,8 +45,8 @@ package "analysis"
 
 package "bitwriter"
 (
-  requires = "llvm-3_3"
-  version = "3.3"
+  requires = "llvm-3_4"
+  version = "3.4"
   archive(native) = "llvm_bitwriter.cmxa"
   archive(byte)   = "llvm_bitwriter.cma"
   linkopts = "-cclib -lllvm_bitwriter"
@@ -54,8 +54,8 @@ package "bitwriter"
 
 package "bitreader"
 (
-  requires = "llvm-3_3 llvm-3_3.bitwriter"
-  version = "3.3"
+  requires = "llvm-3_4 llvm-3_4.bitwriter"
+  version = "3.4"
   archive(native) = "llvm_bitreader.cmxa"
   archive(byte)   = "llvm_bitreader.cma"
   linkopts = "-cclib -lllvm_bitreader"

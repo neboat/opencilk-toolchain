@@ -50,7 +50,7 @@ else
     SVN_CMD="svn export -r $REVISION"
 fi
 
-MAJOR_VERSION=3.3
+MAJOR_VERSION=3.4
 
 # LLVM
 LLVM_TARGET=llvm-toolchain-snapshot_$MAJOR_VERSION~svn$REVISION
