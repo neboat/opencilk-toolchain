@@ -226,9 +226,12 @@ override_dh_auto_test:
 	cd build-llvm/ && $(MAKE) polly-test -C tools/polly/test/ || true
 
 	if test "$(CODECOVERAGE)" = "yes"; then \
+		REPORT=reports/scilab-code-coverage.info; \
 		mkdir -p reports/; \
-		lcov --directory build-llvm/ --capture --ignore-errors source --output-file reports/scilab-code-coverage.info; \
-		genhtml -o reports/coverage --show-details --highlight --legend reports/scilab-code-coverage.info; \
+		lcov --directory build-llvm/ --capture --ignore-errors source --output-file $$REPORT; \
+		lcov --remove $$REPORT "/usr*" -o $$REPORT
+		lcov --remove $$REPORT "build-llvm/*" -o $$REPORT
+		genhtml -o reports/coverage --show-details --highlight --legend $$REPORT; \
 	fi
 
 override_dh_gencontrol:
