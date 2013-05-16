@@ -229,8 +229,8 @@ override_dh_auto_test:
 		REPORT=reports/scilab-code-coverage.info; \
 		mkdir -p reports/; \
 		lcov --directory build-llvm/ --capture --ignore-errors source --output-file $$REPORT; \
-		lcov --remove $$REPORT "/usr*" -o $$REPORT
-		lcov --remove $$REPORT "build-llvm/*" -o $$REPORT
+		lcov --remove $$REPORT "/usr*" -o $$REPORT; \
+		lcov --remove $$REPORT "build-llvm/*" -o $$REPORT; \
 		genhtml -o reports/coverage --show-details --highlight --legend $$REPORT; \
 	fi
 
