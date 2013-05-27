@@ -12,7 +12,6 @@ profile_rt.diff
 0023-link-libopagent.patch
 0044-soname.diff
 0046-Revert-Patch-to-set-is_stmt-a-little-better-for-prol.patch
-0047-version-name.diff
 scan-build-clang-path.diff
 0050-powerpcspe-fp.diff
 declare_clear_cache.diff
