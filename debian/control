@@ -19,8 +19,8 @@ Vcs-Browser: http://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/snap
 Package: clang-3.4
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- libclang-common-dev (= ${binary:Version}),
- libclang1 (= ${binary:Version})
+ libclang-common-3.4-dev (= ${binary:Version}),
+ libclang1-3.4 (= ${binary:Version})
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-3.4-dev, python
 Replaces: clang (<< 1:3.4), clang-3.1, clang-3.2, compiler-rt
@@ -81,7 +81,7 @@ Description: C, C++ and Objective-C compiler (LLVM based) - Documentation
  .
  This package contains the documentation.
 
-Package: libclang1
+Package: libclang1-3.4
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}
 Description: clang library
@@ -111,11 +111,11 @@ Description: clang library
  .
  This package contains the clang library.
 
-Package: libclang1-dbg
+Package: libclang1-3.4-dbg
 Architecture: any
 Section: debug
 Priority: extra
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libclang1
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libclang1-3.4
 Description: clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Some of its goals include the following:
@@ -143,11 +143,11 @@ Description: clang library
  .
  This package contains the debugging symbols.
 
-Package: libclang-dev
+Package: libclang-3.4-dev
 Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- libclang1 (= ${binary:Version}), libclang-common-dev (= ${binary:Version})
+ libclang1-3.4 (= ${binary:Version}), libclang-common-3.4-dev (= ${binary:Version})
 Description: clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Some of its goals include the following:
@@ -173,13 +173,13 @@ Description: clang library - Development package
     * A single unified parser for C, Objective C, C++, and Objective C++
     * Conformance with C/C++/ObjC and their variants
  .
- This package contains the clang headers to develop extensions over libclang.
+ This package contains the clang headers to develop extensions over libclang1-3.4.
 
-Package: libclang-common-dev
+Package: libclang-common-3.4-dev
 Architecture: any
 Section: libdevel
 Depends: ${misc:Depends}, libllvm3.4 (= ${binary:Version})
-Replaces: llvm-3.4-dev (<< 1:3.2repack), libclang-dev
+Replaces: llvm-3.4-dev (<< 1:3.2repack), libclang-3.4-dev
 Breaks: llvm-3.4-dev (<< 1:3.2repack)
 Description: clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
@@ -208,28 +208,6 @@ Description: clang library - Common development package
  .
  This package contains the clang generic headers and some libraries
  (profiling, etc).
-
-
-# Package: compiler-rt
-# Architecture: amd64 i386
-# Replaces: libclang-dev
-# Section: libdevel
-# Depends: ${misc:Depends}, python
-# Description: Runtime C library - LLVM based
-#  The compiler-rt project is a simple library that provides an implementation of
-#  the low-level target-specific hooks required by code generation and other
-#  runtime components. For example, when compiling for a 32-bit target,
-#  converting a double to a 64-bit unsigned integer is compiling into a runtime
-#  call to the "__fixunsdfdi" function. The compiler-rt library provides
-#  optimized implementations of this and other low-level routines.
-#  .
-#  The current feature set of compiler-rt is:
-#  .
-#     * Full support for the libgcc interfaces on supported targets.
-#     * High performance hand tuned implementations of commonly used functions
-#       like __floatundidf in assembly that are dramatically faster than the
-#       libgcc implementations.
-#  .
 
 Package: libllvm3.4
 Architecture: any

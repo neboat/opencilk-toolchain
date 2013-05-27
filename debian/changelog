@@ -1,4 +1,17 @@
-llvm-toolchain-snapshot (1:3.4~svn179851-1~exp1) experimental; urgency=low
+llvm-toolchain-snapshot (1:3.4~svn182733-1~exp1) experimental; urgency=low
+
+  * New snapshot release (3.4 release)
+  * Add a symlink of libLLVM-3.4.so.1 to usr/lib/llvm-3.4/lib/libLLVM-3.4.so
+      to fix make the llvm-config-3.4 --libdir work (Closes: #708677)
+    * Various packages rename to allow co installations:
+      * libclang1 => libclang1-3.4
+      * libclang1-dbg => libclang1-3.4-dbg
+      * libclang-dev => libclang-3.4-dev
+      * libclang-common-dev => libclang-common-3.4-dev
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 27 May 2013 15:01:57 +0200
+
+llvm-toolchain-snapshot (1:3.3~svn179851-1~exp1) experimental; urgency=low
 
   * Draft of a snapshot release (3.3)
   * Enable r600 experimental backend
