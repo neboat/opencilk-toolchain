@@ -223,7 +223,7 @@ override_dh_auto_test:
 # Managed by debian build system
 	rm -f $(CURDIR)/build-llvm/Release/lib/python*/site-packages/lldb/_lldb.so
 # polly tests
-	cd build-llvm/ && $(MAKE) polly-test -C tools/polly/test/ || true
+	cd build-llvm/ && $(MAKE) check-polly -C tools/polly/test/ || true
 
 	if test "$(CODECOVERAGE)" = "yes"; then \
 		mkdir -p reports/; \
