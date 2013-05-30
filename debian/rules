@@ -232,7 +232,7 @@ override_dh_auto_test:
 	cd build-llvm/ && $(MAKE) check-polly -C tools/polly/test/ || true
 
 	if test "$(CODECOVERAGE)" = "yes"; then \
-		REPORT=reports/scilab-code-coverage.info; \
+		REPORT=reports/llvm-toolchain.info; \
 		mkdir -p reports/; \
 		lcov --directory build-llvm/ --capture --ignore-errors source --output-file $$REPORT; \
 		lcov --remove $$REPORT "/usr*" -o $$REPORT; \
