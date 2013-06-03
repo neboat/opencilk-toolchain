@@ -389,8 +389,8 @@ Package: lldb-3.4
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.4 (= ${binary:Version}), python
 Pre-Depends: ${misc:Pre-Depends}
-Replaces: lldb-3.2
-Breaks: lldb-3.2
+Replaces: lldb-3.2, lldb-3.3
+Breaks: lldb-3.2, lldb-3.3
 Description: Next generation, high-performance debugger
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
