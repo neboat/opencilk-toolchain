@@ -173,7 +173,8 @@ Description: clang library - Development package
     * A single unified parser for C, Objective C, C++, and Objective C++
     * Conformance with C/C++/ObjC and their variants
  .
- This package contains the clang headers to develop extensions over libclang1-3.4.
+ This package contains the clang headers to develop extensions over
+ libclang1-3.4.
 
 Package: libclang-common-3.4-dev
 Architecture: any
