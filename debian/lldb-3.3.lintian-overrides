@@ -1,0 +1,2 @@
+# That is normal. The lib is not shipped as a new package
+lldb-3.3: package-name-doesnt-match-sonames liblldb
