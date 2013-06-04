@@ -1,6 +1,6 @@
-llvm-toolchain-3.3 (1:3.3~+rc2-1~exp1) experimental; urgency=low
+llvm-toolchain-3.3 (1:3.3~+rc3-1~exp1) experimental; urgency=low
 
-  * Package of the testing release (3.3 rc2)
+  * Package of the testing release (3.3 rc3)
   * Provide a better lldb package (Closes: #707191)
   * Improve the dependencies:
     * clang-3.3 depends on the exact same libllvm3.3 release
