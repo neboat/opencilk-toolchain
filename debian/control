@@ -50,6 +50,20 @@ Description: C, C++ and Objective-C compiler (LLVM based)
     * A single unified parser for C, Objective C, C++, and Objective C++
     * Conformance with C/C++/ObjC and their variants
 
+Package: clang-format-3.3
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Replaces: clang-format-3.4
+Breaks: clang-format-3.4
+Description: Tool to format C/C++/Obj-C code
+ Clang-format is both a library and a stand-alone tool with the goal of automatically reformatting C++
+ sources files according to configurable style guides. To do so, clang-format uses Clang's Lexer to
+ transform an input file into a token stream and then changes all the whitespace around those tokens. The
+ goal is for clang-format to both serve both as a user tool (ideally with powerful IDE integrations) and
+ part of other refactoring tools, e.g. to do a reformatting of all the lines changed during a renaming.
+ .
+ This package also provides vim and emacs plugins.
+
 Package: clang-3.3-doc
 Architecture: all
 Section: doc

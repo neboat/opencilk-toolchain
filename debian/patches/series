@@ -21,3 +21,4 @@ declare_clear_cache.diff
 ia64-fix.diff
 hurd-endian.diff
 
+clang-format-version.diff
