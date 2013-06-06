@@ -1,39 +1,39 @@
-Index: llvm-toolchain-3.3-3.3~+rc3/clang/tools/clang-format/clang-format.py
+Index: llvm-toolchain-snapshot_3.4~svn183420/clang/tools/clang-format/clang-format.py
 ===================================================================
---- llvm-toolchain-3.3-3.3~+rc3.orig/clang/tools/clang-format/clang-format.py	2013-04-09 17:23:04.000000000 +0200
-+++ llvm-toolchain-3.3-3.3~+rc3/clang/tools/clang-format/clang-format.py	2013-06-06 15:39:16.284119121 +0200
-@@ -21,7 +21,7 @@
- import subprocess
+--- llvm-toolchain-snapshot_3.4~svn183420.orig/clang/tools/clang-format/clang-format.py	2013-05-21 14:21:39.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn183420/clang/tools/clang-format/clang-format.py	2013-06-06 18:39:36.000000000 +0200
+@@ -22,7 +22,7 @@
+ import vim
  
  # Change this to the full path if clang-format is not on the path.
 -binary = 'clang-format'
-+binary = 'clang-format-3.3'
++binary = 'clang-format-3.4'
  
  # Change this to format according to other formatting styles (see 
  # clang-format -help)
-Index: llvm-toolchain-3.3-3.3~+rc3/clang/tools/clang-format/clang-format-diff.py
+Index: llvm-toolchain-snapshot_3.4~svn183420/clang/tools/clang-format/clang-format-diff.py
 ===================================================================
---- llvm-toolchain-3.3-3.3~+rc3.orig/clang/tools/clang-format/clang-format-diff.py	2013-04-17 09:55:02.000000000 +0200
-+++ llvm-toolchain-3.3-3.3~+rc3/clang/tools/clang-format/clang-format-diff.py	2013-06-06 15:39:50.820117303 +0200
+--- llvm-toolchain-snapshot_3.4~svn183420.orig/clang/tools/clang-format/clang-format-diff.py	2013-05-30 13:50:20.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn183420/clang/tools/clang-format/clang-format-diff.py	2013-06-06 18:39:36.000000000 +0200
 @@ -28,7 +28,7 @@
  
  
  # Change this to the full path if clang-format is not on the path.
 -binary = 'clang-format'
-+binary = 'clang-format-3.3'
++binary = 'clang-format-3.4'
  
  
  def getOffsetLength(filename, line_number, line_count):
-Index: llvm-toolchain-3.3-3.3~+rc3/clang/tools/clang-format/clang-format.el
+Index: llvm-toolchain-snapshot_3.4~svn183420/clang/tools/clang-format/clang-format.el
 ===================================================================
---- llvm-toolchain-3.3-3.3~+rc3.orig/clang/tools/clang-format/clang-format.el	2013-05-08 02:29:53.000000000 +0200
-+++ llvm-toolchain-3.3-3.3~+rc3/clang/tools/clang-format/clang-format.el	2013-06-06 15:39:02.512116254 +0200
-@@ -14,7 +14,7 @@
-   (let* ((orig-windows (get-buffer-window-list (current-buffer)))
-          (orig-window-starts (mapcar #'window-start orig-windows))
-          (orig-point (point))
--         (binary "clang-format")
-+         (binary "clang-format-3.3")
-          (style "LLVM"))
-     (if mark-active
-         (setq beg (region-beginning)
+--- llvm-toolchain-snapshot_3.4~svn183420.orig/clang/tools/clang-format/clang-format.el	2013-05-21 19:05:40.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn183420/clang/tools/clang-format/clang-format.el	2013-06-06 18:39:55.000000000 +0200
+@@ -13,7 +13,7 @@
+ 
+ ;; *Location of the clang-format binary. If it is on your PATH, a full path name
+ ;; need not be specified.
+-(defvar clang-format-binary "clang-format")
++(defvar clang-format-binary "clang-format-3.4")
+ 
+ (defun clang-format-region ()
+   "Use clang-format to format the currently active region."
