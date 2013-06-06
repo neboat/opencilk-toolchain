@@ -20,5 +20,6 @@ declare_clear_cache.diff
 34-powerpc-no-altivec.diff
 ia64-fix.diff
 hurd-endian.diff
-
 clang-format-version.diff
+kfreebsd.diff
+
