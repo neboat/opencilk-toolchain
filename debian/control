@@ -8,7 +8,7 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl8.5, expect,
     sharutils, autotools-dev (>= 20060702.1), libffi-dev (>= 3.0.9),
     lsb-release, patchutils, diffstat, xz-utils, chrpath, python-dev,
     libedit-dev, swig, python-sphinx, ocaml-nox, binutils-dev, libcloog-isl-dev,
-    libisl-dev (>= 0.11.1), binutils-gold [amd64 armel armhf i386 powerpc powerpcspe ppc64 sparc sparc64 x32],
+    libisl-dev (>= 0.11.1), binutils-gold [amd64 armel armhf i386 powerpc powerpcspe ppc64 sparc sparc64 x32] (>= 2.23.52.20130522),
     lcov, procps
 Build-Conflicts: oprofile, ocaml
 Standards-Version: 3.9.4
@@ -49,6 +49,36 @@ Description: C, C++ and Objective-C compiler (LLVM based)
     * A simple and hackable code base
     * A single unified parser for C, Objective C, C++, and Objective C++
     * Conformance with C/C++/ObjC and their variants
+
+Package: clang-format-3.4
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Replaces: clang-format-3.3
+Breaks: clang-format-3.3
+Description: Tool to format C/C++/Obj-C code
+ Clang-format is both a library and a stand-alone tool with the goal of
+ automatically reformatting C++ sources files according to configurable
+ style guides. To do so, clang-format uses Clang's Lexer to transform an
+ input file into a token stream and then changes all the whitespace around
+ those tokens. The goal is for clang-format to both serve both as a user
+ tool (ideally with powerful IDE integrations) and part of other
+ refactoring tools, e.g. to do a reformatting of all the lines changed
+ during a renaming.
+ .
+ This package also provides vim and emacs plugins.
+
+Package: cpp11-migrate-3.4
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Replaces: cpp11-migrate-3.3
+Breaks: cpp11-migrate-3.3
+Description: Tool to convert C++98 and C++03 code to C++11
+ The purpose of the C++11 Migrator is to do source-to-source translation to
+ migrate existing C++ code to use C++11 features to enhance
+ maintainability, readability, runtime performance, and compile-time
+ performance. Development is still early and transforms fall mostly into
+ the first two categories. The migrator is based on Clang's LibTooling and
+ the AST Matching library.
 
 Package: clang-3.4-doc
 Architecture: all

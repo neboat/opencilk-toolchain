@@ -106,20 +106,14 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
     ln -s ../polly .; \
 
 
-	# cd clang/tools/ && \
-	# if test -h extra; then \
-	# 	rm extra; \
-	# fi; \
-	# ln -s ../../clang-extra extra; \
-	# readlink extra
-
-
 	cd projects/ && \
 	if test -h compiler-rt; then \
 		rm compiler-rt; \
 	fi; \
 	ln -s ../compiler-rt .; \
 	readlink compiler-rt
+
+	cp -R clang-tools-extra tools/clang/tools/extra
 
 # Start the actual configure
 	cd $(TARGET_BUILD) && $(PRE_CONFIGURE) \
@@ -147,7 +141,7 @@ override_dh_auto_build:
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=$(VENDOR) CXXFLAGS="$(CXXFLAGS_EXTRA) -std=c++0x"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1
 	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 #	$(MAKE) $(NJOBS) -C build-compiler-rt VERBOSE=1
-# Only available in clang 3.3
+# Only available from clang 3.3
 	cd $(CURDIR)/tools/clang/docs && make -f Makefile.sphinx
 
 override_dh_auto_install:
@@ -167,6 +161,8 @@ override_dh_auto_install:
 # Create this fake directory to make the install libclang-common-dev happy
 # under the unsupported archs of compiler-rt
 	mkdir -p $(CURDIR)/debian/tmp/usr/lib/clang/$(LLVM_VERSION)/lib
+	mkdir -p $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)
+
 
 # Rename binaries
 	mkdir -p $(CURDIR)/debian/tmp/usr/bin/
@@ -180,10 +176,21 @@ override_dh_auto_install:
 	d=$(CURDIR)/docs/_build/man/; \
 	cd $$d; \
 	for f in *.1; do \
-		echo "$$f"|grep "3\.2" || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
+		echo "$$f"|grep "3\.3" || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
 	done
 
+# Rename some stuff with the version name
 	mv $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang.1 $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang-$(LLVM_VERSION).1
+
+	if test -f $(CURDIR)/utils/vim/llvm.vim; then \
+		mv $(CURDIR)/utils/vim/llvm.vim $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim; \
+	fi
+	if test -f $(CURDIR)/utils/vim/tablegen.vim; then \
+		mv $(CURDIR)/utils/vim/tablegen.vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim; \
+	fi
+
+	mv $(CURDIR)/clang/tools/clang-format/clang-format-diff.py $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
+	mv $(CURDIR)/clang/tools/clang-format/clang-format.py clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
 
 # Remove some license files
 	rm $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/llvm/Support/LICENSE.TXT
@@ -229,6 +236,7 @@ override_dh_auto_test:
 	if test -d $(TARGET_BUILD)/tools/lldb/test/lldb-test-traces/; then \
 		cat $(TARGET_BUILD)/tools/lldb/test/lldb-test-traces/*; \
 	fi
+
 # Managed by debian build system
 	rm -f $(CURDIR)/$(TARGET_BUILD)/Release/lib/python*/site-packages/lldb/_lldb.so
 # polly tests
@@ -253,4 +261,5 @@ override_dh_auto_clean:
 	find utils -name '*.pyc' | xargs -r rm -f
 	find test -name '*.pyc' -o -name '*.o' -o -name '*.cm[ix]' | xargs -r rm -f
 	rm -f tools/clang tools/polly tools/lldb projects/compiler-rt
+	rm -rf tools/clang/tools/extra
 
