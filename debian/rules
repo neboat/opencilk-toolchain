@@ -167,7 +167,7 @@ override_dh_auto_install:
 # Create this fake directory to make the install libclang-common-dev happy
 # under the unsupported archs of compiler-rt
 	mkdir -p $(CURDIR)/debian/tmp/usr/lib/clang/$(LLVM_VERSION)/lib
-	mkdir -p $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_V
+	mkdir -p $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)
 
 
 # Rename binaries
