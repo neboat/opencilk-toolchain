@@ -106,20 +106,14 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
     ln -s ../polly .; \
 
 
-	# cd clang/tools/ && \
-	# if test -h extra; then \
-	# 	rm extra; \
-	# fi; \
-	# ln -s ../../clang-extra extra; \
-	# readlink extra
-
-
 	cd projects/ && \
 	if test -h compiler-rt; then \
 		rm compiler-rt; \
 	fi; \
 	ln -s ../compiler-rt .; \
 	readlink compiler-rt
+
+	cp -R clang-tools-extra tools/clang/tools/extra
 
 # Start the actual configure
 	cd $(TARGET_BUILD) && $(PRE_CONFIGURE) \
@@ -188,8 +182,12 @@ override_dh_auto_install:
 # Rename some stuff with the version name
 	mv $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang.1 $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang-$(LLVM_VERSION).1
 
-	mv $(CURDIR)/utils/vim/llvm.vim $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim
-	mv $(CURDIR)/utils/vim/tablegen.vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim
+	if test -f $(CURDIR)/utils/vim/llvm.vim; then \
+		mv $(CURDIR)/utils/vim/llvm.vim $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim; \
+	fi
+	if test -f $(CURDIR)/utils/vim/tablegen.vim; then \
+		mv $(CURDIR)/utils/vim/tablegen.vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim; \
+	fi
 
 	mv $(CURDIR)/clang/tools/clang-format/clang-format-diff.py $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
 	mv $(CURDIR)/clang/tools/clang-format/clang-format.py clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
@@ -263,4 +261,5 @@ override_dh_auto_clean:
 	find utils -name '*.pyc' | xargs -r rm -f
 	find test -name '*.pyc' -o -name '*.o' -o -name '*.cm[ix]' | xargs -r rm -f
 	rm -f tools/clang tools/polly tools/lldb projects/compiler-rt
+	rm -rf tools/clang/tools/extra
 
