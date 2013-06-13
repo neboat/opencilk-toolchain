@@ -22,4 +22,3 @@ declare_clear_cache.diff
 ia64-fix.diff
 clang-format-version.diff
 kfreebsd.diff
-
