@@ -23,3 +23,4 @@ hurd-endian.diff
 clang-format-version.diff
 kfreebsd.diff
 add-ubuntu-saucy.patch
+lldb33-to-r183444.patch
