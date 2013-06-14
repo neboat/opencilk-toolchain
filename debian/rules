@@ -139,13 +139,31 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 
 override_dh_auto_build:
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=$(VENDOR) CXXFLAGS="$(CXXFLAGS_EXTRA) -std=c++0x"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1
+
+build_doc:
 	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
-#	$(MAKE) $(NJOBS) -C build-compiler-rt VERBOSE=1
-# Only available in clang 3.3
 	cd $(CURDIR)/tools/clang/docs && make -f Makefile.sphinx
+# Remove the copy of jquery. See bug #701087
+	for d in $(CURDIR)/clang/docs/_build/html/_static/ $(CURDIR)/docs/_build/html/_static/; do \
+		cd $$d && rm -f jquery.js && ln -s /usr/share/javascript/jquery/jquery.js; \
+		cd $$d && rm -f underscore.js && ln -s /usr/share/javascript/underscore/underscore.js; \
+	done
+
+	help2man debian/lldb-$(LLVM_VERSION)/usr/bin/lldb-$(LLVM_VERSION) > debian/man/lldb-$(LLVM_VERSION).1
+	help2man debian/clang-format-$(LLVM_VERSION)/usr/bin/clang-format-$(LLVM_VERSION) > debian/man/clang-format-$(LLVM_VERSION).1
+	help2man debian/cpp11-migrate-$(LLVM_VERSION)/usr/bin/cpp11-migrate-$(LLVM_VERSION) > debian/man/cpp11-migrate-$(LLVM_VERSION).1
+	help2man debian/clang-format-diff-$(LLVM_VERSION)/usr/bin/clang-format-diff-$(LLVM_VERSION) > debian/man/clang-format-diff-$(LLVM_VERSION).1
+
+
+	for f in clang clang-tblgen clang-check scan-view; do \
+		help2man --version-string=$(LLVM_VERSION) debian/clang-$(LLVM_VERSION)/usr/bin/$$f > debian/man/$$f.1; \
+	done
+	for f in llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-tblgen macho-dump; do \
+		help2man --version-string=$(LLVM_VERSION) debian/llvm-$(LLVM_VERSION)/usr/bin/$$f-$(LLVM_VERSION) > debian/man/$$f-$(LLVM_VERSION).1; \
+    done
 
 override_dh_auto_install:
-	$(MAKE) -C $(TARGET_BUILD)  VERBOSE=1  install DESTDIR=$(CURDIR)/debian/tmp/
+	$(MAKE) -C $(TARGET_BUILD)  VERBOSE=1 install DESTDIR=$(CURDIR)/debian/tmp/
 	chrpath -d $(TARGET_BUILD)/Release/bin/clang
 	chrpath -d `find $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable`
 
@@ -185,24 +203,27 @@ override_dh_auto_install:
 	if test -f $(CURDIR)/utils/vim/llvm.vim; then \
 		mv $(CURDIR)/utils/vim/llvm.vim $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim; \
 	fi
+
 	if test -f $(CURDIR)/utils/vim/tablegen.vim; then \
 		mv $(CURDIR)/utils/vim/tablegen.vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim; \
 	fi
 
-	mv $(CURDIR)/clang/tools/clang-format/clang-format-diff.py $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
-	mv $(CURDIR)/clang/tools/clang-format/clang-format.py clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
+	if test -f $(CURDIR)/clang/tools/clang-format/clang-format-diff.py; then \
+		mv $(CURDIR)/clang/tools/clang-format/clang-format-diff.py $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION); \
+	fi
+
+	if test -f $(CURDIR)/clang/tools/clang-format/clang-format.py; then \
+		mv $(CURDIR)/clang/tools/clang-format/clang-format.py clang/tools/clang-format/clang-format-$(LLVM_VERSION).py; \
+	fi
 
 # Remove some license files
-	rm $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/llvm/Support/LICENSE.TXT
+	rm -f $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/llvm/Support/LICENSE.TXT \
+	$(CURDIR)/debian/llvm-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/build/autoconf/LICENSE.TXT
 
 # Managed in lldb-X.Y.links.in
 	rm -f $(CURDIR)/$(TARGET_BUILD)/Release/lib/python*/site-packages/lldb/_lldb.so
 
-# Remove the copy of jquery. See bug #701087
-	cd $(CURDIR)/docs/_build/html/_static/ && rm -f jquery.js && ln -s /usr/share/javascript/jquery/jquery.js
-
-
-override_dh_installman:
+override_dh_installman: build_doc
 	dh_installman
 # Make sure that lli manpage is only in llvm-3.2-runtime (See #697117)
 	rm -f $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/share/man/man1/lli*
