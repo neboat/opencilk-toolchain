@@ -53,7 +53,7 @@ Description: C, C++ and Objective-C compiler (LLVM based)
 
 Package: clang-format-3.3
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, python
 Replaces: clang-format-3.4
 Breaks: clang-format-3.4
 Description: Tool to format C/C++/Obj-C code
