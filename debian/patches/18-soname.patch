@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.3~svn181457/clang/tools/libclang/Makefile
+Index: llvm-toolchain-snapshot_3.4~svn184046/clang/tools/libclang/Makefile
 ===================================================================
---- llvm-toolchain-snapshot_3.3~svn181457.orig/clang/tools/libclang/Makefile	2013-05-08 20:25:14.000000000 +0200
-+++ llvm-toolchain-snapshot_3.3~svn181457/clang/tools/libclang/Makefile	2013-05-08 20:25:20.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn184046.orig/clang/tools/libclang/Makefile	2013-06-15 19:42:22.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn184046/clang/tools/libclang/Makefile	2013-06-15 19:42:22.000000000 +0200
 @@ -14,6 +14,7 @@
  
  LINK_LIBS_IN_SHARED = 1
@@ -9,7 +9,7 @@ Index: llvm-toolchain-snapshot_3.3~svn181457/clang/tools/libclang/Makefile
 +SONAME_MAJOR=1
  
  include $(CLANG_LEVEL)/../../Makefile.config
- LINK_COMPONENTS := $(TARGETS_TO_BUILD) asmparser bitreader support mc
+ LINK_COMPONENTS := $(TARGETS_TO_BUILD) asmparser bitreader support mc option
 @@ -30,7 +31,7 @@
  
  # Add soname to the library.

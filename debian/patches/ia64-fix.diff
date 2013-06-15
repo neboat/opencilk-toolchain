@@ -1,7 +1,7 @@
-Index: llvm-toolchain-3.3-3.3~+rc3/lib/ExecutionEngine/JIT/JIT.cpp
+Index: llvm-toolchain-snapshot_3.4~svn184046/lib/ExecutionEngine/JIT/JIT.cpp
 ===================================================================
---- llvm-toolchain-3.3-3.3~+rc3.orig/lib/ExecutionEngine/JIT/JIT.cpp	2013-01-22 09:46:31.000000000 +0000
-+++ llvm-toolchain-3.3-3.3~+rc3/lib/ExecutionEngine/JIT/JIT.cpp	2013-06-06 08:25:45.000000000 +0000
+--- llvm-toolchain-snapshot_3.4~svn184046.orig/lib/ExecutionEngine/JIT/JIT.cpp	2013-06-15 19:43:21.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn184046/lib/ExecutionEngine/JIT/JIT.cpp	2013-06-15 19:43:21.000000000 +0200
 @@ -68,7 +68,7 @@
  }
  

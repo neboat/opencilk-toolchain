@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn183420/tools/llvm-shlib/Makefile
+Index: llvm-toolchain-snapshot_3.4~svn184046/tools/llvm-shlib/Makefile
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn183420.orig/tools/llvm-shlib/Makefile	2013-06-06 18:37:08.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn183420/tools/llvm-shlib/Makefile	2013-06-06 18:37:09.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn184046.orig/tools/llvm-shlib/Makefile	2013-06-15 19:43:13.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn184046/tools/llvm-shlib/Makefile	2013-06-15 19:43:13.000000000 +0200
 @@ -76,7 +76,7 @@
  
  ifeq ($(HOST_OS), $(filter $(HOST_OS), Linux FreeBSD GNU))

@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn183420/autoconf/configure.ac
+Index: llvm-toolchain-snapshot_3.4~svn184046/autoconf/configure.ac
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn183420.orig/autoconf/configure.ac	2013-05-22 02:35:47.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn183420/autoconf/configure.ac	2013-06-06 18:37:11.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn184046.orig/autoconf/configure.ac	2013-06-15 19:43:15.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn184046/autoconf/configure.ac	2013-06-15 19:43:15.000000000 +0200
 @@ -31,7 +31,7 @@
  dnl===-----------------------------------------------------------------------===
  dnl Initialize autoconf and define the package name, version number and
@@ -11,10 +11,10 @@ Index: llvm-toolchain-snapshot_3.4~svn183420/autoconf/configure.ac
  AC_DEFINE([LLVM_VERSION_MAJOR], [3], [Major version of the LLVM API])
  AC_DEFINE([LLVM_VERSION_MINOR], [4], [Minor version of the LLVM API])
  
-Index: llvm-toolchain-snapshot_3.4~svn183420/configure
+Index: llvm-toolchain-snapshot_3.4~svn184046/configure
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn183420.orig/configure	2013-06-06 18:37:09.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn183420/configure	2013-06-06 18:37:11.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn184046.orig/configure	2013-06-15 19:43:15.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn184046/configure	2013-06-15 19:43:15.000000000 +0200
 @@ -561,8 +561,8 @@
  # Identity of this package.
  PACKAGE_NAME='LLVM'
