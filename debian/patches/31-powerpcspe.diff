@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn184046/clang/lib/Lex/Makefile
+Index: llvm-toolchain-snapshot_3.4~svn184290/clang/lib/Lex/Makefile
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn184046.orig/clang/lib/Lex/Makefile	2013-06-15 19:43:18.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn184046/clang/lib/Lex/Makefile	2013-06-15 19:43:18.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn184290.orig/clang/lib/Lex/Makefile	2013-06-19 11:14:01.434779657 +0200
++++ llvm-toolchain-snapshot_3.4~svn184290/clang/lib/Lex/Makefile	2013-06-19 11:14:01.430779659 +0200
 @@ -17,8 +17,10 @@
  LIBRARYNAME := clangLex
  

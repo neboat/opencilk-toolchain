@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn184046/configure
+Index: llvm-toolchain-snapshot_3.4~svn184290/configure
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn184046.orig/configure	2013-06-15 19:43:12.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn184046/configure	2013-06-15 19:43:12.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn184290.orig/configure	2013-06-19 11:13:58.370779593 +0200
++++ llvm-toolchain-snapshot_3.4~svn184290/configure	2013-06-19 11:13:58.366779571 +0200
 @@ -13681,7 +13681,7 @@
        case $llvm_cv_os_type in
          Linux)

@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn184046/clang/tools/libclang/Makefile
+Index: llvm-toolchain-snapshot_3.4~svn184290/clang/tools/libclang/Makefile
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn184046.orig/clang/tools/libclang/Makefile	2013-06-15 19:42:22.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn184046/clang/tools/libclang/Makefile	2013-06-15 19:42:22.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn184290.orig/clang/tools/libclang/Makefile	2013-06-19 11:13:54.270779471 +0200
++++ llvm-toolchain-snapshot_3.4~svn184290/clang/tools/libclang/Makefile	2013-06-19 11:13:54.266779456 +0200
 @@ -14,6 +14,7 @@
  
  LINK_LIBS_IN_SHARED = 1

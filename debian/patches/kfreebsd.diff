@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn184046/lldb/include/lldb/Host/Config.h
+Index: llvm-toolchain-snapshot_3.4~svn184290/lldb/include/lldb/Host/Config.h
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn184046.orig/lldb/include/lldb/Host/Config.h	2013-06-15 19:43:22.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn184046/lldb/include/lldb/Host/Config.h	2013-06-15 19:43:22.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn184290.orig/lldb/include/lldb/Host/Config.h	2013-06-19 11:14:04.194779756 +0200
++++ llvm-toolchain-snapshot_3.4~svn184290/lldb/include/lldb/Host/Config.h	2013-06-19 11:14:04.190779765 +0200
 @@ -18,7 +18,7 @@
  
  #include "lldb/Host/linux/Config.h"
@@ -11,10 +11,10 @@ Index: llvm-toolchain-snapshot_3.4~svn184046/lldb/include/lldb/Host/Config.h
  
  #include "lldb/Host/freebsd/Config.h"
  
-Index: llvm-toolchain-snapshot_3.4~svn184046/lldb/source/Core/Mangled.cpp
+Index: llvm-toolchain-snapshot_3.4~svn184290/lldb/source/Core/Mangled.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn184046.orig/lldb/source/Core/Mangled.cpp	2013-06-15 19:43:22.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn184046/lldb/source/Core/Mangled.cpp	2013-06-15 19:43:22.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn184290.orig/lldb/source/Core/Mangled.cpp	2013-06-19 11:14:04.194779756 +0200
++++ llvm-toolchain-snapshot_3.4~svn184290/lldb/source/Core/Mangled.cpp	2013-06-19 11:14:04.190779765 +0200
 @@ -31,6 +31,7 @@
  #include <ctype.h>
  #include <string.h>
@@ -23,10 +23,10 @@ Index: llvm-toolchain-snapshot_3.4~svn184046/lldb/source/Core/Mangled.cpp
  
  using namespace lldb_private;
  
-Index: llvm-toolchain-snapshot_3.4~svn184046/lldb/source/Host/common/Host.cpp
+Index: llvm-toolchain-snapshot_3.4~svn184290/lldb/source/Host/common/Host.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn184046.orig/lldb/source/Host/common/Host.cpp	2013-06-15 19:43:22.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn184046/lldb/source/Host/common/Host.cpp	2013-06-15 19:43:22.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn184290.orig/lldb/source/Host/common/Host.cpp	2013-06-19 11:14:04.194779756 +0200
++++ llvm-toolchain-snapshot_3.4~svn184290/lldb/source/Host/common/Host.cpp	2013-06-19 11:14:04.190779765 +0200
 @@ -151,7 +151,7 @@
      delete info;
  
