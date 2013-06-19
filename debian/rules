@@ -113,7 +113,8 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 	ln -s ../compiler-rt .; \
 	readlink compiler-rt
 
-	cp -R clang-tools-extra tools/clang/tools/extra
+	# Due to bug upstream, no symlink here
+	cp -R -H clang-tools-extra tools/clang/tools/extra
 
 # Start the actual configure
 	cd $(TARGET_BUILD) && $(PRE_CONFIGURE) \
@@ -176,11 +177,12 @@ override_dh_auto_install:
 	d=$(CURDIR)/docs/_build/man/; \
 	cd $$d; \
 	for f in *.1; do \
-		echo "$$f"|grep "3\.3" || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
+		echo "$$f"|grep $(LLVM_VERSION) || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
 	done
 
 # Rename some stuff with the version name
-	mv $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang.1 $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang-$(LLVM_VERSION).1
+	# WILL DO when we can install several clang versions together
+	#mv $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang.1 $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang-$(LLVM_VERSION).1
 
 	if test -f $(CURDIR)/utils/vim/llvm.vim; then \
 		mv $(CURDIR)/utils/vim/llvm.vim $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim; \

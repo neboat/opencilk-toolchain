@@ -1,3 +1,13 @@
+llvm-toolchain-snapshot (1:3.4~svn184294-1~exp1) experimental; urgency=low
+
+  * New snapshot release
+  * Improve some scripts and fix cpp11-migrate install from 
+    clang-tools-extra.
+  * Fix "versionless" clang manpages install.
+  * Fix Toolchain patch from change of scope (add namespaces).
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 19 Jun 2013 14:20:12 +0200
+
 llvm-toolchain-snapshot (1:3.4~svn184046-1~exp1) experimental; urgency=low
 
   * New snapshot release

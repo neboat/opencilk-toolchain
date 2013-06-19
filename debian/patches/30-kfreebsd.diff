@@ -6,8 +6,8 @@ Index: llvm-toolchain-snapshot_3.4~svn184046/clang/lib/Driver/ToolChains.h
    virtual bool isPICDefault() const;
    virtual bool isPIEDefault() const;
    virtual bool isPICDefaultForced() const;
-+  virtual void AddClangSystemIncludeArgs(const ArgList &DriverArgs,
-+                                        ArgStringList &CC1Args) const;
++  virtual void AddClangSystemIncludeArgs(const llvm::opt::ArgList &DriverArgs,
++                                        llvm::opt::ArgStringList &CC1Args) const;
  
  protected:
    virtual Tool *getTool(Action::ActionClass AC) const;
@@ -19,8 +19,8 @@ Index: llvm-toolchain-snapshot_3.4~svn184046/clang/lib/Driver/ToolChains.cpp
    return GoodVersion;
  }
  
-+void Generic_GCC::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
-+                                      ArgStringList &CC1Args) const {
++void Generic_GCC::AddClangSystemIncludeArgs(const llvm::opt::ArgList &DriverArgs,
++                                      llvm::opt::ArgStringList &CC1Args) const {
 +  // Under Debian, clang headers are installed into
 +  // '/usr/include/clang/VERSION/include/'
 +  addSystemInclude(DriverArgs, CC1Args, "/usr/include/clang/" + std::string(CLANG_VERSION_STRING) + "/include/");
