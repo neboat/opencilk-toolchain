@@ -25,3 +25,4 @@ kfreebsd.diff
 add-ubuntu-saucy.patch
 lldb33-to-r183444.patch
 disabletestlldb.diff
+mipsel-ftbfs.diff
