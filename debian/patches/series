@@ -8,6 +8,7 @@
 profile_rt.diff
 30-kfreebsd.diff
 0003-Debian-version-info-and-bugreport.patch
+0010-shared-lib-paths.patch
 0021-shared-lib-debian.patch
 0023-link-libopagent.patch
 0044-soname.diff
@@ -22,3 +23,4 @@ declare_clear_cache.diff
 ia64-fix.diff
 clang-format-version.diff
 kfreebsd.diff
+mipsel-ftbfs.diff

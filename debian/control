@@ -9,7 +9,7 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl8.5, expect,
     lsb-release, patchutils, diffstat, xz-utils, chrpath, python-dev,
     libedit-dev, swig, python-sphinx, ocaml-nox, binutils-dev, libcloog-isl-dev,
     libisl-dev (>= 0.11.1), binutils-gold [amd64 armel armhf i386 powerpc powerpcspe ppc64 sparc sparc64 x32],
-    lcov, procps
+    lcov, procps, help2man
 Build-Conflicts: oprofile, ocaml
 Standards-Version: 3.9.4
 Homepage: http://www.llvm.org/
@@ -52,7 +52,7 @@ Description: C, C++ and Objective-C compiler (LLVM based)
 
 Package: clang-format-3.4
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, python
 Replaces: clang-format-3.3
 Breaks: clang-format-3.3
 Description: Tool to format C/C++/Obj-C code
@@ -270,7 +270,7 @@ Description: Low-Level Virtual Machine (LLVM), debugging symbols library
 Package: llvm-3.4
 Architecture: any
 Suggests: llvm-3.4-doc
-Depends: llvm-3.4-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
+Depends: llvm-3.4-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Recommends: llvm-3.4-dev
 Conflicts: llvm (<< 2.7-1)
 Replaces: llvm (<< 2.7-1)
@@ -363,7 +363,7 @@ Description: Low-Level Virtual Machine (LLVM), bindings for OCaml
 Package: llvm-3.4-doc
 Section: doc
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
 Description: Low-Level Virtual Machine (LLVM), documentation
  The Low-Level Virtual Machine (LLVM) is a collection of libraries and
  tools that make it easy to build compilers, optimizers, Just-In-Time

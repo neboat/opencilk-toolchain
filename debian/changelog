@@ -1,7 +1,21 @@
+llvm-toolchain-snapshot (1:3.4~svn184294-1~exp1) UNRELEASED; urgency=low
+
+  * Fix warning python-script-but-no-python-dep on clang-format-X.Y
+  * manpages are generated during build time (simplifies maintenance)
+  * Fix duplicate underscore.js and jquery.js
+  * Move libjs-jquery & libjs-underscore dependencies to llvm-X.Y-doc
+  * Add lldb-X.Y manpage
+  * Hopefully fix the ftbfs under mipsel (mipsel-ftbfs.diff)
+
+  [ Léo Cavaillé ]
+  * Add patch to find correctly LLVMGold.so with -O4 (Closes: #712437)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 20 Jun 2013 15:39:11 +0200
+
 llvm-toolchain-snapshot (1:3.4~svn184294-1~exp1) experimental; urgency=low
 
   * New snapshot release
-  * Improve some scripts and fix cpp11-migrate install from 
+  * Improve some scripts and fix cpp11-migrate install from
     clang-tools-extra.
   * Fix "versionless" clang manpages install.
   * Fix Toolchain patch from change of scope (add namespaces).
