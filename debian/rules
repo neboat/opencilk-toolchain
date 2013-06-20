@@ -140,26 +140,36 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 override_dh_auto_build:
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=$(VENDOR) CXXFLAGS="$(CXXFLAGS_EXTRA) -std=c++0x"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1
 
+override_dh_prep: build_doc
+	dh_prep
+
 build_doc:
 	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	cd $(CURDIR)/tools/clang/docs && make -f Makefile.sphinx
+
+# Rename manpages
+	d=$(CURDIR)/docs/_build/man/; \
+	cd $$d; \
+	for f in *.1; do \
+		echo "$$f"|grep "3\.3" || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
+	done
+
 # Remove the copy of jquery. See bug #701087
 	for d in $(CURDIR)/clang/docs/_build/html/_static/ $(CURDIR)/docs/_build/html/_static/; do \
 		cd $$d && rm -f jquery.js && ln -s /usr/share/javascript/jquery/jquery.js; \
 		cd $$d && rm -f underscore.js && ln -s /usr/share/javascript/underscore/underscore.js; \
 	done
 
-	help2man debian/lldb-$(LLVM_VERSION)/usr/bin/lldb-$(LLVM_VERSION) > debian/man/lldb-$(LLVM_VERSION).1
-	help2man debian/clang-format-$(LLVM_VERSION)/usr/bin/clang-format-$(LLVM_VERSION) > debian/man/clang-format-$(LLVM_VERSION).1
-	help2man debian/cpp11-migrate-$(LLVM_VERSION)/usr/bin/cpp11-migrate-$(LLVM_VERSION) > debian/man/cpp11-migrate-$(LLVM_VERSION).1
-	help2man debian/clang-format-diff-$(LLVM_VERSION)/usr/bin/clang-format-diff-$(LLVM_VERSION) > debian/man/clang-format-diff-$(LLVM_VERSION).1
+	help2man --version-string=$(LLVM_VERSION) clang/tools/scan-view/scan-view > debian/man/scan-view.1
+	help2man --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1
 
 
-	for f in clang clang-tblgen clang-check scan-view; do \
-		help2man --version-string=$(LLVM_VERSION) debian/clang-$(LLVM_VERSION)/usr/bin/$$f > debian/man/$$f.1; \
+	for f in clang clang-tblgen clang-check; do \
+		help2man --version-string=$(LLVM_VERSION) build-llvm/Release/bin/$$f > debian/man/$$f.1; \
 	done
-	for f in llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-tblgen macho-dump; do \
-		help2man --version-string=$(LLVM_VERSION) debian/llvm-$(LLVM_VERSION)/usr/bin/$$f-$(LLVM_VERSION) > debian/man/$$f-$(LLVM_VERSION).1; \
+
+	for f in llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-tblgen macho-dump lldb clang-format cpp11-migrate; do \
+		help2man --version-string=$(LLVM_VERSION) build-llvm/Release/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
     done
 
 override_dh_auto_install:
@@ -190,13 +200,6 @@ override_dh_auto_install:
 		echo "Link $$f to `basename $$f`-$(LLVM_VERSION)"; \
 	done
 
-# Rename manpages
-	d=$(CURDIR)/docs/_build/man/; \
-	cd $$d; \
-	for f in *.1; do \
-		echo "$$f"|grep "3\.3" || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
-	done
-
 # Rename some stuff with the version name
 	mv $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang.1 $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang-$(LLVM_VERSION).1
 
@@ -223,7 +226,7 @@ override_dh_auto_install:
 # Managed in lldb-X.Y.links.in
 	rm -f $(CURDIR)/$(TARGET_BUILD)/Release/lib/python*/site-packages/lldb/_lldb.so
 
-override_dh_installman: build_doc
+override_dh_installman:
 	dh_installman
 # Make sure that lli manpage is only in llvm-3.2-runtime (See #697117)
 	rm -f $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/share/man/man1/lli*
