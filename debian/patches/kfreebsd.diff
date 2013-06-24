@@ -1,5 +1,7 @@
---- test/llvm-toolchain-3.3-3.3~+rc3/lldb/include/lldb/Host/Config.h	2011-04-01 18:18:34.000000000 +0000
-+++ llvm-toolchain-3.3-3.3~+rc3/lldb/include/lldb/Host/Config.h	2013-06-06 07:59:19.000000000 +0000
+Index: llvm-toolchain-3.3-3.3/lldb/include/lldb/Host/Config.h
+===================================================================
+--- llvm-toolchain-3.3-3.3.orig/lldb/include/lldb/Host/Config.h	2013-06-24 01:05:00.775028374 +0200
++++ llvm-toolchain-3.3-3.3/lldb/include/lldb/Host/Config.h	2013-06-24 01:05:00.767028374 +0200
 @@ -18,7 +18,7 @@
  
  #include "lldb/Host/linux/Config.h"
@@ -9,8 +11,10 @@
  
  #include "lldb/Host/freebsd/Config.h"
  
---- test/llvm-toolchain-3.3-3.3~+rc3/lldb/source/Core/Mangled.cpp	2012-09-11 18:11:12.000000000 +0000
-+++ llvm-toolchain-3.3-3.3~+rc3/lldb/source/Core/Mangled.cpp	2013-06-06 07:58:59.000000000 +0000
+Index: llvm-toolchain-3.3-3.3/lldb/source/Core/Mangled.cpp
+===================================================================
+--- llvm-toolchain-3.3-3.3.orig/lldb/source/Core/Mangled.cpp	2013-06-24 01:05:00.775028374 +0200
++++ llvm-toolchain-3.3-3.3/lldb/source/Core/Mangled.cpp	2013-06-24 01:05:28.000000000 +0200
 @@ -30,6 +30,7 @@
  #include "lldb/Core/Timer.h"
  #include <ctype.h>
@@ -19,8 +23,10 @@
  
  using namespace lldb_private;
  
---- test/llvm-toolchain-3.3-3.3~+rc3/lldb/source/Host/common/Host.cpp	2013-05-15 18:27:08.000000000 +0000
-+++ llvm-toolchain-3.3-3.3~+rc3/lldb/source/Host/common/Host.cpp	2013-06-06 07:59:01.000000000 +0000
+Index: llvm-toolchain-3.3-3.3/lldb/source/Host/common/Host.cpp
+===================================================================
+--- llvm-toolchain-3.3-3.3.orig/lldb/source/Host/common/Host.cpp	2013-06-24 01:05:00.775028374 +0200
++++ llvm-toolchain-3.3-3.3/lldb/source/Host/common/Host.cpp	2013-06-24 01:05:28.000000000 +0200
 @@ -151,7 +151,7 @@
      delete info;
  
@@ -30,6 +36,42 @@
      #define __WALL 0
  #endif
      const int options = __WALL;
+@@ -513,7 +513,7 @@
+ {
+ }
+ 
+-#if !defined (__APPLE__) && !defined (__FreeBSD__) && !defined (__linux__) // see macosx/Host.mm
++#if !defined (__APPLE__) && !defined (__FreeBSD__) && !defined(__FreeBSD_kernel__) && !defined (__linux__) // see macosx/Host.mm
+ 
+ void
+ Host::ThreadCreated (const char *thread_name)
+@@ -533,7 +533,7 @@
+     return 0;
+ }
+ 
+-#endif // #if !defined (__APPLE__) && !defined (__FreeBSD__) && !defined (__linux__)
++#endif // #if !defined (__APPLE__) && !defined (__FreeBSD__) && !defined(__FreeBSD_kernel__) && !defined (__linux__)
+ 
+ struct HostThreadCreateInfo
+ {
+@@ -1169,7 +1169,7 @@
+     return NULL;
+ }
+ 
+-#if !defined (__APPLE__) && !defined (__FreeBSD__) // see macosx/Host.mm
++#if !defined (__APPLE__) && !defined (__FreeBSD__) && !defined (__FreeBSD_kernel__) // see macosx/Host.mm
+ bool
+ Host::GetOSBuildString (std::string &s)
+ {
+@@ -1218,7 +1218,7 @@
+ }
+ #endif // #if !defined (__APPLE__) && !defined(__linux__)
+ 
+-#if !defined (__APPLE__) && !defined (__FreeBSD__) && !defined(__linux__)
++#if !defined (__APPLE__) && !defined (__FreeBSD__) && !defined (__FreeBSD_kernel__) && !defined(__linux__)
+ bool
+ Host::GetProcessInfo (lldb::pid_t pid, ProcessInstanceInfo &process_info)
+ {
 @@ -1441,7 +1441,11 @@
          g_num_cores = 0;
          int num_cores = 0;
@@ -42,8 +84,10 @@
          
          /* get the number of CPUs from the system */
          if (sysctl(mib, sizeof(mib)/sizeof(int), &num_cores, &num_cores_len, NULL, 0) == 0 && (num_cores > 0))
---- test/llvm-toolchain-3.3-3.3~+rc3/lldb/source/Plugins/Process/FreeBSD/CMakeLists.txt	2013-02-21 20:58:22.000000000 +0000
-+++ llvm-toolchain-3.3-3.3~+rc3/lldb/source/Plugins/Process/FreeBSD/CMakeLists.txt	2013-06-06 07:59:04.000000000 +0000
+Index: llvm-toolchain-3.3-3.3/lldb/source/Plugins/Process/FreeBSD/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-3.3-3.3.orig/lldb/source/Plugins/Process/FreeBSD/CMakeLists.txt	2013-06-24 01:05:00.775028374 +0200
++++ llvm-toolchain-3.3-3.3/lldb/source/Plugins/Process/FreeBSD/CMakeLists.txt	2013-06-24 01:05:00.771028374 +0200
 @@ -1,5 +1,8 @@
  set(LLVM_NO_RTTI 1)
  
@@ -53,3 +97,59 @@
  add_lldb_library(lldbPluginProcessFreeBSD
    ProcessFreeBSD.cpp
    ProcessMonitor.cpp
+Index: llvm-toolchain-3.3-3.3/lldb/source/Plugins/Process/FreeBSD/ProcessMonitor.cpp
+===================================================================
+--- llvm-toolchain-3.3-3.3.orig/lldb/source/Plugins/Process/FreeBSD/ProcessMonitor.cpp	2013-06-24 01:05:00.775028374 +0200
++++ llvm-toolchain-3.3-3.3/lldb/source/Plugins/Process/FreeBSD/ProcessMonitor.cpp	2013-06-24 01:05:28.000000000 +0200
+@@ -17,6 +17,8 @@
+ #include <sys/socket.h>
+ #include <sys/types.h>
+ #include <sys/wait.h>
++#include <stdint.h>
++#include <machine/reg.h>
+ 
+ // C++ Includes
+ // Other libraries and framework includes
+@@ -530,6 +532,7 @@
+ void
+ SiginfoOperation::Execute(ProcessMonitor *monitor)
+ {
++#if !defined (__FreeBSD_kernel__)
+     struct ptrace_lwpinfo plwp;
+ 
+     if (PTRACE(PT_LWPINFO, m_tid, (caddr_t)&plwp, sizeof(plwp))) {
+@@ -539,6 +542,7 @@
+         memcpy(m_info, &plwp.pl_siginfo, sizeof(siginfo_t));
+         m_result = true;
+     }
++#endif
+ }
+ 
+ //------------------------------------------------------------------------------
+@@ -561,6 +565,7 @@
+ void
+ EventMessageOperation::Execute(ProcessMonitor *monitor)
+ {
++#if !defined (__FreeBSD_kernel__)
+     struct ptrace_lwpinfo plwp;
+ 
+     if (PTRACE(PT_LWPINFO, m_tid, (caddr_t)&plwp, sizeof(plwp)))
+@@ -572,6 +577,7 @@
+         } else
+             m_result = false;
+     }
++#endif
+ }
+ 
+ //------------------------------------------------------------------------------
+Index: llvm-toolchain-3.3-3.3/lldb/lib/Makefile
+===================================================================
+--- llvm-toolchain-3.3-3.3.orig/lldb/lib/Makefile	2013-06-24 01:05:28.000000000 +0200
++++ llvm-toolchain-3.3-3.3/lldb/lib/Makefile	2013-06-24 01:05:40.839027019 +0200
+@@ -150,5 +150,5 @@
+     # Allow unresolved symbols.
+     LLVMLibsOptions += -Wl,--allow-shlib-undefined
+     # Link in python
+-    LLVMLibsOptions += $(PYTHON_BUILD_FLAGS) -lrt -L/usr/local/lib -lexecinfo
++    LLVMLibsOptions += $(PYTHON_BUILD_FLAGS) -lrt -L/usr/local/lib
+ endif
