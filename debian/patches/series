@@ -24,3 +24,5 @@ ia64-fix.diff
 clang-format-version.diff
 kfreebsd.diff
 mipsel-ftbfs.diff
+kfreebsd_ptrace_kludge.diff
+#kfreebsd_v2.diff

@@ -18,11 +18,11 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
-Index: llvm-toolchain-snapshot_3.4~svn184290/clang/lib/Driver/Tools.cpp
+Index: llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/Tools.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn184290.orig/clang/lib/Driver/Tools.cpp	2013-06-19 11:14:02.002779657 +0200
-+++ llvm-toolchain-snapshot_3.4~svn184290/clang/lib/Driver/Tools.cpp	2013-06-19 11:14:01.998779666 +0200
-@@ -493,6 +493,9 @@
+--- llvm-toolchain-snapshot_3.4~svn185325.orig/clang/lib/Driver/Tools.cpp	2013-07-01 13:28:44.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/Tools.cpp	2013-07-01 13:28:44.000000000 +0200
+@@ -492,6 +492,9 @@
    if (Arg *A = Args.getLastArg(options::OPT_march_EQ)) {
      // Otherwise, if we have -march= choose the base CPU for that arch.
      MArch = A->getValue();
@@ -32,7 +32,7 @@ Index: llvm-toolchain-snapshot_3.4~svn184290/clang/lib/Driver/Tools.cpp
    } else {
      // Otherwise, use the Arch from the triple.
      MArch = Triple.getArchName();
-@@ -788,8 +791,19 @@
+@@ -796,8 +799,19 @@
    }
  
    // Honor -mfpu=.

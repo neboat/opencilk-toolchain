@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_3.4~svn184290/clang/lib/Driver/Tools.cpp
+Index: llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/Tools.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn184290.orig/clang/lib/Driver/Tools.cpp	2013-06-19 11:13:56.794779535 +0200
-+++ llvm-toolchain-snapshot_3.4~svn184290/clang/lib/Driver/Tools.cpp	2013-06-19 11:13:56.790779531 +0200
+--- llvm-toolchain-snapshot_3.4~svn185325.orig/clang/lib/Driver/Tools.cpp	2013-07-01 13:27:29.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/Tools.cpp	2013-07-01 13:27:29.000000000 +0200
 @@ -34,6 +34,7 @@
- #include "llvm/Support/PathV1.h"
+ #include "llvm/Support/Program.h"
  #include "llvm/Support/Process.h"
  #include "llvm/Support/raw_ostream.h"
 +#include "llvm/Config/config.h"

@@ -1,20 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn184290/lldb/include/lldb/Host/Config.h
+Index: llvm-toolchain-snapshot_3.4~svn185325/lldb/source/Core/Mangled.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn184290.orig/lldb/include/lldb/Host/Config.h	2013-06-19 11:14:04.194779756 +0200
-+++ llvm-toolchain-snapshot_3.4~svn184290/lldb/include/lldb/Host/Config.h	2013-06-19 11:14:04.190779765 +0200
-@@ -18,7 +18,7 @@
- 
- #include "lldb/Host/linux/Config.h"
- 
--#elif defined(__FreeBSD__) || defined(__OpenBSD__)
-+#elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__OpenBSD__)
- 
- #include "lldb/Host/freebsd/Config.h"
- 
-Index: llvm-toolchain-snapshot_3.4~svn184290/lldb/source/Core/Mangled.cpp
-===================================================================
---- llvm-toolchain-snapshot_3.4~svn184290.orig/lldb/source/Core/Mangled.cpp	2013-06-19 11:14:04.194779756 +0200
-+++ llvm-toolchain-snapshot_3.4~svn184290/lldb/source/Core/Mangled.cpp	2013-06-19 11:14:04.190779765 +0200
+--- llvm-toolchain-snapshot_3.4~svn185325.orig/lldb/source/Core/Mangled.cpp	2013-07-01 13:32:01.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn185325/lldb/source/Core/Mangled.cpp	2013-07-01 13:32:01.000000000 +0200
 @@ -31,6 +31,7 @@
  #include <ctype.h>
  #include <string.h>
@@ -23,28 +10,3 @@ Index: llvm-toolchain-snapshot_3.4~svn184290/lldb/source/Core/Mangled.cpp
  
  using namespace lldb_private;
  
-Index: llvm-toolchain-snapshot_3.4~svn184290/lldb/source/Host/common/Host.cpp
-===================================================================
---- llvm-toolchain-snapshot_3.4~svn184290.orig/lldb/source/Host/common/Host.cpp	2013-06-19 11:14:04.194779756 +0200
-+++ llvm-toolchain-snapshot_3.4~svn184290/lldb/source/Host/common/Host.cpp	2013-06-19 11:14:04.190779765 +0200
-@@ -151,7 +151,7 @@
-     delete info;
- 
-     int status = -1;
--#if defined (__FreeBSD__)
-+#if defined (__FreeBSD__) || defined (__FreeBSD_kernel__)
-     #define __WALL 0
- #endif
-     const int options = __WALL;
-@@ -1460,7 +1460,11 @@
-         g_num_cores = 0;
-         int num_cores = 0;
-         size_t num_cores_len = sizeof(num_cores);
-+#ifdef HW_AVAILCPU
-         int mib[] = { CTL_HW, HW_AVAILCPU };
-+#else
-+        int mib[] = { CTL_HW, HW_NCPU };
-+#endif
-         
-         /* get the number of CPUs from the system */
-         if (sysctl(mib, sizeof(mib)/sizeof(int), &num_cores, &num_cores_len, NULL, 0) == 0 && (num_cores > 0))

@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn184290/clang/lib/Headers/stdint.h
+Index: llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Headers/stdint.h
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn184290.orig/clang/lib/Headers/stdint.h	2013-06-19 11:13:56.014779511 +0200
-+++ llvm-toolchain-snapshot_3.4~svn184290/clang/lib/Headers/stdint.h	2013-06-19 11:13:56.010779511 +0200
+--- llvm-toolchain-snapshot_3.4~svn185325.orig/clang/lib/Headers/stdint.h	2013-07-01 13:27:27.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Headers/stdint.h	2013-07-01 13:27:27.000000000 +0200
 @@ -22,8 +22,6 @@
   *
  \*===----------------------------------------------------------------------===*/

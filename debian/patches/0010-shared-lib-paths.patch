@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.4~svn184409/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn184409/clang/lib/Driver/ToolChains.cpp	(revision 184409)
-+++ llvm-toolchain-snapshot_3.4~svn184409/clang/lib/Driver/ToolChains.cpp	(working copy)
-@@ -2328,6 +2328,13 @@
+--- llvm-toolchain-snapshot_3.4~svn185325.orig/clang/lib/Driver/ToolChains.cpp	2013-07-01 13:27:42.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/ToolChains.cpp	2013-07-01 13:28:26.000000000 +0200
+@@ -2292,6 +2292,14 @@
    addPathIfExists(SysRoot + "/usr/lib/" + MultiarchTriple, Paths);
    addPathIfExists(SysRoot + "/usr/lib/../" + Multilib, Paths);
  
@@ -13,14 +13,15 @@ Index: llvm-toolchain-snapshot_3.4~svn184409/clang/lib/Driver/ToolChains.cpp
 +                    Paths);
 +  }
 +
-   // Try walking via the GCC triple path in case of multiarch GCC
++
+   // Try walking via the GCC triple path in case of biarch or multiarch GCC
    // installations with strange symlinks.
    if (GCCInstallation.isValid())
-Index: llvm-toolchain-snapshot_3.4~svn184409/clang/lib/Driver/Tools.cpp
+Index: llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/Tools.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn184409/clang/lib/Driver/Tools.cpp	(revision 184409)
-+++ llvm-toolchain-snapshot_3.4~svn184409/clang/lib/Driver/Tools.cpp	(working copy)
-@@ -6147,6 +6147,14 @@
+--- llvm-toolchain-snapshot_3.4~svn185325.orig/clang/lib/Driver/Tools.cpp	2013-07-01 13:27:42.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/Tools.cpp	2013-07-01 13:27:42.000000000 +0200
+@@ -6168,6 +6168,14 @@
    if (D.IsUsingLTO(Args) || Args.hasArg(options::OPT_use_gold_plugin)) {
      CmdArgs.push_back("-plugin");
      std::string Plugin = ToolChain.getDriver().Dir + "/../lib/LLVMgold.so";
