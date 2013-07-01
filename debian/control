@@ -9,7 +9,7 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl8.5, expect,
     lsb-release, patchutils, diffstat, xz-utils, chrpath, python-dev,
     libedit-dev, swig, python-sphinx, ocaml-nox, binutils-dev, libcloog-isl-dev,
     libisl-dev (>= 0.11.1), binutils-gold (>= 2.23.52.20130522)
-    [amd64 armel armhf i386 powerpc powerpcspe ppc64 sparc sparc64 x32],
+    [amd64 armhf i386 powerpc powerpcspe ppc64 sparc sparc64 x32],
     lcov, procps, help2man
 Build-Conflicts: oprofile, ocaml
 Standards-Version: 3.9.4
