@@ -99,11 +99,12 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 	if test -h lldb; then \
 		rm lldb; \
 	fi; \
-    ln -s ../lldb .; \
-    if test -h polly; then \
-        rm polly; \
-    fi; \
-    ln -s ../polly .; \
+    ln -s ../lldb .;
+# \
+#    if test -h polly; then \
+#        rm polly; \
+#    fi; \
+#    ln -s ../polly .; \
 
 
 	cd projects/ && \
