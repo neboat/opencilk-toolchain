@@ -274,6 +274,8 @@ override_dh_auto_test:
 # polly tests
 	cd $(TARGET_BUILD)/ && $(MAKE) -C tools/polly/test/ check-polly || true
 
+# The compression of the code coverage report is done in the
+# hook B21GetCoverageResults on the server
 	if test "$(CODECOVERAGE)" = "yes"; then \
 		REPORT=reports/llvm-toolchain.info; \
 		mkdir -p reports/; \
@@ -281,8 +283,6 @@ override_dh_auto_test:
 		lcov --remove $$REPORT "/usr*" -o $$REPORT; \
 		lcov --remove $$REPORT "$(TARGET_BUILD)/*" -o $$REPORT; \
 		genhtml -o reports/coverage --show-details --highlight --legend $$REPORT; \
-# The compression of the code coverage report is done in the
-# hook B21GetCoverageResults on the server
 	fi
 
 override_dh_gencontrol:
