@@ -71,7 +71,12 @@ endif
 
 ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # enable the build using scan-build
+# The package are installed through the variable declarations:
+# OTHERMIRROR="deb http://llvm.org/apt/unstable/ llvm-toolchain main"
+# EXTRAPACKAGES="clang-3.4"
 	PRE_CONFIGURE=scan-build
+# no need to run tests in this case
+	DEB_BUILD_OPTIONS="$DEB_BUILD_OPTIONS nocheck"
 endif
 
 %:
@@ -276,6 +281,8 @@ override_dh_auto_test:
 		lcov --remove $$REPORT "/usr*" -o $$REPORT; \
 		lcov --remove $$REPORT "$(TARGET_BUILD)/*" -o $$REPORT; \
 		genhtml -o reports/coverage --show-details --highlight --legend $$REPORT; \
+# The compression of the code coverage report is done in the
+# hook B21GetCoverageResults on the server
 	fi
 
 override_dh_gencontrol:
