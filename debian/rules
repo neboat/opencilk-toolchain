@@ -76,7 +76,7 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # EXTRAPACKAGES="clang-3.4"
 	PRE_CONFIGURE=scan-build
 # no need to run tests in this case
-	DEB_BUILD_OPTIONS="$DEB_BUILD_OPTIONS nocheck"
+	DEB_BUILD_OPTIONS="$(DEB_BUILD_OPTIONS) nocheck"
 endif
 
 %:
