@@ -74,7 +74,7 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # The package are installed through the variable declarations:
 # OTHERMIRROR="deb http://llvm.org/apt/unstable/ llvm-toolchain main"
 # EXTRAPACKAGES="clang-3.4"
-	PRE_CONFIGURE=scan-build
+	PRE_PROCESS=scan-build
 # no need to run tests in this case
 	DEB_BUILD_OPTIONS+=" nocheck"
 endif
@@ -123,7 +123,7 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 	cp -R -H clang-tools-extra tools/clang/tools/extra
 
 # Start the actual configure
-	cd $(TARGET_BUILD) && $(PRE_CONFIGURE) \
+	cd $(TARGET_BUILD) && $(PRE_PROCESS) \
 	  ../configure $(confargs) \
 	--prefix=/usr/lib/llvm-$(LLVM_VERSION) \
 	--bindir=\$${prefix}/bin/ \
@@ -145,7 +145,7 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 
 
 override_dh_auto_build:
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=$(VENDOR) CXXFLAGS="$(CXXFLAGS_EXTRA) -std=c++0x"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1
+	$(PRE_PROCESS) $(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=$(VENDOR) CXXFLAGS="$(CXXFLAGS_EXTRA) -std=c++0x"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1
 
 override_dh_prep: build_doc
 	dh_prep
