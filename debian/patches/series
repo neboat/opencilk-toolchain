@@ -29,3 +29,4 @@ disabletestlldb.diff
 mipsel-ftbfs.diff
 kfreebsd_ptrace_kludge.diff
 kfreebsd_v2.diff
+patch-bug-16511.diff
