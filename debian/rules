@@ -73,8 +73,9 @@ endif
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 # enable the code coverage
 	CODECOVERAGE=yes
-	CXXFLAGS_EXTRA += -fprofile-arcs -ftest-coverage
-	LDFLAGS_EXTRA += -coverage -lgcov
+# for -fvisibility-inlines-hidden see http://lists.cs.uiuc.edu/pipermail/llvm-commits/Week-of-Mon-20130729/183016.html
+	CXXFLAGS_EXTRA += -fprofile-arcs -ftest-coverage -fvisibility-inlines-hidden
+	LDFLAGS_EXTRA += -coverage -lgcov -fvisibility-inlines-hidden
 endif
 
 ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
