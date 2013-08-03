@@ -74,8 +74,9 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 # enable the code coverage
 	CODECOVERAGE=yes
 # for -fvisibility-inlines-hidden see http://lists.cs.uiuc.edu/pipermail/llvm-commits/Week-of-Mon-20130729/183016.html
-	CXXFLAGS_EXTRA += -fprofile-arcs -ftest-coverage -fvisibility-inlines-hidden
-	LDFLAGS_EXTRA += -coverage -lgcov -fvisibility-inlines-hidden
+	CXXFLAGS_EXTRA += -fprofile-arcs -ftest-coverage
+	LDFLAGS_EXTRA += -coverage -lgcov
+	confargs += llvm_cv_cxx_visibility_inlines_hidden=no
 endif
 
 ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
