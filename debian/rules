@@ -294,7 +294,6 @@ override_dh_auto_test:
 		mkdir -p reports/; \
 		lcov --directory $(TARGET_BUILD)/ --capture --ignore-errors source --output-file $$REPORT; \
 		lcov --remove $$REPORT "/usr*" -o $$REPORT; \
-		lcov --remove $$REPORT "$(TARGET_BUILD)/*" -o $$REPORT; \
 		genhtml -o reports/coverage --show-details --highlight --legend $$REPORT; \
 	fi
 
