@@ -25,3 +25,6 @@ kfreebsd.diff
 add-ubuntu-saucy.patch
 lldb33-to-r183444.patch
 use-deb-json.diff
+lldb-mips.diff
+mipsel-ftbfs.diff
+patch-bug-16511.diff
