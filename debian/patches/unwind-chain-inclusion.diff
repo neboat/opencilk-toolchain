@@ -4,10 +4,10 @@
 # Because of the #ifndef __CLANG_UNWIND_H, it might never include any declaration
 # from the system. 
 
-Index: llvm-toolchain-snapshot-3.4~svn185351/clang/lib/Headers/unwind.h
+Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Headers/unwind.h
 ===================================================================
---- llvm-toolchain-snapshot-3.4~svn185351.orig/clang/lib/Headers/unwind.h	2013-07-05 10:05:52.000000000 +0200
-+++ llvm-toolchain-snapshot-3.4~svn185351/clang/lib/Headers/unwind.h	2013-07-05 10:06:31.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/lib/Headers/unwind.h	2013-08-11 10:01:40.960734544 +0200
++++ llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Headers/unwind.h	2013-08-11 10:01:40.956734544 +0200
 @@ -23,9 +23,6 @@
  
  /* See "Data Definitions for libgcc_s" in the Linux Standard Base.*/

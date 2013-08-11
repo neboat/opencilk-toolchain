@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn185325/lib/Support/Unix/Memory.inc
+Index: llvm-toolchain-snapshot_3.4~svn188146/lib/Support/Unix/Memory.inc
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn185325.orig/lib/Support/Unix/Memory.inc	2013-07-01 13:28:43.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn185325/lib/Support/Unix/Memory.inc	2013-07-01 13:28:43.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn188146.orig/lib/Support/Unix/Memory.inc	2013-08-11 10:01:34.452734709 +0200
++++ llvm-toolchain-snapshot_3.4~svn188146/lib/Support/Unix/Memory.inc	2013-08-11 10:01:34.448734709 +0200
 @@ -336,7 +336,7 @@
    // FIXME: Can we safely always call this for __GNUC__ everywhere?
    const char *Start = static_cast<const char *>(Addr);

@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn185325/clang/tools/scan-build/scan-build
+Index: llvm-toolchain-snapshot_3.4~svn188146/clang/tools/scan-build/scan-build
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn185325.orig/clang/tools/scan-build/scan-build	2013-07-01 13:28:41.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn185325/clang/tools/scan-build/scan-build	2013-07-01 13:28:41.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/tools/scan-build/scan-build	2013-08-11 10:01:33.484734737 +0200
++++ llvm-toolchain-snapshot_3.4~svn188146/clang/tools/scan-build/scan-build	2013-08-11 10:01:33.480734737 +0200
 @@ -1538,7 +1538,7 @@
  
  # Find 'clang'

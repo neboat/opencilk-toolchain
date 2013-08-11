@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/ToolChains.h
+Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Driver/ToolChains.h
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn185325.orig/clang/lib/Driver/ToolChains.h	2013-07-01 13:27:32.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/ToolChains.h	2013-07-01 13:27:32.000000000 +0200
-@@ -129,6 +129,8 @@
+--- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/lib/Driver/ToolChains.h	2013-08-11 10:01:29.732734829 +0200
++++ llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Driver/ToolChains.h	2013-08-11 10:01:29.728734830 +0200
+@@ -141,6 +141,8 @@
    virtual bool isPICDefault() const;
    virtual bool isPIEDefault() const;
    virtual bool isPICDefaultForced() const;
@@ -11,10 +11,10 @@ Index: llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/ToolChains.h
  
  protected:
    virtual Tool *getTool(Action::ActionClass AC) const;
-Index: llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn185325.orig/clang/lib/Driver/ToolChains.cpp	2013-07-01 13:27:32.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/ToolChains.cpp	2013-07-01 13:27:32.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/lib/Driver/ToolChains.cpp	2013-08-11 10:01:29.732734829 +0200
++++ llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Driver/ToolChains.cpp	2013-08-11 10:01:29.728734830 +0200
 @@ -942,6 +942,13 @@
    return GoodVersion;
  }
@@ -27,5 +27,5 @@ Index: llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/ToolChains.cpp
 +}
 +
  /// \brief Less-than for GCCVersion, implementing a Strict Weak Ordering.
- bool Generic_GCC::GCCVersion::operator<(const GCCVersion &RHS) const {
-   if (Major != RHS.Major)
+ bool Generic_GCC::GCCVersion::isOlderThan(int RHSMajor, int RHSMinor,
+                                           int RHSPatch,

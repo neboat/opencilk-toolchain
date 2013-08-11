@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn185325/lldb/source/Host/freebsd/Host.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188146/lldb/source/Host/freebsd/Host.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn185325.orig/lldb/source/Host/freebsd/Host.cpp	2013-07-01 13:32:48.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn185325/lldb/source/Host/freebsd/Host.cpp	2013-07-01 13:32:48.000000000 +0200
+--- llvm-toolchain-snapshot_3.4~svn188146.orig/lldb/source/Host/freebsd/Host.cpp	2013-08-11 10:01:39.192734591 +0200
++++ llvm-toolchain-snapshot_3.4~svn188146/lldb/source/Host/freebsd/Host.cpp	2013-08-11 10:01:39.188734591 +0200
 @@ -20,6 +20,35 @@
  #include <sys/exec.h>
  #include <machine/elf.h>
@@ -38,11 +38,11 @@ Index: llvm-toolchain-snapshot_3.4~svn185325/lldb/source/Host/freebsd/Host.cpp
  
  // C++ Includes
  // Other libraries and framework includes
-Index: llvm-toolchain-snapshot_3.4~svn185325/lldb/source/Plugins/Process/FreeBSD/ProcessMonitor.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188146/lldb/source/Plugins/Process/FreeBSD/ProcessMonitor.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn185325.orig/lldb/source/Plugins/Process/FreeBSD/ProcessMonitor.cpp	2013-07-01 13:32:48.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn185325/lldb/source/Plugins/Process/FreeBSD/ProcessMonitor.cpp	2013-07-01 13:32:48.000000000 +0200
-@@ -18,6 +18,36 @@
+--- llvm-toolchain-snapshot_3.4~svn188146.orig/lldb/source/Plugins/Process/FreeBSD/ProcessMonitor.cpp	2013-08-11 10:01:39.192734591 +0200
++++ llvm-toolchain-snapshot_3.4~svn188146/lldb/source/Plugins/Process/FreeBSD/ProcessMonitor.cpp	2013-08-11 10:01:39.188734591 +0200
+@@ -19,6 +19,36 @@
  #include <sys/types.h>
  #include <sys/wait.h>
  

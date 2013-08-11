@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn185325.orig/clang/lib/Driver/ToolChains.cpp	2013-07-01 13:27:19.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/ToolChains.cpp	2013-07-01 13:27:19.000000000 +0200
-@@ -2366,6 +2366,11 @@
+--- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/lib/Driver/ToolChains.cpp	2013-08-11 10:01:27.552734888 +0200
++++ llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Driver/ToolChains.cpp	2013-08-11 10:01:27.548734887 +0200
+@@ -2415,6 +2415,11 @@
      addSystemInclude(DriverArgs, CC1Args, P.str());
    }
  

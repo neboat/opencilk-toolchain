@@ -18,11 +18,11 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
-Index: llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/Tools.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Driver/Tools.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn185325.orig/clang/lib/Driver/Tools.cpp	2013-07-01 13:28:44.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn185325/clang/lib/Driver/Tools.cpp	2013-07-01 13:28:44.000000000 +0200
-@@ -492,6 +492,9 @@
+--- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/lib/Driver/Tools.cpp	2013-08-11 10:01:35.492734685 +0200
++++ llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Driver/Tools.cpp	2013-08-11 10:01:35.488734686 +0200
+@@ -491,6 +491,9 @@
    if (Arg *A = Args.getLastArg(options::OPT_march_EQ)) {
      // Otherwise, if we have -march= choose the base CPU for that arch.
      MArch = A->getValue();
