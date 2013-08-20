@@ -27,4 +27,5 @@ lldb33-to-r183444.patch
 use-deb-json.diff
 mipsel-ftbfs.diff
 patch-bug-16511.diff
-hurd.diff
+kfreebsd-lldb.diff
+disable-execinfo-usage.diff
