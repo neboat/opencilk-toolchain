@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn188146/lib/ExecutionEngine/JIT/JIT.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188990/lib/ExecutionEngine/JIT/JIT.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/lib/ExecutionEngine/JIT/JIT.cpp	2013-08-11 10:01:36.848734651 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/lib/ExecutionEngine/JIT/JIT.cpp	2013-08-11 10:01:36.848734651 +0200
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/lib/ExecutionEngine/JIT/JIT.cpp	2013-08-22 09:11:27.680602668 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/lib/ExecutionEngine/JIT/JIT.cpp	2013-08-22 09:11:27.672602668 +0200
 @@ -68,7 +68,7 @@
  }
  
@@ -11,10 +11,10 @@ Index: llvm-toolchain-snapshot_3.4~svn188146/lib/ExecutionEngine/JIT/JIT.cpp
       !defined(__USING_SJLJ_EXCEPTIONS__))
  #define HAVE_EHTABLE_SUPPORT 1
  #else
-Index: llvm-toolchain-snapshot_3.4~svn188146/lldb/source/Plugins/Process/Linux/ProcessMonitor.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188990/lldb/source/Plugins/Process/Linux/ProcessMonitor.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/lldb/source/Plugins/Process/Linux/ProcessMonitor.cpp	2013-08-11 10:01:36.848734651 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/lldb/source/Plugins/Process/Linux/ProcessMonitor.cpp	2013-08-11 10:01:36.848734651 +0200
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/lldb/source/Plugins/Process/Linux/ProcessMonitor.cpp	2013-08-22 09:11:27.680602668 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/lldb/source/Plugins/Process/Linux/ProcessMonitor.cpp	2013-08-22 09:11:27.672602668 +0200
 @@ -115,12 +115,14 @@
                  verbose_log->Printf("PTRACE_SETREGS %s", buf.GetData());
                  break;
@@ -54,10 +54,10 @@ Index: llvm-toolchain-snapshot_3.4~svn188146/lldb/source/Plugins/Process/Linux/P
          m_result = true;
  }
  
-Index: llvm-toolchain-snapshot_3.4~svn188146/lib/ExecutionEngine/RTDyldMemoryManager.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188990/lib/ExecutionEngine/RTDyldMemoryManager.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/lib/ExecutionEngine/RTDyldMemoryManager.cpp	2013-08-11 10:01:36.848734651 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/lib/ExecutionEngine/RTDyldMemoryManager.cpp	2013-08-11 10:01:36.848734651 +0200
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/lib/ExecutionEngine/RTDyldMemoryManager.cpp	2013-08-22 09:11:27.680602668 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/lib/ExecutionEngine/RTDyldMemoryManager.cpp	2013-08-22 09:11:27.672602668 +0200
 @@ -33,7 +33,7 @@
  RTDyldMemoryManager::~RTDyldMemoryManager() {}
  

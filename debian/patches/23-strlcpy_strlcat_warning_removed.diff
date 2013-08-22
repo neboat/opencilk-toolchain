@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.4~svn188146/clang/include/clang/Basic/Builtins.def
+Index: llvm-toolchain-snapshot_3.4~svn188990/clang/include/clang/Basic/Builtins.def
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/include/clang/Basic/Builtins.def	2013-08-11 10:01:27.976734874 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/clang/include/clang/Basic/Builtins.def	2013-08-11 10:01:27.968734875 +0200
-@@ -466,8 +466,8 @@
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/clang/include/clang/Basic/Builtins.def	2013-08-22 09:07:00.024609486 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/clang/include/clang/Basic/Builtins.def	2013-08-22 09:07:00.012609486 +0200
+@@ -467,8 +467,8 @@
  BUILTIN(__builtin___stpcpy_chk, "c*c*cC*z", "nF")
  BUILTIN(__builtin___strcat_chk, "c*c*cC*z", "nF")
  BUILTIN(__builtin___strcpy_chk, "c*c*cC*z", "nF")
@@ -13,7 +13,7 @@ Index: llvm-toolchain-snapshot_3.4~svn188146/clang/include/clang/Basic/Builtins.
  BUILTIN(__builtin___strncat_chk, "c*c*cC*zz", "nF")
  BUILTIN(__builtin___strncpy_chk, "c*c*cC*zz", "nF")
  BUILTIN(__builtin___stpncpy_chk, "c*c*cC*zz", "nF")
-@@ -759,8 +759,8 @@
+@@ -760,8 +760,8 @@
  LIBBUILTIN(_longjmp, "vJi",       "fr",    "setjmp.h", ALL_GNU_LANGUAGES)
  LIBBUILTIN(siglongjmp, "vSJi",    "fr",    "setjmp.h", ALL_GNU_LANGUAGES)
  // non-standard but very common
@@ -24,10 +24,10 @@ Index: llvm-toolchain-snapshot_3.4~svn188146/clang/include/clang/Basic/Builtins.
  //   id objc_msgSend(id, SEL, ...)
  LIBBUILTIN(objc_msgSend, "GGH.",   "f",     "objc/message.h", OBJC_LANG)
  // long double objc_msgSend_fpret(id self, SEL op, ...) 
-Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Sema/SemaChecking.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188990/clang/lib/Sema/SemaChecking.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/lib/Sema/SemaChecking.cpp	2013-08-11 10:01:27.976734874 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Sema/SemaChecking.cpp	2013-08-11 10:01:27.968734875 +0200
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/clang/lib/Sema/SemaChecking.cpp	2013-08-22 09:07:00.024609486 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/clang/lib/Sema/SemaChecking.cpp	2013-08-22 09:07:00.012609486 +0200
 @@ -804,9 +804,10 @@
      return false;
  
@@ -42,11 +42,11 @@ Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Sema/SemaChecking.cpp
      CheckStrncatArguments(TheCall, FnInfo);
    else
      CheckMemaccessArguments(TheCall, CMId, FnInfo);
-Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/AST/Decl.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188990/clang/lib/AST/Decl.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/lib/AST/Decl.cpp	2013-08-11 10:01:27.976734874 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/clang/lib/AST/Decl.cpp	2013-08-11 10:01:27.972734874 +0200
-@@ -2900,10 +2900,10 @@
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/clang/lib/AST/Decl.cpp	2013-08-22 09:07:00.024609486 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/clang/lib/AST/Decl.cpp	2013-08-22 09:07:00.016609486 +0200
+@@ -2909,10 +2909,10 @@
    case Builtin::BImemmove:
      return Builtin::BImemmove;
  
@@ -61,10 +61,10 @@ Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/AST/Decl.cpp
  
    case Builtin::BI__builtin_memcmp:
    case Builtin::BImemcmp:
-Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188990/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp	2013-08-11 10:01:27.976734874 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp	2013-08-11 10:01:27.972734874 +0200
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp	2013-08-22 09:07:00.024609486 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp	2013-08-22 09:07:00.016609486 +0200
 @@ -238,9 +238,9 @@
      case Builtin::BIstrncpy:
      case Builtin::BIstrncat:

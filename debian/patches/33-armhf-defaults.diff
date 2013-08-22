@@ -18,10 +18,10 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
-Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Driver/Tools.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188990/clang/lib/Driver/Tools.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/lib/Driver/Tools.cpp	2013-08-11 10:01:35.492734685 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Driver/Tools.cpp	2013-08-11 10:01:35.488734686 +0200
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/clang/lib/Driver/Tools.cpp	2013-08-22 09:08:06.216607799 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/clang/lib/Driver/Tools.cpp	2013-08-22 09:10:40.676603865 +0200
 @@ -491,6 +491,9 @@
    if (Arg *A = Args.getLastArg(options::OPT_march_EQ)) {
      // Otherwise, if we have -march= choose the base CPU for that arch.
@@ -32,16 +32,16 @@ Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Driver/Tools.cpp
    } else {
      // Otherwise, use the Arch from the triple.
      MArch = Triple.getArchName();
-@@ -796,8 +799,19 @@
-   }
+@@ -699,8 +702,19 @@
+     Features.push_back("+soft-float-abi");
  
    // Honor -mfpu=.
 -  if (const Arg *A = Args.getLastArg(options::OPT_mfpu_EQ))
 +  if (const Arg *A = Args.getLastArg(options::OPT_mfpu_EQ)) {
-     addFPUArgs(D, A, Args, CmdArgs);
+     getFPUFeatures(D, A, Args, Features);
 +  } else {
 +    if (StringRef(CPUName).startswith("cortex-a")) {
-+      //Debian armhf uses vfpv3-d16 
++      //Debian armhf uses vfpv3-d16
 +      CmdArgs.push_back("-target-feature");
 +      CmdArgs.push_back("+vfp3");
 +      CmdArgs.push_back("-target-feature");
@@ -51,5 +51,5 @@ Index: llvm-toolchain-snapshot_3.4~svn188146/clang/lib/Driver/Tools.cpp
 +    }
 +  }
  
-   // Honor -mfpmath=.
-   if (const Arg *A = Args.getLastArg(options::OPT_mfpmath_EQ))
+   // Setting -msoft-float effectively disables NEON because of the GCC
+   // implementation, although the same isn't true of VFP or VFP3.

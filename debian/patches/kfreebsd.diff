@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn188146/lldb/source/Core/Mangled.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188990/lldb/source/Core/Mangled.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/lldb/source/Core/Mangled.cpp	2013-08-11 10:01:37.940734621 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/lldb/source/Core/Mangled.cpp	2013-08-11 10:01:37.940734621 +0200
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/lldb/source/Core/Mangled.cpp	2013-08-22 09:11:29.372602625 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/lldb/source/Core/Mangled.cpp	2013-08-22 09:11:29.372602625 +0200
 @@ -23,6 +23,7 @@
  #include <ctype.h>
  #include <string.h>

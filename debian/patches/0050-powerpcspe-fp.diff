@@ -1,10 +1,10 @@
  PPCJITInfo.cpp |   12 ++++++++++++
  1 file changed, 12 insertions(+)
 
-Index: llvm-toolchain-snapshot_3.4~svn188146/lib/Target/PowerPC/PPCJITInfo.cpp
+Index: llvm-toolchain-snapshot_3.4~svn188990/lib/Target/PowerPC/PPCJITInfo.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/lib/Target/PowerPC/PPCJITInfo.cpp	2013-08-11 10:01:33.964734725 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/lib/Target/PowerPC/PPCJITInfo.cpp	2013-08-11 10:01:33.960734725 +0200
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/lib/Target/PowerPC/PPCJITInfo.cpp	2013-08-22 09:07:37.872608521 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/lib/Target/PowerPC/PPCJITInfo.cpp	2013-08-22 09:07:37.868608522 +0200
 @@ -104,6 +104,7 @@
      "stw r8,  196(r1)\n"    "stw r7,  192(r1)\n"
      "stw r6,  188(r1)\n"    "stw r5,  184(r1)\n"

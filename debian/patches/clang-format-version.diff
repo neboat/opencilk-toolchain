@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn188146/clang/tools/clang-format/clang-format.py
+Index: llvm-toolchain-snapshot_3.4~svn188990/clang/tools/clang-format/clang-format.py
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/tools/clang-format/clang-format.py	2013-08-11 10:01:37.348734638 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/clang/tools/clang-format/clang-format.py	2013-08-11 10:01:37.348734638 +0200
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/clang/tools/clang-format/clang-format.py	2013-08-22 09:11:28.544602646 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/clang/tools/clang-format/clang-format.py	2013-08-22 09:11:28.540602646 +0200
 @@ -24,7 +24,7 @@
  import vim
  
@@ -11,10 +11,10 @@ Index: llvm-toolchain-snapshot_3.4~svn188146/clang/tools/clang-format/clang-form
  
  # Change this to format according to other formatting styles (see 
  # clang-format -help)
-Index: llvm-toolchain-snapshot_3.4~svn188146/clang/tools/clang-format/clang-format-diff.py
+Index: llvm-toolchain-snapshot_3.4~svn188990/clang/tools/clang-format/clang-format-diff.py
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/tools/clang-format/clang-format-diff.py	2013-08-11 10:01:37.348734638 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/clang/tools/clang-format/clang-format-diff.py	2013-08-11 10:01:37.348734638 +0200
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/clang/tools/clang-format/clang-format-diff.py	2013-08-22 09:11:28.544602646 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/clang/tools/clang-format/clang-format-diff.py	2013-08-22 09:11:28.544602646 +0200
 @@ -28,7 +28,7 @@
  
  
@@ -24,10 +24,10 @@ Index: llvm-toolchain-snapshot_3.4~svn188146/clang/tools/clang-format/clang-form
  
  
  def getOffsetLength(filename, line_number, line_count):
-Index: llvm-toolchain-snapshot_3.4~svn188146/clang/tools/clang-format/clang-format.el
+Index: llvm-toolchain-snapshot_3.4~svn188990/clang/tools/clang-format/clang-format.el
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188146.orig/clang/tools/clang-format/clang-format.el	2013-08-11 10:01:37.348734638 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188146/clang/tools/clang-format/clang-format.el	2013-08-11 10:01:37.348734638 +0200
+--- llvm-toolchain-snapshot_3.4~svn188990.orig/clang/tools/clang-format/clang-format.el	2013-08-22 09:11:28.544602646 +0200
++++ llvm-toolchain-snapshot_3.4~svn188990/clang/tools/clang-format/clang-format.el	2013-08-22 09:11:28.544602646 +0200
 @@ -13,7 +13,7 @@
  
  ;; *Location of the clang-format binary. If it is on your PATH, a full path name

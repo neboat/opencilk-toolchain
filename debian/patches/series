@@ -23,7 +23,6 @@ ia64-fix.diff
 clang-format-version.diff
 kfreebsd.diff
 mipsel-ftbfs.diff
-kfreebsd-lldb.diff
 disable-execinfo-usage.diff
 unwind-chain-inclusion.diff
 

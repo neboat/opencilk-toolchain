@@ -1,6 +1,7 @@
 llvm-toolchain-snapshot (1:3.4~svn188990-1) unstable; urgency=low
 
   * New snapshot release
+  * Refresh of the patch
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 22 Aug 2013 09:01:38 +0200
 
