@@ -30,3 +30,4 @@ patch-bug-16511.diff
 kfreebsd-lldb.diff
 disable-execinfo-usage.diff
 unwind-chain-inclusion.diff
+hurd-pathmax.diff
