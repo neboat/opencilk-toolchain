@@ -418,7 +418,7 @@ Description: Low-Level Virtual Machine (LLVM), examples
 
 Package: lldb-3.3
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.3 (= ${binary:Version}), python
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.3 (= ${binary:Version}), python, llvm-3.3-dev
 Pre-Depends: ${misc:Pre-Depends}
 Replaces: lldb-3.2
 Breaks: lldb-3.2
