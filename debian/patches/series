@@ -25,3 +25,5 @@ mipsel-ftbfs.diff
 disable-execinfo-usage.diff
 unwind-chain-inclusion.diff
 hurd-pathmax.diff
+use-deb-json.diff
+libprofile_rt_sparc.patchs
