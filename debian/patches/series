@@ -25,4 +25,4 @@ kfreebsd.diff
 mipsel-ftbfs.diff
 disable-execinfo-usage.diff
 unwind-chain-inclusion.diff
-
+hurd-pathmax.diff
