@@ -18,7 +18,6 @@ scan-build-clang-path.diff
 declare_clear_cache.diff
 31-powerpcspe.diff
 34-powerpc-no-altivec.diff
-ia64-fix.diff
 clang-format-version.diff
 kfreebsd.diff
 mipsel-ftbfs.diff

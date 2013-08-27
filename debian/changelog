@@ -1,9 +1,13 @@
 llvm-toolchain-snapshot (1:3.4~svn188990-2) UNRELEASED; urgency=low
 
+  [ Luca Falavigna ]
   * debian/control:
     - Add llvm-3.4-dev to lldb-3.4 Depends field.
 
- -- Luca Falavigna <dktrkranz@debian.org>  Sun, 25 Aug 2013 13:54:46 +0200
+  [ Sylvestre Ledru ]
+  * Remove ia64-fix.diff (applied upstream)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Aug 2013 11:16:45 +0200
 
 llvm-toolchain-snapshot (1:3.4~svn188990-1) unstable; urgency=low
 
