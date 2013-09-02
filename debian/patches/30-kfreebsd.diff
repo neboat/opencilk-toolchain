@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.4~svn188990/clang/lib/Driver/ToolChains.h
+Index: llvm-toolchain-snapshot_3.4~svn189753/clang/lib/Driver/ToolChains.h
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188990.orig/clang/lib/Driver/ToolChains.h	2013-08-22 09:07:17.880609031 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188990/clang/lib/Driver/ToolChains.h	2013-08-22 09:07:17.872609031 +0200
-@@ -141,6 +141,8 @@
+--- llvm-toolchain-snapshot_3.4~svn189753.orig/clang/lib/Driver/ToolChains.h	2013-09-02 14:03:25.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn189753/clang/lib/Driver/ToolChains.h	2013-09-02 14:03:25.000000000 +0200
+@@ -144,6 +144,8 @@
    virtual bool isPICDefault() const;
    virtual bool isPIEDefault() const;
    virtual bool isPICDefaultForced() const;
@@ -11,11 +11,11 @@ Index: llvm-toolchain-snapshot_3.4~svn188990/clang/lib/Driver/ToolChains.h
  
  protected:
    virtual Tool *getTool(Action::ActionClass AC) const;
-Index: llvm-toolchain-snapshot_3.4~svn188990/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.4~svn189753/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188990.orig/clang/lib/Driver/ToolChains.cpp	2013-08-22 09:07:17.880609031 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188990/clang/lib/Driver/ToolChains.cpp	2013-08-22 09:07:17.872609031 +0200
-@@ -942,6 +942,13 @@
+--- llvm-toolchain-snapshot_3.4~svn189753.orig/clang/lib/Driver/ToolChains.cpp	2013-09-02 14:03:25.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn189753/clang/lib/Driver/ToolChains.cpp	2013-09-02 14:03:25.000000000 +0200
+@@ -944,6 +944,13 @@
    return GoodVersion;
  }
  
