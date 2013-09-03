@@ -7,12 +7,19 @@ llvm-toolchain-3.3 (1:3.3-9) UNRELEASED; urgency=low
   [ Sylvestre Ledru ]
   * Only use -fuse-ld=gold on supported distribution. Simplify the
     backports.
+  * Add more fixes for the HURD port...
 
   [ Jon Severinsson ]
   * Merge from llvm-toolchain-3.2 branch up to 3.2repack-11.
   * Drop auto-generated file debian/libllvm3.3.install.
-  * Automatically determine GCC_VERSION and dep:devlibs based on g++ package version.
-  * Automatically determine if -fuse-ld=gold is supported based on binutils package version.
+  * Automatically determine GCC_VERSION and dep:devlibs based on g++ package
+    version.
+  * Automatically determine if -fuse-ld=gold is supported based on binutils
+    package version.
+
+  [ Adam Conrad ]
+  * debian/patches/lldb-link-atomic.diff: Link lldb with -latomic to get
+    builtin GCC atomic helpers on arches (like powerpc) that need them.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 26 Aug 2013 14:48:42 +0200
 
