@@ -209,7 +209,7 @@ Description: clang library - Development package
 Package: libclang-common-3.3-dev
 Architecture: any
 Section: libdevel
-Depends: ${misc:Depends}, libllvm3.3 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.3 (= ${binary:Version})
 Replaces: llvm-3.3-dev (<< 1:3.2repack), libclang-3.3-dev
 Breaks: llvm-3.3-dev (<< 1:3.2repack)
 Description: clang library - Common development package
