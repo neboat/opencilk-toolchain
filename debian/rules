@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 TARGET_BUILD	:= build-llvm
-GCC_VERSION     := 4.7
+GCC_VERSION     := $(shell dpkg-query -W -f '$${Version}' g++ | sed -rne 's,^([0-9]+:)?([0-9]+\.[0-9]+).*$$,\2,p')
 LLVM_VERSION	:= 3.3
 SONAME_EXT      := 1
 DEBIAN_REVISION := $(shell dpkg-parsechangelog | sed -rne 's,^Version: .*-(.*),\1,p')
@@ -24,6 +24,9 @@ ifeq ($(distrel),n/a)
   distrel := sid
 endif
 
+export CC=gcc-$(GCC_VERSION)
+export CXX=g++-$(GCC_VERSION)
+
 LDFLAGS_EXTRA=
 CXXFLAGS_EXTRA=
 
@@ -44,24 +47,12 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   opt_flags += -marm
 endif
 
-ifeq ($(distribution),Ubuntu)
-	ifeq ($(distrel),precise)
-		control_vars = '-Vdep:devlibs=libstdc++6-4.6-dev'
-	endif
-	ifeq ($(distrel),quantal)
-		control_vars = '-Vdep:devlibs=libstdc++6-4.7-dev'
-	endif
-	ifeq ($(distrel),raring)
-		control_vars = '-Vdep:devlibs=libstdc++6-4.7-dev, libgcc-4.7-dev, libobjc-4.7-dev'
-	endif
-
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) ge 4.8-20121128-1~ ; echo $$?),0)
+	control_vars = '-Vdep:devlibs=libstdc++-$(GCC_VERSION)-dev, libgcc-$(GCC_VERSION)-dev, libobjc-$(GCC_VERSION)-dev'
+else ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) ge 4.7.2-10~ ; echo $$?),0)
+	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev, libgcc-$(GCC_VERSION)-dev, libobjc-$(GCC_VERSION)-dev'
 else
-    ifeq ($(distrel),wheezy)
-        control_vars = '-Vdep:devlibs=libstdc++6-4.7-dev'
-	else
-		# Debian experimental
-		control_vars = '-Vdep:devlibs=libstdc++6-4.7-dev, libgcc-4.7-dev, libobjc-4.7-dev'
-	endif
+	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev'
 endif
 
 BINUTILS_GOLD_ARCHS := amd64 armhf i386 powerpc powerpcspe ppc64 sparc sparc64 x32
