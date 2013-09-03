@@ -18,12 +18,6 @@ DEB_HOST_ARCH       = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 OCAML_STDLIB_DIR    ?= $(shell ocamlc -where)
 
-distribution := $(shell lsb_release --id --short)
-distrel := $(shell lsb_release --codename --short)
-ifeq ($(distrel),n/a)
-  distrel := sid
-endif
-
 export CC=gcc-$(GCC_VERSION)
 export CXX=g++-$(GCC_VERSION)
 
@@ -56,9 +50,8 @@ else
 endif
 
 BINUTILS_GOLD_ARCHS := amd64 armhf i386 powerpc powerpcspe ppc64 sparc sparc64 x32
-BINUTILS_GOLD_UNSUPPORTED_DISTRO = wheezy quantal
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.23.1-1~exp3 ; echo $$?),0)
 ifneq (,$(findstring $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
-ifeq (,$(findstring $(distrel),$(BINUTILS_GOLD_UNSUPPORTED_DISTRO)))
 # -fused-ld=gold enables the gold linker (but is not supported by all archs / distro)
 	LDFLAGS_EXTRA += -fuse-ld=gold
 endif
