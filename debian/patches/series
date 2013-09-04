@@ -33,4 +33,4 @@ unwind-chain-inclusion.diff
 hurd-pathmax.diff
 libprofile_rt_sparc.patch
 lldb-hurd.diff
-lldb-link-atomic.diff
+libstdc++-header-i386.diff
