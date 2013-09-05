@@ -25,4 +25,8 @@ disable-execinfo-usage.diff
 unwind-chain-inclusion.diff
 hurd-pathmax.diff
 use-deb-json.diff
-libprofile_rt_sparc.diff
+libprofile_rt_sparc.patch
+lldb-hurd.diff
+libstdc++-header-i386.diff
+kfreebsd_target_info_clang33.diff
+
