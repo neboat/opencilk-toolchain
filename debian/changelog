@@ -1,8 +1,10 @@
-llvm-toolchain-snapshot (1:3.4~svn190038-1) UNRELEASED; urgency=low
+llvm-toolchain-snapshot (1:3.4~svn190038-1) unstable; urgency=low
 
   * New snapshot release
+  * Merge changes from the 3.3 branch (see 1:3.3-9)
   * Remove ia64-fix.diff (applied upstream)
   * cpp11-migrate renamed to clang-modernize
+  * lldb-3.4 is back to Architectures: any
 
   [ Luca Falavigna ]
   * debian/control:

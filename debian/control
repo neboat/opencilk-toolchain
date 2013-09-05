@@ -432,15 +432,9 @@ Description: Low-Level Virtual Machine (LLVM), examples
 
 
 
-<<<<<<< .courant
 Package: lldb-3.4
-Architecture: amd64 i386
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.4 (= ${binary:Version}), python, llvm-3.4-dev
-=======
-Package: lldb-3.3
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.3 (= ${binary:Version}), python, llvm-3.3-dev
->>>>>>> .fusion-droit.r834
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.4 (= ${binary:Version}), python, llvm-3.4-dev
 Pre-Depends: ${misc:Pre-Depends}
 Replaces: lldb-3.2, lldb-3.3
 Breaks: lldb-3.2, lldb-3.3
