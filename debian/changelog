@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:3.4~svn189984-1) UNRELEASED; urgency=low
+llvm-toolchain-snapshot (1:3.4~svn190038-1) UNRELEASED; urgency=low
 
   [ Luca Falavigna ]
   * debian/control:
@@ -9,18 +9,6 @@ llvm-toolchain-snapshot (1:3.4~svn189984-1) UNRELEASED; urgency=low
   * cpp11-migrate renamed to clang-modernize
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Aug 2013 11:16:45 +0200
-
-llvm-toolchain-snapshot (1:3.4~svn188990-1) unstable; urgency=low
-
-  * New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 25 Aug 2013 23:13:16 +0200
-
-llvm-toolchain-snapshot (1:3.4~svn189092-1) unstable; urgency=low
-
-  * New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 23 Aug 2013 10:08:14 +0200
 
 llvm-toolchain-3.3 (1:3.3-7) unstable; urgency=low
 
