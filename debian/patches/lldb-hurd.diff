@@ -1,7 +1,7 @@
-Index: llvm-toolchain-3.3-3.3/lldb/include/lldb/Host/Config.h
+Index: llvm-toolchain-snapshot_3.4~svn190038/lldb/include/lldb/Host/Config.h
 ===================================================================
---- llvm-toolchain-3.3-3.3.orig/lldb/include/lldb/Host/Config.h	2013-08-28 10:29:30.000000000 +0000
-+++ llvm-toolchain-3.3-3.3/lldb/include/lldb/Host/Config.h	2013-08-28 17:23:00.000000000 +0000
+--- llvm-toolchain-snapshot_3.4~svn190038.orig/lldb/include/lldb/Host/Config.h	2013-09-05 15:33:30.817207780 +0200
++++ llvm-toolchain-snapshot_3.4~svn190038/lldb/include/lldb/Host/Config.h	2013-09-05 15:33:30.813207780 +0200
 @@ -14,7 +14,7 @@
  
  #include "lldb/Host/macosx/Config.h"
@@ -11,18 +11,18 @@ Index: llvm-toolchain-3.3-3.3/lldb/include/lldb/Host/Config.h
  
  #include "lldb/Host/linux/Config.h"
  
-Index: llvm-toolchain-3.3-3.3/lldb/source/Host/common/Host.cpp
+Index: llvm-toolchain-snapshot_3.4~svn190038/lldb/source/Host/common/Host.cpp
 ===================================================================
---- llvm-toolchain-3.3-3.3.orig/lldb/source/Host/common/Host.cpp	2013-08-28 10:29:30.000000000 +0000
-+++ llvm-toolchain-3.3-3.3/lldb/source/Host/common/Host.cpp	2013-08-28 17:25:38.000000000 +0000
-@@ -16,8 +16,10 @@
- #include <limits.h>
+--- llvm-toolchain-snapshot_3.4~svn190038.orig/lldb/source/Host/common/Host.cpp	2013-09-05 15:33:30.817207780 +0200
++++ llvm-toolchain-snapshot_3.4~svn190038/lldb/source/Host/common/Host.cpp	2013-09-05 15:34:09.849206788 +0200
+@@ -22,8 +22,10 @@
+ #include <grp.h>
  #include <netdb.h>
  #include <pwd.h>
 +#ifndef __GNU__
  #include <sys/sysctl.h>
- #include <sys/types.h>
+ #endif
 +#endif
- #include <unistd.h>
  
  #if defined (__APPLE__)
+ #include <mach/mach_port.h>
