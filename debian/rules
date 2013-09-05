@@ -187,7 +187,7 @@ build_doc:
 		help2man --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/Release/bin/$$f > debian/man/$$f.1; \
 	done
 
-	for f in llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-tblgen macho-dump lldb clang-format cpp11-migrate; do \
+	for f in llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-tblgen macho-dump lldb clang-format clang-modernize; do \
 		help2man --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/Release/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
     done
 

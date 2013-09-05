@@ -69,7 +69,7 @@ Description: Tool to format C/C++/Obj-C code
 
 Package: cpp11-migrate-3.4
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, clang-modernize-3.4
 Replaces: cpp11-migrate-3.3
 Breaks: cpp11-migrate-3.3
 Description: Tool to convert C++98 and C++03 code to C++11
@@ -79,6 +79,22 @@ Description: Tool to convert C++98 and C++03 code to C++11
  performance. Development is still early and transforms fall mostly into
  the first two categories. The migrator is based on Clang's LibTooling and
  the AST Matching library.
+ .
+ This is a transitional dummy package. It can safely be removed.
+
+Package: clang-modernize-3.4
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, clang
+Replaces: cpp11-migrate-3.3, cpp11-migrate-3.4 (<< 1:3.4~svn189984-1)
+Breaks: cpp11-migrate-3.3, cpp11-migrate-3.4 (<< 1:3.4~svn189984-1)
+Description: Tool to convert C++98 and C++03 code to C++11
+ The purpose of the C++11 Migrator is to do source-to-source translation to
+ migrate existing C++ code to use C++11 features to enhance
+ maintainability, readability, runtime performance, and compile-time
+ performance. Development is still early and transforms fall mostly into
+ the first two categories. The migrator is based on Clang's LibTooling and
+ the AST Matching library.
+
 
 Package: clang-3.4-doc
 Architecture: all
