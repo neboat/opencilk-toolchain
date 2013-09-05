@@ -11,6 +11,10 @@ llvm-toolchain-3.3 (1:3.3-9) unstable; urgency=low
     See libstdc++-header-i386.diff. (Closes: #714890)
   * Add more fixes for the HURD port... (but still fails)
 
+  [ Robert Millan ]
+  * clang under KfFreeBSD was not exporting the correct defines
+    (Closes: #721880)
+
   [ Jon Severinsson ]
   * Merge from llvm-toolchain-3.2 branch up to 3.2repack-11.
   * Drop auto-generated file debian/libllvm3.3.install.
