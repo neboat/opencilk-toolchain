@@ -26,5 +26,4 @@ unwind-chain-inclusion.diff
 hurd-pathmax.diff
 use-deb-json.diff
 libprofile_rt_sparc.patch
-lldb-hurd.diff
 libstdc++-header-i386.diff

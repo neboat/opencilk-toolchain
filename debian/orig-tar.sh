@@ -81,12 +81,14 @@ rm -rf $COMPILER_RT_TARGET
 # Polly
 POLLY_TARGET=polly_$MAJOR_VERSION~svn$REVISION
 $SVN_CMD $(get_svn_url polly $BRANCH) $POLLY_TARGET
+rm -rf $POLLY_TARGET/www
 tar jcvf llvm-toolchain-snapshot_$MAJOR_VERSION~svn$REVISION.orig-polly.tar.bz2 $POLLY_TARGET
 rm -rf $POLLY_TARGET
 
 # LLDB
 LLDB_TARGET=lldb_$MAJOR_VERSION~svn$REVISION
 $SVN_CMD $(get_svn_url lldb $BRANCH) $LLDB_TARGET
+rm -rf $LLDB_TARGET/www/
 tar jcvf llvm-toolchain-snapshot_$MAJOR_VERSION~svn$REVISION.orig-lldb.tar.bz2 $LLDB_TARGET
 rm -rf $LLDB_TARGET
 
