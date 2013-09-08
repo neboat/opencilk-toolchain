@@ -7,6 +7,7 @@ llvm-toolchain-snapshot (1:3.4~svn190150-1) unstable; urgency=low
   * lldb-3.4 is back to Architectures: any
   * Patch lldb-hurd.diff removed (applied upstream)
   * Directory www/ from tarballs polly & lldb removed
+  * Update of the description of LLVM packages
 
   [ Luca Falavigna ]
   * debian/control:

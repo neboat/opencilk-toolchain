@@ -262,10 +262,10 @@ Section: libs
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
-Description: Low-Level Virtual Machine (LLVM), runtime library
- The Low-Level Virtual Machine (LLVM) is a collection of libraries and
- tools that make it easy to build compilers, optimizers, Just-In-Time
- code generators, and many other compiler-related programs.
+Description: Modular and reusable compiler and toolchain technologies, runtime library
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, Just-In-Time code generators, and many other
+ compiler-related programs.
  .
  This package contains the LLVM runtime library.
 
@@ -276,10 +276,10 @@ Priority: extra
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.4
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
-Description: Low-Level Virtual Machine (LLVM), debugging symbols library
- The Low-Level Virtual Machine (LLVM) is a collection of libraries and
- tools that make it easy to build compilers, optimizers, Just-In-Time
- code generators, and many other compiler-related programs.
+Description: Modular and reusable compiler and toolchain technologies, debugging symbols library
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, Just-In-Time code generators, and many other
+ compiler-related programs.
  .
  This package contains the LLVM runtime library debug symbols.
 
@@ -290,11 +290,12 @@ Depends: llvm-3.4-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depen
 Recommends: llvm-3.4-dev
 Conflicts: llvm (<< 2.7-1)
 Replaces: llvm (<< 2.7-1)
-Description: Low-Level Virtual Machine (LLVM)
- The Low-Level Virtual Machine (LLVM) is a collection of libraries and
- tools that make it easy to build compilers, optimizers, Just-In-Time
- code generators, and many other compiler-related programs. LLVM
- uses a single, language-independent virtual instruction set both
+Description: Modular and reusable compiler and toolchain technologies
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, Just-In-Time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
  as an offline code representation (to communicate code between
  compiler phases and to run-time systems) and as the compiler internal
  representation (to analyze and transform programs). This persistent
@@ -308,7 +309,7 @@ Description: Low-Level Virtual Machine (LLVM)
  compiler debugging support, extensibility, and its stability and
  reliability. LLVM is currently being used to host a wide variety of
  academic research projects and commercial projects. LLVM includes C
- and C++ front-ends, a front-end for a Forth-like language (Stacker), 
+ and C++ front-ends, a front-end for a Forth-like language (Stacker),
  a young scheme front-end, and Java support is in development. LLVM can
  generate code for X86, SparcV9, PowerPC, or it can emit C code.
  .
@@ -320,11 +321,12 @@ Architecture: any
 Depends: binfmt-support, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: llvm (<< 2.7-1)
 Replaces: llvm (<< 2.7-1)
-Description: Low-Level Virtual Machine (LLVM), bytecode interpreter
- The Low-Level Virtual Machine (LLVM) is a collection of libraries and
- tools that make it easy to build compilers, optimizers, Just-In-Time
- code generators, and many other compiler-related programs. LLVM
- uses a single, language-independent virtual instruction set both
+Description: Modular and reusable compiler and toolchain technologies, IR interpreter
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, Just-In-Time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
  as an offline code representation (to communicate code between
  compiler phases and to run-time systems) and as the compiler internal
  representation (to analyze and transform programs). This persistent
@@ -339,11 +341,12 @@ Package: llvm-3.4-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends}, llvm-3.4 (= ${binary:Version})
 Replaces: llvm (<< 2.2-3)
-Description: Low-Level Virtual Machine (LLVM), libraries and headers
- The Low-Level Virtual Machine (LLVM) is a collection of libraries and
- tools that make it easy to build compilers, optimizers, Just-In-Time
- code generators, and many other compiler-related programs. LLVM
- uses a single, language-independent virtual instruction set both
+Description: Modular and reusable compiler and toolchain technologies, libraries and headers
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, Just-In-Time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
  as an offline code representation (to communicate code between
  compiler phases and to run-time systems) and as the compiler internal
  representation (to analyze and transform programs). This persistent
@@ -362,11 +365,12 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-3.4-dev (= $
 Replaces: libllvm-ocaml-3.4-dev
 Conflicts: libllvm-ocaml-3.4-dev
 Provides: ${ocaml:Provides}
-Description: Low-Level Virtual Machine (LLVM), bindings for OCaml
- The Low-Level Virtual Machine (LLVM) is a collection of libraries and
- tools that make it easy to build compilers, optimizers, Just-In-Time
- code generators, and many other compiler-related programs. LLVM
- uses a single, language-independent virtual instruction set both
+Description: Modular and reusable compiler and toolchain technologies, OCaml bindings
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, Just-In-Time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
  as an offline code representation (to communicate code between
  compiler phases and to run-time systems) and as the compiler internal
  representation (to analyze and transform programs). This persistent
@@ -380,11 +384,12 @@ Package: llvm-3.4-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
-Description: Low-Level Virtual Machine (LLVM), documentation
- The Low-Level Virtual Machine (LLVM) is a collection of libraries and
- tools that make it easy to build compilers, optimizers, Just-In-Time
- code generators, and many other compiler-related programs. LLVM
- uses a single, language-independent virtual instruction set both
+Description: Modular and reusable compiler and toolchain technologies, documentation
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, Just-In-Time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
  as an offline code representation (to communicate code between
  compiler phases and to run-time systems) and as the compiler internal
  representation (to analyze and transform programs). This persistent
@@ -398,11 +403,12 @@ Package: llvm-3.4-examples
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}, llvm-3.4-dev (>= ${source:Version}), llvm-3.4-dev (<< ${source:Version}+c~)
-Description: Low-Level Virtual Machine (LLVM), examples
- The Low-Level Virtual Machine (LLVM) is a collection of libraries and
- tools that make it easy to build compilers, optimizers, Just-In-Time
- code generators, and many other compiler-related programs. LLVM
- uses a single, language-independent virtual instruction set both
+Description: Modular and reusable compiler and toolchain technologies, examples
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, Just-In-Time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
  as an offline code representation (to communicate code between
  compiler phases and to run-time systems) and as the compiler internal
  representation (to analyze and transform programs). This persistent
@@ -412,25 +418,6 @@ Description: Low-Level Virtual Machine (LLVM), examples
  .
  This package contains examples for using LLVM, both in developing
  extensions to LLVM and in using it to compile code.
-
-# Package: llvm-3.4-source
-# Architecture: all
-# Depends: ${shlibs:Depends}, ${misc:Depends}
-# Description: Low-Level Virtual Machine (LLVM), source code
-#  The Low-Level Virtual Machine (LLVM) is a collection of libraries and
-#  tools that make it easy to build compilers, optimizers, Just-In-Time
-#  code generators, and many other compiler-related programs. LLVM
-#  uses a single, language-independent virtual instruction set both
-#  as an offline code representation (to communicate code between
-#  compiler phases and to run-time systems) and as the compiler internal
-#  representation (to analyze and transform programs). This persistent
-#  code representation allows a common set of sophisticated compiler
-#  techniques to be applied at compile-time, link-time, install-time,
-#  run-time, or "idle-time" (between program runs).
-#  .
-#  This package contains the llvm source code.
-
-
 
 Package: lldb-3.4
 Architecture: any
