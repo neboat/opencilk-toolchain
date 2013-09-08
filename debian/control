@@ -262,7 +262,7 @@ Section: libs
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
-Description: Modular and reusable compiler and toolchain technologies, runtime library
+Description: Modular compiler and toolchain technologies, runtime library
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, Just-In-Time code generators, and many other
  compiler-related programs.
@@ -276,7 +276,7 @@ Priority: extra
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.4
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
-Description: Modular and reusable compiler and toolchain technologies, debugging symbols library
+Description: Modular compiler and toolchain technologies, debugging libraries
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, Just-In-Time code generators, and many other
  compiler-related programs.
@@ -290,7 +290,7 @@ Depends: llvm-3.4-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depen
 Recommends: llvm-3.4-dev
 Conflicts: llvm (<< 2.7-1)
 Replaces: llvm (<< 2.7-1)
-Description: Modular and reusable compiler and toolchain technologies
+Description: Modular compiler and toolchain technologies
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, Just-In-Time code generators, and many other
  compiler-related programs.
@@ -321,7 +321,7 @@ Architecture: any
 Depends: binfmt-support, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: llvm (<< 2.7-1)
 Replaces: llvm (<< 2.7-1)
-Description: Modular and reusable compiler and toolchain technologies, IR interpreter
+Description: Modular compiler and toolchain technologies, IR interpreter
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, Just-In-Time code generators, and many other
  compiler-related programs.
@@ -341,7 +341,7 @@ Package: llvm-3.4-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends}, llvm-3.4 (= ${binary:Version})
 Replaces: llvm (<< 2.2-3)
-Description: Modular and reusable compiler and toolchain technologies, libraries and headers
+Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, Just-In-Time code generators, and many other
  compiler-related programs.
@@ -365,7 +365,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-3.4-dev (= $
 Replaces: libllvm-ocaml-3.4-dev
 Conflicts: libllvm-ocaml-3.4-dev
 Provides: ${ocaml:Provides}
-Description: Modular and reusable compiler and toolchain technologies, OCaml bindings
+Description: Modular compiler and toolchain technologies, OCaml bindings
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, Just-In-Time code generators, and many other
  compiler-related programs.
@@ -384,7 +384,7 @@ Package: llvm-3.4-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
-Description: Modular and reusable compiler and toolchain technologies, documentation
+Description: Modular compiler and toolchain technologies, documentation
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, Just-In-Time code generators, and many other
  compiler-related programs.
@@ -403,7 +403,7 @@ Package: llvm-3.4-examples
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}, llvm-3.4-dev (>= ${source:Version}), llvm-3.4-dev (<< ${source:Version}+c~)
-Description: Modular and reusable compiler and toolchain technologies, examples
+Description: Modular compiler and toolchain technologies, examples
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, Just-In-Time code generators, and many other
  compiler-related programs.
