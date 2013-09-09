@@ -264,7 +264,7 @@ Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Description: Modular compiler and toolchain technologies, runtime library
  LLVM is a collection of libraries and tools that make it easy to build
- compilers, optimizers, Just-In-Time code generators, and many other
+ compilers, optimizers, just-in-time code generators, and many other
  compiler-related programs.
  .
  This package contains the LLVM runtime library.
@@ -278,7 +278,7 @@ Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Description: Modular compiler and toolchain technologies, debugging libraries
  LLVM is a collection of libraries and tools that make it easy to build
- compilers, optimizers, Just-In-Time code generators, and many other
+ compilers, optimizers, just-in-time code generators, and many other
  compiler-related programs.
  .
  This package contains the LLVM runtime library debug symbols.
@@ -292,7 +292,7 @@ Conflicts: llvm (<< 2.7-1)
 Replaces: llvm (<< 2.7-1)
 Description: Modular compiler and toolchain technologies
  LLVM is a collection of libraries and tools that make it easy to build
- compilers, optimizers, Just-In-Time code generators, and many other
+ compilers, optimizers, just-in-time code generators, and many other
  compiler-related programs.
  .
  LLVM uses a single, language-independent virtual instruction set both
@@ -323,7 +323,7 @@ Conflicts: llvm (<< 2.7-1)
 Replaces: llvm (<< 2.7-1)
 Description: Modular compiler and toolchain technologies, IR interpreter
  LLVM is a collection of libraries and tools that make it easy to build
- compilers, optimizers, Just-In-Time code generators, and many other
+ compilers, optimizers, just-in-time code generators, and many other
  compiler-related programs.
  .
  LLVM uses a single, language-independent virtual instruction set both
@@ -343,7 +343,7 @@ Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends}, llvm-3.4 (= 
 Replaces: llvm (<< 2.2-3)
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
- compilers, optimizers, Just-In-Time code generators, and many other
+ compilers, optimizers, just-in-time code generators, and many other
  compiler-related programs.
  .
  LLVM uses a single, language-independent virtual instruction set both
@@ -367,7 +367,7 @@ Conflicts: libllvm-ocaml-3.4-dev
 Provides: ${ocaml:Provides}
 Description: Modular compiler and toolchain technologies, OCaml bindings
  LLVM is a collection of libraries and tools that make it easy to build
- compilers, optimizers, Just-In-Time code generators, and many other
+ compilers, optimizers, just-in-time code generators, and many other
  compiler-related programs.
  .
  LLVM uses a single, language-independent virtual instruction set both
@@ -386,7 +386,7 @@ Architecture: all
 Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
 Description: Modular compiler and toolchain technologies, documentation
  LLVM is a collection of libraries and tools that make it easy to build
- compilers, optimizers, Just-In-Time code generators, and many other
+ compilers, optimizers, just-in-time code generators, and many other
  compiler-related programs.
  .
  LLVM uses a single, language-independent virtual instruction set both
@@ -405,7 +405,7 @@ Architecture: all
 Depends: ${misc:Depends}, llvm-3.4-dev (>= ${source:Version}), llvm-3.4-dev (<< ${source:Version}+c~)
 Description: Modular compiler and toolchain technologies, examples
  LLVM is a collection of libraries and tools that make it easy to build
- compilers, optimizers, Just-In-Time code generators, and many other
+ compilers, optimizers, just-in-time code generators, and many other
  compiler-related programs.
  .
  LLVM uses a single, language-independent virtual instruction set both
