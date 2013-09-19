@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.4~svn190038/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.4~svn190996/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn190038.orig/clang/lib/Driver/ToolChains.cpp	2013-09-05 15:34:23.465206439 +0200
-+++ llvm-toolchain-snapshot_3.4~svn190038/clang/lib/Driver/ToolChains.cpp	2013-09-05 15:37:26.929201769 +0200
-@@ -2604,6 +2604,12 @@
+--- llvm-toolchain-snapshot_3.4~svn190996.orig/clang/lib/Driver/ToolChains.cpp	2013-09-19 14:50:30.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn190996/clang/lib/Driver/ToolChains.cpp	2013-09-19 14:50:30.000000000 +0200
+@@ -2606,6 +2606,12 @@
    StringRef TripleStr = GCCInstallation.getTriple().str();
    const GCCVersion &Version = GCCInstallation.getVersion();
  
