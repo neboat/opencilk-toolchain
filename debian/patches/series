@@ -20,7 +20,6 @@ declare_clear_cache.diff
 34-powerpc-no-altivec.diff
 clang-format-version.diff
 kfreebsd.diff
-mipsel-ftbfs.diff
 disable-execinfo-usage.diff
 unwind-chain-inclusion.diff
 hurd-pathmax.diff
