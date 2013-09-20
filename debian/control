@@ -429,3 +429,15 @@ Description: Next generation, high-performance debugger
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
  Project, such as the Clang expression parser and LLVM disassembler.
+
+Package: lldb-3.4-dev
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-3.4 (= ${binary:Version})
+Pre-Depends: ${misc:Pre-Depends}
+Description: Next generation, high-performance debugger - Header files
+ LLDB is a next generation, high-performance debugger. It is built as a set of
+ reusable components which highly leverage existing libraries in the larger LLVM
+ Project, such as the Clang expression parser and LLVM disassembler.
+ .
+ This package provides the header files to build extension over lldb.
+
