@@ -35,3 +35,4 @@ libprofile_rt_sparc.patch
 lldb-hurd.diff
 libstdc++-header-i386.diff
 kfreebsd_target_info_clang33.diff
+lldb-install-headers.diff

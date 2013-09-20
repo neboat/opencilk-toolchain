@@ -3,8 +3,11 @@ llvm-toolchain-3.3 (1:3.3-10) unstable; urgency=low
   * Update of the description of LLVM packages
     (LLVM no longer mean Low Level Virtual Machine)
   * Disable the build of lldb under HURD
+  * Ship the lldb headers into lldb-X.Y-dev (Closes: #723743)
+    I might create a liblldb-X.Y library at some point but I think it is too
+    early.
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 09 Sep 2013 14:35:08 +0200
 
 llvm-toolchain-3.3 (1:3.3-9) unstable; urgency=low
 

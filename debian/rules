@@ -105,12 +105,12 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
     fi; \
     ln -s ../polly .
 
-    if test $(LLDB_ENABLE) = yes; then \
+	if test $(LLDB_ENABLE) = yes; then \
 	    cd tools/ && \
 	    if test -h lldb; then \
 		   rm lldb; \
 	    fi; \
-        ln -s ../lldb .; \
+		ln -s ../lldb .; \
 	fi
 
 	cd projects/ && \
@@ -176,7 +176,7 @@ build_doc:
 
 	for f in llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-tblgen macho-dump lldb clang-format cpp11-migrate; do \
 		help2man --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/Release/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
-    done
+	done
 
 override_dh_auto_install:
 	$(MAKE) -C $(TARGET_BUILD)  VERBOSE=1 install DESTDIR=$(CURDIR)/debian/tmp/
