@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_3.4~svn190996/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.4~svn191634/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn190996.orig/clang/lib/Driver/ToolChains.cpp	2013-09-19 14:50:30.000000000 +0200
-+++ llvm-toolchain-snapshot_3.4~svn190996/clang/lib/Driver/ToolChains.cpp	2013-09-19 14:50:30.000000000 +0200
-@@ -2606,6 +2606,12 @@
-   StringRef TripleStr = GCCInstallation.getTriple().str();
+--- llvm-toolchain-snapshot_3.4~svn191634.orig/clang/lib/Driver/ToolChains.cpp	2013-09-29 11:38:00.000000000 +0200
++++ llvm-toolchain-snapshot_3.4~svn191634/clang/lib/Driver/ToolChains.cpp	2013-09-29 11:38:00.000000000 +0200
+@@ -2602,6 +2602,12 @@
+   StringRef BiarchSuffix = GCCInstallation.getBiarchSuffix();
    const GCCVersion &Version = GCCInstallation.getVersion();
  
 +#ifdef __i386__
@@ -14,4 +14,4 @@ Index: llvm-toolchain-snapshot_3.4~svn190996/clang/lib/Driver/ToolChains.cpp
 +
    if (addLibStdCXXIncludePaths(
            LibDir.str() + "/../include", "/c++/" + Version.Text, TripleStr,
-           GCCInstallation.getBiarchSuffix(), DriverArgs, CC1Args))
+           MultiLibSuffix + BiarchSuffix, DriverArgs, CC1Args))
