@@ -72,6 +72,7 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # OTHERMIRROR="deb http://llvm.org/apt/unstable/ llvm-toolchain main"
 # EXTRAPACKAGES="clang-3.4"
 	PRE_PROCESS=scan-build
+	PRE_PROCESS_CONF=scan-build
 # no need to run tests in this case
 	DEB_BUILD_OPTIONS+=" nocheck"
 endif
@@ -83,6 +84,10 @@ ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
 # And we have some pbuilder hooks to configure and pack the result
 # Where the binaries are installed on the jenkins instance
 	PRE_PROCESS=PATH=$$PATH:/opt/cov-analysis/bin/ cov-build --dir cov-int
+
+# We don't want to check the temporary files produced by the configure
+	PRE_PROCESS_CONF=
+
 	COVERITY_ENABLE=1
 # no need to run tests in this case
 	DEB_BUILD_OPTIONS+=" nocheck"
@@ -143,7 +148,7 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 	# Due to bug upstream, no symlink here
 	cp -R -H clang-tools-extra tools/clang/tools/extra
 # Start the actual configure
-	cd $(TARGET_BUILD) && $(PRE_PROCESS) \
+	cd $(TARGET_BUILD) && $(PRE_PROCESS_CONF) \
 	  ../configure $(confargs) \
 	--prefix=/usr/lib/llvm-$(LLVM_VERSION) \
 	--bindir=\$${prefix}/bin/ \
