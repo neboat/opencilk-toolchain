@@ -82,7 +82,7 @@ ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
 # pbuilder contains BINDMOUNTS="/opt/cov-analysis/"
 # And we have some pbuilder hooks to configure and pack the result
 # Where the binaries are installed on the jenkins instance
-	PRE_PROCESS=PATH=$$PATH:/pro/pkg-llvm/cov-analysis-linux64-6.6.1/bin// cov-build --dir cov-int
+	PRE_PROCESS=PATH=$$PATH:/opt/cov-analysis/bin/ cov-build --dir cov-int
 	COVERITY_ENABLE=1
 # no need to run tests in this case
 	DEB_BUILD_OPTIONS+=" nocheck"
@@ -132,7 +132,7 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 
 	# Configure coverity (we need the compilers)
 	if test "$COVERITY_ENABLE" == "1"; then \
-		export PATH=$$PATH:/pro/pkg-llvm/cov-analysis-linux64-6.6.1/bin/; \
+		export PATH=$$PATH:/opt/cov-analysis/bin/; \
 		cov-configure --compiler clang --comptype gcc; \
 		cov-configure --compiler gcc-4.8 --comptype gcc; \
 		cov-configure --compiler g++-4.8 --comptype gcc; \
