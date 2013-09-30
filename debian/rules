@@ -86,6 +86,8 @@ ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
 	COVERITY_ENABLE=1
 # no need to run tests in this case
 	DEB_BUILD_OPTIONS+=" nocheck"
+else
+	COVERITY_ENABLE=0
 endif
 
 %:
@@ -131,7 +133,7 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 	readlink compiler-rt
 
 	# Configure coverity (we need the compilers)
-	if test "$(COVERITY_ENABLE)" == "1"; then \
+	if test $(COVERITY_ENABLE) -eq 1; then \
 		export PATH=$$PATH:/opt/cov-analysis/bin/; \
 		cov-configure --compiler clang --comptype gcc; \
 		cov-configure --compiler gcc-4.8 --comptype gcc; \
