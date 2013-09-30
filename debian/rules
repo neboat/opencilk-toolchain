@@ -82,7 +82,8 @@ ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
 # pbuilder contains BINDMOUNTS="/opt/cov-analysis/"
 # And we have some pbuilder hooks to configure and pack the result
 # Where the binaries are installed on the jenkins instance
-	PRE_PROCESS=/opt/cov-analysis/bin/cov-build --dir cov-int
+	PRE_PROCESS=PATH=/opt/cov-analysis/bin/ cov-build --dir cov-int
+	COVERITY_ENABLE=1
 # no need to run tests in this case
 	DEB_BUILD_OPTIONS+=" nocheck"
 endif
@@ -128,6 +129,14 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 	fi; \
 	ln -s ../compiler-rt .; \
 	readlink compiler-rt
+
+	# Configure coverity (we need the compilers)
+	if test "$COVERITY_ENABLE" -eq "1"; then \
+		export PATH=$$PATH:/opt/cov-analysis/bin; \
+		cov-configure --compiler clang --comptype gcc; \
+		cov-configure --compiler gcc-4.8 --comptype gcc; \
+		cov-configure --compiler g++-4.8 --comptype gcc; \
+	fi
 
 	# Due to bug upstream, no symlink here
 	cp -R -H clang-tools-extra tools/clang/tools/extra
