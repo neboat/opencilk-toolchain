@@ -99,8 +99,6 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 	$(CC) -v
 	mkdir -p $(TARGET_BUILD)
 	mkdir -p clang/include/clang/Debian
-	ls -al /tmp/cov-root/
-	mkdir -p /tmp/cov-root/
 	sed -e "s|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|" \
 		-e "s|@DEB_HOST_GNU_TYPE@|$(DEB_HOST_GNU_TYPE)|" \
 		-e "s|@DEB_PATCHSETVERSION@|$(DEBIAN_REVISION)|" \
@@ -133,7 +131,6 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 
 	# Due to bug upstream, no symlink here
 	cp -R -H clang-tools-extra tools/clang/tools/extra
-	ls -al /tmp/cov-root/
 # Start the actual configure
 	cd $(TARGET_BUILD) && $(PRE_PROCESS) \
 	  ../configure $(confargs) \
