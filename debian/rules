@@ -23,6 +23,7 @@ export CXX=g++-$(GCC_VERSION)
 
 LDFLAGS_EXTRA=
 CXXFLAGS_EXTRA=
+CONFIGURE_EXTRA=
 
 confargs := \
         --with-c-include-dirs=/usr/include/$(DEB_HOST_MULTIARCH):/usr/include/$(DEB_HOST_GNU_TYPE):/usr/include \
@@ -75,6 +76,7 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 	PRE_PROCESS_CONF=scan-build
 # no need to run tests in this case
 	DEB_BUILD_OPTIONS+=" nocheck"
+	CONFIGURE_EXTRA += --enable-assertions
 endif
 
 
@@ -84,11 +86,10 @@ ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
 # And we have some pbuilder hooks to configure and pack the result
 # Where the binaries are installed on the jenkins instance
 	PRE_PROCESS=PATH=$$PATH:/opt/cov-analysis/bin/ cov-build --dir cov-int
-
 # We don't want to check the temporary files produced by the configure
 	PRE_PROCESS_CONF=
-
 	COVERITY_ENABLE=1
+	CONFIGURE_EXTRA += --enable-assertions
 # no need to run tests in this case
 	DEB_BUILD_OPTIONS+=" nocheck"
 else
@@ -164,6 +165,7 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 	--with-cloog --with-isl \
 	--with-bug-report-url=http://bugs.debian.org/ \
 	--enable-shared  --enable-experimental-targets=R600 \
+	$(CONFIGURE_EXTRA) \
 	CLANG_VENDOR=$(VENDOR) || { cat config.log tools/polly/config.log; exit 1; }
 #	cd $(TARGET_BUILD) && cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON
 #	mkdir build-compiler-rt && cd build-compiler-rt && cmake ../compiler-rt
