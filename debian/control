@@ -240,6 +240,17 @@ Description: clang library - Common development package
  This package contains the clang generic headers and some libraries
  (profiling, etc).
 
+
+
+Package: python-clang-3.3
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Replaces: python-clang-3.4
+Breaks: python-clang-3.4
+Description: Clang Python Bindings
+ This binding package provides access to the Clang compiler and libraries.
+
+
 Package: libllvm3.3
 Architecture: any
 Section: libs
@@ -252,6 +263,7 @@ Description: Modular compiler and toolchain technologies, runtime library
  compiler-related programs.
  .
  This package contains the LLVM runtime library.
+
 
 Package: libllvm3.3-dbg
 Architecture: any
