@@ -256,6 +256,16 @@ Description: clang library - Common development package
  This package contains the clang generic headers and some libraries
  (profiling, etc).
 
+
+Package: python-clang-3.4
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Replaces: python-clang-3.3
+Breaks: python-clang-3.3
+Description: Clang Python Bindings
+ This binding package provides access to the Clang compiler and libraries.
+
+
 Package: libllvm3.4
 Architecture: any
 Section: libs
@@ -420,7 +430,8 @@ Description: Modular compiler and toolchain technologies, examples
  extensions to LLVM and in using it to compile code.
 
 Package: lldb-3.4
-Architecture: any
+Architecture: amd64 armel armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 s390x sparc  alpha arm64 hppa m68k powerpcspe ppc64 sh4 sparc64 x32
+# Only hurd has been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.4 (= ${binary:Version}), python, llvm-3.4-dev
 Pre-Depends: ${misc:Pre-Depends}
 Replaces: lldb-3.2, lldb-3.3
@@ -440,4 +451,3 @@ Description: Next generation, high-performance debugger - Header files
  Project, such as the Clang expression parser and LLVM disassembler.
  .
  This package provides the header files to build extension over lldb.
-

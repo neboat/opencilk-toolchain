@@ -1,7 +1,7 @@
-Index: llvm-toolchain-3.3-3.3/clang/lib/Basic/FileManager.cpp
+Index: llvm-toolchain-snapshot_3.4~svn192346/clang/lib/Basic/FileManager.cpp
 ===================================================================
---- llvm-toolchain-3.3-3.3.orig/clang/lib/Basic/FileManager.cpp	2013-01-26 16:29:36.000000000 +0000
-+++ llvm-toolchain-3.3-3.3/clang/lib/Basic/FileManager.cpp	2013-08-28 10:29:30.000000000 +0000
+--- llvm-toolchain-snapshot_3.4~svn192346.orig/clang/lib/Basic/FileManager.cpp	2013-10-10 13:38:37.914082328 +0200
++++ llvm-toolchain-snapshot_3.4~svn192346/clang/lib/Basic/FileManager.cpp	2013-10-10 13:38:37.910082329 +0200
 @@ -43,6 +43,11 @@
  #if defined(LLVM_ON_UNIX)
  #include <limits.h>
@@ -14,10 +14,10 @@ Index: llvm-toolchain-3.3-3.3/clang/lib/Basic/FileManager.cpp
  using namespace clang;
  
  // FIXME: Enhance libsystem to support inode and other fields.
-Index: llvm-toolchain-3.3-3.3/lldb/include/lldb/lldb-defines.h
+Index: llvm-toolchain-snapshot_3.4~svn192346/lldb/include/lldb/lldb-defines.h
 ===================================================================
---- llvm-toolchain-3.3-3.3.orig/lldb/include/lldb/lldb-defines.h	2013-08-28 14:14:04.000000000 +0000
-+++ llvm-toolchain-3.3-3.3/lldb/include/lldb/lldb-defines.h	2013-08-28 14:15:01.000000000 +0000
+--- llvm-toolchain-snapshot_3.4~svn192346.orig/lldb/include/lldb/lldb-defines.h	2013-10-10 13:38:37.914082328 +0200
++++ llvm-toolchain-snapshot_3.4~svn192346/lldb/include/lldb/lldb-defines.h	2013-10-10 13:38:37.910082329 +0200
 @@ -12,6 +12,11 @@
  
  #include "lldb/lldb-types.h"
