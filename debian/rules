@@ -95,9 +95,8 @@ else
 	COVERITY_ENABLE=0
 endif
 
-LLDB_ARCHS := hurd-i386
 LLDB_ENABLE=yes
-ifneq (,$(findstring $(DEB_HOST_ARCH),$(LLDB_ARCHS)))
+ifneq (,$(findstring $(DEB_HOST_ARCH), hurd))
         LLDB_ENABLE=no
 endif
 
