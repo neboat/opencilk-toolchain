@@ -28,3 +28,4 @@ libstdc++-header-i386.diff
 atomic_library_1.diff
 atomic_library_2.diff
 python-clangpath.diff
+removeduplicatedeclaration.diff
