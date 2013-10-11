@@ -243,6 +243,7 @@ Description: clang library - Common development package
 
 
 Package: python-clang-3.3
+Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
 Replaces: python-clang-3.4
