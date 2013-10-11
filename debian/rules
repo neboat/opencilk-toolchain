@@ -70,9 +70,8 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 	PRE_CONFIGURE=scan-build
 endif
 
-LLDB_ARCHS := hurd-i386
 LLDB_ENABLE=yes
-ifneq (,$(findstring $(DEB_HOST_ARCH),$(LLDB_ARCHS)))
+ifneq (,$(findstring $(DEB_HOST_ARCH), hurd))
         LLDB_ENABLE=no
 endif
 
