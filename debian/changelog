@@ -12,6 +12,7 @@ llvm-toolchain-3.3 (1:3.3-10) unstable; urgency=low
   * Install libclang.so.1 in /usr/lib/*/libclang-3.3.so.1
   * Also ship the python clang binding (python-clang-3.3)
   * Fix a FTBFS with a duplicate declaration of shouldUseInlineAtomic
+  * Build depend automake1.9 => automake (Closes: #724414)
   * Update the build dependency from tcl8.5 to tcl (Closes: #725953)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 09 Sep 2013 14:35:08 +0200
