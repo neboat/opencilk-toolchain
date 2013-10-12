@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:3.4~svn191069-1~exp1) unstable; urgency=low
+llvm-toolchain-snapshot (1:3.4~svn191069-1) unstable; urgency=low
 
   * New snapshot release
   * Merge changes from the 3.3 branch (see 1:3.3-10)
