@@ -114,6 +114,8 @@ Description: C, C++ and Objective-C compiler (LLVM based) - Documentation
 Package: libclang1-3.3
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
 Description: clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Some of its goals include the following:
