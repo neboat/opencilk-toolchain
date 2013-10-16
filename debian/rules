@@ -230,7 +230,12 @@ override_dh_auto_install:
 		mv $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/liblldb.so $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/liblldb.so.$(SONAME_EXT); \
 	fi
 
-	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && mv libclang.so libclang.so.$(SONAME_EXT) && ln -s libclang.so.$(SONAME_EXT) libclang.so
+	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && \
+	if test ! -f libclang-$(LLVM_VERSION).so.$(SONAME_EXT); then \
+		mv libclang.so libclang-$(LLVM_VERSION).so.$(SONAME_EXT) && \
+		ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT); \
+	fi
+
 #	cd $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/ && rm -rf $$(find . -iname "SubDir.lib*" -o -iname .dir) && rm -rf $$(find -empty)
 
 	mkdir -p $(CURDIR)/debian/clang-$(LLVM_VERSION)/usr/bin/
