@@ -58,6 +58,14 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 endif
 endif
 
+# Enable polly (or not)
+POLLY_ENABLE=no
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libisl-dev) ge 0.12.1; echo $$?),0)
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libcloog-isl-dev) ge 0.18.1; echo $$?),0)
+POLLY_ENABLE=YES
+endif
+endif
+
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 # enable the code coverage
 	CODECOVERAGE=yes
@@ -125,11 +133,13 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
     ln -s ../clang .; \
 	readlink clang
 
-	# cd tools/ && \
-    # if test -h polly; then \
-    #     rm polly; \
-    # fi; \
-    # ln -s ../polly .
+	if test $(POLLY_ENABLE) = yes; then \
+	cd tools/ && \
+    if test -h polly; then \
+        rm polly; \
+    fi; \
+    ln -s ../polly .; \
+	fi
 
 	if test $(LLDB_ENABLE) = yes; then \
 	    cd tools/ && \
