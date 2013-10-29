@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
 Uploaders: Sylvestre Ledru <sylvestre@debian.org>
 Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
-    autoconf, automake1.9, perl, libtool, doxygen, chrpath, texinfo,
+    autoconf, automake, perl, libtool, doxygen, chrpath, texinfo,
     sharutils, autotools-dev (>= 20060702.1), libffi-dev (>= 3.0.9),
     lsb-release, patchutils, diffstat, xz-utils, chrpath, python-dev,
     libedit-dev, swig, python-sphinx, ocaml-nox, binutils-dev, libcloog-isl-dev,
@@ -130,6 +130,8 @@ Description: C, C++ and Objective-C compiler (LLVM based) - Documentation
 Package: libclang1-3.4
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
 Description: clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Some of its goals include the following:
@@ -258,6 +260,7 @@ Description: clang library - Common development package
 
 
 Package: python-clang-3.4
+Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
 Replaces: python-clang-3.3
