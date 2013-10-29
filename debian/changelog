@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:3.4~svn193603-1) unstable; urgency=low
+llvm-toolchain-snapshot (1:3.4~svn193628-1) unstable; urgency=low
 
   * New snapshot release
     - Fix the scan-build warning (Closes: #725332)
