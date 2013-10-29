@@ -362,5 +362,4 @@ override_dh_auto_clean:
 	find test -name '*.pyc' -o -name '*.cm[ix]' | xargs -r rm -f
 	find test/Bindings -name '*.o' | xargs -r rm -f
 	rm -f tools/clang tools/polly tools/lldb projects/compiler-rt
-	rm -rf tools/clang/tools/extra
-
+	rm -rf tools/clang/tools/extra clang/tools/extra/
