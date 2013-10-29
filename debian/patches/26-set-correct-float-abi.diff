@@ -18,11 +18,11 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
-Index: llvm-toolchain-snapshot_3.4~svn192346/clang/lib/Driver/Tools.cpp
+Index: llvm-toolchain-snapshot_3.4~svn193603/clang/lib/Driver/Tools.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn192346.orig/clang/lib/Driver/Tools.cpp	2013-10-10 13:38:02.294083121 +0200
-+++ llvm-toolchain-snapshot_3.4~svn192346/clang/lib/Driver/Tools.cpp	2013-10-10 13:38:02.290083121 +0200
-@@ -695,7 +695,7 @@
+--- llvm-toolchain-snapshot_3.4~svn193603.orig/clang/lib/Driver/Tools.cpp	2013-10-29 12:25:57.426136669 +0100
++++ llvm-toolchain-snapshot_3.4~svn193603/clang/lib/Driver/Tools.cpp	2013-10-29 12:26:01.000000000 +0100
+@@ -721,7 +721,7 @@
          FloatABI = "hard";
          break;
        case llvm::Triple::GNUEABI:

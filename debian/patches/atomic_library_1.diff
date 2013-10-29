@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.4~svn192346/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_3.4~svn193603/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn192346.orig/clang/lib/Basic/Targets.cpp	2013-10-10 13:39:24.086081296 +0200
-+++ llvm-toolchain-snapshot_3.4~svn192346/clang/lib/Basic/Targets.cpp	2013-10-10 13:39:24.082081296 +0200
-@@ -3612,6 +3612,20 @@
+--- llvm-toolchain-snapshot_3.4~svn193603.orig/clang/lib/Basic/Targets.cpp	2013-10-29 12:27:55.278140961 +0100
++++ llvm-toolchain-snapshot_3.4~svn193603/clang/lib/Basic/Targets.cpp	2013-10-29 12:27:55.274140961 +0100
+@@ -3667,6 +3667,20 @@
      return Version >= 7;
    }
  
@@ -23,10 +23,10 @@ Index: llvm-toolchain-snapshot_3.4~svn192346/clang/lib/Basic/Targets.cpp
  public:
    ARMTargetInfo(const llvm::Triple &Triple)
        : TargetInfo(Triple), ABI("aapcs-linux"), CPU("arm1136j-s"),
-Index: llvm-toolchain-snapshot_3.4~svn192346/clang/test/CodeGen/linux-arm-atomic.c
+Index: llvm-toolchain-snapshot_3.4~svn193603/clang/test/CodeGen/linux-arm-atomic.c
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn192346.orig/clang/test/CodeGen/linux-arm-atomic.c	2013-10-10 13:39:24.086081296 +0200
-+++ llvm-toolchain-snapshot_3.4~svn192346/clang/test/CodeGen/linux-arm-atomic.c	2013-10-10 13:39:24.082081296 +0200
+--- llvm-toolchain-snapshot_3.4~svn193603.orig/clang/test/CodeGen/linux-arm-atomic.c	2013-10-29 12:27:55.278140961 +0100
++++ llvm-toolchain-snapshot_3.4~svn193603/clang/test/CodeGen/linux-arm-atomic.c	2013-10-29 12:27:55.278140961 +0100
 @@ -1,5 +1,15 @@
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv7-unknown-linux | FileCheck %s
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv6-unknown-linux | FileCheck %s
