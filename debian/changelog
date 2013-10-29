@@ -16,7 +16,7 @@ llvm-toolchain-snapshot (1:3.4~svn193603-1) unstable; urgency=low
   * Install libclang.so in /usr/lib/*/libclang-3.4.so
   * Install libclang.so.1 in /usr/lib/*/libclang-3.3.so.1
   * Also ship the python clang binding (python-clang-3.4)
-  * Enable polly if the dependencies are OK
+  * Enable polly if the dependencies are OK (only Debian unstable for now)
   * Honor the option "nocheck"
   * Disable the build of lldb under HURD
   * Ship the lldb headers into lldb-X.Y-dev (Closes: #723743)
