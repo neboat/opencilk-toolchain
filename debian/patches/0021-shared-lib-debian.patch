@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn188990/tools/llvm-shlib/Makefile
+Index: llvm-toolchain-snapshot_3.4~svn193961/tools/llvm-shlib/Makefile
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn188990.orig/tools/llvm-shlib/Makefile	2013-08-22 09:07:24.076608873 +0200
-+++ llvm-toolchain-snapshot_3.4~svn188990/tools/llvm-shlib/Makefile	2013-08-22 09:07:24.076608873 +0200
+--- llvm-toolchain-snapshot_3.4~svn193961.orig/tools/llvm-shlib/Makefile	2013-11-03 19:46:40.542833434 +0100
++++ llvm-toolchain-snapshot_3.4~svn193961/tools/llvm-shlib/Makefile	2013-11-03 19:46:40.542833434 +0100
 @@ -39,6 +39,12 @@
  LLVMLibsPaths   := $(IncludeInLibLlvm)
  
@@ -17,7 +17,7 @@ Index: llvm-toolchain-snapshot_3.4~svn188990/tools/llvm-shlib/Makefile
      # set dylib internal version number to llvmCore submission number
 @@ -70,7 +76,7 @@
  
- ifeq ($(HOST_OS), $(filter $(HOST_OS), Linux FreeBSD GNU/kFreeBSD GNU))
+ ifeq ($(HOST_OS), $(filter $(HOST_OS), DragonFly Linux FreeBSD GNU/kFreeBSD GNU))
      # Add soname to the library.
 -    LLVMLibsOptions += -Wl,--soname,lib$(LIBRARYNAME)$(SHLIBEXT)
 +    LLVMLibsOptions += -Wl,--soname,lib$(LIBRARYNAME)$(SHLIBEXT) -Wl,-Bsymbolic-functions
