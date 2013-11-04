@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.4~svn193961/tools/llvm-shlib/Makefile
+Index: llvm-toolchain-snapshot_3.4~svn193982/tools/llvm-shlib/Makefile
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn193961.orig/tools/llvm-shlib/Makefile	2013-11-03 19:46:40.542833434 +0100
-+++ llvm-toolchain-snapshot_3.4~svn193961/tools/llvm-shlib/Makefile	2013-11-03 19:46:40.542833434 +0100
+--- llvm-toolchain-snapshot_3.4~svn193982.orig/tools/llvm-shlib/Makefile	2013-11-04 09:09:01.840586768 +0100
++++ llvm-toolchain-snapshot_3.4~svn193982/tools/llvm-shlib/Makefile	2013-11-04 09:09:01.836586768 +0100
 @@ -39,6 +39,12 @@
  LLVMLibsPaths   := $(IncludeInLibLlvm)
  
