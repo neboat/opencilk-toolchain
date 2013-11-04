@@ -16,6 +16,8 @@ Homepage: http://www.llvm.org/
 Vcs-Svn: svn://svn.debian.org/svn/pkg-llvm/llvm-toolchain/branches/snapshot/
 Vcs-Browser: http://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/snapshot/
 
+# ------------- clang -------------
+
 Package: clang-3.4
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
@@ -172,6 +174,22 @@ Breaks: python-clang-3.3
 Description: Clang Python Bindings
  This binding package provides access to the Clang compiler and libraries.
 
+
+Package: clang-3.4-examples
+Architecture: any
+Section: doc
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Clang examples
+ Clang project is a C, C++, Objective C and Objective C++ front-end
+ for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler
+ Collection (GCC).
+ .
+ Clang implements all of the ISO C++ 1998 and 2001 standards and also provides
+ a partial support of C++1y.
+ .
+ This package contains the clang examples.
+
+# ------------- LLVM -------------
 
 Package: libllvm3.4
 Architecture: any
@@ -336,6 +354,9 @@ Description: Modular compiler and toolchain technologies, examples
  .
  This package contains examples for using LLVM, both in developing
  extensions to LLVM and in using it to compile code.
+
+
+# ------------- lldb -------------
 
 Package: lldb-3.4
 Architecture: amd64 armel armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 s390x sparc alpha arm64 hppa m68k powerpcspe ppc64 sh4 sparc64 x32
