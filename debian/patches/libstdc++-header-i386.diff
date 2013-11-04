@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.4~svn193603/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.4~svn193982/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn193603.orig/clang/lib/Driver/ToolChains.cpp	2013-10-29 12:26:35.270138047 +0100
-+++ llvm-toolchain-snapshot_3.4~svn193603/clang/lib/Driver/ToolChains.cpp	2013-10-29 12:27:25.930139892 +0100
-@@ -2707,6 +2707,12 @@
+--- llvm-toolchain-snapshot_3.4~svn193982.orig/clang/lib/Driver/ToolChains.cpp	2013-11-04 09:46:43.636669144 +0100
++++ llvm-toolchain-snapshot_3.4~svn193982/clang/lib/Driver/ToolChains.cpp	2013-11-04 09:46:43.636669144 +0100
+@@ -2715,6 +2715,12 @@
    StringRef BiarchSuffix = GCCInstallation.getBiarchSuffix();
    const GCCVersion &Version = GCCInstallation.getVersion();
  
