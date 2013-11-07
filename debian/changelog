@@ -1,4 +1,14 @@
-llvm-toolchain-snapshot (1:3.4~svn193983-1) unstable; urgency=low
+llvm-toolchain-snapshot (1:3.4~svn194200-1~exp1) experimental; urgency=low
+
+  * New snapshot release
+  * Update the search path for clang from /usr/include/clang/VERSION/include/
+    to /usr/bin/../include/clang/VERSION/include/
+    To make sure we avoid mixing the headers from the build and installed on
+    the system.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 07 Nov 2013 12:33:12 +0100
+
+llvm-toolchain-snapshot (1:3.4~svn194079-1) unstable; urgency=low
 
   * New snapshot release
   * Also install clang 3.4 examples (clang-3.4-examples) (Closes: #728260)
