@@ -1,0 +1,10 @@
+usr/lib/llvm-3.5/bin/llvm-*
+usr/lib/llvm-3.5/bin/opt*
+usr/lib/llvm-3.5/bin/macho-dump*
+usr/lib/llvm-3.5/bin/bugpoint*
+usr/lib/llvm-3.5/bin/llc*
+usr/bin/llvm-*
+usr/bin/opt*
+usr/bin/macho-dump*
+usr/bin/bugpoint*
+usr/bin/llc*
