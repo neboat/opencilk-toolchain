@@ -8,6 +8,11 @@
 # llvm-toolchain-snapshot-3.2_3.2repack.orig.tar.bz2
 set -e
 
+# TODO rest of the options
+
+# To create an rc1 release:
+# sh 3.4/debian/orig-tar.sh RELEASE_34 rc1
+
 SVN_BASE_URL=http://llvm.org/svn/llvm-project/
 MAJOR_VERSION=3.4
 
