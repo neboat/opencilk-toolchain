@@ -167,8 +167,8 @@ Package: python-clang-3.5
 Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
-Replaces: python-clang-3.3
-Breaks: python-clang-3.3
+Replaces: python-clang-3.3, python-clang-3.4
+Breaks: python-clang-3.3, python-clang-3.4
 Description: Clang Python Bindings
  This binding package provides access to the Clang compiler and libraries.
 
@@ -357,8 +357,8 @@ Architecture: amd64 armel armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mips
 # Only hurd has been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.5 (= ${binary:Version}), python, llvm-3.5-dev
 Pre-Depends: ${misc:Pre-Depends}
-Replaces: lldb-3.2, lldb-3.3
-Breaks: lldb-3.2, lldb-3.3
+Replaces: lldb-3.2, lldb-3.3, lldb-3.4
+Breaks: lldb-3.2, lldb-3.3, lldb-3.4
 Description: Next generation, high-performance debugger
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
