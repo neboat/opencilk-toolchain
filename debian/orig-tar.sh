@@ -18,11 +18,12 @@ MAJOR_VERSION=3.4
 
 if test -n "$1"; then
 # http://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/branches/google/stable/
+# For example: sh 3.4/debian/orig-tar.sh release_34
     BRANCH=$1
 fi
 
 if test -n "$1" -a -n "$2"; then
-# http://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/branches/google/stable/
+# http://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/tags/RELEASE_34/rc1/
     BRANCH=$1
     TAG=$2
     RCRELEASE="true"
@@ -125,6 +126,6 @@ cd $PATH_DEBIAN
 if test -z "$DISTRIBUTION"; then
     DISTRIBUTION="experimental"
 fi
-dch --distribution $DISTRIBUTION --newversion 1:$VERSION-1~exp1 "New snapshot release"
+dch --allow-lower-version --distribution $DISTRIBUTION --newversion 1:$VERSION-1~exp1 "New snapshot release"
 
 exit 0
