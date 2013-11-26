@@ -126,6 +126,11 @@ cd $PATH_DEBIAN
 if test -z "$DISTRIBUTION"; then
     DISTRIBUTION="experimental"
 fi
-dch --allow-lower-version --distribution $DISTRIBUTION --newversion 1:$VERSION-1~exp1 "New snapshot release"
+
+if test ! -n "$RCRELEASE"; then
+    EXTRA_DCH_FLAGS="--force-bad-version --allow-lower-version"
+fi
+
+dch $EXTRA_DCH_FLAGS --distribution $DISTRIBUTION --newversion 1:$VERSION-1~exp1 "New snapshot release"
 
 exit 0
