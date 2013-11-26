@@ -6,8 +6,13 @@ llvm-toolchain-3.4 (1:3.4~+rc1-2) unstable; urgency=low
     (also remove the tests)
   * Make lldb 3.4 also conflict with 3.5 (Closes: #730163)
   * Make python-clang 3.4 also conflict with 3.5 (Closes: #730164)
+  * Remove usr/lib/llvm-3.4/build/autoconf/LICENSE.TXT
+  * silent warning "manpage-has-useless-whatis-entry" in lldb-3.4
+  * silent warning "package-name-doesnt-match-sonames libclang1"
+  * Refresh patch kfreebsd_v2.diff to, maybe, fix lldb build under kfreebsd.
+    Thanks to Ed Maste for the patch.
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 26 Nov 2013 15:01:03 +0100
 
 llvm-toolchain-3.4 (1:3.4~+rc1-1) unstable; urgency=low
 
