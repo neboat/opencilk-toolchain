@@ -78,9 +78,9 @@ Index: llvm-toolchain-3.4-3.4~+rc1/clang/lib/StaticAnalyzer/Checkers/GenericTain
      case Builtin::BIstrndup:
        return TaintPropagationRule(0, 1, ReturnValueIndex);
  
-Index: llvm-toolchain-3.4-3.4~+rc1/pro/pkg-llvm/llvm-toolchain/branches/llvm-toolchain-3.4-3.4~+rc1/clang/test/Sema/builtins.c
+Index: llvm-toolchain-3.4-3.4~+rc1/clang/test/Sema/builtins.c
 ===================================================================
---- llvm-toolchain-3.4-3.4~+rc1.orig/pro/pkg-llvm/llvm-toolchain/branches/llvm-toolchain-3.4-3.4~+rc1/clang/test/Sema/builtins.c	2013-11-24 16:14:43.676235943 +0100
+--- llvm-toolchain-3.4-3.4~+rc1.orig/clang/test/Sema/builtins.c	2013-11-24 16:14:43.676235943 +0100
 +++ /dev/null	1970-01-01 00:00:00.000000000 +0000
 @@ -1,199 +0,0 @@
 -// RUN: %clang_cc1 %s -fsyntax-only -verify -pedantic -Wno-string-plus-int -triple=i686-apple-darwin9
@@ -282,9 +282,9 @@ Index: llvm-toolchain-3.4-3.4~+rc1/pro/pkg-llvm/llvm-toolchain/branches/llvm-too
 -  __noop(1); // expected-warning {{implicit declaration}}
 -  __debugbreak(); // expected-warning {{implicit declaration}}
 -}
-Index: llvm-toolchain-3.4-3.4~+rc1/pro/pkg-llvm/llvm-toolchain/branches/llvm-toolchain-3.4-3.4~+rc1/clang/test/Sema/warn-strlcpycat-size.c
+Index: llvm-toolchain-3.4-3.4~+rc1/clang/test/Sema/warn-strlcpycat-size.c
 ===================================================================
---- llvm-toolchain-3.4-3.4~+rc1.orig/pro/pkg-llvm/llvm-toolchain/branches/llvm-toolchain-3.4-3.4~+rc1/clang/test/Sema/warn-strlcpycat-size.c	2013-11-24 16:14:43.676235943 +0100
+--- llvm-toolchain-3.4-3.4~+rc1.orig/clang/test/Sema/warn-strlcpycat-size.c	2013-11-24 16:14:43.676235943 +0100
 +++ /dev/null	1970-01-01 00:00:00.000000000 +0000
 @@ -1,55 +0,0 @@
 -// RUN: %clang_cc1 -Wstrlcpy-strlcat-size -verify -fsyntax-only %s
