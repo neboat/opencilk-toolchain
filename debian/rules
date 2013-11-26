@@ -309,11 +309,23 @@ override_dh_installdeb:
 	rm -f $(CURDIR)/debian/clang-$(LLVM_VERSION)-examples/usr/share/doc/clang-$(LLVM_VERSION)-examples/examples/*Make*
 
 ifeq (,$(filter nocheck, $(DEB_BUILD_OPTIONS)))
+
+# List of the archs we know we have 100 % tests working
+ARCH_LLVM_TEST_OK := amd64 i386
 override_dh_auto_test:
 # LLVM tests
-	$(MAKE) -C $(TARGET_BUILD) check || true
+ifneq (,$(findstring $(DEB_HOST_ARCH),$(ARCH_LLVM_TEST_OK)))
+# Fail the build if the test fails
+	$(MAKE) -C $(TARGET_BUILD) check
+else
+    $(MAKE) -C $(TARGET_BUILD) check || true
+endif
+
 # clang tests
+# setup the env
+	cd $(TARGET_BUILD)/Release/lib/ && ln -s libclang.so libclang.so.1
 	cd $(TARGET_BUILD)/ && $(MAKE) -C tools/clang/ test || true
+	rm -f $(TARGET_BUILD)/Release/lib/libclang.so.1
 
 # lldb tests
 	if test $(LLDB_ENABLE) = yes; then \

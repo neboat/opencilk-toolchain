@@ -1,5 +1,9 @@
 llvm-toolchain-3.4 (1:3.4~+rc1-2) unstable; urgency=low
 
+  * Fail the build when llvm tests are failing under amd64 + i386. More to come.
+  * Fix a libclang.so.1 issue during the clang tests
+  * Improve the patch 23-strlcpy_strlcat_warning_removed.diff
+    (also remove the tests)
   * Make lldb 3.4 also conflict with 3.5 (Closes: #730163)
   * Make python-clang 3.4 also conflict with 3.5 (Closes: #730164)
 
