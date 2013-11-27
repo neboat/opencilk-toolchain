@@ -1,6 +1,6 @@
 llvm-toolchain-3.4 (1:3.4~svn194079-1) UNRELEASED; urgency=low
 
-  * New snapshot release
+  * Define also MAXPATHLEN in Path.inc for HURD.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 26 Nov 2013 18:33:01 +0100
 
