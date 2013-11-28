@@ -1,7 +1,9 @@
-llvm-toolchain-snapshot (1:3.5~svn195337-2) unstable; urgency=low
+llvm-toolchain-snapshot (1:3.5~svn195337-1) unstable; urgency=low
 
   * Make lldb 3.5 also conflict with 3.4 (Closes: #730163)
   * Make python-clang 3.5 also conflict with 3.4 (Closes: #730164)
+  * Fix a FTBFS with clang
+  * Refresh the /usr/include/clang mess
 
  --
 

@@ -1,0 +1,26 @@
+Index: llvm-toolchain-snapshot-3.5~svn195337/clang/lib/Driver/ToolChains.cpp
+===================================================================
+--- llvm-toolchain-snapshot-3.5~svn195337.orig/clang/lib/Driver/ToolChains.cpp	2013-11-28 19:53:40.000000000 +0100
++++ llvm-toolchain-snapshot-3.5~svn195337/clang/lib/Driver/ToolChains.cpp	2013-11-28 19:55:05.799323368 +0100
+@@ -134,6 +134,12 @@
+     .Default(0);
+ }
+ 
++
+++void Darwin::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
++                                           ArgStringList &CC1Args) const {
++}
++
++
+ StringRef Darwin::getDarwinArchName(const ArgList &Args) const {
+   switch (getTriple().getArch()) {
+   default:
+@@ -1981,6 +1987,8 @@
+       DriverArgs.hasArg(options::OPT_nostdincxx))
+     return;
+ 
++  addSystemInclude(DriverArgs, CC1Args, "/usr/include/clang/" + std::string(CLANG_VERSION_STRING) + "/include/");
++
+   switch (GetCXXStdlibType(DriverArgs)) {
+   case ToolChain::CST_Libcxx:
+     addSystemInclude(DriverArgs, CC1Args,

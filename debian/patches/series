@@ -6,7 +6,6 @@
 27-fix_clang_stdint.diff
 26-set-correct-float-abi.diff
 profile_rt.diff
-30-kfreebsd.diff
 0003-Debian-version-info-and-bugreport.patch
 0021-shared-lib-debian.patch
 0023-link-libopagent.patch
@@ -27,3 +26,4 @@ atomic_library_1.diff
 atomic_library_2.diff
 python-clangpath.diff
 removeduplicatedeclaration.diff
+fix-clang-path-and-build.diff
