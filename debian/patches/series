@@ -28,3 +28,4 @@ atomic_library_2.diff
 python-clangpath.diff
 removeduplicatedeclaration.diff
 ocamldoc.diff
+silent-swig-warning.diff
