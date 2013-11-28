@@ -3,6 +3,8 @@ llvm-toolchain-3.4 (1:3.4~svn194079-1) UNRELEASED; urgency=low
   * Define also MAXPATHLEN in Path.inc for HURD.
   * Silent the trillion of warnings in the LLDB Python wrapper (swig generated)
     See silent-swig-warning.diff
+  * Make lldb 3.4 also conflict with 3.5 (Closes: #730163)
+  * Make python-clang 3.4 also conflict with 3.5 (Closes: #730164)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 26 Nov 2013 18:33:01 +0100
 
