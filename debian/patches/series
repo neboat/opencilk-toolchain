@@ -29,3 +29,4 @@ python-clangpath.diff
 removeduplicatedeclaration.diff
 ocamldoc.diff
 silent-swig-warning.diff
+silent-MCJIIT-tests.diff
