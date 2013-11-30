@@ -1,15 +1,14 @@
-Index: llvm-toolchain-snapshot_3.4~svn193982/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-3.4-3.4~+rc1/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn193982.orig/clang/lib/Driver/ToolChains.cpp	2013-11-04 09:46:43.636669144 +0100
-+++ llvm-toolchain-snapshot_3.4~svn193982/clang/lib/Driver/ToolChains.cpp	2013-11-04 09:46:43.636669144 +0100
-@@ -2715,6 +2715,12 @@
+--- llvm-toolchain-3.4-3.4~+rc1.orig/clang/lib/Driver/ToolChains.cpp	2013-11-30 15:03:35.257604848 +0000
++++ llvm-toolchain-3.4-3.4~+rc1/clang/lib/Driver/ToolChains.cpp	2013-11-30 15:04:14.793603425 +0000
+@@ -2771,6 +2771,11 @@
    StringRef BiarchSuffix = GCCInstallation.getBiarchSuffix();
    const GCCVersion &Version = GCCInstallation.getVersion();
  
 +#ifdef __i386__
-+  // clang does not detect this path: /usr/include/i386-linux-gnu/c++/4.8/ Helphim
-+// For now, comment this patch to make sure it is fixed upstream
-+//  addLibStdCXXIncludePaths( "/usr/include/", "/c++/" + Version.str(), "i386-linux-gnu", GCCInstallation.getMultiarchSuffix(), DriverArgs, CC1Args);
++  // clang does not detect this path: /usr/include/i386-linux-gnu/c++/4.8/ Help him
++  addLibStdCXXIncludePaths( "/usr/include/", "/c++/" + Version.str(), "i386-linux-gnu", GCCInstallation.getMultiarchSuffix(), DriverArgs, CC1Args);
 +#endif
 +
    if (addLibStdCXXIncludePaths(LibDir.str() + "/../include",
