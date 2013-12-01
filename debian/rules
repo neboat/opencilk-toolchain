@@ -28,9 +28,6 @@ CXXFLAGS_EXTRA=
 CONFIGURE_EXTRA=
 
 confargs := \
-        --with-c-include-dirs=/usr/include/$(DEB_HOST_MULTIARCH):/usr/include/$(DEB_HOST_GNU_TYPE):/usr/include \
-	--with-cxx-include-root=/usr/include/c++/$(GCC_VERSION) \
-	--with-cxx-include-arch=$(DEB_HOST_GNU_TYPE) \
 	--host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE)
 
 ifeq ($(shell dpkg-architecture -qDEB_HOST_ARCH_BITS),64)
