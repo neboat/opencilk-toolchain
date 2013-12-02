@@ -121,9 +121,7 @@ override_dh_auto_configure: debian/lldb-$(LLVM_VERSION).install debian/lldb-$(LL
 	$(CC) -v
 	mkdir -p $(TARGET_BUILD)
 	mkdir -p clang/include/clang/Debian
-	sed -e "s|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|" \
-		-e "s|@DEB_HOST_GNU_TYPE@|$(DEB_HOST_GNU_TYPE)|" \
-		-e "s|@DEB_PATCHSETVERSION@|$(DEBIAN_REVISION)|" \
+	sed -e "s|@DEB_PATCHSETVERSION@|$(DEBIAN_REVISION)|" \
 		debian/debian_path.h > clang/include/clang/Debian/debian_path.h
 
 # Remove some old symlinks
