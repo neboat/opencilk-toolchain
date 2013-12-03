@@ -10,7 +10,6 @@ profile_rt.diff
 0021-shared-lib-debian.patch
 0023-link-libopagent.patch
 0044-soname.diff
-0047-version-name.diff
 scan-build-clang-path.diff
 0050-powerpcspe-fp.diff
 declare_clear_cache.diff
@@ -26,7 +25,6 @@ atomic_library_1.diff
 atomic_library_2.diff
 python-clangpath.diff
 removeduplicatedeclaration.diff
-ocamldoc.diff
 silent-swig-warning.diff
 silent-MCJIIT-tests.diff
 include-target.diff

@@ -1,3 +1,10 @@
+llvm-toolchain-3.4 (1:3.4~+rc2-1) unstable; urgency=low
+
+  * New testing upstream release
+  * 0047-version-name.diff ocamldoc.diff removed (applied upstream)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 03 Dec 2013 10:25:59 +0100
+
 llvm-toolchain-3.4 (1:3.4~+rc1-3) unstable; urgency=low
 
   * Remove the usage of --with-c-include-dirs, --with-cxx-include-root,

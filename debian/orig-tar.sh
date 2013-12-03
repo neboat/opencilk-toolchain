@@ -24,6 +24,7 @@ fi
 
 if test -n "$1" -a -n "$2"; then
 # http://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/tags/RELEASE_34/rc1/
+# For example: sh 3.4/debian/orig-tar.sh RELEASE_34 rc2
     BRANCH=$1
     TAG=$2
     RCRELEASE="true"
