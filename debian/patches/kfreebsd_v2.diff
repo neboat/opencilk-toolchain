@@ -305,3 +305,15 @@
 +ifeq ($(HOST_OS), $(filter $(HOST_OS), Linux FreeBSD GNU/kFreeBSD))
  	LLVMLibsOptions += -Wl,-rpath,$(LibDir)
  endif
+--- a/lldb/source/Host/common/Host.cpp
++++ b/lldb/source/Host/common/Host.cpp
+@@ -1569,7 +1569,7 @@ Host::RunShellCommand (const char *command,
+     return error;
+ }
+
+-#if defined(__linux__) or defined(__FreeBSD__)
++#if defined(__linux__) || defined(__FreeBSD__) || defined(__GLIBC__)
+ // The functions below implement process launching via posix_spawn() for Linux
+ // and FreeBSD.
+
+

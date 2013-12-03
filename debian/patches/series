@@ -1,7 +1,6 @@
 18-soname.patch
 19-clang_debian_version.patch
 #20-vendor.patch
-21-searchPathHeaders.diff
 23-strlcpy_strlcat_warning_removed.diff
 27-fix_clang_stdint.diff
 26-set-correct-float-abi.diff
@@ -27,3 +26,10 @@ atomic_library_2.diff
 python-clangpath.diff
 removeduplicatedeclaration.diff
 fix-clang-path-and-build.diff
+silent-swig-warning.diff
+silent-MCJIIT-tests.diff
+include-target.diff
+debian-mips64-n32-multiarch.diff
+force-gcc-header-obj.diff
+do-not-fail-on-unexpected-pass.diff
+

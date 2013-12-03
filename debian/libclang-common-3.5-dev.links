@@ -1,2 +1,3 @@
 usr/lib/llvm-3.5/lib/clang/3.5/include usr/include/clang/3.5/include
+usr/lib/llvm-3.4/lib/clang/3.5/include usr/lib/clang/3.5/include
 usr/lib/llvm-3.5/lib/clang/3.5/lib /usr/lib/clang/3.5/lib

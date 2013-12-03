@@ -1,4 +1,4 @@
-Source: llvm-toolchain-snapshot
+Source: llvm-toolchain-3.4
 Section: devel
 Priority: optional
 Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
@@ -9,12 +9,12 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
     lsb-release, patchutils, diffstat, xz-utils, chrpath, python-dev,
     libedit-dev, swig, python-sphinx, ocaml-nox, binutils-dev, libcloog-isl-dev,
     libisl-dev (>= 0.11.1), libjsoncpp-dev,
-    lcov, procps, help2man
+    lcov, procps, help2man, gcc-4.8, g++-4.8
 Build-Conflicts: oprofile, ocaml
 Standards-Version: 3.9.5
 Homepage: http://www.llvm.org/
-Vcs-Svn: svn://svn.debian.org/svn/pkg-llvm/llvm-toolchain/branches/snapshot/
-Vcs-Browser: http://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/snapshot/
+Vcs-Svn: svn://svn.debian.org/svn/pkg-llvm/llvm-toolchain/branches/3.4/
+Vcs-Browser: http://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/3.4/
 
 # ------------- clang -------------
 
@@ -357,8 +357,13 @@ Architecture: amd64 armel armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mips
 # Only hurd has been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.5 (= ${binary:Version}), python, llvm-3.5-dev
 Pre-Depends: ${misc:Pre-Depends}
+<<<<<<< .courant
 Replaces: lldb-3.2, lldb-3.3, lldb-3.4
 Breaks: lldb-3.2, lldb-3.3, lldb-3.4
+=======
+Replaces: lldb-3.2, lldb-3.3, lldb-3.5
+Breaks: lldb-3.2, lldb-3.3, lldb-3.5
+>>>>>>> .fusion-droit.r1025
 Description: Next generation, high-performance debugger
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
