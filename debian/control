@@ -357,13 +357,8 @@ Architecture: amd64 armel armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mips
 # Only hurd has been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.5 (= ${binary:Version}), python, llvm-3.5-dev
 Pre-Depends: ${misc:Pre-Depends}
-<<<<<<< .courant
 Replaces: lldb-3.2, lldb-3.3, lldb-3.4
 Breaks: lldb-3.2, lldb-3.3, lldb-3.4
-=======
-Replaces: lldb-3.2, lldb-3.3, lldb-3.5
-Breaks: lldb-3.2, lldb-3.3, lldb-3.5
->>>>>>> .fusion-droit.r1025
 Description: Next generation, high-performance debugger
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
