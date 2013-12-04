@@ -108,8 +108,7 @@ ifeq ($(DEB_HOST_ARCH),hurd-i386)
 endif
 
 %:
-	dh $@
-# --buildsystem=cmake --builddirectory=$(TARGET_BUILD)
+	dh $@ --with ocaml
 
 
 debian/%: debian/%.in
