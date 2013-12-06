@@ -1,2 +1,2 @@
 # I know and I am not planning to change that.
-libclang1-3.4: package-name-doesnt-match-sonames libclang1
+libclang1-3.5: package-name-doesnt-match-sonames libclang1
