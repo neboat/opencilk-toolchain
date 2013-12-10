@@ -6,7 +6,7 @@ llvm-toolchain-snapshot (1:3.5~svn195337-1) unstable; urgency=low
   * Fix a FTBFS with clang
   * Refresh the /usr/include/clang mess
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 10 Dec 2013 09:57:15 +0100
 
 llvm-toolchain-snapshot (1:3.5~svn195337-1) unstable; urgency=low
 
