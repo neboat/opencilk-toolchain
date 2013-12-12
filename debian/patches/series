@@ -32,3 +32,4 @@ debian-mips64-n32-multiarch.diff
 force-gcc-header-obj.diff
 do-not-fail-on-unexpected-pass.diff
 
+silent-more-tests.diff
