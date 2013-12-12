@@ -1,16 +1,16 @@
-Index: llvm-toolchain-snapshot_3.5~svn195930/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn195930.orig/clang/lib/Driver/ToolChains.cpp	2013-11-28 20:00:36.083311481 +0100
-+++ llvm-toolchain-snapshot_3.5~svn195930/clang/lib/Driver/ToolChains.cpp	2013-11-29 11:15:58.145335055 +0100
-@@ -134,6 +134,7 @@
-     .Default(0);
+--- llvm-toolchain-snapshot_3.5~svn197156.orig/clang/lib/Driver/ToolChains.cpp	2013-12-12 16:37:40.637766690 +0100
++++ llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Driver/ToolChains.cpp	2013-12-12 16:37:40.637766690 +0100
+@@ -149,6 +149,7 @@
+           A->getValue() == StringRef("soft"));
  }
  
 +
  StringRef Darwin::getDarwinArchName(const ArgList &Args) const {
    switch (getTriple().getArch()) {
    default:
-@@ -1973,6 +1974,8 @@
+@@ -2010,6 +2011,8 @@
        DriverArgs.hasArg(options::OPT_nostdincxx))
      return;
  

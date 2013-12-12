@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.4~svn193982/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn193982.orig/clang/lib/Basic/Targets.cpp	2013-11-04 09:46:53.320669497 +0100
-+++ llvm-toolchain-snapshot_3.4~svn193982/clang/lib/Basic/Targets.cpp	2013-11-04 09:46:53.320669497 +0100
-@@ -3679,33 +3679,6 @@
+--- llvm-toolchain-snapshot_3.5~svn197156.orig/clang/lib/Basic/Targets.cpp	2013-12-12 16:37:57.405767226 +0100
++++ llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Basic/Targets.cpp	2013-12-12 16:37:57.401767226 +0100
+@@ -3702,33 +3702,6 @@
      return Version >= 7;
    }
  
