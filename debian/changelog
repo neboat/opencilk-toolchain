@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:3.5~svn197156-1~exp1) UNRELEASED; urgency=low
+
+  * New snapshot release
+  * Disable much of the display of the lldb display
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 12 Dec 2013 16:30:45 +0100
+
 llvm-toolchain-snapshot (1:3.5~svn195337-1) unstable; urgency=low
 
   * Sync from 3.4~+rc2-1
