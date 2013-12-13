@@ -114,6 +114,7 @@ libclang.so.1 libclang1-3.5 #MINVER#
  clang_disposeDiagnosticSet@Base 3.2
  clang_disposeIndex@Base 3.2
  clang_disposeOverriddenCursors@Base 3.2
+ clang_disposeSourceRangeList@Base 3.5
  clang_disposeString@Base 3.2
  clang_disposeTokens@Base 3.2
  clang_disposeTranslationUnit@Base 3.2
@@ -220,6 +221,7 @@ libclang.so.1 libclang1-3.5 #MINVER#
  clang_getRemappings@Base 3.2
  clang_getRemappingsFromFileList@Base 3.2
  clang_getResultType@Base 3.2
+ clang_getSkippedRanges@Base 3.5
  clang_getSpecializedCursorTemplate@Base 3.2
  clang_getSpellingLocation@Base 3.2
  clang_getTUResourceUsageName@Base 3.2
