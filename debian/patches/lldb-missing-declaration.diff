@@ -1,0 +1,12 @@
+Index: llvm-toolchain-3.4_3.4~+/lldb/source/Host/common/Host.cpp
+===================================================================
+--- llvm-toolchain-3.4_3.4~+.orig/lldb/source/Host/common/Host.cpp	2013-12-15 21:56:52.000000000 +0100
++++ llvm-toolchain-3.4_3.4~+/lldb/source/Host/common/Host.cpp	2013-12-16 10:08:05.144077914 +0100
+@@ -1217,6 +1217,7 @@
+                 }
+                 if (tmpdir_cstr)
+                 {
++                    Log *log(lldb_private::GetLogIfAllCategoriesSet (LIBLLDB_LOG_THREAD));
+                     g_lldb_tmp_dir.SetCString(tmpdir_cstr);
+                     if (log)
+                         log->Printf("Host::GetLLDBPath(ePathTypeLLDBTempSystemDir) => '%s'", g_lldb_tmp_dir.GetCString());
