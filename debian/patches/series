@@ -33,3 +33,4 @@ debian-mips64-n32-multiarch.diff
 force-gcc-header-obj.diff
 do-not-fail-on-unexpected-pass.diff
 fix-an-issue-in-chroot-witout-proc.diff
+lldb-link-atomic.diff
