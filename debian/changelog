@@ -5,6 +5,7 @@ llvm-toolchain-3.4 (1:3.4~+rc3-1) unstable; urgency=low
     See: fix-an-issue-in-chroot-witout-proc.diff
   * Bring back lldb-link-atomic.diff to make sure lldb builds under
     powerpc
+  * Also limit the number of archs for liblldb-dev
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Dec 2013 11:27:40 +0100
 

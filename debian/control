@@ -373,7 +373,8 @@ Description: Next generation, high-performance debugger
  Project, such as the Clang expression parser and LLVM disassembler.
 
 Package: lldb-3.4-dev
-Architecture: any
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha arm64 hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc
+# ia64 mips mipsel hurd have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-3.4 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger - Header files
