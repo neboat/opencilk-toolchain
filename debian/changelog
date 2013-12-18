@@ -1,9 +1,10 @@
-llvm-toolchain-snapshot (1:3.5~svn197156-1~exp1) UNRELEASED; urgency=low
+llvm-toolchain-snapshot (1:3.5~svn197556-1) unstable; urgency=low
 
   * New snapshot release
+  * Merge changes from 1:3.4~+rc3-1
   * Disable much of the display of the lldb display
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 12 Dec 2013 16:30:45 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Dec 2013 12:02:52 +0100
 
 llvm-toolchain-snapshot (1:3.5~svn195337-1) unstable; urgency=low
 
@@ -24,6 +25,32 @@ llvm-toolchain-snapshot (1:3.5~svn195337-1) unstable; urgency=low
   * kfreebsd.diff remove (applied upstream)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 20 Nov 2013 21:24:28 +0100
+
+llvm-toolchain-3.4 (1:3.4~+rc3-1) unstable; urgency=low
+
+  * New testing upstream release
+  * Relative call in the chroot without proc failed.
+    See: fix-an-issue-in-chroot-witout-proc.diff
+  * Bring back lldb-link-atomic.diff to make sure lldb builds under
+    powerpc
+  * Also limit the number of archs for liblldb-dev
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Dec 2013 11:27:40 +0100
+
+llvm-toolchain-3.4 (1:3.4~+rc2-3) unstable; urgency=low
+
+  * Fix the bad declaration on the lldb desactivation
+  * Also disable lldb under powerpc
+  * Hopefully, fix lldb under Kfreebsd-* (thanks to Ed Maste if it works)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 04 Dec 2013 23:53:49 +0100
+
+llvm-toolchain-3.4 (1:3.4~+rc2-2) unstable; urgency=low
+
+  * Add the Ocaml ABI dependency (Closes: #731344)
+  * Disable LLDB also for ia64, mips & mipsel
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 04 Dec 2013 15:37:39 +0100
 
 llvm-toolchain-3.4 (1:3.4~+rc2-1) unstable; urgency=low
 

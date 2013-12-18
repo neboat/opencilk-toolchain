@@ -20,6 +20,7 @@ if test -n "$1"; then
 # http://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/branches/google/stable/
 # For example: sh 3.4/debian/orig-tar.sh release_34
     BRANCH=$1
+    RCRELEASE="true"
 fi
 
 if test -n "$1" -a -n "$2"; then
@@ -128,7 +129,7 @@ if test -z "$DISTRIBUTION"; then
     DISTRIBUTION="experimental"
 fi
 
-if test ! -n "$RCRELEASE"; then
+if test -n "$RCRELEASE"; then
     EXTRA_DCH_FLAGS="--force-bad-version --allow-lower-version"
 fi
 

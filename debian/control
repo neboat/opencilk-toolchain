@@ -9,7 +9,7 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
     lsb-release, patchutils, diffstat, xz-utils, chrpath, python-dev,
     libedit-dev, swig, python-sphinx, ocaml-nox, binutils-dev, libcloog-isl-dev,
     libisl-dev (>= 0.11.1), libjsoncpp-dev,
-    lcov, procps, help2man, gcc-4.8, g++-4.8
+    lcov, procps, help2man, gcc-4.8, g++-4.8, dh-ocaml
 Build-Conflicts: oprofile, ocaml
 Standards-Version: 3.9.5
 Homepage: http://www.llvm.org/
@@ -353,8 +353,8 @@ Description: Modular compiler and toolchain technologies, examples
 # ------------- lldb -------------
 
 Package: lldb-3.5
-Architecture: amd64 armel armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 s390x sparc alpha arm64 hppa m68k powerpcspe ppc64 sh4 sparc64 x32
-# Only hurd has been removed
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha arm64 hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc
+# ia64 mips mipsel hurd have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.5 (= ${binary:Version}), python, llvm-3.5-dev
 Pre-Depends: ${misc:Pre-Depends}
 Replaces: lldb-3.2, lldb-3.3, lldb-3.4
@@ -365,7 +365,8 @@ Description: Next generation, high-performance debugger
  Project, such as the Clang expression parser and LLVM disassembler.
 
 Package: lldb-3.5-dev
-Architecture: any
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha arm64 hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc
+# ia64 mips mipsel hurd have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-3.5 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger - Header files
