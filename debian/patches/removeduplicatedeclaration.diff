@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_3.5~svn197690/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn197156.orig/clang/lib/Basic/Targets.cpp	2013-12-12 16:37:57.405767226 +0100
-+++ llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Basic/Targets.cpp	2013-12-12 16:37:57.401767226 +0100
-@@ -3702,33 +3702,6 @@
-     return Version >= 7;
+--- llvm-toolchain-snapshot_3.5~svn197690.orig/clang/lib/Basic/Targets.cpp	2013-12-19 17:16:04.036572985 +0100
++++ llvm-toolchain-snapshot_3.5~svn197690/clang/lib/Basic/Targets.cpp	2013-12-19 17:16:04.032572984 +0100
+@@ -3757,33 +3757,6 @@
+     // FIXME: Override "preferred align" for double and long long.
    }
  
 -  static bool shouldUseInlineAtomic(const llvm::Triple &T) {

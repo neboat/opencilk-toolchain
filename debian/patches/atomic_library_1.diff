@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_3.4~svn193982/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_3.5~svn197690/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn193982.orig/clang/lib/Basic/Targets.cpp	2013-11-04 09:46:46.696669256 +0100
-+++ llvm-toolchain-snapshot_3.4~svn193982/clang/lib/Basic/Targets.cpp	2013-11-04 09:46:46.692669256 +0100
-@@ -3679,6 +3679,20 @@
-     return Version >= 7;
+--- llvm-toolchain-snapshot_3.5~svn197690.orig/clang/lib/Basic/Targets.cpp	2013-12-19 17:15:54.092573180 +0100
++++ llvm-toolchain-snapshot_3.5~svn197690/clang/lib/Basic/Targets.cpp	2013-12-19 17:15:54.088573180 +0100
+@@ -3757,6 +3757,20 @@
+     // FIXME: Override "preferred align" for double and long long.
    }
  
 +  static bool shouldUseInlineAtomic(const llvm::Triple &T) {
@@ -22,11 +22,11 @@ Index: llvm-toolchain-snapshot_3.4~svn193982/clang/lib/Basic/Targets.cpp
 +
  public:
    ARMTargetInfo(const llvm::Triple &Triple)
-       : TargetInfo(Triple), ABI("aapcs-linux"), CPU("arm1136j-s"),
-Index: llvm-toolchain-snapshot_3.4~svn193982/clang/test/CodeGen/linux-arm-atomic.c
+       : TargetInfo(Triple), CPU("arm1136j-s"), FPMath(FP_Default),
+Index: llvm-toolchain-snapshot_3.5~svn197690/clang/test/CodeGen/linux-arm-atomic.c
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn193982.orig/clang/test/CodeGen/linux-arm-atomic.c	2013-11-04 09:46:46.696669256 +0100
-+++ llvm-toolchain-snapshot_3.4~svn193982/clang/test/CodeGen/linux-arm-atomic.c	2013-11-04 09:46:46.692669256 +0100
+--- llvm-toolchain-snapshot_3.5~svn197690.orig/clang/test/CodeGen/linux-arm-atomic.c	2013-12-19 17:15:54.092573180 +0100
++++ llvm-toolchain-snapshot_3.5~svn197690/clang/test/CodeGen/linux-arm-atomic.c	2013-12-19 17:15:54.088573180 +0100
 @@ -1,5 +1,15 @@
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv7-unknown-linux | FileCheck %s
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv6-unknown-linux | FileCheck %s
