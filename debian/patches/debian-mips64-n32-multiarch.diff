@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.5~svn199197/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn197156.orig/clang/lib/Driver/ToolChains.cpp	2013-12-12 16:38:08.665767586 +0100
-+++ llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Driver/ToolChains.cpp	2013-12-12 16:38:08.661767586 +0100
-@@ -1183,10 +1183,12 @@
+--- llvm-toolchain-snapshot_3.5~svn199197.orig/clang/lib/Driver/ToolChains.cpp	2014-01-14 11:31:30.336867896 +0100
++++ llvm-toolchain-snapshot_3.5~svn199197/clang/lib/Driver/ToolChains.cpp	2014-01-14 11:31:30.336867896 +0100
+@@ -1184,10 +1184,12 @@
  
    static const char *const MIPS64LibDirs[] = { "/lib64", "/lib" };
    static const char *const MIPS64Triples[] = { "mips64-linux-gnu",
@@ -17,7 +17,7 @@ Index: llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Driver/ToolChains.cpp
  
    static const char *const PPCLibDirs[] = { "/lib32", "/lib" };
    static const char *const PPCTriples[] = {
-@@ -1346,9 +1348,9 @@
+@@ -1374,9 +1376,9 @@
  }
  
  static bool isMipsArch(llvm::Triple::ArchType Arch) {
@@ -30,7 +30,7 @@ Index: llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Driver/ToolChains.cpp
           Arch == llvm::Triple::mips64el;
  }
  
-@@ -2344,6 +2346,14 @@
+@@ -2388,6 +2390,14 @@
      if (llvm::sys::fs::exists(SysRoot + "/lib/mipsel-linux-gnu"))
        return "mipsel-linux-gnu";
      return TargetTriple.str();
@@ -45,7 +45,7 @@ Index: llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Driver/ToolChains.cpp
    case llvm::Triple::ppc:
      if (llvm::sys::fs::exists(SysRoot + "/lib/powerpc-linux-gnuspe"))
        return "powerpc-linux-gnuspe";
-@@ -2696,6 +2706,12 @@
+@@ -2727,6 +2737,12 @@
    const StringRef MIPSELMultiarchIncludeDirs[] = {
      "/usr/include/mipsel-linux-gnu"
    };
@@ -58,7 +58,7 @@ Index: llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Driver/ToolChains.cpp
    const StringRef PPCMultiarchIncludeDirs[] = {
      "/usr/include/powerpc-linux-gnu"
    };
-@@ -2718,6 +2734,10 @@
+@@ -2749,6 +2765,10 @@
      MultiarchIncludeDirs = MIPSMultiarchIncludeDirs;
    } else if (getTriple().getArch() == llvm::Triple::mipsel) {
      MultiarchIncludeDirs = MIPSELMultiarchIncludeDirs;

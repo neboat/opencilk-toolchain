@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.5~svn199197/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn197156.orig/clang/lib/Driver/ToolChains.cpp	2013-12-12 16:38:10.897767658 +0100
-+++ llvm-toolchain-snapshot_3.5~svn197156/clang/lib/Driver/ToolChains.cpp	2013-12-12 16:38:10.897767658 +0100
-@@ -2654,6 +2654,11 @@
+--- llvm-toolchain-snapshot_3.5~svn199197.orig/clang/lib/Driver/ToolChains.cpp	2014-01-14 11:31:32.412867856 +0100
++++ llvm-toolchain-snapshot_3.5~svn199197/clang/lib/Driver/ToolChains.cpp	2014-01-14 11:31:32.412867856 +0100
+@@ -2685,6 +2685,11 @@
      return;
    }
  

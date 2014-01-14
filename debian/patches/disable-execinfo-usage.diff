@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.4~svn193603/lldb/lib/Makefile
+Index: llvm-toolchain-snapshot_3.5~svn199197/lldb/lib/Makefile
 ===================================================================
---- llvm-toolchain-snapshot_3.4~svn193603.orig/lldb/lib/Makefile	2013-10-29 12:26:27.542137766 +0100
-+++ llvm-toolchain-snapshot_3.4~svn193603/lldb/lib/Makefile	2013-10-29 12:26:27.542137766 +0100
-@@ -158,5 +158,6 @@
+--- llvm-toolchain-snapshot_3.5~svn199197.orig/lldb/lib/Makefile	2014-01-14 11:31:05.712868380 +0100
++++ llvm-toolchain-snapshot_3.5~svn199197/lldb/lib/Makefile	2014-01-14 11:31:05.708868380 +0100
+@@ -159,5 +159,6 @@
      # Allow unresolved symbols.
      LLVMLibsOptions += -Wl,--allow-shlib-undefined
      # Link in python
