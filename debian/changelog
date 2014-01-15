@@ -1,6 +1,7 @@
 llvm-toolchain-snapshot (1:3.5~svn197556-2) unstable; urgency=low
 
-  * Update clang-format declaration from 3.4 => 3.5 Closes upstream bug #18451
+  * Update clang-format declaration from 3.4 => 3.5. Closes upstream bug #18451
+  * Fix the cindex.py declaration (3.3 => 3.5). Closes upstream bug #18365
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Jan 2014 15:08:03 +0100
 
