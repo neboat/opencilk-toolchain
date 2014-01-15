@@ -7,7 +7,7 @@ Index: llvm-toolchain-snapshot_3.4~svn193603/clang/tools/clang-format/clang-form
  
  # Change this to the full path if clang-format is not on the path.
 -binary = 'clang-format'
-+binary = 'clang-format-3.4'
++binary = 'clang-format-3.5'
  
  # Change this to format according to other formatting styles. See the output of
  # 'clang-format --help' for a list of supported styles. The default looks for
@@ -20,7 +20,7 @@ Index: llvm-toolchain-snapshot_3.4~svn193603/clang/tools/clang-format/clang-form
  
  # Change this to the full path if clang-format is not on the path.
 -binary = 'clang-format'
-+binary = 'clang-format-3.4'
++binary = 'clang-format-3.5'
  
  
  def main():
@@ -33,7 +33,7 @@ Index: llvm-toolchain-snapshot_3.4~svn193603/clang/tools/clang-format/clang-form
  ;; *Location of the clang-format binary. If it is on your PATH, a full path name
  ;; need not be specified.
 -(defvar clang-format-binary "clang-format")
-+(defvar clang-format-binary "clang-format-3.4")
++(defvar clang-format-binary "clang-format-3.5")
  
  (defun clang-format-region ()
    "Use clang-format to format the currently active region."
