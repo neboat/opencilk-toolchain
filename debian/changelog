@@ -1,5 +1,6 @@
-llvm-toolchain-snapshot (1:3.5~svn197556-2) unstable; urgency=low
+llvm-toolchain-snapshot (1:3.5~svn199601-1) unstable; urgency=low
 
+  * New snapshot release
   * Update clang-format declaration from 3.4 => 3.5. Closes upstream bug #18451
   * Fix the cindex.py declaration (3.3 => 3.5). Closes upstream bug #18365
   * Force gcc 4.8. LLVM & Co are now in C++ 11.
