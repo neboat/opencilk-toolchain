@@ -3,14 +3,14 @@ Author: Adam Conrad <adconrad@ubuntu.com>
 Forwarded: no
 Last-Update: 2013-08-21
 
-Index: llvm-toolchain-snapshot_3.5~svn199197/lldb/lib/Makefile
+Index: llvm-toolchain-snapshot_3.5~svn200375/lldb/lib/Makefile
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn199197.orig/lldb/lib/Makefile	2014-01-14 11:31:38.652867733 +0100
-+++ llvm-toolchain-snapshot_3.5~svn199197/lldb/lib/Makefile	2014-01-14 11:31:38.652867733 +0100
-@@ -149,6 +149,10 @@
+--- llvm-toolchain-snapshot_3.5~svn200375.orig/lldb/lib/Makefile	2014-01-29 07:49:00.508714445 -0800
++++ llvm-toolchain-snapshot_3.5~svn200375/lldb/lib/Makefile	2014-01-29 07:49:46.396713007 -0800
+@@ -150,6 +150,10 @@
      LLVMLibsOptions += -Wl,--no-undefined
      # Link in python
-     LLVMLibsOptions += $(PYTHON_BUILD_FLAGS) -lrt
+     LLVMLibsOptions += $(PYTHON_BUILD_FLAGS) -lrt -ledit -lncurses -lpanel
 +    ifneq (,$(filter $(shell dpkg-architecture -qDEB_HOST_ARCH), mips mipsel))
 +    # Link GCC atomic helper library
 +    LLVMLibsOptions += -latomic
