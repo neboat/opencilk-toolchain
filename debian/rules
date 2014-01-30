@@ -61,7 +61,8 @@ endif
 POLLY_ENABLE=no
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libisl-dev) ge 0.12.1; echo $$?),0)
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libcloog-isl-dev) ge 0.18.1; echo $$?),0)
-POLLY_ENABLE=yes
+# polly upstream is now using the isl trunk. disabling it for now
+POLLY_ENABLE=no
 endif
 endif
 
@@ -355,8 +356,11 @@ endif
 
 # Managed by debian build system
 	rm -f $(CURDIR)/$(TARGET_BUILD)/Release/lib/python*/site-packages/lldb/_lldb.so
+
 # polly tests
-	cd $(TARGET_BUILD)/ && $(MAKE) -C tools/polly/test/ check-polly || true
+	if test $(POLLY_ENABLE) = yes; then \
+		cd $(TARGET_BUILD)/ && $(MAKE) -C tools/polly/test/ check-polly || true; \
+    fi
 
 # The compression of the code coverage report is done in the
 # hook B21GetCoverageResults on the server

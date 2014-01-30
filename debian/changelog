@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:3.5~svn200375-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * polly upstream is now using the isl trunk. Disabling it for now.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 29 Jan 2014 07:36:29 -0800
+
 llvm-toolchain-snapshot (1:3.5~svn199601-1) unstable; urgency=low
 
   * New snapshot release
