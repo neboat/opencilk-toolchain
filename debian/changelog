@@ -2,6 +2,8 @@ llvm-toolchain-3.4 (1:3.4-2) UNRELEASED; urgency=medium
 
   * Only explicit the link against atomic when running mips & mipsel
   * Fix the cindex.py declaration (3.3 => 3.5). Closes upstream bug #18365
+  * Bring back the dependency on gcc 4.8. It breaks the nightly snapshot
+    packages and it should be the norm now...
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Jan 2014 11:19:21 +0100
 
