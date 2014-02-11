@@ -5,7 +5,12 @@ llvm-toolchain-3.4 (1:3.4-2) UNRELEASED; urgency=medium
   * Bring back the dependency on gcc 4.8. It breaks the nightly snapshot
     packages and it should be the norm now...
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Jan 2014 11:19:21 +0100
+  [ Martin Nowack ]
+  * Fixed build directory for llvm-config
+  * Add Unittests for running tests for llvm-based projects
+  * Install FileCheck and not for testing
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 11 Feb 2014 11:19:21 +0100
 
 llvm-toolchain-3.4 (1:3.4-1) unstable; urgency=medium
 
