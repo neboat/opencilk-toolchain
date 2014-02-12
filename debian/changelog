@@ -1,7 +1,22 @@
-llvm-toolchain-snapshot (1:3.5~svn200375-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:3.5~svn201239-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 12 Feb 2014 16:10:35 +0100
+
+llvm-toolchain-snapshot (1:3.5~svn200375-1) unstable; urgency=medium
 
   * New snapshot release
   * polly upstream is now using the isl trunk. Disabling it for now.
+  * Only explicit the link against atomic when running mips & mipsel
+  * Fix the cindex.py declaration (3.3 => 3.5). Closes upstream bug #18365
+  * Bring back the dependency on gcc 4.8. It breaks the nightly snapshot
+    packages and it should be the norm now...
+
+  [ Martin Nowack ]
+  * Fixed build directory for llvm-config
+  * Add Unittests for running tests for llvm-based projects
+  * Install FileCheck and not for testing
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 29 Jan 2014 07:36:29 -0800
 
@@ -43,6 +58,27 @@ llvm-toolchain-snapshot (1:3.5~svn195337-1) unstable; urgency=low
   * kfreebsd.diff remove (applied upstream)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 20 Nov 2013 21:24:28 +0100
+
+llvm-toolchain-3.4 (1:3.4-2) UNRELEASED; urgency=medium
+
+  * Only explicit the link against atomic when running mips & mipsel
+  * Fix the cindex.py declaration (3.3 => 3.5). Closes upstream bug #18365
+  * Bring back the dependency on gcc 4.8. It breaks the nightly snapshot
+    packages and it should be the norm now...
+
+  [ Martin Nowack ]
+  * Fixed build directory for llvm-config
+  * Add Unittests for running tests for llvm-based projects
+  * Install FileCheck and not for testing
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 11 Feb 2014 11:19:21 +0100
+
+llvm-toolchain-3.4 (1:3.4-1) unstable; urgency=medium
+
+  * New upstream release
+  * Remove explicit dep on gcc 4.8
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 20 Dec 2013 18:36:58 +0100
 
 llvm-toolchain-3.4 (1:3.4~+rc3-1) unstable; urgency=low
 

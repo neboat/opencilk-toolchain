@@ -1,5 +1,7 @@
 /usr/lib/llvm-3.5/lib
 /usr/lib/llvm-3.5/build
 /usr/lib/llvm-3.5/include
+/usr/lib/llvm-3.5/build/unittests
+/usr/lib/llvm-3.5/build/utils/lit/
 usr/share/doc/llvm-3.5-dev
 usr/share/emacs/site-lisp/llvm-3.5

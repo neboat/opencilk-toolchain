@@ -34,3 +34,4 @@ do-not-fail-on-unexpected-pass.diff
 silent-more-tests.diff
 disable-display-PASS-UNSUPPORTED-XFAIL.diff
 lldb-link-atomic.diff
+fix-llvm-config-obj-src-root.patch
