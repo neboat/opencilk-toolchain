@@ -1,13 +1,13 @@
-Index: llvm-toolchain-snapshot_3.5~svn200375/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.5~svn201236/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn200375.orig/clang/lib/Driver/ToolChains.cpp	2014-01-29 07:46:42.012718786 -0800
-+++ llvm-toolchain-snapshot_3.5~svn200375/clang/lib/Driver/ToolChains.cpp	2014-01-29 07:46:41.972718787 -0800
-@@ -3004,7 +3004,7 @@
+--- llvm-toolchain-snapshot_3.5~svn201236.orig/clang/lib/Driver/ToolChains.cpp	2014-02-12 15:51:58.565602865 +0100
++++ llvm-toolchain-snapshot_3.5~svn201236/clang/lib/Driver/ToolChains.cpp	2014-02-12 15:52:29.329602113 +0100
+@@ -3243,7 +3243,7 @@
  
  #ifdef __i386__
    // clang does not detect this path: /usr/include/i386-linux-gnu/c++/4.8/ Help him
 -  addLibStdCXXIncludePaths( "/usr/include/", "/c++/" + Version.str(), "i386-linux-gnu", GCCInstallation.getMultiarchSuffix(), DriverArgs, CC1Args);
-+  addLibStdCXXIncludePaths( "/usr/include/", "/c++/" + Version.Text, "i386-linux-gnu", BiarchSuffix, MIPSABIDirSuffix, DriverArgs, CC1Args);
++  addLibStdCXXIncludePaths( "/usr/include/", "/c++/" + Version.Text, "i386-linux-gnu", Multilib.includeSuffix(), DriverArgs, CC1Args);
  #endif
  
    if (addLibStdCXXIncludePaths(LibDir.str() + "/../include",
