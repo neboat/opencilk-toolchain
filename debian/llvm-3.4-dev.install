@@ -1,5 +1,3 @@
-usr/lib/llvm-3.4/bin/not*
-usr/lib/llvm-3.4/bin/FileCheck*
 usr/lib/llvm-3.4/lib/libLLVM*.a
 usr/lib/llvm-3.4/lib/libllvm*.a
 usr/lib/llvm-3.4/lib/LLVM*.so
@@ -14,12 +12,9 @@ build-llvm/config.status		/usr/lib/llvm-3.4/build/
 Makefile.rules			        /usr/lib/llvm-3.4/build/
 configure			            /usr/lib/llvm-3.4/build/
 autoconf/			            /usr/lib/llvm-3.4/build/
-unittests/Makefile.unittest           /usr/lib/llvm-3.4/build/unittests/
 
 utils/vim/llvm-3.4.vim		        usr/share/vim/addons/syntax/
 utils/vim/tablegen-3.4.vim		    usr/share/vim/addons/syntax/
-
-utils/lit/*		/usr/lib/llvm-3.4/build/utils/lit/
 
 utils/emacs/emacs.el		    usr/share/emacs/site-lisp/llvm-3.4/
 utils/emacs/llvm-mode.el	    usr/share/emacs/site-lisp/llvm-3.4/
