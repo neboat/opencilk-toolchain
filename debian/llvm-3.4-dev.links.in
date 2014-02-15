@@ -5,3 +5,4 @@ usr/include/llvm-3.4/llvm usr/lib/llvm-3.4/include/llvm
 usr/include/llvm-c-3.4/llvm-c usr/lib/llvm-3.4/build/include/llvm-c
 usr/include/llvm-3.4/llvm usr/lib/llvm-3.4/build/include/llvm
 usr/lib/llvm-3.4/include/ usr/lib/llvm-3.4/build/include
+usr/lib/llvm-3.4/ usr/lib/llvm-3.4/build/Release
