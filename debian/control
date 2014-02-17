@@ -294,7 +294,7 @@ Description: Modular compiler and toolchain technologies, libraries and headers
 Package: llvm-3.5-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- llvm-3.4-dev (= ${binary:Version})
+ llvm-3.5-dev (= ${binary:Version})
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
