@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.5~svn201236/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201236.orig/clang/lib/Driver/ToolChains.cpp	2014-02-12 15:51:58.565602865 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201236/clang/lib/Driver/ToolChains.cpp	2014-02-12 15:52:29.329602113 +0100
-@@ -3243,7 +3243,7 @@
+--- llvm-toolchain-snapshot_3.5~svn201651.orig/clang/lib/Driver/ToolChains.cpp	2014-02-19 09:46:35.377059510 +0100
++++ llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Driver/ToolChains.cpp	2014-02-19 09:46:39.989351664 +0100
+@@ -3241,7 +3241,7 @@
  
  #ifdef __i386__
    // clang does not detect this path: /usr/include/i386-linux-gnu/c++/4.8/ Help him

@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.5~svn201231/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201231.orig/clang/lib/Driver/ToolChains.cpp	2014-02-12 13:13:12.789835837 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201231/clang/lib/Driver/ToolChains.cpp	2014-02-12 13:13:12.789835837 +0100
-@@ -1324,11 +1324,13 @@
+--- llvm-toolchain-snapshot_3.5~svn201651.orig/clang/lib/Driver/ToolChains.cpp	2014-02-19 09:46:39.989351664 +0100
++++ llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Driver/ToolChains.cpp	2014-02-19 09:46:43.433569829 +0100
+@@ -1322,11 +1322,13 @@
  
    static const char *const MIPS64LibDirs[] = { "/lib64", "/lib" };
    static const char *const MIPS64Triples[] = { "mips64-linux-gnu",
@@ -18,7 +18,7 @@ Index: llvm-toolchain-snapshot_3.5~svn201231/clang/lib/Driver/ToolChains.cpp
  
    static const char *const PPCLibDirs[] = { "/lib32", "/lib" };
    static const char *const PPCTriples[] = {
-@@ -2769,6 +2771,14 @@
+@@ -2767,6 +2769,14 @@
      if (llvm::sys::fs::exists(SysRoot + "/lib/mipsel-linux-gnu"))
        return "mipsel-linux-gnu";
      return TargetTriple.str();
@@ -33,7 +33,7 @@ Index: llvm-toolchain-snapshot_3.5~svn201231/clang/lib/Driver/ToolChains.cpp
    case llvm::Triple::ppc:
      if (llvm::sys::fs::exists(SysRoot + "/lib/powerpc-linux-gnuspe"))
        return "powerpc-linux-gnuspe";
-@@ -3122,6 +3132,12 @@
+@@ -3120,6 +3130,12 @@
    const StringRef MIPSELMultiarchIncludeDirs[] = {
      "/usr/include/mipsel-linux-gnu"
    };
@@ -46,7 +46,7 @@ Index: llvm-toolchain-snapshot_3.5~svn201231/clang/lib/Driver/ToolChains.cpp
    const StringRef PPCMultiarchIncludeDirs[] = {
      "/usr/include/powerpc-linux-gnu"
    };
-@@ -3144,6 +3160,10 @@
+@@ -3142,6 +3158,10 @@
      MultiarchIncludeDirs = MIPSMultiarchIncludeDirs;
    } else if (getTriple().getArch() == llvm::Triple::mipsel) {
      MultiarchIncludeDirs = MIPSELMultiarchIncludeDirs;

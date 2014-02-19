@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.5~svn201231/clang/lib/Driver/ToolChains.cpp
+Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Driver/ToolChains.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201231.orig/clang/lib/Driver/ToolChains.cpp	2014-02-12 13:12:51.069836368 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201231/clang/lib/Driver/ToolChains.cpp	2014-02-12 13:12:51.065836368 +0100
-@@ -3239,6 +3239,11 @@
+--- llvm-toolchain-snapshot_3.5~svn201651.orig/clang/lib/Driver/ToolChains.cpp	2014-02-17 12:12:04.000000000 +0100
++++ llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Driver/ToolChains.cpp	2014-02-19 09:46:23.400300812 +0100
+@@ -3237,6 +3237,11 @@
    const Multilib &Multilib = GCCInstallation.getMultilib();
    const GCCVersion &Version = GCCInstallation.getVersion();
  

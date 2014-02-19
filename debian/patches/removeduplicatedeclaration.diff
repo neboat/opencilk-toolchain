@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.5~svn200375/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn200375.orig/clang/lib/Basic/Targets.cpp	2014-01-29 07:46:32.840719073 -0800
-+++ llvm-toolchain-snapshot_3.5~svn200375/clang/lib/Basic/Targets.cpp	2014-01-29 07:46:32.816719074 -0800
-@@ -3746,33 +3746,6 @@
+--- llvm-toolchain-snapshot_3.5~svn201651.orig/clang/lib/Basic/Targets.cpp	2014-02-19 09:46:29.748703000 +0100
++++ llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/Targets.cpp	2014-02-19 09:46:33.132917392 +0100
+@@ -3765,33 +3765,6 @@
      // FIXME: Override "preferred align" for double and long long.
    }
  
