@@ -1,4 +1,10 @@
-llvm-toolchain-snapshot (1:3.5~svn200375-2) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:3.5~svn200375-3) UNRELEASED; urgency=medium
+
+  * Fix the cmake install patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 19 Feb 2014 22:57:27 +0100
+
+llvm-toolchain-snapshot (1:3.5~svn201651-1) unstable; urgency=medium
 
   * Symlink for current build mode missing (Closes upstream #18836)
   * Fix the wrong dependency declaration on llvm-3.5-tools
