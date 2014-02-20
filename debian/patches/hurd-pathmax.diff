@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/FileManager.cpp
+Index: llvm-toolchain-snapshot_3.5~svn201783/clang/lib/Basic/FileManager.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201651.orig/clang/lib/Basic/FileManager.cpp	2014-02-19 01:10:30.000000000 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/FileManager.cpp	2014-02-19 09:46:19.248037494 +0100
-@@ -43,6 +43,10 @@
+--- llvm-toolchain-snapshot_3.5~svn201783.orig/clang/lib/Basic/FileManager.cpp	2014-02-20 14:46:40.801809058 +0100
++++ llvm-toolchain-snapshot_3.5~svn201783/clang/lib/Basic/FileManager.cpp	2014-02-20 14:46:40.797809058 +0100
+@@ -56,6 +56,10 @@
  /// represent a filename that doesn't exist on the disk.
  #define NON_EXISTENT_FILE reinterpret_cast<FileEntry*>((intptr_t)-1)
  
@@ -11,12 +11,12 @@ Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/FileManager.cpp
 +# define PATH_MAX 4096
 +#endif
  
- class FileManager::UniqueDirContainer {
-   /// UniqueDirs - Cache from ID's to existing directories/files.
-Index: llvm-toolchain-snapshot_3.5~svn201651/lldb/include/lldb/lldb-defines.h
+ FileEntry::~FileEntry() {
+   // If this FileEntry owns an open file descriptor that never got used, close
+Index: llvm-toolchain-snapshot_3.5~svn201783/lldb/include/lldb/lldb-defines.h
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201651.orig/lldb/include/lldb/lldb-defines.h	2013-10-18 07:55:24.000000000 +0200
-+++ llvm-toolchain-snapshot_3.5~svn201651/lldb/include/lldb/lldb-defines.h	2014-02-19 09:45:50.222199382 +0100
+--- llvm-toolchain-snapshot_3.5~svn201783.orig/lldb/include/lldb/lldb-defines.h	2014-02-20 14:46:40.801809058 +0100
++++ llvm-toolchain-snapshot_3.5~svn201783/lldb/include/lldb/lldb-defines.h	2014-02-20 14:46:40.797809058 +0100
 @@ -12,6 +12,11 @@
  
  #include "lldb/lldb-types.h"
@@ -29,10 +29,10 @@ Index: llvm-toolchain-snapshot_3.5~svn201651/lldb/include/lldb/lldb-defines.h
  #if !defined(UINT32_MAX)
      #define UINT32_MAX 4294967295U
  #endif
-Index: llvm-toolchain-snapshot_3.5~svn201651/lib/Support/Unix/Path.inc
+Index: llvm-toolchain-snapshot_3.5~svn201783/lib/Support/Unix/Path.inc
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201651.orig/lib/Support/Unix/Path.inc	2014-02-13 14:45:45.000000000 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201651/lib/Support/Unix/Path.inc	2014-02-19 09:45:50.222199382 +0100
+--- llvm-toolchain-snapshot_3.5~svn201783.orig/lib/Support/Unix/Path.inc	2014-02-20 14:46:40.801809058 +0100
++++ llvm-toolchain-snapshot_3.5~svn201783/lib/Support/Unix/Path.inc	2014-02-20 14:46:40.797809058 +0100
 @@ -58,6 +58,7 @@
  // For GNU Hurd
  #if defined(__GNU__) && !defined(PATH_MAX)
