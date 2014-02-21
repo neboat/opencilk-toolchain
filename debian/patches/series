@@ -4,7 +4,7 @@
 23-strlcpy_strlcat_warning_removed.diff
 27-fix_clang_stdint.diff
 26-set-correct-float-abi.diff
-profile_rt.diff
+#profile_rt.diff
 0003-Debian-version-info-and-bugreport.patch
 0021-shared-lib-debian.patch
 0023-link-libopagent.patch
