@@ -5,6 +5,7 @@ llvm-toolchain-3.4 (1:3.4-3) UNRELEASED; urgency=medium
   * Backport of a r201586 from upstream. scan-build was failing on some project
     like firefox build system. (Yeh, advantage to be the packager of a software
     that I use ;) ). See scan-build-fix-clang-detection.diff
+  * Fix the version in the symbol list (libclang1-3.4.symbols)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 15 Feb 2014 11:31:13 +0100
 
