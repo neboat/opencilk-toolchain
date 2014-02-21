@@ -99,6 +99,7 @@ libclang.so.1 libclang1-3.5 #MINVER#
  clang_constructUSR_ObjCProtocol@Base 3.2
  clang_createCXCursorSet@Base 3.2
  clang_createIndex@Base 3.2
+ clang_createTranslationUnit2@Base 1:3.5
  clang_createTranslationUnit@Base 3.2
  clang_createTranslationUnitFromSourceFile@Base 3.2
  clang_defaultCodeCompleteOptions@Base 3.2
@@ -132,6 +133,7 @@ libclang.so.1 libclang1-3.5 #MINVER#
  clang_getArgType@Base 3.2
  clang_getArrayElementType@Base 3.2
  clang_getArraySize@Base 3.2
+ clang_getBuildSessionTimestamp@Base 1:3.5
  clang_getCString@Base 3.2
  clang_getCXTUResourceUsage@Base 3.2
  clang_getCXXAccessSpecifier@Base 3.2
@@ -271,6 +273,7 @@ libclang.so.1 libclang1-3.5 #MINVER#
  clang_isVirtualBase@Base 3.2
  clang_isVolatileQualifiedType@Base 3.2
  clang_loadDiagnostics@Base 3.2
+ clang_parseTranslationUnit2@Base 1:3.5
  clang_parseTranslationUnit@Base 3.2
  clang_remap_dispose@Base 3.2
  clang_remap_getFilenames@Base 3.2
