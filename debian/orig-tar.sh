@@ -72,14 +72,13 @@ else
 fi
 
 if test -n "$RCRELEASE"; then
-    VERSION=$MAJOR_VERSION"~+"$REVISION # WAS TAG
+    VERSION=$MAJOR_VERSION"+"$REVISION # WAS TAG
     FULL_VERSION="llvm-toolchain-"$MAJOR_VERSION"_"$VERSION
 else
     VERSION=$MAJOR_VERSION"~svn"$REVISION
     FULL_VERSION="llvm-toolchain-snapshot_"$VERSION
 fi
-echo $FULL_VERSION
-exit 0
+
 # LLVM
 LLVM_TARGET=$FULL_VERSION
 $SVN_CMD $(get_svn_url llvm $BRANCH $TAG) $LLVM_TARGET
