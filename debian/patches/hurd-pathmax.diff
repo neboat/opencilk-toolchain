@@ -1,22 +1,22 @@
-Index: llvm-toolchain-snapshot_3.5~svn201843/clang/lib/Basic/FileManager.cpp
+Index: llvm-toolchain-snapshot_3.5~svn202473/clang/lib/Basic/FileManager.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201843.orig/clang/lib/Basic/FileManager.cpp	2014-02-21 11:13:02.574417177 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201843/clang/lib/Basic/FileManager.cpp	2014-02-21 11:13:02.570417177 +0100
-@@ -43,6 +43,10 @@
- /// represent a filename that doesn't exist on the disk.
- #define NON_EXISTENT_FILE reinterpret_cast<FileEntry*>((intptr_t)-1)
+--- llvm-toolchain-snapshot_3.5~svn202473.orig/clang/lib/Basic/FileManager.cpp	2014-02-28 09:56:58.459328014 +0100
++++ llvm-toolchain-snapshot_3.5~svn202473/clang/lib/Basic/FileManager.cpp	2014-02-28 09:56:58.455328015 +0100
+@@ -476,6 +476,10 @@
+   UniqueRealFiles.erase(Entry->getUniqueID());
+ }
  
 +// For GNU Hurd
 +#if defined(__GNU__) && !defined(PATH_MAX)
 +# define PATH_MAX 4096
 +#endif
  
- class FileManager::UniqueDirContainer {
-   /// UniqueDirs - Cache from ID's to existing directories/files.
-Index: llvm-toolchain-snapshot_3.5~svn201843/lldb/include/lldb/lldb-defines.h
+ void FileManager::GetUniqueIDMapping(
+                    SmallVectorImpl<const FileEntry *> &UIDToFiles) const {
+Index: llvm-toolchain-snapshot_3.5~svn202473/lldb/include/lldb/lldb-defines.h
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201843.orig/lldb/include/lldb/lldb-defines.h	2014-02-21 11:13:02.574417177 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201843/lldb/include/lldb/lldb-defines.h	2014-02-21 11:13:02.570417177 +0100
+--- llvm-toolchain-snapshot_3.5~svn202473.orig/lldb/include/lldb/lldb-defines.h	2014-02-28 09:56:58.459328014 +0100
++++ llvm-toolchain-snapshot_3.5~svn202473/lldb/include/lldb/lldb-defines.h	2014-02-28 09:56:58.455328015 +0100
 @@ -12,6 +12,11 @@
  
  #include "lldb/lldb-types.h"
@@ -29,10 +29,10 @@ Index: llvm-toolchain-snapshot_3.5~svn201843/lldb/include/lldb/lldb-defines.h
  #if !defined(UINT32_MAX)
      #define UINT32_MAX 4294967295U
  #endif
-Index: llvm-toolchain-snapshot_3.5~svn201843/lib/Support/Unix/Path.inc
+Index: llvm-toolchain-snapshot_3.5~svn202473/lib/Support/Unix/Path.inc
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201843.orig/lib/Support/Unix/Path.inc	2014-02-21 11:13:02.574417177 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201843/lib/Support/Unix/Path.inc	2014-02-21 11:13:02.570417177 +0100
+--- llvm-toolchain-snapshot_3.5~svn202473.orig/lib/Support/Unix/Path.inc	2014-02-28 09:56:58.459328014 +0100
++++ llvm-toolchain-snapshot_3.5~svn202473/lib/Support/Unix/Path.inc	2014-02-28 09:56:58.455328015 +0100
 @@ -58,6 +58,7 @@
  // For GNU Hurd
  #if defined(__GNU__) && !defined(PATH_MAX)
