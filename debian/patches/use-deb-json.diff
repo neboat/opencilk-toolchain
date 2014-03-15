@@ -1,30 +1,26 @@
-Index: llvm-toolchain-snapshot_3.5~svn203903/polly/lib/Makefile
+Index: llvm-toolchain-snapshot_3.5~svn204005/polly/lib/Makefile
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn203903.orig/polly/lib/Makefile	2014-03-14 09:01:28.397124053 +0100
-+++ llvm-toolchain-snapshot_3.5~svn203903/polly/lib/Makefile	2014-03-14 09:02:20.821790117 +0100
-@@ -27,9 +27,6 @@
- DIRS += Support
- USEDLIBS += pollysupport.a
- 
--DIRS += JSON
--USEDLIBS += pollyjson.a
--
- DIRS += Transform
- USEDLIBS += pollytransform.a
- 
-@@ -40,7 +37,7 @@
- #
- include $(LEVEL)/Makefile.common
+--- llvm-toolchain-snapshot_3.5~svn204005.orig/polly/lib/Makefile	2014-03-15 13:31:47.078458657 +0100
++++ llvm-toolchain-snapshot_3.5~svn204005/polly/lib/Makefile	2014-03-15 13:37:10.367703705 +0100
+@@ -13,7 +13,7 @@
+ CPP.Flags += $(POLLY_INC)
+ LD.Flags += $(POLLY_LD) $(POLLY_LIB)
  
 -LIBS += $(POLLY_LD) $(POLLY_LIB)
 +LIBS += $(POLLY_LD) $(POLLY_LIB) -ljsoncpp
  
- $(LibDir)/libpollyanalysis.a : $(LibDir)/.dir $(PROJ_OBJ_DIR)/Analysis/$(BuildMode)/.dir \
-                                $(PROJ_SRC_DIR)/Analysis/*
-@@ -106,4 +103,4 @@
-       $(CP) $(PROJ_SRC_DIR)/Transform/Makefile Transform/Makefile; \
-     fi; \
-     ($(MAKE) -C Transform $@ ) || exit 1; \
--  fi
-\ No newline at end of file
-+  fi
+ include $(LEVEL)/Makefile.config
+ 
+@@ -46,9 +46,9 @@
+ ISL_CODEGEN_FILES= CodeGen/IslAst.cpp \
+                    CodeGen/IslCodeGeneration.cpp
+ 
+-POLLY_JSON_FILES= JSON/json_reader.cpp \
+-		  JSON/json_value.cpp \
+-		  JSON/json_writer.cpp
++# POLLY_JSON_FILES= JSON/json_reader.cpp \
++# 		  JSON/json_value.cpp \
++# 		  JSON/json_writer.cpp
+ 
+ SOURCES= Polly.cpp \
+ 	 Support/GICHelper.cpp \
