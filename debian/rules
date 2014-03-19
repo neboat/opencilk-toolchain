@@ -354,6 +354,8 @@ ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf))
 	cd $(TARGET_BUILD)/Release/lib/python2.7/site-packages/lldb && if test ! -h _lldb.so -o ! -f _lldb.so; then ln -s ../../../liblldb.so _lldb.so; fi; \
 	if test ! -h libLLVM-$(LLVM_VERSION).so.$(SONAME_EXT) -o ! -f _lldb.so; then \
 		ln -s ../../../libLLVM-$(LLVM_VERSION).so libLLVM-$(LLVM_VERSION).so.$(SONAME_EXT); \
+	fi; \
+	if test ! -h libLLVM-$(LLVM_VERSION_FULL).so.$(SONAME_EXT) -o ! -f _lldb.so; then \
 		ln -s ../../../libLLVM-$(LLVM_VERSION).so libLLVM-$(LLVM_VERSION_FULL).so.$(SONAME_EXT); \
 	fi; \
 	fi
