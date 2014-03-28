@@ -1,4 +1,4 @@
-llvm-toolchain-3.4 (1:3.4-3) UNRELEASED; urgency=medium
+llvm-toolchain-3.4 (1:3.4+204650-1~exp1) UNRELEASED; urgency=medium
 
   * Symlink for current build mode missing (Closes upstream #18836)
   * Add link usr/lib/llvm-3.4/ to usr/lib/llvm-3.4/build/Debug+Asserts
@@ -6,8 +6,10 @@ llvm-toolchain-3.4 (1:3.4-3) UNRELEASED; urgency=medium
     like firefox build system. (Yeh, advantage to be the packager of a software
     that I use ;) ). See scan-build-fix-clang-detection.diff
   * Fix the version in the symbol list (libclang1-3.4.symbols)
+  * Update the path regarding upstream changed (3.4 => 3.4.1)
+  * Remove generated file libllvm3.4.install
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 15 Feb 2014 11:31:13 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 Mar 2014 13:41:23 +0000
 
 llvm-toolchain-3.4 (1:3.4-2) unstable; urgency=medium
 
