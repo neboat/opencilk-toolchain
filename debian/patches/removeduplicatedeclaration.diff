@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_3.5~svn205090/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201651.orig/clang/lib/Basic/Targets.cpp	2014-02-19 09:46:29.748703000 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/Targets.cpp	2014-02-19 09:46:33.132917392 +0100
-@@ -3765,33 +3765,6 @@
+--- llvm-toolchain-snapshot_3.5~svn205090.orig/clang/lib/Basic/Targets.cpp	2014-03-29 12:15:16.884486206 +0100
++++ llvm-toolchain-snapshot_3.5~svn205090/clang/lib/Basic/Targets.cpp	2014-03-29 12:15:16.884486206 +0100
+@@ -3843,33 +3843,6 @@
      // FIXME: Override "preferred align" for double and long long.
    }
  
@@ -35,4 +35,4 @@ Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/Targets.cpp
 -  }
  
  public:
-   ARMTargetInfo(const llvm::Triple &Triple)
+   ARMTargetInfo(const llvm::Triple &Triple, bool IsBigEndian)

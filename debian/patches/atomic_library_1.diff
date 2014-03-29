@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_3.5~svn205090/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201651.orig/clang/lib/Basic/Targets.cpp	2014-02-03 18:28:04.000000000 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/Targets.cpp	2014-02-19 09:46:27.872584164 +0100
-@@ -3765,6 +3765,20 @@
+--- llvm-toolchain-snapshot_3.5~svn205090.orig/clang/lib/Basic/Targets.cpp	2014-03-29 12:14:58.543982773 +0100
++++ llvm-toolchain-snapshot_3.5~svn205090/clang/lib/Basic/Targets.cpp	2014-03-29 12:14:58.543982773 +0100
+@@ -3843,6 +3843,20 @@
      // FIXME: Override "preferred align" for double and long long.
    }
  
@@ -21,12 +21,12 @@ Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/Targets.cpp
 +  }
 +
  public:
-   ARMTargetInfo(const llvm::Triple &Triple)
+   ARMTargetInfo(const llvm::Triple &Triple, bool IsBigEndian)
        : TargetInfo(Triple), CPU("arm1136j-s"), FPMath(FP_Default),
-Index: llvm-toolchain-snapshot_3.5~svn201651/clang/test/CodeGen/linux-arm-atomic.c
+Index: llvm-toolchain-snapshot_3.5~svn205090/clang/test/CodeGen/linux-arm-atomic.c
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201651.orig/clang/test/CodeGen/linux-arm-atomic.c	2013-06-17 22:00:15.000000000 +0200
-+++ llvm-toolchain-snapshot_3.5~svn201651/clang/test/CodeGen/linux-arm-atomic.c	2014-02-19 09:46:27.872584164 +0100
+--- llvm-toolchain-snapshot_3.5~svn205090.orig/clang/test/CodeGen/linux-arm-atomic.c	2014-03-29 12:14:58.543982773 +0100
++++ llvm-toolchain-snapshot_3.5~svn205090/clang/test/CodeGen/linux-arm-atomic.c	2014-03-29 12:14:58.543982773 +0100
 @@ -1,5 +1,15 @@
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv7-unknown-linux | FileCheck %s
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv6-unknown-linux | FileCheck %s
