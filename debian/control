@@ -23,7 +23,7 @@ Package: clang-3.4
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  libclang-common-3.4-dev (= ${binary:Version}),
- libclang1-3.4 (= ${binary:Version})
+ libclang1-3.4 (= ${binary:Version}), libc6-dev
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-3.4-dev, python
 Suggests: gnustep, gnustep-devel

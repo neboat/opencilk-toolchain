@@ -9,6 +9,7 @@ llvm-toolchain-3.4 (1:3.4+204650-1~exp1) UNRELEASED; urgency=medium
   * Update the path regarding upstream changed (3.4 => 3.4.1)
   * Remove generated file libllvm3.4.install
   * Add gnustep & gnustep-devel as suggests of clang-3.4
+  * Add libc6-dev as an explicit dependency of clang-3.4
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 Mar 2014 13:41:23 +0000
 
