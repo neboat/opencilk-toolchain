@@ -7,6 +7,7 @@ llvm-toolchain-3.4 (1:3.4+204650-1~exp1) UNRELEASED; urgency=medium
     that I use ;) ). See scan-build-fix-clang-detection.diff
   * Fix the version in the symbol list (libclang1-3.4.symbols)
   * Update the path regarding upstream changed (3.4 => 3.4.1)
+    (Patch improved also by Martin Nowack)
   * Remove generated file libllvm3.4.install
   * Add gnustep & gnustep-devel as suggests of clang-3.4
   * Add libc6-dev as an explicit dependency of clang-3.4
