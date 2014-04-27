@@ -250,6 +250,7 @@ override_dh_auto_install:
 
 	mv $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION_FULL)*.so $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION_FULL).so.$(SONAME_EXT)
 
+
 	if test $(LLDB_ENABLE) = yes; then \
 		mv $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/liblldb.so $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/liblldb.so.$(SONAME_EXT); \
 	fi
@@ -297,6 +298,9 @@ override_dh_auto_install:
 
 # Managed in lldb-X.Y.links.in
 	rm -f $(CURDIR)/$(TARGET_BUILD)/Release/lib/python*/site-packages/lldb/_lldb.so
+
+override_dh_install:
+	dh_install --fail-missing
 
 override_dh_installman:
 	dh_installman

@@ -1,4 +1,3 @@
-usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-3.5.0.so.1		usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-3.5.so.1
 usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-3.5.0.so.1         usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-3.5.so
 usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-3.5.so.1       usr/lib/llvm-3.5/lib/libLLVM-3.5.so
 usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-3.5.0.so.1       usr/lib/llvm-3.5/lib/libLLVM-3.5.0.so
@@ -8,4 +7,4 @@ usr/include/llvm-c-3.5/llvm-c usr/lib/llvm-3.5/build/include/llvm-c
 usr/include/llvm-3.5/llvm usr/lib/llvm-3.5/build/include/llvm
 usr/lib/llvm-3.5/include/ usr/lib/llvm-3.5/build/include
 usr/lib/llvm-3.5/ usr/lib/llvm-3.5/build/Release
-
+usr/lib/llvm-3.5/ usr/lib/llvm-3.5/build/Debug+Asserts

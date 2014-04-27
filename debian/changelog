@@ -1,18 +1,31 @@
-llvm-toolchain-snapshot (1:3.5~svn200375-3) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:3.5~svn207339-1~exp1) UNRELEASED; urgency=medium
 
   * Fix the cmake install patch
   * Disable profile_rt.diff for now
   * Refresh of libclang1-3.5.symbols
   * Fix path to /usr/lib/clang/3.5.0/ (Closes upstream #19088)
-  * Add gnustep & gnustep-devel as suggests of clang-3.4
+  * Fix the wrong dependency declaration on llvm-3.5-tools
+  * Add gnustep & gnustep-devel as suggests of clang-3.5
   * Add libc6-dev as an explicit dependency of clang-3.5
+  * Build with dh_install --fail-missing
+  * Start to use /usr/bin/foo-X.Y. First step to have several clang versions
+    installed together
+  * Add some missing files:
+    - lli-child-target         - llvm-3.4-runtime
+    - count                    - llvm-3.4-tools
+    - html.tar.gz              - llvm-3.4-doc
+    - ocamldoc.tar.gz          - llvm-3.4-doc
+    - BugpointPasses.so        - llvm-3.4-dev
+    - liblldb*                 - lldb-3.4-dev
+    - clang-apply-replacements - clang-3.4
+    - clang-tidy               - clang-3.4
+    - pp-trace                 - clang-3.4
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 19 Feb 2014 22:57:27 +0100
 
 llvm-toolchain-snapshot (1:3.5~svn201651-1) unstable; urgency=medium
 
   * Symlink for current build mode missing (Closes upstream #18836)
-  * Fix the wrong dependency declaration on llvm-3.5-tools
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 17 Feb 2014 13:55:34 +0100
 

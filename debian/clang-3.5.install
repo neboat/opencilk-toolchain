@@ -1,11 +1,25 @@
-usr/lib/llvm-3.5/bin/clang			/usr/bin/
-usr/lib/llvm-3.5/bin/clang++			/usr/bin/
-usr/lib/llvm-3.5/bin/clang-check			/usr/bin/
-usr/lib/llvm-3.5/bin/clang-tblgen			/usr/bin/
-usr/lib/llvm-3.5/bin/c-index-test*
-usr/bin/c-index-test*
-tools/clang/tools/scan-build			/usr/share/clang/
-tools/clang/tools/scan-view			/usr/share/clang/
-#usr/share/man/man1/clang.1	usr/share/man/man1/
-#debian/pollycc		/usr/bin/
+usr/lib/llvm-3.5/bin/clang
+usr/lib/llvm-3.5/bin/clang++
+usr/lib/llvm-3.5/bin/clang-check
+usr/lib/llvm-3.5/bin/clang-tblgen
+usr/lib/llvm-3.5/bin/c-index-test
+usr/lib/llvm-3.5/bin/clang-apply-replacements
+usr/lib/llvm-3.5/bin/clang-tidy
+usr/lib/llvm-3.5/bin/pp-trace
 
+usr/bin/c-index-test*
+tools/clang/tools/scan-build                    /usr/share/clang/
+tools/clang/tools/scan-view                     /usr/share/clang/
+#usr/share/man/man1/clang.1     usr/share/man/man1/
+debian/pollycc          /usr/bin/
+
+usr/bin/clang-3.5
+usr/bin/clang++-3.5
+usr/bin/clang-check-3.5
+usr/bin/clang-tblgen-3.5
+usr/bin/c-index-test-3.5
+usr/bin/clang-apply-replacements-3.5
+usr/bin/clang-tidy-3.5
+usr/bin/pp-trace-3.5
+
+usr/lib/llvm-3.5/share/man/man1/clang.1
