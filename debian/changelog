@@ -11,6 +11,19 @@ llvm-toolchain-3.4 (1:3.4+204650-1~exp1) UNRELEASED; urgency=medium
   * Remove generated file libllvm3.4.install
   * Add gnustep & gnustep-devel as suggests of clang-3.4
   * Add libc6-dev as an explicit dependency of clang-3.4
+  * Build with dh_install --fail-missing
+  * Start to use /usr/bin/foo-X.Y. First step to have several clang versions
+    installed together
+  * Add some missing files:
+    - lli-child-target         - llvm-3.4-runtime
+    - count                    - llvm-3.4-tools
+    - html.tar.gz              - llvm-3.4-doc
+    - ocamldoc.tar.gz          - llvm-3.4-doc
+    - BugpointPasses.so        - llvm-3.4-dev
+    - liblldb*                 - lldb-3.4-dev
+    - clang-apply-replacements - clang-3.4
+    - clang-tidy               - clang-3.4
+    - pp-trace                 - clang-3.4
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 Mar 2014 13:41:23 +0000
 
