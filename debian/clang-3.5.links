@@ -12,3 +12,4 @@ usr/bin/c-index-test-3.5 usr/bin/c-index-test
 usr/bin/clang-apply-replacements-3.5 usr/bin/clang-apply-replacements
 usr/bin/clang-tidy-3.5 usr/bin/clang-tidy
 usr/bin/pp-trace-3.5 usr/bin/pp-trace
+usr/bin/clang-query-3.5 usr/bin/clang-query
