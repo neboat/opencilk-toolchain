@@ -1,5 +1,10 @@
 usr/bin/lldb-3.5
 usr/lib/llvm-3.5/bin/lldb
 usr/lib/llvm-3.5/bin/lldb-platform
+usr/lib/llvm-3.5/bin/lldb-gdbserver
 usr/lib/llvm-3.5/lib/liblldb.so.1 /usr/lib/@DEB_HOST_MULTIARCH@/
 build-llvm/Release/lib/python2.7/site-packages/lldb/ /usr/lib/python2.7/dist-packages/
+usr/lib/llvm-3.5/lib/python2.7/site-packages/readline.so
+
+usr/bin/lldb-platform-3.5
+usr/bin/lldb-gdbserver-3.5
