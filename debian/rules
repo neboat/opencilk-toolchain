@@ -317,6 +317,8 @@ override_dh_strip:
 override_dh_shlibdeps:
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_shlibdeps
 
+override_dh_install:
+	dh_install --fail-missing
 
 override_dh_installdeb:
 # Managed by the package
