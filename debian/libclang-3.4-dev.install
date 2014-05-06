@@ -2,7 +2,7 @@ usr/lib/llvm-3.4/include/clang
 usr/lib/llvm-3.4/include/clang-c
 usr/lib/llvm-3.4/lib/libclang*a
 
-usr/lib/llvm-3.4/lib/libclang.so*
+usr/lib/llvm-3.4/lib/libclang*.so
 usr/lib/llvm-3.4/lib/libpolly*
 usr/lib/llvm-3.4/lib/libmodernizeCore.a
 
