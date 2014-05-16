@@ -23,6 +23,7 @@ llvm-toolchain-snapshot (1:3.5~svn207339-1~exp1) UNRELEASED; urgency=medium
     - pp-trace                 - clang-3.5
     - lldb-platform            - lldb-3.5
     - lldb-gdbserver           - lldb-3.5
+  * Remove usr/lib/llvm-3.5/lib/libLLVM*.so. No longer existing
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 19 Feb 2014 22:57:27 +0100
 
