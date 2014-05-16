@@ -71,6 +71,7 @@ libclang.so.1 libclang1-3.5 #MINVER#
  clang_Module_getNumTopLevelHeaders@Base 3.2
  clang_Module_getParent@Base 3.2
  clang_Module_getTopLevelHeader@Base 3.2
+ clang_Module_isSystem@Base 1:3.5~svn208979-1
  clang_ParamCommandComment_getDirection@Base 3.2
  clang_ParamCommandComment_getParamIndex@Base 3.2
  clang_ParamCommandComment_getParamName@Base 3.2
@@ -217,6 +218,7 @@ libclang.so.1 libclang1-3.5 #MINVER#
  clang_getInstantiationLocation@Base 3.2
  clang_getLocation@Base 3.2
  clang_getLocationForOffset@Base 3.2
+ clang_getModuleForFile@Base 1:3.5~svn208979-1
  clang_getNullCursor@Base 3.2
  clang_getNullLocation@Base 3.2
  clang_getNullRange@Base 3.2
