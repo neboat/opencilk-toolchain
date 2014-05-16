@@ -259,7 +259,9 @@ override_dh_auto_install:
 	if test ! -f libclang-$(LLVM_VERSION).so.$(SONAME_EXT); then \
 		mv libclang.so libclang-$(LLVM_VERSION).so.$(SONAME_EXT) && \
 		ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT); \
-	fi
+	fi; \
+	cp -f $(TARGET_BUILD)/Release/lib/libLLVM-$(LLVM_VERSION)*.so .; \
+	rm -f libclang.so
 
 #	cd $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/ && rm -rf $$(find . -iname "SubDir.lib*" -o -iname .dir) && rm -rf $$(find -empty)
 
@@ -269,7 +271,7 @@ override_dh_auto_install:
 # Create this fake directory to make the install libclang-common-dev happy
 # under the unsupported archs of compiler-rt
 	mkdir -p $(CURDIR)/debian/tmp/usr/lib/clang/$(LLVM_VERSION)/lib
-	mkdir -p $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/lib/
+	mkdir -p $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/lib/
 
 
 # Rename binaries
