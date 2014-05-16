@@ -36,3 +36,4 @@ disable-display-PASS-UNSUPPORTED-XFAIL.diff
 lldb-link-atomic.diff
 fix-llvm-config-obj-src-root.patch
 suffixsvn.diff
+compiler-rt-path.diff
