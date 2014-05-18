@@ -261,6 +261,7 @@ override_dh_auto_install:
 		ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT); \
 	fi; \
 	cp -f $(CURDIR)/$(TARGET_BUILD)/Release/lib/libLLVM-$(LLVM_VERSION)*.so* .; \
+	rm -f libLLVM-$(LLVM_VERSION_FULL).so.1; \
 	rm -f libclang.so
 
 #	cd $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/ && rm -rf $$(find . -iname "SubDir.lib*" -o -iname .dir) && rm -rf $$(find -empty)
