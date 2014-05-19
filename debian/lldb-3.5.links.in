@@ -5,3 +5,4 @@ usr/lib/@DEB_HOST_MULTIARCH@/liblldb.so.1       usr/lib/llvm-3.5/lib/liblldb.so.
 usr/bin/lldb-3.5 usr/bin/lldb
 usr/bin/lldb-platform-3.5 usr/bin/lldb-platform
 usr/bin/lldb-gdbserver-3.5 usr/bin/lldb-gdbserver
+usr/bin/lldb-mi 3.5 usr/bin/lldb-mi
