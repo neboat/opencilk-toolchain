@@ -1,6 +1,7 @@
-llvm-toolchain-3.4 (1:3.4.2-2) UNRELEASED; urgency=medium
+llvm-toolchain-3.4 (1:3.4.2-2) unstable; urgency=medium
 
   * Improve the CVE-2014-2893 fix (Closes: #744817)
+  * Add a check to avoid an error on arch where compiler-rt is not available
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Jun 2014 23:00:47 +0200
 
