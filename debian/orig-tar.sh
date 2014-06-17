@@ -72,10 +72,10 @@ fi
 
 if test -n "$RCRELEASE"; then
     VERSION=$MAJOR_VERSION"+"$REVISION # WAS TAG
-    FULL_VERSION="llvm-toolchain-"$MAJOR_VERSION"_"$VERSION
+    FULL_VERSION="llvm-toolchain"$MAJOR_VERSION"_"$VERSION
 else
     VERSION=$MAJOR_VERSION"~svn"$REVISION
-    FULL_VERSION="llvm-toolchain-"$MAJOR_VERSION"_"$VERSION
+    FULL_VERSION="llvm-toolchain-snapshot_"$VERSION
 fi
 
 # LLVM
