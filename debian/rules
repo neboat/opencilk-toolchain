@@ -355,9 +355,9 @@ override_dh_auto_test:
 # LLVM tests
 ifneq (,$(findstring $(DEB_HOST_ARCH),$(ARCH_LLVM_TEST_OK)))
 # Fail the build if the test fails
-	LD_LIBRARY_PATH=$(CURDIR)/$(TARGET_BUILD)/Release/lib/ $(MAKE) -C $(TARGET_BUILD) check
+	NJOBS="$(NJOBS)" LD_LIBRARY_PATH=$(CURDIR)/$(TARGET_BUILD)/Release/lib/ $(MAKE) -C $(TARGET_BUILD) check
 else
-	LD_LIBRARY_PATH=$(CURDIR)/$(TARGET_BUILD)/Release/lib/ $(MAKE) -C $(TARGET_BUILD) check || true
+	NJOBS="$(NJOBS)" LD_LIBRARY_PATH=$(CURDIR)/$(TARGET_BUILD)/Release/lib/ $(MAKE) -C $(TARGET_BUILD) check || true
 endif
 
 # clang tests
