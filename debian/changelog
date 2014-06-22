@@ -5,6 +5,7 @@ llvm-toolchain-3.4 (1:3.4.2-3) unstable; urgency=medium
    (Closes: #751943)
   * Fix FTBFS on powerpc and powerpcspe (Closes: #733890)
   * Broken library symlink fixed in lldb-3.4 (Closes: #715130)
+  * Fix --use-cc when no absolute path is provided (Closes: #748777)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 19 Jun 2014 19:13:16 +0200
 
