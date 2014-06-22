@@ -7,3 +7,7 @@ usr/bin/lldb-3.5 usr/bin/lldb
 usr/bin/lldb-platform-3.5 usr/bin/lldb-platform
 usr/bin/lldb-gdbserver-3.5 usr/bin/lldb-gdbserver
 usr/bin/lldb-mi-3.5 usr/bin/lldb-mi
+
+usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-3.5.so.1  usr/lib/python2.7/dist-packages/lldb/libLLVM-3.5.0.so.1
+usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-3.5.so.1  usr/lib/python2.7/dist-packages/lldb/libLLVM-3.5.so.1
+

@@ -6,6 +6,7 @@ TARGET_BUILD	:= build-llvm
 GCC_VERSION     := $(shell dpkg-query -W -f '$${Version}' g++ | sed -rne 's,^([0-9]+:)?([0-9]+\.[0-9]+).*$$,\2,p')
 LLVM_VERSION	:= 3.5
 LLVM_VERSION_FULL := $(LLVM_VERSION).0
+LLVM_VERSION_FULL := $(LLVM_VERSION).2
 SONAME_EXT      := 1
 DEBIAN_REVISION := $(shell dpkg-parsechangelog | sed -rne 's,^Version: .*-(.*),\1,p')
 ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
@@ -27,6 +28,10 @@ export CXX=g++-$(GCC_VERSION)
 LDFLAGS_EXTRA=
 CXXFLAGS_EXTRA=
 CONFIGURE_EXTRA=
+
+ifneq (,$(filter $(DEB_HOST_ARCH),powerpc powerpcspe))
+LDFLAGS_EXTRA += -latomic
+endif
 
 confargs := \
 	--host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE)
@@ -253,6 +258,7 @@ override_dh_auto_install:
 # Add the trailing soname
 	mv $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION).so $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION).so.$(SONAME_EXT)
 
+
 	if test $(LLDB_ENABLE) = yes; then \
 		mv $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/liblldb.so $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/liblldb.so.$(SONAME_EXT); \
 	fi
@@ -353,9 +359,9 @@ override_dh_auto_test:
 # LLVM tests
 ifneq (,$(findstring $(DEB_HOST_ARCH),$(ARCH_LLVM_TEST_OK)))
 # Fail the build if the test fails
-	LD_LIBRARY_PATH=$(CURDIR)/$(TARGET_BUILD)/Release/lib/ $(MAKE) -C $(TARGET_BUILD) check
+	NJOBS="$(NJOBS)" LD_LIBRARY_PATH=$(CURDIR)/$(TARGET_BUILD)/Release/lib/ $(MAKE) -C $(TARGET_BUILD) check
 else
-	LD_LIBRARY_PATH=$(CURDIR)/$(TARGET_BUILD)/Release/lib/ $(MAKE) -C $(TARGET_BUILD) check || true
+	NJOBS="$(NJOBS)" LD_LIBRARY_PATH=$(CURDIR)/$(TARGET_BUILD)/Release/lib/ $(MAKE) -C $(TARGET_BUILD) check || true
 endif
 
 # clang tests

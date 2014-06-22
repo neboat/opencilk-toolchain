@@ -39,3 +39,5 @@ suffixsvn.diff
 compiler-rt-path.diff
 lldb-soname.diff
 force-link-pass.o.diff
+follow-parallel-var.diff
+scan-build-search-path.diff

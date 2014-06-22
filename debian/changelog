@@ -3,9 +3,14 @@ llvm-toolchain-snapshot (1:3.5~svn211313-1) unstable; urgency=medium
   * New snapshot release
   * Fix CVE-2014-2893 (Closes: #744817)
   * Merge with 3.4/debian
-  * Ship compiler-rt files
   * Ship lldb-mi in lldb
   * Remove scan-build-fix-clang-detection.diff (applied upstream)
+  * Ship the compiler-rt static libraries
+  * Running tests respect DEB_BUILD_OPTIONS=parallel=X
+   (Closes: #751943)
+  * Fix FTBFS on powerpc and powerpcspe (Closes: #733890)
+  * Broken library symlink fixed in lldb-3.5 (Closes: #715130)
+  * Fix --use-cc when no absolute path is provided (Closes: #748777)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Jun 2014 09:49:31 +0200
 
