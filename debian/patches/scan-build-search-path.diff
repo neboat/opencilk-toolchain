@@ -25,7 +25,7 @@ Index: llvm-toolchain-3.4-3.4.2/clang/tools/scan-build/ccc-analyzer
  if ($FindBin::Script =~ /c\+\+-analyzer/) {
    $Compiler = $ENV{'CCC_CXX'};
 -  if (!defined $Compiler || ! -x $Compiler) { $Compiler = $DefaultCXXCompiler; }
-+  if (!defined $Compiler || ! -x $Compiler || ! SearchInPath($Compiler)) { $Compiler = $DefaultCXXCompiler; }
++  if (!defined $Compiler || (! -x $Compiler && ! SearchInPath($Compiler))) { $Compiler = $DefaultCXXCompiler; }
    
    $Clang = $ENV{'CLANG_CXX'};
    if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++'; }
@@ -33,7 +33,7 @@ Index: llvm-toolchain-3.4-3.4.2/clang/tools/scan-build/ccc-analyzer
  else {
    $Compiler = $ENV{'CCC_CC'};
 -  if (!defined $Compiler || ! -x $Compiler) { $Compiler = $DefaultCCompiler; }
-+  if (!defined $Compiler || ! -x $Compiler && ! SearchInPath($Compiler)) { $Compiler = $DefaultCCompiler; }
++  if (!defined $Compiler || (! -x $Compiler && ! SearchInPath($Compiler))) { $Compiler = $DefaultCCompiler; }
  
    $Clang = $ENV{'CLANG'};
    if (!defined $Clang || ! -x $Clang) { $Clang = 'clang'; }
