@@ -15,6 +15,7 @@ set -e
 
 SVN_BASE_URL=http://llvm.org/svn/llvm-project/
 MAJOR_VERSION=3.5
+CURRENT_VERSION=3.5 # Should be changed to 3.5.1 later
 
 if test -n "$1"; then
 # http://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/branches/google/stable/
@@ -74,7 +75,7 @@ if test -n "$RCRELEASE"; then
     VERSION=$MAJOR_VERSION"+"$REVISION # WAS TAG
     FULL_VERSION="llvm-toolchain"$MAJOR_VERSION"_"$VERSION
 else
-    VERSION=$MAJOR_VERSION"~svn"$REVISION
+    VERSION=$CURRENT_VERSION"~svn"$REVISION
     FULL_VERSION="llvm-toolchain-snapshot_"$VERSION
 fi
 
