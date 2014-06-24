@@ -1,3 +1,11 @@
+llvm-toolchain-3.4 (1:3.4.2-4) unstable; urgency=medium
+
+  * Create a empty directory to make dh_install happy
+    (Closes: #752583)
+  * Actually, silent-MCJIIT-tests.diff tests are still failing under i386
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 24 Jun 2014 15:26:51 -0700
+
 llvm-toolchain-3.4 (1:3.4.2-3) unstable; urgency=medium
 
   * Ship the compiler-rt static libraries in libclang-3.4-dev
@@ -5,7 +13,7 @@ llvm-toolchain-3.4 (1:3.4.2-3) unstable; urgency=medium
    (Closes: #751943)
   * Fix FTBFS on powerpc and powerpcspe (Closes: #733890)
   * Broken library symlink fixed in lldb-3.4 (Closes: #715130)
-  * Fix --use-cc when no absolute path is provided. 
+  * Fix --use-cc when no absolute path is provided.
     Thanks to Aurelien Jacobs for testing (Closes: #748777)
   * depends-on-build-essential-package-without-using-version g++ fixed
   * Disable silent-MCJIIT-tests.diff. They now pass.
