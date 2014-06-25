@@ -283,6 +283,7 @@ override_dh_auto_install:
 	mkdir -p $(CURDIR)/debian/tmp/usr/lib/clang/$(LLVM_VERSION)/lib
 	mkdir -p $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/lib/
 	mkdir -p $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/lib/clang_linux/
+	mkdir -p $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/clang_linux/
 
 # Rename binaries
 	mkdir -p $(CURDIR)/debian/tmp/usr/bin/
