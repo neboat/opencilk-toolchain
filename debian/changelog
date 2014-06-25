@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:3.5~svn211313-1) unstable; urgency=medium
+llvm-toolchain-snapshot (1:3.5~svn211669-1) unstable; urgency=medium
 
   * New snapshot release
   * Fix CVE-2014-2893 (Closes: #744817)
@@ -12,7 +12,7 @@ llvm-toolchain-snapshot (1:3.5~svn211313-1) unstable; urgency=medium
   * Broken library symlink fixed in lldb-3.5 (Closes: #715130)
   * Fix --use-cc when no absolute path is provided (Closes: #748777)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Jun 2014 09:49:31 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 25 Jun 2014 07:58:03 +0200
 
 llvm-toolchain-snapshot (1:3.5~svn209039-2) unstable; urgency=medium
 
