@@ -1,6 +1,8 @@
 llvm-toolchain-snapshot (1:3.5~svn211669-2) unstable; urgency=medium
 
   * Remove useless dependency on g++
+  * Use the option stable '-analyzer-config stable-report-filename=true'
+    to the llvm scan-build reports
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 29 Jun 2014 19:13:05 +0200
 
