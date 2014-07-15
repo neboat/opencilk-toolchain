@@ -1,3 +1,9 @@
+llvm-toolchain-3.4 (1:3.4.2-5) UNRELEASED; urgency=medium
+
+  * Clang will now show the full version. Example: 3.5.0-svn213052-1~exp1
+
+ --
+
 llvm-toolchain-3.4 (1:3.4.2-4) unstable; urgency=medium
 
   * Create a empty directory to make dh_install happy
