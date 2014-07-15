@@ -7,7 +7,8 @@ GCC_VERSION     := $(shell dpkg-query -W -f '$${Version}' g++ | sed -rne 's,^([0
 LLVM_VERSION	:= 3.5
 LLVM_VERSION_FULL := $(LLVM_VERSION).0
 SONAME_EXT      := 1
-DEBIAN_REVISION := $(shell dpkg-parsechangelog | sed -rne 's,^Version: .*-(.*),\1,p')
+# Manage the case when the version is 1:3.5~svn213052-1~exp1 or 1:3.4.2-1
+DEBIAN_REVISION := $(shell dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\3,p")
 ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
   NJOBS := -j $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
 endif
@@ -44,6 +45,11 @@ endif
 opt_flags = -g -O2
 ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   opt_flags += -marm
+endif
+
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) lt 4.7.2-10~ ; echo $$?),0)
+# Too old version of gcc. Force 4.8
+	GCC_VERSION := 4.8
 endif
 
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) ge 4.8-20121128-1~ ; echo $$?),0)
