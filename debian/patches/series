@@ -40,3 +40,4 @@ lldb-soname.diff
 force-link-pass.o.diff
 follow-parallel-var.diff
 scan-build-search-path.diff
+lldb-kfreebsd.diff
