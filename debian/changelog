@@ -5,6 +5,7 @@ llvm-toolchain-3.4 (1:3.4.2-6) unstable; urgency=medium
   * Move the polly installation in the dh_auto_install rules instead
     of using *.install files. In llvm.org/apt/, I have to sometime disable
     polly
+  * hurd-EIEIO-undef.diff: try to undef an errno.h to fix the ftbfs
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 23 Jul 2014 13:02:56 +0200
 
