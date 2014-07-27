@@ -1,8 +1,8 @@
-usr/lib/llvm-3.4/bin/llvm-*
-usr/lib/llvm-3.4/bin/opt*
-usr/lib/llvm-3.4/bin/macho-dump*
-usr/lib/llvm-3.4/bin/bugpoint*
-usr/lib/llvm-3.4/bin/llc*
+usr/lib/llvm-@LLVM_VERSION@/bin/llvm-*
+usr/lib/llvm-@LLVM_VERSION@/bin/opt*
+usr/lib/llvm-@LLVM_VERSION@/bin/macho-dump*
+usr/lib/llvm-@LLVM_VERSION@/bin/bugpoint*
+usr/lib/llvm-@LLVM_VERSION@/bin/llc*
 usr/bin/llvm-*
 usr/bin/opt*
 usr/bin/macho-dump*

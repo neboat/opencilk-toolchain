@@ -137,6 +137,7 @@ preconfigure:
 		echo "$$f => $$f2"; \
 		sed -e 's|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|g' \
 			-e "s|@OCAML_STDLIB_DIR@|$(OCAML_STDLIB_DIR)|g" \
+			-e "s|@LLVM_VERSION_FULL@|$(LLVM_VERSION_FULL)|g" \
 			-e "s|@LLVM_VERSION@|$(LLVM_VERSION)|g" $$f > $$f2; \
 	done
 

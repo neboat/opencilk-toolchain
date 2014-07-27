@@ -1,2 +1,2 @@
-usr/lib/llvm-3.4/lib/libclang-3.4.so.1 /usr/lib/@DEB_HOST_MULTIARCH@/
-usr/lib/llvm-3.4/lib/libclang.so.1
+usr/lib/llvm-@LLVM_VERSION@/lib/libclang-@LLVM_VERSION@.so.1 /usr/lib/@DEB_HOST_MULTIARCH@/
+usr/lib/llvm-@LLVM_VERSION@/lib/libclang.so.1

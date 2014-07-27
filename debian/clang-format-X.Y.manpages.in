@@ -1,2 +1,2 @@
-debian/man/clang-format-diff-3.4.1
+debian/man/clang-format-diff-@LLVM_VERSION@.1
 

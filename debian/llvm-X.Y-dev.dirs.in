@@ -1,5 +1,5 @@
-/usr/lib/llvm-3.4/lib
-/usr/lib/llvm-3.4/build
-/usr/lib/llvm-3.4/include
-usr/share/doc/llvm-3.4-dev
-usr/share/emacs/site-lisp/llvm-3.4
+/usr/lib/llvm-@LLVM_VERSION@/lib
+/usr/lib/llvm-@LLVM_VERSION@/build
+/usr/lib/llvm-@LLVM_VERSION@/include
+usr/share/doc/llvm-@LLVM_VERSION@-dev
+usr/share/emacs/site-lisp/llvm-@LLVM_VERSION@

@@ -8,7 +8,7 @@ llvm-toolchain-3.4 (1:3.4.2-6) unstable; urgency=medium
   * hurd-EIEIO-undef.diff: try to undef an errno.h to fix the ftbfs
   * clang-X suggests clang-X-doc (Closes: #755922)
   * Manage all files using .in mecanism. It will simplify the upgrade of
-    version
+    version + file names 
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 23 Jul 2014 13:02:56 +0200
 

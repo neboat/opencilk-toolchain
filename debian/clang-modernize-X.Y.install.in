@@ -1,2 +1,2 @@
-usr/lib/llvm-3.4/bin/clang-modernize
-usr/bin/clang-modernize-3.4
+usr/lib/llvm-@LLVM_VERSION@/bin/clang-modernize
+usr/bin/clang-modernize-@LLVM_VERSION@

@@ -1,7 +1,7 @@
-usr/lib/llvm-3.4/lib/clang/3.4.2/include
+usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/include
 
-usr/lib/llvm-3.4/lib/clang/3.4.2/lib
+usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/lib
 
 
-#usr/lib/clang/3.4/lib             /usr/lib/clang/3.4/
-#usr/lib/clang/3.4/include/         /usr/include/clang/3.4/
+#usr/lib/clang/@LLVM_VERSION@/lib             /usr/lib/clang/@LLVM_VERSION@/
+#usr/lib/clang/@LLVM_VERSION@/include/         /usr/include/clang/@LLVM_VERSION@/

@@ -1,1 +1,1 @@
-debian/man/clang-modernize-3.4.1
+debian/man/clang-modernize-@LLVM_VERSION@.1
