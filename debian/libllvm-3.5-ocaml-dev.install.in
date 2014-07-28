@@ -1,2 +1,0 @@
-@OCAML_STDLIB_DIR@/llvm-3.5	@OCAML_STDLIB_DIR@/
-usr/lib/llvm-3.5/docs/llvm/ocamldoc/html	usr/share/doc/libllvm-3.5-ocaml-dev/
