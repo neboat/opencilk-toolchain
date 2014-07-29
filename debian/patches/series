@@ -39,7 +39,6 @@ compiler-rt-path.diff
 lldb-soname.diff
 force-link-pass.o.diff
 follow-parallel-var.diff
-scan-build-search-path.diff
 lldb-kfreebsd.diff
 hurd-EIEIO-undef.diff
 lldb-__linux__-ftbfs-powerpc.patch

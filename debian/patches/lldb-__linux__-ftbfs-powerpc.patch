@@ -1,23 +1,7 @@
-From 0480011e58fc86c20026204a979918d0f4a9b831 Mon Sep 17 00:00:00 2001
-From: Dimitri John Ledkov <dimitri.ledkov@canonical.com>
-Date: Tue, 29 Jul 2014 16:38:04 +0100
-Subject: [PATCH] Use __linux__ macro throughout, instead of ocasional __linux.
-
-__linux is not universally defined across all standards versions, compilers and architectures. Specifically at C99 and up, it's not defined in GCC on powerpc platform.
-
-See https://gcc.gnu.org/bugzilla/show_bug.cgi?id=28314
-
-Bugzilla: http://llvm.org/bugs/show_bug.cgi?id=20380
----
- tools/lldb-mi/MICmnLogMediumFile.cpp | 2 +-
- tools/lldb-mi/MIUtilSystemLinux.cpp  | 4 ++--
- tools/lldb-mi/MIUtilSystemLinux.h    | 4 ++--
- 3 files changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/tools/lldb-mi/MICmnLogMediumFile.cpp b/tools/lldb-mi/MICmnLogMediumFile.cpp
+diff --git llvm-toolchain-snapshot_3.5~svn201241.orig/lldb/tools/lldb-mi/MICmnLogMediumFile.cpp llvm-toolchain-snapshot_3.5~svn201241/lldb/tools/lldb-mi/MICmnLogMediumFile.cpp
 index a14ad04..382db07 100644
---- a/tools/lldb-mi/MICmnLogMediumFile.cpp
-+++ b/tools/lldb-mi/MICmnLogMediumFile.cpp
+--- llvm-toolchain-snapshot_3.5~svn201241.orig/tools/lldb-mi/MICmnLogMediumFile.cpp
++++ llvm-toolchain-snapshot_3.5~svn201241/lldb/tools/lldb-mi/MICmnLogMediumFile.cpp
 @@ -28,7 +28,7 @@
  
  #if defined( _MSC_VER )
@@ -27,10 +11,10 @@ index a14ad04..382db07 100644
  	#include "MIUtilSystemLinux.h"
  #elif defined( __APPLE__ )
  	#include "MIUtilSystemOsx.h"
-diff --git a/tools/lldb-mi/MIUtilSystemLinux.cpp b/tools/lldb-mi/MIUtilSystemLinux.cpp
+diff --git llvm-toolchain-snapshot_3.5~svn201241.orig/lldb//tools/lldb-mi/MIUtilSystemLinux.cpp llvm-toolchain-snapshot_3.5~svn201241/lldb//tools/lldb-mi/MIUtilSystemLinux.cpp
 index de14317..9c4deb4 100644
---- a/tools/lldb-mi/MIUtilSystemLinux.cpp
-+++ b/tools/lldb-mi/MIUtilSystemLinux.cpp
+--- llvm-toolchain-snapshot_3.5~svn201241.orig/lldb/tools/lldb-mi/MIUtilSystemLinux.cpp
++++ llvm-toolchain-snapshot_3.5~svn201241/lldb/tools/lldb-mi/MIUtilSystemLinux.cpp
 @@ -22,7 +22,7 @@
  // Include compiler configuration
  #include "MICmnConfig.h"
@@ -46,10 +30,10 @@ index de14317..9c4deb4 100644
  
 -#endif // #if defined( __linux )
 +#endif // #if defined( __linux__ )
-diff --git a/tools/lldb-mi/MIUtilSystemLinux.h b/tools/lldb-mi/MIUtilSystemLinux.h
+diff --git llvm-toolchain-snapshot_3.5~svn201241/lldb/tools/lldb-mi/MIUtilSystemLinux.h llvm-toolchain-snapshot_3.5~svn201241/lldb//tools/lldb-mi/MIUtilSystemLinux.h
 index c79bcfd..0d9062a 100644
---- a/tools/lldb-mi/MIUtilSystemLinux.h
-+++ b/tools/lldb-mi/MIUtilSystemLinux.h
+--- llvm-toolchain-snapshot_3.5~svn201241.orig/lldb/tools/lldb-mi/MIUtilSystemLinux.h
++++ llvm-toolchain-snapshot_3.5~svn201241/lldb/tools/lldb-mi/MIUtilSystemLinux.h
 @@ -24,7 +24,7 @@
  // Include compiler configuration
  #include "MICmnConfig.h"
