@@ -42,3 +42,4 @@ follow-parallel-var.diff
 scan-build-search-path.diff
 lldb-kfreebsd.diff
 hurd-EIEIO-undef.diff
+lldb-__linux__-ftbfs-powerpc.patch
