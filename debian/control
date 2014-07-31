@@ -10,7 +10,8 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
     libedit-dev, swig, python-sphinx, ocaml-nox, binutils-dev, libcloog-isl-dev,
     libisl-dev (>= 0.11.1), libjsoncpp-dev,
     lcov, procps, help2man, dh-ocaml
-Build-Conflicts: oprofile, ocaml, libllvm-3.4-ocaml-dev, libllvm-3.6-ocaml-dev
+Build-Conflicts: oprofile, ocaml, libllvm-3.4-ocaml-dev, libllvm-3.5-ocaml-dev
+ libllvm-3.6-ocaml-dev
 Standards-Version: 3.9.5
 Homepage: http://www.llvm.org/
 Vcs-Svn: svn://svn.debian.org/svn/pkg-llvm/llvm-toolchain/branches/snapshot/
@@ -26,8 +27,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-3.6-dev, python
 Suggests: gnustep, gnustep-devel, clang-3.6-doc
-Replaces: clang, clang-3.1, clang-3.2, clang-3.3, clang-3.4, compiler-rt
-Breaks: clang, clang-3.1, clang-3.2, clang-3.3, clang-3.4, compiler-rt
+Replaces: clang, clang-3.1, clang-3.2, clang-3.3, clang-3.4, clang-3.5, compiler-rt
+Breaks: clang, clang-3.1, clang-3.2, clang-3.3, clang-3.4, clang-3.5, compiler-rt
 Description: C, C++ and Objective-C compiler (LLVM based)
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler
@@ -71,8 +72,8 @@ Description: Tool to convert C++98 and C++03 code to C++11
 Package: clang-modernize-3.6
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, clang-3.6
-Replaces: cpp11-migrate-3.3, cpp11-migrate-3.4
-Breaks: cpp11-migrate-3.3, cpp11-migrate-3.4
+Replaces: cpp11-migrate-3.3, cpp11-migrate-3.4, cpp11-migrate-3.5
+Breaks: cpp11-migrate-3.3, cpp11-migrate-3.4, cpp11-migrate-3.5
 Description: Tool to convert C++98 and C++03 code to C++11
  The purpose of the C++11 Migrator is to do source-to-source translation to
  migrate existing C++ code to use C++11 features to enhance
@@ -168,8 +169,8 @@ Package: python-clang-3.6
 Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
-Replaces: python-clang-3.3, python-clang-3.4
-Breaks: python-clang-3.3, python-clang-3.4
+Replaces: python-clang-3.3, python-clang-3.4, python-clang-3.5
+Breaks: python-clang-3.3, python-clang-3.4, python-clang-3.5
 Description: Clang Python Bindings
  This binding package provides access to the Clang compiler and libraries.
 
@@ -380,8 +381,8 @@ Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sp
 # ia64 mips mipsel hurd have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.6 (= ${binary:Version}), python, llvm-3.6-dev
 Pre-Depends: ${misc:Pre-Depends}
-Replaces: lldb-3.2, lldb-3.3, lldb-3.4
-Breaks: lldb-3.2, lldb-3.3, lldb-3.4
+Replaces: lldb-3.2, lldb-3.3, lldb-3.4, lldb-3.5
+Breaks: lldb-3.2, lldb-3.3, lldb-3.4, lldb-3.5
 Description: Next generation, high-performance debugger
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
