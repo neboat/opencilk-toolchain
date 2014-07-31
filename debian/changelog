@@ -1,3 +1,9 @@
+llvm-toolchain-3.5 (1:3.5~+rc1-3) UNRELEASED; urgency=medium
+
+  * SVN branched. Update the Vcs- flags.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 31 Jul 2014 08:27:50 +0200
+
 llvm-toolchain-3.5 (1:3.5~+rc1-2) unstable; urgency=medium
 
   * Sync with 3.4 svn to retrieve some changes:
