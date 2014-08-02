@@ -10,7 +10,6 @@ usr/lib/llvm-@LLVM_VERSION@/bin/pp-trace
 usr/bin/c-index-test*
 tools/clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
 tools/clang/tools/scan-view-@LLVM_VERSION@       usr/share/clang/
-#usr/share/man/man1/clang.1	usr/share/man/man1/
 
 usr/bin/clang-@LLVM_VERSION@
 usr/bin/clang++-@LLVM_VERSION@
