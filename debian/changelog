@@ -1,7 +1,11 @@
-llvm-toolchain-3.5 (1:3.5~+rc1-4) UNRELEASED; urgency=medium
+llvm-toolchain-3.5 (1:3.5~+rc1-3~exp1) experimental; urgency=medium
 
   * SVN branched. Update the Vcs- flags.
-  * clang-3.5 Breaks & Replaces clang (<< 1:3.5). Just like 3.4
+  * Co installation of clang (Closes: #736057)
+    - scan-build => scan-build-3.5
+    - scan-view => scan-view-3.5
+    - asan_symbolize => asan_symbolize-3.5
+  * Remove of pollycc
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 31 Jul 2014 18:12:59 +0200
 
