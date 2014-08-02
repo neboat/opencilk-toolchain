@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:3.6~svn214390-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:3.6~svn214630-1~exp1) experimental; urgency=medium
 
   * New snapshot release (3.5 => 3.6)
   * Co installation of clang (Closes: #736057)
