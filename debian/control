@@ -27,8 +27,9 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-3.6-dev, python
 Suggests: gnustep, gnustep-devel, clang-3.6-doc
-Replaces: clang, clang-3.2, clang-3.3, clang-3.4, clang-3.5, compiler-rt
-Breaks: clang, clang-3.2, clang-3.3, clang-3.4, clang-3.5, compiler-rt
+# remettre les clang-X.Y avec les versions spécifiques
+Replaces: clang-3.2, clang-3.3, compiler-rt
+Breaks: clang-3.2, clang-3.3, compiler-rt
 Description: C, C++ and Objective-C compiler (LLVM based)
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler

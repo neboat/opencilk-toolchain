@@ -1,8 +1,13 @@
 llvm-toolchain-snapshot (1:3.6~svn214390-1~exp1) experimental; urgency=medium
 
   * New snapshot release (3.5 => 3.6)
+  * Co installation of clang (Closes: #736057)
+    - scan-build => scan-build-3.6
+    - scan-view => scan-view-3.6
+    - asan_symbolize => asan_symbolize-3.6
   * Refresh of the patches
   * Install yaml2obj, obj2yaml & verify-uselistorder in llvm-3.6
+  * Remove of pollycc
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 31 Jul 2014 08:42:35 +0200
 
