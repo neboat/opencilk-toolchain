@@ -1,3 +1,9 @@
+llvm-toolchain-3.5 (1:3.5~+rc1-3~exp2) UNRELEASED; urgency=medium
+
+  * Enable compressed debug sections (Closes: #757002)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 04 Aug 2014 13:35:35 +0200
+
 llvm-toolchain-3.5 (1:3.5~+rc1-3~exp1) experimental; urgency=medium
 
   * SVN branched. Update the Vcs- flags.
