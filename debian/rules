@@ -117,7 +117,7 @@ endif
 
 
 LLDB_ENABLE=yes
-LLDB_DISABLE_ARCHS := arm64 hurd-i386 mips mipsel ia64
+LLDB_DISABLE_ARCHS := arm64 hurd-i386 ia64
 # hurd has threading issues
 # mips* fails with "undefined references to `__atomic_load_8'"
 ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
