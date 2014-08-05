@@ -130,7 +130,7 @@ if test -z "$DISTRIBUTION"; then
     DISTRIBUTION="experimental"
 fi
 
-if test -n "$RCRELEASE"; then
+if test -n "$RCRELEASE" -o -n "$BRANCH"; then
     EXTRA_DCH_FLAGS="--force-bad-version --allow-lower-version"
 fi
 
