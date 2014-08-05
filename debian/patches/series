@@ -9,7 +9,6 @@
 0021-shared-lib-debian.patch
 0023-link-libopagent.patch
 0044-soname.diff
-0047-version-name.diff
 scan-build-clang-path.diff
 0050-powerpcspe-fp.diff
 declare_clear_cache.diff
@@ -34,11 +33,9 @@ silent-more-tests.diff
 disable-display-PASS-UNSUPPORTED-XFAIL.diff
 lldb-link-atomic.diff
 fix-llvm-config-obj-src-root.patch
-suffixsvn.diff
 compiler-rt-path.diff
 lldb-soname.diff
 force-link-pass.o.diff
 follow-parallel-var.diff
 lldb-kfreebsd.diff
 hurd-EIEIO-undef.diff
-lldb-__linux__-ftbfs-powerpc.patch
