@@ -77,7 +77,11 @@ if test -n "$RCRELEASE"; then
     FULL_VERSION="llvm-toolchain-"$MAJOR_VERSION"_"$VERSION
 else
     VERSION=$CURRENT_VERSION"~svn"$REVISION
-    FULL_VERSION="llvm-toolchain-snapshot_"$VERSION
+    if grep -q release_ $BRANCH; then
+	FULL_VERSION="llvm-toolchain-"$MAJOR_VERSION"_"$VERSION
+    else
+	FULL_VERSION="llvm-toolchain-snapshot_"$VERSION
+    fi
 fi
 
 # LLVM
@@ -130,7 +134,7 @@ if test -z "$DISTRIBUTION"; then
     DISTRIBUTION="experimental"
 fi
 
-if test -n "$RCRELEASE"; then
+if test -n "$RCRELEASE" -o -n "$BRANCH"; then
     EXTRA_DCH_FLAGS="--force-bad-version --allow-lower-version"
 fi
 
