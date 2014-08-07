@@ -77,7 +77,7 @@ if test -n "$RCRELEASE"; then
     FULL_VERSION="llvm-toolchain-"$MAJOR_VERSION"_"$VERSION
 else
     VERSION=$CURRENT_VERSION"~svn"$REVISION
-    if grep -q release_ $BRANCH; then
+    if echo $BRANCH|grep -q release_; then
 	FULL_VERSION="llvm-toolchain-"$MAJOR_VERSION"_"$VERSION
     else
 	FULL_VERSION="llvm-toolchain-snapshot_"$VERSION
