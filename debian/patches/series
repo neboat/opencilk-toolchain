@@ -11,7 +11,6 @@
 0044-soname.diff
 0047-version-name.diff
 scan-build-clang-path.diff
-0050-powerpcspe-fp.diff
 declare_clear_cache.diff
 31-powerpcspe.diff
 34-powerpc-no-altivec.diff
@@ -26,7 +25,6 @@ atomic_library_2.diff
 python-clangpath.diff
 removeduplicatedeclaration.diff
 fix-clang-path-and-build.diff
-silent-MCJIIT-tests.diff
 include-target.diff
 force-gcc-header-obj.diff
 do-not-fail-on-unexpected-pass.diff
