@@ -39,3 +39,5 @@ force-link-pass.o.diff
 follow-parallel-var.diff
 lldb-kfreebsd.diff
 hurd-EIEIO-undef.diff
+disable-powerpc-test.diff
+fix-lldb-3.5-rc2.diff
