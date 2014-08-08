@@ -91,8 +91,8 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # The package are installed through the variable declarations:
 # OTHERMIRROR="deb http://llvm.org/apt/unstable/ llvm-toolchain main"
 # EXTRAPACKAGES="clang-3.6"
-	PRE_PROCESS=scan-build -analyzer-config stable-report-filename=true
-	PRE_PROCESS_CONF=scan-build
+	PRE_PROCESS=scan-build-$(LLVM_VERSION) -analyzer-config stable-report-filename=true
+	PRE_PROCESS_CONF=scan-build-$(LLVM_VERSION)
 # no need to run tests in this case
 	DEB_BUILD_OPTIONS+=" nocheck"
 	CONFIGURE_EXTRA += --enable-assertions
@@ -310,9 +310,9 @@ override_dh_auto_install:
 
 # Rename some stuff with the version name
 	cp $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang.1 $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang-$(LLVM_VERSION).1
-	
+
 	cp $(CURDIR)/clang/tools/scan-build/scan-build.1 $(CURDIR)/clang/tools/scan-build/scan-build-$(LLVM_VERSION).1
-		
+
 	cp -f $(CURDIR)/utils/vim/llvm.vim $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim
 
 	cp -f $(CURDIR)/utils/vim/tablegen.vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim
