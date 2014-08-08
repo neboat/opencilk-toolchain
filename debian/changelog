@@ -1,9 +1,3 @@
-llvm-toolchain-snapshot (1:3.6~svn215188-1~exp1) experimental; urgency=medium
-
-  * New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 08 Aug 2014 10:05:06 +0200
-
 llvm-toolchain-snapshot (1:3.6~svn214630-1~exp2) UNRELEASED; urgency=medium
 
   * Enable compressed debug sections (Closes: #757002)
