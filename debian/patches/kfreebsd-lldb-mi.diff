@@ -1,0 +1,13 @@
+Index: llvm-toolchain-snapshot-3.6~svn215195/lldb/tools/Makefile
+===================================================================
+--- llvm-toolchain-snapshot-3.6~svn215195.orig/lldb/tools/Makefile	2014-08-11 08:42:54.000000000 +0200
++++ llvm-toolchain-snapshot-3.6~svn215195/lldb/tools/Makefile	2014-08-11 08:43:35.918401006 +0200
+@@ -25,7 +25,7 @@
+ DIRS += debugserver
+ endif
+ 
+-ifeq ($(HOST_OS),Linux)
++ifneq (,$(strip $(filter $(HOST_OS), Linux GNU/kFreeBSD)))
+ DIRS += lldb-mi
+ endif
+ 
