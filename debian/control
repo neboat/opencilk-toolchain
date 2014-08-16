@@ -378,7 +378,7 @@ Description: Modular compiler and toolchain technologies, examples
 # ------------- lldb -------------
 
 Package: lldb-3.6
-Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc mips mipsel
 # ia64 mips mipsel hurd have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.6 (= ${binary:Version}), python, llvm-3.6-dev
 Pre-Depends: ${misc:Pre-Depends}
@@ -390,7 +390,7 @@ Description: Next generation, high-performance debugger
  Project, such as the Clang expression parser and LLVM disassembler.
 
 Package: lldb-3.6-dev
-Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc mips mipsel
 # ia64 mips mipsel hurd have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-3.6 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
