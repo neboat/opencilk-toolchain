@@ -311,9 +311,9 @@ override_dh_auto_install:
 
 # Rename some stuff with the version name
 	cp $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang.1 $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang-$(LLVM_VERSION).1
-	
+
 	cp $(CURDIR)/clang/tools/scan-build/scan-build.1 $(CURDIR)/clang/tools/scan-build/scan-build-$(LLVM_VERSION).1
-		
+
 	cp -f $(CURDIR)/utils/vim/llvm.vim $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim
 
 	cp -f $(CURDIR)/utils/vim/tablegen.vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim
@@ -363,9 +363,6 @@ override_dh_strip:
 	dh_strip -a
 
 
-override_dh_install:
-	dh_install --fail-missing
-
 override_dh_installdeb:
 # Managed by the package
 	dh_installdeb -a
@@ -376,8 +373,6 @@ override_dh_installdeb:
 
 # Remove auto generated python pyc
 	find $(CURDIR)/debian/llvm-$(LLVM_VERSION)-tools/usr/lib/llvm-$(LLVM_VERSION)/ -name '*.pyc' | xargs -r rm -f
-
-
 
 
 ifeq (,$(filter nocheck, $(DEB_BUILD_OPTIONS)))
