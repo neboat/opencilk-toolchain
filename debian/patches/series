@@ -19,14 +19,14 @@ disable-execinfo-usage.diff
 unwind-chain-inclusion.diff
 hurd-pathmax.diff
 use-deb-json.diff
-libstdc++-header-i386.diff
+#libstdc++-header-i386.diff
 atomic_library_1.diff
 atomic_library_2.diff
 python-clangpath.diff
 removeduplicatedeclaration.diff
 fix-clang-path-and-build.diff
 silent-MCJIIT-tests.diff
-include-target.diff
+#include-target.diff
 force-gcc-header-obj.diff
 do-not-fail-on-unexpected-pass.diff
 silent-more-tests.diff
