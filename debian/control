@@ -22,7 +22,7 @@ Package: clang-3.4
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  libclang-common-3.4-dev (= ${binary:Version}),
- libclang1-3.4 (= ${binary:Version}), libc6-dev
+ libclang1-3.4 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-3.4-dev, python
 Suggests: gnustep, gnustep-devel, clang-3.4-doc
@@ -177,6 +177,13 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, python
 Replaces: python-clang-3.3, python-clang-3.5
 Breaks: python-clang-3.3, python-clang-3.5
 Description: Clang Python Bindings
+ Clang project is a C, C++, Objective C and Objective C++ front-end
+ for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler
+ Collection (GCC).
+ .
+ Clang implements all of the ISO C++ 1998 and 2001 standards and also provides
+ a partial support of C++1y.
+ .
  This binding package provides access to the Clang compiler and libraries.
 
 
@@ -385,19 +392,50 @@ Description: Modular compiler and toolchain technologies, examples
 Package: lldb-3.4
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc mips mipsel
 # ia64 hurd have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.4 (= ${binary:Version}), python, llvm-3.4-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.4 (= ${binary:Version}), python, llvm-3.4-dev, liblldb-3.4,
+ python-lldb-3.4
 Pre-Depends: ${misc:Pre-Depends}
-Replaces: lldb-3.2, lldb-3.3, lldb-3.5
-Breaks: lldb-3.2, lldb-3.3, lldb-3.5
 Description: Next generation, high-performance debugger
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
  Project, such as the Clang expression parser and LLVM disassembler.
 
-Package: lldb-3.4-dev
+Package: liblldb-3.4
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc mips mipsel
+# ia64 hurd have been removed
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.4 (= ${binary:Version})
+Pre-Depends: ${misc:Pre-Depends}
+Section: libs
+Replaces: lldb-3.4 (>> 1:3.4.2-9~)
+Breaks: lldb-3.4 (>> 1:3.4.2-9~)
+Description: Next generation, high-performance debugger, library
+ LLDB is a next generation, high-performance debugger. It is built as a set of
+ reusable components which highly leverage existing libraries in the larger LLVM
+ Project, such as the Clang expression parser and LLVM disassembler.
+ .
+ This package contains the LLDB runtime library.
+
+
+Package: python-lldb-3.4
+Section: python
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Pre-Depends: ${misc:Pre-Depends}
+Description: Next generation, high-performance debugger, python lib
+ LLDB is a next generation, high-performance debugger. It is built as a set of
+ reusable components which highly leverage existing libraries in the larger LLVM
+ Project, such as the Clang expression parser and LLVM disassembler.
+ .
+ This binding package provides access to lldb.
+
+
+Package: liblldb-3.4-dev
+Section: libdevel
+Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc mips mipsel
 # ia64 mips mipsel hurd have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-3.4 (= ${binary:Version})
+Replaces: lldb-3.4-dev (<< 1:3.4.2-9~)
+Breaks: lldb-3.4-dev (<< 1:3.4.2-9~)
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger - Header files
  LLDB is a next generation, high-performance debugger. It is built as a set of
@@ -405,3 +443,11 @@ Description: Next generation, high-performance debugger - Header files
  Project, such as the Clang expression parser and LLVM disassembler.
  .
  This package provides the header files to build extension over lldb.
+
+
+Package: lldb-3.4-dev
+Depends: liblldb-3.4-dev, ${misc:Depends}
+Architecture: all
+Section: oldlibs
+Description: transitional dummy package to liblldb-3.4-dev
+ This is a transitional dummy package. It can safely be removed.

@@ -1,3 +1,18 @@
+llvm-toolchain-3.4 (1:3.4.2-9~exp1) experimental; urgency=medium
+
+  * libclang-3.4.so should be used instead libclang.so. Update the soname
+    to match the new lib name (Closes: #759538)
+  * Rename liblldb.so to liblldb-3.4.so + update of the soname.
+  * python-clang-3.4 description updated
+  * liblldb-3.4 and python-lldb-3.4 added
+  * lldb-3.4-dev renamed to liblldb-3.4-dev to match the previous changes
+  * Manpages for llvm-ranlib, clang-apply-replacements, pp-trace and clang-tidy
+    added
+  * clang-3.4 should depends on binutils (for ld, at least)
+    (Closes: #751030)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Aug 2014 18:09:20 +0200
+
 llvm-toolchain-3.4 (1:3.4.2-8) unstable; urgency=medium
 
   * Try to bring back lldb-3.4-dev on mips & mipsel (Closes: #758314)
