@@ -7,7 +7,7 @@ Index: llvm-toolchain-3.4-3.4.2/lldb/lib/Makefile
      LLVMLibsOptions += -latomic
      endif
 -    LLVMLibsOptions += -Wl,--soname,lib$(LIBRARYNAME)$(SHLIBEXT).$(SONAME_EXTENSION)
-+    LLVMLibsOptions += -Wl,--soname,lib$(LIBRARYNAME)-$(LLVM_VERSION_MAJOR).$(LLVM_VERSION_MINOR)$(SHLIBEXT).$(SONAME_EXTENSION)
++    LLVMLibsOptions += -Wl,--soname,lib$(LIBRARYNAME)-$(LLVM_VERSION_MAJOR).$(LLVM_VERSION_MINOR)$(SHLIBEXT)
  endif
  
  ifeq ($(HOST_OS),FreeBSD)
