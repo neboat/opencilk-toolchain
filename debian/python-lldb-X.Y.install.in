@@ -1,1 +1,1 @@
-build-llvm/Release/lib/python2.7/site-packages/lldb/ /usr/lib/python2.7/dist-packages/
+usr/lib/llvm-@LLVM_VERSION@/lib/python2.7/site-packages/lldb/

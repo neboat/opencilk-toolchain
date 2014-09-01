@@ -11,6 +11,7 @@ llvm-toolchain-3.5 (1:3.5~+rc4-2) unstable; urgency=medium
     added
   * clang-3.5 should depends on binutils (for ld, at least)
     (Closes: #751030)
+  * clang/www/analyzer/scripts/dbtree.js removed
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Aug 2014 18:09:20 +0200
 
