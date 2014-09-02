@@ -7,4 +7,3 @@ usr/lib/llvm-@LLVM_VERSION@/bin/lldb-gdbserver
 usr/bin/lldb-platform-@LLVM_VERSION@
 usr/bin/lldb-gdbserver-@LLVM_VERSION@
 usr/bin/lldb-mi-@LLVM_VERSION@
-
