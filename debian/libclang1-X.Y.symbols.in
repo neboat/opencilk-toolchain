@@ -58,20 +58,14 @@ libclang-@LLVM_VERSION@.so libclang1-@LLVM_VERSION@ #MINVER#
  clang_InlineCommandComment_getNumArgs@Base 3.2
  clang_InlineCommandComment_getRenderKind@Base 3.2
  clang_InlineContentComment_hasTrailingNewline@Base 3.2
-<<<<<<< .working
- clang_Location_isFromMainFile@Base @LLVM_VERSION@
- clang_Location_isInSystemHeader@Base @LLVM_VERSION@
+ clang_Location_isFromMainFile@Base 3.4
+ clang_Location_isInSystemHeader@Base 3.4
  clang_ModuleMapDescriptor_create@Base @LLVM_VERSION@
  clang_ModuleMapDescriptor_dispose@Base @LLVM_VERSION@
  clang_ModuleMapDescriptor_setFrameworkModuleName@Base @LLVM_VERSION@
  clang_ModuleMapDescriptor_setUmbrellaHeader@Base @LLVM_VERSION@
  clang_ModuleMapDescriptor_writeToBuffer@Base @LLVM_VERSION@
- clang_Module_getASTFile@Base @LLVM_VERSION@
-=======
- clang_Location_isFromMainFile@Base 3.4
- clang_Location_isInSystemHeader@Base 3.4
  clang_Module_getASTFile@Base 3.4
->>>>>>> .merge-right.r1372
  clang_Module_getFullName@Base 3.2
  clang_Module_getName@Base 3.2
  clang_Module_getNumTopLevelHeaders@Base 3.2
@@ -89,21 +83,13 @@ libclang-@LLVM_VERSION@.so libclang1-@LLVM_VERSION@ #MINVER#
  clang_TParamCommandComment_getParamName@Base 3.2
  clang_TParamCommandComment_isParamPositionValid@Base 3.2
  clang_TextComment_getText@Base 3.2
-<<<<<<< .working
- clang_Type_getAlignOf@Base @LLVM_VERSION@
- clang_Type_getCXXRefQualifier@Base @LLVM_VERSION@
- clang_Type_getClassType@Base @LLVM_VERSION@
- clang_Type_getNumTemplateArguments@Base @LLVM_VERSION@
- clang_Type_getOffsetOf@Base @LLVM_VERSION@
- clang_Type_getSizeOf@Base @LLVM_VERSION@
- clang_Type_getTemplateArgumentAsType@Base @LLVM_VERSION@
-=======
  clang_Type_getAlignOf@Base 3.4
  clang_Type_getCXXRefQualifier@Base 3.4
  clang_Type_getClassType@Base 3.4
+ clang_Type_getNumTemplateArguments@Base @LLVM_VERSION@
  clang_Type_getOffsetOf@Base 3.4
  clang_Type_getSizeOf@Base 3.4
->>>>>>> .merge-right.r1372
+ clang_Type_getTemplateArgumentAsType@Base @LLVM_VERSION@
  clang_VerbatimBlockLineComment_getText@Base 3.2
  clang_VerbatimLineComment_getText@Base 3.2
  clang_VirtualFileOverlay_addFileMapping@Base @LLVM_VERSION@
@@ -153,13 +139,8 @@ libclang-@LLVM_VERSION@.so libclang1-@LLVM_VERSION@ #MINVER#
  clang_equalRanges@Base 3.2
  clang_equalTypes@Base 3.2
  clang_executeOnThread@Base 3.2
-<<<<<<< .working
- clang_findIncludesInFile@Base @LLVM_VERSION@
- clang_findIncludesInFileWithBlock@Base @LLVM_VERSION@
-=======
  clang_findIncludesInFile@Base 3.4
  clang_findIncludesInFileWithBlock@Base 3.4
->>>>>>> .merge-right.r1372
  clang_findReferencesInFile@Base 3.2
  clang_findReferencesInFileWithBlock@Base 3.2
  clang_formatDiagnostic@Base 3.2
@@ -224,24 +205,12 @@ libclang-@LLVM_VERSION@.so libclang1-@LLVM_VERSION@ #MINVER#
  clang_getEnumConstantDeclValue@Base 3.2
  clang_getEnumDeclIntegerType@Base 3.2
  clang_getExpansionLocation@Base 3.2
-<<<<<<< .working
- clang_getFieldDeclBitWidth@Base @LLVM_VERSION@
-=======
  clang_getFieldDeclBitWidth@Base 3.4
->>>>>>> .merge-right.r1372
  clang_getFile@Base 3.2
-<<<<<<< .working
- clang_getFileLocation@Base @LLVM_VERSION@
-=======
  clang_getFileLocation@Base 3.4
->>>>>>> .merge-right.r1372
  clang_getFileName@Base 3.2
  clang_getFileTime@Base 3.2
-<<<<<<< .working
- clang_getFileUniqueID@Base @LLVM_VERSION@
-=======
  clang_getFileUniqueID@Base 3.4
->>>>>>> .merge-right.r1372
  clang_getFunctionTypeCallingConv@Base 3.2
  clang_getIBOutletCollectionType@Base 3.2
  clang_getIncludedFile@Base 3.2
@@ -282,11 +251,7 @@ libclang-@LLVM_VERSION@.so libclang1-@LLVM_VERSION@ #MINVER#
  clang_getTranslationUnitSpelling@Base 3.2
  clang_getTypeDeclaration@Base 3.2
  clang_getTypeKindSpelling@Base 3.2
-<<<<<<< .working
- clang_getTypeSpelling@Base @LLVM_VERSION@
-=======
  clang_getTypeSpelling@Base 3.4
->>>>>>> .merge-right.r1372
  clang_getTypedefDeclUnderlyingType@Base 3.2
  clang_hashCursor@Base 3.2
  clang_indexLoc_getCXSourceLocation@Base 3.2
