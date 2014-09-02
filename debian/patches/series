@@ -24,12 +24,6 @@ atomic_library_2.diff
 python-clangpath.diff
 removeduplicatedeclaration.diff
 fix-clang-path-and-build.diff
-<<<<<<< .working
-#include-target.diff
-=======
-silent-MCJIIT-tests.diff
-#include-target.diff
->>>>>>> .merge-right.r1379
 force-gcc-header-obj.diff
 do-not-fail-on-unexpected-pass.diff
 silent-more-tests.diff
