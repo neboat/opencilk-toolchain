@@ -9,8 +9,7 @@
 0021-shared-lib-debian.patch
 0023-link-libopagent.patch
 0044-soname.diff
-0047-version-name.diff
-scan-build-clang-path.diff
+#scan-build-clang-path.diff
 declare_clear_cache.diff
 31-powerpcspe.diff
 34-powerpc-no-altivec.diff
@@ -25,14 +24,18 @@ atomic_library_2.diff
 python-clangpath.diff
 removeduplicatedeclaration.diff
 fix-clang-path-and-build.diff
+<<<<<<< .working
 #include-target.diff
+=======
+silent-MCJIIT-tests.diff
+#include-target.diff
+>>>>>>> .merge-right.r1379
 force-gcc-header-obj.diff
 do-not-fail-on-unexpected-pass.diff
 silent-more-tests.diff
 disable-display-PASS-UNSUPPORTED-XFAIL.diff
 lldb-link-atomic.diff
 fix-llvm-config-obj-src-root.patch
-suffixsvn.diff
 compiler-rt-path.diff
 lldb-soname.diff
 force-link-pass.o.diff
@@ -41,3 +44,4 @@ lldb-kfreebsd.diff
 hurd-EIEIO-undef.diff
 silent-MCJIIT-tests.diff
 kfreebsd-lldb-mi.diff
+lldb-libname.diff

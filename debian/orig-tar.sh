@@ -14,8 +14,8 @@ set -e
 # sh 3.4/debian/orig-tar.sh RELEASE_34 rc1
 
 SVN_BASE_URL=http://llvm.org/svn/llvm-project/
-MAJOR_VERSION=3.6
-CURRENT_VERSION=3.6 # Should be changed to 3.6.1 later
+MAJOR_VERSION=3.5
+CURRENT_VERSION=3.5 # Should be changed to 3.5.1 later
 
 if test -n "$1"; then
 # http://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/branches/google/stable/
