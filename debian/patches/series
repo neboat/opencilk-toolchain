@@ -39,3 +39,4 @@ hurd-EIEIO-undef.diff
 silent-MCJIIT-tests.diff
 kfreebsd-lldb-mi.diff
 lldb-libname.diff
+strip-svn.diff

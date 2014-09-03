@@ -1,3 +1,21 @@
+llvm-toolchain-snapshot (1:3.6~svn216933-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * sync from 1:3.5~+rc4-2~exp1
+  * libclang-3.6.so should be used instead libclang.so. Update the soname
+    to match the new lib name (Closes: #759538)
+  * Rename liblldb.so to liblldb-3.6.so + update of the soname.
+  * python-clang-3.6 description updated
+  * liblldb-3.6 and python-lldb-3.6 added
+  * lldb-3.6-dev renamed to liblldb-3.6-dev to match the previous changes
+  * Manpages for llvm-ranlib, clang-apply-replacements, pp-trace and clang-tidy
+    added
+  * clang-3.6 should depends on binutils (for ld, at least)
+    (Closes: #751030)
+  * clang/www/analyzer/scripts/dbtree.js removed
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Aug 2014 18:09:20 +0200
+
 llvm-toolchain-snapshot (1:3.6~svn215195-3) unstable; urgency=medium
 
   * Just like in 3.4 & 3.5, bring back lldb & lldb-dev under mips & mipsel
@@ -23,23 +41,6 @@ llvm-toolchain-snapshot (1:3.6~svn215195-1) unstable; urgency=medium
   * Second try to fix build under HURD (hurd-EIEIO-undef.diff)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 04 Aug 2014 13:36:15 +0200
-
-llvm-toolchain-3.5 (1:3.5~+rc4-2~exp1) experimental; urgency=medium
-
-  * sync from 1:3.4.2-9~exp1
-  * libclang-3.5.so should be used instead libclang.so. Update the soname
-    to match the new lib name (Closes: #759538)
-  * Rename liblldb.so to liblldb-3.5.so + update of the soname.
-  * python-clang-3.5 description updated
-  * liblldb-3.5 and python-lldb-3.5 added
-  * lldb-3.5-dev renamed to liblldb-3.5-dev to match the previous changes
-  * Manpages for llvm-ranlib, clang-apply-replacements, pp-trace and clang-tidy
-    added
-  * clang-3.5 should depends on binutils (for ld, at least)
-    (Closes: #751030)
-  * clang/www/analyzer/scripts/dbtree.js removed
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Aug 2014 18:09:20 +0200
 
 llvm-toolchain-3.4 (1:3.4.2-8) unstable; urgency=medium
 
