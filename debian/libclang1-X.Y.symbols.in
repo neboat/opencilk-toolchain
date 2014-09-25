@@ -28,6 +28,7 @@ libclang-@LLVM_VERSION@.so libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_getArgument@Base 3.2
  clang_Cursor_getBriefCommentText@Base 3.2
  clang_Cursor_getCommentRange@Base 3.2
+ clang_Cursor_getMangling@Base 3.6
  clang_Cursor_getModule@Base 3.2
  clang_Cursor_getNumArguments@Base 3.2
  clang_Cursor_getObjCDeclQualifiers@Base 3.4
@@ -43,6 +44,7 @@ libclang-@LLVM_VERSION@.so libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_isNull@Base 3.2
  clang_Cursor_isObjCOptional@Base 3.4
  clang_Cursor_isVariadic@Base 3.4
+ clang_File_isEqual@Base 3.6
  clang_FullComment_getAsHTML@Base 3.2
  clang_FullComment_getAsXML@Base 3.2
  clang_HTMLStartTagComment_isSelfClosing@Base 3.2
