@@ -416,6 +416,7 @@ Package: python-lldb-3.6
 Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Conflicts: python-lldb-3.4, python-lldb-3.5
 Pre-Depends: ${misc:Pre-Depends}
 Conflicts: python-lldb-3.4, python-lldb-3.5
 Description: Next generation, high-performance debugger, python lib
