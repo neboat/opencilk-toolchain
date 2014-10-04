@@ -406,6 +406,11 @@ ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
 		ln -s ../../../libLLVM-$(LLVM_VERSION_FULL).so libLLVM-$(LLVM_VERSION_FULL).so.$(SONAME_EXT); \
 	fi; \
 	fi
+
+	cd $(TARGET_BUILD)/Release/lib && \
+	rm -f liblldb-$(LLVM_VERSION).so && \
+	ln -s liblldb.so liblldb-$(LLVM_VERSION).so
+
 	cd $(TARGET_BUILD)/ && $(MAKE) -C tools/lldb/test || true
 	if test -d $(TARGET_BUILD)/tools/lldb/test/lldb-test-traces/; then \
 		cat $(TARGET_BUILD)/tools/lldb/test/lldb-test-traces/*; \
@@ -413,7 +418,7 @@ ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
 endif
 
 # Managed by debian build system
-	rm -f $(CURDIR)/$(TARGET_BUILD)/Release/lib/python*/site-packages/lldb/_lldb.so
+	rm -f $(CURDIR)/$(TARGET_BUILD)/Release/lib/python*/site-packages/lldb/_lldb.so $(TARGET_BUILD)/Release/lib/liblldb-$(LLVM_VERSION).so
 
 # polly tests
 	if test $(POLLY_ENABLE) = yes; then \
