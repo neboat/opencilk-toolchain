@@ -391,9 +391,10 @@ endif
 
 # clang tests
 # setup the env
-	cd $(TARGET_BUILD)/Release/lib/ && ln -s libclang.so libclang.so.1
+	cd $(TARGET_BUILD)/Release/lib/ && ln -s libclang.so libclang.so.1 && ln -s libclang.so libclang-3.6.so.1
 	cd $(TARGET_BUILD)/ && $(MAKE) -C tools/clang/ test || true
-	rm -f $(TARGET_BUILD)/Release/lib/libclang.so.1
+	rm -f $(TARGET_BUILD)/Release/lib/libclang.so.1 $(TARGET_BUILD)/Release/lib/libclang-$(LLVM_VERSION).so.1
+
 
 # lldb tests
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
