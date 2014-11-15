@@ -1,5 +1,5 @@
 usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM*.a
-usr/lib/llvm-@LLVM_VERSION@/lib/libllvm*.a
+#usr/lib/llvm-@LLVM_VERSION@/lib/libllvm*.a
 usr/lib/llvm-@LLVM_VERSION@/lib/LLVM*.so
 usr/lib/llvm-@LLVM_VERSION@/lib/libLTO.*
 usr/lib/llvm-@LLVM_VERSION@/lib/BugpointPasses.so

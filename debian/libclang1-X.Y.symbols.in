@@ -1,4 +1,4 @@
-libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
+libclang-3.6.so.1 libclang1-3.6 #MINVER#
  clang_BlockCommandComment_getArgText@Base 3.2
  clang_BlockCommandComment_getCommandName@Base 3.2
  clang_BlockCommandComment_getNumArgs@Base 3.2
@@ -31,6 +31,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_getMangling@Base 3.6
  clang_Cursor_getModule@Base 3.2
  clang_Cursor_getNumArguments@Base 3.2
+ clang_Cursor_getNumTemplateArguments@Base 3.6
  clang_Cursor_getObjCDeclQualifiers@Base 3.4
  clang_Cursor_getObjCPropertyAttributes@Base 3.4
  clang_Cursor_getObjCSelectorIndex@Base 3.2
@@ -38,6 +39,11 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_getRawCommentText@Base 3.2
  clang_Cursor_getReceiverType@Base 3.2
  clang_Cursor_getSpellingNameRange@Base 3.2
+ clang_Cursor_getStorageClass@Base 3.6
+ clang_Cursor_getTemplateArgumentKind@Base 3.6
+ clang_Cursor_getTemplateArgumentType@Base 3.6
+ clang_Cursor_getTemplateArgumentUnsignedValue@Base 3.6
+ clang_Cursor_getTemplateArgumentValue@Base 3.6
  clang_Cursor_getTranslationUnit@Base 3.2
  clang_Cursor_isBitField@Base 3.4
  clang_Cursor_isDynamicCall@Base 3.2
@@ -62,18 +68,18 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_InlineContentComment_hasTrailingNewline@Base 3.2
  clang_Location_isFromMainFile@Base 3.4
  clang_Location_isInSystemHeader@Base 3.4
- clang_ModuleMapDescriptor_create@Base @LLVM_VERSION@
- clang_ModuleMapDescriptor_dispose@Base @LLVM_VERSION@
- clang_ModuleMapDescriptor_setFrameworkModuleName@Base @LLVM_VERSION@
- clang_ModuleMapDescriptor_setUmbrellaHeader@Base @LLVM_VERSION@
- clang_ModuleMapDescriptor_writeToBuffer@Base @LLVM_VERSION@
+ clang_ModuleMapDescriptor_create@Base 3.6
+ clang_ModuleMapDescriptor_dispose@Base 3.6
+ clang_ModuleMapDescriptor_setFrameworkModuleName@Base 3.6
+ clang_ModuleMapDescriptor_setUmbrellaHeader@Base 3.6
+ clang_ModuleMapDescriptor_writeToBuffer@Base 3.6
  clang_Module_getASTFile@Base 3.4
  clang_Module_getFullName@Base 3.2
  clang_Module_getName@Base 3.2
  clang_Module_getNumTopLevelHeaders@Base 3.2
  clang_Module_getParent@Base 3.2
  clang_Module_getTopLevelHeader@Base 3.2
- clang_Module_isSystem@Base @LLVM_VERSION@
+ clang_Module_isSystem@Base 3.6
  clang_ParamCommandComment_getDirection@Base 3.2
  clang_ParamCommandComment_getParamIndex@Base 3.2
  clang_ParamCommandComment_getParamName@Base 3.2
@@ -88,17 +94,17 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Type_getAlignOf@Base 3.4
  clang_Type_getCXXRefQualifier@Base 3.4
  clang_Type_getClassType@Base 3.4
- clang_Type_getNumTemplateArguments@Base @LLVM_VERSION@
+ clang_Type_getNumTemplateArguments@Base 3.6
  clang_Type_getOffsetOf@Base 3.4
  clang_Type_getSizeOf@Base 3.4
- clang_Type_getTemplateArgumentAsType@Base @LLVM_VERSION@
+ clang_Type_getTemplateArgumentAsType@Base 3.6
  clang_VerbatimBlockLineComment_getText@Base 3.2
  clang_VerbatimLineComment_getText@Base 3.2
- clang_VirtualFileOverlay_addFileMapping@Base @LLVM_VERSION@
- clang_VirtualFileOverlay_create@Base @LLVM_VERSION@
- clang_VirtualFileOverlay_dispose@Base @LLVM_VERSION@
- clang_VirtualFileOverlay_setCaseSensitivity@Base @LLVM_VERSION@
- clang_VirtualFileOverlay_writeToBuffer@Base @LLVM_VERSION@
+ clang_VirtualFileOverlay_addFileMapping@Base 3.6
+ clang_VirtualFileOverlay_create@Base 3.6
+ clang_VirtualFileOverlay_dispose@Base 3.6
+ clang_VirtualFileOverlay_setCaseSensitivity@Base 3.6
+ clang_VirtualFileOverlay_writeToBuffer@Base 3.6
  clang_annotateTokens@Base 3.2
  clang_codeCompleteAt@Base 3.2
  clang_codeCompleteGetContainerKind@Base 3.2
@@ -115,7 +121,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_constructUSR_ObjCProtocol@Base 3.2
  clang_createCXCursorSet@Base 3.2
  clang_createIndex@Base 3.2
- clang_createTranslationUnit2@Base @LLVM_VERSION@
+ clang_createTranslationUnit2@Base 3.6
  clang_createTranslationUnit@Base 3.2
  clang_createTranslationUnitFromSourceFile@Base 3.2
  clang_defaultCodeCompleteOptions@Base 3.2
@@ -131,7 +137,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_disposeDiagnosticSet@Base 3.2
  clang_disposeIndex@Base 3.2
  clang_disposeOverriddenCursors@Base 3.2
- clang_disposeSourceRangeList@Base @LLVM_VERSION@
+ clang_disposeSourceRangeList@Base 3.6
  clang_disposeString@Base 3.2
  clang_disposeTokens@Base 3.2
  clang_disposeTranslationUnit@Base 3.2
@@ -149,7 +155,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getArgType@Base 3.2
  clang_getArrayElementType@Base 3.2
  clang_getArraySize@Base 3.2
- clang_getBuildSessionTimestamp@Base @LLVM_VERSION@
+ clang_getBuildSessionTimestamp@Base 3.6
  clang_getCString@Base 3.2
  clang_getCXTUResourceUsage@Base 3.2
  clang_getCXXAccessSpecifier@Base 3.2
@@ -220,7 +226,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getInstantiationLocation@Base 3.2
  clang_getLocation@Base 3.2
  clang_getLocationForOffset@Base 3.2
- clang_getModuleForFile@Base @LLVM_VERSION@
+ clang_getModuleForFile@Base 3.6
  clang_getNullCursor@Base 3.2
  clang_getNullLocation@Base 3.2
  clang_getNullRange@Base 3.2
@@ -240,7 +246,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getRemappings@Base 3.2
  clang_getRemappingsFromFileList@Base 3.2
  clang_getResultType@Base 3.2
- clang_getSkippedRanges@Base @LLVM_VERSION@
+ clang_getSkippedRanges@Base 3.6
  clang_getSpecializedCursorTemplate@Base 3.2
  clang_getSpellingLocation@Base 3.2
  clang_getTUResourceUsageName@Base 3.2
@@ -290,7 +296,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_isVirtualBase@Base 3.2
  clang_isVolatileQualifiedType@Base 3.2
  clang_loadDiagnostics@Base 3.2
- clang_parseTranslationUnit2@Base @LLVM_VERSION@
+ clang_parseTranslationUnit2@Base 3.6
  clang_parseTranslationUnit@Base 3.2
  clang_remap_dispose@Base 3.2
  clang_remap_getFilenames@Base 3.2

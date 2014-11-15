@@ -205,16 +205,17 @@ override_dh_auto_configure: preconfigure
 	--with-optimize-option=' $(opt_flags)' \
 	--enable-pic \
 	--enable-libffi \
-	--with-ocaml-libdir=/usr/lib/ocaml/llvm-$(LLVM_VERSION) \
 	--libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
 	--with-binutils-include=/usr/include \
 	--with-cloog --with-isl \
 	--with-bug-report-url=http://bugs.debian.org/ \
 	--enable-shared \
+        --disable-bindings \
 	$(CONFIGURE_EXTRA) \
 	CLANG_VENDOR=$(VENDOR) || { cat config.log tools/polly/config.log; exit 1; }
 #	cd $(TARGET_BUILD) && cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_VERBOSE_MAKEFILE=ON
 #	mkdir build-compiler-rt && cd build-compiler-rt && cmake ../compiler-rt
+#        --with-ocaml-libdir=/usr/lib/ocaml/llvm-$(LLVM_VERSION) \
 
 
 override_dh_auto_build:
