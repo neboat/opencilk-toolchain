@@ -32,7 +32,7 @@ endif
 
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) lt 4.7.2-10~ ; echo $$?),0)
 # Too old version of gcc. Force 4.8
-	GCC_VERSION := 4.8
+	GCC_VERSION := 4.9
 endif
 
 export CC=gcc-$(GCC_VERSION)
