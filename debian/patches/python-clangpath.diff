@@ -7,7 +7,7 @@ Index: llvm-toolchain-snapshot_3.5~svn199197/clang/bindings/python/clang/cindex.
              file = 'libclang.dll'
          else:
 -            file = 'libclang.so'
-+            file = 'libclang-3.5.so'
++            file = 'libclang-3.6.so'
  
          if Config.library_path:
              file = Config.library_path + '/' + file
