@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.6~svn221256/clang/tools/clang-format/clang-format.py
+Index: llvm-toolchain-snapshot_3.6~svn225450/clang/tools/clang-format/clang-format.py
 ===================================================================
---- llvm-toolchain-snapshot_3.6~svn221256.orig/clang/tools/clang-format/clang-format.py
-+++ llvm-toolchain-snapshot_3.6~svn221256/clang/tools/clang-format/clang-format.py
+--- llvm-toolchain-snapshot_3.6~svn225450.orig/clang/tools/clang-format/clang-format.py
++++ llvm-toolchain-snapshot_3.6~svn225450/clang/tools/clang-format/clang-format.py
 @@ -25,7 +25,7 @@ import vim
  
  # set g:clang_format_path to the path to clang-format if it is not on the path
@@ -11,10 +11,10 @@ Index: llvm-toolchain-snapshot_3.6~svn221256/clang/tools/clang-format/clang-form
  if vim.eval('exists("g:clang_format_path")') == "1":
    binary = vim.eval('g:clang_format_path')
  
-Index: llvm-toolchain-snapshot_3.6~svn221256/clang/tools/clang-format/clang-format-diff.py
+Index: llvm-toolchain-snapshot_3.6~svn225450/clang/tools/clang-format/clang-format-diff.py
 ===================================================================
---- llvm-toolchain-snapshot_3.6~svn221256.orig/clang/tools/clang-format/clang-format-diff.py
-+++ llvm-toolchain-snapshot_3.6~svn221256/clang/tools/clang-format/clang-format-diff.py
+--- llvm-toolchain-snapshot_3.6~svn225450.orig/clang/tools/clang-format/clang-format-diff.py
++++ llvm-toolchain-snapshot_3.6~svn225450/clang/tools/clang-format/clang-format-diff.py
 @@ -32,7 +32,7 @@ import sys
  
  
@@ -24,16 +24,16 @@ Index: llvm-toolchain-snapshot_3.6~svn221256/clang/tools/clang-format/clang-form
  
  
  def main():
-Index: llvm-toolchain-snapshot_3.6~svn221256/clang/tools/clang-format/clang-format.el
+Index: llvm-toolchain-snapshot_3.6~svn225450/clang/tools/clang-format/clang-format.el
 ===================================================================
---- llvm-toolchain-snapshot_3.6~svn221256.orig/clang/tools/clang-format/clang-format.el
-+++ llvm-toolchain-snapshot_3.6~svn221256/clang/tools/clang-format/clang-format.el
-@@ -13,7 +13,7 @@
+--- llvm-toolchain-snapshot_3.6~svn225450.orig/clang/tools/clang-format/clang-format.el
++++ llvm-toolchain-snapshot_3.6~svn225450/clang/tools/clang-format/clang-format.el
+@@ -35,7 +35,7 @@
+   :group 'tools)
  
- ;; *Location of the clang-format binary. If it is on your PATH, a full path name
- ;; need not be specified.
--(defvar clang-format-binary "clang-format")
-+(defvar clang-format-binary "clang-format-3.6")
+ (defcustom clang-format-executable
+-  (or (executable-find "clang-format")
++  (or (executable-find "clang-format-3.6")
+       "clang-format")
+   "Location of the clang-format executable.
  
- (defun clang-format-region ()
-   "Use clang-format to format the currently active region."
