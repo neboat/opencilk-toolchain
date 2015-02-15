@@ -1,13 +1,13 @@
-Index: llvm-toolchain-snapshot_3.7~svn228604/test/lit.cfg
+Index: llvm-toolchain-snapshot_3.7~svn229332/test/lit.cfg
 ===================================================================
---- llvm-toolchain-snapshot_3.7~svn228604.orig/test/lit.cfg
-+++ llvm-toolchain-snapshot_3.7~svn228604/test/lit.cfg
-@@ -333,7 +333,7 @@ def have_ld_plugin_support():
+--- llvm-toolchain-snapshot_3.7~svn229332.orig/test/lit.cfg
++++ llvm-toolchain-snapshot_3.7~svn229332/test/lit.cfg
+@@ -334,7 +334,7 @@ def have_ld_plugin_support():
      if not os.path.exists(os.path.join(config.llvm_shlib_dir, 'LLVMgold.so')):
          return False
  
--    ld_cmd = subprocess.Popen(['ld', '--help'], stdout = subprocess.PIPE)
-+    ld_cmd = subprocess.Popen(['ld', '--help'], stdout = subprocess.PIPE, env={'LANG': 'C'})
+-    ld_cmd = subprocess.Popen([config.gold_executable, '--help'], stdout = subprocess.PIPE)
++    ld_cmd = subprocess.Popen([config.gold_executable, '--help'], stdout = subprocess.PIPE, env={'LANG': 'C'})
      ld_out = ld_cmd.stdout.read().decode()
      ld_cmd.wait()
  
