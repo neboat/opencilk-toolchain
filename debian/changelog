@@ -1,4 +1,11 @@
-llvm-toolchain-snapshot (1:3.7~svn228604-1) unstable; urgency=medium
+llvm-toolchain-snapshot (1:3.7~svn229332-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * Support of gcc 5.0 (Closes: #777988)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 15 Feb 2015 22:22:15 +0100
+
+llvm-toolchain-snapshot (1:3.7~svn228821-1) unstable; urgency=medium
 
   * New snapshot release
   * Bring back polly and remove libcloog-isl-dev & libisl-dev as build deps
