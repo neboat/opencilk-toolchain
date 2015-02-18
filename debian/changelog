@@ -3,6 +3,7 @@ llvm-toolchain-snapshot (1:3.7~svn229332-1~exp1) experimental; urgency=medium
   * New snapshot release
   * Support of gcc 5.0 (Closes: #777988)
   * compiler-rt-i586.diff: fix a build issue of compiler-rt under i386
+  * lldb-gdbserver & lldb-platform have been merged into lldb-server
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 15 Feb 2015 22:22:15 +0100
 
