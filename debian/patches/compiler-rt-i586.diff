@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.7~svn229332/compiler-rt/make/platform/clang_linux.mk
+Index: llvm-toolchain-snapshot_3.7~svn229683/compiler-rt/make/platform/clang_linux.mk
 ===================================================================
---- llvm-toolchain-snapshot_3.7~svn229332.orig/compiler-rt/make/platform/clang_linux.mk
-+++ llvm-toolchain-snapshot_3.7~svn229332/compiler-rt/make/platform/clang_linux.mk
+--- llvm-toolchain-snapshot_3.7~svn229683.orig/compiler-rt/make/platform/clang_linux.mk
++++ llvm-toolchain-snapshot_3.7~svn229683/compiler-rt/make/platform/clang_linux.mk
 @@ -21,7 +21,7 @@ ifneq ($(findstring -linux-,$(CompilerTa
  
  # Define configs only if arch in triple is i386 or x86_64
@@ -20,10 +20,10 @@ Index: llvm-toolchain-snapshot_3.7~svn229332/compiler-rt/make/platform/clang_lin
    SupportedArches := i386
    ifeq ($(call TryCompile,$(CC),$(test_source),-m64),0)
      SupportedArches += x86_64
-Index: llvm-toolchain-snapshot_3.7~svn229332/tools/clang/runtime/compiler-rt/Makefile
+Index: llvm-toolchain-snapshot_3.7~svn229683/clang/runtime/compiler-rt/Makefile
 ===================================================================
---- llvm-toolchain-snapshot_3.7~svn229332.orig/tools/clang/runtime/compiler-rt/Makefile
-+++ llvm-toolchain-snapshot_3.7~svn229332/tools/clang/runtime/compiler-rt/Makefile
+--- llvm-toolchain-snapshot_3.7~svn229683.orig/clang/runtime/compiler-rt/Makefile
++++ llvm-toolchain-snapshot_3.7~svn229683/clang/runtime/compiler-rt/Makefile
 @@ -165,6 +165,7 @@ BuildRuntimeLibraries:
  	  ProjSrcRoot=$(COMPILERRT_SRC_ROOT) \
  	  ProjObjRoot=$(PROJ_OBJ_DIR) \
