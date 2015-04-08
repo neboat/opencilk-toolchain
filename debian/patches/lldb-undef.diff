@@ -1,0 +1,13 @@
+Index: llvm-toolchain-snapshot_3.7~svn234307/lldb/tools/lldb-server/Makefile
+===================================================================
+--- llvm-toolchain-snapshot_3.7~svn234307.orig/lldb/tools/lldb-server/Makefile
++++ llvm-toolchain-snapshot_3.7~svn234307/lldb/tools/lldb-server/Makefile
+@@ -12,6 +12,8 @@ TOOLNAME = lldb-server
+ 
+ LLVMLibsOptions += -llldb -llldbUtility
+ 
++USEDLIBS := LLVMSupport.a
++
+ include $(LLDB_LEVEL)/Makefile
+ 
+ ifeq ($(HOST_OS),Darwin)
