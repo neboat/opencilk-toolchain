@@ -304,9 +304,15 @@ override_dh_auto_install:
 
 	cp $(CURDIR)/clang/tools/scan-build/scan-build.1 $(CURDIR)/clang/tools/scan-build/scan-build-$(LLVM_VERSION).1
 
-	cp -f $(CURDIR)/utils/vim/llvm.vim $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim
-
-	cp -f $(CURDIR)/utils/vim/tablegen.vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim
+	# copy the vim files (exept that tablegen does not exist for indent
+	VIM_DIRS="ftdetect ftplugin syntax indent"; \
+	for dir in $$VIM_DIRS; do \
+		cp -f $(CURDIR)/utils/vim/$$dir/llvm.vim $(CURDIR)/utils/vim/$$dir/llvm-$(LLVM_VERSION).vim; \
+		if test -f $(CURDIR)/utils/vim/$$dir/tablegen.vim; then \
+			cp -f $(CURDIR)/utils/vim/$$dir/tablegen.vim $(CURDIR)/utils/vim/$$dir/tablegen-$(LLVM_VERSION).vim; \
+		fi; \
+	done
+	cp -f $(CURDIR)/utils/vim/vimrc $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION)-vimrc
 
 	cp -f $(CURDIR)/clang/tools/clang-format/clang-format-diff.py $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
 
