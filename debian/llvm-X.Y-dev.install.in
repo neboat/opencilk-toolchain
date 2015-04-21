@@ -26,7 +26,7 @@ utils/vim/ftdetect/tablegen-@LLVM_VERSION@.vim		    usr/share/vim/addons/ftdetec
 utils/vim/ftplugin/llvm-@LLVM_VERSION@.vim		        usr/share/vim/addons/ftplugin/
 utils/vim/ftplugin/tablegen-@LLVM_VERSION@.vim		    usr/share/vim/addons/ftplugin/
 
-utils/vim/llvm-$(LLVM_VERSION)-vimrc		            usr/share/vim/addons
+utils/vim/llvm-@LLVM_VERSION@-vimrc		            usr/share/vim/addons
 
 
 utils/emacs/emacs.el		    usr/share/emacs/site-lisp/llvm-@LLVM_VERSION@/
