@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_3.7~svn228304/polly/lib/Makefile
+Index: llvm-toolchain-snapshot_3.7~svn236310/polly/lib/Makefile
 ===================================================================
---- llvm-toolchain-snapshot_3.7~svn228304.orig/polly/lib/Makefile
-+++ llvm-toolchain-snapshot_3.7~svn228304/polly/lib/Makefile
-@@ -29,9 +29,9 @@ ISL_CODEGEN_FILES= CodeGen/IslAst.cpp \
-                    CodeGen/IslExprBuilder.cpp \
+--- llvm-toolchain-snapshot_3.7~svn236310.orig/polly/lib/Makefile
++++ llvm-toolchain-snapshot_3.7~svn236310/polly/lib/Makefile
+@@ -26,9 +26,9 @@ ISL_CODEGEN_FILES= CodeGen/IslAst.cpp \
+                    CodeGen/IslNodeBuilder.cpp \
                     CodeGen/IslCodeGeneration.cpp
  
 -POLLY_JSON_FILES= JSON/json_reader.cpp \
@@ -15,7 +15,7 @@ Index: llvm-toolchain-snapshot_3.7~svn228304/polly/lib/Makefile
  
  ISL_FILES= External/isl/basis_reduction_tab.c \
             External/isl/isl_aff.c \
-@@ -143,4 +143,5 @@ SOURCES= Polly.cpp \
+@@ -144,4 +144,5 @@ SOURCES= Polly.cpp \
  #
  include $(LEVEL)/Makefile.common
  
