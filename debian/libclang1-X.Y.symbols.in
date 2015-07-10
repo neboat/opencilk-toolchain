@@ -35,6 +35,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_getObjCDeclQualifiers@Base 3.4
  clang_Cursor_getObjCPropertyAttributes@Base 3.4
  clang_Cursor_getObjCSelectorIndex@Base 3.2
+ clang_Cursor_getOffsetOfField@Base 3.7
  clang_Cursor_getParsedComment@Base 3.2
  clang_Cursor_getRawCommentText@Base 3.2
  clang_Cursor_getReceiverType@Base 3.2
@@ -45,6 +46,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_getTemplateArgumentUnsignedValue@Base 3.6
  clang_Cursor_getTemplateArgumentValue@Base 3.6
  clang_Cursor_getTranslationUnit@Base 3.2
+ clang_Cursor_isAnonymous@Base 3.7
  clang_Cursor_isBitField@Base 3.4
  clang_Cursor_isDynamicCall@Base 3.2
  clang_Cursor_isNull@Base 3.2
@@ -98,6 +100,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Type_getOffsetOf@Base 3.4
  clang_Type_getSizeOf@Base 3.4
  clang_Type_getTemplateArgumentAsType@Base 3.6
+ clang_Type_visitFields@Base 3.7
  clang_VerbatimBlockLineComment_getText@Base 3.2
  clang_VerbatimLineComment_getText@Base 3.2
  clang_VirtualFileOverlay_addFileMapping@Base 3.6
@@ -152,6 +155,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_findReferencesInFile@Base 3.2
  clang_findReferencesInFileWithBlock@Base 3.2
  clang_formatDiagnostic@Base 3.2
+ clang_free@Base 3.7
  clang_getArgType@Base 3.2
  clang_getArrayElementType@Base 3.2
  clang_getArraySize@Base 3.2

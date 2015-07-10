@@ -5,6 +5,7 @@ llvm-toolchain-snapshot (1:3.7~svn231060-1~exp2) UNRELEASED; urgency=medium
   * Disable the patch force-gcc-header-obj.diff. Seems to cause bug #23556
   * Fix the CMake build. thanks to Paweł Bylica for the fix.
     Fix upstream bug #23352
+  * No longer building some clang help page, removing them
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 21 Apr 2015 09:41:41 +0200
 

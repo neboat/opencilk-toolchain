@@ -25,4 +25,4 @@ usr/bin/pp-trace-@LLVM_VERSION@
 usr/bin/clang-query-@LLVM_VERSION@
 usr/bin/clang-rename-@LLVM_VERSION@
 
-usr/lib/llvm-@LLVM_VERSION@/share/man/man1/clang.1
+#usr/lib/llvm-@LLVM_VERSION@/share/man/man1/clang.1
