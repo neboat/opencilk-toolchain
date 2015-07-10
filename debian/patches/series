@@ -39,3 +39,4 @@ lit-lang.diff
 compiler-rt-i586.diff
 clang-analyzer-force-version.diff
 
+locale-issue-ld.diff
