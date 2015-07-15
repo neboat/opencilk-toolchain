@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.7~svn229332/test/lit.cfg
+Index: llvm-toolchain-snapshot_3.7~svn242297/test/lit.cfg
 ===================================================================
---- llvm-toolchain-snapshot_3.7~svn229332.orig/test/lit.cfg
-+++ llvm-toolchain-snapshot_3.7~svn229332/test/lit.cfg
-@@ -334,7 +334,7 @@ def have_ld_plugin_support():
+--- llvm-toolchain-snapshot_3.7~svn242297.orig/test/lit.cfg
++++ llvm-toolchain-snapshot_3.7~svn242297/test/lit.cfg
+@@ -345,7 +345,7 @@ def have_ld_plugin_support():
      if not os.path.exists(os.path.join(config.llvm_shlib_dir, 'LLVMgold.so')):
          return False
  
