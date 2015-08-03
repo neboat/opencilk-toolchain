@@ -34,7 +34,7 @@ follow-parallel-var.diff
 hurd-EIEIO-undef.diff
 silent-MCJIIT-tests.diff
 lldb-libname.diff
-strip-svn.diff
+#strip-svn.diff
 lit-lang.diff
 compiler-rt-i586.diff
 clang-analyzer-force-version.diff
