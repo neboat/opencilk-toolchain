@@ -1,3 +1,13 @@
+llvm-toolchain-3.7 (1:3.7~+rc2-2) unstable; urgency=medium
+
+  * Workaround:
+    The 5| in the debian/rules regexp is a crappy workaround. 
+    g++ 5.2 in Debian is not providing a g++-5.2 binary (only
+    g++-5) accomodate that by hardcoding the 5 detection
+  * Remove Dummy.html from clang-3.7-doc to avoid install (Closes: #794539)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 04 Aug 2015 09:27:22 +0200
+
 llvm-toolchain-3.7 (1:3.7~+rc2-1) unstable; urgency=medium
 
   * New snapshot release
