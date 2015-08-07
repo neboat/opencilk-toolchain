@@ -189,6 +189,8 @@ override_dh_auto_configure: preconfigure
 		cov-configure --compiler g++-4.8 --comptype gcc; \
 		cov-configure --compiler gcc-4.9 --comptype gcc; \
 		cov-configure --compiler g++-4.9 --comptype gcc; \
+		cov-configure --compiler gcc-5 --comptype gcc; \
+		cov-configure --compiler g++-5 --comptype gcc; \
 	fi)
 
 	# Due to bug upstream, no symlink here
