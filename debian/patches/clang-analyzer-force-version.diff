@@ -10,7 +10,7 @@ Index: llvm-toolchain-snapshot_3.7~svn242297/clang/tools/scan-build/ccc-analyzer
  
    $Clang = $ENV{'CLANG_CXX'};
 -  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++'; }
-+  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++-3.7'; }
++  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++-3.8'; }
  
    $IsCXX = 1
  }
@@ -19,7 +19,7 @@ Index: llvm-toolchain-snapshot_3.7~svn242297/clang/tools/scan-build/ccc-analyzer
  
    $Clang = $ENV{'CLANG'};
 -  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang'; }
-+  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang-3.7'; }
++  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang-3.8'; }
  
    $IsCXX = 0
  }

@@ -7,7 +7,7 @@ Index: llvm-toolchain-snapshot_3.7~svn241915/clang/tools/clang-format/clang-form
  # set g:clang_format_path to the path to clang-format if it is not on the path
  # Change this to the full path if clang-format is not on the path.
 -binary = 'clang-format'
-+binary = 'clang-format-3.7'
++binary = 'clang-format-3.8'
  if vim.eval('exists("g:clang_format_path")') == "1":
    binary = vim.eval('g:clang_format_path')
  
@@ -20,7 +20,7 @@ Index: llvm-toolchain-snapshot_3.7~svn241915/clang/tools/clang-format/clang-form
  
  # Change this to the full path if clang-format is not on the path.
 -binary = 'clang-format'
-+binary = 'clang-format-3.7'
++binary = 'clang-format-3.8'
  
  
  def main():
@@ -33,7 +33,7 @@ Index: llvm-toolchain-snapshot_3.7~svn241915/clang/tools/clang-format/clang-form
  
  (defcustom clang-format-executable
 -  (or (executable-find "clang-format")
-+  (or (executable-find "clang-format-3.7")
++  (or (executable-find "clang-format-3.8")
        "clang-format")
    "Location of the clang-format executable.
  
