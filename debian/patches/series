@@ -40,3 +40,4 @@ compiler-rt-i586.diff
 clang-analyzer-force-version.diff
 
 locale-issue-ld.diff
+bug783205.patch
