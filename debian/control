@@ -300,8 +300,6 @@ Description: Modular compiler and toolchain technologies, libraries and headers
  This package provides the libraries and headers to develop applications
  using llvm.
 
-
-
 Package: llvm-3.8-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
