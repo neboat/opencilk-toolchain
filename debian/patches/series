@@ -41,3 +41,4 @@ clang-analyzer-force-version.diff
 
 locale-issue-ld.diff
 bug783205.patch
+CVE-2015-2305.patch
