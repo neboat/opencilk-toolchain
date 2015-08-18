@@ -1,15 +1,14 @@
-llvm-toolchain-snapshot (1:3.8~svn243884-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:3.8~svn245290-1~exp1) experimental; urgency=medium
 
-  * Team upload
+  * New snapshot release
   * Fix VCS fields.
   * d/p/CVE-2015-2305.patch, fix security issue on regcomp.c
   * Fix many lintian warning/errors
     - copyright fixes
-    - updated overrides for v5 switch
     - control files
     - disabled ocaml documentation
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 18 Aug 2015 13:48:28 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 18 Aug 2015 14:29:24 +0200
 
 llvm-toolchain-snapshot (1:3.8~svn243884-1~exp1) experimental; urgency=medium
 
