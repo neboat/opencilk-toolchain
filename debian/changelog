@@ -1,6 +1,9 @@
-llvm-toolchain-snapshot (1:3.8~svn245290-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:3.8~svn245286-1) unstable; urgency=medium
 
-  * New snapshot release
+  * New snapshot release (3.7 => 3.8)
+    No need to rename libllvm as 3.8 was not part of the debian archive
+
+  [ Gianfranco Costamagna ]
   * Fix VCS fields.
   * d/p/CVE-2015-2305.patch, fix security issue on regcomp.c
   * Fix many lintian warning/errors
@@ -8,19 +11,7 @@ llvm-toolchain-snapshot (1:3.8~svn245290-1~exp1) experimental; urgency=medium
     - control files
     - disabled ocaml documentation
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 18 Aug 2015 14:29:24 +0200
-
-llvm-toolchain-snapshot (1:3.8~svn243884-1~exp1) experimental; urgency=medium
-
-  * New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 03 Aug 2015 19:26:07 +0200
-
-llvm-toolchain-snapshot (1:3.8~svn242297-1~exp1) experimental; urgency=medium
-
-  * New snapshot release (3.7 => 3.8)
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Jul 2015 17:51:08 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 18 Aug 2015 14:28:36 +0200
 
 llvm-toolchain-snapshot (1:3.7~svn231060-1~exp2) UNRELEASED; urgency=medium
 
