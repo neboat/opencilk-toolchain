@@ -1,8 +1,14 @@
 llvm-toolchain-3.7 (1:3.7~+rc2-3) UNRELEASED; urgency=medium
 
+  * Team upload
   * Fix VCS fields.
   * d/p/bug783205.patch rebase s390x patch to apply to 3.7
   * d/p/CVE-2015-2305.patch, fix security issue on regcomp.c
+  * Fix many lintian warning/errors
+    - copyright fixes
+    - updated overrides for v5 switch
+    - control files
+    - disabled ocaml documentation
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 13 Aug 2015 09:02:30 +0200
 
