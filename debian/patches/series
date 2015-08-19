@@ -38,6 +38,7 @@ lldb-libname.diff
 lit-lang.diff
 compiler-rt-i586.diff
 clang-analyzer-force-version.diff
-
+#bug783205.patch
 locale-issue-ld.diff
 CVE-2015-2305.patch
+bug783205.patch
