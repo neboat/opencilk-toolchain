@@ -1,6 +1,14 @@
 llvm-toolchain-snapshot (1:3.8~svn245286-2) UNRELEASED; urgency=medium
 
-  * d/p/bug783205.patch fix s390x porting issue.
+  * Team upload
+  [ Gianfranco Costamagna ]
+  * d/p/bug783205.patch fix s390x porting issue
+    (rebase to trunk).
+
+  [ James Price ]
+  * d/p/fix-cmake-config-prefix.diff: fix cmake path,
+    needs a change after upstream revision r241080
+    (Closes: #794905)
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 18 Aug 2015 18:37:46 +0200
 
