@@ -1,6 +1,8 @@
-llvm-toolchain-3.7 (1:3.7~+rc2-3) UNRELEASED; urgency=medium
+llvm-toolchain-3.7 (1:3.7~+rc3-1) unstable; urgency=medium
 
-  * Team upload
+  * New upstream snapshot
+  * Remove an obsolete declaration about dragonegg
+    (Closes: #796182)
 
   [ Luciano Bello ]
   * d/p/CVE-2015-2305.patch, fix security issue on regcomp.c
@@ -19,7 +21,7 @@ llvm-toolchain-3.7 (1:3.7~+rc2-3) UNRELEASED; urgency=medium
     needs a change after upstream revision r241080
     (Closes: #794905)
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 13 Aug 2015 09:02:30 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Aug 2015 12:23:18 +0200
 
 llvm-toolchain-3.7 (1:3.7~+rc2-2) unstable; urgency=medium
 

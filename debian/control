@@ -255,9 +255,6 @@ Description: Modular compiler and toolchain technologies
  and C++ front-ends, a front-end for a Forth-like language (Stacker),
  a young scheme front-end, and Java support is in development. LLVM can
  generate code for X86, SparcV9, PowerPC or many other architectures.
- .
- LLVM is the key component of the clang compiler and the gcc plugin called
- dragonegg.
 
 Package: llvm-3.7-runtime
 Architecture: any
