@@ -5,7 +5,7 @@ llvm-toolchain-snapshot (1:3.8~svn245286-2) UNRELEASED; urgency=medium
   [ Gianfranco Costamagna ]
   * d/p/bug783205.patch fix s390x porting issue
     (rebase to trunk).
-  * d/control: Add more conflicting packages (clang and lldb)
+  * d/control: Add more conflicting packages (python-clang and python-lldb)
     (Closes: #796811, #796843)
   * Remove an obsolete declaration about dragonegg
     (cherry-pick from 3.7 branch)
