@@ -125,7 +125,7 @@ Architecture: any
 Multi-Arch: same
 Section: debug
 Priority: extra
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libclang1-3.8
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libclang1-3.8 (= ${binary:Version})
 Description: clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler
@@ -172,8 +172,8 @@ Package: python-clang-3.8
 Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
-Replaces: python-clang-3.3, python-clang-3.4, python-clang-3.5, python-clang-3.6
-Breaks: python-clang-3.3, python-clang-3.4, python-clang-3.5, python-clang-3.6
+Replaces: python-clang-3.3, python-clang-3.4, python-clang-3.5, python-clang-3.6, python-clang-3.7
+Breaks: python-clang-3.3, python-clang-3.4, python-clang-3.5, python-clang-3.6, python-clang-3.7
 Description: Clang Python Bindings
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler
@@ -218,7 +218,7 @@ Package: libllvm3.8-dbg
 Architecture: any
 Section: debug
 Priority: extra
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.8
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.8 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Description: Modular compiler and toolchain technologies, debugging libraries
@@ -255,9 +255,6 @@ Description: Modular compiler and toolchain technologies
  and C++ front-ends, a front-end for a Forth-like language (Stacker),
  a young scheme front-end, and Java support is in development. LLVM can
  generate code for X86, SparcV9, PowerPC or many other architectures.
- .
- LLVM is the key component of the clang compiler and the gcc plugin called
- dragonegg.
 
 Package: llvm-3.8-runtime
 Architecture: any
@@ -415,7 +412,7 @@ Package: python-lldb-3.8
 Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
-Conflicts: python-lldb-3.4, python-lldb-3.5, python-lldb-3.6
+Conflicts: python-lldb-3.4, python-lldb-3.5, python-lldb-3.6, python-lldb-3.7
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger, python lib
  LLDB is a next generation, high-performance debugger. It is built as a set of
