@@ -2,6 +2,12 @@ llvm-toolchain-3.7 (1:3.7-1) unstable; urgency=medium
 
   * New upstream release
 
+  [ Gianfranco Costamagna ]
+  * debian/patches/kfreebsd-build-fix.patch:
+    - fix kfreebsd-* build failures by workarounding
+      missing F_DUPFD_CLOEXEC (rebased patch from gnome-terminal
+      10_kfreebsd-f_dupfd_cloexec.patch)
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 Aug 2015 08:59:58 +0200
 
 llvm-toolchain-3.7 (1:3.7~+rc4-1) unstable; urgency=medium
