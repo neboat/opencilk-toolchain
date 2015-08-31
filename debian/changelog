@@ -4,6 +4,8 @@ llvm-toolchain-snapshot (1:3.8~svn246420-1~exp1) experimental; urgency=medium
   * remove patches merge upstream
     - bug783205.patch
     - kfreebsd-build-fix.patch
+    - lit-lang.diff
+    - locale-issue-ld.diff
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 31 Aug 2015 08:55:22 +0200
 
