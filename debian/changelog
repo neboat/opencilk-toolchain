@@ -1,38 +1,25 @@
-llvm-toolchain-snapshot (1:3.8~svn246420-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:3.8~svn246420-1) unstable; urgency=medium
 
+  [ Sylvestre Ledru ]
   * New snapshot release
+  * Remove CVE-2015-2305.patch. Already fixed upstream in a different
+    way
   * remove patches merge upstream
-    - bug783205.patch
-    - kfreebsd-build-fix.patch
     - lit-lang.diff
     - locale-issue-ld.diff
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 31 Aug 2015 08:55:22 +0200
-
-llvm-toolchain-snapshot (1:3.8~svn245286-3) UNRELEASED; urgency=medium
-
   [ Gianfranco Costamagna ]
-  * d/p/bug783205.patch fix s390x porting issue
-    (rebase to trunk).
   * d/control: Add more conflicting packages (python-clang and python-lldb)
     (Closes: #796811, #796843)
   * Remove an obsolete declaration about dragonegg
     (cherry-pick from 3.7 branch)
-  * debian/patches/kfreebsd-build-fix.patch:
-    - fix kfreebsd-* build failures by workarounding
-      missing F_DUPFD_CLOEXEC (rebased patch from gnome-terminal
-      10_kfreebsd-f_dupfd_cloexec.patch)
 
   [ James Price ]
   * d/p/fix-cmake-config-prefix.diff: fix cmake path,
     needs a change after upstream revision r241080
     (Addresses: #794905)
 
-  [ Sylvestre Ledru ]
-  * Remove CVE-2015-2305.patch. Already fixed upstream in a different
-    way
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 Aug 2015 14:21:27 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 31 Aug 2015 08:55:22 +0200
 
 llvm-toolchain-snapshot (1:3.8~svn245286-1) unstable; urgency=medium
 
