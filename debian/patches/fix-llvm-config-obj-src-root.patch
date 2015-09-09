@@ -1,10 +1,10 @@
-Index: llvm-toolchain-snapshot_3.5~svn201239/tools/llvm-config/llvm-config.cpp
+Index: llvm-toolchain-snapshot_3.8~svn247169/tools/llvm-config/llvm-config.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.5~svn201239.orig/tools/llvm-config/llvm-config.cpp	2014-02-12 16:21:54.713558937 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201239/tools/llvm-config/llvm-config.cpp	2014-02-12 16:34:24.993540587 +0100
-@@ -321,9 +321,9 @@
-         OS << "ON\n";
- #endif
+--- llvm-toolchain-snapshot_3.8~svn247169.orig/tools/llvm-config/llvm-config.cpp
++++ llvm-toolchain-snapshot_3.8~svn247169/tools/llvm-config/llvm-config.cpp
+@@ -327,9 +327,9 @@ int main(int argc, char **argv) {
+       } else if (Arg == "--build-system") {
+         OS << LLVM_BUILD_SYSTEM << '\n';
        } else if (Arg == "--obj-root") {
 -        OS << ActivePrefix << '\n';
 +        OS << ActivePrefix << "/build/" << '\n';
