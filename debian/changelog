@@ -1,10 +1,4 @@
-llvm-toolchain-snapshot (1:3.8~svn246420-2) UNRELEASED; urgency=medium
-
-  * Also generate liblldb-3.8-dbg
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 11 Sep 2015 12:12:48 +0200
-
-llvm-toolchain-snapshot (1:3.8~svn246420-1) unstable; urgency=medium
+llvm-toolchain-snapshot (1:3.8~svn246420-1) UNRELEASED; urgency=medium
 
   [ Sylvestre Ledru ]
   * New snapshot release
@@ -13,6 +7,7 @@ llvm-toolchain-snapshot (1:3.8~svn246420-1) unstable; urgency=medium
   * remove patches merge upstream
     - lit-lang.diff
     - locale-issue-ld.diff
+  * Also generate liblldb-3.8-dbg
 
   [ Gianfranco Costamagna ]
   * d/control: Add more conflicting packages (python-clang and python-lldb)
