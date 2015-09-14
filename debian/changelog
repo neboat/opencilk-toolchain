@@ -3,6 +3,7 @@ llvm-toolchain-3.7 (1:3.7-2) UNRELEASED; urgency=medium
   * Remove CVE-2015-2305.patch. Already fixed upstream in a different
     way
   * Also generate liblldb-3.7-dbg
+  * Select LLVM OpenMP as the default backend
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 Aug 2015 14:22:33 +0200
 

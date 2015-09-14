@@ -213,6 +213,7 @@ override_dh_auto_configure: preconfigure
 		--with-bug-report-url=http://bugs.debian.org/ \
 		--enable-shared \
 	        --disable-bindings \
+		--with-clang-default-openmp-runtime=libomp \
 		$(CONFIGURE_EXTRA) \
 		CLANG_VENDOR=$(VENDOR) || { cat config.log tools/polly/config.log; exit 1; }; \
 	else \
