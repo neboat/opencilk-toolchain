@@ -1,13 +1,13 @@
-Index: llvm-toolchain-snapshot_3.8~svn247513/clang/tools/scan-build/scan-build
+Index: llvm-toolchain-snapshot_3.8~svn247876/clang/tools/scan-build/scan-build
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn247513.orig/clang/tools/scan-build/scan-build
-+++ llvm-toolchain-snapshot_3.8~svn247513/clang/tools/scan-build/scan-build
-@@ -1644,7 +1644,7 @@ if (!@ARGV and !$RequestDisplayHelp) {
+--- llvm-toolchain-snapshot_3.8~svn247876.orig/clang/tools/scan-build/scan-build
++++ llvm-toolchain-snapshot_3.8~svn247876/clang/tools/scan-build/scan-build
+@@ -1405,7 +1405,7 @@ sub ShellEscape {
  
- # Find 'clang'
- if (!defined $Options{AnalyzerDiscoveryMethod}) {
--  $Clang = Cwd::realpath("$RealBin/bin/clang") if (-f "$RealBin/bin/clang");
-+  $Clang = Cwd::realpath("/usr/lib/llvm-3.8/bin/clang") if (-f "/usr/lib/llvm-3.8/bin/clang");
-   if (!defined $Clang || ! -x $Clang) {
-     $Clang = Cwd::realpath("$RealBin/clang") if (-f "$RealBin/clang");
-   }
+ sub FindClang {
+   if (!defined $Options{AnalyzerDiscoveryMethod}) {
+-    $Clang = Cwd::realpath("$RealBin/bin/clang") if (-f "$RealBin/bin/clang");
++    $Clang = Cwd::realpath("/usr/lib/llvm-3.8/bin/clang") if (-f "$RealBin/bin/clang");
+     if (!defined $Clang || ! -x $Clang) {
+       $Clang = Cwd::realpath("$RealBin/clang") if (-f "$RealBin/clang");
+     }
