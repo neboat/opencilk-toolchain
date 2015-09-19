@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.8~svn247779/lldb/test/dotest.py
+Index: llvm-toolchain-snapshot_3.8~svn248088/lldb/test/dotest.py
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn247779.orig/lldb/test/dotest.py
-+++ llvm-toolchain-snapshot_3.8~svn247779/lldb/test/dotest.py
-@@ -1858,8 +1858,8 @@ if __name__ == "__main__":
+--- llvm-toolchain-snapshot_3.8~svn248088.orig/lldb/test/dotest.py
++++ llvm-toolchain-snapshot_3.8~svn248088/lldb/test/dotest.py
+@@ -1898,8 +1898,8 @@ if __name__ == "__main__":
                  def addSuccess(self, test):
                      global parsable
                      super(LLDBTestResult, self).addSuccess(test)
@@ -11,9 +11,9 @@ Index: llvm-toolchain-snapshot_3.8~svn247779/lldb/test/dotest.py
 +#                    if parsable:
 +#                        self.stream.write("PASS: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
                      if self.results_formatter:
-                         self.results_formatter.process_event(
+                         self.results_formatter.handle_event(
                              EventBuilder.event_for_success(test))
-@@ -1924,8 +1924,8 @@ if __name__ == "__main__":
+@@ -1964,8 +1964,8 @@ if __name__ == "__main__":
                      method = getattr(test, "markExpectedFailure", None)
                      if method:
                          method(err, bugnumber)
@@ -22,9 +22,9 @@ Index: llvm-toolchain-snapshot_3.8~svn247779/lldb/test/dotest.py
 +#                    if parsable:
 +#                        self.stream.write("XFAIL: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
                      if self.results_formatter:
-                         self.results_formatter.process_event(
+                         self.results_formatter.handle_event(
                              EventBuilder.event_for_expected_failure(
-@@ -1939,8 +1939,8 @@ if __name__ == "__main__":
+@@ -1979,8 +1979,8 @@ if __name__ == "__main__":
                      method = getattr(test, "markSkippedTest", None)
                      if method:
                          method()
@@ -33,12 +33,12 @@ Index: llvm-toolchain-snapshot_3.8~svn247779/lldb/test/dotest.py
 +#                    if parsable:
 +#                        self.stream.write("UNSUPPORTED: LLDB (%s) :: %s (%s) \n" % (self._config_string(test), str(test), reason))
                      if self.results_formatter:
-                         self.results_formatter.process_event(
+                         self.results_formatter.handle_event(
                              EventBuilder.event_for_skip(test, reason))
-Index: llvm-toolchain-snapshot_3.8~svn247779/lldb/test/unittest2/runner.py
+Index: llvm-toolchain-snapshot_3.8~svn248088/lldb/test/unittest2/runner.py
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn247779.orig/lldb/test/unittest2/runner.py
-+++ llvm-toolchain-snapshot_3.8~svn247779/lldb/test/unittest2/runner.py
+--- llvm-toolchain-snapshot_3.8~svn248088.orig/lldb/test/unittest2/runner.py
++++ llvm-toolchain-snapshot_3.8~svn248088/lldb/test/unittest2/runner.py
 @@ -171,9 +171,9 @@ class TextTestRunner(unittest.TextTestRu
          if hasattr(result, 'separator2'):
              self.stream.writeln(result.separator2)

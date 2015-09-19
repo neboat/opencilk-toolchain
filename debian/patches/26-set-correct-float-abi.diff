@@ -18,16 +18,16 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
-Index: llvm-toolchain-snapshot_3.7~svn241915/clang/lib/Driver/Tools.cpp
+Index: llvm-toolchain-snapshot_3.8~svn248088/clang/lib/Driver/Tools.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.7~svn241915.orig/clang/lib/Driver/Tools.cpp
-+++ llvm-toolchain-snapshot_3.7~svn241915/clang/lib/Driver/Tools.cpp
-@@ -604,7 +604,7 @@ StringRef tools::arm::getARMFloatABI(con
-         FloatABI = "hard";
-         break;
+--- llvm-toolchain-snapshot_3.8~svn248088.orig/clang/lib/Driver/Tools.cpp
++++ llvm-toolchain-snapshot_3.8~svn248088/clang/lib/Driver/Tools.cpp
+@@ -643,7 +643,7 @@ arm::FloatABI arm::getARMFloatABI(const
        case llvm::Triple::GNUEABI:
--        FloatABI = "softfp";
-+        FloatABI = "soft";
+       case llvm::Triple::EABI:
+         // EABI is always AAPCS, and if it was not marked 'hard', it's softfp
+-        ABI = FloatABI::SoftFP;
++        ABI = FloatABI::Soft;
          break;
-       case llvm::Triple::EABIHF:
-         FloatABI = "hard";
+       case llvm::Triple::Android:
+         ABI = (SubArch == 7) ? FloatABI::SoftFP : FloatABI::Soft;
