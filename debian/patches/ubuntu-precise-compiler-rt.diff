@@ -11,3 +11,13 @@ Index: llvm-toolchain-3.7-3.7/compiler-rt/make/platform/clang_linux.mk
  
  # TryCompile compiler source flags
  # Returns exit code of running a compiler invocation.
+@@ -35,7 +35,7 @@
+     echo $$?)
+ 
+ test_source = $(ProjSrcRoot)/make/platform/clang_linux_test_input.c
+-ifneq (,$(filter $(CompilerTargetArch),i386 i586))
++ifneq (,$(filter $(CompilerTargetArch),i386 i586 i686))
+   SupportedArches := i386
+   ifeq ($(call TryCompile,$(CC),$(test_source),-m64),0)
+     SupportedArches += x86_64
+
