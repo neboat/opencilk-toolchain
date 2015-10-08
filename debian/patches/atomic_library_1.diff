@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.8~svn242701/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_3.8~svn249699/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn242701.orig/clang/lib/Basic/Targets.cpp
-+++ llvm-toolchain-snapshot_3.8~svn242701/clang/lib/Basic/Targets.cpp
-@@ -4325,6 +4325,20 @@ class ARMTargetInfo : public TargetInfo
+--- llvm-toolchain-snapshot_3.8~svn249699.orig/clang/lib/Basic/Targets.cpp
++++ llvm-toolchain-snapshot_3.8~svn249699/clang/lib/Basic/Targets.cpp
+@@ -4330,6 +4330,20 @@ class ARMTargetInfo : public TargetInfo
      }
    }
  
@@ -22,11 +22,11 @@ Index: llvm-toolchain-snapshot_3.8~svn242701/clang/lib/Basic/Targets.cpp
 +
  public:
    ARMTargetInfo(const llvm::Triple &Triple, bool IsBigEndian)
-       : TargetInfo(Triple), CPU("arm1136j-s"), FPMath(FP_Default),
-Index: llvm-toolchain-snapshot_3.8~svn242701/clang/test/CodeGen/linux-arm-atomic.c
+       : TargetInfo(Triple), FPMath(FP_Default),
+Index: llvm-toolchain-snapshot_3.8~svn249699/clang/test/CodeGen/linux-arm-atomic.c
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn242701.orig/clang/test/CodeGen/linux-arm-atomic.c
-+++ llvm-toolchain-snapshot_3.8~svn242701/clang/test/CodeGen/linux-arm-atomic.c
+--- llvm-toolchain-snapshot_3.8~svn249699.orig/clang/test/CodeGen/linux-arm-atomic.c
++++ llvm-toolchain-snapshot_3.8~svn249699/clang/test/CodeGen/linux-arm-atomic.c
 @@ -1,5 +1,15 @@
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv7-unknown-linux | FileCheck %s
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv6-unknown-linux | FileCheck %s
