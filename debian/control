@@ -56,11 +56,9 @@ Description: Tool to format C/C++/Obj-C code
  .
  This package also provides vim and emacs plugins.
 
-Package: cpp11-migrate-3.8
+Package: clang-modernize-3.8
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, clang-modernize-3.8
-Replaces: cpp11-migrate-3.3
-Breaks: cpp11-migrate-3.3
+Depends: ${shlibs:Depends}, ${misc:Depends}, clang-tidy-3.8
 Description: Tool to convert C++98 and C++03 code to C++11
  The purpose of the C++11 Migrator is to do source-to-source translation to
  migrate existing C++ code to use C++11 features to enhance
@@ -69,20 +67,20 @@ Description: Tool to convert C++98 and C++03 code to C++11
  the first two categories. The migrator is based on Clang's LibTooling and
  the AST Matching library.
  .
+ From clang 3.8, this package has been replaced by clang-tidy
+ .
  This is a transitional dummy package. It can safely be removed.
 
-Package: clang-modernize-3.8
+Package: clang-tidy-3.8
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, clang-3.8
-Replaces: cpp11-migrate-3.3, cpp11-migrate-3.4
-Breaks: cpp11-migrate-3.3, cpp11-migrate-3.4
-Description: Tool to convert C++98 and C++03 code to C++11
- The purpose of the C++11 Migrator is to do source-to-source translation to
- migrate existing C++ code to use C++11 features to enhance
- maintainability, readability, runtime performance, and compile-time
- performance. Development is still early and transforms fall mostly into
- the first two categories. The migrator is based on Clang's LibTooling and
- the AST Matching library.
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Replaces: clang-modernize-3.8
+Breaks: clang-modernize-3.8
+Description: clang-based C++ linter tool
+ Provide an extensible framework for diagnosing and fixing typical programming
+ errors, like style violations, interface misuse, or bugs that can be deduced
+ via static analysis. clang-tidy is modular and provides a convenient interface
+ for writing new checks.
 
 
 Package: clang-3.8-doc
