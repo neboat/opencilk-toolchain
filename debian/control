@@ -85,6 +85,15 @@ Description: Tool to convert C++98 and C++03 code to C++11
  the AST Matching library.
 
 
+Package: clang-tidy-3.7
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: clang-based C++ linter tool
+ Provide an extensible framework for diagnosing and fixing typical programming
+ errors, like style violations, interface misuse, or bugs that can be deduced
+ via static analysis. clang-tidy is modular and provides a convenient interface
+ for writing new checks.
+
 Package: clang-3.7-doc
 Architecture: all
 Section: doc
