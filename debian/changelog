@@ -1,19 +1,14 @@
-llvm-toolchain-snapshot (1:3.8~svn250696-2) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:3.8~svn250696-1) unstable; urgency=medium
 
+  * Remove macho-dump from LLVM (removed by upstream r248302)
+  * Introduce clang-tidy-3.8 as a separate package. Replaces clang-modernize
+  * Ship run-clang-tidy.py & clang-tidy-diff.py in clang-tidy-3.8
+  * Remove cpp11-migrate-3.8 package. Has been replaced by clang-modernize
+    for a while (which will be replaced by clang-tidy)
   * Add three new symbols in libclang1
     - clang_CompileCommand_getFilename@Base
     - clang_CompileCommand_getMappedSourceContent@Base 3.8
     - clang_CompileCommand_getMappedSourcePath@Base 3.8
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 20 Oct 2015 10:39:51 +0200
-
-llvm-toolchain-snapshot (1:3.8~svn250696-1) unstable; urgency=medium
-
-  * Ship run-clang-tidy.py & lang-tidy-diff.py
-  * Remove macho-dump from LLVM (removed by upstream r248302)
-  * Introduce clang-tidy-3.8 as a separate package. Replaces clang-modernize
-  * Remove cpp11-migrate-3.8 package. Has been replaced by clang-modernize
-    for a while (which will be replaced by clang-tidy)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 21 Sep 2015 13:16:35 +0200
 
