@@ -21,6 +21,9 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_CompilationDatabase_getCompileCommands@Base 3.2
  clang_CompileCommand_getArg@Base 3.2
  clang_CompileCommand_getDirectory@Base 3.2
+ clang_CompileCommand_getFilename@Base 3.8
+ clang_CompileCommand_getMappedSourceContent@Base 3.8
+ clang_CompileCommand_getMappedSourcePath@Base 3.8
  clang_CompileCommand_getNumArgs@Base 3.2
  clang_CompileCommands_dispose@Base 3.2
  clang_CompileCommands_getCommand@Base 3.2
