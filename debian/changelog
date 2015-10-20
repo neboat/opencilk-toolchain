@@ -2,8 +2,9 @@ llvm-toolchain-3.7 (1:3.7-4) unstable; urgency=medium
 
   * Add a Break/Replaces clang-3.7 (<< 1:3.7-3) from clang-tidy-3.7
     to simplify the transition
+  * Remove some warnings in the manpages generation (Closes: #795310)
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 20 Oct 2015 09:28:32 +0200
 
 llvm-toolchain-3.7 (1:3.7-3) unstable; urgency=medium
 
