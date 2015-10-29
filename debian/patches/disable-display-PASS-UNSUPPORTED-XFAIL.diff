@@ -1,44 +1,7 @@
-Index: llvm-toolchain-snapshot_3.8~svn251098/lldb/test/dotest.py
+Index: llvm-toolchain-snapshot_3.8~svn251620/lldb/third_party/Python/module/unittest2/unittest2/runner.py
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn251098.orig/lldb/test/dotest.py
-+++ llvm-toolchain-snapshot_3.8~svn251098/lldb/test/dotest.py
-@@ -1913,8 +1913,8 @@ if __name__ == "__main__":
-                 def addSuccess(self, test):
-                     global parsable
-                     super(LLDBTestResult, self).addSuccess(test)
--                    if parsable:
--                        self.stream.write("PASS: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
-+#                    if parsable:
-+#                        self.stream.write("PASS: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
-                     if self.results_formatter:
-                         self.results_formatter.handle_event(
-                             EventBuilder.event_for_success(test))
-@@ -1979,8 +1979,8 @@ if __name__ == "__main__":
-                     method = getattr(test, "markExpectedFailure", None)
-                     if method:
-                         method(err, bugnumber)
--                    if parsable:
--                        self.stream.write("XFAIL: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
-+#                    if parsable:
-+#                        self.stream.write("XFAIL: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
-                     if self.results_formatter:
-                         self.results_formatter.handle_event(
-                             EventBuilder.event_for_expected_failure(
-@@ -1994,8 +1994,8 @@ if __name__ == "__main__":
-                     method = getattr(test, "markSkippedTest", None)
-                     if method:
-                         method()
--                    if parsable:
--                        self.stream.write("UNSUPPORTED: LLDB (%s) :: %s (%s) \n" % (self._config_string(test), str(test), reason))
-+#                    if parsable:
-+#                        self.stream.write("UNSUPPORTED: LLDB (%s) :: %s (%s) \n" % (self._config_string(test), str(test), reason))
-                     if self.results_formatter:
-                         self.results_formatter.handle_event(
-                             EventBuilder.event_for_skip(test, reason))
-Index: llvm-toolchain-snapshot_3.8~svn251098/lldb/third_party/Python/module/unittest2/unittest2/runner.py
-===================================================================
---- llvm-toolchain-snapshot_3.8~svn251098.orig/lldb/third_party/Python/module/unittest2/unittest2/runner.py
-+++ llvm-toolchain-snapshot_3.8~svn251098/lldb/third_party/Python/module/unittest2/unittest2/runner.py
+--- llvm-toolchain-snapshot_3.8~svn251620.orig/lldb/third_party/Python/module/unittest2/unittest2/runner.py
++++ llvm-toolchain-snapshot_3.8~svn251620/lldb/third_party/Python/module/unittest2/unittest2/runner.py
 @@ -171,9 +171,9 @@ class TextTestRunner(unittest.TextTestRu
          if hasattr(result, 'separator2'):
              self.stream.writeln(result.separator2)
@@ -52,3 +15,47 @@ Index: llvm-toolchain-snapshot_3.8~svn251098/lldb/third_party/Python/module/unit
          
          expectedFails = unexpectedSuccesses = skipped = passed = failed = errored = 0
          try:
+Index: llvm-toolchain-snapshot_3.8~svn251620/lldb/packages/Python/lldbsuite/test/dotest.py
+===================================================================
+--- llvm-toolchain-snapshot_3.8~svn251620.orig/lldb/packages/Python/lldbsuite/test/dotest.py
++++ llvm-toolchain-snapshot_3.8~svn251620/lldb/packages/Python/lldbsuite/test/dotest.py
+@@ -1882,8 +1882,8 @@ def run_suite():
+                 def addSuccess(self, test):
+                     global parsable
+                     super(LLDBTestResult, self).addSuccess(test)
+-                    if parsable:
+-                        self.stream.write("PASS: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
++#                    if parsable:
++#                        self.stream.write("PASS: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
+                     if self.results_formatter:
+                         self.results_formatter.handle_event(
+                             EventBuilder.event_for_success(test))
+@@ -1896,8 +1896,8 @@ def run_suite():
+                     method = getattr(test, "markError", None)
+                     if method:
+                         method()
+-                    if parsable:
+-                        self.stream.write("FAIL: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
++#                    if parsable:
++#                        self.stream.write("FAIL: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
+                     if self.results_formatter:
+                         self.results_formatter.handle_event(
+                             EventBuilder.event_for_error(test, err))
+@@ -1963,8 +1963,8 @@ def run_suite():
+                     method = getattr(test, "markSkippedTest", None)
+                     if method:
+                         method()
+-                    if parsable:
+-                        self.stream.write("UNSUPPORTED: LLDB (%s) :: %s (%s) \n" % (self._config_string(test), str(test), reason))
++#                    if parsable:
++#                        self.stream.write("UNSUPPORTED: LLDB (%s) :: %s (%s) \n" % (self._config_string(test), str(test), reason))
+                     if self.results_formatter:
+                         self.results_formatter.handle_event(
+                             EventBuilder.event_for_skip(test, reason))
+@@ -2036,4 +2036,4 @@ def run_suite():
+     exitTestSuite(failed)
+ 
+ if __name__ == "__main__":
+-    run_suite()
+\ No newline at end of file
++    run_suite()
