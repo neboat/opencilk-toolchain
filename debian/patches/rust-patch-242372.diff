@@ -1,0 +1,60 @@
+Index: include/llvm-c/Core.h
+===================================================================
+--- include/llvm-c/Core.h	(révision 242371)
++++ include/llvm-c/Core.h	(révision 242372)
+@@ -2675,7 +2675,8 @@
+                              LLVMBasicBlockRef Then, LLVMBasicBlockRef Catch,
+                              const char *Name);
+ LLVMValueRef LLVMBuildLandingPad(LLVMBuilderRef B, LLVMTypeRef Ty,
+-                                 unsigned NumClauses, const char *Name);
++                                 LLVMValueRef PersFn, unsigned NumClauses,
++                                 const char *Name);
+ LLVMValueRef LLVMBuildResume(LLVMBuilderRef B, LLVMValueRef Exn);
+ LLVMValueRef LLVMBuildUnreachable(LLVMBuilderRef);
+ 
+Index: bindings/go/llvm/ir.go
+===================================================================
+--- bindings/go/llvm/ir.go	(révision 242371)
++++ bindings/go/llvm/ir.go	(révision 242372)
+@@ -1731,7 +1731,7 @@
+ func (b Builder) CreateLandingPad(t Type, nclauses int, name string) (l Value) {
+ 	cname := C.CString(name)
+ 	defer C.free(unsafe.Pointer(cname))
+-	l.C = C.LLVMBuildLandingPad(b.C, t.C, C.unsigned(nclauses), cname)
++	l.C = C.LLVMBuildLandingPad(b.C, t.C, nil, C.unsigned(nclauses), cname)
+ 	return l
+ }
+ 
+Index: bindings/ocaml/llvm/llvm_ocaml.c
+===================================================================
+--- bindings/ocaml/llvm/llvm_ocaml.c	(révision 242371)
++++ bindings/ocaml/llvm/llvm_ocaml.c	(révision 242372)
+@@ -1745,7 +1745,7 @@
+ CAMLprim LLVMValueRef llvm_build_landingpad(LLVMTypeRef Ty, LLVMValueRef PersFn,
+                                             value NumClauses,  value Name,
+                                             value B) {
+-    return LLVMBuildLandingPad(Builder_val(B), Ty, Int_val(NumClauses),
++    return LLVMBuildLandingPad(Builder_val(B), Ty, PersFn, Int_val(NumClauses),
+                                String_val(Name));
+ }
+ 
+Index: lib/IR/Core.cpp
+===================================================================
+--- lib/IR/Core.cpp	(révision 242371)
++++ lib/IR/Core.cpp	(révision 242372)
+@@ -2257,7 +2257,14 @@
+ }
+ 
+ LLVMValueRef LLVMBuildLandingPad(LLVMBuilderRef B, LLVMTypeRef Ty,
+-                                 unsigned NumClauses, const char *Name) {
++                                 LLVMValueRef PersFn, unsigned NumClauses,
++                                 const char *Name) {
++  // The personality used to live on the landingpad instruction, but now it
++  // lives on the parent function. For compatibility, take the provided
++  // personality and put it on the parent function.
++  if (PersFn)
++    unwrap(B)->GetInsertBlock()->getParent()->setPersonalityFn(
++        cast<Function>(unwrap(PersFn)));
+   return wrap(unwrap(B)->CreateLandingPad(unwrap(Ty), NumClauses, Name));
+ }
+ 
