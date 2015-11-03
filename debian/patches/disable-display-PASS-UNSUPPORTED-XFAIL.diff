@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.8~svn251620/lldb/third_party/Python/module/unittest2/unittest2/runner.py
+Index: llvm-toolchain-snapshot_3.8~svn251907/lldb/third_party/Python/module/unittest2/unittest2/runner.py
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn251620.orig/lldb/third_party/Python/module/unittest2/unittest2/runner.py
-+++ llvm-toolchain-snapshot_3.8~svn251620/lldb/third_party/Python/module/unittest2/unittest2/runner.py
+--- llvm-toolchain-snapshot_3.8~svn251907.orig/lldb/third_party/Python/module/unittest2/unittest2/runner.py
++++ llvm-toolchain-snapshot_3.8~svn251907/lldb/third_party/Python/module/unittest2/unittest2/runner.py
 @@ -171,9 +171,9 @@ class TextTestRunner(unittest.TextTestRu
          if hasattr(result, 'separator2'):
              self.stream.writeln(result.separator2)
@@ -15,11 +15,11 @@ Index: llvm-toolchain-snapshot_3.8~svn251620/lldb/third_party/Python/module/unit
          
          expectedFails = unexpectedSuccesses = skipped = passed = failed = errored = 0
          try:
-Index: llvm-toolchain-snapshot_3.8~svn251620/lldb/packages/Python/lldbsuite/test/dotest.py
+Index: llvm-toolchain-snapshot_3.8~svn251907/lldb/packages/Python/lldbsuite/test/dotest.py
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn251620.orig/lldb/packages/Python/lldbsuite/test/dotest.py
-+++ llvm-toolchain-snapshot_3.8~svn251620/lldb/packages/Python/lldbsuite/test/dotest.py
-@@ -1882,8 +1882,8 @@ def run_suite():
+--- llvm-toolchain-snapshot_3.8~svn251907.orig/lldb/packages/Python/lldbsuite/test/dotest.py
++++ llvm-toolchain-snapshot_3.8~svn251907/lldb/packages/Python/lldbsuite/test/dotest.py
+@@ -1878,8 +1878,8 @@ def run_suite():
                  def addSuccess(self, test):
                      global parsable
                      super(LLDBTestResult, self).addSuccess(test)
@@ -30,7 +30,7 @@ Index: llvm-toolchain-snapshot_3.8~svn251620/lldb/packages/Python/lldbsuite/test
                      if self.results_formatter:
                          self.results_formatter.handle_event(
                              EventBuilder.event_for_success(test))
-@@ -1896,8 +1896,8 @@ def run_suite():
+@@ -1892,8 +1892,8 @@ def run_suite():
                      method = getattr(test, "markError", None)
                      if method:
                          method()
@@ -41,7 +41,7 @@ Index: llvm-toolchain-snapshot_3.8~svn251620/lldb/packages/Python/lldbsuite/test
                      if self.results_formatter:
                          self.results_formatter.handle_event(
                              EventBuilder.event_for_error(test, err))
-@@ -1963,8 +1963,8 @@ def run_suite():
+@@ -1959,8 +1959,8 @@ def run_suite():
                      method = getattr(test, "markSkippedTest", None)
                      if method:
                          method()
@@ -52,10 +52,3 @@ Index: llvm-toolchain-snapshot_3.8~svn251620/lldb/packages/Python/lldbsuite/test
                      if self.results_formatter:
                          self.results_formatter.handle_event(
                              EventBuilder.event_for_skip(test, reason))
-@@ -2036,4 +2036,4 @@ def run_suite():
-     exitTestSuite(failed)
- 
- if __name__ == "__main__":
--    run_suite()
-\ No newline at end of file
-+    run_suite()
