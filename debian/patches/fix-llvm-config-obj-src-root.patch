@@ -1,10 +1,10 @@
-Index: llvm-toolchain-snapshot_3.8~svn252155/tools/llvm-config/llvm-config.cpp
+Index: llvm-toolchain-snapshot_3.8~svn247169/tools/llvm-config/llvm-config.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn252155.orig/tools/llvm-config/llvm-config.cpp
-+++ llvm-toolchain-snapshot_3.8~svn252155/tools/llvm-config/llvm-config.cpp
-@@ -330,9 +330,9 @@ int main(int argc, char **argv) {
-       } else if (Arg == "--has-rtti") {
-         OS << LLVM_HAS_RTTI << '\n';
+--- llvm-toolchain-snapshot_3.8~svn247169.orig/tools/llvm-config/llvm-config.cpp
++++ llvm-toolchain-snapshot_3.8~svn247169/tools/llvm-config/llvm-config.cpp
+@@ -327,9 +327,9 @@ int main(int argc, char **argv) {
+       } else if (Arg == "--build-system") {
+         OS << LLVM_BUILD_SYSTEM << '\n';
        } else if (Arg == "--obj-root") {
 -        OS << ActivePrefix << '\n';
 +        OS << ActivePrefix << "/build/" << '\n';
