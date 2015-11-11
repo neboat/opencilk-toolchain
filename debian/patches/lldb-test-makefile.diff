@@ -1,0 +1,14 @@
+Index: llvm-toolchain-snapshot_3.8~svn252405/lldb/Makefile
+===================================================================
+--- llvm-toolchain-snapshot_3.8~svn252405.orig/lldb/Makefile
++++ llvm-toolchain-snapshot_3.8~svn252405/lldb/Makefile
+@@ -91,7 +91,8 @@ ifneq ($(PROJ_SRC_ROOT),$(PROJ_OBJ_ROOT)
+ $(RecursiveTargets)::
+ 	$(Verb) if [ ! -f test/Makefile ]; then \
+ 	  $(MKDIR) test; \
+-	  $(CP) $(PROJ_SRC_DIR)/test/Makefile test/Makefile; \
++	  $(CP) $(PROJ_SRC_DIR)/packages/Python/lldbsuite/test/Makefile test/Makefile; \
++	  $(CP) $(PROJ_SRC_DIR)/packages/Python/lldbsuite/test/Makefile $(PROJ_SRC_DIR)/test/; \
+ 	fi
+ endif
+ 
