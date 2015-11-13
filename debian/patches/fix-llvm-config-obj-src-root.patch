@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.8~svn252617/tools/llvm-config/llvm-config.cpp
+Index: llvm-toolchain-snapshot_3.8~svn253020/tools/llvm-config/llvm-config.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn252617.orig/tools/llvm-config/llvm-config.cpp
-+++ llvm-toolchain-snapshot_3.8~svn252617/tools/llvm-config/llvm-config.cpp
-@@ -500,9 +500,9 @@ int main(int argc, char **argv) {
+--- llvm-toolchain-snapshot_3.8~svn253020.orig/tools/llvm-config/llvm-config.cpp
++++ llvm-toolchain-snapshot_3.8~svn253020/tools/llvm-config/llvm-config.cpp
+@@ -498,9 +498,9 @@ int main(int argc, char **argv) {
        } else if (Arg == "--shared-mode") {
          PrintSharedMode = true;
        } else if (Arg == "--obj-root") {
