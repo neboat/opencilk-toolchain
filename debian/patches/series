@@ -44,4 +44,3 @@ bug783205.patch
 fix-cmake-config-prefix.diff
 kfreebsd-build-fix.patch
 ubuntu-precise-compiler-rt.diff
-rust-patch-242372.diff
