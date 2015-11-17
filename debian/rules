@@ -260,7 +260,7 @@ build_doc:
 		cd $$d && rm -f underscore.js && ln -s /usr/share/javascript/underscore/underscore.js; \
 	done
 
-	help2man --version-string=$(LLVM_VERSION) clang/tools/scan-view/scan-view > debian/man/scan-view-$(LLVM_VERSION).1
+	help2man --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1
 	help2man --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1
 
 	CMDS="llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-tblgen llvm-ranlib lldb clang-format clang-modernize clang clang-tblgen clang-check clang-tidy clang-apply-replacements pp-trace"; \
@@ -320,7 +320,7 @@ override_dh_auto_install:
 # Rename some stuff with the version name
 #	cp $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang.1 $(CURDIR)/$(TARGET_BUILD)/tools/clang/docs/tools/clang-$(LLVM_VERSION).1
 
-	cp $(CURDIR)/clang/tools/scan-build/scan-build.1 $(CURDIR)/clang/tools/scan-build/scan-build-$(LLVM_VERSION).1
+	cp $(CURDIR)/clang/tools/scan-build/man/scan-build.1 $(CURDIR)/clang/tools/scan-build/man/scan-build-$(LLVM_VERSION).1
 
 	# copy the vim files (exept that tablegen does not exist for indent
 	VIM_DIRS="ftdetect ftplugin syntax indent"; \
