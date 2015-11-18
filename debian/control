@@ -87,7 +87,7 @@ Description: Tool to convert C++98 and C++03 code to C++11
 
 Package: clang-tidy-3.7
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, python
 Replaces: clang-3.7 (<< 1:3.7-3)
 Breaks: clang-3.7 (<< 1:3.7-3)
 Description: clang-based C++ linter tool
@@ -424,6 +424,7 @@ Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hp
 Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-3.7 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: debug
+Priority: extra
 Description: Next generation, high-performance debugger, debugging libraries
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM

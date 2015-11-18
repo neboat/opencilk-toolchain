@@ -1,9 +1,13 @@
-llvm-toolchain-3.7 (1:3.7-5) UNRELEASED; urgency=medium
+llvm-toolchain-3.7 (1:3.7.1~+rc1-1~exp1) experimental; urgency=medium
 
+  * New snapshot release
   * Also install run-clang-tidy.py & clang-tidy-diff.py (also installed in
     usr/bin/ as run-clang-tidy-3.7.py & clang-tidy-diff-3.7.py)
+  * Fix clang-modernize detection of clang-apply-replacements (Closes: #791607)
+  * Priority extra for liblldb-3.7-dbg
+  * clang-tidy-3.7 depends on python
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Nov 2015 10:37:59 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 18 Nov 2015 10:01:18 +0100
 
 llvm-toolchain-3.7 (1:3.7-4) unstable; urgency=medium
 
