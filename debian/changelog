@@ -3,6 +3,7 @@ llvm-toolchain-snapshot (1:3.8~svn250819-1~exp1) experimental; urgency=medium
   * New snapshot release
   * Remove some warnings in the manpages generation (Closes: #795310)
   * Also ship sancov in clang-3.8
+  * Fix the links to scan-build-3.8 & scan-view-3.8
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 20 Oct 2015 14:07:06 +0200
 
