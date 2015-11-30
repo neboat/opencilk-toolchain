@@ -380,8 +380,8 @@ Description: Modular compiler and toolchain technologies, examples
 # ------------- lldb -------------
 
 Package: lldb-3.8
-Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc mips mipsel
-# ia64 mips mipsel hurd ppc64el have been removed
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
+# ia64 mips mipsel hurd powerpc ppc64el have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.8 (= ${binary:Version}), python, llvm-3.8-dev, python-lldb-3.8
 Conflicts: lldb-3.4, lldb-3.5
 Pre-Depends: ${misc:Pre-Depends}
@@ -391,8 +391,8 @@ Description: Next generation, high-performance debugger
  Project, such as the Clang expression parser and LLVM disassembler.
 
 Package: liblldb-3.8
-Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc mips mipsel
-# ia64 mips mipsel hurd ppc64el have been removed
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
+# ia64 mips mipsel hurd powerpc ppc64el have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.8 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: libs
@@ -435,8 +435,8 @@ Description: Next generation, high-performance debugger, python lib
 
 Package: liblldb-3.8-dev
 Section: libdevel
-Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 powerpc mips mipsel
-# ia64 mips mipsel hurd ppc64el have been removed
+Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
+# ia64 mips mipsel hurd powerpc ppc64el have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-3.8 (= ${binary:Version})
 Replaces: lldb-3.8-dev (<= 1:3.8~svn215195-2)
 Breaks: lldb-3.8-dev (<< 1:3.8~svn215195-2)

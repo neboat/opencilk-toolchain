@@ -1,3 +1,14 @@
+llvm-toolchain-snapshot (1:3.8~svn254193-2) UNRELEASED; urgency=medium
+
+  * disable lldb and polly on powerpc, currently ftbfs.
+    setting the lldb archs in debian/control in just one
+    place would be appreciated.
+  * quoting fixes in debian/rules, when make macros
+    are empty 
+    Thanks to Doko for the two previous changes (Closes: #806729)
+
+ -- Sylvestre Ledru <sylvestre@debian.org> Mon, 30 Nov 2015 15:34:12 +0100
+
 llvm-toolchain-snapshot (1:3.8~svn254193-1) unstable; urgency=medium
 
   * New snapshot release

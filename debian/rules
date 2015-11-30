@@ -74,7 +74,9 @@ endif
 endif
 
 # Enable polly (or not)
-POLLY_ENABLE=yes
+ifeq (,$(filter $(DEB_HOST_ARCH), powerpc))
+  POLLY_ENABLE=yes
+endif
 
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 # enable the code coverage
@@ -115,7 +117,7 @@ endif
 
 
 LLDB_ENABLE=yes
-LLDB_DISABLE_ARCHS := arm64 hurd-i386 ia64 ppc64el
+LLDB_DISABLE_ARCHS := arm64 hurd-i386 ia64 ppc64el powerpc
 # hurd has threading issues
 ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 # Disable LLDB for this arch.
@@ -158,7 +160,7 @@ override_dh_auto_configure: preconfigure
 		ln -s ../clang .; \
 	readlink clang
 
-	if test $(POLLY_ENABLE) = yes; then \
+	if test "$(POLLY_ENABLE)" = yes; then \
 		cd tools/ && \
 		if test -h polly; then \
 			rm polly; \
@@ -166,7 +168,7 @@ override_dh_auto_configure: preconfigure
 		ln -s ../polly .; \
 	fi
 
-	if test $(LLDB_ENABLE) = yes; then \
+	if test "$(LLDB_ENABLE)" = yes; then \
 		cd tools/ && \
 		if test -h lldb; then \
 		   rm lldb; \
@@ -284,7 +286,7 @@ override_dh_auto_install:
 	mv libclang.so libclang-$(LLVM_VERSION).so.$(SONAME_EXT) && \
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT); \
         ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so; \
-	if test $(LLDB_ENABLE) = yes; then \
+	if test "$(LLDB_ENABLE)" = yes; then \
 		mv liblldb.so liblldb-$(LLVM_VERSION).so.$(SONAME_EXT) && \
 		ln -s liblldb-$(LLVM_VERSION).so.$(SONAME_EXT) liblldb.so.$(SONAME_EXT); \
 	fi; \
@@ -353,7 +355,7 @@ override_dh_auto_install:
 	rm -f $(CURDIR)/$(TARGET_BUILD)/$(BUILD_DIR)/lib/python*/site-packages/lldb/_lldb.so
 
 # Manage the polly files. Sometimes, we build them. Sometimes not.
-	if test $(POLLY_ENABLE) = yes; then \
+	if test "$(POLLY_ENABLE)" = yes; then \
 		mkdir -p $(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/ $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly/; \
 		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libpolly* \
 		$(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
@@ -419,7 +421,7 @@ endif
 
 # lldb tests
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
-	if test $(LLDB_ENABLE) = yes; then \
+	if test "$(LLDB_ENABLE)" = yes; then \
 	cd $(TARGET_BUILD)/$(BUILD_DIR)/lib/python2.7/site-packages/lldb && if test ! -h _lldb.so -o ! -f _lldb.so; then ln -s ../../../liblldb.so _lldb.so; fi; \
 	if test ! -h libLLVM-$(LLVM_VERSION).so.$(SONAME_EXT) -o ! -f _lldb.so; then \
 		ln -s ../../../libLLVM-$(LLVM_VERSION_FULL).so libLLVM-$(LLVM_VERSION).so.$(SONAME_EXT); \
@@ -443,7 +445,7 @@ endif
 	rm -f $(CURDIR)/$(TARGET_BUILD)/$(BUILD_DIR)/lib/python*/site-packages/lldb/_lldb.so $(TARGET_BUILD)/$(BUILD_DIR)/lib/liblldb-$(LLVM_VERSION).so
 
 # polly tests
-	if test $(POLLY_ENABLE) = yes; then \
+	if test "$(POLLY_ENABLE)" = yes; then \
 		cd $(TARGET_BUILD)/ && LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ $(MAKE) -C tools/polly/test/ check-polly || true; \
     fi
 
