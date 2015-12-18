@@ -2,6 +2,8 @@ llvm-toolchain-snapshot (1:3.8~svn255217-1~exp1) experimental; urgency=medium
 
   * New snapshot release
   * Fix an install issue with clang-tidy
+  * clang-modernize has been removed. Long live to clang-tidy, its
+    replacement
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 10 Dec 2015 05:18:29 +0100
 
