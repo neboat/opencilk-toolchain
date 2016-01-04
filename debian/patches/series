@@ -39,3 +39,4 @@ compiler-rt-i586.diff
 clang-analyzer-force-version.diff
 fix-cmake-config-prefix.diff
 lldb-test-makefile.diff
+llvm25468-lldb-swig-format-security.diff
