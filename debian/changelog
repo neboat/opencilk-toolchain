@@ -15,6 +15,11 @@ llvm-toolchain-snapshot (1:3.8~svn256489-1~exp1) experimental; urgency=medium
       See https://llvm.org/bugs/show_bug.cgi?id=25468
     - add missing files to clang-format
     - Add patch to fix sanitizer lit invocation
+    - removed LLVM-internal tools (lit, FileCheck, not, *-tblgen, etc.);
+      not installed by CMake, not intended for distribution
+    - removed llvm-X.Y-tools (contained only internal tools)
+    - removed autotools-specific artifacts (configure, Makefile, etc.)
+    - removed dummy documentation files
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 28 Dec 2015 09:31:25 +0100
 
