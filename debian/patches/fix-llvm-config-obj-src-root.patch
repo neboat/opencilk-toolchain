@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.8~svn253020/tools/llvm-config/llvm-config.cpp
+Index: llvm-toolchain-snapshot_3.8~svn257050/tools/llvm-config/llvm-config.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn253020.orig/tools/llvm-config/llvm-config.cpp
-+++ llvm-toolchain-snapshot_3.8~svn253020/tools/llvm-config/llvm-config.cpp
-@@ -498,9 +498,9 @@ int main(int argc, char **argv) {
+--- llvm-toolchain-snapshot_3.8~svn257050.orig/tools/llvm-config/llvm-config.cpp
++++ llvm-toolchain-snapshot_3.8~svn257050/tools/llvm-config/llvm-config.cpp
+@@ -531,9 +531,9 @@ int main(int argc, char **argv) {
        } else if (Arg == "--shared-mode") {
          PrintSharedMode = true;
        } else if (Arg == "--obj-root") {
@@ -11,6 +11,6 @@ Index: llvm-toolchain-snapshot_3.8~svn253020/tools/llvm-config/llvm-config.cpp
        } else if (Arg == "--src-root") {
 -        OS << LLVM_SRC_ROOT << '\n';
 +        OS << ActivePrefix << "/build/" << '\n';
-       } else {
-         usage();
-       }
+       } else if (Arg == "--link-shared") {
+         LinkMode = LinkModeDyLib;
+       } else if (Arg == "--link-static") {
