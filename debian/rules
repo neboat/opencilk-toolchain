@@ -224,7 +224,7 @@ override_dh_auto_configure: preconfigure
 		--with-cloog --with-isl \
 		--with-bug-report-url=http://bugs.debian.org/ \
 		--enable-shared \
-	        --disable-bindings \
+		--disable-bindings \
 		--with-clang-default-openmp-runtime=libomp \
 		$(CONFIGURE_EXTRA) \
 		CLANG_VENDOR=$(VENDOR) || { cat config.log tools/polly/config.log; exit 1; }; \
@@ -347,7 +347,6 @@ ifeq (${AUTOCONF_BUILD},yes)
 	mv $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION).so $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION).so.1
 endif
 
-
 # Remove things that CMake or autoconf install but which aren't packaged yet,
 # or are packaged from the source or build tree.
 ifneq (${AUTOCONF_BUILD},yes)
@@ -443,6 +442,10 @@ endif
 		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/include/polly/ \
 		$(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/; \
 	fi
+
+# Delete the target build directory to save some space on the build systems
+# All the files have been installed in $(CURDIR)/debian/tmp/ already
+	rm -rf $(TARGET_BUILD)
 
 
 override_dh_shlibdeps:
