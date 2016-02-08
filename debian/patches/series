@@ -34,8 +34,8 @@ follow-parallel-var.diff
 hurd-EIEIO-undef.diff
 silent-MCJIIT-tests.diff
 lldb-libname.diff
-strip-svn.diff
 compiler-rt-i586.diff
 clang-analyzer-force-version.diff
 fix-cmake-config-prefix.diff
-lldb-test-makefile.diff
+llvm25468-lldb-swig-format-security.diff
+llvm26003-sanitizer-check-env.diff

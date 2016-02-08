@@ -1,6 +1,25 @@
 llvm-toolchain-snapshot (1:3.8~svn255217-1~exp2) experimental; urgency=medium
 
   * Update the clang description for something more accurate (C++-11, 14, etc)
+  * Cmake migration. Done by Andrew Wilkins. Many thanks to him
+    - Update patches to set SONAME in CMake build
+    - Create symlinks with ".links", don't install from build tree
+    - Remove LLVM-internal tools (lit, FileCheck, not, tblgen, etc.)
+    - Remove llvm-X.Y-tools package, because it contained only
+      internal tools that are not intended for distribution.
+    - Remove autotools-specific artifacts from packages.
+    - Remove "dummy" documentation artifacts from llvm-X.Y-docs
+      package. Not built/installed by CMake, not useful.
+    - Update control/rules to support CMake
+    - Patch LLDB SWIG interfaces to workaround a bug in SWIG
+      See https://llvm.org/bugs/show_bug.cgi?id=25468
+    - add missing files to clang-format
+    - Add patch to fix sanitizer lit invocation
+    - removed LLVM-internal tools (lit, FileCheck, not, *-tblgen, etc.);
+      not installed by CMake, not intended for distribution
+    - removed llvm-X.Y-tools (contained only internal tools)
+    - removed autotools-specific artifacts (configure, Makefile, etc.)
+    - removed dummy documentation files
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 16 Jan 2016 12:34:11 +0100
 

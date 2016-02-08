@@ -8,12 +8,6 @@ usr/lib/llvm-@LLVM_VERSION@/include/llvm-c/	usr/include/llvm-c-@LLVM_VERSION@/
 # Explicit debian/tmp since there are multiple declarations
 debian/tmp/usr/lib/llvm-@LLVM_VERSION@/share/llvm/cmake/*.cmake usr/share/llvm-@LLVM_VERSION@/cmake/
 
-build-llvm/Makefile.common		/usr/lib/llvm-@LLVM_VERSION@/build/
-build-llvm/Makefile.config		/usr/lib/llvm-@LLVM_VERSION@/build/
-build-llvm/config.status		/usr/lib/llvm-@LLVM_VERSION@/build/
-Makefile.rules			        /usr/lib/llvm-@LLVM_VERSION@/build/
-configure			            /usr/lib/llvm-@LLVM_VERSION@/build/
-autoconf/			            /usr/lib/llvm-@LLVM_VERSION@/build/
 
 utils/vim/indent/llvm-@LLVM_VERSION@.vim		        usr/share/vim/addons/indent/
 

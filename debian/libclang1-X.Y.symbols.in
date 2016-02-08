@@ -7,6 +7,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_CXCursorSet_insert@Base 3.2
  clang_CXIndex_getGlobalOptions@Base 3.2
  clang_CXIndex_setGlobalOptions@Base 3.2
+ clang_CXXField_isMutable@Base 3.8
  clang_CXXMethod_isConst@Base 3.4
  clang_CXXMethod_isPureVirtual@Base 3.4
  clang_CXXMethod_isStatic@Base 3.2
@@ -30,6 +31,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_CompileCommands_getSize@Base 3.2
  clang_Cursor_getArgument@Base 3.2
  clang_Cursor_getBriefCommentText@Base 3.2
+ clang_Cursor_getCXXManglings@Base 3.8
  clang_Cursor_getCommentRange@Base 3.2
  clang_Cursor_getMangling@Base 3.6
  clang_Cursor_getModule@Base 3.2
@@ -145,6 +147,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_disposeOverriddenCursors@Base 3.2
  clang_disposeSourceRangeList@Base 3.6
  clang_disposeString@Base 3.2
+ clang_disposeStringSet@Base 3.8
  clang_disposeTokens@Base 3.2
  clang_disposeTranslationUnit@Base 3.2
  clang_enableStackTraces@Base 3.2
@@ -199,6 +202,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getCursorSpelling@Base 3.2
  clang_getCursorType@Base 3.2
  clang_getCursorUSR@Base 3.2
+ clang_getCursorVisibility@Base 3.8
  clang_getDeclObjCTypeEncoding@Base 3.2
  clang_getDefinitionSpellingAndExtent@Base 3.2
  clang_getDiagnostic@Base 3.2
@@ -272,6 +276,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_indexLoc_getCXSourceLocation@Base 3.2
  clang_indexLoc_getFileLocation@Base 3.2
  clang_indexSourceFile@Base 3.2
+ clang_indexSourceFileFullArgv@Base 3.8
  clang_indexTranslationUnit@Base 3.2
  clang_index_getCXXClassDeclInfo@Base 3.2
  clang_index_getClientContainer@Base 3.2
@@ -304,6 +309,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_isVolatileQualifiedType@Base 3.2
  clang_loadDiagnostics@Base 3.2
  clang_parseTranslationUnit2@Base 3.6
+ clang_parseTranslationUnit2FullArgv@Base 3.8
  clang_parseTranslationUnit@Base 3.2
  clang_remap_dispose@Base 3.2
  clang_remap_getFilenames@Base 3.2
