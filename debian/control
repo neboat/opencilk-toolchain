@@ -420,11 +420,3 @@ Description: Next generation, high-performance debugger - Header files
  Project, such as the Clang expression parser and LLVM disassembler.
  .
  This package provides the header files to build extension over lldb.
-
-
-Package: lldb-3.9-dev
-Depends: liblldb-3.9-dev, ${misc:Depends}
-Architecture: all
-Section: oldlibs
-Description: transitional dummy package to liblldb-3.9-dev
- This is a transitional dummy package. It can safely be removed.
