@@ -26,4 +26,3 @@ silent-MCJIIT-tests.diff
 clang-analyzer-force-version.diff
 llvm25468-lldb-swig-format-security.diff
 llvm26003-sanitizer-check-env.diff
-fix-doc-rst.diff
