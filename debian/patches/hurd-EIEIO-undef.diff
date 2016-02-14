@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_3.6~svn217023/utils/TableGen/CodeEmitterGen.cpp
+Index: llvm-toolchain-snapshot_3.9~svn260089/utils/TableGen/CodeEmitterGen.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.6~svn217023.orig/utils/TableGen/CodeEmitterGen.cpp
-+++ llvm-toolchain-snapshot_3.6~svn217023/utils/TableGen/CodeEmitterGen.cpp
+--- llvm-toolchain-snapshot_3.9~svn260089.orig/utils/TableGen/CodeEmitterGen.cpp
++++ llvm-toolchain-snapshot_3.9~svn260089/utils/TableGen/CodeEmitterGen.cpp
 @@ -230,6 +230,9 @@ void CodeEmitterGen::run(raw_ostream &o)
-   const std::vector<const CodeGenInstruction*> &NumberedInstructions =
+   ArrayRef<const CodeGenInstruction*> NumberedInstructions =
      Target.getInstructionsByEnumValue();
  
 +  o << "// Undef for HURD\n";

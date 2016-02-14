@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.7~svn241915/clang/tools/clang-format/clang-format.py
+Index: llvm-toolchain-snapshot_3.9~svn260089/clang/tools/clang-format/clang-format.py
 ===================================================================
---- llvm-toolchain-snapshot_3.7~svn241915.orig/clang/tools/clang-format/clang-format.py
-+++ llvm-toolchain-snapshot_3.7~svn241915/clang/tools/clang-format/clang-format.py
-@@ -25,7 +25,7 @@ import vim
+--- llvm-toolchain-snapshot_3.9~svn260089.orig/clang/tools/clang-format/clang-format.py
++++ llvm-toolchain-snapshot_3.9~svn260089/clang/tools/clang-format/clang-format.py
+@@ -34,7 +34,7 @@ import vim
  
  # set g:clang_format_path to the path to clang-format if it is not on the path
  # Change this to the full path if clang-format is not on the path.
@@ -11,23 +11,23 @@ Index: llvm-toolchain-snapshot_3.7~svn241915/clang/tools/clang-format/clang-form
  if vim.eval('exists("g:clang_format_path")') == "1":
    binary = vim.eval('g:clang_format_path')
  
-Index: llvm-toolchain-snapshot_3.7~svn241915/clang/tools/clang-format/clang-format-diff.py
+Index: llvm-toolchain-snapshot_3.9~svn260089/clang/tools/clang-format/clang-format-diff.py
 ===================================================================
---- llvm-toolchain-snapshot_3.7~svn241915.orig/clang/tools/clang-format/clang-format-diff.py
-+++ llvm-toolchain-snapshot_3.7~svn241915/clang/tools/clang-format/clang-format-diff.py
-@@ -32,7 +32,7 @@ import sys
+--- llvm-toolchain-snapshot_3.9~svn260089.orig/clang/tools/clang-format/clang-format-diff.py
++++ llvm-toolchain-snapshot_3.9~svn260089/clang/tools/clang-format/clang-format-diff.py
+@@ -55,7 +55,7 @@ def main():
+   parser.add_argument('-style',
+                       help='formatting style to apply (LLVM, Google, Chromium, '
+                       'Mozilla, WebKit)')
+-  parser.add_argument('-binary', default='clang-format',
++  parser.add_argument('-binary', default='clang-format-3.9',
+                       help='location of binary to use for clang-format')
+   args = parser.parse_args()
  
- 
- # Change this to the full path if clang-format is not on the path.
--binary = 'clang-format'
-+binary = 'clang-format-3.9'
- 
- 
- def main():
-Index: llvm-toolchain-snapshot_3.7~svn241915/clang/tools/clang-format/clang-format.el
+Index: llvm-toolchain-snapshot_3.9~svn260089/clang/tools/clang-format/clang-format.el
 ===================================================================
---- llvm-toolchain-snapshot_3.7~svn241915.orig/clang/tools/clang-format/clang-format.el
-+++ llvm-toolchain-snapshot_3.7~svn241915/clang/tools/clang-format/clang-format.el
+--- llvm-toolchain-snapshot_3.9~svn260089.orig/clang/tools/clang-format/clang-format.el
++++ llvm-toolchain-snapshot_3.9~svn260089/clang/tools/clang-format/clang-format.el
 @@ -36,7 +36,7 @@
    :group 'tools)
  
