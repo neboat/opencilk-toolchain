@@ -263,20 +263,20 @@ override_dh_prep: build_doc
 
 
 build_doc:
-	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
-	cd $(CURDIR)/tools/clang/docs && make -f Makefile.sphinx
+	cd $(TARGET_BUILD) && make $(NJOBS) docs-llvm-html docs-clang-html docs-clang-tools-html docs-polly-html docs-polly-man docs-clang-tools-man docs-clang-man docs-llvm-man
+
 
 # Rename manpages
-	d=$(CURDIR)/docs/_build/man/; \
+	d=$(TARGET_BUILD)/docs/man/; \
 	cd $$d; \
 	for f in *.1; do \
 		echo "$$f"|grep $(LLVM_VERSION) || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
 	done
 
 # Remove the copy of jquery. See bug #701087
-	for d in $(CURDIR)/clang/docs/_build/html/_static/ $(CURDIR)/docs/_build/html/_static/; do \
-		cd $$d && rm -f jquery.js && ln -s /usr/share/javascript/jquery/jquery.js; \
-		cd $$d && rm -f underscore.js && ln -s /usr/share/javascript/underscore/underscore.js; \
+	for d in $(TARGET_BUILD)/docs/html/_static/ $(TARGET_BUILD)/tools/clang/docs/html/_static/ $(TARGET_BUILD)/tools/clang/tools/extra/docs/html/_static/ $(TARGET_BUILD)/tools/polly/docs/html/_static/; do \
+		cd $$d && rm -f jquery.js && ln -s /usr/share/javascript/jquery/jquery.js && cd -; \
+		cd $$d && rm -f underscore.js && ln -s /usr/share/javascript/underscore/underscore.js && cd -; \
 	done
 
 	help2man --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1
@@ -428,7 +428,7 @@ endif
 	$(CURDIR)/debian/llvm-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/build/autoconf/LICENSE.TXT
 
 # Change CMake module dir
-	sed -i 's|LLVM_CMAKE_DIR "/usr/lib/llvm-$(LLVM_VERSION)/share/llvm/cmake"|LLVM_CMAKE_DIR "/usr/share/llvm-$(LLVM_VERSION)/cmake"|' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/llvm/cmake/LLVMConfig.cmake
+	sed -i 's|LLVM_CMAKE_DIR "/usr/lib/llvm-$(LLVM_VERSION)/share/llvm/cmake"|LLVM_CMAKE_DIR "/usr/share/llvm-$(LLVM_VERSION)/cmake"|' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMConfig.cmake
 
 # Managed in lldb-X.Y.links.in
 	rm -f $(CURDIR)/$(TARGET_BUILD)/$(BUILD_DIR)/lib/python*/site-packages/lldb/_lldb.so
