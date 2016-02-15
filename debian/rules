@@ -238,6 +238,7 @@ override_dh_auto_configure: preconfigure
 		-DLLVM_LINK_LLVM_DYLIB=ON \
 		-DLLVM_VERSION_SUFFIX= \
 		-DLLVM_ENABLE_SPHINX=ON \
+		-DLLVM_BUILD_LLVM_DYLIB=ON \
 		-DLLVM_ENABLE_RTTI=ON \
 		-DLLVM_ENABLE_FFI=ON \
 		$(CMAKE_EXTRA) \
@@ -302,13 +303,13 @@ endif
 	# Only run on executable, not script
 	chrpath -d `find $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary'|cut -d: -f1`
 
+	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && \
+	mv libclang.so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so.$(SONAME_EXT) && \
+	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT); \
+	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so
 
 # Add the trailing soname
 ifeq (${AUTOCONF_BUILD},yes)
-	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && \
-	mv libclang.so libclang-$(LLVM_VERSION).so.$(SONAME_EXT) && \
-	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT); \
-        ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so; \
 	if test "$(LLDB_ENABLE)" = yes; then \
 		mv liblldb.so liblldb-$(LLVM_VERSION).so.$(SONAME_EXT) && \
 		ln -s liblldb-$(LLVM_VERSION).so.$(SONAME_EXT) liblldb.so.$(SONAME_EXT); \
@@ -373,7 +374,7 @@ endif
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/modularize
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/libexec/c++-analyzer
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/libexec/ccc-analyzer
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libclang*.so
+#	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libclang*.so
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM*.so
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/liblldb*.so
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libclang.so.1
@@ -466,6 +467,7 @@ override_dh_strip:
 
 
 override_dh_install:
+	cp $(TARGET_BUILD)/lib/libLLVM-$(LLVM_VERSION).so $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION).so.$(SONAME_EXT)
 	dh_install --fail-missing
 
 override_dh_installdeb:

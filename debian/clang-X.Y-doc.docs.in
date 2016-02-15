@@ -1,2 +1,1 @@
-tools/clang/docs/_build/html/
-
+build-llvm/tools/clang/docs/html/
