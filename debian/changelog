@@ -1,10 +1,15 @@
-llvm-toolchain-3.8 (1:3.8~+rc2-2~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-3.8 (1:3.8~+rc3-1~exp1) experimental; urgency=medium
 
+  * New snapshot release
   * Update the clang description for something more accurate (C++-11, 14, etc)
   * Update debian/orig-tar.sh to remove autoconf/config.sub autoconf/config.guess
     in polly
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 07 Feb 2016 17:15:39 +0100
+  [ Matthias Klose ]
+  * clang-tidy-3.8: Remove Breaks/Replaces on clang-modernize-3.8.
+  * Disable lldb on s390x.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 25 Feb 2016 14:26:14 +0100
 
 llvm-toolchain-3.8 (1:3.8~+rc2-1~exp1) experimental; urgency=medium
 
