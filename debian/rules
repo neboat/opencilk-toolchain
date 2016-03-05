@@ -361,8 +361,6 @@ endif
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPolly*a
 # Probably useless
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python2.7/site-packages/six.py
-# Don't want to install lldb-3.8.0-3.8 binaries (probably a bug)
-	rm -f $(DEB_INST)/usr/bin/lldb-*-$(LLVM_VERSION_FULL)-*
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
