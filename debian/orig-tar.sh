@@ -113,7 +113,7 @@ rm -rf $COMPILER_RT_TARGET
 # Polly
 POLLY_TARGET=polly_$VERSION
 $SVN_CMD $(get_svn_url polly $BRANCH $TAG) $POLLY_TARGET
-rm -rf $POLLY_TARGET/www
+rm -rf $POLLY_TARGET/www $POLLY_TARGET/autoconf/config.sub $POLLY_TARGET/autoconf/config.guess
 tar jcvf $FULL_VERSION.orig-polly.tar.bz2 $POLLY_TARGET
 rm -rf $POLLY_TARGET
 

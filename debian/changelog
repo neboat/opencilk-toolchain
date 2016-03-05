@@ -31,6 +31,59 @@ llvm-toolchain-snapshot (1:3.9~svn260089-1) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 16 Jan 2016 12:34:11 +0100
 
+llvm-toolchain-3.8 (1:3.8-1) unstable; urgency=medium
+
+  * New upstream release
+  * Install a missing library to unbreak lldb (Closes: #815809)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 03 Mar 2016 21:16:21 +0100
+
+llvm-toolchain-3.8 (1:3.8~+rc3-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * Update the clang description for something more accurate (C++-11, 14, etc)
+  * Update debian/orig-tar.sh to remove autoconf/config.sub autoconf/config.guess
+    in polly
+
+  [ Matthias Klose ]
+  * clang-tidy-3.8: Remove Breaks/Replaces on clang-modernize-3.8.
+  * Disable lldb on s390x.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 25 Feb 2016 14:26:14 +0100
+
+llvm-toolchain-3.8 (1:3.8~+rc2-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * Remove build-llvm/ after the install step to save space.
+    Most of the rc1 builds failed because of hd space.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 03 Feb 2016 08:59:32 +0100
+
+llvm-toolchain-3.8 (1:3.8~+rc1-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * Cmake migration. Done by Andrew Wilkins. Many thanks to him
+    - Update patches to set SONAME in CMake build
+    - Create symlinks with ".links", don't install from build tree
+    - Remove LLVM-internal tools (lit, FileCheck, not, tblgen, etc.)
+    - Remove llvm-X.Y-tools package, because it contained only
+      internal tools that are not intended for distribution.
+    - Remove autotools-specific artifacts from packages.
+    - Remove "dummy" documentation artifacts from llvm-X.Y-docs
+      package. Not built/installed by CMake, not useful.
+    - Update control/rules to support CMake
+    - Patch LLDB SWIG interfaces to workaround a bug in SWIG
+      See https://llvm.org/bugs/show_bug.cgi?id=25468
+    - add missing files to clang-format
+    - Add patch to fix sanitizer lit invocation
+    - removed LLVM-internal tools (lit, FileCheck, not, *-tblgen, etc.);
+      not installed by CMake, not intended for distribution
+    - removed llvm-X.Y-tools (contained only internal tools)
+    - removed autotools-specific artifacts (configure, Makefile, etc.)
+    - removed dummy documentation files
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 20 Jan 2016 16:09:01 +0100
+
 llvm-toolchain-snapshot (1:3.8~svn255217-1~exp1) experimental; urgency=medium
 
   * New snapshot release
@@ -46,10 +99,10 @@ llvm-toolchain-snapshot (1:3.8~svn254193-2) UNRELEASED; urgency=medium
     setting the lldb archs in debian/control in just one
     place would be appreciated.
   * quoting fixes in debian/rules, when make macros
-    are empty 
+    are empty
     Thanks to Doko for the two previous changes (Closes: #806729)
 
- -- Sylvestre Ledru <sylvestre@debian.org> Mon, 30 Nov 2015 15:34:12 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 30 Nov 2015 15:34:12 +0100
 
 llvm-toolchain-snapshot (1:3.8~svn254193-1) unstable; urgency=medium
 

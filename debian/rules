@@ -122,7 +122,7 @@ endif
 
 
 LLDB_ENABLE=yes
-LLDB_DISABLE_ARCHS := arm64 hurd-i386 ia64 ppc64el powerpc
+LLDB_DISABLE_ARCHS := arm64 hurd-i386 ia64 ppc64el powerpc s390x
 # hurd has threading issues
 ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 # Disable LLDB for this arch.
@@ -354,42 +354,14 @@ ifneq (${AUTOCONF_BUILD},yes)
 	mv $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/clang-$(LLVM_VERSION) \
 	   $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/clang
 endif
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/clang-cl
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/scan-build
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/scan-view
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/c-index-test
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/clang-tblgen
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/pp-trace
+# internal tools, don't care
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/count
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/not
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/FileCheck
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/Reporter.py
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/ScanView.py
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/startfile.py
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/lli-child-target
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/lldb-argdumper
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/lldb-$(LLVM_VERSION_FULL)
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/lldb-mi-$(LLVM_VERSION_FULL)
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/lldb-server-$(LLVM_VERSION_FULL)
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/modularize
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/libexec/c++-analyzer
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/libexec/ccc-analyzer
-#	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libclang*.so
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM*.so
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/liblldb*.so
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libclang.so.1
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/liblldb.so.1
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPolly.a
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPollyISL.a
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/*.txt
+# Don't think it is used
+	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPolly*a
+# Probably useless
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python2.7/site-packages/six.py
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/man/man1/scan-build.1
-	rm -fr $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/clang/cmake/
-	rm -fr $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/scan-view/
-	rm -fr $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/docs/llvm/html/
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/docs/llvm/html.tar.gz
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/scan-build/scanview.css
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/scan-build/sorttable.js
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
@@ -450,7 +422,7 @@ endif
 
 
 override_dh_shlibdeps:
-	cd $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ && ln -s libLLVM-$(LLVM_VERSION).so.1 libLLVM-$(LLVM_VERSION).so
+#	cd $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ && ln -s libLLVM-$(LLVM_VERSION).so.1 libLLVM-$(LLVM_VERSION).so
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_shlibdeps
 
 override_dh_installman:
