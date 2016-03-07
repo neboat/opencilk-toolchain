@@ -6,6 +6,7 @@ llvm-toolchain-3.8 (1:3.8-2) UNRELEASED; urgency=medium
   [ Sylvestre Ledru ]
   * Fix txt file installation issue, by putting a README.txt file
     with some explanation.
+  * Fix the cmake installation.
 
   [ Graham Inggs ]
   * Tighten llvm dev dependency (Closes: #814142).
