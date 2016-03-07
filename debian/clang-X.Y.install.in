@@ -23,7 +23,9 @@ usr/bin/c-index-test-@LLVM_VERSION@
 tools/clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
 tools/clang/tools/scan-view-@LLVM_VERSION@       usr/share/clang/
 #usr/share/man/man1/clang.1     usr/share/man/man1/
-usr/lib/llvm-@LLVM_VERSION@/lib/cmake/clang/*.cmake usr/share/llvm-@LLVM_VERSION@/cmake/
+usr/lib/llvm-@LLVM_VERSION@/share/clang/cmake/
+# todo: check if it is not be moved
+#usr/lib/llvm-@LLVM_VERSION@/lib/cmake/clang/*.cmake usr/share/llvm-@LLVM_VERSION@/cmake/
 
 usr/bin/clang-@LLVM_VERSION@
 usr/bin/clang++-@LLVM_VERSION@
