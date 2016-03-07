@@ -77,8 +77,9 @@ endif
 endif
 
 # Enable polly (or not)
-ifeq (,$(filter $(DEB_HOST_ARCH), powerpc))
-  POLLY_ENABLE=yes
+POLLY_ENABLE=yes
+ifeq (,$(filter-out $(DEB_HOST_ARCH), powerpc s390x))
+  POLLY_ENABLE=no
 endif
 
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
