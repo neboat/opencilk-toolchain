@@ -77,7 +77,7 @@ endif
 endif
 
 # Enable polly (or not)
-ifeq (,$(filter $(DEB_HOST_ARCH), powerpc s390x))
+ifeq (,$(filter $(DEB_HOST_ARCH), powerpc))
   POLLY_ENABLE=yes
 endif
 
@@ -331,6 +331,9 @@ endif
 	mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/lib/clang_linux/
 	mkdir -p $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/clang_linux/
 	mkdir -p $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/clang_linux/
+	echo "The *.txt files if available, contain helper to override some of the errors messages" >> $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/README.txt
+	echo "please visit https://github.com/google/sanitizers/wiki/AddressSanitizer for help" >> $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/README.txt
+	
 
 # idem for the lldb python binding
 	mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python2.7/site-packages/lldb/
