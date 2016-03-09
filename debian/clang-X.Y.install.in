@@ -4,6 +4,9 @@ usr/lib/llvm-@LLVM_VERSION@/bin/clang-check
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-apply-replacements
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-query
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-rename
+usr/lib/llvm-@LLVM_VERSION@/bin/scan-view
+usr/lib/llvm-@LLVM_VERSION@/bin/scan-build
+usr/lib/llvm-@LLVM_VERSION@/bin/clang-cl
 usr/lib/llvm-@LLVM_VERSION@/bin/sancov
 usr/lib/llvm-@LLVM_VERSION@/share/scan-view/
 usr/lib/llvm-@LLVM_VERSION@/share/scan-build/
@@ -30,3 +33,5 @@ usr/bin/clang-cl-@LLVM_VERSION@
 usr/bin/modularize-@LLVM_VERSION@
 usr/bin/scan-build-@LLVM_VERSION@
 usr/bin/scan-view-@LLVM_VERSION@
+usr/bin/c-index-test-@LLVM_VERSION@
+
