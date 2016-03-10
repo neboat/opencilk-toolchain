@@ -360,7 +360,7 @@ override_dh_auto_install:
 
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
-#	rm -rf $(TARGET_BUILD)
+	rm -rf $(TARGET_BUILD)
 
 
 override_dh_shlibdeps:

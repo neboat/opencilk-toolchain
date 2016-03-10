@@ -1,6 +1,7 @@
 llvm-toolchain-snapshot (1:3.9~svn260851-2) UNRELEASED; urgency=medium
 
   * Remove the autoconf section
+  * Bring back the removal of the build dir
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 09 Mar 2016 19:30:30 +0100
 
