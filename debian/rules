@@ -205,6 +205,12 @@ override_dh_auto_configure: preconfigure
 	rm -fr tools/clang/tools/extra
 	cp -R -H clang-tools-extra tools/clang/tools/extra
 
+	# if cmake is installed in /tmp/cmake/ uses it
+	# Used to build llvm on old ubuntu (precise) on the llvm.org/apt/ ci
+	if test -d /tmp/cmake/bin/; then \
+		export PATH=$$PATH:/tmp/cmake/bin; \
+	fi
+
 	# TODO(axw) specify build type for CMake
 	# TODO(axw) pass compiler flags, etc.
 
