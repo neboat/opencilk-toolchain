@@ -208,7 +208,7 @@ override_dh_auto_configure: preconfigure
 	# if cmake is installed in /tmp/cmake/ uses it
 	# Used to build llvm on old ubuntu (precise) on the llvm.org/apt/ ci
 	if test -d /tmp/cmake/bin/; then \
-		export PATH=$$PATH:/tmp/cmake/bin; \
+		export PATH=/tmp/cmake/bin:$$PATH; \
 	fi
 
 	# TODO(axw) specify build type for CMake
