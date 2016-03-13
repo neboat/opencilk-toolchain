@@ -204,10 +204,10 @@ override_dh_auto_configure: preconfigure
 	if test -d /tmp/; then \
 	ls /tmp/; \
 	fi
-    if test -d /tmp/cmake; then \
+	if test -d /tmp/cmake; then \
 	ls /tmp/cmake; \
 	fi
-    if test -d /tmp/cmake/bin; then \
+	if test -d /tmp/cmake/bin; then \
 	ls /tmp/cmake/bin; \
 	fi
 	if test -d /tmp/cmake/bin/; then \
