@@ -232,7 +232,6 @@ override_dh_auto_build:
 override_dh_prep: build_doc
 	dh_prep
 
-
 build_doc:
 	cd $(TARGET_BUILD) && make $(NJOBS) docs-llvm-html docs-clang-html docs-clang-tools-html docs-polly-html docs-polly-man docs-clang-tools-man docs-clang-man docs-llvm-man
 
@@ -363,6 +362,11 @@ override_dh_auto_install:
 		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/include/polly/ \
 		$(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/; \
 	fi
+
+	mkdir -p $(CURDIR)/debian/usr/share/doc/llvm-$(LLVM_VERSION)-doc/ $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/
+	cp -R build-llvm/docs/html $(CURDIR)/debian/usr/share/doc/llvm-$(LLVM_VERSION)-doc/
+	cp -R build-llvm/tools/clang/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/
+	cp -R build-llvm/tools/clang/tools/extra/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/clang-extra
 
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
