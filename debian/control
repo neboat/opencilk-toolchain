@@ -396,7 +396,7 @@ Package: python-lldb-3.9
 Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
-Conflicts: python-lldb-3.4, python-lldb-3.5, python-lldb-3.6, python-lldb-3.7
+Conflicts: python-lldb-3.4, python-lldb-3.5, python-lldb-3.6, python-lldb-3.7, python-lldb-3.8
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger, python lib
  LLDB is a next generation, high-performance debugger. It is built as a set of
