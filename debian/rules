@@ -201,20 +201,11 @@ override_dh_auto_configure: preconfigure
 
 	# if cmake is installed in /tmp/cmake/ uses it
 	# Used to build llvm on old ubuntu (precise) on the llvm.org/apt/ ci
-	if test -d /tmp/; then \
-	ls /tmp/; \
-	fi
-	if test -d /tmp/cmake; then \
-	ls /tmp/cmake; \
-	fi
-	if test -d /tmp/cmake/bin; then \
-	ls /tmp/cmake/bin; \
-	fi
 	CMAKE_BIN=cmake; \
 	if test -f /tmp/cmake/bin/cmake; then \
 		CMAKE_BIN=/tmp/cmake/bin/cmake; \
 	fi; \
-	echo $$CMAKE_BIN; \
+	echo "Using cmake: $$CMAKE_BIN"; \
 	cd $(TARGET_BUILD) && \
 	$$CMAKE_BIN ../ \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
