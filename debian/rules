@@ -210,14 +210,11 @@ override_dh_auto_configure: preconfigure
 	if test -d /tmp/cmake/bin; then \
 	ls /tmp/cmake/bin; \
 	fi
-	CMAKE_BIN=cmake
+	CMAKE_BIN=cmake; \
 	if test -f /tmp/cmake/bin/cmake; then \
 		CMAKE_BIN=/tmp/cmake/bin/cmake; \
-	fi
-	echo $$CMAKE_BIN
-	# TODO(axw) specify build type for CMake
-	# TODO(axw) pass compiler flags, etc.
-
+	fi; \
+	echo $$CMAKE_BIN; \
 	cd $(TARGET_BUILD) && \
 	$$CMAKE_BIN ../ \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
