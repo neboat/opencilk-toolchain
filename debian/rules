@@ -205,13 +205,13 @@ override_dh_auto_configure: preconfigure
 	rm -fr tools/clang/tools/extra
 	cp -R -H clang-tools-extra tools/clang/tools/extra
 
-        # if cmake is installed in /tmp/cmake/ uses it
-        # Used to build llvm on old ubuntu (precise) on the llvm.org/apt/ ci
-        CMAKE_BIN=cmake; \
-        if test -f /tmp/cmake/bin/cmake; then \
-                CMAKE_BIN=/tmp/cmake/bin/cmake; \
-        fi; \
-        echo "Using cmake: $$CMAKE_BIN"; \
+	# if cmake is installed in /tmp/cmake/ uses it
+	# Used to build llvm on old ubuntu (precise) on the llvm.org/apt/ ci
+	CMAKE_BIN=cmake; \
+	if test -f /tmp/cmake/bin/cmake; then \
+			CMAKE_BIN=/tmp/cmake/bin/cmake; \
+	fi; \
+	echo "Using cmake: $$CMAKE_BIN"; \
 	if test $(AUTOCONF_BUILD) = yes; then \
 		cd $(TARGET_BUILD); \
 		$(PRE_PROCESS_CONF) \
@@ -234,8 +234,8 @@ override_dh_auto_configure: preconfigure
 		$(CONFIGURE_EXTRA) \
 		CLANG_VENDOR=$(VENDOR) || { cat config.log tools/polly/config.log; exit 1; }; \
 	else \
-	        cd $(TARGET_BUILD) && \
-	        $$CMAKE_BIN ../ \
+		cd $(TARGET_BUILD) && \
+		$$CMAKE_BIN ../ \
 		-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 		-DCMAKE_VERBOSE_MAKEFILE=ON \
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo \
