@@ -259,8 +259,10 @@ build_doc:
 	done
 
 override_dh_auto_install:
-	$(MAKE) -C $(TARGET_BUILD) VERBOSE=1 install DESTDIR=$(DEB_INST)/
-
+	# Clean up temporary files to make sure the install works
+	rm -rf $(find $(TARGET_BUILD) -wholename '*CMakeFiles*' -not -name CMakeLists.txt -a -name "*.dir" -type d)
+	# install/fast enables a make install without recompiling temporary files
+	$(MAKE) -C $(TARGET_BUILD) VERBOSE=1 install/fast DESTDIR=$(DEB_INST)/
 	# Not used on Linux.
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/argdumper
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/clang/clang-format-bbedit.applescript
