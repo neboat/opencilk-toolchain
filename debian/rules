@@ -433,7 +433,7 @@ ifeq (${POLLY_ENABLE},yes)
 endif
 
 # Managed by debian build system
-	rm -f $(CURDIR)/$(TARGET_BUILD)/$(BUILD_DIR)/lib/python*/site-packages/lldb/_lldb.so $(TARGET_BUILD)/$(BUILD_DIR)/lib/liblldb-$(LLVM_VERSION).so
+	rm -f $(CURDIR)/$(TARGET_BUILD)/$(BUILD_DIR)/lib/python*/site-packages/lldb/_lldb.so
 
 # polly tests
 	if test "$(POLLY_ENABLE)" = yes; then \
