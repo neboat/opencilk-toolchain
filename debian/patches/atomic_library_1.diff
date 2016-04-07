@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_3.8~svn249699/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_3.9~svn265666/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn249699.orig/clang/lib/Basic/Targets.cpp
-+++ llvm-toolchain-snapshot_3.8~svn249699/clang/lib/Basic/Targets.cpp
-@@ -4330,6 +4330,20 @@ class ARMTargetInfo : public TargetInfo
-     }
+--- llvm-toolchain-snapshot_3.9~svn265666.orig/clang/lib/Basic/Targets.cpp
++++ llvm-toolchain-snapshot_3.9~svn265666/clang/lib/Basic/Targets.cpp
+@@ -4052,6 +4052,20 @@ protected:
+     Builder.defineMacro("__ELF__");
    }
  
 +  static bool shouldUseInlineAtomic(const llvm::Triple &T) {
@@ -21,12 +21,12 @@ Index: llvm-toolchain-snapshot_3.8~svn249699/clang/lib/Basic/Targets.cpp
 +  }
 +
  public:
-   ARMTargetInfo(const llvm::Triple &Triple, bool IsBigEndian)
-       : TargetInfo(Triple), FPMath(FP_Default),
-Index: llvm-toolchain-snapshot_3.8~svn249699/clang/test/CodeGen/linux-arm-atomic.c
+   RTEMSTargetInfo(const llvm::Triple &Triple, const CodeGenOptions &CGOpts)
+       : OSTargetInfo<Target>(Triple, CGOpts) {
+Index: llvm-toolchain-snapshot_3.9~svn265666/clang/test/CodeGen/linux-arm-atomic.c
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn249699.orig/clang/test/CodeGen/linux-arm-atomic.c
-+++ llvm-toolchain-snapshot_3.8~svn249699/clang/test/CodeGen/linux-arm-atomic.c
+--- llvm-toolchain-snapshot_3.9~svn265666.orig/clang/test/CodeGen/linux-arm-atomic.c
++++ llvm-toolchain-snapshot_3.9~svn265666/clang/test/CodeGen/linux-arm-atomic.c
 @@ -1,5 +1,15 @@
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv7-unknown-linux | FileCheck %s
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv6-unknown-linux | FileCheck %s

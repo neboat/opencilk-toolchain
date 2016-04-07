@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_3.8~svn242701/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_3.9~svn265666/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn242701.orig/clang/lib/Basic/Targets.cpp
-+++ llvm-toolchain-snapshot_3.8~svn242701/clang/lib/Basic/Targets.cpp
-@@ -4325,33 +4325,6 @@ class ARMTargetInfo : public TargetInfo
-     }
+--- llvm-toolchain-snapshot_3.9~svn265666.orig/clang/lib/Basic/Targets.cpp
++++ llvm-toolchain-snapshot_3.9~svn265666/clang/lib/Basic/Targets.cpp
+@@ -4052,33 +4052,6 @@ protected:
+     Builder.defineMacro("__ELF__");
    }
  
 -  static bool shouldUseInlineAtomic(const llvm::Triple &T) {
@@ -35,4 +35,4 @@ Index: llvm-toolchain-snapshot_3.8~svn242701/clang/lib/Basic/Targets.cpp
 -  }
  
  public:
-   ARMTargetInfo(const llvm::Triple &Triple, bool IsBigEndian)
+   RTEMSTargetInfo(const llvm::Triple &Triple, const CodeGenOptions &CGOpts)
