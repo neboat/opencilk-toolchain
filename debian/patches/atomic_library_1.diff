@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.9~svn265871/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_3.9~svn265903/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.9~svn265871.orig/clang/lib/Basic/Targets.cpp
-+++ llvm-toolchain-snapshot_3.9~svn265871/clang/lib/Basic/Targets.cpp
-@@ -4021,6 +4021,20 @@ protected:
+--- llvm-toolchain-snapshot_3.9~svn265903.orig/clang/lib/Basic/Targets.cpp
++++ llvm-toolchain-snapshot_3.9~svn265903/clang/lib/Basic/Targets.cpp
+@@ -4041,6 +4041,20 @@ protected:
      Builder.defineMacro("__ELF__");
    }
  
@@ -21,12 +21,12 @@ Index: llvm-toolchain-snapshot_3.9~svn265871/clang/lib/Basic/Targets.cpp
 +  }
 +
  public:
-   RTEMSTargetInfo(const llvm::Triple &Triple) : OSTargetInfo<Target>(Triple) {
-     switch (Triple.getArch()) {
-Index: llvm-toolchain-snapshot_3.9~svn265871/clang/test/CodeGen/linux-arm-atomic.c
+   RTEMSTargetInfo(const llvm::Triple &Triple, const TargetOptions &Opts)
+       : OSTargetInfo<Target>(Triple, Opts) {
+Index: llvm-toolchain-snapshot_3.9~svn265903/clang/test/CodeGen/linux-arm-atomic.c
 ===================================================================
---- llvm-toolchain-snapshot_3.9~svn265871.orig/clang/test/CodeGen/linux-arm-atomic.c
-+++ llvm-toolchain-snapshot_3.9~svn265871/clang/test/CodeGen/linux-arm-atomic.c
+--- llvm-toolchain-snapshot_3.9~svn265903.orig/clang/test/CodeGen/linux-arm-atomic.c
++++ llvm-toolchain-snapshot_3.9~svn265903/clang/test/CodeGen/linux-arm-atomic.c
 @@ -1,5 +1,15 @@
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv7-unknown-linux | FileCheck %s
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv6-unknown-linux | FileCheck %s

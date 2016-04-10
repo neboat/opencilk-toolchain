@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.9~svn265871/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_3.9~svn265903/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.9~svn265871.orig/clang/lib/Basic/Targets.cpp
-+++ llvm-toolchain-snapshot_3.9~svn265871/clang/lib/Basic/Targets.cpp
-@@ -4021,33 +4021,6 @@ protected:
+--- llvm-toolchain-snapshot_3.9~svn265903.orig/clang/lib/Basic/Targets.cpp
++++ llvm-toolchain-snapshot_3.9~svn265903/clang/lib/Basic/Targets.cpp
+@@ -4041,33 +4041,6 @@ protected:
      Builder.defineMacro("__ELF__");
    }
  
@@ -35,4 +35,4 @@ Index: llvm-toolchain-snapshot_3.9~svn265871/clang/lib/Basic/Targets.cpp
 -  }
  
  public:
-   RTEMSTargetInfo(const llvm::Triple &Triple) : OSTargetInfo<Target>(Triple) {
+   RTEMSTargetInfo(const llvm::Triple &Triple, const TargetOptions &Opts)
