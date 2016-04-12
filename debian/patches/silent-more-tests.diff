@@ -1,10 +1,10 @@
 # Comment the tests for the code coverage (fails otherwise)
 
 
-Index: llvm-toolchain-snapshot_3.8~svn243372/test/BugPoint/crash-narrowfunctiontest.ll
+Index: llvm-toolchain-snapshot_3.9~svn266048/test/BugPoint/crash-narrowfunctiontest.ll
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn243372.orig/test/BugPoint/crash-narrowfunctiontest.ll
-+++ llvm-toolchain-snapshot_3.8~svn243372/test/BugPoint/crash-narrowfunctiontest.ll
+--- llvm-toolchain-snapshot_3.9~svn266048.orig/test/BugPoint/crash-narrowfunctiontest.ll
++++ llvm-toolchain-snapshot_3.9~svn266048/test/BugPoint/crash-narrowfunctiontest.ll
 @@ -2,6 +2,7 @@
  ;
  ; RUN: bugpoint -load %llvmshlibdir/BugpointPasses%shlibext %s -output-prefix %t -bugpoint-crashcalls -silence-passes > /dev/null
@@ -13,22 +13,22 @@ Index: llvm-toolchain-snapshot_3.8~svn243372/test/BugPoint/crash-narrowfunctiont
  
  define i32 @foo() { ret i32 1 }
  
-Index: llvm-toolchain-snapshot_3.8~svn243372/test/BugPoint/metadata.ll
+Index: llvm-toolchain-snapshot_3.9~svn266048/test/BugPoint/metadata.ll
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn243372.orig/test/BugPoint/metadata.ll
-+++ llvm-toolchain-snapshot_3.8~svn243372/test/BugPoint/metadata.ll
+--- llvm-toolchain-snapshot_3.9~svn266048.orig/test/BugPoint/metadata.ll
++++ llvm-toolchain-snapshot_3.9~svn266048/test/BugPoint/metadata.ll
 @@ -1,6 +1,7 @@
- ; RUN: bugpoint -load %llvmshlibdir/BugpointPasses%shlibext %s -output-prefix %t -bugpoint-crashcalls -silence-passes > /dev/null
+ ; RUN: bugpoint -load %llvmshlibdir/BugpointPasses%shlibext %s -output-prefix %t -bugpoint-crashcalls -silence-passes -disable-namedmd-remove > /dev/null
  ; RUN: llvm-dis %t-reduced-simplified.bc -o - | FileCheck %s
  ; REQUIRES: loadable_module
 +; XFAIL: *
  
  ; Bugpoint should keep the call's metadata attached to the call.
  
-Index: llvm-toolchain-snapshot_3.8~svn243372/test/BugPoint/remove_arguments_test.ll
+Index: llvm-toolchain-snapshot_3.9~svn266048/test/BugPoint/remove_arguments_test.ll
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn243372.orig/test/BugPoint/remove_arguments_test.ll
-+++ llvm-toolchain-snapshot_3.8~svn243372/test/BugPoint/remove_arguments_test.ll
+--- llvm-toolchain-snapshot_3.9~svn266048.orig/test/BugPoint/remove_arguments_test.ll
++++ llvm-toolchain-snapshot_3.9~svn266048/test/BugPoint/remove_arguments_test.ll
 @@ -1,6 +1,7 @@
  ; RUN: bugpoint -load %llvmshlibdir/BugpointPasses%shlibext %s -output-prefix %t -bugpoint-crashcalls -silence-passes
  ; RUN: llvm-dis %t-reduced-simplified.bc -o - | FileCheck %s
@@ -37,10 +37,10 @@ Index: llvm-toolchain-snapshot_3.8~svn243372/test/BugPoint/remove_arguments_test
  
  ; Test to make sure that arguments are removed from the function if they are
  ; unnecessary. And clean up any types that frees up too.
-Index: llvm-toolchain-snapshot_3.8~svn243372/test/Feature/load_module.ll
+Index: llvm-toolchain-snapshot_3.9~svn266048/test/Feature/load_module.ll
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn243372.orig/test/Feature/load_module.ll
-+++ llvm-toolchain-snapshot_3.8~svn243372/test/Feature/load_module.ll
+--- llvm-toolchain-snapshot_3.9~svn266048.orig/test/Feature/load_module.ll
++++ llvm-toolchain-snapshot_3.9~svn266048/test/Feature/load_module.ll
 @@ -3,6 +3,7 @@
  ; RUN:   -disable-output 2>&1 | grep Hello
  ; REQUIRES: loadable_module
@@ -49,10 +49,10 @@ Index: llvm-toolchain-snapshot_3.8~svn243372/test/Feature/load_module.ll
  
  @junk = global i32 0
  
-Index: llvm-toolchain-3.8_3.8~+rc1/clang/test/SemaCXX/warn-memsize-comparison.cpp
+Index: llvm-toolchain-snapshot_3.9~svn266048/clang/test/SemaCXX/warn-memsize-comparison.cpp
 ===================================================================
---- llvm-toolchain-3.8_3.8~+rc1.orig/clang/test/SemaCXX/warn-memsize-comparison.cpp
-+++ llvm-toolchain-3.8_3.8~+rc1/clang/test/SemaCXX/warn-memsize-comparison.cpp
+--- llvm-toolchain-snapshot_3.9~svn266048.orig/clang/test/SemaCXX/warn-memsize-comparison.cpp
++++ llvm-toolchain-snapshot_3.9~svn266048/clang/test/SemaCXX/warn-memsize-comparison.cpp
 @@ -11,8 +11,6 @@ extern "C" int strncasecmp(const char *s
  extern "C" char *strncpy(char *dst, const char *src, size_t n);
  extern "C" char *strncat(char *dst, const char *src, size_t n);
@@ -81,4 +81,3 @@ Index: llvm-toolchain-3.8_3.8~+rc1/clang/test/SemaCXX/warn-memsize-comparison.cp
    if (memset(b1, 0, sizeof(b1) / 2)) {}
    if (memset(b1, 0, sizeof(b1) >> 2)) {}
    if (memset(b1, 0, 4 << 2)) {}
-
