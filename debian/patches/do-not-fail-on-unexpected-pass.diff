@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.8~svn256489/utils/lit/lit/Test.py
+Index: llvm-toolchain-snapshot_3.9~svn268880/utils/lit/lit/Test.py
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn256489.orig/utils/lit/lit/Test.py
-+++ llvm-toolchain-snapshot_3.8~svn256489/utils/lit/lit/Test.py
+--- llvm-toolchain-snapshot_3.9~svn268880.orig/utils/lit/lit/Test.py
++++ llvm-toolchain-snapshot_3.9~svn268880/utils/lit/lit/Test.py
 @@ -30,7 +30,7 @@ PASS        = ResultCode('PASS', False)
  FLAKYPASS   = ResultCode('FLAKYPASS', False)
  XFAIL       = ResultCode('XFAIL', False)
