@@ -3,6 +3,7 @@
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-clang.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-clang-extra.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-compiler-rt.tar.bz2
+# llvm-toolchain-snapshot-3.2_3.2repack.orig-lld.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-lldb.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-polly.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig.tar.bz2
@@ -48,7 +49,7 @@ get_svn_url() {
 }
 
 get_higher_revision() {
-    PROJECTS="llvm cfe compiler-rt polly lldb clang-tools-extra"
+    PROJECTS="llvm cfe compiler-rt polly lld lldb clang-tools-extra"
     REVISION_MAX=0
     for f in $PROJECTS; do
         REVISION=$(LANG=C svn info $(get_svn_url $f $BRANCH $TAG)|grep "^Last Changed Rev:"|awk '{print $4}')
@@ -116,6 +117,13 @@ $SVN_CMD $(get_svn_url polly $BRANCH $TAG) $POLLY_TARGET
 rm -rf $POLLY_TARGET/www $POLLY_TARGET/autoconf/config.sub $POLLY_TARGET/autoconf/config.guess
 tar jcvf $FULL_VERSION.orig-polly.tar.bz2 $POLLY_TARGET
 rm -rf $POLLY_TARGET
+
+# LLD
+LLD_TARGET=lld_$VERSION
+$SVN_CMD $(get_svn_url lld $BRANCH $TAG) $LLD_TARGET
+rm -rf $LLD_TARGET/www/
+tar jcvf $FULL_VERSION.orig-lld.tar.bz2 $LLD_TARGET
+rm -rf $LLD_TARGET
 
 # LLDB
 LLDB_TARGET=lldb_$VERSION

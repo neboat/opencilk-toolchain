@@ -1,0 +1,6 @@
+usr/lib/llvm-@LLVM_VERSION@/bin/ld.lld*
+usr/lib/llvm-@LLVM_VERSION@/bin/lld*
+
+usr/bin/lld-link-@LLVM_VERSION@
+usr/bin/ld.lld-@LLVM_VERSION@
+usr/bin/lld-@LLVM_VERSION@*
