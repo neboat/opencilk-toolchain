@@ -6,8 +6,9 @@ llvm-toolchain-snapshot (1:3.9~svn260851-2) UNRELEASED; urgency=medium
   * Set the correct conflicts on python-lldb-3.8 (Closes: #817873)
   * Set the correct conflicts on python-clang-3.8 (Closes: #817872)
   * remove llvm26003-sanitizer-check-env.diff (merged upstream)
-  * Do not fail the build if the manpages cannot be built (failing on 
+  * Do not fail the build if the manpages cannot be built (failing on
     Ubuntu precise)
+  * Install libfindAllSymbols.a as part of libclang-X.Y-dev
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 09 Mar 2016 19:30:30 +0100
 
