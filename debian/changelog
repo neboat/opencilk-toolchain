@@ -1,3 +1,15 @@
+llvm-toolchain-3.8 (1:3.8.1-2) unstable; urgency=medium
+
+  [ Brad King ]
+  * Install cmake files in usr/share/llvm-@LLVM_VERSION@/cmake/ instead of
+    usr/share/llvm-@LLVM_VERSION@/cmake/
+  * Also install libLLVM-3.8.so.1 as a symlink
+  * debian/patches/fix-cmake-config-prefix.diff:
+    cover the CMake build system too
+  (Closes: #819072)
+
+ --
+
 llvm-toolchain-3.8 (1:3.8.1-1) UNRELEASED; urgency=medium
 
   * Preparation of 3.8.1

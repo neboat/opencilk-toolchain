@@ -1,4 +1,5 @@
 usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-@LLVM_VERSION@.so.1       usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM-@LLVM_VERSION@.so
+usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-@LLVM_VERSION@.so.1       usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM-@LLVM_VERSION@.so.1
 usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-@LLVM_VERSION@.so.1       usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM-@LLVM_VERSION_FULL@.so.1
 usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-@LLVM_VERSION@.so.1       usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM-@LLVM_VERSION_FULL@.so
 usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-@LLVM_VERSION@.so.1       usr/lib/@DEB_HOST_MULTIARCH@/libLLVM-@LLVM_VERSION_FULL@.so.1

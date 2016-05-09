@@ -9,8 +9,7 @@ usr/lib/llvm-@LLVM_VERSION@/lib/BugpointPasses.so
 usr/lib/llvm-@LLVM_VERSION@/include/llvm/      usr/include/llvm-@LLVM_VERSION@/
 usr/lib/llvm-@LLVM_VERSION@/include/llvm-c/	usr/include/llvm-c-@LLVM_VERSION@/
 # Explicit debian/tmp since there are multiple declarations
-debian/tmp/usr/lib/llvm-@LLVM_VERSION@/share/llvm/cmake/*.cmake usr/share/llvm-@LLVM_VERSION@/cmake/
-
+debian/tmp/usr/lib/llvm-@LLVM_VERSION@/share/llvm/cmake/*.cmake
 
 utils/vim/indent/llvm-@LLVM_VERSION@.vim		        usr/share/vim/addons/indent/
 
