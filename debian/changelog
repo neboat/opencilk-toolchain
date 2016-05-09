@@ -8,6 +8,12 @@ llvm-toolchain-3.8 (1:3.8.1-2) unstable; urgency=medium
     cover the CMake build system too
   (Closes: #819072)
 
+  [ Pablo Oliveira ]
+  * Fix python-lldb dependencies and make proper symlinks to libLLVM
+    and liblldb as suggested by Graham Inggs (Closes: #821022)
+  * Fix liblldb suffix in lldb/scripts/Python/finishSwigPythonLLDB.py
+    (Closes: #813798)
+
  --
 
 llvm-toolchain-3.8 (1:3.8.1-1) UNRELEASED; urgency=medium

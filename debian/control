@@ -395,7 +395,7 @@ Description: Next generation, high-performance debugger, debugging libraries
 Package: python-lldb-3.8
 Section: python
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-3.8, lldb-3.8, python
 Conflicts: python-lldb-3.4, python-lldb-3.5, python-lldb-3.6, python-lldb-3.7
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger, python lib
