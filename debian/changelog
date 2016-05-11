@@ -1,4 +1,4 @@
-llvm-toolchain-3.8 (1:3.8.1-2) unstable; urgency=medium
+llvm-toolchain-3.8 (1:3.8.1-1) UNRELEASED; urgency=medium
 
   [ Brad King ]
   * Install cmake files in usr/share/llvm-@LLVM_VERSION@/cmake/ instead of
@@ -14,12 +14,14 @@ llvm-toolchain-3.8 (1:3.8.1-2) unstable; urgency=medium
   * Fix liblldb suffix in lldb/scripts/Python/finishSwigPythonLLDB.py
     (Closes: #813798)
 
- --
-
-llvm-toolchain-3.8 (1:3.8.1-1) UNRELEASED; urgency=medium
-
-  * Preparation of 3.8.1
+  [ Sylvestre Ledru ]
   * Improve the cmake detection (used for llvm.org/apt)
+
+  [ Gianfranco Costamagna ]
+  * Make python-lldb-3.8 depend on lldb-3.8-dev, to pick all
+    the required dependencies
+  * Unbreak circular dependency by Suggesting the python binding from
+    liblldb-3.8-dev
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Mar 2016 18:25:13 +0100
 
