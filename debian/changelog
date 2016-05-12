@@ -12,6 +12,7 @@ llvm-toolchain-snapshot (1:3.9~svn260851-2) UNRELEASED; urgency=medium
   * Do not fail the build if the manpages cannot be built (failing on
     Ubuntu precise)
   * Install libfindAllSymbols.a as part of libclang-X.Y-dev
+  * Ship scan-build-py
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 09 Mar 2016 19:30:30 +0100
 
