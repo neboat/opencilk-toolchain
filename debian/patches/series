@@ -27,5 +27,5 @@ clang-analyzer-force-version.diff
 llvm25468-lldb-swig-format-security.diff
 silent-test-transforms.diff
 install-scan-build-py.diff
-scan-build-py-default.diff
+#scan-build-py-default.diff
 
