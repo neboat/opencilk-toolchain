@@ -1,1 +1,1 @@
-usr/lib/llvm-@LLVM_VERSION@/lib/liblld-@LLVM_VERSION@.so.1 /usr/lib/@DEB_HOST_MULTIARCH@/
+#usr/lib/llvm-@LLVM_VERSION@/lib/liblld-@LLVM_VERSION@.so.1 /usr/lib/@DEB_HOST_MULTIARCH@/

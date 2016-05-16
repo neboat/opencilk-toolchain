@@ -356,6 +356,9 @@ override_dh_auto_install:
 	rm -rf clang/tools/scan-build-$(LLVM_VERSION)
 	cp -fR $(CURDIR)/clang/tools/scan-build clang/tools/scan-build-$(LLVM_VERSION)
 
+	rm -rf clang/tools/scan-build-py-$(LLVM_VERSION)
+	cp -fR $(CURDIR)/clang/tools/scan-build-py clang/tools/scan-build-py-$(LLVM_VERSION)
+
 	rm -rf clang/tools/scan-view-$(LLVM_VERSION)
 	cp -fR $(CURDIR)/clang/tools/scan-view clang/tools/scan-view-$(LLVM_VERSION)
 

@@ -1,5 +1,4 @@
 /usr/lib/llvm-@LLVM_VERSION@/include/lldb
 /usr/lib/llvm-@LLVM_VERSION@/lib/liblldb*a
 /usr/lib/llvm-@LLVM_VERSION@/lib/liblldb*so
-
-
+/usr/lib/llvm-@LLVM_VERSION@/lib/liblldb*so.@LLVM_VERSION_FULL@

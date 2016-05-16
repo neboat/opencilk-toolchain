@@ -10,7 +10,6 @@ usr/lib/llvm-@LLVM_VERSION@/bin/clang-cl
 usr/lib/llvm-@LLVM_VERSION@/bin/sancov
 usr/lib/llvm-@LLVM_VERSION@/share/scan-view/
 usr/lib/llvm-@LLVM_VERSION@/share/scan-build/
-usr/lib/llvm-@LLVM_VERSION@/share/scan-build-py/
 usr/lib/llvm-@LLVM_VERSION@/share/man/man1/scan-build.1
 usr/lib/llvm-@LLVM_VERSION@/libexec/ccc-analyzer
 usr/lib/llvm-@LLVM_VERSION@/libexec/c++-analyzer
@@ -19,6 +18,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/modularize
 usr/lib/llvm-@LLVM_VERSION@/bin/c-index-test
 
 tools/clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
+tools/clang/tools/scan-build-py-@LLVM_VERSION@      usr/share/clang/
 tools/clang/tools/scan-view-@LLVM_VERSION@       usr/share/clang/
 #usr/share/man/man1/clang.1     usr/share/man/man1/
 usr/lib/llvm-@LLVM_VERSION@/lib/cmake/clang/*.cmake usr/share/llvm-@LLVM_VERSION@/cmake/
