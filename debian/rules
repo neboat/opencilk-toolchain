@@ -284,11 +284,11 @@ override_dh_auto_install:
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT); \
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so
 
-	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && \
-    mv liblldb.so.$(LLVM_VERSION_FULL) liblldb-$(LLVM_VERSION).so.$(SONAME_EXT) && \
-	rm -f liblldb.so && \
-	ln -s liblldb-$(LLVM_VERSION).so.$(SONAME_EXT) liblldb.so && \
-	ln -s liblldb-$(LLVM_VERSION).so.$(SONAME_EXT) liblldb.so.$(LLVM_VERSION_FULL)
+#	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && \
+#    mv liblldb.so.$(LLVM_VERSION_FULL) liblldb-$(LLVM_VERSION).so.$(SONAME_EXT) && \
+#	rm -f liblldb.so && \
+#	ln -s liblldb-$(LLVM_VERSION).so.$(SONAME_EXT) liblldb.so && \
+#	ln -s liblldb-$(LLVM_VERSION).so.$(SONAME_EXT) liblldb.so.$(LLVM_VERSION_FULL)
 
 # Remove artefact (where compiler-rt is built)
 #	if test -d $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/clang_linux; then \
