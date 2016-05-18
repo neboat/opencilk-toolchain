@@ -8,7 +8,7 @@ declare_clear_cache.diff
 clang-format-version.diff
 unwind-chain-inclusion.diff
 hurd-pathmax.diff
-use-deb-json.diff
+#use-deb-json.diff
 atomic_library_1.diff
 atomic_library_2.diff
 python-clangpath.diff
