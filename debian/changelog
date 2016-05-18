@@ -13,6 +13,7 @@ llvm-toolchain-snapshot (1:3.9~svn260851-2) UNRELEASED; urgency=medium
     Ubuntu precise)
   * Install libfindAllSymbols.a as part of libclang-X.Y-dev
   * Ship scan-build-py
+  * Use the libjsoncpp library embedded (fails to link otherwise)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 09 Mar 2016 19:30:30 +0100
 
