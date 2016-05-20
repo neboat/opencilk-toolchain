@@ -124,6 +124,7 @@ ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 		LLDB_ENABLE=no
 endif
 
+LLD_ENABLE=NO
 
 %:
 	dh $@ --with ocaml
@@ -168,12 +169,14 @@ override_dh_auto_configure: preconfigure
 		ln -s ../polly .; \
 	fi
 
+	if test "$(LLD_ENABLE)" = yes; then \
 	cd tools/ && \
 		if test -h lld; then \
 			rm lld; \
 		fi; \
 		ln -s ../lld .; \
-	readlink lld
+	readlink lld; \
+	fi
 
 	if test "$(LLDB_ENABLE)" = yes; then \
 		cd tools/ && \
@@ -440,7 +443,9 @@ endif
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-clang || true
 
 # LLD tests (CMake)
+ifeq (${LLD_ENABLE},yes)
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lld || true
+endif
 
 # LLDB tests (CMake)
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
