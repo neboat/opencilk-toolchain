@@ -39,3 +39,4 @@ clang-analyzer-force-version.diff
 fix-cmake-config-prefix.diff
 llvm25468-lldb-swig-format-security.diff
 llvm26003-sanitizer-check-env.diff
+scan-view-fix-path.diff
