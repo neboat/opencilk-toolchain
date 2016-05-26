@@ -6,7 +6,7 @@ Uploaders: Sylvestre Ledru <sylvestre@debian.org>
 Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
     cmake, perl, libtool, chrpath, texinfo, sharutils, libffi-dev (>= 3.0.9),
     lsb-release, patchutils, diffstat, xz-utils, python-dev,
-    libedit-dev, swig, python-sphinx, ocaml-nox, binutils-dev,
+    libedit-dev, swig, python-six, python-sphinx, ocaml-nox, binutils-dev,
     libjsoncpp-dev,
     lcov, procps, help2man, dh-ocaml, zlib1g-dev
 Build-Conflicts: oprofile, ocaml, libllvm-3.4-ocaml-dev, libllvm-3.5-ocaml-dev,
@@ -396,7 +396,7 @@ Description: Next generation, high-performance debugger, debugging libraries
 Package: python-lldb-3.8
 Section: python
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-3.8-dev, python
+Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-3.8-dev, python, python-six
 Conflicts: python-lldb-3.4, python-lldb-3.5, python-lldb-3.6, python-lldb-3.7
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger, python lib
