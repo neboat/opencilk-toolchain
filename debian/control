@@ -6,7 +6,7 @@ Uploaders: Sylvestre Ledru <sylvestre@debian.org>
 Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
     cmake, perl, libtool, chrpath, texinfo, sharutils, libffi-dev (>= 3.0.9),
     lsb-release, patchutils, diffstat, xz-utils, python-dev,
-    libedit-dev, swig, python-sphinx, ocaml-nox, binutils-dev,
+    libedit-dev, swig, python-six, python-sphinx, ocaml-nox, binutils-dev,
     libjsoncpp-dev,
     lcov, procps, help2man, dh-ocaml, zlib1g-dev
 Build-Conflicts: oprofile, ocaml, libllvm-3.4-ocaml-dev, libllvm-3.5-ocaml-dev,
@@ -408,7 +408,8 @@ Description: Modular compiler and toolchain technologies, examples
 Package: lldb-3.9
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd powerpc ppc64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.9 (= ${binary:Version}), python, llvm-3.9-dev, python-lldb-3.9
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.9 (= ${binary:Version}), llvm-3.9-dev
+Suggests: python-lldb-3.9
 Conflicts: lldb-3.4, lldb-3.5
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger
@@ -449,7 +450,7 @@ Description: Next generation, high-performance debugger, debugging libraries
 Package: python-lldb-3.9
 Section: python
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-3.9-dev, python, python-six
 Conflicts: python-lldb-3.4, python-lldb-3.5, python-lldb-3.6, python-lldb-3.7, python-lldb-3.8
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger, python lib

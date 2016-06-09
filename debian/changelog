@@ -15,6 +15,11 @@ llvm-toolchain-snapshot (1:3.9~svn260851-2) UNRELEASED; urgency=medium
   * Ship scan-build-py
   * Use the libjsoncpp library embedded (fails to link otherwise)
 
+  [ Pablo Oliveira ]
+  * Add python-six as a dependency of python-lldb (Closes: #825371)
+    (thanks to Askar Safin)
+  * Fix lldb symlinks  
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 09 Mar 2016 19:30:30 +0100
 
 llvm-toolchain-snapshot (1:3.9~svn260851-1) unstable; urgency=medium
