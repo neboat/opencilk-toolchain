@@ -41,15 +41,6 @@ endif
 export CC=gcc-$(GCC_VERSION)
 export CXX=g++-$(GCC_VERSION)
 
-confargs := \
-	--host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE)
-
-ifeq ($(shell dpkg-architecture -qDEB_HOST_ARCH_BITS),64)
-  confargs += --with-cxx-include-32bit-dir=32
-else
-  confargs += --with-cxx-include-64bit-dir=64
-endif
-
 opt_flags = -g -O2
 ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   opt_flags += -marm
@@ -83,7 +74,6 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 # for -fvisibility-inlines-hidden see http://lists.cs.uiuc.edu/pipermail/llvm-commits/Week-of-Mon-20130729/183016.html
 	CXXFLAGS_EXTRA += -fprofile-arcs -ftest-coverage
 	LDFLAGS_EXTRA += -coverage -lgcov
-	confargs += llvm_cv_cxx_visibility_inlines_hidden=no
 endif
 
 ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
