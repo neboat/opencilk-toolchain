@@ -484,7 +484,9 @@ endif
 
 # LLDB tests (CMake)
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
+ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lldb || true
+endif
 endif
 
 # Polly tests (CMake)
