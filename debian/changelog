@@ -4,6 +4,9 @@ llvm-toolchain-3.8 (1:3.8.1~+rc1-1~exp2) UNRELEASED; urgency=medium
   * debian/rules: Ensure ld-gold is used. CMake invokes the linker through
     g++ most of the time, therefore we need to set -Wl,-fuse-ld=gold.
 
+  [ Brad King ]
+  * Followup to fix the cmake install (Closes: #819072) 
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 11 Jun 2016 16:53:04 +0200
 
 llvm-toolchain-3.8 (1:3.8.1~+rc1-1~exp1) experimental; urgency=medium
