@@ -30,3 +30,4 @@ silent-test-transforms.diff
 install-scan-build-py.diff
 #scan-build-py-default.diff
 
+scan-view-fix-path.diff
