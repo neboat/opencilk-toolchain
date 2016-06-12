@@ -26,7 +26,7 @@ llvm-toolchain-3.8 (1:3.8.1~+rc1-1~exp1) experimental; urgency=medium
     and liblldb as suggested by Graham Inggs (Closes: #821022)
   * Fix liblldb suffix in lldb/scripts/Python/finishSwigPythonLLDB.py
     (Closes: #813798)
-  * Fix LLVM bug 26158 - clang packages don't provide man pages 
+  * Fix LLVM bug 26158 - clang packages don't provide man pages
   * Add python-six as a dependency of python-lldb (thanks to Askar Safin).
 
   [ Gianfranco Costamagna ]
@@ -714,7 +714,7 @@ llvm-toolchain-3.4 (1:3.4~+rc1-3) unstable; urgency=low
   * If we get an unexpected pass, do not break the tests
     do-not-fail-on-unexpected-pass.diff (I am disabling some tests)
   * Fix the path detection of the objective h headers.
-  * Also add usr/lib/llvm-3.4/lib/clang/3.4/include => 
+  * Also add usr/lib/llvm-3.4/lib/clang/3.4/include =>
     usr/lib/clang/3.4/include symlink to simplify the path detection
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Dec 2013 17:49:46 +0100
