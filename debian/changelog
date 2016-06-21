@@ -7,6 +7,9 @@ llvm-toolchain-3.8 (1:3.8.1~+rc1-1~exp2) UNRELEASED; urgency=medium
   [ Brad King ]
   * Followup to fix the cmake install (Closes: #819072)
 
+  [ YunQiang Su ]
+  * Enable FPXX by default on mips/mipsel (Closes: #826749)
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 11 Jun 2016 16:53:04 +0200
 
 llvm-toolchain-3.8 (1:3.8.1~+rc1-1~exp1) experimental; urgency=medium
