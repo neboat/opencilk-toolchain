@@ -1,14 +1,12 @@
 --- a/clang/lib/Driver/Tools.cpp
 +++ b/clang/lib/Driver/Tools.cpp
-@@ -7172,11 +7172,6 @@
+@@ -6705,10 +6705,6 @@
  
  bool mips::isFPXXDefault(const llvm::Triple &Triple, StringRef CPUName,
                           StringRef ABIName, mips::FloatABI FloatABI) {
 -  if (Triple.getVendor() != llvm::Triple::ImaginationTechnologies &&
--      Triple.getVendor() != llvm::Triple::MipsTechnologies &&
--      !Triple.isAndroid())
+-      Triple.getVendor() != llvm::Triple::MipsTechnologies)
 -    return false;
 -
    if (ABIName != "32")
      return false;
- 
