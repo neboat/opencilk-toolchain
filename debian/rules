@@ -363,7 +363,7 @@ override_dh_auto_install:
 	sed -i 's|LLVM_CMAKE_DIR "/usr/lib/llvm-$(LLVM_VERSION)/share/llvm/cmake"|LLVM_CMAKE_DIR "/usr/share/llvm-$(LLVM_VERSION)/cmake"|' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMConfig.cmake
 
 # Disable CMake's package validation checks for target files that we may remove.
-#	sed -i '/_IMPORT_CHECK_TARGETS \(Polly\|sancov\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/llvm/cmake/LLVMExports-*.cmake
+	sed -i '/_IMPORT_CHECK_TARGETS \(Polly\|sancov\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 
 # Managed in python-lldb-X.Y.links.in
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/site-packages/lldb/_lldb.so
