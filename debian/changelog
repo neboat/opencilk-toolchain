@@ -7,6 +7,7 @@ llvm-toolchain-snapshot (1:3.9~svn273256-1~exp1) UNRELEASED; urgency=medium
     pointing to usr/share/llvm-3.9/cmake
   * Disable the run of lldb testsuite because of LLVM_LINK_LLVM_DYLIB=ON:
      https://llvm.org/bugs/show_bug.cgi?id=28127
+  * Disable lldb on i386 (cannot link). This is probably temporary
 
   [ YunQiang Su ]
   * Enable FPXX by default on mips/mipsel (Closes: #826749)
