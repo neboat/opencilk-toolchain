@@ -108,7 +108,7 @@ endif
 
 
 LLDB_ENABLE=yes
-LLDB_DISABLE_ARCHS := arm64 hurd-i386 ia64 ppc64el powerpc s390x i386
+LLDB_DISABLE_ARCHS := arm64 hurd-i386 ia64 ppc64el powerpc s390x
 # hurd has threading issues
 ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 # Disable LLDB for this arch.
@@ -213,6 +213,7 @@ override_dh_auto_configure: preconfigure
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 	-DCMAKE_CXX_FLAGS='$(CXXFLAGS_EXTRA)' \
+	-DLLVM_LINK_LLVM_DYLIB=ON \
 	-DLLVM_VERSION_SUFFIX= \
 	-DLLVM_ENABLE_SPHINX=ON \
 	-DSPHINX_WARNINGS_AS_ERRORS=OFF \
