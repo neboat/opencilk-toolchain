@@ -1,0 +1,2 @@
+# Does not link otherwise
+llvm-@LLVM_VERSION@-dev: embedded-library usr/lib/llvm-@LLVM_VERSION@/lib/LLVMPolly.so: libjsoncpp
