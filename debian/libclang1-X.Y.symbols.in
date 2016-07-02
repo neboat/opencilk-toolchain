@@ -7,8 +7,13 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_CXCursorSet_insert@Base 3.2
  clang_CXIndex_getGlobalOptions@Base 3.2
  clang_CXIndex_setGlobalOptions@Base 3.2
+ clang_CXXConstructor_isConvertingConstructor@Base 3.9
+ clang_CXXConstructor_isCopyConstructor@Base 3.9
+ clang_CXXConstructor_isDefaultConstructor@Base 3.9
+ clang_CXXConstructor_isMoveConstructor@Base 3.9
  clang_CXXField_isMutable@Base 3.8
  clang_CXXMethod_isConst@Base 3.4
+ clang_CXXMethod_isDefaulted@Base 3.9
  clang_CXXMethod_isPureVirtual@Base 3.4
  clang_CXXMethod_isStatic@Base 3.2
  clang_CXXMethod_isVirtual@Base 3.2
@@ -29,6 +34,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_CompileCommands_dispose@Base 3.2
  clang_CompileCommands_getCommand@Base 3.2
  clang_CompileCommands_getSize@Base 3.2
+ clang_Cursor_Evaluate@Base 3.9
  clang_Cursor_getArgument@Base 3.2
  clang_Cursor_getBriefCommentText@Base 3.2
  clang_Cursor_getCXXManglings@Base 3.8
@@ -51,12 +57,21 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_getTemplateArgumentUnsignedValue@Base 3.6
  clang_Cursor_getTemplateArgumentValue@Base 3.6
  clang_Cursor_getTranslationUnit@Base 3.2
+ clang_Cursor_hasAttrs@Base 3.9
  clang_Cursor_isAnonymous@Base 3.7
  clang_Cursor_isBitField@Base 3.4
  clang_Cursor_isDynamicCall@Base 3.2
+ clang_Cursor_isFunctionInlined@Base 3.9
+ clang_Cursor_isMacroBuiltin@Base 3.9
+ clang_Cursor_isMacroFunctionLike@Base 3.9
  clang_Cursor_isNull@Base 3.2
  clang_Cursor_isObjCOptional@Base 3.4
  clang_Cursor_isVariadic@Base 3.4
+ clang_EvalResult_dispose@Base 3.9
+ clang_EvalResult_getAsDouble@Base 3.9
+ clang_EvalResult_getAsInt@Base 3.9
+ clang_EvalResult_getAsStr@Base 3.9
+ clang_EvalResult_getKind@Base 3.9
  clang_File_isEqual@Base 3.6
  clang_FullComment_getAsHTML@Base 3.2
  clang_FullComment_getAsXML@Base 3.2
@@ -101,7 +116,9 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Type_getAlignOf@Base 3.4
  clang_Type_getCXXRefQualifier@Base 3.4
  clang_Type_getClassType@Base 3.4
+ clang_Type_getNamedType@Base 3.9
  clang_Type_getNumTemplateArguments@Base 3.6
+ clang_Type_getObjCEncoding@Base 3.9
  clang_Type_getOffsetOf@Base 3.4
  clang_Type_getSizeOf@Base 3.4
  clang_Type_getTemplateArgumentAsType@Base 3.6
