@@ -49,7 +49,7 @@ llvm-toolchain-snapshot (1:3.9~svn274438-1) unstable; urgency=medium
   * Fix an issue with scan-view (Closes: #825101)
 
   [ YunQiang Su ]
-    * Enable FPXX by default on mips/mipsel (Closes: #826749)
+  * Enable FPXX by default on mips/mipsel (Closes: #826749)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 10 Jun 2016 10:22:26 +0200
 
