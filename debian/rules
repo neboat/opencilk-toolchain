@@ -328,7 +328,7 @@ override_dh_auto_install:
 
 	cp $(CURDIR)/clang/tools/scan-build/man/scan-build.1 $(CURDIR)/clang/tools/scan-build/man/scan-build-$(LLVM_VERSION).1
 
-	# copy the vim files (exept that tablegen does not exist for indent
+	# copy the vim files (except that tablegen does not exist for indent
 	VIM_DIRS="ftdetect ftplugin syntax indent"; \
 	for dir in $$VIM_DIRS; do \
 		cp -f $(CURDIR)/utils/vim/$$dir/llvm.vim $(CURDIR)/utils/vim/$$dir/llvm-$(LLVM_VERSION).vim; \

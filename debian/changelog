@@ -416,7 +416,7 @@ llvm-toolchain-3.5 (1:3.5~+rc1-2) unstable; urgency=medium
     polly
   * hurd-EIEIO-undef.diff: try to undef an errno.h to fix the ftbfs
   * clang-X suggests clang-X-doc (Closes: #755922)
-  * Manage all files using .in mecanism. It will simplify the upgrade of
+  * Manage all files using .in mechanism. It will simplify the upgrade of
     version
   * Disable lldb for ppc64el. Thanks to Dimitri John Ledkov (Closes: #756380)
   * Fix the FTBFS under PowerPC. Thanks to Dimitri John Ledkov for the patch
