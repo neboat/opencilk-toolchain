@@ -21,6 +21,8 @@ llvm-toolchain-snapshot (1:3.9~svn274438-1) unstable; urgency=medium
     https://llvm.org/bugs/show_bug.cgi?id=28127
   * Add -gsplit-dwarf to CXXFLAGS to workaround the memory allocation
     issue on i386
+  * Ignore the lintian override about embedded-library for json.
+    Doesn't link otherwise
 
   [ Pablo Oliveira ]
   * Add python-six as a dependency of python-lldb (Closes: #825371)
