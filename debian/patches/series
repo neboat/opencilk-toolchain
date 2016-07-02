@@ -20,6 +20,7 @@ silent-more-tests.diff
 disable-display-PASS-UNSUPPORTED-XFAIL.diff
 fix-llvm-config-obj-src-root.patch
 compiler-rt-path.diff
+0044-soname.diff 
 lldb-soname.diff
 lldb-libname.diff
 hurd-EIEIO-undef.diff

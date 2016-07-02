@@ -1,17 +1,8 @@
---- a/tools/llvm-shlib/Makefile
-+++ b/tools/llvm-shlib/Makefile
-@@ -67,7 +67,7 @@
- 
- ifeq ($(HOST_OS), $(filter $(HOST_OS), DragonFly Linux FreeBSD GNU/kFreeBSD GNU))
-     # Add soname to the library.
--    LLVMLibsOptions += -Wl,--soname,lib$(LIBRARYNAME)$(SHLIBEXT) -Wl,-Bsymbolic-functions
-+    LLVMLibsOptions += -Wl,--soname,lib$(LIBRARYNAME)$(SHLIBEXT).1 -Wl,-Bsymbolic-functions
- endif
- 
- ifeq ($(HOST_OS), $(filter $(HOST_OS), Linux GNU GNU/kFreeBSD))
---- a/tools/llvm-shlib/CMakeLists.txt
-+++ b/tools/llvm-shlib/CMakeLists.txt
-@@ -39,6 +39,7 @@
+Index: llvm-toolchain-snapshot_3.9~svn274438/tools/llvm-shlib/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_3.9~svn274438.orig/tools/llvm-shlib/CMakeLists.txt
++++ llvm-toolchain-snapshot_3.9~svn274438/tools/llvm-shlib/CMakeLists.txt
+@@ -37,6 +37,7 @@ if(LLVM_DYLIB_EXPORTED_SYMBOL_FILE)
  endif()
  
  add_llvm_library(LLVM SHARED DISABLE_LLVM_LINK_LLVM_DYLIB SONAME ${SOURCES})
@@ -19,9 +10,11 @@
  
  list(REMOVE_DUPLICATES LIB_NAMES)
  if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux") # FIXME: It should be "GNU ld for elf"
---- a/clang/tools/libclang/CMakeLists.txt
-+++ b/clang/tools/libclang/CMakeLists.txt
-@@ -82,7 +82,7 @@
+Index: llvm-toolchain-snapshot_3.9~svn274438/clang/tools/libclang/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_3.9~svn274438.orig/clang/tools/libclang/CMakeLists.txt
++++ llvm-toolchain-snapshot_3.9~svn274438/clang/tools/libclang/CMakeLists.txt
+@@ -83,7 +83,7 @@ else()
    set(output_name "clang")
  endif()
  
