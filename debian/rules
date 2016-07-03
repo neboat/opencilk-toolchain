@@ -34,7 +34,7 @@ CXXFLAGS_EXTRA = -std=c++0x -gsplit-dwarf
 CONFIGURE_EXTRA =
 CMAKE_EXTRA =
 
-ifneq (,$(filter $(DEB_HOST_ARCH),powerpc powerpcspe))
+ifneq (,$(filter $(DEB_HOST_ARCH),powerpc powerpcspe mips mipsel))
 LDFLAGS_EXTRA += -latomic
 endif
 
