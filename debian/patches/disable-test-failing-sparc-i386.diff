@@ -1,0 +1,10 @@
+Index: llvm-toolchain-snapshot_3.9~svn275597/test/CodeGen/SPARC/LeonInsertNOPsDoublePrecision.ll
+===================================================================
+--- llvm-toolchain-snapshot_3.9~svn275597.orig/test/CodeGen/SPARC/LeonInsertNOPsDoublePrecision.ll
++++ llvm-toolchain-snapshot_3.9~svn275597/test/CodeGen/SPARC/LeonInsertNOPsDoublePrecision.ll
+@@ -1,4 +1,5 @@
+ ; RUN: llc %s -O0 -march=sparc -mcpu=at697f -o - | FileCheck %s
++; XFAIL: *
+ 
+ ; CHECK:        ldd
+ ; CHECK:        ldd

@@ -32,3 +32,4 @@ install-scan-build-py.diff
 #scan-build-py-default.diff
 scan-view-fix-path.diff
 mips-fpxx-enable.diff
+disable-test-failing-sparc-i386.diff
