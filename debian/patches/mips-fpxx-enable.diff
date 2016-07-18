@@ -1,6 +1,8 @@
---- a/clang/lib/Driver/Tools.cpp
-+++ b/clang/lib/Driver/Tools.cpp
-@@ -7172,11 +7172,6 @@
+Index: llvm-toolchain-snapshot_3.9~svn275793/clang/lib/Driver/Tools.cpp
+===================================================================
+--- llvm-toolchain-snapshot_3.9~svn275793.orig/clang/lib/Driver/Tools.cpp
++++ llvm-toolchain-snapshot_3.9~svn275793/clang/lib/Driver/Tools.cpp
+@@ -7321,11 +7321,6 @@ bool mips::isFP64ADefault(const llvm::Tr
  
  bool mips::isFPXXDefault(const llvm::Triple &Triple, StringRef CPUName,
                           StringRef ABIName, mips::FloatABI FloatABI) {
