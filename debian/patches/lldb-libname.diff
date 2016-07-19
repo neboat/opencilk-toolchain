@@ -1,11 +1,13 @@
---- a/lldb/scripts/Python/finishSwigPythonLLDB.py
-+++ b/lldb/scripts/Python/finishSwigPythonLLDB.py
-@@ -379,7 +379,7 @@
+Index: llvm-toolchain-snapshot_4.0~svn275970/lldb/scripts/Python/finishSwigPythonLLDB.py
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn275970.orig/lldb/scripts/Python/finishSwigPythonLLDB.py
++++ llvm-toolchain-snapshot_4.0~svn275970/lldb/scripts/Python/finishSwigPythonLLDB.py
+@@ -392,7 +392,7 @@ def make_symlink_liblldb(vDictArgs, vstr
              if eOSType == utilsOsType.EnumOsType.Darwin:
                  strLibFileExtn = ".dylib"
              else:
 -                strLibFileExtn = ".so"
-+                strLibFileExtn = "-3.9.so"
++                strLibFileExtn = "-4.0.so"
              strSrc = os.path.join(vstrLldbLibDir, "liblldb" + strLibFileExtn)
  
      bOk, strErrMsg = make_symlink(vDictArgs, vstrFrameworkPythonDir, strSrc, strTarget)
