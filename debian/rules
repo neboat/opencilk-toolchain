@@ -366,10 +366,6 @@ ifneq (${AUTOCONF_BUILD},yes)
 	mv $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/clang-$(LLVM_VERSION) \
 	   $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/clang
 endif
-# internal tools, don't care
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/count
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/not
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/FileCheck
 # Don't think it is used
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPolly*a
 # Probably useless
