@@ -1,9 +1,10 @@
-llvm-toolchain-3.8 (1:3.8.1-4) UNRELEASED; urgency=medium
+llvm-toolchain-3.8 (1:3.8.1-4) unstable; urgency=medium
 
   * Fix the FTBFS under mips/mipsel? (enable the link against atomic)
     (Closes: #820537)
+  * Bring back llvm-tools to life
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Jul 2016 12:10:44 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 20 Jul 2016 10:20:46 +0200
 
 llvm-toolchain-3.8 (1:3.8.1-3) unstable; urgency=medium
 
