@@ -5,6 +5,7 @@ llvm-toolchain-snapshot (1:4.0~svn275970-1~exp1) experimental; urgency=medium
   * ship clang-tblgen & yaml-bench as part of the libclang-common-X.Y-dev
     package
   * Silent test CodeGen/SPARC/LeonInsertNOPsDoublePrecision.ll
+  * ship lli-child-target as part of the llvm-X.Y-runtime package
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 15 Jul 2016 21:29:38 +0200
 
