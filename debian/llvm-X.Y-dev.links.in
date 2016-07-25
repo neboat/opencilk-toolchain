@@ -13,5 +13,5 @@ usr/lib/llvm-@LLVM_VERSION@/include/ usr/lib/llvm-@LLVM_VERSION@/build/include
 usr/lib/llvm-@LLVM_VERSION@/ usr/lib/llvm-@LLVM_VERSION@/build/Release
 usr/lib/llvm-@LLVM_VERSION@/ usr/lib/llvm-@LLVM_VERSION@/build/Debug+Asserts
 
-usr/lib/llvm-@LLVM_VERSION@/share/llvm/cmake usr/share/llvm-@LLVM_VERSION@/cmake
+usr/lib/llvm-@LLVM_VERSION@/lib/llvm/cmake usr/lib/llvm-@LLVM_VERSION@/cmake
 
