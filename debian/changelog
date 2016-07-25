@@ -5,6 +5,7 @@ llvm-toolchain-3.9 (1:3.9~svn275918-1~exp2) experimental; urgency=medium
   * LLVMConfig.cmake is now installed to <prefix>/lib/cmake/llvm instead of
     <prefix>/share/llvm/cmake
     Thanks to Brad King of the fix
+  * Disable lldb on sparc64 (Closes: #832371)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 25 Jul 2016 12:18:52 +0200
 
