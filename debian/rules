@@ -34,10 +34,6 @@ CXXFLAGS_EXTRA = -std=c++0x -gsplit-dwarf
 CONFIGURE_EXTRA =
 CMAKE_EXTRA =
 
-ifneq (,$(filter $(DEB_HOST_ARCH),powerpc powerpcspe mips mipsel mips64el))
-LDFLAGS_EXTRA += -latomic
-endif
-
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) lt 4.7.2-10~ ; echo $$?),0)
 # Too old version of gcc. Force 4.9
 	GCC_VERSION := 4.9
