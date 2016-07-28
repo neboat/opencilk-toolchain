@@ -1,0 +1,16 @@
+--- a/lib/Target/X86/X86.td
++++ b/lib/Target/X86/X86.td
+@@ -487,13 +487,7 @@ def : KnightsLandingProc<"knl">;
+ // FIXME: define SKX model
+ class SkylakeProc<string Name> : ProcessorModel<Name, HaswellModel, [
+   FeatureMMX,
+-  FeatureAVX512,
+   FeatureFXSR,
+-  FeatureCDI,
+-  FeatureDQI,
+-  FeatureBWI,
+-  FeatureVLX,
+-  FeaturePKU,
+   FeatureCMPXCHG16B,
+   FeatureSlowBTMem,
+   FeaturePOPCNT,

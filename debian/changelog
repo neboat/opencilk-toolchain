@@ -1,3 +1,16 @@
+llvm-toolchain-3.8 (1:3.8.1-6) unstable; urgency=medium
+
+  * Sync from Ubuntu. Many thanks to Matthias Klose
+    - drop-avx512-from-skylake.diff: Don't enable AVX512 on Skylake, as it's
+      a server cpu feature and breaks llvmpipe on workstations.
+    - Remove the build tree before calling dh_strip; at least the amd64 buildd
+      runs out of diskspace at this step.
+    - Add support for gcc's attribute abi_tag (needed for compatibility with
+      GCC 5's libstdc++); taken from the trunk (Closes: #797038)
+      (LP: #1510042, #1488254)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 28 Jul 2016 11:15:04 +0200
+
 llvm-toolchain-3.8 (1:3.8.1-5) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]

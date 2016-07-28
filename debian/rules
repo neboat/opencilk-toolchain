@@ -440,6 +440,8 @@ override_dh_installman:
 
 
 override_dh_strip:
+	: # running out of diskspace on the buildds
+	find $(TARGET_BUILD) -name '*.o' -o -name '*.a' | xargs -r rm -f
 	dh_strip -p libclang$(SONAME_EXT)-$(LLVM_VERSION) --dbg-package=libclang$(SONAME_EXT)-$(LLVM_VERSION)-dbg
 	dh_strip -p libllvm$(LLVM_VERSION) --dbg-package=libllvm$(LLVM_VERSION)-dbg
 	dh_strip -p liblldb-$(LLVM_VERSION) --dbg-package=liblldb-$(LLVM_VERSION)-dbg
