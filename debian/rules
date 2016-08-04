@@ -253,6 +253,13 @@ override_dh_auto_configure: preconfigure
 
 override_dh_auto_build:
 	$(PRE_PROCESS) $(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=$(VENDOR) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1
+	cd $(TARGET_BUILD) \
+	CFLAGS=`dpkg-buildflags --get CFLAGS`; \
+	CFLAGS="$$CFLAGS `dpkg-buildflags --get CPPFLAGS`"; \
+	echo $$CFLAGS; \
+	bin/clang++ -c $$CFLAGS -std=c++11 ../lib/Fuzzer/*.cpp -IFuzzer; \
+	ar ruv libFuzzer.a Fuzzer*.o
+
 
 ifeq (${AUTOCONF_BUILD},yes)
 # We run the build with the Asserts, new directory, make a symlink to make
@@ -332,6 +339,9 @@ endif
 	mkdir -p $(CURDIR)/debian/clang-$(LLVM_VERSION)/usr/bin/
 	cp compiler-rt/lib/asan/scripts/asan_symbolize.py $(CURDIR)/debian/clang-$(LLVM_VERSION)/usr/bin/asan_symbolize-$(LLVM_VERSION)
 
+	mkdir -p $(CURDIR)/debian/libfuzzer-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/
+	cp -v $(TARGET_BUILD)/libFuzzer.a $(CURDIR)/debian/libfuzzer-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/
+
 # Create this fake directory to make the install libclang-common-dev happy
 # under the unsupported archs of compiler-rt
 	mkdir -p $(DEB_INST)/usr/lib/clang/$(LLVM_VERSION)/lib
@@ -372,7 +382,8 @@ endif
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
-	cd $(DEB_INST)/usr/bin/; rm -f *; \
+	cd $(DEB_INST)/usr/bin/; \
+	rm -f *; \
 	for f in ../lib/llvm-$(LLVM_VERSION)/bin/*; do \
 		ln -s $$f `basename $$f`-$(LLVM_VERSION); \
 		echo "Link $$f to `basename $$f`-$(LLVM_VERSION)"; \
