@@ -17,8 +17,6 @@ endif
 
 VENDOR=$(shell lsb_release -is)
 
-BUILD_DIR=Release
-
 DEB_HOST_MULTIARCH  = $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 DEB_HOST_GNU_TYPE   = $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_HOST_ARCH_BITS  = $(shell dpkg-architecture -qDEB_HOST_ARCH_BITS)
@@ -269,7 +267,7 @@ build_doc:
 	CMDS="llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb clang-format clang clang-tblgen clang-check clang-tidy clang-apply-replacements pp-trace sancov"; \
 	for f in $$CMDS; do \
 		echo "Generating manpage of $$f"; \
-		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-discard-stderr --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/$(BUILD_DIR)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
+		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-discard-stderr --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
 	done
 
 override_dh_auto_install:
@@ -462,7 +460,7 @@ ifeq (${POLLY_ENABLE},yes)
 endif
 
 # Managed by debian build system
-	rm -f $(CURDIR)/$(TARGET_BUILD)/$(BUILD_DIR)/lib/python*/site-packages/lldb/_lldb.so
+	rm -f $(CURDIR)/$(TARGET_BUILD)/lib/python*/site-packages/lldb/_lldb.so
 
 # polly tests
 	if test "$(POLLY_ENABLE)" = yes; then \
