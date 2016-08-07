@@ -35,4 +35,3 @@ usr/bin/modularize-@LLVM_VERSION@
 usr/bin/scan-build-@LLVM_VERSION@
 usr/bin/scan-view-@LLVM_VERSION@
 usr/bin/c-index-test-@LLVM_VERSION@
-

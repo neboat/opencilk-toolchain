@@ -27,9 +27,10 @@ hurd-EIEIO-undef.diff
 silent-MCJIIT-tests.diff
 clang-analyzer-force-version.diff
 llvm25468-lldb-swig-format-security.diff
-#silent-test-transforms.diff
 install-scan-build-py.diff
-#scan-build-py-default.diff
 scan-view-fix-path.diff
 mips-fpxx-enable.diff
 disable-test-failing-sparc-i386.diff
+fix-cmake-config-prefix.diff
+lldb-test-makefile.diff
+lldb-link-atomic-cmake.patch
