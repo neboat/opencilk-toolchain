@@ -159,7 +159,7 @@ Description: clang library - Common development package
 Package: libfuzzer-3.8-dev
 Architecture: any
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, clang-3.8 (= ${binary:Version})
 Description: Library for coverage-guided fuzz testing
  LibFuzzer is a library for in-process, coverage-guided, evolutionary fuzzing
  of other libraries.

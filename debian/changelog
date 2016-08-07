@@ -4,6 +4,7 @@ llvm-toolchain-3.8 (1:3.8.1-8) unstable; urgency=medium
   * Revert drop-avx512-from-skylake.diff, it is causing some regressions in the
     testsuite
   * Disable lldb on ppc64
+  * libfuzzer depends on the same version of clang (Closes: #833564)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 07 Aug 2016 14:10:09 +0200
 
