@@ -478,7 +478,7 @@ override_dh_installdeb:
 
 ifeq (,$(filter nocheck, $(DEB_BUILD_OPTIONS)))
 # List of the archs we know we have 100 % tests working
-ARCH_LLVM_TEST_OK := i386
+ARCH_LLVM_TEST_OK := i386 amd64
 
 override_dh_auto_test:
 

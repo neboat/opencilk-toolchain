@@ -1,3 +1,9 @@
+llvm-toolchain-3.8 (1:3.8.1-9) UNRELEASED; urgency=medium
+
+  * amd64 llvm testsuite is green, bring back the failure in case of error
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 07 Aug 2016 16:03:32 +0200
+
 llvm-toolchain-3.8 (1:3.8.1-8) unstable; urgency=medium
 
   * Disable the usage of ld gold on powerpc (Closes: #833583)
