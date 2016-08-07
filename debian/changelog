@@ -5,6 +5,8 @@ llvm-toolchain-3.8 (1:3.8.1-8) unstable; urgency=medium
     testsuite
   * Disable lldb on ppc64
   * libfuzzer depends on the same version of clang (Closes: #833564)
+  * Use filter into of findstring in the gold usage. Thanks Doko for the
+    suggestion
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 07 Aug 2016 14:10:09 +0200
 
