@@ -7,6 +7,7 @@ llvm-toolchain-snapshot (1:4.0~svn275970-1~exp2) experimental; urgency=medium
     <prefix>/share/llvm/cmake
     Thanks to Brad King of the fix
   * Disable lldb on sparc64 (Closes: #832371)
+  * Also install clang-rename.el & clang-rename.py in clang-4.0
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 25 Jul 2016 12:19:52 +0200
 
