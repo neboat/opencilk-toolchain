@@ -11,6 +11,8 @@ llvm-toolchain-snapshot (1:4.0~svn275970-1~exp2) experimental; urgency=medium
   * scan-build llvm results are built using --show-description
   * Generate manpages for lli, lldb-mi & git-clang-format
   * Fix some lintian overrides
+  * Generate more manpages
+  * Remove some garbage from the manpages (Closes: #815991, #804347)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 25 Jul 2016 12:19:52 +0200
 
