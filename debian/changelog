@@ -3,6 +3,8 @@ llvm-toolchain-3.9 (1:3.9~+rc1-1~exp1) experimental; urgency=medium
   * new testing version
   * Sync the 3.8 changes into 3.9
   * amd64 llvm testsuite is green, bring back the failure in case of error
+  * Bring back the lto (gone with the cmake migration)
+    (Closes: #819333) (upstream: #27223)
   * Fix the cmake paths in llvm-3.9-dev deb package. Thanks to Brad King
     for the patch (Closes: #819072)
   * LLVMConfig.cmake is now installed to <prefix>/lib/cmake/llvm instead of
