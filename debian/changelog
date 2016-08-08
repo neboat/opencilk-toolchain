@@ -3,6 +3,8 @@ llvm-toolchain-snapshot (1:4.0~svn275970-1~exp2) experimental; urgency=medium
   * Sync the 3.9 changes into 4.0
   * Fix the cmake paths in llvm-4.0-dev deb package. Thanks to Brad King
     for the patch (Closes: #819072)
+  * Bring back the lto (gone with the cmake migration)
+    (Closes: #819333) (upstream: #27223)
   * LLVMConfig.cmake is now installed to <prefix>/lib/cmake/llvm instead of
     <prefix>/share/llvm/cmake
     Thanks to Brad King of the fix
