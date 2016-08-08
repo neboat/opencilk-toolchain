@@ -11,6 +11,7 @@ llvm-toolchain-3.9 (1:3.9~+rc1-1~exp1) experimental; urgency=medium
   * Disable lldb on sparc64 (Closes: #832371)
   * Generate manpages for lli, lldb-mi & git-clang-format
   * Fix some lintian overrides
+  * Generate more manpages
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 25 Jul 2016 12:18:52 +0200
 
