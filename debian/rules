@@ -252,11 +252,12 @@ build_doc:
 		echo "$$f"|grep $(LLVM_VERSION) || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
 	done; \
 	fi
-
+# the clang doc generation only generates clang manpage
+# When it will do more, we should move that in the loop above
 	cd $(CURDIR)/clang/docs/_build/man/; mv clang.1 clang-$(LLVM_VERSION).1
 
 # Remove the copy of jquery. See bug #701087
-	for d in $(TARGET_BUILD)/docs/html/_static/ $(TARGET_BUILD)/tools/clang/docs/html/_static/ $(TARGET_BUILD)/tools/clang/tools/extra/docs/html/_static/ $(TARGET_BUILD)/tools/polly/docs/html/_static/; do \
+	for d in $(TARGET_BUILD)/docs/html/_static/ $(TARGET_BUILD)/tools/clang/docs/html/_static/ $(TARGET_BUILD)/tools/clang/tools/extra/docs/html/_static/; do \
 		cd $$d && rm -f jquery.js && ln -s /usr/share/javascript/jquery/jquery.js && cd -; \
 		cd $$d && rm -f underscore.js && ln -s /usr/share/javascript/underscore/underscore.js && cd -; \
 	done
