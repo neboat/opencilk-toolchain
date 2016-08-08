@@ -9,6 +9,8 @@ llvm-toolchain-snapshot (1:4.0~svn275970-1~exp2) experimental; urgency=medium
   * Disable lldb on sparc64 (Closes: #832371)
   * Also install clang-rename.el & clang-rename.py in clang-4.0
   * scan-build llvm results are built using --show-description
+  * Generate manpages for lli, lldb-mi & git-clang-format
+  * Fix some lintian overrides
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 25 Jul 2016 12:19:52 +0200
 
@@ -22,10 +24,6 @@ llvm-toolchain-snapshot (1:4.0~svn275970-1~exp1) experimental; urgency=medium
   * amd64 llvm testsuite is green, bring back the failure in case of error
   * Fix the cmake paths in llvm-3.9-dev deb package. Thanks to Brad King
     for the patch (Closes: #819072)
-  * LLVMConfig.cmake is now installed to <prefix>/lib/cmake/llvm instead of
-    <prefix>/share/llvm/cmake
-    Thanks to Brad King of the fix
-  * Disable lldb on sparc64 (Closes: #832371)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 25 Jul 2016 12:18:52 +0200
 
