@@ -60,7 +60,39 @@ get_higher_revision() {
     echo $REVISION_MAX
 }
 
+SVN_ARCHIVES=svn-archives
 
+checkout_sources() {
+    PROJECT=$1
+    URL=$2
+    TARGET=$3
+    BRANCH=$4
+    if test -n "$BRANCH"; then
+        REVISION=$5
+    fi
+    echo "$PROJECT / $URL / $BRANCH / $TARGET / $REVISION"
+
+    cd $SVN_ARCHIVES/
+    DEST=$PROJECT-$BRANCH
+    if test -d $DEST; then
+        cd $DEST
+        if test -n "$BRANCH"; then
+            svn up
+        else
+            svn up -r $REVISION
+        fi
+        cd ..
+    else
+        if test -n "$BRANCH"; then
+            svn co $URL $DEST
+        else
+            svn co -r $REVISION $URL $DIST
+        fi
+    fi
+    rm -rf ../$TARGET
+    rsync -r --exclude=.svn $DEST/ ../$TARGET
+    cd ..
+}
 
 if test -n "$BRANCH"; then
     REVISION=$(get_higher_revision)
@@ -85,49 +117,55 @@ else
     fi
 fi
 
+mkdir -p $SVN_ARCHIVES
+
 # LLVM
 LLVM_TARGET=$FULL_VERSION
-$SVN_CMD $(get_svn_url llvm $BRANCH $TAG) $LLVM_TARGET
+checkout_sources llvm $(get_svn_url llvm $BRANCH $TAG) $LLVM_TARGET "$BRANCH" $REVISION
 tar jcvf $FULL_VERSION.orig.tar.bz2 $LLVM_TARGET
 rm -rf $LLVM_TARGET
 
 
 # Clang
 CLANG_TARGET=clang_$VERSION
-$SVN_CMD $(get_svn_url cfe $BRANCH $TAG) $CLANG_TARGET
+checkout_sources clang $(get_svn_url cfe $BRANCH $TAG) $CLANG_TARGET "$BRANCH" $REVISION
 tar jcvf $FULL_VERSION.orig-clang.tar.bz2 $CLANG_TARGET
 rm -rf $CLANG_TARGET
 
 
 # Clang extra
 CLANG_TARGET=clang-tools-extra_$VERSION
-$SVN_CMD $(get_svn_url clang-tools-extra $BRANCH $TAG) $CLANG_TARGET
+checkout_sources clang-tools-extra $(get_svn_url clang-tools-extra $BRANCH $TAG) $CLANG_TARGET "$BRANCH" $REVISION
 tar jcvf $FULL_VERSION.orig-clang-tools-extra.tar.bz2 $CLANG_TARGET
 rm -rf $CLANG_TARGET
 
 # Compiler-rt
 COMPILER_RT_TARGET=compiler-rt_$VERSION
-$SVN_CMD $(get_svn_url compiler-rt $BRANCH $TAG) $COMPILER_RT_TARGET
+checkout_sources compiler-rt $(get_svn_url compiler-rt $BRANCH $TAG) $COMPILER_RT_TARGET "$BRANCH" $REVISION
+#$SVN_CMD $(get_svn_url compiler-rt $BRANCH $TAG) $COMPILER_RT_TARGET
 tar jcvf $FULL_VERSION.orig-compiler-rt.tar.bz2 $COMPILER_RT_TARGET
 rm -rf $COMPILER_RT_TARGET
 
 # Polly
 POLLY_TARGET=polly_$VERSION
-$SVN_CMD $(get_svn_url polly $BRANCH $TAG) $POLLY_TARGET
+checkout_sources polly $(get_svn_url polly $BRANCH $TAG) $POLLY_TARGET "$BRANCH" $REVISION
+#$SVN_CMD $(get_svn_url polly $BRANCH $TAG) $POLLY_TARGET
 rm -rf $POLLY_TARGET/www $POLLY_TARGET/autoconf/config.sub $POLLY_TARGET/autoconf/config.guess
 tar jcvf $FULL_VERSION.orig-polly.tar.bz2 $POLLY_TARGET
 rm -rf $POLLY_TARGET
 
 # LLD
 LLD_TARGET=lld_$VERSION
-$SVN_CMD $(get_svn_url lld $BRANCH $TAG) $LLD_TARGET
+checkout_sources lld $(get_svn_url lld $BRANCH $TAG) $LLD_TARGET "$BRANCH" $REVISION
+#$SVN_CMD $(get_svn_url lld $BRANCH $TAG) $LLD_TARGET
 rm -rf $LLD_TARGET/www/
 tar jcvf $FULL_VERSION.orig-lld.tar.bz2 $LLD_TARGET
 rm -rf $LLD_TARGET
 
 # LLDB
 LLDB_TARGET=lldb_$VERSION
-$SVN_CMD $(get_svn_url lldb $BRANCH $TAG) $LLDB_TARGET
+checkout_sources lldb $(get_svn_url lldb $BRANCH $TAG) $LLDB_TARGET "$BRANCH" $REVISION
+#$SVN_CMD $(get_svn_url lldb $BRANCH $TAG) $LLDB_TARGET
 rm -rf $LLDB_TARGET/www/
 tar jcvf $FULL_VERSION.orig-lldb.tar.bz2 $LLDB_TARGET
 rm -rf $LLDB_TARGET
