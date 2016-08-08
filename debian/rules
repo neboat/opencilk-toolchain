@@ -297,7 +297,7 @@ build_doc:
 	help2man --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1
 	help2man --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1
 
-	CMDS="llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb clang-format clang clang-tblgen clang-check clang-tidy clang-apply-replacements pp-trace sancov"; \
+	CMDS="llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb lldb-mi clang-format clang clang-tblgen clang-check clang-tidy clang-apply-replacements git-clang-format pp-trace sancov lli"; \
 	for f in $$CMDS; do \
 		echo "Generating manpage of $$f"; \
 		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-discard-stderr --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/$(BUILD_DIR)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
