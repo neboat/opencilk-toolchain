@@ -4,7 +4,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/clang-check
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-apply-replacements
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-query
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-rename
-usr/lib/llvm-@LLVM_VERISON@/share/clang/clang-rename.el
+usr/lib/llvm-@LLVM_VERSION@/share/clang/clang-rename.el
 usr/lib/llvm-@LLVM_VERSION@/share/clang/clang-rename.py
 usr/lib/llvm-@LLVM_VERSION@/bin/scan-view
 usr/lib/llvm-@LLVM_VERSION@/bin/scan-build
