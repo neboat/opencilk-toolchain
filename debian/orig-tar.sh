@@ -85,7 +85,7 @@ checkout_sources() {
         if test -n "$BRANCH"; then
             svn co $URL $DEST
         else
-            svn co -r $REVISION $URL $DIST
+            svn co -r $REVISION $URL $DEST
         fi
     fi
     rm -rf ../$TARGET
