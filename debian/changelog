@@ -1,6 +1,6 @@
 llvm-toolchain-3.9 (1:3.9~+rc1-1~exp2) experimental; urgency=medium
 
-  * Disable the build of lldb on mips64el and ppc64
+  * Disable the build of lldb on mips64el, ppc64 and s390x for real
 
  --
 
