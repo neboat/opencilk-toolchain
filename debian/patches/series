@@ -29,6 +29,5 @@ clang-analyzer-force-version.diff
 install-scan-build-py.diff
 scan-view-fix-path.diff
 mips-fpxx-enable.diff
-disable-test-failing-sparc-i386.diff
 fix-cmake-config-prefix.diff
 lldb-link-atomic-cmake.patch
