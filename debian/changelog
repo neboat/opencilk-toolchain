@@ -1,5 +1,8 @@
 llvm-toolchain-snapshot (1:4.0~svn275971-1~exp1) experimental; urgency=medium
 
+  * Disable the build of lldb on mips64el, ppc64 and s390x for real
+  * Add symlink from ./build to ../share and ../lib etc
+    Thanks to Ximin Luo for the patch (Closes: #834144)
   * Sync the 3.9 changes into 4.0
   * Fix the cmake paths in llvm-4.0-dev deb package. Thanks to Brad King
     for the patch (Closes: #819072)

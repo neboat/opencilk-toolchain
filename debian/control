@@ -446,8 +446,8 @@ Description: Modular compiler and toolchain technologies, examples
 # ------------- lldb -------------
 
 Package: lldb-4.0
-Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 x32 mips mipsel
-# ia64 mips mipsel hurd powerpc ppc64el sparc64  have been removed
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe sh4 x32 mips mipsel
+# ia64 mips mipsel hurd powerpc ppc64 ppc64el sparc64  have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm4.0 (= ${binary:Version}), llvm-4.0-dev
 Suggests: python-lldb-4.0
 Conflicts: lldb-3.4, lldb-3.5
@@ -458,8 +458,8 @@ Description: Next generation, high-performance debugger
  Project, such as the Clang expression parser and LLVM disassembler.
 
 Package: liblldb-4.0
-Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 x32 mips mipsel
-# ia64 mips mipsel hurd powerpc ppc64el sparc64  have been removed
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe sh4 x32 mips mipsel
+# ia64 mips mipsel hurd powerpc ppc64 ppc64el sparc64  have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm4.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: libs
@@ -473,8 +473,8 @@ Description: Next generation, high-performance debugger, library
  This package contains the LLDB runtime library.
 
 Package: liblldb-4.0-dbg
-Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m68k powerpcspe ppc64 sh4 x32 mips mipsel
-# ia64 mips mipsel hurd ppc64el alpha s390x sparc64 powerpc have been removed
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m68k powerpcspe sh4 x32 mips mipsel
+# ia64 mips mipsel hurd ppc64el alpha s390x sparc64 powerpc ppc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-4.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: debug
@@ -503,8 +503,8 @@ Description: Next generation, high-performance debugger, python lib
 
 Package: liblldb-4.0-dev
 Section: libdevel
-Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 x32 mips mipsel
-# ia64 mips mipsel hurd powerpc ppc64el sparc64 have been removed
+Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe sh4 x32 mips mipsel
+# ia64 mips mipsel hurd powerpc ppc64  ppc64el sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-4.0 (= ${binary:Version})
 Replaces: lldb-4.0-dev (<= 1:4.0~svn215195-2)
 Breaks: lldb-4.0-dev (<< 1:4.0~svn215195-2)
