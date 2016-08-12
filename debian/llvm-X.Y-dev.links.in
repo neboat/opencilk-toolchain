@@ -10,6 +10,8 @@ usr/include/llvm-c-@LLVM_VERSION@/llvm-c usr/lib/llvm-@LLVM_VERSION@/build/inclu
 usr/include/llvm-@LLVM_VERSION@/llvm usr/lib/llvm-@LLVM_VERSION@/build/include/llvm
 
 usr/lib/llvm-@LLVM_VERSION@/include/ usr/lib/llvm-@LLVM_VERSION@/build/include
+usr/lib/llvm-@LLVM_VERSION@/lib/     usr/lib/llvm-@LLVM_VERSION@/build/lib
+usr/lib/llvm-@LLVM_VERSION@/share/   usr/lib/llvm-@LLVM_VERSION@/build/share
 usr/lib/llvm-@LLVM_VERSION@/ usr/lib/llvm-@LLVM_VERSION@/build/Release
 usr/lib/llvm-@LLVM_VERSION@/ usr/lib/llvm-@LLVM_VERSION@/build/Debug+Asserts
 
