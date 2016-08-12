@@ -16,6 +16,7 @@ llvm-toolchain-snapshot (1:4.0~svn275971-1~exp1) experimental; urgency=medium
   * Generate more manpages
   * Remove some garbage from the manpages (Closes: #815991, #804347)
   * Disable -gsplit-dwarf on Ubuntu precise
+  * Update the coverity configuration (Debian has moved to gcc 6)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 25 Jul 2016 12:19:52 +0200
 

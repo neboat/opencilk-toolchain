@@ -200,12 +200,10 @@ override_dh_auto_configure: preconfigure
 	-(if test $(COVERITY_ENABLE) -eq 1; then \
 		export PATH=$$PATH:/opt/cov-analysis/bin/; \
 		cov-configure --compiler clang --comptype clang; \
-		cov-configure --compiler gcc-4.8 --comptype gcc; \
-		cov-configure --compiler g++-4.8 --comptype gcc; \
-		cov-configure --compiler gcc-4.9 --comptype gcc; \
-		cov-configure --compiler g++-4.9 --comptype gcc; \
 		cov-configure --compiler gcc-5 --comptype gcc; \
 		cov-configure --compiler g++-5 --comptype gcc; \
+		cov-configure --compiler gcc-6 --comptype gcc; \
+		cov-configure --compiler g++-6 --comptype gcc; \
 	fi)
 
 	# Due to bug upstream, no symlink here
