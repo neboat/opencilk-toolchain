@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:4.0~svn275970-1~exp2) experimental; urgency=medium
+llvm-toolchain-snapshot (1:4.0~svn275971-1~exp1) experimental; urgency=medium
 
   * Sync the 3.9 changes into 4.0
   * Fix the cmake paths in llvm-4.0-dev deb package. Thanks to Brad King
@@ -15,6 +15,7 @@ llvm-toolchain-snapshot (1:4.0~svn275970-1~exp2) experimental; urgency=medium
   * Fix some lintian overrides
   * Generate more manpages
   * Remove some garbage from the manpages (Closes: #815991, #804347)
+  * Disable -gsplit-dwarf on Ubuntu precise
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 25 Jul 2016 12:19:52 +0200
 
