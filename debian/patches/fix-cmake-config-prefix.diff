@@ -1,9 +1,11 @@
 ## Description: add some description
 ## Origin/Author: add some origin or author
 ## Bug: bug URL
---- a/cmake/modules/CMakeLists.txt
-+++ b/cmake/modules/CMakeLists.txt
-@@ -47,16 +47,7 @@ file(COPY .
+Index: llvm-toolchain-snapshot_4.0~svn278527/cmake/modules/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn278527.orig/cmake/modules/CMakeLists.txt
++++ llvm-toolchain-snapshot_4.0~svn278527/cmake/modules/CMakeLists.txt
+@@ -48,16 +48,7 @@ file(COPY .
    )
  
  # Generate LLVMConfig.cmake for the install tree.
@@ -21,4 +23,3 @@
  set(LLVM_CONFIG_INCLUDE_DIRS "\${LLVM_INSTALL_PREFIX}/include")
  set(LLVM_CONFIG_LIBRARY_DIRS "\${LLVM_INSTALL_PREFIX}/lib\${LLVM_LIBDIR_SUFFIX}")
  set(LLVM_CONFIG_CMAKE_DIR "\${LLVM_INSTALL_PREFIX}/${LLVM_INSTALL_PACKAGE_DIR}")
-
