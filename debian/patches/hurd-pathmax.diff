@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.9~svn265113/clang/lib/Basic/FileManager.cpp
+Index: llvm-toolchain-snapshot_4.0~svn278655/clang/lib/Basic/FileManager.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.9~svn265113.orig/clang/lib/Basic/FileManager.cpp
-+++ llvm-toolchain-snapshot_3.9~svn265113/clang/lib/Basic/FileManager.cpp
-@@ -494,6 +494,10 @@ void FileManager::invalidateCache(const
+--- llvm-toolchain-snapshot_4.0~svn278655.orig/clang/lib/Basic/FileManager.cpp
++++ llvm-toolchain-snapshot_4.0~svn278655/clang/lib/Basic/FileManager.cpp
+@@ -500,6 +500,12 @@ void FileManager::invalidateCache(const
    UniqueRealFiles.erase(Entry->getUniqueID());
  }
  
@@ -10,13 +10,15 @@ Index: llvm-toolchain-snapshot_3.9~svn265113/clang/lib/Basic/FileManager.cpp
 +#if defined(__GNU__) && !defined(PATH_MAX)
 +# define PATH_MAX 4096
 +#endif
- 
++
++
  void FileManager::GetUniqueIDMapping(
                     SmallVectorImpl<const FileEntry *> &UIDToFiles) const {
-Index: llvm-toolchain-snapshot_3.9~svn265113/lldb/include/lldb/lldb-defines.h
+   UIDToFiles.clear();
+Index: llvm-toolchain-snapshot_4.0~svn278655/lldb/include/lldb/lldb-defines.h
 ===================================================================
---- llvm-toolchain-snapshot_3.9~svn265113.orig/lldb/include/lldb/lldb-defines.h
-+++ llvm-toolchain-snapshot_3.9~svn265113/lldb/include/lldb/lldb-defines.h
+--- llvm-toolchain-snapshot_4.0~svn278655.orig/lldb/include/lldb/lldb-defines.h
++++ llvm-toolchain-snapshot_4.0~svn278655/lldb/include/lldb/lldb-defines.h
 @@ -28,6 +28,11 @@
      #define INT32_MAX 2147483647
  #endif
@@ -29,11 +31,11 @@ Index: llvm-toolchain-snapshot_3.9~svn265113/lldb/include/lldb/lldb-defines.h
  #if !defined(UINT32_MAX)
      #define UINT32_MAX 4294967295U
  #endif
-Index: llvm-toolchain-snapshot_3.9~svn265113/lib/Support/Unix/Path.inc
+Index: llvm-toolchain-snapshot_4.0~svn278655/lib/Support/Unix/Path.inc
 ===================================================================
---- llvm-toolchain-snapshot_3.9~svn265113.orig/lib/Support/Unix/Path.inc
-+++ llvm-toolchain-snapshot_3.9~svn265113/lib/Support/Unix/Path.inc
-@@ -58,6 +58,7 @@
+--- llvm-toolchain-snapshot_4.0~svn278655.orig/lib/Support/Unix/Path.inc
++++ llvm-toolchain-snapshot_4.0~svn278655/lib/Support/Unix/Path.inc
+@@ -62,6 +62,7 @@
  // For GNU Hurd
  #if defined(__GNU__) && !defined(PATH_MAX)
  # define PATH_MAX 4096
@@ -41,10 +43,10 @@ Index: llvm-toolchain-snapshot_3.9~svn265113/lib/Support/Unix/Path.inc
  #endif
  
  #include <sys/types.h>
-Index: llvm-toolchain-snapshot_3.9~svn265113/tools/dsymutil/DwarfLinker.cpp
+Index: llvm-toolchain-snapshot_4.0~svn278655/tools/dsymutil/DwarfLinker.cpp
 ===================================================================
---- llvm-toolchain-snapshot_3.9~svn265113.orig/tools/dsymutil/DwarfLinker.cpp
-+++ llvm-toolchain-snapshot_3.9~svn265113/tools/dsymutil/DwarfLinker.cpp
+--- llvm-toolchain-snapshot_4.0~svn278655.orig/tools/dsymutil/DwarfLinker.cpp
++++ llvm-toolchain-snapshot_4.0~svn278655/tools/dsymutil/DwarfLinker.cpp
 @@ -41,6 +41,11 @@
  #include <string>
  #include <tuple>
