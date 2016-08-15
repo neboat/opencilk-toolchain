@@ -33,7 +33,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),powerpc powerpcspe))
 LDFLAGS_EXTRA += -latomic
 endif
 
-ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils ge 2.22.52.0.4 ; echo $$?),0)
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.22.52.0.4 ; echo $$?),0)
 # when using -gsplit-dwarf, it will requires extract-dwo which doesn't exist on precise:
 # More: https://llvm.org/bugs/show_bug.cgi?id=28841
 CXXFLAGS_EXTRA += -gsplit-dwarf
