@@ -1,0 +1,2 @@
+debian/man/find-all-symbols-@LLVM_VERSION@.1
+debian/man/clang-include-fixer-@LLVM_VERSION@.1
