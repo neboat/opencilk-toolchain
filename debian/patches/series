@@ -32,4 +32,4 @@ mips-fpxx-enable.diff
 fix-cmake-config-prefix.diff
 lldb-link-atomic-cmake.patch
 disable-source-interleave.diff
-silent-i386-gold-utils.diff
+silent-gold-utils.diff
