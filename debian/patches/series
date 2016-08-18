@@ -32,3 +32,4 @@ mips-fpxx-enable.diff
 disable-test-failing-sparc-i386.diff
 fix-cmake-config-prefix.diff
 lldb-link-atomic-cmake.patch
+disable-llvm-symbolizer-test.diff
