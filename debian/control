@@ -67,6 +67,13 @@ Description: clang-based C++ linter tool
  via static analysis. clang-tidy is modular and provides a convenient interface
  for writing new checks.
 
+Package: clang-include-fixer-4.0
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Description: clang-based C/C++ include fixer
+ Provide automated way of adding #include directives for missing symbols in one
+ translation unit.
+
 
 Package: clang-4.0-doc
 Architecture: all

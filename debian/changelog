@@ -1,5 +1,6 @@
 llvm-toolchain-snapshot (1:4.0~svn275971-1~exp1) experimental; urgency=medium
 
+  * Introduce clang-include-fixer-4.0
   * Disable the build of lldb on mips64el, ppc64 and s390x for real
   * Add symlink from ./build to ../share and ../lib etc
     Thanks to Ximin Luo for the patch (Closes: #834144)
