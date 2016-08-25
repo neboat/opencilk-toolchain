@@ -23,6 +23,7 @@ llvm-toolchain-snapshot (1:4.0~svn275971-1~exp1) experimental; urgency=medium
   * Update the coverity configuration (Debian has moved to gcc 6)
   * remove compiler-rt-path.diff (file removed upstream, probably because
     we moved to cmake)
+  * Ship clang-offload-bundler in clang 4.0
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 25 Jul 2016 12:19:52 +0200
 

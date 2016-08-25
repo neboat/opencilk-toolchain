@@ -15,6 +15,7 @@ usr/lib/llvm-@LLVM_VERSION@/share/scan-build/
 usr/lib/llvm-@LLVM_VERSION@/share/man/man1/scan-build.1
 usr/lib/llvm-@LLVM_VERSION@/libexec/ccc-analyzer
 usr/lib/llvm-@LLVM_VERSION@/libexec/c++-analyzer
+usr/lib/llvm-@LLVM_VERSION@/bin/clang-offload-bundler
 
 usr/lib/llvm-@LLVM_VERSION@/bin/modularize
 usr/lib/llvm-@LLVM_VERSION@/bin/c-index-test
@@ -37,3 +38,4 @@ usr/bin/modularize-@LLVM_VERSION@
 usr/bin/scan-build-@LLVM_VERSION@
 usr/bin/scan-view-@LLVM_VERSION@
 usr/bin/c-index-test-@LLVM_VERSION@
+usr/bin/clang-offload-bundler-@LLVM_VERSION@
