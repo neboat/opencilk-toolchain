@@ -24,6 +24,8 @@ llvm-toolchain-snapshot (1:4.0~svn275971-1~exp1) experimental; urgency=medium
   * remove compiler-rt-path.diff (file removed upstream, probably because
     we moved to cmake)
   * Ship clang-offload-bundler in clang 4.0
+  * Set the correct Conflicts for python-clang-4.0, python-lldb-4.0
+    (Closes: #832410)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 25 Jul 2016 12:19:52 +0200
 
