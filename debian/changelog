@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:4.0~svn279869-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 26 Aug 2016 23:42:05 +0200
+
 llvm-toolchain-snapshot (1:4.0~svn275971-1~exp1) experimental; urgency=medium
 
   * Introduce clang-include-fixer-4.0
