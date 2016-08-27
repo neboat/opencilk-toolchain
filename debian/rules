@@ -249,7 +249,7 @@ build_doc:
 	-(cd $(TARGET_BUILD) && make $(NJOBS) docs-llvm-html docs-clang-html docs-clang-tools-html docs-polly-html docs-polly-man docs-clang-tools-man docs-clang-man docs-llvm-man)
 
 # Rename manpages
-	d=$(TARGET_BUILD)/docs/_build/man/; \
+	d=$(TARGET_BUILD)/docs/man/; \
 	if test -d $$d; then \
 	cd $$d; \
 	for f in *.1; do \
