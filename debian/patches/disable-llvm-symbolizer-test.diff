@@ -11,15 +11,16 @@ Description: Silent a test failing on yakkety amd64
 Author: Sylvestre <sylvestre@debian.org>
 Last-Update: 2016-08-26
 
-Index: llvm-toolchain-snapshot_4.0~svn279658/test/tools/llvm-symbolizer/print_context.c
+Index: llvm-toolchain-3.9-3.9~+rc1/test/tools/llvm-symbolizer/print_context.c
 ===================================================================
---- llvm-toolchain-snapshot_4.0~svn279658.orig/test/tools/llvm-symbolizer/print_context.c
-+++ llvm-toolchain-snapshot_4.0~svn279658/test/tools/llvm-symbolizer/print_context.c
-@@ -1,6 +1,7 @@
+--- llvm-toolchain-3.9-3.9~+rc1.orig/test/tools/llvm-symbolizer/print_context.c
++++ llvm-toolchain-3.9-3.9~+rc1/test/tools/llvm-symbolizer/print_context.c
+@@ -1,7 +1,7 @@
  // REQUIRES: x86_64-linux
  // RUN: %host_cc -O0 -g %s -o %t 2>&1
  // RUN: %t 2>&1 | llvm-symbolizer -print-source-context-lines=5 -obj=%t | FileCheck %s
+-
 +// XFAIL: *
- 
  #include <stdio.h>
  
+ int inc(int a) {

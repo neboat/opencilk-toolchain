@@ -32,4 +32,4 @@ fix-cmake-config-prefix.diff
 lldb-link-atomic-cmake.patch
 disable-source-interleave.diff
 silent-gold-utils.diff
-silent-symbolizer.diff
+disable-llvm-symbolizer-test.diff

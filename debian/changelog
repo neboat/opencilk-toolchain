@@ -1,6 +1,8 @@
 llvm-toolchain-snapshot (1:4.0~svn275971-1) unstable; urgency=medium
 
   * Introduce clang-include-fixer-4.0
+  * Fix the renaming of the manpages (Closes: #834077)
+  * Use the manpage from clang.rst instead of help2man
   * Disable the build of lldb on mips64el, ppc64 and s390x for real
   * Add symlink from ./build to ../share and ../lib etc
     Thanks to Ximin Luo for the patch (Closes: #834144)
