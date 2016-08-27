@@ -249,16 +249,18 @@ build_doc:
 	-(cd $(TARGET_BUILD) && make $(NJOBS) docs-llvm-html docs-clang-html docs-clang-tools-html docs-polly-html docs-polly-man docs-clang-tools-man docs-clang-man docs-llvm-man)
 
 # Rename manpages
-	d=$(TARGET_BUILD)/docs/man/; \
+	d=$(CURDIR)/docs/_build/man/; \
 	if test -d $$d; then \
-	cd $$d; \
-	for f in *.1; do \
-		echo "$$f"|grep $(LLVM_VERSION) || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
-	done; \
+		cd $$d; \
+		for f in *.1; do \
+			echo "$$f"|grep $(LLVM_VERSION) || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
+		done; \
+	else \
+		echo "could not find $$d"; \
 	fi
 # the clang doc generation only generates clang manpage
 # When it will do more, we should move that in the loop above
-#	cd $(CURDIR)/clang/docs/_build/man/; mv clang.1 clang-$(LLVM_VERSION).1
+	cd $(CURDIR)/clang/docs/_build/man/; mv clang.1 clang-$(LLVM_VERSION).1
 
 # Remove the copy of jquery. See bug #701087
 	for d in $(TARGET_BUILD)/docs/html/_static/ $(TARGET_BUILD)/tools/clang/docs/html/_static/ $(TARGET_BUILD)/tools/clang/tools/extra/docs/html/_static/; do \
