@@ -1,5 +1,6 @@
-llvm-toolchain-3.9 (1:3.9~+rc3-1~exp2) experimental; urgency=medium
+llvm-toolchain-3.9 (1:3.9~+rc3-1) unstable; urgency=medium
 
+  * Upload in unstable
   * Fix the usage of jsoncpp in polly. Thanks to James Clarke for the patch
     (Closes: #835607)
   * Fix the renaming of the manpages (Closes: #834077)
