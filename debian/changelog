@@ -1,10 +1,4 @@
-llvm-toolchain-snapshot (1:4.0~svn279869-1~exp1) experimental; urgency=medium
-
-  * New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 26 Aug 2016 23:42:05 +0200
-
-llvm-toolchain-snapshot (1:4.0~svn275971-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:4.0~svn275971-1) unstable; urgency=medium
 
   * Introduce clang-include-fixer-4.0
   * Disable the build of lldb on mips64el, ppc64 and s390x for real
@@ -33,7 +27,7 @@ llvm-toolchain-snapshot (1:4.0~svn275971-1~exp1) experimental; urgency=medium
   * Set the correct Conflicts for python-clang-4.0, python-lldb-4.0
     (Closes: #832410)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 25 Jul 2016 12:19:52 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 27 Aug 2016 14:19:41 +0200
 
 llvm-toolchain-snapshot (1:4.0~svn275970-1~exp1) experimental; urgency=medium
 
