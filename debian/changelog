@@ -1,5 +1,6 @@
-llvm-toolchain-snapshot (1:4.0~svn275971-1) unstable; urgency=medium
+llvm-toolchain-snapshot (1:4.0~svn279916-1) unstable; urgency=medium
 
+  * Snapshot is now 4.0
   * Introduce clang-include-fixer-4.0
   * Fix the renaming of the manpages (Closes: #834077)
   * Use the manpage from clang.rst instead of help2man
