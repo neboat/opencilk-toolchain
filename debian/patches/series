@@ -9,6 +9,7 @@ clang-format-version.diff
 unwind-chain-inclusion.diff
 hurd-pathmax.diff
 use-deb-json.diff
+silent-gold-test.diff
 atomic_library_1.diff
 atomic_library_2.diff
 python-clangpath.diff
