@@ -1,8 +1,8 @@
-Index: llvm-toolchain-3.8_3.8~+rc1/polly/lib/Makefile
+Index: b/polly/lib/Makefile
 ===================================================================
---- llvm-toolchain-3.8_3.8~+rc1.orig/polly/lib/Makefile
-+++ llvm-toolchain-3.8_3.8~+rc1/polly/lib/Makefile
-@@ -26,9 +26,9 @@ ISL_CODEGEN_FILES= CodeGen/IslAst.cpp \
+--- a/polly/lib/Makefile
++++ b/polly/lib/Makefile
+@@ -26,9 +26,9 @@
                     CodeGen/IslNodeBuilder.cpp \
                     CodeGen/CodeGeneration.cpp
  
@@ -15,17 +15,17 @@ Index: llvm-toolchain-3.8_3.8~+rc1/polly/lib/Makefile
  
  ISL_FILES= External/isl/basis_reduction_tab.c \
             External/isl/isl_aff.c \
-@@ -146,4 +146,5 @@ SOURCES= Polly.cpp \
+@@ -146,4 +146,5 @@
  #
  include $(LEVEL)/Makefile.common
  
 -LIBS += $(POLLY_LD) $(POLLY_LIB)
 +LIBS += $(POLLY_LD) $(POLLY_LIB) -ljsoncpp
 +
-Index: llvm-toolchain-3.8_3.8~+rc1/polly/lib/CMakeLists.txt
+Index: b/polly/lib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-3.8_3.8~+rc1.orig/polly/lib/CMakeLists.txt
-+++ llvm-toolchain-3.8_3.8~+rc1/polly/lib/CMakeLists.txt
+--- a/polly/lib/CMakeLists.txt
++++ b/polly/lib/CMakeLists.txt
 @@ -1,10 +1,10 @@
  set(LLVM_NO_RTTI 1)
  
@@ -42,7 +42,7 @@ Index: llvm-toolchain-3.8_3.8~+rc1/polly/lib/CMakeLists.txt
  
  set(ISL_CODEGEN_FILES
      CodeGen/IslAst.cpp
-@@ -46,7 +46,7 @@ add_polly_library(Polly
+@@ -46,7 +46,7 @@
    Support/RegisterPasses.cpp
    Support/ScopHelper.cpp
    Support/ScopLocation.cpp
@@ -51,7 +51,7 @@ Index: llvm-toolchain-3.8_3.8~+rc1/polly/lib/CMakeLists.txt
    Transform/Canonicalization.cpp
    Transform/CodePreparation.cpp
    Transform/DeadCodeElimination.cpp
-@@ -54,7 +54,7 @@ add_polly_library(Polly
+@@ -54,7 +54,7 @@
    ${POLLY_HEADER_FILES}
    )
  
@@ -60,3 +60,35 @@ Index: llvm-toolchain-3.8_3.8~+rc1/polly/lib/CMakeLists.txt
  
  if (BUILD_SHARED_LIBS)
    target_link_libraries(Polly
+Index: b/polly/CMakeLists.txt
+===================================================================
+--- a/polly/CMakeLists.txt
++++ b/polly/CMakeLists.txt
+@@ -128,10 +128,13 @@
+   INCLUDE_DIRECTORIES( ${CUDALIB_INCLUDE_DIR} )
+ endif(CUDALIB_FOUND)
+ 
++find_path(JSONCPP_INCLUDE_PATH json/json.h PATH_SUFFIXES jsoncpp)
++
+ include_directories(
+   BEFORE
+   ${CMAKE_CURRENT_SOURCE_DIR}/include
+-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/JSON/include
++#  ${CMAKE_CURRENT_SOURCE_DIR}/lib/JSON/include
++  ${JSONCPP_INCLUDE_PATH}
+   ${CMAKE_CURRENT_BINARY_DIR}/lib/External/isl/include
+   ${CMAKE_CURRENT_SOURCE_DIR}/lib/External/isl/include
+   ${CMAKE_CURRENT_BINARY_DIR}/include
+Index: b/polly/Makefile.config.in
+===================================================================
+--- a/polly/Makefile.config.in
++++ b/polly/Makefile.config.in
+@@ -53,7 +53,7 @@
+ POLLY_INC :=  @cuda_inc@ \
+               -I$(POLLY_OBJ_ROOT)/lib/External/isl/include \
+               -I$(POLLY_OBJ_ROOT)/lib/External/isl \
+-              -I$(POLLY_SRC_ROOT)/lib/JSON/include \
++              -I/usr/include/jsoncpp \
+               -I$(POLLY_SRC_ROOT)/lib/External/isl/include \
+               -I$(POLLY_SRC_ROOT)/lib/External/isl/imath \
+               -I$(POLLY_SRC_ROOT)/lib/External/isl
