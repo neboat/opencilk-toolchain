@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_3.9~svn260089/polly/lib/CMakeLists.txt
+Index: b/polly/lib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_3.9~svn260089.orig/polly/lib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_3.9~svn260089/polly/lib/CMakeLists.txt
+--- a/polly/lib/CMakeLists.txt
++++ b/polly/lib/CMakeLists.txt
 @@ -1,10 +1,10 @@
  set(LLVM_NO_RTTI 1)
  
@@ -18,7 +18,7 @@ Index: llvm-toolchain-snapshot_3.9~svn260089/polly/lib/CMakeLists.txt
  
  set(ISL_CODEGEN_FILES
      CodeGen/IslAst.cpp
-@@ -46,7 +46,7 @@ add_polly_library(Polly
+@@ -46,7 +46,7 @@
    Support/RegisterPasses.cpp
    Support/ScopHelper.cpp
    Support/ScopLocation.cpp
@@ -27,7 +27,7 @@ Index: llvm-toolchain-snapshot_3.9~svn260089/polly/lib/CMakeLists.txt
    Transform/Canonicalization.cpp
    Transform/CodePreparation.cpp
    Transform/DeadCodeElimination.cpp
-@@ -54,7 +54,7 @@ add_polly_library(Polly
+@@ -54,7 +54,7 @@
    ${POLLY_HEADER_FILES}
    )
  
@@ -36,3 +36,22 @@ Index: llvm-toolchain-snapshot_3.9~svn260089/polly/lib/CMakeLists.txt
  
  if (BUILD_SHARED_LIBS)
    target_link_libraries(Polly
+Index: b/polly/CMakeLists.txt
+===================================================================
+--- a/polly/CMakeLists.txt
++++ b/polly/CMakeLists.txt
+@@ -128,10 +128,13 @@
+   INCLUDE_DIRECTORIES( ${CUDALIB_INCLUDE_DIR} )
+ endif(CUDALIB_FOUND)
+ 
++find_path(JSONCPP_INCLUDE_PATH json/json.h PATH_SUFFIXES jsoncpp)
++
+ include_directories(
+   BEFORE
+   ${CMAKE_CURRENT_SOURCE_DIR}/include
+-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/JSON/include
++#  ${CMAKE_CURRENT_SOURCE_DIR}/lib/JSON/include
++  ${JSONCPP_INCLUDE_PATH}
+   ${CMAKE_CURRENT_BINARY_DIR}/lib/External/isl/include
+   ${CMAKE_CURRENT_SOURCE_DIR}/lib/External/isl/include
+   ${CMAKE_CURRENT_BINARY_DIR}/include
