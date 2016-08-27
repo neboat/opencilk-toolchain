@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:4.0~svn279916-2) UNRELEASED; urgency=medium
+
+  * clang_getAllSkippedRanges in the list of libclang1 symbols
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 27 Aug 2016 20:15:58 +0200
+
 llvm-toolchain-snapshot (1:4.0~svn279916-1) unstable; urgency=medium
 
   * Snapshot is now 4.0

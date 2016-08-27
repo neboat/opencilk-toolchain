@@ -179,6 +179,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_findReferencesInFileWithBlock@Base 3.2
  clang_formatDiagnostic@Base 3.2
  clang_free@Base 3.7
+ clang_getAllSkippedRanges@Base 4.0
  clang_getArgType@Base 3.2
  clang_getArrayElementType@Base 3.2
  clang_getArraySize@Base 3.2
