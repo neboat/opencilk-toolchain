@@ -1,3 +1,10 @@
+llvm-toolchain-3.9 (1:3.9~+rc3-2) UNRELEASED; urgency=medium
+
+  * Port to kfreebsd. Many thanks to Pino Toscano
+    (Closes: #835665)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 29 Aug 2016 00:44:40 +0200
+
 llvm-toolchain-3.9 (1:3.9~+rc3-1) unstable; urgency=medium
 
   * Upload in unstable
@@ -7,8 +14,6 @@ llvm-toolchain-3.9 (1:3.9~+rc3-1) unstable; urgency=medium
   * Use the manpage from clang.rst instead of help2man
   * Fix a crash with clang-tidy (Closes: #833802)
     Fixed in 1:3.9~+rc1-1~exp1
-  * Port to kfreebsd. Many thanks to Pino Toscano
-    (Closes: #835665)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 26 Aug 2016 23:34:16 +0200
 
