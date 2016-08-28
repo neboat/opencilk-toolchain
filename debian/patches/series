@@ -34,3 +34,4 @@ lldb-link-atomic-cmake.patch
 disable-source-interleave.diff
 silent-gold-utils.diff
 disable-llvm-symbolizer-test.diff
+kfreebsd-support.diff
