@@ -88,6 +88,11 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 	LDFLAGS_EXTRA += -coverage -lgcov
 endif
 
+RUN_TEST=yes
+ifeq (,$(filter nocheck, $(DEB_BUILD_OPTIONS)))
+	RUN_TEST=no
+endif
+
 ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # enable the build using scan-build
 # The package are installed through the variable declarations:
@@ -96,7 +101,7 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 	PRE_PROCESS=scan-build-$(LLVM_VERSION) --show-description -analyzer-config stable-report-filename=true -enable-checker optin.performance.Padding
 	PRE_PROCESS_CONF=scan-build-$(LLVM_VERSION)
 # no need to run tests in this case
-	DEB_BUILD_OPTIONS+=" nocheck"
+	RUN_TEST=no
 	CONFIGURE_EXTRA += --enable-assertions
 	CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
 endif
@@ -113,7 +118,7 @@ ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
 	CONFIGURE_EXTRA += --enable-assertions
 	CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
 # no need to run tests in this case
-	DEB_BUILD_OPTIONS+=" nocheck"
+	RUN_TEST=no
 else
 	COVERITY_ENABLE=0
 endif
@@ -437,8 +442,7 @@ override_dh_installdeb:
 # Remove auto generated python pyc
 	find $(CURDIR)/debian/llvm-$(LLVM_VERSION)-tools/usr/lib/llvm-$(LLVM_VERSION)/ -name '*.pyc' | xargs -r rm -f
 
-
-ifeq (,$(filter nocheck, $(DEB_BUILD_OPTIONS)))
+ifeq (${RUN_TEST},yes)
 # List of the archs we know we have 100 % tests working
 ARCH_LLVM_TEST_OK := i386 amd64
 
