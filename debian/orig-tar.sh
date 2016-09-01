@@ -104,8 +104,11 @@ else
 fi
 
 if test -n "$RCRELEASE"; then
-#    VERSION=$MAJOR_VERSION"+"$REVISION # WAS TAG
-    VERSION=$MAJOR_VERSION"~+"$TAG
+    if test "$TAG" = "final"; then
+	VERSION=$MAJOR_VERSION
+    else
+        VERSION=$MAJOR_VERSION"~+"$TAG
+    fi
     FULL_VERSION="llvm-toolchain-"$MAJOR_VERSION"_"$VERSION
 else
     VERSION=$CURRENT_VERSION"~svn"$REVISION
