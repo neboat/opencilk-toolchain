@@ -13,15 +13,18 @@ usr/lib/llvm-@LLVM_VERSION@/share/scan-build/
 usr/lib/llvm-@LLVM_VERSION@/share/man/man1/scan-build.1
 usr/lib/llvm-@LLVM_VERSION@/libexec/ccc-analyzer
 usr/lib/llvm-@LLVM_VERSION@/libexec/c++-analyzer
-
 usr/lib/llvm-@LLVM_VERSION@/bin/modularize
 usr/lib/llvm-@LLVM_VERSION@/bin/c-index-test
+usr/lib/llvm-@LLVM_VERSION@/bin/clang-include-fixer
+usr/lib/llvm-@LLVM_VERSION@/bin/find-all-symbols
 
 tools/clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
 tools/clang/tools/scan-build-py-@LLVM_VERSION@      usr/share/clang/
 tools/clang/tools/scan-view-@LLVM_VERSION@       usr/share/clang/
 #usr/share/man/man1/clang.1     usr/share/man/man1/
 usr/lib/llvm-@LLVM_VERSION@/lib/cmake/clang/*.cmake usr/share/llvm-@LLVM_VERSION@/cmake/
+usr/lib/llvm-@LLVM_VERSION@/share/clang/run-find-all-symbols.py
+usr/lib/llvm-@LLVM_VERSION@/share/clang/clang-include-fixer.py
 
 usr/bin/clang-@LLVM_VERSION@
 usr/bin/clang++-@LLVM_VERSION@
@@ -35,3 +38,5 @@ usr/bin/modularize-@LLVM_VERSION@
 usr/bin/scan-build-@LLVM_VERSION@
 usr/bin/scan-view-@LLVM_VERSION@
 usr/bin/c-index-test-@LLVM_VERSION@
+usr/bin/find-all-symbols-@LLVM_VERSION@
+usr/bin/clang-include-fixer-@LLVM_VERSION@

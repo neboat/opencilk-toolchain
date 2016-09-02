@@ -1,6 +1,0 @@
-usr/bin/find-all-symbols-@LLVM_VERSION@
-usr/bin/clang-include-fixer-@LLVM_VERSION@
-usr/lib/llvm-@LLVM_VERSION@/bin/clang-include-fixer
-usr/lib/llvm-@LLVM_VERSION@/bin/find-all-symbols
-usr/lib/llvm-@LLVM_VERSION@/share/clang/run-find-all-symbols.py
-usr/lib/llvm-@LLVM_VERSION@/share/clang/clang-include-fixer.py
