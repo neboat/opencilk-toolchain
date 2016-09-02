@@ -30,6 +30,7 @@ tools/clang/tools/scan-view-@LLVM_VERSION@       usr/share/clang/
 usr/lib/llvm-@LLVM_VERSION@/lib/cmake/clang/*.cmake usr/share/llvm-@LLVM_VERSION@/cmake/
 usr/lib/llvm-@LLVM_VERSION@/share/clang/run-find-all-symbols.py
 usr/lib/llvm-@LLVM_VERSION@/share/clang/clang-include-fixer.py
+usr/lib/llvm-@LLVM_VERSION@/share/clang/clang-include-fixer.el
 
 usr/bin/clang-@LLVM_VERSION@
 usr/bin/clang++-@LLVM_VERSION@
