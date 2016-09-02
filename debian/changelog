@@ -1,8 +1,10 @@
 llvm-toolchain-snapshot (1:4.0~svn279916-2) UNRELEASED; urgency=medium
 
-  * clang_getAllSkippedRanges in the list of libclang1 symbols
+  * Merge clang-include-fixer-4.0 into clang-4.0. Don't think
+    it deserves it own package
   * Port to kfreebsd. Many thanks to Pino Toscano
     (Closes: #835665)
+  * clang_getAllSkippedRanges in the list of libclang1 symbols
   * Try to disable the execution of the testsuite for scan-build & coverity
     for real
   * Also ship clang-reorder-fields as part of the clang-4.0 package

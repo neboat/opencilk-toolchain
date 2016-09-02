@@ -106,7 +106,7 @@ fi
 
 if test -n "$RCRELEASE"; then
     if test "$TAG" = "final"; then
-	VERSION=$MAJOR_VERSION
+	    VERSION=$MAJOR_VERSION
     else
         VERSION=$MAJOR_VERSION"~+"$TAG
     fi
