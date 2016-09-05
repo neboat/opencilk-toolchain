@@ -45,3 +45,4 @@ lldb-link-atomic-cmake.patch
 D17567-PR23529-Sema-part-of-attrbute-abi_tag-support.diff
 D18035-PR23529-Mangler-part-of-attrbute-abi_tag-support.diff
 kfreebsd-support.diff
+asan-glibc-2.24.diff
