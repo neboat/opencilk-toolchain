@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_3.8~svn255217/lldb/third_party/Python/module/unittest2/unittest2/runner.py
+Index: llvm-toolchain-snapshot_4.0~svn280802/lldb/third_party/Python/module/unittest2/unittest2/runner.py
 ===================================================================
---- llvm-toolchain-snapshot_3.8~svn255217.orig/lldb/third_party/Python/module/unittest2/unittest2/runner.py
-+++ llvm-toolchain-snapshot_3.8~svn255217/lldb/third_party/Python/module/unittest2/unittest2/runner.py
-@@ -171,9 +171,9 @@ class TextTestRunner(unittest.TextTestRu
+--- llvm-toolchain-snapshot_4.0~svn280802.orig/lldb/third_party/Python/module/unittest2/unittest2/runner.py
++++ llvm-toolchain-snapshot_4.0~svn280802/lldb/third_party/Python/module/unittest2/unittest2/runner.py
+@@ -174,9 +174,9 @@ class TextTestRunner(unittest.TextTestRu
          if hasattr(result, 'separator2'):
              self.stream.writeln(result.separator2)
          run = result.testsRun
@@ -12,6 +12,6 @@ Index: llvm-toolchain-snapshot_3.8~svn255217/lldb/third_party/Python/module/unit
 +#        self.stream.writeln("Ran %d test%s in %.3fs" %
 +#                            (run, run != 1 and "s" or "", timeTaken))
 +#        self.stream.writeln()
-         
+ 
          expectedFails = unexpectedSuccesses = skipped = passed = failed = errored = 0
          try:
