@@ -1,5 +1,6 @@
-llvm-toolchain-3.8 (1:3.8.1-11) UNRELEASED; urgency=medium
+llvm-toolchain-3.8 (1:3.8.1-11) unstable; urgency=medium
 
+  * Fix the arm64 lldb build issue. Thanks to Ximin Luo (Closes: #836591)
   * Fix asan with libc6 >= 2.24 (asan-glibc-2.24.diff, backport of 269633)
     Many thanks to Michael Stapelberg for the great bug report.
     (Closes: 836723)
