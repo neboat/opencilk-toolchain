@@ -1,0 +1,12 @@
+Index: llvm-toolchain-3.8-3.8.1/lldb/source/Plugins/Process/Linux/NativeRegisterContextLinux_arm64.cpp
+--- llvm-toolchain-3.8-3.8.1.orig/lldb/source/Plugins/Process/Linux/NativeRegisterContextLinux_arm64.cpp	2016/01/11 10:39:09	257322
++++ llvm-toolchain-3.8-3.8.1/lldb/source/Plugins/Process/Linux/NativeRegisterContextLinux_arm64.cpp	2016/04/12 05:40:51	266042
+@@ -32,6 +32,8 @@
+ #include <sys/socket.h>
+ // NT_PRSTATUS and NT_FPREGSET definition
+ #include <elf.h>
++// user_hwdebug_state definition
++#include <asm/ptrace.h>
+ 
+ #define REG_CONTEXT_SIZE (GetGPRSize() + GetFPRSize())
+ 

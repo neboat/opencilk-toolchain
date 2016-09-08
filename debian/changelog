@@ -1,3 +1,10 @@
+llvm-toolchain-3.8 (1:3.8.1-12) unstable; urgency=medium
+
+  * Fix a ftbfs on lldb on arm64 (Closes: #836591)
+    Once more, thanks to Ximin Luo for investigating
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 08 Sep 2016 10:39:51 +0200
+
 llvm-toolchain-3.8 (1:3.8.1-11) unstable; urgency=medium
 
   * Fix the arm64 lldb build issue. Thanks to Ximin Luo (Closes: #836591)
