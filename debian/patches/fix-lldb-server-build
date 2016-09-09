@@ -1,0 +1,11 @@
+--- a/cmake/modules/AddLLVM.cmake
++++ b/cmake/modules/AddLLVM.cmake
+@@ -486,7 +486,7 @@
+     # On DLL platforms symbols are imported from the tool by linking against it.
+     set(llvm_libs ${ARG_PLUGIN_TOOL})
+   elseif (DEFINED LLVM_LINK_COMPONENTS OR DEFINED ARG_LINK_COMPONENTS)
+-    if (LLVM_LINK_LLVM_DYLIB AND NOT ARG_DISABLE_LLVM_LINK_LLVM_DYLIB)
++    if (NOT ARG_STATIC AND LLVM_LINK_LLVM_DYLIB AND NOT ARG_DISABLE_LLVM_LINK_LLVM_DYLIB)
+       set(llvm_libs LLVM)
+     else()
+       llvm_map_components_to_libnames(llvm_libs

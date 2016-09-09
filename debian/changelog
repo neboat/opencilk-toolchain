@@ -10,8 +10,9 @@ llvm-toolchain-snapshot (1:4.0~svn279916-2) UNRELEASED; urgency=medium
     for real
   * Also ship clang-reorder-fields as part of the clang-4.0 package
   * Build lldb on arm64. Hopefully, works.
+  * Tentative fix for lldb-server build
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 27 Aug 2016 20:15:58 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 09 Sep 2016 19:11:37 +0200
 
 llvm-toolchain-snapshot (1:4.0~svn279916-1) unstable; urgency=medium
 
