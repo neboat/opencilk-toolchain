@@ -1,21 +1,21 @@
-Index: llvm-toolchain-snapshot_4.0~svn280802/compiler-rt/cmake/config-ix.cmake
+Index: llvm-toolchain-snapshot_4.0~svn281020/compiler-rt/cmake/config-ix.cmake
 ===================================================================
---- llvm-toolchain-snapshot_4.0~svn280802.orig/compiler-rt/cmake/config-ix.cmake
-+++ llvm-toolchain-snapshot_4.0~svn280802/compiler-rt/cmake/config-ix.cmake
+--- llvm-toolchain-snapshot_4.0~svn281020.orig/compiler-rt/cmake/config-ix.cmake
++++ llvm-toolchain-snapshot_4.0~svn281020/compiler-rt/cmake/config-ix.cmake
 @@ -415,7 +415,8 @@ list_replace(COMPILER_RT_SANITIZERS_TO_B
  
  if (SANITIZER_COMMON_SUPPORTED_ARCH AND NOT LLVM_USE_SANITIZER AND
      (OS_NAME MATCHES "Android|Darwin|Linux|FreeBSD" OR
--    (OS_NAME MATCHES "Windows" AND MSVC)))
-+    (OS_NAME MATCHES "Windows" AND MSVC))
+-    (OS_NAME MATCHES "Windows" AND (NOT MINGW AND NOT CYGWIN))))
++    (OS_NAME MATCHES "Windows" AND (NOT MINGW AND NOT CYGWIN)))
 +    AND NOT (OS_NAME STREQUAL "kFreeBSD"))
    set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)
  else()
    set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)
-Index: llvm-toolchain-snapshot_4.0~svn280802/tools/llvm-shlib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_4.0~svn281020/tools/llvm-shlib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_4.0~svn280802.orig/tools/llvm-shlib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_4.0~svn280802/tools/llvm-shlib/CMakeLists.txt
+--- llvm-toolchain-snapshot_4.0~svn281020.orig/tools/llvm-shlib/CMakeLists.txt
++++ llvm-toolchain-snapshot_4.0~svn281020/tools/llvm-shlib/CMakeLists.txt
 @@ -40,7 +40,7 @@ add_llvm_library(LLVM SHARED DISABLE_LLV
  set_property(TARGET LLVM PROPERTY VERSION "1") # Append .1 to SONAME
  
@@ -25,10 +25,10 @@ Index: llvm-toolchain-snapshot_4.0~svn280802/tools/llvm-shlib/CMakeLists.txt
    # GNU ld doesn't resolve symbols in the version script.
    set(LIB_NAMES -Wl,--whole-archive ${LIB_NAMES} -Wl,--no-whole-archive)
  elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
-Index: llvm-toolchain-snapshot_4.0~svn280802/lldb/cmake/LLDBDependencies.cmake
+Index: llvm-toolchain-snapshot_4.0~svn281020/lldb/cmake/LLDBDependencies.cmake
 ===================================================================
---- llvm-toolchain-snapshot_4.0~svn280802.orig/lldb/cmake/LLDBDependencies.cmake
-+++ llvm-toolchain-snapshot_4.0~svn280802/lldb/cmake/LLDBDependencies.cmake
+--- llvm-toolchain-snapshot_4.0~svn281020.orig/lldb/cmake/LLDBDependencies.cmake
++++ llvm-toolchain-snapshot_4.0~svn281020/lldb/cmake/LLDBDependencies.cmake
 @@ -166,7 +166,7 @@ if (NOT HAVE_CXX_ATOMICS64_WITHOUT_LIB )
  endif()
  
@@ -38,10 +38,10 @@ Index: llvm-toolchain-snapshot_4.0~svn280802/lldb/cmake/LLDBDependencies.cmake
    list(APPEND LLDB_SYSTEM_LIBS execinfo)
  endif()
  
-Index: llvm-toolchain-snapshot_4.0~svn280802/lldb/scripts/utilsOsType.py
+Index: llvm-toolchain-snapshot_4.0~svn281020/lldb/scripts/utilsOsType.py
 ===================================================================
---- llvm-toolchain-snapshot_4.0~svn280802.orig/lldb/scripts/utilsOsType.py
-+++ llvm-toolchain-snapshot_4.0~svn280802/lldb/scripts/utilsOsType.py
+--- llvm-toolchain-snapshot_4.0~svn281020.orig/lldb/scripts/utilsOsType.py
++++ llvm-toolchain-snapshot_4.0~svn281020/lldb/scripts/utilsOsType.py
 @@ -36,6 +36,7 @@ if sys.version_info.major >= 3:
          Linux = 3
          NetBSD = 4
@@ -69,10 +69,10 @@ Index: llvm-toolchain-snapshot_4.0~svn280802/lldb/scripts/utilsOsType.py
 +        eOSType = EnumOsType.kFreeBSD
  
      return eOSType
-Index: llvm-toolchain-snapshot_4.0~svn280802/lldb/scripts/Python/modules/CMakeLists.txt
+Index: llvm-toolchain-snapshot_4.0~svn281020/lldb/scripts/Python/modules/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_4.0~svn280802.orig/lldb/scripts/Python/modules/CMakeLists.txt
-+++ llvm-toolchain-snapshot_4.0~svn280802/lldb/scripts/Python/modules/CMakeLists.txt
+--- llvm-toolchain-snapshot_4.0~svn281020.orig/lldb/scripts/Python/modules/CMakeLists.txt
++++ llvm-toolchain-snapshot_4.0~svn281020/lldb/scripts/Python/modules/CMakeLists.txt
 @@ -5,7 +5,7 @@ if (CXX_SUPPORTS_NO_MACRO_REDEFINED)
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-macro-redefined")
  endif ()
