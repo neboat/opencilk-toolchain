@@ -34,3 +34,5 @@ fix-cmake-config-prefix.diff
 lldb-link-atomic-cmake.patch
 disable-llvm-symbolizer-test.diff
 kfreebsd-support.diff
+clang-tidy-run-bin.diff
+
