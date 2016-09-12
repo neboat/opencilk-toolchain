@@ -1,8 +1,16 @@
-llvm-toolchain-snapshot (1:4.0~svn279916-2) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:4.0~svn280796-1~exp1) experimental; urgency=medium
 
   * Merge clang-include-fixer-4.0 into clang-4.0. Don't think
     it deserves it own package
   * python-lldb-4.0 archs "any" to a list like others pkg
+  * Fix a version issue with run-clang-tidy-4.0.py
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 02 Sep 2016 13:11:56 +0200
+
+llvm-toolchain-3.9 (1:3.9-1) unstable; urgency=medium
+
+  * New stable release
+>>>>>>> .merge-right.r2207
   * Port to kfreebsd. Many thanks to Pino Toscano
     (Closes: #835665)
   * clang_getAllSkippedRanges in the list of libclang1 symbols
@@ -10,9 +18,10 @@ llvm-toolchain-snapshot (1:4.0~svn279916-2) UNRELEASED; urgency=medium
     for real
   * Also ship clang-reorder-fields as part of the clang-4.0 package
   * Build lldb on arm64. Hopefully, works.
+  * New snapshot release
   * Tentative fix for lldb-server build
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 09 Sep 2016 19:11:37 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 07 Sep 2016 12:02:12 +0200
 
 llvm-toolchain-snapshot (1:4.0~svn279916-1) unstable; urgency=medium
 
