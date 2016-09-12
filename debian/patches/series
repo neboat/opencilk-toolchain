@@ -48,3 +48,5 @@ kfreebsd-support.diff
 asan-glibc-2.24.diff
 lldb-dont-assume-64bit-systems-are-all-x86-64.patch
 lldb-arm64.diff
+clang-tidy-run-bin.diff
+

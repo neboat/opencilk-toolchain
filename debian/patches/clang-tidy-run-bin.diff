@@ -1,0 +1,13 @@
+Index: llvm-toolchain-3.8-3.8.1/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
+===================================================================
+--- llvm-toolchain-3.8-3.8.1.orig/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
++++ llvm-toolchain-3.8-3.8.1/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
+@@ -108,7 +108,7 @@ def main():
+                                    'clang-tidy and clang-apply-replacements in '
+                                    '$PATH.')
+   parser.add_argument('-clang-tidy-binary', metavar='PATH',
+-                      default='clang-tidy',
++                      default='clang-tidy-3.8',
+                       help='path to clang-tidy binary')
+   parser.add_argument('-clang-apply-replacements-binary', metavar='PATH',
+                       default='clang-apply-replacements',
