@@ -10,7 +10,6 @@ llvm-toolchain-snapshot (1:4.0~svn280796-1~exp1) experimental; urgency=medium
 llvm-toolchain-3.9 (1:3.9-1) unstable; urgency=medium
 
   * New stable release
->>>>>>> .merge-right.r2207
   * Port to kfreebsd. Many thanks to Pino Toscano
     (Closes: #835665)
   * clang_getAllSkippedRanges in the list of libclang1 symbols

@@ -9,3 +9,60 @@
        set(llvm_libs LLVM)
      else()
        llvm_map_components_to_libnames(llvm_libs
+--- a/polly/lib/CMakeLists.txt
++++ b/polly/lib/CMakeLists.txt
+@@ -66,35 +66,26 @@
+ 
+ target_link_libraries(Polly PollyISL jsoncpp)
+ 
+-if (BUILD_SHARED_LIBS)
+-  target_link_libraries(Polly
+-    LLVMSupport
+-    LLVMCore
+-    LLVMScalarOpts
+-    LLVMInstCombine
+-    LLVMTransformUtils
+-    LLVMAnalysis
+-    LLVMipo
+-    LLVMMC
++target_link_libraries(Polly
++  LLVMSupport
++  LLVMCore
++  LLVMScalarOpts
++  LLVMInstCombine
++  LLVMTransformUtils
++  LLVMAnalysis
++  LLVMipo
++  LLVMMC
+ # The libraries below are required for darwin: http://PR26392
+-    LLVMBitReader
+-    LLVMMCParser
+-    LLVMObject
+-    LLVMProfileData
+-    LLVMTarget
+-    LLVMVectorize
+-  )
+-  link_directories(
+-    ${LLVM_LIBRARY_DIR}
+-  )
+-elseif (LLVM_LINK_LLVM_DYLIB)
+-  target_link_libraries(Polly
+-    LLVM
+-  )
+-  link_directories(
+-    ${LLVM_LIBRARY_DIR}
+-  )
+-endif()
++  LLVMBitReader
++  LLVMMCParser
++  LLVMObject
++  LLVMProfileData
++  LLVMTarget
++  LLVMVectorize
++)
++link_directories(
++  ${LLVM_LIBRARY_DIR}
++)
+ 
+ # Build a monolithic Polly.a and a thin module LLVMPolly.moduleext that links to
+ # that static library.
