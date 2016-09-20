@@ -4,6 +4,7 @@ llvm-toolchain-snapshot (1:4.0~svn280796-1~exp1) experimental; urgency=medium
     it deserves it own package
   * python-lldb-4.0 archs "any" to a list like others pkg
   * Fix a version issue with run-clang-tidy-4.0.py
+  * Also install clang-change-namespace-4.0
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 02 Sep 2016 13:11:56 +0200
 
