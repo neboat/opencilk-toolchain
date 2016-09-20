@@ -465,7 +465,7 @@ endif
 
 # LLDB tests (CMake)
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
-ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
+ifneq (,$(filter codecoverageDISABLED,$(DEB_BUILD_OPTIONS)))
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ $(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lldb || true
 endif
 endif
