@@ -1,8 +1,10 @@
---- a/lldb/source/API/CMakeLists.txt
-+++ b/lldb/source/API/CMakeLists.txt
-@@ -6,7 +6,12 @@
- # for liblldb to link against
- include(${LLDB_PROJECT_ROOT}/cmake/LLDBDependencies.cmake)
+Index: llvm-toolchain-snapshot_4.0~svn282142/lldb/source/API/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn282142.orig/lldb/source/API/CMakeLists.txt
++++ llvm-toolchain-snapshot_4.0~svn282142/lldb/source/API/CMakeLists.txt
+@@ -12,7 +12,12 @@ if (LLDB_BUILD_FRAMEWORK AND NOT APPLE)
+   message(FATAL_ERROR "LLDB.framework cannot be generated unless targeting Apple platforms.")
+ endif()
  
 -add_lldb_library(liblldb SHARED
 +set(output_name lldb)
@@ -14,7 +16,7 @@
    SBAddress.cpp
    SBAttachInfo.cpp
    SBBlock.cpp
-@@ -78,7 +83,7 @@
+@@ -87,7 +92,7 @@ target_link_libraries(liblldb PRIVATE
  
  set_target_properties(liblldb
    PROPERTIES
@@ -23,7 +25,7 @@
    )
  
  if (NOT CMAKE_SYSTEM_NAME MATCHES "Windows")
-@@ -105,11 +110,6 @@
+@@ -114,11 +119,6 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Windows"
    if (MSVC AND NOT LLDB_DISABLE_PYTHON)
      target_link_libraries(liblldb PRIVATE ${PYTHON_LIBRARY})
    endif()
