@@ -23,15 +23,18 @@
  elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
 --- a/lldb/cmake/LLDBDependencies.cmake
 +++ b/lldb/cmake/LLDBDependencies.cmake
-@@ -153,7 +153,7 @@ if (NOT CMAKE_SYSTEM_NAME MATCHES "Windo
+@@ -152,10 +152,7 @@ if (NOT CMAKE_SYSTEM_NAME MATCHES "Windo
+     endif()
    endif()
  endif()
- # On FreeBSD/NetBSD backtrace() is provided by libexecinfo, not libc.
+-# On FreeBSD/NetBSD backtrace() is provided by libexecinfo, not libc.
 -if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "NetBSD")
-+if ((CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "NetBSD") AND NOT CMAKE_SYSTEM_NAME STREQUAL "kFreeBSD")
-   list(APPEND LLDB_SYSTEM_LIBS execinfo)
- endif()
+-  list(APPEND LLDB_SYSTEM_LIBS execinfo)
+-endif()
++list(APPEND LLDB_SYSTEM_LIBS ${Backtrace_LIBRARY})
  
+ if (NOT LLDB_DISABLE_PYTHON AND NOT LLVM_BUILD_STATIC)
+   list(APPEND LLDB_SYSTEM_LIBS ${PYTHON_LIBRARIES})
 --- a/lldb/scripts/utilsOsType.py
 +++ b/lldb/scripts/utilsOsType.py
 @@ -35,6 +35,7 @@ if sys.version_info.major >= 3:
@@ -72,3 +75,11 @@
 +if ((CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "GNU" OR CMAKE_SYSTEM_NAME STREQUAL "kFreeBSD") AND NOT __ANDROID_NDK__)
     add_subdirectory(readline)
  endif()
+--- a/lldb/cmake/modules/LLDBConfig.cmake
++++ b/lldb/cmake/modules/LLDBConfig.cmake
+@@ -410,3 +410,5 @@ if (NOT LLDB_DISABLE_CURSES)
+     list(APPEND system_libs ${CURSES_LIBRARIES})
+     include_directories(${CURSES_INCLUDE_DIR})
+ endif ()
++
++find_package(Backtrace REQUIRED)
