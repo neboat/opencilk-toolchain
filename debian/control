@@ -13,8 +13,8 @@ Build-Conflicts: oprofile, ocaml, libllvm-3.4-ocaml-dev, libllvm-3.5-ocaml-dev,
   libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev
 Standards-Version: 3.9.8
 Homepage: http://www.llvm.org/
-Vcs-Svn: svn://anonscm.debian.org/svn/pkg-llvm/llvm-toolchain/branches/3.8/
-Vcs-Browser: https://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/3.8/
+Vcs-Svn: svn://anonscm.debian.org/svn/pkg-llvm/llvm-toolchain/branches/3.9/
+Vcs-Browser: https://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/3.9/
 
 # ------------- clang -------------
 

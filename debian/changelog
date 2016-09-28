@@ -4,6 +4,7 @@ llvm-toolchain-3.9 (1:3.9-2) unstable; urgency=medium
     it deserves it own package
   * python-lldb-3.9 archs "any" to a list like others pkg
   * Fix a version issue with run-clang-tidy-4.0.py
+  * Fix the VCS-* fields (Closes: #839095)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 02 Sep 2016 13:11:56 +0200
 
