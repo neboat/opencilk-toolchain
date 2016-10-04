@@ -201,7 +201,7 @@ override_dh_auto_configure: preconfigure
 	ln -s ../compiler-rt .; \
 	readlink compiler-rt
 
-	# Configure coverity (we need the compilers)
+	# Configure coverity (we need the compilers) + work around perf issues
 	-(if test $(COVERITY_ENABLE) -eq 1; then \
 		export PATH=$$PATH:/opt/cov-analysis/bin/; \
 		cov-configure --compiler clang --comptype clang; \
@@ -209,6 +209,17 @@ override_dh_auto_configure: preconfigure
 		cov-configure --compiler g++-5 --comptype gcc; \
 		cov-configure --compiler gcc-6 --comptype gcc; \
 		cov-configure --compiler g++-6 --comptype gcc; \
+		cov-configure --compiler cc --comptype gcc --template \
+			--xml-option append_arg:"--ppp_translator" \
+			--xml-option append_arg:"replace/llvm::AlignOf<PrevTy>::Alignment/(llvm::AlignOf<PrevTy>::Alignment)" \
+			--xml-option append_arg:"--ppp_translator" \
+			--xml-option append_arg:"replace/llvm::AlignOf<NextTy>::Alignment/(llvm::AlignOf<NextTy>::Alignment)"; \
+		cov-configure --compiler c++ --comptype g++ --template \
+			--xml-option append_arg:"--ppp_translator" \
+			--xml-option append_arg:"replace/llvm::AlignOf<PrevTy>::Alignment/(llvm::AlignOf<PrevTy>::Alignment)" \
+			--xml-option append_arg:"--ppp_translator" \
+			--xml-option append_arg:"replace/llvm::AlignOf<NextTy>::Alignment/(llvm::AlignOf<NextTy>::Alignment)"
+ 
 	fi)
 
 	# Due to bug upstream, no symlink here
