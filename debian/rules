@@ -218,8 +218,7 @@ override_dh_auto_configure: preconfigure
 			--xml-option append_arg:"--ppp_translator" \
 			--xml-option append_arg:"replace/llvm::AlignOf<PrevTy>::Alignment/(llvm::AlignOf<PrevTy>::Alignment)" \
 			--xml-option append_arg:"--ppp_translator" \
-			--xml-option append_arg:"replace/llvm::AlignOf<NextTy>::Alignment/(llvm::AlignOf<NextTy>::Alignment)"
- 
+			--xml-option append_arg:"replace/llvm::AlignOf<NextTy>::Alignment/(llvm::AlignOf<NextTy>::Alignment)"; \
 	fi)
 
 	# Due to bug upstream, no symlink here
