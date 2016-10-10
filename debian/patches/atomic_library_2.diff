@@ -1,19 +1,11 @@
-Index: llvm-toolchain-snapshot_3.5~svn201651/clang/test/CodeGen/linux-arm-atomic.c
-===================================================================
---- llvm-toolchain-snapshot_3.5~svn201651.orig/clang/test/CodeGen/linux-arm-atomic.c	2014-02-19 09:46:27.872584164 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201651/clang/test/CodeGen/linux-arm-atomic.c	2014-02-19 09:46:29.748703000 +0100
-@@ -1,5 +1,6 @@
- // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv7-unknown-linux | FileCheck %s
- // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv6-unknown-linux | FileCheck %s
-+// RUN: %clang_cc1 %s -emit-llvm -o - -triple=thumbv7-unknown-linux | FileCheck %s
- 
- typedef int _Atomic_word;
- _Atomic_word exchange_and_add(volatile _Atomic_word *__mem, int __val) {
-Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/Targets.cpp
-===================================================================
---- llvm-toolchain-snapshot_3.5~svn201651.orig/clang/lib/Basic/Targets.cpp	2014-02-19 09:46:27.872584164 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/Targets.cpp	2014-02-19 09:46:29.748703000 +0100
-@@ -3774,9 +3774,23 @@
+---
+ clang/lib/Basic/Targets.cpp           |   20 +++++++++++++++++---
+ clang/test/CodeGen/linux-arm-atomic.c |    1 +
+ 2 files changed, 18 insertions(+), 3 deletions(-)
+
+--- a/clang/lib/Basic/Targets.cpp
++++ b/clang/lib/Basic/Targets.cpp
+@@ -4391,9 +4391,23 @@ protected:
      if (T.getOS() != llvm::Triple::Linux)
       return false;
      StringRef ArchName = T.getArchName();
@@ -40,3 +32,12 @@ Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Basic/Targets.cpp
    }
  
  public:
+--- a/clang/test/CodeGen/linux-arm-atomic.c
++++ b/clang/test/CodeGen/linux-arm-atomic.c
+@@ -1,5 +1,6 @@
+ // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv7-unknown-linux | FileCheck %s
+ // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv6-unknown-linux | FileCheck %s
++// RUN: %clang_cc1 %s -emit-llvm -o - -triple=thumbv7-unknown-linux | FileCheck %s
+ 
+ typedef int _Atomic_word;
+ _Atomic_word exchange_and_add(volatile _Atomic_word *__mem, int __val) {

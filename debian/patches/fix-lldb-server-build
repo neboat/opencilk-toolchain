@@ -1,6 +1,11 @@
+---
+ cmake/modules/AddLLVM.cmake |    2 -
+ polly/lib/CMakeLists.txt    |   47 +++++++++++++++++---------------------------
+ 2 files changed, 20 insertions(+), 29 deletions(-)
+
 --- a/cmake/modules/AddLLVM.cmake
 +++ b/cmake/modules/AddLLVM.cmake
-@@ -486,7 +486,7 @@
+@@ -498,7 +498,7 @@ function(llvm_add_library name)
      # On DLL platforms symbols are imported from the tool by linking against it.
      set(llvm_libs ${ARG_PLUGIN_TOOL})
    elseif (DEFINED LLVM_LINK_COMPONENTS OR DEFINED ARG_LINK_COMPONENTS)
@@ -11,7 +16,7 @@
        llvm_map_components_to_libnames(llvm_libs
 --- a/polly/lib/CMakeLists.txt
 +++ b/polly/lib/CMakeLists.txt
-@@ -66,35 +66,26 @@
+@@ -66,35 +66,26 @@ endif (GPU_CODEGEN)
  
  target_link_libraries(Polly PollyISL jsoncpp)
  

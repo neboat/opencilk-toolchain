@@ -1,11 +1,13 @@
 ## Description: add some description
 ## Origin/Author: add some origin or author
 ## Bug: bug URL
-Index: llvm-toolchain-snapshot_4.0~svn278527/cmake/modules/CMakeLists.txt
-===================================================================
---- llvm-toolchain-snapshot_4.0~svn278527.orig/cmake/modules/CMakeLists.txt
-+++ llvm-toolchain-snapshot_4.0~svn278527/cmake/modules/CMakeLists.txt
-@@ -48,16 +48,7 @@ file(COPY .
+---
+# cmake/modules/CMakeLists.txt |   11 +----------
+# 1 file changed, 1 insertion(+), 10 deletions(-)
+#
+--- a/cmake/modules/CMakeLists.txt
++++ b/cmake/modules/CMakeLists.txt
+@@ -74,16 +74,7 @@ file(COPY .
    )
  
  # Generate LLVMConfig.cmake for the install tree.

@@ -1,5 +1,6 @@
 usr/lib/llvm-@LLVM_VERSION@/bin/clang
 usr/lib/llvm-@LLVM_VERSION@/bin/clang++
+usr/lib/llvm-@LLVM_VERSION@/bin/clang-cpp
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-check
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-apply-replacements
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-query
@@ -35,6 +36,7 @@ usr/lib/llvm-@LLVM_VERSION@/share/clang/clang-include-fixer.el
 
 usr/bin/clang-@LLVM_VERSION@
 usr/bin/clang++-@LLVM_VERSION@
+usr/bin/clang-cpp-@LLVM_VERSION@
 usr/bin/clang-check-@LLVM_VERSION@
 usr/bin/clang-apply-replacements-@LLVM_VERSION@
 usr/bin/clang-query-@LLVM_VERSION@

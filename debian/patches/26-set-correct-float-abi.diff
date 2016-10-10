@@ -18,11 +18,13 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
-Index: llvm-toolchain-snapshot_3.9~svn273780/clang/lib/Driver/Tools.cpp
-===================================================================
---- llvm-toolchain-snapshot_3.9~svn273780.orig/clang/lib/Driver/Tools.cpp
-+++ llvm-toolchain-snapshot_3.9~svn273780/clang/lib/Driver/Tools.cpp
-@@ -811,7 +811,7 @@ arm::FloatABI arm::getARMFloatABI(const
+---
+ clang/lib/Driver/Tools.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/clang/lib/Driver/Tools.cpp
++++ b/clang/lib/Driver/Tools.cpp
+@@ -839,7 +839,7 @@ arm::FloatABI arm::getARMFloatABI(const
        case llvm::Triple::MuslEABI:
        case llvm::Triple::EABI:
          // EABI is always AAPCS, and if it was not marked 'hard', it's softfp

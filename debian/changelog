@@ -6,6 +6,10 @@ llvm-toolchain-snapshot (1:4.0~svn280796-1~exp1) experimental; urgency=medium
   * Fix a version issue with run-clang-tidy-4.0.py
   * Also install clang-change-namespace-4.0
 
+  [ Kai Wasserbäch ]
+  * debian/clang-X.Y.install.in: Added clang-cpp.
+  * debian/patches: Refreshed.
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 02 Sep 2016 13:11:56 +0200
 
 llvm-toolchain-3.9 (1:3.9-1) unstable; urgency=medium

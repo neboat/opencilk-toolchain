@@ -1,8 +1,10 @@
-Index: llvm-toolchain-snapshot_3.9~svn260089/tools/llvm-config/llvm-config.cpp
-===================================================================
---- llvm-toolchain-snapshot_3.9~svn260089.orig/tools/llvm-config/llvm-config.cpp
-+++ llvm-toolchain-snapshot_3.9~svn260089/tools/llvm-config/llvm-config.cpp
-@@ -533,9 +533,9 @@ int main(int argc, char **argv) {
+---
+ tools/llvm-config/llvm-config.cpp |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/tools/llvm-config/llvm-config.cpp
++++ b/tools/llvm-config/llvm-config.cpp
+@@ -538,9 +538,9 @@ int main(int argc, char **argv) {
        } else if (Arg == "--shared-mode") {
          PrintSharedMode = true;
        } else if (Arg == "--obj-root") {
@@ -14,6 +16,3 @@ Index: llvm-toolchain-snapshot_3.9~svn260089/tools/llvm-config/llvm-config.cpp
        } else if (Arg == "--link-shared") {
          LinkMode = LinkModeShared;
        } else if (Arg == "--link-static") {
-       } else {
-         usage();
-       }

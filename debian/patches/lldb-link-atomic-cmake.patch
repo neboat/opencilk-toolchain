@@ -2,11 +2,13 @@ Description: Link with -latomic when mips* processor is detected
 Author: Gianfranco Costamagna <locutusofborg@debian.org>
 Last-Update: 2016-07-27
 
-Index: llvm-toolchain-snapshot_4.0~svn277987/lldb/cmake/LLDBDependencies.cmake
-===================================================================
---- llvm-toolchain-snapshot_4.0~svn277987.orig/lldb/cmake/LLDBDependencies.cmake
-+++ llvm-toolchain-snapshot_4.0~svn277987/lldb/cmake/LLDBDependencies.cmake
-@@ -183,6 +183,12 @@ if (LLVM_BUILD_STATIC)
+---
+ lldb/cmake/LLDBDependencies.cmake |    6 ++++++
+ 1 file changed, 6 insertions(+)
+
+--- a/lldb/cmake/LLDBDependencies.cmake
++++ b/lldb/cmake/LLDBDependencies.cmake
+@@ -185,6 +185,12 @@ if (LLVM_BUILD_STATIC)
    endif()
  endif()
  

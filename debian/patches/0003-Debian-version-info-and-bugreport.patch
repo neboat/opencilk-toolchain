@@ -1,8 +1,10 @@
-Index: llvm-toolchain-snapshot_3.7~svn241915/lib/Support/CommandLine.cpp
-===================================================================
---- llvm-toolchain-snapshot_3.7~svn241915.orig/lib/Support/CommandLine.cpp
-+++ llvm-toolchain-snapshot_3.7~svn241915/lib/Support/CommandLine.cpp
-@@ -1747,6 +1747,10 @@ public:
+---
+ lib/Support/CommandLine.cpp |    4 ++++
+ 1 file changed, 4 insertions(+)
+
+--- a/lib/Support/CommandLine.cpp
++++ b/lib/Support/CommandLine.cpp
+@@ -2027,6 +2027,10 @@ public:
      OS << " " << LLVM_VERSION_INFO;
  #endif
      OS << "\n  ";

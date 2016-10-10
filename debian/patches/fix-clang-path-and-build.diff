@@ -1,8 +1,10 @@
-Index: llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Driver/ToolChains.cpp
-===================================================================
---- llvm-toolchain-snapshot_3.5~svn201651.orig/clang/lib/Driver/ToolChains.cpp	2014-02-19 09:46:23.400300812 +0100
-+++ llvm-toolchain-snapshot_3.5~svn201651/clang/lib/Driver/ToolChains.cpp	2014-02-19 09:46:35.377059510 +0100
-@@ -2326,6 +2326,8 @@
+---
+ clang/lib/Driver/ToolChains.cpp |    2 ++
+ 1 file changed, 2 insertions(+)
+
+--- a/clang/lib/Driver/ToolChains.cpp
++++ b/clang/lib/Driver/ToolChains.cpp
+@@ -3402,6 +3402,8 @@ void Haiku::AddClangCXXStdlibIncludeArgs
        DriverArgs.hasArg(options::OPT_nostdincxx))
      return;
  

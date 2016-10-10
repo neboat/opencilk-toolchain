@@ -1,8 +1,10 @@
-Index: llvm-toolchain-snapshot_3.9~svn265903/clang/lib/Basic/Targets.cpp
-===================================================================
---- llvm-toolchain-snapshot_3.9~svn265903.orig/clang/lib/Basic/Targets.cpp
-+++ llvm-toolchain-snapshot_3.9~svn265903/clang/lib/Basic/Targets.cpp
-@@ -4041,33 +4041,6 @@ protected:
+---
+ clang/lib/Basic/Targets.cpp |   27 ---------------------------
+ 1 file changed, 27 deletions(-)
+
+--- a/clang/lib/Basic/Targets.cpp
++++ b/clang/lib/Basic/Targets.cpp
+@@ -4382,33 +4382,6 @@ protected:
      Builder.defineMacro("__ELF__");
    }
  

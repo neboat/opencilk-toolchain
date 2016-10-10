@@ -1,8 +1,10 @@
-Index: llvm-toolchain-snapshot_4.0~svn278527/clang/lib/Driver/Tools.cpp
-===================================================================
---- llvm-toolchain-snapshot_4.0~svn278527.orig/clang/lib/Driver/Tools.cpp
-+++ llvm-toolchain-snapshot_4.0~svn278527/clang/lib/Driver/Tools.cpp
-@@ -7391,11 +7391,6 @@ bool mips::isFP64ADefault(const llvm::Tr
+---
+ clang/lib/Driver/Tools.cpp |    5 -----
+ 1 file changed, 5 deletions(-)
+
+--- a/clang/lib/Driver/Tools.cpp
++++ b/clang/lib/Driver/Tools.cpp
+@@ -7549,11 +7549,6 @@ bool mips::isFP64ADefault(const llvm::Tr
  
  bool mips::isFPXXDefault(const llvm::Triple &Triple, StringRef CPUName,
                           StringRef ABIName, mips::FloatABI FloatABI) {
