@@ -3,6 +3,7 @@ llvm-toolchain-3.9 (1:3.9-2) unstable; urgency=medium
   * Merge clang-include-fixer-3.9 into clang-3.9. Don't think
     it deserves it own package
   * python-lldb-3.9 archs "any" to a list like others pkg
+    Should fix the transition issue
   * Fix a version issue with run-clang-tidy-4.0.py
   * Fix the VCS-* fields (Closes: #839095)
 
