@@ -1,3 +1,11 @@
+llvm-toolchain-3.9 (1:3.9-3) unstable; urgency=medium
+
+  * The libstdc++-6-dev & libobjc-6-dev are only install with clang-X.Y
+    and libclang-X.Y-dev and no longer with libclang1-X.Y
+    (Closes: #841309)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 24 Oct 2016 10:45:07 +0200
+
 llvm-toolchain-3.9 (1:3.9-2) unstable; urgency=medium
 
   * Merge clang-include-fixer-3.9 into clang-3.9. Don't think
