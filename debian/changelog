@@ -1,3 +1,12 @@
+llvm-toolchain-snapshot (1:4.0~svn282142-1~exp1) experimental; urgency=medium
+
+  * The libstdc++-6-dev & libobjc-6-dev are only install with clang-X.Y
+    and libclang-X.Y-dev and no longer with libclang1-X.Y
+    (Closes: #841309)
+  * Fix the VCS-* fields
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 24 Oct 2016 10:45:07 +0200
+
 llvm-toolchain-snapshot (1:4.0~svn280796-1~exp1) experimental; urgency=medium
 
   * Merge clang-include-fixer-4.0 into clang-4.0. Don't think

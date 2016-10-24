@@ -13,15 +13,15 @@ Build-Conflicts: oprofile, ocaml, libllvm-3.4-ocaml-dev, libllvm-3.5-ocaml-dev,
   libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev
 Standards-Version: 3.9.8
 Homepage: http://www.llvm.org/
-Vcs-Svn: svn://anonscm.debian.org/svn/pkg-llvm/llvm-toolchain/branches/3.8/
-Vcs-Browser: https://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/3.8/
+Vcs-Svn: svn://anonscm.debian.org/svn/pkg-llvm/llvm-toolchain/branches/snapshot/
+Vcs-Browser: https://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/snapshot/
 
 # ------------- clang -------------
 
 Package: clang-4.0
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- libclang-common-4.0-dev (= ${binary:Version}),
+ ${dep:devlibs-objc}, libclang-common-4.0-dev (= ${binary:Version}),
  libclang1-4.0 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-4.0-dev, python
@@ -86,7 +86,7 @@ Description: C, C++ and Objective-C compiler (LLVM based) - Documentation
 
 Package: libclang1-4.0
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Description: C interface to the clang library
@@ -127,7 +127,8 @@ Package: libclang-4.0-dev
 Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- libclang1-4.0 (= ${binary:Version}), libclang-common-4.0-dev (= ${binary:Version})
+ ${dep:devlibs-objc}, libclang1-4.0 (= ${binary:Version}), 
+ libclang-common-4.0-dev (= ${binary:Version})
 Description: clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler
