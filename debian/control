@@ -21,7 +21,7 @@ Vcs-Browser: https://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/3.8
 Package: clang-3.8
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- libclang-common-3.8-dev (= ${binary:Version}),
+ ${dep:devlibs-objc}, libclang-common-3.8-dev (= ${binary:Version}),
  libclang1-3.8 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-3.8-dev, python
@@ -85,7 +85,7 @@ Description: C, C++ and Objective-C compiler (LLVM based) - Documentation
 
 Package: libclang1-3.8
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Description: C interface to the clang library
@@ -126,7 +126,8 @@ Package: libclang-3.8-dev
 Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- libclang1-3.8 (= ${binary:Version}), libclang-common-3.8-dev (= ${binary:Version})
+ ${dep:devlibs-objc}, libclang1-3.8 (= ${binary:Version}),
+ libclang-common-3.8-dev (= ${binary:Version})
 Description: clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler
