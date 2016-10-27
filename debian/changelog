@@ -5,6 +5,13 @@ llvm-toolchain-snapshot (1:4.0~svn282142-1~exp1) experimental; urgency=medium
     (Closes: #841309)
   * Fix the VCS-* fields
 
+  [ Kai Wasserbäch ]
+  * debian/patches/{23-strlcpy_strlcat_warning_removed.diff,
+    0003-Debian-version-info-and-bugreport.patch, atomic_library_[12].diff,
+    python-clangpath.diff,removeduplicatedeclaration.diff,
+    fix-clang-path-and-build.diff,mips-fpxx-enable.diff}: Refreshed.
+  * debian/patches/{silent-more-tests.diff,silent-MCJIIT-tests.diff}: Updated.
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 24 Oct 2016 10:45:07 +0200
 
 llvm-toolchain-snapshot (1:4.0~svn280796-1~exp1) experimental; urgency=medium

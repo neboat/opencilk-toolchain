@@ -4,7 +4,7 @@
 
 --- a/lib/Support/CommandLine.cpp
 +++ b/lib/Support/CommandLine.cpp
-@@ -2027,6 +2027,10 @@ public:
+@@ -2029,6 +2029,10 @@ public:
      OS << " " << LLVM_VERSION_INFO;
  #endif
      OS << "\n  ";

@@ -4,7 +4,7 @@
 
 --- a/clang/lib/Basic/Targets.cpp
 +++ b/clang/lib/Basic/Targets.cpp
-@@ -4382,33 +4382,6 @@ protected:
+@@ -4391,33 +4391,6 @@ protected:
      Builder.defineMacro("__ELF__");
    }
  

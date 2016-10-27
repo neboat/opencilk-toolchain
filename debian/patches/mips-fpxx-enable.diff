@@ -4,7 +4,7 @@
 
 --- a/clang/lib/Driver/Tools.cpp
 +++ b/clang/lib/Driver/Tools.cpp
-@@ -7549,11 +7549,6 @@ bool mips::isFP64ADefault(const llvm::Tr
+@@ -7616,11 +7616,6 @@ bool mips::isFP64ADefault(const llvm::Tr
  
  bool mips::isFPXXDefault(const llvm::Triple &Triple, StringRef CPUName,
                           StringRef ABIName, mips::FloatABI FloatABI) {
