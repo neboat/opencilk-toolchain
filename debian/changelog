@@ -6,6 +6,7 @@ llvm-toolchain-3.9 (1:3.9-3) unstable; urgency=medium
     (Closes: #841309)
 
   [ Gianfranco Costamagna ]
+  * Team upload
   * d/p/drop-wrong-hack-arm64.patch:
     - drop hack that was preventing the package from building on
       non-amd64 64bit architectures:
