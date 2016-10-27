@@ -1,0 +1,25 @@
+Description: This hack was needed on 14.04, and for some reason
+ breaks finding pythonlibs in cmake (seen in arm64 and mips64el)
+
+Author: Gianfranco Costamagna <locutusofborg@debian.org>
+
+--- llvm-toolchain-3.9-3.9.orig/lldb/cmake/modules/LLDBConfig.cmake
++++ llvm-toolchain-3.9-3.9/lldb/cmake/modules/LLDBConfig.cmake
+@@ -167,12 +167,12 @@ function(find_python_libs_windows)
+ endfunction(find_python_libs_windows)
+ 
+ if (NOT LLDB_DISABLE_PYTHON)
+-  if(UNIX)
++  #if(UNIX)
+     # This is necessary for crosscompile on Ubuntu 14.04 64bit. Need a proper fix.
+-    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+-      set(CMAKE_LIBRARY_ARCHITECTURE "x86_64-linux-gnu")
+-    endif()
+-  endif()
++    #if(CMAKE_SIZEOF_VOID_P EQUAL 8)
++    #  set(CMAKE_LIBRARY_ARCHITECTURE "x86_64-linux-gnu")
++    #endif()
++  #endif()
+ 
+   if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
+     find_python_libs_windows()
