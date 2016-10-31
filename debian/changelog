@@ -1,3 +1,10 @@
+llvm-toolchain-3.9 (1:3.9-4) unstable; urgency=medium
+
+  * d/p/bug-30342.diff:
+    Backport upstream bug 30342 to fix an infinity loop in rust testsuite
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 31 Oct 2016 10:47:52 +0100
+
 llvm-toolchain-3.9 (1:3.9-3) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
