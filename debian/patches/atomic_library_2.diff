@@ -5,7 +5,7 @@
 
 --- a/clang/lib/Basic/Targets.cpp
 +++ b/clang/lib/Basic/Targets.cpp
-@@ -4400,9 +4400,23 @@ protected:
+@@ -4423,9 +4423,23 @@ protected:
      if (T.getOS() != llvm::Triple::Linux)
       return false;
      StringRef ArchName = T.getArchName();

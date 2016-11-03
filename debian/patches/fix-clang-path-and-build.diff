@@ -4,12 +4,12 @@
 
 --- a/clang/lib/Driver/ToolChains.cpp
 +++ b/clang/lib/Driver/ToolChains.cpp
-@@ -3447,6 +3447,8 @@ void Haiku::AddClangCXXStdlibIncludeArgs
+@@ -2842,6 +2842,8 @@ void Generic_GCC::AddClangCXXStdlibInclu
        DriverArgs.hasArg(options::OPT_nostdincxx))
      return;
  
 +  addSystemInclude(DriverArgs, CC1Args, "/usr/include/clang/" + std::string(CLANG_VERSION_STRING) + "/include/");
 +
    switch (GetCXXStdlibType(DriverArgs)) {
-   case ToolChain::CST_Libcxx:
-     addSystemInclude(DriverArgs, CC1Args,
+   case ToolChain::CST_Libcxx: {
+     std::string Path = findLibCxxIncludePath();

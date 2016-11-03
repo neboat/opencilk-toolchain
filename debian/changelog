@@ -1,3 +1,15 @@
+llvm-toolchain-snapshot (1:4.0~svn285794-1~exp0.1) UNRELEASED; urgency=medium
+
+  * debian/patches/{0003-Debian-version-info-and-bugreport.patch,
+    0044-soname.diff,23-strlcpy_strlcat_warning_removed.diff,
+    26-set-correct-float-abi.diff,atomic_library_[12].diff,
+    fix-clang-path-and-build.diff,fix-lldb-server-build,lldb-libname.diff,
+    lldb-soname.diff,mips-fpxx-enable.diff,removeduplicatedeclaration.diff}:
+    Refreshed.
+  * debian/patches/{silent-gold-utils,kfreebsd-support}.diff: Updated.
+
+ -- Kai Wasserbäch <curan@debian.org>  Wed, 02 Nov 2016 18:12:12 +0100
+
 llvm-toolchain-snapshot (1:4.0~svn282142-1~exp1) experimental; urgency=medium
 
   * The libstdc++-6-dev & libobjc-6-dev are only install with clang-X.Y

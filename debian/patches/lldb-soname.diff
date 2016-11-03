@@ -27,7 +27,7 @@
    )
  
  if (NOT CMAKE_SYSTEM_NAME MATCHES "Windows")
-@@ -122,11 +127,6 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Windows"
+@@ -119,11 +124,6 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Windows"
    if (MSVC AND NOT LLDB_DISABLE_PYTHON)
      target_link_libraries(liblldb PRIVATE ${PYTHON_LIBRARY})
    endif()

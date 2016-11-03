@@ -1,19 +1,10 @@
-Index: llvm-toolchain-snapshot_3.9~svn274438/tools/llvm-shlib/CMakeLists.txt
-===================================================================
---- llvm-toolchain-snapshot_3.9~svn274438.orig/tools/llvm-shlib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_3.9~svn274438/tools/llvm-shlib/CMakeLists.txt
-@@ -37,6 +37,7 @@ if(LLVM_DYLIB_EXPORTED_SYMBOL_FILE)
- endif()
- 
- add_llvm_library(LLVM SHARED DISABLE_LLVM_LINK_LLVM_DYLIB SONAME ${SOURCES})
-+set_property(TARGET LLVM PROPERTY VERSION "1") # Append .1 to SONAME
- 
- list(REMOVE_DUPLICATES LIB_NAMES)
- if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux") # FIXME: It should be "GNU ld for elf"
-Index: llvm-toolchain-snapshot_3.9~svn274438/clang/tools/libclang/CMakeLists.txt
-===================================================================
---- llvm-toolchain-snapshot_3.9~svn274438.orig/clang/tools/libclang/CMakeLists.txt
-+++ llvm-toolchain-snapshot_3.9~svn274438/clang/tools/libclang/CMakeLists.txt
+---
+ clang/tools/libclang/CMakeLists.txt |    2 +-
+ tools/llvm-shlib/CMakeLists.txt     |    1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+--- a/clang/tools/libclang/CMakeLists.txt
++++ b/clang/tools/libclang/CMakeLists.txt
 @@ -83,7 +83,7 @@ else()
    set(output_name "clang")
  endif()
@@ -23,3 +14,13 @@ Index: llvm-toolchain-snapshot_3.9~svn274438/clang/tools/libclang/CMakeLists.txt
    OUTPUT_NAME ${output_name}
    ${SOURCES}
    DEPENDS clang-headers
+--- a/tools/llvm-shlib/CMakeLists.txt
++++ b/tools/llvm-shlib/CMakeLists.txt
+@@ -35,6 +35,7 @@ if(LLVM_DYLIB_EXPORTED_SYMBOL_FILE)
+ endif()
+ 
+ add_llvm_library(LLVM SHARED DISABLE_LLVM_LINK_LLVM_DYLIB SONAME ${SOURCES})
++set_property(TARGET LLVM PROPERTY VERSION "1") # Append .1 to SONAME
+ 
+ list(REMOVE_DUPLICATES LIB_NAMES)
+ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux" OR MINGW) # FIXME: It should be "GNU ld for elf"

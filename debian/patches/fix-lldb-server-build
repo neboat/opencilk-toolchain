@@ -5,7 +5,7 @@
 
 --- a/cmake/modules/AddLLVM.cmake
 +++ b/cmake/modules/AddLLVM.cmake
-@@ -498,7 +498,7 @@ function(llvm_add_library name)
+@@ -501,7 +501,7 @@ function(llvm_add_library name)
      # On DLL platforms symbols are imported from the tool by linking against it.
      set(llvm_libs ${ARG_PLUGIN_TOOL})
    elseif (DEFINED LLVM_LINK_COMPONENTS OR DEFINED ARG_LINK_COMPONENTS)
