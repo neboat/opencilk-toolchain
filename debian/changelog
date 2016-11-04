@@ -1,8 +1,6 @@
-llvm-toolchain-3.9 (1:3.9-5) UNRELEASED; urgency=medium
+llvmy-toolchain-3.9 (1:3.9-5) UNRELEASED; urgency=medium
 
-  [ Gianfranco Costamagna ]
-  * d/p/no-neon-on-armhf.patch: avoid defaulting to NEON instructions
-    for armhf (Closes: #842143).
+  * armhf (Closes: #842143).
 
   [ Sylvestre Ledru ]
   * d/p/0011-SimplifyCFG-Hoisting-invalidates-metadata.patch: Also apply bug 29163
