@@ -1,0 +1,15 @@
+Description: Patch suggested from upstream, to build without a default NEON for arm*
+
+Bug-Debian: https://bugs.debian.org/842142
+
+--- llvm-toolchain-3.8-3.8.1.orig/clang/lib/Driver/Tools.cpp
++++ llvm-toolchain-3.8-3.8.1/clang/lib/Driver/Tools.cpp
+@@ -8437,7 +8437,7 @@ void gnutools::Assembler::ConstructJob(C
+     const llvm::Triple &Triple2 = getToolChain().getTriple();
+     switch (Triple2.getSubArch()) {
+     case llvm::Triple::ARMSubArch_v7:
+-      CmdArgs.push_back("-mfpu=neon");
++      CmdArgs.push_back("-mfpu=vfp");
+       break;
+     case llvm::Triple::ARMSubArch_v8:
+       CmdArgs.push_back("-mfpu=crypto-neon-fp-armv8");
