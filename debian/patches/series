@@ -51,4 +51,3 @@ lldb-arm64.diff
 clang-tidy-run-bin.diff
 
 silent-llvm-symbolizer.diff
-no-neon-on-armhf.patch
