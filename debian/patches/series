@@ -40,3 +40,4 @@ bug-30342.diff
 fix-scan-view-path.diff
 
 no-neon-on-armhf.patch
+0011-SimplifyCFG-Hoisting-invalidates-metadata.patch
