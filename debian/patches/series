@@ -38,3 +38,5 @@ clang-tidy-run-bin.diff
 drop-wrong-hack-arm64.patch
 bug-30342.diff
 fix-scan-view-path.diff
+
+no-neon-on-armhf.patch
