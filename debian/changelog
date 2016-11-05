@@ -1,4 +1,4 @@
-llvmy-toolchain-3.9 (1:3.9-5) UNRELEASED; urgency=medium
+llvm-toolchain-3.9 (1:3.9-5) UNRELEASED; urgency=medium
 
   * d/p/0011-SimplifyCFG-Hoisting-invalidates-metadata.patch: Also apply bug 29163
     to fix some issues in rust (Closes: #842956)
