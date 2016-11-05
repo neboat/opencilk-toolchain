@@ -39,3 +39,6 @@ drop-wrong-hack-arm64.patch
 bug-30342.diff
 fix-scan-view-path.diff
 0011-SimplifyCFG-Hoisting-invalidates-metadata.patch
+clang-default-to-i686-on-32bit-x86-targets.patch
+clang-fix-cmpxchg8-detection-on-i386.patch
+lldb-addversion-suffix-to-llvm-server-exec.patch

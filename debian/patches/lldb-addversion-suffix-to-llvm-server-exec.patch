@@ -1,0 +1,45 @@
+lldb-server exec users always /usr/bin/lldb-server. Server is required
+for any debugging with lldb which makes it unusable unless default version
+package has been installed. Small changes to code and debian/rules allows
+a workaround for lldb-server start up.
+
+To use this one needs to add cmake defination during configure. eg
+-DDEBIAN_VERSION_SUFFIX=-$(LLVM_VERSION)
+
+Better implementation would be to use /usr/share/llvm-$(VERSION)/bin but 
+that change seems to require a big change to the path handling code
+which could then break something else.
+
+This probably should have upstream bug but I couldn't find any existing report.
+
+--- llvm-toolchain-3.9-3.9.orig/CMakeLists.txt
++++ llvm-toolchain-3.9-3.9/CMakeLists.txt
+@@ -2,6 +2,10 @@
+ 
+ cmake_minimum_required(VERSION 3.4.3)
+ 
++set(DEBIAN_VERSION_SUFFIX "" CACHE STRING "Versioned program suffix that is required to exec correct subtool.")
++
++add_definitions( -DDEBIAN_VERSION_SUFFIX=\"${DEBIAN_VERSION_SUFFIX}\")
++
+ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+   message(STATUS "No build type selected, default to Debug")
+   set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Build type (default Debug)")
+--- llvm-toolchain-3.9-3.9.orig/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
++++ llvm-toolchain-3.9-3.9/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+@@ -37,10 +37,14 @@
+ // Project includes
+ #include "ProcessGDBRemoteLog.h"
+ 
++#ifndef DEBIAN_VERSION_SUFFIX
++#define DEBIAN_VERSION_SUFFIX ""
++#endif
++
+ #if defined(__APPLE__)
+ # define DEBUGSERVER_BASENAME    "debugserver"
+ #else
+-# define DEBUGSERVER_BASENAME    "lldb-server"
++# define DEBUGSERVER_BASENAME    "lldb-server" DEBIAN_VERSION_SUFFIX
+ #endif
+ 
+ #if defined (HAVE_LIBCOMPRESSION)

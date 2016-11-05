@@ -1,12 +1,20 @@
 llvmy-toolchain-3.9 (1:3.9-5) UNRELEASED; urgency=medium
 
-  * armhf (Closes: #842143).
-
-  [ Sylvestre Ledru ]
   * d/p/0011-SimplifyCFG-Hoisting-invalidates-metadata.patch: Also apply bug 29163
     to fix some issues in rust (Closes: #842956)
     Many thanks to Ximin Luo for the investigation
 
+  [ Pauli ]
+  * d/p/clang-default-to-i686-on-32bit-x86-targets.patch:
+    Set i386 default target CPU to be i686 (same as gcc)
+    (Closes: #812803)
+  * d/p/clang-fix-cmpxchg8-detection-on-i386.patch:
+    libcxx atomic tests for old i386 fail with wrong Atomic inline width.
+    Needed for libc++
+    (See https://llvm.org/bugs/show_bug.cgi?id=19355)
+  * d/p lldb-addversion-suffix-to-llvm-server-exec.patch:
+    Fix the lldb-server call in some cases
+  
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 04 Nov 2016 17:18:07 +0100
 
 llvm-toolchain-3.9 (1:3.9-4) unstable; urgency=medium

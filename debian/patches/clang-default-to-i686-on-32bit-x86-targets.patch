@@ -1,0 +1,15 @@
+Set i386 default target CPU to be i686 (same as gcc)
+
+Closes: #812803
+Index: llvm-toolchain-3.9-3.9/clang/lib/Driver/Tools.cpp
+===================================================================
+--- llvm-toolchain-3.9-3.9.orig/clang/lib/Driver/Tools.cpp
++++ llvm-toolchain-3.9-3.9/clang/lib/Driver/Tools.cpp
+@@ -1898,6 +1898,7 @@ static const char *getX86TargetCPU(const
+   case llvm::Triple::Haiku:
+     return "i586";
+   case llvm::Triple::Bitrig:
++  case llvm::Triple::Linux:
+     return "i686";
+   default:
+     // Fallback to p4.

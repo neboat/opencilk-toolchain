@@ -1,0 +1,67 @@
+libcxx atomic tests for old i386 fail with wrong Atomic inline width.
+cmpxchg8b instruction is required for 8 byte atomics that clang was
+assuming.
+
+Too bad _GCC_ATOMIC_LLONG_LOCK_FREE 2 isn't supported even with this change
+because llvm doesn't support unaligned atomic compare and exchange operation.
+Fallback calls to libatomic.so should handle long long lock free but clang
+can't tell program if libatomic is always lock free.
+
+Related bug: https://llvm.org/bugs/show_bug.cgi?id=19355
+
+Index: llvm-toolchain-3.9-3.9/clang/lib/Basic/Targets.cpp
+===================================================================
+--- llvm-toolchain-3.9-3.9.orig/clang/lib/Basic/Targets.cpp
++++ llvm-toolchain-3.9-3.9/clang/lib/Basic/Targets.cpp
+@@ -2609,7 +2609,10 @@ class X86TargetInfo : public TargetInfo
+     FP_SSE,
+     FP_387
+   } FPMath = FP_Default;
+-
++protected:
++  bool isCmpXChg8Supported() const {
++    return CPU >= CK_i586;
++  }
+ public:
+   X86TargetInfo(const llvm::Triple &Triple, const TargetOptions &)
+       : TargetInfo(Triple) {
+@@ -2701,6 +2704,8 @@ public:
+     // acceptable.
+     // FIXME: This results in terrible diagnostics. Clang just says the CPU is
+     // invalid without explaining *why*.
++    if (!isCmpXChg8Supported())
++        MaxAtomicPromoteWidth = MaxAtomicInlineWidth = 32;
+     switch (CPU) {
+     case CK_Generic:
+       // No processor selected!
+@@ -3730,7 +3735,7 @@ void X86TargetInfo::getTargetDefines(con
+     Builder.defineMacro("__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2");
+     Builder.defineMacro("__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4");
+   }
+-  if (CPU >= CK_i586)
++  if (isCmpXChg8Supported())
+     Builder.defineMacro("__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8");
+ }
+ 
+@@ -4009,8 +4014,6 @@ public:
+                              (1 << TargetInfo::LongDouble));
+ 
+     // x86-32 has atomics up to 8 bytes
+-    // FIXME: Check that we actually have cmpxchg8b before setting
+-    // MaxAtomicInlineWidth. (cmpxchg8b is an i586 instruction.)
+     MaxAtomicPromoteWidth = MaxAtomicInlineWidth = 64;
+   }
+   BuiltinVaListKind getBuiltinVaListKind() const override {
+Index: llvm-toolchain-3.9-3.9/clang/test/Sema/atomic-ops.c
+===================================================================
+--- llvm-toolchain-3.9-3.9.orig/clang/test/Sema/atomic-ops.c
++++ llvm-toolchain-3.9-3.9/clang/test/Sema/atomic-ops.c
+@@ -14,7 +14,7 @@ _Static_assert(__GCC_ATOMIC_WCHAR_T_LOCK
+ _Static_assert(__GCC_ATOMIC_SHORT_LOCK_FREE == 2, "");
+ _Static_assert(__GCC_ATOMIC_INT_LOCK_FREE == 2, "");
+ _Static_assert(__GCC_ATOMIC_LONG_LOCK_FREE == 2, "");
+-#ifdef __i386__
++#if defined(__i386__)
+ _Static_assert(__GCC_ATOMIC_LLONG_LOCK_FREE == 1, "");
+ #else
+ _Static_assert(__GCC_ATOMIC_LLONG_LOCK_FREE == 2, "");
