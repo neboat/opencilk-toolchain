@@ -445,7 +445,8 @@ endif
 
 override_dh_shlibdeps:
 #	cd $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ && ln -s libLLVM-$(LLVM_VERSION).so.1 libLLVM-$(LLVM_VERSION).so
-	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_shlibdeps
+# Ignore asan libraries. They would trigger dependencies to multiarch libraries
+	dh_shlibdeps -l$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ -Xlibclang_rt.asan -Xlibclang_rt.asan
 
 override_dh_installman:
 	dh_installman

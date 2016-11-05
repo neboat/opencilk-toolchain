@@ -8,7 +8,8 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
     lsb-release, patchutils, diffstat, xz-utils, python-dev,
     libedit-dev, swig, python-six, python-sphinx, ocaml-nox, binutils-dev,
     libjsoncpp-dev,
-    lcov, procps, help2man, dh-ocaml, zlib1g-dev
+    lcov, procps, help2man, dh-ocaml, zlib1g-dev,
+    g++-multilib
 Build-Conflicts: oprofile, ocaml, libllvm-3.4-ocaml-dev, libllvm-3.5-ocaml-dev,
  libllvm-3.8-ocaml-dev
 Standards-Version: 3.9.8

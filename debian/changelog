@@ -1,8 +1,10 @@
-llvm-toolchain-3.8 (1:3.8.1-14) UNRELEASED; urgency=medium
+llvm-toolchain-3.8 (1:3.8.1-14) unstable; urgency=medium
 
-  * (Closes: #842142).
+  * libclang-common-3.9-dev: missing multilib binaries for the sanatizer
+    libraries (Closes: #841923)
+    Many thanks to Norbert Lange for the changes
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 04 Nov 2016 12:16:22 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 05 Nov 2016 14:31:41 +0100
 
 llvm-toolchain-3.8 (1:3.8.1-13) unstable; urgency=medium
 
