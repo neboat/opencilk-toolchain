@@ -1,3 +1,11 @@
+llvm-toolchain-3.8 (1:3.8.1-15) unstable; urgency=medium
+
+  * Limit build-deps on g++-multilib where it is available:
+    amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390
+    s390x sparc sparc64 x32
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 06 Nov 2016 15:44:34 +0100
+
 llvm-toolchain-3.8 (1:3.8.1-14) unstable; urgency=medium
 
   * libclang-common-3.8-dev: missing multilib binaries for the sanitizer
