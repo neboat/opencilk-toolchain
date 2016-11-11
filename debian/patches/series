@@ -35,16 +35,11 @@ lldb-link-atomic-cmake.patch
 disable-llvm-symbolizer-test.diff
 kfreebsd-support.diff
 clang-tidy-run-bin.diff
-<<<<<<< .working
 drop-wrong-hack-arm64.patch
 bug-30342.diff
 fix-scan-view-path.diff
 0011-SimplifyCFG-Hoisting-invalidates-metadata.patch
 clang-fix-cmpxchg8-detection-on-i386.patch
 lldb-addversion-suffix-to-llvm-server-exec.patch
-#upstream-fix-asan-initialization.diff
-upstream-msan-prevent-initialization-failure.diff
-upstream-asan-msan-fix-reallocation-logic.diff
-silent-llvm-symbolizer.diff
 upstream-msan-prevent-initialization-failure.diff
 upstream-asan-msan-fix-reallocation-logic.diff
