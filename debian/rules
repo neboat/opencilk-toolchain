@@ -498,6 +498,9 @@ endif
 # Clang tests (CMake)
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-clang || true
 
+# Sanitizer
+	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-sanitize || true
+
 # LLDB tests (CMake)
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
