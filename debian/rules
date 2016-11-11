@@ -458,7 +458,7 @@ ifeq (${LLD_ENABLE},yes)
 endif
 
 # Sanitizer
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-sanitize || true
+	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-sanitizer || true
 
 # LLDB tests (CMake)
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
