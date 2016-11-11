@@ -51,3 +51,6 @@ lldb-arm64.diff
 clang-tidy-run-bin.diff
 
 silent-llvm-symbolizer.diff
+upstream-asan-msan-fix-reallocation-logic.diff
+upstream-fix-asan-initialization.diff
+upstream-msan-prevent-initialization-failure.diff
