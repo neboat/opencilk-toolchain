@@ -1,0 +1,54 @@
+From c8a185bc3169b0a6d2cd8beedc77033461830037 Mon Sep 17 00:00:00 2001
+From: Maxim Ostapenko <m.ostapenko@partner.samsung.com>
+Date: Mon, 26 Sep 2016 08:11:21 +0000
+Subject: [PATCH] [asan, msan] Fix reallocation logic when
+ IsInDlsymAllocPool(ptr) is true.
+
+git-svn-id: https://llvm.org/svn/llvm-project/compiler-rt/trunk@282389 91177308-0d34-0410-b5e6-96231b3b80d8
+---
+ lib/asan/asan_malloc_linux.cc | 8 +++++---
+ lib/msan/msan_interceptors.cc | 8 +++++++-
+ 2 files changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/compiler-rt/lib/asan/asan_malloc_linux.cc b/compiler-rt/lib/asan/asan_malloc_linux.cc
+index d7a22d6..a78767c 100644
+--- a/compiler-rt/lib/asan/asan_malloc_linux.cc
++++ b/compiler-rt/lib/asan/asan_malloc_linux.cc
+@@ -79,10 +79,12 @@ INTERCEPTOR(void*, realloc, void *ptr, uptr size) {
+     uptr offset = (uptr)ptr - (uptr)alloc_memory_for_dlsym;
+     uptr copy_size = Min(size, kDlsymAllocPoolSize - offset);
+     void *new_ptr;
+-    if (UNLIKELY(!asan_inited))
++    if (UNLIKELY(!asan_inited)) {
+       new_ptr = AllocateFromLocalPool(size);
+-    else
+-      new_ptr = asan_malloc(size, &stack);
++    } else {
++      copy_size = size;
++      new_ptr = asan_malloc(copy_size, &stack);
++    }
+     internal_memcpy(new_ptr, ptr, copy_size);
+     return new_ptr;
+   }
+diff --git a/compiler-rt/lib/msan/msan_interceptors.cc b/compiler-rt/lib/msan/msan_interceptors.cc
+index 2aeaef4..93b93ae 100644
+--- a/compiler-rt/lib/msan/msan_interceptors.cc
++++ b/compiler-rt/lib/msan/msan_interceptors.cc
+@@ -935,7 +935,13 @@ INTERCEPTOR(void *, realloc, void *ptr, SIZE_T size) {
+   if (UNLIKELY(IsInDlsymAllocPool(ptr))) {
+     uptr offset = (uptr)ptr - (uptr)alloc_memory_for_dlsym;
+     uptr copy_size = Min(size, kDlsymAllocPoolSize - offset);
+-    void *new_ptr = AllocateFromLocalPool(size);
++    void *new_ptr;
++    if (UNLIKELY(!msan_inited)) {
++      new_ptr = AllocateFromLocalPool(copy_size);
++    } else {
++      copy_size = size;
++      new_ptr = MsanReallocate(&stack, ptr, copy_size, sizeof(u64), false);
++    }
+     internal_memcpy(new_ptr, ptr, copy_size);
+     return new_ptr;
+   }
+-- 
+2.10.2
+
