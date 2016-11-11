@@ -49,8 +49,7 @@ asan-glibc-2.24.diff
 lldb-dont-assume-64bit-systems-are-all-x86-64.patch
 lldb-arm64.diff
 clang-tidy-run-bin.diff
-
 silent-llvm-symbolizer.diff
-upstream-asan-msan-fix-reallocation-logic.diff
-upstream-fix-asan-initialization.diff
 upstream-msan-prevent-initialization-failure.diff
+upstream-asan-msan-fix-reallocation-logic.diff
+
