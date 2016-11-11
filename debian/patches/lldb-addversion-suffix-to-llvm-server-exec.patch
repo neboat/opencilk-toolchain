@@ -1,0 +1,49 @@
+lldb-server exec users always /usr/bin/lldb-server. Server is required
+for any debugging with lldb which makes it unusable unless default version
+package has been installed. Small changes to code and debian/rules allows
+a workaround for lldb-server start up.
+
+To use this one needs to add cmake defination during configure. eg
+-DDEBIAN_VERSION_SUFFIX=-$(LLVM_VERSION)
+
+Better implementation would be to use /usr/share/llvm-$(VERSION)/bin but 
+that change seems to require a big change to the path handling code
+which could then break something else.
+
+This probably should have upstream bug but I couldn't find any existing report.
+
+Index: llvm-toolchain-snapshot_4.0~svn286225/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn286225.orig/CMakeLists.txt
++++ llvm-toolchain-snapshot_4.0~svn286225/CMakeLists.txt
+@@ -49,6 +49,10 @@ project(LLVM
+   ${cmake_3_0_LANGUAGES}
+   C CXX ASM)
+ 
++set(DEBIAN_VERSION_SUFFIX "" CACHE STRING "Versioned program suffix that is required to exec correct subtool.")
++
++add_definitions( -DDEBIAN_VERSION_SUFFIX=\"${DEBIAN_VERSION_SUFFIX}\")
++
+ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+   message(STATUS "No build type selected, default to Debug")
+   set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Build type (default Debug)" FORCE)
+Index: llvm-toolchain-snapshot_4.0~svn286225/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn286225.orig/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
++++ llvm-toolchain-snapshot_4.0~svn286225/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+@@ -36,10 +36,14 @@
+ // Project includes
+ #include "ProcessGDBRemoteLog.h"
+ 
++#ifndef DEBIAN_VERSION_SUFFIX
++#define DEBIAN_VERSION_SUFFIX ""
++#endif
++
+ #if defined(__APPLE__)
+ #define DEBUGSERVER_BASENAME "debugserver"
+ #else
+-#define DEBUGSERVER_BASENAME "lldb-server"
++# define DEBUGSERVER_BASENAME    "lldb-server" DEBIAN_VERSION_SUFFIX
+ #endif
+ 
+ #if defined(HAVE_LIBCOMPRESSION)

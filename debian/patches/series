@@ -20,7 +20,7 @@ do-not-fail-on-unexpected-pass.diff
 silent-more-tests.diff
 disable-display-PASS-UNSUPPORTED-XFAIL.diff
 fix-llvm-config-obj-src-root.patch
-0044-soname.diff 
+0044-soname.diff
 lldb-soname.diff
 lldb-libname.diff
 hurd-EIEIO-undef.diff
@@ -37,3 +37,9 @@ disable-llvm-symbolizer-test.diff
 kfreebsd-support.diff
 fix-lldb-server-build
 clang-tidy-run-bin.diff
+#bug-30342.diff
+fix-scan-view-path.diff
+#0011-SimplifyCFG-Hoisting-invalidates-metadata.patch
+clang-fix-cmpxchg8-detection-on-i386.patch
+lldb-addversion-suffix-to-llvm-server-exec.patch
+
