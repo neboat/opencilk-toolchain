@@ -42,4 +42,3 @@ fix-scan-view-path.diff
 #0011-SimplifyCFG-Hoisting-invalidates-metadata.patch
 clang-fix-cmpxchg8-detection-on-i386.patch
 lldb-addversion-suffix-to-llvm-server-exec.patch
-
