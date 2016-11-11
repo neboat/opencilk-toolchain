@@ -1,8 +1,8 @@
-Index: llvm-toolchain-3.8-3.8.1/projects/compiler-rt/test/lit.common.cfg
+Index: llvm-toolchain-3.9-3.9~svn275918/compiler-rt/test/lit.common.cfg
 ===================================================================
---- llvm-toolchain-3.8-3.8.1.orig/projects/compiler-rt/test/lit.common.cfg
-+++ llvm-toolchain-3.8-3.8.1/projects/compiler-rt/test/lit.common.cfg
-@@ -120,7 +120,7 @@ def is_linux_lto_supported():
+--- llvm-toolchain-3.9-3.9~svn275918.orig/compiler-rt/test/lit.common.cfg
++++ llvm-toolchain-3.9-3.9~svn275918/compiler-rt/test/lit.common.cfg
+@@ -148,7 +148,7 @@ def is_linux_lto_supported():
    if not os.path.exists(os.path.join(config.llvm_shlib_dir, 'LLVMgold.so')):
      return False
  
