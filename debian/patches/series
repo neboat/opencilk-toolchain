@@ -43,3 +43,4 @@ clang-fix-cmpxchg8-detection-on-i386.patch
 lldb-addversion-suffix-to-llvm-server-exec.patch
 upstream-msan-prevent-initialization-failure.diff
 upstream-asan-msan-fix-reallocation-logic.diff
+lit-force-lang.diff
