@@ -53,3 +53,4 @@ silent-llvm-symbolizer.diff
 upstream-msan-prevent-initialization-failure.diff
 upstream-asan-msan-fix-reallocation-logic.diff
 lit-force-lang.diff
+clang-arm-default-vfp3-on-armv7a.patch

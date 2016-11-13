@@ -1,0 +1,13 @@
+Index: llvm-toolchain-3.8-3.8.1/include/llvm/Support/ARMTargetParser.def
+===================================================================
+--- llvm-toolchain-3.8-3.8.1.orig/include/llvm/Support/ARMTargetParser.def
++++ llvm-toolchain-3.8-3.8.1/include/llvm/Support/ARMTargetParser.def
+@@ -75,7 +75,7 @@ ARM_ARCH("armv6kz", AK_ARMV6KZ, "6KZ", "
+ ARM_ARCH("armv6-m", AK_ARMV6M, "6-M", "v6m", ARMBuildAttrs::CPUArch::v6_M,
+           FK_NONE, AEK_NONE)
+ ARM_ARCH("armv7-a", AK_ARMV7A, "7-A", "v7", ARMBuildAttrs::CPUArch::v7,
+-          FK_NEON, AEK_DSP)
++          FK_VFPV3 /* Hard float */, AEK_DSP)
+ ARM_ARCH("armv7-r", AK_ARMV7R, "7-R", "v7r", ARMBuildAttrs::CPUArch::v7,
+           FK_NONE, (AEK_HWDIV | AEK_DSP))
+ ARM_ARCH("armv7-m", AK_ARMV7M, "7-M", "v7m", ARMBuildAttrs::CPUArch::v7,
