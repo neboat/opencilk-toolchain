@@ -35,7 +35,7 @@ disable-source-interleave.diff
 silent-gold-utils.diff
 disable-llvm-symbolizer-test.diff
 kfreebsd-support.diff
-fix-lldb-server-build
+#fix-lldb-server-build
 clang-tidy-run-bin.diff
 #bug-30342.diff
 fix-scan-view-path.diff
