@@ -37,7 +37,6 @@ kfreebsd-support.diff
 clang-tidy-run-bin.diff
 drop-wrong-hack-arm64.patch
 fix-scan-view-path.diff
-0011-SimplifyCFG-Hoisting-invalidates-metadata.patch
 clang-fix-cmpxchg8-detection-on-i386.patch
 lldb-addversion-suffix-to-llvm-server-exec.patch
 upstream-msan-prevent-initialization-failure.diff
