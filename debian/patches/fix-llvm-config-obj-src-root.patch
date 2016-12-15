@@ -2,9 +2,11 @@
  tools/llvm-config/llvm-config.cpp |    4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
---- a/tools/llvm-config/llvm-config.cpp
-+++ b/tools/llvm-config/llvm-config.cpp
-@@ -538,9 +538,9 @@ int main(int argc, char **argv) {
+Index: llvm-toolchain-snapshot_4.0~svn289826/tools/llvm-config/llvm-config.cpp
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn289826.orig/tools/llvm-config/llvm-config.cpp
++++ llvm-toolchain-snapshot_4.0~svn289826/tools/llvm-config/llvm-config.cpp
+@@ -547,9 +547,9 @@ int main(int argc, char **argv) {
        } else if (Arg == "--shared-mode") {
          PrintSharedMode = true;
        } else if (Arg == "--obj-root") {
@@ -13,6 +15,6 @@
        } else if (Arg == "--src-root") {
 -        OS << LLVM_SRC_ROOT << '\n';
 +        OS << ActivePrefix << "/build/" << '\n';
-       } else if (Arg == "--link-shared") {
-         LinkMode = LinkModeShared;
-       } else if (Arg == "--link-static") {
+       } else if (Arg == "--ignore-libllvm") {
+         LinkDyLib = false;
+         LinkMode = BuiltSharedLibs ? LinkModeShared : LinkModeAuto;
