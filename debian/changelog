@@ -2,6 +2,10 @@ llvm-toolchain-3.8 (1:3.8.1-17) unstable; urgency=medium
 
   * Disable NEON generation on armhf (Closes: #841474, #842142)
     Thanks to Pauli for the fix
+  * Remove the info section from the generated manpages (Closes: #846269)
+  * Fix the path to lldb-server (to lldb-server-3.8) (Closes: #846638)
+  * Also install python-lldb-3.8 when installing lldb-3.8 (Closes: #846612)
+  * Disable libedit usage in lldb because of garbage (Closes: #846616)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Nov 2016 13:38:01 +0100
 

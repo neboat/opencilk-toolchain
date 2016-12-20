@@ -130,7 +130,10 @@ LLDB_DISABLE_ARCHS := hurd-i386 ia64 ppc64el powerpc s390x sparc64 ppc64 mips64e
 # hurd has threading issues
 ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 # Disable LLDB for this arch.
-		LLDB_ENABLE=no
+	LLDB_ENABLE=no
+else
+# See https://llvm.org/bugs/show_bug.cgi?id=28898
+	CMAKE_EXTRA += -DLLDB_DISABLE_LIBEDIT=ON
 endif
 
 
@@ -297,13 +300,13 @@ build_doc:
 		cd $$d && rm -f underscore.js && ln -s /usr/share/javascript/underscore/underscore.js; \
 	done
 
-	help2man --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1
-	help2man --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1
+	help2man --version-string=$(LLVM_VERSION) --no-info clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1
+	help2man --version-string=$(LLVM_VERSION) --no-info clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1
 
 	CMDS="llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb lldb-mi clang-format clang clang-tblgen clang-check clang-tidy clang-apply-replacements git-clang-format pp-trace sancov lli"; \
 	for f in $$CMDS; do \
 		echo "Generating manpage of $$f"; \
-		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-discard-stderr --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/$(BUILD_DIR)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
+		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-discard-stderr --version-string=$(LLVM_VERSION) --no-info $(TARGET_BUILD)/$(BUILD_DIR)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
 	done
 
 override_dh_auto_install:
