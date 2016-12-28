@@ -77,8 +77,10 @@ checkout_sources() {
     if test -d $DEST; then
         cd $DEST
         if test -n "$BRANCH"; then
+            svn cleanup
             svn up
         else
+            svn cleanup
             svn up -r $REVISION
         fi
         cd ..
