@@ -3,6 +3,7 @@ llvm-toolchain-snapshot (1:4.0~svn288822-1~exp1) experimental; urgency=medium
   * New snapshot release
   * d/p/kfreebsd-support.diff removed (applied upstream)
   * debian/orig-tar.sh: less verbose
+  * Ship new binary in clang-X.Y: clang-import-test
   * New symbols in libclang1:
     - clang_EvalResult_getAsLongLong
     - clang_EvalResult_getAsLongLong
