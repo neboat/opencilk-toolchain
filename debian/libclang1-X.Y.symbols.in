@@ -70,8 +70,11 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_EvalResult_dispose@Base 3.9
  clang_EvalResult_getAsDouble@Base 3.9
  clang_EvalResult_getAsInt@Base 3.9
+ clang_EvalResult_getAsLongLong@Base 4.0
  clang_EvalResult_getAsStr@Base 3.9
+ clang_EvalResult_getAsUnsigned@Base 4.0
  clang_EvalResult_getKind@Base 3.9
+ clang_EvalResult_isUnsignedInt@Base 4.0
  clang_File_isEqual@Base 3.6
  clang_FullComment_getAsHTML@Base 3.2
  clang_FullComment_getAsXML@Base 3.2

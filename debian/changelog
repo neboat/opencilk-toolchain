@@ -3,12 +3,17 @@ llvm-toolchain-snapshot (1:4.0~svn288822-1~exp1) experimental; urgency=medium
   * New snapshot release
   * d/p/kfreebsd-support.diff removed (applied upstream)
   * debian/orig-tar.sh: less verbose
+  * New symbols in libclang1:
+    - clang_EvalResult_getAsLongLong
+    - clang_EvalResult_getAsLongLong
+    - clang_EvalResult_isUnsignedInt
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 06 Dec 2016 17:54:39 +0100
 
 llvm-toolchain-snapshot (1:4.0~svn286225-1) unstable; urgency=medium
 
   * New snapshot release
+  * Remove the info section from the generated manpages (Closes: #846269)
 
   [ Kai Wasserbäch ]
   * debian/patches/{0003-Debian-version-info-and-bugreport.patch,
