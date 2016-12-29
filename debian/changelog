@@ -10,6 +10,7 @@ llvm-toolchain-snapshot (1:4.0~svn288822-1~exp1) experimental; urgency=medium
     - clang_EvalResult_getAsLongLong
     - clang_EvalResult_getAsLongLong
     - clang_EvalResult_isUnsignedInt
+  * Fix a regression in the test run for the code coverage
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 06 Dec 2016 17:54:39 +0100
 

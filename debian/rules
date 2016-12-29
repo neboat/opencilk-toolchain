@@ -83,17 +83,18 @@ ifeq (,$(filter-out $(DEB_HOST_ARCH), powerpc s390x))
   POLLY_ENABLE=no
 endif
 
+RUN_TEST=yes
+ifeq (,$(filter nocheck, $(DEB_BUILD_OPTIONS)))
+	RUN_TEST=no
+endif
+
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 # enable the code coverage
 	CODECOVERAGE=yes
 # for -fvisibility-inlines-hidden see http://lists.cs.uiuc.edu/pipermail/llvm-commits/Week-of-Mon-20130729/183016.html
 	CXXFLAGS_EXTRA += -fprofile-arcs -ftest-coverage
 	LDFLAGS_EXTRA += -coverage -lgcov
-endif
-
-RUN_TEST=yes
-ifeq (,$(filter nocheck, $(DEB_BUILD_OPTIONS)))
-	RUN_TEST=no
+	RUN_TEST=yes
 endif
 
 ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
