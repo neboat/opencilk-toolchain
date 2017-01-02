@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:4.0~svn288822-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:4.0~svn290810-1) unstable; urgency=medium
 
   * New snapshot release
   * d/p/kfreebsd-support.diff removed (applied upstream)
@@ -13,7 +13,7 @@ llvm-toolchain-snapshot (1:4.0~svn288822-1~exp1) experimental; urgency=medium
   * Fix a regression in the test run for the code coverage
   * Silent ThinLTO/X86/autoupgrade.ll, fails with code coverage (and maybe others)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 06 Dec 2016 17:54:39 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 02 Jan 2017 13:51:06 +0100
 
 llvm-toolchain-snapshot (1:4.0~svn286225-1) unstable; urgency=medium
 

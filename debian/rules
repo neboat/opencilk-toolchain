@@ -136,7 +136,7 @@ ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 		LLDB_ENABLE=no
 endif
 
-LLD_ENABLE=NO
+LLD_ENABLE=no
 
 %:
 	dh $@ --with ocaml
