@@ -394,56 +394,56 @@ Description: Modular compiler and toolchain technologies, examples
 
 # ------------- lld -------------
 
-# Package: lld-4.0
-# Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
-# # ia64 mips mipsel hurd powerpc ppc64el have been removed
-# Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm4.0 (= ${binary:Version}), llvm-4.0-dev
-# Pre-Depends: ${misc:Pre-Depends}
-# Description: LLVM-based linker
-#  LLD is a new, high-performance linker. It is built as a set of reusable
-#  components which highly leverage existing libraries in the larger LLVM
-#  Project.
+Package: lld-4.0
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
+# ia64 mips mipsel hurd powerpc ppc64el have been removed
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm4.0 (= ${binary:Version}), llvm-4.0-dev
+Pre-Depends: ${misc:Pre-Depends}
+Description: LLVM-based linker
+ LLD is a new, high-performance linker. It is built as a set of reusable
+ components which highly leverage existing libraries in the larger LLVM
+ Project.
 
-# Package: liblld-4.0
-# Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
-# # ia64 mips mipsel hurd powerpc ppc64el have been removed
-# Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm4.0 (= ${binary:Version})
-# Pre-Depends: ${misc:Pre-Depends}
-# Section: libs
-# Description: LLVM-based linker, library
-#  LLD is a new, high-performance linker. It is built as a set of reusable
-#  components which highly leverage existing libraries in the larger LLVM
-#  Project.
-#  .
-#  This package contains the LLD runtime library.
+Package: liblld-4.0
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
+# ia64 mips mipsel hurd powerpc ppc64el have been removed
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm4.0 (= ${binary:Version})
+Pre-Depends: ${misc:Pre-Depends}
+Section: libs
+Description: LLVM-based linker, library
+ LLD is a new, high-performance linker. It is built as a set of reusable
+ components which highly leverage existing libraries in the larger LLVM
+ Project.
+ .
+ This package contains the LLD runtime library.
 
-# Package: liblld-4.0-dbg
-# Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
-# # ia64 mips mipsel hurd ppc64el alpha s390x powerpc have been removed
-# Depends: ${shlibs:Depends}, ${misc:Depends}, liblld-4.0 (= ${binary:Version})
-# Pre-Depends: ${misc:Pre-Depends}
-# Section: debug
-# Priority: extra
-# Description: LLVM-based linker, debugging libraries
-#  LLD is a new, high-performance linker. It is built as a set of reusable
-#  components which highly leverage existing libraries in the larger LLVM
-#  Project.
-#  .
-#  This package contains the LLD runtime library debug symbols.
+Package: liblld-4.0-dbg
+Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
+# ia64 mips mipsel hurd ppc64el alpha s390x powerpc have been removed
+Depends: ${shlibs:Depends}, ${misc:Depends}, liblld-4.0 (= ${binary:Version})
+Pre-Depends: ${misc:Pre-Depends}
+Section: debug
+Priority: extra
+Description: LLVM-based linker, debugging libraries
+ LLD is a new, high-performance linker. It is built as a set of reusable
+ components which highly leverage existing libraries in the larger LLVM
+ Project.
+ .
+ This package contains the LLD runtime library debug symbols.
 
 
-# Package: liblld-4.0-dev
-# Section: libdevel
-# Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
-# # ia64 mips mipsel hurd powerpc ppc64el have been removed
-# Depends: ${shlibs:Depends}, ${misc:Depends}, lld-4.0 (= ${binary:Version})
-# Pre-Depends: ${misc:Pre-Depends}
-# Description: LLVM-based linker, header files
-#  LLD is a new, high-performance linker. It is built as a set of reusable
-#  components which highly leverage existing libraries in the larger LLVM
-#  Project.
-#  .
-#  This package provides the header files to build extension over lld.
+Package: liblld-4.0-dev
+Section: libdevel
+Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
+# ia64 mips mipsel hurd powerpc ppc64el have been removed
+Depends: ${shlibs:Depends}, ${misc:Depends}, lld-4.0 (= ${binary:Version})
+Pre-Depends: ${misc:Pre-Depends}
+Description: LLVM-based linker, header files
+ LLD is a new, high-performance linker. It is built as a set of reusable
+ components which highly leverage existing libraries in the larger LLVM
+ Project.
+ .
+ This package provides the header files to build extension over lld.
 
 
 # ------------- lldb -------------

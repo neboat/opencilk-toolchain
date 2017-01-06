@@ -1,0 +1,141 @@
+Index: llvm-toolchain-snapshot_4.0~svn290969/lld/cmake/modules/AddLLD.cmake
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn290969.orig/lld/cmake/modules/AddLLD.cmake
++++ llvm-toolchain-snapshot_4.0~svn290969/lld/cmake/modules/AddLLD.cmake
+@@ -1,5 +1,5 @@
+ macro(add_lld_library name)
+-  add_llvm_library(${name} ${ARGN})
++  llvm_add_library(${name} ${ARGN})
+   set_target_properties(${name} PROPERTIES FOLDER "lld libraries")
+ endmacro(add_lld_library)
+ 
+Index: llvm-toolchain-snapshot_4.0~svn290969/lld/lib/Config/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn290969.orig/lld/lib/Config/CMakeLists.txt
++++ llvm-toolchain-snapshot_4.0~svn290969/lld/lib/Config/CMakeLists.txt
+@@ -4,6 +4,6 @@
+   ADDITIONAL_HEADER_DIRS
+   ${LLD_INCLUDE_DIR}/lld/Config
+ 
+-  LINK_LIBS
+-    LLVMSupport
++  LINK_COMPONENTS
++    Support
+   )
+Index: llvm-toolchain-snapshot_4.0~svn290969/lld/lib/Core/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn290969.orig/lld/lib/Core/CMakeLists.txt
++++ llvm-toolchain-snapshot_4.0~svn290969/lld/lib/Core/CMakeLists.txt
+@@ -12,6 +12,6 @@
+   ADDITIONAL_HEADER_DIRS
+   ${LLD_INCLUDE_DIR}/lld/Core
+ 
+-  LINK_LIBS
+-    LLVMSupport
++  LINK_COMPONENTS
++    Support
+   )
+Index: llvm-toolchain-snapshot_4.0~svn290969/lld/lib/Driver/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn290969.orig/lld/lib/Driver/CMakeLists.txt
++++ llvm-toolchain-snapshot_4.0~svn290969/lld/lib/Driver/CMakeLists.txt
+@@ -8,15 +8,17 @@
+   ADDITIONAL_HEADER_DIRS
+   ${LLD_INCLUDE_DIR}/lld/Driver
+ 
++  LINK_COMPONENTS
++    Object
++    Option
++    Support
++
+   LINK_LIBS
+     lldConfig
+     lldMachO
+     lldCore
+     lldReaderWriter
+     lldYAML
+-    LLVMObject
+-    LLVMOption
+-    LLVMSupport
+   )
+ 
+ add_dependencies(lldDriver DriverOptionsTableGen)
+Index: llvm-toolchain-snapshot_4.0~svn290969/lld/lib/ReaderWriter/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn290969.orig/lld/lib/ReaderWriter/CMakeLists.txt
++++ llvm-toolchain-snapshot_4.0~svn290969/lld/lib/ReaderWriter/CMakeLists.txt
+@@ -11,9 +11,11 @@
+   ADDITIONAL_HEADER_DIRS
+   ${LLD_INCLUDE_DIR}/lld/ReaderWriter
+ 
++  LINK_COMPONENTS
++    Object
++    Support
++
+   LINK_LIBS
+     lldCore
+     lldYAML
+-    LLVMObject
+-    LLVMSupport
+   )
+Index: llvm-toolchain-snapshot_4.0~svn290969/lld/lib/ReaderWriter/MachO/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn290969.orig/lld/lib/ReaderWriter/MachO/CMakeLists.txt
++++ llvm-toolchain-snapshot_4.0~svn290969/lld/lib/ReaderWriter/MachO/CMakeLists.txt
+@@ -18,13 +18,16 @@
+   StubsPass.cpp
+   TLVPass.cpp
+   WriterMachO.cpp
++
++  LINK_COMPONENTS
++    DebugInfoDWARF
++    Object
++    Support
++    Demangle
++
+   LINK_LIBS
+     lldCore
+     lldYAML
+-    LLVMDebugInfoDWARF
+-    LLVMObject
+-    LLVMSupport
+-    LLVMDemangle
+     ${PTHREAD_LIB}
+   )
+ 
+Index: llvm-toolchain-snapshot_4.0~svn290969/lld/lib/ReaderWriter/YAML/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn290969.orig/lld/lib/ReaderWriter/YAML/CMakeLists.txt
++++ llvm-toolchain-snapshot_4.0~svn290969/lld/lib/ReaderWriter/YAML/CMakeLists.txt
+@@ -1,6 +1,9 @@
+ add_lld_library(lldYAML
+   ReaderWriterYAML.cpp
++
++  LINK_COMPONENTS
++    Support
++
+   LINK_LIBS
+     lldCore
+-    LLVMSupport
+   )
+Index: llvm-toolchain-snapshot_4.0~svn290969/lld/tools/lld/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_4.0~svn290969.orig/lld/tools/lld/CMakeLists.txt
++++ llvm-toolchain-snapshot_4.0~svn290969/lld/tools/lld/CMakeLists.txt
+@@ -1,12 +1,15 @@
++set(LLVM_LINK_COMPONENTS
++  Support
++  )
++
+ add_lld_tool(lld
+   lld.cpp
+   )
+ 
+ target_link_libraries(lld
+   lldDriver
+   lldCOFF
+   lldELF
+-  LLVMSupport
+   )
+ 
+ install(TARGETS lld

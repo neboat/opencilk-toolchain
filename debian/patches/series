@@ -43,3 +43,4 @@ clang-fix-cmpxchg8-detection-on-i386.patch
 lldb-addversion-suffix-to-llvm-server-exec.patch
 lldb-missing-install.diff
 silent-test-failing-codeverage.diff
+lld-arg-cmake-issue.diff
