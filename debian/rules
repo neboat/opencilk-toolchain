@@ -463,17 +463,20 @@ ARCH_LLVM_TEST_OK := i386 amd64
 
 override_dh_auto_test:
 
-# LLVM tests (CMake)
+# LLVM tests
 ifneq (,$(findstring $(DEB_HOST_ARCH),$(ARCH_LLVM_TEST_OK)))
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-llvm
 else
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-llvm || true
 endif
 
-# Clang tests (CMake)
+# Clang tests
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-clang || true
 
-# LLD tests (CMake)
+# Clang extra tests (ex: clang-tidy)
+	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-clang-tools || true
+
+# LLD tests
 ifeq (${LLD_ENABLE},yes)
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lld || true
 endif
@@ -481,14 +484,14 @@ endif
 # Sanitizer
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-sanitizer || true
 
-# LLDB tests (CMake)
+# LLDB tests
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ $(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lldb || true
 endif
 endif
 
-# Polly tests (CMake)
+# Polly tests
 ifeq (${POLLY_ENABLE},yes)
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-polly || true
 endif
