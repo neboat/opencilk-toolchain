@@ -134,6 +134,9 @@ LLDB_DISABLE_ARCHS := hurd-i386 ia64 ppc64el powerpc s390x sparc64 mips64el ppc6
 ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 # Disable LLDB for this arch.
 		LLDB_ENABLE=no
+else
+# See https://llvm.org/bugs/show_bug.cgi?id=28898
+	CMAKE_EXTRA += -DLLDB_DISABLE_LIBEDIT=ON
 endif
 
 LLD_ENABLE=yes
