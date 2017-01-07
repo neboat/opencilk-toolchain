@@ -1,4 +1,4 @@
-llvm-toolchain-3.9 (1:3.9.1-2) UNRELEASED; urgency=medium
+llvm-toolchain-3.9 (1:3.9.1-2) unstable; urgency=medium
 
   * debian/orig-tar.sh: less verbose
   * Remove the info section from the generated manpages (Closes: #846269)
