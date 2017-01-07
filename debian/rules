@@ -229,6 +229,8 @@ override_dh_auto_configure: preconfigure
 	rm -fr tools/clang/tools/extra
 	cp -R -H clang-tools-extra tools/clang/tools/extra
 
+	echo "Running tests: $(RUN_TEST)"
+
 	# if cmake is installed in /tmp/cmake/ uses it
 	# Used to build llvm on old ubuntu (precise) on the llvm.org/apt/ ci
 	CMAKE_BIN=cmake; \
