@@ -84,7 +84,7 @@ ifeq (,$(filter-out $(DEB_HOST_ARCH), powerpc s390x))
 endif
 
 RUN_TEST=yes
-ifeq (,$(filter nocheck, $(DEB_BUILD_OPTIONS)))
+ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	RUN_TEST=no
 endif
 
