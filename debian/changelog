@@ -6,6 +6,7 @@ llvm-toolchain-snapshot (1:4.0~svn291344-1) unstable; urgency=medium
     - d/p/lld-arg-cmake-issue.diff fixes upstream bug #27685
   * Run clang extra test suite
   * Fix the detection of lldb-server
+  * Fix the run of the check-lldb target
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 07 Jan 2017 12:24:32 +0100
 
