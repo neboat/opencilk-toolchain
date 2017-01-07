@@ -1,11 +1,12 @@
-llvm-toolchain-snapshot (1:4.0~svn291233-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:4.0~svn291344-1) unstable; urgency=medium
 
+  * New snapshot release
   * Disable libedit usage in lldb because of garbage (Closes: #846616, #850111)
   * Build lld
     - d/p/lld-arg-cmake-issue.diff fixes upstream bug #27685
   * Run clang extra test suite
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Jan 2017 14:10:39 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 07 Jan 2017 12:24:32 +0100
 
 llvm-toolchain-snapshot (1:4.0~svn290810-1) unstable; urgency=medium
 
