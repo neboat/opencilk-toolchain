@@ -494,7 +494,9 @@ ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 # Create a symlink to run the testsuite: see https://bugs.archlinux.org/task/50759
 	cd $(CURDIR)/$(TARGET_BUILD)/lib/python*/site-packages/lldb/; \
-		ln -s lldb/_lldb.so
+		if test ! -e _lldb.so; then \
+			ln -s lldb/_lldb.so; \
+		fi
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ $(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lldb || true
 endif
 endif
