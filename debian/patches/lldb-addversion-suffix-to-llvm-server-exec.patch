@@ -12,16 +12,24 @@ which could then break something else.
 
 This probably should have upstream bug but I couldn't find any existing report.
 
-Index: llvm-toolchain-snapshot_4.0~svn291344/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+Index: llvm-toolchain-snapshot_4.0~svn291432/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
 ===================================================================
---- llvm-toolchain-snapshot_4.0~svn291344.orig/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
-+++ llvm-toolchain-snapshot_4.0~svn291344/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
-@@ -39,7 +39,7 @@
+--- llvm-toolchain-snapshot_4.0~svn291432.orig/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
++++ llvm-toolchain-snapshot_4.0~svn291432/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+@@ -32,6 +32,7 @@
+ #include "lldb/Target/Process.h"
+ #include "llvm/ADT/SmallString.h"
+ #include "llvm/Support/ScopedPrinter.h"
++#include "llvm/Config/llvm-config.h"
+ 
+ // Project includes
+ #include "ProcessGDBRemoteLog.h"
+@@ -39,7 +40,7 @@
  #if defined(__APPLE__)
  #define DEBUGSERVER_BASENAME "debugserver"
  #else
 -#define DEBUGSERVER_BASENAME "lldb-server"
-+# define DEBUGSERVER_BASENAME    "lldb-server-4.0"
++# define DEBUGSERVER_BASENAME    "lldb-server-"LLVM_VERSION_STRING
  #endif
  
  #if defined(HAVE_LIBCOMPRESSION)
