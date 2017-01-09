@@ -1,0 +1,28 @@
+diff --git a/lldb/cmake/modules/AddLLDB.cmake b/cmake/modules/AddLLDB.cmake
+index 75c522f65..3d868068c 100644
+--- a/lldb.orig/cmake/modules/AddLLDB.cmake
++++ b/lldb/cmake/modules/AddLLDB.cmake
+@@ -93,7 +93,7 @@ macro(add_lldb_library name)
+ endmacro(add_lldb_library)
+ 
+ macro(add_lldb_executable name)
+-  add_llvm_executable(${name} DISABLE_LLVM_LINK_LLVM_DYLIB ${ARGN})
++  add_llvm_executable(${name} ${ARGN})
+   set_target_properties(${name} PROPERTIES FOLDER "lldb executables")
+ endmacro(add_lldb_executable)
+ 
+diff --git a/lldb/tools/lldb-server/CMakeLists.txt b/tools/lldb-server/CMakeLists.txt
+index 28360914a..9d8a09b69 100644
+--- a/lldb.orig/tools/lldb-server/CMakeLists.txt
++++ b/lldb/tools/lldb-server/CMakeLists.txt
+@@ -43,7 +43,9 @@ else()
+   target_link_libraries(lldb-server ${LLDB_USED_LIBS})
+   target_link_libraries(lldb-server ${CLANG_USED_LIBS})
+ endif()
+-llvm_config(lldb-server ${LLVM_LINK_COMPONENTS})
++if (NOT LLVM_LINK_LLVM_DYLIB)
++  llvm_config(lldb-server ${LLVM_LINK_COMPONENTS})
++endif()
+ 
+ target_link_libraries(lldb-server ${LLDB_SYSTEM_LIBS})
+ 

@@ -6,8 +6,10 @@ llvm-toolchain-3.8 (1:3.8.1-17) unstable; urgency=medium
   * Fix the path to lldb-server (to lldb-server-3.8) (Closes: #846638)
   * Also install python-lldb-3.8 when installing lldb-3.8 (Closes: #846612)
   * Disable libedit usage in lldb because of garbage (Closes: #846616)
+  * d/p/lldb-server-link.diff Fix the lldb hang. It was due to a linking issue.
+    Thanks to Pavel Labath (Closes: #846640)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Nov 2016 13:38:01 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 09 Jan 2017 21:24:17 +0100
 
 llvm-toolchain-3.8 (1:3.8.1-16) unstable; urgency=medium
 
