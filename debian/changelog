@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:4.0~svn291557-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * d/p/lldb-server-link-issue.patch removed, merged upstream
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 10 Jan 2017 12:01:20 +0100
+
 llvm-toolchain-snapshot (1:4.0~svn291344-1) unstable; urgency=medium
 
   * New snapshot release
