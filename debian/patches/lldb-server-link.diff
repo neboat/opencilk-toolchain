@@ -1,5 +1,17 @@
+diff --git a/lldb/cmake/LLDBDependencies.cmake b/cmake/LLDBDependencies.cmake
+index 67d110e0a..ee4f7a6e3 100644
+--- a/lldb.orig/cmake/LLDBDependencies.cmake
++++ b/lldb/cmake/LLDBDependencies.cmake
+@@ -201,6 +201,7 @@ set(LLVM_LINK_COMPONENTS
+   option
+   support
+   coverage
++  DebugInfoPDB
+   )
+ 
+ if ( NOT LLDB_DISABLE_PYTHON )
 diff --git a/lldb/cmake/modules/AddLLDB.cmake b/cmake/modules/AddLLDB.cmake
-index 75c522f65..3d868068c 100644
+index af1605076..aa11a90d0 100644
 --- a/lldb.orig/cmake/modules/AddLLDB.cmake
 +++ b/lldb/cmake/modules/AddLLDB.cmake
 @@ -93,7 +93,7 @@ macro(add_lldb_library name)
@@ -11,18 +23,14 @@ index 75c522f65..3d868068c 100644
    set_target_properties(${name} PROPERTIES FOLDER "lldb executables")
  endmacro(add_lldb_executable)
  
-diff --git a/lldb/tools/lldb-server/CMakeLists.txt b/tools/lldb-server/CMakeLists.txt
-index 28360914a..9d8a09b69 100644
---- a/lldb.orig/tools/lldb-server/CMakeLists.txt
-+++ b/lldb/tools/lldb-server/CMakeLists.txt
-@@ -43,7 +43,9 @@ else()
-   target_link_libraries(lldb-server ${LLDB_USED_LIBS})
-   target_link_libraries(lldb-server ${CLANG_USED_LIBS})
- endif()
--llvm_config(lldb-server ${LLVM_LINK_COMPONENTS})
-+if (NOT LLVM_LINK_LLVM_DYLIB)
-+  llvm_config(lldb-server ${LLVM_LINK_COMPONENTS})
-+endif()
- 
- target_link_libraries(lldb-server ${LLDB_SYSTEM_LIBS})
- 
+diff --git a/lldb/source/Plugins/SymbolFile/PDB/CMakeLists.txt b/source/Plugins/SymbolFile/PDB/CMakeLists.txt
+index 79d8a25d6..b22c928c5 100644
+--- a/lldb.orig/source/Plugins/SymbolFile/PDB/CMakeLists.txt
++++ b/lldb/source/Plugins/SymbolFile/PDB/CMakeLists.txt
+@@ -1,6 +1,3 @@
+-set(LLVM_PRIVATE_LINK_COMPONENTS
+-    DebugInfoPDB)
+-
+ add_lldb_library(lldbPluginSymbolFilePDB
+   PDBASTParser.cpp
+   SymbolFilePDB.cpp

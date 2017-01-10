@@ -11,12 +11,3 @@ Index: llvm-toolchain-3.9-3.9.1/lldb/source/Plugins/Process/gdb-remote/GDBRemote
  #endif
  
  #if defined (HAVE_LIBCOMPRESSION)
-@@ -1175,7 +1175,7 @@ GDBRemoteCommunication::StartDebugserver
-             }
-         }
-     }
--    
-+    log->Printf("foo %s,  debugserver_file_spec.GetPath ().c_str ());
-     if (debugserver_exists)
-     {
-         debugserver_file_spec.GetPath (debugserver_path, sizeof(debugserver_path));
