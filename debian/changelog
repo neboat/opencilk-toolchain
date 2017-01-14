@@ -2,7 +2,8 @@ llvm-toolchain-snapshot (1:5.0~svn291557-1~exp1) experimental; urgency=medium
 
   * New snapshot release
     snapshot is now 5.0
-  * silent amdgpu tests failing (see upstream bug 31610)
+  * d/p/silent-amdgpu-test-failing.diff silent amdgpu tests failing 
+    (see upstream bug 31610)
   * d/p/lldb-server-link-issue.patch removed, merged upstream
   * Also install python-lldb-4.0 when installing lldb-4.0 (Closes: #851171)
   * Bring back the content of llvm-4.0-doc (Closes: #844616)
