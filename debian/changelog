@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:4.0~svn291557-1~exp1) experimental; urgency=medium
+llvm-toolchain-4.0 (1:4.0~svn291557-1~exp1) experimental; urgency=medium
 
   * New snapshot release
   * d/p/lldb-server-link-issue.patch removed, merged upstream
