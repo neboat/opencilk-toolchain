@@ -11,7 +11,7 @@
                        help='formatting style to apply (LLVM, Google, Chromium, '
                        'Mozilla, WebKit)')
 -  parser.add_argument('-binary', default='clang-format',
-+  parser.add_argument('-binary', default='clang-format-4.0',
++  parser.add_argument('-binary', default='clang-format-5.0',
                        help='location of binary to use for clang-format')
    args = parser.parse_args()
  
@@ -22,7 +22,7 @@
  
  (defcustom clang-format-executable
 -  (or (executable-find "clang-format")
-+  (or (executable-find "clang-format-4.0")
++  (or (executable-find "clang-format-5.0")
        "clang-format")
    "Location of the clang-format executable.
  
@@ -33,7 +33,7 @@
  # set g:clang_format_path to the path to clang-format if it is not on the path
  # Change this to the full path if clang-format is not on the path.
 -binary = 'clang-format'
-+binary = 'clang-format-4.0'
++binary = 'clang-format-5.0'
  if vim.eval('exists("g:clang_format_path")') == "1":
    binary = vim.eval('g:clang_format_path')
  
