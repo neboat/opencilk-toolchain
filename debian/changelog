@@ -2,6 +2,7 @@ llvm-toolchain-snapshot (1:4.0~svn291557-1~exp1) experimental; urgency=medium
 
   * New snapshot release
   * d/p/lldb-server-link-issue.patch removed, merged upstream
+  * Also install python-lldb-4.0 when installing lldb-4.0 (Closes: #851171)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 10 Jan 2017 12:01:20 +0100
 
