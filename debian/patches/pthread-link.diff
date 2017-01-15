@@ -1,7 +1,7 @@
-Index: llvm-toolchain-4.0-4.0~svn292009/tools/clang/tools/libclang/CMakeLists.txt
-===================================================================
---- llvm-toolchain-4.0-4.0~svn292009.orig/tools/clang/tools/libclang/CMakeLists.txt
-+++ llvm-toolchain-4.0-4.0~svn292009/tools/clang/tools/libclang/CMakeLists.txt
+Index: llvm-toolchain-4.0-4.0~svn292009/clang/tools/libclang/CMakeLists.txt
+1;4601;0c===================================================================
+--- llvm-toolchain-4.0-4.0~svn292009.orig/clang/tools/libclang/CMakeLists.txt
++++ llvm-toolchain-4.0-4.0~svn292009/clang/tools/libclang/CMakeLists.txt
 @@ -56,6 +56,13 @@ endif ()
  find_library(DL_LIBRARY_PATH dl)
  if (DL_LIBRARY_PATH)
