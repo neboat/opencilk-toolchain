@@ -1,3 +1,9 @@
+llvm-toolchain-4.0 (1:4.0~+rc1-1) unstable; urgency=medium
+
+  * New testing release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 18 Jan 2017 16:50:19 +0100
+
 llvm-toolchain-4.0 (1:4.0~svn292009-1~exp1) experimental; urgency=medium
 
   * Upsream branched.
