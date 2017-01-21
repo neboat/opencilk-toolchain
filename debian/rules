@@ -497,6 +497,8 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 			ln -s lldb/_lldb.so; \
 		fi
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ $(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lldb || true
+	# remove the workaround
+	rm $(CURDIR)/$(TARGET_BUILD)/lib/python*/site-packages/_lldb.so
 endif
 endif
 
