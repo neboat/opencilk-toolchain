@@ -44,3 +44,4 @@ lit-force-lang.diff
 clang-arm-default-vfp3-on-armv7a.patch
 lldb-addversion-suffix-to-llvm-server-exec.patch
 lldb-server-link.diff
+amdgpu-regression.diff
