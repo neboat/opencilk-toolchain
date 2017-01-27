@@ -2,8 +2,11 @@ llvm-toolchain-3.9 (1:3.9.1-4) unstable; urgency=medium
 
   * d/p/amdgpu-regression.diff Fix a regression impacting mesa
     (Closes: #852616)
+  * d/p/esan-Fix-ESan-test-failure-on-Debian-Sid-bot*.diff:
+    cherry-pick upsream patch to make esan work with the new glibc
+    Thanks to Nobert Lange for investigating (Closes: #844092)
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 27 Jan 2017 11:02:15 +0100
 
 llvm-toolchain-3.9 (1:3.9.1-3) unstable; urgency=medium
 

@@ -45,3 +45,5 @@ clang-arm-default-vfp3-on-armv7a.patch
 lldb-addversion-suffix-to-llvm-server-exec.patch
 lldb-server-link.diff
 amdgpu-regression.diff
+esan-Fix-ESan-test-failure-on-Debian-Sid-bot.diff
+esan-Fix-ESan-test-failure-on-Debian-Sid-bot2.diff

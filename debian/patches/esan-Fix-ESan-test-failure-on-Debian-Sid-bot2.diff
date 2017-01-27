@@ -1,0 +1,31 @@
+From 9b149609c0dc08dc75537c44d43038c0e34b1321 Mon Sep 17 00:00:00 2001
+From: Qin Zhao <zhaoqin@google.com>
+Date: Fri, 7 Oct 2016 20:53:35 +0000
+Subject: [PATCH] [esan] Fix ESan test failure on Debian Sid bot
+
+Summary: Increase early allocation buffer size.
+
+Reviewers: bruening
+
+Subscribers: kubabrecka
+
+Differential Revision: https://reviews.llvm.org/D25380
+
+git-svn-id: https://llvm.org/svn/llvm-project/compiler-rt/trunk@283598 91177308-0d34-0410-b5e6-96231b3b80d8
+---
+ lib/esan/esan_interceptors.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Index: llvm-toolchain-3.9-3.9.1/compiler-rt/lib/esan/esan_interceptors.cpp
+===================================================================
+--- llvm-toolchain-3.9-3.9.1.orig/compiler-rt/lib/esan/esan_interceptors.cpp
++++ llvm-toolchain-3.9-3.9.1/compiler-rt/lib/esan/esan_interceptors.cpp
+@@ -461,7 +461,7 @@ INTERCEPTOR(int, pthread_sigmask, int ho
+ // Malloc interceptors
+ //===----------------------------------------------------------------------===//
+ 
+-static const uptr early_alloc_buf_size = 1024;
++static const uptr early_alloc_buf_size = 4096;
+ static uptr allocated_bytes;
+ static char early_alloc_buf[early_alloc_buf_size];
+ 
