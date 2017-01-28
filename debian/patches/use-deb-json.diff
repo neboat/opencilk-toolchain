@@ -3,9 +3,11 @@
  polly/lib/CMakeLists.txt |   14 +++++++-------
  2 files changed, 11 insertions(+), 8 deletions(-)
 
---- a/polly/CMakeLists.txt
-+++ b/polly/CMakeLists.txt
-@@ -147,10 +147,13 @@ if (CUDALIB_FOUND)
+Index: llvm-toolchain-snapshot_5.0~svn293390/polly/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn293390.orig/polly/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn293390/polly/CMakeLists.txt
+@@ -158,10 +158,13 @@ if (CUDALIB_FOUND)
    INCLUDE_DIRECTORIES( ${CUDALIB_INCLUDE_DIR} )
  endif(CUDALIB_FOUND)
  
@@ -20,8 +22,10 @@
    ${CMAKE_CURRENT_BINARY_DIR}/lib/External/isl/include
    ${CMAKE_CURRENT_SOURCE_DIR}/lib/External/isl/include
    ${CMAKE_CURRENT_SOURCE_DIR}/lib/External/pet/include
---- a/polly/lib/CMakeLists.txt
-+++ b/polly/lib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_5.0~svn293390/polly/lib/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn293390.orig/polly/lib/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn293390/polly/lib/CMakeLists.txt
 @@ -1,10 +1,10 @@
  set(LLVM_NO_RTTI 1)
  
@@ -38,16 +42,16 @@
  
  set(ISL_CODEGEN_FILES
      CodeGen/IslAst.cpp
-@@ -50,7 +50,7 @@ add_polly_library(Polly
-   Support/RegisterPasses.cpp
+@@ -51,7 +51,7 @@ add_polly_library(Polly
    Support/ScopHelper.cpp
    Support/ScopLocation.cpp
+   Support/ISLTools.cpp
 -  ${POLLY_JSON_FILES}
 +#  ${POLLY_JSON_FILES}
    Transform/Canonicalization.cpp
    Transform/CodePreparation.cpp
    Transform/DeadCodeElimination.cpp
-@@ -64,7 +64,7 @@ if (GPU_CODEGEN)
+@@ -66,7 +66,7 @@ if (GPU_CODEGEN)
    target_link_libraries(Polly PollyPPCG)
  endif (GPU_CODEGEN)
  
