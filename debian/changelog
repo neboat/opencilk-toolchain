@@ -1,10 +1,11 @@
-llvm-toolchain-snapshot (1:5.0~svn292012-1~exp2) experimental; urgency=medium
+llvm-toolchain-snapshot (1:5.0~svn292096-1~exp1) experimental; urgency=medium
 
-  * Add static lib of lld in liblld-X.Y
+  * New snapshot release
+  * New library liblldb-intel-mpxtable.so
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 24 Jan 2017 18:57:10 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Jan 2017 09:03:48 +0100
 
-llvm-toolchain-snapshot (1:5.0~svn292012-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:5.0~svn292017-1~exp1) experimental; urgency=medium
 
   * New snapshot release
     snapshot is now 5.0
@@ -14,7 +15,7 @@ llvm-toolchain-snapshot (1:5.0~svn292012-1~exp1) experimental; urgency=medium
   * Also install python-lldb-5.0 when installing lldb-5.0 (Closes: #851171)
   * Bring back the content of llvm-5.0-doc (Closes: #844616)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 10 Jan 2017 12:01:20 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 14 Jan 2017 16:36:51 +0100
 
 llvm-toolchain-snapshot (1:4.0~svn291344-1) unstable; urgency=medium
 
