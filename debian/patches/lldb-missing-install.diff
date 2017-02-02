@@ -1,21 +1,21 @@
-Index: llvm-toolchain-snapshot_5.0~svn293760/lldb/tools/argdumper/CMakeLists.txt
+Index: llvm-toolchain-snapshot_5.0~svn293876/lldb/tools/argdumper/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn293760.orig/lldb/tools/argdumper/CMakeLists.txt
-+++ llvm-toolchain-snapshot_5.0~svn293760/lldb/tools/argdumper/CMakeLists.txt
+--- llvm-toolchain-snapshot_5.0~svn293876.orig/lldb/tools/argdumper/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn293876/lldb/tools/argdumper/CMakeLists.txt
 @@ -8,3 +8,5 @@ add_lldb_tool(lldb-argdumper INCLUDE_IN_
      lldbUtility
    )
  
 +install(TARGETS lldb-argdumper
 +  RUNTIME DESTINATION bin)
-Index: llvm-toolchain-snapshot_5.0~svn293760/lldb/tools/lldb-server/CMakeLists.txt
+Index: llvm-toolchain-snapshot_5.0~svn293876/lldb/tools/lldb-server/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn293760.orig/lldb/tools/lldb-server/CMakeLists.txt
-+++ llvm-toolchain-snapshot_5.0~svn293760/lldb/tools/lldb-server/CMakeLists.txt
-@@ -194,3 +194,7 @@ endif()
- target_link_libraries(lldb-server ${LLDB_SYSTEM_LIBS})
+--- llvm-toolchain-snapshot_5.0~svn293876.orig/lldb/tools/lldb-server/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn293876/lldb/tools/lldb-server/CMakeLists.txt
+@@ -192,3 +192,7 @@ if(NOT LLVM_LINK_LLVM_DYLIB)
+ endif()
  
- set_target_properties(lldb-server PROPERTIES VERSION ${LLDB_VERSION})
+ target_link_libraries(lldb-server ${LLDB_SYSTEM_LIBS})
 +
 +install(TARGETS lldb-server
 +  RUNTIME DESTINATION bin)
