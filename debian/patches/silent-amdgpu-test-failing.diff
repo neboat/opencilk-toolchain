@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_5.0~svn292012/test/CodeGen/AMDGPU/invalid-opencl-version-metadata1.ll
+Index: llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/invalid-opencl-version-metadata1.ll
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn292012.orig/test/CodeGen/AMDGPU/invalid-opencl-version-metadata1.ll
-+++ llvm-toolchain-snapshot_5.0~svn292012/test/CodeGen/AMDGPU/invalid-opencl-version-metadata1.ll
+--- llvm-toolchain-snapshot_5.0~svn293997.orig/test/CodeGen/AMDGPU/invalid-opencl-version-metadata1.ll
++++ llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/invalid-opencl-version-metadata1.ll
 @@ -2,5 +2,6 @@
  ; check llc does not crash for invalid opencl version metadata
  
@@ -9,10 +9,10 @@ Index: llvm-toolchain-snapshot_5.0~svn292012/test/CodeGen/AMDGPU/invalid-opencl-
 +; XFAIL: *
  
  !opencl.ocl.version = !{}
-Index: llvm-toolchain-snapshot_5.0~svn292012/test/CodeGen/AMDGPU/invalid-opencl-version-metadata2.ll
+Index: llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/invalid-opencl-version-metadata2.ll
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn292012.orig/test/CodeGen/AMDGPU/invalid-opencl-version-metadata2.ll
-+++ llvm-toolchain-snapshot_5.0~svn292012/test/CodeGen/AMDGPU/invalid-opencl-version-metadata2.ll
+--- llvm-toolchain-snapshot_5.0~svn293997.orig/test/CodeGen/AMDGPU/invalid-opencl-version-metadata2.ll
++++ llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/invalid-opencl-version-metadata2.ll
 @@ -2,6 +2,7 @@
  ; check llc does not crash for invalid opencl version metadata
  
@@ -21,10 +21,10 @@ Index: llvm-toolchain-snapshot_5.0~svn292012/test/CodeGen/AMDGPU/invalid-opencl-
  
  !opencl.ocl.version = !{!0}
  !0 = !{}
-Index: llvm-toolchain-snapshot_5.0~svn292012/test/CodeGen/AMDGPU/invalid-opencl-version-metadata3.ll
+Index: llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/invalid-opencl-version-metadata3.ll
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn292012.orig/test/CodeGen/AMDGPU/invalid-opencl-version-metadata3.ll
-+++ llvm-toolchain-snapshot_5.0~svn292012/test/CodeGen/AMDGPU/invalid-opencl-version-metadata3.ll
+--- llvm-toolchain-snapshot_5.0~svn293997.orig/test/CodeGen/AMDGPU/invalid-opencl-version-metadata3.ll
++++ llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/invalid-opencl-version-metadata3.ll
 @@ -2,6 +2,7 @@
  ; check llc does not crash for invalid opencl version metadata
  
@@ -33,12 +33,12 @@ Index: llvm-toolchain-snapshot_5.0~svn292012/test/CodeGen/AMDGPU/invalid-opencl-
  
  !opencl.ocl.version = !{!0}
  !0 = !{i32 1}
-Index: llvm-toolchain-snapshot_5.0~svn292012/test/CodeGen/AMDGPU/runtime-metadata.ll
+Index: llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/runtime-metadata.ll
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn292012.orig/test/CodeGen/AMDGPU/runtime-metadata.ll
-+++ llvm-toolchain-snapshot_5.0~svn292012/test/CodeGen/AMDGPU/runtime-metadata.ll
+--- llvm-toolchain-snapshot_5.0~svn293997.orig/test/CodeGen/AMDGPU/runtime-metadata.ll
++++ llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/runtime-metadata.ll
 @@ -1,5 +1,6 @@
- ; RUN: llc -mtriple=amdgcn--amdhsa -filetype=obj -o - < %s | llvm-readobj -amdgpu-runtime-metadata | FileCheck %s
+ ; RUN: llc -mtriple=amdgcn--amdhsa -filetype=obj -o - < %s | llvm-readobj -amdgpu-runtime-metadata -elf-output-style=GNU -notes | FileCheck %s --check-prefix=NOTES
  ; RUN: llc -mtriple=amdgcn--amdhsa -filetype=obj -amdgpu-dump-rtmd -amdgpu-check-rtmd-parser %s -o - 2>&1 | FileCheck --check-prefix=CHECK --check-prefix=PARSER %s
 +; XFAIL: *
  
