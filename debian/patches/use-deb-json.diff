@@ -3,11 +3,11 @@
  polly/lib/CMakeLists.txt |   14 +++++++-------
  2 files changed, 11 insertions(+), 8 deletions(-)
 
-Index: llvm-toolchain-snapshot_5.0~svn293390/polly/CMakeLists.txt
+Index: llvm-toolchain-snapshot_5.0~svn294178/polly/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn293390.orig/polly/CMakeLists.txt
-+++ llvm-toolchain-snapshot_5.0~svn293390/polly/CMakeLists.txt
-@@ -158,10 +158,13 @@ if (CUDALIB_FOUND)
+--- llvm-toolchain-snapshot_5.0~svn294178.orig/polly/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn294178/polly/CMakeLists.txt
+@@ -158,10 +158,12 @@ if (CUDALIB_FOUND)
    INCLUDE_DIRECTORIES( ${CUDALIB_INCLUDE_DIR} )
  endif(CUDALIB_FOUND)
  
@@ -16,29 +16,28 @@ Index: llvm-toolchain-snapshot_5.0~svn293390/polly/CMakeLists.txt
  include_directories(
    BEFORE
    ${CMAKE_CURRENT_SOURCE_DIR}/include
--  ${CMAKE_CURRENT_SOURCE_DIR}/lib/JSON/include
-+#  ${CMAKE_CURRENT_SOURCE_DIR}/lib/JSON/include
-+  ${JSONCPP_INCLUDE_PATH}
+-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/External/JSON/include
++#  ${CMAKE_CURRENT_SOURCE_DIR}/lib/External/JSON/include
    ${CMAKE_CURRENT_BINARY_DIR}/lib/External/isl/include
    ${CMAKE_CURRENT_SOURCE_DIR}/lib/External/isl/include
    ${CMAKE_CURRENT_SOURCE_DIR}/lib/External/pet/include
-Index: llvm-toolchain-snapshot_5.0~svn293390/polly/lib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_5.0~svn294178/polly/lib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn293390.orig/polly/lib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_5.0~svn293390/polly/lib/CMakeLists.txt
+--- llvm-toolchain-snapshot_5.0~svn294178.orig/polly/lib/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn294178/polly/lib/CMakeLists.txt
 @@ -1,10 +1,10 @@
  set(LLVM_NO_RTTI 1)
  
 -set(POLLY_JSON_FILES
--    JSON/json_reader.cpp
--    JSON/json_value.cpp
--    JSON/json_writer.cpp
+-    External/JSON/json_reader.cpp
+-    External/JSON/json_value.cpp
+-    External/JSON/json_writer.cpp
 -)
-+# set(POLLY_JSON_FILES
-+#     JSON/json_reader.cpp
-+#     JSON/json_value.cpp
-+#     JSON/json_writer.cpp
-+# )
++#set(POLLY_JSON_FILES
++#    External/JSON/json_reader.cpp
++#    External/JSON/json_value.cpp
++#    External/JSON/json_writer.cpp
++#)
  
  set(ISL_CODEGEN_FILES
      CodeGen/IslAst.cpp
