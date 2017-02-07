@@ -3,10 +3,10 @@
  polly/lib/CMakeLists.txt |   14 +++++++-------
  2 files changed, 11 insertions(+), 8 deletions(-)
 
-Index: llvm-toolchain-snapshot_5.0~svn294178/polly/CMakeLists.txt
+Index: llvm-toolchain-snapshot_5.0~svn294199/polly/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn294178.orig/polly/CMakeLists.txt
-+++ llvm-toolchain-snapshot_5.0~svn294178/polly/CMakeLists.txt
+--- llvm-toolchain-snapshot_5.0~svn294199.orig/polly/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn294199/polly/CMakeLists.txt
 @@ -158,10 +158,12 @@ if (CUDALIB_FOUND)
    INCLUDE_DIRECTORIES( ${CUDALIB_INCLUDE_DIR} )
  endif(CUDALIB_FOUND)
@@ -21,10 +21,10 @@ Index: llvm-toolchain-snapshot_5.0~svn294178/polly/CMakeLists.txt
    ${CMAKE_CURRENT_BINARY_DIR}/lib/External/isl/include
    ${CMAKE_CURRENT_SOURCE_DIR}/lib/External/isl/include
    ${CMAKE_CURRENT_SOURCE_DIR}/lib/External/pet/include
-Index: llvm-toolchain-snapshot_5.0~svn294178/polly/lib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_5.0~svn294199/polly/lib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn294178.orig/polly/lib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_5.0~svn294178/polly/lib/CMakeLists.txt
+--- llvm-toolchain-snapshot_5.0~svn294199.orig/polly/lib/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn294199/polly/lib/CMakeLists.txt
 @@ -1,10 +1,10 @@
  set(LLVM_NO_RTTI 1)
  
@@ -59,3 +59,18 @@ Index: llvm-toolchain-snapshot_5.0~svn294178/polly/lib/CMakeLists.txt
  
  if (BUILD_SHARED_LIBS)
    target_link_libraries(Polly
+Index: llvm-toolchain-snapshot_5.0~svn294199/polly/lib/Exchange/JSONExporter.cpp
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn294199.orig/polly/lib/Exchange/JSONExporter.cpp
++++ llvm-toolchain-snapshot_5.0~svn294199/polly/lib/Exchange/JSONExporter.cpp
+@@ -29,8 +29,8 @@
+ #include "isl/printer.h"
+ #include "isl/set.h"
+ #include "isl/union_map.h"
+-#include "json/reader.h"
+-#include "json/writer.h"
++#include "jsoncpp/json/reader.h"
++#include "jsoncpp/json/writer.h"
+ #include <memory>
+ #include <string>
+ #include <system_error>
