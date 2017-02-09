@@ -2,11 +2,13 @@
  lldb/source/API/CMakeLists.txt |   14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
 
---- a/lldb/source/API/CMakeLists.txt
-+++ b/lldb/source/API/CMakeLists.txt
-@@ -12,7 +12,12 @@ if (LLDB_BUILD_FRAMEWORK AND NOT APPLE)
-   message(FATAL_ERROR "LLDB.framework cannot be generated unless targeting Apple platforms.")
- endif()
+Index: llvm-toolchain-snapshot_5.0~svn294583/lldb/source/API/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn294583.orig/lldb/source/API/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn294583/lldb/source/API/CMakeLists.txt
+@@ -18,7 +18,12 @@ endif()
+ 
+ get_property(LLDB_ALL_PLUGINS GLOBAL PROPERTY LLDB_PLUGINS)
  
 -add_lldb_library(liblldb SHARED
 +set(output_name lldb)
@@ -18,7 +20,7 @@
    SBAddress.cpp
    SBAttachInfo.cpp
    SBBlock.cpp
-@@ -95,7 +100,7 @@ target_link_libraries(liblldb PRIVATE
+@@ -116,7 +121,7 @@ target_link_libraries(liblldb PRIVATE
  
  set_target_properties(liblldb
    PROPERTIES
@@ -27,7 +29,7 @@
    )
  
  if (NOT CMAKE_SYSTEM_NAME MATCHES "Windows")
-@@ -119,11 +124,6 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Windows"
+@@ -140,11 +145,6 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Windows"
    if (MSVC AND NOT LLDB_DISABLE_PYTHON)
      target_link_libraries(liblldb PRIVATE ${PYTHON_LIBRARY})
    endif()

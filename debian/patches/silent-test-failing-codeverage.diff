@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot-4.0~svn290518/test/ThinLTO/X86/autoupgrade.ll
+Index: llvm-toolchain-snapshot_5.0~svn294583/test/ThinLTO/X86/autoupgrade.ll
 ===================================================================
---- llvm-toolchain-snapshot-4.0~svn290518.orig/test/ThinLTO/X86/autoupgrade.ll
-+++ llvm-toolchain-snapshot-4.0~svn290518/test/ThinLTO/X86/autoupgrade.ll
-@@ -11,6 +11,8 @@
+--- llvm-toolchain-snapshot_5.0~svn294583.orig/test/ThinLTO/X86/autoupgrade.ll
++++ llvm-toolchain-snapshot_5.0~svn294583/test/ThinLTO/X86/autoupgrade.ll
+@@ -14,6 +14,8 @@
  ; CHECK: record string = 'llvm.invariant.start.p0i8'
  ; CHECK-NOT: 'llvm.invariant.start'
  

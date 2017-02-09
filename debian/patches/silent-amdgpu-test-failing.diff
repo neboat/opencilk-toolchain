@@ -1,44 +1,45 @@
-Index: llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/invalid-opencl-version-metadata1.ll
+Index: llvm-toolchain-snapshot_5.0~svn294583/test/CodeGen/AMDGPU/invalid-opencl-version-metadata1.ll
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn293997.orig/test/CodeGen/AMDGPU/invalid-opencl-version-metadata1.ll
-+++ llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/invalid-opencl-version-metadata1.ll
+--- llvm-toolchain-snapshot_5.0~svn294583.orig/test/CodeGen/AMDGPU/invalid-opencl-version-metadata1.ll
++++ llvm-toolchain-snapshot_5.0~svn294583/test/CodeGen/AMDGPU/invalid-opencl-version-metadata1.ll
 @@ -2,5 +2,6 @@
  ; check llc does not crash for invalid opencl version metadata
  
- ; CHECK: { amd.MDVersion: [ 2, 0 ] }
+ ; CHECK: { amd.MDVersion: [ 2, 1 ], amd.IsaInfo: { amd.IsaInfoWavefrontSize: 64, amd.IsaInfoLocalMemorySize: 65536, amd.IsaInfoEUsPerCU: 4, amd.IsaInfoMaxWavesPerEU: 10, amd.IsaInfoMaxFlatWorkGroupSize: 2048, amd.IsaInfoSGPRAllocGranule: 8, amd.IsaInfoTotalNumSGPRs: 512, amd.IsaInfoAddressableNumSGPRs: 104, amd.IsaInfoVGPRAllocGranule: 4, amd.IsaInfoTotalNumVGPRs: 256, amd.IsaInfoAddressableNumVGPRs: 256 } }
 +; XFAIL: *
  
  !opencl.ocl.version = !{}
-Index: llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/invalid-opencl-version-metadata2.ll
+Index: llvm-toolchain-snapshot_5.0~svn294583/test/CodeGen/AMDGPU/invalid-opencl-version-metadata2.ll
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn293997.orig/test/CodeGen/AMDGPU/invalid-opencl-version-metadata2.ll
-+++ llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/invalid-opencl-version-metadata2.ll
+--- llvm-toolchain-snapshot_5.0~svn294583.orig/test/CodeGen/AMDGPU/invalid-opencl-version-metadata2.ll
++++ llvm-toolchain-snapshot_5.0~svn294583/test/CodeGen/AMDGPU/invalid-opencl-version-metadata2.ll
 @@ -2,6 +2,7 @@
  ; check llc does not crash for invalid opencl version metadata
  
- ; CHECK: { amd.MDVersion: [ 2, 0 ] }
+ ; CHECK: { amd.MDVersion: [ 2, 1 ], amd.IsaInfo: { amd.IsaInfoWavefrontSize: 64, amd.IsaInfoLocalMemorySize: 65536, amd.IsaInfoEUsPerCU: 4, amd.IsaInfoMaxWavesPerEU: 10, amd.IsaInfoMaxFlatWorkGroupSize: 2048, amd.IsaInfoSGPRAllocGranule: 8, amd.IsaInfoTotalNumSGPRs: 512, amd.IsaInfoAddressableNumSGPRs: 104, amd.IsaInfoVGPRAllocGranule: 4, amd.IsaInfoTotalNumVGPRs: 256, amd.IsaInfoAddressableNumVGPRs: 256 } }
 +; XFAIL: *
  
  !opencl.ocl.version = !{!0}
  !0 = !{}
-Index: llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/invalid-opencl-version-metadata3.ll
+Index: llvm-toolchain-snapshot_5.0~svn294583/test/CodeGen/AMDGPU/invalid-opencl-version-metadata3.ll
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn293997.orig/test/CodeGen/AMDGPU/invalid-opencl-version-metadata3.ll
-+++ llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/invalid-opencl-version-metadata3.ll
+--- llvm-toolchain-snapshot_5.0~svn294583.orig/test/CodeGen/AMDGPU/invalid-opencl-version-metadata3.ll
++++ llvm-toolchain-snapshot_5.0~svn294583/test/CodeGen/AMDGPU/invalid-opencl-version-metadata3.ll
 @@ -2,6 +2,7 @@
  ; check llc does not crash for invalid opencl version metadata
  
- ; CHECK: { amd.MDVersion: [ 2, 0 ] }
+ ; CHECK: { amd.MDVersion: [ 2, 1 ], amd.IsaInfo: { amd.IsaInfoWavefrontSize: 64, amd.IsaInfoLocalMemorySize: 65536, amd.IsaInfoEUsPerCU: 4, amd.IsaInfoMaxWavesPerEU: 10, amd.IsaInfoMaxFlatWorkGroupSize: 2048, amd.IsaInfoSGPRAllocGranule: 8, amd.IsaInfoTotalNumSGPRs: 512, amd.IsaInfoAddressableNumSGPRs: 104, amd.IsaInfoVGPRAllocGranule: 4, amd.IsaInfoTotalNumVGPRs: 256, amd.IsaInfoAddressableNumVGPRs: 256 } }
 +; XFAIL: *
  
  !opencl.ocl.version = !{!0}
  !0 = !{i32 1}
-Index: llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/runtime-metadata.ll
+Index: llvm-toolchain-snapshot_5.0~svn294583/test/CodeGen/AMDGPU/runtime-metadata.ll
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn293997.orig/test/CodeGen/AMDGPU/runtime-metadata.ll
-+++ llvm-toolchain-snapshot_5.0~svn293997/test/CodeGen/AMDGPU/runtime-metadata.ll
-@@ -1,5 +1,6 @@
- ; RUN: llc -mtriple=amdgcn--amdhsa -filetype=obj -o - < %s | llvm-readobj -amdgpu-runtime-metadata -elf-output-style=GNU -notes | FileCheck %s --check-prefix=NOTES
+--- llvm-toolchain-snapshot_5.0~svn294583.orig/test/CodeGen/AMDGPU/runtime-metadata.ll
++++ llvm-toolchain-snapshot_5.0~svn294583/test/CodeGen/AMDGPU/runtime-metadata.ll
+@@ -1,6 +1,7 @@
+ ; RUN: llc -mtriple=amdgcn--amdhsa -filetype=obj -o - < %s | llvm-readobj -amdgpu-runtime-metadata -elf-output-style=GNU -notes | FileCheck %s --check-prefix=NOTES --check-prefix=SI
+ ; RUN: llc -mtriple=amdgcn--amdhsa -mcpu=fiji -filetype=obj -o - < %s | llvm-readobj -amdgpu-runtime-metadata -elf-output-style=GNU -notes | FileCheck %s --check-prefix=NOTES --check-prefix=VI
  ; RUN: llc -mtriple=amdgcn--amdhsa -filetype=obj -amdgpu-dump-rtmd -amdgpu-check-rtmd-parser %s -o - 2>&1 | FileCheck --check-prefix=CHECK --check-prefix=PARSER %s
 +; XFAIL: *
  
