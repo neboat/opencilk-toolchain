@@ -44,4 +44,3 @@ lldb-addversion-suffix-to-llvm-server-exec.patch
 lldb-missing-install.diff
 silent-test-failing-codeverage.diff
 silent-amdgpu-test-failing.diff
-silent-debug-test.diff
