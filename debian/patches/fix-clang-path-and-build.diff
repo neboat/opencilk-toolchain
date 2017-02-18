@@ -2,14 +2,15 @@
  clang/lib/Driver/ToolChains.cpp |    2 ++
  1 file changed, 2 insertions(+)
 
---- a/clang/lib/Driver/ToolChains.cpp
-+++ b/clang/lib/Driver/ToolChains.cpp
-@@ -2842,6 +2842,8 @@ void Generic_GCC::AddClangCXXStdlibInclu
-       DriverArgs.hasArg(options::OPT_nostdincxx))
-     return;
- 
+Index: llvm-toolchain-4.0-4.0~+rc2/clang/lib/Driver/ToolChains.cpp
+===================================================================
+--- llvm-toolchain-4.0-4.0~+rc2.orig/clang/lib/Driver/ToolChains.cpp
++++ llvm-toolchain-4.0-4.0~+rc2/clang/lib/Driver/ToolChains.cpp
+@@ -2952,6 +2952,7 @@ void Generic_GCC::AddClangCXXStdlibInclu
+     addLibStdCxxIncludePaths(DriverArgs, CC1Args);
+     break;
+   }
 +  addSystemInclude(DriverArgs, CC1Args, "/usr/include/clang/" + std::string(CLANG_VERSION_STRING) + "/include/");
-+
-   switch (GetCXXStdlibType(DriverArgs)) {
-   case ToolChain::CST_Libcxx: {
-     std::string Path = findLibCxxIncludePath();
+ }
+ 
+ std::string Generic_GCC::findLibCxxIncludePath() const {
