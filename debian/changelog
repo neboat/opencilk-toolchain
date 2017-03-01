@@ -1,6 +1,7 @@
-llvm-toolchain-snapshot (1:5.0~svn292096-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:5.0~svn294583-1~exp1) experimental; urgency=medium
 
   * New snapshot release
+  * Ship clangd into the clang-X.Y package
   * New library liblldb-intel-mpxtable.so
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Jan 2017 09:03:48 +0100
