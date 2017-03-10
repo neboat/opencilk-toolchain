@@ -6,7 +6,15 @@ Index: llvm-toolchain-snapshot_5.0~svn297449/clang/lib/Driver/ToolChains/Gnu.cpp
 ===================================================================
 --- llvm-toolchain-snapshot_5.0~svn297449.orig/clang/lib/Driver/ToolChains/Gnu.cpp
 +++ llvm-toolchain-snapshot_5.0~svn297449/clang/lib/Driver/ToolChains/Gnu.cpp
-@@ -2306,6 +2306,8 @@ void Generic_GCC::AddClangCXXStdlibInclu
+@@ -15,6 +15,7 @@
+ #include "Arch/SystemZ.h"
+ #include "CommonArgs.h"
+ #include "clang/Basic/VirtualFileSystem.h"
++#include "clang/Basic/Version.h"
+ #include "clang/Config/config.h" // for GCC_INSTALL_PREFIX
+ #include "clang/Driver/Compilation.h"
+ #include "clang/Driver/Driver.h"
+@@ -2306,6 +2307,8 @@ void Generic_GCC::AddClangCXXStdlibInclu
        DriverArgs.hasArg(options::OPT_nostdincxx))
      return;
  
