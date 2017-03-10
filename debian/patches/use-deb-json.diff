@@ -3,10 +3,10 @@
  polly/lib/CMakeLists.txt |   14 +++++++-------
  2 files changed, 11 insertions(+), 8 deletions(-)
 
-Index: llvm-toolchain-snapshot_5.0~svn296391/polly/CMakeLists.txt
+Index: llvm-toolchain-snapshot_5.0~svn297449/polly/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn296391.orig/polly/CMakeLists.txt
-+++ llvm-toolchain-snapshot_5.0~svn296391/polly/CMakeLists.txt
+--- llvm-toolchain-snapshot_5.0~svn297449.orig/polly/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn297449/polly/CMakeLists.txt
 @@ -171,11 +171,13 @@ else()
    set(ISL_TARGET PollyISL)
  endif()
@@ -22,10 +22,10 @@ Index: llvm-toolchain-snapshot_5.0~svn296391/polly/CMakeLists.txt
    ${CMAKE_CURRENT_SOURCE_DIR}/lib/External/pet/include
    ${CMAKE_CURRENT_SOURCE_DIR}/lib/External
    ${CMAKE_CURRENT_BINARY_DIR}/include
-Index: llvm-toolchain-snapshot_5.0~svn296391/polly/lib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_5.0~svn297449/polly/lib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn296391.orig/polly/lib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_5.0~svn296391/polly/lib/CMakeLists.txt
+--- llvm-toolchain-snapshot_5.0~svn297449.orig/polly/lib/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn297449/polly/lib/CMakeLists.txt
 @@ -1,10 +1,10 @@
  set(LLVM_NO_RTTI 1)
  
@@ -42,16 +42,16 @@ Index: llvm-toolchain-snapshot_5.0~svn296391/polly/lib/CMakeLists.txt
  
  set(ISL_CODEGEN_FILES
      CodeGen/IslAst.cpp
-@@ -51,7 +51,7 @@ add_polly_library(Polly
-   Support/ScopHelper.cpp
+@@ -52,7 +52,7 @@ add_polly_library(Polly
    Support/ScopLocation.cpp
    Support/ISLTools.cpp
+   Support/DumpModulePass.cpp
 -  ${POLLY_JSON_FILES}
 +#  ${POLLY_JSON_FILES}
    Transform/Canonicalization.cpp
    Transform/CodePreparation.cpp
    Transform/DeadCodeElimination.cpp
-@@ -66,7 +66,7 @@ if (GPU_CODEGEN)
+@@ -67,7 +67,7 @@ if (GPU_CODEGEN)
    target_link_libraries(Polly PollyPPCG)
  endif (GPU_CODEGEN)
  
@@ -60,10 +60,10 @@ Index: llvm-toolchain-snapshot_5.0~svn296391/polly/lib/CMakeLists.txt
  
  if (BUILD_SHARED_LIBS)
    target_link_libraries(Polly
-Index: llvm-toolchain-snapshot_5.0~svn296391/polly/lib/Exchange/JSONExporter.cpp
+Index: llvm-toolchain-snapshot_5.0~svn297449/polly/lib/Exchange/JSONExporter.cpp
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn296391.orig/polly/lib/Exchange/JSONExporter.cpp
-+++ llvm-toolchain-snapshot_5.0~svn296391/polly/lib/Exchange/JSONExporter.cpp
+--- llvm-toolchain-snapshot_5.0~svn297449.orig/polly/lib/Exchange/JSONExporter.cpp
++++ llvm-toolchain-snapshot_5.0~svn297449/polly/lib/Exchange/JSONExporter.cpp
 @@ -29,8 +29,8 @@
  #include "isl/printer.h"
  #include "isl/set.h"
