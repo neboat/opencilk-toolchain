@@ -24,6 +24,7 @@ llvm-toolchain-snapshot (1:4.0~svn291344-1) unstable; urgency=medium
   * Disable libedit usage in lldb because of garbage (Closes: #846616, #850111)
   * Build lld
     - d/p/lld-arg-cmake-issue.diff fixes upstream bug #27685
+  * ship clang-tblgen
   * Run clang extra test suite
   * Fix the detection of lldb-server
   * Fix the run of the check-lldb target

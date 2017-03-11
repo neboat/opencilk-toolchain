@@ -21,6 +21,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/clang-reorder-fields
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-change-namespace
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-import-test
 usr/lib/llvm-@LLVM_VERSION@/bin/clangd
+usr/lib/llvm-@LLVM_VERSION@/bin/clang-tblgen
 
 usr/lib/llvm-@LLVM_VERSION@/bin/modularize
 usr/lib/llvm-@LLVM_VERSION@/bin/c-index-test
@@ -56,3 +57,4 @@ usr/bin/clang-include-fixer-@LLVM_VERSION@
 usr/bin/clang-change-namespace-@LLVM_VERSION@
 usr/bin/clang-import-test-@LLVM_VERSION@
 usr/bin/clangd-@LLVM_VERSION@
+usr/bin/clang-tblgen-@LLVM_VERSION@
