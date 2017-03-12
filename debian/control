@@ -397,7 +397,8 @@ Description: Modular compiler and toolchain technologies, examples
 Package: lldb-3.8
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe sh4 x32 mips mipsel arm64
 # ia64 hurd powerpc ppc64el sparc64  ppc64  mips64el  have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.8 (= ${binary:Version}), llvm-3.8-dev,
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm3.8 (= ${binary:Version}),
+ llvm-3.8-dev,
  python-lldb-3.8
 Conflicts: lldb-3.4, lldb-3.5
 Pre-Depends: ${misc:Pre-Depends}
