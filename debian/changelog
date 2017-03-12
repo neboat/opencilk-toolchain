@@ -1,8 +1,8 @@
-llvm-toolchain-4.0 (1:4.0~+rc4-2) unstable; urgency=medium
+llvm-toolchain-4.0 (1:4.0-1) unstable; urgency=medium
 
-  * Fix the incorrect symlink to scan-build-py (Closes: #856869)
+  * New upstream release
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 12 Mar 2017 10:01:46 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 09 Mar 2017 07:51:53 +0100
 
 llvm-toolchain-4.0 (1:4.0~+rc4-1) unstable; urgency=medium
 
