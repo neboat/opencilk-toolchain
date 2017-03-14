@@ -1,6 +1,8 @@
 llvm-toolchain-4.0 (1:4.0-2) unstable; urgency=medium
 
   * Fix the incorrect symlink to scan-build-py (Closes: #856869)
+  * Explicit the dep of clang-format on same version of llvm to avoid
+    undefined symbols
   * Try to ignore also libclang_rt.asan-*.so for the dep generation
     (Closes: #854965)
 

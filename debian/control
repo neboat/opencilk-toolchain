@@ -44,7 +44,8 @@ Description: C, C++ and Objective-C compiler (LLVM based)
 
 Package: clang-format-4.0
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Depends: ${shlibs:Depends}, ${misc:Depends}, python,
+ libllvm4.0 (= ${binary:Version})
 Replaces: clang-format-3.3
 Breaks: clang-format-3.3
 Description: Tool to format C/C++/Obj-C code
