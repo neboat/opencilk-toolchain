@@ -3,6 +3,8 @@ llvm-toolchain-snapshot (1:5.0~svn294583-1~exp1) experimental; urgency=medium
   * New snapshot release
   * New library liblldb-intel-mpxtable.so
   * Fix the incorrect symlink to scan-build-py (Closes: #856869)
+  * Explicit the dep of clang-format on same version of llvm to avoid
+    undefined symbols
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Jan 2017 09:03:48 +0100
 
