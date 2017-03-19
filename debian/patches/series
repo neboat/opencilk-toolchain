@@ -56,3 +56,4 @@ lit-force-lang.diff
 clang-arm-default-vfp3-on-armv7a.patch
 lldb-server-path.diff
 lldb-server-link.diff
+add_symbols_versioning.patch

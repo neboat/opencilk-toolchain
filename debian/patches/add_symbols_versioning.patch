@@ -1,0 +1,41 @@
+Description: add a simple linker script to version LLVM symbols
+
+This patch adds a very simple linker script to version the lib's symbols
+and thus trying to avoid crashes if an application loads two different
+LLVM versions (as long as they do not share data between them).
+
+Note that we deliberately *don't* make LLVM_3.8 depend on LLVM_3.8:
+they're incompatible and the whole point of this patch is
+to tell the linker that.
+
+Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
+Author: Lisandro Damían Nicanor Pérez Meyer <lisandro@debian.org>
+Bug-Debian: https://bugs.debian.org/848368
+
+--- llvm-toolchain-3.8-3.8.1.orig/tools/llvm-shlib/CMakeLists.txt
++++ llvm-toolchain-3.8-3.8.1/tools/llvm-shlib/CMakeLists.txt
+@@ -42,7 +42,7 @@ set_property(TARGET LLVM PROPERTY VERSIO
+ list(REMOVE_DUPLICATES LIB_NAMES)
+ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux" OR "${CMAKE_SYSTEM_NAME}" STREQUAL "GNU" OR "${CMAKE_SYSTEM_NAME}" STREQUAL "kFreeBSD") # FIXME: It should be "GNU ld for elf"
+   # GNU ld doesn't resolve symbols in the version script.
+-  set(LIB_NAMES -Wl,--whole-archive ${LIB_NAMES} -Wl,--no-whole-archive)
++  set(LIB_NAMES -Wl,--version-script,${CMAKE_CURRENT_SOURCE_DIR}/simple_version_script.map -Wl,--whole-archive ${LIB_NAMES} -Wl,--no-whole-archive)
+ elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
+   set(LIB_NAMES -Wl,-all_load ${LIB_NAMES})
+ endif()
+--- /dev/null
++++ llvm-toolchain-3.8-3.8.1/tools/llvm-shlib/simple_version_script.map
+@@ -0,0 +1 @@
++LLVM_3.8 { global: *; };
+--- llvm-toolchain-3.8-3.8.1.orig/cmake/modules/AddLLVM.cmake
++++ llvm-toolchain-3.8-3.8.1/cmake/modules/AddLLVM.cmake
+@@ -74,7 +74,7 @@ function(add_llvm_symbol_exports target_
+     set(native_export_file "${target_name}.exports")
+     # FIXME: Don't write the "local:" line on OpenBSD.
+     add_custom_command(OUTPUT ${native_export_file}
+-      COMMAND echo "{" > ${native_export_file}
++      COMMAND echo "LLVM_3.8 {" > ${native_export_file}
+       COMMAND grep -q "[[:alnum:]]" ${export_file} && echo "  global:" >> ${native_export_file} || :
+       COMMAND sed -e "s/$/;/" -e "s/^/    /" < ${export_file} >> ${native_export_file}
+       COMMAND echo "  local: *;" >> ${native_export_file}
+
