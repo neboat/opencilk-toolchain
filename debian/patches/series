@@ -47,3 +47,4 @@ lldb-server-link.diff
 amdgpu-regression.diff
 esan-Fix-ESan-test-failure-on-Debian-Sid-bot.diff
 esan-Fix-ESan-test-failure-on-Debian-Sid-bot2.diff
+857623-allow-opencl-pointer-to-bool.diff

@@ -1,0 +1,20 @@
+Description: Allow "if (!pointer)" in OpenCL 1.1
+
+Used by e.g. Blender on mesa-opencl-icd
+
+Author: Anastasia Stulova
+Origin: upstream https://reviews.llvm.org/rL294313
+Bug: https://bugs.llvm.org/show_bug.cgi?id=30217
+Bug-Debian: https://bugs.debian.org/857623
+
+--- llvm-toolchain-3.9-3.9.1.orig/clang/lib/Sema/SemaExpr.cpp
++++ llvm-toolchain-3.9-3.9.1/clang/lib/Sema/SemaExpr.cpp
+@@ -11424,7 +11424,7 @@ ExprResult Sema::CreateBuiltinUnaryOp(So
+                  Context.getLangOpts().OpenCLVersion < 120) {
+         // OpenCL v1.1 6.3.h: The logical operator not (!) does not
+         // operate on scalar float types.
+-        if (!resultType->isIntegerType())
++        if (!resultType->isIntegerType() && !resultType->isPointerType())
+           return ExprError(Diag(OpLoc, diag::err_typecheck_unary_expr)
+                            << resultType << Input.get()->getSourceRange());
+       }

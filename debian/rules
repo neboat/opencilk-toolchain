@@ -24,7 +24,7 @@ DEB_HOST_ARCH       = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 OCAML_STDLIB_DIR    ?= $(shell ocamlc -where)
 
-LDFLAGS_EXTRA =
+LDFLAGS_EXTRA = -Wl,--default-symver
 CXXFLAGS_EXTRA = -std=c++0x
 CONFIGURE_EXTRA =
 CMAKE_EXTRA =
