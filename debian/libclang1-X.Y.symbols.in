@@ -1,5 +1,5 @@
 libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
- LLVM_@LLVM_VERSION@@LLVM_@LLVM_VERSION@ 3.9
+ (optional)LLVM_@LLVM_VERSION@@LLVM_@LLVM_VERSION@ 3.9
  clang_BlockCommandComment_getArgText@LLVM_@LLVM_VERSION@ 3.2
  clang_BlockCommandComment_getCommandName@LLVM_@LLVM_VERSION@ 3.2
  clang_BlockCommandComment_getNumArgs@LLVM_@LLVM_VERSION@ 3.2
