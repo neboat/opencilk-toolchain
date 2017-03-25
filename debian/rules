@@ -27,8 +27,6 @@ DEB_HOST_GNU_TYPE   = $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_HOST_ARCH_BITS  = $(shell dpkg-architecture -qDEB_HOST_ARCH_BITS)
 DEB_HOST_ARCH       = $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
-OCAML_STDLIB_DIR    ?= $(shell ocamlc -where)
-
 LDFLAGS_EXTRA =
 CXXFLAGS_EXTRA = -std=c++0x -gsplit-dwarf
 CONFIGURE_EXTRA =
@@ -138,7 +136,7 @@ endif
 
 
 %:
-	dh $@ --with ocaml
+	dh $@
 
 
 
@@ -147,14 +145,9 @@ preconfigure:
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
 		echo "$$f => $$f2"; \
 		sed -e 's|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|g' \
-			-e "s|@OCAML_STDLIB_DIR@|$(OCAML_STDLIB_DIR)|g" \
 			-e "s|@LLVM_VERSION_FULL@|$(LLVM_VERSION_FULL)|g" \
 			-e "s|@LLVM_VERSION@|$(LLVM_VERSION)|g" $$f > $$f2; \
 	done
-
-# Override this two targets. They are trying to manage the .in conversion for me
-override_dh_ocamlinit:
-override_dh_ocamlclean:
 
 override_dh_auto_configure: preconfigure
 	echo "Using gcc: "
