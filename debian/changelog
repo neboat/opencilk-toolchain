@@ -1,3 +1,15 @@
+llvm-toolchain-snapshot (1:5.0~svn298810-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Mar 2017 18:48:30 +0200
+
+llvm-toolchain-snapshot (1:5.0~svn298773-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 25 Mar 2017 16:16:14 +0100
+
 llvm-toolchain-snapshot (1:5.0~svn294583-1~exp1) experimental; urgency=medium
 
   * New snapshot release
