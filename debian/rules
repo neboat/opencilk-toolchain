@@ -277,6 +277,7 @@ override_dh_prep: build_doc
 build_doc:
 	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	cd $(CURDIR)/clang/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
+	$(PRE_PROCESS) $(MAKE) $(NJOBS) -C "$(TARGET_BUILD)/docs" ocaml_doc
 
 # Rename manpages
 	d=$(CURDIR)/docs/_build/man/; \
@@ -434,10 +435,20 @@ endif
 		$(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/; \
 	fi
 
+# Rename OCaml bindings
+	if test -d "$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ocaml"; then \
+		mkdir -p "$(DEB_INST)$(OCAML_STDLIB_DIR)"; \
+		mv -f "$(DEB_INST)usr/lib/llvm-$(LLVM_VERSION)/lib/ocaml" \
+			"$(DEB_INST)$(OCAML_STDLIB_DIR)/llvm-$(LLVM_VERSION)"; \
+	fi
+
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
 	rm -rf $(TARGET_BUILD)
 
+
+override_dh_makeshlibs:
+	dh_makeshlibs -V1:3.8.1-19~
 
 override_dh_shlibdeps:
 #	cd $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ && ln -s libLLVM-$(LLVM_VERSION).so.1 libLLVM-$(LLVM_VERSION).so
