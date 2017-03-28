@@ -62,7 +62,8 @@ Description: Tool to format C/C++/Obj-C code
 
 Package: clang-tidy-4.0
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Depends: ${shlibs:Depends}, ${misc:Depends}, python,
+  libllvm4.0 (= ${binary:Version})
 Replaces: clang-modernize-4.0, clang-4.0 (<< 1:4.0~svn250696-1)
 Breaks: clang-modernize-4.0, clang-4.0 (<< 1:4.0~svn250696-1)
 Description: clang-based C++ linter tool
