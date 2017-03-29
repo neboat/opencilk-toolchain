@@ -4,6 +4,9 @@ llvm-toolchain-snapshot (1:5.0~svn298832-1~exp1) experimental; urgency=medium
   * Explicit the dep of clang-tidy on same version of llvm to avoid
     undefined symbols
 
+  [ Rebecca N. Palmer ]
+  * Use versioned symbols (Closes: #848368)
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 27 Mar 2017 09:15:16 +0200
 
 llvm-toolchain-snapshot (1:5.0~svn294583-1~exp1) experimental; urgency=medium
