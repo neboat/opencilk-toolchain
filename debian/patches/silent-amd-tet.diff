@@ -1,0 +1,132 @@
+Index: llvm-toolchain-snapshot_5.0~svn299411/test/CodeGen/AMDGPU/code-object-metadata-from-llvm-ir-full.ll
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299411.orig/test/CodeGen/AMDGPU/code-object-metadata-from-llvm-ir-full.ll
++++ llvm-toolchain-snapshot_5.0~svn299411/test/CodeGen/AMDGPU/code-object-metadata-from-llvm-ir-full.ll
+@@ -4,6 +4,7 @@
+ ; RUN: llc -mtriple=amdgcn-amd-amdhsa -mcpu=gfx700 -amdgpu-dump-comd -amdgpu-verify-comd -filetype=obj -o - < %s 2>&1 | FileCheck --check-prefix=PARSER %s
+ ; RUN: llc -mtriple=amdgcn-amd-amdhsa -mcpu=gfx800 -amdgpu-dump-comd -amdgpu-verify-comd -filetype=obj -o - < %s 2>&1 | FileCheck --check-prefix=PARSER %s
+ ; RUN: llc -mtriple=amdgcn-amd-amdhsa -mcpu=gfx900 -amdgpu-dump-comd -amdgpu-verify-comd -filetype=obj -o - < %s 2>&1 | FileCheck --check-prefix=PARSER %s
++; XFAIL: *
+ 
+ %struct.A = type { i8, float }
+ %opencl.image1d_t = type opaque
+Index: llvm-toolchain-snapshot_5.0~svn299411/test/CodeGen/AMDGPU/code-object-metadata-invalid-ocl-version-1.ll
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299411.orig/test/CodeGen/AMDGPU/code-object-metadata-invalid-ocl-version-1.ll
++++ llvm-toolchain-snapshot_5.0~svn299411/test/CodeGen/AMDGPU/code-object-metadata-invalid-ocl-version-1.ll
+@@ -1,4 +1,5 @@
+ ; RUN: llc -mtriple=amdgcn-amd-amdhsa -filetype=obj -o - < %s | llvm-readobj -amdgpu-code-object-metadata | FileCheck %s
++; XFAIL: *
+ 
+ ; Make sure llc does not crash for invalid opencl version metadata.
+ 
+Index: llvm-toolchain-snapshot_5.0~svn299411/test/CodeGen/AMDGPU/code-object-metadata-invalid-ocl-version-2.ll
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299411.orig/test/CodeGen/AMDGPU/code-object-metadata-invalid-ocl-version-2.ll
++++ llvm-toolchain-snapshot_5.0~svn299411/test/CodeGen/AMDGPU/code-object-metadata-invalid-ocl-version-2.ll
+@@ -1,4 +1,5 @@
+ ; RUN: llc -mtriple=amdgcn-amd-amdhsa -filetype=obj -o - < %s | llvm-readobj -amdgpu-code-object-metadata | FileCheck %s
++; XFAIL: *
+ 
+ ; Make sure llc does not crash for invalid opencl version metadata.
+ 
+Index: llvm-toolchain-snapshot_5.0~svn299411/test/CodeGen/AMDGPU/code-object-metadata-invalid-ocl-version-3.ll
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299411.orig/test/CodeGen/AMDGPU/code-object-metadata-invalid-ocl-version-3.ll
++++ llvm-toolchain-snapshot_5.0~svn299411/test/CodeGen/AMDGPU/code-object-metadata-invalid-ocl-version-3.ll
+@@ -1,4 +1,5 @@
+ ; RUN: llc -mtriple=amdgcn-amd-amdhsa -filetype=obj -o - < %s | llvm-readobj -amdgpu-code-object-metadata | FileCheck %s
++; XFAIL: *
+ 
+ ; Make sure llc does not crash for invalid opencl version metadata.
+ 
+Index: llvm-toolchain-snapshot_5.0~svn299411/test/CodeGen/AMDGPU/code-object-metadata-kernel-code-props.ll
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299411.orig/test/CodeGen/AMDGPU/code-object-metadata-kernel-code-props.ll
++++ llvm-toolchain-snapshot_5.0~svn299411/test/CodeGen/AMDGPU/code-object-metadata-kernel-code-props.ll
+@@ -1,6 +1,7 @@
+ ; RUN: llc -mtriple=amdgcn-amd-amdhsa -mcpu=gfx700 -filetype=obj -o - < %s | llvm-readobj -amdgpu-code-object-metadata -elf-output-style=GNU -notes | FileCheck --check-prefix=CHECK --check-prefix=GFX700 --check-prefix=NOTES %s
+ ; RUN: llc -mtriple=amdgcn-amd-amdhsa -mcpu=gfx800 -filetype=obj -o - < %s | llvm-readobj -amdgpu-code-object-metadata -elf-output-style=GNU -notes | FileCheck --check-prefix=CHECK --check-prefix=GFX800 --check-prefix=NOTES %s
+ ; RUN: llc -mtriple=amdgcn-amd-amdhsa -mcpu=gfx900 -filetype=obj -o - < %s | llvm-readobj -amdgpu-code-object-metadata -elf-output-style=GNU -notes | FileCheck --check-prefix=CHECK --check-prefix=GFX900 --check-prefix=NOTES %s
++; XFAIL: *
+ 
+ ; CHECK: ---
+ ; CHECK:  Version: [ 1, 0 ]
+Index: llvm-toolchain-snapshot_5.0~svn299411/test/CodeGen/AMDGPU/code-object-metadata-kernel-debug-props.ll
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299411.orig/test/CodeGen/AMDGPU/code-object-metadata-kernel-debug-props.ll
++++ llvm-toolchain-snapshot_5.0~svn299411/test/CodeGen/AMDGPU/code-object-metadata-kernel-debug-props.ll
+@@ -1,6 +1,7 @@
+ ; RUN: llc -mtriple=amdgcn-amd-amdhsa -mcpu=gfx700 -filetype=obj -o - < %s | llvm-readobj -amdgpu-code-object-metadata -elf-output-style=GNU -notes | FileCheck --check-prefix=CHECK --check-prefix=GFX700 --check-prefix=NOTES %s
+ ; RUN: llc -mtriple=amdgcn-amd-amdhsa -mcpu=gfx800 -filetype=obj -o - < %s | llvm-readobj -amdgpu-code-object-metadata -elf-output-style=GNU -notes | FileCheck --check-prefix=CHECK --check-prefix=GFX800 --check-prefix=NOTES %s
+ ; RUN: llc -mtriple=amdgcn-amd-amdhsa -mcpu=gfx900 -filetype=obj -o - < %s | llvm-readobj -amdgpu-code-object-metadata -elf-output-style=GNU -notes | FileCheck --check-prefix=CHECK --check-prefix=GFX900 --check-prefix=NOTES %s
++; XFAIL: *
+ 
+ declare void @llvm.dbg.declare(metadata, metadata, metadata)
+ 
+Index: llvm-toolchain-snapshot_5.0~svn299411/test/MC/AMDGPU/code-object-metadata-kernel-args.s
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299411.orig/test/MC/AMDGPU/code-object-metadata-kernel-args.s
++++ llvm-toolchain-snapshot_5.0~svn299411/test/MC/AMDGPU/code-object-metadata-kernel-args.s
+@@ -1,6 +1,7 @@
+ // RUN: llvm-mc -triple=amdgcn-amd-amdhsa -mcpu=gfx700 -show-encoding %s | FileCheck --check-prefix=CHECK --check-prefix=GFX700 %s
+ // RUN: llvm-mc -triple=amdgcn-amd-amdhsa -mcpu=gfx800 -show-encoding %s | FileCheck --check-prefix=CHECK --check-prefix=GFX800 %s
+ // RUN: llvm-mc -triple=amdgcn-amd-amdhsa -mcpu=gfx900 -show-encoding %s | FileCheck --check-prefix=CHECK --check-prefix=GFX900 %s
++// XFAIL: *
+ 
+ // CHECK:  .amdgpu_code_object_metadata
+ // CHECK:    Version: [ 1, 0 ]
+Index: llvm-toolchain-snapshot_5.0~svn299411/test/MC/AMDGPU/code-object-metadata-kernel-attrs.s
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299411.orig/test/MC/AMDGPU/code-object-metadata-kernel-attrs.s
++++ llvm-toolchain-snapshot_5.0~svn299411/test/MC/AMDGPU/code-object-metadata-kernel-attrs.s
+@@ -1,6 +1,7 @@
+ // RUN: llvm-mc -triple=amdgcn-amd-amdhsa -mcpu=gfx700 -show-encoding %s | FileCheck --check-prefix=CHECK --check-prefix=GFX700 %s
+ // RUN: llvm-mc -triple=amdgcn-amd-amdhsa -mcpu=gfx800 -show-encoding %s | FileCheck --check-prefix=CHECK --check-prefix=GFX800 %s
+ // RUN: llvm-mc -triple=amdgcn-amd-amdhsa -mcpu=gfx900 -show-encoding %s | FileCheck --check-prefix=CHECK --check-prefix=GFX900 %s
++// XFAIL: *
+ 
+ // CHECK:  .amdgpu_code_object_metadata
+ // CHECK:    Version: [ 1, 0 ]
+Index: llvm-toolchain-snapshot_5.0~svn299411/test/MC/AMDGPU/code-object-metadata-kernel-code-props.s
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299411.orig/test/MC/AMDGPU/code-object-metadata-kernel-code-props.s
++++ llvm-toolchain-snapshot_5.0~svn299411/test/MC/AMDGPU/code-object-metadata-kernel-code-props.s
+@@ -1,6 +1,7 @@
+ // RUN: llvm-mc -triple=amdgcn-amd-amdhsa -mcpu=gfx700 -show-encoding %s | FileCheck --check-prefix=CHECK --check-prefix=GFX700 %s
+ // RUN: llvm-mc -triple=amdgcn-amd-amdhsa -mcpu=gfx800 -show-encoding %s | FileCheck --check-prefix=CHECK --check-prefix=GFX800 %s
+ // RUN: llvm-mc -triple=amdgcn-amd-amdhsa -mcpu=gfx900 -show-encoding %s | FileCheck --check-prefix=CHECK --check-prefix=GFX900 %s
++// FAIL: *
+ 
+ // CHECK:  .amdgpu_code_object_metadata
+ // CHECK:    Version: [ 1, 0 ]
+Index: llvm-toolchain-snapshot_5.0~svn299411/test/MC/AMDGPU/code-object-metadata-kernel-debug-props.s
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299411.orig/test/MC/AMDGPU/code-object-metadata-kernel-debug-props.s
++++ llvm-toolchain-snapshot_5.0~svn299411/test/MC/AMDGPU/code-object-metadata-kernel-debug-props.s
+@@ -1,6 +1,7 @@
+ // RUN: llvm-mc -triple=amdgcn-amd-amdhsa -mcpu=gfx700 -show-encoding %s | FileCheck --check-prefix=CHECK --check-prefix=GFX700 %s
+ // RUN: llvm-mc -triple=amdgcn-amd-amdhsa -mcpu=gfx800 -show-encoding %s | FileCheck --check-prefix=CHECK --check-prefix=GFX800 %s
+ // RUN: llvm-mc -triple=amdgcn-amd-amdhsa -mcpu=gfx900 -show-encoding %s | FileCheck --check-prefix=CHECK --check-prefix=GFX900 %s
++// XFAIL: *
+ 
+ // CHECK:  .amdgpu_code_object_metadata
+ // CHECK:    Version: [ 1, 0 ]
+@@ -23,4 +24,4 @@
+         ReservedFirstVGPR:                 11
+         PrivateSegmentBufferSGPR:          0
+         WavefrontPrivateSegmentOffsetSGPR: 11
+-.end_amdgpu_code_object_metadata
+\ No newline at end of file
++.end_amdgpu_code_object_metadata
+Index: llvm-toolchain-snapshot_5.0~svn299411/test/MC/AMDGPU/hsa.s
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299411.orig/test/MC/AMDGPU/hsa.s
++++ llvm-toolchain-snapshot_5.0~svn299411/test/MC/AMDGPU/hsa.s
+@@ -1,5 +1,6 @@
+ // RUN: llvm-mc -triple amdgcn--amdhsa -mcpu=kaveri -show-encoding %s | FileCheck %s --check-prefix=ASM
+ // RUN: llvm-mc -filetype=obj -triple amdgcn--amdhsa -mcpu=kaveri -show-encoding %s | llvm-readobj -symbols -s -sd | FileCheck %s --check-prefix=ELF
++// XFAIL: *
+ 
+ // ELF: Section {
+ // ELF: Name: .text

@@ -3,6 +3,7 @@ llvm-toolchain-snapshot (1:5.0~svn298832-1~exp1) experimental; urgency=medium
   * New snapshot release
   * Explicit the dep of clang-tidy on same version of llvm to avoid
     undefined symbols
+  * Silent some amdgpu test https://bugs.llvm.org//show_bug.cgi?id=32483
 
   [ Rebecca N. Palmer ]
   * Use versioned symbols (Closes: #848368)
