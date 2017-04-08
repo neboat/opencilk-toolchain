@@ -46,3 +46,4 @@ silent-test-failing-codeverage.diff
 disable-path-test-failing.diff
 add_symbols_versioning.patch
 silent-amd-tet.diff
+disable-error-xray.diff

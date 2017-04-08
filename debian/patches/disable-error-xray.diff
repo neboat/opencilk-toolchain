@@ -1,0 +1,45 @@
+Index: llvm-toolchain-snapshot_5.0~svn299813/compiler-rt/lib/xray/xray_tsc.h
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299813.orig/compiler-rt/lib/xray/xray_tsc.h
++++ llvm-toolchain-snapshot_5.0~svn299813/compiler-rt/lib/xray/xray_tsc.h
+@@ -61,8 +61,6 @@ inline uint64_t getTSCFrequency() XRAY_N
+ 
+ } // namespace __xray
+ 
+-#else
+-#error Target architecture is not supported.
+ #endif // CPU architecture
+ 
+ #endif // XRAY_EMULATE_TSC_H
+Index: llvm-toolchain-snapshot_5.0~svn299813/compiler-rt/lib/xray/xray_fdr_logging_impl.h
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn299813.orig/compiler-rt/lib/xray/xray_fdr_logging_impl.h
++++ llvm-toolchain-snapshot_5.0~svn299813/compiler-rt/lib/xray/xray_fdr_logging_impl.h
+@@ -423,11 +423,11 @@ static inline void processFunctionHook(
+       return;
+     }
+ 
+-    uint64_t CycleFrequency = getTSCFrequency();
++/*    uint64_t CycleFrequency = getTSCFrequency();
+     NumberOfTicksThreshold = CycleFrequency *
+                              flags()->xray_fdr_log_func_duration_threshold_us /
+                              1000000;
+-    setupNewBuffer(Buffer, wall_clock_reader);
++                             setupNewBuffer(Buffer, wall_clock_reader);*/
+   }
+ 
+   if (CurrentCPU == std::numeric_limits<uint16_t>::max()) {
+@@ -489,11 +489,11 @@ static inline void processFunctionHook(
+              BufferQueue::getErrorString(EC));
+       return;
+     }
+-    uint64_t CycleFrequency = getTSCFrequency();
++/*    uint64_t CycleFrequency = getTSCFrequency();
+     NumberOfTicksThreshold = CycleFrequency *
+                              flags()->xray_fdr_log_func_duration_threshold_us /
+                              1000000;
+-    setupNewBuffer(Buffer, wall_clock_reader);
++                             setupNewBuffer(Buffer, wall_clock_reader);*/
+   }
+ 
+   // By this point, we are now ready to write at most 24 bytes (one metadata
