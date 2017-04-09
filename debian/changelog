@@ -45,23 +45,11 @@ llvm-toolchain-3.9 (1:3.9.1-2) unstable; urgency=medium
   * debian/orig-tar.sh: less verbose
   * Remove the info section from the generated manpages (Closes: #846269)
   * Disable libedit usage in lldb because of garbage (Closes: #846616)
-<<<<<<< .working
   * Fix the path to lldb-server (to lldb-server-3.9) (Closes: #846638)
   * d/p/lldb-server-link.diff Fix the lldb hang. It was due to a linking issue.
     Thanks to Pavel Labath (Closes: #846640)
-||||||| .merge-left.r2337
-=======
-  * d/p/lldb-server-link.diff Fix the lldb hang. It was due to a linking issue.
-    Thanks to Pavel Labath (Closes: #846640)
->>>>>>> .merge-right.r2514
 
-<<<<<<< .working
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 17 Dec 2016 17:55:44 +0100
-||||||| .merge-left.r2337
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Nov 2016 13:38:01 +0100
-=======
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 09 Jan 2017 21:24:17 +0100
->>>>>>> .merge-right.r2514
 
 llvm-toolchain-3.9 (1:3.9.1-1) unstable; urgency=medium
 
