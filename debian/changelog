@@ -2,11 +2,18 @@ llvm-toolchain-4.0 (1:4.0-3) UNRELEASED; urgency=medium
 
   * Explicit the dep of clang-tidy on same version of llvm to avoid
     undefined symbols
+  * Add override_dh_makeshlibs for the libllvm or liblldb versions
+    Thanks to Julien Cristau for the patch
+  * Bring back the ocaml binding. thanks to Cyril Soldani for the patch
+    (Closes: #858626)
+  * change the min version of the libclang1 symbols to 1:4.0-3~
+  * Add override_dh_makeshlibs for the libllvm or liblldb versions
+    Thanks to Julien Cristau for the patch
 
   [ Rebecca N. Palmer ]
   * Use versioned symbols (Closes: #848368)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 19 Mar 2017 23:11:23 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 09 Apr 2017 10:11:56 +0200
 
 llvm-toolchain-4.0 (1:4.0-2) unstable; urgency=medium
 
