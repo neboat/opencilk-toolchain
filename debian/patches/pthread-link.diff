@@ -1,0 +1,18 @@
+Index: llvm-toolchain-4.0-4.0~svn292009/clang/tools/libclang/CMakeLists.txt
+1;4601;0c===================================================================
+--- llvm-toolchain-4.0-4.0~svn292009.orig/clang/tools/libclang/CMakeLists.txt
++++ llvm-toolchain-4.0-4.0~svn292009/clang/tools/libclang/CMakeLists.txt
+@@ -56,6 +56,13 @@ endif ()
+ find_library(DL_LIBRARY_PATH dl)
+ if (DL_LIBRARY_PATH)
+   list(APPEND LIBS dl)
++
++endif()
++if (PTHREAD_LIB)
++  # libpthreads overrides some standard library symbols, so main
++  # executable must be linked with it in order to provide consistent
++  # API for all shared libaries loaded by this executable.
++  list(APPEND LIBS ${PTHREAD_LIB})
+ endif()
+ 
+ option(LIBCLANG_BUILD_STATIC

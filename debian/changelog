@@ -1,17 +1,20 @@
 llvm-toolchain-snapshot (1:5.0~svn298832-1~exp1) experimental; urgency=medium
 
-  * New snapshot release
   * Explicit the dep of clang-tidy on same version of llvm to avoid
     undefined symbols
-  * d/p/silent-amd-tet.diff: Silent some amdgpu test
-    https://bugs.llvm.org//show_bug.cgi?id=32483
-  * d/p/disable-error-xray.diff: silent some xray error. See
-    https://bugs.llvm.org/show_bug.cgi?id=32582
+  * Add override_dh_makeshlibs for the libllvm or liblldb versions
+    Thanks to Julien Cristau for the patch
+  * Bring back the ocaml binding. thanks to Cyril Soldani for the patch
+    (Closes: #858626)
+  * change the min version of the libclang1 symbols to 1:4.0-3~
+  * Add override_dh_makeshlibs for the libllvm or liblldb versions
+    Thanks to Julien Cristau for the patch
+  * Fix the symlink on scan-build-py
 
   [ Rebecca N. Palmer ]
   * Use versioned symbols (Closes: #848368)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 27 Mar 2017 09:15:16 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 09 Apr 2017 10:11:56 +0200
 
 llvm-toolchain-snapshot (1:5.0~svn294583-1~exp1) experimental; urgency=medium
 
@@ -32,6 +35,9 @@ llvm-toolchain-snapshot (1:5.0~svn292017-1~exp1) experimental; urgency=medium
   * d/p/lldb-server-link-issue.patch removed, merged upstream
   * Also install python-lldb-5.0 when installing lldb-5.0 (Closes: #851171)
   * Bring back the content of llvm-5.0-doc (Closes: #844616)
+  * Bring back the content of llvm-4.0-doc (Closes: #844616)
+  * d/p/pthread-link.diff Hardcode like to pthread which was missing for
+    libclang
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 14 Jan 2017 16:36:51 +0100
 
