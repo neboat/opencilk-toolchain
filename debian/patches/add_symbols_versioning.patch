@@ -12,29 +12,29 @@ Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
 Author: Lisandro Damían Nicanor Pérez Meyer <lisandro@debian.org>
 Bug-Debian: https://bugs.debian.org/848368
 
-Index: llvm-toolchain-snapshot_5.0~svn298832/tools/llvm-shlib/CMakeLists.txt
+Index: llvm-toolchain-4.0_4.0~svn299455/tools/llvm-shlib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn298832.orig/tools/llvm-shlib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_5.0~svn298832/tools/llvm-shlib/CMakeLists.txt
+--- llvm-toolchain-4.0_4.0~svn299455.orig/tools/llvm-shlib/CMakeLists.txt
++++ llvm-toolchain-4.0_4.0~svn299455/tools/llvm-shlib/CMakeLists.txt
 @@ -40,7 +40,7 @@ set_property(TARGET LLVM PROPERTY VERSIO
  list(REMOVE_DUPLICATES LIB_NAMES)
- if(("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux") OR (MINGW) OR ("${CMAKE_SYSTEM_NAME}" STREQUAL "FreeBSD") OR ("${CMAKE_SYSTEM_NAME}" STREQUAL "DragonFly")) # FIXME: It should be "GNU ld for elf"
+ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux" OR MINGW) # FIXME: It should be "GNU ld for elf"
    # GNU ld doesn't resolve symbols in the version script.
 -  set(LIB_NAMES -Wl,--whole-archive ${LIB_NAMES} -Wl,--no-whole-archive)
 +  set(LIB_NAMES -Wl,--version-script,${CMAKE_CURRENT_SOURCE_DIR}/simple_version_script.map -Wl,--whole-archive ${LIB_NAMES} -Wl,--no-whole-archive)
  elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
    set(LIB_NAMES -Wl,-all_load ${LIB_NAMES})
  endif()
-Index: llvm-toolchain-snapshot_5.0~svn298832/tools/llvm-shlib/simple_version_script.map
+Index: llvm-toolchain-4.0_4.0~svn299455/tools/llvm-shlib/simple_version_script.map
 ===================================================================
 --- /dev/null
-+++ llvm-toolchain-snapshot_5.0~svn298832/tools/llvm-shlib/simple_version_script.map
++++ llvm-toolchain-4.0_4.0~svn299455/tools/llvm-shlib/simple_version_script.map
 @@ -0,0 +1 @@
 +LLVM_5.0 { global: *; };
-Index: llvm-toolchain-snapshot_5.0~svn298832/cmake/modules/AddLLVM.cmake
+Index: llvm-toolchain-4.0_4.0~svn299455/cmake/modules/AddLLVM.cmake
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn298832.orig/cmake/modules/AddLLVM.cmake
-+++ llvm-toolchain-snapshot_5.0~svn298832/cmake/modules/AddLLVM.cmake
+--- llvm-toolchain-4.0_4.0~svn299455.orig/cmake/modules/AddLLVM.cmake
++++ llvm-toolchain-4.0_4.0~svn299455/cmake/modules/AddLLVM.cmake
 @@ -82,7 +82,7 @@ function(add_llvm_symbol_exports target_
      set(native_export_file "${target_name}.exports")
      # FIXME: Don't write the "local:" line on OpenBSD.
