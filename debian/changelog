@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:5.0~svn299842-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 10 Apr 2017 14:10:31 +0200
+
 llvm-toolchain-snapshot (1:5.0~svn298832-1~exp1) experimental; urgency=medium
 
   * Explicit the dep of clang-tidy on same version of llvm to avoid
