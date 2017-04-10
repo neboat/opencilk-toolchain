@@ -6,7 +6,7 @@ Uploaders: Sylvestre Ledru <sylvestre@debian.org>
 Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
     cmake, perl, libtool, chrpath, texinfo, sharutils, libffi-dev (>= 3.0.9),
     lsb-release, patchutils, diffstat, xz-utils, python-dev,
-    libedit-dev, swig, python-six, python-sphinx, binutils-dev,
+    libedit-dev, libncurses5-dev, swig, python-six, python-sphinx, binutils-dev,
     libjsoncpp-dev, 
 # ocaml-nox, libctypes-ocaml, ocaml-findlib, libctypes-ocaml-dev, dh-ocaml,
     lcov, procps, help2man, zlib1g-dev,
