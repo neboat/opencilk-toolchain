@@ -1,4 +1,4 @@
-llvm-toolchain-4.0 (1:4.0-3) UNRELEASED; urgency=medium
+llvm-toolchain-4.0 (1:4.0-3) unstable; urgency=medium
 
   * Explicit the dep of clang-tidy on same version of llvm to avoid
     undefined symbols
