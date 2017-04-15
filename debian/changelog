@@ -1,3 +1,11 @@
+llvm-toolchain-4.0 (1:4.0-4) unstable; urgency=medium
+
+  * Limit the archs where the ocaml binding is built
+    Should fix the FTBFS
+    Currently amd64 arm64 armel armhf i386
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 15 Apr 2017 12:03:30 +0200
+
 llvm-toolchain-4.0 (1:4.0-3) unstable; urgency=medium
 
   * Explicit the dep of clang-tidy on same version of llvm to avoid
