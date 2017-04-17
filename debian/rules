@@ -279,9 +279,9 @@ override_dh_prep: build_doc
 build_doc:
 	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	cd $(CURDIR)/clang/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
-	if test "$(OCAML_ENABLE)" = yes; then \
-	-($(PRE_PROCESS) $(MAKE) $(NJOBS) -C "$(TARGET_BUILD)/docs" ocaml_doc); \
-	fi
+	-(if test "$(OCAML_ENABLE)" = yes; then \
+	$(PRE_PROCESS) $(MAKE) $(NJOBS) -C "$(TARGET_BUILD)/docs" ocaml_doc; \
+	fi)
 
 # Continue if failing, Ubuntu precise cannot generate manpages as sphinx is too old
 	-(cd $(TARGET_BUILD) && make $(NJOBS) docs-llvm-html docs-clang-html docs-clang-tools-html docs-polly-html docs-polly-man docs-clang-tools-man docs-clang-man docs-llvm-man)
