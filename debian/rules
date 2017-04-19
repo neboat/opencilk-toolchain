@@ -433,8 +433,8 @@ override_dh_auto_install:
 
 # Rename OCaml bindings
 	if test "$(OCAML_ENABLE)" = yes; then \
+		mkdir -p "$(DEB_INST)$(OCAML_STDLIB_DIR)"; \
 		if test -d "$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ocaml"; then \
-			mkdir -p "$(DEB_INST)$(OCAML_STDLIB_DIR)"; \
 			mv -f "$(DEB_INST)usr/lib/llvm-$(LLVM_VERSION)/lib/ocaml" \
 			"$(DEB_INST)$(OCAML_STDLIB_DIR)/llvm-$(LLVM_VERSION)"; \
 		fi; \
