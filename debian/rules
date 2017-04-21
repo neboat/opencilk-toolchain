@@ -279,9 +279,9 @@ override_dh_prep: build_doc
 build_doc:
 	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	cd $(CURDIR)/clang/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
-	if test "$(OCAML_ENABLE)" = yes; then \
+	-(if test "$(OCAML_ENABLE)" = yes; then \
 	$(PRE_PROCESS) $(MAKE) $(NJOBS) -C "$(TARGET_BUILD)/docs" ocaml_doc; \
-	fi
+	fi)
 
 # Continue if failing, Ubuntu precise cannot generate manpages as sphinx is too old
 	-(cd $(TARGET_BUILD) && make $(NJOBS) docs-llvm-html docs-clang-html docs-clang-tools-html docs-polly-html docs-polly-man docs-clang-tools-man docs-clang-man docs-llvm-man)
@@ -433,8 +433,9 @@ override_dh_auto_install:
 
 # Rename OCaml bindings
 	if test "$(OCAML_ENABLE)" = yes; then \
+		mkdir -p "$(DEB_INST)$(OCAML_STDLIB_DIR)"; \
+		mkdir -p "$(DEB_INST)usr/lib/llvm-$(LLVM_VERSION)/share/doc/llvm/ocaml-html/"; \
 		if test -d "$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ocaml"; then \
-			mkdir -p "$(DEB_INST)$(OCAML_STDLIB_DIR)"; \
 			mv -f "$(DEB_INST)usr/lib/llvm-$(LLVM_VERSION)/lib/ocaml" \
 			"$(DEB_INST)$(OCAML_STDLIB_DIR)/llvm-$(LLVM_VERSION)"; \
 		fi; \

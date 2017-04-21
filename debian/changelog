@@ -1,6 +1,7 @@
 llvm-toolchain-4.0 (1:4.0-5) unstable; urgency=medium
 
   * Prepare version 4.0.1
+  * Tolerate if ocaml failed
 
  --
 
