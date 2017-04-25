@@ -2,8 +2,10 @@ llvm-toolchain-4.0 (1:4.0-5) unstable; urgency=medium
 
   * Prepare version 4.0.1
   * Tolerate if ocaml failed
+  * Just like with snapshot, add libncurses in the list of build deps
+    (Closes: #861170)
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 25 Apr 2017 13:32:25 +0200
 
 llvm-toolchain-4.0 (1:4.0-4) unstable; urgency=medium
 
