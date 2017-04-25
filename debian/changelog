@@ -1,11 +1,13 @@
-llvm-toolchain-snapshot (1:5.0~svn298832-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:5.0~svn298832-1~exp3) UNRELEASED; urgency=medium
 
   * Limit the archs where the ocaml binding is built
     Should fix the FTBFS
     Currently amd64 arm64 armel armhf i386
   * d/p/add_symbols_versioning.patch removed (applied upstream)
+  * Really fix "use versioned symbols" for llvm
+    Thanks to Julien Cristau for the patch (Closes: #849098)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 15 Apr 2017 17:20:07 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 25 Apr 2017 15:13:24 +0200
 
 llvm-toolchain-snapshot (1:5.0~svn298832-1~exp1) experimental; urgency=medium
 
