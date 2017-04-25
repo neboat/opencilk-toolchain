@@ -1,5 +1,7 @@
 llvm-toolchain-4.0 (1:4.0-5) unstable; urgency=medium
 
+  * Really fix "use versioned symbols" for llvm
+    Thanks to Julien Cristau for the patch (Closes: #849098)
   * Prepare version 4.0.1
   * Tolerate if ocaml failed
   * Just like with snapshot, add libncurses in the list of build deps
@@ -7,6 +9,7 @@ llvm-toolchain-4.0 (1:4.0-5) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 25 Apr 2017 13:32:25 +0200
 
+>>>>>>> .r2572
 llvm-toolchain-4.0 (1:4.0-4) unstable; urgency=medium
 
   * Limit the archs where the ocaml binding is built
