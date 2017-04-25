@@ -1,5 +1,16 @@
 llvm-toolchain-snapshot (1:5.0~svn298832-1~exp3) UNRELEASED; urgency=medium
 
+  * Really fix "use versioned symbols" for llvm
+    Thanks to Julien Cristau for the patch (Closes: #849098)
+  * Prepare version 4.0.1
+  * Tolerate if ocaml failed
+  * Just like with snapshot, add libncurses in the list of build deps
+    (Closes: #861170)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 25 Apr 2017 13:32:25 +0200
+
+llvm-toolchain-snapshot (1:5.0~svn298832-1~exp2) unstable; urgency=medium
+
   * Limit the archs where the ocaml binding is built
     Should fix the FTBFS
     Currently amd64 arm64 armel armhf i386
