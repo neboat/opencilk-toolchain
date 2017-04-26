@@ -1,15 +1,4 @@
-llvm-toolchain-snapshot (1:5.0~svn298832-1~exp3) UNRELEASED; urgency=medium
-
-  * Really fix "use versioned symbols" for llvm
-    Thanks to Julien Cristau for the patch (Closes: #849098)
-  * Prepare version 4.0.1
-  * Tolerate if ocaml failed
-  * Just like with snapshot, add libncurses in the list of build deps
-    (Closes: #861170)
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 25 Apr 2017 13:32:25 +0200
-
-llvm-toolchain-snapshot (1:5.0~svn298832-1~exp2) unstable; urgency=medium
+llvm-toolchain-snapshot (1:5.0~svn298899-1) unstable; urgency=medium
 
   * Limit the archs where the ocaml binding is built
     Should fix the FTBFS
@@ -17,20 +6,13 @@ llvm-toolchain-snapshot (1:5.0~svn298832-1~exp2) unstable; urgency=medium
   * d/p/add_symbols_versioning.patch removed (applied upstream)
   * Really fix "use versioned symbols" for llvm
     Thanks to Julien Cristau for the patch (Closes: #849098)
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 25 Apr 2017 15:13:24 +0200
-
-llvm-toolchain-snapshot (1:5.0~svn298832-1~exp1) experimental; urgency=medium
-
   * Explicit the dep of clang-tidy on same version of llvm to avoid
     undefined symbols
   * Add override_dh_makeshlibs for the libllvm or liblldb versions
     Thanks to Julien Cristau for the patch
   * change the min version of the libclang1 symbols to 1:4.0-3~
-  * Add override_dh_makeshlibs for the libllvm or liblldb versions
-    Thanks to Julien Cristau for the patch
   * Fix the symlink on scan-build-py
-  * Add libncurses5-dev as part of the build dep (needed now for lldb)
+  * add libncurses in the list of build deps (Closes: #861170)
 
   [ Rebecca N. Palmer ]
   * Use versioned symbols (Closes: #848368)
