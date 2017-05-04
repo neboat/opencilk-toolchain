@@ -3,10 +3,10 @@
  polly/lib/CMakeLists.txt |   14 +++++++-------
  2 files changed, 11 insertions(+), 8 deletions(-)
 
-Index: llvm-toolchain-snapshot_5.0~svn301630/polly/CMakeLists.txt
+Index: llvm-toolchain-snapshot_5.0~svn302180/polly/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn301630.orig/polly/CMakeLists.txt
-+++ llvm-toolchain-snapshot_5.0~svn301630/polly/CMakeLists.txt
+--- llvm-toolchain-snapshot_5.0~svn302180.orig/polly/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn302180/polly/CMakeLists.txt
 @@ -179,11 +179,13 @@ else()
    set(ISL_TARGET PollyISL)
  endif()
@@ -22,10 +22,10 @@ Index: llvm-toolchain-snapshot_5.0~svn301630/polly/CMakeLists.txt
    ${CMAKE_CURRENT_SOURCE_DIR}/lib/External/pet/include
    ${CMAKE_CURRENT_SOURCE_DIR}/lib/External
    ${CMAKE_CURRENT_BINARY_DIR}/include
-Index: llvm-toolchain-snapshot_5.0~svn301630/polly/lib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_5.0~svn302180/polly/lib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn301630.orig/polly/lib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_5.0~svn301630/polly/lib/CMakeLists.txt
+--- llvm-toolchain-snapshot_5.0~svn302180.orig/polly/lib/CMakeLists.txt
++++ llvm-toolchain-snapshot_5.0~svn302180/polly/lib/CMakeLists.txt
 @@ -1,10 +1,10 @@
  set(LLVM_NO_RTTI 1)
  
@@ -42,16 +42,16 @@ Index: llvm-toolchain-snapshot_5.0~svn301630/polly/lib/CMakeLists.txt
  
  set(ISL_CODEGEN_FILES
      CodeGen/IslAst.cpp
-@@ -56,7 +56,7 @@ add_library(PollyCore OBJECT
-   Support/ScopLocation.cpp
+@@ -57,7 +57,7 @@ add_library(PollyCore OBJECT
    Support/ISLTools.cpp
    Support/DumpModulePass.cpp
+   Support/VirtualInstruction.cpp
 -  ${POLLY_JSON_FILES}
 +#  ${POLLY_JSON_FILES}
    Transform/Canonicalization.cpp
    Transform/CodePreparation.cpp
    Transform/DeadCodeElimination.cpp
-@@ -75,6 +75,7 @@ add_library(PollyCore OBJECT
+@@ -77,6 +77,7 @@ set_target_properties(PollyCore PROPERTI
  add_polly_library(Polly $<TARGET_OBJECTS:PollyCore>)
  target_link_libraries(Polly
    ${ISL_TARGET}
@@ -59,10 +59,10 @@ Index: llvm-toolchain-snapshot_5.0~svn301630/polly/lib/CMakeLists.txt
  )
  
  # Additional dependencies for Polly-ACC.
-Index: llvm-toolchain-snapshot_5.0~svn301630/polly/lib/Exchange/JSONExporter.cpp
+Index: llvm-toolchain-snapshot_5.0~svn302180/polly/lib/Exchange/JSONExporter.cpp
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn301630.orig/polly/lib/Exchange/JSONExporter.cpp
-+++ llvm-toolchain-snapshot_5.0~svn301630/polly/lib/Exchange/JSONExporter.cpp
+--- llvm-toolchain-snapshot_5.0~svn302180.orig/polly/lib/Exchange/JSONExporter.cpp
++++ llvm-toolchain-snapshot_5.0~svn302180/polly/lib/Exchange/JSONExporter.cpp
 @@ -29,8 +29,8 @@
  #include "isl/printer.h"
  #include "isl/set.h"
