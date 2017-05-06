@@ -166,7 +166,7 @@ Description: clang library - Common development package
 
 
 Package: libfuzzer-4.0-dev
-Architecture: any
+Architecture: linux-any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, clang-4.0 (= ${binary:Version})
 Description: Library for coverage-guided fuzz testing

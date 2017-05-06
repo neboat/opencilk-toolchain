@@ -1,3 +1,10 @@
+llvm-toolchain-4.0 (1:4.0.1~+rc1-2) unstable; urgency=medium
+
+  * Only enable libfuzzer for Linux kernel.
+    Thanks to Pino Toscano for the patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 06 May 2017 10:03:14 +0200
+
 llvm-toolchain-4.0 (1:4.0.1~+rc1-1) unstable; urgency=medium
 
   * New snapshot release
