@@ -1,3 +1,9 @@
+llvm-toolchain-4.0 (1:4.0.1~+rc1-1) unstable; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 05 May 2017 09:44:42 +0200
+
 llvm-toolchain-4.0 (1:4.0-5) unstable; urgency=medium
 
   * Really fix "use versioned symbols" for llvm
