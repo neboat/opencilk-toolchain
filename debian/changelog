@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:5.0~svn298899-2) UNRELEASED; urgency=medium
+
+  * Only enable libfuzzer for Linux kernel.
+    Thanks to Pino Toscano for the patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 06 May 2017 10:05:07 +0200
+
 llvm-toolchain-snapshot (1:5.0~svn298899-1) unstable; urgency=medium
 
   * Limit the archs where the ocaml binding is built
