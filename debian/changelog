@@ -1,9 +1,11 @@
-llvm-toolchain-snapshot (1:5.0~svn298899-2) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:5.0~svn302368-1~exp1) experimental; urgency=medium
 
   * Only enable libfuzzer for Linux kernel.
     Thanks to Pino Toscano for the patch
+  * Add option -DPOLLY_BUNDLED_JSONCPP=ON
+    to use the system lib instead of the patch d/p/use-deb-json.diff
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 06 May 2017 10:05:07 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 07 May 2017 12:13:43 +0200
 
 llvm-toolchain-snapshot (1:5.0~svn298899-1) unstable; urgency=medium
 
