@@ -289,7 +289,7 @@ build_doc:
 	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	cd $(CURDIR)/clang/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	-(if test "$(OCAML_ENABLE)" = yes; then \
-	$(PRE_PROCESS) $(MAKE) $(NJOBS) -C "$(TARGET_BUILD)/docs" ocaml_doc; \
+	$(MAKE) $(NJOBS) -C "$(TARGET_BUILD)/docs" ocaml_doc; \
 	fi)
 
 # Continue if failing, Ubuntu precise cannot generate manpages as sphinx is too old
