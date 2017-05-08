@@ -71,8 +71,11 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_EvalResult_dispose@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_EvalResult_getAsDouble@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_EvalResult_getAsInt@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_EvalResult_getAsLongLong@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
  clang_EvalResult_getAsStr@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_EvalResult_getAsUnsigned@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
  clang_EvalResult_getKind@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_EvalResult_isUnsignedInt@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
  clang_File_isEqual@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_FullComment_getAsHTML@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_FullComment_getAsXML@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -113,6 +116,9 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_TParamCommandComment_getIndex@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_TParamCommandComment_getParamName@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_TParamCommandComment_isParamPositionValid@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_TargetInfo_dispose@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
+ clang_TargetInfo_getPointerWidth@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
+ clang_TargetInfo_getTriple@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
  clang_TextComment_getText@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Type_getAlignOf@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Type_getCXXRefQualifier@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -123,6 +129,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Type_getOffsetOf@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Type_getSizeOf@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Type_getTemplateArgumentAsType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_Type_isTransparentTagTypedef@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
  clang_Type_visitFields@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_VerbatimBlockLineComment_getText@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_VerbatimLineComment_getText@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -180,6 +187,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_findReferencesInFileWithBlock@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_formatDiagnostic@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_free@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_getAllSkippedRanges@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
  clang_getArgType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getArrayElementType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getArraySize@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -286,6 +294,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getTokenSpelling@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getTranslationUnitCursor@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getTranslationUnitSpelling@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_getTranslationUnitTargetInfo@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
  clang_getTypeDeclaration@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getTypeKindSpelling@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getTypeSpelling@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~

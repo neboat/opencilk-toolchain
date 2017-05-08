@@ -4,6 +4,16 @@ llvm-toolchain-snapshot (1:5.0~svn302368-1~exp1) experimental; urgency=medium
     Thanks to Pino Toscano for the patch
   * Add option -DPOLLY_BUNDLED_JSONCPP=ON
     to use the system lib instead of the patch d/p/use-deb-json.diff
+  * New symbols added in libclang
+     - clang_EvalResult_getAsLongLong
+     - clang_EvalResult_getAsUnsigned
+     - clang_EvalResult_isUnsignedInt
+     - clang_TargetInfo_dispose
+     - clang_TargetInfo_getPointerWidth
+     - clang_TargetInfo_getTriple
+     - clang_Type_isTransparentTagTypedef
+     - clang_getAllSkippedRanges
+     - clang_getTranslationUnitTargetInfo
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 07 May 2017 12:13:43 +0200
 
