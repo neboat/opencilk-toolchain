@@ -14,6 +14,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/sancov
 usr/lib/llvm-@LLVM_VERSION@/share/scan-view/
 usr/lib/llvm-@LLVM_VERSION@/share/scan-build/
 usr/lib/llvm-@LLVM_VERSION@/share/man/man1/scan-build.1
+usr/lib/llvm-@LLVM_VERSION@/share/clang/bash-autocomplete.sh
 usr/lib/llvm-@LLVM_VERSION@/libexec/ccc-analyzer
 usr/lib/llvm-@LLVM_VERSION@/libexec/c++-analyzer
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-offload-bundler
