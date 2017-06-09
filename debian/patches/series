@@ -45,3 +45,4 @@ silent-test-failing-codeverage.diff
 disable-path-test-failing.diff
 silent-amd-tet.diff
 disable-error-xray.diff
+lldb-disable-swig-error.diff
