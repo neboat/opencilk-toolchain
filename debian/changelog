@@ -1,3 +1,9 @@
+llvm-toolchain-4.0 (1:4.0.1~+rc3-2) unstable; urgency=medium
+
+  * Add libomp-dev to the suggests of clang
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 14 Jun 2017 19:06:20 +0200
+
 llvm-toolchain-4.0 (1:4.0.1~+rc3-1) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
