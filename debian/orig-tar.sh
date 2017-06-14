@@ -12,7 +12,7 @@ set -e
 # TODO rest of the options
 
 # To create an rc1 release:
-# sh 3.4/debian/orig-tar.sh RELEASE_34 rc1
+# sh 4.0/debian/orig-tar.sh RELEASE_40 rc1
 
 SVN_BASE_URL=http://llvm.org/svn/llvm-project/
 MAJOR_VERSION=4.0
@@ -20,16 +20,20 @@ CURRENT_VERSION=4.0 # Should be changed to 3.5.1 later
 
 if test -n "$1"; then
 # http://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/branches/google/stable/
-# For example: sh 3.4/debian/orig-tar.sh release_34
+# For example: sh 4.0/debian/orig-tar.sh release_400
     BRANCH=$1
 fi
 
 if test -n "$1" -a -n "$2"; then
 # http://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/tags/RELEASE_34/rc1/
-# For example: sh 3.4/debian/orig-tar.sh RELEASE_34 rc2
+# For example: sh 4.0/debian/orig-tar.sh RELEASE_401 rc3 4.0.1
     BRANCH=$1
     TAG=$2
     RCRELEASE="true"
+    if test -z "$3"; then
+        echo "Please provide the exact version. Used for the tarball name  Ex: 4.0.1"
+    fi
+    EXACT_VERSION=$3
 fi
 
 get_svn_url() {
@@ -108,9 +112,9 @@ fi
 
 if test -n "$RCRELEASE"; then
     if test "$TAG" = "final"; then
-	    VERSION=$MAJOR_VERSION
+	    VERSION=$EXACT_VERSION
     else
-        VERSION=$MAJOR_VERSION"~+"$TAG
+        VERSION=$EXACT_VERSION"~+"$TAG
     fi
     FULL_VERSION="llvm-toolchain-"$MAJOR_VERSION"_"$VERSION
 else
