@@ -7,6 +7,7 @@ llvm-toolchain-snapshot (1:5.0~svn305064-1~exp1) experimental; urgency=medium
   * New snapshot release
   * Fix a hurd PATH_MAX issue
   * Transform the lldb swig check from a error to a warning
+  * Add libomp-dev to the suggests of clang
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 09 Jun 2017 12:04:56 +0200
 
