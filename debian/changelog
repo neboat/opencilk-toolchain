@@ -11,6 +11,8 @@ llvm-toolchain-snapshot (1:5.0~svn305064-1~exp1) experimental; urgency=medium
   * Add Provides on python-lldb-x.y & python-clang-x.y & libllvm-x.y-ocaml-dev
     to avoid the recurring problem about conflicts
     (Closes: #835546, #863739, #863742)
+  * Standards-Version => 4.0.0
+  * Generate the llvm-tblgen & lld manpages
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 09 Jun 2017 12:04:56 +0200
 
