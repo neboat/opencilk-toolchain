@@ -8,6 +8,7 @@ llvm-toolchain-4.0 (1:4.0.1~+rc3-2) unstable; urgency=medium
   * Standards-Version => 4.0.0
   * Generate the llvm-tblgen, clang-change-namespace, clang-offload-bundler
     lld, clang++, clang-check, clang-cpp & clang-import-test manpages
+  * Remove the --no-discard-stderr option from help2man calls
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 14 Jun 2017 19:06:20 +0200
 
