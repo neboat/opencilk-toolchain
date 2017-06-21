@@ -1,5 +1,6 @@
-llvm-toolchain-4.0 (1:4.0.1~+rc3-2) unstable; urgency=medium
+llvm-toolchain-4.0 (1:4.0.1-1) unstable; urgency=medium
 
+  * New stable release
   * Add libomp-dev to the suggests of clang
   * Add the ld.lld manpage
   * Add Provides on python-lldb-x.y & python-clang-x.y & libllvm-x.y-ocaml-dev
