@@ -15,7 +15,8 @@ llvm-toolchain-snapshot (1:5.0~svn305653-1) unstable; urgency=medium
   * Generate the llvm-tblgen, clang-change-namespace, clang-offload-bundler
     lld, clang++, clang-check, clang-cpp & clang-import-test manpages
   * Remove the --no-discard-stderr option from help2man calls
-  * use -DPOLLY_BUNDLED_JSONCPP=OFF
+  * use -DPOLLY_BUNDLED_JSONCPP=OFF & add pkg-config as a dep (to help find
+    the files)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 09 Jun 2017 12:04:56 +0200
 
