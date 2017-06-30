@@ -1,10 +1,10 @@
-Index: llvm-toolchain-snapshot_5.0~svn300485/test/ThinLTO/X86/autoupgrade.ll
+Index: llvm-toolchain-snapshot_5.0~svn306792/test/ThinLTO/X86/autoupgrade.ll
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn300485.orig/test/ThinLTO/X86/autoupgrade.ll
-+++ llvm-toolchain-snapshot_5.0~svn300485/test/ThinLTO/X86/autoupgrade.ll
+--- llvm-toolchain-snapshot_5.0~svn306792.orig/test/ThinLTO/X86/autoupgrade.ll
++++ llvm-toolchain-snapshot_5.0~svn306792/test/ThinLTO/X86/autoupgrade.ll
 @@ -12,6 +12,8 @@
  ; CHECK: <STRTAB_BLOCK
- ; CHECK-NEXT: blob data = 'mainglobalfunc1llvm.invariant.start.p0i8'
+ ; CHECK-NEXT: blob data = 'mainglobalfunc1llvm.invariant.start.p0i8{{.*}}'
  
 +; XFAIL: *
 +
