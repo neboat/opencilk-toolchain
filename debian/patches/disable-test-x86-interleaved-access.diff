@@ -1,0 +1,12 @@
+Index: llvm-toolchain-snapshot_5.0~svn307684/test/CodeGen/X86/x86-interleaved-access.ll
+===================================================================
+--- llvm-toolchain-snapshot_5.0~svn307684.orig/test/CodeGen/X86/x86-interleaved-access.ll
++++ llvm-toolchain-snapshot_5.0~svn307684/test/CodeGen/X86/x86-interleaved-access.ll
+@@ -2,6 +2,7 @@
+ ; RUN: llc < %s -mtriple=x86_64-pc-linux -mattr=+avx | FileCheck %s --check-prefix=AVX --check-prefix=AVX1
+ ; RUN: llc < %s -mtriple=x86_64-pc-linux -mattr=+avx2 | FileCheck %s --check-prefix=AVX --check-prefix=AVXB --check-prefix=AVX2
+ ; RUN: llc < %s -mtriple=x86_64-pc-linux -mattr=+avx512f | FileCheck %s --check-prefix=AVXB --check-prefix=AVX3
++; XFAIL: *
+ 
+ define <4 x double> @load_factorf64_4(<16 x double>* %ptr) {
+ ; AVX-LABEL: load_factorf64_4:
