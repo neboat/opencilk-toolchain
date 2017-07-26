@@ -1,3 +1,9 @@
+llvm-toolchain-4.0 (1:4.0.1-2) unstable; urgency=medium
+
+  * ld.lld manpage wasn't installed
+
+ --
+
 llvm-toolchain-4.0 (1:4.0.1-1) unstable; urgency=medium
 
   * New stable release
