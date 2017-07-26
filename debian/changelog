@@ -1,8 +1,9 @@
 llvm-toolchain-4.0 (1:4.0.1-2) unstable; urgency=medium
 
+  * Rebuild with gcc 7 to fix a relocation error (Closes: #866354)
   * ld.lld manpage wasn't installed
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 26 Jul 2017 09:06:29 +0200
 
 llvm-toolchain-4.0 (1:4.0.1-1) unstable; urgency=medium
 
