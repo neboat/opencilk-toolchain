@@ -1,4 +1,4 @@
-llvm-toolchain-5 (1:5.0~svn309301-1) unstable; urgency=medium
+llvm-toolchain-5.0 (1:5.0~svn309301-1) unstable; urgency=medium
 
   * Upload as a new package
   * Ship the opt-viewer new program as part of llvm-5.0 tools
