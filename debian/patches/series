@@ -10,9 +10,7 @@ unwind-chain-inclusion.diff
 hurd-pathmax.diff
 silent-gold-test.diff
 atomic_library_1.diff
-atomic_library_2.diff
 python-clangpath.diff
-removeduplicatedeclaration.diff
 fix-clang-path-and-build.diff
 #force-gcc-header-obj.diff
 do-not-fail-on-unexpected-pass.diff

@@ -9,32 +9,11 @@ can't tell program if libatomic is always lock free.
 
 Related bug: https://llvm.org/bugs/show_bug.cgi?id=19355
 
-Index: llvm-toolchain-snapshot_5.0~svn304075/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_6.0~svn309319/clang/lib/Basic/Targets/X86.cpp
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn304075.orig/clang/lib/Basic/Targets.cpp
-+++ llvm-toolchain-snapshot_5.0~svn304075/clang/lib/Basic/Targets.cpp
-@@ -2913,7 +2913,10 @@ class X86TargetInfo : public TargetInfo
-     FP_SSE,
-     FP_387
-   } FPMath = FP_Default;
--
-+protected:
-+  bool isCmpXChg8Supported() const {
-+    return CPU >= CK_i586;
-+  }
- public:
-   X86TargetInfo(const llvm::Triple &Triple, const TargetOptions &)
-       : TargetInfo(Triple) {
-@@ -3034,6 +3037,8 @@ public:
-     // acceptable.
-     // FIXME: This results in terrible diagnostics. Clang just says the CPU is
-     // invalid without explaining *why*.
-+    if (!isCmpXChg8Supported())
-+        MaxAtomicPromoteWidth = MaxAtomicInlineWidth = 32;
-     switch (CPU) {
-     case CK_Generic:
-       // No processor selected!
-@@ -4163,7 +4168,7 @@ void X86TargetInfo::getTargetDefines(con
+--- llvm-toolchain-snapshot_6.0~svn309319.orig/clang/lib/Basic/Targets/X86.cpp
++++ llvm-toolchain-snapshot_6.0~svn309319/clang/lib/Basic/Targets/X86.cpp
+@@ -1133,7 +1133,7 @@ void X86TargetInfo::getTargetDefines(con
      Builder.defineMacro("__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2");
      Builder.defineMacro("__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4");
    }
@@ -43,12 +22,25 @@ Index: llvm-toolchain-snapshot_5.0~svn304075/clang/lib/Basic/Targets.cpp
      Builder.defineMacro("__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8");
  
    if (HasFloat128)
-@@ -4469,8 +4474,6 @@ public:
-                              (1 << TargetInfo::LongDouble));
+Index: llvm-toolchain-snapshot_6.0~svn309319/clang/lib/Basic/Targets/X86.h
+===================================================================
+--- llvm-toolchain-snapshot_6.0~svn309319.orig/clang/lib/Basic/Targets/X86.h
++++ llvm-toolchain-snapshot_6.0~svn309319/clang/lib/Basic/Targets/X86.h
+@@ -281,6 +281,8 @@ class LLVM_LIBRARY_VISIBILITY X86TargetI
+     // acceptable.
+     // FIXME: This results in terrible diagnostics. Clang just says the CPU is
+     // invalid without explaining *why*.
++    if (!isCmpXChg8Supported())
++        MaxAtomicPromoteWidth = MaxAtomicInlineWidth = 32;
+     switch (Kind) {
+     case CK_Generic:
+       // No processor selected!
+@@ -548,8 +550,6 @@ public:
+          (1 << TargetInfo::LongDouble));
  
      // x86-32 has atomics up to 8 bytes
 -    // FIXME: Check that we actually have cmpxchg8b before setting
 -    // MaxAtomicInlineWidth. (cmpxchg8b is an i586 instruction.)
      MaxAtomicPromoteWidth = MaxAtomicInlineWidth = 64;
    }
-   BuiltinVaListKind getBuiltinVaListKind() const override {
+ 
