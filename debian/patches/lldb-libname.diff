@@ -9,7 +9,7 @@
                  strLibFileExtn = ".dylib"
              else:
 -                strLibFileExtn = ".so"
-+                strLibFileExtn = "-5.0.so"
++                strLibFileExtn = "-6.0.so"
              strSrc = os.path.join(vstrLldbLibDir, "liblldb" + strLibFileExtn)
  
      bOk, strErrMsg = make_symlink(

@@ -1,16 +1,16 @@
 # Force the version of clang in the analyzer
 # This was causing the static analyzer to fail silently if the clang & clang++ are
 # not installed
-Index: llvm-toolchain-snapshot_5.0~svn255.06/clang/tools/scan-build/libexec/ccc-analyzer
+Index: llvm-toolchain-snapshot_6.0~svn256.06/clang/tools/scan-build/libexec/ccc-analyzer
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn255.06.orig/clang/tools/scan-build/libexec/ccc-analyzer
-+++ llvm-toolchain-snapshot_5.0~svn255.06/clang/tools/scan-build/libexec/ccc-analyzer
+--- llvm-toolchain-snapshot_6.0~svn256.06.orig/clang/tools/scan-build/libexec/ccc-analyzer
++++ llvm-toolchain-snapshot_6.0~svn256.06/clang/tools/scan-build/libexec/ccc-analyzer
 @@ -91,7 +91,7 @@ if ($FindBin::Script =~ /c\+\+-analyzer/
    if (!defined $Compiler || (! -x $Compiler && ! SearchInPath($Compiler))) { $Compiler = $DefaultCXXCompiler; }
  
    $Clang = $ENV{'CLANG_CXX'};
 -  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++'; }
-+  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++-5.0'; }
++  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++-6.0'; }
  
    $IsCXX = 1
  }
@@ -19,7 +19,7 @@ Index: llvm-toolchain-snapshot_5.0~svn255.06/clang/tools/scan-build/libexec/ccc-
  
    $Clang = $ENV{'CLANG'};
 -  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang'; }
-+  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang-5.0'; }
++  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang-6.0'; }
  
    $IsCXX = 0
  }

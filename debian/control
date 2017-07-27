@@ -23,20 +23,20 @@ Vcs-Browser: https://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/sna
 
 # ------------- clang -------------
 
-Package: clang-5.0
+Package: clang-6.0
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang-common-5.0-dev (= ${binary:Version}),
- libclang1-5.0 (= ${binary:Version}), libc6-dev, binutils
+ ${dep:devlibs-objc}, libclang-common-6.0-dev (= ${binary:Version}),
+ libclang1-6.0 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
-Recommends: llvm-5.0-dev, python
-Suggests: gnustep, gnustep-devel, clang-5.0-doc, libomp-dev
+Recommends: llvm-6.0-dev, python
+Suggests: gnustep, gnustep-devel, clang-6.0-doc, libomp-dev
 Replaces: clang-3.1, clang-3.2, clang-3.3,
  clang-3.4 (<< 1:3.4.2-7~exp1), clang-3.5 (<< 1:3.5~+rc1-3~exp1), compiler-rt,
- clang-include-fixer-5.0
+ clang-include-fixer-6.0
 Breaks: clang-3.1, clang-3.2, clang-3.3,
  clang-3.4 (<< 1:3.4.2-7~exp1), clang-3.5 (<< 1:3.5~+rc1-3~exp1), compiler-rt,
-  clang-include-fixer-5.0
+  clang-include-fixer-6.0
 Description: C, C++ and Objective-C compiler (LLVM based)
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler
@@ -46,10 +46,10 @@ Description: C, C++ and Objective-C compiler (LLVM based)
  well as the upcoming C++14 standard, and some parts of the fledgling C++1z
  standard, and is considered a production-quality C++ compiler.
 
-Package: clang-format-5.0
+Package: clang-format-6.0
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- libllvm5.0 (= ${binary:Version})
+ libllvm6.0 (= ${binary:Version})
 Replaces: clang-format-3.3
 Breaks: clang-format-3.3
 Description: Tool to format C/C++/Obj-C code
@@ -64,19 +64,19 @@ Description: Tool to format C/C++/Obj-C code
  .
  This package also provides vim and emacs plugins.
 
-Package: clang-tidy-5.0
+Package: clang-tidy-6.0
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- libllvm5.0 (= ${binary:Version})
-Replaces: clang-modernize-5.0, clang-5.0 (<< 1:5.0~svn250696-1)
-Breaks: clang-modernize-5.0, clang-5.0 (<< 1:5.0~svn250696-1)
+ libllvm6.0 (= ${binary:Version})
+Replaces: clang-modernize-6.0, clang-6.0 (<< 1:6.0~svn250696-1)
+Breaks: clang-modernize-6.0, clang-6.0 (<< 1:6.0~svn250696-1)
 Description: clang-based C++ linter tool
  Provide an extensible framework for diagnosing and fixing typical programming
  errors, like style violations, interface misuse, or bugs that can be deduced
  via static analysis. clang-tidy is modular and provides a convenient interface
  for writing new checks.
 
-Package: clang-5.0-doc
+Package: clang-6.0-doc
 Architecture: all
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -91,7 +91,7 @@ Description: C, C++ and Objective-C compiler (LLVM based) - Documentation
  .
  This package contains the documentation.
 
-Package: libclang1-5.0
+Package: libclang1-6.0
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
@@ -113,12 +113,12 @@ Description: C interface to the clang library
  locations with elements within the AST, and other facilities that support
  Clang-based development tools.
 
-Package: libclang1-5.0-dbg
+Package: libclang1-6.0-dbg
 Architecture: any
 Multi-Arch: same
 Section: debug
 Priority: extra
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libclang1-5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libclang1-6.0 (= ${binary:Version})
 Description: clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler
@@ -130,12 +130,12 @@ Description: clang library
  .
  This package contains the debugging symbols.
 
-Package: libclang-5.0-dev
+Package: libclang-6.0-dev
 Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang1-5.0 (= ${binary:Version}),
- libclang-common-5.0-dev (= ${binary:Version})
+ ${dep:devlibs-objc}, libclang1-6.0 (= ${binary:Version}),
+ libclang-common-6.0-dev (= ${binary:Version})
 Description: clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler
@@ -146,12 +146,12 @@ Description: clang library - Development package
  standard, and is considered a production-quality C++ compiler.
  .
  This package contains the clang headers to develop extensions over
- libclang1-5.0.
+ libclang1-6.0.
 
-Package: libclang-common-5.0-dev
+Package: libclang-common-6.0-dev
 Architecture: any
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm6.0 (= ${binary:Version})
 Description: clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  for the LLVM compiler. Its goal is to offer a replacement to the GNU Compiler
@@ -165,10 +165,10 @@ Description: clang library - Common development package
  (profiling, etc).
 
 
-Package: libfuzzer-5.0-dev
+Package: libfuzzer-6.0-dev
 Architecture: linux-any
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, clang-5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, clang-6.0 (= ${binary:Version})
 Description: Library for coverage-guided fuzz testing
  LibFuzzer is a library for in-process, coverage-guided, evolutionary fuzzing
  of other libraries.
@@ -186,7 +186,7 @@ Description: Library for coverage-guided fuzz testing
  instrumentation.
 
 
-Package: python-clang-5.0
+Package: python-clang-6.0
 Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
@@ -206,7 +206,7 @@ Description: Clang Python Bindings
  This binding package provides access to the Clang compiler and libraries.
 
 
-Package: clang-5.0-examples
+Package: clang-6.0-examples
 Architecture: any
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -223,7 +223,7 @@ Description: Clang examples
 
 # ------------- LLVM -------------
 
-Package: libllvm5.0
+Package: libllvm6.0
 Architecture: any
 Section: libs
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -236,11 +236,11 @@ Description: Modular compiler and toolchain technologies, runtime library
  .
  This package contains the LLVM runtime library.
 
-Package: libllvm5.0-dbg
+Package: libllvm6.0-dbg
 Architecture: any
 Section: debug
 Priority: extra
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm6.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Description: Modular compiler and toolchain technologies, debugging libraries
@@ -250,11 +250,11 @@ Description: Modular compiler and toolchain technologies, debugging libraries
  .
  This package contains the LLVM runtime library debug symbols.
 
-Package: llvm-5.0
+Package: llvm-6.0
 Architecture: any
-Suggests: llvm-5.0-doc
-Depends: llvm-5.0-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Recommends: llvm-5.0-dev
+Suggests: llvm-6.0-doc
+Depends: llvm-6.0-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Recommends: llvm-6.0-dev
 Description: Modular compiler and toolchain technologies
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -278,7 +278,7 @@ Description: Modular compiler and toolchain technologies
  a young scheme front-end, and Java support is in development. LLVM can
  generate code for X86, SparcV9, PowerPC or many other architectures.
 
-Package: llvm-5.0-runtime
+Package: llvm-6.0-runtime
 Architecture: any
 Depends: binfmt-support, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: llvm (<< 2.7-1)
@@ -299,10 +299,10 @@ Description: Modular compiler and toolchain technologies, IR interpreter
  This package provides the minimal required to execute programs in LLVM
  format.
 
-Package: llvm-5.0-dev
+Package: llvm-6.0-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends},
- llvm-5.0 (= ${binary:Version}), libllvm5.0 (= ${binary:Version}), libtinfo-dev
+ llvm-6.0 (= ${binary:Version}), libllvm6.0 (= ${binary:Version}), libtinfo-dev
 Replaces: llvm (<< 2.2-3)
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
@@ -320,10 +320,10 @@ Description: Modular compiler and toolchain technologies, libraries and headers
  This package provides the libraries and headers to develop applications
  using llvm.
 
-Package: llvm-5.0-tools
+Package: llvm-6.0-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- llvm-5.0-dev (= ${binary:Version})
+ llvm-6.0-dev (= ${binary:Version})
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -339,11 +339,11 @@ Description: Modular compiler and toolchain technologies, tools
  .
  This package provides tools for testing.
 
-Package: libllvm-5.0-ocaml-dev
+Package: libllvm-6.0-ocaml-dev
 Section: ocaml
 Architecture: amd64 arm64 armel armhf i386
-Suggests: llvm-5.0-doc
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-5.0-dev (= ${binary:Version})
+Suggests: llvm-6.0-doc
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-6.0-dev (= ${binary:Version})
 Replaces: libllvm-x.y-ocaml-dev
 Conflicts: libllvm-x.y-ocaml-dev
 Provides: ${ocaml:Provides}, libllvm-x.y-ocaml-dev
@@ -362,7 +362,7 @@ Description: Modular compiler and toolchain technologies, OCaml bindings
  .
  This package provides the OCaml bindings to develop applications using llvm.
 
-Package: llvm-5.0-doc
+Package: llvm-6.0-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
@@ -381,10 +381,10 @@ Description: Modular compiler and toolchain technologies, documentation
  .
  This package contains all documentation (extensive).
 
-Package: llvm-5.0-examples
+Package: llvm-6.0-examples
 Section: doc
 Architecture: all
-Depends: ${misc:Depends}, llvm-5.0-dev (>= ${source:Version}), llvm-5.0-dev (<< ${source:Version}+c~)
+Depends: ${misc:Depends}, llvm-6.0-dev (>= ${source:Version}), llvm-6.0-dev (<< ${source:Version}+c~)
 Description: Modular compiler and toolchain technologies, examples
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -404,20 +404,20 @@ Description: Modular compiler and toolchain technologies, examples
 
 # ------------- lld -------------
 
-Package: lld-5.0
+Package: lld-6.0
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd powerpc ppc64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm5.0 (= ${binary:Version}), llvm-5.0-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm6.0 (= ${binary:Version}), llvm-6.0-dev
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker
  LLD is a new, high-performance linker. It is built as a set of reusable
  components which highly leverage existing libraries in the larger LLVM
  Project.
 
-Package: liblld-5.0
+Package: liblld-6.0
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd powerpc ppc64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm6.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: libs
 Description: LLVM-based linker, library
@@ -427,10 +427,10 @@ Description: LLVM-based linker, library
  .
  This package contains the LLD runtime library.
 
-Package: liblld-5.0-dbg
+Package: liblld-6.0-dbg
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd ppc64el alpha s390x powerpc have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, liblld-5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, liblld-6.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: debug
 Priority: extra
@@ -442,11 +442,11 @@ Description: LLVM-based linker, debugging libraries
  This package contains the LLD runtime library debug symbols.
 
 
-Package: liblld-5.0-dev
+Package: liblld-6.0-dev
 Section: libdevel
 Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd powerpc ppc64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, lld-5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, lld-6.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker, header files
  LLD is a new, high-performance linker. It is built as a set of reusable
@@ -458,11 +458,11 @@ Description: LLVM-based linker, header files
 
 # ------------- lldb -------------
 
-Package: lldb-5.0
+Package: lldb-6.0
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe sh4 x32 mips mipsel arm64
 # ia64 mips mipsel hurd powerpc ppc64 ppc64el sparc64  have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm5.0 (= ${binary:Version}), llvm-5.0-dev,
- python-lldb-5.0
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm6.0 (= ${binary:Version}), llvm-6.0-dev,
+ python-lldb-6.0
 Conflicts: lldb-3.4, lldb-3.5
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger
@@ -470,14 +470,14 @@ Description: Next generation, high-performance debugger
  reusable components which highly leverage existing libraries in the larger LLVM
  Project, such as the Clang expression parser and LLVM disassembler.
 
-Package: liblldb-5.0
+Package: liblldb-6.0
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe sh4 x32 mips mipsel arm64
 # ia64 mips mipsel hurd powerpc ppc64 ppc64el sparc64  have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm6.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: libs
-Replaces: lldb-5.0 (<= 1:5.0~svn215195-2)
-Breaks: lldb-5.0 (<< 1:5.0~svn215195-2)
+Replaces: lldb-6.0 (<= 1:6.0~svn215195-2)
+Breaks: lldb-6.0 (<< 1:6.0~svn215195-2)
 Description: Next generation, high-performance debugger, library
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
@@ -485,10 +485,10 @@ Description: Next generation, high-performance debugger, library
  .
  This package contains the LLDB runtime library.
 
-Package: liblldb-5.0-dbg
+Package: liblldb-6.0-dbg
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m68k powerpcspe sh4 x32 mips mipsel arm64
 # ia64 mips mipsel hurd ppc64el alpha s390x sparc64 powerpc ppc64 have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-6.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: debug
 Priority: extra
@@ -500,11 +500,11 @@ Description: Next generation, high-performance debugger, debugging libraries
  This package contains the LLDB runtime library debug symbols.
 
 
-Package: python-lldb-5.0
+Package: python-lldb-6.0
 Section: python
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m68k powerpcspe sh4 x32 mips mipsel arm64
 # ia64 mips mipsel hurd ppc64 ppc64el alpha s390x powerpc sparc64 have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-5.0-dev, python, python-six
+Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-6.0-dev, python, python-six
 Conflicts: python-lldb-3.4, python-lldb-3.5, python-lldb-3.6, python-lldb-3.7, python-lldb-3.8,
  python-lldb-3.9, python-lldb-x.y
 Replaces: python-lldb-x.y
@@ -518,13 +518,13 @@ Description: Next generation, high-performance debugger, python lib
  This binding package provides access to lldb.
 
 
-Package: liblldb-5.0-dev
+Package: liblldb-6.0-dev
 Section: libdevel
 Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe sh4 x32 mips mipsel arm64
 # ia64 mips mipsel hurd powerpc ppc64  ppc64el sparc64 have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-5.0 (= ${binary:Version})
-Replaces: lldb-5.0-dev (<= 1:5.0~svn215195-2)
-Breaks: lldb-5.0-dev (<< 1:5.0~svn215195-2)
+Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-6.0 (= ${binary:Version})
+Replaces: lldb-6.0-dev (<= 1:6.0~svn215195-2)
+Breaks: lldb-6.0-dev (<< 1:6.0~svn215195-2)
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger, header files
  LLDB is a next generation, high-performance debugger. It is built as a set of

@@ -1,5 +1,6 @@
 llvm-toolchain-snapshot (1:5.0~svn305653-2) UNRELEASED; urgency=medium
 
+  * We moved from 5.0 to 6.0
   * Ship the opt-viewer new program as part of llvm-5.0 tools
   * ld.lld manpage wasn't installed
 

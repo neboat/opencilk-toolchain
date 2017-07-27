@@ -9,7 +9,7 @@
              file = 'libclang.dll'
          else:
 -            file = 'libclang.so'
-+            file = 'libclang-5.0.so'
++            file = 'libclang-6.0.so'
  
          if Config.library_path:
              file = Config.library_path + '/' + file
