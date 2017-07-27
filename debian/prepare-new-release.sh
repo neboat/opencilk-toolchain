@@ -10,3 +10,7 @@ for F in $LIST; do
     sed -i -e "s|$ORIG_VERSION|$TARGET_VERSION|g" $F
 done
 
+echo "once you copy the old version into a new branch"
+echo "edit debian/control, update the VCS links"
+echo "edit debian/control, update the source pkg name"
+echo "edit debian/changelog, update the source pkg name"
