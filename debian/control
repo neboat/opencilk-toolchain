@@ -1,4 +1,4 @@
-Source: llvm-toolchain-5.0
+Source: llvm-toolchain-5
 Section: devel
 Priority: optional
 Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
