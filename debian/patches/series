@@ -36,7 +36,7 @@ clang-tidy-run-bin.diff
 #bug-30342.diff
 fix-scan-view-path.diff
 #0011-SimplifyCFG-Hoisting-invalidates-metadata.patch
-clang-fix-cmpxchg8-detection-on-i386.patch
+#clang-fix-cmpxchg8-detection-on-i386.patch
 lldb-addversion-suffix-to-llvm-server-exec.patch
 lldb-missing-install.diff
 silent-test-failing-codeverage.diff
