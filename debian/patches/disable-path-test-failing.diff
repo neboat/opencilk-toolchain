@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_5.0~svn298832/unittests/Support/Path.cpp
+Index: llvm-toolchain-snapshot_6.0~svn309541/unittests/Support/Path.cpp
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn298832.orig/unittests/Support/Path.cpp
-+++ llvm-toolchain-snapshot_5.0~svn298832/unittests/Support/Path.cpp
-@@ -472,7 +472,7 @@ protected:
+--- llvm-toolchain-snapshot_6.0~svn309541.orig/unittests/Support/Path.cpp
++++ llvm-toolchain-snapshot_6.0~svn309541/unittests/Support/Path.cpp
+@@ -473,7 +473,7 @@ protected:
      errs().flush();
    }
  
@@ -11,7 +11,7 @@ Index: llvm-toolchain-snapshot_5.0~svn298832/unittests/Support/Path.cpp
  };
  
  TEST_F(FileSystemTest, Unique) {
-@@ -552,13 +552,13 @@ TEST_F(FileSystemTest, RealPath) {
+@@ -553,13 +553,13 @@ TEST_F(FileSystemTest, RealPath) {
  
    SmallString<64> HomeDir;
    bool Result = llvm::sys::path::home_directory(HomeDir);
