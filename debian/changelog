@@ -2,6 +2,9 @@ llvm-toolchain-5.0 (1:5.0~+rc1-3) UNRELEASED; urgency=medium
 
   * Remove the temp-unbreak-5.0-build.diff patch to unbreak the build
 
+  [ Katsuhiko Nishimra ]
+  * Ensure /usr/bin/g++-$(GCC_VERSION) exists (Closes: #871591)
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 01 Aug 2017 08:57:24 +0200
 
 llvm-toolchain-5.0 (1:5.0~+rc1-2) unstable; urgency=medium
