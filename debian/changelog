@@ -4,10 +4,13 @@ llvm-toolchain-snapshot (1:6.0~svn309319-1) unstable; urgency=medium
   * Ship the opt-viewer new program as part of llvm-5.0 tools
   * ld.lld manpage wasn't installed
   * Disable the clang-fix-cmpxchg8-detection-on-i386.patch patch
-    because breaks the build with 
+    because breaks the build with
     'error: 'isCmpXChg8Supported' was not declared in this scope'
-  * Remove usr/bin/liblldb-intel-mpxtable.so-6.0 as it seems to be removed 
+  * Remove usr/bin/liblldb-intel-mpxtable.so-6.0 as it seems to be removed
     from usptream
+
+  [ Katsuhiko Nishimra ]
+  * Ensure /usr/bin/g++-$(GCC_VERSION) exists (Closes: #871591)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 27 Jul 2017 23:16:06 +0200
 
