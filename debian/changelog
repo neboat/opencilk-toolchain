@@ -1,7 +1,8 @@
 llvm-toolchain-5.0 (1:5.0~+rc2-1) unstable; urgency=medium
 
   * New snapshot release
-  * Force the usage of gcc 6 until the link issues are fixed
+  * Force the usage of gcc 6 until the link issues with gcc 7 are fixed
+    https://bugs.llvm.org/show_bug.cgi?id=34140
   * Remove the temp-unbreak-5.0-build.diff patch to unbreak the build
 
   [ Katsuhiko Nishimra ]
