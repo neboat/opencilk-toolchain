@@ -78,6 +78,9 @@ checkout_sources() {
 
     cd $SVN_ARCHIVES/
     DEST=$PROJECT-$BRANCH
+    if test -n "$TAG"; then
+	DEST=$DEST-$TAG
+    fi
     if test -d $DEST; then
         cd $DEST
         if test -n "$BRANCH"; then
