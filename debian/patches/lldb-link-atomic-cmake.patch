@@ -8,13 +8,14 @@ Last-Update: 2016-07-27
 
 --- a/lldb/cmake/LLDBDependencies.cmake
 +++ b/lldb/cmake/LLDBDependencies.cmake
-@@ -185,6 +185,12 @@ if (LLVM_BUILD_STATIC)
+@@ -185,6 +185,13 @@ if (LLVM_BUILD_STATIC)
    endif()
  endif()
  
 +if(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mips" OR
 +   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mipsel" OR
-+   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mips64el")
++   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mips64el" OR
++   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "powerpcspe")
 +  list(APPEND LLDB_SYSTEM_LIBS atomic)
 +endif()
 +
