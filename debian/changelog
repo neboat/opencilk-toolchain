@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:6.0~svn310776-2) unstable; urgency=medium
+
+  * Link LLDB with -latomic on powerpcspe (Closes: #872267)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Aug 2017 09:58:05 +0200
+
 llvm-toolchain-snapshot (1:6.0~svn310776-1) unstable; urgency=medium
 
   * We moved from 5.0 to 6.0

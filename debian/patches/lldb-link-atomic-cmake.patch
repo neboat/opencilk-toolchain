@@ -6,20 +6,19 @@ Last-Update: 2016-07-27
  lldb/cmake/LLDBDependencies.cmake |    6 ++++++
  1 file changed, 6 insertions(+)
 
-Index: llvm-toolchain-snapshot_5.0~svn294583/lldb/cmake/LLDBDependencies.cmake
-===================================================================
---- llvm-toolchain-snapshot_5.0~svn294583.orig/lldb/cmake/LLDBDependencies.cmake
-+++ llvm-toolchain-snapshot_5.0~svn294583/lldb/cmake/LLDBDependencies.cmake
-@@ -28,6 +28,12 @@ if (NOT LLDB_DISABLE_PYTHON AND NOT LLVM
-   list(APPEND LLDB_SYSTEM_LIBS ${PYTHON_LIBRARIES})
+--- a/lldb/cmake/LLDBDependencies.cmake
++++ b/lldb/cmake/LLDBDependencies.cmake
+@@ -185,6 +185,13 @@ if (LLVM_BUILD_STATIC)
+   endif()
  endif()
  
 +if(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mips" OR
 +   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mipsel" OR
-+   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mips64el")
++   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mips64el" OR
++   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "powerpcspe")
 +  list(APPEND LLDB_SYSTEM_LIBS atomic)
 +endif()
 +
- list(APPEND LLDB_SYSTEM_LIBS ${system_libs})
- 
- if (LLVM_BUILD_STATIC)
+ set(LLVM_LINK_COMPONENTS
+   ${LLVM_TARGETS_TO_BUILD}
+   interpreter
