@@ -6,11 +6,13 @@ Last-Update: 2016-07-27
  lldb/cmake/LLDBDependencies.cmake |    6 ++++++
  1 file changed, 6 insertions(+)
 
---- a/lldb/cmake/LLDBDependencies.cmake
-+++ b/lldb/cmake/LLDBDependencies.cmake
-@@ -185,6 +185,13 @@ if (LLVM_BUILD_STATIC)
-   endif()
- endif()
+Index: llvm-toolchain-5.0_5.0~svn311110/lldb/cmake/LLDBDependencies.cmake
+===================================================================
+--- llvm-toolchain-5.0_5.0~svn311110.orig/lldb/cmake/LLDBDependencies.cmake
++++ llvm-toolchain-5.0_5.0~svn311110/lldb/cmake/LLDBDependencies.cmake
+@@ -30,6 +30,13 @@ endif()
+ 
+ list(APPEND LLDB_SYSTEM_LIBS ${system_libs})
  
 +if(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mips" OR
 +   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mipsel" OR
@@ -19,6 +21,6 @@ Last-Update: 2016-07-27
 +  list(APPEND LLDB_SYSTEM_LIBS atomic)
 +endif()
 +
- set(LLVM_LINK_COMPONENTS
-   ${LLVM_TARGETS_TO_BUILD}
-   interpreter
+ if (LLVM_BUILD_STATIC)
+   if (NOT LLDB_DISABLE_PYTHON)
+     list(APPEND LLDB_SYSTEM_LIBS python2.7 util)
