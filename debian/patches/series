@@ -46,3 +46,4 @@ disable-path-test-failing.diff
 silent-amd-tet.diff
 disable-error-xray.diff
 lldb-disable-swig-error.diff
+gcc-7.1-workaround.diff
