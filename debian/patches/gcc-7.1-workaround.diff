@@ -1,7 +1,7 @@
-Index: include/clang/AST/DeclObjC.h
+Index: clang/include/clang/AST/DeclObjC.h
 ===================================================================
---- include/clang/AST/DeclObjC.h	(revision 311595)
-+++ include/clang/AST/DeclObjC.h	(working copy)
+--- clang.orig/include/clang/AST/DeclObjC.h	(revision 311595)
++++ clang/include/clang/AST/DeclObjC.h	(working copy)
 @@ -413,12 +413,12 @@
    /// Determines the family of this method.
    ObjCMethodFamily getMethodFamily() const;
@@ -64,10 +64,10 @@ Index: include/clang/AST/DeclObjC.h
    
  public:
    /// \brief Iterator that walks over all of the known extensions.
-Index: include/clang/ASTMatchers/ASTMatchersMacros.h
+Index: clang/include/clang/ASTMatchers/ASTMatchersMacros.h
 ===================================================================
---- include/clang/ASTMatchers/ASTMatchersMacros.h	(revision 311595)
-+++ include/clang/ASTMatchers/ASTMatchersMacros.h	(working copy)
+--- clang.orig/include/clang/ASTMatchers/ASTMatchersMacros.h	(revision 311595)
++++ clang/include/clang/ASTMatchers/ASTMatchersMacros.h	(working copy)
 @@ -54,7 +54,7 @@
  /// defines a zero parameter function named DefineMatcher() that returns a
  /// ReturnType object.
