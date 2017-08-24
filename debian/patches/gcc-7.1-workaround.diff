@@ -1,7 +1,7 @@
-Index: clang/include/clang/AST/DeclObjC.h
+Index: llvm-toolchain-snapshot_6.0~svn311700/clang/include/clang/AST/DeclObjC.h
 ===================================================================
---- clang.orig/include/clang/AST/DeclObjC.h	(revision 311595)
-+++ clang/include/clang/AST/DeclObjC.h	(working copy)
+--- llvm-toolchain-snapshot_6.0~svn311700.orig/clang/include/clang/AST/DeclObjC.h	(revision 311595)
++++ llvm-toolchain-snapshot_6.0~svn311700/clang/include/clang/AST/DeclObjC.h	(working copy)
 @@ -413,12 +413,12 @@
    /// Determines the family of this method.
    ObjCMethodFamily getMethodFamily() const;
@@ -64,10 +64,10 @@ Index: clang/include/clang/AST/DeclObjC.h
    
  public:
    /// \brief Iterator that walks over all of the known extensions.
-Index: clang/include/clang/ASTMatchers/ASTMatchersMacros.h
+Index: llvm-toolchain-snapshot_6.0~svn311700/clang/include/clang/ASTMatchers/ASTMatchersMacros.h
 ===================================================================
---- clang.orig/include/clang/ASTMatchers/ASTMatchersMacros.h	(revision 311595)
-+++ clang/include/clang/ASTMatchers/ASTMatchersMacros.h	(working copy)
+--- llvm-toolchain-snapshot_6.0~svn311700.orig/clang/include/clang/ASTMatchers/ASTMatchersMacros.h	(revision 311595)
++++ llvm-toolchain-snapshot_6.0~svn311700/clang/include/clang/ASTMatchers/ASTMatchersMacros.h	(working copy)
 @@ -54,7 +54,7 @@
  /// defines a zero parameter function named DefineMatcher() that returns a
  /// ReturnType object.
