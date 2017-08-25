@@ -14,7 +14,7 @@ Index: llvm-toolchain-5.0-5.0~+rc2/clang/lib/Driver/ToolChains/Gnu.cpp
  #include "clang/Config/config.h" // for GCC_INSTALL_PREFIX
  #include "clang/Driver/Compilation.h"
  #include "clang/Driver/Driver.h"
-@@ -2368,6 +2368,7 @@ void Generic_GCC::AddClangCXXStdlibInclu
+@@ -2368,6 +2369,7 @@ void Generic_GCC::AddClangCXXStdlibInclu
      addLibStdCxxIncludePaths(DriverArgs, CC1Args);
      break;
    }
