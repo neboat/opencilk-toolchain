@@ -1,6 +1,7 @@
 llvm-toolchain-snapshot (1:6.0~svn310776-2) unstable; urgency=medium
 
   * Link LLDB with -latomic on powerpcspe (Closes: #872267)
+  * Fix the C++ include path order (Closes: #859083)
   * Take an ugly workaround to build with gcc 7
     See https://bugs.llvm.org/show_bug.cgi?id=34140
 
