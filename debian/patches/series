@@ -46,3 +46,4 @@ silent-test-failing-codeverage.diff
 silent-amdgpu-test-failing.diff
 pthread-link.diff
 add_symbols_versioning.patch
+ftfbs-gcc.diff

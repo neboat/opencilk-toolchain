@@ -1,6 +1,8 @@
 llvm-toolchain-4.0 (1:4.0.1-2) unstable; urgency=medium
 
   * Rebuild with gcc 7 to fix a relocation error (Closes: #866354)
+  * Also add a missing include in ftfbs-gcc.diff to fix a ftbfs
+    with gcc 7
   * ld.lld manpage wasn't installed
   * Link LLDB with -latomic on powerpcspe (Closes: #872267)
   * Disable -gsplit-dwarf when using gcc 7 for causing a linking issue
