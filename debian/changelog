@@ -12,7 +12,7 @@ llvm-toolchain-4.0 (1:4.0.1-2) unstable; urgency=medium
   [ Katsuhiko Nishimra ]
   * Ensure /usr/bin/g++-$(GCC_VERSION) exists (Closes: #871591)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 10 Aug 2017 08:26:26 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 26 Aug 2017 17:36:26 +0200
 
 llvm-toolchain-4.0 (1:4.0.1-1) unstable; urgency=medium
 
