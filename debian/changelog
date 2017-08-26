@@ -1,9 +1,3 @@
-llvm-toolchain-snapshot (1:6.0~svn311700-1~exp1) experimental; urgency=medium
-
-  * New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 24 Aug 2017 23:01:34 +0200
-
 llvm-toolchain-snapshot (1:6.0~svn310776-2) unstable; urgency=medium
 
   * Link LLDB with -latomic on powerpcspe (Closes: #872267)
