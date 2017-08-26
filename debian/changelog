@@ -5,6 +5,8 @@ llvm-toolchain-5.0 (1:5.0~+rc3-1) unstable; urgency=medium
   * Fix the C++ include path order (Closes: #859083)
   * Disable -gsplit-dwarf when using gcc 7 for causing a linking issue
     See https://bugs.llvm.org/show_bug.cgi?id=34140
+  * clang was producing unusable binaries on armv5tel (Closes #873306)
+    Thanks to Adrian Bunk for the patch
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 26 Aug 2017 10:16:07 +0200
 
