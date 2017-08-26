@@ -1,11 +1,12 @@
-llvm-toolchain-5.0 (1:5.0~+rc2-2) unstable; urgency=medium
+llvm-toolchain-5.0 (1:5.0~+rc3-1) unstable; urgency=medium
 
+  * New testing release
   * Link LLDB with -latomic on powerpcspe (Closes: #872267)
   * Fix the C++ include path order (Closes: #859083)
-  * Take an ugly workaround to build with gcc 7
+  * Disable -gsplit-dwarf when using gcc 7 for causing a linking issue
     See https://bugs.llvm.org/show_bug.cgi?id=34140
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Aug 2017 09:57:56 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 26 Aug 2017 10:16:07 +0200
 
 llvm-toolchain-5.0 (1:5.0~+rc2-1) unstable; urgency=medium
 
@@ -17,7 +18,7 @@ llvm-toolchain-5.0 (1:5.0~+rc2-1) unstable; urgency=medium
   [ Katsuhiko Nishimra ]
   * Ensure /usr/bin/g++-$(GCC_VERSION) exists (Closes: #871591)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 01 Aug 2017 08:57:24 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 12 Aug 2017 11:38:36 +0200
 
 llvm-toolchain-5.0 (1:5.0~+rc1-2) unstable; urgency=medium
 
