@@ -1,9 +1,17 @@
+llvm-toolchain-snapshot (1:6.0~svn311700-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 24 Aug 2017 23:01:34 +0200
+
 llvm-toolchain-snapshot (1:6.0~svn310776-2) unstable; urgency=medium
 
   * Link LLDB with -latomic on powerpcspe (Closes: #872267)
   * Fix the C++ include path order (Closes: #859083)
   * Disable -gsplit-dwarf when using gcc 7 for causing a linking issue
     See https://bugs.llvm.org/show_bug.cgi?id=34140
+  * clang was producing unusable binaries on armv5tel (Closes #873307)
+    Thanks to Adrian Bunk for the patch
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Aug 2017 09:58:05 +0200
 
