@@ -6,6 +6,8 @@ llvm-toolchain-4.0 (1:4.0.1-2) unstable; urgency=medium
   * Disable -gsplit-dwarf when using gcc 7 for causing a linking issue
     See https://bugs.llvm.org/show_bug.cgi?id=34140
     (Closes: #853526)
+  * clang was producing unusable binaries on armv5tel (Closes #873305)
+    Thanks to Adrian Bunk for the patch
 
   [ Katsuhiko Nishimra ]
   * Ensure /usr/bin/g++-$(GCC_VERSION) exists (Closes: #871591)
