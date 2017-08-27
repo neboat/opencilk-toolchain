@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:6.0~svn310776-2) unstable; urgency=medium
+llvm-toolchain-snapshot (1:6.0~svn311834-1) unstable; urgency=medium
 
   * Link LLDB with -latomic on powerpcspe (Closes: #872267)
   * Fix the C++ include path order (Closes: #859083)
@@ -7,11 +7,11 @@ llvm-toolchain-snapshot (1:6.0~svn310776-2) unstable; urgency=medium
     (Closes: #853525)
   * clang was producing unusable binaries on armv5tel (Closes #873307)
     Thanks to Adrian Bunk for the patch
-  * With Ubuntu Trusty (for apt.llvm.org), the build fails 
+  * With Ubuntu Trusty (for apt.llvm.org), the build fails
     on internal compiler error: in output_index_string, at dwarf2out.c:218
     force the usage of gcc 4.9
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Aug 2017 09:58:05 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 26 Aug 2017 22:35:00 +0200
 
 llvm-toolchain-snapshot (1:6.0~svn310776-1) unstable; urgency=medium
 
