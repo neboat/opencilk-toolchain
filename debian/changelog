@@ -1,3 +1,11 @@
+llvm-toolchain-snapshot (1:6.0~svn311834-2) UNRELEASED; urgency=medium
+
+  * Fix the FTBFS because of -gsplit-dwarf:
+    - Only enable it on archs which needs it
+    - Only enable it when gcc supports it correctly
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 31 Aug 2017 19:14:53 +0200
+
 llvm-toolchain-snapshot (1:6.0~svn311834-1) unstable; urgency=medium
 
   * Link LLDB with -latomic on powerpcspe (Closes: #872267)
