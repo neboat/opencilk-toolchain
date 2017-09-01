@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:6.0~svn311834-2) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:6.0~svn311834-2) unstable; urgency=medium
 
   * Fix the FTBFS because of -gsplit-dwarf:
     - Only enable it on archs which needs it
