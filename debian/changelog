@@ -1,4 +1,4 @@
-llvm-toolchain-4.0 (1:4.0.1-3) UNRELEASED; urgency=medium
+llvm-toolchain-4.0 (1:4.0.1-3) unstable; urgency=medium
 
   * Fix the FTBFS because of -gsplit-dwarf:
     - Only enable it on archs which needs it
