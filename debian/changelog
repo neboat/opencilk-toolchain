@@ -1,3 +1,9 @@
+llvm-toolchain-5.0 (1:5.0~+rc5-1) unstable; urgency=medium
+
+  * New testing release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 01 Sep 2017 23:18:29 +0200
+
 llvm-toolchain-5.0 (1:5.0~+rc4-2) unstable; urgency=medium
 
   * Fix the FTBFS because of -gsplit-dwarf:
