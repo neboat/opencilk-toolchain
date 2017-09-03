@@ -3,6 +3,7 @@ llvm-toolchain-snapshot (1:6.0~svn311834-2) unstable; urgency=medium
   * Fix the FTBFS because of -gsplit-dwarf:
     - Only enable it on archs which needs it
     - Only enable it when gcc supports it correctly
+  * Fail the build if the arch + gcc has a broken gsplit-dwarf support
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 31 Aug 2017 19:14:53 +0200
 
