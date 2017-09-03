@@ -1,3 +1,9 @@
+llvm-toolchain-5.0 (1:5.0~+rc5-2) unstable; urgency=medium
+
+  * Fail the build if the arch + gcc has a broken gsplit-dwarf support
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Sep 2017 15:13:34 +0200
+
 llvm-toolchain-5.0 (1:5.0~+rc5-1) unstable; urgency=medium
 
   * New testing release
