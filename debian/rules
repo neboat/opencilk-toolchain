@@ -240,10 +240,10 @@ override_dh_auto_configure: preconfigure
 	-(if test $(COVERITY_ENABLE) -eq 1; then \
 		export PATH=$$PATH:/opt/cov-analysis/bin/; \
 		cov-configure --compiler clang --comptype clang; \
-		cov-configure --compiler gcc-6 --comptype gcc; \
-		cov-configure --compiler g++-6 --comptype gcc; \
-		cov-configure -co /usr/bin/g++-6 --comptype gcc -- -std=c++0x -fPIC -std=c++11; \
-		cov-configure -co /usr/bin/gcc-6 --comptype gcc -- -fPIC; \
+		cov-configure --compiler gcc-7 --comptype gcc; \
+		cov-configure --compiler g++-7 --comptype gcc; \
+		cov-configure -co /usr/bin/g++-7 --comptype gcc -- -std=c++0x -fPIC -std=c++11; \
+		cov-configure -co /usr/bin/gcc-7 --comptype gcc -- -fPIC; \
 		cov-configure --compiler cc --comptype gcc --template \
 			--xml-option append_arg:"--ppp_translator" \
 			--xml-option append_arg:"replace/llvm::AlignOf<PrevTy>::Alignment/(llvm::AlignOf<PrevTy>::Alignment)" \
