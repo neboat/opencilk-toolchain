@@ -1,3 +1,15 @@
+llvm-toolchain-5.0 (1:5.0-1ubuntu1) artful; urgency=medium
+
+  * Link with --no-keep-files-mapped --no-map-whole-files when using gold.
+
+ -- Matthias Klose <doko@ubuntu.com>  Fri, 08 Sep 2017 10:43:24 +0200
+
+llvm-toolchain-5.0 (1:5.0-1) unstable; urgency=medium
+
+  * New stable release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Sep 2017 13:04:44 +0200
+
 llvm-toolchain-5.0 (1:5.0~+rc5-2) unstable; urgency=medium
 
   * Fail the build if the arch + gcc has a broken gsplit-dwarf support
