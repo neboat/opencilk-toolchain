@@ -1,3 +1,10 @@
+llvm-toolchain-4.0 (1:5.0-1~exp2) UNRELEASED; urgency=medium
+
+  [ Matthias Klose ]
+  * Link with --no-keep-files-mapped --no-map-whole-files when using gold.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 08 Sep 2017 11:59:03 +0200
+
 llvm-toolchain-4.0 (1:4.0.1-4) unstable; urgency=medium
 
   * Fail the build if the arch + gcc has a broken gsplit-dwarf support
