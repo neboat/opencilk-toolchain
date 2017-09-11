@@ -1,11 +1,14 @@
-llvm-toolchain-snapshot (1:6.0~svn311834-3) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:6.0~svn311834-4) UNRELEASED; urgency=medium
 
+  [ Gianfranco Costamagna ]
   * Enable ocaml on release architectures.
 
   [ Matthias Klose ]
   * Link with --no-keep-files-mapped --no-map-whole-files when using gold.
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 05 Sep 2017 22:52:49 +0200
+  * ship liblldMinGW
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 11 Sep 2017 22:27:20 +0200
 
 llvm-toolchain-snapshot (1:6.0~svn311834-2) unstable; urgency=medium
 
