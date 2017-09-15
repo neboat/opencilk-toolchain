@@ -6,7 +6,8 @@ llvm-toolchain-snapshot (1:6.0~svn311834-4) UNRELEASED; urgency=medium
   [ Matthias Klose ]
   * Link with --no-keep-files-mapped --no-map-whole-files when using gold.
 
-  * ship liblldMinGW
+  * ship liblldMinGW lld lib
+  * ship clang-refactor in clang-X.Y
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 11 Sep 2017 22:27:20 +0200
 
