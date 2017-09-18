@@ -62,14 +62,14 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_isAnonymous@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isBitField@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isDynamicCall@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
- clang_Cursor_isExternalSymbol@LLVM_@LLVM_VERSION@  1:5.0~+rc1~
+ clang_Cursor_isExternalSymbol@LLVM_@LLVM_VERSION@ 1:5.0~+rc1~
  clang_Cursor_isFunctionInlined@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isMacroBuiltin@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isMacroFunctionLike@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isNull@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isObjCOptional@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isVariadic@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
- clang_EnumDecl_isScoped@LLVM_@LLVM_VERSION@  1:5.0~+rc1~
+ clang_EnumDecl_isScoped@LLVM_@LLVM_VERSION@1:5.0~+rc1~
  clang_EvalResult_dispose@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_EvalResult_getAsDouble@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_EvalResult_getAsInt@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -189,7 +189,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_findReferencesInFileWithBlock@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_formatDiagnostic@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_free@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
- clang_getAddressSpace@LLVM_@LLVM_VERSION@  1:5.0~+rc1~
+ clang_getAddressSpace@LLVM_@LLVM_VERSION@1:5.0~+rc1~
  clang_getAllSkippedRanges@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
  clang_getArgType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getArrayElementType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -216,7 +216,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getCursorCompletionString@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursorDefinition@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursorDisplayName@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
- clang_getCursorExceptionSpecificationType@LLVM_@LLVM_VERSION@  1:5.0~+rc1~
+ clang_getCursorExceptionSpecificationType@LLVM_@LLVM_VERSION@ 1:5.0~+rc1~
  clang_getCursorExtent@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursorKind@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursorKindSpelling@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -253,7 +253,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getEnumConstantDeclUnsignedValue@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getEnumConstantDeclValue@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getEnumDeclIntegerType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
- clang_getExceptionSpecificationType@LLVM_@LLVM_VERSION@  1:5.0~+rc1~
+ clang_getExceptionSpecificationType@LLVM_@LLVM_VERSION@ 1:5.0~+rc1~
  clang_getExpansionLocation@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getFieldDeclBitWidth@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getFile@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -304,7 +304,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getTypeKindSpelling@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getTypeSpelling@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getTypedefDeclUnderlyingType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
- clang_getTypedefName@LLVM_@LLVM_VERSION@  1:5.0~+rc1~
+ clang_getTypedefName@LLVM_@LLVM_VERSION@ 1:5.0~+rc1~
  clang_hashCursor@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_indexLoc_getCXSourceLocation@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_indexLoc_getFileLocation@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -350,7 +350,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_reparseTranslationUnit@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_saveTranslationUnit@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_sortCodeCompletionResults@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
- clang_suspendTranslationUnit@LLVM_@LLVM_VERSION@  1:5.0~+rc1~
+ clang_suspendTranslationUnit@LLVM_@LLVM_VERSION@ 1:5.0~+rc1~
  clang_toggleCrashRecovery@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_tokenize@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_visitChildren@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
