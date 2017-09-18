@@ -47,3 +47,5 @@ silent-amdgpu-test-failing.diff
 pthread-link.diff
 add_symbols_versioning.patch
 ftfbs-gcc.diff
+pr81066.diff
+armhf-bitfield.diff

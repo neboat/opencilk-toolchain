@@ -1,7 +1,17 @@
-llvm-toolchain-4.0 (1:5.0-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-4.0 (1:4.0.1-5) unstable; urgency=medium
+
+  * Backport of an arm patch for rust.
+    https://bugs.llvm.org/show_bug.cgi?id=32379
+    (Closes: #876072)
 
   [ Matthias Klose ]
   * Link with --no-keep-files-mapped --no-map-whole-files when using gold.
+  * Fix sanitizer build failure with glibc-2.26.
+  * build using gold on arm64 and s390x. For backports, arm64 might still
+    need the BFD linker, and building with only one or two processes in
+    parallel.
+  * On amd64, s390x, arm64 and ppc64el, build with -g1 instead of -g.
+  * Set CMAKE_CXX_FLAGS_RELWITHDEBINFO and pass opt_flags.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 08 Sep 2017 11:59:03 +0200
 
