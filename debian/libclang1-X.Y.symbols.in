@@ -69,7 +69,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_isNull@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isObjCOptional@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isVariadic@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
- clang_EnumDecl_isScoped@LLVM_@LLVM_VERSION@1:5.0~+rc1~
+ clang_EnumDecl_isScoped@LLVM_@LLVM_VERSION@ 1:5.0~+rc1~
  clang_EvalResult_dispose@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_EvalResult_getAsDouble@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_EvalResult_getAsInt@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -189,7 +189,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_findReferencesInFileWithBlock@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_formatDiagnostic@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_free@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
- clang_getAddressSpace@LLVM_@LLVM_VERSION@1:5.0~+rc1~
+ clang_getAddressSpace@LLVM_@LLVM_VERSION@ 1:5.0~+rc1~
  clang_getAllSkippedRanges@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
  clang_getArgType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getArrayElementType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
