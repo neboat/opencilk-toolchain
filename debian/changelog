@@ -1,8 +1,14 @@
-llvm-toolchain-5.0 (1:5.0-1ubuntu1) artful; urgency=medium
+llvm-toolchain-5.0 (1:5.0-2) unstable; urgency=medium
 
+  [ Matthias Klose ]
   * Link with --no-keep-files-mapped --no-map-whole-files when using gold.
+  * build using gold on arm64 and s390x. For backports, arm64 might still
+    need the BFD linker, and building with only one or two processes in
+    parallel.
+  * On amd64, s390x, arm64 and ppc64el, build with -g1 instead of -g.
+  * Set CMAKE_CXX_FLAGS_RELWITHDEBINFO and pass opt_flags.
 
- -- Matthias Klose <doko@ubuntu.com>  Fri, 08 Sep 2017 10:43:24 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 18 Sep 2017 21:53:00 +0200
 
 llvm-toolchain-5.0 (1:5.0-1) unstable; urgency=medium
 
