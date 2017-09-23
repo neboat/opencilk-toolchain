@@ -23,6 +23,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/clang-change-namespace
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-import-test
 usr/lib/llvm-@LLVM_VERSION@/bin/clangd
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-refactor
+usr/lib/llvm-@LLVM_VERSION@/bin/clang-func-mapping
 
 usr/lib/llvm-@LLVM_VERSION@/bin/modularize
 usr/lib/llvm-@LLVM_VERSION@/bin/c-index-test
@@ -59,3 +60,4 @@ usr/bin/clang-change-namespace-@LLVM_VERSION@
 usr/bin/clang-import-test-@LLVM_VERSION@
 usr/bin/clangd-@LLVM_VERSION@
 usr/bin/clang-refactor-@LLVM_VERSION@
+usr/bin/clang-func-mapping-@LLVM_VERSION@

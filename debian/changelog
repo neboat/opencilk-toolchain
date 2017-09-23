@@ -1,7 +1,7 @@
 llvm-toolchain-snapshot (1:6.0~svn311834-4) UNRELEASED; urgency=medium
 
   * Ship liblldMinGW lld lib
-  * Ship clang-refactor in clang-X.Y
+  * Ship clang-refactor & clang-func-mapping in clang-X.Y
 
   [ Gianfranco Costamagna ]
   * Enable ocaml on release architectures.
