@@ -5,6 +5,7 @@ llvm-toolchain-snapshot (1:6.0~svn311834-4) UNRELEASED; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Enable ocaml on release architectures.
+  * Add NDEBUG flag, lost in the -g -> -g1 switch
 
   [ Matthias Klose ]
   * Link with --no-keep-files-mapped --no-map-whole-files when using gold.
