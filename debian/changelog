@@ -1,3 +1,9 @@
+llvm-toolchain-5.0 (1:5.0-3) UNRELEASED; urgency=medium
+
+  * Add NDEBUG macro, lost in the previous -g --> -g1 switch
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 25 Sep 2017 10:27:03 +0200
+
 llvm-toolchain-5.0 (1:5.0-2) unstable; urgency=medium
 
   [ Matthias Klose ]
