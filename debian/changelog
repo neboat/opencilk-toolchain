@@ -1,3 +1,9 @@
+llvm-toolchain-4.0 (1:4.0.1-6) UNRELEASED; urgency=medium
+
+  * Add NDEBUG macro, lost in the -g -> -g1 change.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 25 Sep 2017 10:26:11 +0200
+
 llvm-toolchain-4.0 (1:4.0.1-5) unstable; urgency=medium
 
   * Backport of an arm patch for rust.
