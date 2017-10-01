@@ -8,7 +8,7 @@ GXX_VERSIONED_EXECUTABLE := $(shell dpkg -L $(GXX_VERSIONED_PACKAGE) | grep '/us
 GCC_VERSION              := $(subst /usr/bin/g++-,,$(GXX_VERSIONED_EXECUTABLE))
 
 LLVM_VERSION	:= 5.0
-LLVM_VERSION_FULL := $(LLVM_VERSION).1
+LLVM_VERSION_FULL := $(LLVM_VERSION).0
 
 SONAME_EXT      := 1
 # Manage the case when the version is 1:3.5~svn213052-1~exp1 or 1:3.4.2-1
