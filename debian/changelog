@@ -1,7 +1,9 @@
-llvm-toolchain-snapshot (1:6.0~svn311834-4) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:6.0~svn311834-5) UNRELEASED; urgency=medium
 
   * Ship liblldMinGW lld lib
   * Ship clang-refactor & clang-func-mapping in clang-X.Y
+  * Remove the -Wl option to call gold instead of the normal linker
+    (Closes: #876787)
 
   [ Gianfranco Costamagna ]
   * Enable ocaml on release architectures.
@@ -15,7 +17,7 @@ llvm-toolchain-snapshot (1:6.0~svn311834-4) UNRELEASED; urgency=medium
   * On amd64, s390x, arm64 and ppc64el, build with -g1 instead of -g.
   * Set CMAKE_CXX_FLAGS_RELWITHDEBINFO and pass opt_flags.
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 11 Sep 2017 22:27:20 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Oct 2017 15:24:36 +0200
 
 llvm-toolchain-snapshot (1:6.0~svn311834-2) unstable; urgency=medium
 
