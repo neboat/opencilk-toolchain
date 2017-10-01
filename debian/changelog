@@ -35,7 +35,7 @@ llvm-toolchain-snapshot (1:6.0~svn311834-1) unstable; urgency=medium
   * Disable -gsplit-dwarf when using gcc 7 for causing a linking issue
     See https://bugs.llvm.org/show_bug.cgi?id=34140
     (Closes: #853525)
-  * clang was producing unusable binaries on armv5tel (Closes #873307)
+  * clang was producing unusable binaries on armv5tel (Closes: #873307)
     Thanks to Adrian Bunk for the patch
   * With Ubuntu Trusty (for apt.llvm.org), the build fails
     on internal compiler error: in output_index_string, at dwarf2out.c:218
