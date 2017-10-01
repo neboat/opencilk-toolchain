@@ -4,6 +4,7 @@ llvm-toolchain-5.0 (1:5.0-3) unstable; urgency=medium
     (Closes: #876787)
   * For now, lld doesn't generate shared libs. Removing the files
     (Closes: #857653)
+  * Add the missing lldb symlinks (Closes: #872237)
 
   [ Gianfranco Costamagna ]
   * Fixup previous upload, adding -NDEBUG to build flags,
