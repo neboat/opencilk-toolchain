@@ -1,8 +1,13 @@
-llvm-toolchain-5.0 (1:5.0-3) UNRELEASED; urgency=medium
+llvm-toolchain-5.0 (1:5.0-3) unstable; urgency=medium
 
-  * Add NDEBUG macro, lost in the previous -g --> -g1 switch
+  * Remove the -Wl option to call gold instead of the normal linker
+    (Closes: #876787)
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 25 Sep 2017 10:27:03 +0200
+  [ Gianfranco Costamagna ]
+  * Fixup previous upload, adding -NDEBUG to build flags,
+    lost in the -g -> -g1 switch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Oct 2017 15:24:29 +0200
 
 llvm-toolchain-5.0 (1:5.0-2) unstable; urgency=medium
 
@@ -55,7 +60,7 @@ llvm-toolchain-5.0 (1:5.0~+rc3-1) unstable; urgency=medium
   * Fix the C++ include path order (Closes: #859083)
   * Disable -gsplit-dwarf when using gcc 7 for causing a linking issue
     See https://bugs.llvm.org/show_bug.cgi?id=34140
-  * clang was producing unusable binaries on armv5tel (Closes #873306)
+  * clang was producing unusable binaries on armv5tel (Closes: #873306)
     Thanks to Adrian Bunk for the patch
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 26 Aug 2017 10:16:07 +0200
