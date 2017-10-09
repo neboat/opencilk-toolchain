@@ -251,7 +251,7 @@ override_dh_auto_configure: preconfigure
 		cov-configure -co /usr/bin/g++-$(GCC_VERSION) --comptype gcc -- -std=c++0x -fPIC -std=c++11; \
 		cov-configure -co /usr/bin/gcc-$(GCC_VERSION) --comptype gcc -- -fPIC; \
 		cov-configure -co /usr/bin/g++-$(GCC_VERSION) --comptype gcc -- -std=c++0x -fPIC -std=c++11 -fno-exceptions; \
-		cov-configure --compiler cc --comptype gcc --template \
+		cov-configure -co /usr/bin/g++-$(GCC_VERSION) --comptype gcc --template \
 			--xml-option append_arg:"--ppp_translator" \
 			--xml-option append_arg:"replace/llvm::AlignOf<PrevTy>::Alignment/(llvm::AlignOf<PrevTy>::Alignment)" \
 			--xml-option append_arg:"--ppp_translator" \
