@@ -1,9 +1,10 @@
-llvm-toolchain-snapshot (1:6.0~svn311834-5) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:6.0~svn311834-5) unstable; urgency=medium
 
   * Ship liblldMinGW lld lib
   * Ship clang-refactor & clang-func-mapping in clang-X.Y
   * Remove the -Wl option to call gold instead of the normal linker
     (Closes: #876787)
+  * Force the deactivation of ocaml until the transition is done
 
   [ Gianfranco Costamagna ]
   * Enable ocaml on release architectures.
