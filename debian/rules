@@ -170,7 +170,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(OCAML_ARCHS)))
 	DH_OPTIONS=--with ocaml
 endif
 # Force the deactivation of ocaml until the transition is done
-OCAML_ENABLE= no
+OCAML_ENABLE=no
 
 LIBFUZZER_ENABLE=yes
 ifeq (,$(filter $(DEB_HOST_ARCH_OS),linux))
