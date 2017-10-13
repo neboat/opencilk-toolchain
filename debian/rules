@@ -169,6 +169,8 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(OCAML_ARCHS)))
 	OCAML_STDLIB_DIR    ?= $(shell ocamlc -where)
 	DH_OPTIONS=--with ocaml
 endif
+# Force the deactivation of ocaml until the transition is done
+OCAML_ENABLE=no
 
 LIBFUZZER_ENABLE=yes
 ifeq (,$(filter $(DEB_HOST_ARCH_OS),linux))
