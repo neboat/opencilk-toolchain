@@ -6,6 +6,7 @@ llvm-toolchain-snapshot (1:6.0~svn315736-1) unstable; urgency=medium
   * Remove the -Wl option to call gold instead of the normal linker
     (Closes: #876787)
   * Force the deactivation of ocaml until the transition is done
+  * Standards Version 4.1.0
 
   [ Gianfranco Costamagna ]
   * Enable ocaml on release architectures.
