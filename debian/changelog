@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:6.0~svn315736-2) unstable; urgency=medium
+
+  * Also ship ld64.lld in the lld-X.Y package
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Oct 2017 10:24:33 +0200
+
 llvm-toolchain-snapshot (1:6.0~svn315736-1) unstable; urgency=medium
 
   * New snapshot
