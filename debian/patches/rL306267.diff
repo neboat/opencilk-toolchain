@@ -1,0 +1,187 @@
+commit 5a057dc8edbb63887f8c611dd8ddf1b76997f07c
+Author: Chandler Carruth <chandlerc@gmail.com>
+Date:   Mon Jun 26 03:31:31 2017 +0000
+
+    [InstCombine] Factor the logic for propagating !nonnull and !range
+    metadata out of InstCombine and into helpers.
+    
+    NFC, this just exposes the logic used by InstCombine when propagating
+    metadata from one load instruction to another. The plan is to use this
+    in SROA to address PR32902.
+    
+    If anyone has better ideas about how to factor this or name variables,
+    I'm all ears, but this seemed like a pretty good start and lets us make
+    progress on the PR.
+    
+    This is based on a patch by Ariel Ben-Yehuda (D34285).
+    
+    git-svn-id: https://llvm.org/svn/llvm-project/llvm/trunk@306267 91177308-0d34-0410-b5e6-96231b3b80d8
+
+--- a/include/llvm/Transforms/Utils/Local.h
++++ b/include/llvm/Transforms/Utils/Local.h
+@@ -366,6 +366,19 @@
+ /// during lowering by the GC infrastructure.
+ bool callsGCLeafFunction(ImmutableCallSite CS);
+ 
++/// Copy a nonnull metadata node to a new load instruction.
++///
++/// This handles mapping it to range metadata if the new load is an integer
++/// load instead of a pointer load.
++void copyNonnullMetadata(const LoadInst &OldLI, MDNode *N, LoadInst &NewLI);
++
++/// Copy a range metadata node to a new load instruction.
++///
++/// This handles mapping it to nonnull metadata if the new load is a pointer
++/// load instead of an integer load and the range doesn't cover null.
++void copyRangeMetadata(const DataLayout &DL, const LoadInst &OldLI, MDNode *N,
++                       LoadInst &NewLI);
++
+ //===----------------------------------------------------------------------===//
+ //  Intrinsic pattern matching
+ //
+--- a/lib/Transforms/InstCombine/InstCombineLoadStoreAlloca.cpp
++++ b/lib/Transforms/InstCombine/InstCombineLoadStoreAlloca.cpp
+@@ -471,21 +471,7 @@
+       break;
+ 
+     case LLVMContext::MD_nonnull:
+-      // This only directly applies if the new type is also a pointer.
+-      if (NewTy->isPointerTy()) {
+-        NewLoad->setMetadata(ID, N);
+-        break;
+-      }
+-      // If it's integral now, translate it to !range metadata.
+-      if (NewTy->isIntegerTy()) {
+-        auto *ITy = cast<IntegerType>(NewTy);
+-        auto *NullInt = ConstantExpr::getPtrToInt(
+-            ConstantPointerNull::get(cast<PointerType>(Ptr->getType())), ITy);
+-        auto *NonNullInt =
+-            ConstantExpr::getAdd(NullInt, ConstantInt::get(ITy, 1));
+-        NewLoad->setMetadata(LLVMContext::MD_range,
+-                             MDB.createRange(NonNullInt, NullInt));
+-      }
++      copyNonnullMetadata(LI, N, *NewLoad);
+       break;
+     case LLVMContext::MD_align:
+     case LLVMContext::MD_dereferenceable:
+@@ -495,17 +481,7 @@
+         NewLoad->setMetadata(ID, N);
+       break;
+     case LLVMContext::MD_range:
+-      // FIXME: It would be nice to propagate this in some way, but the type
+-      // conversions make it hard.
+-
+-      // If it's a pointer now and the range does not contain 0, make it !nonnull.
+-      if (NewTy->isPointerTy()) {
+-        unsigned BitWidth = IC.getDataLayout().getTypeSizeInBits(NewTy);
+-        if (!getConstantRangeFromMetadata(*N).contains(APInt(BitWidth, 0))) {
+-          MDNode *NN = MDNode::get(LI.getContext(), None);
+-          NewLoad->setMetadata(LLVMContext::MD_nonnull, NN);
+-        }
+-      }
++      copyRangeMetadata(IC.getDataLayout(), LI, N, *NewLoad);
+       break;
+     }
+   }
+--- a/lib/Transforms/Utils/Local.cpp
++++ b/lib/Transforms/Utils/Local.cpp
+@@ -26,6 +26,7 @@
+ #include "llvm/Analysis/LazyValueInfo.h"
+ #include "llvm/Analysis/ValueTracking.h"
+ #include "llvm/IR/CFG.h"
++#include "llvm/IR/ConstantRange.h"
+ #include "llvm/IR/Constants.h"
+ #include "llvm/IR/DIBuilder.h"
+ #include "llvm/IR/DataLayout.h"
+@@ -1069,7 +1070,7 @@
+ }
+ 
+ /// See if there is a dbg.value intrinsic for DIVar for the PHI node.
+-static bool PhiHasDebugValue(DILocalVariable *DIVar, 
++static bool PhiHasDebugValue(DILocalVariable *DIVar,
+                              DIExpression *DIExpr,
+                              PHINode *APN) {
+   // Since we can't guarantee that the original dbg.declare instrinsic
+@@ -1152,7 +1153,7 @@
+   DbgValue->insertAfter(LI);
+ }
+ 
+-/// Inserts a llvm.dbg.value intrinsic after a phi 
++/// Inserts a llvm.dbg.value intrinsic after a phi
+ /// that has an associated llvm.dbg.decl intrinsic.
+ void llvm::ConvertDebugDeclareToDebugValue(DbgDeclareInst *DDI,
+                                            PHINode *APN, DIBuilder &Builder) {
+@@ -1723,12 +1724,12 @@
+         // Preserve !invariant.group in K.
+         break;
+       case LLVMContext::MD_align:
+-        K->setMetadata(Kind, 
++        K->setMetadata(Kind,
+           MDNode::getMostGenericAlignmentOrDereferenceable(JMD, KMD));
+         break;
+       case LLVMContext::MD_dereferenceable:
+       case LLVMContext::MD_dereferenceable_or_null:
+-        K->setMetadata(Kind, 
++        K->setMetadata(Kind,
+           MDNode::getMostGenericAlignmentOrDereferenceable(JMD, KMD));
+         break;
+     }
+@@ -1812,6 +1813,49 @@
+   return false;
+ }
+ 
++void llvm::copyNonnullMetadata(const LoadInst &OldLI, MDNode *N,
++                               LoadInst &NewLI) {
++  auto *NewTy = NewLI.getType();
++
++  // This only directly applies if the new type is also a pointer.
++  if (NewTy->isPointerTy()) {
++    NewLI.setMetadata(LLVMContext::MD_nonnull, N);
++    return;
++  }
++
++  // The only other translation we can do is to integral loads with !range
++  // metadata.
++  if (!NewTy->isIntegerTy())
++    return;
++
++  MDBuilder MDB(NewLI.getContext());
++  const Value *Ptr = OldLI.getPointerOperand();
++  auto *ITy = cast<IntegerType>(NewTy);
++  auto *NullInt = ConstantExpr::getPtrToInt(
++      ConstantPointerNull::get(cast<PointerType>(Ptr->getType())), ITy);
++  auto *NonNullInt = ConstantExpr::getAdd(NullInt, ConstantInt::get(ITy, 1));
++  NewLI.setMetadata(LLVMContext::MD_range,
++                    MDB.createRange(NonNullInt, NullInt));
++}
++
++void llvm::copyRangeMetadata(const DataLayout &DL, const LoadInst &OldLI,
++                             MDNode *N, LoadInst &NewLI) {
++  auto *NewTy = NewLI.getType();
++
++  // Give up unless it is converted to a pointer where there is a single very
++  // valuable mapping we can do reliably.
++  // FIXME: It would be nice to propagate this in more ways, but the type
++  // conversions make it hard.
++  if (!NewTy->isPointerTy())
++    return;
++
++  unsigned BitWidth = DL.getTypeSizeInBits(NewTy);
++  if (!getConstantRangeFromMetadata(*N).contains(APInt(BitWidth, 0))) {
++    MDNode *NN = MDNode::get(OldLI.getContext(), None);
++    NewLI.setMetadata(LLVMContext::MD_nonnull, NN);
++  }
++}
++
+ namespace {
+ /// A potential constituent of a bitreverse or bswap expression. See
+ /// collectBitParts for a fuller explanation.
+@@ -1933,7 +1977,7 @@
+       unsigned NumMaskedBits = AndMask.countPopulation();
+       if (!MatchBitReversals && NumMaskedBits % 8 != 0)
+         return Result;
+-      
++
+       auto &Res = collectBitParts(I->getOperand(0), MatchBSwaps,
+                                   MatchBitReversals, BPS);
+       if (!Res)

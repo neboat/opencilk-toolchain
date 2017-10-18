@@ -1,0 +1,147 @@
+commit 7df06519765b14e1b08d7034c82c45a0a653eb25
+Author: Chandler Carruth <chandlerc@gmail.com>
+Date:   Tue Jun 27 08:32:03 2017 +0000
+
+    [SROA] Fix PR32902 by more carefully propagating !nonnull metadata.
+    
+    This is based heavily on the work done ni D34285. I mostly wanted to do
+    test cleanup for the author to save them some time, but I had a really
+    hard time understanding why it was so hard to write better test cases
+    for these issues.
+    
+    The problem is that because SROA does a second rewrite of the loads and
+    because we *don't* propagate !nonnull for non-pointer loads, we first
+    introduced invalid !nonnull metadata and then stripped it back off just
+    in time to avoid most ways of this PR manifesting. Moving to the more
+    careful utility only fixes this by changing the predicate to look at the
+    new load's type rather than the target type. However, that *does* fix
+    the bug, and the utility is much nicer including adding range metadata
+    to model the nonnull property after a conversion to an integer.
+    
+    However, we have bigger problems because we don't actually propagate
+    *range* metadata, and the utility to do this extracted from instcombine
+    isn't really in good shape to do this currently. It *only* handles the
+    case of copying range metadata from an integer load to a pointer load.
+    It doesn't even handle the trivial cases of propagating from one integer
+    load to another when they are the same width! This utility will need to
+    be beefed up prior to using in this location to get the metadata to
+    fully survive.
+    
+    And even then, we need to go and teach things to turn the range metadata
+    into an assume the way we do with nonnull so that when we *promote* an
+    integer we don't lose the information.
+    
+    All of this will require a new test case that looks kind-of like
+    `preserve-nonnull.ll` does here but focuses on range metadata. It will
+    also likely require more testing because it needs to correctly handle
+    changes to the integer width, especially as SROA actively tries to
+    change the integer width!
+    
+    Last but not least, I'm a little worried about hooking the range
+    metadata up here because the instcombine logic for converting from
+    a range metadata *to* a nonnull metadata node seems broken in the face
+    of non-zero address spaces where null is not mapped to the integer `0`.
+    So that probably needs to get fixed with test cases both in SROA and in
+    instcombine to cover it.
+    
+    But this *does* extract the core PR fix from D34285 of preventing the
+    !nonnull metadata from being propagated in a broken state just long
+    enough to feed into promotion and crash value tracking.
+    
+    On D34285 there is some discussion of zero-extend handling because it
+    isn't necessary. First, the new load size covers all of the non-undef
+    (ie, possibly initialized) bits. This may even extend past the original
+    alloca if loading those bits could produce valid data. The only way its
+    valid for us to zero-extend an integer load in SROA is if the original
+    code had a zero extend or those bits were undef. And we get to assume
+    things like undef *never* satifies nonnull, so non undef bits can
+    participate here. No need to special case the zero-extend handling, it
+    just falls out correctly.
+    
+    The original credit goes to Ariel Ben-Yehuda! I'm mostly landing this to
+    save a few rounds of trivial edits fixing style issues and test case
+    formulation.
+    
+    Differental Revision: D34285
+    
+    git-svn-id: https://llvm.org/svn/llvm-project/llvm/trunk@306379 91177308-0d34-0410-b5e6-96231b3b80d8
+
+--- a/lib/Transforms/Scalar/SROA.cpp
++++ b/lib/Transforms/Scalar/SROA.cpp
+@@ -2388,9 +2388,20 @@
+       if (LI.isVolatile())
+         NewLI->setAtomic(LI.getOrdering(), LI.getSynchScope());
+ 
++      // Any !nonnull metadata or !range metadata on the old load is also valid
++      // on the new load. This is even true in some cases even when the loads
++      // are different types, for example by mapping !nonnull metadata to
++      // !range metadata by modeling the null pointer constant converted to the
++      // integer type.
++      // FIXME: Add support for range metadata here. Currently the utilities
++      // for this don't propagate range metadata in trivial cases from one
++      // integer load to another, don't handle non-addrspace-0 null pointers
++      // correctly, and don't have any support for mapping ranges as the
++      // integer type becomes winder or narrower.
++      if (MDNode *N = LI.getMetadata(LLVMContext::MD_nonnull))
++        copyNonnullMetadata(LI, N, *NewLI);
++
+       // Try to preserve nonnull metadata
+-      if (TargetTy->isPointerTy())
+-        NewLI->copyMetadata(LI, LLVMContext::MD_nonnull);
+       V = NewLI;
+ 
+       // If this is an integer load past the end of the slice (which means the
+--- a/test/Transforms/SROA/preserve-nonnull.ll
++++ b/test/Transforms/SROA/preserve-nonnull.ll
+@@ -42,4 +42,51 @@
+   ret float* %ret
+ }
+ 
++; Make sure we properly handle the !nonnull attribute when we convert
++; a pointer load to an integer load.
++; FIXME: While this doesn't do anythnig actively harmful today, it really
++; should propagate the !nonnull metadata to range metadata. The irony is, it
++; *does* initially, but then we lose that !range metadata before we finish
++; SROA.
++define i8* @propagate_nonnull_to_int() {
++; CHECK-LABEL: define i8* @propagate_nonnull_to_int(
++; CHECK-NEXT:  entry:
++; CHECK-NEXT:    %[[A:.*]] = alloca i64
++; CHECK-NEXT:    store i64 42, i64* %[[A]]
++; CHECK-NEXT:    %[[LOAD:.*]] = load volatile i64, i64* %[[A]]
++; CHECK-NEXT:    %[[CAST:.*]] = inttoptr i64 %[[LOAD]] to i8*
++; CHECK-NEXT:    ret i8* %[[CAST]]
++entry:
++  %a = alloca [2 x i8*]
++  %a.gep0 = getelementptr [2 x i8*], [2 x i8*]* %a, i32 0, i32 0
++  %a.gep1 = getelementptr [2 x i8*], [2 x i8*]* %a, i32 0, i32 1
++  %a.gep0.cast = bitcast i8** %a.gep0 to i64*
++  %a.gep1.cast = bitcast i8** %a.gep1 to i64*
++  store i64 42, i64* %a.gep1.cast
++  store i64 0, i64* %a.gep0.cast
++  %load = load volatile i8*, i8** %a.gep1, !nonnull !0
++  ret i8* %load
++}
++
++; Make sure we properly handle the !nonnull attribute when we convert
++; a pointer load to an integer load and immediately promote it to an SSA
++; register. This can fail in interesting ways due to the rewrite iteration of
++; SROA, resulting in PR32902.
++define i8* @propagate_nonnull_to_int_and_promote() {
++; CHECK-LABEL: define i8* @propagate_nonnull_to_int_and_promote(
++; CHECK-NEXT:  entry:
++; CHECK-NEXT:    %[[PROMOTED_VALUE:.*]] = inttoptr i64 42 to i8*
++; CHECK-NEXT:    ret i8* %[[PROMOTED_VALUE]]
++entry:
++  %a = alloca [2 x i8*], align 8
++  %a.gep0 = getelementptr [2 x i8*], [2 x i8*]* %a, i32 0, i32 0
++  %a.gep1 = getelementptr [2 x i8*], [2 x i8*]* %a, i32 0, i32 1
++  %a.gep0.cast = bitcast i8** %a.gep0 to i64*
++  %a.gep1.cast = bitcast i8** %a.gep1 to i64*
++  store i64 42, i64* %a.gep1.cast
++  store i64 0, i64* %a.gep0.cast
++  %load = load i8*, i8** %a.gep1, align 8, !nonnull !0
++  ret i8* %load
++}
++
+ !0 = !{}

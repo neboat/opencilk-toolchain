@@ -1,0 +1,292 @@
+commit 2b66aeed20b61d42cd2782b94d5419c6faca49a1
+Author: Luqman Aden <me@luqman.ca>
+Date:   Wed Mar 22 19:16:39 2017 +0000
+
+    Preserve nonnull metadata on Loads through SROA & mem2reg.
+    
+    Summary:
+    https://llvm.org/bugs/show_bug.cgi?id=31142 :
+    
+    SROA was dropping the nonnull metadata on loads from allocas that got optimized out. This patch simply preserves nonnull metadata on loads through SROA and mem2reg.
+    
+    Reviewers: chandlerc, efriedma
+    
+    Reviewed By: efriedma
+    
+    Subscribers: hfinkel, spatel, efriedma, arielb1, davide, llvm-commits
+    
+    Differential Revision: https://reviews.llvm.org/D27114
+    
+    git-svn-id: https://llvm.org/svn/llvm-project/llvm/trunk@298540 91177308-0d34-0410-b5e6-96231b3b80d8
+
+--- a/lib/Transforms/Scalar/SROA.cpp
++++ b/lib/Transforms/Scalar/SROA.cpp
+@@ -2387,6 +2387,10 @@
+                                               LI.isVolatile(), LI.getName());
+       if (LI.isVolatile())
+         NewLI->setAtomic(LI.getOrdering(), LI.getSynchScope());
++
++      // Try to preserve nonnull metadata
++      if (TargetTy->isPointerTy())
++        NewLI->copyMetadata(LI, LLVMContext::MD_nonnull);
+       V = NewLI;
+ 
+       // If this is an integer load past the end of the slice (which means the
+--- a/lib/Transforms/Utils/PromoteMemoryToRegister.cpp
++++ b/lib/Transforms/Utils/PromoteMemoryToRegister.cpp
+@@ -15,7 +15,6 @@
+ //
+ //===----------------------------------------------------------------------===//
+ 
+-#include "llvm/Transforms/Utils/PromoteMemToReg.h"
+ #include "llvm/ADT/ArrayRef.h"
+ #include "llvm/ADT/DenseMap.h"
+ #include "llvm/ADT/STLExtras.h"
+@@ -23,6 +22,7 @@
+ #include "llvm/ADT/SmallVector.h"
+ #include "llvm/ADT/Statistic.h"
+ #include "llvm/Analysis/AliasSetTracker.h"
++#include "llvm/Analysis/AssumptionCache.h"
+ #include "llvm/Analysis/InstructionSimplify.h"
+ #include "llvm/Analysis/IteratedDominanceFrontier.h"
+ #include "llvm/Analysis/ValueTracking.h"
+@@ -38,6 +38,7 @@
+ #include "llvm/IR/Metadata.h"
+ #include "llvm/IR/Module.h"
+ #include "llvm/Transforms/Utils/Local.h"
++#include "llvm/Transforms/Utils/PromoteMemToReg.h"
+ #include <algorithm>
+ using namespace llvm;
+ 
+@@ -301,6 +302,18 @@
+ 
+ } // end of anonymous namespace
+ 
++/// Given a LoadInst LI this adds assume(LI != null) after it.
++static void addAssumeNonNull(AssumptionCache *AC, LoadInst *LI) {
++  Function *AssumeIntrinsic =
++      Intrinsic::getDeclaration(LI->getModule(), Intrinsic::assume);
++  ICmpInst *LoadNotNull = new ICmpInst(ICmpInst::ICMP_NE, LI,
++                                       Constant::getNullValue(LI->getType()));
++  LoadNotNull->insertAfter(LI);
++  CallInst *CI = CallInst::Create(AssumeIntrinsic, {LoadNotNull});
++  CI->insertAfter(LoadNotNull);
++  AC->registerAssumption(CI);
++}
++
+ static void removeLifetimeIntrinsicUsers(AllocaInst *AI) {
+   // Knowing that this alloca is promotable, we know that it's safe to kill all
+   // instructions except for load and store.
+@@ -334,9 +347,9 @@
+ /// and thus must be phi-ed with undef. We fall back to the standard alloca
+ /// promotion algorithm in that case.
+ static bool rewriteSingleStoreAlloca(AllocaInst *AI, AllocaInfo &Info,
+-                                     LargeBlockInfo &LBI,
+-                                     DominatorTree &DT,
+-                                     AliasSetTracker *AST) {
++                                     LargeBlockInfo &LBI, DominatorTree &DT,
++                                     AliasSetTracker *AST,
++                                     AssumptionCache *AC) {
+   StoreInst *OnlyStore = Info.OnlyStore;
+   bool StoringGlobalVal = !isa<Instruction>(OnlyStore->getOperand(0));
+   BasicBlock *StoreBB = OnlyStore->getParent();
+@@ -387,6 +400,14 @@
+     // code.
+     if (ReplVal == LI)
+       ReplVal = UndefValue::get(LI->getType());
++
++    // If the load was marked as nonnull we don't want to lose
++    // that information when we erase this Load. So we preserve
++    // it with an assume.
++    if (AC && LI->getMetadata(LLVMContext::MD_nonnull) &&
++        !llvm::isKnownNonNullAt(ReplVal, LI, &DT))
++      addAssumeNonNull(AC, LI);
++
+     LI->replaceAllUsesWith(ReplVal);
+     if (AST && LI->getType()->isPointerTy())
+       AST->deleteValue(LI);
+@@ -435,7 +456,9 @@
+ ///  }
+ static bool promoteSingleBlockAlloca(AllocaInst *AI, const AllocaInfo &Info,
+                                      LargeBlockInfo &LBI,
+-                                     AliasSetTracker *AST) {
++                                     AliasSetTracker *AST,
++                                     DominatorTree &DT,
++                                     AssumptionCache *AC) {
+   // The trickiest case to handle is when we have large blocks. Because of this,
+   // this code is optimized assuming that large blocks happen.  This does not
+   // significantly pessimize the small block case.  This uses LargeBlockInfo to
+@@ -476,10 +499,17 @@
+         // There is no store before this load, bail out (load may be affected
+         // by the following stores - see main comment).
+         return false;
+-    }
+-    else
++    } else {
+       // Otherwise, there was a store before this load, the load takes its value.
+-      LI->replaceAllUsesWith(std::prev(I)->second->getOperand(0));
++      // Note, if the load was marked as nonnull we don't want to lose that
++      // information when we erase it. So we preserve it with an assume.
++      Value *ReplVal = std::prev(I)->second->getOperand(0);
++      if (AC && LI->getMetadata(LLVMContext::MD_nonnull) &&
++          !llvm::isKnownNonNullAt(ReplVal, LI, &DT))
++        addAssumeNonNull(AC, LI);
++
++      LI->replaceAllUsesWith(ReplVal);
++    }
+ 
+     if (AST && LI->getType()->isPointerTy())
+       AST->deleteValue(LI);
+@@ -553,7 +583,7 @@
+     // If there is only a single store to this value, replace any loads of
+     // it that are directly dominated by the definition with the value stored.
+     if (Info.DefiningBlocks.size() == 1) {
+-      if (rewriteSingleStoreAlloca(AI, Info, LBI, DT, AST)) {
++      if (rewriteSingleStoreAlloca(AI, Info, LBI, DT, AST, AC)) {
+         // The alloca has been processed, move on.
+         RemoveFromAllocasList(AllocaNum);
+         ++NumSingleStore;
+@@ -564,7 +594,7 @@
+     // If the alloca is only read and written in one basic block, just perform a
+     // linear sweep over the block to eliminate it.
+     if (Info.OnlyUsedInOneBlock &&
+-        promoteSingleBlockAlloca(AI, Info, LBI, AST)) {
++        promoteSingleBlockAlloca(AI, Info, LBI, AST, DT, AC)) {
+       // The alloca has been processed, move on.
+       RemoveFromAllocasList(AllocaNum);
+       continue;
+@@ -940,6 +970,13 @@
+ 
+       Value *V = IncomingVals[AI->second];
+ 
++      // If the load was marked as nonnull we don't want to lose
++      // that information when we erase this Load. So we preserve
++      // it with an assume.
++      if (AC && LI->getMetadata(LLVMContext::MD_nonnull) &&
++          !llvm::isKnownNonNullAt(V, LI, &DT))
++        addAssumeNonNull(AC, LI);
++
+       // Anything using the load now uses the current value.
+       LI->replaceAllUsesWith(V);
+       if (AST && LI->getType()->isPointerTy())
+--- /dev/null
++++ b/test/Transforms/Mem2Reg/preserve-nonnull-load-metadata.ll
+@@ -0,0 +1,89 @@
++; RUN: opt < %s -mem2reg -S | FileCheck %s
++
++; This tests that mem2reg preserves the !nonnull metadata on loads
++; from allocas that get optimized out.
++
++; Check the case where the alloca in question has a single store.
++define float* @single_store(float** %arg) {
++; CHECK-LABEL: define float* @single_store
++; CHECK: %arg.load = load float*, float** %arg, align 8
++; CHECK: [[ASSUME:%(.*)]] = icmp ne float* %arg.load, null
++; CHECK: call void @llvm.assume(i1 {{.*}}[[ASSUME]])
++; CHECK: ret float* %arg.load
++entry:
++  %buf = alloca float*
++  %arg.load = load float*, float** %arg, align 8
++  store float* %arg.load, float** %buf, align 8
++  %buf.load = load float*, float **%buf, !nonnull !0
++  ret float* %buf.load
++}
++
++; Check the case where the alloca in question has more than one
++; store but still within one basic block.
++define float* @single_block(float** %arg) {
++; CHECK-LABEL: define float* @single_block
++; CHECK: %arg.load = load float*, float** %arg, align 8
++; CHECK: [[ASSUME:%(.*)]] = icmp ne float* %arg.load, null
++; CHECK: call void @llvm.assume(i1 {{.*}}[[ASSUME]])
++; CHECK: ret float* %arg.load
++entry:
++  %buf = alloca float*
++  %arg.load = load float*, float** %arg, align 8
++  store float* null, float** %buf, align 8
++  store float* %arg.load, float** %buf, align 8
++  %buf.load = load float*, float **%buf, !nonnull !0
++  ret float* %buf.load
++}
++
++; Check the case where the alloca in question has more than one
++; store and also reads ands writes in multiple blocks.
++define float* @multi_block(float** %arg) {
++; CHECK-LABEL: define float* @multi_block
++; CHECK-LABEL: entry:
++; CHECK: %arg.load = load float*, float** %arg, align 8
++; CHECK: br label %next
++; CHECK-LABEL: next:
++; CHECK: [[ASSUME:%(.*)]] = icmp ne float* %arg.load, null
++; CHECK: call void @llvm.assume(i1 {{.*}}[[ASSUME]])
++; CHECK: ret float* %arg.load
++entry:
++  %buf = alloca float*
++  %arg.load = load float*, float** %arg, align 8
++  store float* null, float** %buf, align 8
++  br label %next
++next:
++  store float* %arg.load, float** %buf, align 8
++  %buf.load = load float*, float** %buf, !nonnull !0
++  ret float* %buf.load
++}
++
++; Check that we don't add an assume if it's not
++; necessary i.e. the value is already implied to be nonnull
++define float* @no_assume(float** %arg) {
++; CHECK-LABEL: define float* @no_assume
++; CHECK-LABEL: entry:
++; CHECK: %arg.load = load float*, float** %arg, align 8
++; CHECK: %cn = icmp ne float* %arg.load, null
++; CHECK: br i1 %cn, label %next, label %fin
++; CHECK-LABEL: next:
++; CHECK-NOT: call void @llvm.assume
++; CHECK: ret float* %arg.load
++; CHECK-LABEL: fin:
++; CHECK: ret float* null
++entry:
++  %buf = alloca float*
++  %arg.load = load float*, float** %arg, align 8
++  %cn = icmp ne float* %arg.load, null
++  br i1 %cn, label %next, label %fin
++next:
++; At this point the above nonnull check ensures that
++; the value %arg.load is nonnull in this block and thus
++; we need not add the assume.
++  store float* %arg.load, float** %buf, align 8
++  %buf.load = load float*, float** %buf, !nonnull !0
++  ret float* %buf.load
++fin:
++  ret float* null
++}
++
++!0 = !{}
+--- /dev/null
++++ b/test/Transforms/SROA/preserve-nonnull.ll
+@@ -0,0 +1,26 @@
++; RUN: opt < %s -sroa -S | FileCheck %s
++;
++; Make sure that SROA doesn't lose nonnull metadata
++; on loads from allocas that get optimized out.
++
++; CHECK-LABEL: define float* @yummy_nonnull
++; CHECK: [[RETURN:%(.*)]] = load float*, float** %arg, align 8
++; CHECK: [[ASSUME:%(.*)]] = icmp ne float* {{.*}}[[RETURN]], null
++; CHECK: call void @llvm.assume(i1 {{.*}}[[ASSUME]])
++; CHECK: ret float* {{.*}}[[RETURN]]
++
++define float* @yummy_nonnull(float** %arg) {
++entry-block:
++	%buf = alloca float*
++
++	%_arg_i8 = bitcast float** %arg to i8*
++	%_buf_i8 = bitcast float** %buf to i8*
++	call void @llvm.memcpy.p0i8.p0i8.i64(i8* %_buf_i8, i8* %_arg_i8, i64 8, i32 8, i1 false)
++
++	%ret = load float*, float** %buf, align 8, !nonnull !0
++	ret float* %ret
++}
++
++declare void @llvm.memcpy.p0i8.p0i8.i64(i8* nocapture writeonly, i8* nocapture readonly, i64, i32, i1)
++
++!0 = !{}
