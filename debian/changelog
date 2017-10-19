@@ -1,10 +1,17 @@
-llvm-toolchain-4.0 (1:4.0.1-7.1) UNRELEASED; urgency=medium
+llvm-toolchain-4.0 (1:4.0.1-8) unstable; urgency=medium
 
-  * Non-maintainer upload.
+  [ Ximin Luo ]
   * Backport some patches (originally from rust, and upstreamed) to fix two
     failing tests in rustc.
 
- -- Ximin Luo <infinity0@debian.org>  Wed, 18 Oct 2017 15:28:20 +0200
+  [ Sylvestre Ledru ]
+  * Try to fix the mipsel FTBFS (Closes: #877567)
+    I am trying the first option from the bug:
+    - gsplit-dward on 32 bits archs
+    - -g everywhere
+    Many thanks to Adrian Bunk for that
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 18 Oct 2017 16:37:25 +0200
 
 llvm-toolchain-4.0 (1:4.0.1-7) unstable; urgency=medium
 
