@@ -1,3 +1,10 @@
+llvm-toolchain-5.0 (1:5.0-5) UNRELEASED; urgency=medium
+
+  * Update of the copyright file (Closes: #878502)
+    Thanks to Nicholas D Steeves for the work
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 19 Oct 2017 09:34:09 +0200
+
 llvm-toolchain-5.0 (1:5.0-4) unstable; urgency=medium
 
   * Force the deactivation of ocaml until the transition is done

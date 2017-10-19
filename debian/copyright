@@ -3,7 +3,7 @@ Upstream-Name: LLVM/Clang
 Source: http://llvm.org/releases/download.html
 
 Files: *
-Copyright: 2003-2007 University of Illinois at Urbana-Champaign.
+Copyright: 2003-2017 University of Illinois at Urbana-Champaign.
 License: U-OF-I-BSD-LIKE
 
 Files: */install-sh
@@ -131,6 +131,21 @@ Files: lib/Support/reg*
 Copyright: 1992, 1993, 1994 Henry Spencer
            1992, 1993, 1994 The Regents of the University of California
 License: BSD-3-clause
+
+Files: lib/Support/MD5.cpp llvm/include/llvm/Support/MD5.h
+Copyright: 2001 Alexander Peslyak aka Solar Designer <solar at openwall.com>
+License: solar-public-domain
+ This software was written by Alexander Peslyak in 2001.  No copyright is
+ claimed, and the software is hereby placed in the public domain.
+ In case this attempt to disclaim copyright and place the software in the
+ public domain is deemed null and void, then the software is
+ Copyright (c) 2001 Alexander Peslyak and it is hereby released to the
+ general public under the following terms:
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted.
+ .
+ * There's ABSOLUTELY NO WARRANTY, express or implied.
 
 Files: lib/Target/ARM/*
 Copyright: ARM Limited
@@ -370,7 +385,7 @@ License: U-OF-I-BSD-LIKE
  University of Illinois/NCSA
  Open Source License
  .
- Copyright (c) 2003-2013 University of Illinois at Urbana-Champaign.
+ Copyright (c) 2003-2017 University of Illinois at Urbana-Champaign.
  All rights reserved.
  .
  Developed by:
