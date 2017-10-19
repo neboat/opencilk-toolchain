@@ -2,6 +2,8 @@ llvm-toolchain-snapshot (1:6.0~svn315736-2) unstable; urgency=medium
 
   * Also ship ld64.lld in the lld-X.Y package
   * Update d/rules to reflect the move of libfuzzer into compiler-rt
+  * Update of the copyright file (Closes: #878502)
+    Thanks to Nicholas D Steeves for the work
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Oct 2017 10:24:33 +0200
 
