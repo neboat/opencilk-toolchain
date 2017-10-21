@@ -4,6 +4,11 @@ llvm-toolchain-snapshot (1:6.0~svn315736-2) unstable; urgency=medium
   * Update d/rules to reflect the move of libfuzzer into compiler-rt
   * Update of the copyright file (Closes: #878502)
     Thanks to Nicholas D Steeves for the work
+  * Try to fix the mipsel FTBFS (Closes: #877567)
+    I am trying the first option from the bug:
+    - gsplit-dward on 32 bits archs
+    - -g everywhere
+    Many thanks to Adrian Bunk for that
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Oct 2017 10:24:33 +0200
 
