@@ -1,0 +1,84 @@
+Description: Account for bias in stack readjustment
+ While trying to get rust running on Sparc64, I encountered an issue inside
+ llvm. For some reason I did not try to hunt down, rustc decides to do
+ strict (over-)alignment of some stack frames. At a certain point, it is
+ requesting an alignment of 64 bytes. This creates the following sparc
+ assembly code in the output from SparcFrameLowering.cpp:
+
+ andn %sp,63,%sp
+
+ This ensures (as intended) that the stack pointer has its low 6 bits
+ cleared and is perfectly aligned on 64 bytes. Alas, this does not take
+ Sparc64's stack pointer bias into account: The real register value is 2047
+ (0x7ff) lower than the effective stack pointer address. As the stack an
+ Sparc64 is always 8-byte aligned, the stack pointer register modulo 8 has
+ to be 1.
+
+ A crude fix to this is to not mask the lowest bit of the stack pointer
+ (which will keep it 0 on Sparc32 and 1 on Sparc64), which I have verified
+ to fix a Bus Error in rustc on Sparc64/Linux.
+ .
+ See: http://lists.llvm.org/pipermail/llvm-dev/2017-October/118620.html
+Reported-By: Michael Karcher <debian@mkarcher.dialup.fu-berlin.de>
+Author: James Clarke <jrtc27@jrtc27.com>
+
+---
+Origin: upstream
+Bug: https://reviews.llvm.org/D39425
+Last-Update: 2017-10-30
+
+--- llvm-toolchain-4.0-4.0.1.orig/lib/Target/Sparc/SparcFrameLowering.cpp
++++ llvm-toolchain-4.0-4.0.1/lib/Target/Sparc/SparcFrameLowering.cpp
+@@ -88,10 +88,11 @@ void SparcFrameLowering::emitPrologue(Ma
+ 
+   assert(&MF.front() == &MBB && "Shrink-wrapping not yet supported");
+   MachineFrameInfo &MFI = MF.getFrameInfo();
++  const SparcSubtarget &Subtarget = MF.getSubtarget<SparcSubtarget>();
+   const SparcInstrInfo &TII =
+-      *static_cast<const SparcInstrInfo *>(MF.getSubtarget().getInstrInfo());
++      *static_cast<const SparcInstrInfo *>(Subtarget.getInstrInfo());
+   const SparcRegisterInfo &RegInfo =
+-      *static_cast<const SparcRegisterInfo *>(MF.getSubtarget().getRegisterInfo());
++      *static_cast<const SparcRegisterInfo *>(Subtarget.getRegisterInfo());
+   MachineBasicBlock::iterator MBBI = MBB.begin();
+   // Debug location must be unknown since the first debug location is used
+   // to determine the end of the prologue.
+@@ -141,7 +142,7 @@ void SparcFrameLowering::emitPrologue(Ma
+ 
+   // Adds the SPARC subtarget-specific spill area to the stack
+   // size. Also ensures target-required alignment.
+-  NumBytes = MF.getSubtarget<SparcSubtarget>().getAdjustedFrameSize(NumBytes);
++  NumBytes = Subtarget.getAdjustedFrameSize(NumBytes);
+ 
+   // Finally, ensure that the size is sufficiently aligned for the
+   // data on the stack.
+@@ -176,9 +177,27 @@ void SparcFrameLowering::emitPrologue(Ma
+       .addCFIIndex(CFIIndex);
+ 
+   if (NeedsStackRealignment) {
+-    // andn %o6, MaxAlign-1, %o6
++    int64_t Bias = Subtarget.getStackPointerBias();
++    unsigned regUnbiased;
++    if (Bias) {
++      // This clobbers G1 which we always know is available here.
++      regUnbiased = SP::G1;
++      // add %o6, BIAS, %g1
++      BuildMI(MBB, MBBI, dl, TII.get(SP::ADDri), regUnbiased)
++        .addReg(SP::O6).addImm(Bias);
++    } else
++      regUnbiased = SP::O6;
++
++    // andn %regUnbiased, MaxAlign-1, %regUnbiased
+     int MaxAlign = MFI.getMaxAlignment();
+-    BuildMI(MBB, MBBI, dl, TII.get(SP::ANDNri), SP::O6).addReg(SP::O6).addImm(MaxAlign - 1);
++    BuildMI(MBB, MBBI, dl, TII.get(SP::ANDNri), regUnbiased)
++      .addReg(regUnbiased).addImm(MaxAlign - 1);
++
++    if (Bias) {
++      // add %o6, -BIAS, %g1
++      BuildMI(MBB, MBBI, dl, TII.get(SP::ADDri), SP::O6)
++        .addReg(regUnbiased).addImm(-Bias);
++    }
+   }
+ }
+ 

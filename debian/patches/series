@@ -58,3 +58,4 @@ rL306267.diff
 rL306353.diff
 rL306358.diff
 rL306379.diff
+sparc64-fix-stack-alignment.diff

@@ -2,8 +2,10 @@ llvm-toolchain-4.0 (1:4.0.1-9) unstable; urgency=medium
 
   * Update of the copyright file (Closes: #878502)
     Thanks to Nicholas D Steeves for the work
+  * Take a patch for a stack alignment on sparc64 for rust
+    Thanks to John Paul Adrian Glaubitz for the work (Closes: #880221)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 19 Oct 2017 09:33:23 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 30 Oct 2017 19:41:20 +0100
 
 llvm-toolchain-4.0 (1:4.0.1-8) unstable; urgency=medium
 
