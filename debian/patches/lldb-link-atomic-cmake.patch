@@ -6,11 +6,11 @@ Last-Update: 2016-07-27
  lldb/cmake/LLDBDependencies.cmake |    6 ++++++
  1 file changed, 6 insertions(+)
 
-Index: llvm-toolchain-snapshot_6.0~svn310997/lldb/cmake/LLDBDependencies.cmake
+Index: llvm-toolchain-snapshot_6.0~svn317000/lldb/source/Utility/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_6.0~svn310997.orig/lldb/cmake/LLDBDependencies.cmake
-+++ llvm-toolchain-snapshot_6.0~svn310997/lldb/cmake/LLDBDependencies.cmake
-@@ -30,6 +30,13 @@ endif()
+--- llvm-toolchain-snapshot_6.0~svn317000.orig/lldb/source/Utility/CMakeLists.txt
++++ llvm-toolchain-snapshot_6.0~svn317000/lldb/source/Utility/CMakeLists.txt
+@@ -30,6 +30,14 @@ endif()
  
  list(APPEND LLDB_SYSTEM_LIBS ${system_libs})
  
@@ -20,6 +20,7 @@ Index: llvm-toolchain-snapshot_6.0~svn310997/lldb/cmake/LLDBDependencies.cmake
 +   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "powerpcspe")
 +  list(APPEND LLDB_SYSTEM_LIBS atomic)
 +endif()
++
 +
  if (LLVM_BUILD_STATIC)
    if (NOT LLDB_DISABLE_PYTHON)
