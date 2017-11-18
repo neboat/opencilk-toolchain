@@ -8,3 +8,4 @@ usr/lib/llvm-@LLVM_VERSION@/lib/liblldMachO.a
 usr/lib/llvm-@LLVM_VERSION@/lib/liblldCOFF.a
 usr/lib/llvm-@LLVM_VERSION@/lib/liblldMinGW.a
 usr/lib/llvm-@LLVM_VERSION@/lib/liblldCommon.a
+usr/lib/llvm-@LLVM_VERSION@/lib/liblldWasm.a
