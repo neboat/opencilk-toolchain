@@ -1,5 +1,8 @@
 llvm-toolchain-4.0 (1:4.0.1-9) unstable; urgency=medium
 
+  * Create clang-tools-4.0 and move the various clang tools into it
+    clang-tools-4.0 depends on clang-4.0. This might affect some packages.
+    (Closes: #836397)
   * Update of the copyright file (Closes: #878502)
     Thanks to Nicholas D Steeves for the work
   * Take a patch for a stack alignment on sparc64 for rust
