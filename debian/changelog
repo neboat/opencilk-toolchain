@@ -6,6 +6,7 @@ llvm-toolchain-4.0 (1:4.0.1-9) unstable; urgency=medium
     Thanks to John Paul Adrian Glaubitz for the work (Closes: #880221)
   * Update of the clang description
   * Standards-Version updated to 4.1.1
+  * Remove some old breaks/replaces/conflicts (<3.8)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 30 Oct 2017 19:41:20 +0100
 

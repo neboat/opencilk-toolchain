@@ -14,8 +14,7 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
 #    ocaml-findlib [amd64 arm64 armel armhf i386],
 #    libctypes-ocaml-dev [amd64 arm64 armel armhf i386],
 #    dh-ocaml [amd64 arm64 armel armhf i386],
-Build-Conflicts: oprofile, ocaml, libllvm-3.4-ocaml-dev, libllvm-3.5-ocaml-dev,
-  libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev
+Build-Conflicts: oprofile, ocaml, libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev
 Standards-Version: 4.1.1
 Homepage: http://www.llvm.org/
 Vcs-Svn: svn://anonscm.debian.org/svn/pkg-llvm/llvm-toolchain/branches/4.0/
@@ -31,12 +30,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-4.0-dev, python
 Suggests: gnustep, gnustep-devel, clang-4.0-doc, libomp-dev
-Replaces: clang-3.1, clang-3.2, clang-3.3,
- clang-3.4 (<< 1:3.4.2-7~exp1), clang-3.5 (<< 1:3.5~+rc1-3~exp1), compiler-rt,
- clang-include-fixer-4.0
-Breaks: clang-3.1, clang-3.2, clang-3.3,
- clang-3.4 (<< 1:3.4.2-7~exp1), clang-3.5 (<< 1:3.5~+rc1-3~exp1), compiler-rt,
-  clang-include-fixer-4.0
+Replaces: clang-include-fixer-4.0
+Breaks: clang-include-fixer-4.0
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -50,8 +45,6 @@ Package: clang-format-4.0
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
  libllvm4.0 (= ${binary:Version})
-Replaces: clang-format-3.3
-Breaks: clang-format-3.3
 Description: Tool to format C/C++/Obj-C code
  Clang-format is both a library and a stand-alone tool with the goal of
  automatically reformatting C++ sources files according to configurable
@@ -185,8 +178,8 @@ Package: python-clang-4.0
 Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
-Replaces: python-clang-3.3, python-clang-3.4, python-clang-3.5, python-clang-3.6, python-clang-3.7, python-clang-3.8, python-clang-3.9, python-clang-x.y
-Breaks: python-clang-3.3, python-clang-3.4, python-clang-3.5, python-clang-3.6, python-clang-3.7, python-clang-3.8, python-clang-3.9
+Replaces: python-clang-3.8, python-clang-3.9, python-clang-x.y
+Breaks: python-clang-3.8, python-clang-3.9
 Conflicts: python-clang-x.y
 Provides: python-clang-x.y
 Description: Clang Python Bindings
@@ -460,7 +453,6 @@ Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc al
 # ia64 mips mipsel hurd powerpc ppc64 ppc64el sparc64  have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm4.0 (= ${binary:Version}), llvm-4.0-dev,
  python-lldb-4.0
-Conflicts: lldb-3.4, lldb-3.5
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger
  LLDB is a next generation, high-performance debugger. It is built as a set of
@@ -502,7 +494,7 @@ Section: python
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m68k powerpcspe sh4 x32 mips mipsel arm64
 # ia64 mips mipsel hurd ppc64 ppc64el alpha s390x powerpc sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-4.0-dev, python, python-six
-Conflicts: python-lldb-3.4, python-lldb-3.5, python-lldb-3.6, python-lldb-3.7, python-lldb-3.8, python-lldb-3.9, python-lldb-x.y
+Conflicts: python-lldb-3.8, python-lldb-3.9, python-lldb-x.y
 Replaces: python-lldb-x.y
 Provides: python-lldb-x.y
 Pre-Depends: ${misc:Pre-Depends}
