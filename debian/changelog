@@ -10,6 +10,8 @@ llvm-toolchain-4.0 (1:4.0.1-9) unstable; urgency=medium
   * Update of the clang description
   * Standards-Version updated to 4.1.1
   * Remove some old breaks/replaces/conflicts (<3.8)
+  * Fix some wrong-section-according-to-package-name and
+    priority-extra-is-replaced-by-priority-optional issues
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 30 Oct 2017 19:41:20 +0100
 

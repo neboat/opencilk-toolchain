@@ -96,6 +96,7 @@ Description: C, C++ and Objective-C compiler - Documentation
  This package contains the documentation.
 
 Package: libclang1-4.0
+Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
@@ -120,7 +121,7 @@ Package: libclang1-4.0-dbg
 Architecture: any
 Multi-Arch: same
 Section: debug
-Priority: extra
+Priority: optional
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libclang1-4.0 (= ${binary:Version})
 Description: clang library (debug)
  Clang project is a C, C++, Objective C and Objective C++ front-end
@@ -239,7 +240,7 @@ Description: Modular compiler and toolchain technologies, runtime library
 Package: libllvm4.0-dbg
 Architecture: any
 Section: debug
-Priority: extra
+Priority: optional
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm4.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
@@ -435,7 +436,7 @@ Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hp
 Depends: ${shlibs:Depends}, ${misc:Depends}, liblld-4.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: debug
-Priority: extra
+Priority: optional
 Description: LLVM-based linker, debugging libraries
  LLD is a new, high-performance linker. It is built as a set of reusable
  components which highly leverage existing libraries in the larger LLVM
@@ -492,7 +493,7 @@ Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hp
 Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-4.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: debug
-Priority: extra
+Priority: optional
 Description: Next generation, high-performance debugger, debugging libraries
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
