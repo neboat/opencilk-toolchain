@@ -1,5 +1,142 @@
-llvm-toolchain-5.0 (1:5.0-5) UNRELEASED; urgency=medium
+llvm-toolchain-5.0 (1:5.0.1~+rc1-1~exp1) experimental; urgency=medium
 
+  * Create clang-tools-4.0 and move the various clang tools into it
+    clang-tools-4.0 depends on clang-4.0. This might affect some packages.
+    (Closes: #836397)
+  * Update of the copyright file (Closes: #878502)
+    Thanks to Nicholas D Steeves for the work
+  * Take a patch for a stack alignment on sparc64 for rust
+    Thanks to John Paul Adrian Glaubitz for the work (Closes: #880221)
+  * Update of the clang description
+  * Standards-Version updated to 4.1.1
+  * Remove some old breaks/replaces/conflicts (<3.8)
+  * Fix some wrong-section-according-to-package-name and
+    priority-extra-is-replaced-by-priority-optional issues
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 30 Oct 2017 19:41:20 +0100
+
+llvm-toolchain-4.0 (1:4.0.1-8) unstable; urgency=medium
+
+  [ Ximin Luo ]
+  * Backport some patches (originally from rust, and upstreamed) to fix two
+    failing tests in rustc.
+
+  [ Sylvestre Ledru ]
+  * Try to fix the mipsel FTBFS (Closes: #877567)
+    I am trying the first option from the bug:
+    - gsplit-dward on 32 bits archs
+    - -g everywhere
+    Many thanks to Adrian Bunk for that
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 18 Oct 2017 16:37:25 +0200
+
+llvm-toolchain-4.0 (1:4.0.1-7) unstable; urgency=medium
+
+  * Force the deactivation of ocaml until the transition is done
+  * Standards-Version: 4.1.0
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 13 Oct 2017 21:22:54 +0200
+
+llvm-toolchain-4.0 (1:4.0.1-6) unstable; urgency=medium
+
+  * Remove the -Wl option to call gold instead of the normal linker
+    (Closes: #876787)
+  * For now, lld doesn't generate shared libs. Removing the files
+    (Closes: #857653)
+  * Add the missing lldb symlinks (Closes: #872237)
+
+  [ Gianfranco Costamagna ]
+  * Fixup previous upload, adding -NDEBUG to build flags,
+    lost in the -g -> -g1 switch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Oct 2017 15:24:14 +0200
+
+llvm-toolchain-4.0 (1:4.0.1-5) unstable; urgency=medium
+
+  * Backport of an arm patch for rust.
+    https://bugs.llvm.org/show_bug.cgi?id=32379
+    (Closes: #876072)
+
+  [ Matthias Klose ]
+  * Link with --no-keep-files-mapped --no-map-whole-files when using gold.
+  * Fix sanitizer build failure with glibc-2.26.
+  * build using gold on arm64 and s390x. For backports, arm64 might still
+    need the BFD linker, and building with only one or two processes in
+    parallel.
+  * On amd64, s390x, arm64 and ppc64el, build with -g1 instead of -g.
+  * Set CMAKE_CXX_FLAGS_RELWITHDEBINFO and pass opt_flags.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 08 Sep 2017 11:59:03 +0200
+
+llvm-toolchain-4.0 (1:4.0.1-4) unstable; urgency=medium
+
+  * Fail the build if the arch + gcc has a broken gsplit-dwarf support
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Sep 2017 15:13:14 +0200
+
+llvm-toolchain-4.0 (1:4.0.1-3) unstable; urgency=medium
+
+  * Fix the FTBFS because of -gsplit-dwarf:
+    - Only enable it on archs which needs it
+    - Only enable it when gcc supports it correctly
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 31 Aug 2017 19:14:39 +0200
+
+llvm-toolchain-4.0 (1:4.0.1-2) unstable; urgency=medium
+
+  * Rebuild with gcc 7 to fix a relocation error (Closes: #866354)
+  * Also add a missing include in ftfbs-gcc.diff to fix a ftbfs
+    with gcc 7
+  * ld.lld manpage wasn't installed
+  * Link LLDB with -latomic on powerpcspe (Closes: #872267)
+  * Disable -gsplit-dwarf when using gcc 7 for causing a linking issue
+    See https://bugs.llvm.org/show_bug.cgi?id=34140
+    (Closes: #853526)
+  * clang was producing unusable binaries on armv5tel (Closes: #873305)
+    Thanks to Adrian Bunk for the patch
+
+  [ Katsuhiko Nishimra ]
+  * Ensure /usr/bin/g++-$(GCC_VERSION) exists (Closes: #871591)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 26 Aug 2017 17:36:26 +0200
+
+llvm-toolchain-4.0 (1:4.0.1-1) unstable; urgency=medium
+
+  * New stable release
+  * Add libomp-dev to the suggests of clang
+  * Add the ld.lld manpage
+  * Add Provides on python-lldb-x.y & python-clang-x.y & libllvm-x.y-ocaml-dev
+    to avoid the recurring problem about conflicts
+    (Closes: #835546, #863739, #863742)
+  * Standards-Version => 4.0.0
+  * Generate the llvm-tblgen, clang-change-namespace, clang-offload-bundler
+    lld, clang++, clang-check, clang-cpp & clang-import-test manpages
+  * Remove the --no-discard-stderr option from help2man calls
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 14 Jun 2017 19:06:20 +0200
+
+llvm-toolchain-4.0 (1:4.0.1~+rc3-1) unstable; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * Try to fix polly on hurd (missing PATH_MAX)
+  * New snapshot release
+
+  [ Gianfranco Costamagna ]
+  * Fix clang-doc generation
+    - there was a missing install file
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 14 Jun 2017 09:59:59 +0200
+
+llvm-toolchain-4.0 (1:4.0.1~+rc2-1) unstable; urgency=medium
+
+  * New snapshot release
+  * Remove clang-tblgen from clang-X.Y (done by upstream)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 01 Jun 2017 23:01:38 +0200
+
+llvm-toolchain-4.0 (1:4.0.1~+rc1-2) unstable; urgency=medium
+
+  * New testing release
   * Update of the copyright file (Closes: #878502)
     Thanks to Nicholas D Steeves for the work
   * Try to fix the mipsel FTBFS (Closes: #877567)
@@ -8,7 +145,7 @@ llvm-toolchain-5.0 (1:5.0-5) UNRELEASED; urgency=medium
     - -g everywhere
     Many thanks to Adrian Bunk for that
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 19 Oct 2017 09:34:09 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 03 Nov 2017 15:30:19 +0100
 
 llvm-toolchain-5.0 (1:5.0-4) unstable; urgency=medium
 

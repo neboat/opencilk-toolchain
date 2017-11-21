@@ -34,7 +34,6 @@ ifneq (,$(filter $(DEB_HOST_ARCH),powerpc powerpcspe))
 LDFLAGS_EXTRA += -latomic
 endif
 
-
 # Only enable gsplit dwarf on archs which needs it (32 bits)
 ifeq ($(DEB_HOST_ARCH_BITS),32)
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.22.52.0.4 ; echo $$?),0)
