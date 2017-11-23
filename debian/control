@@ -41,7 +41,7 @@ Description: C, C++ and Objective-C compiler
 
 Package: clang-tools-6.0
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, clang-5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, clang-6.0 (= ${binary:Version})
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
