@@ -12,6 +12,8 @@ llvm-toolchain-5.0 (1:5.0.1~+rc1-1~exp1) experimental; urgency=medium
   * Remove some old breaks/replaces/conflicts (<3.8)
   * Fix some wrong-section-according-to-package-name and
     priority-extra-is-replaced-by-priority-optional issues
+  * Use ?= for some variables declarations
+  * Remove the hardcoded declarations of llvm version in debian/rules
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 30 Oct 2017 19:41:20 +0100
 
