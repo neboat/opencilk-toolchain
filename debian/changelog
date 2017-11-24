@@ -12,6 +12,8 @@ llvm-toolchain-snapshot (1:6.0~svn315736-2) unstable; urgency=medium
     - gsplit-dward on 32 bits archs
     - -g everywhere
     Many thanks to Adrian Bunk for that
+  * Use ?= for some variables declarations
+  * Remove the hardcoded declarations of llvm version in debian/rules
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Oct 2017 10:24:33 +0200
 
