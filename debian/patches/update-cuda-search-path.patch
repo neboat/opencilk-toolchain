@@ -1,0 +1,22 @@
+Author: Andreas Beckmann <anbe@debian.org>
+Description: add /usr/lib/cuda to CUDA search paths
+ nvidia-cuda-toolkit/non-free now provides a shim monolitic cuda install
+ tree in /usr/lib/cuda (LP: #1706326) that could be used for
+   clang++ --cuda-path=/usr/lib/cuda
+
+ let clang try that path by default, too, s.t. an explicit --cuda-path is
+ not needed for the nvidia-cuda-toolkit/non-free packages
+ 
+ try the new path *after* the default paths /usr/local/cuda{,-X.Y}
+ to not interfere with cuda installations from nvidia's installer
+
+--- a/clang/lib/Driver/ToolChains.cpp
++++ b/clang/lib/Driver/ToolChains.cpp
+@@ -1825,6 +1825,7 @@ CudaInstallationDetector::CudaInstallati
+     CudaPathCandidates.push_back(D.SysRoot + "/usr/local/cuda");
+     for (const char *Ver : Versions)
+       CudaPathCandidates.push_back(D.SysRoot + "/usr/local/cuda-" + Ver);
++    CudaPathCandidates.push_back(D.SysRoot + "/usr/lib/cuda");
+   }
+ 
+   for (const auto &CudaPath : CudaPathCandidates) {
