@@ -14,6 +14,8 @@ llvm-toolchain-snapshot (1:6.0~svn315736-2) unstable; urgency=medium
     Many thanks to Adrian Bunk for that
   * Use ?= for some variables declarations
   * Remove the hardcoded declarations of llvm version in debian/rules
+  * add /usr/lib/cuda to the CUDA toolkit search paths
+    Thanks to Andreas Beckmann for the patch (Closes: #882505)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Oct 2017 10:24:33 +0200
 
