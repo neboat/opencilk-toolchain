@@ -1,7 +1,7 @@
 llvm-toolchain-snapshot (1:6.0~svn315736-2) unstable; urgency=medium
 
-  * Create clang-tools-4.0 and move the various clang tools into it
-    clang-tools-4.0 depends on clang-4.0. This might affect some packages.
+  * Create clang-tools-6.0 and move the various clang tools into it
+    clang-tools-6.0 depends on clang-6.0. This might affect some packages.
     (Closes: #836397)
   * Also ship ld64.lld and wasm-ld in the lld-X.Y package
   * Update d/rules to reflect the move of libfuzzer into compiler-rt
