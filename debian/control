@@ -28,8 +28,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang-common-5.0-dev (= ${binary:Version}),
  libclang1-5.0 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
-Recommends: llvm-5.0-dev, python
-Suggests: gnustep, gnustep-devel, clang-5.0-doc, libomp-dev
+Recommends: llvm-5.0-dev, python, libomp-dev
+Suggests: gnustep, gnustep-devel, clang-5.0-doc
 Replaces: clang-include-fixer-5.0
 Breaks: clang-include-fixer-5.0
 Description: C, C++ and Objective-C compiler

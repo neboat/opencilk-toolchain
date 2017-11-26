@@ -17,6 +17,7 @@ llvm-toolchain-5.0 (1:5.0.1~+rc1-1~exp1) experimental; urgency=medium
   * add /usr/lib/cuda to the CUDA toolkit search paths
     Thanks to Andreas Beckmann for the patch (Closes: #882505) (LP: #1706326)
   * Fix the fix-scan-view-path.diff path
+  * Move libomp-dev from Suggests to Recommends (Closes: #882781)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 30 Oct 2017 19:41:20 +0100
 
