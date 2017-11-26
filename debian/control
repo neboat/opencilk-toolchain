@@ -29,8 +29,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang-common-6.0-dev (= ${binary:Version}),
  libclang1-6.0 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
-Recommends: llvm-6.0-dev, python
-Suggests: gnustep, gnustep-devel, clang-6.0-doc, libomp-dev
+Recommends: llvm-6.0-dev, python, libomp-dev
+Suggests: gnustep, gnustep-devel, clang-6.0-doc
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
