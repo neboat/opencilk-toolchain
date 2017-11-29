@@ -45,5 +45,3 @@ disable-error-xray.diff
 lldb-disable-swig-error.diff
 silent-test-macho.diff
 silent-llvm-isel-fuzzer.diff
-update-cuda-search-path.patch
-
