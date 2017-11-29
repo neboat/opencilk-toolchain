@@ -1,3 +1,9 @@
+llvm-toolchain-5.0 (1:5.0.1~+rc1-1~exp3) UNRELEASED; urgency=medium
+
+  * Add a symlink to fix lldb-X.Y (Closes: #881993)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 29 Nov 2017 16:46:58 +0100
+
 llvm-toolchain-5.0 (1:5.0.1~+rc1-1~exp2) experimental; urgency=medium
 
   * Create clang-tools-5.0 and move the various clang tools into it
@@ -16,9 +22,9 @@ llvm-toolchain-5.0 (1:5.0.1~+rc1-1~exp2) experimental; urgency=medium
     Thanks to Andreas Beckmann for the patch (Closes: #882505) (LP: #1706326)
   * Fix the fix-scan-view-path.diff path
   * Move libomp-dev from Suggests to Recommends (Closes: #882781)
+  * Do not ship liblld-5.0-dbg as we are not shipping the .so in this version
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 30 Oct 2017 19:41:20 +0100
-
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 28 Nov 2017 16:27:35 +0100
 
 llvm-toolchain-5.0 (1:5.0.1~+rc1-1~exp1) experimental; urgency=medium
 

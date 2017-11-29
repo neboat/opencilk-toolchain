@@ -502,9 +502,9 @@ override_dh_strip:
 	dh_strip -p libclang$(SONAME_EXT)-$(LLVM_VERSION) --dbg-package=libclang$(SONAME_EXT)-$(LLVM_VERSION)-dbg
 	dh_strip -p libllvm$(LLVM_VERSION) --dbg-package=libllvm$(LLVM_VERSION)-dbg
 	dh_strip -p liblldb-$(LLVM_VERSION) --dbg-package=liblldb-$(LLVM_VERSION)-dbg
-ifeq (${LLD_ENABLE},yes)
-	dh_strip -p liblld-$(LLVM_VERSION) --dbg-package=liblld-$(LLVM_VERSION)-dbg
-endif
+#ifeq (${LLD_ENABLE},yes)
+#	dh_strip -p liblld-$(LLVM_VERSION) --dbg-package=liblld-$(LLVM_VERSION)-dbg
+#endif
 	dh_strip -a
 
 
