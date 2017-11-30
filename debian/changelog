@@ -1,8 +1,9 @@
-llvm-toolchain-5.0 (1:5.0.1~+rc1-1~exp3) UNRELEASED; urgency=medium
+llvm-toolchain-5.0 (1:5.0.1~+rc2-1~exp1) experimental; urgency=medium
 
+  * New testing release
   * Add a symlink to fix lldb-X.Y (Closes: #881993)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 29 Nov 2017 16:46:58 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 30 Nov 2017 09:02:28 +0100
 
 llvm-toolchain-5.0 (1:5.0.1~+rc1-1~exp2) experimental; urgency=medium
 
