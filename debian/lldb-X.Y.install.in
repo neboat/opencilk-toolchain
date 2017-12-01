@@ -7,3 +7,5 @@ usr/bin/lldb-@LLVM_VERSION@*
 usr/bin/lldb-server-@LLVM_VERSION@*
 usr/bin/lldb-mi-@LLVM_VERSION@*
 usr/bin/lldb-argdumper-@LLVM_VERSION@
+usr/bin/lldb-test-@LLVM_VERSION@
+

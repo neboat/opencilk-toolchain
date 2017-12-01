@@ -20,6 +20,7 @@ llvm-toolchain-snapshot (1:6.0~svn315736-2) unstable; urgency=medium
   * Move libomp-dev from Suggests to Recommends (Closes: #882781)
   * Add a symlink to fix lldb-X.Y (Closes: #881993)
   * Remove update-cuda-search-path.patch (applied upstream)
+  * Also install usr/bin/lldb-test-6.0
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Oct 2017 10:24:33 +0200
 
