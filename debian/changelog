@@ -12,6 +12,7 @@ llvm-toolchain-4.0 (1:4.0.1-9) unstable; urgency=medium
   * Remove some old breaks/replaces/conflicts (<3.8)
   * Fix some wrong-section-according-to-package-name and
     priority-extra-is-replaced-by-priority-optional issues
+  * liblld-4.0-dev depends on liblld-4.0 (Closes: #856545)
   * Use ?= for some variables declarations
   * Remove the hardcoded declarations of llvm version in debian/rules
   * add /usr/lib/cuda to the CUDA toolkit search paths

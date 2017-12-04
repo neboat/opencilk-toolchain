@@ -43,7 +43,7 @@ Description: C, C++ and Objective-C compiler
 Package: clang-tools-4.0
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, clang-4.0 (= ${binary:Version})
-Description: C, C++ and Objective-C compiler
+Description: clang-based tools for C/C++ developments
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
  GNU Compiler Collection (GCC).
@@ -449,7 +449,8 @@ Package: liblld-4.0-dev
 Section: libdevel
 Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd powerpc ppc64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, lld-4.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, lld-4.0 (= ${binary:Version}),
+ liblld-4.0
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker, header files
  LLD is a new, high-performance linker. It is built as a set of reusable
