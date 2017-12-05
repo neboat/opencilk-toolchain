@@ -14,8 +14,7 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
 #    ocaml-findlib [amd64 arm64 armel armhf i386 ppc64el s390x],
 #    libctypes-ocaml-dev [amd64 arm64 armel armhf i386 ppc64el s390x],
 #    dh-ocaml [amd64 arm64 armel armhf i386 ppc64el s390x],
-Build-Conflicts: oprofile, ocaml, 
-  libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev
+Build-Conflicts: oprofile, ocaml, libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev
 Standards-Version: 4.1.0
 Homepage: http://www.llvm.org/
 Vcs-Svn: svn://anonscm.debian.org/svn/pkg-llvm/llvm-toolchain/branches/5.0/
@@ -449,7 +448,7 @@ Section: libdevel
 Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd powerpc ppc64el have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lld-6.0 (= ${binary:Version}),
- liblld-6.0
+ liblld-6.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker, header files
  LLD is a new, high-performance linker. It is built as a set of reusable
