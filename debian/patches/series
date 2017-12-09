@@ -47,3 +47,4 @@ disable-error-xray.diff
 lldb-disable-swig-error.diff
 update-cuda-search-path.patch
 
+test-keep-alive.diff

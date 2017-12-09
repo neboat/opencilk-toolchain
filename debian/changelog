@@ -1,3 +1,10 @@
+llvm-toolchain-5.0 (1:5.0.1~+rc3-1~exp2) experimental; urgency=medium
+
+  * test-keep-alive.diff: Display more information during the test suite run
+    to avoid the FTBFS on mips*
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 09 Dec 2017 19:56:52 +0100
+
 llvm-toolchain-5.0 (1:5.0.1~+rc3-1~exp1) experimental; urgency=medium
 
   * New testing release
