@@ -1,5 +1,6 @@
-llvm-toolchain-5.0 (1:5.0.1~+rc3-1~exp2) experimental; urgency=medium
+llvm-toolchain-5.0 (1:5.0.1-1) unstable; urgency=medium
 
+  * New stable release
   * test-keep-alive.diff: Display more information during the test suite run
     to avoid the FTBFS on mips*
 
