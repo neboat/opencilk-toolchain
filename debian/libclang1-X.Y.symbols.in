@@ -8,6 +8,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_CXCursorSet_insert@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_CXIndex_getGlobalOptions@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_CXIndex_setGlobalOptions@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_CXIndex_setInvocationEmissionPathOption@LLVM_@LLVM_VERSION@ 1:6.0~svn320926-1~
  clang_CXXConstructor_isConvertingConstructor@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_CXXConstructor_isCopyConstructor@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_CXXConstructor_isDefaultConstructor@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -18,6 +19,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_CXXMethod_isPureVirtual@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_CXXMethod_isStatic@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_CXXMethod_isVirtual@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_CXXRecord_isAbstract@LLVM_@LLVM_VERSION@ 1:6.0~svn320926-1~
  clang_Comment_getChild@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Comment_getKind@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Comment_getNumChildren@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -45,6 +47,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_getNumArguments@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_getNumTemplateArguments@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_getObjCDeclQualifiers@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_Cursor_getObjCManglings@LLVM_@LLVM_VERSION@ 1:6.0~svn320926-1~
  clang_Cursor_getObjCPropertyAttributes@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_getObjCSelectorIndex@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_getOffsetOfField@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -230,6 +233,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getCursorResultType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursorSemanticParent@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursorSpelling@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_getCursorTLSKind@LLVM_@LLVM_VERSION@ 1:6.0~svn320926-1~
  clang_getCursorType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursorUSR@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursorVisibility@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
