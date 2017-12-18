@@ -27,8 +27,10 @@ llvm-toolchain-snapshot (1:6.0~svn315736-2) unstable; urgency=medium
     - clang_CXXRecord_isAbstract
     - clang_Cursor_getObjCManglings
     - clang_getCursorTLSKind
+  * add test-keep-alive.diff to improve the keep alive for some
+    archs like mips*
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Oct 2017 10:24:33 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 18 Dec 2017 13:59:34 +0100
 
 llvm-toolchain-snapshot (1:6.0~svn315736-1) unstable; urgency=medium
 
