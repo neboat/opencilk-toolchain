@@ -1,0 +1,14 @@
+Index: llvm-toolchain-5.0-5.0.1/clang/lib/Driver/ToolChains/CommonArgs.cpp
+===================================================================
+--- llvm-toolchain-5.0-5.0.1.orig/clang/lib/Driver/ToolChains/CommonArgs.cpp
++++ llvm-toolchain-5.0-5.0.1/clang/lib/Driver/ToolChains/CommonArgs.cpp
+@@ -602,7 +602,8 @@ static void addLibFuzzerRuntime(const To
+                                 ArgStringList &CmdArgs) {
+     StringRef ParentDir = llvm::sys::path::parent_path(TC.getDriver().InstalledDir);
+     SmallString<128> P(ParentDir);
+-    llvm::sys::path::append(P, "lib", "libLLVMFuzzer.a");
++    SmallString<128> P(ToolChain.getDriver().Dir);
++    llvm::sys::path::append(P, + "/../lib" CLANG_LIBDIR_SUFFIX, "libfuzzer.a");
+     CmdArgs.push_back(Args.MakeArgString(P));
+     TC.AddCXXStdlibLibArgs(Args, CmdArgs);
+ }
