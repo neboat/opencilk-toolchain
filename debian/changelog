@@ -4,6 +4,7 @@ llvm-toolchain-5.0 (1:5.0.1-2) unstable; urgency=medium
     Fix upstream bug https://bugs.llvm.org/show_bug.cgi?id=35291
   * Fix the path detection to lib fuzzer
     https://bugs.llvm.org/show_bug.cgi?id=33248
+  * Add a symlink to fix lldb-X.Y - for real (Closes: #881993)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 22 Dec 2017 11:42:46 +0100
 
