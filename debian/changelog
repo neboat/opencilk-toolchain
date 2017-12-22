@@ -31,6 +31,7 @@ llvm-toolchain-snapshot (1:6.0~svn315736-2) unstable; urgency=medium
     - clang_getCursorTLSKind
   * add test-keep-alive.diff to improve the keep alive for some
     archs like mips*
+  * remove liblld-6.0-dbg for now
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 18 Dec 2017 13:59:34 +0100
 
