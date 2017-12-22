@@ -151,7 +151,8 @@ ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 		LLDB_ENABLE=no
 else
 # See https://llvm.org/bugs/show_bug.cgi?id=28898
-	CMAKE_EXTRA += -DLLDB_DISABLE_LIBEDIT=ON
+# Enable it again as it seems it is fixed upstream https://bugs.llvm.org/show_bug.cgi?id=35291
+#	CMAKE_EXTRA += -DLLDB_DISABLE_LIBEDIT=ON
 endif
 
 LLD_ENABLE=yes
