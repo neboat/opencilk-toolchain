@@ -1,3 +1,9 @@
+llvm-toolchain-6.0 (1:6.0~svn321385-2) unstable; urgency=medium
+
+  * Upload the new package (upstream just branched)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 03 Jan 2018 20:03:12 +0100
+
 llvm-toolchain-snapshot (1:6.0~svn321385-1) unstable; urgency=medium
 
   * Snapshot upload before rc1 (January)
