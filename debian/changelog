@@ -1,4 +1,4 @@
-llvm-toolchain-6.0 (1:6.0~svn321385-2) unstable; urgency=medium
+llvm-toolchain-6.0 (1:6.0~svn321745-1~exp1) experimental; urgency=medium
 
   * Upload the new package (upstream just branched)
 
