@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:7~svn322673-1) unstable; urgency=medium
+llvm-toolchain-snapshot (1:7~svn322880-1) unstable; urgency=medium
 
   * Change the versioning from X.Y to X as upstream is using
     X.Y.Z and X
@@ -9,7 +9,7 @@ llvm-toolchain-snapshot (1:7~svn322673-1) unstable; urgency=medium
     - clang_isInvalidDeclaration
   * Fix the VCS-* tags
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 03 Jan 2018 20:04:10 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jan 2018 20:50:03 +0100
 
 llvm-toolchain-snapshot (1:6.0~svn321385-1) unstable; urgency=medium
 
