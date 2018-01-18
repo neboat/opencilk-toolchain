@@ -1,3 +1,12 @@
+llvm-toolchain-snapshot (1:7~svn322673-1) unstable; urgency=medium
+
+  * Packages, binaries and libraries have been renamed.
+    Instead of the X.Y naming, we moved to X to match the
+    naming from upstream.
+    As example, clang version 7 is named clang-7 (was clang-6.0)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 17 Jan 2018 10:50:39 +0100
+
 llvm-toolchain-snapshot (1:3.6~svn214630-1~exp1) experimental; urgency=medium
 
   * clang is now co-instalable. Available on version 3.4, 3.5 and 3.6

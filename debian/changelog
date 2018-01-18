@@ -1,3 +1,16 @@
+llvm-toolchain-snapshot (1:7~svn322673-1) unstable; urgency=medium
+
+  * Change the versioning from X.Y to X as upstream is using
+    X.Y.Z and X
+    I am keeping the epoch because it would be too complex to manage
+    with the various updates scenario
+  * Two new symbols in libclang
+    - clang_getFileContents
+    - clang_isInvalidDeclaration
+  * Fix the VCS-* tags
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 03 Jan 2018 20:04:10 +0100
+
 llvm-toolchain-snapshot (1:6.0~svn321385-1) unstable; urgency=medium
 
   * Snapshot upload before rc1 (January)

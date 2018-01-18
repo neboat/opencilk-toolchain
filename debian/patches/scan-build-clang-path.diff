@@ -9,7 +9,7 @@
      $Clang = Cwd::realpath("$RealBin/bin/clang") if (-f "$RealBin/bin/clang");
      if (!defined $Clang || ! -x $Clang) {
 -      $Clang = Cwd::realpath("$RealBin/clang") if (-f "$RealBin/clang");
-+      $Clang = Cwd::realpath("/usr/lib/llvm-6.0/bin/clang");
++      $Clang = Cwd::realpath("/usr/lib/llvm-7/bin/clang");
      }
      if (!defined $Clang || ! -x $Clang) {
        return "error: Cannot find an executable 'clang' relative to" .

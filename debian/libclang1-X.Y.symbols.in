@@ -261,6 +261,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getExpansionLocation@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getFieldDeclBitWidth@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getFile@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_getFileContents@@LLVM_@LLVM_VERSION@ 1:7~svn321385-1~
  clang_getFileLocation@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getFileName@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getFileTime@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -335,6 +336,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_isFileMultipleIncludeGuarded@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_isFunctionTypeVariadic@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_isInvalid@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_isInvalidDeclaration@LLVM_@LLVM_VERSION@ 1:7~svn321385-1~
  clang_isPODType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_isPreprocessing@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_isReference@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
