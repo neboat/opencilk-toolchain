@@ -7,8 +7,8 @@ GXX_VERSIONED_PACKAGE    := $(shell dpkg-query -W -f '$${Depends}' g++ | grep -o
 GXX_VERSIONED_EXECUTABLE := $(shell dpkg -L $(GXX_VERSIONED_PACKAGE) | grep '/usr/bin/g++-[0-9][0-9.]*' | xargs ls -d | tail -n1 )
 GCC_VERSION              := $(subst /usr/bin/g++-,,$(GXX_VERSIONED_EXECUTABLE))
 
-LLVM_VERSION   := $(shell dpkg-parsechangelog | sed -rne "s,^Version: ([0-9]+).*,\1,p")
-LLVM_VERSION_FULL := $(shell dpkg-parsechangelog | sed -rne "s,^Version: ([0-9.]+)(~|-)(.*),\1,p")
+LLVM_VERSION   := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
+LLVM_VERSION_FULL := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1,p")
 ifeq ($(LLVM_VERSION),$(LLVM_VERSION_FULL))
 	LLVM_VERSION_FULL := $(LLVM_VERSION).0.0
 endif
@@ -482,9 +482,9 @@ endif
 
 
 override_dh_makeshlibs:
-	dh_makeshlibs -plibclang$(SONAME_EXT)-$(LLVM_VERSION) -V"libclang$(SONAME_EXT)-$(LLVM_VERSION) (>= 7~svn298832-1~)"
-	dh_makeshlibs -pliblldb-$(LLVM_VERSION) -V"liblldb-$(LLVM_VERSION) (>= 7~svn298832-1~)"
-	dh_makeshlibs -plibllvm$(LLVM_VERSION) -V"libllvm$(LLVM_VERSION) (>= 7~svn298832-1~)"
+	dh_makeshlibs -plibclang$(SONAME_EXT)-$(LLVM_VERSION) -V"libclang$(SONAME_EXT)-$(LLVM_VERSION) (>= 1:7~svn298832-1~)"
+	dh_makeshlibs -pliblldb-$(LLVM_VERSION) -V"liblldb-$(LLVM_VERSION) (>= 1:7~svn298832-1~)"
+	dh_makeshlibs -plibllvm$(LLVM_VERSION) -V"libllvm$(LLVM_VERSION) (>= 1:7~svn298832-1~)"
 	dh_makeshlibs --remaining-packages
 
 override_dh_shlibdeps:
@@ -499,7 +499,7 @@ override_dh_installman:
 
 override_dh_strip:
 	: # running out of diskspace on the buildds
-	find $(TARGET_BUILD) -name '*.o' -o -name '*.a' -type f | xargs -r rm -f
+	find $(TARGET_BUILD) -name '*.o' -o -name '*.a' -type f  | xargs -r rm -f
 	dh_strip -p libclang$(SONAME_EXT)-$(LLVM_VERSION) --dbg-package=libclang$(SONAME_EXT)-$(LLVM_VERSION)-dbg
 	dh_strip -p libllvm$(LLVM_VERSION) --dbg-package=libllvm$(LLVM_VERSION)-dbg
 	dh_strip -p liblldb-$(LLVM_VERSION) --dbg-package=liblldb-$(LLVM_VERSION)-dbg
