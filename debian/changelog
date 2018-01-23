@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:7~svn322880-2) unstable; urgency=medium
+
+  * Update the creation of the README to unbreak the mips* FTBFS
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 23 Jan 2018 08:58:40 +0100
+
 llvm-toolchain-snapshot (1:7~svn322880-1) unstable; urgency=medium
 
   * Change the versioning from X.Y to X as upstream is using

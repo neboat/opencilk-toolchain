@@ -388,6 +388,8 @@ endif
 # a fake txt to make sure it doesn't fail
 	echo "The *.txt files, if available, contain helper to override some of the errors messages." > $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/README.txt
 	echo "Please visit https://github.com/google/sanitizers/wiki/AddressSanitizer for help" >> $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/README.txt
+# Path changed. Make a copy of it
+	cp $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/README.txt $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/share/README.txt
 
 # idem for the lldb python binding
 	mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python2.7/site-packages/lldb/
