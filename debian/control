@@ -41,7 +41,7 @@ Description: C, C++ and Objective-C compiler
 Package: clang-tools-7
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, clang-7 (= ${binary:Version})
-Description: C, C++ and Objective-C compiler
+Description: clang-based tools
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
  GNU Compiler Collection (GCC).
@@ -49,7 +49,8 @@ Description: C, C++ and Objective-C compiler
  Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
  provides most of the support of C++17.
  .
- This package contains some clang-based tools.
+ This package contains some clang-based tools like scan-build, clangd,
+ clang-cl, etc.
 
 Package: clang-format-7
 Architecture: any
