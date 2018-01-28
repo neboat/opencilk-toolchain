@@ -1,7 +1,7 @@
 llvm-toolchain-snapshot (1:7~svn323616-1~exp1) experimental; urgency=medium
 
   * New snapshot release
-  * Fix llvm-config with the change of versionning (Closes: #888592)
+  * Fix llvm-config with the change of versioning (Closes: #888592)
   * Update the creation of the README to unbreak the mips* FTBFS
   * Update of the clang-tools-X.Y description
 
