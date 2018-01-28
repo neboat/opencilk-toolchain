@@ -1,9 +1,11 @@
-llvm-toolchain-snapshot (1:7~svn322880-2) unstable; urgency=medium
+llvm-toolchain-snapshot (1:7~svn323616-1~exp1) experimental; urgency=medium
 
+  * New snapshot release
+  * Fix llvm-config with the change of versionning (Closes: #888592)
   * Update the creation of the README to unbreak the mips* FTBFS
   * Update of the clang-tools-X.Y description
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 23 Jan 2018 08:58:40 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 28 Jan 2018 13:43:37 +0100
 
 llvm-toolchain-snapshot (1:7~svn322880-1) unstable; urgency=medium
 
