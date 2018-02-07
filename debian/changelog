@@ -4,6 +4,7 @@ llvm-toolchain-snapshot (1:7~svn323616-1~exp1) experimental; urgency=medium
   * Fix llvm-config with the change of versioning (Closes: #888592)
   * Update the creation of the README to unbreak the mips* FTBFS
   * Update of the clang-tools-X.Y description
+  * ignore source: source-is-missing lldb/unittests/
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 28 Jan 2018 13:43:37 +0100
 

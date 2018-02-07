@@ -6,4 +6,5 @@ source: outdated-autotools-helper-file autoconf/config.sub 2011-11-02
 # Reported here https://bugs.llvm.org/show_bug.cgi?id=32962
 # No activity, silent it to avoid false positive in automation
 source: license-problem-convert-utf-code lib/Support/ConvertUTF.cpp
-
+# A unit test. No big deal
+source: source-is-missing lldb/unittests/ObjectFile/ELF/Inputs/early-section-headers.so
