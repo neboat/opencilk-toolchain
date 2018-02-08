@@ -1,9 +1,13 @@
-llvm-toolchain-6.0 (1:6.0~+rc1-2) UNRELEASED; urgency=medium
+llvm-toolchain-6.0 (1:6.0~+rc2-1) unstable; urgency=medium
 
+  * New snapshot release
+    - should fix the FTBFS on arm64 (Closes: #888877)
   * Also ignore comdat.ll test failure in silent-gold-test.diff. see
     https://bugs.llvm.org/show_bug.cgi?id=36166
+  * Remove the python-lldb-6.0 dep to liblldb-6.0-dev to remove the
+    circular dependency (Closes: #876015)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 31 Jan 2018 13:49:35 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 07 Feb 2018 23:13:54 +0100
 
 llvm-toolchain-6.0 (1:6.0~+rc1-1) unstable; urgency=medium
 
