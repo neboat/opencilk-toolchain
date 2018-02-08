@@ -6,6 +6,8 @@ llvm-toolchain-6.0 (1:6.0~+rc2-1) unstable; urgency=medium
     https://bugs.llvm.org/show_bug.cgi?id=36166
   * Remove the python-lldb-6.0 dep to liblldb-6.0-dev to remove the
     circular dependency (Closes: #876015)
+  * Mark liblldb-6.0-dbg conflict with liblldb-7-dbg
+    (Closes: #888057)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 07 Feb 2018 23:13:54 +0100
 

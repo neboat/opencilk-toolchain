@@ -492,6 +492,7 @@ Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hp
 # ia64 mips mipsel hurd ppc64el alpha s390x sparc64 powerpc ppc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-6.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
+Conflicts: liblldb-7-dbg
 Section: debug
 Priority: optional
 Description: Next generation, high-performance debugger, debugging libraries
