@@ -19,6 +19,7 @@ llvm-toolchain-4.0 (1:4.0.1-9) unstable; urgency=medium
     Thanks to Andreas Beckmann for the patch (Closes: #882505) (LP: #1706326)
   * Fix the fix-scan-view-path.diff path (Closes: #885827)
   * Move libomp-dev from Suggests to Recommends (Closes: #882781)
+  * Do not ship liblld-4.0-dbg for now (Closes: #889269)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 11 Feb 2018 00:01:50 +0100
 

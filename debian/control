@@ -430,19 +430,19 @@ Description: LLVM-based linker, library
  .
  This package contains the LLD runtime library.
 
-Package: liblld-4.0-dbg
-Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
-# ia64 mips mipsel hurd ppc64el alpha s390x powerpc have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, liblld-4.0 (= ${binary:Version})
-Pre-Depends: ${misc:Pre-Depends}
-Section: debug
-Priority: optional
-Description: LLVM-based linker, debugging libraries
- LLD is a new, high-performance linker. It is built as a set of reusable
- components which highly leverage existing libraries in the larger LLVM
- Project.
- .
- This package contains the LLD runtime library debug symbols.
+# Package: liblld-4.0-dbg
+# Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
+# # ia64 mips mipsel hurd ppc64el alpha s390x powerpc have been removed
+# Depends: ${shlibs:Depends}, ${misc:Depends}, liblld-4.0 (= ${binary:Version})
+# Pre-Depends: ${misc:Pre-Depends}
+# Section: debug
+# Priority: optional
+# Description: LLVM-based linker, debugging libraries
+#  LLD is a new, high-performance linker. It is built as a set of reusable
+#  components which highly leverage existing libraries in the larger LLVM
+#  Project.
+#  .
+#  This package contains the LLD runtime library debug symbols.
 
 
 Package: liblld-4.0-dev
