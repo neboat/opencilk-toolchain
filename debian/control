@@ -10,6 +10,7 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
     libjsoncpp-dev, pkg-config,
     lcov, procps, help2man, zlib1g-dev,
     g++-multilib [amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
+    libjs-mathjax
 #    ocaml-nox [amd64 arm64 armel armhf i386],
 #    ocaml-findlib [amd64 arm64 armel armhf i386],
 #    libctypes-ocaml-dev [amd64 arm64 armel armhf i386],
@@ -86,7 +87,7 @@ Description: clang-based C++ linter tool
 Package: clang-5.0-doc
 Architecture: all
 Section: doc
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-mathjax
 Description: C, C++ and Objective-C compiler - Documentation
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
