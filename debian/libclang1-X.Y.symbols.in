@@ -116,6 +116,9 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_ParamCommandComment_getParamName@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_ParamCommandComment_isDirectionExplicit@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_ParamCommandComment_isParamIndexValid@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_PrintingPolicy_dispose@LLVM_@LLVM_VERSION@ 1:7~svn324835-1~
+ clang_PrintingPolicy_getProperty@LLVM_@LLVM_VERSION@ 1:7~svn324835-1~
+ clang_PrintingPolicy_setProperty@LLVM_@LLVM_VERSION@ 1:7~svn324835-1~
  clang_Range_isNull@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_TParamCommandComment_getDepth@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_TParamCommandComment_getIndex@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -228,6 +231,8 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getCursorLinkage@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursorLocation@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursorPlatformAvailability@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_getCursorPrettyPrinted@LLVM_@LLVM_VERSION@ 1:7~svn324835-1~
+ clang_getCursorPrintingPolicy@LLVM_@LLVM_VERSION@ 1:7~svn324835-1~
  clang_getCursorReferenceNameRange@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursorReferenced@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursorResultType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
