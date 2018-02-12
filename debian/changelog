@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:7~svn323616-1~exp2) experimental; urgency=medium
+
+  * Fail the build when new symbols are added
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 12 Feb 2018 17:32:45 +0100
+
 llvm-toolchain-snapshot (1:7~svn323616-1~exp1) experimental; urgency=medium
 
   * New snapshot release
