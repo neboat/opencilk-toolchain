@@ -1,3 +1,12 @@
+llvm-toolchain-4.0 (1:4.0.1-10) unstable; urgency=medium
+
+  * Ignore the test tools/gold/X86/comdat.ll
+    until https://bugs.llvm.org/show_bug.cgi?id=36166
+    is fixed.
+    Will fix the ftbfs on x86
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 13 Feb 2018 09:26:55 +0100
+
 llvm-toolchain-4.0 (1:4.0.1-9) unstable; urgency=medium
 
   * Create clang-tools-4.0 and move the various clang tools into it
