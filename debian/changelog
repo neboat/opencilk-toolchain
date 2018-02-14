@@ -1,9 +1,15 @@
 llvm-toolchain-5.0 (1:5.0.1-4) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * Ignore the test tools/gold/X86/comdat.ll
     until https://bugs.llvm.org/show_bug.cgi?id=36166
     is fixed.
     Will fix the ftbfs on x86
+
+  [ John Paul Adrian Glaubitz ]
+  * Add proposed upstream patch by James Clarke to add the
+    missing __tls_get_addr symbol to the symbol table for
+    TLS calls on SPARC (Closes: #890401)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 14 Feb 2018 13:12:18 +0100
 

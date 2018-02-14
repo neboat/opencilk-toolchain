@@ -49,3 +49,4 @@ update-cuda-search-path.patch
 
 test-keep-alive.diff
 libfuzzer-path.diff
+sparc64-add-missing-tls-get-addr.diff
