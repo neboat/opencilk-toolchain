@@ -1,3 +1,12 @@
+llvm-toolchain-4.0 (1:4.0.1-11) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Add proposed upstream patch by James Clarke to add the
+    missing __tls_get_addr symbol to the symbol table for
+    TLS calls on SPARC (Closes: #890401)
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Wed, 14 Feb 2018 19:25:54 +0100
+
 llvm-toolchain-4.0 (1:4.0.1-10) unstable; urgency=medium
 
   * Ignore the test tools/gold/X86/comdat.ll
