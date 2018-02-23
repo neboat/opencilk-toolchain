@@ -1,11 +1,14 @@
 llvm-toolchain-6.0 (1:6.0~+rc2-2) UNRELEASED; urgency=medium
 
+  * Move the VCS to git.
+    Many thanks to James Clarke for doing the conversion
+
   [ John Paul Adrian Glaubitz ]
   * Add proposed upstream patch by James Clarke to add the
     missing __tls_get_addr symbol to the symbol table for
     TLS calls on SPARC (Closes: #890401)
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Wed, 14 Feb 2018 21:23:31 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 23 Feb 2018 19:54:21 +0100
 
 llvm-toolchain-6.0 (1:6.0~+rc2-1) unstable; urgency=medium
 
