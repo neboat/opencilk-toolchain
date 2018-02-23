@@ -17,8 +17,8 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
 Build-Conflicts: oprofile, ocaml, libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev
 Standards-Version: 4.1.1
 Homepage: http://www.llvm.org/
-Vcs-Svn: svn://anonscm.debian.org/svn/pkg-llvm/llvm-toolchain/branches/4.0/
-Vcs-Browser: https://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/4.0/
+Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b 4.0
+Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/4.0
 
 # ------------- clang -------------
 
