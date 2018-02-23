@@ -1,6 +1,7 @@
 llvm-toolchain-5.0 (1:5.0.1-4) UNRELEASED; urgency=medium
 
-  [ Sylvestre Ledru ]
+  * Move the VCS to git.
+    Many thanks to James Clarke for doing the conversion
   * Ignore the test tools/gold/X86/comdat.ll
     until https://bugs.llvm.org/show_bug.cgi?id=36166
     is fixed.
@@ -65,6 +66,7 @@ llvm-toolchain-5.0 (1:5.0.1~+rc1-1~exp2) experimental; urgency=medium
   * Remove some old breaks/replaces/conflicts (<3.8)
   * Fix some wrong-section-according-to-package-name and
     priority-extra-is-replaced-by-priority-optional issues
+  * liblld-4.0-dev depends on liblld-4.0 (Closes: #856545)
   * Use ?= for some variables declarations
   * Remove the hardcoded declarations of llvm version in debian/rules
   * add /usr/lib/cuda to the CUDA toolkit search paths
@@ -85,8 +87,11 @@ llvm-toolchain-5.0 (1:5.0.1~+rc1-1~exp1) experimental; urgency=medium
       - gsplit-dward on 32 bits archs
       - -g everywhere
     Many thanks to Adrian Bunk for that
+  * Fix the fix-scan-view-path.diff path (Closes: #885827)
+  * Move libomp-dev from Suggests to Recommends (Closes: #882781)
+  * Do not ship liblld-4.0-dbg for now (Closes: #889269)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 03 Nov 2017 15:30:19 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 11 Feb 2018 00:01:50 +0100
 
 llvm-toolchain-4.0 (1:4.0.1-8) unstable; urgency=medium
 
