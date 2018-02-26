@@ -1,5 +1,6 @@
 llvm-toolchain-snapshot (1:7~svn323616-1~exp2) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * create the directory for the mips stuff
   * Fail the build when new symbols are added
   * 5 new symbols:
@@ -11,8 +12,12 @@ llvm-toolchain-snapshot (1:7~svn323616-1~exp2) UNRELEASED; urgency=medium
   * Use upstream ld.lld manpage instead of help2man
   * Move the VCS to git.
     Many thanks to James Clarke for doing the conversion
+  * Create the directory before having the manpages generated
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 12 Feb 2018 17:32:45 +0100
+  [ James Clarke ]
+  * Disable LLDB on powerpcspe
+
+ -- James Clarke <jrtc27@debian.org>  Mon, 26 Feb 2018 16:07:18 +0000
 
 llvm-toolchain-snapshot (1:7~svn323616-1~exp1) experimental; urgency=medium
 
