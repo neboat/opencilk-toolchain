@@ -1,16 +1,19 @@
 llvm-toolchain-4.0 (1:4.0.1-11) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * Move the VCS to git.
     Many thanks to James Clarke for doing the conversion
+  * Create the directory before having the manpages generated
 
   [ John Paul Adrian Glaubitz ]
   * Add proposed upstream patch by James Clarke to add the
     missing __tls_get_addr symbol to the symbol table for
     TLS calls on SPARC (Closes: #890401)
 
-  [ Sylvestre Ledru ]
+  [ James Clarke ]
+  * Disable LLDB on powerpcspe
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 23 Feb 2018 19:43:43 +0100
+ -- James Clarke <jrtc27@debian.org>  Mon, 26 Feb 2018 16:07:18 +0000
 
 llvm-toolchain-4.0 (1:4.0.1-10) unstable; urgency=medium
 
