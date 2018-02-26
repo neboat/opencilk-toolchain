@@ -1,18 +1,23 @@
 llvm-toolchain-5.0 (1:5.0.1-4) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * Move the VCS to git.
     Many thanks to James Clarke for doing the conversion
   * Ignore the test tools/gold/X86/comdat.ll
     until https://bugs.llvm.org/show_bug.cgi?id=36166
     is fixed.
     Will fix the ftbfs on x86
+  * Create the directory before having the manpages generated
 
   [ John Paul Adrian Glaubitz ]
   * Add proposed upstream patch by James Clarke to add the
     missing __tls_get_addr symbol to the symbol table for
     TLS calls on SPARC (Closes: #890401)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 14 Feb 2018 13:12:18 +0100
+  [ James Clarke ]
+  * Disable LLDB on powerpcspe
+
+ -- James Clarke <jrtc27@debian.org>  Mon, 26 Feb 2018 16:07:18 +0000
 
 llvm-toolchain-5.0 (1:5.0.1-3) unstable; urgency=medium
 
