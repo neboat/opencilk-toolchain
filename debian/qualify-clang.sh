@@ -2,7 +2,7 @@
 # Stop at the first error
 set -e
 
-VERSION=5.0
+VERSION=6.0
 
 if test ! -f /usr/bin/llvm-config-$VERSION; then
     echo "Install llvm-$VERSION & llvm-$VERSION-dev"
