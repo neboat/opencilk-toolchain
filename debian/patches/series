@@ -49,3 +49,4 @@ update-cuda-search-path.patch
 
 test-keep-alive.diff
 libfuzzer-path.diff
+silent-gold-regression.diff
