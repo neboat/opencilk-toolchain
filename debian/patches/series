@@ -41,22 +41,11 @@ clang-fix-cmpxchg8-detection-on-i386.patch
 lldb-addversion-suffix-to-llvm-server-exec.patch
 lldb-missing-install.diff
 silent-test-failing-codeverage.diff
-silent-amdgpu-test-failing.diff
-pthread-link.diff
-add_symbols_versioning.patch
-ftfbs-gcc.diff
-pr81066.diff
-armhf-bitfield.diff
-# rust LLVM PR84, LLVM PR32488
-# This is actually Rust's backport of upstream RL305193 (which doesn't apply cleanly to LLVM 4)
-# https://github.com/rust-lang/llvm/commit/2b622a393ce
-rL305193-backport.diff
-# rust LLVM PR90, LLVM PR32902, PR31142
-rL298540.diff
-rL306267.diff
-rL306353.diff
-rL306358.diff
-rL306379.diff
-sparc64-fix-stack-alignment.diff
+disable-path-test-failing.diff
+silent-amd-tet.diff
+disable-error-xray.diff
+lldb-disable-swig-error.diff
 update-cuda-search-path.patch
-sparc64-add-missing-tls-get-addr.diff
+
+test-keep-alive.diff
+libfuzzer-path.diff
