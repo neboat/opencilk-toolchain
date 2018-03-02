@@ -2,7 +2,7 @@ Organization of the repository
 ==============================
 
 The debian package for each LLVM point release is maintained as a git branch.
-For example, the 4.0 release lives at in the "4.0" branch.
+For example, the 7.0 release lives at in the "7.0" branch.
 
 The current snapshot release is maintained in the "snapshot" branch.
 
@@ -50,20 +50,25 @@ Retrieving a specific branch or release candidate with orig-tar.sh
 ==================================================================
 
 When using orig-tar.sh, if you need to retrieve a specific branch, you can pass
-the branch name as the first argument. For example, to get the 4.0 release
+the branch name as the first argument. For example, to get the 7.0 release
 branch at
-  http://llvm.org/svn/llvm-project/{llvm,...}/branches/release_40
+  http://llvm.org/svn/llvm-project/{llvm,...}/branches/release_70
 you should use,
 
-  $ sh 4.0/debian/orig-tar.sh release_40
+  $ sh 7.0/debian/orig-tar.sh release_70
 
 To retrieve a specific release candidate, you can pass the branch name as the
 first argument, and the tag rc number as the second argument. For example, to
-get the 4.0.1 release candidate rc3 at
-  http://llvm.org/svn/llvm-project/{llvm,...}/tags/RELEASE_401/rc3
+get the 7.0.1 release candidate rc3 at
+  http://llvm.org/svn/llvm-project/{llvm,...}/tags/RELEASE_701/rc3
 you should use,
 
-  $ sh 4.0/debian/orig-tar.sh RELEASE_401 rc3 4.0.1
+  $ sh 7.0/debian/orig-tar.sh RELEASE_701 rc3 7.0.1
+
+For a stable release, the syntax is:
+
+ $ sh 7.0/debian/orig-tar.sh RELEASE_700 final 7.0
+
 
 Additional maintainer scripts
 =============================
