@@ -13,6 +13,7 @@ llvm-toolchain-snapshot (1:7~svn323616-1~exp2) UNRELEASED; urgency=medium
   * Move the VCS to git.
     Many thanks to James Clarke for doing the conversion
   * Create the directory before having the manpages generated
+  * Automatically update the debian/README
 
   [ James Clarke ]
   * Disable LLDB on powerpcspe
