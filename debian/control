@@ -73,7 +73,7 @@ Description: Tool to format C/C++/Obj-C code
 Package: clang-tidy-5.0
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- libllvm5.0 (= ${binary:Version})
+ libllvm5.0 (= ${binary:Version}), libclang-common-5-dev
 Replaces: clang-modernize-5.0, clang-5.0 (<< 1:5.0~svn250696-1)
 Breaks: clang-modernize-5.0, clang-5.0 (<< 1:5.0~svn250696-1)
 Description: clang-based C++ linter tool
