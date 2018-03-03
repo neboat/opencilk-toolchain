@@ -8,7 +8,7 @@ llvm-toolchain-5.0 (1:5.0.1-4) UNRELEASED; urgency=medium
     is fixed.
     Will fix the ftbfs on x86
   * Create the directory before having the manpages generated
-  * clang-tidy-5.0: depends on libclang-common-5-dev
+  * clang-tidy-5.0: depends on libclang-common-5.0-dev
     (Closes: #891999)
 
   [ John Paul Adrian Glaubitz ]
