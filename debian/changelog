@@ -11,6 +11,8 @@ llvm-toolchain-6.0 (1:6.0~+rc3-1) unstable; urgency=medium
   * Move the VCS to git.
     Many thanks to James Clarke for doing the conversion
   * Create the directory before having the manpages generated
+  * clang-tidy-6.0: depends on libclang-common-6.0-dev
+    (Closes: #891999)
 
   [ John Paul Adrian Glaubitz ]
   * Add proposed upstream patch by James Clarke to add the

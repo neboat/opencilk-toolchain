@@ -71,7 +71,7 @@ Description: Tool to format C/C++/Obj-C code
 Package: clang-tidy-6.0
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- libllvm6.0 (= ${binary:Version})
+ libllvm6.0 (= ${binary:Version}), libclang-common-6.0-dev
 Replaces: clang-modernize-6.0, clang-6.0 (<< 1:6.0~svn250696-1)
 Breaks: clang-modernize-6.0, clang-6.0 (<< 1:6.0~svn250696-1)
 Description: clang-based C++ linter tool
