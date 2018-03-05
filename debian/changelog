@@ -10,6 +10,8 @@ llvm-toolchain-5.0 (1:5.0.1-4) UNRELEASED; urgency=medium
   * Create the directory before having the manpages generated
   * clang-tidy-5.0: depends on libclang-common-5.0-dev
     (Closes: #891999)
+  * clang-tidy-5.0 also depends on clang-tools-5.0 for, at least
+    clang-apply-replacements
 
   [ John Paul Adrian Glaubitz ]
   * Add proposed upstream patch by James Clarke to add the
