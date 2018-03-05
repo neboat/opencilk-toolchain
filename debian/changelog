@@ -1,3 +1,18 @@
+llvm-toolchain-6.0 (1:6.0-2) unstable; urgency=medium
+
+  * clang-tidy-6.0: depends on libclang-common-6.0-dev
+    (Closes: #891999)
+  * clang-tidy-6.0 also depends on clang-tools-6.0 for, at least
+    clang-apply-replacements
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 05 Mar 2018 09:58:10 +0100
+
+llvm-toolchain-6.0 (1:6.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 02 Mar 2018 13:28:19 +0100
+
 llvm-toolchain-6.0 (1:6.0~+rc3-1) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
@@ -5,10 +20,6 @@ llvm-toolchain-6.0 (1:6.0~+rc3-1) unstable; urgency=medium
   * Move the VCS to git.
     Many thanks to James Clarke for doing the conversion
   * Create the directory before having the manpages generated
-  * clang-tidy-6.0: depends on libclang-common-6.0-dev
-    (Closes: #891999)
-  * clang-tidy-6.0 also depends on clang-tools-6.0 for, at least
-    clang-apply-replacements
 
   [ John Paul Adrian Glaubitz ]
   * Add proposed upstream patch by James Clarke to add the
