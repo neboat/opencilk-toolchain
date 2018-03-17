@@ -1,6 +1,8 @@
 llvm-toolchain-snapshot (1:7~svn327768-2) UNRELEASED; urgency=medium
 
   * Remove a bunch of old unused patches
+  * Fix debian-watch-uses-insecure-uri as upstream has now https
+  * Standards-Version updated to 4.1.3
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 17 Mar 2018 16:53:15 +0100
 
