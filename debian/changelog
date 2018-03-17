@@ -1,3 +1,9 @@
+llvm-toolchain-6.0 (1:6.0-3) unstable; urgency=medium
+
+  * Remove a bunch of old unused patches
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 17 Mar 2018 17:07:19 +0100
+
 llvm-toolchain-6.0 (1:6.0-2) unstable; urgency=medium
 
   * clang-tidy-6.0: depends on libclang-common-6.0-dev
