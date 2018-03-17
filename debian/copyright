@@ -1,6 +1,6 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: LLVM/Clang
-Source: http://llvm.org/releases/download.html
+Source: https://llvm.org/releases/download.html
 
 Files: *
 Copyright: 2003-2017 University of Illinois at Urbana-Champaign.
@@ -17,7 +17,7 @@ License: LLVM
  Permission to use, copy, modify, distribute, and sell this software and its
  documentation for any purpose is hereby granted without fee, provided that
  the above copyright notice appear in all copies and that both that
- copyright notice and this permission notice appear in supporting 
+ copyright notice and this permission notice appear in supporting
  documentation, and that the name of M.I.T. not be used in advertising or
  publicity pertaining to distribution of the software without specific,
  written prior permission.  M.I.T. makes no representations about the
@@ -227,8 +227,8 @@ License: NCSA
        this list of conditions and the following disclaimers in the
        documentation and/or other materials provided with the distribution.
  .
-     * Neither the names of the LLDB Team, copyright holders, nor the names of 
-       its contributors may be used to endorse or promote products derived from 
+     * Neither the names of the LLDB Team, copyright holders, nor the names of
+       its contributors may be used to endorse or promote products derived from
        this Software without specific prior written permission.
  .
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
