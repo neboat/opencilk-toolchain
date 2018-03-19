@@ -6,6 +6,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/obj2yaml
 usr/lib/llvm-@LLVM_VERSION@/bin/yaml2obj
 usr/lib/llvm-@LLVM_VERSION@/bin/verify-uselistorder
 usr/lib/llvm-@LLVM_VERSION@/bin/sanstats
+usr/lib/llvm-@LLVM_VERSION@/bin/dsymutil
 usr/bin/llvm-*
 usr/bin/opt*
 usr/bin/bugpoint*
@@ -14,3 +15,4 @@ usr/bin/obj2yaml-*
 usr/bin/yaml2obj-*
 usr/bin/verify-uselistorder-*
 usr/bin/sanstats-*
+usr/bin/dsymutil-*
