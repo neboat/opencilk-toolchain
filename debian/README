@@ -69,7 +69,6 @@ For a stable release, the syntax is:
 
  $ sh 6.0/debian/orig-tar.sh RELEASE_600 final 6.0
 
-
 Additional maintainer scripts
 =============================
 
