@@ -1,17 +1,12 @@
-llvm-toolchain-6.0 (1:6.0-3) unstable; urgency=medium
-
-  * Remove a bunch of old unused patches
-  * Fix debian-watch-uses-insecure-uri as upstream has now https
-  * Standards-Version updated to 4.1.3
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 17 Mar 2018 17:07:19 +0100
-
 llvm-toolchain-6.0 (1:6.0-2) unstable; urgency=medium
 
   * clang-tidy-6.0: depends on libclang-common-6.0-dev
     (Closes: #891999)
   * clang-tidy-6.0 also depends on clang-tools-6.0 for, at least
     clang-apply-replacements
+  * Remove a bunch of old unused patches
+  * Fix debian-watch-uses-insecure-uri as upstream has now https
+  * Standards-Version updated to 4.1.3
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 05 Mar 2018 09:58:10 +0100
 
