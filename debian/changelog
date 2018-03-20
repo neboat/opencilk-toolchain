@@ -1,6 +1,5 @@
-llvm-toolchain-5.0 (1:5.0.1-4) UNRELEASED; urgency=medium
+llvm-toolchain-5.0 (1:5.0.1-3) unstable; urgency=medium
 
-  [ Sylvestre Ledru ]
   * Move the VCS to git.
     Many thanks to James Clarke for doing the conversion
   * Ignore the test tools/gold/X86/comdat.ll
@@ -11,7 +10,10 @@ llvm-toolchain-5.0 (1:5.0.1-4) UNRELEASED; urgency=medium
   * clang-tidy-5.0: depends on libclang-common-5.0-dev
     (Closes: #891999)
   * clang-tidy-5.0 also depends on clang-tools-5.0 for, at least
-    clang-apply-replacements
+    clang-apply-replacements (Closes: #893600)
+  * Update of the clang-tools-X.Y description
+  * Fix the libclang1-X.Y.symbols.in file (two spaces)
+    (Closes: #889035)
 
   [ John Paul Adrian Glaubitz ]
   * Add proposed upstream patch by James Clarke to add the
@@ -21,15 +23,7 @@ llvm-toolchain-5.0 (1:5.0.1-4) UNRELEASED; urgency=medium
   [ James Clarke ]
   * Disable LLDB on powerpcspe
 
- -- James Clarke <jrtc27@debian.org>  Mon, 26 Feb 2018 16:07:18 +0000
-
-llvm-toolchain-5.0 (1:5.0.1-3) unstable; urgency=medium
-
-  * Update of the clang-tools-X.Y description
-  * Fix the libclang1-X.Y.symbols.in file (two spaces)
-    (Closes: #889035)
-
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 20 Mar 2018 15:29:03 +0100
 
 llvm-toolchain-5.0 (1:5.0.1-2) unstable; urgency=medium
 
