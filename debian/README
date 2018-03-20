@@ -2,7 +2,7 @@ Organization of the repository
 ==============================
 
 The debian package for each LLVM point release is maintained as a git branch.
-For example, the 7.0 release lives at in the "7.0" branch.
+For example, the 7 release lives at in the "7.0" branch.
 
 The current snapshot release is maintained in the "snapshot" branch.
 
