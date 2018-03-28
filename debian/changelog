@@ -4,7 +4,11 @@ llvm-toolchain-5.0 (1:5.0.1-5) unstable; urgency=medium
     Many thanks to Nicholas D Steeves for the patch
     (Closes: #829361)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 22 Mar 2018 12:11:21 +0100
+  [ Athos Ribeiro ]
+  * Create symlink to run-clang-tidy-X.Y.py to remove its .py extension
+    (Closes: #892089)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Mar 2018 21:22:11 +0200
 
 llvm-toolchain-5.0 (1:5.0.1-4) unstable; urgency=medium
 
