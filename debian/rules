@@ -532,7 +532,8 @@ override_dh_auto_test:
 
 # LLVM tests
 ifneq (,$(findstring $(DEB_HOST_ARCH),$(ARCH_LLVM_TEST_OK)))
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-llvm
+# logs the output to check-llvm_build_log.txt for validation through autopkgtest
+	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-llvm | tee check-llvm_build_log.txt
 else
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-llvm || true
 endif

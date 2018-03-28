@@ -1,6 +1,10 @@
-llvm-toolchain-5.0 (1:5.0.2~+rc1-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-5.0 (1:5.0.2~+rc1-1~exp1) experimental; urgency=medium
 
   * New snapshot release
+
+  [ Reshabh Sharma ]
+  * Enable autopkgtest for amd64 & i386 on the llvm test suite
+    (Closes: #774294)
 
   [ Nicholas D Steeves ]
   * Fix the lintian error 'privacy-breach-uses-embedded-file'
