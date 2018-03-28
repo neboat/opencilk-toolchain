@@ -1,14 +1,16 @@
-llvm-toolchain-5.0 (1:5.0.1-5) unstable; urgency=medium
+llvm-toolchain-5.0 (1:5.0.2~+rc1-1~exp1) UNRELEASED; urgency=medium
 
+  * New snapshot release
+
+  [ Nicholas D Steeves ]
   * Fix the lintian error 'privacy-breach-uses-embedded-file'
-    Many thanks to Nicholas D Steeves for the patch
     (Closes: #829361)
 
   [ Athos Ribeiro ]
   * Create symlink to run-clang-tidy-X.Y.py to remove its .py extension
     (Closes: #892089)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Mar 2018 21:22:11 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Mar 2018 09:18:47 +0200
 
 llvm-toolchain-5.0 (1:5.0.1-4) unstable; urgency=medium
 
