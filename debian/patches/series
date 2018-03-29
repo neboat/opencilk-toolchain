@@ -46,4 +46,3 @@ lldb-disable-swig-error.diff
 silent-test-macho.diff
 silent-llvm-isel-fuzzer.diff
 test-keep-alive.diff
-library-binary-filename.diff
