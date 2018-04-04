@@ -1,3 +1,9 @@
+llvm-toolchain-6.0 (1:6.0-2.1) UNRELEASED; urgency=medium
+
+  * Migrate to automatic debug packages (Closes: #893267)
+
+ -- David Tenty <dtenty@ryerson.ca>  Sat, 31 Mar 2018 21:11:28 +0000
+
 llvm-toolchain-6.0 (1:6.0-2) unstable; urgency=medium
 
   * clang-tidy-6.0: depends on libclang-common-6.0-dev
