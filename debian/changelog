@@ -1,6 +1,10 @@
 llvm-toolchain-6.0 (1:6.0-2.1) UNRELEASED; urgency=medium
 
   * Migrate to automatic debug packages (Closes: #893267)
+ 
+  [ Sylvestre Ledru ]
+  * Remove sysconf_interceptor_bypass_test.cc because it makes
+    Debian unstable and Ubuntu bionic freeze
 
  -- David Tenty <dtenty@ryerson.ca>  Sat, 31 Mar 2018 21:11:28 +0000
 
