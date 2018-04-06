@@ -6,6 +6,11 @@ llvm-toolchain-6.0 (1:6.0-2.1) UNRELEASED; urgency=medium
   * Remove sysconf_interceptor_bypass_test.cc because it makes
     Debian unstable and Ubuntu bionic freeze
 
+  [ Nishanth Aravamudan ]
+  * debian/patches/install-lldb-sb-headers.patch: Install lldb's
+    SB headers (pr36630).  Thanks to Pavel Labath <labath@google.com>.
+    LP: #1761009
+
  -- David Tenty <dtenty@ryerson.ca>  Sat, 31 Mar 2018 21:11:28 +0000
 
 llvm-toolchain-6.0 (1:6.0-2) unstable; urgency=medium

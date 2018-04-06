@@ -48,3 +48,5 @@ silent-llvm-isel-fuzzer.diff
 test-keep-alive.diff
 sparc64-add-missing-tls-get-addr.diff
 remove-test-freezing.diff
+install-lldb-sb-headers.patch
+
