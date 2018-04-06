@@ -46,12 +46,9 @@ silent-amd-tet.diff
 disable-error-xray.diff
 lldb-disable-swig-error.diff
 update-cuda-search-path.patch
-
 test-keep-alive.diff
 libfuzzer-path.diff
 silent-gold-regression.diff
 glibc_2.27.diff
 0048-Set-html_static_path-_static-everywhere.patch
 0049-Use-Debian-provided-MathJax-everywhere.patch
-
-fix-LLVM_VERSION_PATCH.diff

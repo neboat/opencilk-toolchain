@@ -1,6 +1,7 @@
 llvm-toolchain-5.0 (1:5.0.2~+rc1-1~exp2) experimental; urgency=medium
 
   * Remove the info text from the manpages (Closes: #894734)
+  * Remove the fix-LLVM_VERSION_PATCH.diff patch (applied upstream)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 03 Apr 2018 19:22:12 +0200
 
