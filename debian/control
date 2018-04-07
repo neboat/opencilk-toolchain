@@ -3,7 +3,7 @@ Section: devel
 Priority: optional
 Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
 Uploaders: Sylvestre Ledru <sylvestre@debian.org>
-Build-Depends: debhelper (>= 9.20160114), flex, bison, dejagnu, tcl, expect,
+Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
     cmake, perl, libtool, chrpath, texinfo, sharutils, libffi-dev (>= 3.0.9),
     lsb-release, patchutils, diffstat, xz-utils, python-dev,
     libedit-dev, libncurses5-dev, swig, python-six, python-sphinx, binutils-dev,
