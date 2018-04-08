@@ -82,6 +82,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_EvalResult_getKind@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_EvalResult_isUnsignedInt@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
  clang_File_isEqual@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_File_tryGetRealPathName@LLVM_@LLVM_VERSION@ 1:7~svn329516-1~
  clang_FullComment_getAsHTML@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_FullComment_getAsXML@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_HTMLStartTagComment_isSelfClosing@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~

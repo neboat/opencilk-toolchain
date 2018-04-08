@@ -7,6 +7,7 @@ llvm-toolchain-snapshot (1:7~svn327768-2) UNRELEASED; urgency=medium
   * Remove sysconf_interceptor_bypass_test.cc because it makes
     Debian unstable and Ubuntu bionic freeze
   * library-binary-filename.diff removed (applied upstream)
+  * Add clang_File_tryGetRealPathName as new symbol in libclang
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 17 Mar 2018 16:53:15 +0100
 
