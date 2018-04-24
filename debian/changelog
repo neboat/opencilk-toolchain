@@ -24,7 +24,7 @@ llvm-toolchain-6.0 (1:6.0-3) unstable; urgency=medium
     SB headers (pr36630).  Thanks to Pavel Labath <labath@google.com>.
     (LP: #1761009) (Closes: #895051)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Mar 2018 09:18:47 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 24 Apr 2018 23:24:44 +0200
 
 llvm-toolchain-6.0 (1:6.0.1-1~exp1) experimental; urgency=medium
 
