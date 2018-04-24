@@ -1,0 +1,4 @@
+Tests: llvm
+Depends: @
+Restrictions: build-needed
+

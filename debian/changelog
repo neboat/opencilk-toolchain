@@ -1,3 +1,31 @@
+llvm-toolchain-6.0 (1:6.0-3) unstable; urgency=medium
+
+  * Remove sysconf_interceptor_bypass_test.cc because it makes
+    Debian unstable and Ubuntu bionic freeze
+  * Remove the info text from the manpages (Closes: #894734)
+
+  [ Reshabh Sharma ]
+  * Enable autopkgtest for amd64 & i386 on the llvm test suite
+    (Closes: #774294)
+
+  [ Nicholas D Steeves ]
+  * Fix the lintian error 'privacy-breach-uses-embedded-file'
+    (Closes: #829361)
+
+  [ Athos Ribeiro ]
+  * Create symlink to run-clang-tidy-X.Y.py to remove its .py extension
+    (Closes: #892089)
+
+  [ David Tenty ]
+  * Migrate to automatic debug packages (Closes: #893267)
+
+  [ Nishanth Aravamudan ]
+  * debian/patches/install-lldb-sb-headers.patch: Install lldb's
+    SB headers (pr36630).  Thanks to Pavel Labath <labath@google.com>.
+    (LP: #1761009) (Closes: #895051)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Mar 2018 09:18:47 +0200
+
 llvm-toolchain-6.0 (1:6.0.1-1~exp1) experimental; urgency=medium
 
   * preparation of the new release
