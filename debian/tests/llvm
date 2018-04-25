@@ -1,0 +1,9 @@
+#!/bin/sh
+# Checks llvm build passing on architectiures known to have 100% tests workings
+
+if grep -q "Unexpected Failure" check-llvm_build_log.txt; then
+	exit 1
+else
+	echo "build OK"
+f1
+rm check-llvm_build_log.txt

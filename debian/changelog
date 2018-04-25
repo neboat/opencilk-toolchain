@@ -1,5 +1,8 @@
 llvm-toolchain-snapshot (1:7~svn327768-2) UNRELEASED; urgency=medium
 
+  * Remove sysconf_interceptor_bypass_test.cc because it makes
+    Debian unstable and Ubuntu bionic freeze
+  * Remove the info text from the manpages (Closes: #894734)
   * Remove a bunch of old unused patches
   * Fix debian-watch-uses-insecure-uri as upstream has now https
   * Standards-Version updated to 4.1.3
@@ -8,6 +11,21 @@ llvm-toolchain-snapshot (1:7~svn327768-2) UNRELEASED; urgency=medium
     Debian unstable and Ubuntu bionic freeze
   * library-binary-filename.diff removed (applied upstream)
   * Add clang_File_tryGetRealPathName as new symbol in libclang
+
+  [ Reshabh Sharma ]
+  * Enable autopkgtest for amd64 & i386 on the llvm test suite
+    (Closes: #774294)
+
+  [ Nicholas D Steeves ]
+  * Fix the lintian error 'privacy-breach-uses-embedded-file'
+    (Closes: #829361)
+
+  [ Athos Ribeiro ]
+  * Create symlink to run-clang-tidy-X.Y.py to remove its .py extension
+    (Closes: #892089)
+
+  [ David Tenty ]
+  * Migrate to automatic debug packages (Closes: #893267)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 17 Mar 2018 16:53:15 +0100
 
