@@ -111,6 +111,9 @@ fi
 clang-$VERSION -fuse-ld=lld -O2 foo.c main.c -o foo
 ./foo > /dev/null
 
+clang-$VERSION -fuse-ld=lld-$VERSION -O2 foo.c main.c -o foo
+./foo > /dev/null
+
 cat << EOF > test_fuzzer.cc
 #include <stdint.h>
 #include <stddef.h>
