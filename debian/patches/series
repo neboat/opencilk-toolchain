@@ -48,6 +48,7 @@ silent-llvm-isel-fuzzer.diff
 test-keep-alive.diff
 sparc64-add-missing-tls-get-addr.diff
 remove-test-freezing.diff
-install-lldb-sb-headers.patch
+# Disable as it was merged upstream
+#install-lldb-sb-headers.patch
 0048-Set-html_static_path-_static-everywhere.patch
 0049-Use-Debian-provided-MathJax-everywhere.patch
