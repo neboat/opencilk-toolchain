@@ -28,7 +28,8 @@ clang-analyzer-force-version.diff
 install-scan-build-py.diff
 scan-view-fix-path.diff
 mips-fpxx-enable.diff
-fix-cmake-config-prefix.diff
+0001-llvm-cmake-resolve-symlinks-in-LLVMConfig.cmake.patch
+0001-tools-clang-cmake-resolve-symlinks-in-ClangConfig.cmake.patch
 lldb-link-atomic-cmake.patch
 disable-source-interleave.diff
 silent-gold-utils.diff
