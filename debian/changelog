@@ -1,3 +1,18 @@
+llvm-toolchain-5.0 (1:5.0.2~svn328729-1~exp1) UNRELEASED; urgency=medium
+
+  * Make CMake find_package(Clang) work. Fixes upstream bug
+    https://bugs.llvm.org/show_bug.cgi?id=37128
+    - Move Clang*.cmake back to /usr/lib/llvm-X.Y/lib/cmake/clang and install a
+      symlink in /usr/lib/cmake/clang-X.Y.
+    - Ensure that the LLVM installation prefix is correctly discovered despire
+      symlinks (replaces fix-cmake-config-prefix.diff).
+    - Create /usr/lib/llvm-X.Y/bin/clang-X.Y symlink as required by
+      ClangTargets-relwithdebinfo.cmake.
+    - Remove useless LLVM_CMAKE_DIR sed command that did not match anything.
+    - Ignore missing binaries in ClangTargets-relwithdebinfo.cmake.
+
+ -- Peter Wu <peter@lekensteyn.nl>  Sun, 06 May 2018 17:42:16 +0200
+
 llvm-toolchain-5.0 (1:5.0.2~+rc1-1~exp2) experimental; urgency=medium
 
   * Remove the info text from the manpages (Closes: #894734)
