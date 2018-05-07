@@ -177,6 +177,27 @@ echo "int main() { return 1; }" > foo.c
 clang-$VERSION -fsanitize=efficiency-working-set -o foo foo.c
 ./foo > /dev/null || true
 
+
+rm -rf cmaketest && mkdir cmaketest
+cat > cmaketest/CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 2.8.12)
+project(SanityCheck)
+find_package(LLVM $VERSION REQUIRED CONFIG)
+message(STATUS "LLVM_CMAKE_DIR: \${LLVM_CMAKE_DIR}")
+if(NOT EXISTS "\${LLVM_TOOLS_BINARY_DIR}/clang")
+message(FATAL_ERROR "Invalid LLVM_TOOLS_BINARY_DIR: \${LLVM_TOOLS_BINARY_DIR}")
+endif()
+# TODO add version to ClangConfig.cmake and use $VERSION below
+find_package(Clang REQUIRED CONFIG)
+find_file(H clang/AST/ASTConsumer.h PATHS \${CLANG_INCLUDE_DIRS} NO_DEFAULT_PATH)
+message(STATUS "CLANG_INCLUDE_DIRS: \${CLANG_INCLUDE_DIRS}")
+if(NOT H)
+message(FATAL_ERROR "Invalid Clang header path: \${CLANG_INCLUDE_DIRS}")
+endif()
+EOF
+(cd cmaketest && cmake .)
+rm -rf cmaketest
+
 CLANG=clang-$VERSION
 #command -v "$CLANG" 1>/dev/null 2>/dev/null || { printf "Usage:\n%s CLANGEXE [ARGS]\n" "$0" 1>&2; exit 1; }
 #shift
@@ -253,24 +274,4 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libclangBasic.a; then
     exit 1
 fi
 
-rm -rf cmaketest && mkdir cmaketest
-cat > cmaketest/CMakeLists.txt <<EOF
-cmake_minimum_required(VERSION 2.8.12)
-project(SanityCheck)
-find_package(LLVM $VERSION REQUIRED CONFIG)
-message(STATUS "LLVM_CMAKE_DIR: \${LLVM_CMAKE_DIR}")
-if(NOT EXISTS "\${LLVM_TOOLS_BINARY_DIR}/clang")
-message(FATAL_ERROR "Invalid LLVM_TOOLS_BINARY_DIR: \${LLVM_TOOLS_BINARY_DIR}")
-endif()
-# TODO add version to ClangConfig.cmake and use $VERSION below
-find_package(Clang REQUIRED CONFIG)
-find_file(H clang/AST/ASTConsumer.h PATHS \${CLANG_INCLUDE_DIRS} NO_DEFAULT_PATH)
-message(STATUS "CLANG_INCLUDE_DIRS: \${CLANG_INCLUDE_DIRS}")
-if(NOT H)
-message(FATAL_ERROR "Invalid Clang header path: \${CLANG_INCLUDE_DIRS}")
-endif()
-EOF
-(cd cmaketest && cmake .)
-
 echo "Completed"
-
