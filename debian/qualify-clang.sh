@@ -246,5 +246,29 @@ done
 echo "#include <objc/objc.h>" > foo.m
 clang-$VERSION -c foo.m
 
+if test ! -f /usr/lib/llvm-$VERSION/lib/libclangBasic.a; then
+    echo "Install libclang-$VERSION-dev"
+    exit 1
+fi
+
+rm -rf cmaketest && mkdir cmaketest
+cat > cmaketest/CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 2.8.12)
+project(SanityCheck)
+find_package(LLVM $VERSION REQUIRED CONFIG)
+message(STATUS "LLVM_CMAKE_DIR: \${LLVM_CMAKE_DIR}")
+if(NOT EXISTS "\${LLVM_TOOLS_BINARY_DIR}/clang")
+message(FATAL_ERROR "Invalid LLVM_TOOLS_BINARY_DIR: \${LLVM_TOOLS_BINARY_DIR}")
+endif()
+# TODO add version to ClangConfig.cmake and use $VERSION below
+find_package(Clang REQUIRED CONFIG)
+find_file(H clang/AST/ASTConsumer.h PATHS \${CLANG_INCLUDE_DIRS} NO_DEFAULT_PATH)
+message(STATUS "CLANG_INCLUDE_DIRS: \${CLANG_INCLUDE_DIRS}")
+if(NOT H)
+message(FATAL_ERROR "Invalid Clang header path: \${CLANG_INCLUDE_DIRS}")
+endif()
+EOF
+(cd cmaketest && cmake .)
+
 echo "Completed"
 
