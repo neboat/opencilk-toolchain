@@ -195,8 +195,11 @@ if(NOT H)
 message(FATAL_ERROR "Invalid Clang header path: \${CLANG_INCLUDE_DIRS}")
 endif()
 EOF
-(cd cmaketest && cmake .)
-rm -rf cmaketest
+mkdir cmaketest/standard cmaketest/explicit
+echo "Test: CMake find LLVM and Clang in default path"
+(cd cmaketest/standard && CC=clang-$VERSION CXX=clang++-$VERSION cmake ..)
+echo "Test: CMake find LLVM and Clang in explicit prefix path"
+(cd cmaketest/explicit && CC=clang-$VERSION CXX=clang++-$VERSION CMAKE_PREFIX_PATH=/usr/lib/llvm-$VERSION cmake ..)
 
 CLANG=clang-$VERSION
 #command -v "$CLANG" 1>/dev/null 2>/dev/null || { printf "Usage:\n%s CLANGEXE [ARGS]\n" "$0" 1>&2; exit 1; }
@@ -266,6 +269,8 @@ for SYSTEM in ""; do
     done
 done
 
+echo "If the following fails, try setting an environment variable such as:"
+echo "OBJC_INCLUDE_PATH=/usr/lib/gcc/x86_64-linux-gnu/5/include"
 echo "#include <objc/objc.h>" > foo.m
 clang-$VERSION -c foo.m
 
