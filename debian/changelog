@@ -1,3 +1,9 @@
+llvm-toolchain-6.0 (1:6.0.1~+rc1-1~exp2) experimental; urgency=medium
+
+  * Add python-yaml as dep for clang-tidy (Closes: #890514)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 07 May 2018 23:27:26 +0200
+
 llvm-toolchain-6.0 (1:6.0.1~+rc1-1~exp1) experimental; urgency=medium
 
   * New snapshot release
