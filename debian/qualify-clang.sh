@@ -219,6 +219,8 @@ EOF
 # SYSTEM should iterate multiple targets (eg. x86_64-unknown-none-gnu for embedded)
 # MARCH should iterate the library architectures via flags
 # LIB should iterate the different libraries
+echo "if it fails, please run"
+echo "apt-get install libc6-dev:i386 libgcc-5-dev:i386 libc6-dev-x32 libx32gcc-5-dev"
 for SYSTEM in ""; do
     for MARCH in -m64 -m32 -mx32 "-m32 -march=i686"; do
         for LIB in --rtlib=compiler-rt -fsanitize=address -fsanitize=thread -fsanitize=memory -fsanitize=undefined -fsanitize=dataflow; do # -fsanitize=efficiency-working-set; do
