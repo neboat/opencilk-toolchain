@@ -13,6 +13,13 @@ llvm-toolchain-5.0 (1:5.0.2~svn328729-1~exp1) UNRELEASED; urgency=medium
 
  -- Peter Wu <peter@lekensteyn.nl>  Sun, 06 May 2018 17:42:16 +0200
 
+llvm-toolchain-5.0 (1:5.0.2-1) unstable; urgency=medium
+
+  * New stable release (Spectre Mitigation)
+    AFAIK, only clang has been changed
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 06 May 2018 10:56:14 +0200
+
 llvm-toolchain-5.0 (1:5.0.2~+rc1-1~exp2) experimental; urgency=medium
 
   * Remove the info text from the manpages (Closes: #894734)
