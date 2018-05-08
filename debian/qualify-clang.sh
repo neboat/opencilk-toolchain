@@ -26,18 +26,18 @@ fi
 echo 'int main() {return 0;}' > foo.c
 clang-$VERSION foo.c
 
-echo '#include <stddef.h>' > x.c
-clang-$VERSION -c x.c
+echo '#include <stddef.h>' > foo.c
+clang-$VERSION -c foo.c
 
-echo "#include <fenv.h>" > x.cc
-NBLINES=$(clang++-$VERSION -P -E x.cc|wc -l)
+echo "#include <fenv.h>" > foo.cc
+NBLINES=$(clang++-$VERSION -P -E foo.cc|wc -l)
 if test $NBLINES -lt 100; then
     echo "Error: more than 100 lines should be returned"
     exit 42
 fi
 
-echo '#include <emmintrin.h>' > x.cc
-clang++-$VERSION -c x.cc
+echo '#include <emmintrin.h>' > foo.cc
+clang++-$VERSION -c foo.cc
 
 echo '
 #include <string.h>
@@ -46,16 +46,16 @@ main ()
 {
   (void) strcat;
   return 0;
-}' > x.c
-clang-$VERSION -c x.c
+}' > foo.c
+clang-$VERSION -c foo.c
 
 echo '#include <errno.h>
-int main() {} ' > x.c
-clang-$VERSION x.c
+int main() {} ' > foo.c
+clang-$VERSION foo.c
 
 echo '#include <chrono>
-int main() { }' > x.cpp
-clang++-$VERSION -std=c++11 x.cpp
+int main() { }' > foo.cpp
+clang++-$VERSION -std=c++11 foo.cpp
 
 echo '#include <stdio.h>
 int main() {
@@ -166,19 +166,44 @@ int main (void)
 {  std::vector<int> a;
   a.push_back (0);
 }
-' > o.cpp
-clang++-$VERSION -g -o o o.cpp
-echo 'target create "./o"
+' > foo.cpp
+clang++-$VERSION -g -o foo foo.cpp
+echo 'target create "./foo"
 b main
 r
 n
 p a
 quit' > lldb-cmd.txt
-lldb-$VERSION -s lldb-cmd.txt ./o
+lldb-$VERSION -s lldb-cmd.txt ./foo
 
 echo "int main() { return 1; }" > foo.c
 clang-$VERSION -fsanitize=efficiency-working-set -o foo foo.c
 ./foo > /dev/null || true
+
+
+rm -rf cmaketest && mkdir cmaketest
+cat > cmaketest/CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 2.8.12)
+project(SanityCheck)
+find_package(LLVM $VERSION REQUIRED CONFIG)
+message(STATUS "LLVM_CMAKE_DIR: \${LLVM_CMAKE_DIR}")
+if(NOT EXISTS "\${LLVM_TOOLS_BINARY_DIR}/clang")
+message(FATAL_ERROR "Invalid LLVM_TOOLS_BINARY_DIR: \${LLVM_TOOLS_BINARY_DIR}")
+endif()
+# TODO add version to ClangConfig.cmake and use $VERSION below
+find_package(Clang REQUIRED CONFIG)
+find_file(H clang/AST/ASTConsumer.h PATHS \${CLANG_INCLUDE_DIRS} NO_DEFAULT_PATH)
+message(STATUS "CLANG_INCLUDE_DIRS: \${CLANG_INCLUDE_DIRS}")
+if(NOT H)
+message(FATAL_ERROR "Invalid Clang header path: \${CLANG_INCLUDE_DIRS}")
+endif()
+EOF
+mkdir cmaketest/standard cmaketest/explicit
+echo "Test: CMake find LLVM and Clang in default path"
+(cd cmaketest/standard && CC=clang-$VERSION CXX=clang++-$VERSION cmake ..)
+echo "Test: CMake find LLVM and Clang in explicit prefix path"
+(cd cmaketest/explicit && CC=clang-$VERSION CXX=clang++-$VERSION CMAKE_PREFIX_PATH=/usr/lib/llvm-$VERSION cmake ..)
+rm -rf cmaketest
 
 CLANG=clang-$VERSION
 #command -v "$CLANG" 1>/dev/null 2>/dev/null || { printf "Usage:\n%s CLANGEXE [ARGS]\n" "$0" 1>&2; exit 1; }
@@ -214,6 +239,9 @@ int main ()
 }
 EOF
 
+#clean up
+rm a.out bar crash-* foo foo.* lldb-cmd.txt main.c test_fuzzer.cc
+
 # only for AMD64 for now
 # many sanitizers only work on AMD64
 # x32 programs need to be enabled in the kernel bootparams for debian
@@ -222,6 +250,8 @@ EOF
 # SYSTEM should iterate multiple targets (eg. x86_64-unknown-none-gnu for embedded)
 # MARCH should iterate the library architectures via flags
 # LIB should iterate the different libraries
+echo "if it fails, please run"
+echo "apt-get install libc6-dev:i386 libgcc-5-dev:i386 libc6-dev-x32 libx32gcc-5-dev"
 for SYSTEM in ""; do
     for MARCH in -m64 -m32 -mx32 "-m32 -march=i686"; do
         for LIB in --rtlib=compiler-rt -fsanitize=address -fsanitize=thread -fsanitize=memory -fsanitize=undefined -fsanitize=dataflow; do # -fsanitize=efficiency-working-set; do
@@ -246,8 +276,14 @@ for SYSTEM in ""; do
     done
 done
 
+echo "If the following fails, try setting an environment variable such as:"
+echo "OBJC_INCLUDE_PATH=/usr/lib/gcc/x86_64-linux-gnu/5/include"
 echo "#include <objc/objc.h>" > foo.m
 clang-$VERSION -c foo.m
 
-echo "Completed"
+if test ! -f /usr/lib/llvm-$VERSION/lib/libclangBasic.a; then
+    echo "Install libclang-$VERSION-dev"
+    exit 1
+fi
 
+echo "Completed"

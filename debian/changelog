@@ -1,10 +1,30 @@
 llvm-toolchain-snapshot (1:7~svn330801-1~exp2) experimental; urgency=medium
 
+  * Add python-yaml as dep for clang-tidy (Closes: #890514)
   * d/p/impl-path-hurd.diff: Try to fix an issue with hurd
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 26 Apr 2018 15:45:59 +0200
+  [ Peter Wu ]
+  * Make CMake find_package(Clang) work. Fixes upstream bug
+    https://bugs.llvm.org/show_bug.cgi?id=37128
+    - Move Clang*.cmake back to /usr/lib/llvm-X.Y/lib/cmake/clang and install a
+      symlink in /usr/lib/cmake/clang-X.Y.
+    - Ensure that the LLVM installation prefix is correctly discovered despire
+      symlinks (replaces fix-cmake-config-prefix.diff).
+    - Create /usr/lib/llvm-X.Y/bin/clang-X.Y symlink as required by
+      ClangTargets-relwithdebinfo.cmake.
+    - Remove useless LLVM_CMAKE_DIR sed command that did not match anything.
+    - Ignore missing binaries in ClangTargets-relwithdebinfo.cmake.
 
-llvm-toolchain-snapshot (1:7~svn330801-1~exp1) experimental; urgency=medium
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 07 May 2018 23:27:26 +0200
+
+llvm-toolchain-6.0 (1:6.0.1~+rc1-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * Fix a typo in the debci
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 26 Apr 2018 08:02:09 +0200
+
+llvm-toolchain-6.0 (1:6.0-3) unstable; urgency=medium
 
   * Remove sysconf_interceptor_bypass_test.cc because it makes
     Debian unstable and Ubuntu bionic freeze
