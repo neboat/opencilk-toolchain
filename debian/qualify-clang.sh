@@ -248,7 +248,7 @@ rm a.out bar crash-* foo foo.* lldb-cmd.txt main.c test_fuzzer.cc
 # MARCH should iterate the library architectures via flags
 # LIB should iterate the different libraries
 echo "if it fails, please run"
-echo "apt-get install libc6-dev:i386 libgcc-5-dev:i386 libc6-dev-x32 libx32gcc-5-dev"
+echo "apt-get install libc6-dev:i386 libgcc-5-dev:i386 libc6-dev-x32 libx32gcc-5-dev libx32gcc-8-dev"
 for SYSTEM in ""; do
     for MARCH in -m64 -m32 -mx32 "-m32 -march=i686"; do
         for LIB in --rtlib=compiler-rt -fsanitize=address -fsanitize=thread -fsanitize=memory -fsanitize=undefined -fsanitize=dataflow; do # -fsanitize=efficiency-working-set; do
