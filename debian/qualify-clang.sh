@@ -26,18 +26,18 @@ fi
 echo 'int main() {return 0;}' > foo.c
 clang-$VERSION foo.c
 
-echo '#include <stddef.h>' > x.c
-clang-$VERSION -c x.c
+echo '#include <stddef.h>' > foo.c
+clang-$VERSION -c foo.c
 
-echo "#include <fenv.h>" > x.cc
-NBLINES=$(clang++-$VERSION -P -E x.cc|wc -l)
+echo "#include <fenv.h>" > foo.cc
+NBLINES=$(clang++-$VERSION -P -E foo.cc|wc -l)
 if test $NBLINES -lt 100; then
     echo "Error: more than 100 lines should be returned"
     exit 42
 fi
 
-echo '#include <emmintrin.h>' > x.cc
-clang++-$VERSION -c x.cc
+echo '#include <emmintrin.h>' > foo.cc
+clang++-$VERSION -c foo.cc
 
 echo '
 #include <string.h>
@@ -46,16 +46,16 @@ main ()
 {
   (void) strcat;
   return 0;
-}' > x.c
-clang-$VERSION -c x.c
+}' > foo.c
+clang-$VERSION -c foo.c
 
 echo '#include <errno.h>
-int main() {} ' > x.c
-clang-$VERSION x.c
+int main() {} ' > foo.c
+clang-$VERSION foo.c
 
 echo '#include <chrono>
-int main() { }' > x.cpp
-clang++-$VERSION -std=c++11 x.cpp
+int main() { }' > foo.cpp
+clang++-$VERSION -std=c++11 foo.cpp
 
 echo '#include <stdio.h>
 int main() {
@@ -163,15 +163,15 @@ int main (void)
 {  std::vector<int> a;
   a.push_back (0);
 }
-' > o.cpp
-clang++-$VERSION -g -o o o.cpp
-echo 'target create "./o"
+' > foo.cpp
+clang++-$VERSION -g -o foo foo.cpp
+echo 'target create "./foo"
 b main
 r
 n
 p a
 quit' > lldb-cmd.txt
-lldb-$VERSION -s lldb-cmd.txt ./o
+lldb-$VERSION -s lldb-cmd.txt ./foo
 
 echo "int main() { return 1; }" > foo.c
 clang-$VERSION -fsanitize=efficiency-working-set -o foo foo.c
@@ -200,6 +200,7 @@ echo "Test: CMake find LLVM and Clang in default path"
 (cd cmaketest/standard && CC=clang-$VERSION CXX=clang++-$VERSION cmake ..)
 echo "Test: CMake find LLVM and Clang in explicit prefix path"
 (cd cmaketest/explicit && CC=clang-$VERSION CXX=clang++-$VERSION CMAKE_PREFIX_PATH=/usr/lib/llvm-$VERSION cmake ..)
+rm -rf cmaketest
 
 CLANG=clang-$VERSION
 #command -v "$CLANG" 1>/dev/null 2>/dev/null || { printf "Usage:\n%s CLANGEXE [ARGS]\n" "$0" 1>&2; exit 1; }
@@ -234,6 +235,9 @@ int main ()
   return EXIT_SUCCESS;
 }
 EOF
+
+#clean up
+rm a.out bar crash-* foo foo.* lldb-cmd.txt main.c test_fuzzer.cc
 
 # only for AMD64 for now
 # many sanitizers only work on AMD64
