@@ -277,7 +277,8 @@ for SYSTEM in ""; do
 done
 
 echo "If the following fails, try setting an environment variable such as:"
-echo "OBJC_INCLUDE_PATH=/usr/lib/gcc/x86_64-linux-gnu/5/include"
+echo "OBJC_INCLUDE_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/include"
+echo "libobjc-7-dev should be also installed"
 echo "#include <objc/objc.h>" > foo.m
 clang-$VERSION -c foo.m
 

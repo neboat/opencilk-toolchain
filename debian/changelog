@@ -1,5 +1,6 @@
 llvm-toolchain-snapshot (1:7~svn330801-1~exp2) experimental; urgency=medium
 
+  * d/p/force-gcc-header-obj.diff Fix the detection of the objc path
   * Add python-yaml as dep for clang-tidy (Closes: #890514)
   * d/p/impl-path-hurd.diff: Try to fix an issue with hurd
 
