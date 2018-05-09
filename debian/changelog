@@ -1,3 +1,9 @@
+llvm-toolchain-5.0 (1:5.0.2-3) UNRELEASED; urgency=medium
+
+  * d/p/force-gcc-header-obj.diff Fix the detection of the objc path
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 09 May 2018 14:21:13 +0200
+
 llvm-toolchain-5.0 (1:5.0.2-2) unstable; urgency=medium
 
   * Make CMake find_package(Clang) work. Fixes upstream bug
