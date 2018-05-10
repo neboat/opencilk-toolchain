@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:7~svn330801-1~exp3) UNRELEASED; urgency=medium
+
+  * Add ubuntu cosmic to Ubuntu supported releases
+
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 10 May 2018 10:00:03 +0200
+
 llvm-toolchain-snapshot (1:7~svn330801-1~exp2) experimental; urgency=medium
 
   * d/p/force-gcc-header-obj.diff Fix the detection of the objc path
