@@ -1,6 +1,10 @@
 llvm-toolchain-6.0 (1:6.0.1~+rc1-1~exp3) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * d/p/force-gcc-header-obj.diff Fix the detection of the objc path
+
+  [ Gianfranco Costamagna ]
+  * Add ubuntu cosmic to Ubuntu supported releases
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 09 May 2018 14:23:49 +0200
 
