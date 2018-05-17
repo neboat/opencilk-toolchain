@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:7~svn330801-1~exp3) experimental; urgency=medium
+
+  * Also ship diagtool
+
+ --
+
 llvm-toolchain-snapshot (1:7~svn330801-1~exp2) experimental; urgency=medium
 
   * d/p/force-gcc-header-obj.diff Fix the detection of the objc path

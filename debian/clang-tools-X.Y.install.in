@@ -24,6 +24,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/find-all-symbols
 usr/lib/llvm-@LLVM_VERSION@/bin/clangd
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-refactor
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-func-mapping
+usr/lib/llvm-@LLVM_VERSION@/bin/diagtool
 
 tools/clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
 tools/clang/tools/scan-build-py-@LLVM_VERSION@      usr/share/clang/
@@ -51,4 +52,4 @@ usr/bin/clang-import-test-@LLVM_VERSION@
 usr/bin/clangd-@LLVM_VERSION@
 usr/bin/clang-refactor-@LLVM_VERSION@
 usr/bin/clang-func-mapping-@LLVM_VERSION@
-
+usr/bin/diagtool-@LLVM_VERSION@
