@@ -1,8 +1,12 @@
 llvm-toolchain-6.0 (1:6.0.1~+rc1-1~exp3) experimental; urgency=medium
 
   * Enable WebAssembly & ARV as experimental archs
+  * d/p/force-gcc-header-obj.diff Fix the detection of the objc path
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 20 May 2018 21:45:46 +0200
+  [ Gianfranco Costamagna ]
+  * Add ubuntu cosmic to Ubuntu supported releases
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 09 May 2018 14:23:49 +0200
 
 llvm-toolchain-6.0 (1:6.0.1~+rc1-1~exp2) experimental; urgency=medium
 

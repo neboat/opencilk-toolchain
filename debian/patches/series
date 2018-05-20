@@ -12,7 +12,7 @@ silent-gold-test.diff
 atomic_library_1.diff
 python-clangpath.diff
 fix-clang-path-and-build.diff
-#force-gcc-header-obj.diff
+force-gcc-header-obj.diff
 do-not-fail-on-unexpected-pass.diff
 silent-more-tests.diff
 disable-display-PASS-UNSUPPORTED-XFAIL.diff
@@ -53,3 +53,4 @@ remove-test-freezing.diff
 #install-lldb-sb-headers.patch
 0048-Set-html_static_path-_static-everywhere.patch
 0049-Use-Debian-provided-MathJax-everywhere.patch
+ubuntu-cosmic-support.patch
