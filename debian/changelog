@@ -1,7 +1,7 @@
 llvm-toolchain-snapshot (1:7~svn330801-1~exp3) experimental; urgency=medium
 
   * Also ship diagtool
-  * Enable WebAssembly & ARV as experimental archs (Closes: #899202)
+  * Enable WebAssembly & AVR as experimental archs (Closes: #899202)
   * d/p/force-gcc-header-obj.diff Fix the detection of the objc path
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 09 May 2018 14:23:49 +0200
