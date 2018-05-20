@@ -1,6 +1,6 @@
 llvm-toolchain-6.0 (1:6.0.1~+rc1-1~exp3) experimental; urgency=medium
 
-  * Enable WebAssembly & ARV as experimental archs
+  * Enable WebAssembly & ARV as experimental archs (Closes: #899202)
   * d/p/force-gcc-header-obj.diff Fix the detection of the objc path
 
   [ Gianfranco Costamagna ]
