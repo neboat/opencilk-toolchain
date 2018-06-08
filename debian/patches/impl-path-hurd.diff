@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot-7~svn330801/lib/Support/Unix/Path.inc
+Index: llvm-toolchain-snapshot_7~svn334230/lib/Support/Unix/Path.inc
 ===================================================================
---- llvm-toolchain-snapshot-7~svn330801.orig/lib/Support/Unix/Path.inc
-+++ llvm-toolchain-snapshot-7~svn330801/lib/Support/Unix/Path.inc
-@@ -172,7 +172,7 @@ std::string getMainExecutable(const char
+--- llvm-toolchain-snapshot_7~svn334230.orig/lib/Support/Unix/Path.inc
++++ llvm-toolchain-snapshot_7~svn334230/lib/Support/Unix/Path.inc
+@@ -175,7 +175,7 @@ std::string getMainExecutable(const char
  
    if (getprogpath(exe_path, argv0) != NULL)
      return exe_path;

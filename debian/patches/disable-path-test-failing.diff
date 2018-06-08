@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_6.0~svn309541/unittests/Support/Path.cpp
+Index: llvm-toolchain-snapshot_7~svn334230/unittests/Support/Path.cpp
 ===================================================================
---- llvm-toolchain-snapshot_6.0~svn309541.orig/unittests/Support/Path.cpp
-+++ llvm-toolchain-snapshot_6.0~svn309541/unittests/Support/Path.cpp
-@@ -473,7 +473,7 @@ protected:
-     errs().flush();
+--- llvm-toolchain-snapshot_7~svn334230.orig/unittests/Support/Path.cpp
++++ llvm-toolchain-snapshot_7~svn334230/unittests/Support/Path.cpp
+@@ -465,7 +465,7 @@ protected:
+     sys::path::append(NonExistantFile, "1B28B495C16344CB9822E588CD4C3EF0");
    }
  
 -  void TearDown() override { ASSERT_NO_ERROR(fs::remove(TestDirectory.str())); }
@@ -11,7 +11,7 @@ Index: llvm-toolchain-snapshot_6.0~svn309541/unittests/Support/Path.cpp
  };
  
  TEST_F(FileSystemTest, Unique) {
-@@ -553,13 +553,13 @@ TEST_F(FileSystemTest, RealPath) {
+@@ -545,13 +545,13 @@ TEST_F(FileSystemTest, RealPath) {
  
    SmallString<64> HomeDir;
    bool Result = llvm::sys::path::home_directory(HomeDir);
