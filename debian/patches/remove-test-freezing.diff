@@ -1,17 +1,19 @@
-Index: llvm-toolchain-snapshot_7~svn323616/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cc
+Index: llvm-toolchain-snapshot_7~svn335949/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cc
 ===================================================================
---- llvm-toolchain-snapshot_7~svn323616.orig/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cc
-+++ llvm-toolchain-snapshot_7~svn323616/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cc
-@@ -1,27 +0,0 @@
+--- llvm-toolchain-snapshot_7~svn335949.orig/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cc
++++ llvm-toolchain-snapshot_7~svn335949/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cc
+@@ -1,29 +0,0 @@
 -// RUN: %clangxx -O2 %s -o %t && %run %t 2>&1 | FileCheck %s
--
--// XFAIL: android
 -
 -#include <stdio.h>
 -
+-#if !defined(__GLIBC_PREREQ)
+-#define __GLIBC_PREREQ(a, b) 0
+-#endif
+-
 -// getauxval() used instead of sysconf() in GetPageSize() is defined starting
 -// glbc version 2.16.
--#if defined(__GLIBC_PREREQ) && __GLIBC_PREREQ(2, 16)
+-#if __GLIBC_PREREQ(2, 16)
 -extern "C" long sysconf(int name) {
 -  fprintf(stderr, "sysconf wrapper called\n");
 -  return 0;
