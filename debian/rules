@@ -15,7 +15,7 @@ endif
 
 SONAME_EXT      := 1
 # Manage the case when the version is 3.5~svn213052-1~exp1 or 3.4.2-1
-DEBIAN_REVISION := $(shell dpkg-parsechangelog |  sed -rne "s,^Version: ([0-9.]+)(~|-)(.*),\3,p")
+DEBIAN_REVISION := $(shell dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\3,p")
 ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
   NJOBS := -j $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
 endif
