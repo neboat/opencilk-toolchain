@@ -13,23 +13,10 @@ Subject: Use Debian-provided MathJax everywhere.
  polly/docs/doxygen.cfg.in             | 2 +-
  8 files changed, 14 insertions(+), 5 deletions(-)
 
-diff --git a/clang-tools-extra/docs/Doxyfile b/clang-tools-extra/docs/Doxyfile
-index d674390..1bf4f72 100644
---- a/clang-tools-extra/docs/Doxyfile
-+++ b/clang-tools-extra/docs/Doxyfile
-@@ -1206,7 +1206,7 @@ USE_MATHJAX            = NO
- # MathJax, but it is strongly recommended to install a local copy of MathJax
- # before deployment.
- 
--MATHJAX_RELPATH        = http://www.mathjax.org/mathjax
-+MATHJAX_RELPATH        = /usr/share/javascript/mathjax
- 
- # The MATHJAX_EXTENSIONS tag can be used to specify one or MathJax extension
- # names that should be enabled during MathJax rendering.
-diff --git a/clang-tools-extra/docs/conf.py b/clang-tools-extra/docs/conf.py
-index 69f425a..46f8eea 100644
---- a/clang-tools-extra/docs/conf.py
-+++ b/clang-tools-extra/docs/conf.py
+Index: llvm-toolchain-snapshot_7~svn336327/clang-tools-extra/docs/conf.py
+===================================================================
+--- llvm-toolchain-snapshot_7~svn336327.orig/clang-tools-extra/docs/conf.py
++++ llvm-toolchain-snapshot_7~svn336327/clang-tools-extra/docs/conf.py
 @@ -123,6 +123,9 @@ html_theme = 'haiku'
  # so a file named "default.css" will overwrite the builtin "default.css".
  html_static_path = ['_static']
@@ -40,11 +27,11 @@ index 69f425a..46f8eea 100644
  # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
  # using the given strftime format.
  #html_last_updated_fmt = '%b %d, %Y'
-diff --git a/clang-tools-extra/docs/doxygen.cfg.in b/clang-tools-extra/docs/doxygen.cfg.in
-index 6dbf6db..da44cfc 100644
---- a/clang-tools-extra/docs/doxygen.cfg.in
-+++ b/clang-tools-extra/docs/doxygen.cfg.in
-@@ -1438,7 +1438,7 @@ MATHJAX_FORMAT         = HTML-CSS
+Index: llvm-toolchain-snapshot_7~svn336327/clang-tools-extra/docs/doxygen.cfg.in
+===================================================================
+--- llvm-toolchain-snapshot_7~svn336327.orig/clang-tools-extra/docs/doxygen.cfg.in
++++ llvm-toolchain-snapshot_7~svn336327/clang-tools-extra/docs/doxygen.cfg.in
+@@ -1443,7 +1443,7 @@ MATHJAX_FORMAT         = HTML-CSS
  # The default value is: http://cdn.mathjax.org/mathjax/latest.
  # This tag requires that the tag USE_MATHJAX is set to YES.
  
@@ -53,10 +40,10 @@ index 6dbf6db..da44cfc 100644
  
  # The MATHJAX_EXTENSIONS tag can be used to specify one or more MathJax
  # extension names that should be enabled during MathJax rendering. For example
-diff --git a/clang/docs/analyzer/conf.py b/clang/docs/analyzer/conf.py
-index 666308d..2881bcc 100644
---- a/clang/docs/analyzer/conf.py
-+++ b/clang/docs/analyzer/conf.py
+Index: llvm-toolchain-snapshot_7~svn336327/clang/docs/analyzer/conf.py
+===================================================================
+--- llvm-toolchain-snapshot_7~svn336327.orig/clang/docs/analyzer/conf.py
++++ llvm-toolchain-snapshot_7~svn336327/clang/docs/analyzer/conf.py
 @@ -123,6 +123,9 @@ html_theme = 'haiku'
  # so a file named "default.css" will overwrite the builtin "default.css".
  html_static_path = ['_static']
@@ -67,10 +54,10 @@ index 666308d..2881bcc 100644
  # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
  # using the given strftime format.
  #html_last_updated_fmt = '%b %d, %Y'
-diff --git a/clang/docs/conf.py b/clang/docs/conf.py
-index d125dc6..2ce1a91 100644
---- a/clang/docs/conf.py
-+++ b/clang/docs/conf.py
+Index: llvm-toolchain-snapshot_7~svn336327/clang/docs/conf.py
+===================================================================
+--- llvm-toolchain-snapshot_7~svn336327.orig/clang/docs/conf.py
++++ llvm-toolchain-snapshot_7~svn336327/clang/docs/conf.py
 @@ -123,6 +123,9 @@ html_theme = 'haiku'
  # so a file named "default.css" will overwrite the builtin "default.css".
  html_static_path = ['_static']
@@ -81,10 +68,10 @@ index d125dc6..2ce1a91 100644
  # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
  # using the given strftime format.
  #html_last_updated_fmt = '%b %d, %Y'
-diff --git a/clang/docs/doxygen.cfg.in b/clang/docs/doxygen.cfg.in
-index 13ed722..77bed6e 100644
---- a/clang/docs/doxygen.cfg.in
-+++ b/clang/docs/doxygen.cfg.in
+Index: llvm-toolchain-snapshot_7~svn336327/clang/docs/doxygen.cfg.in
+===================================================================
+--- llvm-toolchain-snapshot_7~svn336327.orig/clang/docs/doxygen.cfg.in
++++ llvm-toolchain-snapshot_7~svn336327/clang/docs/doxygen.cfg.in
 @@ -1432,7 +1432,7 @@ MATHJAX_FORMAT         = HTML-CSS
  # The default value is: http://cdn.mathjax.org/mathjax/latest.
  # This tag requires that the tag USE_MATHJAX is set to YES.
@@ -94,10 +81,10 @@ index 13ed722..77bed6e 100644
  
  # The MATHJAX_EXTENSIONS tag can be used to specify one or more MathJax
  # extension names that should be enabled during MathJax rendering. For example
-diff --git a/docs/doxygen.cfg.in b/docs/doxygen.cfg.in
-index e3c7f47..dcdade1 100644
---- a/docs/doxygen.cfg.in
-+++ b/docs/doxygen.cfg.in
+Index: llvm-toolchain-snapshot_7~svn336327/docs/doxygen.cfg.in
+===================================================================
+--- llvm-toolchain-snapshot_7~svn336327.orig/docs/doxygen.cfg.in
++++ llvm-toolchain-snapshot_7~svn336327/docs/doxygen.cfg.in
 @@ -1433,7 +1433,7 @@ MATHJAX_FORMAT         = HTML-CSS
  # The default value is: http://cdn.mathjax.org/mathjax/latest.
  # This tag requires that the tag USE_MATHJAX is set to YES.
@@ -107,10 +94,10 @@ index e3c7f47..dcdade1 100644
  
  # The MATHJAX_EXTENSIONS tag can be used to specify one or more MathJax
  # extension names that should be enabled during MathJax rendering. For example
-diff --git a/polly/docs/doxygen.cfg.in b/polly/docs/doxygen.cfg.in
-index 36786aa..26a8984 100644
---- a/polly/docs/doxygen.cfg.in
-+++ b/polly/docs/doxygen.cfg.in
+Index: llvm-toolchain-snapshot_7~svn336327/polly/docs/doxygen.cfg.in
+===================================================================
+--- llvm-toolchain-snapshot_7~svn336327.orig/polly/docs/doxygen.cfg.in
++++ llvm-toolchain-snapshot_7~svn336327/polly/docs/doxygen.cfg.in
 @@ -1433,7 +1433,7 @@ MATHJAX_FORMAT         = HTML-CSS
  # The default value is: http://cdn.mathjax.org/mathjax/latest.
  # This tag requires that the tag USE_MATHJAX is set to YES.
