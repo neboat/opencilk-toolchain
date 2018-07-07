@@ -118,7 +118,7 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # enable the build using scan-build
 # The package are installed through the variable declarations:
 # OTHERMIRROR="deb http://llvm.org/apt/unstable/ llvm-toolchain main"
-# EXTRAPACKAGES="clang-3.5"
+# EXTRAPACKAGES="clang-X"
 	PRE_PROCESS=scan-build-$(LLVM_VERSION) --show-description -analyzer-config stable-report-filename=true
 # -enable-checker optin.performance.Padding
 	PRE_PROCESS_CONF=scan-build-$(LLVM_VERSION)
