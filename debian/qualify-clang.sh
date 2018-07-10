@@ -148,6 +148,22 @@ echo 'int main() {
 }
 ' > foo.c
 clang++-$VERSION -g -o bar foo.c
+
+# OpenMP
+echo '
+//test.c
+#include "omp.h"
+#include <stdio.h>
+
+int main(void) {
+  #pragma omp parallel
+  printf("thread %d\n", omp_get_thread_num());
+}
+' > foo.c
+clang-$VERSION -v foo.c -I/usr/lib/llvm-$VERSION/include/openmp-$VERSION/ -fopenmp -o o
+./o
+
+
 echo "b main
 run
 bt
