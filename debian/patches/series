@@ -51,3 +51,6 @@ remove-test-freezing.diff
 0048-Set-html_static_path-_static-everywhere.patch
 0049-Use-Debian-provided-MathJax-everywhere.patch
 impl-path-hurd.diff
+openmp-check-execstack.diff
+openmp-soname.diff
+openmp-mips-affinity.patch

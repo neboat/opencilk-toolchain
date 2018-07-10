@@ -14,6 +14,7 @@ ifeq ($(LLVM_VERSION),$(LLVM_VERSION_FULL))
 endif
 
 SONAME_EXT      := 1
+SONAME_OPENMP	:= 5
 # Manage the case when the version is 3.5~svn213052-1~exp1 or 3.4.2-1
 DEBIAN_REVISION := $(shell dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\3,p")
 ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
@@ -176,6 +177,14 @@ ifeq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 	LIBFUZZER_ENABLE=no
 endif
 
+ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel))
+	LIBOMP_ARCH = mips
+endif
+
+ifneq (,$(filter $(DEB_HOST_ARCH), mips64 mips64el))
+	LIBOMP_ARCH = mips64
+endif
+
 
 %:
 	dh $@ $(DH_OPTIONS)
@@ -242,6 +251,13 @@ override_dh_auto_configure: preconfigure
 	fi; \
 	ln -s ../compiler-rt .; \
 	readlink compiler-rt
+
+	cd projects/ && \
+	if test -h openmp; then \
+		rm openmp; \
+	fi; \
+	ln -s ../openmp .; \
+	readlink openmp
 
 	# Configure coverity (we need the compilers) + work around perf issues
 	-(if test $(COVERITY_ENABLE) -eq 1; then \
@@ -351,6 +367,8 @@ build_doc:
 		echo "Generating manpage of $$f"; \
 		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-info --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
 	done
+	cd openmp/runtime && doxygen doc/doxygen/config
+	cd openmp/runtime/doc/doxygen/generated/html/ && rm jquery.js && ln -s /usr/share/javascript/jquery/jquery.js
 
 override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
@@ -368,6 +386,12 @@ override_dh_auto_install:
 
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so; \
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT)
+
+	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && rm -f libomp.so; \
+	ln -s libomp.so.$(SONAME_OPENMP) libomp.so
+	
+	mkdir -p debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp
+	cp openmp/runtime/exports/common.dia.50.ompt.optional/include/* debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp
 
 # Remove artefact (where compiler-rt is built)
 #	if test -d $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/clang_linux; then \
@@ -492,6 +516,7 @@ override_dh_makeshlibs:
 	dh_makeshlibs -plibclang$(SONAME_EXT)-$(LLVM_VERSION) -V"libclang$(SONAME_EXT)-$(LLVM_VERSION) (>= 1:7~svn298832-1~)" -- -c4
 	dh_makeshlibs -pliblldb-$(LLVM_VERSION) -V"liblldb-$(LLVM_VERSION) (>= 1:7~svn298832-1~)"
 	dh_makeshlibs -plibllvm$(LLVM_VERSION) -V"libllvm$(LLVM_VERSION) (>= 1:7~svn298832-1~)"
+	dh_makeshlibs -plibomp$(SONAME_OPENMP)-$(LLVM_VERSION) -V"libomp$(SONAME_OPENMP)-$(LLVM_VERSION)) (>= 1:7~svn298832-1~)"
 	dh_makeshlibs --remaining-packages
 
 override_dh_shlibdeps:
@@ -513,6 +538,7 @@ ifeq (0, $(strip $(shell dpkg --compare-versions $(DH_VERSION) ge 9.20160114; ec
 	dh_strip -p libclang$(SONAME_EXT)-$(LLVM_VERSION) --dbgsym-migration='libclang$(SONAME_EXT)-$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
 	dh_strip -p libllvm$(LLVM_VERSION) --dbgsym-migration='libllvm$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
 	dh_strip -p liblldb-$(LLVM_VERSION) --dbgsym-migration='liblldb-$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
+	dh_strip -p libomp$(SONAME_OPENMP)-$(LLVM_VERSION) --dbgsym-migration='libomp$(SONAME_OPENMP)-$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
 endif
 # ifeq (${LLD_ENABLE},yes)
 # 	dh_strip -p liblld-$(LLVM_VERSION) --dbg-package=liblld-$(LLVM_VERSION)-dbg
