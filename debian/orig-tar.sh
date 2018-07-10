@@ -6,7 +6,9 @@
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-lld.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-lldb.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-polly.tar.bz2
+# llvm-toolchain-snapshot-3.2_3.2repack.orig-openmp.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig.tar.bz2
+
 set -e
 
 # TODO rest of the options
@@ -181,6 +183,14 @@ checkout_sources lldb $(get_svn_url lldb $BRANCH $TAG) $LLDB_TARGET "$BRANCH" $R
 rm -rf $LLDB_TARGET/www/
 tar jcf $FULL_VERSION.orig-lldb.tar.bz2 $LLDB_TARGET
 rm -rf $LLDB_TARGET
+
+# OPENMP
+OPENMP_TARGET=openmp_$VERSION
+checkout_sources openmp $(get_svn_url openmp $BRANCH $TAG) $OPENMP_TARGET "$BRANCH" $REVISION
+rm -rf $OPENMP_TARGET/www/
+tar jcf $FULL_VERSION.orig-openmp.tar.bz2 $OPENMP_TARGET
+rm -rf $OPENMP_TARGET
+
 
 PATH_DEBIAN="$(pwd)/$(dirname $0)/../"
 echo "going into $PATH_DEBIAN"

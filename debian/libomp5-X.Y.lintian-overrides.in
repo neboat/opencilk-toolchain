@@ -1,0 +1,1 @@
+libomp5-@LLVM_VERSION@: postinst-must-call-ldconfig usr/lib/*/libomp-@LLVM_VERSION@.so.5
