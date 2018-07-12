@@ -1,7 +1,7 @@
 llvm-toolchain-snapshot (1:7~svn330801-1~exp3) experimental; urgency=medium
 
   [ Reshabh Sharma ]
-  * Integrate opemp as part of the llvm-toolchain packages
+  * Integrate opemp as part of the llvm-toolchain packages (Closes: #813672)
     As part of this work, the transition libiomp packages have been removed.
 
   [ Sylvestre Ledru ]
