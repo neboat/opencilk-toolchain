@@ -478,18 +478,6 @@ Description: Next generation, high-performance debugger, header files
 
 # ------------- openmp -------------
 
-Package: libiomp-7-dev
-Section: libdevel
-Architecture: any
-Depends: libomp-7-dev (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Description: Intel OpenMP runtime - dev package - transition package
- The runtime is the part of the OpenMP implementation that your code is
- linked against, and that manages the multiple threads in an OpenMP program
- while it is executing.
- .
- This package has been replaced by the LLVM sources. This is the Intel version
- moved under the LLVM umbrella. This is a dependency package.
-
 Package: libomp-7-dev
 Section: libdevel
 Architecture: any
@@ -501,18 +489,6 @@ Description: LLVM OpenMP runtime - dev package
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
  while it is executing.
-
-Package: libiomp5-7
-Section: libs
-Architecture: any
-Depends: libomp5-7, ${shlibs:Depends}, ${misc:Depends}
-Description: Intel OpenMP runtime - transition package
- The runtime is the part of the OpenMP implementation that your code is
- linked against, and that manages the multiple threads in an OpenMP program
- while it is executing.
- .
- This package has been replaced by the LLVM sources. This is the Intel version
- moved under the LLVM umbrella. This is a dependency package.
 
 Package: libomp5-7
 Multi-Arch: same
@@ -526,19 +502,6 @@ Description: LLVM OpenMP runtime
  linked against, and that manages the multiple threads in an OpenMP program
  while it is executing.
 
-Package: libiomp5-7-dbg
-Section: debug
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libomp5-7 (= ${binary:Version})
-Description: Intel OpenMP runtime - Debug transition package
- The runtime is the part of the OpenMP implementation that your code is
- linked against, and that manages the multiple threads in an OpenMP program
- while it is executing.
- .
- This package has been replaced by the LLVM sources. This is the Intel version
- moved under the LLVM umbrella. This is a dependency package.
-
-
 Package: libomp5-7-dbg
 Section: debug
 Architecture: any
@@ -550,18 +513,6 @@ Description: LLVM OpenMP runtime - Debug package
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
  while it is executing.
-
-Package: libiomp-7-doc
-Section: doc
-Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, libomp-7-doc
-Description: Intel OpenMP runtime - Documentation -  Transition package
- The runtime is the part of the OpenMP implementation that your code is
- linked against, and that manages the multiple threads in an OpenMP program
- while it is executing.
- .
- This package has been replaced by the LLVM sources. This is the Intel version
- moved under the LLVM umbrella. This is a dependency package.
 
 Package: libomp-7-doc
 Section: doc
