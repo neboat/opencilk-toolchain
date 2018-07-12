@@ -149,6 +149,12 @@ echo 'int main() {
 ' > foo.c
 clang++-$VERSION -g -o bar foo.c
 
+
+if test ! -f /usr/lib/llvm-$VERSION/lib/libomp.so; then
+    echo "Install libomp-$VERSION-dev";
+    exit -1;
+fi
+
 # OpenMP
 echo '
 //test.c
@@ -196,6 +202,11 @@ echo "int main() { return 1; }" > foo.c
 clang-$VERSION -fsanitize=efficiency-working-set -o foo foo.c
 ./foo > /dev/null || true
 
+
+if test ! -f /usr/lib/llvm-$VERSION/lib/libclangToolingInclusions.a; then
+    echo "Install libclang-$VERSION-dev";
+    exit -1;
+fi
 
 rm -rf cmaketest && mkdir cmaketest
 cat > cmaketest/CMakeLists.txt <<EOF
