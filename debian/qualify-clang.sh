@@ -160,7 +160,7 @@ int main(void) {
   printf("thread %d\n", omp_get_thread_num());
 }
 ' > foo.c
-clang-$VERSION -v foo.c -I/usr/lib/llvm-$VERSION/include/openmp-$VERSION/ -fopenmp -o o
+clang-$VERSION -v foo.c -fopenmp -o o
 ./o
 
 
