@@ -520,6 +520,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Replaces: libiomp5-7 (<< 3.7-1)
 Breaks: libiomp5-7 (<< 3.7-1)
+# TODO add the break depends
 Description: LLVM OpenMP runtime
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
