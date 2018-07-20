@@ -1,3 +1,10 @@
+llvm-toolchain-6.0 (1:6.0.1-3) UNRELEASED; urgency=medium
+
+  [ Dimitri John Ledkov ]
+  * Enable lldb on ppc64el LP: #1777136
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 20 Jul 2018 09:27:13 +0200
+
 llvm-toolchain-6.0 (1:6.0.1-2) unstable; urgency=medium
 
   * Bump std-version to 4.1.4, no changes required.
