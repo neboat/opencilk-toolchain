@@ -54,3 +54,5 @@ remove-test-freezing.diff
 0048-Set-html_static_path-_static-everywhere.patch
 0049-Use-Debian-provided-MathJax-everywhere.patch
 ubuntu-cosmic-support.patch
+D40146-JumpThreading-backport-1.diff
+D42717-JumpThreading-backport-2.diff
