@@ -1,0 +1,2 @@
+usr/lib/llvm-@LLVM_VERSION@/bin/clang++-libc++-@LLVM_VERSION@ usr/bin/clang++-libc++-@LLVM_VERSION@
+usr/lib/llvm-@LLVM_VERSION@/bin/g++-libc++-@LLVM_VERSION@ usr/bin/g++-libc++-@LLVM_VERSION@

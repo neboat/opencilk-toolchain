@@ -51,6 +51,19 @@ remove-test-freezing.diff
 0048-Set-html_static_path-_static-everywhere.patch
 0049-Use-Debian-provided-MathJax-everywhere.patch
 impl-path-hurd.diff
+
+# OpenMP
+
 openmp-check-execstack.diff
 openmp-soname.diff
 openmp-mips-affinity.patch
+
+# libcxx
+
+libcxxabi-test-don-t-fail-extended-long-double.patch
+libcxx-test-fix-lockfree-test-for-i386.patch
+libcxxabi-arm-ehabi-fix.patch
+libcxx-test-atomics-set-compare-exchange-to-be-expected-fails-on-arm.patch
+libcxx-silent-test-libcxx.diff
+libcxx-silent-failure-ppc64el.diff
+libcxx-silent-failure-arm64.diff

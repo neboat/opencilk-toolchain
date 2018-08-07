@@ -1,0 +1,16 @@
+#!/bin/sh
+
+cxx_libs="-lc++"
+c_libs="-lc -lgcc_s"
+pthread_libs="-lpthread $c_libs"
+
+libs="$cxx_libs $c_libs"
+
+for i; do
+    if test x"$i" = x"-pthread"; then
+        libs="$libs $pthread_libs"
+        break
+    fi
+done
+
+gcc -std=c++0x -nodefaultlibs $libs -isystem/usr/include/c++/v1 "$@"

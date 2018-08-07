@@ -1,0 +1,3 @@
+usr/lib/llvm-@LLVM_VERSION@/lib/libc++.so /usr/lib/x86_64-linux-gnu/libc++.so
+usr/lib/llvm-@LLVM_VERSION@/lib/libc++.a /usr/lib/x86_64-linux-gnu/libc++.a
+usr/lib/llvm-@LLVM_VERSION@/include/c++ /usr/include/c++
