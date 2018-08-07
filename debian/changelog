@@ -3,6 +3,10 @@ llvm-toolchain-snapshot (1:7~svn336894-1~exp2) UNRELEASED; urgency=medium
   [ Dimitri John Ledkov ]
   * Enable lldb on ppc64el LP: #1777136
 
+  [ Reshabh Sharma ]
+  * Integrate libcxx and libcxxabi as part of the llvm-toolchain packages
+(Closes: 813673)
+
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 20 Jul 2018 09:59:40 +0200
 
 llvm-toolchain-snapshot (1:7~svn336894-1~exp1) experimental; urgency=medium
@@ -24,6 +28,10 @@ llvm-toolchain-snapshot (1:7~svn336894-1~exp1) experimental; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Bump std-version to 4.1.5, no changes required
+
+  [ Reshabh Sharma ]
+  * Updated debian/control with breaks, provides and conflicts for OpenMP
+    packages (Closes: #903802)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 09 May 2018 14:23:49 +0200
 

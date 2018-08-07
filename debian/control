@@ -483,8 +483,9 @@ Section: libdevel
 Architecture: any
 Depends: libomp5-7 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Suggests: libomp-7-doc
-Replaces: libiomp-7-dev (<< 3.7-1)
-Breaks: libiomp-7-dev (<< 3.7-1)
+Replaces: libiomp-dev (<< 3.7-1), libomp-dev
+Breaks: libiomp-dev (<< 3.7-1), libomp-dev
+Provides: libomp-dev
 Description: LLVM OpenMP runtime - dev package
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
@@ -494,8 +495,9 @@ Package: libomp5-7
 Multi-Arch: same
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Replaces: libiomp5-7 (<< 3.7-1)
-Breaks: libiomp5-7 (<< 3.7-1)
+Replaces: libomp5
+Breaks: libomp5
+Provides: libomp5
 # TODO add the break depends
 Description: LLVM OpenMP runtime
  The runtime is the part of the OpenMP implementation that your code is
@@ -506,11 +508,150 @@ Package: libomp-7-doc
 Section: doc
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
-Replaces: libiomp-7-doc (<< 3.7-1)
-Breaks: libiomp-7-doc (<< 3.7-1)
+Replaces: libiomp-doc
+Breaks: libiomp-doc
 Description: LLVM OpenMP runtime - Documentation
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
  while it is executing.
  .
  This package contains the documentation of this package.
+
+# ------------- libcxx -------------
+
+Package: libc++1-7
+Section: libs
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: clang
+Description: LLVM C++ Standard library
+ libc++ is another implementation of the C++ standard library.
+ .
+ Features and Goals
+ .
+   * Correctness as defined by the C++ standards.
+   * Fast execution.
+   * Minimal memory use.
+   * Fast compile times.
+   * ABI compatibility with gcc's libstdc++ for some low-level features such
+     as exception objects, rtti and memory allocation.
+   * Extensive unit tests.
+
+Package: libc++-7-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: libc++1-7 (= ${binary:Version}), ${misc:Depends}, libc++-helpers
+Provides: libstdc++-dev, libc++-7-dev
+Breaks: libc++-dev
+Description: LLVM C++ Standard library (development files)
+ libc++ is another implementation of the C++ standard library
+ .
+ Features and Goals
+ .
+   * Correctness as defined by the C++ standards.
+   * Fast execution.
+   * Minimal memory use.
+   * Fast compile times.
+   * ABI compatibility with gcc's libstdc++ for some low-level features such
+     as exception objects, rtti and memory allocation.
+   * Extensive unit tests.
+
+Package: libc++-7-test
+Section: libs
+Architecture: any
+Depends: libc++1-7 (= ${binary:Version}), ${misc:Depends}
+Description: LLVM C++ Standard library (test cases)
+Breaks: libc++-test
+Provides: libc++-test
+ libc++ is another implementation of the C++ standard library.
+ .
+ Features and Goals
+ .
+   * Correctness as defined by the standards.
+   * Fast execution.
+   * Minimal memory use.
+   * Fast compile times.
+   * ABI compatibility with gcc's libstdc++ for some low-level features such
+     as exception objects, rtti and memory allocation.
+   * Extensive unit tests.
+ .
+ This package contains the test cases of libc++ library.
+
+# ------------- libcxxabi -------------
+
+Package: libc++abi1-7
+Section: libs
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Breaks: libc++abi1
+Provides: libc++abi1
+Description: LLVM low level support for a standard C++ library
+ libc++abi is another implementation of low level support for a standard C++
+ library.
+ .
+ Features and Goals
+ .
+   * Correctness as defined by the C++ standards.
+   * Provide a portable sublayer to ease the porting of libc++
+ .
+
+Package: libc++abi-7-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: libc++abi1-7 (= ${binary:Version}), ${misc:Depends}
+Replaces: libc++-7-dev (<< 3.9.0-3)
+Breaks: libc++-dev (<< 3.9.0-3), libc++-7-dev
+Description: LLVM low level support for a standard C++ library (development files)
+ libc++abi is another implementation of low level support for a standard C++
+ library.
+ .
+ Features and Goals
+ .
+   * Correctness as defined by the C++ standards.
+   * Provide a portable sublayer to ease the porting of libc++
+ .
+
+Package: libc++abi-7-test
+Section: libs
+Architecture: any
+Depends: libc++abi1-7 (= ${binary:Version}), ${misc:Depends}
+Breaks: libc++abi-test
+Provides: libc++abi-test
+Description: libc++abi test cases
+ libc++abi is another implementation of low level support for a standard C++
+ library.
+ .
+ Features and Goals
+ .
+   * Correctness as defined by the C++ standards.
+   * Provide a portable sublayer to ease the porting of libc++
+ .
+ Test cases of libc++abi library.
+
+
+Package: libc++-7-helpers
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}
+Breaks: libc++-7-helpers
+Provides: libc++-helpers
+Description: LLVM C++ Standard library - build helpers
+ libc++ is another implementation of the C++ standard library
+ .
+ Features and Goals
+ .
+   * Correctness as defined by the C++ standards.
+   * Fast execution.
+   * Minimal memory use.
+   * Fast compile times.
+   * ABI compatibility with gcc's libstdc++ for some low-level features such
+     as exception objects, rtti and memory allocation.
+   * Extensive unit tests.
+ .
+ This package contains the build helpers (clang++-libc++, etc)
