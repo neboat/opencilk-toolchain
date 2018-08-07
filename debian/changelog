@@ -1,13 +1,16 @@
-llvm-toolchain-snapshot (1:7~svn336894-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:7~+rc1-1~exp1) experimental; urgency=medium
+
+  * First testing release of 7
 
   [ Dimitri John Ledkov ]
   * Enable lldb on ppc64el LP: #1777136
 
   [ Reshabh Sharma ]
   * Integrate libcxx and libcxxabi as part of the llvm-toolchain packages
-(Closes: 813673)
+    Outcome of the LLVM GSoC 2018
+    (Closes: #813673)
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 20 Jul 2018 09:59:40 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 07 Aug 2018 19:25:09 +0200
 
 llvm-toolchain-snapshot (1:7~svn336894-1~exp1) experimental; urgency=medium
 
