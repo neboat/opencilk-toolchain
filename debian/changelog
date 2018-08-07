@@ -3,6 +3,7 @@ llvm-toolchain-7 (1:7~+rc1-1~exp1) experimental; urgency=medium
   * First testing release of 7
     - Rename packages
     - Update the VCS-* URL
+  * Standards-Version to 4.2.0
 
   [ Dimitri John Ledkov ]
   * Enable lldb on ppc64el LP: #1777136
