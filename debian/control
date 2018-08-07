@@ -483,8 +483,9 @@ Section: libdevel
 Architecture: any
 Depends: libomp5-7 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Suggests: libomp-7-doc
-Replaces: libiomp-7-dev (<< 3.7-1)
-Breaks: libiomp-7-dev (<< 3.7-1)
+Replaces: libiomp-dev (<< 3.7-1), libomp-dev
+Breaks: libiomp-dev (<< 3.7-1), libomp-dev
+Provides: libomp-dev
 Description: LLVM OpenMP runtime - dev package
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
@@ -494,8 +495,9 @@ Package: libomp5-7
 Multi-Arch: same
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Replaces: libiomp5-7 (<< 3.7-1)
-Breaks: libiomp5-7 (<< 3.7-1)
+Replaces: libomp5
+Breaks: libomp5
+Provides: libomp5
 # TODO add the break depends
 Description: LLVM OpenMP runtime
  The runtime is the part of the OpenMP implementation that your code is
@@ -506,8 +508,8 @@ Package: libomp-7-doc
 Section: doc
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
-Replaces: libiomp-7-doc (<< 3.7-1)
-Breaks: libiomp-7-doc (<< 3.7-1)
+Replaces: libiomp-doc
+Breaks: libiomp-doc
 Description: LLVM OpenMP runtime - Documentation
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program

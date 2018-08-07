@@ -25,6 +25,10 @@ llvm-toolchain-snapshot (1:7~svn336894-1~exp1) experimental; urgency=medium
   [ Gianfranco Costamagna ]
   * Bump std-version to 4.1.5, no changes required
 
+  [ Reshabh Sharma ]
+  * Updated debian/control with breaks, provides and conflicts for OpenMP
+    packages (Closes: #903802)
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 09 May 2018 14:23:49 +0200
 
 llvm-toolchain-snapshot (1:7~svn330801-1~exp2) experimental; urgency=medium
