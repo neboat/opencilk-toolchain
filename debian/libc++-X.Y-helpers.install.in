@@ -1,0 +1,2 @@
+debian/clang++-libc++-@LLVM_VERSION@ usr/lib/llvm-@LLVM_VERSION@/bin/
+debian/g++-libc++-@LLVM_VERSION@ usr/lib/llvm-@LLVM_VERSION@/bin/

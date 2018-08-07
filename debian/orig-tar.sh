@@ -7,6 +7,8 @@
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-lldb.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-polly.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-openmp.tar.bz2
+# llvm-toolchain-snapshot-3.2_3.2repack.orig-libcxx.tar.bz2
+# llvm-toolchain-snapshot-3.2_3.2repack.orig-libcxxabi.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig.tar.bz2
 
 set -e
@@ -190,6 +192,20 @@ checkout_sources openmp $(get_svn_url openmp $BRANCH $TAG) $OPENMP_TARGET "$BRAN
 rm -rf $OPENMP_TARGET/www/
 tar jcf $FULL_VERSION.orig-openmp.tar.bz2 $OPENMP_TARGET
 rm -rf $OPENMP_TARGET
+
+# LIBCXX
+LIBCXX_TARGET=libcxx_$VERSION
+checkout_sources libcxx $(get_svn_url libcxx $BRANCH $TAG) $LIBCXX_TARGET "$BRANCH" $REVISION
+rm -rf $LIBCXX_TARGET/www/
+tar jcf $FULL_VERSION.orig-libcxx.tar.bz2 $LIBCXX_TARGET
+rm -rf $LIBCXX_TARGET
+
+# LIBCXXABI
+LIBCXXABI_TARGET=libcxxabi_$VERSION
+checkout_sources libcxxabi $(get_svn_url libcxxabi $BRANCH $TAG) $LIBCXXABI_TARGET "$BRANCH" $REVISION
+rm -rf $LIBCXXABI_TARGET/www/
+tar jcf $FULL_VERSION.orig-libcxxabi.tar.bz2 $LIBCXXABI_TARGET
+rm -rf $LIBCXXABI_TARGET
 
 
 PATH_DEBIAN="$(pwd)/$(dirname $0)/../"
