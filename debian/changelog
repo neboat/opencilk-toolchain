@@ -1,4 +1,4 @@
-llvm-toolchain-6.0 (1:6.0.1-3) UNRELEASED; urgency=medium
+llvm-toolchain-6.0 (1:6.0.1-3) unstable; urgency=medium
 
   * Backport to fix a miscompilation issue with rust.
     See https://github.com/rust-lang/rust/issues/52694
@@ -11,7 +11,10 @@ llvm-toolchain-6.0 (1:6.0.1-3) UNRELEASED; urgency=medium
   * backport two upstream patches to fix julia miscompiling (Closes: #905397)
     llvm-D49832-SCEVPred.patch, llvm-rL323946-LSRTy.patch
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 26 Jul 2018 14:51:47 +0200
+  [ Gianfranco Costamagna ]
+  * Team Upload to unstable
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 09 Aug 2018 10:06:11 +0200
 
 llvm-toolchain-6.0 (1:6.0.1-2) unstable; urgency=medium
 
