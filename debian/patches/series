@@ -56,3 +56,5 @@ remove-test-freezing.diff
 ubuntu-cosmic-support.patch
 D40146-JumpThreading-backport-1.diff
 D42717-JumpThreading-backport-2.diff
+llvm-D49832-SCEVPred.patch
+llvm-rL323946-LSRTy.patch
