@@ -10,7 +10,7 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
     libjsoncpp-dev, pkg-config,
     lcov, procps, help2man, zlib1g-dev,
     g++-multilib [amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
-    libjs-mathjax,
+    libjs-mathjax, python-recommonmark,
     doxygen, gfortran
 #    ocaml-nox [amd64 arm64 armel armhf i386 ppc64el s390x],
 #    ocaml-findlib [amd64 arm64 armel armhf i386 ppc64el s390x],
