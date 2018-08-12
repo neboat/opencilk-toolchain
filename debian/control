@@ -19,19 +19,19 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
 Build-Conflicts: oprofile, ocaml, libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev
 Standards-Version: 4.2.0
 Homepage: https://www.llvm.org/
-Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b 7
-Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/7
+Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b snapshot
+Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/snapshot
 
 # ------------- clang -------------
 
-Package: clang-7
+Package: clang-8
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang-common-7-dev (= ${binary:Version}),
- libclang1-7 (= ${binary:Version}), libc6-dev, binutils
+ ${dep:devlibs-objc}, libclang-common-8-dev (= ${binary:Version}),
+ libclang1-8 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
-Recommends: llvm-7-dev, python, libomp-dev
-Suggests: gnustep, gnustep-devel, clang-7-doc
+Recommends: llvm-8-dev, python, libomp-dev
+Suggests: gnustep, gnustep-devel, clang-8-doc
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -40,9 +40,9 @@ Description: C, C++ and Objective-C compiler
  Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
  provides most of the support of C++17.
 
-Package: clang-tools-7
+Package: clang-tools-8
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, clang-7 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, clang-8 (= ${binary:Version})
 Description: clang-based tools for C/C++ developments
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -54,10 +54,10 @@ Description: clang-based tools for C/C++ developments
  This package contains some clang-based tools like scan-build, clangd,
  clang-cl, etc.
 
-Package: clang-format-7
+Package: clang-format-8
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- libllvm7 (= ${binary:Version})
+ libllvm8 (= ${binary:Version})
 Description: Tool to format C/C++/Obj-C code
  Clang-format is both a library and a stand-alone tool with the goal of
  automatically reformatting C++ sources files according to configurable
@@ -70,20 +70,20 @@ Description: Tool to format C/C++/Obj-C code
  .
  This package also provides vim and emacs plugins.
 
-Package: clang-tidy-7
+Package: clang-tidy-8
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- libllvm7 (= ${binary:Version}), libclang-common-7-dev,
- clang-tools-7, python-yaml
-Replaces: clang-modernize-7, clang-7 (<< 7~svn250696-1)
-Breaks: clang-modernize-7, clang-7 (<< 7~svn250696-1)
+ libllvm8 (= ${binary:Version}), libclang-common-8-dev,
+ clang-tools-8, python-yaml
+Replaces: clang-modernize-8, clang-8 (<< 8~svn250696-1)
+Breaks: clang-modernize-8, clang-8 (<< 8~svn250696-1)
 Description: clang-based C++ linter tool
  Provide an extensible framework for diagnosing and fixing typical programming
  errors, like style violations, interface misuse, or bugs that can be deduced
  via static analysis. clang-tidy is modular and provides a convenient interface
  for writing new checks.
 
-Package: clang-7-doc
+Package: clang-8-doc
 Architecture: all
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-mathjax
@@ -97,7 +97,7 @@ Description: C, C++ and Objective-C compiler - Documentation
  .
  This package contains the documentation.
 
-Package: libclang1-7
+Package: libclang1-8
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -119,12 +119,12 @@ Description: C interface to the clang library
  locations with elements within the AST, and other facilities that support
  Clang-based development tools.
 
-Package: libclang-7-dev
+Package: libclang-8-dev
 Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang1-7 (= ${binary:Version}),
- libclang-common-7-dev (= ${binary:Version})
+ ${dep:devlibs-objc}, libclang1-8 (= ${binary:Version}),
+ libclang-common-8-dev (= ${binary:Version})
 Description: clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -134,12 +134,12 @@ Description: clang library - Development package
  provides most of the support of C++17.
  .
  This package contains the clang headers to develop extensions over
- libclang1-7.
+ libclang1-8.
 
-Package: libclang-common-7-dev
+Package: libclang-common-8-dev
 Architecture: any
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm7 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm8 (= ${binary:Version})
 Description: clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -152,10 +152,10 @@ Description: clang library - Common development package
  (profiling, etc).
 
 
-Package: libfuzzer-7-dev
+Package: libfuzzer-8-dev
 Architecture: linux-any
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, clang-7 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, clang-8 (= ${binary:Version})
 Description: Library for coverage-guided fuzz testing
  LibFuzzer is a library for in-process, coverage-guided, evolutionary fuzzing
  of other libraries.
@@ -173,7 +173,7 @@ Description: Library for coverage-guided fuzz testing
  instrumentation.
 
 
-Package: python-clang-7
+Package: python-clang-8
 Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
@@ -192,7 +192,7 @@ Description: Clang Python Bindings
  This binding package provides access to the Clang compiler and libraries.
 
 
-Package: clang-7-examples
+Package: clang-8-examples
 Architecture: any
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -208,7 +208,7 @@ Description: Clang examples
 
 # ------------- LLVM -------------
 
-Package: libllvm7
+Package: libllvm8
 Architecture: any
 Section: libs
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -223,11 +223,11 @@ Description: Modular compiler and toolchain technologies, runtime library
  .
  This package contains the LLVM runtime library.
 
-Package: llvm-7
+Package: llvm-8
 Architecture: any
-Suggests: llvm-7-doc
-Depends: llvm-7-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Recommends: llvm-7-dev
+Suggests: llvm-8-doc
+Depends: llvm-8-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Recommends: llvm-8-dev
 Description: Modular compiler and toolchain technologies
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -251,11 +251,11 @@ Description: Modular compiler and toolchain technologies
  a young scheme front-end, and Java support is in development. LLVM can
  generate code for X86, SparcV9, PowerPC or many other architectures.
 
-Package: llvm-7-runtime
+Package: llvm-8-runtime
 Architecture: any
 Depends: binfmt-support, ${shlibs:Depends}, ${misc:Depends}
-Conflicts: llvm (<< 2.7-1)
-Replaces: llvm (<< 2.7-1)
+Conflicts: llvm (<< 2.8-1)
+Replaces: llvm (<< 2.8-1)
 Description: Modular compiler and toolchain technologies, IR interpreter
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -272,10 +272,10 @@ Description: Modular compiler and toolchain technologies, IR interpreter
  This package provides the minimal required to execute programs in LLVM
  format.
 
-Package: llvm-7-dev
+Package: llvm-8-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends},
- llvm-7 (= ${binary:Version}), libllvm7 (= ${binary:Version}), libtinfo-dev
+ llvm-8 (= ${binary:Version}), libllvm8 (= ${binary:Version}), libtinfo-dev
 Replaces: llvm (<< 2.2-3)
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
@@ -293,10 +293,10 @@ Description: Modular compiler and toolchain technologies, libraries and headers
  This package provides the libraries and headers to develop applications
  using llvm.
 
-Package: llvm-7-tools
+Package: llvm-8-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- llvm-7-dev (= ${binary:Version})
+ llvm-8-dev (= ${binary:Version})
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -312,11 +312,11 @@ Description: Modular compiler and toolchain technologies, tools
  .
  This package provides tools for testing.
 
-# Package: libllvm-7-ocaml-dev
+# Package: libllvm-8-ocaml-dev
 # Section: ocaml
 # Architecture: amd64 arm64 armel armhf i386 ppc64el s390x
-# Suggests: llvm-7-doc
-# Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-7-dev (= ${binary:Version})
+# Suggests: llvm-8-doc
+# Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-8-dev (= ${binary:Version})
 # Replaces: libllvm-x.y-ocaml-dev
 # Conflicts: libllvm-x.y-ocaml-dev
 # Provides: ${ocaml:Provides}, libllvm-x.y-ocaml-dev
@@ -335,7 +335,7 @@ Description: Modular compiler and toolchain technologies, tools
 #  .
 #  This package provides the OCaml bindings to develop applications using llvm.
 
-Package: llvm-7-doc
+Package: llvm-8-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
@@ -354,10 +354,10 @@ Description: Modular compiler and toolchain technologies, documentation
  .
  This package contains all documentation (extensive).
 
-Package: llvm-7-examples
+Package: llvm-8-examples
 Section: doc
 Architecture: all
-Depends: ${misc:Depends}, llvm-7-dev (>= ${source:Version}), llvm-7-dev (<< ${source:Version}+c~)
+Depends: ${misc:Depends}, llvm-8-dev (>= ${source:Version}), llvm-8-dev (<< ${source:Version}+c~)
 Description: Modular compiler and toolchain technologies, examples
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -377,20 +377,20 @@ Description: Modular compiler and toolchain technologies, examples
 
 # ------------- lld -------------
 
-Package: lld-7
+Package: lld-8
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd powerpc ppc64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm7 (= ${binary:Version}), llvm-7-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm8 (= ${binary:Version}), llvm-8-dev
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker
  LLD is a new, high-performance linker. It is built as a set of reusable
  components which highly leverage existing libraries in the larger LLVM
  Project.
 
-Package: liblld-7
+Package: liblld-8
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd powerpc ppc64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm7 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm8 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: libs
 Description: LLVM-based linker, library
@@ -400,12 +400,12 @@ Description: LLVM-based linker, library
  .
  This package contains the LLD runtime library.
 
-Package: liblld-7-dev
+Package: liblld-8-dev
 Section: libdevel
 Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd powerpc ppc64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, lld-7 (= ${binary:Version}),
- liblld-7 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, lld-8 (= ${binary:Version}),
+ liblld-8 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker, header files
  LLD is a new, high-performance linker. It is built as a set of reusable
@@ -417,25 +417,25 @@ Description: LLVM-based linker, header files
 
 # ------------- lldb -------------
 
-Package: lldb-7
+Package: lldb-8
 Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 ppc64el s390 sparc hppa m68k sh4 x32 mips mipsel arm64
 # ia64 mips mipsel hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm7 (= ${binary:Version}), llvm-7-dev,
- python-lldb-7
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm8 (= ${binary:Version}), llvm-8-dev,
+ python-lldb-8
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
  Project, such as the Clang expression parser and LLVM disassembler.
 
-Package: liblldb-7
+Package: liblldb-8
 Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 ppc64el s390 sparc hppa m68k sh4 x32 mips mipsel arm64
 # ia64 mips mipsel hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm7 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm8 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: libs
-Replaces: lldb-7 (<= 7~svn215195-2)
-Breaks: lldb-7 (<< 7~svn215195-2)
+Replaces: lldb-8 (<= 8~svn215195-2)
+Breaks: lldb-8 (<< 8~svn215195-2)
 Description: Next generation, high-performance debugger, library
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
@@ -443,11 +443,11 @@ Description: Next generation, high-performance debugger, library
  .
  This package contains the LLDB runtime library.
 
-Package: python-lldb-7
+Package: python-lldb-8
 Section: python
 Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 ppc64el s390 sparc hppa m68k sh4 x32 mips mipsel arm64
 # ia64 mips mipsel hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-7-dev, python, python-six
+Depends: ${shlibs:Depends}, ${misc:Depends}, liblldb-8-dev, python, python-six
 Conflicts: python-lldb-3.8, python-lldb-3.9, python-lldb-x.y
 Replaces: python-lldb-x.y
 Provides: python-lldb-x.y
@@ -460,13 +460,13 @@ Description: Next generation, high-performance debugger, python lib
  This binding package provides access to lldb.
 
 
-Package: liblldb-7-dev
+Package: liblldb-8-dev
 Section: libdevel
 Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 ppc64el s390 sparc hppa m68k sh4 x32 mips mipsel arm64
 # ia64 mips mipsel hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-7 (= ${binary:Version})
-Replaces: lldb-7-dev (<= 7~svn215195-2)
-Breaks: lldb-7-dev (<< 7~svn215195-2)
+Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-8 (= ${binary:Version})
+Replaces: lldb-8-dev (<= 8~svn215195-2)
+Breaks: lldb-8-dev (<< 8~svn215195-2)
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger, header files
  LLDB is a next generation, high-performance debugger. It is built as a set of
@@ -478,20 +478,20 @@ Description: Next generation, high-performance debugger, header files
 
 # ------------- openmp -------------
 
-Package: libomp-7-dev
+Package: libomp-8-dev
 Section: libdevel
 Architecture: any
-Depends: libomp5-7 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Suggests: libomp-7-doc
-Replaces: libiomp-dev (<< 3.7-1), libomp-dev
-Breaks: libiomp-dev (<< 3.7-1), libomp-dev
+Depends: libomp5-8 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Suggests: libomp-8-doc
+Replaces: libiomp-dev (<< 3.8-1), libomp-dev
+Breaks: libiomp-dev (<< 3.8-1), libomp-dev
 Provides: libomp-dev
 Description: LLVM OpenMP runtime - dev package
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
  while it is executing.
 
-Package: libomp5-7
+Package: libomp5-8
 Multi-Arch: same
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -504,7 +504,7 @@ Description: LLVM OpenMP runtime
  linked against, and that manages the multiple threads in an OpenMP program
  while it is executing.
 
-Package: libomp-7-doc
+Package: libomp-8-doc
 Section: doc
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
@@ -519,7 +519,7 @@ Description: LLVM OpenMP runtime - Documentation
 
 # ------------- libcxx -------------
 
-Package: libc++1-7
+Package: libc++1-8
 Section: libs
 Architecture: any
 Multi-Arch: same
@@ -539,12 +539,12 @@ Description: LLVM C++ Standard library
      as exception objects, rtti and memory allocation.
    * Extensive unit tests.
 
-Package: libc++-7-dev
+Package: libc++-8-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libc++1-7 (= ${binary:Version}), ${misc:Depends}, libc++-helpers
-Provides: libstdc++-dev, libc++-7-dev
+Depends: libc++1-8 (= ${binary:Version}), ${misc:Depends}, libc++-helpers
+Provides: libstdc++-dev, libc++-8-dev
 Breaks: libc++-dev
 Description: LLVM C++ Standard library (development files)
  libc++ is another implementation of the C++ standard library
@@ -559,10 +559,10 @@ Description: LLVM C++ Standard library (development files)
      as exception objects, rtti and memory allocation.
    * Extensive unit tests.
 
-Package: libc++-7-test
+Package: libc++-8-test
 Section: libs
 Architecture: any
-Depends: libc++1-7 (= ${binary:Version}), ${misc:Depends}
+Depends: libc++1-8 (= ${binary:Version}), ${misc:Depends}
 Description: LLVM C++ Standard library (test cases)
 Breaks: libc++-test
 Provides: libc++-test
@@ -582,7 +582,7 @@ Provides: libc++-test
 
 # ------------- libcxxabi -------------
 
-Package: libc++abi1-7
+Package: libc++abi1-8
 Section: libs
 Architecture: any
 Multi-Arch: same
@@ -600,13 +600,13 @@ Description: LLVM low level support for a standard C++ library
    * Provide a portable sublayer to ease the porting of libc++
  .
 
-Package: libc++abi-7-dev
+Package: libc++abi-8-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libc++abi1-7 (= ${binary:Version}), ${misc:Depends}
-Replaces: libc++-7-dev (<< 3.9.0-3)
-Breaks: libc++-dev (<< 3.9.0-3), libc++-7-dev
+Depends: libc++abi1-8 (= ${binary:Version}), ${misc:Depends}
+Replaces: libc++-8-dev (<< 3.9.0-3)
+Breaks: libc++-dev (<< 3.9.0-3), libc++-8-dev
 Description: LLVM low level support for a standard C++ library (development files)
  libc++abi is another implementation of low level support for a standard C++
  library.
@@ -617,10 +617,10 @@ Description: LLVM low level support for a standard C++ library (development file
    * Provide a portable sublayer to ease the porting of libc++
  .
 
-Package: libc++abi-7-test
+Package: libc++abi-8-test
 Section: libs
 Architecture: any
-Depends: libc++abi1-7 (= ${binary:Version}), ${misc:Depends}
+Depends: libc++abi1-8 (= ${binary:Version}), ${misc:Depends}
 Breaks: libc++abi-test
 Provides: libc++abi-test
 Description: libc++abi test cases
@@ -635,11 +635,11 @@ Description: libc++abi test cases
  Test cases of libc++abi library.
 
 
-Package: libc++-7-helpers
+Package: libc++-8-helpers
 Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends}
-Breaks: libc++-7-helpers
+Breaks: libc++-8-helpers
 Provides: libc++-helpers
 Description: LLVM C++ Standard library - build helpers
  libc++ is another implementation of the C++ standard library

@@ -2,7 +2,7 @@
 # Stop at the first error
 set -e
 
-VERSION=7
+VERSION=8
 
 if test ! -f /usr/bin/llvm-config-$VERSION; then
     echo "Install llvm-$VERSION & llvm-$VERSION-dev"
@@ -304,8 +304,8 @@ for SYSTEM in ""; do
 done
 
 echo "If the following fails, try setting an environment variable such as:"
-echo "OBJC_INCLUDE_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/include"
-echo "libobjc-7-dev should be also installed"
+echo "OBJC_INCLUDE_PATH=/usr/lib/gcc/x86_64-linux-gnu/8/include"
+echo "libobjc-8-dev should be also installed"
 echo "#include <objc/objc.h>" > foo.m
 clang-$VERSION -c foo.m
 

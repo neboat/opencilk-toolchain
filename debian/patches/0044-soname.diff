@@ -3,11 +3,11 @@
  tools/llvm-shlib/CMakeLists.txt     |    1 +
  2 files changed, 2 insertions(+), 1 deletion(-)
 
-Index: llvm-toolchain-snapshot_6.0~svn309319/clang/tools/libclang/CMakeLists.txt
+Index: llvm-toolchain-snapshot_8~svn339515/clang/tools/libclang/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_6.0~svn309319.orig/clang/tools/libclang/CMakeLists.txt
-+++ llvm-toolchain-snapshot_6.0~svn309319/clang/tools/libclang/CMakeLists.txt
-@@ -84,7 +84,7 @@ else()
+--- llvm-toolchain-snapshot_8~svn339515.orig/clang/tools/libclang/CMakeLists.txt
++++ llvm-toolchain-snapshot_8~svn339515/clang/tools/libclang/CMakeLists.txt
+@@ -87,7 +87,7 @@ else()
    set(output_name "clang")
  endif()
  
@@ -16,15 +16,16 @@ Index: llvm-toolchain-snapshot_6.0~svn309319/clang/tools/libclang/CMakeLists.txt
    OUTPUT_NAME ${output_name}
    ${SOURCES}
    DEPENDS clang-headers
-Index: llvm-toolchain-snapshot_6.0~svn309319/tools/llvm-shlib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_8~svn339515/tools/llvm-shlib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_6.0~svn309319.orig/tools/llvm-shlib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_6.0~svn309319/tools/llvm-shlib/CMakeLists.txt
-@@ -35,6 +35,7 @@ if(LLVM_DYLIB_EXPORTED_SYMBOL_FILE)
- endif()
+--- llvm-toolchain-snapshot_8~svn339515.orig/tools/llvm-shlib/CMakeLists.txt
++++ llvm-toolchain-snapshot_8~svn339515/tools/llvm-shlib/CMakeLists.txt
+@@ -41,6 +41,8 @@ if(LLVM_BUILD_LLVM_DYLIB)
  
- add_llvm_library(LLVM SHARED DISABLE_LLVM_LINK_LLVM_DYLIB SONAME ${SOURCES})
-+set_property(TARGET LLVM PROPERTY VERSION "1") # Append .1 to SONAME
+   add_llvm_library(LLVM SHARED DISABLE_LLVM_LINK_LLVM_DYLIB SONAME ${SOURCES})
  
- list(REMOVE_DUPLICATES LIB_NAMES)
- if(("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux") OR (MINGW) OR (HAIKU)
++  set_property(TARGET LLVM PROPERTY VERSION "1") # Append .1 to SONAME
++
+   list(REMOVE_DUPLICATES LIB_NAMES)
+   if(("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux") OR (MINGW) OR (HAIKU)
+      OR ("${CMAKE_SYSTEM_NAME}" STREQUAL "FreeBSD")
