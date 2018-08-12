@@ -49,6 +49,8 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_getObjCDeclQualifiers@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_getObjCManglings@LLVM_@LLVM_VERSION@ 1:6.0~svn320926-1~
  clang_Cursor_getObjCPropertyAttributes@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_Cursor_getObjCPropertyGetterName@LLVM_@LLVM_VERSION@ 1:8~svn339515-1~
+ clang_Cursor_getObjCPropertySetterName@LLVM_@LLVM_VERSION@ 1:8~svn339515-1~
  clang_Cursor_getObjCSelectorIndex@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_getOffsetOfField@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_getParsedComment@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -132,9 +134,16 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Type_getAlignOf@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Type_getCXXRefQualifier@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Type_getClassType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_Type_getModifiedType@LLVM_@LLVM_VERSION@ 1:8~svn339515-1~
  clang_Type_getNamedType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_Type_getNullability@LLVM_@LLVM_VERSION@ 1:8~svn339515-1~
+ clang_Type_getNumObjCProtocolRefs@LLVM_@LLVM_VERSION@ 1:8~svn339515-1~
+ clang_Type_getNumObjCTypeArgs@LLVM_@LLVM_VERSION@ 1:8~svn339515-1~
  clang_Type_getNumTemplateArguments@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Type_getObjCEncoding@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_Type_getObjCObjectBaseType@LLVM_@LLVM_VERSION@ 1:8~svn339515-1~
+ clang_Type_getObjCProtocolDecl@LLVM_@LLVM_VERSION@ 1:8~svn339515-1~
+ clang_Type_getObjCTypeArg@LLVM_@LLVM_VERSION@ 1:8~svn339515-1~
  clang_Type_getOffsetOf@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Type_getSizeOf@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Type_getTemplateArgumentAsType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -215,9 +224,9 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getCompletionChunkCompletionString@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCompletionChunkKind@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCompletionChunkText@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
- clang_getCompletionFixIt@LLVM_7 1:7~svn334604-1~
+ clang_getCompletionFixIt@LLVM_@LLVM_VERSION@ 1:7~svn334604-1~
  clang_getCompletionNumAnnotations@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
- clang_getCompletionNumFixIts@LLVM_7 1:7~svn334604-1~exp1+0~
+ clang_getCompletionNumFixIts@LLVM_@LLVM_VERSION@ 1:7~svn334604-1~+0~
  clang_getCompletionParent@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCompletionPriority@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getCursor@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -306,7 +315,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_getSpellingLocation@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getTUResourceUsageName@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getTemplateCursorKind@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
- clang_getToken@LLVM_7 1:7~svn334604-1~
+ clang_getToken@LLVM_@LLVM_VERSION@ 1:7~svn334604-1~
  clang_getTokenExtent@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getTokenKind@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_getTokenLocation@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~

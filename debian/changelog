@@ -1,12 +1,17 @@
-llvm-toolchain-snapshot (1:8~svn339515-1~exp1) experimental; urgency=medium
-
-  * New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 12 Aug 2018 14:17:36 +0200
-
 llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
 
-  * branching
+  * branching to version 8
+    - New symbols in libclang:
+      clang_Cursor_getObjCPropertyGetterName
+      clang_Cursor_getObjCPropertySetterName
+      clang_Type_getModifiedType
+      clang_Type_getNullability
+      clang_Type_getNumObjCProtocolRefs
+      clang_Type_getNumObjCTypeArgs
+      clang_Type_getObjCObjectBaseType
+      clang_Type_getObjCProtocolDecl
+      clang_Type_getObjCTypeArg
+   * python-recommonmark is a new build dep for the sphinx doc
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 12 Aug 2018 13:19:15 +0200
 
