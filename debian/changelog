@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
+
+  * branching
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 12 Aug 2018 13:19:15 +0200
+
 llvm-toolchain-7 (1:7~+rc1-1~exp1) experimental; urgency=medium
 
   * First testing release of 7
