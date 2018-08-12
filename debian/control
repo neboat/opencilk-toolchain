@@ -563,9 +563,9 @@ Package: libc++-8-test
 Section: libs
 Architecture: any
 Depends: libc++1-8 (= ${binary:Version}), ${misc:Depends}
-Description: LLVM C++ Standard library (test cases)
 Breaks: libc++-test
 Provides: libc++-test
+Description: LLVM C++ Standard library (test cases)
  libc++ is another implementation of the C++ standard library.
  .
  Features and Goals
