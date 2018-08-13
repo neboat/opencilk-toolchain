@@ -29,3 +29,16 @@ Index: llvm-toolchain-7_7~+rc1/lldb/source/API/CMakeLists.txt
  )
  
  if (NOT CMAKE_SYSTEM_NAME MATCHES "Windows")
+@@ -141,11 +141,6 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Windows"
+   if (MSVC AND NOT LLDB_DISABLE_PYTHON)
+     target_link_libraries(liblldb PRIVATE ${PYTHON_LIBRARY})
+   endif()
+-else()
+-  set_target_properties(liblldb
+-    PROPERTIES
+-    OUTPUT_NAME lldb
+-  )
+ endif()
+ 
+ if (LLDB_WRAP_PYTHON)
+
