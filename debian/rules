@@ -360,9 +360,10 @@ endif
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
 	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
+	-DLIBCXXABI_LIBCXX_INCLUDES=$(BASE_PATH)/libcxx/include \
 	-DLIBCXXABI_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
 	-DLLVM_ENABLE_RTTI=ON
-
+	$(MAKE) $(NJOBS) VERBOSE=1
 	cd libcxx/build && \
 	cmake ../ \
 	$(LIBCXX_CMAKE_OPTIONS) \
@@ -371,6 +372,7 @@ endif
 	-DLIBCXX_CXX_ABI_LIBRARY_PATH=$(BASE_PATH)/libcxxabi/build/lib \
 	-DLIBCXX_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
 	-DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON
+	$(MAKE) $(NJOBS) VERBOSE=1
 
 override_dh_prep: build_doc
 	dh_prep
@@ -430,6 +432,7 @@ override_dh_auto_install:
 
 	# Only run on executable, not script
 	chrpath -d `find $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary'|cut -d: -f1`
+	chrpath -d debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libc++abi.so.1.0
 
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so; \
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT)
