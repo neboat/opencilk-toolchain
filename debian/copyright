@@ -361,6 +361,7 @@ Files: utils/unittest/googletest/*
 Copyright: 2006-2008, Google Inc.
 License: BSD-3-Clause
 
+Files: libcxx/*
 License: BSD-3-Clause
  This software is provided 'as-is', without any express or implied
  warranty.  In no event will the authors be held liable for any damages
@@ -377,6 +378,58 @@ License: BSD-3-Clause
  2. Altered source versions must be plainly marked as such, and must not be
     misrepresented as being the original software.
  3. This notice may not be removed or altered from any source distribution.
+
+Files: libcxx*/*
+Copyright: 2009-2012 by the contributors listed below
+ N: Howard Hinnant
+ E: hhinnant@apple.com
+ D: Architect and primary author of libc++
+ .
+ N: Marshall Clow
+ E: marshall@idio.com
+ E: mclow@qualcomm.com
+ D: Minor patches and bug fixes.
+ .
+ N: Bjorn Reese
+ E: breese@users.sourceforge.net
+ D: Initial regex prototype
+ .
+ N: David Chisnall
+ E: theraven at theravensnest dot org
+ D: FreeBSD and Solaris ports, libcxxrt support, some atomics work.
+ .
+ N: Ruben Van Boxem
+ E: vanboxem dot ruben at gmail dot com
+ D: Initial Windows patches.
+ .
+ N: Arvid Picciani
+ E: aep at exys dot org
+ D: Minor patches and musl port.
+ .
+ N: Craig Silverstein
+ E: csilvers@google.com
+ D: Implemented Cityhash as the string hash function on 64-bit machines
+ .
+ N: Google Inc.
+ D: Copyright owner and contributor of the CityHash algorithm
+ .
+ N: Jeffrey Yasskin
+ E: jyasskin@gmail.com
+ E: jyasskin@google.com
+ D: Linux fixes.
+ .
+ N: Jonathan Sauer
+ D: Minor patches, mostly related to constexpr
+ .
+ N: Richard Smith
+ D: Minor patches.
+ .
+ The list is sorted by surname and formatted to allow easy grepping and
+ beautification by scripts.  The fields are: name (N), email (E), web-address
+ (W), PGP key ID and fingerprint (P), description (D), and snail-mail address
+ (S).
+ .
+License: NCSA or MIT
 
 License: U-OF-I-BSD-LIKE
  ==============================================================================
