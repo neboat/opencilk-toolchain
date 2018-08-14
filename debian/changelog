@@ -10,6 +10,8 @@ llvm-toolchain-7 (1:7~+rc1-1~exp1) experimental; urgency=medium
 
   [ Reshabh Sharma ]
   * Integrate libcxx and libcxxabi as part of the llvm-toolchain packages
+    Very similar to the previous packages
+    except that libc++abi-7-test & libc++-7-test are no longer shipped
     Outcome of the LLVM GSoC 2018
     (Closes: #813673)
 
