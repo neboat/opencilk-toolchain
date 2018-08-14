@@ -431,6 +431,10 @@ Copyright: 2009-2012 by the contributors listed below
  .
 License: NCSA or MIT
 
+Files: openmp/*
+Copyright: 1997-2015 Intel Corporation
+License: U-OF-I-BSD-LIKE
+
 License: U-OF-I-BSD-LIKE
  ==============================================================================
  LLVM Release License
