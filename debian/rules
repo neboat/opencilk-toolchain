@@ -350,7 +350,7 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 	ar ruv libFuzzer.a Fuzzer*.o
 endif
 
-# Builds libcxx and libcxxabi 
+# Builds libcxx and libcxxabi
 
 	mkdir -p libcxxabi/build
 	mkdir -p libcxx/build
@@ -439,7 +439,7 @@ override_dh_auto_install:
 
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && rm -f libomp.so; \
 	ln -s libomp.so.$(SONAME_OPENMP) libomp.so
-	
+
 	mkdir -p debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp
 	cp openmp/runtime/exports/common.dia.50.ompt.optional/include/* debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp
 
