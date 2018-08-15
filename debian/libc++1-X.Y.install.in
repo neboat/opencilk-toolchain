@@ -1,1 +1,1 @@
-usr/lib/llvm-@LLVM_VERSION@/lib/libc++.so*
+usr/lib/llvm-@LLVM_VERSION@/lib/libc++.so.1.*
