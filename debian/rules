@@ -444,7 +444,7 @@ override_dh_auto_install:
 	mkdir -p debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp
 	cp openmp/runtime/exports/common.dia.50.ompt.optional/include/* debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp
 
-# Remove artefact (where compiler-rt is built)
+# Remove artifact (where compiler-rt is built)
 #	if test -d $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/clang_linux; then \
 #	cd $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/clang_linux && rm -rf $$(find . -mindepth 2 -maxdepth 2 -type d) && rm -rf $$(find -empty) && rm -rf */.dir; \
 #	fi
