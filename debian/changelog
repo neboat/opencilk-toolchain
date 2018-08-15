@@ -6,6 +6,10 @@ llvm-toolchain-7 (1:7~+rc1-1~exp2) experimental; urgency=medium
   * libc++-7-dev should depend on libc++-7-helpers (and not
     libc++-helpers)
 
+  [ Reshabh Sharma ]
+  * Fix the path to libc++ header
+  * libc++.so was in two packages
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Aug 2018 15:27:57 +0200
 
 llvm-toolchain-7 (1:7~+rc1-1~exp1) experimental; urgency=medium
