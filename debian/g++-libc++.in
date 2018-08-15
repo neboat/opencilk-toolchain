@@ -13,4 +13,4 @@ for i; do
     fi
 done
 
-gcc -std=c++0x -nodefaultlibs $libs -isystem/usr/include/c++/v1 "$@"
+gcc -std=c++0x -nodefaultlibs $libs -isystem/usr/lib/llvm-@LLVM_VERSION@/include/c++/v1/ "$@"
