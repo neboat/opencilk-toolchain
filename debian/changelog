@@ -11,9 +11,12 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
       clang_Type_getObjCObjectBaseType
       clang_Type_getObjCProtocolDecl
       clang_Type_getObjCTypeArg
-   * python-recommonmark is a new build dep for the sphinx doc
+  * python-recommonmark is a new build dep for the sphinx doc
+  * Disable force-gcc-header-obj.diff as it is introducing
+    some regressions in the search headers
+    (Closes: #903709)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 12 Aug 2018 13:19:15 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Aug 2018 15:35:08 +0200
 
 llvm-toolchain-7 (1:7~+rc1-1~exp1) experimental; urgency=medium
 
@@ -27,6 +30,8 @@ llvm-toolchain-7 (1:7~+rc1-1~exp1) experimental; urgency=medium
 
   [ Reshabh Sharma ]
   * Integrate libcxx and libcxxabi as part of the llvm-toolchain packages
+    Very similar to the previous packages
+    except that libc++abi-7-test & libc++-7-test are no longer shipped
     Outcome of the LLVM GSoC 2018
     (Closes: #813673)
 
@@ -1386,7 +1391,7 @@ llvm-toolchain-snapshot (1:3.5~svn195337-1) unstable; urgency=low
 
   * Switch from 3.4 to 3.5
   * Remove patch 0046-Revert-Patch-to-set-is_stmt-a-little-better-for-prol.patch
-    Useless now and missleading
+    Useless now and misleading
   * Standards-Version updated to 3.9.5
   * kfreebsd.diff remove (applied upstream)
 
@@ -1533,7 +1538,7 @@ llvm-toolchain-3.4 (1:3.4~+rc1-1) unstable; urgency=low
   * New testing upstream release
   * kfreebsd.diff removed. Applied upstream
   * Remove patch 0046-Revert-Patch-to-set-is_stmt-a-little-better-for-prol.patch
-    Useless now and missleading
+    Useless now and misleading
   * Branch from llvm-toolchain-snapshot
   * Standards-Version updated to 3.9.5
 

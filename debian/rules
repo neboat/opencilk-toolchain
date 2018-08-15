@@ -338,7 +338,6 @@ LIBCXX_CMAKE_OPTIONS := \
 	-DCMAKE_C_COMPILER=$(CURDIR)/$(TARGET_BUILD)/bin/clang \
 	-DLLVM_EXTERNAL_LIT=$(BASE_PATH)/utils/lit/lit.py
 
-
 override_dh_auto_build:
 	$(PRE_PROCESS) $(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=$(VENDOR) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1
 ifeq (${LIBFUZZER_ENABLE},yes)
@@ -350,7 +349,7 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 	ar ruv libFuzzer.a Fuzzer*.o
 endif
 
-# Builds libcxx and libcxxabi 
+# Builds libcxx and libcxxabi
 
 	mkdir -p libcxxabi/build
 	mkdir -p libcxx/build
@@ -360,8 +359,10 @@ endif
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
 	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
+	-DLIBCXXABI_LIBCXX_INCLUDES=$(BASE_PATH)/libcxx/include \
 	-DLIBCXXABI_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
-	-DLLVM_ENABLE_RTTI=ON
+	-DLLVM_ENABLE_RTTI=ON && \
+	$(MAKE) $(NJOBS) VERBOSE=1
 
 	cd libcxx/build && \
 	cmake ../ \
@@ -370,7 +371,8 @@ endif
 	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
 	-DLIBCXX_CXX_ABI_LIBRARY_PATH=$(BASE_PATH)/libcxxabi/build/lib \
 	-DLIBCXX_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
-	-DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON
+	-DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON && \
+	$(MAKE) $(NJOBS) VERBOSE=1
 
 override_dh_prep: build_doc
 	dh_prep
@@ -430,6 +432,8 @@ override_dh_auto_install:
 
 	# Only run on executable, not script
 	chrpath -d `find $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary'|cut -d: -f1`
+	chrpath -d libcxxabi/build/lib/libc++abi.so.1.0 
+	chrpath -d libcxx/build/lib/libc++.so.1.0
 
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so; \
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT)
@@ -440,7 +444,7 @@ override_dh_auto_install:
 	mkdir -p debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp
 	cp openmp/runtime/exports/common.dia.50.ompt.optional/include/* debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp
 
-# Remove artefact (where compiler-rt is built)
+# Remove artifact (where compiler-rt is built)
 #	if test -d $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/clang_linux; then \
 #	cd $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/clang_linux && rm -rf $$(find . -mindepth 2 -maxdepth 2 -type d) && rm -rf $$(find -empty) && rm -rf */.dir; \
 #	fi
@@ -559,7 +563,7 @@ endif
 
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
-#	rm -rf $(TARGET_BUILD)
+	rm -rf $(TARGET_BUILD)
 
 
 override_dh_makeshlibs:
