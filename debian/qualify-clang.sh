@@ -236,8 +236,12 @@ int main() {
           std::filesystem::path
       >::value, "");
 }' > foo.cpp
-clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o o -v
-./o
+clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o o
+./o > /dev/null
+
+g++ -nostdinc++ -I/usr/lib/llvm-7/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
+    foo.cpp -nodefaultlibs -std=c++17 -lc++ -lc++abi -lm -lc -lgcc_s -lgcc
+./o > /dev/null
 
 echo "b main
 run
