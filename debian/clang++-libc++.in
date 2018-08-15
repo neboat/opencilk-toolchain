@@ -1,0 +1,2 @@
+#!/bin/sh
+clang++-@LLVM_VERSION@ -stdlib=libc++ "$@"
