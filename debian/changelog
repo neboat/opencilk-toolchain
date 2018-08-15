@@ -3,6 +3,8 @@ llvm-toolchain-7 (1:7~+rc1-1~exp2) experimental; urgency=medium
   * Disable force-gcc-header-obj.diff as it is introducing
     some regressions in the search headers
     (Closes: #903709)
+  * libc++-7-dev should depend on libc++-7-helpers (and not
+    libc++-helpers)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Aug 2018 15:27:57 +0200
 
