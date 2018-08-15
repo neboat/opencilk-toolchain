@@ -186,6 +186,59 @@ clang-$VERSION -v foo.c -fopenmp -o o
 ./o
 
 
+if test ! -f /usr/lib/llvm-$VERSION/lib/libomp.so; then
+    echo "Install libomp-$VERSION-dev";
+    exit -1;
+fi
+
+# libc++
+echo '
+#include <vector>
+#include <string>
+#include <iostream>
+using namespace std;
+int main(void) {
+    vector<string> tab;
+    tab.push_back("the");
+    tab.push_back("world");
+    tab.insert(tab.begin(), "Hello");
+
+    for(vector<string>::iterator it=tab.begin(); it!=tab.end(); ++it)
+    {
+        cout << *it << " ";
+    }
+    return 0;
+}' > foo.cpp
+clang++-$VERSION -stdlib=libc++ foo.cpp -o o
+if ! ldd o 2>&1|grep -q  libc++.so.1; then
+#    if ! ./a.out 2>&1 |  -q -E "(Test unit written|PreferSmall)"; then
+    echo "not linked against libc++.so.1"
+    exit -1
+fi
+if ! ldd o 2>&1|grep -q  libc++abi.so.1; then
+    echo "not linked against libc++abi.so.1"
+    exit -1
+fi
+./o
+clang++-$VERSION -std=c++11 -stdlib=libc++ foo.cpp -o o
+./o
+clang++-$VERSION -std=c++14 -stdlib=libc++ foo.cpp -lc++experimental -o o
+./o
+
+# fs from C++17
+echo '
+#include <filesystem>
+#include <type_traits>
+using namespace std::filesystem;
+int main() {
+  static_assert(std::is_same<
+          path,
+          std::filesystem::path
+      >::value, "");
+}' > foo.cpp
+clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o o -v
+./o
+
 echo "b main
 run
 bt
