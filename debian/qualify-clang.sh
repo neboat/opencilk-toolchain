@@ -182,8 +182,8 @@ int main(void) {
   printf("thread %d\n", omp_get_thread_num());
 }
 ' > foo.c
-clang-$VERSION -v foo.c -fopenmp -o o
-./o
+clang-$VERSION foo.c -fopenmp -o o
+./o > /dev/null
 
 
 if test ! -f /usr/lib/llvm-$VERSION/lib/libomp.so; then
@@ -219,11 +219,11 @@ if ! ldd o 2>&1|grep -q  libc++abi.so.1; then
     echo "not linked against libc++abi.so.1"
     exit -1
 fi
-./o
+./o > /dev/null
 clang++-$VERSION -std=c++11 -stdlib=libc++ foo.cpp -o o
-./o
+./o > /dev/null
 clang++-$VERSION -std=c++14 -stdlib=libc++ foo.cpp -lc++experimental -o o
-./o
+./o > /dev/null
 
 # fs from C++17
 echo '
