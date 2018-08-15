@@ -35,13 +35,15 @@ clang-$VERSION foo.c
 echo '#include <stddef.h>' > foo.c
 clang-$VERSION -c foo.c
 
+
+
 # bug 903709
 echo '#include <stdatomic.h>
 void increment(atomic_size_t *arg) {
     atomic_fetch_add(arg, 1);
 } ' > foo.c
 
-clang-$VERSION -v -c foo.c
+#clang-$VERSION -v -c foo.c
 
 echo "#include <fenv.h>" > foo.cc
 NBLINES=$(clang++-$VERSION -P -E foo.cc|wc -l)
