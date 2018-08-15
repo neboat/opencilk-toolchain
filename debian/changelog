@@ -1,3 +1,11 @@
+llvm-toolchain-7 (1:7~+rc1-1~exp2) experimental; urgency=medium
+
+  * Disable force-gcc-header-obj.diff as it is introducing
+    some regressions in the search headers
+    (Closes: #903709)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Aug 2018 15:27:57 +0200
+
 llvm-toolchain-7 (1:7~+rc1-1~exp1) experimental; urgency=medium
 
   * First testing release of 7
