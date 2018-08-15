@@ -238,7 +238,9 @@ int main() {
 clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o o
 ./o > /dev/null
 
-clang++-libc++ -std=c++17 foo.cpp -lc++experimental -lc++fs -o o
+/usr/lib/llvm-7/bin/clang++-libc++ -std=c++17 foo.cpp -lc++experimental -lc++fs -o o
+./o > /dev/null
+clang++-libc++-$VERSION -std=c++17 foo.cpp -lc++experimental -lc++fs -o o
 ./o > /dev/null
 
 g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
