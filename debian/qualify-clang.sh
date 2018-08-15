@@ -3,6 +3,12 @@
 set -e
 
 VERSION=7
+DETAILED_VERSION="7~+rc1-1~exp1"
+
+echo "To install everything:"
+echo "sudo dpkg -i libomp-$VERSION-dev_$DETAILED_VERSION_amd64.deb libomp5-$VERSION_$DETAILED_VERSION_amd64.deb lldb-$VERSION_$DETAILED_VERSION_amd64.deb python-lldb-$VERSION_$DETAILED_VERSION_amd64.deb libllvm7_$DETAILED_VERSION_amd64.deb llvm-$VERSION-dev_$DETAILED_VERSION_amd64.deb liblldb-$VERSION-dev_$DETAILED_VERSION_amd64.deb  clang-$VERSION_$DETAILED_VERSION_amd64.deb libclang1-$VERSION_$DETAILED_VERSION_amd64.deb  libclang-common-$VERSION-dev_$DETAILED_VERSION_amd64.deb  llvm-$VERSION_$DETAILED_VERSION_amd64.deb  lldb-$VERSION_$DETAILED_VERSION_amd64.deb  liblldb-$VERSION_$DETAILED_VERSION_amd64.deb  llvm-$VERSION-runtime_$DETAILED_VERSION_amd64.deb"
+
+
 
 if test ! -f /usr/bin/llvm-config-$VERSION; then
     echo "Install llvm-$VERSION & llvm-$VERSION-dev"
