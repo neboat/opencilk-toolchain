@@ -5,6 +5,7 @@ llvm-toolchain-7 (1:7~+rc1-1~exp2) experimental; urgency=medium
     (Closes: #903709)
   * libc++-7-dev should depend on libc++-7-helpers (and not
     libc++-helpers)
+  * Fix the links in the helper package
 
   [ Reshabh Sharma ]
   * Fix the path to libc++ header
