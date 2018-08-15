@@ -3,10 +3,10 @@
 set -e
 
 VERSION=7
-DETAILED_VERSION="7~+rc1-1~exp1"
+DETAILED_VERSION=7~+rc1-1~exp1
 
 echo "To install everything:"
-echo "sudo dpkg -i libomp-$VERSION-dev_$DETAILED_VERSION_amd64.deb libomp5-$VERSION_$DETAILED_VERSION_amd64.deb lldb-$VERSION_$DETAILED_VERSION_amd64.deb python-lldb-$VERSION_$DETAILED_VERSION_amd64.deb libllvm7_$DETAILED_VERSION_amd64.deb llvm-$VERSION-dev_$DETAILED_VERSION_amd64.deb liblldb-$VERSION-dev_$DETAILED_VERSION_amd64.deb  clang-$VERSION_$DETAILED_VERSION_amd64.deb libclang1-$VERSION_$DETAILED_VERSION_amd64.deb  libclang-common-$VERSION-dev_$DETAILED_VERSION_amd64.deb  llvm-$VERSION_$DETAILED_VERSION_amd64.deb  lldb-$VERSION_$DETAILED_VERSION_amd64.deb  liblldb-$VERSION_$DETAILED_VERSION_amd64.deb  llvm-$VERSION-runtime_$DETAILED_VERSION_amd64.deb lld-$VERSION_$DETAILED_VERSION_amd64.deb libfuzzer-$VERSION-dev_$DETAILED_VERSION.deb libclang-7-dev_7~+rc1-1~exp1_amd64.deb libc++-7-dev_7~+rc1-1~exp1_amd64.deb libc++1-7_7~+rc1-1~exp1_amd64.deb libc++-7-helpers_7~+rc1-1~exp1_all.deb"
+echo "sudo dpkg -i libomp-$VERSION-dev_${DETAILED_VERSION}_amd64.deb libomp5-$VERSION_${DETAILED_VERSION}_amd64.deb lldb-$VERSION_${DETAILED_VERSION}_amd64.deb python-lldb-$VERSION_${DETAILED_VERSION}_amd64.deb libllvm7_${DETAILED_VERSION}_amd64.deb llvm-$VERSION-dev_${DETAILED_VERSION}_amd64.deb liblldb-$VERSION-dev_${DETAILED_VERSION}_amd64.deb  clang-$VERSION_${DETAILED_VERSION}_amd64.deb libclang1-$VERSION_${DETAILED_VERSION}_amd64.deb  libclang-common-$VERSION-dev_${DETAILED_VERSION}_amd64.deb  llvm-$VERSION_${DETAILED_VERSION}_amd64.deb  lldb-$VERSION_${DETAILED_VERSION}_amd64.deb  liblldb-$VERSION_${DETAILED_VERSION}_amd64.deb  llvm-$VERSION-runtime_${DETAILED_VERSION}_amd64.deb lld-$VERSION_${DETAILED_VERSION}_amd64.deb libfuzzer-$VERSION-dev_${DETAILED_VERSION}.deb libclang-$VERSION-dev_${DETAILED_VERSION}_amd64.deb libc++-$VERSION-dev_${DETAILED_VERSION}_amd64.deb libc++1-$VERSION_${DETAILED_VERSION}_amd64.deb libc++-$VERSION-helpers_${DETAILED_VERSION}_all.deb"
 
 
 
