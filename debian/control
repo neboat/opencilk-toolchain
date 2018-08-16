@@ -495,8 +495,8 @@ Package: libomp5-7
 Multi-Arch: same
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Replaces: libomp5 (<= 4.0.1-2)
-Breaks: libomp5 (<= 4.0.1-2)
+Replaces: libomp5 (<= 6.0.1-1)
+Breaks: libomp5 (<= 6.0.1-1)
 Provides: libomp5
 # TODO add the break depends
 Description: LLVM OpenMP runtime
@@ -589,9 +589,9 @@ Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: libc++abi1-7 (= ${binary:Version}), ${misc:Depends}
-Replaces: libc++-7-dev
-Breaks: libc++-dev , libc++-7-dev, libc++abi-dev
-Provides: libc++-dev , libc++-7-dev, libc++abi-dev
+Replaces: libc++-dev (<= 6.0.1-1), libc++-7-dev, libc++abi-dev (<= 6.0.1-1)
+Breaks: libc++-dev (<= 6.0.1-1), libc++-7-dev, libc++abi-dev (<= 6.0.1-1)
+Provides: libc++-dev, libc++-7-dev, libc++abi-dev
 Description: LLVM low level support for a standard C++ library (development files)
  libc++abi is another implementation of low level support for a standard C++
  library.
