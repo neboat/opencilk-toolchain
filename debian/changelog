@@ -20,27 +20,16 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
   * Fix the links in the helper package
 
   [ Reshabh Sharma ]
-  * Fix the path to libc++ header
-  * libc++.so was in two packages
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Aug 2018 15:35:08 +0200
-
-llvm-toolchain-7 (1:7~+rc1-1~exp1) experimental; urgency=medium
-
-  * First testing release of 7
-    - Rename packages
-    - Update the VCS-* URL
-  * Standards-Version to 4.2.0
-
-  [ Dimitri John Ledkov ]
-  * Enable lldb on ppc64el LP: #1777136
-
-  [ Reshabh Sharma ]
   * Integrate libcxx and libcxxabi as part of the llvm-toolchain packages
     Very similar to the previous packages
     except that libc++abi-7-test & libc++-7-test are no longer shipped
     Outcome of the LLVM GSoC 2018
     (Closes: #813673)
+  * Fix the path to libc++ header
+  * libc++.so was in two packages
+
+  [ Dimitri John Ledkov ]
+  * Enable lldb on ppc64el LP: #1777136
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 07 Aug 2018 19:25:09 +0200
 
