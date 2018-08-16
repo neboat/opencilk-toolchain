@@ -146,7 +146,7 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libFuzzer.a; then
     exit -1;
 fi
 
-clang++-$VERSION -fsanitize=address -fsanitize-coverage=edge test_fuzzer.cc /usr/lib/llvm-$VERSION/lib/libFuzzer.a
+clang++-$VERSION -fsanitize=address -fsanitize-coverage=edge,trace-pc test_fuzzer.cc /usr/lib/llvm-$VERSION/lib/libFuzzer.a
 if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
     echo "fuzzer"
     exit 42
