@@ -1,3 +1,9 @@
+llvm-toolchain-7 (1:7~+rc1-1~exp3) experimental; urgency=medium
+
+  * Fixed "weak-library-dev-dependency libc++-7-dev on libc++-7-helpers"
+
+ --
+
 llvm-toolchain-7 (1:7~+rc1-1~exp2) experimental; urgency=medium
 
   * Disable force-gcc-header-obj.diff as it is introducing
