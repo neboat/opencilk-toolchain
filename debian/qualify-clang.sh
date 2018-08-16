@@ -3,6 +3,11 @@
 set -e
 
 VERSION=8
+DETAILED_VERSION=7~+rc1-1~exp2
+
+echo "To install everything:"
+echo "sudo dpkg -i libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm7_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-helpers_${DETAILED_VERSION}_all.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb"
+
 
 if test ! -f /usr/bin/llvm-config-$VERSION; then
     echo "Install llvm-$VERSION & llvm-$VERSION-dev"
@@ -28,6 +33,16 @@ clang-$VERSION foo.c
 
 echo '#include <stddef.h>' > foo.c
 clang-$VERSION -c foo.c
+
+
+
+# bug 903709
+echo '#include <stdatomic.h>
+void increment(atomic_size_t *arg) {
+    atomic_fetch_add(arg, 1);
+} ' > foo.c
+
+#clang-$VERSION -v -c foo.c
 
 echo "#include <fenv.h>" > foo.cc
 NBLINES=$(clang++-$VERSION -P -E foo.cc|wc -l)
@@ -131,7 +146,7 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libFuzzer.a; then
     exit -1;
 fi
 
-clang++-$VERSION -fsanitize=address -fsanitize-coverage=edge test_fuzzer.cc /usr/lib/llvm-$VERSION/lib/libFuzzer.a
+clang++-$VERSION -fsanitize=address -fsanitize-coverage=edge,trace-pc test_fuzzer.cc /usr/lib/llvm-$VERSION/lib/libFuzzer.a
 if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
     echo "fuzzer"
     exit 42
@@ -166,9 +181,71 @@ int main(void) {
   printf("thread %d\n", omp_get_thread_num());
 }
 ' > foo.c
-clang-$VERSION -v foo.c -fopenmp -o o
-./o
+clang-$VERSION foo.c -fopenmp -o o
+./o > /dev/null
 
+
+if test ! -f /usr/lib/llvm-$VERSION/lib/libomp.so; then
+    echo "Install libomp-$VERSION-dev";
+    exit -1;
+fi
+
+# libc++
+echo '
+#include <vector>
+#include <string>
+#include <iostream>
+using namespace std;
+int main(void) {
+    vector<string> tab;
+    tab.push_back("the");
+    tab.push_back("world");
+    tab.insert(tab.begin(), "Hello");
+
+    for(vector<string>::iterator it=tab.begin(); it!=tab.end(); ++it)
+    {
+        cout << *it << " ";
+    }
+    return 0;
+}' > foo.cpp
+clang++-$VERSION -stdlib=libc++ foo.cpp -o o
+if ! ldd o 2>&1|grep -q  libc++.so.1; then
+#    if ! ./a.out 2>&1 |  -q -E "(Test unit written|PreferSmall)"; then
+    echo "not linked against libc++.so.1"
+    exit -1
+fi
+if ! ldd o 2>&1|grep -q  libc++abi.so.1; then
+    echo "not linked against libc++abi.so.1"
+    exit -1
+fi
+./o > /dev/null
+clang++-$VERSION -std=c++11 -stdlib=libc++ foo.cpp -o o
+./o > /dev/null
+clang++-$VERSION -std=c++14 -stdlib=libc++ foo.cpp -lc++experimental -o o
+./o > /dev/null
+
+# fs from C++17
+echo '
+#include <filesystem>
+#include <type_traits>
+using namespace std::filesystem;
+int main() {
+  static_assert(std::is_same<
+          path,
+          std::filesystem::path
+      >::value, "");
+}' > foo.cpp
+clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o o
+./o > /dev/null
+
+/usr/lib/llvm-7/bin/clang++-libc++ -std=c++17 foo.cpp -lc++experimental -lc++fs -o o
+./o > /dev/null
+clang++-libc++-$VERSION -std=c++17 foo.cpp -lc++experimental -lc++fs -o o
+./o > /dev/null
+
+g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
+    foo.cpp -nodefaultlibs -std=c++17 -lc++ -lc++abi -lm -lc -lgcc_s -lgcc
+./o > /dev/null
 
 echo "b main
 run
@@ -267,7 +344,7 @@ int main ()
 EOF
 
 #clean up
-rm a.out bar crash-* foo foo.* lldb-cmd.txt main.c test_fuzzer.cc
+rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.c test_fuzzer.cc foo.* o
 
 # only for AMD64 for now
 # many sanitizers only work on AMD64

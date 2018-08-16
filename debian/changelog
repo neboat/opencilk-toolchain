@@ -15,6 +15,13 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
   * Disable force-gcc-header-obj.diff as it is introducing
     some regressions in the search headers
     (Closes: #903709)
+  * libc++-7-dev should depend on libc++-7-helpers (and not
+    libc++-helpers)
+  * Fix the links in the helper package
+
+  [ Reshabh Sharma ]
+  * Fix the path to libc++ header
+  * libc++.so was in two packages
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Aug 2018 15:35:08 +0200
 
