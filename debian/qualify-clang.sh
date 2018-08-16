@@ -344,7 +344,7 @@ int main ()
 EOF
 
 #clean up
-rm a.out bar crash-* foo foo.* lldb-cmd.txt main.c test_fuzzer.cc foo.* o
+rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.c test_fuzzer.cc foo.* o
 
 # only for AMD64 for now
 # many sanitizers only work on AMD64
