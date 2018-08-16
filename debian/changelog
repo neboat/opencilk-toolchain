@@ -3,12 +3,15 @@ llvm-toolchain-7 (1:7~+rc1-1~exp3) experimental; urgency=medium
   * Fixed "weak-library-dev-dependency libc++-7-dev on libc++-7-helpers"
   * Fixed "libomp5-7: shlibs-declares-dependency-on-other-package
            libomp5-7) (>= 1:7~svn298832-1~)"
+
+  [ Reshabh Sharma ]
   * Fixed "Lintian warnings for libc++abi-7-dev package"
     - Warning: libc++abi-7-dev: breaks-without-version libc++-dev
     - Warning: libc++abi-7-dev: breaks-without-version libc++abi-dev
-    - Warning: llvm-toolchain-7 source: binaries-have-file-conflict libc++abi-7-dev libc++abi1-7 usr/lib/llvm-7/lib/libc++abi.so
+    - Warning: llvm-toolchain-7 source: binaries-have-file-conflict
+      libc++abi-7-dev libc++abi1-7 usr/lib/llvm-7/lib/libc++abi.so
 
- --   
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Aug 2018 17:49:31 +0200
 
 llvm-toolchain-7 (1:7~+rc1-1~exp2) experimental; urgency=medium
 
