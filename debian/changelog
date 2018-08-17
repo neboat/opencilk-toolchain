@@ -1,4 +1,4 @@
-llvm-toolchain-6.0 (1:6.0.1-6) UNRELEASED; urgency=medium
+llvm-toolchain-6.0 (1:6.0.1-5exp1) experimental; urgency=medium
 
   * Enable lld on arm64, mips64el
   * Enable lldb on mips64el
