@@ -597,7 +597,12 @@ endif
 # ifeq (${LLD_ENABLE},yes)
 # 	dh_strip -p liblld-$(LLVM_VERSION) --dbg-package=liblld-$(LLVM_VERSION)-dbg
 # endif
-	dh_strip -a
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.28 ; echo $$?),0)
+# strip segfaults on libFuzzer.a
+	dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a
+else
+	dh_strip -a -v
+endif
 
 
 override_dh_install:

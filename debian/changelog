@@ -1,5 +1,8 @@
 llvm-toolchain-7 (1:7~+rc1-1~exp3) experimental; urgency=medium
 
+  * dh_strip should be verbose
+  * On Stretch (binutils 2.28), do not run strip on libFuzzer.a, libc++.a
+    & libc++abi.a because it segfaults
   * Fixed "weak-library-dev-dependency libc++-7-dev on libc++-7-helpers"
   * Fixed "libomp5-7: shlibs-declares-dependency-on-other-package
            libomp5-7) (>= 1:7~svn298832-1~)"
