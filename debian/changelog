@@ -21,6 +21,7 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
   * libc++-7-dev should depend on libc++-7-helpers (and not
     libc++-helpers)
   * Fix the links in the helper package
+  * also ship lldb-vscode-8 in lldb-8
 
   [ Reshabh Sharma ]
   * Integrate libcxx and libcxxabi as part of the llvm-toolchain packages
@@ -34,7 +35,7 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
   [ Dimitri John Ledkov ]
   * Enable lldb on ppc64el LP: #1777136
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 07 Aug 2018 19:25:09 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 17 Aug 2018 12:34:54 +0200
 
 llvm-toolchain-snapshot (1:7~svn336894-1~exp1) experimental; urgency=medium
 
