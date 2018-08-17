@@ -1,3 +1,10 @@
+llvm-toolchain-6.0 (1:6.0.1-6) UNRELEASED; urgency=medium
+
+  * Enable lld on arm64, mips64el
+  * Enable lldb on mips64el
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 17 Aug 2018 17:36:03 +0200
+
 llvm-toolchain-6.0 (1:6.0.1-5) unstable; urgency=medium
 
   * Cherry-pick a patch from 7 to fix an issue with Julia
