@@ -1,3 +1,11 @@
+llvm-toolchain-6.0 (1:6.0.1-5) unstable; urgency=medium
+
+  * Cherry-pick a patch from 7 to fix an issue with Julia
+    on powerpc - PowerPC-Make-AddrSpaceCast-noop.diff
+    (Closes: #906314)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 17 Aug 2018 08:49:22 +0200
+
 llvm-toolchain-6.0 (1:6.0.1-4) unstable; urgency=medium
 
   * Disable force-gcc-header-obj.diff as it is introducing
