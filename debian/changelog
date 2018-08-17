@@ -12,6 +12,9 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
       clang_Type_getObjCProtocolDecl
       clang_Type_getObjCTypeArg
   * python-recommonmark is a new build dep for the sphinx doc
+  * dh_strip should be verbose
+  * On Stretch (binutils 2.28), do not run strip on libFuzzer.a, libc++.a
+    & libc++abi.a because it segfaults
   * Disable force-gcc-header-obj.diff as it is introducing
     some regressions in the search headers
     (Closes: #903709)
