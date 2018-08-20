@@ -129,6 +129,9 @@ clang-$VERSION -fuse-ld=lld -O2 foo.c main.c -o foo
 clang-$VERSION -fuse-ld=lld-$VERSION -O2 foo.c main.c -o foo
 ./foo > /dev/null
 
+clang-$VERSION -flto=thin -O2 foo.c main.c -c
+clang-$VERSION -flto=thin -O2 foo.o main.o -o a.out
+
 cat << EOF > test_fuzzer.cc
 #include <stdint.h>
 #include <stddef.h>
