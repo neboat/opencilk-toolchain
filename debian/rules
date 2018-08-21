@@ -107,7 +107,7 @@ endif
 
 # Enable polly (or not)
 POLLY_ENABLE=yes
-ifeq (,$(filter-out $(DEB_HOST_ARCH), powerpc s390x))
+ifeq (,$(filter-out $(DEB_HOST_ARCH), powerpc powerpcspe s390x))
   POLLY_ENABLE=no
 endif
 
