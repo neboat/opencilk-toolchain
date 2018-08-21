@@ -2,6 +2,7 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp2) UNRELEASED; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Don't build with ld.gold on powerpcspe
+  * Disable polly on powerpcspe
 
  -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Tue, 21 Aug 2018 23:43:19 +0200
 
