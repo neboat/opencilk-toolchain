@@ -1,3 +1,10 @@
+llvm-toolchain-7 (1:7~+rc1-1~exp4) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Don't build with ld.gold on powerpcspe
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Tue, 21 Aug 2018 23:50:12 +0200
+
 llvm-toolchain-7 (1:7~+rc1-1~exp3) experimental; urgency=medium
 
   * dh_strip should be verbose
