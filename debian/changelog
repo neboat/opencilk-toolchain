@@ -3,6 +3,7 @@ llvm-toolchain-7 (1:7~+rc1-1~exp4) UNRELEASED; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * Don't build with ld.gold on powerpcspe
   * Disable polly on powerpcspe
+  * Add upstream patch to make rustc build on powerpc
 
   [ Gianfranco Costamagna ]
   * Enable lld on ppc64el
