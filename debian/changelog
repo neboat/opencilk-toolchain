@@ -1,5 +1,6 @@
-llvm-toolchain-7 (1:7~+rc1-1~exp3) experimental; urgency=medium
+llvm-toolchain-7 (1:7~+rc2-1~exp1) experimental; urgency=medium
 
+  * New snapshot release
   * dh_strip should be verbose
   * On Stretch (binutils 2.28), do not run strip on libFuzzer.a, libc++.a
     & libc++abi.a because it segfaults
