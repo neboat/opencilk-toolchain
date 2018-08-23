@@ -3,6 +3,7 @@ llvm-toolchain-6.0 (1:6.0.1-6) unstable; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * Don't build with ld.gold on powerpcspe
   * Disable polly on powerpcspe
+  * Cherry-pick upstream patch to make rustc build on ppc
 
   [ Gianfranco Costamagna ]
   * Team upload
