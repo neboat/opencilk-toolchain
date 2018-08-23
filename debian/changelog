@@ -7,6 +7,7 @@ llvm-toolchain-6.0 (1:6.0.1-6) unstable; urgency=medium
   [ Gianfranco Costamagna ]
   * Team upload
   * Upload to unstable
+  * Enable lld on ppc64el
   * Add liblldb-6.0-dev to python-lldb runtime dependencies, needed to import it
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 22 Aug 2018 11:33:44 +0200
