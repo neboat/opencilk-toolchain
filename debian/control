@@ -378,8 +378,8 @@ Description: Modular compiler and toolchain technologies, examples
 # ------------- lld -------------
 
 Package: lld-8
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
-# ia64 hurd powerpc ppc64el have been removed
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
+# ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm8 (= ${binary:Version}), llvm-8-dev
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker
@@ -388,8 +388,8 @@ Description: LLVM-based linker
  Project.
 
 Package: liblld-8
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
-# ia64 hurd powerpc ppc64el have been removed
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
+# ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm8 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: libs
@@ -402,8 +402,8 @@ Description: LLVM-based linker, library
 
 Package: liblld-8-dev
 Section: libdevel
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
-# ia64 hurd powerpc ppc64el have been removed
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
+# ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lld-8 (= ${binary:Version}),
  liblld-8 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
