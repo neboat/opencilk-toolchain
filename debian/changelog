@@ -3,6 +3,7 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp2) UNRELEASED; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * Don't build with ld.gold on powerpcspe
   * Disable polly on powerpcspe
+  * cherry-pick upstream patch to fix compilation of rustc on powerpc
 
   [ Gianfranco Costamagna ]
   * enable lld on ppc64el
