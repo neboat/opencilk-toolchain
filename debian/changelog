@@ -32,6 +32,7 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
            libomp5-7) (>= 1:7~svn298832-1~)"
   * Also use the local cmake binary if available (for trusty)
     and take in account the PRE_PROCESS_CONF option
+  * Try to fix a FTBFS on jessie with openmp
 
   [ Reshabh Sharma ]
   * Fixed "Lintian warnings for libc++abi-7-dev package"
