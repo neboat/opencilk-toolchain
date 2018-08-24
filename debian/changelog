@@ -1,6 +1,7 @@
 llvm-toolchain-7 (1:7~+rc1-1~exp4) UNRELEASED; urgency=medium
 
   * Force sphinx to be >> 1.2.3
+  * also ignore libc++experimental.a on dh_strip (fails on stretch)
 
   [ John Paul Adrian Glaubitz ]
   * Don't build with ld.gold on powerpcspe
