@@ -1,5 +1,7 @@
 llvm-toolchain-7 (1:7~+rc1-1~exp4) UNRELEASED; urgency=medium
 
+  * Force sphinx to be >> 1.2.3
+
   [ John Paul Adrian Glaubitz ]
   * Don't build with ld.gold on powerpcspe
   * Disable polly on powerpcspe
@@ -8,7 +10,7 @@ llvm-toolchain-7 (1:7~+rc1-1~exp4) UNRELEASED; urgency=medium
   [ Gianfranco Costamagna ]
   * Enable lld on ppc64el
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Tue, 21 Aug 2018 23:50:12 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 24 Aug 2018 15:19:54 +0200
 
 llvm-toolchain-7 (1:7~+rc1-1~exp3) experimental; urgency=medium
 
