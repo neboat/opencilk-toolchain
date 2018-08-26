@@ -1,3 +1,10 @@
+llvm-toolchain-6.0 (1:6.0.1-6) unstable; urgency=medium
+
+  * Remove libtool flex, bison, dejagnu, tcl, expect,
+    and perl from the build deps (testing)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Aug 2018 13:58:40 +0200
+
 llvm-toolchain-6.0 (1:6.0.1-5) unstable; urgency=medium
 
   * Cherry-pick a patch from 7 to fix an issue with Julia
