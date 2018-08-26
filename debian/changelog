@@ -3,7 +3,25 @@ llvm-toolchain-6.0 (1:6.0.1-6) unstable; urgency=medium
   * Remove libtool flex, bison, dejagnu, tcl, expect,
     and perl from the build deps (testing)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Aug 2018 13:58:40 +0200
+  [ John Paul Adrian Glaubitz ]
+  * Don't build with ld.gold on powerpcspe
+  * Disable polly on powerpcspe
+  * Cherry-pick upstream patch to make rustc build on ppc
+
+  [ Gianfranco Costamagna ]
+  * Team upload
+  * Upload to unstable
+  * Enable lld on ppc64el
+  * Add liblldb-6.0-dev to python-lldb runtime dependencies, needed to import it
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Aug 2018 14:00:14 +0200
+
+llvm-toolchain-6.0 (1:6.0.1-5exp1) experimental; urgency=medium
+
+  * Enable lld on arm64, mips64el
+  * Enable lldb on mips64el
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 17 Aug 2018 17:36:03 +0200
 
 llvm-toolchain-6.0 (1:6.0.1-5) unstable; urgency=medium
 
