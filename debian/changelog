@@ -2,6 +2,7 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp2) UNRELEASED; urgency=medium
 
   * Force sphinx to be >> 1.2.3
   * also ignore libc++experimental.a on dh_strip (fails on stretch)
+  * Make libc++-8-dev & libc++abi-8-dev coinstallable
 
   [ John Paul Adrian Glaubitz ]
   * Don't build with ld.gold on powerpcspe
