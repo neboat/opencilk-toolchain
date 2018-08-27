@@ -220,14 +220,33 @@ if ! ldd o 2>&1|grep -q  libc++abi.so.1; then
     echo "not linked against libc++abi.so.1"
     exit -1
 fi
+
 ./o > /dev/null
 clang++-$VERSION -std=c++11 -stdlib=libc++ foo.cpp -o o
 ./o > /dev/null
 clang++-$VERSION -std=c++14 -stdlib=libc++ foo.cpp -lc++experimental -o o
 ./o > /dev/null
-# Force the usage of libc++abi (should be implicit)
+
+if test ! -f /usr/lib/llvm-$VERSION/include/cxxabi.h; then
+    echo "Install libc++abi-$VERSION-dev";
+    exit -1;
+fi
+
+# Force the usage of libc++abi
 clang++-$VERSION -stdlib=libc++ -lc++abi foo.cpp -o o
 ./o > /dev/null
+if ! ldd o 2>&1|grep -q  libc++abi.so.1; then
+    echo "not linked against libc++abi.so.1"
+    exit -1
+fi
+
+# Use the libc++abi and uses the libstc++ headers
+clang++-$VERSION -lc++abi foo.cpp -o o
+./o > /dev/null
+if ! ldd o 2>&1|grep -q libstdc++.so.; then
+    echo "not linked against libstdc++"
+    exit -1
+fi
 
 # fs from C++17
 echo '
