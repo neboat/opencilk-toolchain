@@ -1,7 +1,7 @@
-llvm-toolchain-7 (1:7~+rc1-1~exp4) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7~+rc1-1~exp4) experimental; urgency=medium
 
   * Force sphinx to be >> 1.2.3
-  * also ignore libc++experimental.a on dh_strip (fails on stretch)
+  * Also ignore libc++experimental.a on dh_strip (fails on stretch)
   * Make libc++-7-dev & libc++abi-7-dev coinstallable
 
   [ John Paul Adrian Glaubitz ]
@@ -12,7 +12,7 @@ llvm-toolchain-7 (1:7~+rc1-1~exp4) UNRELEASED; urgency=medium
   [ Gianfranco Costamagna ]
   * Enable lld on ppc64el
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 24 Aug 2018 15:19:54 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 27 Aug 2018 10:57:41 +0200
 
 llvm-toolchain-7 (1:7~+rc1-1~exp3) experimental; urgency=medium
 
