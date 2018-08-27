@@ -1,5 +1,7 @@
-llvm-toolchain-snapshot (1:7~svn322880-1) unstable; urgency=medium
+llvm-toolchain-7 (1:7-1) unstable; urgency=medium
 
+  * From version 7, llvm-toolchain also provides libc++, libc++abi
+    and OpenMP packages
   * Packages, binaries and libraries have been renamed.
     Instead of the X.Y naming, we moved to X to match the
     naming from upstream.
