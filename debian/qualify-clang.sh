@@ -187,9 +187,8 @@ int main(void) {
 clang-$VERSION foo.c -fopenmp -o o
 ./o > /dev/null
 
-
-if test ! -f /usr/lib/llvm-$VERSION/lib/libomp.so; then
-    echo "Install libomp-$VERSION-dev";
+if test ! -f /usr/lib/llvm-$VERSION/include/c++/v1/vector; then
+    echo "Install libc++-$VERSION-dev";
     exit -1;
 fi
 
@@ -225,6 +224,9 @@ fi
 clang++-$VERSION -std=c++11 -stdlib=libc++ foo.cpp -o o
 ./o > /dev/null
 clang++-$VERSION -std=c++14 -stdlib=libc++ foo.cpp -lc++experimental -o o
+./o > /dev/null
+# Force the usage of libc++abi (should be implicit)
+clang++-$VERSION -stdlib=libc++ -lc++abi foo.cpp -o o
 ./o > /dev/null
 
 # fs from C++17
