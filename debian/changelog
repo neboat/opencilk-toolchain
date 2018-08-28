@@ -9,22 +9,6 @@ llvm-toolchain-snapshot (1:8~svn340819-1) unstable; urgency=medium
   * Disable force-gcc-header-obj.diff as it is introducing
     some regressions in the search headers
     (Closes: #903709)
-
-  [ Gianfranco Costamagna ]
-  * Add liblldb-8-dev to python-lldb runtime dependencies, needed to import it
-  * Enable lld on arm64, mips64el
-  * Enable lldb on mips64el
-  * Enable lld on ppc64el
-
-  [ John Paul Adrian Glaubitz ]
-  * Don't build with ld.gold on powerpcspe
-  * Disable polly on powerpcspe
-  * Add upstream patch to make rustc build on powerpc
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 28 Aug 2018 14:28:07 +0200
-
-llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
-
   * branching to version 8
     - New symbols in libclang:
       clang_Cursor_getObjCPropertyGetterName
@@ -47,14 +31,22 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
     and take in account the PRE_PROCESS_CONF option
   * Try to fix a FTBFS on jessie with openmp
 
-  [ Reshabh Sharma ]
-  * Fixed "Lintian warnings for libc++abi-7-dev package"
-    - Warning: libc++abi-7-dev: breaks-without-version libc++-dev
-    - Warning: libc++abi-7-dev: breaks-without-version libc++abi-dev
-    - Warning: llvm-toolchain-7 source: binaries-have-file-conflict
-      libc++abi-7-dev libc++abi1-7 usr/lib/llvm-7/lib/libc++abi.so
+  [ Gianfranco Costamagna ]
+  * Add liblldb-8-dev to python-lldb runtime dependencies, needed to import it
+  * Enable lld on arm64, mips64el
+  * Enable lldb on mips64el
+  * Enable lld on ppc64el
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Aug 2018 17:49:31 +0200
+  [ John Paul Adrian Glaubitz ]
+  * Don't build with ld.gold on powerpcspe
+  * Disable polly on powerpcspe
+  * Add upstream patch to make rustc build on powerpc
+
+  [ Reshabh Sharma ]
+  * Integrate opemp as part of the llvm-toolchain packages (Closes: #813672)
+    As part of this work, the transition libiomp packages have been removed.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 28 Aug 2018 16:28:24 +0200
 
 llvm-toolchain-7 (1:7~+rc1-1~exp2) experimental; urgency=medium
 
