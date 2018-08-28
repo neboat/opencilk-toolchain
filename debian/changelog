@@ -1,3 +1,18 @@
+llvm-toolchain-7 (1:7~+rc2-1~exp3) experimental; urgency=medium
+
+  * Remove libtool flex, bison, dejagnu, tcl, expect,
+    and perl from the build deps (testing)
+  * Disable force-gcc-header-obj.diff as it is introducing
+    some regressions in the search headers
+    (Closes: #903709)
+
+  [ Gianfranco Costamagna ]
+  * Add liblldb-7-dev to python-lldb runtime dependencies, needed to import it
+  * Enable lld on arm64, mips64el
+  * Enable lldb on mips64el
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Aug 2018 14:00:14 +0200
+
 llvm-toolchain-7 (1:7~+rc2-1~exp2) experimental; urgency=medium
 
   * Force sphinx to be >> 1.2.3
