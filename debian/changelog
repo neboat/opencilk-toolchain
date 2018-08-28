@@ -1,4 +1,19 @@
-llvm-toolchain-7 (1:7~+rc1-1~exp4) experimental; urgency=medium
+llvm-toolchain-7 (1:7~+rc2-1~exp3) experimental; urgency=medium
+
+  * Remove libtool flex, bison, dejagnu, tcl, expect,
+    and perl from the build deps (testing)
+  * Disable force-gcc-header-obj.diff as it is introducing
+    some regressions in the search headers
+    (Closes: #903709)
+
+  [ Gianfranco Costamagna ]
+  * Add liblldb-7-dev to python-lldb runtime dependencies, needed to import it
+  * Enable lld on arm64, mips64el
+  * Enable lldb on mips64el
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Aug 2018 14:00:14 +0200
+
+llvm-toolchain-7 (1:7~+rc2-1~exp2) experimental; urgency=medium
 
   * Force sphinx to be >> 1.2.3
   * Also ignore libc++experimental.a on dh_strip (fails on stretch)
@@ -14,8 +29,9 @@ llvm-toolchain-7 (1:7~+rc1-1~exp4) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 27 Aug 2018 10:57:41 +0200
 
-llvm-toolchain-7 (1:7~+rc1-1~exp3) experimental; urgency=medium
+llvm-toolchain-7 (1:7~+rc2-1~exp1) experimental; urgency=medium
 
+  * New snapshot release
   * dh_strip should be verbose
   * On Stretch (binutils 2.28), do not run strip on libFuzzer.a, libc++.a
     & libc++abi.a because it segfaults
