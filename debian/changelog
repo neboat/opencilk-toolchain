@@ -1,5 +1,6 @@
-llvm-toolchain-snapshot (1:8~svn336894-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:8~svn340819-1) unstable; urgency=medium
 
+  * New snapshot release
   * Force sphinx to be >> 1.2.3
   * also ignore libc++experimental.a on dh_strip (fails on stretch)
   * Make libc++-8-dev & libc++abi-8-dev coinstallable
@@ -20,7 +21,7 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp2) UNRELEASED; urgency=medium
   * Disable polly on powerpcspe
   * Add upstream patch to make rustc build on powerpc
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 27 Aug 2018 10:57:41 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 28 Aug 2018 14:28:07 +0200
 
 llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
 
@@ -36,9 +37,6 @@ llvm-toolchain-snapshot (1:8~svn336894-1~exp1) experimental; urgency=medium
       clang_Type_getObjCProtocolDecl
       clang_Type_getObjCTypeArg
   * python-recommonmark is a new build dep for the sphinx doc
-=======
-  * New snapshot release
->>>>>>> origin/7
   * dh_strip should be verbose
   * On Stretch (binutils 2.28), do not run strip on libFuzzer.a, libc++.a
     & libc++abi.a because it segfaults
