@@ -1,6 +1,8 @@
---- llvm-toolchain-6.0-6.0.1~+rc1.orig/lib/Transforms/Scalar/SROA.cpp
-+++ llvm-toolchain-6.0-6.0.1~+rc1/lib/Transforms/Scalar/SROA.cpp
-@@ -3046,6 +3046,42 @@
+Index: llvm-toolchain-6.0-6.0.1/lib/Transforms/Scalar/SROA.cpp
+===================================================================
+--- llvm-toolchain-6.0-6.0.1.orig/lib/Transforms/Scalar/SROA.cpp
++++ llvm-toolchain-6.0-6.0.1/lib/Transforms/Scalar/SROA.cpp
+@@ -2987,6 +2987,42 @@ private:
      return true;
    }
  
@@ -41,10 +43,10 @@
 +  }
 +
    bool visitPHINode(PHINode &PN) {
-     LLVM_DEBUG(dbgs() << "    original: " << PN << "\n");
+     DEBUG(dbgs() << "    original: " << PN << "\n");
      assert(BeginOffset >= NewAllocaBeginOffset && "PHIs are unsplittable");
-@@ -3069,6 +3105,9 @@
-     LLVM_DEBUG(dbgs() << "          to: " << PN << "\n");
+@@ -3010,6 +3046,9 @@ private:
+     DEBUG(dbgs() << "          to: " << PN << "\n");
      deleteIfTriviallyDead(OldPtr);
  
 +    // Fix the alignment of any loads or stores using this PHI node.
@@ -53,8 +55,8 @@
      // PHIs can't be promoted on their own, but often can be speculated. We
      // check the speculation outside of the rewriter so that we see the
      // fully-rewritten alloca.
-@@ -3093,6 +3132,9 @@
-     LLVM_DEBUG(dbgs() << "          to: " << SI << "\n");
+@@ -3034,6 +3073,9 @@ private:
+     DEBUG(dbgs() << "          to: " << SI << "\n");
      deleteIfTriviallyDead(OldPtr);
  
 +    // Fix the alignment of any loads or stores using this select.
@@ -63,9 +65,11 @@
      // Selects can't be promoted on their own, but often can be speculated. We
      // check the speculation outside of the rewriter so that we see the
      // fully-rewritten alloca.
---- llvm-toolchain-6.0-6.0.1~+rc1.orig/test/Transforms/SROA/phi-and-select.ll
-+++ llvm-toolchain-6.0-6.0.1~+rc1/test/Transforms/SROA/phi-and-select.ll
-@@ -600,3 +600,35 @@
+Index: llvm-toolchain-6.0-6.0.1/test/Transforms/SROA/phi-and-select.ll
+===================================================================
+--- llvm-toolchain-6.0-6.0.1.orig/test/Transforms/SROA/phi-and-select.ll
++++ llvm-toolchain-6.0-6.0.1/test/Transforms/SROA/phi-and-select.ll
+@@ -600,3 +600,35 @@ if.then5:
    store %struct.S undef, %struct.S* %f1, align 4
    ret void
  }
