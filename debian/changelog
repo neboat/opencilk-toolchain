@@ -1,3 +1,13 @@
+llvm-toolchain-6.0 (1:6.0.1-7) unstable; urgency=medium
+
+  * Cherry pick a patch from upstream to fix a crash
+    when doing PGO + LTO
+    See upstream bug 38663
+  * Fix an alignment issue
+    See upstream bug 38707 (Closes: #907622)
+
+ --
+
 llvm-toolchain-6.0 (1:6.0.1-6) unstable; urgency=medium
 
   * Remove libtool flex, bison, dejagnu, tcl, expect,

@@ -62,3 +62,4 @@ llvm-rL323946-LSRTy.patch
 PowerPC-Make-AddrSpaceCast-noop.diff
 D51108-rust-powerpc.diff
 pr38663-pgo-lto-crash.patch
+D51335-alignment-issue.diff
