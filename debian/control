@@ -481,7 +481,7 @@ Description: Next generation, high-performance debugger, header files
 
 Package: libomp-7-dev
 Section: libdevel
-Architecture: any
+Architecture: amd64 arm64 armhf armel i386 mips mipsel mips64el ppc64el ppc64
 Depends: libomp5-7 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Suggests: libomp-7-doc
 Replaces: libiomp-dev (<< 3.7-1), libomp-dev (<< 7~+rc1-1~exp1)
@@ -494,7 +494,7 @@ Description: LLVM OpenMP runtime - dev package
 
 Package: libomp5-7
 Multi-Arch: same
-Architecture: any
+Architecture: amd64 arm64 armhf armel i386 mips mipsel mips64el ppc64el ppc64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Replaces: libomp5 (<< 7~+rc1-1~exp1)
 Breaks: libomp5 (<< 7~+rc1-1~exp1)
