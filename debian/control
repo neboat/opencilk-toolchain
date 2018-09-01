@@ -547,7 +547,7 @@ Package: libc++-7-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libc++1-7 (= ${binary:Version}), ${misc:Depends}, libc++-7-helpers (= ${source:Version})
+Depends: libc++1-7 (= ${binary:Version}), ${misc:Depends}
 Provides: libstdc++-dev, libc++-dev
 Breaks: libc++-dev (<< 7~+rc1-1~exp1)
 Replaces: libc++-dev (<< 7~+rc1-1~exp1)
@@ -600,25 +600,3 @@ Description: LLVM low level support for a standard C++ library (development file
  .
    * Correctness as defined by the C++ standards.
    * Provide a portable sublayer to ease the porting of libc++
-
-Package: libc++-7-helpers
-Architecture: all
-Multi-Arch: foreign
-Depends: ${misc:Depends}
-Breaks: libc++-helpers (<< 7~+rc1-1~exp1)
-Provides: libc++-helpers
-Replaces: libc++-helpers (<< 7~+rc1-1~exp1)
-Description: LLVM C++ Standard library - build helpers
- libc++ is another implementation of the C++ standard library
- .
- Features and Goals
- .
-   * Correctness as defined by the C++ standards.
-   * Fast execution.
-   * Minimal memory use.
-   * Fast compile times.
-   * ABI compatibility with gcc's libstdc++ for some low-level features such
-     as exception objects, rtti and memory allocation.
-   * Extensive unit tests.
- .
- This package contains the build helpers (clang++-libc++, etc)

@@ -15,6 +15,7 @@ llvm-toolchain-7 (1:7~+rc2-1~exp3) experimental; urgency=medium
 
   [ Reshabh Sharma ]
   * Added version for libc++ and OpenMP packages breaks/replaces 
+  * Removed libc++-helpers package
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Aug 2018 14:00:14 +0200
 
