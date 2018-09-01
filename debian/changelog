@@ -14,8 +14,11 @@ llvm-toolchain-7 (1:7~+rc2-1~exp3) experimental; urgency=medium
   * Enable lldb on mips64el
 
   [ Reshabh Sharma ]
-  * Add version for libc++ and OpenMP packages breaks/replaces 
+  * Add version for libc++ and OpenMP packages breaks/replaces
   * Remove libc++-helpers package
+    - No real value
+    - Just two scripts
+    - Command line arguments aren't that complex
   * Fix autopkgtest support
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Aug 2018 14:00:14 +0200
