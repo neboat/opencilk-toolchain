@@ -7,9 +7,19 @@ llvm-toolchain-7 (1:7~+rc2-1~exp3) experimental; urgency=medium
     (Closes: #903709)
 
   [ Gianfranco Costamagna ]
+  * Fix build on armhf, by removing some installed package
+  * Fix build on s390x, by disabling OpenMP
   * Add liblldb-7-dev to python-lldb runtime dependencies, needed to import it
   * Enable lld on arm64, mips64el
   * Enable lldb on mips64el
+
+  [ Reshabh Sharma ]
+  * Add version for libc++ and OpenMP packages breaks/replaces
+  * Remove libc++-helpers package
+    - No real value
+    - Just two scripts
+    - Command line arguments aren't that complex
+  * Fix autopkgtest support
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Aug 2018 14:00:14 +0200
 
