@@ -118,6 +118,7 @@ echo "int foo(void) {	return 0; }"> foo.c
 echo "int foo(void); int main() {foo();	return 0;}">main.c
 clang-$VERSION -flto=thin -O2 foo.c main.c -o foo
 ./foo > /dev/null
+clang-$VERSION -flto=thin -O2 foo.c main.c -c
 
 if test ! -f /usr/bin/lld-$VERSION; then
     echo "Install lld-$VERSION"
@@ -128,9 +129,6 @@ clang-$VERSION -fuse-ld=lld -O2 foo.c main.c -o foo
 
 clang-$VERSION -fuse-ld=lld-$VERSION -O2 foo.c main.c -o foo
 ./foo > /dev/null
-
-clang-$VERSION -flto=thin -O2 foo.c main.c -c
-clang-$VERSION -flto=thin -O2 foo.o main.o -o a.out
 
 cat << EOF > test_fuzzer.cc
 #include <stdint.h>
@@ -263,6 +261,7 @@ clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o 
 ./o > /dev/null
 
 /usr/lib/llvm-7/bin/clang++-libc++ -std=c++17 foo.cpp -lc++experimental -lc++fs -o o
+
 ./o > /dev/null
 clang++-libc++-$VERSION -std=c++17 foo.cpp -lc++experimental -lc++fs -o o
 ./o > /dev/null
