@@ -1,3 +1,11 @@
+llvm-toolchain-7 (1:7~+rc2-1~exp4) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Disable OpenMP on unsupported architectures powerpc,
+    powerpcspe, riscv64 and sparc64 (Closes: #907912)
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Tue, 04 Sep 2018 10:20:57 +0200
+
 llvm-toolchain-7 (1:7~+rc2-1~exp3) experimental; urgency=medium
 
   * Remove libtool flex, bison, dejagnu, tcl, expect,
