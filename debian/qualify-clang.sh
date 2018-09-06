@@ -6,7 +6,7 @@ VERSION=8
 DETAILED_VERSION=8~+rc1-1~exp2
 
 echo "To install everything:"
-echo "sudo dpkg -i libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm7_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-helpers_${DETAILED_VERSION}_all.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb"
+echo "sudo dpkg -i libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm7_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb"
 
 
 if test ! -f /usr/bin/llvm-config-$VERSION; then
@@ -118,6 +118,7 @@ echo "int foo(void) {	return 0; }"> foo.c
 echo "int foo(void); int main() {foo();	return 0;}">main.c
 clang-$VERSION -flto=thin -O2 foo.c main.c -o foo
 ./foo > /dev/null
+clang-$VERSION -flto=thin -O2 foo.c main.c -c
 
 if test ! -f /usr/bin/lld-$VERSION; then
     echo "Install lld-$VERSION"
@@ -128,9 +129,6 @@ clang-$VERSION -fuse-ld=lld -O2 foo.c main.c -o foo
 
 clang-$VERSION -fuse-ld=lld-$VERSION -O2 foo.c main.c -o foo
 ./foo > /dev/null
-
-clang-$VERSION -flto=thin -O2 foo.c main.c -c
-clang-$VERSION -flto=thin -O2 foo.o main.o -o a.out
 
 cat << EOF > test_fuzzer.cc
 #include <stdint.h>
@@ -263,6 +261,7 @@ clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o 
 ./o > /dev/null
 
 /usr/lib/llvm-7/bin/clang++-libc++ -std=c++17 foo.cpp -lc++experimental -lc++fs -o o
+
 ./o > /dev/null
 clang++-libc++-$VERSION -std=c++17 foo.cpp -lc++experimental -lc++fs -o o
 ./o > /dev/null
@@ -408,7 +407,7 @@ echo "If the following fails, try setting an environment variable such as:"
 echo "OBJC_INCLUDE_PATH=/usr/lib/gcc/x86_64-linux-gnu/8/include"
 echo "libobjc-8-dev should be also installed"
 echo "#include <objc/objc.h>" > foo.m
-clang-$VERSION -c foo.m
+#clang-$VERSION -c foo.m
 
 if test ! -f /usr/lib/llvm-$VERSION/lib/libclangBasic.a; then
     echo "Install libclang-$VERSION-dev"
