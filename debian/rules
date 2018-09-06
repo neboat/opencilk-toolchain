@@ -111,6 +111,12 @@ ifeq (,$(filter-out $(DEB_HOST_ARCH), powerpc powerpcspe s390x))
   POLLY_ENABLE=no
 endif
 
+# Enable openmp (or not)
+OPENMP_ENABLE=yes
+ifeq (,$(filter-out $(DEB_HOST_ARCH), powerpc powerpcspe riscv64 sparc64 s390x))
+  OPENMP_ENABLE=no
+endif
+
 RUN_TEST=yes
 ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	RUN_TEST=no
@@ -262,14 +268,14 @@ override_dh_auto_configure: preconfigure
 	ln -s ../compiler-rt .; \
 	readlink compiler-rt
 
-ifeq (,$(filter $(DEB_HOST_ARCH), s390x))
-	cd projects/ && \
-	if test -h openmp; then \
-		rm openmp; \
-	fi; \
-	ln -s ../openmp .; \
-	readlink openmp
-endif
+	if test "$(OPENMP_ENABLE)" = yes; then \
+		cd projects/ && \
+		if test -h openmp; then \
+			rm openmp; \
+		fi; \
+		ln -s ../openmp .; \
+		readlink openmp; \
+	fi
 
 	# Configure coverity (we need the compilers) + work around perf issues
 	-(if test $(COVERITY_ENABLE) -eq 1; then \
@@ -428,10 +434,10 @@ build_doc:
 		echo "Generating manpage of $$f"; \
 		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-info --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
 	done
-ifeq (,$(filter $(DEB_HOST_ARCH), s390x))
-	cd openmp/runtime && doxygen doc/doxygen/config
-	cd openmp/runtime/doc/doxygen/generated/html/ && rm jquery.js && ln -s /usr/share/javascript/jquery/jquery.js
-endif
+	if test "$(OPENMP_ENABLE)" = yes; then \
+		cd openmp/runtime && doxygen doc/doxygen/config; \
+		cd openmp/runtime/doc/doxygen/generated/html/ && rm jquery.js && ln -s /usr/share/javascript/jquery/jquery.js; \
+	fi
 
 override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
@@ -446,7 +452,7 @@ override_dh_auto_install:
 
 	# Only run on executable, not script
 	chrpath -d `find $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary'|cut -d: -f1`
-	chrpath -d libcxxabi/build/lib/libc++abi.so.1.0 
+	chrpath -d libcxxabi/build/lib/libc++abi.so.1.0
 	chrpath -d libcxx/build/lib/libc++.so.1.0
 
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so; \
@@ -455,11 +461,10 @@ override_dh_auto_install:
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && rm -f libomp.so; \
 	ln -s libomp.so.$(SONAME_OPENMP) libomp.so
 
-
-ifeq (,$(filter $(DEB_HOST_ARCH), s390x))
-	mkdir -p debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp
-	cp -f openmp/runtime/exports/common*/include/* debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp
-endif
+	if test "$(OPENMP_ENABLE)" = yes; then \
+		mkdir -p debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp; \
+		cp -f openmp/runtime/exports/common*/include/* debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp; \
+	fi
 
 # Remove artifact (where compiler-rt is built)
 #	if test -d $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/clang_linux; then \
