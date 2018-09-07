@@ -435,7 +435,7 @@ build_doc:
 		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-info --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
 	done
 	if test "$(OPENMP_ENABLE)" = yes; then \
-		cd openmp/runtime && doxygen doc/doxygen/config; \
+		cd openmp/runtime && doxygen doc/doxygen/config; cd -; \
 		cd openmp/runtime/doc/doxygen/generated/html/ && rm jquery.js && ln -s /usr/share/javascript/jquery/jquery.js; \
 	fi
 
