@@ -5,8 +5,6 @@ llvm-toolchain-6.0 (1:6.0.1-7) unstable; urgency=medium
     See upstream bug 38663
   * Fix an alignment issue
     See upstream bug 38707 (Closes: #907622)
-  * Fix an optimization issues (Closes: #907649)
-    See upstream bug 38786
   * Cherry pick an upstream issue with x86 mentionned here:
     https://lists.llvm.org/pipermail/llvm-dev/2018-August/125111.html
     "A very subtle miscompile due to a bug in EFLAGS copy lowering
