@@ -7,6 +7,12 @@ llvm-toolchain-6.0 (1:6.0.1-7) unstable; urgency=medium
     See upstream bug 38707 (Closes: #907622)
   * Fix an optimization issues (Closes: #907649)
     See upstream bug 38786
+  * Cherry pick an upstream issue with x86 mentionned here:
+    https://lists.llvm.org/pipermail/llvm-dev/2018-August/125111.html
+    "A very subtle miscompile due to a bug in EFLAGS copy lowering
+    for X86 was fixed. Chandler suggests maintainers of out-of-tree
+    branches using the X86 backend may want to cherry-pick this fix."
+    https://reviews.llvm.org/rL338481
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 06 Sep 2018 20:51:24 +0200
 
