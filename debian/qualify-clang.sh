@@ -332,6 +332,24 @@ echo "Test: CMake find LLVM and Clang in explicit prefix path"
 (cd cmaketest/explicit && CC=clang-$VERSION CXX=clang++-$VERSION CMAKE_PREFIX_PATH=/usr/lib/llvm-$VERSION cmake ..)
 rm -rf cmaketest
 
+# Test case for bug #900440
+rm -rf cmaketest && mkdir cmaketest
+cat > cmaketest/CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 2.8.12)
+project(testllvm)
+
+find_package(LLVM CONFIG REQUIRED)
+find_package(Clang CONFIG REQUIRED)
+
+if(NOT LLVM_VERSION STREQUAL Clang_VERSION)
+    #message(FATAL_ERROR "LLVM ${LLVM_VERSION} not matching to Clang ${Clang_VERSION}")
+endif()
+EOF
+mkdir cmaketest/foo/
+(cd cmaketest/foo && cmake ..)
+rm -rf cmaketest
+
+
 CLANG=clang-$VERSION
 #command -v "$CLANG" 1>/dev/null 2>/dev/null || { printf "Usage:\n%s CLANGEXE [ARGS]\n" "$0" 1>&2; exit 1; }
 #shift
