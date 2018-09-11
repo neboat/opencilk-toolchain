@@ -1,8 +1,8 @@
-Index: llvm-toolchain-6.0-6.0.1/lib/Target/PowerPC/PPCISelLowering.cpp
+Index: llvm-toolchain-7-7~+rc2/lib/Target/PowerPC/PPCISelLowering.cpp
 ===================================================================
---- llvm-toolchain-6.0-6.0.1.orig/lib/Target/PowerPC/PPCISelLowering.cpp
-+++ llvm-toolchain-6.0-6.0.1/lib/Target/PowerPC/PPCISelLowering.cpp
-@@ -3351,9 +3351,14 @@
+--- llvm-toolchain-7-7~+rc2.orig/lib/Target/PowerPC/PPCISelLowering.cpp
++++ llvm-toolchain-7-7~+rc2/lib/Target/PowerPC/PPCISelLowering.cpp
+@@ -3480,9 +3480,14 @@ SDValue PPCTargetLowering::LowerFormalAr
        // Argument stored in memory.
        assert(VA.isMemLoc());
  
@@ -19,7 +19,7 @@ Index: llvm-toolchain-6.0-6.0.1/lib/Target/PowerPC/PPCISelLowering.cpp
  
        // Create load nodes to retrieve arguments from the stack.
        SDValue FIN = DAG.getFrameIndex(FI, PtrVT);
-@@ -5303,10 +5308,11 @@
+@@ -5437,10 +5442,11 @@ SDValue PPCTargetLowering::LowerCall_32S
        Arg = PtrOff;
      }
  
@@ -34,10 +34,10 @@ Index: llvm-toolchain-6.0-6.0.1/lib/Target/PowerPC/PPCISelLowering.cpp
        seenFloatArg |= VA.getLocVT().isFloatingPoint();
        // Put argument in a physical register.
        RegsToPass.push_back(std::make_pair(VA.getLocReg(), Arg));
-Index: llvm-toolchain-6.0-6.0.1/test/CodeGen/PowerPC/ppc32-i1-stack-arguments-abi-bug.ll
+Index: llvm-toolchain-7-7~+rc2/test/CodeGen/PowerPC/ppc32-i1-stack-arguments-abi-bug.ll
 ===================================================================
 --- /dev/null
-+++ llvm-toolchain-6.0-6.0.1/test/CodeGen/PowerPC/ppc32-i1-stack-arguments-abi-bug.ll
++++ llvm-toolchain-7-7~+rc2/test/CodeGen/PowerPC/ppc32-i1-stack-arguments-abi-bug.ll
 @@ -0,0 +1,24 @@
 +; RUN: llc -verify-machineinstrs < %s -mcpu=ppc32 -mattr=+crbits | FileCheck %s
 +target triple = "powerpc-unknown-linux-gnu"
