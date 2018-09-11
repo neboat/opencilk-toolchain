@@ -58,7 +58,6 @@ impl-path-hurd.diff
 openmp-check-execstack.diff
 openmp-soname.diff
 openmp-mips-affinity.patch
-D51108.diff
 # libcxx
 
 libcxxabi-test-don-t-fail-extended-long-double.patch
@@ -69,3 +68,5 @@ libcxx-silent-test-libcxx.diff
 libcxx-silent-failure-ppc64el.diff
 libcxx-silent-failure-arm64.diff
 
+# Rust on ppc
+D51108-rust-powerpc.diff
