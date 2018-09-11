@@ -69,5 +69,5 @@ libcxx-silent-failure-ppc64el.diff
 libcxx-silent-failure-arm64.diff
 
 # Rust on ppc
-D51108.diff
+D51108-rust-powerpc.diff
 
