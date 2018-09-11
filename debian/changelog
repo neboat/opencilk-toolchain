@@ -71,6 +71,17 @@ llvm-toolchain-snapshot (1:8~svn340819-1) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 28 Aug 2018 16:28:24 +0200
 
+llvm-toolchain-7 (1:7~+rc3-1) unstable; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Disable OpenMP on unsupported architectures powerpc,
+    powerpcspe, riscv64 and sparc64 (Closes: #907912)
+
+  [ Sylvestre Ledru ]
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 10 Sep 2018 17:01:25 +0200
+
 llvm-toolchain-7 (1:7~+rc1-1~exp2) experimental; urgency=medium
 
   * Disable force-gcc-header-obj.diff as it is introducing
