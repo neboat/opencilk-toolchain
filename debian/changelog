@@ -1,3 +1,9 @@
+llvm-toolchain-7 (1:7~+rc3-3) unstable; urgency=medium
+
+  * Build llvm using -DLLVM_USE_PERF=yes (Closes: #908707)
+
+ --
+
 llvm-toolchain-7 (1:7~+rc3-2) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]

@@ -176,6 +176,11 @@ endif
 
 LLD_ENABLE=yes
 
+ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
+# only for linux
+	CMAKE_EXTRA += -DLLVM_USE_PERF=yes
+endif
+
 DH_OPTIONS=
 OCAML_ENABLE= no
 OCAML_ARCHS := amd64 arm64 armel armhf i386 ppc64el s390x
