@@ -32,7 +32,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  libclang1-8 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-8-dev, python, libomp-dev
-Suggests: gnustep, gnustep-devel, clang-8-doc
+Suggests: clang-8-doc
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -481,7 +481,7 @@ Description: Next generation, high-performance debugger, header files
 
 Package: libomp-8-dev
 Section: libdevel
-Architecture: amd64 arm64 armhf armel i386 mips mipsel mips64el ppc64el ppc64
+Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64
 Depends: libomp5-8 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Suggests: libomp-8-doc
 Replaces: libiomp-dev (<< 3.8-1), libomp-dev (<< 7~+rc1-1~exp1)
@@ -494,7 +494,7 @@ Description: LLVM OpenMP runtime - dev package
 
 Package: libomp5-8
 Multi-Arch: same
-Architecture: amd64 arm64 armhf armel i386 mips mipsel mips64el ppc64el ppc64
+Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Replaces: libomp5 (<< 7~+rc1-1~exp1)
 Breaks: libomp5 (<< 7~+rc1-1~exp1)
