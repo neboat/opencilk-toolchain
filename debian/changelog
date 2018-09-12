@@ -1,3 +1,11 @@
+llvm-toolchain-7 (1:7~+rc3-2) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Fix inverted logic in ifeq statement for POLLY_ENABLE
+    and OPENMP_ENABLE (Closes: #908646)
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Wed, 12 Sep 2018 10:40:28 +0200
+
 llvm-toolchain-7 (1:7~+rc3-1) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
