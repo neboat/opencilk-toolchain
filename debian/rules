@@ -629,6 +629,9 @@ endif
 
 override_dh_install:
 #	cp $(TARGET_BUILD)/lib/libLLVM-$(LLVM_VERSION).so $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION).so.$(SONAME_EXT)
+ifeq (${POLLY_ENABLE},yes)
+	dh_install -p libclang$(SONAME_EXT)-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly
+endif
 	dh_install --fail-missing
 
 override_dh_installdeb:
