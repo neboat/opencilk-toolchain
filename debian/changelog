@@ -3,6 +3,9 @@ llvm-toolchain-6.0 (1:6.0.1-8) UNRELEASED; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * Fix inverted logic in ifeq statement for POLLY_ENABLE (Closes: #908646)
 
+  [ Gianfranco Costamagna ]
+  * Fixup the polly installation failure where polly is not built
+
  -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Wed, 12 Sep 2018 10:48:35 +0200
 
 llvm-toolchain-6.0 (1:6.0.1-7) unstable; urgency=medium
