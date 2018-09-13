@@ -1,6 +1,11 @@
 llvm-toolchain-7 (1:7~+rc3-4) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * libc++-7-dev doesn't provide libstdc++-dev anymore (Closes: #908738)
+
+  [ Reshabh Sharma ]
+  * Make OpenMP packages coinstallable
+  * Make libc++ packages coinstallable 
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 13 Sep 2018 15:26:41 +0200
 
