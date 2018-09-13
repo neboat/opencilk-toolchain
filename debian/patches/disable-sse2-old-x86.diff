@@ -1,12 +1,13 @@
-Index: llvm-toolchain-6.0-6.0.1/clang/lib/Basic/Targets/X86.cpp
+Index: llvm-toolchain-7-7~+rc3/clang/include/clang/Basic/X86Target.def
 ===================================================================
---- llvm-toolchain-6.0-6.0.1.orig/clang/lib/Basic/Targets/X86.cpp
-+++ llvm-toolchain-6.0-6.0.1/clang/lib/Basic/Targets/X86.cpp
-@@ -207,7 +207,6 @@ bool X86TargetInfo::initFeatureMap(
-     setFeatureEnabledImpl(Features, "cx16", true);
-     LLVM_FALLTHROUGH;
-   case CK_PentiumM:
--  case CK_Pentium4:
-   case CK_x86_64:
-     setFeatureEnabledImpl(Features, "sse2", true);
-     LLVM_FALLTHROUGH;
+--- llvm-toolchain-7-7~+rc3.orig/clang/include/clang/Basic/X86Target.def
++++ llvm-toolchain-7-7~+rc3/clang/include/clang/Basic/X86Target.def
+@@ -293,7 +293,7 @@ CPU_SPECIFIC("pentium_mmx", 'D', "+mmx")
+ CPU_SPECIFIC("pentium_ii", 'E', "+cmov,+mmx")
+ CPU_SPECIFIC("pentium_iii", 'H', "+cmov,+mmx,+sse")
+ CPU_SPECIFIC("pentium_iii_no_xmm_regs", 'H',"+cmov,+sse")
+-CPU_SPECIFIC("pentium_4", 'J', "+cmov,+mmx,+sse,+sse2")
++CPU_SPECIFIC("pentium_4", 'J', "+cmov,+mmx,+sse")
+ CPU_SPECIFIC("pentium_m", 'K', "+cmov,+mmx,+sse,+sse2")
+ CPU_SPECIFIC("pentium_4_sse3", 'L', "+cmov,+mmx,+sse,+sse2,+sse3")
+ CPU_SPECIFIC("core_2_duo_ssse3", 'M', "+cmov,+mmx,+sse,+sse2,+sse3,+ssse3")
