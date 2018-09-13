@@ -1,3 +1,3 @@
-usr/lib/llvm-@LLVM_VERSION@/lib/libc++abi*so
-usr/lib/llvm-@LLVM_VERSION@/lib/libc++abi.a
+usr/lib/llvm-@LLVM_VERSION@/lib/libc++abi-@LLVM_VERSION@*so	usr/lib/@DEB_HOST_MULTIARCH@/
+usr/lib/llvm-@LLVM_VERSION@/lib/libc++abi-@LLVM_VERSION@.a	usr/lib/@DEB_HOST_MULTIARCH@/
 libcxxabi/include/* usr/lib/llvm-@LLVM_VERSION@/include/
