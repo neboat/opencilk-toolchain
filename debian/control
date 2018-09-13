@@ -484,9 +484,6 @@ Section: libdevel
 Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64
 Depends: libomp5-7 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Suggests: libomp-7-doc
-Replaces: libiomp-dev (<< 3.7-1), libomp-dev (<< 7~+rc1-1~exp1)
-Breaks: libiomp-dev (<< 3.7-1), libomp-dev (<< 7~+rc1-1~exp1)
-Provides: libomp-dev
 Description: LLVM OpenMP runtime - dev package
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
@@ -496,10 +493,6 @@ Package: libomp5-7
 Multi-Arch: same
 Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Replaces: libomp5 (<< 7~+rc1-1~exp1)
-Breaks: libomp5 (<< 7~+rc1-1~exp1)
-Provides: libomp5
-# TODO add the break depends
 Description: LLVM OpenMP runtime
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program

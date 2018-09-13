@@ -463,8 +463,7 @@ override_dh_auto_install:
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so; \
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT)
 
-	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && rm -f libomp.so; \
-	ln -s libomp.so.$(SONAME_OPENMP) libomp.so
+	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && cp libomp.so.$(SONAME_OPENMP) libomp-$(LLVM_VERSION).so.$(SONAME_OPENMP); 
 
 	if test "$(OPENMP_ENABLE)" = yes; then \
 		mkdir -p debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp; \
@@ -513,6 +512,17 @@ endif
 
 	$(MAKE) -C libcxxabi/build install DESTDIR=$(DEB_INST)
 	$(MAKE) -C libcxx/build install DESTDIR=$(DEB_INST)
+	
+	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && mv libc++.so.1.0 libc++-$(LLVM_VERSION).so.1.0; \
+	mv libc++.so libc++-$(LLVM_VERSION).so; \
+	mv libc++.a libc++-$(LLVM_VERSION).a; \
+	mv libc++abi.so.1.0 libc++abi-$(LLVM_VERSION).so.1.0; \
+	mv libc++abi.a libc++abi-$(LLVM_VERSION).a; \
+	rm libc++.so.1 libc++abi.so libc++abi.so.1; \
+	ln -s libc++-$(LLVM_VERSION).so.1.0 libc++-$(LLVM_VERSION).so.1; \
+	ln -s libc++abi-$(LLVM_VERSION).so.1.0 libc++abi-$(LLVM_VERSION).so.1; \
+	ln -s libc++abi-$(LLVM_VERSION).so.1 libc++abi-$(LLVM_VERSION).so; \
+	ln -s libc++abi-$(LLVM_VERSION).so.1 libc++abi.so.1
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
