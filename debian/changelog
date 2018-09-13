@@ -1,8 +1,12 @@
-llvm-toolchain-7 (1:7~+rc3-3) unstable; urgency=medium
+llvm-toolchain-7 (1:7~+rc3-3) UNRELEASED; urgency=medium
 
+  [ John Paul Adrian Glaubitz ]
+  * Disable OpenMP on unsupported architecture x32
+
+  [ Sylvestre Ledru ]
   * Build llvm using -DLLVM_USE_PERF=yes (Closes: #908707)
 
- --
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Thu, 13 Sep 2018 09:41:19 +0200
 
 llvm-toolchain-7 (1:7~+rc3-2) unstable; urgency=medium
 
