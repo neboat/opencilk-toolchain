@@ -5,6 +5,7 @@ llvm-toolchain-7 (1:7~+rc3-3) UNRELEASED; urgency=medium
 
   [ Sylvestre Ledru ]
   * Build llvm using -DLLVM_USE_PERF=yes (Closes: #908707)
+  * libc++-7-dev doesn't provide libstdc++-dev anymore (Closes: #908738)
 
  -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Thu, 13 Sep 2018 09:41:19 +0200
 
