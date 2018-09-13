@@ -66,3 +66,4 @@ D51335-alignment-issue.diff
 # Doesn't fully apply
 # D51639-optim-issue.diff
 rL338481-cherry-pick-really-subtle-miscompile.diff
+disable-sse2-old-x86.diff
