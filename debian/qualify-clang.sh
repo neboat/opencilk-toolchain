@@ -182,7 +182,7 @@ int main(void) {
   printf("thread %d\n", omp_get_thread_num());
 }
 ' > foo.c
-clang-$VERSION foo.c -fopenmp -o o
+clang-$VERSION foo.c -L/usr/lib/llvm-$VERSION/lib -fopenmp -o o
 ./o > /dev/null
 
 if test ! -f /usr/lib/llvm-$VERSION/include/c++/v1/vector; then
@@ -208,7 +208,7 @@ int main(void) {
     }
     return 0;
 }' > foo.cpp
-clang++-$VERSION -stdlib=libc++ foo.cpp -o o
+clang++-$VERSION -stdlib=libc++ -L/usr/lib/llvm-$VERSION/lib -I/usr/lib/llvm-$VERSION/include/c++ foo.cpp -o o
 if ! ldd o 2>&1|grep -q  libc++.so.1; then
 #    if ! ./a.out 2>&1 |  -q -E "(Test unit written|PreferSmall)"; then
     echo "not linked against libc++.so.1"
@@ -220,9 +220,9 @@ if ! ldd o 2>&1|grep -q  libc++abi.so.1; then
 fi
 
 ./o > /dev/null
-clang++-$VERSION -std=c++11 -stdlib=libc++ foo.cpp -o o
+clang++-$VERSION -std=c++11 -stdlib=libc++ -L/usr/lib/llvm-$VERSION/lib -I/usr/lib/llvm-$VERSION/include/c++ foo.cpp -o o
 ./o > /dev/null
-clang++-$VERSION -std=c++14 -stdlib=libc++ foo.cpp -lc++experimental -o o
+clang++-$VERSION -std=c++14 -stdlib=libc++ -L/usr/lib/llvm-$VERSION/lib -I/usr/lib/llvm-$VERSION/include/c++ foo.cpp -lc++experimental -o o
 ./o > /dev/null
 
 if test ! -f /usr/lib/llvm-$VERSION/include/cxxabi.h; then
@@ -231,7 +231,7 @@ if test ! -f /usr/lib/llvm-$VERSION/include/cxxabi.h; then
 fi
 
 # Force the usage of libc++abi
-clang++-$VERSION -stdlib=libc++ -lc++abi foo.cpp -o o
+clang++-$VERSION -stdlib=libc++ -lc++abi -L/usr/lib/llvm-$VERSION/lib -I/usr/lib/llvm-$VERSION/include/c++ foo.cpp -o o
 ./o > /dev/null
 if ! ldd o 2>&1|grep -q  libc++abi.so.1; then
     echo "not linked against libc++abi.so.1"
@@ -239,7 +239,7 @@ if ! ldd o 2>&1|grep -q  libc++abi.so.1; then
 fi
 
 # Use the libc++abi and uses the libstc++ headers
-clang++-$VERSION -lc++abi foo.cpp -o o
+clang++-$VERSION -lc++abi -L/usr/lib/llvm-$VERSION/lib -I/usr/lib/llvm-$VERSION/include/c++ foo.cpp -o o
 ./o > /dev/null
 if ! ldd o 2>&1|grep -q libstdc++.so.; then
     echo "not linked against libstdc++"
@@ -257,13 +257,13 @@ int main() {
           std::filesystem::path
       >::value, "");
 }' > foo.cpp
-clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o o
+clang++-$VERSION -std=c++17 -stdlib=libc++ -L/usr/lib/llvm-$VERSION/lib -I/usr/lib/llvm-$VERSION/include/c++ foo.cpp -lc++experimental -lc++fs -o o
 ./o > /dev/null
 
-/usr/lib/llvm-7/bin/clang++-libc++ -std=c++17 foo.cpp -lc++experimental -lc++fs -o o
+/usr/lib/llvm-7/bin/clang++-libc++ -std=c++17 -L/usr/lib/llvm-$VERSION/lib -I/usr/lib/llvm-$VERSION/include/c++ foo.cpp -lc++experimental -lc++fs -o o
 
 ./o > /dev/null
-clang++-libc++-$VERSION -std=c++17 foo.cpp -lc++experimental -lc++fs -o o
+clang++-libc++-$VERSION -std=c++17 -L/usr/lib/llvm-$VERSION/lib foo.cpp -I/usr/lib/llvm-$VERSION/include/c++ -lc++experimental -lc++fs -o o
 ./o > /dev/null
 
 g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
