@@ -1,0 +1,12 @@
+Index: llvm-toolchain-6.0-6.0.1/clang/lib/Basic/Targets/X86.cpp
+===================================================================
+--- llvm-toolchain-6.0-6.0.1.orig/clang/lib/Basic/Targets/X86.cpp
++++ llvm-toolchain-6.0-6.0.1/clang/lib/Basic/Targets/X86.cpp
+@@ -207,7 +207,6 @@ bool X86TargetInfo::initFeatureMap(
+     setFeatureEnabledImpl(Features, "cx16", true);
+     LLVM_FALLTHROUGH;
+   case CK_PentiumM:
+-  case CK_Pentium4:
+   case CK_x86_64:
+     setFeatureEnabledImpl(Features, "sse2", true);
+     LLVM_FALLTHROUGH;

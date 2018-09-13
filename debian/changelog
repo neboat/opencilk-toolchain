@@ -264,6 +264,21 @@ llvm-toolchain-snapshot (1:7~svn322880-1) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jan 2018 20:50:03 +0100
 
+llvm-toolchain-6.0 (1:6.0.1-8) unstable; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Fix inverted logic in ifeq statement for POLLY_ENABLE (Closes: #908646)
+
+  [ Gianfranco Costamagna ]
+  * Fixup the polly installation failure where polly is not built
+  * Add s390x to polly architectures
+  * Fix typo in rules file
+
+  [ Sylvestre Ledru ]
+  * Disable sse2 on pentium4 arch (Closes: #632472)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 13 Sep 2018 10:04:42 +0200
+
 llvm-toolchain-snapshot (1:6.0~svn321385-1) unstable; urgency=medium
 
   * Snapshot upload before rc1 (January)
