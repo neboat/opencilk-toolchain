@@ -1,4 +1,4 @@
-llvm-toolchain-6.0 (1:6.0.1-8) UNRELEASED; urgency=medium
+llvm-toolchain-6.0 (1:6.0.1-8) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Fix inverted logic in ifeq statement for POLLY_ENABLE (Closes: #908646)
