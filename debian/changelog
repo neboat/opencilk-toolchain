@@ -6,11 +6,16 @@ llvm-toolchain-7 (1:7~+rc3-4) unstable; urgency=medium
   [ Gianfranco Costamagna ]
   * Force polly cmake removal on arch:all because of --fail-missing
 
-  [ John Paul Adrian Glaubitz ]
-  * debian/patches/powerpcspe.patch:
-    - fix build on powerpcspe target
+  [ Reshabh Sharma ]
+  * Make OpenMP packages coinstallable from version 7
+  * Make libc++ packages coinstallable from version 7
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 13 Sep 2018 23:18:22 +0200
+  [ John Paul Adrian Glaubitz ]
+  * Add patch to fix missing MultiArch include dir
+    on powerpcspe (Closes: #908791)
+  * Disable LLDB on riscv64
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 14 Sep 2018 11:27:28 +0200
 
 llvm-toolchain-7 (1:7~+rc3-3) unstable; urgency=medium
 
