@@ -1,8 +1,12 @@
-llvm-toolchain-snapshot (1:8~svn340819-2) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:8~svn340819-2) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
   * libc++-8-dev doesn't provide libstdc++-dev anymore (Closes: #908738)
   * Build llvm using -DLLVM_USE_PERF=yes (Closes: #908707)
+  * Only rename libomp when openmp is built
+
+  [ Gianfranco Costamagna ]
+  * Force polly cmake removal on arch:all because of --fail-missing
 
   [ Reshabh Sharma ]
   * Make OpenMP packages coinstallable from version 7
@@ -15,6 +19,7 @@ llvm-toolchain-snapshot (1:8~svn340819-2) UNRELEASED; urgency=medium
   * Fix inverted logic in ifeq statement for POLLY_ENABLE
     and OPENMP_ENABLE (Closes: #908646)
   * Disable OpenMP on unsupported architecture x32
+  * Add patch to fix missing include and library paths on x32
 
   [ Gianfranco Costamagna ]
   * Install polly only on arch:all packages

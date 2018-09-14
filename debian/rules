@@ -511,7 +511,8 @@ endif
 
 	$(MAKE) -C libcxxabi/build install DESTDIR=$(DEB_INST)
 	$(MAKE) -C libcxx/build install DESTDIR=$(DEB_INST)
-	
+
+# hack to make them co installable
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && mv libc++.so.1.0 libc++-$(LLVM_VERSION).so.1.0; \
 	mv libc++.so libc++-$(LLVM_VERSION).so; \
 	mv libc++.a libc++-$(LLVM_VERSION).a; \
@@ -659,10 +660,6 @@ override_dh_installdeb:
 
 	rm -f $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/site-packages/lldb/__init__.pyc $(CURDIR)/debian/python-lldb-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/site-packages/lldb/__init__.pyc
 	rm -f $(CURDIR)/debian/clang-$(LLVM_VERSION)-examples/usr/share/doc/clang-$(LLVM_VERSION)-examples/examples/*Make*
-
-	if test -f  $(CURDIR)/debian/libc++-$(LLVM_VERSION)-helpers/usr/lib/llvm-$(LLVM_VERSION)/bin/clang++-libc++; then \
-	chmod +x $(CURDIR)/debian/libc++-$(LLVM_VERSION)-helpers/usr/lib/llvm-$(LLVM_VERSION)/bin/clang++-libc++ $(CURDIR)/debian/libc++-$(LLVM_VERSION)-helpers/usr/lib/llvm-$(LLVM_VERSION)/bin/g++-libc++; \
-	fi
 
 # Remove auto generated python pyc
 	find $(CURDIR)/debian/llvm-$(LLVM_VERSION)-tools/usr/lib/llvm-$(LLVM_VERSION)/ -name '*.pyc' | xargs -r rm -f
