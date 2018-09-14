@@ -1,8 +1,11 @@
-llvm-toolchain-6.0 (1:6.0.1-9) UNRELEASED; urgency=medium
+llvm-toolchain-6.0 (1:6.0.1-9) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Add patch to fix missing MultiArch include dir
     on powerpcspe (Closes: #908791)
+
+  [ Gianfranco Costamagna ]
+  * Force polly cmake removal on arch:all because of --fail-missing
 
  -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Fri, 14 Sep 2018 09:24:02 +0200
 
