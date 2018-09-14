@@ -638,6 +638,8 @@ ifeq (${POLLY_ENABLE},yes)
 # only for arch:any builds
 ifneq (,$(filter libclang-common-$(LLVM_VERSION)-dev, $(shell dh_listpackages)))
 	dh_install -p libclang-common-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly
+else
+	rm -rf $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
 endif
 endif
 	dh_install --fail-missing
