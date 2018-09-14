@@ -1,8 +1,16 @@
-llvm-toolchain-7 (1:7~+rc3-4) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7~+rc3-4) unstable; urgency=medium
 
+  [ Sylvestre Ledru ]
   * libc++-7-dev doesn't provide libstdc++-dev anymore (Closes: #908738)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 13 Sep 2018 15:26:41 +0200
+  [ Gianfranco Costamagna ]
+  * Force polly cmake removal on arch:all because of --fail-missing
+
+  [ John Paul Adrian Glaubitz ]
+  * debian/patches/powerpcspe.patch:
+    - fix build on powerpcspe target
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 13 Sep 2018 23:18:22 +0200
 
 llvm-toolchain-7 (1:7~+rc3-3) unstable; urgency=medium
 

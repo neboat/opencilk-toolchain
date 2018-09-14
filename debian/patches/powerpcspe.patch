@@ -4,14 +4,14 @@ Date: Thu, 13 Sep 2018 23:59:21 +0200
 Subject: [PATCH] [Driver] Fix missing MultiArch include dir on powerpcspe
 
 ---
- lib/Driver/ToolChains/Linux.cpp | 3 ++-
+ clang/lib/Driver/ToolChains/Linux.cpp | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/lib/Driver/ToolChains/Linux.cpp b/lib/Driver/ToolChains/Linux.cpp
-index 2a87cb077c..a7f4e9332b 100644
---- a/lib/Driver/ToolChains/Linux.cpp
-+++ b/lib/Driver/ToolChains/Linux.cpp
-@@ -699,7 +699,8 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
+Index: llvm-toolchain-7-7~+rc3/clang/lib/Driver/ToolChains/Linux.cpp
+===================================================================
+--- llvm-toolchain-7-7~+rc3.orig/clang/lib/Driver/ToolChains/Linux.cpp
++++ llvm-toolchain-7-7~+rc3/clang/lib/Driver/ToolChains/Linux.cpp
+@@ -700,7 +700,8 @@
        "/usr/include/mips64el-linux-gnu",
        "/usr/include/mips64el-linux-gnuabi64"};
    const StringRef PPCMultiarchIncludeDirs[] = {
@@ -21,6 +21,3 @@ index 2a87cb077c..a7f4e9332b 100644
    const StringRef PPC64MultiarchIncludeDirs[] = {
        "/usr/include/powerpc64-linux-gnu"};
    const StringRef PPC64LEMultiarchIncludeDirs[] = {
--- 
-2.19.0
-
