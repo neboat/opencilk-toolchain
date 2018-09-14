@@ -321,9 +321,9 @@ endif()
 EOF
 mkdir cmaketest/standard cmaketest/explicit
 echo "Test: CMake find LLVM and Clang in default path"
-(cd cmaketest/standard && CC=clang-$VERSION CXX=clang++-$VERSION cmake ..)
+(cd cmaketest/standard && CC=clang-$VERSION CXX=clang++-$VERSION cmake .. > /dev/null)
 echo "Test: CMake find LLVM and Clang in explicit prefix path"
-(cd cmaketest/explicit && CC=clang-$VERSION CXX=clang++-$VERSION CMAKE_PREFIX_PATH=/usr/lib/llvm-$VERSION cmake ..)
+(cd cmaketest/explicit && CC=clang-$VERSION CXX=clang++-$VERSION CMAKE_PREFIX_PATH=/usr/lib/llvm-$VERSION cmake .. > /dev/null)
 rm -rf cmaketest
 
 # Test case for bug #900440
@@ -340,7 +340,7 @@ if(NOT LLVM_VERSION STREQUAL Clang_VERSION)
 endif()
 EOF
 mkdir cmaketest/foo/
-(cd cmaketest/foo && cmake ..)
+(cd cmaketest/foo && cmake .. > /dev/null)
 rm -rf cmaketest
 
 
