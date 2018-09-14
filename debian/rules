@@ -464,12 +464,9 @@ override_dh_auto_install:
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT)
 
 	if test "$(OPENMP_ENABLE)" = yes; then \
-		cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && cp libomp.so.$(SONAME_OPENMP) libomp-$(LLVM_VERSION).so.$(SONAME_OPENMP); \
-	fi
-
-	if test "$(OPENMP_ENABLE)" = yes; then \
 		mkdir -p debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp; \
 		cp -f openmp/runtime/exports/common*/include/* debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp; \
+		cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && cp libomp.so.$(SONAME_OPENMP) libomp-$(LLVM_VERSION).so.$(SONAME_OPENMP); \
 	fi
 
 # Remove artifact (where compiler-rt is built)
