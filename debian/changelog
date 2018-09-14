@@ -1,19 +1,28 @@
 llvm-toolchain-snapshot (1:8~svn340819-2) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
+  * libc++-8-dev doesn't provide libstdc++-dev anymore (Closes: #908738)
   * Build llvm using -DLLVM_USE_PERF=yes (Closes: #908707)
-  * libc++-7-dev doesn't provide libstdc++-dev anymore (Closes: #908738)
+
+  [ Reshabh Sharma ]
+  * Make OpenMP packages coinstallable from version 7
+  * Make libc++ packages coinstallable from version 7
 
   [ John Paul Adrian Glaubitz ]
+  * Add patch to fix missing MultiArch include dir
+    on powerpcspe (Closes: #908791)
+  * Disable LLDB on riscv64
   * Fix inverted logic in ifeq statement for POLLY_ENABLE
     and OPENMP_ENABLE (Closes: #908646)
   * Disable OpenMP on unsupported architecture x32
 
   [ Gianfranco Costamagna ]
+  * Install polly only on arch:all packages
   * Drop gnustep and gnustep-devel suggestions (Closes: #902847)
   * Enable polly on s390x
   * Disable omp on armel mips and mipsel for now
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 13 Sep 2018 15:29:10 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 14 Sep 2018 11:30:11 +0200
 
 llvm-toolchain-7 (1:7~+rc3-1) unstable; urgency=medium
 

@@ -1,1 +1,2 @@
 libomp5-@LLVM_VERSION@: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libomp.so.5
+libomp5-@LLVM_VERSION@: ldconfig-symlink-missing-for-shlib usr/lib/*/libomp.so.5 usr/lib/*/libomp-@LLVM_VERSION@.so.5 libomp.so.5
