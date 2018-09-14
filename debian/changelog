@@ -1,4 +1,4 @@
-llvm-toolchain-7 (1:8~svn340819-2) unstable; urgency=medium
+llvm-toolchain-snapshot (1:8~svn342269-1) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
   * libc++-8-dev doesn't provide libstdc++-dev anymore (Closes: #908738)
@@ -27,7 +27,7 @@ llvm-toolchain-7 (1:8~svn340819-2) unstable; urgency=medium
   * Enable polly on s390x
   * Disable omp on armel mips and mipsel for now
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 14 Sep 2018 11:30:11 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 14 Sep 2018 21:56:57 +0200
 
 llvm-toolchain-7 (1:7~+rc3-1) unstable; urgency=medium
 
