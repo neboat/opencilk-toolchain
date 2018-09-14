@@ -1,8 +1,12 @@
 llvm-toolchain-7 (1:7~+rc3-5) unstable; urgency=medium
 
+  [ John Paul Adrian Glaubitz ]
+  * Add patch to fix missing include and library paths on x32
+
+  [ Sylvestre Ledru ]
   * Only rename libomp when openmp is built
 
- --
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Fri, 14 Sep 2018 19:54:38 +0200
 
 llvm-toolchain-7 (1:7~+rc3-4) unstable; urgency=medium
 

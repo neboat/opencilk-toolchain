@@ -53,6 +53,7 @@ remove-test-freezing.diff
 0049-Use-Debian-provided-MathJax-everywhere.patch
 impl-path-hurd.diff
 powerpcspe-add-missing-include-path.diff
+x32-fix-driver-search-paths.diff
 
 # OpenMP
 
