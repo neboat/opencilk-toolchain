@@ -7,6 +7,10 @@ llvm-toolchain-7 (1:7~+rc3-4) UNRELEASED; urgency=medium
   * Make OpenMP packages coinstallable
   * Make libc++ packages coinstallable
 
+  [ John Paul Adrian Glaubitz ]
+  * Add patch to fix missing MultiArch include dir
+    on powerpcspe (Closes: #908791)
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 13 Sep 2018 15:26:41 +0200
 
 llvm-toolchain-7 (1:7~+rc3-3) unstable; urgency=medium
