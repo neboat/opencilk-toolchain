@@ -8,8 +8,10 @@
  clang/lib/Headers/unwind.h |    9 +++++----
  1 file changed, 5 insertions(+), 4 deletions(-)
 
---- a/clang/lib/Headers/unwind.h
-+++ b/clang/lib/Headers/unwind.h
+Index: llvm-toolchain-snapshot_8~svn342269/clang/lib/Headers/unwind.h
+===================================================================
+--- llvm-toolchain-snapshot_8~svn342269.orig/clang/lib/Headers/unwind.h
++++ llvm-toolchain-snapshot_8~svn342269/clang/lib/Headers/unwind.h
 @@ -23,9 +23,6 @@
  
  /* See "Data Definitions for libgcc_s" in the Linux Standard Base.*/
@@ -30,7 +32,7 @@
  #include <stdint.h>
  
  #ifdef __cplusplus
-@@ -294,6 +294,7 @@ _Unwind_Ptr _Unwind_GetTextRelBase(struc
+@@ -336,6 +336,7 @@ _Unwind_Ptr _Unwind_GetTextRelBase(struc
  }
  #endif
  

@@ -3,9 +3,11 @@ Author: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
 Forwarded: https://reviews.llvm.org/D52050
 Last-Update: 2018-09-14
 
---- llvm-toolchain-7-7~+rc3.orig/clang/lib/Driver/ToolChains/Gnu.cpp
-+++ llvm-toolchain-7-7~+rc3/clang/lib/Driver/ToolChains/Gnu.cpp
-@@ -1837,7 +1837,10 @@ void Generic_GCC::GCCInstallationDetecto
+Index: llvm-toolchain-snapshot_8~svn342269/clang/lib/Driver/ToolChains/Gnu.cpp
+===================================================================
+--- llvm-toolchain-snapshot_8~svn342269.orig/clang/lib/Driver/ToolChains/Gnu.cpp
++++ llvm-toolchain-snapshot_8~svn342269/clang/lib/Driver/ToolChains/Gnu.cpp
+@@ -1830,7 +1830,10 @@ void Generic_GCC::GCCInstallationDetecto
        "x86_64-manbo-linux-gnu", "x86_64-linux-gnu",
        "x86_64-slackware-linux", "x86_64-unknown-linux",
        "x86_64-amazon-linux"};
@@ -17,7 +19,7 @@ Last-Update: 2018-09-14
    static const char *const X86LibDirs[] = {"/lib32", "/lib"};
    static const char *const X86Triples[] = {
        "i686-linux-gnu",       "i686-pc-linux-gnu",     "i486-linux-gnu",
-@@ -2031,14 +2034,16 @@ void Generic_GCC::GCCInstallationDetecto
+@@ -2024,14 +2027,16 @@ void Generic_GCC::GCCInstallationDetecto
      }
      break;
    case llvm::Triple::x86_64:
@@ -37,8 +39,10 @@ Last-Update: 2018-09-14
        BiarchLibDirs.append(begin(X86LibDirs), end(X86LibDirs));
        BiarchTripleAliases.append(begin(X86Triples), end(X86Triples));
      }
---- llvm-toolchain-7-7~+rc3.orig/clang/lib/Driver/ToolChains/Linux.cpp
-+++ llvm-toolchain-7-7~+rc3/clang/lib/Driver/ToolChains/Linux.cpp
+Index: llvm-toolchain-snapshot_8~svn342269/clang/lib/Driver/ToolChains/Linux.cpp
+===================================================================
+--- llvm-toolchain-snapshot_8~svn342269.orig/clang/lib/Driver/ToolChains/Linux.cpp
++++ llvm-toolchain-snapshot_8~svn342269/clang/lib/Driver/ToolChains/Linux.cpp
 @@ -86,10 +86,13 @@ static std::string getMultiarchTriple(co
    case llvm::Triple::x86_64:
      if (IsAndroid)
@@ -57,7 +61,7 @@ Last-Update: 2018-09-14
      break;
    case llvm::Triple::aarch64:
      if (IsAndroid)
-@@ -673,6 +676,8 @@ void Linux::AddClangSystemIncludeArgs(co
+@@ -672,6 +675,8 @@ void Linux::AddClangSystemIncludeArgs(co
        // in use in any released version of Debian, so we should consider
        // removing them.
        "/usr/include/i686-linux-gnu/64", "/usr/include/i486-linux-gnu/64"};
@@ -66,7 +70,7 @@ Last-Update: 2018-09-14
    const StringRef X86MultiarchIncludeDirs[] = {
        "/usr/include/i386-linux-gnu",
  
-@@ -715,7 +720,10 @@ void Linux::AddClangSystemIncludeArgs(co
+@@ -714,7 +719,10 @@ void Linux::AddClangSystemIncludeArgs(co
    ArrayRef<StringRef> MultiarchIncludeDirs;
    switch (getTriple().getArch()) {
    case llvm::Triple::x86_64:

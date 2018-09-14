@@ -4,9 +4,11 @@
  clang/tools/clang-format/clang-format.py      |    2 +-
  3 files changed, 3 insertions(+), 3 deletions(-)
 
---- a/clang/tools/clang-format/clang-format-diff.py
-+++ b/clang/tools/clang-format/clang-format-diff.py
-@@ -55,7 +55,7 @@ def main():
+Index: llvm-toolchain-snapshot_8~svn342269/clang/tools/clang-format/clang-format-diff.py
+===================================================================
+--- llvm-toolchain-snapshot_8~svn342269.orig/clang/tools/clang-format/clang-format-diff.py
++++ llvm-toolchain-snapshot_8~svn342269/clang/tools/clang-format/clang-format-diff.py
+@@ -57,7 +57,7 @@ def main():
    parser.add_argument('-style',
                        help='formatting style to apply (LLVM, Google, Chromium, '
                        'Mozilla, WebKit)')
@@ -15,8 +17,10 @@
                        help='location of binary to use for clang-format')
    args = parser.parse_args()
  
---- a/clang/tools/clang-format/clang-format.el
-+++ b/clang/tools/clang-format/clang-format.el
+Index: llvm-toolchain-snapshot_8~svn342269/clang/tools/clang-format/clang-format.el
+===================================================================
+--- llvm-toolchain-snapshot_8~svn342269.orig/clang/tools/clang-format/clang-format.el
++++ llvm-toolchain-snapshot_8~svn342269/clang/tools/clang-format/clang-format.el
 @@ -36,7 +36,7 @@
    :group 'tools)
  
@@ -26,9 +30,11 @@
        "clang-format")
    "Location of the clang-format executable.
  
---- a/clang/tools/clang-format/clang-format.py
-+++ b/clang/tools/clang-format/clang-format.py
-@@ -35,7 +35,7 @@ import vim
+Index: llvm-toolchain-snapshot_8~svn342269/clang/tools/clang-format/clang-format.py
+===================================================================
+--- llvm-toolchain-snapshot_8~svn342269.orig/clang/tools/clang-format/clang-format.py
++++ llvm-toolchain-snapshot_8~svn342269/clang/tools/clang-format/clang-format.py
+@@ -36,7 +36,7 @@ import vim
  
  # set g:clang_format_path to the path to clang-format if it is not on the path
  # Change this to the full path if clang-format is not on the path.

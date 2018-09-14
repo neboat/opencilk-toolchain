@@ -2,9 +2,11 @@
  lib/Support/Unix/Memory.inc |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- a/lib/Support/Unix/Memory.inc
-+++ b/lib/Support/Unix/Memory.inc
-@@ -319,7 +319,7 @@ void Memory::InvalidateInstructionCache(
+Index: llvm-toolchain-snapshot_8~svn342269/lib/Support/Unix/Memory.inc
+===================================================================
+--- llvm-toolchain-snapshot_8~svn342269.orig/lib/Support/Unix/Memory.inc
++++ llvm-toolchain-snapshot_8~svn342269/lib/Support/Unix/Memory.inc
+@@ -237,7 +237,7 @@ void Memory::InvalidateInstructionCache(
    // FIXME: Can we safely always call this for __GNUC__ everywhere?
    const char *Start = static_cast<const char *>(Addr);
    const char *End = Start + Len;
