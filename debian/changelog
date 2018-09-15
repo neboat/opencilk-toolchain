@@ -1,3 +1,10 @@
+llvm-toolchain-6.0 (1:6.0.1-10) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Add patch to fix missing include and library paths on x32
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sat, 15 Sep 2018 09:35:13 +0200
+
 llvm-toolchain-6.0 (1:6.0.1-9) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]

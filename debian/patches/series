@@ -68,3 +68,4 @@ D51335-alignment-issue.diff
 rL338481-cherry-pick-really-subtle-miscompile.diff
 disable-sse2-old-x86.diff
 powerpcspe-add-missing-include-path.diff
+x32-fix-driver-search-paths.diff
