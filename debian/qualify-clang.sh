@@ -27,6 +27,14 @@ if ! ./foo 2>&1 | grep -q heap-use-after-free ; then
     echo "sanitize=address is failing"
     exit 42
 fi
+echo '
+void test() {
+  int x;
+  x = 1; // warn
+}
+'> foo.c
+scan-build-$VERSION gcc -c foo.c &> /dev/null
+scan-build-$VERSION clang-$VERSION -c foo.c &> /dev/null
 
 echo 'int main() {return 0;}' > foo.c
 clang-$VERSION foo.c

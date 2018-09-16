@@ -74,3 +74,4 @@ libcxx-silent-failure-arm64.diff
 D51108-rust-powerpc.diff
 
 disable-sse2-old-x86.diff
+scan-build-clang-X.diff

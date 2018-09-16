@@ -1,3 +1,10 @@
+llvm-toolchain-7 (1:7~+rc3-6) unstable; urgency=medium
+
+  * Also manages clang-X as tool for scan-build
+    see https://reviews.llvm.org/D52151
+
+ --
+
 llvm-toolchain-7 (1:7~+rc3-5) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
