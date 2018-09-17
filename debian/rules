@@ -627,7 +627,7 @@ endif
 # endif
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.28 ; echo $$?),0)
 # strip segfaults on libFuzzer.a
-	dh_strip -a -v -XlibFuzzer.a -Xlibc++-$(LLVM_VERSION).a -Xlibc++abi-$(LLVM_VERSION).a -Xlibc++experimental.a
+	dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a
 else
 	dh_strip -a -v
 endif
