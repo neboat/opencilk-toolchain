@@ -1,2 +1,1 @@
 libc++abi1-@LLVM_VERSION@: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libc++abi.so.1.0
-libc++abi1-@LLVM_VERSION@: ldconfig-symlink-missing-for-shlib usr/lib/*/libc++abi.so.1 usr/lib/*/libc++abi-@LLVM_VERSION@.so.1.0 libc++abi.so.1

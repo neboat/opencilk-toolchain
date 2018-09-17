@@ -1,1 +1,1 @@
-usr/lib/llvm-@LLVM_VERSION@/lib/libc++-@LLVM_VERSION@.so.*	usr/lib/@DEB_HOST_MULTIARCH@
+usr/lib/llvm-@LLVM_VERSION@/lib/libc++.so.*
