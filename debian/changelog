@@ -17,14 +17,10 @@ llvm-toolchain-7 (1:7~+rc3-5) unstable; urgency=medium
 
 llvm-toolchain-7 (1:7~+rc3-4) unstable; urgency=medium
 
-  [ Sylvestre Ledru ]
   * libc++-7-dev doesn't provide libstdc++-dev anymore (Closes: #908738)
 
   [ Gianfranco Costamagna ]
   * Force polly cmake removal on arch:all because of --fail-missing
-
-  [ Reshabh Sharma ]
-  * Make OpenMP packages coinstallable from version 7
 
   [ John Paul Adrian Glaubitz ]
   * Add patch to fix missing MultiArch include dir

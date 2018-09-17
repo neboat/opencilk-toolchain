@@ -1,5 +1,0 @@
-/usr/lib/llvm-@LLVM_VERSION@/lib/libgomp.so	/usr/lib/@DEB_HOST_MULTIARCH@/libgomp-@LLVM_VERSION@.so
-/usr/lib/llvm-@LLVM_VERSION@/lib/libiomp5.so	/usr/lib/@DEB_HOST_MULTIARCH@/libiomp5-@LLVM_VERSION@.so
-/usr/lib/llvm-@LLVM_VERSION@/lib/libomp.so.5	/usr/lib/llvm-@LLVM_VERSION@/lib/libomp.so
-/usr/lib/llvm-@LLVM_VERSION@/lib/libomp.so	/usr/lib/llvm-@LLVM_VERSION@/lib/libomp-@LLVM_VERSION@.so
-/usr/lib/llvm-@LLVM_VERSION@/lib/libomp-@LLVM_VERSION@.so	/usr/lib/@DEB_HOST_MULTIARCH@/libomp-@LLVM_VERSION@.so
