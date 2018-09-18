@@ -1,2 +1,3 @@
-/usr/lib/@DEB_HOST_MULTIARCH@/libomp-@LLVM_VERSION@.so.5	/usr/lib/llvm-@LLVM_VERSION@/lib/libomp-@LLVM_VERSION@.so.5  
-/usr/lib/llvm-@LLVM_VERSION@/lib/libomp-@LLVM_VERSION@.so.5	/usr/lib/llvm-@LLVM_VERSION@/lib/libomp.so.5
+usr/lib/llvm-@LLVM_VERSION@/lib/libomp.so.5  /usr/lib/@DEB_HOST_MULTIARCH@/libomp.so.5
+
+

@@ -23,10 +23,6 @@ llvm-toolchain-7 (1:7~+rc3-4) unstable; urgency=medium
   [ Gianfranco Costamagna ]
   * Force polly cmake removal on arch:all because of --fail-missing
 
-  [ Reshabh Sharma ]
-  * Make OpenMP packages coinstallable from version 7
-  * Make libc++ packages coinstallable from version 7
-
   [ John Paul Adrian Glaubitz ]
   * Add patch to fix missing MultiArch include dir
     on powerpcspe (Closes: #908791)
