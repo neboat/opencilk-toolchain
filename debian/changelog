@@ -2,9 +2,6 @@ llvm-toolchain-7 (1:7~+rc3-6) unstable; urgency=medium
 
   * Also manages clang-X as tool for scan-build
     see https://reviews.llvm.org/D52151
-
- --
-
 llvm-toolchain-7 (1:7~+rc3-5) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
@@ -298,6 +295,24 @@ llvm-toolchain-snapshot (1:7~svn322880-1) unstable; urgency=medium
   * Fix the VCS-* tags
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jan 2018 20:50:03 +0100
+
+llvm-toolchain-6.0 (1:6.0.1-10) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Add patch to fix missing include and library paths on x32
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sat, 15 Sep 2018 09:35:13 +0200
+
+llvm-toolchain-6.0 (1:6.0.1-9) unstable; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Add patch to fix missing MultiArch include dir
+    on powerpcspe (Closes: #908791)
+
+  [ Gianfranco Costamagna ]
+  * Force polly cmake removal on arch:all because of --fail-missing
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Fri, 14 Sep 2018 09:24:02 +0200
 
 llvm-toolchain-6.0 (1:6.0.1-8) unstable; urgency=medium
 
