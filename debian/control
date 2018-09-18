@@ -484,6 +484,9 @@ Section: libdevel
 Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64
 Depends: libomp5-8 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Suggests: libomp-8-doc
+Replaces: libiomp-dev (<< 3.7-1), libomp-dev (<< 7~+rc1-1~exp1)
+Breaks: libiomp-dev (<< 3.7-1), libomp-dev (<< 7~+rc1-1~exp1)
+Provides: libomp-dev
 Description: LLVM OpenMP runtime - dev package
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
@@ -493,6 +496,10 @@ Package: libomp5-8
 Multi-Arch: same
 Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Replaces: libomp5 (<< 7~+rc1-1~exp1)
+Breaks: libomp5 (<< 7~+rc1-1~exp1)
+Provides: libomp5
+# TODO add the break depends
 Description: LLVM OpenMP runtime
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
@@ -520,6 +527,9 @@ Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: clang
+Replaces: libc++1 (<< 7~+rc1-1~exp1)
+Breaks: libc++1 (<< 7~+rc1-1~exp1)
+Provides: libc++1
 Description: LLVM C++ Standard library
  libc++ is another implementation of the C++ standard library.
  .
@@ -538,6 +548,9 @@ Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: libc++1-8 (= ${binary:Version}), ${misc:Depends}
+Provides: libc++-dev
+Breaks: libc++-dev (<< 7~+rc1-1~exp1)
+Replaces: libc++-dev (<< 7~+rc1-1~exp1)
 Description: LLVM C++ Standard library (development files)
  libc++ is another implementation of the C++ standard library
  .
@@ -559,6 +572,9 @@ Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Breaks: libc++abi1 (<< 7~+rc1-1~exp1)
+Provides: libc++abi1
+Replaces: libc++abi1 (<< 7~+rc1-1~exp1)
 Description: LLVM low level support for a standard C++ library
  libc++abi is another implementation of low level support for a standard C++
  library.
@@ -573,6 +589,9 @@ Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: libc++abi1-8 (= ${binary:Version}), ${misc:Depends}
+Replaces: libc++-dev (<= 6.0.1-1), libc++abi-dev (<= 6.0.1-1)
+Breaks: libc++-dev (<= 6.0.1-1), libc++abi-dev (<= 6.0.1-1)
+Provides: libc++abi-dev
 Description: LLVM low level support for a standard C++ library (development files)
  libc++abi is another implementation of low level support for a standard C++
  library.
