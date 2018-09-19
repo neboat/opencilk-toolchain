@@ -102,8 +102,21 @@ llvm-toolchain-snapshot (1:8~svn340819-1) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 28 Aug 2018 16:28:24 +0200
 
-<<<<<<<
-=======
+llvm-toolchain-7 (1:7-2) unstable; urgency=medium
+
+  * Fix the ftbfs under armel on libc++ and enable openmp on armel.
+    Thanks to Adrian Bunk for the patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 19 Sep 2018 14:12:34 +0200
+
+llvm-toolchain-7 (1:7-1) unstable; urgency=medium
+
+  * Stable release
+  * Also manages clang-X as tool for scan-build
+    see https://reviews.llvm.org/D52151
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 17 Sep 2018 13:51:03 +0200
+
 llvm-toolchain-7 (1:7~+rc3-4) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
@@ -119,7 +132,6 @@ llvm-toolchain-7 (1:7~+rc3-4) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 14 Sep 2018 11:27:28 +0200
 
->>>>>>>
 llvm-toolchain-7 (1:7~+rc3-2) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
@@ -303,24 +315,6 @@ llvm-toolchain-snapshot (1:7~svn322880-1) unstable; urgency=medium
   * Fix the VCS-* tags
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jan 2018 20:50:03 +0100
-
-llvm-toolchain-6.0 (1:6.0.1-10) UNRELEASED; urgency=medium
-
-  [ John Paul Adrian Glaubitz ]
-  * Add patch to fix missing include and library paths on x32
-
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sat, 15 Sep 2018 09:35:13 +0200
-
-llvm-toolchain-6.0 (1:6.0.1-9) unstable; urgency=medium
-
-  [ John Paul Adrian Glaubitz ]
-  * Add patch to fix missing MultiArch include dir
-    on powerpcspe (Closes: #908791)
-
-  [ Gianfranco Costamagna ]
-  * Force polly cmake removal on arch:all because of --fail-missing
-
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Fri, 14 Sep 2018 09:24:02 +0200
 
 llvm-toolchain-6.0 (1:6.0.1-8) unstable; urgency=medium
 
