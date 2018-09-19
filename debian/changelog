@@ -1,3 +1,10 @@
+llvm-toolchain-7 (1:7-2) unstable; urgency=medium
+
+  * Fix the ftbfs under armel on libc++ and enable openmp on armel.
+    Thanks to Adrian Bunk for the patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 19 Sep 2018 14:12:34 +0200
+
 llvm-toolchain-7 (1:7-1) unstable; urgency=medium
 
   * Stable release
