@@ -640,7 +640,7 @@ ifeq (${POLLY_ENABLE},yes)
 ifneq (,$(filter libclang-common-$(LLVM_VERSION)-dev, $(shell dh_listpackages)))
 	dh_install -p libclang-common-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly
 # On old Debian & Ubuntu, removing the files is necessary
-	rm debian/tmp/usr/lib/llvm-$(VERSION)/lib/cmake/polly/*.cmake
+	rm -rf debian/tmp/usr/lib/llvm-$(VERSION)/lib/cmake/polly/*.cmake
 else
 	rm -rf $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
 endif
