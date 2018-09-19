@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:8~svn342269-2) unstable; urgency=medium
+
+  * Fix the ftbfs under armel on libc++ and enable openmp on armel.
+    Thanks to Adrian Bunk for the patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 19 Sep 2018 15:53:51 +0200
+
 llvm-toolchain-snapshot (1:8~svn342269-1) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
@@ -28,29 +35,6 @@ llvm-toolchain-snapshot (1:8~svn342269-1) unstable; urgency=medium
   * Disable omp on armel mips and mipsel for now
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 14 Sep 2018 21:56:57 +0200
-
-llvm-toolchain-7 (1:7~+rc3-1) unstable; urgency=medium
-
-  [ John Paul Adrian Glaubitz ]
-  * Disable OpenMP on unsupported architectures powerpc,
-    powerpcspe, riscv64 and sparc64 (Closes: #907912)
-
-  [ Gianfranco Costamagna ]
-  * Fix build on armhf, by removing some installed package
-  * Fix build on s390x, by disabling OpenMP
-  * Add liblldb-7-dev to python-lldb runtime dependencies, needed to import it
-  * Enable lld on arm64, mips64el
-  * Enable lldb on mips64el
-
-  [ Reshabh Sharma ]
-  * Add version for libc++ and OpenMP packages breaks/replaces
-  * Remove libc++-helpers package
-    - No real value
-    - Just two scripts
-    - Command line arguments aren't that complex
-  * Fix autopkgtest support
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 06 Sep 2018 10:25:33 +0200
 
 llvm-toolchain-snapshot (1:8~svn340819-1) unstable; urgency=medium
 
@@ -145,16 +129,29 @@ llvm-toolchain-7 (1:7~+rc3-2) unstable; urgency=medium
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 12 Sep 2018 10:58:12 +0200
 
+
 llvm-toolchain-7 (1:7~+rc3-1) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Disable OpenMP on unsupported architectures powerpc,
     powerpcspe, riscv64 and sparc64 (Closes: #907912)
 
-  [ Sylvestre Ledru ]
-  * New snapshot release
+  [ Gianfranco Costamagna ]
+  * Fix build on armhf, by removing some installed package
+  * Fix build on s390x, by disabling OpenMP
+  * Add liblldb-7-dev to python-lldb runtime dependencies, needed to import it
+  * Enable lld on arm64, mips64el
+  * Enable lldb on mips64el
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 10 Sep 2018 17:01:25 +0200
+  [ Reshabh Sharma ]
+  * Add version for libc++ and OpenMP packages breaks/replaces
+  * Remove libc++-helpers package
+    - No real value
+    - Just two scripts
+    - Command line arguments aren't that complex
+  * Fix autopkgtest support
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 06 Sep 2018 10:25:33 +0200
 
 llvm-toolchain-7 (1:7~+rc1-1~exp2) experimental; urgency=medium
 
