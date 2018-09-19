@@ -180,7 +180,7 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libomp.so; then
 fi
 
 # OpenMP
-echo '
+cat <<EOF > foo.c
 //test.c
 #include "omp.h"
 #include <stdio.h>
@@ -189,7 +189,7 @@ int main(void) {
   #pragma omp parallel
   printf("thread %d\n", omp_get_thread_num());
 }
-' > foo.c
+EOF
 clang-$VERSION foo.c -fopenmp -o o
 ./o > /dev/null
 
