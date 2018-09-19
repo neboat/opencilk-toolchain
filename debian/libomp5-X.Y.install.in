@@ -1,1 +1,1 @@
-usr/lib/llvm-@LLVM_VERSION@/lib/libomp.so.5 
+usr/lib/llvm-@LLVM_VERSION@/lib/libomp*.so.5
