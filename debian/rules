@@ -42,8 +42,8 @@ ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
 	LIBCXX_EXCEPTIONS :=OFF
 endif
 
-ifneq (,$(filter $(DEB_HOST_ARCH),powerpc powerpcspe))
-LDFLAGS_EXTRA += -latomic
+ifneq (,$(filter $(DEB_HOST_ARCH),armel mips mipsel powerpc powerpcspe riscv64))
+CMAKE_EXTRA += -DLIBOMP_LIBFLAGS="-latomic" -DCMAKE_SHARED_LINKER_FLAGS="-latomic"
 endif
 
 # Cxx flags for building libcxx and libcxxabi
@@ -80,6 +80,8 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   # 3.8 fails to build, disable the compiler_rt builtins
   # See http://lists.llvm.org/pipermail/llvm-dev/2016-May/099761.html
   CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
+  # Check for ancient libstdc++ fails due to atomics usage
+  CMAKE_EXTRA_LIBCXX += -DLLVM_COMPILER_CHECKED=ON
   # Prevent clang from getting a > v4t default
   # See bug #868779
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabi
@@ -113,7 +115,7 @@ endif
 
 # Enable openmp (or not)
 OPENMP_ENABLE=yes
-ifneq (,$(filter $(DEB_HOST_ARCH), armel mips mipsel powerpc powerpcspe riscv64 sparc64 s390x x32))
+ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel powerpc powerpcspe riscv64 sparc64 s390x x32))
   OPENMP_ENABLE=no
 endif
 
@@ -349,7 +351,9 @@ LIBCXX_CMAKE_OPTIONS := \
 	-DCMAKE_AR=$(CURDIR)/$(TARGET_BUILD)/bin/llvm-ar \
 	-DCMAKE_RANLIB=$(CURDIR)/$(TARGET_BUILD)/bin/llvm-ranlib \
 	-DCMAKE_C_COMPILER=$(CURDIR)/$(TARGET_BUILD)/bin/clang \
-	-DLLVM_EXTERNAL_LIT=$(BASE_PATH)/utils/lit/lit.py
+	-DLLVM_EXTERNAL_LIT=$(BASE_PATH)/utils/lit/lit.py \
+	$(CMAKE_EXTRA) \
+	$(CMAKE_EXTRA_LIBCXX)
 
 override_dh_auto_build:
 	$(PRE_PROCESS) $(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=$(VENDOR) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1
@@ -463,6 +467,9 @@ override_dh_auto_install:
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so; \
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT)
 
+	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && rm -f libomp.so; \
+	ln -s libomp.so.$(SONAME_OPENMP) libomp.so
+
 	if test "$(OPENMP_ENABLE)" = yes; then \
 		mkdir -p debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp; \
 		cp -f openmp/runtime/exports/common*/include/* debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp; \
@@ -511,18 +518,6 @@ endif
 
 	$(MAKE) -C libcxxabi/build install DESTDIR=$(DEB_INST)
 	$(MAKE) -C libcxx/build install DESTDIR=$(DEB_INST)
-
-# hack to make them co installable
-	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && mv libc++.so.1.0 libc++-$(LLVM_VERSION).so.1.0; \
-	mv libc++.so libc++-$(LLVM_VERSION).so; \
-	mv libc++.a libc++-$(LLVM_VERSION).a; \
-	mv libc++abi.so.1.0 libc++abi-$(LLVM_VERSION).so.1.0; \
-	mv libc++abi.a libc++abi-$(LLVM_VERSION).a; \
-	rm libc++.so.1 libc++abi.so libc++abi.so.1; \
-	ln -s libc++-$(LLVM_VERSION).so.1.0 libc++-$(LLVM_VERSION).so.1; \
-	ln -s libc++abi-$(LLVM_VERSION).so.1.0 libc++abi-$(LLVM_VERSION).so.1; \
-	ln -s libc++abi-$(LLVM_VERSION).so.1 libc++abi-$(LLVM_VERSION).so; \
-	ln -s libc++abi-$(LLVM_VERSION).so.1 libc++abi.so.1
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
@@ -636,7 +631,7 @@ endif
 # endif
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.28 ; echo $$?),0)
 # strip segfaults on libFuzzer.a
-	dh_strip -a -v -XlibFuzzer.a -Xlibc++-$(LLVM_VERSION).a -Xlibc++abi-$(LLVM_VERSION).a -Xlibc++experimental.a
+	dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a
 else
 	dh_strip -a -v
 endif
@@ -648,6 +643,8 @@ ifeq (${POLLY_ENABLE},yes)
 # only for arch:any builds
 ifneq (,$(filter libclang-common-$(LLVM_VERSION)-dev, $(shell dh_listpackages)))
 	dh_install -p libclang-common-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly
+# On old Debian & Ubuntu, removing the files is necessary
+	rm -rf debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
 else
 	rm -rf $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
 endif
