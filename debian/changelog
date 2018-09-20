@@ -8,6 +8,8 @@ llvm-toolchain-7 (1:7-2) unstable; urgency=medium
        - built with libc++-8-dev
        - run with libc++1-7
     (Closes: #903802)
+  * Remove circular dependency by removing python-lldb-7: Depends: liblldb-7-dev
+    (Closes: #888889)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 19 Sep 2018 14:12:34 +0200
 
