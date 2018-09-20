@@ -1,7 +1,13 @@
-llvm-toolchain-7 (1:7-2) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7-2) unstable; urgency=medium
 
   * Fix the ftbfs under armel on libc++ and enable openmp on armel.
     Thanks to Adrian Bunk for the patch
+  * Make libc++, libc++abi & openmp NOT co-installable
+    Rational: the benefits are limited compared to the drawback.
+    We should have issues like:
+       - built with libc++-8-dev
+       - run with libc++1-7
+    (Closes: #903802)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 19 Sep 2018 14:12:34 +0200
 
