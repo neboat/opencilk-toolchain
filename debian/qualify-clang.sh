@@ -272,6 +272,52 @@ g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-
     foo.cpp -nodefaultlibs -std=c++17 -lc++ -lc++abi -lm -lc -lgcc_s -lgcc
 ./o > /dev/null
 
+
+if test ! -f /usr/lib/llvm-$VERSION/include/polly/LinkAllPasses.h; then
+    echo "Install libclang-common-$VERSION-dev for polly";
+    exit -1;
+fi
+
+# Polly
+echo "
+#define N 1536
+float A[N][N];
+float B[N][N];
+float C[N][N];
+
+void init_array()
+{
+    int i, j;
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            A[i][j] = (1+(i*j)%1024)/2.0;
+            B[i][j] = (1+(i*j)%1024)/2.0;
+        }
+    }
+}
+
+int main()
+{
+    int i, j, k;
+    double t_start, t_end;
+    init_array();
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            C[i][j] = 0;
+            for (k = 0; k < N; k++)
+                C[i][j] = C[i][j] + A[i][k] * B[k][j];
+        }
+    }
+    return 0;
+}
+" > foo.c
+clang-$VERSION -O3 -mllvm -polly foo.c
+clang-$VERSION -O3 -mllvm -polly -mllvm -polly-parallel -lgomp foo.c
+clang-$VERSION -O3 -mllvm -polly -mllvm -polly-vectorizer=stripmine foo.c
+clang-$VERSION -S -emit-llvm foo.c -o matmul.s
+opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
+opt-$VERSION -basicaa -polly-ast -analyze -q matmul.preopt.ll -polly-process-unprofitable > /dev/null
+
 echo "b main
 run
 bt
@@ -350,6 +396,8 @@ EOF
 mkdir cmaketest/foo/
 (cd cmaketest/foo && cmake .. > /dev/null)
 rm -rf cmaketest
+
+
 
 
 CLANG=clang-$VERSION
