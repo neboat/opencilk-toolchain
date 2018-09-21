@@ -314,9 +314,19 @@ int main()
 clang-$VERSION -O3 -mllvm -polly foo.c
 clang-$VERSION -O3 -mllvm -polly -mllvm -polly-parallel -lgomp foo.c
 clang-$VERSION -O3 -mllvm -polly -mllvm -polly-vectorizer=stripmine foo.c
-clang-$VERSION -S -emit-llvm foo.c -o matmul.s
+clang-$VERSION -S -fsave-optimization-record -emit-llvm foo.c -o matmul.s
 opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
 opt-$VERSION -basicaa -polly-ast -analyze -q matmul.preopt.ll -polly-process-unprofitable > /dev/null
+if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
+    echo "Install llvm-$VERSION-tools"
+    exit 42
+fi
+/usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py -source-dir .  matmul.opt.yaml -o ./output > /dev/null
+
+if ! grep "not inlined into" output/foo.c.html 2>&1; then
+    echo "Could not find the output from polly"
+    exit -1
+fi
 
 echo "b main
 run
@@ -436,6 +446,7 @@ EOF
 
 #clean up
 rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.c test_fuzzer.cc foo.* o
+rm -rf output matmul.*
 
 # only for AMD64 for now
 # many sanitizers only work on AMD64
