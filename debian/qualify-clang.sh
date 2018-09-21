@@ -473,10 +473,6 @@ int main ()
 }
 EOF
 
-#clean up
-rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.c test_fuzzer.cc foo.* o
-rm -rf output matmul.* *profraw
-
 # only for AMD64 for now
 # many sanitizers only work on AMD64
 # x32 programs need to be enabled in the kernel bootparams for debian
@@ -521,5 +517,9 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libclangBasic.a; then
     echo "Install libclang-$VERSION-dev"
     exit 1
 fi
+
+#clean up
+rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.* test_fuzzer.cc foo.* o
+rm -rf output matmul.* *profraw
 
 echo "Completed"
