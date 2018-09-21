@@ -171,7 +171,7 @@ echo 'int main() {
 	return a;
 }
 ' > foo.c
-clang++-$VERSION -g -o bar foo.c
+clang-$VERSION -g -o bar foo.c
 
 
 if test ! -f /usr/lib/llvm-$VERSION/lib/libomp.so; then
