@@ -328,6 +328,30 @@ if ! grep "not inlined into" output/foo.c.html 2>&1; then
     exit -1
 fi
 
+echo "
+int foo(int x, int y) __attribute__((always_inline));
+int foo(int x, int y) { return x + y; }
+int bar(int j) { return foo(j, j - 2); }" > foo.cc
+clang-$VERSION -O2 -Rpass=inline foo.cc -c &> foo.log
+if ! grep "with cost=always" foo.log; then
+    echo "-Rpass fails"
+    cat foo.log
+    exit 1
+fi
+echo "
+int X = 0;
+
+int main() {
+  int i;
+  for (i = 0; i < 100; i++)
+    X += i;
+  return 0;
+}"> foo.cc
+clang++-$VERSION -O2 -fprofile-instr-generate foo.cc -o foo
+LLVM_PROFILE_FILE="foo-%p.profraw" ./foo
+llvm-profdata-$VERSION merge -output=foo.profdata foo-*.profraw
+clang++-$VERSION -O2 -fprofile-instr-use=foo.profdata foo.cc -o foo
+
 echo "b main
 run
 bt
@@ -446,7 +470,7 @@ EOF
 
 #clean up
 rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.c test_fuzzer.cc foo.* o
-rm -rf output matmul.*
+rm -rf output matmul.* *profraw
 
 # only for AMD64 for now
 # many sanitizers only work on AMD64
