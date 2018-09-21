@@ -7,7 +7,7 @@ Index: llvm-toolchain-7_7~+rc1/clang/tools/scan-build/bin/scan-build
        $Cmd =~ /(.*\/?cc[^\/]*$)/ or
        $Cmd =~ /(.*\/?llvm-gcc[^\/]*$)/ or
 -      $Cmd =~ /(.*\/?clang$)/ or
-+​      $Cmd =~ /(.*\/?clang[^\/]*$)/ or
++      $Cmd =~ /(.*\/?clang[^\/]*$)/ or
        $Cmd =~ /(.*\/?ccc-analyzer[^\/]*$)/) {
  
      if (!($Cmd =~ /ccc-analyzer/) and !defined $ENV{"CCC_CC"}) {
