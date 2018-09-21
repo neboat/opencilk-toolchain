@@ -5,9 +5,15 @@ set -e
 VERSION=8
 DETAILED_VERSION=8~+rc1-1~exp2
 
+LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm7_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb"
 echo "To install everything:"
-echo "sudo dpkg -i libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm7_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb"
-
+echo "sudo dpkg -i $LIST"
+L=""
+for f in $LIST; do
+    L="$L $(echo $f|cut -d_ -f1)"
+done
+echo "or"
+echo "apt-get install $L"
 
 if test ! -f /usr/bin/llvm-config-$VERSION; then
     echo "Install llvm-$VERSION & llvm-$VERSION-dev"
@@ -321,9 +327,43 @@ int main()
 clang-$VERSION -O3 -mllvm -polly foo.c
 clang-$VERSION -O3 -mllvm -polly -mllvm -polly-parallel -lgomp foo.c
 clang-$VERSION -O3 -mllvm -polly -mllvm -polly-vectorizer=stripmine foo.c
-clang-$VERSION -S -emit-llvm foo.c -o matmul.s
+clang-$VERSION -S -fsave-optimization-record -emit-llvm foo.c -o matmul.s
 opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
 opt-$VERSION -basicaa -polly-ast -analyze -q matmul.preopt.ll -polly-process-unprofitable > /dev/null
+if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
+    echo "Install llvm-$VERSION-tools"
+    exit 42
+fi
+/usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py -source-dir .  matmul.opt.yaml -o ./output > /dev/null
+
+if ! grep "not inlined into" output/foo.c.html 2>&1; then
+    echo "Could not find the output from polly"
+    exit -1
+fi
+
+echo "
+int foo(int x, int y) __attribute__((always_inline));
+int foo(int x, int y) { return x + y; }
+int bar(int j) { return foo(j, j - 2); }" > foo.cc
+clang-$VERSION -O2 -Rpass=inline foo.cc -c &> foo.log
+if ! grep "with cost=always" foo.log; then
+    echo "-Rpass fails"
+    cat foo.log
+    exit 1
+fi
+echo "
+int X = 0;
+
+int main() {
+  int i;
+  for (i = 0; i < 100; i++)
+    X += i;
+  return 0;
+}"> foo.cc
+clang++-$VERSION -O2 -fprofile-instr-generate foo.cc -o foo
+LLVM_PROFILE_FILE="foo-%p.profraw" ./foo
+llvm-profdata-$VERSION merge -output=foo.profdata foo-*.profraw
+clang++-$VERSION -O2 -fprofile-instr-use=foo.profdata foo.cc -o foo
 
 echo "b main
 run
@@ -441,9 +481,6 @@ int main ()
 }
 EOF
 
-#clean up
-rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.c test_fuzzer.cc foo.* o
-
 # only for AMD64 for now
 # many sanitizers only work on AMD64
 # x32 programs need to be enabled in the kernel bootparams for debian
@@ -488,5 +525,9 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libclangBasic.a; then
     echo "Install libclang-$VERSION-dev"
     exit 1
 fi
+
+#clean up
+rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.* test_fuzzer.cc foo.* o
+rm -rf output matmul.* *profraw
 
 echo "Completed"
