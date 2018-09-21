@@ -1,8 +1,9 @@
 llvm-toolchain-7 (1:7-3) unstable; urgency=medium
 
   * Fix a syntax issue in a scan-build patch
+  * Fix the autopkgtest script (no gcc in the test)
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Sep 2018 22:48:47 +0200
 
 llvm-toolchain-7 (1:7-2) unstable; urgency=medium
 
