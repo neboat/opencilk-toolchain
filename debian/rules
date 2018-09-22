@@ -131,6 +131,8 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 	CXXFLAGS_EXTRA += -fprofile-arcs -ftest-coverage
 	LDFLAGS_EXTRA += -coverage -lgcov
 	RUN_TEST=yes
+	# OpenMP doesn't respect LDFLAGS
+	CMAKE_EXTRA+= -DLIBOMP_LDFLAGS="-coverage -lgcov" # don't pass LDFLAGS_EXTRA because it expects gcc arg
 endif
 
 ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
@@ -356,7 +358,12 @@ LIBCXX_CMAKE_OPTIONS := \
 	$(CMAKE_EXTRA_LIBCXX)
 
 override_dh_auto_build:
-	$(PRE_PROCESS) $(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=$(VENDOR) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1
+# start the full build process. Includes also openmp
+	$(PRE_PROCESS) $(MAKE) $(NJOBS) -C $(TARGET_BUILD) VERBOSE=1 CLANG_VENDOR=$(VENDOR) \
+	CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" \
+	LIBOMP_CXXFLAGS="$(CXXFLAGS_EXTRA)" LIBOMP_LDFLAGS="$(LDFLAGS_EXTRA)" \
+	REQUIRES_RTTI=1 DEBUGMAKE=1
+
 ifeq (${LIBFUZZER_ENABLE},yes)
 	cd $(TARGET_BUILD) \
 	CFLAGS=`dpkg-buildflags --get CFLAGS`; \
