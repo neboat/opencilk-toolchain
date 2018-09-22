@@ -94,6 +94,9 @@ llvm-toolchain-snapshot (1:8~svn340819-1) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 28 Aug 2018 16:28:24 +0200
 
+llvm-toolchain-7 (1:7-3) unstable; urgency=medium
+
+  * Fix a syntax issue in a scan-build patch
 llvm-toolchain-7 (1:7-2) unstable; urgency=medium
 
   * Fix the ftbfs under armel on libc++ and enable openmp on armel.

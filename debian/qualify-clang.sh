@@ -5,9 +5,16 @@ set -e
 VERSION=8
 DETAILED_VERSION=8~+rc1-1~exp2
 
-echo "To install everything:"
-echo "sudo dpkg -i libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm7_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb"
+LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm7_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb"
 
+echo "To install everything:"
+echo "sudo dpkg -i $LIST"
+L=""
+for f in $LIST; do
+    L="$L $(echo $f|cut -d_ -f1)"
+done
+echo "or"
+echo "apt-get install $L"
 
 if test ! -f /usr/bin/llvm-config-$VERSION; then
     echo "Install llvm-$VERSION & llvm-$VERSION-dev"
@@ -27,17 +34,24 @@ if ! ./foo 2>&1 | grep -q heap-use-after-free ; then
     echo "sanitize=address is failing"
     exit 42
 fi
+
+if test ! -f /usr/bin/scan-build-$VERSION; then
+    echo "Install clang-tools-$VERSION"
+    exit 1
+fi
+
 echo '
 void test() {
   int x;
   x = 1; // warn
 }
 '> foo.c
+
 scan-build-$VERSION gcc -c foo.c &> /dev/null
 scan-build-$VERSION clang-$VERSION -c foo.c &> /dev/null
 scan-build-$VERSION --exclude non-existing/ --exclude /tmp/ -v clang-$VERSION -c foo.c &> /dev/null
 scan-build-$VERSION --exclude $(pwd) -v clang-$VERSION -c foo.c &> foo.log
-if ! grep -q -E "scan-build: 0 bugs found."; then
+if ! grep -q -E "scan-build: 0 bugs found." foo.log; then
     echo "scan-build --exclude didn't ignore the defect"
     exit 42
 fi
@@ -178,7 +192,7 @@ echo 'int main() {
 	return a;
 }
 ' > foo.c
-clang++-$VERSION -g -o bar foo.c
+clang-$VERSION -g -o bar foo.c
 
 
 if test ! -f /usr/lib/llvm-$VERSION/lib/libomp.so; then
@@ -279,6 +293,86 @@ g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-
     foo.cpp -nodefaultlibs -std=c++17 -lc++ -lc++abi -lm -lc -lgcc_s -lgcc
 ./o > /dev/null
 
+
+if test ! -f /usr/lib/llvm-$VERSION/include/polly/LinkAllPasses.h; then
+    echo "Install libclang-common-$VERSION-dev for polly";
+    exit -1;
+fi
+
+# Polly
+echo "
+#define N 1536
+float A[N][N];
+float B[N][N];
+float C[N][N];
+
+void init_array()
+{
+    int i, j;
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            A[i][j] = (1+(i*j)%1024)/2.0;
+            B[i][j] = (1+(i*j)%1024)/2.0;
+        }
+    }
+}
+
+int main()
+{
+    int i, j, k;
+    double t_start, t_end;
+    init_array();
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            C[i][j] = 0;
+            for (k = 0; k < N; k++)
+                C[i][j] = C[i][j] + A[i][k] * B[k][j];
+        }
+    }
+    return 0;
+}
+" > foo.c
+clang-$VERSION -O3 -mllvm -polly foo.c
+clang-$VERSION -O3 -mllvm -polly -mllvm -polly-parallel -lgomp foo.c
+clang-$VERSION -O3 -mllvm -polly -mllvm -polly-vectorizer=stripmine foo.c
+clang-$VERSION -S -fsave-optimization-record -emit-llvm foo.c -o matmul.s
+opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
+opt-$VERSION -basicaa -polly-ast -analyze -q matmul.preopt.ll -polly-process-unprofitable > /dev/null
+if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
+    echo "Install llvm-$VERSION-tools"
+    exit 42
+fi
+/usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py -source-dir .  matmul.opt.yaml -o ./output > /dev/null
+
+if ! grep "not inlined into" output/foo.c.html 2>&1; then
+    echo "Could not find the output from polly"
+    exit -1
+fi
+
+echo "
+int foo(int x, int y) __attribute__((always_inline));
+int foo(int x, int y) { return x + y; }
+int bar(int j) { return foo(j, j - 2); }" > foo.cc
+clang-$VERSION -O2 -Rpass=inline foo.cc -c &> foo.log
+if ! grep "cost=always" foo.log; then
+    echo "-Rpass fails"
+    cat foo.log
+    exit 1
+fi
+echo "
+int X = 0;
+
+int main() {
+  int i;
+  for (i = 0; i < 100; i++)
+    X += i;
+  return 0;
+}"> foo.cc
+clang++-$VERSION -O2 -fprofile-instr-generate foo.cc -o foo
+LLVM_PROFILE_FILE="foo-%p.profraw" ./foo
+llvm-profdata-$VERSION merge -output=foo.profdata foo-*.profraw
+clang++-$VERSION -O2 -fprofile-instr-use=foo.profdata foo.cc -o foo
+
 echo "b main
 run
 bt
@@ -359,6 +453,8 @@ mkdir cmaketest/foo/
 rm -rf cmaketest
 
 
+
+
 CLANG=clang-$VERSION
 #command -v "$CLANG" 1>/dev/null 2>/dev/null || { printf "Usage:\n%s CLANGEXE [ARGS]\n" "$0" 1>&2; exit 1; }
 #shift
@@ -392,9 +488,6 @@ int main ()
   return EXIT_SUCCESS;
 }
 EOF
-
-#clean up
-rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.c test_fuzzer.cc foo.* o
 
 # only for AMD64 for now
 # many sanitizers only work on AMD64
@@ -440,5 +533,9 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libclangBasic.a; then
     echo "Install libclang-$VERSION-dev"
     exit 1
 fi
+
+#clean up
+rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.* test_fuzzer.cc foo.* o
+rm -rf output matmul.* *profraw
 
 echo "Completed"
