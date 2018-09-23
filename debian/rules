@@ -124,6 +124,7 @@ ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	RUN_TEST=no
 endif
 
+CODECOVERAGE=no
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 # enable the code coverage
 	CODECOVERAGE=yes
@@ -710,7 +711,9 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 		if test ! -e _lldb.so; then \
 			ln -s lldb/_lldb.so; \
 		fi
-	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ $(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lldb || true
+	if test "$(CODECOVERAGE)" = "no"; then \
+	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ $(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lldb || true; \
+	fi
 	# remove the workaround
 	rm $(CURDIR)/$(TARGET_BUILD)/lib/python*/site-packages/_lldb.so
 endif
