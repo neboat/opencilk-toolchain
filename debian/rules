@@ -737,7 +737,7 @@ endif
 	if test "$(CODECOVERAGE)" = "yes"; then \
 		REPORT=reports/llvm-toolchain.info; \
 		mkdir -p reports/; \
-		lcov --directory . --capture --ignore-errors source --output-file $$REPORT; \
+		lcov --directory $(TARGET_BUILD)/ --capture --ignore-errors source --output-file $$REPORT; \
 		lcov --remove $$REPORT "/usr*" -o $$REPORT; \
 		genhtml -o reports/coverage --show-details --highlight --legend $$REPORT; \
 		chmod 0755 $(find reports/coverage -type d); \
