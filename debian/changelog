@@ -6,6 +6,7 @@ llvm-toolchain-7 (1:7-3) unstable; urgency=medium
   * remove dep from lld to llvm-7-dev because lld
     doesn't use LLVM LTO
   * remove old Replaces/Breaks
+  * Standards-Version: 4.2.1
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Sep 2018 22:48:47 +0200
 
