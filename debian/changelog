@@ -2,6 +2,8 @@ llvm-toolchain-7 (1:7-3) unstable; urgency=medium
 
   * Fix a syntax issue in a scan-build patch
   * Fix the autopkgtest script (no gcc in the test)
+  * Create a new llvm-lto-7-dev package to ship lto
+    This will avoid to download llvm-dev to get lld
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Sep 2018 22:48:47 +0200
 

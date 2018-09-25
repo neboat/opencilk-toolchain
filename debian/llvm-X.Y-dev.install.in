@@ -4,7 +4,6 @@ usr/lib/llvm-@LLVM_VERSION@/lib/LLVM*.so
 usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM.so
 usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM-@LLVM_VERSION@.so
 usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM-@LLVM_VERSION_FULL@.so
-usr/lib/llvm-@LLVM_VERSION@/lib/libLTO.*
 usr/lib/llvm-@LLVM_VERSION@/lib/BugpointPasses.so
 usr/lib/llvm-@LLVM_VERSION@/lib/TestPlugin.so
 usr/lib/llvm-@LLVM_VERSION@/include/llvm/      usr/include/llvm-@LLVM_VERSION@/
