@@ -2,7 +2,6 @@ llvm-toolchain-7 (1:7-3) unstable; urgency=medium
 
   * Fix a syntax issue in a scan-build patch
   * Fix the autopkgtest script (no gcc in the test)
-  * Create a new llvm-lto-7-dev package to ship lto
   * remove dep from lld to llvm-7-dev because lld
     doesn't use LLVM LTO
   * remove old Replaces/Breaks

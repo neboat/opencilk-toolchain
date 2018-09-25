@@ -274,8 +274,7 @@ Description: Modular compiler and toolchain technologies, IR interpreter
 Package: llvm-7-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends},
- llvm-7 (= ${binary:Version}), libllvm7 (= ${binary:Version}), libtinfo-dev,
- libllvm-lto-7-dev
+ llvm-7 (= ${binary:Version}), libllvm7 (= ${binary:Version}), libtinfo-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -291,18 +290,6 @@ Description: Modular compiler and toolchain technologies, libraries and headers
  .
  This package provides the libraries and headers to develop applications
  using llvm.
-
-Package: libllvm-lto-7-dev
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Breaks: llvm-7-dev (<< 7-3)
-Replaces: llvm-7-dev (<< 7-3)
-Description: Modular compiler and toolchain technologies, LTO lib
- LLVM is a collection of libraries and tools that make it easy to build
- compilers, optimizers, just-in-time code generators, and many other
- compiler-related programs.
- .
- This package provides the LTO libraries.
 
 Package: llvm-7-tools
 Architecture: any
@@ -391,7 +378,7 @@ Description: Modular compiler and toolchain technologies, examples
 Package: lld-7
 Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
 # ia64 hurd powerpc have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm7 (= ${binary:Version}), libllvm-lto-7-dev (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm7 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker
  LLD is a new, high-performance linker. It is built as a set of reusable
