@@ -297,6 +297,8 @@ Description: Modular compiler and toolchain technologies, libraries and headers
 Package: libllvm-lto-7-dev
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Breaks: llvm-7-dev (<< 7-3)
+Replaces: llvm-7-dev (<< 7-3)
 Description: Modular compiler and toolchain technologies, LTO lib
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
