@@ -255,8 +255,6 @@ Description: Modular compiler and toolchain technologies
 Package: llvm-7-runtime
 Architecture: any
 Depends: binfmt-support, ${shlibs:Depends}, ${misc:Depends}
-Conflicts: llvm (<< 2.7-1)
-Replaces: llvm (<< 2.7-1)
 Description: Modular compiler and toolchain technologies, IR interpreter
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -278,7 +276,6 @@ Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends},
  llvm-7 (= ${binary:Version}), libllvm7 (= ${binary:Version}), libtinfo-dev,
  libllvm-lto-7-dev
-Replaces: llvm (<< 2.2-3)
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
