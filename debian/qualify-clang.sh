@@ -147,6 +147,10 @@ fi
 clang-$VERSION -fuse-ld=lld -O2 foo.c main.c -o foo
 ./foo > /dev/null
 
+clang-$VERSION -fuse-ld=lld -flto -O2 foo.c main.c -o foo
+./foo > /dev/null
+exit 0
+
 clang-$VERSION -fuse-ld=lld-$VERSION -O2 foo.c main.c -o foo
 ./foo > /dev/null
 
