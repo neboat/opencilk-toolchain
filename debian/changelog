@@ -1,5 +1,16 @@
 llvm-toolchain-snapshot (1:8~svn342269-2) UNRELEASED; urgency=medium
 
+  * Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
+  * Fix the autopkgtest script (no gcc in the test)
+  * remove dep from lld to llvm-8-dev because lld
+    doesn't use LLVM LTO
+  * remove old Replaces/Breaks
+  * Standards-Version: 4.2.1
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Sep 2018 22:48:47 +0200
+
+llvm-toolchain-7 (1:7-2) unstable; urgency=medium
+
   * Fix the ftbfs under armel on libc++ and enable openmp on armel.
     Thanks to Adrian Bunk for the patch
   * Make libc++, libc++abi & openmp NOT co-installable

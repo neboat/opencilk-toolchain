@@ -47,7 +47,7 @@ void test() {
 }
 '> foo.c
 
-scan-build-$VERSION gcc -c foo.c &> /dev/null
+scan-build-$VERSION gcc -c foo.c &> /dev/null || true
 scan-build-$VERSION clang-$VERSION -c foo.c &> /dev/null
 scan-build-$VERSION --exclude non-existing/ --exclude /tmp/ -v clang-$VERSION -c foo.c &> /dev/null
 scan-build-$VERSION --exclude $(pwd) -v clang-$VERSION -c foo.c &> foo.log
@@ -155,6 +155,10 @@ if test ! -f /usr/bin/lld-$VERSION; then
 fi
 clang-$VERSION -fuse-ld=lld -O2 foo.c main.c -o foo
 ./foo > /dev/null
+
+clang-$VERSION -fuse-ld=lld -flto -O2 foo.c main.c -o foo
+./foo > /dev/null
+exit 0
 
 clang-$VERSION -fuse-ld=lld-$VERSION -O2 foo.c main.c -o foo
 ./foo > /dev/null
@@ -290,7 +294,7 @@ clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o 
 ./o > /dev/null
 
 g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
-    foo.cpp -nodefaultlibs -std=c++17 -lc++ -lc++abi -lm -lc -lgcc_s -lgcc
+    foo.cpp -nodefaultlibs -std=c++17 -lc++ -lc++abi -lm -lc -lgcc_s -lgcc|| true
 ./o > /dev/null
 
 
