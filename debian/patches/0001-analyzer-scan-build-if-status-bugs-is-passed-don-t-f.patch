@@ -1,0 +1,46 @@
+From 564f50e7536dab9dec5ed73f811b0b2d9d3aed14 Mon Sep 17 00:00:00 2001
+From: Roman Lebedev <lebedev.ri@gmail.com>
+Date: Wed, 26 Sep 2018 13:08:44 +0000
+Subject: [PATCH] [analyzer] scan-build: if --status-bugs is passed, don't
+ forget about the exit status of the actual build
+
+Summary:
+This has been bothering me for a while, but only now i have actually looked into this.
+I'm using one CI job for static analysis - clang static analyzers as compilers + clang-tidy via cmake.
+And i'd like for the build to fail if at least one of those finds issues.
+If clang-tidy finds issues, it will fail the build since the warnings-as-errors is set.
+If static analyzer finds anything, since --status-bugs is set, it will fail the build.
+But if clang-tidy find anything, but static analyzer does not, the build succeeds :/
+
+Reviewers: sylvestre.ledru, alexfh, jroelofs, ygribov, george.karpenkov, krememek
+
+Reviewed By: jroelofs
+
+Subscribers: xazax.hun, szepet, a.sidorin, mikhail.ramalho, Szelethus, cfe-commits
+
+Differential Revision: https://reviews.llvm.org/D52530
+
+git-svn-id: https://llvm.org/svn/llvm-project/cfe/trunk@343105 91177308-0d34-0410-b5e6-96231b3b80d8
+
+Index: llvm-toolchain-7-7/clang/tools/scan-build/bin/scan-build
+===================================================================
+--- llvm-toolchain-7-7.orig/clang/tools/scan-build/bin/scan-build
++++ llvm-toolchain-7-7/clang/tools/scan-build/bin/scan-build
+@@ -1192,7 +1192,7 @@ OPTIONS:
+ 
+    By default, the exit status of scan-build is the same as the executed build
+    command. Specifying this option causes the exit status of scan-build to be 1
+-   if it found potential bugs and 0 otherwise.
++   if it found potential bugs and the exit status of the build itself otherwise.
+ 
+  --use-cc [compiler path]
+  --use-cc=[compiler path]
+@@ -1878,7 +1878,7 @@ if (defined $Options{OutputFormat}) {
+ 
+     if ($Options{ExitStatusFoundBugs}) {
+       exit 1 if ($NumBugs > 0);
+-      exit 0;
++      exit $ExitStatus;
+     }
+   }
+ }
