@@ -3,6 +3,7 @@ llvm-toolchain-7 (1:7-4) unstable; urgency=medium
   * Backport a fix to improve scan-build code error.
     Thanks to Roman Lebedev for the fix(Closes: #909662)
   * Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
+  * Install bash-completion
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 26 Sep 2018 14:32:41 +0100
 
