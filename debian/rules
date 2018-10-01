@@ -742,8 +742,8 @@ endif
 		lcov --directory $(TARGET_BUILD)/ --capture --ignore-errors source --output-file $$REPORT; \
 		lcov --remove $$REPORT "/usr*" -o $$REPORT; \
 		genhtml -o reports/coverage --show-details --highlight --legend $$REPORT; \
-		chmod 0755 $(find reports/coverage -type d); \
-		chmod 0644 $(find reports/coverage -type f); \
+		chmod 0755 `find reports/coverage -type d`; \
+		chmod 0644 `find reports/coverage -type f`; \
 	fi
 override_dh_auto_test:
 endif
