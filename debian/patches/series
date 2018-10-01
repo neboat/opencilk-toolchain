@@ -69,3 +69,4 @@ libcxx-silent-failure-ppc64el.diff
 libcxx-silent-failure-arm64.diff
 
 disable-sse2-old-x86.diff
+OptionDefinitionFix.patch
