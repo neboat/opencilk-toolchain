@@ -6,6 +6,11 @@ llvm-toolchain-snapshot (1:8~svn342269-2) UNRELEASED; urgency=medium
     doesn't use LLVM LTO
   * remove old Replaces/Breaks
   * Standards-Version: 4.2.1
+  * Backport a fix to improve scan-build code error.
+    Thanks to Roman Lebedev for the fix(Closes: #909662)
+  * Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
+  * Install bash-completion for clang
+  * Disable ocaml on armel
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Sep 2018 22:48:47 +0200
 
@@ -104,6 +109,16 @@ llvm-toolchain-snapshot (1:8~svn340819-1) unstable; urgency=medium
     As part of this work, the transition libiomp packages have been removed.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 28 Aug 2018 16:28:24 +0200
+
+llvm-toolchain-7 (1:7-4) unstable; urgency=medium
+
+  * Backport a fix to improve scan-build code error.
+    Thanks to Roman Lebedev for the fix(Closes: #909662)
+  * Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
+  * Install bash-completion for clang
+  * Disable ocaml on armel
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 26 Sep 2018 14:32:41 +0100
 
 llvm-toolchain-7 (1:7-3) unstable; urgency=medium
 
