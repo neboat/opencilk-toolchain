@@ -13,10 +13,10 @@ Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
     g++-multilib [amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
     libjs-mathjax,
     doxygen, gfortran,
-    ocaml-nox [amd64 arm64 armel armhf i386 ppc64el s390x],
-    ocaml-findlib [amd64 arm64 armel armhf i386 ppc64el s390x],
-    libctypes-ocaml-dev [amd64 arm64 armel armhf i386 ppc64el s390x],
-    dh-ocaml [amd64 arm64 armel armhf i386 ppc64el s390x],
+    ocaml-nox [amd64 arm64 armhf i386 ppc64el s390x],
+    ocaml-findlib [amd64 arm64 armhf i386 ppc64el s390x],
+    libctypes-ocaml-dev [amd64 arm64 armhf i386 ppc64el s390x],
+    dh-ocaml [amd64 arm64 armhf i386 ppc64el s390x],
 Build-Conflicts: oprofile, ocaml, libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev
 Standards-Version: 4.2.1
 Homepage: https://www.llvm.org/
@@ -312,7 +312,7 @@ Description: Modular compiler and toolchain technologies, tools
 
 Package: libllvm-7-ocaml-dev
 Section: ocaml
-Architecture: amd64 arm64 armel armhf i386 ppc64el s390x
+Architecture: amd64 arm64 armhf i386 ppc64el s390x
 Suggests: llvm-7-doc
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-7-dev (= ${binary:Version})
 Replaces: libllvm-x.y-ocaml-dev
