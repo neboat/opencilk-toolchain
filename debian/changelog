@@ -1,9 +1,20 @@
+llvm-toolchain-7 (1:7-4) unstable; urgency=medium
+
+  * Backport a fix to improve scan-build code error.
+    Thanks to Roman Lebedev for the fix(Closes: #909662)
+  * Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
+  * Install bash-completion
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 26 Sep 2018 14:32:41 +0100
+
 llvm-toolchain-7 (1:7-3) unstable; urgency=medium
 
   * Fix a syntax issue in a scan-build patch
   * Fix the autopkgtest script (no gcc in the test)
-  * Create a new llvm-lto-7-dev package to ship lto
-    This will avoid to download llvm-dev to get lld
+  * remove dep from lld to llvm-7-dev because lld
+    doesn't use LLVM LTO
+  * remove old Replaces/Breaks
+  * Standards-Version: 4.2.1
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Sep 2018 22:48:47 +0200
 

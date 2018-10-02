@@ -12,13 +12,13 @@ Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
     lcov, procps, help2man, zlib1g-dev,
     g++-multilib [amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
     libjs-mathjax,
-    doxygen, gfortran
-#    ocaml-nox [amd64 arm64 armel armhf i386 ppc64el s390x],
-#    ocaml-findlib [amd64 arm64 armel armhf i386 ppc64el s390x],
-#    libctypes-ocaml-dev [amd64 arm64 armel armhf i386 ppc64el s390x],
-#    dh-ocaml [amd64 arm64 armel armhf i386 ppc64el s390x],
+    doxygen, gfortran,
+    ocaml-nox [amd64 arm64 armel armhf i386 ppc64el s390x],
+    ocaml-findlib [amd64 arm64 armel armhf i386 ppc64el s390x],
+    libctypes-ocaml-dev [amd64 arm64 armel armhf i386 ppc64el s390x],
+    dh-ocaml [amd64 arm64 armel armhf i386 ppc64el s390x],
 Build-Conflicts: oprofile, ocaml, libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev
-Standards-Version: 4.2.0
+Standards-Version: 4.2.1
 Homepage: https://www.llvm.org/
 Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b 7
 Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/7
@@ -255,8 +255,6 @@ Description: Modular compiler and toolchain technologies
 Package: llvm-7-runtime
 Architecture: any
 Depends: binfmt-support, ${shlibs:Depends}, ${misc:Depends}
-Conflicts: llvm (<< 2.7-1)
-Replaces: llvm (<< 2.7-1)
 Description: Modular compiler and toolchain technologies, IR interpreter
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -277,7 +275,6 @@ Package: llvm-7-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends},
  llvm-7 (= ${binary:Version}), libllvm7 (= ${binary:Version}), libtinfo-dev
-Replaces: llvm (<< 2.2-3)
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -293,16 +290,6 @@ Description: Modular compiler and toolchain technologies, libraries and headers
  .
  This package provides the libraries and headers to develop applications
  using llvm.
-
-Package: libllvm-lto-7-dev
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Modular compiler and toolchain technologies, LTO lib
- LLVM is a collection of libraries and tools that make it easy to build
- compilers, optimizers, just-in-time code generators, and many other
- compiler-related programs.
- .
- This package provides the LTO libraries.
 
 Package: llvm-7-tools
 Architecture: any
@@ -323,28 +310,28 @@ Description: Modular compiler and toolchain technologies, tools
  .
  This package provides tools for testing.
 
-# Package: libllvm-7-ocaml-dev
-# Section: ocaml
-# Architecture: amd64 arm64 armel armhf i386 ppc64el s390x
-# Suggests: llvm-7-doc
-# Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-7-dev (= ${binary:Version})
-# Replaces: libllvm-x.y-ocaml-dev
-# Conflicts: libllvm-x.y-ocaml-dev
-# Provides: ${ocaml:Provides}, libllvm-x.y-ocaml-dev
-# Description: Modular compiler and toolchain technologies, OCaml bindings
-#  LLVM is a collection of libraries and tools that make it easy to build
-#  compilers, optimizers, just-in-time code generators, and many other
-#  compiler-related programs.
-#  .
-#  LLVM uses a single, language-independent virtual instruction set both
-#  as an offline code representation (to communicate code between
-#  compiler phases and to run-time systems) and as the compiler internal
-#  representation (to analyze and transform programs). This persistent
-#  code representation allows a common set of sophisticated compiler
-#  techniques to be applied at compile-time, link-time, install-time,
-#  run-time, or "idle-time" (between program runs).
-#  .
-#  This package provides the OCaml bindings to develop applications using llvm.
+Package: libllvm-7-ocaml-dev
+Section: ocaml
+Architecture: amd64 arm64 armel armhf i386 ppc64el s390x
+Suggests: llvm-7-doc
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-7-dev (= ${binary:Version})
+Replaces: libllvm-x.y-ocaml-dev
+Conflicts: libllvm-x.y-ocaml-dev
+Provides: ${ocaml:Provides}, libllvm-x.y-ocaml-dev
+Description: Modular compiler and toolchain technologies, OCaml bindings
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, just-in-time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
+ as an offline code representation (to communicate code between
+ compiler phases and to run-time systems) and as the compiler internal
+ representation (to analyze and transform programs). This persistent
+ code representation allows a common set of sophisticated compiler
+ techniques to be applied at compile-time, link-time, install-time,
+ run-time, or "idle-time" (between program runs).
+ .
+ This package provides the OCaml bindings to develop applications using llvm.
 
 Package: llvm-7-doc
 Section: doc
@@ -391,7 +378,7 @@ Description: Modular compiler and toolchain technologies, examples
 Package: lld-7
 Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
 # ia64 hurd powerpc have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm7 (= ${binary:Version}), libllvm-lto-7-dev (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm7 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker
  LLD is a new, high-performance linker. It is built as a set of reusable
