@@ -234,7 +234,6 @@ int main(void) {
 }' > foo.cpp
 clang++-$VERSION -stdlib=libc++ foo.cpp -o o
 if ! ldd o 2>&1|grep -q  libc++.so.1; then
-#    if ! ./a.out 2>&1 |  -q -E "(Test unit written|PreferSmall)"; then
     echo "not linked against libc++.so.1"
     exit -1
 fi
