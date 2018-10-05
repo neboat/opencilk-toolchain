@@ -3,11 +3,13 @@ llvm-toolchain-7 (1:7-5) UNRELEASED; urgency=medium
   [ Reshabh Sharma ]
   * Run check-openmp to test OpenMP
 
- -- reshabh <reshabhsh@gmail.com>  Fri, 05 Oct 2018 12:01:47 +0530
+  [ Sylvestre Ledru ]
+  * In debci, run qualify-clang.sh in verbose mode
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 05 Oct 2018 08:40:44 +0200
 
 llvm-toolchain-7 (1:7-4) unstable; urgency=medium
 
-  [ Sylvestre Ledru ]
   * Backport a fix to improve scan-build code error.
     Thanks to Roman Lebedev for the fix(Closes: #909662)
   * Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
