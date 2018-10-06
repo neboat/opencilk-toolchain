@@ -1,12 +1,12 @@
-llvm-toolchain-7 (1:7-5) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7-5) unstable; urgency=medium
+
+  * In debci, run qualify-clang.sh in verbose mode
+  * Only run the g++ test if g++ exist
 
   [ Reshabh Sharma ]
   * Run check-openmp to test OpenMP
 
-  [ Sylvestre Ledru ]
-  * In debci, run qualify-clang.sh in verbose mode
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 05 Oct 2018 08:40:44 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 06 Oct 2018 08:25:48 +0200
 
 llvm-toolchain-7 (1:7-4) unstable; urgency=medium
 

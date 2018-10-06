@@ -283,9 +283,11 @@ int main() {
 clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o o
 ./o > /dev/null
 
+if test -f /usr/bin/g++; then
 g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
     foo.cpp -nodefaultlibs -std=c++17 -lc++ -lc++abi -lm -lc -lgcc_s -lgcc|| true
 ./o > /dev/null
+fi
 
 
 if test ! -f /usr/lib/llvm-$VERSION/include/polly/LinkAllPasses.h; then
