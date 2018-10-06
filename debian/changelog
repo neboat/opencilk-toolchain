@@ -1,6 +1,11 @@
 llvm-toolchain-7 (1:7-6) UNRELEASED; urgency=medium
 
   * Add back libomp5-X.Y.symbols.in (untested)
+  * Start the work on bootstraping clang
+    - bootstrap-with-openmp-version-export-missing.diff: fix a link issue
+      https://bugs.llvm.org/show_bug.cgi?id=39200
+    - bootstrap-fix-include-next.diff: Fix an include issue at bootstrap phase
+      https://bugs.llvm.org/show_bug.cgi?id=39162
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 06 Oct 2018 14:57:58 +0200
 
