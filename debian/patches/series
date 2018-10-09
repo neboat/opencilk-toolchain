@@ -80,4 +80,3 @@ fix-include-next-bootstrap.diff
 bootstrap-with-openmp-version-export-missing.diff
 bootstrap-polly-fpic.diff
 #bootstrap-default-passthrough.diff
-disable-cflags-check.diff
