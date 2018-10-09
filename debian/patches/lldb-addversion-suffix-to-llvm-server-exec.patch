@@ -29,7 +29,7 @@ Index: llvm-toolchain-snapshot_7.0~svn293997/lldb/source/Plugins/Process/gdb-rem
  #define DEBUGSERVER_BASENAME "debugserver"
  #else
 -#define DEBUGSERVER_BASENAME "lldb-server"
-+# define DEBUGSERVER_BASENAME    "lldb-server-"LLVM_VERSION_STRING
++# define DEBUGSERVER_BASENAME    "lldb-server-" LLVM_VERSION_STRING
  #endif
  
  #if defined(HAVE_LIBCOMPRESSION)

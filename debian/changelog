@@ -1,3 +1,10 @@
+llvm-toolchain-7 (1:7-6) UNRELEASED; urgency=medium
+
+  * Try to bootstrap (currently in a different branch)
+  * Split the builds in different make target
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 09 Oct 2018 10:50:17 +0200
+
 llvm-toolchain-7 (1:7-5) unstable; urgency=medium
 
   * In debci, run qualify-clang.sh in verbose mode
