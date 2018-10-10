@@ -14,6 +14,32 @@ llvm-toolchain-snapshot (1:8~svn342269-2) UNRELEASED; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Sep 2018 22:48:47 +0200
 
+llvm-toolchain-7 (1:7-5) unstable; urgency=medium
+
+  * In debci, run qualify-clang.sh in verbose mode
+  * Only run the g++ test if g++ exist
+
+  [ Reshabh Sharma ]
+  * Run check-openmp to test OpenMP
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 06 Oct 2018 08:25:48 +0200
+
+llvm-toolchain-7 (1:7-4) unstable; urgency=medium
+
+  * Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
+  * Fix the autopkgtest script (no gcc in the test)
+  * remove dep from lld to llvm-8-dev because lld
+    doesn't use LLVM LTO
+  * remove old Replaces/Breaks
+  * Standards-Version: 4.2.1
+  * Backport a fix to improve scan-build code error.
+    Thanks to Roman Lebedev for the fix(Closes: #909662)
+  * Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
+  * Install bash-completion for clang
+  * Disable ocaml on armel
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Sep 2018 22:48:47 +0200
+
 llvm-toolchain-7 (1:7-2) unstable; urgency=medium
 
   * Fix the ftbfs under armel on libc++ and enable openmp on armel.
