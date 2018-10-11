@@ -504,7 +504,7 @@ override_dh_auto_install:
 	# Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
 	rm -f $(DEB_INST)/usr/share/clang/scan-build-$(LLVM_VERSION)/libexec/*.bat $(DEB_INST)/usr/share/clang/scan-build-$(LLVM_VERSION)/bin/*.bat
 
-	cp $(TARGET_BUILD)/bin/clang-query $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin
+	cp $(TARGET_BUILD_STAGE2)/bin/clang-query $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin
 
 	# Only run on executable, not script
 	chrpath -d `find $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary'|cut -d: -f1`
