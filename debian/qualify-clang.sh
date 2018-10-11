@@ -181,11 +181,11 @@ fi
 # fails on 32 bit, seems a real BUG in the package, using 64bit static libs?
 LANG=C clang-$VERSION -fsanitize=fuzzer test_fuzzer.cc &> foo.log
 if ! grep "No such file or directory" foo.log; then
-# This isn't failing on 64, so, look at the results
-if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
-    echo "fuzzer"
-    exit 42
-fi
+    # This isn't failing on 64, so, look at the results
+    if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
+        echo "fuzzer"
+        exit 42
+    fi
 fi
 
 echo 'int main() {
