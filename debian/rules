@@ -699,6 +699,9 @@ endif
 # Sanitizer
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-sanitizer || true
 
+# OpenMP
+	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-openmp || true
+
 # Libcxx
 	$(MAKE) $(NJOBS) -C libcxx/build check-libcxx || true
 

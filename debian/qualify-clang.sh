@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Stop at the first error
 set -e
 
@@ -241,7 +241,6 @@ int main(void) {
 }' > foo.cpp
 clang++-$VERSION -stdlib=libc++ foo.cpp -o o
 if ! ldd o 2>&1|grep -q  libc++.so.1; then
-#    if ! ./a.out 2>&1 |  -q -E "(Test unit written|PreferSmall)"; then
     echo "not linked against libc++.so.1"
     exit -1
 fi
@@ -291,9 +290,11 @@ int main() {
 clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o o
 ./o > /dev/null
 
+if test -f /usr/bin/g++; then
 g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
     foo.cpp -nodefaultlibs -std=c++17 -lc++ -lc++abi -lm -lc -lgcc_s -lgcc|| true
 ./o > /dev/null
+fi
 
 
 if test ! -f /usr/lib/llvm-$VERSION/include/polly/LinkAllPasses.h; then
@@ -502,7 +503,8 @@ EOF
 echo "if it fails, please run"
 echo "apt-get install libc6-dev:i386 libgcc-5-dev:i386 libc6-dev-x32 libx32gcc-5-dev libx32gcc-8-dev"
 for SYSTEM in ""; do
-    for MARCH in -m64 -m32 -mx32 "-m32 -march=i686"; do
+#    for MARCH in -m64 -m32 -mx32 "-m32 -march=i686"; do
+    for MARCH in -m64; do
         for LIB in --rtlib=compiler-rt -fsanitize=address -fsanitize=thread -fsanitize=memory -fsanitize=undefined -fsanitize=dataflow; do # -fsanitize=efficiency-working-set; do
             if test "$MARCH" == "-m32" -o "$MARCH" == "-mx32"; then
                 if test $LIB == "-fsanitize=thread" -o $LIB == "-fsanitize=memory" -o $LIB == "-fsanitize=dataflow" -o $LIB == "-fsanitize=address" -o $LIB == "-fsanitize=undefined"; then
