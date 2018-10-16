@@ -49,22 +49,6 @@ endif
 # Cxx flags for building libcxx and libcxxabi
 LIBCXXFLAGS := $(shell dpkg-buildflags --get CXXFLAGS) $(shell dpkg-buildflags --get CPPFLAGS)
 
-# Only enable gsplit dwarf on archs which needs it (32 bits)
-ifeq ($(DEB_HOST_ARCH_BITS),32)
-ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.22.52.0.4 ; echo $$?),0)
-# when using -gsplit-dwarf, it will requires extract-dwo which doesn't exist on precise:
-# More: https://llvm.org/bugs/show_bug.cgi?id=28841
-ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) lt 7.1.0-7~ || \
-	dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) ge 7.2.0-2; echo $$?),0)
-# Only pass -gsplit-dwarf with working version of gcc 7
-# More: https://bugs.llvm.org/show_bug.cgi?id=34140 & https://bugs.debian.org/873609
-CXXFLAGS_EXTRA += -gsplit-dwarf
-else
-$(error "Broken gcc version for -gsplit-dwarf support. Please use < gcc 7 or >= 7.2.0-2")
-endif # < gcc 7 or >= 7.2.0-2
-endif # binutils
-endif # archs
-
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) lt 4.9-20140411-1~ ; echo $$?),0)
 # Too old version of gcc. Force 4.9
 	GCC_VERSION := 4.9
@@ -74,6 +58,11 @@ export CC=gcc-$(GCC_VERSION)
 export CXX=g++-$(GCC_VERSION)
 
 opt_flags = -O2 -DNDEBUG
+
+# Only enable g1 on archs which needs it (it fixes an OOM during dh_strip due to huge symbols)
+ifeq ($(DEB_HOST_ARCH_BITS),32)
+opt_flags += -g1
+endif
 
 ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   opt_flags += -marm
