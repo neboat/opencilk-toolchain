@@ -1,9 +1,25 @@
-llvm-toolchain-7 (1:7-6) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7-6~exp2) experimental; urgency=medium
+
+  * Disable for now the bootstrapping clang patches
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 16 Oct 2018 15:00:46 +0200
+
+llvm-toolchain-7 (1:7-6~exp1) experimental; urgency=medium
 
   * Try to bootstrap (currently in a different branch)
   * Split the builds in different make target
   * Add python-pygments as dep of llvm-7-tools because
     opt-viewer.py needs it
+  * Add back libomp5-X.Y.symbols.in (untested)
+  * Fix the install of clang bash completion
+  * Start the work on bootstraping clang
+    - bootstrap-with-openmp-version-export-missing.diff: fix a link issue
+      https://bugs.llvm.org/show_bug.cgi?id=39200
+    - bootstrap-fix-include-next.diff: Fix an include issue at bootstrap phase
+      https://bugs.llvm.org/show_bug.cgi?id=39162
+
+  [ Gianfranco Costamagna ]
+  * Take option two in bug #877567 to fix FTBFS on mips and mipsel
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 06 Oct 2018 23:04:24 +0200
 

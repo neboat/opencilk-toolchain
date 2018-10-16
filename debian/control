@@ -293,8 +293,9 @@ Description: Modular compiler and toolchain technologies, libraries and headers
 
 Package: llvm-7-tools
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- llvm-7-dev (= ${binary:Version}), python-pygments
+Depends: ${shlibs:Depends}, ${misc:Depends}, python, 
+ python-pygments, python-yaml,
+ llvm-7-dev (= ${binary:Version})
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
