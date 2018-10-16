@@ -3,11 +3,6 @@ llvm-toolchain-7 (1:7-6~exp1) experimental; urgency=medium
   * Add python-pygments as dep of llvm-7-tools because
     opt-viewer.py needs it
   * Add back libomp5-X.Y.symbols.in (untested)
-  * Start the work on bootstraping clang
-    - bootstrap-with-openmp-version-export-missing.diff: fix a link issue
-      https://bugs.llvm.org/show_bug.cgi?id=39200
-    - bootstrap-fix-include-next.diff: Fix an include issue at bootstrap phase
-      https://bugs.llvm.org/show_bug.cgi?id=39162
   * Fix the install of clang bash completion
 
   [ Gianfranco Costamagna ]
