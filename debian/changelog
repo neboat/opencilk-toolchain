@@ -1,5 +1,6 @@
 llvm-toolchain-snapshot (1:8~svn342269-2) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
   * Fix the autopkgtest script (no gcc in the test)
   * remove dep from lld to llvm-8-dev because lld
@@ -11,6 +12,10 @@ llvm-toolchain-snapshot (1:8~svn342269-2) UNRELEASED; urgency=medium
   * Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
   * Install bash-completion for clang
   * Disable ocaml on armel
+
+  [ Gianfranco Costamagna ]
+  * Take option two in bug #877567 to fix FTBFS on mips and mipsel
+
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Sep 2018 22:48:47 +0200
 
