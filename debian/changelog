@@ -1,3 +1,10 @@
+llvm-toolchain-7 (1:7-6) unstable; urgency=medium
+
+  * Team upload
+  * Upload to unstable
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 17 Oct 2018 11:00:09 +0200
+
 llvm-toolchain-7 (1:7-6~exp2) experimental; urgency=medium
 
   * Disable for now the bootstrapping clang patches
