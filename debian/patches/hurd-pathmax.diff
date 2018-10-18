@@ -75,3 +75,19 @@ Index: llvm-toolchain-snapshot_6.0~svn317126/polly/lib/External/ppcg/cuda_common
  /* Open the host .cu file and the kernel .hu and .cu files for writing.
   * Add the necessary includes.
   */
+Index: llvm-toolchain-6.0-6.0.1/clang/lib/Frontend/ModuleDependencyCollector.cpp
+===================================================================
+--- llvm-toolchain-6.0-6.0.1.orig/clang/lib/Frontend/ModuleDependencyCollector.cpp
++++ llvm-toolchain-6.0-6.0.1/clang/lib/Frontend/ModuleDependencyCollector.cpp
+@@ -97,6 +97,11 @@ struct ModuleDependencyMMCallbacks : pub
+ 
+ }
+ 
++// For GNU Hurd
++#if defined(__GNU__) && !defined(PATH_MAX)
++# define PATH_MAX 4096
++#endif
++
+ // TODO: move this to Support/Path.h and check for HAVE_REALPATH?
+ static bool real_path(StringRef SrcPath, SmallVectorImpl<char> &RealPath) {
+ #ifdef LLVM_ON_UNIX
