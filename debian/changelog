@@ -380,6 +380,23 @@ llvm-toolchain-snapshot (1:7~svn322880-1) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jan 2018 20:50:03 +0100
 
+llvm-toolchain-6.0 (1:6.0.1-10) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Add patch to fix missing include and library paths on x32
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Oct 2018 16:43:31 +0200
+
+llvm-toolchain-6.0 (1:6.0.1-9.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Apply hurd fixes (Closes: #908847).
+    - hurd-lib_Support_Unix_Path.inc.diff
+    - hurd-pathmax.diff
+    - hurd-tools_llvm-shlib_CMakeLists.txt.diff
+
+ -- Samuel Thibault <sthibault@debian.org>  Tue, 16 Oct 2018 20:18:39 +0000
+
 llvm-toolchain-6.0 (1:6.0.1-8) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
