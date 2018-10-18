@@ -1,3 +1,13 @@
+llvm-toolchain-7 (1:7-7) unstable; urgency=medium
+
+  [ Samuel Thibault ]
+  * Apply hurd fixes (Closes: #908847).
+   - hurd-lib_Support_Unix_Path.inc.diff
+   - hurd-pathmax.diff
+   - hurd-tools_llvm-shlib_CMakeLists.txt.diff
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Oct 2018 16:50:58 +0200
+
 llvm-toolchain-7 (1:7-6) unstable; urgency=medium
 
   * Team upload

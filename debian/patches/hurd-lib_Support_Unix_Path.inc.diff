@@ -1,8 +1,8 @@
-Index: llvm-toolchain-6.0-6.0.1/lib/Support/Unix/Path.inc
+Index: llvm-toolchain-7-7/lib/Support/Unix/Path.inc
 ===================================================================
---- llvm-toolchain-6.0-6.0.1.orig/lib/Support/Unix/Path.inc
-+++ llvm-toolchain-6.0-6.0.1/lib/Support/Unix/Path.inc
-@@ -98,7 +98,7 @@
+--- llvm-toolchain-7-7.orig/lib/Support/Unix/Path.inc
++++ llvm-toolchain-7-7/lib/Support/Unix/Path.inc
+@@ -83,7 +83,7 @@
  #define STATVFS_F_FRSIZE(vfs) static_cast<uint64_t>(vfs.f_bsize)
  #endif
  
@@ -11,8 +11,8 @@ Index: llvm-toolchain-6.0-6.0.1/lib/Support/Unix/Path.inc
  #define STATVFS_F_FLAG(vfs) (vfs).f_flag
  #else
  #define STATVFS_F_FLAG(vfs) (vfs).f_flags
-@@ -111,7 +111,7 @@ namespace sys  {
- namespace fs {
+@@ -99,7 +99,7 @@ const file_t kInvalidFile = -1;
+ 
  #if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) ||     \
      defined(__minix) || defined(__FreeBSD_kernel__) || defined(__linux__) ||   \
 -    defined(__CYGWIN__) || defined(__DragonFly__) || defined(_AIX)
@@ -20,16 +20,7 @@ Index: llvm-toolchain-6.0-6.0.1/lib/Support/Unix/Path.inc
  static int
  test_dir(char ret[PATH_MAX], const char *dir, const char *bin)
  {
-@@ -187,7 +187,7 @@ std::string getMainExecutable(const char
- 
-   if (getprogpath(exe_path, argv0) != NULL)
-     return exe_path;
--#elif defined(__linux__) || defined(__CYGWIN__)
-+#elif defined(__linux__) || defined(__CYGWIN__) || defined(__GNU__)
-   char exe_path[MAXPATHLEN];
-   StringRef aPath("/proc/self/exe");
-   if (sys::fs::exists(aPath)) {
-@@ -360,7 +360,7 @@ std::error_code remove(const Twine &path
+@@ -348,7 +348,7 @@ std::error_code remove(const Twine &path
  }
  
  static bool is_local_impl(struct STATVFS &Vfs) {
@@ -38,7 +29,7 @@ Index: llvm-toolchain-6.0-6.0.1/lib/Support/Unix/Path.inc
  #ifndef NFS_SUPER_MAGIC
  #define NFS_SUPER_MAGIC 0x6969
  #endif
-@@ -370,7 +370,11 @@ static bool is_local_impl(struct STATVFS
+@@ -358,7 +358,11 @@ static bool is_local_impl(struct STATVFS
  #ifndef CIFS_MAGIC_NUMBER
  #define CIFS_MAGIC_NUMBER 0xFF534D42
  #endif
