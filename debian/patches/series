@@ -76,7 +76,9 @@ D51108-rust-powerpc.diff
 disable-sse2-old-x86.diff
 scan-build-clang-X.diff
 0001-analyzer-scan-build-if-status-bugs-is-passed-don-t-f.patch
-fix-include-next-bootstrap.diff
-bootstrap-with-openmp-version-export-missing.diff
-bootstrap-polly-fpic.diff
-#bootstrap-default-passthrough.diff
+#bootstrap-fix-include-next.diff
+#bootstrap-with-openmp-version-export-missing.diff
+
+hurd-lib_Support_Unix_Path.inc.diff
+hurd-tools_llvm-shlib_CMakeLists.txt.diff
+clangd-atomic-cmake.patch

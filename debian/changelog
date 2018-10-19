@@ -1,3 +1,16 @@
+llvm-toolchain-7 (1:7-7~exp2) experimental; urgency=medium
+
+  * clangd-atomic-cmake.patch: Link against atomic for clangd in i386
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 19 Oct 2018 11:17:16 +0200
+
+llvm-toolchain-7 (1:7-7~exp1) experimental; urgency=medium
+
+  * Experiment the clang bootstrap
+  * Try to boostrap clang using clang
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 17 Oct 2018 20:15:57 +0200
+
 llvm-toolchain-7 (1:7-6) unstable; urgency=medium
 
   * Team upload
