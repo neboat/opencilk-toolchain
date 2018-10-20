@@ -1,3 +1,10 @@
+llvm-toolchain-7 (1:7-8) unstable; urgency=medium
+
+  * Update the watch file to display the right version
+    (even if the download will fail)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 20 Oct 2018 16:00:58 +0200
+
 llvm-toolchain-7 (1:7-7) unstable; urgency=medium
 
   [ Samuel Thibault ]
