@@ -46,8 +46,9 @@ void test() {
 }
 '> foo.c
 
-scan-build-$VERSION gcc -c foo.c &> /dev/null || true
-scan-build-$VERSION clang-$VERSION -c foo.c &> /dev/null
+scan-build-$VERSION -o scan-build gcc -c foo.c &> /dev/null || true
+scan-build-$VERSION -o scan-build clang-$VERSION -c foo.c &> /dev/null
+rm -rf scan-build
 
 echo 'int main() {return 0;}' > foo.c
 clang-$VERSION foo.c
