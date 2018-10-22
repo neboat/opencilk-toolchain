@@ -355,7 +355,7 @@ VERBOSE=VERBOSE=1
 #VERBOSE=-v
 
 debian-stage2-build:
-	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 stage2 || if test -f $(TARGET_BUILD_STAGE2)/CMakeFiles/CMakeError.log; then cat $(TARGET_BUILD_STAGE2)/CMakeFiles/CMakeError.log; fi
+	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 stage2 || if test -f $(TARGET_BUILD_STAGE2)/CMakeFiles/CMakeError.log; then tail -100 $(TARGET_BUILD_STAGE2)/CMakeFiles/CMakeError.log; fi
 	if grep "CMAKE_BUILD_TYPE:STRING=Debug"  $(TARGET_BUILD_STAGE2)/CMakeCache.txt; then \
 		echo "clang stage2 has been built in upstream Debug mode. Too slow, we don't want that."; \
 	fi
