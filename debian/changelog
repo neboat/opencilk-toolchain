@@ -1,3 +1,9 @@
+llvm-toolchain-7 (1:7-7~exp3) experimental; urgency=medium
+
+  * Remove the dump of cmake error file (too confusing)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 23 Oct 2018 08:21:03 +0200
+
 llvm-toolchain-7 (1:7-7~exp2) experimental; urgency=medium
 
   * clangd-atomic-cmake.patch: Link against atomic for clangd in i386
