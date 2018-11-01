@@ -9,6 +9,8 @@ llvm-toolchain-7 (1:7-8) unstable; urgency=medium
     with python-clang-*)
   * Backport upstream fix D51749 to address a rust aarch64 issues
     (Closes: #909705)
+  * Add tests from old bugs to make sure they don't come back
+    (Closes: #889832, #827866)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 20 Oct 2018 16:00:58 +0200
 
