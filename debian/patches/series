@@ -82,3 +82,6 @@ bootstrap-with-openmp-version-export-missing.diff
 hurd-lib_Support_Unix_Path.inc.diff
 hurd-tools_llvm-shlib_CMakeLists.txt.diff
 clangd-atomic-cmake.patch
+rustc-aarch64-test-failure.diff
+symbolizer-path.diff
+
