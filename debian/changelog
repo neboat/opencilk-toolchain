@@ -4,6 +4,7 @@ llvm-toolchain-7 (1:7-8) unstable; urgency=medium
     (even if the download will fail)
   * clang-7 suggests libomp-7-dev instead of libomp-dev
   * Make sure that we don't conflict openmp & libc++ with llvm-defaults's
+    (Closes: #912544)
   * Handle better the non coinstability of openmp & libc++ (like we are doing
     with python-clang-*)
   * Backport upstream fix D51749 to address a rust aarch64 issues
