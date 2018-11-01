@@ -34,11 +34,11 @@ git-svn-id: https://llvm.org/svn/llvm-project/llvm/trunk@341969 91177308-0d34-04
  3 files changed, 74 insertions(+), 6 deletions(-)
  create mode 100644 test/CodeGen/AArch64/GlobalISel/debug-cpp.ll
 
-diff --git a/lib/CodeGen/GlobalISel/IRTranslator.cpp b/lib/CodeGen/GlobalISel/IRTranslator.cpp
-index 974629bc4f4..f7b905c9db4 100644
---- a/lib/CodeGen/GlobalISel/IRTranslator.cpp
-+++ b/lib/CodeGen/GlobalISel/IRTranslator.cpp
-@@ -758,9 +758,12 @@ bool IRTranslator::translateKnownIntrinsic(const CallInst &CI, Intrinsic::ID ID,
+Index: llvm-toolchain-7-7/lib/CodeGen/GlobalISel/IRTranslator.cpp
+===================================================================
+--- llvm-toolchain-7-7.orig/lib/CodeGen/GlobalISel/IRTranslator.cpp
++++ llvm-toolchain-7-7/lib/CodeGen/GlobalISel/IRTranslator.cpp
+@@ -763,9 +763,12 @@ bool IRTranslator::translateKnownIntrins
        // instructions (in fact, they get ignored if they *do* exist).
        MF->setVariableDbgInfo(DI.getVariable(), DI.getExpression(),
                               getOrCreateFrameIndex(*AI), DI.getDebugLoc());
@@ -53,12 +53,11 @@ index 974629bc4f4..f7b905c9db4 100644
 +    }
      return true;
    }
-   case Intrinsic::dbg_label: {
-diff --git a/test/CodeGen/AArch64/GlobalISel/debug-cpp.ll b/test/CodeGen/AArch64/GlobalISel/debug-cpp.ll
-new file mode 100644
-index 00000000000..e603af678de
+   case Intrinsic::vaend:
+Index: llvm-toolchain-7-7/test/CodeGen/AArch64/GlobalISel/debug-cpp.ll
+===================================================================
 --- /dev/null
-+++ b/test/CodeGen/AArch64/GlobalISel/debug-cpp.ll
++++ llvm-toolchain-7-7/test/CodeGen/AArch64/GlobalISel/debug-cpp.ll
 @@ -0,0 +1,67 @@
 +; RUN: llc -global-isel -mtriple=aarch64 %s -stop-after=irtranslator -o - | FileCheck %s
 +; RUN: llc -mtriple=aarch64 -global-isel --global-isel-abort=0 -o /dev/null
@@ -127,10 +126,10 @@ index 00000000000..e603af678de
 +!24 = !DILocation(line: 6, column: 16, scope: !7)
 +!25 = !DILocation(line: 7, column: 12, scope: !7)
 +!26 = !DILocation(line: 7, column: 3, scope: !7)
-diff --git a/test/CodeGen/AArch64/GlobalISel/debug-insts.ll b/test/CodeGen/AArch64/GlobalISel/debug-insts.ll
-index 8309e00e2fc..256eb37f6d4 100644
---- a/test/CodeGen/AArch64/GlobalISel/debug-insts.ll
-+++ b/test/CodeGen/AArch64/GlobalISel/debug-insts.ll
+Index: llvm-toolchain-7-7/test/CodeGen/AArch64/GlobalISel/debug-insts.ll
+===================================================================
+--- llvm-toolchain-7-7.orig/test/CodeGen/AArch64/GlobalISel/debug-insts.ll
++++ llvm-toolchain-7-7/test/CodeGen/AArch64/GlobalISel/debug-insts.ll
 @@ -6,18 +6,16 @@
  ; CHECK:    - { id: {{.*}}, name: in.addr, type: default, offset: 0, size: {{.*}}, alignment: {{.*}},
  ; CHECK-NEXT: callee-saved-register: '', callee-saved-restored: true,
