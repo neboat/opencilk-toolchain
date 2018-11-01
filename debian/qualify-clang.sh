@@ -176,6 +176,61 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
 }
 EOF
 
+echo 'int main(int argc, char **argv) {
+  int *array = new int[100];
+  delete [] array;
+  return array[argc];  // BOOM
+}' > foo.cpp
+clang++-$VERSION -O1 -g -fsanitize=address -fno-omit-frame-pointer foo.cpp
+ASAN_OPTIONS=verbosity=1 ./a.out &> foo.log || true
+if ! grep "Init done" foo.log; then
+    echo "asan verbose mode failed"
+    cat foo.log
+    exit 42
+fi
+
+if test ! -f /usr/lib/llvm-$VERSION/bin/llvm-symbolizer; then
+    echo "Install llvm-$VERSION"
+    exit 1
+fi
+
+# See also https://bugs.llvm.org/show_bug.cgi?id=39514 why
+# /usr/bin/llvm-symbolizer-7 doesn't work
+ASAN_OPTIONS=verbosity=2:external_symbolizer_path=/usr/lib/llvm-$VERSION/bin/llvm-symbolizer ./a.out &> foo.log || true
+if ! grep "Using llvm-symbolizer" foo.log; then
+    echo "could not find llvm-symbolizer path"
+    cat foo.log
+    exit 42
+fi
+if ! grep "new\[\](unsigned long)" foo.log; then
+    echo "could not symbolize correctly"
+    cat foo.log
+    exit 42
+fi
+
+if ! grep "foo.cpp:3:3" foo.log; then
+    echo "could not symbolize correctly"
+    cat foo.log
+    exit 42
+fi
+./a.out &> foo.log || true
+if ! grep "Using llvm-symbolizer" foo.log; then
+    echo "could not find llvm-symbolizer path"
+    cat foo.log
+    exit 42
+fi
+if ! grep "new\[\](unsigned long)" foo.log; then
+    echo "could not symbolize correctly"
+    cat foo.log
+    exit 42
+fi
+
+if ! grep "foo.cpp:3:3" foo.log; then
+    echo "could not symbolize correctly"
+    cat foo.log
+    exit 42
+fi
+
 if test ! -f /usr/lib/llvm-$VERSION/lib/libFuzzer.a; then
     echo "Install libfuzzer-$VERSION-dev";
     exit -1;
@@ -186,6 +241,7 @@ if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
     echo "fuzzer"
     exit 42
 fi
+
 
 
 # fails on 32 bit, seems a real BUG in the package, using 64bit static libs?
