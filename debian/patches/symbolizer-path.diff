@@ -18,7 +18,7 @@ Index: llvm-toolchain-7-7/compiler-rt/lib/sanitizer_common/sanitizer_symbolizer_
    }
  #endif  // SANITIZER_MAC
 -  if (const char *found_path = FindPathToBinary("llvm-symbolizer")) {
-+  if (const char *found_path = "/usr/bin/llvm-symbolizer-" TOSTR(LLVM_VERSION_MAJOR))) {
++  if (const char *found_path = "/usr/bin/llvm-symbolizer-" TOSTR(LLVM_VERSION_MAJOR)) {
      VReport(2, "Using llvm-symbolizer found at: %s\n", found_path);
      return new(*allocator) LLVMSymbolizer(found_path, allocator);
    }
