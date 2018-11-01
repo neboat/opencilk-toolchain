@@ -255,6 +255,10 @@ clang++-$VERSION -std=c++11 -stdlib=libc++ foo.cpp -o o
 clang++-$VERSION -std=c++14 -stdlib=libc++ foo.cpp -lc++experimental -o o
 ./o > /dev/null
 
+# Bug 889832
+echo '#include <iostream>
+int main() {}'  | clang++-$VERSION -std=c++1z  -x c++ -stdlib=libc++ -
+
 if test ! -f /usr/lib/llvm-$VERSION/include/cxxabi.h; then
     echo "Install libc++abi-$VERSION-dev";
     exit -1;
