@@ -48,6 +48,12 @@ ifneq (,$(filter $(DEB_HOST_ARCH),armel mips mipsel powerpc powerpcspe riscv64))
 CMAKE_EXTRA += -DLIBOMP_LIBFLAGS="-latomic" -DCMAKE_SHARED_LINKER_FLAGS="-latomic"
 endif
 
+ifneq (,$(filter $(DEB_HOST_ARCH),armel))
+# For some reason, in the stage2 build, when clang is used to compile
+# itself. The atomic detection is failing on armel. Forcing the inclusion everywhere.
+LDFLAGS_EXTRA += -latomic
+endif
+
 # Cxx flags for building libcxx and libcxxabi
 LIBCXXFLAGS := $(shell dpkg-buildflags --get CXXFLAGS) $(shell dpkg-buildflags --get CPPFLAGS)
 
@@ -355,10 +361,8 @@ VERBOSE=VERBOSE=1
 #VERBOSE=-v
 
 debian-stage2-build:
-	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 stage2
-	if grep "CMAKE_BUILD_TYPE:STRING=Debug"  $(TARGET_BUILD_STAGE2)/CMakeCache.txt; then \
-		echo "clang stage2 has been built in upstream Debug mode. Too slow, we don't want that."; \
-	fi
+	$(PRE_[PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 stage2
+
 
 # Check the stage 2 build worked
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \
