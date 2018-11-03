@@ -84,4 +84,4 @@ hurd-tools_llvm-shlib_CMakeLists.txt.diff
 clangd-atomic-cmake.patch
 rustc-aarch64-test-failure.diff
 symbolizer-path.diff
-
+mips-rdhwr.diff

@@ -3,7 +3,9 @@ llvm-toolchain-7 (1:7-7~exp3) experimental; urgency=medium
   * Remove the dump of cmake error file (too confusing)
   * Try to fix the bootstrap FTBFS :
 	- on armel by forcing the link to -latomic
-
+        - mips-rdhwr.diff: backport D51773 to fix an 
+          assembly issue on mips.
+          Thanks to jrtc27 for finding the issue
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 23 Oct 2018 08:21:03 +0200
 
