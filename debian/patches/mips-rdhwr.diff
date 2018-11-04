@@ -1,19 +1,19 @@
-Index: llvm/trunk/lib/Target/Mips/Mips64InstrInfo.td
+Index: llvm-toolchain-7-7/lib/Target/Mips/Mips64InstrInfo.td
 ===================================================================
---- llvm/trunk/lib/Target/Mips/Mips64InstrInfo.td
-+++ llvm/trunk/lib/Target/Mips/Mips64InstrInfo.td
-@@ -1139,3 +1139,6 @@
+--- llvm-toolchain-7-7.orig/lib/Target/Mips/Mips64InstrInfo.td
++++ llvm-toolchain-7-7/lib/Target/Mips/Mips64InstrInfo.td
+@@ -1139,3 +1139,6 @@ def SLTUImm64 : MipsAsmPseudoInst<(outs
                                    "sltu\t$rs, $rt, $imm">, GPR_64;
  def : MipsInstAlias<"sltu\t$rs, $imm", (SLTUImm64 GPR64Opnd:$rs, GPR64Opnd:$rs,
                                                    imm64:$imm)>, GPR_64;
 +
 +def : MipsInstAlias<"rdhwr $rt, $rs",
 +                    (RDHWR64 GPR64Opnd:$rt, HWRegsOpnd:$rs, 0), 1>, GPR_64;
-Index: llvm/trunk/test/CodeGen/Mips/tls.ll
+Index: llvm-toolchain-7-7/test/CodeGen/Mips/tls.ll
 ===================================================================
---- llvm/trunk/test/CodeGen/Mips/tls.ll
-+++ llvm/trunk/test/CodeGen/Mips/tls.ll
-@@ -48,14 +48,14 @@
+--- llvm-toolchain-7-7.orig/test/CodeGen/Mips/tls.ll
++++ llvm-toolchain-7-7/test/CodeGen/Mips/tls.ll
+@@ -48,14 +48,14 @@ entry:
  ; STATIC32-LABEL:   f1:
  ; STATIC32:   lui     $[[R0:[0-9]+]], %tprel_hi(t1)
  ; STATIC32:   addiu   $[[R1:[0-9]+]], $[[R0]], %tprel_lo(t1)
@@ -30,7 +30,7 @@ Index: llvm/trunk/test/CodeGen/Mips/tls.ll
  ; STATIC64:   daddu   $[[R2:[0-9]+]], $3, $[[R0]]
  ; STATIC64:   lw      $2, 0($[[R2]])
  }
-@@ -101,15 +101,15 @@
+@@ -101,7 +101,7 @@ entry:
  ; STATIC32-LABEL:   f2:
  ; STATIC32:   lui     $[[R0:[0-9]+]], %hi(__gnu_local_gp)
  ; STATIC32:   addiu   $[[GP:[0-9]+]], $[[R0]], %lo(__gnu_local_gp)
@@ -39,7 +39,7 @@ Index: llvm/trunk/test/CodeGen/Mips/tls.ll
  ; STATIC32:   lw      $[[R0:[0-9]+]], %gottprel(t2)($[[GP]])
  ; STATIC32:   addu    $[[R1:[0-9]+]], $3, $[[R0]]
  ; STATIC32:   lw      $2, 0($[[R1]])
- 
+@@ -109,7 +109,7 @@ entry:
  ; STATIC64-LABEL:   f2:
  ; STATIC64:   lui     $[[R0:[0-9]+]], %hi(%neg(%gp_rel(f2)))
  ; STATIC64:   daddiu  $[[GP:[0-9]+]], $[[R0]], %lo(%neg(%gp_rel(f2)))
