@@ -1,7 +1,10 @@
 #!/bin/bash
 # Stop at the first error
 set -e
-
+if ! test -d debian/; then
+    echo "$0: Could not find the debian/ directory"
+    exit 1
+fi
 VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 DETAILED_VERSION=$(dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1\2\3,p")
 
