@@ -250,7 +250,7 @@ int main(int argc, char **argv)
 }' > foo.c
 
 clang-$VERSION -fsanitize=address foo.c -o foo -lc
-./foo
+./foo &> /dev/null
 
 # fails on 32 bit, seems a real BUG in the package, using 64bit static libs?
 LANG=C clang-$VERSION -fsanitize=fuzzer test_fuzzer.cc &> foo.log
