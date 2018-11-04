@@ -83,3 +83,4 @@ hurd-lib_Support_Unix_Path.inc.diff
 hurd-tools_llvm-shlib_CMakeLists.txt.diff
 rustc-aarch64-test-failure.diff
 symbolizer-path.diff
+remove-apple-clang-manpage.diff
