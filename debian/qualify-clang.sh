@@ -237,7 +237,17 @@ if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
     exit 42
 fi
 
+# Bug #876973
+echo '
+#include <stdio.h>
+int main(int argc, char **argv)
+{
+   printf("Hello world!\n");
+   return 0;
+}' > foo.c
 
+clang-$VERSION -fsanitize=address foo.c -o foo -lc
+./foo
 
 # fails on 32 bit, seems a real BUG in the package, using 64bit static libs?
 LANG=C clang-$VERSION -fsanitize=fuzzer test_fuzzer.cc &> foo.log
