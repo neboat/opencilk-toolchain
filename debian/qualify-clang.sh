@@ -367,6 +367,28 @@ int main() {
 clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o o
 ./o > /dev/null
 
+# Bug LP#1586215
+echo '
+#include <string>
+#include <iostream>
+
+int main()
+{
+    try
+    {
+        std::string x;
+        char z = x.at(2);
+        std::cout << z << std::endl;
+    }
+    catch (...)
+    {
+    }
+
+    return 0;
+}' > foo.cpp
+clang++-$VERSION -stdlib=libc++ -Wall -Werror foo.cpp -o foo
+./foo
+
 if test -f /usr/bin/g++; then
 g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
     foo.cpp -nodefaultlibs -std=c++17 -lc++ -lc++abi -lm -lc -lgcc_s -lgcc|| true
