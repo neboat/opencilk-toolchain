@@ -84,8 +84,9 @@ echo 'bool testAndSet(void *atomic) {
     return __atomic_test_and_set(atomic, __ATOMIC_SEQ_CST);
 }'> foo.cpp
 clang++-$VERSION -c -target aarch64-linux-gnu foo.cpp
-if ! file foo.o 2>&1 | grep -q "aarch64"; then
-    echo "Could not find the string 'aarch64' in the output of file"
+if ! file foo.o 2>&1 | grep -i -q "aarch64"; then
+    echo "Could not find the string 'aarch64' in the output of file. Output:"
+    file foo.o
     exit 42
 fi
 echo '
