@@ -2,6 +2,8 @@ llvm-toolchain-7 (1:7-9) UNRELEASED; urgency=medium
 
   * Update the clang manpage to remove osx specific options
     and to add -arch (Closes: #743133)
+  * Bring back usr/lib/@DEB_HOST_MULTIARCH@/{libiomp5.so, libomp5.so}
+    symlink for gcc (Closes: #912641)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 04 Nov 2018 18:07:23 +0100
 
