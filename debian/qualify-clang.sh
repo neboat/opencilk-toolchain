@@ -206,7 +206,7 @@ if ! grep "Using llvm-symbolizer" foo.log; then
     cat foo.log
     exit 42
 fi
-if ! grep "new\[\](unsigned long)" foo.log; then
+if ! grep "new\[\](unsigned" foo.log; then
     echo "could not symbolize correctly"
     cat foo.log
     exit 42
@@ -218,7 +218,7 @@ if ! grep "foo.cpp:3:3" foo.log; then
     exit 42
 fi
 ./a.out &> foo.log || true
-if ! grep "new\[\](unsigned long)" foo.log; then
+if ! grep "new\[\](unsigned" foo.log; then
     echo "could not symbolize correctly"
     cat foo.log
     exit 42
