@@ -1,9 +1,35 @@
-llvm-toolchain-7 (1:7-9) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7.0.1~+rc2-1) unstable; urgency=medium
 
+  * Upload of 7.0.1 rc2 into unstable
+  * New testing release
+  * Enable the stage2 bootstrap:
+    - stage1 = build clang with gcc
+    - stage2 = clang building itself
+    (Closes: #909234)
+  * Bring back the Disable NEON generation on armhf patch which was gone
+    Should fix the FTBFS on armhf
+    (Closes: #842142)
   * Update the clang manpage to remove osx specific options
     and to add -arch (Closes: #743133)
   * Bring back usr/lib/@DEB_HOST_MULTIARCH@/{libiomp5.so, libomp5.so}
     symlink for gcc (Closes: #912641)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 07 Nov 2018 15:17:41 +0100
+
+llvm-toolchain-7 (1:7.0.1~+rc2-1~exp1) unstabe; urgency=medium
+
+  * New testing release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 05 Nov 2018 23:38:34 +0100
+
+llvm-toolchain-7 (1:7-9) UNRELEASED; urgency=medium
+
+  * Remove the dump of cmake error file (too confusing)
+  * Try to fix the bootstrap FTBFS :
+    - on armel by forcing the link to -latomic
+    - mips-rdhwr.diff: backport D51773 to fix an
+      assembly issue on mips.
+      Thanks to jrtc27 for finding the issue.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 04 Nov 2018 18:07:23 +0100
 
@@ -24,6 +50,34 @@ llvm-toolchain-7 (1:7-8) unstable; urgency=medium
     llvm-X package (Closes: #753572)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 20 Oct 2018 16:00:58 +0200
+
+llvm-toolchain-7 (1:7-7~exp2) experimental; urgency=medium
+
+  * clangd-atomic-cmake.patch: Link against atomic for clangd in i386
+  * When the cmake configure of the stage2 is failing, dump the cmake error log
+  * Declare some variables (-Wno-*) for all platforms (was failing on mips)
+  * Update the watch file to display the right version
+    (even if the download will fail)
+  * clang-7 suggests libomp-7-dev instead of libomp-dev
+  * Make sure that we don't conflict openmp & libc++ with llvm-defaults's
+    (Closes: #912544)
+  * Handle better the non coinstability of openmp & libc++ (like we are doing
+    with python-clang-*)
+  * Backport upstream fix D51749 to address a rust aarch64 issues
+    (Closes: #909705)
+  * Add tests from old bugs to make sure they don't come back
+    (Closes: #889832, #827866)
+  * The sanitizers use the versionned llvm-symbolizer provided by the
+    llvm-X package (Closes: #753572)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 21 Oct 2018 18:34:20 +0200
+
+llvm-toolchain-7 (1:7-7~exp1) experimental; urgency=medium
+
+  * Experiment the clang bootstrap
+  * Try to boostrap clang using clang
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 17 Oct 2018 20:15:57 +0200
 
 llvm-toolchain-7 (1:7-7) unstable; urgency=medium
 
@@ -50,6 +104,8 @@ llvm-toolchain-7 (1:7-6~exp2) experimental; urgency=medium
 
 llvm-toolchain-7 (1:7-6~exp1) experimental; urgency=medium
 
+  * Try to bootstrap (currently in a different branch)
+  * Split the builds in different make target
   * Add python-pygments as dep of llvm-7-tools because
     opt-viewer.py needs it
   * Add back libomp5-X.Y.symbols.in (untested)
