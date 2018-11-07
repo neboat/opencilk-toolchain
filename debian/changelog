@@ -1,6 +1,9 @@
 llvm-toolchain-7 (1:7.0.1~+rc2-1~exp1) experimental; urgency=medium
 
   * New testing release
+  * Bring back the Disable NEON generation on armhf patch which was gone
+    Should fix the FTBFS on armhg
+    (Closes: #842142)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 05 Nov 2018 23:38:34 +0100
 

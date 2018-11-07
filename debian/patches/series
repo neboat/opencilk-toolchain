@@ -85,3 +85,4 @@ clangd-atomic-cmake.patch
 rustc-aarch64-test-failure.diff
 symbolizer-path.diff
 mips-rdhwr.diff
+clang-arm-default-vfp3-on-armv7a.patch
