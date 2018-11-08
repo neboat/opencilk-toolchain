@@ -22,13 +22,13 @@ llvm-toolchain-7 (1:7.0.1~+rc2-1) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 07 Nov 2018 15:17:41 +0100
 
-llvm-toolchain-7 (1:7.0.1~+rc2-1~exp1) unstabe; urgency=medium
+llvm-toolchain-7 (1:7.0.1~+rc2-1~exp1) experimental; urgency=medium
 
   * New testing release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 05 Nov 2018 23:38:34 +0100
 
-llvm-toolchain-7 (1:7-9) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7-9) unstable; urgency=medium
 
   * Remove the dump of cmake error file (too confusing)
   * Try to fix the bootstrap FTBFS :
