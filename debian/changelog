@@ -1,4 +1,4 @@
-llvm-toolchain-7 (1:7.0.1~+rc2-2) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7.0.1~+rc2-2) unstable; urgency=medium
 
   * Fix a non-break space in a patch (Closes: #913213)
 
