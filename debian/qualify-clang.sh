@@ -49,6 +49,7 @@ void test() {
 }
 '> foo.c
 
+# Ignore if gcc isn't available
 scan-build-$VERSION -o scan-build gcc -c foo.c &> /dev/null || true
 scan-build-$VERSION -o scan-build clang-$VERSION -c foo.c &> /dev/null
 scan-build-$VERSION --exclude non-existing/ --exclude /tmp/ -v clang-$VERSION -c foo.c &> /dev/null
@@ -57,9 +58,7 @@ if ! grep -q -E "scan-build: 0 bugs found." foo.log; then
     echo "scan-build --exclude didn't ignore the defect"
     exit 42
 fi
-=======
 rm -rf scan-build
->>>>>>> origin/7
 
 rm -f foo.log
 echo 'int main() {return 0;}' > foo.c

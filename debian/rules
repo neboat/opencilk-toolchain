@@ -678,7 +678,7 @@ endif
 # 	dh_strip -p liblld-$(LLVM_VERSION) --dbg-package=liblld-$(LLVM_VERSION)-dbg
 # endif
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.28 ; echo $$?),0)
-	rm -f ($CURDIR)/libc++-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/*/operations.cpp.o
+	rm -f $(CURDIR)/libc++-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/*/operations.cpp.o
 # strip segfaults on libFuzzer.a
 	dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a
 else
