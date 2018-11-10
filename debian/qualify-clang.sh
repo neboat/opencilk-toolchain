@@ -79,6 +79,9 @@ fi
 echo '#include <emmintrin.h>' > foo.cc
 clang++-$VERSION -c foo.cc
 
+# Bug 913213
+echo '#include <limits.h>' | clang-$VERSION -E -
+
 # bug 827866
 echo 'bool testAndSet(void *atomic) {
     return __atomic_test_and_set(atomic, __ATOMIC_SEQ_CST);
