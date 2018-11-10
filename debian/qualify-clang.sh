@@ -88,7 +88,7 @@ echo '#include <emmintrin.h>' > foo.cc
 clang++-$VERSION -c foo.cc
 
 # Bug 913213
-echo '#include <limits.h>' | clang-$VERSION -E -
+echo '#include <limits.h>' | clang-$VERSION -E - > /dev/null
 
 # bug 827866
 echo 'bool testAndSet(void *atomic) {
