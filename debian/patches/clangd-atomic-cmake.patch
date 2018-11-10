@@ -1,7 +1,7 @@
-Index: llvm-toolchain-7-7/clang-tools-extra/clangd/CMakeLists.txt
+Index: llvm-toolchain-snapshot_8~svn346586/clang-tools-extra/clangd/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-7-7.orig/clang-tools-extra/clangd/CMakeLists.txt
-+++ llvm-toolchain-7-7/clang-tools-extra/clangd/CMakeLists.txt
+--- llvm-toolchain-snapshot_8~svn346586.orig/clang-tools-extra/clangd/CMakeLists.txt
++++ llvm-toolchain-snapshot_8~svn346586/clang-tools-extra/clangd/CMakeLists.txt
 @@ -7,6 +7,11 @@ if(NOT HAVE_CXX_ATOMICS64_WITHOUT_LIB)
    list(APPEND CLANGD_ATOMIC_LIB "atomic")
  endif()
@@ -13,4 +13,4 @@ Index: llvm-toolchain-7-7/clang-tools-extra/clangd/CMakeLists.txt
 +
  add_clang_library(clangDaemon
    AST.cpp
-   ClangdLSPServer.cpp
+   Cancellation.cpp
