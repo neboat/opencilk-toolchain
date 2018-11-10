@@ -1,9 +1,11 @@
-llvm-toolchain-snapshot (1:8~svn345705-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:8~svn346586-1~exp1) experimental; urgency=medium
 
   * New snapshot release
   * Also install libOptRemarks.so
+  * Merge all the recent 7 changes into snapshot
+    (Closes: #913058) the co install issue with libc++ & openmp
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 31 Oct 2018 11:05:37 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 10 Nov 2018 15:14:15 +0100
 
 llvm-toolchain-snapshot (1:8~svn345569-1~exp1) experimental; urgency=medium
 
