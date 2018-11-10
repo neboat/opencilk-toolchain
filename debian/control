@@ -31,7 +31,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang-common-8-dev (= ${binary:Version}),
  libclang1-8 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
-Recommends: llvm-8-dev, python, libomp-dev
+Recommends: llvm-8-dev, python, libomp-8-dev
 Suggests: clang-8-doc
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
@@ -293,7 +293,8 @@ Description: Modular compiler and toolchain technologies, libraries and headers
 
 Package: llvm-8-tools
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python, python-pygments, python-yaml,
+Depends: ${shlibs:Depends}, ${misc:Depends}, python,
+ python-pygments, python-yaml,
  llvm-8-dev (= ${binary:Version})
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
@@ -475,16 +476,18 @@ Description: Next generation, high-performance debugger, header files
 
 
 # ------------- openmp -------------
+# 44 because it was the first version in which openmp & libc++ have been
+# managed in llvm-defaults
 
 Package: libomp-8-dev
 Section: libdevel
 Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64
 Depends: libomp5-8 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Suggests: libomp-8-doc
-Breaks: libiomp-dev (<< 3.7-1), libomp-dev (<< 7~+rc1-1~exp1)
-Conflicts: libomp-dev
-Replaces: libomp-dev
-Provides: libomp-dev
+Breaks: libiomp-dev (<< 3.7-1), libomp-dev (<< 44)
+Provides: libomp-x.y-dev
+Conflicts: libomp-x.y-dev
+Replaces: libomp-x.y-dev
 Description: LLVM OpenMP runtime - dev package
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
@@ -494,11 +497,10 @@ Package: libomp5-8
 Multi-Arch: same
 Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Breaks: libomp5 (<< 7~+rc1-1~exp1)
-Conflicts: libomp5
-Replaces: libomp5
-Provides: libomp5
-# TODO add the break depends
+Breaks: libomp5 (<< 44)
+Provides: libomp-x.y
+Conflicts: libomp-x.y
+Replaces: libomp-x.y
 Description: LLVM OpenMP runtime
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
@@ -508,8 +510,8 @@ Package: libomp-8-doc
 Section: doc
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
-Replaces: libiomp-doc
-Breaks: libiomp-doc
+Replaces: libiomp-x.y-doc
+Breaks: libiomp-x.y-doc
 Description: LLVM OpenMP runtime - Documentation
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
@@ -526,10 +528,10 @@ Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: clang
-Breaks: libc++1 (<< 7~+rc1-1~exp1)
-Conflicts: libc++1
-Replaces: libc++1
-Provides: libc++1
+Breaks: libc++1 (<< 44)
+Provides: libc++-x.y
+Conflicts: libc++-x.y
+Replaces: libc++-x.y
 Description: LLVM C++ Standard library
  libc++ is another implementation of the C++ standard library.
  .
@@ -548,10 +550,10 @@ Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: libc++1-8 (= ${binary:Version}), ${misc:Depends}
-Breaks: libc++-dev (<< 7~+rc1-1~exp1)
-Conflicts: libc++-dev
-Provides: libc++-dev
-Replaces: libc++-dev
+Breaks: libc++-dev (<< 44)
+Provides: libc++-x.y-dev
+Conflicts: libc++-x.y-dev
+Replaces: libc++-x.y-dev
 Description: LLVM C++ Standard library (development files)
  libc++ is another implementation of the C++ standard library
  .
@@ -573,10 +575,10 @@ Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Breaks: libc++abi1 (<< 7~+rc1-1~exp1)
-Conflicts: libc++abi1
-Provides: libc++abi1
-Replaces: libc++abi1
+Breaks: libc++abi1 (<< 44)
+Provides: libc++abi-x.y
+Conflicts: libc++abi-x.y
+Replaces: libc++abi-x.y
 Description: LLVM low level support for a standard C++ library
  libc++abi is another implementation of low level support for a standard C++
  library.
@@ -591,9 +593,10 @@ Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: libc++abi1-8 (= ${binary:Version}), ${misc:Depends}
-Breaks: libc++-dev (<= 6.0.1-1)
-Provides: libc++abi-dev
-Replaces: libc++abi-dev
+Breaks: libc++abi-dev (<= 44)
+Provides: libc++abi-x.y-dev
+Conflicts: libc++abi-x.y-dev
+Replaces: libc++abi-x.y-dev
 Description: LLVM low level support for a standard C++ library (development files)
  libc++abi is another implementation of low level support for a standard C++
  library.
