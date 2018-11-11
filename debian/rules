@@ -360,8 +360,8 @@ VERBOSE=VERBOSE=1
 # ninja
 #VERBOSE=-v
 
-debian-stage2-build:
-	$(PRE_[PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 stage2
+debian-full-build:
+	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 stage2
 
 
 # Check the stage 2 build worked
@@ -442,7 +442,7 @@ debian-libcxxabi-build:
 	$(PRE_PROCESS_CONF) make $(NJOBS) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)"
 	touch $@
 
-override_dh_auto_build: debian-stage2-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build
+override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build
 
 override_dh_prep: build_doc
 	dh_prep
@@ -801,4 +801,4 @@ override_dh_auto_clean:
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
 	rm -rf libcxx/build libcxxabi/build
 
-.PHONY: override_dh_strip preconfigure debian-stage2-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build
+.PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build

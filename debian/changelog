@@ -1,6 +1,10 @@
 llvm-toolchain-7 (1:7.0.1~+rc2-3) unstable; urgency=medium
 
   * Disable gold for sparc* (Closes: #913260)
+  * Hide a symbol in openmp for mips64el
+  * Try to integrate a pach to make pch reproducible
+    Thanks to Rebecca Palmer for the patch
+    (Closes: #877359)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 08 Nov 2018 20:50:39 +0100
 

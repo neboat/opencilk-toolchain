@@ -862,7 +862,7 @@ libomp.so.5 libomp5 #MINVER#
  kmp_get_stacksize_s_@VERSION 0.20130412
  kmp_malloc@VERSION 0.20130412
  kmp_malloc_@VERSION 0.20130412
- kmp_mutex_impl_info@VERSION 7
+ (arch=!mips64el)kmp_mutex_impl_info@VERSION 7
  kmp_realloc@VERSION 0.20130412
  kmp_realloc_@VERSION 0.20130412
  kmp_set_affinity@VERSION 0.20130412
@@ -1095,7 +1095,7 @@ libomp.so.5 libomp5 #MINVER#
  omp_set_schedule@VERSION 0.20130412
  omp_set_schedule_@OMP_3.0 0.20131209
  omp_set_schedule_@VERSION 0.20130412
- (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf) omp_state_info@VERSION 6.0
+ (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)omp_state_info@VERSION 6.0
  omp_test_lock@OMP_1.0 0.20131209
  omp_test_lock@OMP_3.0 0.20131209
  omp_test_lock@VERSION 0.20130412
