@@ -80,7 +80,27 @@ echo '#include <emmintrin.h>' > foo.cc
 clang++-$VERSION -c foo.cc
 
 # Bug 913213
-echo '#include <limits.h>' | clang-$VERSION -E -
+echo '#include <limits.h>' | clang-$VERSION -E - > /dev/null
+
+# Bug launchpad #1488254
+echo '
+#include <string>
+std::string hello = "Hello, world!\n";
+' > foo.cc
+
+echo '
+#include <string>
+#include <iostream>
+extern std::string hello;
+int main() {
+    std::cout << hello;
+    return 0;
+} ' > bar.cc
+
+g++ -c foo.cc && g++ foo.o bar.cc && ./a.out  > /dev/null || true
+clang++-$VERSION -c foo.cc && clang++-$VERSION foo.o bar.cc && ./a.out  > /dev/null
+g++ -c foo.cc && clang++ foo.o bar.cc && ./a.out  > /dev/null || true
+clang++-$VERSION -c foo.cc -fPIC && g++ foo.o bar.cc && ./a.out > /dev/null || true
 
 # bug 827866
 echo 'bool testAndSet(void *atomic) {
