@@ -22,6 +22,10 @@ if test ! -f /usr/bin/llvm-config-$VERSION; then
     echo "Install llvm-$VERSION & llvm-$VERSION-dev"
     exit 1
 fi
+if test ! -f /usr/lib/llvm-$VERSION/lib/libLLVM-$VERSION.so; then
+    echo "Install llvm-$VERSION-dev"
+    exit 1
+fi
 llvm-config-$VERSION --link-shared --libs &> /dev/null
 
 echo '#include <stdlib.h>
