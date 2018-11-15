@@ -312,6 +312,50 @@ echo 'int main() {
 ' > foo.c
 clang-$VERSION -g -o bar foo.c
 
+# ABI issue between gcc & clang
+# https://bugs.llvm.org/show_bug.cgi?id=39427
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=913271
+echo '
+#include <llvm/ADT/ArrayRef.h>
+#include <llvm/ADT/Optional.h>
+namespace llvm { class Constant{}; class Type; class Value; }
+extern llvm::Constant* bar (llvm::Type*, llvm::Constant*, llvm::ArrayRef<llvm::Value*>, bool, llvm::Optional<unsigned> o, llvm::Type*);
+#ifdef PART2
+llvm::Constant* bar (llvm::Type*, llvm::Constant*, llvm::ArrayRef<llvm::Value*>, bool, llvm::Optional<unsigned> o, llvm::Type*)
+{
+   return o.hasValue()?static_cast<llvm::Constant*>(nullptr)+1:nullptr;
+}
+#endif
+#ifndef PART2
+static llvm::Constant* doConstantRef(llvm::Type* type, llvm::Constant* var, llvm::ArrayRef<llvm::Value*> steps)
+{
+   llvm::Optional<unsigned> inRangeIndex;
+   return bar(type, var, steps, false, inRangeIndex, nullptr);
+}
+bool foo()
+{
+   llvm::Constant* var = nullptr;
+   llvm::Value* zero = nullptr;
+   llvm::Value* indexes[2] = {zero, zero};
+   llvm::ArrayRef<llvm::Value*> steps(indexes, 2);
+   auto result = doConstantRef(nullptr, var, steps);
+   return result;
+}
+int main()
+{
+   return foo();
+}
+#endif
+' > foo.cpp
+FLAGS="-I/usr/lib/llvm-$VERSION/include -fPIC -fvisibility-inlines-hidden -Werror=date-time -std=c++11 -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wdelete-non-virtual-dtor -Wno-comment -ffunction-sections -fdata-sections -fno-common -Woverloaded-virtual -fno-strict-aliasing -fPIC -fvisibility-inlines-hidden -Werror=date-time -std=c++11 -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -pedantic -Wno-long-long -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -ffunction-sections -fdata-sections -O2 -DNDEBUG  -fno-exceptions -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS"
+
+clang++-$VERSION -c -o part1.o foo.cpp $FLAGS
+if test -f /usr/bin/g++; then
+    g++ -c -o part2.o -DPART2 foo.cpp $FLAGS
+    clang++-$VERSION -o foo part1.o part2.o $FLAGS
+    ./foo || true
+fi
+rm part1.o part2.o
 
 if test ! -f /usr/lib/llvm-$VERSION/lib/libomp.so; then
     echo "Install libomp-$VERSION-dev";
