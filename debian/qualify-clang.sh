@@ -186,7 +186,7 @@ clang-$VERSION -fuse-ld=gold -shared -o libfoo.so bar.o
 # Still failing, commenting
 # clang-$VERSION -fuse-ld=gold -o y x.o libfoo.so -Wl,-R,.
 
-rm -f x.c bar.c
+rm -f x.c bar.c libfoo.so bar.o y x.o
 
 
 # test thinlto
