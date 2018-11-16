@@ -5,6 +5,9 @@ llvm-toolchain-7 (1:7.0.1~+rc2-3) unstable; urgency=medium
   * Try to integrate a pach to make pch reproducible
     Thanks to Rebecca Palmer for the patch
     (Closes: #877359)
+  * Fix the misscompilation issue causing rustc to crash (Closes: #913271)
+    Might cause some ABI issues but no real good solution.
+    See https://bugs.llvm.org/show_bug.cgi?id=39427
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 08 Nov 2018 20:50:39 +0100
 

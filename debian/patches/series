@@ -88,3 +88,4 @@ remove-apple-clang-manpage.diff
 mips-rdhwr.diff
 clang-arm-default-vfp3-on-armv7a.patch
 reproducible-pch.diff
+pr39427-misscompile.diff
