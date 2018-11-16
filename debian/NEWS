@@ -1,3 +1,12 @@
+llvm-toolchain-7 (1:7.0.1-1) unstable; urgency=medium
+
+  * llvm-toolchain packages are built using clang itself (stage2)
+    - stage1 = build clang with gcc
+    - stage2 = clang building itself
+    This could lead to some unexpected (but rare) ABI issues.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 16 Nov 2018 13:00:39 +0100
+
 llvm-toolchain-7 (1:7-1) unstable; urgency=medium
 
   * From version 7, llvm-toolchain also provides libc++, libc++abi
