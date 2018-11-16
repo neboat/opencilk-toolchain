@@ -808,5 +808,8 @@ override_dh_auto_clean:
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
 	rm -rf libcxx/build libcxxabi/build
+	if test -f lld/docs/ld.lld-$(LLVM_VERSION).1; then \
+		mv lld/docs/ld.lld-$(LLVM_VERSION).1 lld/docs/ld.lld.1; \
+	fi
 
 .PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build
