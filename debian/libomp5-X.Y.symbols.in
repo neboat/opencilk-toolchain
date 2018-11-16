@@ -862,7 +862,7 @@ libomp.so.5 libomp5 #MINVER#
  kmp_get_stacksize_s_@VERSION 0.20130412
  kmp_malloc@VERSION 0.20130412
  kmp_malloc_@VERSION 0.20130412
- (arch=!mips64el)kmp_mutex_impl_info@VERSION 7
+ (arch=!armhf !mips64el)kmp_mutex_impl_info@VERSION 7
  kmp_realloc@VERSION 0.20130412
  kmp_realloc_@VERSION 0.20130412
  kmp_set_affinity@VERSION 0.20130412
