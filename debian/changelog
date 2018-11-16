@@ -1,3 +1,10 @@
+llvm-toolchain-7 (1:7.0.1~+rc2-4) unstable; urgency=medium
+
+  * Workaround the build issues on armhf
+    Thanks to Adrian Bunk for the idea
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 16 Nov 2018 22:46:29 +0100
+
 llvm-toolchain-7 (1:7.0.1~+rc2-3) unstable; urgency=medium
 
   * Disable gold for sparc* (Closes: #913260)
