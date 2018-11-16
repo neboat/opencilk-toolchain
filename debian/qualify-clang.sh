@@ -103,7 +103,7 @@ int main() {
 
 g++ -c foo.cc && g++ foo.o bar.cc && ./a.out  > /dev/null || true
 clang++-$VERSION -c foo.cc && clang++-$VERSION foo.o bar.cc && ./a.out  > /dev/null
-g++ -c foo.cc && clang++ foo.o bar.cc && ./a.out  > /dev/null || true
+g++ -c foo.cc && clang++-$VERSION foo.o bar.cc && ./a.out  > /dev/null || true
 clang++-$VERSION -c foo.cc -fPIC && g++ foo.o bar.cc && ./a.out > /dev/null || true
 
 # bug 827866
