@@ -87,6 +87,12 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabi
 endif
 
+
+ifneq (,$(findstring $(DEB_HOST_ARCH),armhf))
+# avoid an issue with openmp on armhf
+  CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=armv7l-unknown-linux-gnueabihf
+endif
+
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) ge 4.8-20121128-1~ ; echo $$?),0)
 	control_vars = '-Vdep:devlibs=libstdc++-$(GCC_VERSION)-dev, libgcc-$(GCC_VERSION)-dev' \
 		'-Vdep:devlibs-objc=libobjc-$(GCC_VERSION)-dev'
@@ -663,7 +669,9 @@ override_dh_shlibdeps:
 	dh_shlibdeps -l$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ -Xlibclang_rt.asan -Xlibclang_rt.asan -Xlibclang_rt.asan-*.so -Xlibclang_rt.asan-*.so
 
 override_dh_installman:
-	mv lld/docs/ld.lld.1 lld/docs/ld.lld-$(LLVM_VERSION).1
+	if test -f lld/docs/ld.lld.1; then \
+	mv lld/docs/ld.lld.1 lld/docs/ld.lld-$(LLVM_VERSION).1; \
+	fi
 	dh_installman
 # Make sure that lli manpage is only in llvm-3.2-runtime (See #697117)
 	rm -f $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/share/man/man1/lli*
