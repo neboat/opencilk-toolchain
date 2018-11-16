@@ -373,7 +373,7 @@ clang++-$VERSION -c -o part1.o foo.cpp $FLAGS
 if test -f /usr/bin/g++; then
     g++ -c -o part2.o -DPART2 foo.cpp $FLAGS
     clang++-$VERSION -o foo part1.o part2.o $FLAGS
-    ./foo || true
+    ./foo
 fi
 rm part1.o part2.o
 
