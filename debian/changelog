@@ -2,6 +2,8 @@ llvm-toolchain-7 (1:7.0.1~+rc2-4) unstable; urgency=medium
 
   * Workaround the build issues on armhf
     Thanks to Adrian Bunk for the idea
+  * Remove useless symlink /usr/include/c++ -> ../lib/llvm-7/include/c++
+    (Closes: #913400)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 16 Nov 2018 22:46:29 +0100
 
