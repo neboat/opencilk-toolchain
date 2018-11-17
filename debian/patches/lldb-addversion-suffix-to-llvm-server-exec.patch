@@ -12,19 +12,18 @@ which could then break something else.
 
 This probably should have upstream bug but I couldn't find any existing report.
 
-Index: llvm-toolchain-snapshot_8.0~svn293998/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+Index: llvm-toolchain-snapshot_8~svn347135/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
 ===================================================================
---- llvm-toolchain-snapshot_8.0~svn293998.orig/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
-+++ llvm-toolchain-snapshot_8.0~svn293998/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
-@@ -32,6 +32,7 @@
+--- llvm-toolchain-snapshot_8~svn347135.orig/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
++++ llvm-toolchain-snapshot_8~svn347135/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+@@ -33,13 +33,14 @@
  #include "lldb/Utility/StreamString.h"
  #include "llvm/ADT/SmallString.h"
  #include "llvm/Support/ScopedPrinter.h"
 +#include "llvm/Config/llvm-config.h"
  
- // Project includes
  #include "ProcessGDBRemoteLog.h"
-@@ -39,7 +40,7 @@
+ 
  #if defined(__APPLE__)
  #define DEBUGSERVER_BASENAME "debugserver"
  #else

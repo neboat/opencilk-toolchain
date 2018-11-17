@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_8~svn342269/unittests/Support/Path.cpp
+Index: llvm-toolchain-snapshot_8~svn347135/unittests/Support/Path.cpp
 ===================================================================
---- llvm-toolchain-snapshot_8~svn342269.orig/unittests/Support/Path.cpp
-+++ llvm-toolchain-snapshot_8~svn342269/unittests/Support/Path.cpp
-@@ -466,7 +466,7 @@ protected:
+--- llvm-toolchain-snapshot_8~svn347135.orig/unittests/Support/Path.cpp
++++ llvm-toolchain-snapshot_8~svn347135/unittests/Support/Path.cpp
+@@ -437,7 +437,7 @@ protected:
      sys::path::append(NonExistantFile, "1B28B495C16344CB9822E588CD4C3EF0");
    }
  
@@ -11,9 +11,9 @@ Index: llvm-toolchain-snapshot_8~svn342269/unittests/Support/Path.cpp
  };
  
  TEST_F(FileSystemTest, Unique) {
-@@ -546,13 +546,13 @@ TEST_F(FileSystemTest, RealPath) {
+@@ -519,13 +519,13 @@ TEST_F(FileSystemTest, RealPath) {
  
-   SmallString<64> HomeDir;
+   // This can fail if $HOME is not set and getpwuid fails.
    bool Result = llvm::sys::path::home_directory(HomeDir);
 -  if (Result) {
 +/*  if (Result) {
