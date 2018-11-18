@@ -89,3 +89,12 @@ mips-rdhwr.diff
 clang-arm-default-vfp3-on-armv7a.patch
 reproducible-pch.diff
 pr39427-misscompile.diff
+
+# Hurd port
+D54079-hurd-openmp.diff
+D54338-hurd-libcxx-threads-build.diff
+D54339-hurd-libcxx-threads-detection.diff
+D54378-hurd-triple.diff
+D54379-hurd-triple-clang.diff
+D54677-hurd-path_max.diff
+hurd-cxx-paths.diff
