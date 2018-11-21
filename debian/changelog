@@ -7,8 +7,10 @@ llvm-toolchain-7 (1:7.0.1~svn347285-1~exp1) UNRELEASED; urgency=medium
     hurd-cxx-paths.diff: New patches to fix hurd build.
 
   [ Sylvestre Ledru ]
-  * experimental New snapshot release
   * Remove mips-rdhwr.diff as it has been applied upstream
+  * Fix a baseline violation on armhf (Closes: #914268)
+    clang-arm-default-vfp3-on-armv7a.patch has been updated to disable
+    neon in another place
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 21 Nov 2018 09:45:00 +0100
 
