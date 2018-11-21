@@ -1,11 +1,16 @@
-llvm-toolchain-7 (1:7.0.1~+rc2-5) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7.0.1~svn347285-1~exp1) UNRELEASED; urgency=medium
 
+  [ Samuel Thibault ]
   * D54079-hurd-openmp.diff, D54338-hurd-libcxx-threads-build.diff,
     D54339-hurd-libcxx-threads-detection.diff, D54378-hurd-triple.diff,
     D54379-hurd-triple-clang.diff, D54677-hurd-path_max.diff,
     hurd-cxx-paths.diff: New patches to fix hurd build.
 
- -- Samuel Thibault <sthibault@debian.org>  Sun, 18 Nov 2018 23:43:55 +0100
+  [ Sylvestre Ledru ]
+  * experimental New snapshot release
+  * Remove mips-rdhwr.diff as it has been applied upstream
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 21 Nov 2018 09:45:00 +0100
 
 llvm-toolchain-7 (1:7.0.1~+rc2-4) unstable; urgency=medium
 
