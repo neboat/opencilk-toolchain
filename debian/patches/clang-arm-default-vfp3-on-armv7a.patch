@@ -11,3 +11,15 @@ Index: llvm-toolchain-7-7/include/llvm/Support/ARMTargetParser.def
  ARM_ARCH("armv7ve", ARMV7VE, "7VE", "v7ve", ARMBuildAttrs::CPUArch::v7,
            FK_NEON, (ARM::AEK_SEC | ARM::AEK_MP | ARM::AEK_VIRT |
            ARM::AEK_HWDIVARM | ARM::AEK_HWDIVTHUMB | ARM::AEK_DSP))
+Index: llvm-toolchain-7-7/lib/Target/ARM/ARM.td
+===================================================================
+--- llvm-toolchain-7-7.orig/lib/Target/ARM/ARM.td
++++ llvm-toolchain-7-7/lib/Target/ARM/ARM.td
+@@ -558,7 +558,6 @@ def ARMv6sm   : Architecture<"armv6s-m",
+                                                        FeatureStrictAlign]>;
+ 
+ def ARMv7a    : Architecture<"armv7-a",   "ARMv7a",   [HasV7Ops,
+-                                                       FeatureNEON,
+                                                        FeatureDB,
+                                                        FeatureDSP,
+                                                        FeatureAClass]>;

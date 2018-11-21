@@ -30,6 +30,30 @@ llvm-toolchain-snapshot (1:8~svn345569-1~exp1) experimental; urgency=medium
   * New snapshot release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Oct 2018 08:31:14 +0100
+llvm-toolchain-7 (1:7.0.1~+rc2-5) unstable; urgency=medium
+
+  [ Samuel Thibault ]
+  * D54079-hurd-openmp.diff, D54338-hurd-libcxx-threads-build.diff,
+    D54339-hurd-libcxx-threads-detection.diff, D54378-hurd-triple.diff,
+    D54379-hurd-triple-clang.diff, D54677-hurd-path_max.diff,
+    hurd-cxx-paths.diff: New patches to fix hurd build.
+
+  [ Sylvestre Ledru ]
+  * Remove mips-rdhwr.diff as it has been applied upstream
+  * Fix a baseline violation on armhf (Closes: #914268)
+    clang-arm-default-vfp3-on-armv7a.patch has been updated to disable
+    neon in another place
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 21 Nov 2018 09:45:00 +0100
+
+llvm-toolchain-7 (1:7.0.1~+rc2-4) unstable; urgency=medium
+
+  * Workaround the build issues on armhf
+    Thanks to Adrian Bunk for the idea
+  * Remove useless symlink /usr/include/c++ -> ../lib/llvm-7/include/c++
+    (Closes: #913400)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 16 Nov 2018 22:46:29 +0100
 
 llvm-toolchain-7 (1:7.0.1~+rc2-3) unstable; urgency=medium
 
@@ -38,6 +62,9 @@ llvm-toolchain-7 (1:7.0.1~+rc2-3) unstable; urgency=medium
   * Try to integrate a pach to make pch reproducible
     Thanks to Rebecca Palmer for the patch
     (Closes: #877359)
+  * Fix the misscompilation issue causing rustc to crash (Closes: #913271)
+    Might cause some ABI issues but no real good solution.
+    See https://bugs.llvm.org/show_bug.cgi?id=39427
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 08 Nov 2018 20:50:39 +0100
 
