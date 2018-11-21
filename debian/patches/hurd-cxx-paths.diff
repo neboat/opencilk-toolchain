@@ -1,9 +1,9 @@
 This should be factorized with Linux.cpp and the GNU/kFreeBSD case.
 
-Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.cpp
+Index: llvm-toolchain-7_7.0.1~svn347285/clang/lib/Driver/ToolChains/Hurd.cpp
 ===================================================================
---- llvm-toolchain-7-7.0.1~+rc2.orig/clang/lib/Driver/ToolChains/Hurd.cpp
-+++ llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.cpp
+--- llvm-toolchain-7_7.0.1~svn347285.orig/clang/lib/Driver/ToolChains/Hurd.cpp
++++ llvm-toolchain-7_7.0.1~svn347285/clang/lib/Driver/ToolChains/Hurd.cpp
 @@ -67,15 +67,102 @@ static StringRef getOSLibDir(const llvm:
    return Triple.isArch32Bit() ? "lib" : "lib64";
  }
@@ -150,7 +150,7 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.cpp
    // FIXME: It's not clear whether we should use the driver's installed
    // directory ('Dir' below) or the ResourceDir.
    if (StringRef(D.Dir).startswith(SysRoot))
-@@ -161,6 +280,16 @@ void Hurd::AddClangSystemIncludeArgs(con
+@@ -163,6 +282,16 @@ void Hurd::AddClangSystemIncludeArgs(con
    // Lacking those, try to detect the correct set of system includes for the
    // target triple.
  
@@ -167,7 +167,7 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.cpp
    const StringRef X86MultiarchIncludeDirs[] = {
        "/usr/include/i386-gnu"};
  
-@@ -187,3 +316,94 @@ void Hurd::AddClangSystemIncludeArgs(con
+@@ -189,3 +318,94 @@ void Hurd::AddClangSystemIncludeArgs(con
  
    addExternCSystemInclude(DriverArgs, CC1Args, SysRoot + "/usr/include");
  }
@@ -262,11 +262,11 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.cpp
 +      break;
 +  }
 +}
-Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.h
+Index: llvm-toolchain-7_7.0.1~svn347285/clang/lib/Driver/ToolChains/Hurd.h
 ===================================================================
---- llvm-toolchain-7-7.0.1~+rc2.orig/clang/lib/Driver/ToolChains/Hurd.h
-+++ llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.h
-@@ -25,6 +25,12 @@ public:
+--- llvm-toolchain-7_7.0.1~svn347285.orig/clang/lib/Driver/ToolChains/Hurd.h
++++ llvm-toolchain-7_7.0.1~svn347285/clang/lib/Driver/ToolChains/Hurd.h
+@@ -27,6 +27,12 @@ public:
    void
    AddClangSystemIncludeArgs(const llvm::opt::ArgList &DriverArgs,
                              llvm::opt::ArgStringList &CC1Args) const override;

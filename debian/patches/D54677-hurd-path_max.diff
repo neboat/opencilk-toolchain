@@ -4,11 +4,11 @@ The GNU/Hurd system does not define an arbitrary PATH_MAX limitation, the POSIX 
 
 https://reviews.llvm.org/D54677
 
-Index: llvm/libcxx/src/filesystem/operations.cpp
+Index: llvm-toolchain-7_7.0.1~svn347285/libcxx/src/filesystem/operations.cpp
 ===================================================================
---- llvm/libcxx/src/filesystem/operations.cpp	(révision 347139)
-+++ llvm/libcxx/src/filesystem/operations.cpp	(copie de travail)
-@@ -530,11 +530,20 @@
+--- llvm-toolchain-7_7.0.1~svn347285.orig/libcxx/src/filesystem/operations.cpp
++++ llvm-toolchain-7_7.0.1~svn347285/libcxx/src/filesystem/operations.cpp
+@@ -531,11 +531,20 @@ path __canonical(path const& orig_p, err
    ErrorHandler<path> err("canonical", ec, &orig_p, &cwd);
  
    path p = __do_absolute(orig_p, &cwd, ec);
@@ -29,7 +29,7 @@ Index: llvm/libcxx/src/filesystem/operations.cpp
  }
  
  void __copy(const path& from, const path& to, copy_options options,
-@@ -1076,16 +1085,27 @@
+@@ -1077,16 +1086,27 @@ void __permissions(const path& p, perms
  path __read_symlink(const path& p, error_code* ec) {
    ErrorHandler<path> err("read_symlink", ec, &p);
  
