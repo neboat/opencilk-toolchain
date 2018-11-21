@@ -496,6 +496,18 @@ int main()
 clang++-$VERSION -stdlib=libc++ -Wall -Werror foo.cpp -o foo
 ./foo
 
+# Bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=914201
+echo '
+#include <math.h>
+int main(void)
+{
+    double f = 2.0;
+    if (isnan(f))
+      return 1;
+    return 0;
+}' > foo.c
+clang-$VERSION -Wconversion -Werror foo.c || true
+
 if test -f /usr/bin/g++; then
 g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
     foo.cpp -nodefaultlibs -std=c++17 -lc++ -lc++abi -lm -lc -lgcc_s -lgcc|| true
