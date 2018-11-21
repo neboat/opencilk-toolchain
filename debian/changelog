@@ -1,4 +1,4 @@
-llvm-toolchain-7 (1:7.0.1~svn347285-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7.0.1~+rc2-5) unstable; urgency=medium
 
   [ Samuel Thibault ]
   * D54079-hurd-openmp.diff, D54338-hurd-libcxx-threads-build.diff,
