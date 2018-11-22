@@ -1,8 +1,11 @@
-Fix threads detection on GNU/Hurd
+r347347 | ldionne | 2018-11-20 22:14:05 +0100 (mar. 20 nov. 2018) | 6 lignes
+
+[libcxx] Fix threads detection on GNU/Hurd
 
 GNU/Hurd provides standard Posix threads
 
-https://reviews.llvm.org/D54339
+Reviewed as https://reviews.llvm.org/D54339.
+Thanks to Samuel Thibault for the patch.
 
 Index: llvm-toolchain-7-7/libcxx/include/__config
 ===================================================================
