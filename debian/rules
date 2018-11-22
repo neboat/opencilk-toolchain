@@ -4,6 +4,9 @@ TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
 DEB_INST		:= $(CURDIR)/debian/tmp/
 
+# Disable to move the previous method
+BUILD_METHOD := stage2
+
 GXX_VERSIONED_PACKAGE    := $(shell dpkg-query -W -f '$${Depends}' g++ | grep -o 'g++-[0-9][0-9.]*' | tail -n1 )
 GXX_VERSIONED_EXECUTABLE := $(shell dpkg -L $(GXX_VERSIONED_PACKAGE) | grep '/usr/bin/g++-[0-9][0-9.]*' | xargs ls -d | tail -n1 )
 GCC_VERSION              := $(subst /usr/bin/g++-,,$(GXX_VERSIONED_EXECUTABLE))
@@ -82,6 +85,12 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   # Prevent clang from getting a > v4t default
   # See bug #868779
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabi
+endif
+
+
+ifneq (,$(findstring $(DEB_HOST_ARCH),armhf))
+# avoid an issue with openmp on armhf
+  CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=armv7l-unknown-linux-gnueabihf
 endif
 
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) ge 4.8-20121128-1~ ; echo $$?),0)
@@ -364,12 +373,13 @@ VERBOSE=VERBOSE=1
 #VERBOSE=-v
 
 debian-full-build:
-	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 stage2
-
+	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 $(BUILD_METHOD)
 
 # Check the stage 2 build worked
+	if test "$(BUILD_METHOD)" = "stage2"; then \
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \
 		echo "clang hasn't been built using clang. Bye bye. Check that the stage2 build has been done."; \
+	fi; \
 	fi
 
 	touch $@
@@ -498,7 +508,11 @@ override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
 	rm -rf $(find $(TARGET_BUILD) -wholename '*CMakeFiles*' -not -name CMakeLists.txt -a -name "*.dir" -type d)
 	# install/fast enables a make install without recompiling temporary files
-	$(MAKE) -C $(TARGET_BUILD) $(VERBOSE) stage2-install DESTDIR=$(DEB_INST)/
+	if test "$(BUILD_METHOD)" = "stage2"; then \
+		$(MAKE) -C $(TARGET_BUILD) $(VERBOSE) stage2-install DESTDIR=$(DEB_INST)/; \
+	else \
+		$(MAKE) -C $(TARGET_BUILD) $(VERBOSE) install DESTDIR=$(DEB_INST)/; \
+	fi
 	# Not used on Linux.
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/argdumper
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/clang/clang-format-bbedit.applescript
@@ -658,7 +672,9 @@ override_dh_shlibdeps:
 	dh_shlibdeps -l$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ -Xlibclang_rt.asan -Xlibclang_rt.asan -Xlibclang_rt.asan-*.so -Xlibclang_rt.asan-*.so
 
 override_dh_installman:
-	mv lld/docs/ld.lld.1 lld/docs/ld.lld-$(LLVM_VERSION).1
+	if test -f lld/docs/ld.lld.1; then \
+	mv lld/docs/ld.lld.1 lld/docs/ld.lld-$(LLVM_VERSION).1; \
+	fi
 	dh_installman
 # Make sure that lli manpage is only in llvm-3.2-runtime (See #697117)
 	rm -f $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/share/man/man1/lli*
@@ -680,7 +696,7 @@ endif
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.28 ; echo $$?),0)
 	rm -f $(CURDIR)/libc++-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/*/operations.cpp.o
 # strip segfaults on libFuzzer.a
-	dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a
+	dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a -XlibclangTidyModernizeModule.a
 else
 	dh_strip -a -v
 endif
@@ -808,5 +824,8 @@ override_dh_auto_clean:
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
 	rm -rf libcxx/build libcxxabi/build
+	if test -f lld/docs/ld.lld-$(LLVM_VERSION).1; then \
+		mv lld/docs/ld.lld-$(LLVM_VERSION).1 lld/docs/ld.lld.1; \
+	fi
 
 .PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build
