@@ -1,3 +1,10 @@
+llvm-toolchain-7 (1:7.0.1~+rc2-6) UNRELEASED; urgency=medium
+
+  * D53557-hurd-self-exe-realpath.diff: Fix paths returned by
+    llvm-config (See Bug#911817).
+
+ -- Samuel Thibault <sthibault@debian.org>  Thu, 22 Nov 2018 19:49:52 +0100
+
 llvm-toolchain-7 (1:7.0.1~+rc2-5) unstable; urgency=medium
 
   [ Samuel Thibault ]
