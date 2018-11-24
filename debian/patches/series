@@ -80,6 +80,6 @@ clang-arm-default-vfp3-on-armv7a.patch
 reproducible-pch.diff
 
 # Hurd port
-D54379-hurd-triple-clang.diff
+#D54379-hurd-triple-clang.diff
 D54677-hurd-path_max.diff
 hurd-cxx-paths.diff
