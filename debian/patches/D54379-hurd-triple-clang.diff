@@ -2,10 +2,10 @@ Add Hurd toolchain support to Clang
 
 https://reviews.llvm.org/D54379
 
-Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Basic/Targets/OSTargets.h
+Index: llvm-toolchain-snapshot_8~svn347511/clang/lib/Basic/Targets/OSTargets.h
 ===================================================================
---- llvm-toolchain-7-7.0.1~+rc2.orig/clang/lib/Basic/Targets/OSTargets.h
-+++ llvm-toolchain-7-7.0.1~+rc2/clang/lib/Basic/Targets/OSTargets.h
+--- llvm-toolchain-snapshot_8~svn347511.orig/clang/lib/Basic/Targets/OSTargets.h
++++ llvm-toolchain-snapshot_8~svn347511/clang/lib/Basic/Targets/OSTargets.h
 @@ -270,6 +270,29 @@ public:
    }
  };
@@ -36,10 +36,10 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Basic/Targets/OSTargets.h
  // Minix Target
  template <typename Target>
  class LLVM_LIBRARY_VISIBILITY MinixTargetInfo : public OSTargetInfo<Target> {
-Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-snapshot_8~svn347511/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-7-7.0.1~+rc2.orig/clang/lib/Basic/Targets.cpp
-+++ llvm-toolchain-7-7.0.1~+rc2/clang/lib/Basic/Targets.cpp
+--- llvm-toolchain-snapshot_8~svn347511.orig/clang/lib/Basic/Targets.cpp
++++ llvm-toolchain-snapshot_8~svn347511/clang/lib/Basic/Targets.cpp
 @@ -495,6 +495,8 @@ TargetInfo *AllocateTarget(const llvm::T
        return new NaClTargetInfo<X86_32TargetInfo>(Triple, Opts);
      case llvm::Triple::ELFIAMCU:
@@ -49,10 +49,10 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Basic/Targets.cpp
      default:
        return new X86_32TargetInfo(Triple, Opts);
      }
-Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/CMakeLists.txt
+Index: llvm-toolchain-snapshot_8~svn347511/clang/lib/Driver/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-7-7.0.1~+rc2.orig/clang/lib/Driver/CMakeLists.txt
-+++ llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/CMakeLists.txt
+--- llvm-toolchain-snapshot_8~svn347511.orig/clang/lib/Driver/CMakeLists.txt
++++ llvm-toolchain-snapshot_8~svn347511/clang/lib/Driver/CMakeLists.txt
 @@ -47,6 +47,7 @@ add_clang_library(clangDriver
    ToolChains/Haiku.cpp
    ToolChains/HIP.cpp
@@ -61,10 +61,10 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/CMakeLists.txt
    ToolChains/Linux.cpp
    ToolChains/MipsLinux.cpp
    ToolChains/MinGW.cpp
-Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/Driver.cpp
+Index: llvm-toolchain-snapshot_8~svn347511/clang/lib/Driver/Driver.cpp
 ===================================================================
---- llvm-toolchain-7-7.0.1~+rc2.orig/clang/lib/Driver/Driver.cpp
-+++ llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/Driver.cpp
+--- llvm-toolchain-snapshot_8~svn347511.orig/clang/lib/Driver/Driver.cpp
++++ llvm-toolchain-snapshot_8~svn347511/clang/lib/Driver/Driver.cpp
 @@ -26,6 +26,7 @@
  #include "ToolChains/HIP.h"
  #include "ToolChains/Haiku.h"
@@ -73,7 +73,7 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/Driver.cpp
  #include "ToolChains/Lanai.h"
  #include "ToolChains/Linux.h"
  #include "ToolChains/MSVC.h"
-@@ -399,6 +400,13 @@ static llvm::Triple computeTargetTriple(
+@@ -402,6 +403,13 @@ static llvm::Triple computeTargetTriple(
  
    llvm::Triple Target(llvm::Triple::normalize(TargetTriple));
  
@@ -87,7 +87,7 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/Driver.cpp
    // Handle Apple-specific options available here.
    if (Target.isOSBinFormatMachO()) {
      // If an explicit Darwin arch name is given, that trumps all.
-@@ -4374,6 +4382,9 @@ const ToolChain &Driver::getToolChain(co
+@@ -4574,6 +4582,9 @@ const ToolChain &Driver::getToolChain(co
      case llvm::Triple::Contiki:
        TC = llvm::make_unique<toolchains::Contiki>(*this, Target, Args);
        break;
@@ -97,11 +97,11 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/Driver.cpp
      default:
        // Of these targets, Hexagon is the only one that might have
        // an OS of Linux, in which case it got handled above already.
-Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Clang.cpp
+Index: llvm-toolchain-snapshot_8~svn347511/clang/lib/Driver/ToolChains/Clang.cpp
 ===================================================================
---- llvm-toolchain-7-7.0.1~+rc2.orig/clang/lib/Driver/ToolChains/Clang.cpp
-+++ llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Clang.cpp
-@@ -528,7 +528,7 @@ static bool useFramePointerForTargetByDe
+--- llvm-toolchain-snapshot_8~svn347511.orig/clang/lib/Driver/ToolChains/Clang.cpp
++++ llvm-toolchain-snapshot_8~svn347511/clang/lib/Driver/ToolChains/Clang.cpp
+@@ -530,7 +530,7 @@ static bool useFramePointerForTargetByDe
      return !areOptimizationsEnabled(Args);
    }
  
@@ -110,22 +110,23 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Clang.cpp
      switch (Triple.getArch()) {
      // Don't use a frame pointer on linux if optimizing for certain targets.
      case llvm::Triple::mips64:
-Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Gnu.cpp
+Index: llvm-toolchain-snapshot_8~svn347511/clang/lib/Driver/ToolChains/Gnu.cpp
 ===================================================================
---- llvm-toolchain-7-7.0.1~+rc2.orig/clang/lib/Driver/ToolChains/Gnu.cpp
-+++ llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Gnu.cpp
-@@ -1846,7 +1846,9 @@ void Generic_GCC::GCCInstallationDetecto
-       "i686-linux-gnu",       "i686-pc-linux-gnu",     "i486-linux-gnu",
+--- llvm-toolchain-snapshot_8~svn347511.orig/clang/lib/Driver/ToolChains/Gnu.cpp
++++ llvm-toolchain-snapshot_8~svn347511/clang/lib/Driver/ToolChains/Gnu.cpp
+@@ -1882,7 +1882,10 @@ void Generic_GCC::GCCInstallationDetecto
        "i386-linux-gnu",       "i386-redhat-linux6E",   "i686-redhat-linux",
        "i586-redhat-linux",    "i386-redhat-linux",     "i586-suse-linux",
--      "i486-slackware-linux", "i686-montavista-linux", "i586-linux-gnu"};
-+      "i486-slackware-linux", "i686-montavista-linux", "i586-linux-gnu",
+       "i486-slackware-linux", "i686-montavista-linux", "i586-linux-gnu",
+-      "i686-linux-android"};
++      "i686-linux-android",
 +      "i386-gnu",             "i486-gnu",              "i586-gnu",
 +      "i686-gnu"};
++
  
    static const char *const MIPSLibDirs[] = {"/lib"};
-   static const char *const MIPSTriples[] = {"mips-linux-gnu", "mips-mti-linux",
-@@ -2210,6 +2212,9 @@ void Generic_GCC::GCCInstallationDetecto
+   static const char *const MIPSTriples[] = {
+@@ -2262,6 +2265,9 @@ void Generic_GCC::GCCInstallationDetecto
        // triple.
        {"i386-linux-gnu/gcc/" + CandidateTriple.str(), "../../..",
         (TargetArch == llvm::Triple::x86 &&
@@ -135,10 +136,10 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Gnu.cpp
          TargetTriple.getOS() != llvm::Triple::Solaris)}};
  
    for (auto &Suffix : Suffixes) {
-Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.cpp
+Index: llvm-toolchain-snapshot_8~svn347511/clang/lib/Driver/ToolChains/Hurd.cpp
 ===================================================================
 --- /dev/null
-+++ llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.cpp
++++ llvm-toolchain-snapshot_8~svn347511/clang/lib/Driver/ToolChains/Hurd.cpp
 @@ -0,0 +1,191 @@
 +//===--- Hurd.cpp - Hurd ToolChain Implementations --------*- C++ -*-===//
 +//
@@ -331,10 +332,10 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.cpp
 +
 +  addExternCSystemInclude(DriverArgs, CC1Args, SysRoot + "/usr/include");
 +}
-Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.h
+Index: llvm-toolchain-snapshot_8~svn347511/clang/lib/Driver/ToolChains/Hurd.h
 ===================================================================
 --- /dev/null
-+++ llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.h
++++ llvm-toolchain-snapshot_8~svn347511/clang/lib/Driver/ToolChains/Hurd.h
 @@ -0,0 +1,46 @@
 +//===--- Hurd.h - Hurd ToolChain Implementations ----------*- C++ -*-===//
 +//
@@ -382,10 +383,10 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Driver/ToolChains/Hurd.h
 +} // end namespace clang
 +
 +#endif // LLVM_CLANG_LIB_DRIVER_TOOLCHAINS_Hurd_H
-Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Frontend/InitHeaderSearch.cpp
+Index: llvm-toolchain-snapshot_8~svn347511/clang/lib/Frontend/InitHeaderSearch.cpp
 ===================================================================
---- llvm-toolchain-7-7.0.1~+rc2.orig/clang/lib/Frontend/InitHeaderSearch.cpp
-+++ llvm-toolchain-7-7.0.1~+rc2/clang/lib/Frontend/InitHeaderSearch.cpp
+--- llvm-toolchain-snapshot_8~svn347511.orig/clang/lib/Frontend/InitHeaderSearch.cpp
++++ llvm-toolchain-snapshot_8~svn347511/clang/lib/Frontend/InitHeaderSearch.cpp
 @@ -260,6 +260,7 @@ void InitHeaderSearch::AddDefaultCInclud
  
    switch (os) {
@@ -394,20 +395,19 @@ Index: llvm-toolchain-7-7.0.1~+rc2/clang/lib/Frontend/InitHeaderSearch.cpp
    case llvm::Triple::Solaris:
      llvm_unreachable("Include management is handled in the driver.");
  
-@@ -412,6 +413,7 @@
-
+@@ -412,6 +413,7 @@ void InitHeaderSearch::AddDefaultCPlusPl
+ 
    switch (os) {
    case llvm::Triple::Linux:
 +  case llvm::Triple::Hurd:
    case llvm::Triple::Solaris:
      llvm_unreachable("Include management is handled in the driver.");
      break;
-@@ -460,6 +462,7 @@
+@@ -460,6 +462,7 @@ void InitHeaderSearch::AddDefaultInclude
      break; // Everything else continues to use this routine's logic.
-
+ 
    case llvm::Triple::Linux:
 +  case llvm::Triple::Hurd:
    case llvm::Triple::Solaris:
      return;
-
  

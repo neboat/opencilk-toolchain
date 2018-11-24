@@ -4,10 +4,10 @@ Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
 Bug-Debian: https://bugs.debian.org/877359
 Forwarded: no
 
-Index: llvm-toolchain-snapshot_8~svn346586/clang/lib/Serialization/ASTWriter.cpp
+Index: llvm-toolchain-snapshot_8~svn347511/clang/lib/Serialization/ASTWriter.cpp
 ===================================================================
---- llvm-toolchain-snapshot_8~svn346586.orig/clang/lib/Serialization/ASTWriter.cpp
-+++ llvm-toolchain-snapshot_8~svn346586/clang/lib/Serialization/ASTWriter.cpp
+--- llvm-toolchain-snapshot_8~svn347511.orig/clang/lib/Serialization/ASTWriter.cpp
++++ llvm-toolchain-snapshot_8~svn347511/clang/lib/Serialization/ASTWriter.cpp
 @@ -4280,9 +4280,13 @@ void ASTWriter::WriteOpenCLExtensionType
      return;
  
