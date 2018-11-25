@@ -1,3 +1,9 @@
+llvm-toolchain-7 (1:7.0.1~+rc2-7) unstable; urgency=medium
+
+  * Bring back mips-rdhwr.diff as it isn't in rc2
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 25 Nov 2018 17:00:31 +0100
+
 llvm-toolchain-7 (1:7.0.1~+rc2-6) unstable; urgency=medium
 
   [ Samuel Thibault ]
