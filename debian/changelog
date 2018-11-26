@@ -1,3 +1,16 @@
+llvm-toolchain-7 (1:7.0.1~+rc2-8) unstable; urgency=medium
+
+  * Use llvm-strip instead of binutils strip.
+    Two reasons:
+      - with clang stage2, the dbg packages were not generated
+      - strip fails on stretch and other ubuntu on some archives
+    For this, I had to silent the --enable-deterministic-archives
+    option (https://bugs.llvm.org/show_bug.cgi?id=39789).
+    Thanks to Rebecca Palmer for the idea
+    (Closes: #913946)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 26 Nov 2018 16:12:02 +0100
+
 llvm-toolchain-7 (1:7.0.1~+rc2-7) unstable; urgency=medium
 
   * Bring back mips-rdhwr.diff as it isn't in rc2
