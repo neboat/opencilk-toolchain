@@ -54,6 +54,7 @@ remove-test-freezing.diff
 impl-path-hurd.diff
 powerpcspe-add-missing-include-path.diff
 x32-fix-driver-search-paths.diff
+clang-baseline-fix-i386.patch
 
 # OpenMP
 
