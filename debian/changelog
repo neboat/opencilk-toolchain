@@ -1,3 +1,13 @@
+llvm-toolchain-7 (1:7.0.1~+rc2-9) unstable; urgency=medium
+
+  * Change the i386 base line to avoid using sse2 extension
+    This is more important now that llvm is built with clang
+    instead of gcc.
+    Thanks to Fanael Linithien for the patch
+    (Closes: #914770, #894840)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 29 Nov 2018 09:53:10 +0100
+
 llvm-toolchain-7 (1:7.0.1~+rc2-8) unstable; urgency=medium
 
   * Use llvm-strip instead of binutils strip.
