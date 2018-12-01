@@ -1,13 +1,3 @@
-llvm-toolchain-7 (1:7.0.1~+rc2-9) unstable; urgency=medium
-
-  * Change the i386 base line to avoid using sse2 extension
-    This is more important now that llvm is built with clang
-    instead of gcc.
-    Thanks to Fanael Linithien for the patch
-    (Closes: #914770, #894840)
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 29 Nov 2018 09:53:10 +0100
-
 llvm-toolchain-7 (1:7.0.1~+rc2-8) unstable; urgency=medium
 
   * Use llvm-strip instead of binutils strip.
@@ -18,8 +8,13 @@ llvm-toolchain-7 (1:7.0.1~+rc2-8) unstable; urgency=medium
     option (https://bugs.llvm.org/show_bug.cgi?id=39789).
     Thanks to Rebecca Palmer for the idea
     (Closes: #913946)
+  * Change the i386 base line to avoid using sse2 extension
+    This is more important now that llvm is built with clang
+    instead of gcc.
+    Thanks to Fanael Linithien for the patch
+    (Closes: #914770, #894840)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 26 Nov 2018 16:12:02 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 01 Dec 2018 11:18:39 +0100
 
 llvm-toolchain-7 (1:7.0.1~+rc2-7) unstable; urgency=medium
 
