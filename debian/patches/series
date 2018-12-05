@@ -103,3 +103,6 @@ D53557-hurd-self-exe-realpath.diff
 # mips
 mips-rdhwr.diff
 strip-ignore-deterministic-archives.diff
+
+# powerpcspe
+D49754-powerpcspe-clang.diff
