@@ -2,6 +2,7 @@ llvm-toolchain-7 (1:7.0.1~+rc2-9) UNRELEASED; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Add patch to add powerpcspe support to clang
+  * Add patch to fix register spilling on powerpcspe
 
  -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Wed, 05 Dec 2018 09:22:19 +0100
 

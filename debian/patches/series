@@ -106,3 +106,4 @@ strip-ignore-deterministic-archives.diff
 
 # powerpcspe
 D49754-powerpcspe-clang.diff
+D54409-powerpcspe-register-spilling.diff
