@@ -684,21 +684,23 @@ override_dh_strip:
 	fi
 	: # running out of diskspace on the buildds
 	find $(TARGET_BUILD) -name '*.o' -o -name '*.a' -type f | xargs -r rm -f
+	# strip args in case we want to use llvm-strip
+	#PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/
 ifeq (0, $(strip $(shell dpkg --compare-versions $(DH_VERSION) ge 9.20160114; echo $$?)))
 	: # If we don't have the right version of debhelper, don't run the option
-	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_strip -p libclang$(SONAME_EXT)-$(LLVM_VERSION) --dbgsym-migration='libclang$(SONAME_EXT)-$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
-	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_strip -p libllvm$(LLVM_VERSION) --dbgsym-migration='libllvm$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
-	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_strip -p liblldb-$(LLVM_VERSION) --dbgsym-migration='liblldb-$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
-	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_strip -p libomp$(SONAME_OPENMP)-$(LLVM_VERSION) --dbgsym-migration='libomp$(SONAME_OPENMP)-$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
+	dh_strip -p libclang$(SONAME_EXT)-$(LLVM_VERSION) --dbgsym-migration='libclang$(SONAME_EXT)-$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
+	dh_strip -p libllvm$(LLVM_VERSION) --dbgsym-migration='libllvm$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
+	dh_strip -p liblldb-$(LLVM_VERSION) --dbgsym-migration='liblldb-$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
+	dh_strip -p libomp$(SONAME_OPENMP)-$(LLVM_VERSION) --dbgsym-migration='libomp$(SONAME_OPENMP)-$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
 endif
 # ifeq (${LLD_ENABLE},yes)
 # 	PATH=$(CURDIR)/:$$PATH dh_strip -p liblld-$(LLVM_VERSION) --dbg-package=liblld-$(LLVM_VERSION)-dbg
 # endif
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.28 ; echo $$?),0)
 # strip segfaults on libFuzzer.a
-	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a -XlibclangTidyModernizeModule.a
+	dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a -XlibclangTidyModernizeModule.a
 else
-	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_strip -a -v
+	dh_strip -a -v
 endif
 	: # Remove the workaround
 	rm $(CURDIR)/strip
