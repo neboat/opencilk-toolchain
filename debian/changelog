@@ -1,11 +1,14 @@
-llvm-toolchain-7 (1:7.0.1~+rc2-9) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7.0.1~+rc3-1) unstable; urgency=medium
+
+  * New testing release
+  * disable the llvm-strip as it created too big llvm lib
 
   [ John Paul Adrian Glaubitz ]
   * Add patch to add powerpcspe support to clang
   * Add patch to fix register spilling on powerpcspe
   * Add patch to optimize double parameter calling setup on powerpcspe
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Wed, 05 Dec 2018 09:22:19 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 08 Dec 2018 07:29:59 +0100
 
 llvm-toolchain-7 (1:7.0.1~+rc2-8) unstable; urgency=medium
 
