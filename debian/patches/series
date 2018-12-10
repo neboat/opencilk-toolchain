@@ -16,7 +16,6 @@ atomic_library_1.diff
 python-clangpath.diff
 fix-clang-path-and-build.diff
 0048-Set-html_static_path-_static-everywhere.patch
-x32-fix-driver-search-paths.diff
 symbolizer-path.diff
 clang-tidy-run-bin.diff
 0001-tools-clang-cmake-resolve-symlinks-in-ClangConfig.cmake.patch
@@ -60,7 +59,6 @@ scan-build-clang-path.diff
 install-scan-build-py.diff
 scan-view-fix-path.diff
 fix-scan-view-path.diff
-scan-build-clang-X.diff
 
 # lldb
 lldb-link-atomic-cmake.patch
@@ -85,9 +83,6 @@ libcxx-silent-test-libcxx.diff
 libcxx-silent-failure-ppc64el.diff
 libcxx-silent-failure-arm64.diff
 
-# Rust on ppc
-D51108-rust-powerpc.diff
-
 # Change default optims
 mips-fpxx-enable.diff
 26-set-correct-float-abi.diff
@@ -98,10 +93,6 @@ clang-arm-default-vfp3-on-armv7a.patch
 # For the boostrap
 bootstrap-fix-include-next.diff
 clangd-atomic-cmake.patch
-pr39427-misscompile.diff
-
-# Rustc
-rustc-aarch64-test-failure.diff
 
 # Fix docs
 remove-apple-clang-manpage.diff
@@ -114,20 +105,9 @@ reproducible-pch.diff
 hurd-pathmax.diff
 hurd-EIEIO-undef.diff
 impl-path-hurd.diff
-hurd-lib_Support_Unix_Path.inc.diff
-hurd-tools_llvm-shlib_CMakeLists.txt.diff
-D54079-hurd-openmp.diff
-D54338-hurd-libcxx-threads-build.diff
-D54339-hurd-libcxx-threads-detection.diff
-D54378-hurd-triple.diff
 D54677-hurd-path_max.diff
-D53557-hurd-self-exe-realpath.diff
-
-# mips
-strip-ignore-deterministic-archives.diff
 
 # powerpcspe
-powerpcspe-add-missing-include-path.diff
 D49754-powerpcspe-clang.diff
 D54409-powerpcspe-register-spilling.diff
 D54584-powerpcspe-double-parameter.diff
