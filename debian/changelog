@@ -25,11 +25,68 @@ llvm-toolchain-snapshot (1:8~svn345569-1~exp1) experimental; urgency=medium
   [ Gianfranco Costamagna ]
   * Take option two in bug #877567 to fix FTBFS on mips and mipsel
 
-
   [ Sylvestre Ledru ]
   * New snapshot release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Oct 2018 08:31:14 +0100
+
+llvm-toolchain-7 (1:7.0.1~+rc3-2) UNRELEASED; urgency=medium
+
+  * Fix llvm-config by stripping unnecessary flags
+    See also https://bugs.llvm.org/show_bug.cgi?id=8220
+    (Closes: #697755, #914838)
+  * Improved the debian/patches/series presentation by creating categories
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 10 Dec 2018 03:49:59 -0500
+
+llvm-toolchain-7 (1:7.0.1~+rc3-1) unstable; urgency=medium
+
+  * New testing release
+  * disable the llvm-strip as it created too big llvm lib
+
+  [ John Paul Adrian Glaubitz ]
+  * Add patch to add powerpcspe support to clang
+  * Add patch to fix register spilling on powerpcspe
+  * Add patch to optimize double parameter calling setup on powerpcspe
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 08 Dec 2018 07:29:59 +0100
+
+llvm-toolchain-7 (1:7.0.1~+rc2-8) unstable; urgency=medium
+
+  * Use llvm-strip instead of binutils strip.
+    Two reasons:
+      - with clang stage2, the dbg packages were not generated
+      - strip fails on stretch and other ubuntu on some archives
+    For this, I had to silent the --enable-deterministic-archives
+    option (https://bugs.llvm.org/show_bug.cgi?id=39789).
+    Thanks to Rebecca Palmer for the idea
+    (Closes: #913946)
+  * Change the i386 base line to avoid using sse2 extension
+    This is more important now that llvm is built with clang
+    instead of gcc.
+    Thanks to Fanael Linithien for the patch
+    (Closes: #914770, #894840)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 01 Dec 2018 11:18:39 +0100
+
+llvm-toolchain-7 (1:7.0.1~+rc2-7) unstable; urgency=medium
+
+  * Bring back mips-rdhwr.diff as it isn't in rc2
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 25 Nov 2018 17:00:31 +0100
+
+llvm-toolchain-7 (1:7.0.1~+rc2-6) unstable; urgency=medium
+
+  [ Samuel Thibault ]
+  * D53557-hurd-self-exe-realpath.diff: Fix paths returned by
+    llvm-config (See Bug#911817).
+
+  [ Sylvestre Ledru ]
+  * Fix the FTBFS on armhf for real! Thanks to Adrian Bunk
+    Force the activation of FeatureVFP3 & FeatureD16
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 24 Nov 2018 09:12:26 +0100
+
 llvm-toolchain-7 (1:7.0.1~+rc2-5) unstable; urgency=medium
 
   [ Samuel Thibault ]
