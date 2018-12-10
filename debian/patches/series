@@ -1,73 +1,82 @@
+# Debian versions
 19-clang_debian_version.patch
-23-strlcpy_strlcat_warning_removed.diff
-27-fix_clang_stdint.diff
-26-set-correct-float-abi.diff
 0003-Debian-version-info-and-bugreport.patch
-scan-build-clang-path.diff
-declare_clear_cache.diff
 clang-format-version.diff
+clang-analyzer-force-version.diff
+
+# Disabling features
+23-strlcpy_strlcat_warning_removed.diff
+
+27-fix_clang_stdint.diff
+declare_clear_cache.diff
 unwind-chain-inclusion.diff
-hurd-pathmax.diff
-silent-gold-test.diff
 atomic_library_1.diff
+
+# Path updates
 python-clangpath.diff
 fix-clang-path-and-build.diff
+0048-Set-html_static_path-_static-everywhere.patch
+x32-fix-driver-search-paths.diff
+symbolizer-path.diff
+clang-tidy-run-bin.diff
+0001-tools-clang-cmake-resolve-symlinks-in-ClangConfig.cmake.patch
+
 # commented because of bug 903709
 #force-gcc-header-obj.diff
+
 do-not-fail-on-unexpected-pass.diff
-silent-more-tests.diff
 disable-display-PASS-UNSUPPORTED-XFAIL.diff
 
-# llvm-config 
+# llvm-config
 fix-llvm-config-obj-src-root.patch
 fix-llvm-config.diff
+0001-llvm-cmake-resolve-symlinks-in-LLVMConfig.cmake.patch
 
 # Lib names
 0044-soname.diff
 lldb-soname.diff
 lldb-libname.diff
-hurd-EIEIO-undef.diff
+openmp-soname.diff
+
+# Disable some tests
+silent-gold-test.diff
+silent-more-tests.diff
 silent-MCJIIT-tests.diff
-clang-analyzer-force-version.diff
-install-scan-build-py.diff
-scan-view-fix-path.diff
-mips-fpxx-enable.diff
-0001-llvm-cmake-resolve-symlinks-in-LLVMConfig.cmake.patch
-0001-tools-clang-cmake-resolve-symlinks-in-ClangConfig.cmake.patch
-lldb-link-atomic-cmake.patch
-disable-source-interleave.diff
 silent-gold-utils.diff
-disable-llvm-symbolizer-test.diff
-#fix-lldb-server-build
-clang-tidy-run-bin.diff
-#bug-30342.diff
-fix-scan-view-path.diff
-#clang-fix-cmpxchg8-detection-on-i386.patch
-lldb-addversion-suffix-to-llvm-server-exec.patch
-lldb-missing-install.diff
 silent-test-failing-codeverage.diff
-disable-path-test-failing.diff
 silent-amd-tet.diff
-disable-error-xray.diff
-lldb-disable-swig-error.diff
 silent-test-macho.diff
 silent-llvm-isel-fuzzer.diff
-test-keep-alive.diff
 remove-test-freezing.diff
-0048-Set-html_static_path-_static-everywhere.patch
-0049-Use-Debian-provided-MathJax-everywhere.patch
-impl-path-hurd.diff
-powerpcspe-add-missing-include-path.diff
-x32-fix-driver-search-paths.diff
-clang-baseline-fix-i386.patch
+disable-llvm-symbolizer-test.diff
+disable-path-test-failing.diff
+disable-source-interleave.diff
+
+# Decrease the freq for the keep alive
+test-keep-alive.diff
+
+# scan-build
+scan-build-clang-path.diff
+install-scan-build-py.diff
+scan-view-fix-path.diff
+fix-scan-view-path.diff
+scan-build-clang-X.diff
+
+# lldb
+lldb-link-atomic-cmake.patch
+lldb-addversion-suffix-to-llvm-server-exec.patch
+lldb-missing-install.diff
+lldb-disable-swig-error.diff
+
+# Fix arch issue
+disable-error-xray.diff
 
 # OpenMP
-
 openmp-check-execstack.diff
-openmp-soname.diff
 openmp-mips-affinity.patch
-# libcxx
+bootstrap-with-openmp-version-export-missing.diff
 
+# libcxx
 libcxxabi-test-don-t-fail-extended-long-double.patch
 libcxx-test-fix-lockfree-test-for-i386.patch
 libcxxabi-arm-ehabi-fix.patch
@@ -79,22 +88,34 @@ libcxx-silent-failure-arm64.diff
 # Rust on ppc
 D51108-rust-powerpc.diff
 
+# Change default optims
+mips-fpxx-enable.diff
+26-set-correct-float-abi.diff
+clang-baseline-fix-i386.patch
 disable-sse2-old-x86.diff
-scan-build-clang-X.diff
-bootstrap-fix-include-next.diff
-bootstrap-with-openmp-version-export-missing.diff
-
-hurd-lib_Support_Unix_Path.inc.diff
-hurd-tools_llvm-shlib_CMakeLists.txt.diff
-clangd-atomic-cmake.patch
-rustc-aarch64-test-failure.diff
-symbolizer-path.diff
-remove-apple-clang-manpage.diff
 clang-arm-default-vfp3-on-armv7a.patch
-reproducible-pch.diff
+
+# For the boostrap
+bootstrap-fix-include-next.diff
+clangd-atomic-cmake.patch
 pr39427-misscompile.diff
 
+# Rustc
+rustc-aarch64-test-failure.diff
+
+# Fix docs
+remove-apple-clang-manpage.diff
+0049-Use-Debian-provided-MathJax-everywhere.patch
+
+# reproducible
+reproducible-pch.diff
+
 # Hurd port
+hurd-pathmax.diff
+hurd-EIEIO-undef.diff
+impl-path-hurd.diff
+hurd-lib_Support_Unix_Path.inc.diff
+hurd-tools_llvm-shlib_CMakeLists.txt.diff
 D54079-hurd-openmp.diff
 D54338-hurd-libcxx-threads-build.diff
 D54339-hurd-libcxx-threads-detection.diff
@@ -108,6 +129,7 @@ D53557-hurd-self-exe-realpath.diff
 strip-ignore-deterministic-archives.diff
 
 # powerpcspe
+powerpcspe-add-missing-include-path.diff
 D49754-powerpcspe-clang.diff
 D54409-powerpcspe-register-spilling.diff
 D54584-powerpcspe-double-parameter.diff
