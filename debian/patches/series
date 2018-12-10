@@ -17,7 +17,12 @@ fix-clang-path-and-build.diff
 do-not-fail-on-unexpected-pass.diff
 silent-more-tests.diff
 disable-display-PASS-UNSUPPORTED-XFAIL.diff
+
+# llvm-config 
 fix-llvm-config-obj-src-root.patch
+fix-llvm-config.diff
+
+# Lib names
 0044-soname.diff
 lldb-soname.diff
 lldb-libname.diff
