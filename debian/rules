@@ -704,6 +704,8 @@ else
 endif
 	: # Remove the workaround
 	rm $(CURDIR)/strip
+	: # for some reasons, the +x might be removed
+	chmod -f +x $(CURDIR)/debian/*/usr/lib/llvm-$(LLVM_VERSION)/bin/* || true
 
 override_dh_install:
 #	cp $(TARGET_BUILD)/lib/libLLVM-$(LLVM_VERSION).so $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION).so.$(SONAME_EXT)
