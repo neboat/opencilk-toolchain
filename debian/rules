@@ -133,9 +133,11 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 endif
 
 # Enable for bootstrap
-LDFLAGS_EXTRA  += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option -fno-addrsig
-CXXFLAGS_EXTRA += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option -fno-addrsig
-CFLAGS_EXTRA   += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option -fno-addrsig
+LDFLAGS_EXTRA            += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
+CXXFLAGS_EXTRA           += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
+BOOTSTRAP_CXXFLAGS_EXTRA  = $(CXXFLAGS_EXTRA) -fno-addrsig
+CFLAGS_EXTRA             += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
+BOOTSTRAP_CFLAGS_EXTRA    = $(CFLAGS_EXTRA) -fno-addrsig
 
 # Enable polly (or not)
 POLLY_ENABLE=yes
@@ -347,6 +349,8 @@ override_dh_auto_configure: preconfigure
 	-DCMAKE_CXX_FLAGS_RELWITHDEBINFO="$(opt_flags)" \
 	-DCMAKE_CXX_FLAGS='$(CXXFLAGS_EXTRA)' \
 	-DCMAKE_C_FLAGS='$(CFLAGS_EXTRA)' \
+	-DBOOTSTRAP_CMAKE_CXX_FLAGS='$(BOOTSTRAP_CXXFLAGS_EXTRA)' \
+	-DBOOTSTRAP_CMAKE_C_FLAGS='$(BOOTSTRAP_CFLAGS_EXTRA)' \
 	-DLLVM_LINK_LLVM_DYLIB=ON \
 	-DLLVM_INSTALL_UTILS=ON \
 	-DLLVM_VERSION_SUFFIX= \
