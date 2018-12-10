@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:8~svn348749-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * Merge changes from 7 into snapshot
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 10 Dec 2018 10:56:16 +0100
+
 llvm-toolchain-snapshot (1:8~svn346586-1~exp1) experimental; urgency=medium
 
   * New snapshot release
