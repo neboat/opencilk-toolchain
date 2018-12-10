@@ -124,9 +124,9 @@ endif
 endif
 
 # Enable for bootstrap
-LDFLAGS_EXTRA  += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
-CXXFLAGS_EXTRA += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
-CFLAGS_EXTRA   += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
+LDFLAGS_EXTRA  += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option -fno-addrsig
+CXXFLAGS_EXTRA += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option -fno-addrsig
+CFLAGS_EXTRA   += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option -fno-addrsig
 
 # Enable polly (or not)
 POLLY_ENABLE=yes
