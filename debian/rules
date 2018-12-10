@@ -702,7 +702,7 @@ endif
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.28 ; echo $$?),0)
 	rm -f $(CURDIR)/libc++-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/*/operations.cpp.o
 # strip segfaults on libFuzzer.a
-	dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a -XlibclangTidyModernizeModule.a
+	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a -XlibclangTidyModernizeModule.a
 else
 	dh_strip -a -v
 endif
