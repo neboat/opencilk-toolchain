@@ -8,6 +8,7 @@ llvm-toolchain-7 (1:7.0.1~+rc3-2) UNRELEASED; urgency=medium
   * Force the chmod +x on llvm-X/bin/* because it was sometimes removed
     by the strip process
   * Improved the debian/patches/series presentation by creating categories
+  * Force the link to atomic also for i386 as it fails on Debian jessie too
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 10 Dec 2018 03:49:59 -0500
 

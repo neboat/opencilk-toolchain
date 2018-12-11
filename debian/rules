@@ -47,7 +47,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
 	LIBCXX_EXCEPTIONS :=OFF
 endif
 
-ifneq (,$(filter $(DEB_HOST_ARCH),armel mips mipsel powerpc powerpcspe riscv64))
+ifneq (,$(filter $(DEB_HOST_ARCH),i386 armel mips mipsel powerpc powerpcspe riscv64))
 CMAKE_EXTRA += -DLIBOMP_LIBFLAGS="-latomic" -DCMAKE_SHARED_LINKER_FLAGS="-latomic"
 endif
 
