@@ -47,7 +47,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
 	LIBCXX_EXCEPTIONS :=OFF
 endif
 
-ifneq (,$(filter $(DEB_HOST_ARCH),armel mips mipsel powerpc powerpcspe riscv64))
+ifneq (,$(filter $(DEB_HOST_ARCH),i386 armel mips mipsel powerpc powerpcspe riscv64))
 CMAKE_EXTRA += -DLIBOMP_LIBFLAGS="-latomic" -DCMAKE_SHARED_LINKER_FLAGS="-latomic"
 endif
 
@@ -123,10 +123,22 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 endif
 endif
 
+CODECOVERAGE=no
+ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
+# enable the code coverage
+	CODECOVERAGE=yes
+# for -fvisibility-inlines-hidden see http://lists.cs.uiuc.edu/pipermail/llvm-commits/Week-of-Mon-20130729/183016.html
+	CXXFLAGS_EXTRA += -fprofile-arcs -ftest-coverage
+	LDFLAGS_EXTRA += -coverage -lgcov
+	RUN_TEST=yes
+endif
+
 # Enable for bootstrap
-LDFLAGS_EXTRA  += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
-CXXFLAGS_EXTRA += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
-CFLAGS_EXTRA   += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
+LDFLAGS_EXTRA            += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
+CXXFLAGS_EXTRA           += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
+BOOTSTRAP_CXXFLAGS_EXTRA  = $(CXXFLAGS_EXTRA) -fno-addrsig
+CFLAGS_EXTRA             += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
+BOOTSTRAP_CFLAGS_EXTRA    = $(CFLAGS_EXTRA) -fno-addrsig
 
 # Enable polly (or not)
 POLLY_ENABLE=yes
@@ -143,18 +155,6 @@ endif
 RUN_TEST=yes
 ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	RUN_TEST=no
-endif
-
-CODECOVERAGE=no
-ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
-# enable the code coverage
-	CODECOVERAGE=yes
-# for -fvisibility-inlines-hidden see http://lists.cs.uiuc.edu/pipermail/llvm-commits/Week-of-Mon-20130729/183016.html
-	CXXFLAGS_EXTRA += -fprofile-arcs -ftest-coverage
-	LDFLAGS_EXTRA += -coverage -lgcov
-	RUN_TEST=yes
-	# OpenMP doesn't respect LDFLAGS
-	CMAKE_EXTRA+= -DLIBOMP_LDFLAGS="-coverage -lgcov" # don't pass LDFLAGS_EXTRA because it expects gcc arg
 endif
 
 ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
@@ -348,8 +348,8 @@ override_dh_auto_configure: preconfigure
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 	-DCMAKE_CXX_FLAGS_RELWITHDEBINFO="$(opt_flags)" \
-	-DCMAKE_CXX_FLAGS='$(CXXFLAGS_EXTRA)' \
-	-DCMAKE_C_FLAGS='$(CFLAGS_EXTRA)' \
+	-DBOOTSTRAP_CMAKE_CXX_FLAGS='$(BOOTSTRAP_CXXFLAGS_EXTRA)' \
+	-DBOOTSTRAP_CMAKE_C_FLAGS='$(BOOTSTRAP_CFLAGS_EXTRA)' \
 	-DLLVM_LINK_LLVM_DYLIB=ON \
 	-DLLVM_INSTALL_UTILS=ON \
 	-DLLVM_VERSION_SUFFIX= \
@@ -364,7 +364,7 @@ override_dh_auto_configure: preconfigure
 	-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly;AVR" \
 	-DCLANG_ENABLE_BOOTSTRAP=ON \
 	-DCLANG_VENDOR=$(VENDOR) \
-	-DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE;CMAKE_BUILD_TYPE;CMAKE_CXX_FLAGS_RELWITHDEBINFO;CMAKE_CXX_FLAGS;CMAKE_C_FLAGS;LLVM_LINK_LLVM_DYLIB;LLVM_INSTALL_UTILS;LLVM_VERSION_SUFFIX;LLVM_ENABLE_SPHINX;SPHINX_WARNINGS_AS_ERRORS;LLVM_BUILD_LLVM_DYLIB;LLVM_ENABLE_RTTI;LLVM_ENABLE_FFI;LIBCLANG_LIBRARY_VERSION;POLLY_BUNDLED_JSONCPP;LLVM_EXPERIMENTAL_TARGETS_TO_BUILD;LLVM_USE_PERF;LLVM_ENABLE_ASSERTIONS;LLVM_BINUTILS_INCDIR;LLVM_HOST_TRIPLE;;LLVM_COMPILER_CHECKED;COMPILER_RT_BUILD_BUILTINS;LIBOMP_LIBFLAGS;CMAKE_SHARED_LINKER_FLAGS"
+	-DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE;CMAKE_BUILD_TYPE;CMAKE_CXX_FLAGS_RELWITHDEBINFO;LLVM_LINK_LLVM_DYLIB;LLVM_INSTALL_UTILS;LLVM_VERSION_SUFFIX;LLVM_ENABLE_SPHINX;SPHINX_WARNINGS_AS_ERRORS;LLVM_BUILD_LLVM_DYLIB;LLVM_ENABLE_RTTI;LLVM_ENABLE_FFI;LIBCLANG_LIBRARY_VERSION;POLLY_BUNDLED_JSONCPP;LLVM_EXPERIMENTAL_TARGETS_TO_BUILD;LLVM_USE_PERF;LLVM_ENABLE_ASSERTIONS;LLVM_BINUTILS_INCDIR;LLVM_HOST_TRIPLE;;LLVM_COMPILER_CHECKED;COMPILER_RT_BUILD_BUILTINS;LIBOMP_LIBFLAGS;CMAKE_SHARED_LINKER_FLAGS"
 
 
 # make
@@ -373,7 +373,7 @@ VERBOSE=VERBOSE=1
 #VERBOSE=-v
 
 debian-full-build:
-	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 $(BUILD_METHOD)
+	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CFLAGS="$(CFLAGS_EXTRA)" CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 $(BUILD_METHOD)
 
 # Check the stage 2 build worked
 	if test "$(BUILD_METHOD)" = "stage2"; then \
@@ -447,7 +447,7 @@ debian-libcxxabi-build:
 	cd libcxx/build && \
 	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../ \
 	$(LIBCXX_CMAKE_OPTIONS) \
-    -DLIBCXX_CXX_ABI=libcxxabi \
+	-DLIBCXX_CXX_ABI=libcxxabi \
 	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
 	-DLIBCXX_CXX_ABI_LIBRARY_PATH=$(BASE_PATH)/libcxxabi/build/lib \
 	-DLIBCXX_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
@@ -708,6 +708,8 @@ else
 endif
 	: # Remove the workaround
 	rm $(CURDIR)/strip
+	: # for some reasons, the +x might be removed
+	chmod -f +x $(CURDIR)/debian/*/usr/lib/llvm-$(LLVM_VERSION)/bin/* || true
 
 override_dh_install:
 #	cp $(TARGET_BUILD)/lib/libLLVM-$(LLVM_VERSION).so $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION).so.$(SONAME_EXT)
@@ -794,7 +796,7 @@ endif
 # polly tests
 	if test "$(POLLY_ENABLE)" = yes; then \
 		cd $(TARGET_BUILD)/ && LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ $(MAKE) -C tools/polly/test/ check-polly || true; \
-    fi
+	fi
 
 # The compression of the code coverage report is done in the
 # hook B21GetCoverageResults on the server
