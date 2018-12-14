@@ -3,10 +3,10 @@ Author: Justin Hibbits <jrh29@alumni.cwru.edu>
 Origin: https://reviews.llvm.org/D54583
 Last-Update: 2018-12-04
 
-Index: llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCISelLowering.cpp
+Index: llvm-toolchain-snapshot_8~svn349138/lib/Target/PowerPC/PPCISelLowering.cpp
 ===================================================================
---- llvm-toolchain-snapshot_8~svn348749.orig/lib/Target/PowerPC/PPCISelLowering.cpp
-+++ llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCISelLowering.cpp
+--- llvm-toolchain-snapshot_8~svn349138.orig/lib/Target/PowerPC/PPCISelLowering.cpp
++++ llvm-toolchain-snapshot_8~svn349138/lib/Target/PowerPC/PPCISelLowering.cpp
 @@ -391,8 +391,16 @@ PPCTargetLowering::PPCTargetLowering(con
    } else {
      setOperationAction(ISD::BITCAST, MVT::f32, Expand);
@@ -87,10 +87,10 @@ Index: llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCISelLowering.cp
    }
  }
  
-Index: llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCISelLowering.h
+Index: llvm-toolchain-snapshot_8~svn349138/lib/Target/PowerPC/PPCISelLowering.h
 ===================================================================
---- llvm-toolchain-snapshot_8~svn348749.orig/lib/Target/PowerPC/PPCISelLowering.h
-+++ llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCISelLowering.h
+--- llvm-toolchain-snapshot_8~svn349138.orig/lib/Target/PowerPC/PPCISelLowering.h
++++ llvm-toolchain-snapshot_8~svn349138/lib/Target/PowerPC/PPCISelLowering.h
 @@ -196,6 +196,15 @@ namespace llvm {
        /// Direct move of 2 consective GPR to a VSX register.
        BUILD_FP128,
@@ -115,10 +115,10 @@ Index: llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCISelLowering.h
  
      SDValue DAGCombineExtBoolTrunc(SDNode *N, DAGCombinerInfo &DCI) const;
      SDValue DAGCombineBuildVector(SDNode *N, DAGCombinerInfo &DCI) const;
-Index: llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCInstrInfo.td
+Index: llvm-toolchain-snapshot_8~svn349138/lib/Target/PowerPC/PPCInstrInfo.td
 ===================================================================
---- llvm-toolchain-snapshot_8~svn348749.orig/lib/Target/PowerPC/PPCInstrInfo.td
-+++ llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCInstrInfo.td
+--- llvm-toolchain-snapshot_8~svn349138.orig/lib/Target/PowerPC/PPCInstrInfo.td
++++ llvm-toolchain-snapshot_8~svn349138/lib/Target/PowerPC/PPCInstrInfo.td
 @@ -231,6 +231,22 @@ def PPCbuild_fp128: SDNode<"PPCISD::BUIL
                                SDTCisSameAs<1,2>]>,
                             []>;
@@ -142,10 +142,10 @@ Index: llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCInstrInfo.td
  // These are target-independent nodes, but have target-specific formats.
  def callseq_start : SDNode<"ISD::CALLSEQ_START", SDT_PPCCallSeqStart,
                             [SDNPHasChain, SDNPOutGlue]>;
-Index: llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCInstrSPE.td
+Index: llvm-toolchain-snapshot_8~svn349138/lib/Target/PowerPC/PPCInstrSPE.td
 ===================================================================
---- llvm-toolchain-snapshot_8~svn348749.orig/lib/Target/PowerPC/PPCInstrSPE.td
-+++ llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCInstrSPE.td
+--- llvm-toolchain-snapshot_8~svn349138.orig/lib/Target/PowerPC/PPCInstrSPE.td
++++ llvm-toolchain-snapshot_8~svn349138/lib/Target/PowerPC/PPCInstrSPE.td
 @@ -512,7 +512,7 @@ def EVLWWSPLATX    : EVXForm_1<792, (out
  
  def EVMERGEHI      : EVXForm_1<556, (outs sperc:$RT), (ins sperc:$RA, sperc:$RB),
@@ -155,7 +155,7 @@ Index: llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCInstrSPE.td
                                 "evmergelo $RT, $RA, $RB", IIC_VecGeneral, []>;
  def EVMERGEHILO    : EVXForm_1<558, (outs sperc:$RT), (ins sperc:$RA, sperc:$RB),
                                 "evmergehilo $RT, $RA, $RB", IIC_VecGeneral, []>;
-@@ -889,4 +889,15 @@ def : Pat<(f64 (selectcc i1:$lhs, i1:$rh
+@@ -887,4 +887,15 @@ def : Pat<(f64 (selectcc i1:$lhs, i1:$rh
            (SELECT_SPE (CRANDC $lhs, $rhs), $tval, $fval)>;
  def : Pat<(f64 (selectcc i1:$lhs, i1:$rhs, f64:$tval, f64:$fval, SETNE)),
            (SELECT_SPE (CRXOR $lhs, $rhs), $tval, $fval)>;
@@ -171,10 +171,10 @@ Index: llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCInstrSPE.td
 +          (i32 (EXTRACT_SUBREG $rA, sub_32))>;
 +
  }
-Index: llvm-toolchain-snapshot_8~svn348749/test/CodeGen/PowerPC/spe.ll
+Index: llvm-toolchain-snapshot_8~svn349138/test/CodeGen/PowerPC/spe.ll
 ===================================================================
---- llvm-toolchain-snapshot_8~svn348749.orig/test/CodeGen/PowerPC/spe.ll
-+++ llvm-toolchain-snapshot_8~svn348749/test/CodeGen/PowerPC/spe.ll
+--- llvm-toolchain-snapshot_8~svn349138.orig/test/CodeGen/PowerPC/spe.ll
++++ llvm-toolchain-snapshot_8~svn349138/test/CodeGen/PowerPC/spe.ll
 @@ -472,10 +472,8 @@ entry:
  ; CHECK-LABEL: test_dselect
  ; CHECK: andi.

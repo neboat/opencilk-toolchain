@@ -131,6 +131,8 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 	CXXFLAGS_EXTRA += -fprofile-arcs -ftest-coverage
 	LDFLAGS_EXTRA += -coverage -lgcov
 	RUN_TEST=yes
+    # OpenMP doesn't respect LDFLAGS
+    CMAKE_EXTRA+= -DLIBOMP_LDFLAGS="-coverage -lgcov" # don't pass LDFLAGS_EXTRA because it expects gcc arg
 endif
 
 # Enable for bootstrap

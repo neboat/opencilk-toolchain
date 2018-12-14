@@ -28,6 +28,11 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libLLVM-$VERSION.so; then
 fi
 llvm-config-$VERSION --link-shared --libs &> /dev/null
 
+if llvm-config-$VERSION --cxxflags | grep " \-W"; then
+    echo "llvm-config should not export -W warnings"
+    exit 1
+fi
+
 echo '#include <stdlib.h>
 int main() {
   char *x = (char*)malloc(10 * sizeof(char*));
