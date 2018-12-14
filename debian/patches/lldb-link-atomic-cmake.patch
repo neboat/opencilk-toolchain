@@ -6,11 +6,11 @@ Last-Update: 2016-07-27
  lldb/cmake/LLDBDependencies.cmake |    6 ++++++
  1 file changed, 6 insertions(+)
 
-Index: llvm-toolchain-snapshot_6.0~svn317000/lldb/source/Utility/CMakeLists.txt
+Index: llvm-toolchain-snapshot_8~svn349138/lldb/source/Utility/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_6.0~svn317000.orig/lldb/source/Utility/CMakeLists.txt
-+++ llvm-toolchain-snapshot_6.0~svn317000/lldb/source/Utility/CMakeLists.txt
-@@ -30,6 +30,14 @@ endif()
+--- llvm-toolchain-snapshot_8~svn349138.orig/lldb/source/Utility/CMakeLists.txt
++++ llvm-toolchain-snapshot_8~svn349138/lldb/source/Utility/CMakeLists.txt
+@@ -32,6 +32,14 @@ endif()
  
  list(APPEND LLDB_SYSTEM_LIBS ${system_libs})
  
