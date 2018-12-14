@@ -87,15 +87,6 @@ Index: llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCISelLowering.cp
    }
  }
  
-@@ -9703,6 +9745,8 @@ void PPCTargetLowering::ReplaceNodeResul
-   case ISD::BITCAST:
-     // Don't handle bitcast here.
-     return;
-+  case ISD::BITCAST:
-+    return;
-   }
- }
- 
 Index: llvm-toolchain-snapshot_8~svn348749/lib/Target/PowerPC/PPCISelLowering.h
 ===================================================================
 --- llvm-toolchain-snapshot_8~svn348749.orig/lib/Target/PowerPC/PPCISelLowering.h
