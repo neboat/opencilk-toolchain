@@ -28,7 +28,6 @@ disable-display-PASS-UNSUPPORTED-XFAIL.diff
 
 # llvm-config
 fix-llvm-config-obj-src-root.patch
-fix-llvm-config.diff
 0001-llvm-cmake-resolve-symlinks-in-LLVMConfig.cmake.patch
 
 # Lib names
