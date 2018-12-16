@@ -136,9 +136,9 @@ endif
 # Enable for bootstrap
 LDFLAGS_EXTRA            += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
 CXXFLAGS_EXTRA           += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
-BOOTSTRAP_CXXFLAGS_EXTRA  = $(CXXFLAGS_EXTRA) -fno-addrsig
+BOOTSTRAP_CXXFLAGS_EXTRA  = $(CXXFLAGS_EXTRA) # Nothing for now. Keeping in case we need it
 CFLAGS_EXTRA             += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
-BOOTSTRAP_CFLAGS_EXTRA    = $(CFLAGS_EXTRA) -fno-addrsig
+BOOTSTRAP_CFLAGS_EXTRA    = $(CFLAGS_EXTRA) # Nothing for now. Keeping in case we need it
 
 # Enable polly (or not)
 POLLY_ENABLE=yes
