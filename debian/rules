@@ -693,7 +693,7 @@ endif
 # ifeq (${LLD_ENABLE},yes)
 # 	PATH=$(CURDIR)/:$$PATH dh_strip -p liblld-$(LLVM_VERSION) --dbg-package=liblld-$(LLVM_VERSION)-dbg
 # endif
-ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.28 ; echo $$?),0)
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) lt 2.28 ; echo $$?),0)
 	: # Workaround some issues with stripping by using llvm's
 	if test ! -f $(CURDIR)/strip; then \
 		ln -s $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/bin/llvm-strip $(CURDIR)/strip; \
