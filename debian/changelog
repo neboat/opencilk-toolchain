@@ -1,3 +1,9 @@
+llvm-toolchain-7 (1:7.0.1-1) unstable; urgency=medium
+
+  * New release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 16 Dec 2018 13:07:54 +0100
+
 llvm-toolchain-7 (1:7.0.1~+rc3-2) unstable; urgency=medium
 
   * Fix llvm-config by stripping unnecessary flags
