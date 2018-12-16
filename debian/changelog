@@ -1,6 +1,8 @@
 llvm-toolchain-7 (1:7.0.1-1) unstable; urgency=medium
 
   * New release
+  * Remove the dbg workaround. Hopefully, the new version of 
+    binutils will fix it (Closes: #913946)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 16 Dec 2018 13:07:54 +0100
 
