@@ -681,14 +681,8 @@ override_dh_installman:
 
 
 override_dh_strip:
-	: # Workaround some issues with stripping by using llvm's
-	if test ! -f $(CURDIR)/strip; then \
-		ln -s $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/bin/llvm-strip $(CURDIR)/strip; \
-	fi
 	: # running out of diskspace on the buildds
 	find $(TARGET_BUILD) -name '*.o' -o -name '*.a' -type f | xargs -r rm -f
-	# strip args in case we want to use llvm-strip
-	#PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/
 ifeq (0, $(strip $(shell dpkg --compare-versions $(DH_VERSION) ge 9.20160114; echo $$?)))
 	: # If we don't have the right version of debhelper, don't run the option
 	dh_strip -p libclang$(SONAME_EXT)-$(LLVM_VERSION) --dbgsym-migration='libclang$(SONAME_EXT)-$(LLVM_VERSION)-dbg (<< 1:7~svn327768-1~)'
@@ -700,13 +694,18 @@ endif
 # 	PATH=$(CURDIR)/:$$PATH dh_strip -p liblld-$(LLVM_VERSION) --dbg-package=liblld-$(LLVM_VERSION)-dbg
 # endif
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.28 ; echo $$?),0)
-# strip segfaults on libFuzzer.a
-	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a -XlibclangTidyModernizeModule.a
+	: # Workaround some issues with stripping by using llvm's
+	if test ! -f $(CURDIR)/strip; then \
+		ln -s $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/bin/llvm-strip $(CURDIR)/strip; \
+	fi
+	: # strip segfaults on libFuzzer.a and other libs
+	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a -XlibclangTidyModernizeModule.a
+	: # Remove the workaround
+	rm $(CURDIR)/strip
 else
 	dh_strip -a -v
 endif
-	: # Remove the workaround
-	rm $(CURDIR)/strip
+
 	: # for some reasons, the +x might be removed
 	chmod -f +x $(CURDIR)/debian/*/usr/lib/llvm-$(LLVM_VERSION)/bin/* || true
 
