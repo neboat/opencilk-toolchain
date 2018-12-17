@@ -76,7 +76,7 @@ void increment(atomic_size_t *arg) {
     atomic_fetch_add(arg, 1);
 } ' > foo.c
 
-#clang-$VERSION -v -c foo.c
+clang-$VERSION -v -c foo.c
 
 echo "#include <fenv.h>" > foo.cc
 NBLINES=$(clang++-$VERSION -P -E foo.cc|wc -l)
@@ -203,13 +203,13 @@ clang-$VERSION -O3 -fpic -c -o bar.o bar.c
 clang-$VERSION -fuse-ld=bfd -shared -o libfoo.so bar.o
 clang-$VERSION -fuse-ld=bfd -o y x.o libfoo.so -Wl,-R,.
 # Still failing, commenting
-# ./y
+./y || true
 
 clang-$VERSION -O3 -c -o x.o x.c
 clang-$VERSION -O3 -fpic -c -o bar.o bar.c
 clang-$VERSION -fuse-ld=gold -shared -o libfoo.so bar.o
 # Still failing, commenting
-# clang-$VERSION -fuse-ld=gold -o y x.o libfoo.so -Wl,-R,.
+clang-$VERSION -fuse-ld=gold -o y x.o libfoo.so -Wl,-R,. || true
 
 rm -f x.c bar.c libfoo.so bar.o y x.o
 
