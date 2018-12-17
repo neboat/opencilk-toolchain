@@ -167,7 +167,7 @@ if (1==1) {
   return 42;
 }
 return 0;}' > foo.c
-rm foo
+rm foo bar.cc
 
 if test ! -f /usr/lib/llvm-$VERSION/bin/../lib/LLVMgold.so; then
     echo "Install llvm-$VERSION-dev"
