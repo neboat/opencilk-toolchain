@@ -1,3 +1,9 @@
+llvm-toolchain-7 (1:7.0.1-2) UNRELEASED; urgency=medium
+
+  * Pass -Wl,--build-id to get dbgsym packages (Closes: #916975)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Dec 2018 08:24:20 +0100
+
 llvm-toolchain-7 (1:7.0.1-1) unstable; urgency=medium
 
   * New release

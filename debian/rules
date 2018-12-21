@@ -134,7 +134,7 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 endif
 
 # Enable for bootstrap
-LDFLAGS_EXTRA            += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
+LDFLAGS_EXTRA            += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option -Wl,--build-id
 CXXFLAGS_EXTRA           += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
 BOOTSTRAP_CXXFLAGS_EXTRA  = $(CXXFLAGS_EXTRA) # Nothing for now. Keeping in case we need it
 CFLAGS_EXTRA             += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
