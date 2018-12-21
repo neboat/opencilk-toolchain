@@ -3,6 +3,7 @@ llvm-toolchain-7 (1:7.0.1-2) unstable; urgency=medium
   * Enable -DENABLE_LINKER_BUILD_ID:BOOL=ON as, unlike gcc, isn't enabled
     by default in clang. Thanks to Adrian Bunk for the patch.
     Once more, thanks to Rebecca Palmer (Closes: #916975)
+  * Build with -g1 also on 64bit architectures (thanks to Adrian too)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Dec 2018 17:07:44 +0100
 
