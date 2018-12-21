@@ -247,6 +247,7 @@ if ! grep "BuildID" foo2.log; then
     echo "BuildID isn't part of the generated binary (ld generation)"
     exit 1
 fi
+
 strip foo2
 file foo2 &> foo2.log
 if ! grep "BuildID" foo2.log; then
