@@ -1,7 +1,15 @@
+llvm-toolchain-7 (1:7.0.1-2) unstable; urgency=medium
+
+  * Enable -DENABLE_LINKER_BUILD_ID:BOOL=ON as, unlike gcc, isn't enabled
+    by default in clang.
+    Once more, thanks to Rebecca Palmer (Closes: #916975)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Dec 2018 17:07:44 +0100
+
 llvm-toolchain-7 (1:7.0.1-1) unstable; urgency=medium
 
   * New release
-  * Remove the dbg workaround. Hopefully, the new version of 
+  * Remove the dbg workaround. Hopefully, the new version of
     binutils will fix it (Closes: #913946)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 16 Dec 2018 13:07:54 +0100
