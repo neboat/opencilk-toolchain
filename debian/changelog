@@ -1,13 +1,27 @@
-llvm-toolchain-7 (1:7.0.1-2) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7.0.1-3) unstable; urgency=medium
 
-  * Pass -Wl,--build-id to get dbgsym packages (Closes: #916975)
+  * Also install clang-7-dbgsym libclang1-7-dbgsym in autopkgtest
+    to verify that debug symbols are present
+  * Cherry-pick upstream fix D52340 to address a rustc debuginfo
+    (Closes: #917209)
+  * Change the jit debug path from $HOME/.debug/jit/ to
+    $TMPDIR/.debug/jit/ (Closes: #916393)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Dec 2018 08:24:20 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 26 Dec 2018 12:24:01 +0100
+
+llvm-toolchain-7 (1:7.0.1-2) unstable; urgency=medium
+
+  * Enable -DENABLE_LINKER_BUILD_ID:BOOL=ON as, unlike gcc, isn't enabled
+    by default in clang. Thanks to Adrian Bunk for the patch.
+    Once more, thanks to Rebecca Palmer (Closes: #916975)
+  * Build with -g1 also on 64bit architectures (thanks to Adrian too)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Dec 2018 17:07:44 +0100
 
 llvm-toolchain-7 (1:7.0.1-1) unstable; urgency=medium
 
   * New release
-  * Remove the dbg workaround. Hopefully, the new version of 
+  * Remove the dbg workaround. Hopefully, the new version of
     binutils will fix it (Closes: #913946)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 16 Dec 2018 13:07:54 +0100
