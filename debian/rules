@@ -73,6 +73,9 @@ opt_flags = -O2 -DNDEBUG
 # Only enable g1 on archs which needs it (it fixes an OOM during dh_strip due to huge symbols)
 ifeq ($(DEB_HOST_ARCH_BITS),32)
 opt_flags += -g1
+else
+# Should be -g, but this causes buildd disk space issues
+opt_flags += -g1
 endif
 
 ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
@@ -136,11 +139,11 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 endif
 
 # Enable for bootstrap
-LDFLAGS_EXTRA            += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
+LDFLAGS_EXTRA            += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option -Wl,--build-id
 CXXFLAGS_EXTRA           += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
-BOOTSTRAP_CXXFLAGS_EXTRA  = $(CXXFLAGS_EXTRA) -fno-addrsig
+BOOTSTRAP_CXXFLAGS_EXTRA  = $(CXXFLAGS_EXTRA) # Nothing for now. Keeping in case we need it
 CFLAGS_EXTRA             += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
-BOOTSTRAP_CFLAGS_EXTRA    = $(CFLAGS_EXTRA) -fno-addrsig
+BOOTSTRAP_CFLAGS_EXTRA    = $(CFLAGS_EXTRA) # Nothing for now. Keeping in case we need it
 
 # Enable polly (or not)
 POLLY_ENABLE=yes
@@ -362,11 +365,12 @@ override_dh_auto_configure: preconfigure
 	-DLLVM_ENABLE_FFI=ON \
 	$(CMAKE_EXTRA) \
 	-DLIBCLANG_LIBRARY_VERSION=$(SONAME_EXT) \
+	-DENABLE_LINKER_BUILD_ID=ON \
 	-DPOLLY_BUNDLED_JSONCPP=OFF \
 	-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="WebAssembly;AVR" \
 	-DCLANG_ENABLE_BOOTSTRAP=ON \
 	-DCLANG_VENDOR=$(VENDOR) \
-	-DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE;CMAKE_BUILD_TYPE;CMAKE_CXX_FLAGS_RELWITHDEBINFO;LLVM_LINK_LLVM_DYLIB;LLVM_INSTALL_UTILS;LLVM_VERSION_SUFFIX;LLVM_ENABLE_SPHINX;SPHINX_WARNINGS_AS_ERRORS;LLVM_BUILD_LLVM_DYLIB;LLVM_ENABLE_RTTI;LLVM_ENABLE_FFI;LIBCLANG_LIBRARY_VERSION;POLLY_BUNDLED_JSONCPP;LLVM_EXPERIMENTAL_TARGETS_TO_BUILD;LLVM_USE_PERF;LLVM_ENABLE_ASSERTIONS;LLVM_BINUTILS_INCDIR;LLVM_HOST_TRIPLE;;LLVM_COMPILER_CHECKED;COMPILER_RT_BUILD_BUILTINS;LIBOMP_LIBFLAGS;CMAKE_SHARED_LINKER_FLAGS"
+	-DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE;CMAKE_BUILD_TYPE;CMAKE_CXX_FLAGS_RELWITHDEBINFO;LLVM_LINK_LLVM_DYLIB;LLVM_INSTALL_UTILS;LLVM_VERSION_SUFFIX;LLVM_ENABLE_SPHINX;SPHINX_WARNINGS_AS_ERRORS;LLVM_BUILD_LLVM_DYLIB;LLVM_ENABLE_RTTI;LLVM_ENABLE_FFI;LIBCLANG_LIBRARY_VERSION;ENABLE_LINKER_BUILD_ID;POLLY_BUNDLED_JSONCPP;LLVM_EXPERIMENTAL_TARGETS_TO_BUILD;LLVM_USE_PERF;LLVM_ENABLE_ASSERTIONS;LLVM_BINUTILS_INCDIR;LLVM_HOST_TRIPLE;;LLVM_COMPILER_CHECKED;COMPILER_RT_BUILD_BUILTINS;LIBOMP_LIBFLAGS;CMAKE_SHARED_LINKER_FLAGS"
 
 
 # make
@@ -683,14 +687,8 @@ override_dh_installman:
 
 
 override_dh_strip:
-	: # Workaround some issues with stripping by using llvm's
-	if test ! -f $(CURDIR)/strip; then \
-		ln -s $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/bin/llvm-strip $(CURDIR)/strip; \
-	fi
 	: # running out of diskspace on the buildds
 	find $(TARGET_BUILD) -name '*.o' -o -name '*.a' -type f | xargs -r rm -f
-	# strip args in case we want to use llvm-strip
-	#PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/
 ifeq (0, $(strip $(shell dpkg --compare-versions $(DH_VERSION) ge 9.20160114; echo $$?)))
 	: # If we don't have the right version of debhelper, don't run the option
 	dh_strip -p libclang$(SONAME_EXT)-$(LLVM_VERSION) --dbgsym-migration='libclang$(SONAME_EXT)-$(LLVM_VERSION)-dbg (<< 1:8~svn327768-1~)'
@@ -701,17 +699,20 @@ endif
 # ifeq (${LLD_ENABLE},yes)
 # 	PATH=$(CURDIR)/:$$PATH dh_strip -p liblld-$(LLVM_VERSION) --dbg-package=liblld-$(LLVM_VERSION)-dbg
 # endif
-ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.28 ; echo $$?),0)
-	rm -f $(CURDIR)/libc++-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/*/operations.cpp.o
-# strip segfaults on libFuzzer.a
-	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a -XlibclangTidyModernizeModule.a
-else
-	dh_strip -a -v
-endif
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) lt 2.31.1-11 ; echo $$?),0)
+	: # Workaround some issues with stripping by using llvm's
+	if test ! -f $(CURDIR)/strip; then \
+		ln -s $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/bin/llvm-strip $(CURDIR)/strip; \
+	fi
+	: # strip segfaults on libFuzzer.a and other libs
+	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot dh_strip -a -v -XlibFuzzer.a -Xlibc++.a -Xlibc++abi.a -Xlibc++experimental.a -XlibclangTidyModernizeModule.a
 	: # Remove the workaround
 	rm $(CURDIR)/strip
 	: # for some reasons, the +x might be removed
 	chmod -f +x $(CURDIR)/debian/*/usr/lib/llvm-$(LLVM_VERSION)/bin/* || true
+else
+	dh_strip -a -v
+endif
 
 override_dh_install:
 #	cp $(TARGET_BUILD)/lib/libLLVM-$(LLVM_VERSION).so $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION).so.$(SONAME_EXT)

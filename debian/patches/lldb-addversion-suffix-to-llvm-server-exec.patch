@@ -3,7 +3,7 @@ for any debugging with lldb which makes it unusable unless default version
 package has been installed. Small changes to code and debian/rules allows
 a workaround for lldb-server start up.
 
-To use this one needs to add cmake defination during configure. eg
+To use this one needs to add cmake definition during configure. eg
 -DDEBIAN_VERSION_SUFFIX=-$(LLVM_VERSION)
 
 Better implementation would be to use /usr/share/llvm-$(VERSION)/bin but 

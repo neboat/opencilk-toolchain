@@ -7,7 +7,7 @@ if ! test -d debian/; then
 fi
 VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 DETAILED_VERSION=$(dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1\2\3,p")
-LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb"
+LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}-dbgsym_${DETAILED_VERSION}_amd64.deb libclang1-${VERSION}-dbgsym_${DETAILED_VERSION}_amd64.deb"
 
 echo "To install everything:"
 echo "sudo dpkg -i $LIST"
@@ -84,7 +84,7 @@ void increment(atomic_size_t *arg) {
     atomic_fetch_add(arg, 1);
 } ' > foo.c
 
-#clang-$VERSION -v -c foo.c
+clang-$VERSION -v -c foo.c
 
 echo "#include <fenv.h>" > foo.cc
 NBLINES=$(clang++-$VERSION -P -E foo.cc|wc -l)
@@ -175,7 +175,7 @@ if (1==1) {
   return 42;
 }
 return 0;}' > foo.c
-rm foo
+rm foo bar.cc
 
 if test ! -f /usr/lib/llvm-$VERSION/bin/../lib/LLVMgold.so; then
     echo "Install llvm-$VERSION-dev"
@@ -211,13 +211,13 @@ clang-$VERSION -O3 -fpic -c -o bar.o bar.c
 clang-$VERSION -fuse-ld=bfd -shared -o libfoo.so bar.o
 clang-$VERSION -fuse-ld=bfd -o y x.o libfoo.so -Wl,-R,.
 # Still failing, commenting
-# ./y
+./y || true
 
 clang-$VERSION -O3 -c -o x.o x.c
 clang-$VERSION -O3 -fpic -c -o bar.o bar.c
 clang-$VERSION -fuse-ld=gold -shared -o libfoo.so bar.o
 # Still failing, commenting
-# clang-$VERSION -fuse-ld=gold -o y x.o libfoo.so -Wl,-R,.
+clang-$VERSION -fuse-ld=gold -o y x.o libfoo.so -Wl,-R,. || true
 
 rm -f x.c bar.c libfoo.so bar.o y x.o
 
@@ -241,6 +241,28 @@ clang-$VERSION -fuse-ld=lld -flto -O2 foo.c main.c -o foo
 
 clang-$VERSION -fuse-ld=lld-$VERSION -O2 foo.c main.c -o foo
 ./foo > /dev/null
+
+# Bug 916975
+file foo &> foo.log
+if ! grep -q "BuildID" foo.log; then
+    echo "BuildID isn't part of the generated binary (lld generation)"
+    exit 1
+fi
+# Bug 916975
+clang-$VERSION -O2 foo.c main.c -o foo2
+file foo2 &> foo2.log
+if ! grep "BuildID" foo2.log; then
+    echo "BuildID isn't part of the generated binary (ld generation)"
+    exit 1
+fi
+
+strip foo2
+file foo2 &> foo2.log
+if ! grep "BuildID" foo2.log; then
+    echo "BuildID isn't part of the generated binary (stripped)"
+    exit 1
+fi
+rm foo2 foo2.log
 
 cat << EOF > test_fuzzer.cc
 #include <stdint.h>
@@ -617,8 +639,20 @@ if test ! -f /usr/bin/lldb-$VERSION; then
     exit -1;
 fi
 
-
+# bug 913946
 lldb-$VERSION -s lldb-cmd.txt bar
+if dpkg -l|grep -q clang-$VERSION-dbgsym; then
+    # Testing if clang dbg symbol are here
+    lldb-$VERSION -s lldb-cmd.txt clang-$VERSION &> foo.log
+    if ! grep "main at driver.cpp" foo.log; then
+        echo "Could not find the debug info"
+        echo "Or the main() of clang isn't in driver.cpp anymore"
+        exit -1
+    fi
+else
+    echo "clang-$VERSION-dbgsym isn't installed"
+fi
+
 echo '
 #include <vector>
 int main (void)

@@ -19,6 +19,7 @@ fix-clang-path-and-build.diff
 symbolizer-path.diff
 clang-tidy-run-bin.diff
 0001-tools-clang-cmake-resolve-symlinks-in-ClangConfig.cmake.patch
+debug-jit-path.diff
 
 # commented because of bug 903709
 #force-gcc-header-obj.diff
@@ -89,7 +90,7 @@ clang-baseline-fix-i386.patch
 disable-sse2-old-x86.diff
 clang-arm-default-vfp3-on-armv7a.patch
 
-# For the boostrap
+# For the bootstrap
 bootstrap-fix-include-next.diff
 clangd-atomic-cmake.patch
 
@@ -110,4 +111,5 @@ D54677-hurd-path_max.diff
 D49754-powerpcspe-clang.diff
 D54409-powerpcspe-register-spilling.diff
 D54584-powerpcspe-double-parameter.diff
+
 

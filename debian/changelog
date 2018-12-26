@@ -69,6 +69,35 @@ llvm-toolchain-snapshot (1:8~svn345569-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Oct 2018 08:31:14 +0100
 
+llvm-toolchain-7 (1:7.0.1-3) unstable; urgency=medium
+
+  * Also install clang-7-dbgsym libclang1-7-dbgsym in autopkgtest
+    to verify that debug symbols are present
+  * Cherry-pick upstream fix D52340 to address a rustc debuginfo
+    (Closes: #917209)
+  * Change the jit debug path from $HOME/.debug/jit/ to
+    $TMPDIR/.debug/jit/ (Closes: #916393)
+  * Document in README.source some Debian/Ubuntu specific changes
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 26 Dec 2018 22:57:45 +0100
+
+llvm-toolchain-7 (1:7.0.1-2) unstable; urgency=medium
+
+  * Enable -DENABLE_LINKER_BUILD_ID:BOOL=ON as, unlike gcc, isn't enabled
+    by default in clang. Thanks to Adrian Bunk for the patch.
+    Once more, thanks to Rebecca Palmer (Closes: #916975)
+  * Build with -g1 also on 64bit architectures (thanks to Adrian too)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 21 Dec 2018 17:07:44 +0100
+
+llvm-toolchain-7 (1:7.0.1-1) unstable; urgency=medium
+
+  * New release
+  * Remove the dbg workaround. Hopefully, the new version of
+    binutils will fix it (Closes: #913946)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 16 Dec 2018 13:07:54 +0100
+
 llvm-toolchain-7 (1:7.0.1~+rc3-2) unstable; urgency=medium
 
   * Fix llvm-config by stripping unnecessary flags
@@ -165,7 +194,7 @@ llvm-toolchain-7 (1:7.0.1~+rc2-3) unstable; urgency=medium
 
   * Disable gold for sparc* (Closes: #913260)
   * Hide a symbol in openmp for mips64el
-  * Try to integrate a pach to make pch reproducible
+  * Try to integrate a patch to make pch reproducible
     Thanks to Rebecca Palmer for the patch
     (Closes: #877359)
   * Fix the misscompilation issue causing rustc to crash (Closes: #913271)
@@ -228,7 +257,7 @@ llvm-toolchain-7 (1:7-8) unstable; urgency=medium
     (Closes: #909705)
   * Add tests from old bugs to make sure they don't come back
     (Closes: #889832, #827866)
-  * The sanitizers use the versionned llvm-symbolizer provided by the
+  * The sanitizers use the versioned llvm-symbolizer provided by the
     llvm-X package (Closes: #753572)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 20 Oct 2018 16:00:58 +0200
@@ -249,7 +278,7 @@ llvm-toolchain-7 (1:7-7~exp2) experimental; urgency=medium
     (Closes: #909705)
   * Add tests from old bugs to make sure they don't come back
     (Closes: #889832, #827866)
-  * The sanitizers use the versionned llvm-symbolizer provided by the
+  * The sanitizers use the versioned llvm-symbolizer provided by the
     llvm-X package (Closes: #753572)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 21 Oct 2018 18:34:20 +0200
@@ -257,7 +286,7 @@ llvm-toolchain-7 (1:7-7~exp2) experimental; urgency=medium
 llvm-toolchain-7 (1:7-7~exp1) experimental; urgency=medium
 
   * Experiment the clang bootstrap
-  * Try to boostrap clang using clang
+  * Try to bootstrap clang using clang
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 17 Oct 2018 20:15:57 +0200
 
