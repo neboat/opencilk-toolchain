@@ -4,6 +4,8 @@ llvm-toolchain-7 (1:7.0.1-3) unstable; urgency=medium
     to verify that debug symbols are present
   * Cherry-pick upstream fix D52340 to address a rustc debuginfo
     (Closes: #917209)
+  * Change the jit debug path from $HOME/.debug/jit/ to
+    $TMPDIR/.debug/jit/ (Closes: #916393)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 26 Dec 2018 12:24:01 +0100
 

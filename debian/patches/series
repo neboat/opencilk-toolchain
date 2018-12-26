@@ -20,6 +20,7 @@ x32-fix-driver-search-paths.diff
 symbolizer-path.diff
 clang-tidy-run-bin.diff
 0001-tools-clang-cmake-resolve-symlinks-in-ClangConfig.cmake.patch
+debug-jit-path.diff
 
 # commented because of bug 903709
 #force-gcc-header-obj.diff
@@ -133,3 +134,4 @@ D49754-powerpcspe-clang.diff
 D54409-powerpcspe-register-spilling.diff
 D54584-powerpcspe-double-parameter.diff
 D52340-rustc-debuginfo.diff
+
