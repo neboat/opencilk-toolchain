@@ -123,7 +123,7 @@ llvm-toolchain-7 (1:7.0.1~+rc2-3) unstable; urgency=medium
 
   * Disable gold for sparc* (Closes: #913260)
   * Hide a symbol in openmp for mips64el
-  * Try to integrate a pach to make pch reproducible
+  * Try to integrate a patch to make pch reproducible
     Thanks to Rebecca Palmer for the patch
     (Closes: #877359)
   * Fix the misscompilation issue causing rustc to crash (Closes: #913271)
@@ -186,7 +186,7 @@ llvm-toolchain-7 (1:7-8) unstable; urgency=medium
     (Closes: #909705)
   * Add tests from old bugs to make sure they don't come back
     (Closes: #889832, #827866)
-  * The sanitizers use the versionned llvm-symbolizer provided by the
+  * The sanitizers use the versioned llvm-symbolizer provided by the
     llvm-X package (Closes: #753572)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 20 Oct 2018 16:00:58 +0200
@@ -207,7 +207,7 @@ llvm-toolchain-7 (1:7-7~exp2) experimental; urgency=medium
     (Closes: #909705)
   * Add tests from old bugs to make sure they don't come back
     (Closes: #889832, #827866)
-  * The sanitizers use the versionned llvm-symbolizer provided by the
+  * The sanitizers use the versioned llvm-symbolizer provided by the
     llvm-X package (Closes: #753572)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 21 Oct 2018 18:34:20 +0200
@@ -215,7 +215,7 @@ llvm-toolchain-7 (1:7-7~exp2) experimental; urgency=medium
 llvm-toolchain-7 (1:7-7~exp1) experimental; urgency=medium
 
   * Experiment the clang bootstrap
-  * Try to boostrap clang using clang
+  * Try to bootstrap clang using clang
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 17 Oct 2018 20:15:57 +0200
 
