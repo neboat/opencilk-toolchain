@@ -132,3 +132,4 @@ powerpcspe-add-missing-include-path.diff
 D49754-powerpcspe-clang.diff
 D54409-powerpcspe-register-spilling.diff
 D54584-powerpcspe-double-parameter.diff
+D52340-rustc-debuginfo.diff
