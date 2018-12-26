@@ -6,8 +6,9 @@ llvm-toolchain-7 (1:7.0.1-3) unstable; urgency=medium
     (Closes: #917209)
   * Change the jit debug path from $HOME/.debug/jit/ to
     $TMPDIR/.debug/jit/ (Closes: #916393)
+  * Document in README.source some Debian/Ubuntu specific changes
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 26 Dec 2018 12:24:01 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 26 Dec 2018 22:57:45 +0100
 
 llvm-toolchain-7 (1:7.0.1-2) unstable; urgency=medium
 
