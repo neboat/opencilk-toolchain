@@ -10,7 +10,7 @@ include_next to get the glibc (libc6-dev package) header.
 
 However, in the previous example, because we have inttypes.h twice in the
 include search path, clang's header will call itself without any effect.
-Therefor, it will do include_next until the define from the libc is existing (ex: _INTTYPES_H)
+Therefore, it will do include_next until the define from the libc is existing (ex: _INTTYPES_H)
 
 
 Index: llvm-toolchain-7-7/clang/lib/Headers/inttypes.h
