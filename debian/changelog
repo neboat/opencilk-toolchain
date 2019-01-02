@@ -1,3 +1,9 @@
+llvm-toolchain-7 (1:7.0.1-5) UNRELEASED; urgency=medium
+
+  * Ignore a test result on i386, due to upstream bug 26580#c18
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 02 Jan 2019 12:37:45 +0100
+
 llvm-toolchain-7 (1:7.0.1-4) unstable; urgency=medium
 
   * On old Debian/Ubuntu, run dh_strip using fakeroot to mitigate
