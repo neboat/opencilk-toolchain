@@ -472,13 +472,6 @@ llvm-toolchain-snapshot (1:8~svn340819-1) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 28 Aug 2018 16:28:24 +0200
 
-llvm-toolchain-7 (1:7.0.1-4) unstable; urgency=medium
-
-  * On old Debian/Ubuntu, run dh_strip using fakeroot to mitigate
-    a permission issue
-
-  [ Gianfranco Costamagna ]
-  * Ignore a test result on i386, due to upstream bug 26580#c18
 llvm-toolchain-7 (1:7-1) unstable; urgency=medium
 
   * Stable release
