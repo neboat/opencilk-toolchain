@@ -36,6 +36,7 @@ llvm-toolchain-7 (1:7.0.1-4) unstable; urgency=medium
 
   * On old Debian/Ubuntu, run dh_strip using fakeroot to mitigate
     a permission issue
+  * Remove dbgsym packages from debci because of bug #917528
 
   [ Gianfranco Costamagna ]
   * Ignore a test result on i386, due to upstream bug 26580#c18
