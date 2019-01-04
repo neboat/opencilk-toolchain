@@ -356,7 +356,7 @@ Description: Modular compiler and toolchain technologies, documentation
 Package: llvm-7-examples
 Section: doc
 Architecture: all
-Depends: ${misc:Depends}, llvm-7-dev (>= ${source:Version}), llvm-7-dev (<< ${source:Version}+c~)
+Depends: ${misc:Depends}, llvm-7-dev (= ${source:Version}), llvm-7-dev (<< ${source:Version}+c~)
 Description: Modular compiler and toolchain technologies, examples
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
