@@ -2,13 +2,13 @@
  lldb/source/API/CMakeLists.txt |   14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
 
-Index: llvm-toolchain-snapshot_8~svn349138/lldb/source/API/CMakeLists.txt
+Index: llvm-toolchain-snapshot_8~svn350421/lldb/source/API/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_8~svn349138.orig/lldb/source/API/CMakeLists.txt
-+++ llvm-toolchain-snapshot_8~svn349138/lldb/source/API/CMakeLists.txt
-@@ -4,7 +4,12 @@ endif()
- 
- get_property(LLDB_ALL_PLUGINS GLOBAL PROPERTY LLDB_PLUGINS)
+--- llvm-toolchain-snapshot_8~svn350421.orig/lldb/source/API/CMakeLists.txt
++++ llvm-toolchain-snapshot_8~svn350421/lldb/source/API/CMakeLists.txt
+@@ -9,7 +9,12 @@ if(NOT LLDB_DISABLE_PYTHON)
+   set(lldb_python_wrapper ${lldb_scripts_dir}/LLDBWrapPython.cpp)
+ endif()
  
 -add_lldb_library(liblldb SHARED
 +set(output_name lldb)
@@ -20,7 +20,7 @@ Index: llvm-toolchain-snapshot_8~svn349138/lldb/source/API/CMakeLists.txt
    SBAddress.cpp
    SBAttachInfo.cpp
    SBBlock.cpp
-@@ -113,7 +118,7 @@ endif ()
+@@ -120,7 +125,7 @@ endif()
  
  set_target_properties(liblldb
    PROPERTIES
@@ -29,7 +29,7 @@ Index: llvm-toolchain-snapshot_8~svn349138/lldb/source/API/CMakeLists.txt
  )
  
  if (NOT CMAKE_SYSTEM_NAME MATCHES "Windows")
-@@ -137,11 +142,6 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Windows"
+@@ -144,11 +149,6 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Windows"
    if (MSVC AND NOT LLDB_DISABLE_PYTHON)
      target_link_libraries(liblldb PRIVATE ${PYTHON_LIBRARY})
    endif()
@@ -40,4 +40,4 @@ Index: llvm-toolchain-snapshot_8~svn349138/lldb/source/API/CMakeLists.txt
 -  )
  endif()
  
- if (LLDB_BUILD_FRAMEWORK)
+ if(LLDB_BUILD_FRAMEWORK)
