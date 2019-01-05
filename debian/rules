@@ -704,7 +704,9 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' bin
 	if test ! -f $(CURDIR)/strip; then \
 		ln -s $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/bin/llvm-strip $(CURDIR)/strip; \
 	fi
-	: # strip segfaults on libFuzzer.a and other libs
+	: # Debug to list the files
+	ls -al $(CURDIR)/debian/.debhelper/*/dbgsym-root/usr/lib/debug/.build-id/*/* || true
+	: # strip segfaults on libFuzzer.a and other libs. Use llvm-strip instead
 	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot dh_strip -a -v
 	: # Remove the workaround
 	rm $(CURDIR)/strip
