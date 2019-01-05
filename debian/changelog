@@ -1,8 +1,5 @@
 llvm-toolchain-7 (1:7.0.1-5) unstable; urgency=medium
 
-  * llvm-7-examples: Force the same version of llvm-7-dev to mitigate
-    a debci issue
-    https://ci.debian.net/data/autopkgtest/unstable/amd64/l/llvm-toolchain-7/1635547/log.gz
   * Add 'Rules-Requires-Root: no' in debian/control
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 04 Jan 2019 16:00:41 +0100
