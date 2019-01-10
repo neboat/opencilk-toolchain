@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:8~svn348749-1~exp3) experimental; urgency=medium
+
+  * Silent a source lintian warning
+    source: source-is-missing lldb/lit/Modules/ELF/Inputs/PT_LOAD-overlap-section.elf
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 10 Jan 2019 12:16:19 +0100
+
 llvm-toolchain-snapshot (1:8~svn348749-1~exp2) experimental; urgency=medium
 
   * New symbols in openmp:

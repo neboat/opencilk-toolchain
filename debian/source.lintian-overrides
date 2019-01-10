@@ -8,3 +8,6 @@ source: outdated-autotools-helper-file autoconf/config.sub 2011-11-02
 source: license-problem-convert-utf-code lib/Support/ConvertUTF.cpp
 # A unit test. No big deal
 source: source-is-missing lldb/unittests/ObjectFile/ELF/Inputs/early-section-headers.so
+# Generated See https://github.com/llvm-mirror/lldb/commit/7aee683f410ffc27b61a8e9779b9df9a7c0fff7d#diff-dcfea8d8a36846a00781105f8618e06d
+source: source-is-missing lldb/lit/Modules/ELF/Inputs/PT_LOAD-overlap-section.elf
+
