@@ -705,9 +705,11 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' bin
 	if test ! -f $(CURDIR)/strip; then \
 		ln -s $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/bin/llvm-strip $(CURDIR)/strip; \
 	fi
-	ls -al $(CURDIR)/debian/.debhelper/*/dbgsym-root/usr/lib/debug/.build-id/*/* || true
-	: # strip segfaults on libFuzzer.a and other libs
-	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot dh_strip -a -v
+	ls -al $(CURDIR)/debian/.debhelper/*/dbgsym-root/usr/lib/debug/.build-id/*/*|| true
+	: # On some old version of Debian (stretch) and Ubuntu, Rules-Requires-Root isn't supported
+	: # Sometime, it fails because of chown: changing ownership of 'debian/.debhelper/clang-7/dbgsym-root/usr/lib/debug/.build-id/37/ba506ae9d2f82219bf5c552f7c09853052b2b0.debug': Operation not permitted
+	: # Therefor, continue when we encounter an error
+	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot dh_strip -a -v || true
 	: # Remove the workaround
 	rm $(CURDIR)/strip
 	: # for some reasons, the +x might be removed
