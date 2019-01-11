@@ -26,6 +26,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/clang-refactor
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-func-mapping
 usr/lib/llvm-@LLVM_VERSION@/bin/diagtool
 usr/lib/llvm-@LLVM_VERSION@/bin/hmaptool
+usr/lib/llvm-@LLVM_VERSION@/bin/clang-func-mapping
 
 tools/clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
 tools/clang/tools/scan-build-py-@LLVM_VERSION@      usr/share/clang/
@@ -55,3 +56,4 @@ usr/bin/clang-refactor-@LLVM_VERSION@
 usr/bin/clang-func-mapping-@LLVM_VERSION@
 usr/bin/diagtool-@LLVM_VERSION@
 usr/bin/hmaptool-@LLVM_VERSION@
+usr/bin/clang-func-mapping-@LLVM_VERSION@
