@@ -71,4 +71,4 @@ powerpcspe-add-missing-include-path.diff
 x32-fix-driver-search-paths.diff
 hurd-lib_Support_Unix_Path.inc.diff
 hurd-tools_llvm-shlib_CMakeLists.txt.diff
-
+D53557-hurd-self-exe-realpath.diff
