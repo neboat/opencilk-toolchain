@@ -34,6 +34,13 @@ if llvm-config-$VERSION --cxxflags | grep " \-W"; then
     exit 1
 fi
 
+# Test https://bugs.llvm.org/show_bug.cgi?id=40059
+nm /usr/lib/llvm-$VERSION/lib/libLLVMBitWriter.a &> foo.log
+if grep "File format not recognized" foo.log; then
+    echo "nm libLLVMBitWriter.a contains 'File format not recognized'"
+    exit 1
+fi
+
 echo '#include <stdlib.h>
 int main() {
   char *x = (char*)malloc(10 * sizeof(char*));
