@@ -1,17 +1,12 @@
-llvm-toolchain-snapshot (1:9~svn351348-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:9~svn351375-1~exp1) experimental; urgency=medium
 
-  * New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 16:19:49 +0100
-
-llvm-toolchain-snapshot (1:9~svn350834-1~exp1) experimental; urgency=medium
-
+  * New snapshot release and move to 9 as upstream branched
   * Silent a source lintian warning
     source: source-is-missing lldb/lit/Modules/ELF/Inputs/PT_LOAD-overlap-section.elf
   * Revert patch D55434 as it is breaking the build on old version of debian/ubuntu
   * Remove BugpointPasses.so & TestPlugin.so as they don't ship anymore
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 10 Jan 2019 12:16:19 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:59:29 +0100
 
 llvm-toolchain-snapshot (1:8~svn348749-1~exp2) experimental; urgency=medium
 
