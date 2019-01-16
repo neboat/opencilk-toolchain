@@ -1,16 +1,16 @@
 # Force the version of clang in the analyzer
 # This was causing the static analyzer to fail silently if the clang & clang++ are
 # not installed
-Index: llvm-toolchain-snapshot_8~svn339515/clang/tools/scan-build/libexec/ccc-analyzer
+Index: llvm-toolchain-snapshot_9~svn339515/clang/tools/scan-build/libexec/ccc-analyzer
 ===================================================================
---- llvm-toolchain-snapshot_8~svn339515.orig/clang/tools/scan-build/libexec/ccc-analyzer
-+++ llvm-toolchain-snapshot_8~svn339515/clang/tools/scan-build/libexec/ccc-analyzer
+--- llvm-toolchain-snapshot_9~svn339515.orig/clang/tools/scan-build/libexec/ccc-analyzer
++++ llvm-toolchain-snapshot_9~svn339515/clang/tools/scan-build/libexec/ccc-analyzer
 @@ -91,7 +91,7 @@ if ($FindBin::Script =~ /c\+\+-analyzer/
    if (!defined $Compiler || (! -x $Compiler && ! SearchInPath($Compiler))) { $Compiler = $DefaultCXXCompiler; }
  
    $Clang = $ENV{'CLANG_CXX'};
 -  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++'; }
-+  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++-8'; }
++  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++-9'; }
  
    $IsCXX = 1
  }
@@ -19,7 +19,7 @@ Index: llvm-toolchain-snapshot_8~svn339515/clang/tools/scan-build/libexec/ccc-an
  
    $Clang = $ENV{'CLANG'};
 -  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang'; }
-+  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang-8'; }
++  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang-9'; }
  
    $IsCXX = 0
  }
