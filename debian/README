@@ -2,7 +2,7 @@ Organization of the repository
 ==============================
 
 The debian package for each LLVM point release is maintained as a git branch.
-For example, the 8 release lives at in the "8" branch.
+For example, the 9 release lives at in the "9" branch.
 
 The current snapshot release is maintained in the "snapshot" branch.
 
@@ -33,7 +33,7 @@ Steps for manually building a snapshot release
      $ sh unpack.sh
 
    which will unpack the source tree inside a new directory such as
-   branches/llvm-toolchain-snapshot_3.9~svn268942. Depending on the current
+   branches/llvm-toolchain-snapshot_3.9~svn269942. Depending on the current
    snapshot version number and svn release, the directory name will be
    different.
 
@@ -50,24 +50,24 @@ Retrieving a specific branch or release candidate with orig-tar.sh
 ==================================================================
 
 When using orig-tar.sh, if you need to retrieve a specific branch, you can pass
-the branch name as the first argument. For example, to get the 8 release
+the branch name as the first argument. For example, to get the 9 release
 branch at
-  http://llvm.org/svn/llvm-project/{llvm,...}/branches/release_80
+  http://llvm.org/svn/llvm-project/{llvm,...}/branches/release_90
 you should use,
 
-  $ sh snapshot/debian/orig-tar.sh release_80
+  $ sh snapshot/debian/orig-tar.sh release_90
 
 To retrieve a specific release candidate, you can pass the branch name as the
 first argument, and the tag rc number as the second argument. For example, to
-get the 8.0.1 release candidate rc3 at
-  http://llvm.org/svn/llvm-project/{llvm,...}/tags/RELEASE_801/rc3
+get the 9.0.1 release candidate rc3 at
+  http://llvm.org/svn/llvm-project/{llvm,...}/tags/RELEASE_901/rc3
 you should use,
 
-  $ sh snapshot/debian/orig-tar.sh RELEASE_801 rc3 8.0.1
+  $ sh snapshot/debian/orig-tar.sh RELEASE_901 rc3 9.0.1
 
 For a stable release, the syntax is:
 
- $ sh snapshot/debian/orig-tar.sh RELEASE_800 final 8.0
+ $ sh snapshot/debian/orig-tar.sh RELEASE_900 final 9.0
 
 
 Additional maintainer scripts
