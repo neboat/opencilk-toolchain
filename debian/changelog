@@ -1,9 +1,17 @@
+llvm-toolchain-8 (1:8~svn351401-1~exp2) experimental; urgency=medium
+
+  * fix debian-changelog-line-too-long
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Jan 2019 10:23:10 +0100
+
 llvm-toolchain-8 (1:8~svn351401-1~exp1) experimental; urgency=medium
 
   * New snapshot release (branch 8 created)
   * Silent a source lintian warning
-    source: source-is-missing lldb/lit/Modules/ELF/Inputs/PT_LOAD-overlap-section.elf
-  * Revert patch D55434 as it is breaking the build on old version of debian/ubuntu
+    source: source-is-missing
+    lldb/lit/Modules/ELF/Inputs/PT_LOAD-overlap-section.elf
+  * Revert patch D55434 as it is breaking the build on old version of
+    debian/ubuntu
   * Remove BugpointPasses.so & TestPlugin.so as they don't ship anymore
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Jan 2019 08:24:19 +0100
