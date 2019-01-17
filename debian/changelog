@@ -16,20 +16,39 @@ llvm-toolchain-snapshot (1:9~svn351375-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:59:29 +0100
 
+llvm-toolchain-8 (1:8~svn351401-1~exp2) experimental; urgency=medium
+
+  * Fix debian-changelog-line-too-long
+  * Silent source-contains-prebuilt-windows-binary
+  * Silent executable-not-elf-or-script
+    usr/lib/llvm-8/share/clang/bash-autocomplete.sh
+  * Remove unapplied patches:
+    - D52340-rustc-debuginfo.diff
+    - D54379-hurd-triple-clang.diff
+    - hurd-cxx-paths.diff
+    - openmp-jessie-missing-include.diff
+    - rustc-aarch64-test-failure.diff
+    - strip-ignore-deterministic-archives.diff
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Jan 2019 10:23:10 +0100
+
+llvm-toolchain-8 (1:8~svn351401-1~exp1) experimental; urgency=medium
+
+  * New snapshot release (branch 8 created)
+  * Silent a source lintian warning
+    source: source-is-missing
+    lldb/lit/Modules/ELF/Inputs/PT_LOAD-overlap-section.elf
+  * Revert patch D55434 as it is breaking the build on old version of
+    debian/ubuntu
+  * Remove BugpointPasses.so & TestPlugin.so as they don't ship anymore
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Jan 2019 08:24:19 +0100
+
 llvm-toolchain-8 (1:8~svn350834-1~exp2) UNRELEASED; urgency=medium
 
   * Remove patch D55434-revert.diff as the regression has been fixed upstream
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Jan 2019 09:16:03 +0100
-
-llvm-toolchain-8 (1:8~svn350834-1~exp1) experimental; urgency=medium
-
-  * Silent a source lintian warning
-    source: source-is-missing lldb/lit/Modules/ELF/Inputs/PT_LOAD-overlap-section.elf
-  * Revert patch D55434 as it is breaking the build on old version of debian/ubuntu
-  * Remove BugpointPasses.so & TestPlugin.so as they don't ship anymore
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 10 Jan 2019 12:16:19 +0100
 
 llvm-toolchain-snapshot (1:8~svn348749-1~exp2) experimental; urgency=medium
 
@@ -506,6 +525,12 @@ llvm-toolchain-snapshot (1:8~svn340819-1) unstable; urgency=medium
 llvm-toolchain-7 (1:7.0.1-5) unstable; urgency=medium
 
   * Add 'Rules-Requires-Root: no' in debian/control
+  * llvm-7-examples: Force the same version of llvm-7-dev to mitigate
+    a debci issue
+    https://ci.debian.net/data/autopkgtest/unstable/amd64/l/llvm-toolchain-7/1635547/log.gz
+  * Add 'Rules-Requires-Root: no' in debian/control
+  * Because more and more tools in clang-tools are in python, add
+    the dependency
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 04 Jan 2019 16:00:41 +0100
 
