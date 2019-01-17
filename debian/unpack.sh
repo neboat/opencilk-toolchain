@@ -20,5 +20,5 @@ ln -s openmp_$MAJOR_VERSION~$VERSION openmp
 ln -s libcxx_$MAJOR_VERSION~$VERSION libcxx
 ln -s libcxxabi_$MAJOR_VERSION~$VERSION libcxxabi
 
-cp -R ../$VERSION/debian .
+cp -R ../8/debian .
 QUILT_PATCHES=debian/patches/ quilt push -a --fuzz=0
