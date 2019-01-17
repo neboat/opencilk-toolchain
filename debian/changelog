@@ -1,6 +1,7 @@
 llvm-toolchain-8 (1:8~svn351401-1~exp2) experimental; urgency=medium
 
-  * fix debian-changelog-line-too-long
+  * Fix debian-changelog-line-too-long
+  * Silent source-contains-prebuilt-windows-binary
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Jan 2019 10:23:10 +0100
 
