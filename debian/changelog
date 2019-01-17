@@ -2,6 +2,13 @@ llvm-toolchain-8 (1:8~svn351401-1~exp2) experimental; urgency=medium
 
   * Fix debian-changelog-line-too-long
   * Silent source-contains-prebuilt-windows-binary
+  * Remove unapplied patches:
+    - D52340-rustc-debuginfo.diff
+    - D54379-hurd-triple-clang.diff
+    - hurd-cxx-paths.diff
+    - openmp-jessie-missing-include.diff
+    - rustc-aarch64-test-failure.diff
+    - strip-ignore-deterministic-archives.diff
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Jan 2019 10:23:10 +0100
 
