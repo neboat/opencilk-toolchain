@@ -29,6 +29,10 @@ llvm-toolchain-8 (1:8~svn351401-1~exp2) experimental; urgency=medium
     - openmp-jessie-missing-include.diff
     - rustc-aarch64-test-failure.diff
     - strip-ignore-deterministic-archives.diff
+  * Update the list of openmp symbols (added):
+    - omp_get_device_num
+    - omp_get_initial_device
+    - omp_get_num_devices
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Jan 2019 10:23:10 +0100
 
