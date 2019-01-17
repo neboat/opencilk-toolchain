@@ -961,10 +961,14 @@ libomp.so.5 libomp5 #MINVER#
  omp_get_default_device@VERSION 4.0
  omp_get_default_device_@OMP_4.0 4.0
  omp_get_default_device_@VERSION 4.0
+ omp_get_device_num@VERSION 8
+ omp_get_device_num_@VERSION 8
  omp_get_dynamic@OMP_1.0 0.20131209
  omp_get_dynamic@VERSION 0.20130412
  omp_get_dynamic_@OMP_1.0 0.20131209
  omp_get_dynamic_@VERSION 0.20130412
+ omp_get_initial_device@VERSION 8
+ omp_get_initial_device_@VERSION 8
  omp_get_level@OMP_3.0 0.20131209
  omp_get_level@VERSION 0.20130412
  omp_get_level_@OMP_3.0 0.20131209
@@ -985,6 +989,10 @@ libomp.so.5 libomp5 #MINVER#
  omp_get_nested@VERSION 0.20130412
  omp_get_nested_@OMP_1.0 0.20131209
  omp_get_nested_@VERSION 0.20130412
+ omp_get_num_devices@OMP_4.0 8
+ omp_get_num_devices@VERSION 8
+ omp_get_num_devices_@OMP_4.0 8
+ omp_get_num_devices_@VERSION 8
  omp_get_num_places@OMP_4.5 7
  omp_get_num_places@VERSION 3.9.0
  omp_get_num_places_@OMP_4.5 7
