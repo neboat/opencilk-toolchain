@@ -1,3 +1,15 @@
+llvm-toolchain-8 (1:8~svn351343-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:44:33 +0100
+
+llvm-toolchain-8 (1:8~svn351372-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:30:02 +0100
+
 llvm-toolchain-8 (1:8~svn350834-1~exp1) experimental; urgency=medium
 
   * Silent a source lintian warning
@@ -38,8 +50,6 @@ llvm-toolchain-snapshot (1:8~svn348749-1~exp2) experimental; urgency=medium
     - ompc_set_affinity_format
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 18 Dec 2018 18:09:48 +0100
-
-llvm-toolchain-snapshot (1:8~svn348749-1~exp1) experimental; urgency=medium
 
 llvm-toolchain-7 (1:7.0.1-4) unstable; urgency=medium
 
@@ -494,7 +504,6 @@ llvm-toolchain-7 (1:7.0.1-4) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Ignore a test result on i386, due to upstream bug 26580#c18
-llvm-toolchain-7 (1:7-1) unstable; urgency=medium
 
   * Stable release
   * Also manages clang-X as tool for scan-build
