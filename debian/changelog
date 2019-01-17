@@ -1,23 +1,8 @@
-llvm-toolchain-snapshot (1:9~svn351416-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:9~svn351420-1~exp1) experimental; urgency=medium
 
   * New snapshot release
   * Fix a typo in the arch declaration
   * Remove patch D54677-hurd-path_max.diff (applied upstream)
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Jan 2019 09:04:49 +0100
-
-llvm-toolchain-snapshot (1:9~svn351375-1~exp1) experimental; urgency=medium
-
-  * New snapshot release and move to 9 as upstream branched
-  * Silent a source lintian warning
-    source: source-is-missing lldb/lit/Modules/ELF/Inputs/PT_LOAD-overlap-section.elf
-  * Revert patch D55434 as it is breaking the build on old version of debian/ubuntu
-  * Remove BugpointPasses.so & TestPlugin.so as they don't ship anymore
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:59:29 +0100
-
-llvm-toolchain-8 (1:8~svn351401-1~exp2) experimental; urgency=medium
-
   * Fix debian-changelog-line-too-long
   * Silent source-contains-prebuilt-windows-binary
   * Silent executable-not-elf-or-script
@@ -34,7 +19,17 @@ llvm-toolchain-8 (1:8~svn351401-1~exp2) experimental; urgency=medium
     - omp_get_initial_device
     - omp_get_num_devices
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Jan 2019 10:23:10 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Jan 2019 11:04:49 +0100
+
+llvm-toolchain-snapshot (1:9~svn351375-1~exp1) experimental; urgency=medium
+
+  * New snapshot release and move to 9 as upstream branched
+  * Silent a source lintian warning
+    source: source-is-missing lldb/lit/Modules/ELF/Inputs/PT_LOAD-overlap-section.elf
+  * Revert patch D55434 as it is breaking the build on old version of debian/ubuntu
+  * Remove BugpointPasses.so & TestPlugin.so as they don't ship anymore
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:59:29 +0100
 
 llvm-toolchain-8 (1:8~svn351401-1~exp1) experimental; urgency=medium
 
