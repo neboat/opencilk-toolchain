@@ -45,6 +45,7 @@ Description: C, C++ and Objective-C compiler
 Package: clang-tools-8
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, clang-8 (= ${binary:Version})
+ python
 Description: clang-based tools for C/C++ developments
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
