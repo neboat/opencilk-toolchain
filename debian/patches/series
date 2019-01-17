@@ -105,7 +105,6 @@ reproducible-pch.diff
 hurd-pathmax.diff
 hurd-EIEIO-undef.diff
 impl-path-hurd.diff
-D54677-hurd-path_max.diff
 
 # powerpcspe
 D49754-powerpcspe-clang.diff

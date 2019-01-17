@@ -1,3 +1,11 @@
+llvm-toolchain-snapshot (1:9~svn351416-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * Fix a typo in the arch declaration
+  * Remove patch D54677-hurd-path_max.diff (applied upstream)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Jan 2019 09:04:49 +0100
+
 llvm-toolchain-snapshot (1:9~svn351375-1~exp1) experimental; urgency=medium
 
   * New snapshot release and move to 9 as upstream branched
