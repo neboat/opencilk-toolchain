@@ -44,7 +44,7 @@ Description: C, C++ and Objective-C compiler
 
 Package: clang-tools-9
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, clang-9 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, clang-9 (= ${binary:Version}),
  python
 Description: clang-based tools for C/C++ developments
  Clang project is a C, C++, Objective C and Objective C++ front-end
