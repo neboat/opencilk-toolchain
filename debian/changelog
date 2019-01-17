@@ -2,6 +2,8 @@ llvm-toolchain-8 (1:8~svn351401-1~exp2) experimental; urgency=medium
 
   * Fix debian-changelog-line-too-long
   * Silent source-contains-prebuilt-windows-binary
+  * Silent executable-not-elf-or-script
+    usr/lib/llvm-8/share/clang/bash-autocomplete.sh
   * Remove unapplied patches:
     - D52340-rustc-debuginfo.diff
     - D54379-hurd-triple-clang.diff
