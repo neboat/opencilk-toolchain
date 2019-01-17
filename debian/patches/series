@@ -111,6 +111,3 @@ D54677-hurd-path_max.diff
 D49754-powerpcspe-clang.diff
 D54409-powerpcspe-register-spilling.diff
 D54584-powerpcspe-double-parameter.diff
-
-
-D55434-revert.diff
