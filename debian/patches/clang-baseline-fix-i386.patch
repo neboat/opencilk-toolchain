@@ -1,6 +1,8 @@
---- a/clang/lib/Driver/ToolChains/Arch/X86.cpp
-+++ b/clang/lib/Driver/ToolChains/Arch/X86.cpp
-@@ -105,8 +105,8 @@ const char *x86::getX86TargetCPU(const ArgList &Args,
+Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Driver/ToolChains/Arch/X86.cpp
+===================================================================
+--- llvm-toolchain-snapshot_9~svn351647.orig/clang/lib/Driver/ToolChains/Arch/X86.cpp
++++ llvm-toolchain-snapshot_9~svn351647/clang/lib/Driver/ToolChains/Arch/X86.cpp
+@@ -100,8 +100,8 @@ const char *x86::getX86TargetCPU(const A
    case llvm::Triple::Haiku:
      return "i586";
    default:
@@ -10,4 +12,4 @@
 +    return "i686";
    }
  }
-
+ 

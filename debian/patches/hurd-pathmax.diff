@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_8~svn349138/clang/lib/Basic/FileManager.cpp
+Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Basic/FileManager.cpp
 ===================================================================
---- llvm-toolchain-snapshot_8~svn349138.orig/clang/lib/Basic/FileManager.cpp
-+++ llvm-toolchain-snapshot_8~svn349138/clang/lib/Basic/FileManager.cpp
-@@ -528,6 +528,12 @@ void FileManager::invalidateCache(const
+--- llvm-toolchain-snapshot_9~svn351647.orig/clang/lib/Basic/FileManager.cpp
++++ llvm-toolchain-snapshot_9~svn351647/clang/lib/Basic/FileManager.cpp
+@@ -495,6 +495,12 @@ void FileManager::invalidateCache(const
    UniqueRealFiles.erase(Entry->getUniqueID());
  }
  
@@ -15,11 +15,11 @@ Index: llvm-toolchain-snapshot_8~svn349138/clang/lib/Basic/FileManager.cpp
  void FileManager::GetUniqueIDMapping(
                     SmallVectorImpl<const FileEntry *> &UIDToFiles) const {
    UIDToFiles.clear();
-Index: llvm-toolchain-snapshot_8~svn349138/lldb/include/lldb/lldb-defines.h
+Index: llvm-toolchain-snapshot_9~svn351647/lldb/include/lldb/lldb-defines.h
 ===================================================================
---- llvm-toolchain-snapshot_8~svn349138.orig/lldb/include/lldb/lldb-defines.h
-+++ llvm-toolchain-snapshot_8~svn349138/lldb/include/lldb/lldb-defines.h
-@@ -28,6 +28,11 @@
+--- llvm-toolchain-snapshot_9~svn351647.orig/lldb/include/lldb/lldb-defines.h
++++ llvm-toolchain-snapshot_9~svn351647/lldb/include/lldb/lldb-defines.h
+@@ -27,6 +27,11 @@
  #define INT32_MAX 2147483647
  #endif
  
@@ -31,11 +31,11 @@ Index: llvm-toolchain-snapshot_8~svn349138/lldb/include/lldb/lldb-defines.h
  #if !defined(UINT32_MAX)
  #define UINT32_MAX 4294967295U
  #endif
-Index: llvm-toolchain-snapshot_8~svn349138/tools/dsymutil/DwarfLinker.cpp
+Index: llvm-toolchain-snapshot_9~svn351647/tools/dsymutil/DwarfLinker.cpp
 ===================================================================
---- llvm-toolchain-snapshot_8~svn349138.orig/tools/dsymutil/DwarfLinker.cpp
-+++ llvm-toolchain-snapshot_8~svn349138/tools/dsymutil/DwarfLinker.cpp
-@@ -101,6 +101,11 @@
+--- llvm-toolchain-snapshot_9~svn351647.orig/tools/dsymutil/DwarfLinker.cpp
++++ llvm-toolchain-snapshot_9~svn351647/tools/dsymutil/DwarfLinker.cpp
+@@ -100,6 +100,11 @@
  #include <utility>
  #include <vector>
  
@@ -47,10 +47,10 @@ Index: llvm-toolchain-snapshot_8~svn349138/tools/dsymutil/DwarfLinker.cpp
  namespace llvm {
  namespace dsymutil {
  
-Index: llvm-toolchain-snapshot_8~svn349138/polly/lib/External/ppcg/cuda_common.c
+Index: llvm-toolchain-snapshot_9~svn351647/polly/lib/External/ppcg/cuda_common.c
 ===================================================================
---- llvm-toolchain-snapshot_8~svn349138.orig/polly/lib/External/ppcg/cuda_common.c
-+++ llvm-toolchain-snapshot_8~svn349138/polly/lib/External/ppcg/cuda_common.c
+--- llvm-toolchain-snapshot_9~svn351647.orig/polly/lib/External/ppcg/cuda_common.c
++++ llvm-toolchain-snapshot_9~svn351647/polly/lib/External/ppcg/cuda_common.c
 @@ -15,6 +15,11 @@
  #include "cuda_common.h"
  #include "ppcg.h"
@@ -63,11 +63,11 @@ Index: llvm-toolchain-snapshot_8~svn349138/polly/lib/External/ppcg/cuda_common.c
  /* Open the host .cu file and the kernel .hu and .cu files for writing.
   * Add the necessary includes.
   */
-Index: llvm-toolchain-snapshot_8~svn349138/clang/lib/Frontend/ModuleDependencyCollector.cpp
+Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Frontend/ModuleDependencyCollector.cpp
 ===================================================================
---- llvm-toolchain-snapshot_8~svn349138.orig/clang/lib/Frontend/ModuleDependencyCollector.cpp
-+++ llvm-toolchain-snapshot_8~svn349138/clang/lib/Frontend/ModuleDependencyCollector.cpp
-@@ -99,6 +99,11 @@ struct ModuleDependencyMMCallbacks : pub
+--- llvm-toolchain-snapshot_9~svn351647.orig/clang/lib/Frontend/ModuleDependencyCollector.cpp
++++ llvm-toolchain-snapshot_9~svn351647/clang/lib/Frontend/ModuleDependencyCollector.cpp
+@@ -98,6 +98,11 @@ struct ModuleDependencyMMCallbacks : pub
  
  }
  

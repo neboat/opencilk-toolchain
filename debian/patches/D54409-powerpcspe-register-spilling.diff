@@ -3,9 +3,11 @@ Author: Justin Hibbits <jrh29@alumni.cwru.edu>
 Origin: https://reviews.llvm.org/D54409
 Last-Update: 2018-12-05
 
---- llvm-toolchain-7-7.0.1~+rc2.orig/lib/Target/PowerPC/PPCRegisterInfo.cpp
-+++ llvm-toolchain-7-7.0.1~+rc2/lib/Target/PowerPC/PPCRegisterInfo.cpp
-@@ -844,6 +844,9 @@ static unsigned offsetMinAlign(const Mac
+Index: llvm-toolchain-snapshot_9~svn351647/lib/Target/PowerPC/PPCRegisterInfo.cpp
+===================================================================
+--- llvm-toolchain-snapshot_9~svn351647.orig/lib/Target/PowerPC/PPCRegisterInfo.cpp
++++ llvm-toolchain-snapshot_9~svn351647/lib/Target/PowerPC/PPCRegisterInfo.cpp
+@@ -846,6 +846,9 @@ static unsigned offsetMinAlign(const Mac
    case PPC::STXSD:
    case PPC::STXSSP:
      return 4;
@@ -15,7 +17,7 @@ Last-Update: 2018-12-05
    case PPC::LXV:
    case PPC::STXV:
      return 16;
-@@ -960,7 +963,10 @@ PPCRegisterInfo::eliminateFrameIndex(Mac
+@@ -962,7 +965,10 @@ PPCRegisterInfo::eliminateFrameIndex(Mac
    // happen in invalid code.
    assert(OpC != PPC::DBG_VALUE &&
           "This should be handled in a target-independent way");
@@ -27,8 +29,10 @@ Last-Update: 2018-12-05
                        ((Offset % offsetMinAlign(MI)) == 0)) ||
                       OpC == TargetOpcode::STACKMAP ||
                       OpC == TargetOpcode::PATCHPOINT)) {
---- llvm-toolchain-7-7.0.1~+rc2.orig/test/CodeGen/PowerPC/spe.ll
-+++ llvm-toolchain-7-7.0.1~+rc2/test/CodeGen/PowerPC/spe.ll
+Index: llvm-toolchain-snapshot_9~svn351647/test/CodeGen/PowerPC/spe.ll
+===================================================================
+--- llvm-toolchain-snapshot_9~svn351647.orig/test/CodeGen/PowerPC/spe.ll
++++ llvm-toolchain-snapshot_9~svn351647/test/CodeGen/PowerPC/spe.ll
 @@ -525,18 +525,53 @@ entry:
  ; CHECK: #NO_APP
  }

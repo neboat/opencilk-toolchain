@@ -3,11 +3,11 @@ Author: Justin Hibbits <jrh29@alumni.cwru.edu>
 Origin: https://reviews.llvm.org/D54583
 Last-Update: 2018-12-04
 
-Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCISelLowering.cpp
+Index: llvm-toolchain-snapshot_9~svn351647/lib/Target/PowerPC/PPCISelLowering.cpp
 ===================================================================
---- llvm-toolchain-snapshot_8~svn350421.orig/lib/Target/PowerPC/PPCISelLowering.cpp
-+++ llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCISelLowering.cpp
-@@ -385,8 +385,16 @@ PPCTargetLowering::PPCTargetLowering(con
+--- llvm-toolchain-snapshot_9~svn351647.orig/lib/Target/PowerPC/PPCISelLowering.cpp
++++ llvm-toolchain-snapshot_9~svn351647/lib/Target/PowerPC/PPCISelLowering.cpp
+@@ -384,8 +384,16 @@ PPCTargetLowering::PPCTargetLowering(con
    } else {
      setOperationAction(ISD::BITCAST, MVT::f32, Expand);
      setOperationAction(ISD::BITCAST, MVT::i32, Expand);
@@ -25,7 +25,7 @@ Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCISelLowering.cp
    }
  
    // We cannot sextinreg(i1).  Expand to shifts.
-@@ -1366,6 +1374,9 @@ const char *PPCTargetLowering::getTarget
+@@ -1365,6 +1373,9 @@ const char *PPCTargetLowering::getTarget
    case PPCISD::QVLFSb:          return "PPCISD::QVLFSb";
    case PPCISD::BUILD_FP128:     return "PPCISD::BUILD_FP128";
    case PPCISD::EXTSWSLI:        return "PPCISD::EXTSWSLI";
@@ -35,7 +35,7 @@ Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCISelLowering.cp
    }
    return nullptr;
  }
-@@ -7886,6 +7897,15 @@ SDValue PPCTargetLowering::LowerBITCAST(
+@@ -7885,6 +7896,15 @@ SDValue PPCTargetLowering::LowerBITCAST(
    SDLoc dl(Op);
    SDValue Op0 = Op->getOperand(0);
  
@@ -51,7 +51,7 @@ Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCISelLowering.cp
    if (!EnableQuadPrecision ||
        (Op.getValueType() != MVT::f128 ) ||
        (Op0.getOpcode() != ISD::BUILD_PAIR) ||
-@@ -7897,6 +7917,26 @@ SDValue PPCTargetLowering::LowerBITCAST(
+@@ -7896,6 +7916,26 @@ SDValue PPCTargetLowering::LowerBITCAST(
                       Op0.getOperand(1));
  }
  
@@ -78,7 +78,7 @@ Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCISelLowering.cp
  // If this is a case we can't handle, return null and let the default
  // expansion code take care of it.  If we CAN select this case, and if it
  // selects to a single instruction, return Op.  Otherwise, if we can codegen
-@@ -9680,6 +9720,8 @@ SDValue PPCTargetLowering::LowerOperatio
+@@ -9679,6 +9719,8 @@ SDValue PPCTargetLowering::LowerOperatio
      return LowerBSWAP(Op, DAG);
    case ISD::ATOMIC_CMP_SWAP:
      return LowerATOMIC_CMP_SWAP(Op, DAG);
@@ -87,11 +87,11 @@ Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCISelLowering.cp
    }
  }
  
-Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCISelLowering.h
+Index: llvm-toolchain-snapshot_9~svn351647/lib/Target/PowerPC/PPCISelLowering.h
 ===================================================================
---- llvm-toolchain-snapshot_8~svn350421.orig/lib/Target/PowerPC/PPCISelLowering.h
-+++ llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCISelLowering.h
-@@ -196,6 +196,15 @@ namespace llvm {
+--- llvm-toolchain-snapshot_9~svn351647.orig/lib/Target/PowerPC/PPCISelLowering.h
++++ llvm-toolchain-snapshot_9~svn351647/lib/Target/PowerPC/PPCISelLowering.h
+@@ -195,6 +195,15 @@ namespace llvm {
        /// Direct move of 2 consective GPR to a VSX register.
        BUILD_FP128,
  
@@ -107,7 +107,7 @@ Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCISelLowering.h
        /// Extract a subvector from signed integer vector and convert to FP.
        /// It is primarily used to convert a (widened) illegal integer vector
        /// type to a legal floating point vector type.
-@@ -1110,6 +1119,7 @@ namespace llvm {
+@@ -1109,6 +1118,7 @@ namespace llvm {
      SDValue lowerEH_SJLJ_SETJMP(SDValue Op, SelectionDAG &DAG) const;
      SDValue lowerEH_SJLJ_LONGJMP(SDValue Op, SelectionDAG &DAG) const;
      SDValue LowerBITCAST(SDValue Op, SelectionDAG &DAG) const;
@@ -115,11 +115,11 @@ Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCISelLowering.h
  
      SDValue DAGCombineExtBoolTrunc(SDNode *N, DAGCombinerInfo &DCI) const;
      SDValue DAGCombineBuildVector(SDNode *N, DAGCombinerInfo &DCI) const;
-Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCInstrInfo.td
+Index: llvm-toolchain-snapshot_9~svn351647/lib/Target/PowerPC/PPCInstrInfo.td
 ===================================================================
---- llvm-toolchain-snapshot_8~svn350421.orig/lib/Target/PowerPC/PPCInstrInfo.td
-+++ llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCInstrInfo.td
-@@ -231,6 +231,22 @@ def PPCbuild_fp128: SDNode<"PPCISD::BUIL
+--- llvm-toolchain-snapshot_9~svn351647.orig/lib/Target/PowerPC/PPCInstrInfo.td
++++ llvm-toolchain-snapshot_9~svn351647/lib/Target/PowerPC/PPCInstrInfo.td
+@@ -230,6 +230,22 @@ def PPCbuild_fp128: SDNode<"PPCISD::BUIL
                                SDTCisSameAs<1,2>]>,
                             []>;
  
@@ -142,11 +142,11 @@ Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCInstrInfo.td
  // These are target-independent nodes, but have target-specific formats.
  def callseq_start : SDNode<"ISD::CALLSEQ_START", SDT_PPCCallSeqStart,
                             [SDNPHasChain, SDNPOutGlue]>;
-Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCInstrSPE.td
+Index: llvm-toolchain-snapshot_9~svn351647/lib/Target/PowerPC/PPCInstrSPE.td
 ===================================================================
---- llvm-toolchain-snapshot_8~svn350421.orig/lib/Target/PowerPC/PPCInstrSPE.td
-+++ llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCInstrSPE.td
-@@ -512,7 +512,7 @@ def EVLWWSPLATX    : EVXForm_1<792, (out
+--- llvm-toolchain-snapshot_9~svn351647.orig/lib/Target/PowerPC/PPCInstrSPE.td
++++ llvm-toolchain-snapshot_9~svn351647/lib/Target/PowerPC/PPCInstrSPE.td
+@@ -511,7 +511,7 @@ def EVLWWSPLATX    : EVXForm_1<792, (out
  
  def EVMERGEHI      : EVXForm_1<556, (outs sperc:$RT), (ins sperc:$RA, sperc:$RB),
                                 "evmergehi $RT, $RA, $RB", IIC_VecGeneral, []>;
@@ -155,7 +155,7 @@ Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCInstrSPE.td
                                 "evmergelo $RT, $RA, $RB", IIC_VecGeneral, []>;
  def EVMERGEHILO    : EVXForm_1<558, (outs sperc:$RT), (ins sperc:$RA, sperc:$RB),
                                 "evmergehilo $RT, $RA, $RB", IIC_VecGeneral, []>;
-@@ -887,4 +887,15 @@ def : Pat<(f64 (selectcc i1:$lhs, i1:$rh
+@@ -886,4 +886,15 @@ def : Pat<(f64 (selectcc i1:$lhs, i1:$rh
            (SELECT_SPE (CRANDC $lhs, $rhs), $tval, $fval)>;
  def : Pat<(f64 (selectcc i1:$lhs, i1:$rhs, f64:$tval, f64:$fval, SETNE)),
            (SELECT_SPE (CRXOR $lhs, $rhs), $tval, $fval)>;
@@ -171,10 +171,10 @@ Index: llvm-toolchain-snapshot_8~svn350421/lib/Target/PowerPC/PPCInstrSPE.td
 +          (i32 (EXTRACT_SUBREG $rA, sub_32))>;
 +
  }
-Index: llvm-toolchain-snapshot_8~svn350421/test/CodeGen/PowerPC/spe.ll
+Index: llvm-toolchain-snapshot_9~svn351647/test/CodeGen/PowerPC/spe.ll
 ===================================================================
---- llvm-toolchain-snapshot_8~svn350421.orig/test/CodeGen/PowerPC/spe.ll
-+++ llvm-toolchain-snapshot_8~svn350421/test/CodeGen/PowerPC/spe.ll
+--- llvm-toolchain-snapshot_9~svn351647.orig/test/CodeGen/PowerPC/spe.ll
++++ llvm-toolchain-snapshot_9~svn351647/test/CodeGen/PowerPC/spe.ll
 @@ -472,10 +472,8 @@ entry:
  ; CHECK-LABEL: test_dselect
  ; CHECK: andi.

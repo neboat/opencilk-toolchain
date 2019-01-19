@@ -1,7 +1,7 @@
-Index: llvm-toolchain-7-7/openmp/runtime/src/CMakeLists.txt
+Index: llvm-toolchain-snapshot_9~svn351647/openmp/runtime/src/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-7-7.orig/openmp/runtime/src/CMakeLists.txt
-+++ llvm-toolchain-7-7/openmp/runtime/src/CMakeLists.txt
+--- llvm-toolchain-snapshot_9~svn351647.orig/openmp/runtime/src/CMakeLists.txt
++++ llvm-toolchain-snapshot_9~svn351647/openmp/runtime/src/CMakeLists.txt
 @@ -174,7 +174,8 @@ endif()
  
  # Linking command will include libraries in LIBOMP_CONFIGURED_LIBFLAGS

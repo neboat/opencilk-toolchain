@@ -7,10 +7,10 @@ sure their ABI stays in sync.
 
 No known upstream bug about this.
 
-Index: llvm-toolchain-snapshot_8~svn344157/libcxxabi/src/cxa_exception.cpp
+Index: llvm-toolchain-snapshot_9~svn351647/libcxxabi/src/cxa_exception.cpp
 ===================================================================
---- llvm-toolchain-snapshot_8~svn344157.orig/libcxxabi/src/cxa_exception.cpp
-+++ llvm-toolchain-snapshot_8~svn344157/libcxxabi/src/cxa_exception.cpp
+--- llvm-toolchain-snapshot_9~svn351647.orig/libcxxabi/src/cxa_exception.cpp
++++ llvm-toolchain-snapshot_9~svn351647/libcxxabi/src/cxa_exception.cpp
 @@ -277,15 +277,16 @@ __cxa_throw(void *thrown_object, std::ty
  
  #ifdef __USING_SJLJ_EXCEPTIONS__
@@ -66,10 +66,10 @@ Index: llvm-toolchain-snapshot_8~svn344157/libcxxabi/src/cxa_exception.cpp
  #endif
          // Some sort of unwinding error.  Note that terminate is a handler.
          __cxa_begin_catch(&dep_exception_header->unwindHeader);
-Index: llvm-toolchain-snapshot_8~svn344157/libcxxabi/src/cxa_exception.hpp
+Index: llvm-toolchain-snapshot_9~svn351647/libcxxabi/src/cxa_exception.hpp
 ===================================================================
---- llvm-toolchain-snapshot_8~svn344157.orig/libcxxabi/src/cxa_exception.hpp
-+++ llvm-toolchain-snapshot_8~svn344157/libcxxabi/src/cxa_exception.hpp
+--- llvm-toolchain-snapshot_9~svn351647.orig/libcxxabi/src/cxa_exception.hpp
++++ llvm-toolchain-snapshot_9~svn351647/libcxxabi/src/cxa_exception.hpp
 @@ -28,6 +28,45 @@ uint64_t __getExceptionClass  (const _Un
  void     __setExceptionClass  (      _Unwind_Exception*, uint64_t);
  bool     __isOurExceptionClass(const _Unwind_Exception*);

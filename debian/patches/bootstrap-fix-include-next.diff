@@ -13,10 +13,10 @@ include search path, clang's header will call itself without any effect.
 Therefore, it will do include_next until the define from the libc is existing (ex: _INTTYPES_H)
 
 
-Index: llvm-toolchain-7-7/clang/lib/Headers/inttypes.h
+Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Headers/inttypes.h
 ===================================================================
---- llvm-toolchain-7-7.orig/clang/lib/Headers/inttypes.h
-+++ llvm-toolchain-7-7/clang/lib/Headers/inttypes.h
+--- llvm-toolchain-snapshot_9~svn351647.orig/clang/lib/Headers/inttypes.h
++++ llvm-toolchain-snapshot_9~svn351647/clang/lib/Headers/inttypes.h
 @@ -20,7 +20,7 @@
   *
  \*===----------------------------------------------------------------------===*/
@@ -26,10 +26,10 @@ Index: llvm-toolchain-7-7/clang/lib/Headers/inttypes.h
  #define __CLANG_INTTYPES_H
  
  #if defined(_MSC_VER) && _MSC_VER < 1800
-Index: llvm-toolchain-7-7/clang/lib/Headers/limits.h
+Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Headers/limits.h
 ===================================================================
---- llvm-toolchain-7-7.orig/clang/lib/Headers/limits.h
-+++ llvm-toolchain-7-7/clang/lib/Headers/limits.h
+--- llvm-toolchain-snapshot_9~svn351647.orig/clang/lib/Headers/limits.h
++++ llvm-toolchain-snapshot_9~svn351647/clang/lib/Headers/limits.h
 @@ -22,7 +22,7 @@
   *
  \*===----------------------------------------------------------------------===*/
