@@ -798,6 +798,7 @@ libomp.so.5 libomp5 #MINVER#
  __kmpc_omp_taskyield@VERSION 0.20130412
  __kmpc_omp_wait_deps@VERSION 0.20130912
  __kmpc_ordered@VERSION 0.20130412
+ __kmpc_pause_resource@VERSION 9
  __kmpc_pop_num_threads@VERSION 0.20130412
  __kmpc_proxy_task_completed@VERSION 0.20150401
  __kmpc_proxy_task_completed_ooo@VERSION 0.20150401
@@ -1092,6 +1093,10 @@ libomp.so.5 libomp5 #MINVER#
  omp_is_initial_device_@VERSION 0.20141212
  omp_large_cap_mem_alloc@VERSION 8
  omp_low_lat_mem_alloc@VERSION 8
+ omp_pause_resource@VERSION 9
+ omp_pause_resource_@VERSION 9
+ omp_pause_resource_all@VERSION 9
+ omp_pause_resource_all_@VERSION 9
  omp_pteam_mem_alloc@VERSION 8
  omp_set_affinity_format@VERSION 8
  omp_set_affinity_format_@VERSION 8
