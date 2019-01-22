@@ -1,0 +1,174 @@
+Index: llvm-toolchain-snapshot_9~svn351787/cmake/config-ix.cmake
+===================================================================
+--- llvm-toolchain-snapshot_9~svn351787.orig/cmake/config-ix.cmake
++++ llvm-toolchain-snapshot_9~svn351787/cmake/config-ix.cmake
+@@ -325,6 +325,15 @@ else()
+   unset(HAVE_FFI_CALL CACHE)
+ endif( LLVM_ENABLE_FFI )
+ 
++# Wether we can use std::is_triviallyc_opyable to verify llvm::is_trivially_copyable
++CHECK_CXX_SOURCE_COMPILES("
++#include <type_traits>
++struct T { int val; };
++static_assert(std::is_trivially_copyable<T>::value, \"ok\");
++int main() { return 0;}
++" HAVE_STD_IS_TRIVIALLY_COPYABLE)
++
++
+ # Define LLVM_HAS_ATOMICS if gcc or MSVC atomic builtins are supported.
+ include(CheckAtomic)
+ 
+Index: llvm-toolchain-snapshot_9~svn351787/include/llvm/ADT/PointerIntPair.h
+===================================================================
+--- llvm-toolchain-snapshot_9~svn351787.orig/include/llvm/ADT/PointerIntPair.h
++++ llvm-toolchain-snapshot_9~svn351787/include/llvm/ADT/PointerIntPair.h
+@@ -14,6 +14,7 @@
+ #define LLVM_ADT_POINTERINTPAIR_H
+ 
+ #include "llvm/Support/PointerLikeTypeTraits.h"
++#include "llvm/Support/type_traits.h"
+ #include <cassert>
+ #include <cstdint>
+ #include <limits>
+@@ -125,6 +126,17 @@ public:
+   }
+ };
+ 
++template <typename PointerTy, unsigned IntBits, typename IntType,
++          typename PtrTraits,
++          typename Info>
++struct is_trivially_copyable<PointerIntPair<PointerTy, IntBits, IntType, PtrTraits, Info>> : std::true_type {
++#ifdef HAVE_STD_IS_TRIVIALLY_COPYABLE
++  static_assert(std::is_trivially_copyable<PointerIntPair<PointerTy, IntBits, IntType, PtrTraits, Info>>::value,
++                "inconsistent behavior between llvm:: and std:: implementation of is_trivially_copyable");
++#endif
++};
++
++
+ template <typename PointerT, unsigned IntBits, typename PtrTraits>
+ struct PointerIntPairInfo {
+   static_assert(PtrTraits::NumLowBitsAvailable <
+Index: llvm-toolchain-snapshot_9~svn351787/include/llvm/Config/config.h.cmake
+===================================================================
+--- llvm-toolchain-snapshot_9~svn351787.orig/include/llvm/Config/config.h.cmake
++++ llvm-toolchain-snapshot_9~svn351787/include/llvm/Config/config.h.cmake
+@@ -338,6 +338,9 @@
+ /* Define as the return type of signal handlers (`int' or `void'). */
+ #cmakedefine RETSIGTYPE ${RETSIGTYPE}
+ 
++/* Define if std::is_trivially_copyable is supported */
++#cmakedefine HAVE_STD_IS_TRIVIALLY_COPYABLE ${HAVE_STD_IS_TRIVIALLY_COPYABLE}
++
+ /* Define to a function implementing stricmp */
+ #cmakedefine stricmp ${stricmp}
+ 
+Index: llvm-toolchain-snapshot_9~svn351787/include/llvm/Support/type_traits.h
+===================================================================
+--- llvm-toolchain-snapshot_9~svn351787.orig/include/llvm/Support/type_traits.h
++++ llvm-toolchain-snapshot_9~svn351787/include/llvm/Support/type_traits.h
+@@ -95,6 +95,31 @@ template<class T>
+ union trivial_helper {
+     T t;
+ };
++
++
++template <typename... Ts> struct VoidTImpl { using type = void; };
++
++template <class Enabler, template <class...> class Op, class... Args>
++struct IsDetectedImpl {
++  using type = std::false_type;
++};
++
++template <template <class...> class Op, class... Args>
++struct IsDetectedImpl<typename VoidTImpl<Op<Args...>>::type, Op, Args...> {
++  using type = std::true_type;
++};
++
++
++template <template <class...> class Op, class... Args>
++struct IsDetected : IsDetectedImpl<void, Op, Args...>::type {};
++
++template <typename T>
++using IsCopyAssignableImpl =
++    decltype(std::declval<T &>() = std::declval<const T &>());
++
++template <typename T>
++using IsMoveAssignableImpl =
++    decltype(std::declval<T &>() = std::declval<T &&>());
+ } // end namespace detail
+ 
+ /// An implementation of `std::is_trivially_copy_constructible` since we have
+@@ -119,6 +144,13 @@ struct is_trivially_move_constructible<T
+ template <typename T>
+ struct is_trivially_move_constructible<T &&> : std::true_type {};
+ 
++
++template <typename T>
++struct is_copy_assignable : detail::IsDetected<detail::IsCopyAssignableImpl, T> {};
++
++template <typename T>
++struct is_move_assignable : detail::IsDetected<detail::IsMoveAssignableImpl, T> {};
++
+ // An implementation of `std::is_trivially_copyable` since STL version
+ // is not equally supported by all compilers, especially GCC 4.9.
+ // Uniform implementation of this trait is important for ABI compatibility
+@@ -140,15 +172,15 @@ class is_trivially_copyable {
+ 
+   // copy assign
+   static constexpr bool has_trivial_copy_assign =
+-      std::is_copy_assignable<detail::trivial_helper<T>>::value;
++      is_copy_assignable<detail::trivial_helper<T>>::value;
+   static constexpr bool has_deleted_copy_assign =
+-      !std::is_copy_assignable<T>::value;
++      !is_copy_assignable<T>::value;
+ 
+   // move assign
+   static constexpr bool has_trivial_move_assign =
+-      std::is_move_assignable<detail::trivial_helper<T>>::value;
++      is_move_assignable<detail::trivial_helper<T>>::value;
+   static constexpr bool has_deleted_move_assign =
+-      !std::is_move_assignable<T>::value;
++      !is_move_assignable<T>::value;
+ 
+   // destructor
+   static constexpr bool has_trivial_destructor =
+@@ -163,10 +195,14 @@ class is_trivially_copyable {
+       (has_deleted_copy_assign || has_trivial_copy_assign) &&
+       (has_deleted_copy_constructor || has_trivial_copy_constructor);
+ 
+-#if (__has_feature(is_trivially_copyable) || (defined(__GNUC__) && __GNUC__ >= 5))
+-  static_assert(value == std::is_trivially_copyable<T>::value, "inconsistent behavior between llvm:: and std:: implementation of is_trivially_copyable");
++#ifdef HAVE_STD_IS_TRIVIALLY_COPYABLE
++  static_assert(value == std::is_trivially_copyable<T>::value,
++                "inconsistent behavior between llvm:: and std:: implementation of is_trivially_copyable");
+ #endif
+ };
++template <typename T>
++class is_trivially_copyable<T*> : public std::true_type {
++};
+ 
+ 
+ } // end namespace llvm
+Index: llvm-toolchain-snapshot_9~svn351787/tools/llvm-xray/trie-node.h
+===================================================================
+--- llvm-toolchain-snapshot_9~svn351787.orig/tools/llvm-xray/trie-node.h
++++ llvm-toolchain-snapshot_9~svn351787/tools/llvm-xray/trie-node.h
+@@ -27,6 +27,18 @@
+ ///
+ /// The template parameter allows users of the template to attach their own
+ /// data elements to each node in the invocation graph.
++template <typename AssociatedData> struct TrieNode;
++namespace llvm {
++template <typename AssociatedData>
++struct is_triviallly_copyable {
++  static constexpr bool value = is_trivially_copyable<AssociatedData>::value;
++#ifdef HAVE_STD_IS_TRIVIALLY_COPYABLE
++  static_assert(value == std::is_trivially_copyable<T>::value,
++                "inconsistent behavior between llvm:: and std:: implementation of is_trivially_copyable");
++#endif
++};
++}
++
+ template <typename AssociatedData> struct TrieNode {
+   /// The function ID.
+   int32_t FuncId;
