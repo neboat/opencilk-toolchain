@@ -1,3 +1,10 @@
+llvm-toolchain-8 (1:8~svn351401-1~exp3) experimental; urgency=medium
+
+  * Remove 'Multi-Arch: same' in libclang
+    (Closes: #874248)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 24 Jan 2019 08:49:34 +0100
+
 llvm-toolchain-8 (1:8~svn351401-1~exp2) experimental; urgency=medium
 
   * Fix debian-changelog-line-too-long
@@ -517,8 +524,6 @@ llvm-toolchain-7 (1:7.0.1-5) unstable; urgency=medium
   * Add 'Rules-Requires-Root: no' in debian/control
   * Because more and more tools in clang-tools are in python, add
     the dependency
-  * Remove 'Multi-Arch: same' in libclang
-    (Closes: #874248)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 04 Jan 2019 16:00:41 +0100
 
