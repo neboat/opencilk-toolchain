@@ -1,6 +1,8 @@
---- llvm-toolchain-7-7~+rc3.orig/tools/llvm-config/CMakeLists.txt
-+++ llvm-toolchain-7-7~+rc3/tools/llvm-config/CMakeLists.txt
-@@ -32,9 +32,9 @@
+Index: llvm-toolchain-7_7.0.1~svn347285/tools/llvm-config/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-7_7.0.1~svn347285.orig/tools/llvm-config/CMakeLists.txt
++++ llvm-toolchain-7_7.0.1~svn347285/tools/llvm-config/CMakeLists.txt
+@@ -32,9 +32,9 @@ get_property(COMPILE_FLAGS TARGET llvm-c
  # Use configure_file to create BuildVariables.inc.
  set(LLVM_SRC_ROOT ${LLVM_MAIN_SRC_DIR})
  set(LLVM_OBJ_ROOT ${LLVM_BINARY_DIR})
