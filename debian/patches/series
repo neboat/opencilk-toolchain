@@ -99,7 +99,6 @@ clang-arm-default-vfp3-on-armv7a.patch
 # For the bootstrap
 bootstrap-fix-include-next.diff
 clangd-atomic-cmake.patch
-pr39427-misscompile.diff
 
 # Rustc
 rustc-aarch64-test-failure.diff
