@@ -1,7 +1,19 @@
-llvm-toolchain-7 (1:7.0.1~svn352582-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-7 (1:7.1.0~svn352582-1~exp1) UNRELEASED; urgency=medium
 
-  * experimental New snapshot release
-  * Remove pr39427-misscompile.diff as it has been applied upstream
+  * New stable release.
+    To be clear, this is the same as release 7.0.1
+    To be ABI compliant in Debian between 7 and 7.0.1,
+    I took the pr39427-misscompile.diff.
+    7.1.0 is an official release for downstream users to bring
+    back the ABI comptability.
+    I am uploading this new version in the archive to:
+    - avoid question like "why we don't have 7.1.0 in the archive?"
+    - align with upstream
+    - clearly show that we kept the ABI
+    Upstream decided to rename the library from 7 to 7.0.1
+    As I kept the ABI, I reverted this patch (revert-change-soname.diff)
+    More info on https://bugs.llvm.org/show_bug.cgi?id=39427
+    and https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=913271
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 30 Jan 2019 08:53:14 +0100
 

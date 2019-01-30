@@ -134,3 +134,7 @@ D54409-powerpcspe-register-spilling.diff
 D54584-powerpcspe-double-parameter.diff
 D52340-rustc-debuginfo.diff
 
+# Disable https://llvm.org/viewvc/llvm-project?view=revision&revision=352580
+# 7.0.1 was always abi compatible with 7.0
+# Therefor, the libraries are still compatible with the 7.1.0 version
+revert-change-soname.diff
