@@ -112,9 +112,6 @@ D49754-powerpcspe-clang.diff
 D54409-powerpcspe-register-spilling.diff
 D54584-powerpcspe-double-parameter.diff
 
-# Rust
-D52340-rustc-debuginfo.diff
-
 # kfreebsd
 kfreebsd/clang_lib_Basic_Targets.diff
 kfreebsd/CMakeLists.txt.diff
