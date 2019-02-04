@@ -84,7 +84,12 @@ clang-$VERSION foo.c
 echo '#include <stddef.h>' > foo.c
 clang-$VERSION -c foo.c
 
-
+# https://bugs.launchpad.net/bugs/1810860
+clang-$VERSION -dumpversion &> foo.log
+if grep 4.2.1 foo.log; then
+    echo "dumpversion still returns 4.2.1"
+#    exit 1
+fi
 
 # bug 903709
 echo '#include <stdatomic.h>

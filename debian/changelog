@@ -2,9 +2,6 @@ llvm-toolchain-snapshot (1:9~svn351420-1~exp2) experimental; urgency=medium
 
   * Remove 'Multi-Arch: same' in libclang
     (Closes: #874248)
-
- --
-
 llvm-toolchain-snapshot (1:9~svn351420-1~exp1) experimental; urgency=medium
 
   * New snapshot release
@@ -41,6 +38,14 @@ llvm-toolchain-snapshot (1:9~svn351375-1~exp1) experimental; urgency=medium
   * Remove BugpointPasses.so & TestPlugin.so as they don't ship anymore
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:59:29 +0100
+
+llvm-toolchain-8 (1:8~+rc1-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * Remove 'Multi-Arch: same' in libclang
+    (Closes: #874248)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 24 Jan 2019 08:49:34 +0100
 
 llvm-toolchain-8 (1:8~svn351401-1~exp1) experimental; urgency=medium
 
@@ -531,6 +536,13 @@ llvm-toolchain-snapshot (1:8~svn340819-1) unstable; urgency=medium
     As part of this work, the transition libiomp packages have been removed.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 28 Aug 2018 16:28:24 +0200
+
+llvm-toolchain-7 (1:7.0.1-6) unstable; urgency=medium
+
+  * Add support for kfreebsd (Closes: #921246)
+    Many thanks to Svante Signell for all patches
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Feb 2019 17:27:51 +0100
 
 llvm-toolchain-7 (1:7.0.1-5) unstable; urgency=medium
 
