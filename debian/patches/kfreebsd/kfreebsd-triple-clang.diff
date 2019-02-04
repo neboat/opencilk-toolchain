@@ -1,8 +1,8 @@
-Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/CMakeLists.txt
+Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-7-7.0.1.orig/clang/lib/Driver/CMakeLists.txt
-+++ llvm-toolchain-7-7.0.1/clang/lib/Driver/CMakeLists.txt
-@@ -48,6 +48,7 @@ add_clang_library(clangDriver
+--- llvm-toolchain-8-8~+rc1.orig/clang/lib/Driver/CMakeLists.txt
++++ llvm-toolchain-8-8~+rc1/clang/lib/Driver/CMakeLists.txt
+@@ -49,6 +49,7 @@ add_clang_library(clangDriver
    ToolChains/HIP.cpp
    ToolChains/Hexagon.cpp
    ToolChains/Hurd.cpp
@@ -10,10 +10,10 @@ Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/CMakeLists.txt
    ToolChains/Linux.cpp
    ToolChains/MipsLinux.cpp
    ToolChains/MinGW.cpp
-Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/Driver.cpp
+Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/Driver.cpp
 ===================================================================
---- llvm-toolchain-7-7.0.1.orig/clang/lib/Driver/Driver.cpp
-+++ llvm-toolchain-7-7.0.1/clang/lib/Driver/Driver.cpp
+--- llvm-toolchain-8-8~+rc1.orig/clang/lib/Driver/Driver.cpp
++++ llvm-toolchain-8-8~+rc1/clang/lib/Driver/Driver.cpp
 @@ -27,6 +27,7 @@
  #include "ToolChains/Haiku.h"
  #include "ToolChains/Hexagon.h"
@@ -21,8 +21,8 @@ Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/Driver.cpp
 +#include "ToolChains/KFreeBSD.h"
  #include "ToolChains/Lanai.h"
  #include "ToolChains/Linux.h"
- #include "ToolChains/MSVC.h"
-@@ -4320,6 +4321,9 @@ const ToolChain &Driver::getToolChain(co
+ #include "ToolChains/MSP430.h"
+@@ -4546,6 +4547,9 @@ const ToolChain &Driver::getToolChain(co
      case llvm::Triple::FreeBSD:
        TC = llvm::make_unique<toolchains::FreeBSD>(*this, Target, Args);
        break;
@@ -32,24 +32,24 @@ Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/Driver.cpp
      case llvm::Triple::Minix:
        TC = llvm::make_unique<toolchains::Minix>(*this, Target, Args);
        break;
-Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/Clang.cpp
+Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/Clang.cpp
 ===================================================================
---- llvm-toolchain-7-7.0.1.orig/clang/lib/Driver/ToolChains/Clang.cpp
-+++ llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/Clang.cpp
-@@ -528,7 +528,7 @@ static bool useFramePointerForTargetByDe
-     return !areOptimizationsEnabled(Args);
+--- llvm-toolchain-8-8~+rc1.orig/clang/lib/Driver/ToolChains/Clang.cpp
++++ llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/Clang.cpp
+@@ -535,7 +535,7 @@ static bool useFramePointerForTargetByDe
    }
  
--  if (Triple.isOSLinux() || Triple.getOS() == llvm::Triple::CloudABI || Triple.isOSHurd()) {
-+  if (Triple.isOSLinux() || Triple.getOS() == llvm::Triple::CloudABI || Triple.isOSHurd() || Triple.isOSkFreeBSD()) {
+   if (Triple.isOSLinux() || Triple.getOS() == llvm::Triple::CloudABI ||
+-      Triple.isOSHurd()) {
++      Triple.isOSHurd() || Triple.isOSkFreeBSD()) {
      switch (Triple.getArch()) {
      // Don't use a frame pointer on linux if optimizing for certain targets.
      case llvm::Triple::mips64:
-Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/Gnu.cpp
+Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/Gnu.cpp
 ===================================================================
---- llvm-toolchain-7-7.0.1.orig/clang/lib/Driver/ToolChains/Gnu.cpp
-+++ llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/Gnu.cpp
-@@ -499,6 +499,18 @@ void tools::gnutools::Linker::ConstructJ
+--- llvm-toolchain-8-8~+rc1.orig/clang/lib/Driver/ToolChains/Gnu.cpp
++++ llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/Gnu.cpp
+@@ -522,6 +522,18 @@ void tools::gnutools::Linker::ConstructJ
          CmdArgs.push_back("--wrap=pthread_create");
  
        CmdArgs.push_back("-lc");
@@ -68,32 +68,29 @@ Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/Gnu.cpp
  
        // Add IAMCU specific libs, if needed.
        if (IsIAMCU)
-@@ -1836,7 +1848,8 @@ void Generic_GCC::GCCInstallationDetecto
+@@ -1898,7 +1910,8 @@ void Generic_GCC::GCCInstallationDetecto
        "x86_64-redhat-linux",    "x86_64-suse-linux",
        "x86_64-manbo-linux-gnu", "x86_64-linux-gnu",
        "x86_64-slackware-linux", "x86_64-unknown-linux",
--      "x86_64-amazon-linux"};
-+      "x86_64-amazon-linux",    "x86_64-kfreebsd-gnu",
-+      "x86_64-pc-kfreebsd-gnu"};
-   static const char *const X32LibDirs[] = {"/libx32", "/lib"};
-   static const char *const X32Triples[] = {
-       "x86_64-linux-gnux32",    "x86_64-unknown-linux-gnux32",
-@@ -1847,8 +1860,9 @@ void Generic_GCC::GCCInstallationDetecto
-       "i386-linux-gnu",       "i386-redhat-linux6E",   "i686-redhat-linux",
+-      "x86_64-amazon-linux",    "x86_64-linux-android"};
++      "x86_64-amazon-linux",    "x86_64-linux-android",
++      "x86_64-kfreebsd-gnu",    "x86_64-pc-kfreebsd-gnu"};
+   static const char *const X32LibDirs[] = {"/libx32"};
+   static const char *const X86LibDirs[] = {"/lib32", "/lib"};
+   static const char *const X86Triples[] = {
+@@ -1907,6 +1920,8 @@ void Generic_GCC::GCCInstallationDetecto
        "i586-redhat-linux",    "i386-redhat-linux",     "i586-suse-linux",
        "i486-slackware-linux", "i686-montavista-linux", "i586-linux-gnu",
--      "i386-gnu",             "i486-gnu",              "i586-gnu",
--      "i686-gnu"};
-+      "i686-kfreebsd-gnu",    "i686-pc-kfreebsd-gnu",  "i486-kfreebsd-gnu",
-+      "i386-kfreebsd-gnu",    "i386-gnu",              "i486-gnu",
-+      "i586-gnu",             "i686-gnu"};
+       "i686-linux-android",   "i386-gnu",              "i486-gnu",
++      "i686-kfreebsd-gnu",   "i686-pc-kfreebsd-gnu",  "i486-kfreebsd-gnu",
++      "i386-kfreebsd-gnu",
+       "i586-gnu",             "i686-gnu"};
  
    static const char *const MIPSLibDirs[] = {"/lib"};
-   static const char *const MIPSTriples[] = {"mips-linux-gnu", "mips-mti-linux",
-Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/KFreeBSD.cpp
+Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/KFreeBSD.cpp
 ===================================================================
 --- /dev/null
-+++ llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/KFreeBSD.cpp
++++ llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/KFreeBSD.cpp
 @@ -0,0 +1,459 @@
 +//===--- KFreeBSD.cpp - kFreeBSD ToolChain Implementations --------*- C++ -*-===//
 +//
@@ -554,10 +551,10 @@ Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/KFreeBSD.cpp
 +  return Res;
 +}
 +
-Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/KFreeBSD.h
+Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/KFreeBSD.h
 ===================================================================
 --- /dev/null
-+++ llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/KFreeBSD.h
++++ llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/KFreeBSD.h
 @@ -0,0 +1,54 @@
 +//===--- KFreeBSD.h - kFreeBSD ToolChain Implementations ----------*- C++ -*-===//
 +//
