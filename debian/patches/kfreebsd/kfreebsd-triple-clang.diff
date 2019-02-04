@@ -1,7 +1,7 @@
-Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/CMakeLists.txt
+Index: llvm-toolchain-snapshot_9~svn353038/clang/lib/Driver/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/clang/lib/Driver/CMakeLists.txt
-+++ llvm-toolchain-8-8~+rc1/clang/lib/Driver/CMakeLists.txt
+--- llvm-toolchain-snapshot_9~svn353038.orig/clang/lib/Driver/CMakeLists.txt
++++ llvm-toolchain-snapshot_9~svn353038/clang/lib/Driver/CMakeLists.txt
 @@ -49,6 +49,7 @@ add_clang_library(clangDriver
    ToolChains/HIP.cpp
    ToolChains/Hexagon.cpp
@@ -10,11 +10,11 @@ Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/CMakeLists.txt
    ToolChains/Linux.cpp
    ToolChains/MipsLinux.cpp
    ToolChains/MinGW.cpp
-Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/Driver.cpp
+Index: llvm-toolchain-snapshot_9~svn353038/clang/lib/Driver/Driver.cpp
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/clang/lib/Driver/Driver.cpp
-+++ llvm-toolchain-8-8~+rc1/clang/lib/Driver/Driver.cpp
-@@ -27,6 +27,7 @@
+--- llvm-toolchain-snapshot_9~svn353038.orig/clang/lib/Driver/Driver.cpp
++++ llvm-toolchain-snapshot_9~svn353038/clang/lib/Driver/Driver.cpp
+@@ -26,6 +26,7 @@
  #include "ToolChains/Haiku.h"
  #include "ToolChains/Hexagon.h"
  #include "ToolChains/Hurd.h"
@@ -22,7 +22,7 @@ Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/Driver.cpp
  #include "ToolChains/Lanai.h"
  #include "ToolChains/Linux.h"
  #include "ToolChains/MSP430.h"
-@@ -4546,6 +4547,9 @@ const ToolChain &Driver::getToolChain(co
+@@ -4562,6 +4563,9 @@ const ToolChain &Driver::getToolChain(co
      case llvm::Triple::FreeBSD:
        TC = llvm::make_unique<toolchains::FreeBSD>(*this, Target, Args);
        break;
@@ -32,11 +32,11 @@ Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/Driver.cpp
      case llvm::Triple::Minix:
        TC = llvm::make_unique<toolchains::Minix>(*this, Target, Args);
        break;
-Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/Clang.cpp
+Index: llvm-toolchain-snapshot_9~svn353038/clang/lib/Driver/ToolChains/Clang.cpp
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/clang/lib/Driver/ToolChains/Clang.cpp
-+++ llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/Clang.cpp
-@@ -535,7 +535,7 @@ static bool useFramePointerForTargetByDe
+--- llvm-toolchain-snapshot_9~svn353038.orig/clang/lib/Driver/ToolChains/Clang.cpp
++++ llvm-toolchain-snapshot_9~svn353038/clang/lib/Driver/ToolChains/Clang.cpp
+@@ -534,7 +534,7 @@ static bool useFramePointerForTargetByDe
    }
  
    if (Triple.isOSLinux() || Triple.getOS() == llvm::Triple::CloudABI ||
@@ -45,11 +45,11 @@ Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/Clang.cpp
      switch (Triple.getArch()) {
      // Don't use a frame pointer on linux if optimizing for certain targets.
      case llvm::Triple::mips64:
-Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/Gnu.cpp
+Index: llvm-toolchain-snapshot_9~svn353038/clang/lib/Driver/ToolChains/Gnu.cpp
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/clang/lib/Driver/ToolChains/Gnu.cpp
-+++ llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/Gnu.cpp
-@@ -522,6 +522,18 @@ void tools::gnutools::Linker::ConstructJ
+--- llvm-toolchain-snapshot_9~svn353038.orig/clang/lib/Driver/ToolChains/Gnu.cpp
++++ llvm-toolchain-snapshot_9~svn353038/clang/lib/Driver/ToolChains/Gnu.cpp
+@@ -521,6 +521,18 @@ void tools::gnutools::Linker::ConstructJ
          CmdArgs.push_back("--wrap=pthread_create");
  
        CmdArgs.push_back("-lc");
@@ -68,7 +68,7 @@ Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/Gnu.cpp
  
        // Add IAMCU specific libs, if needed.
        if (IsIAMCU)
-@@ -1898,7 +1910,8 @@ void Generic_GCC::GCCInstallationDetecto
+@@ -1897,7 +1909,8 @@ void Generic_GCC::GCCInstallationDetecto
        "x86_64-redhat-linux",    "x86_64-suse-linux",
        "x86_64-manbo-linux-gnu", "x86_64-linux-gnu",
        "x86_64-slackware-linux", "x86_64-unknown-linux",
@@ -78,7 +78,7 @@ Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/Gnu.cpp
    static const char *const X32LibDirs[] = {"/libx32"};
    static const char *const X86LibDirs[] = {"/lib32", "/lib"};
    static const char *const X86Triples[] = {
-@@ -1907,6 +1920,8 @@ void Generic_GCC::GCCInstallationDetecto
+@@ -1906,6 +1919,8 @@ void Generic_GCC::GCCInstallationDetecto
        "i586-redhat-linux",    "i386-redhat-linux",     "i586-suse-linux",
        "i486-slackware-linux", "i686-montavista-linux", "i586-linux-gnu",
        "i686-linux-android",   "i386-gnu",              "i486-gnu",
@@ -87,10 +87,10 @@ Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/Gnu.cpp
        "i586-gnu",             "i686-gnu"};
  
    static const char *const MIPSLibDirs[] = {"/lib"};
-Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/KFreeBSD.cpp
+Index: llvm-toolchain-snapshot_9~svn353038/clang/lib/Driver/ToolChains/KFreeBSD.cpp
 ===================================================================
 --- /dev/null
-+++ llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/KFreeBSD.cpp
++++ llvm-toolchain-snapshot_9~svn353038/clang/lib/Driver/ToolChains/KFreeBSD.cpp
 @@ -0,0 +1,459 @@
 +//===--- KFreeBSD.cpp - kFreeBSD ToolChain Implementations --------*- C++ -*-===//
 +//
@@ -551,10 +551,10 @@ Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/KFreeBSD.cpp
 +  return Res;
 +}
 +
-Index: llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/KFreeBSD.h
+Index: llvm-toolchain-snapshot_9~svn353038/clang/lib/Driver/ToolChains/KFreeBSD.h
 ===================================================================
 --- /dev/null
-+++ llvm-toolchain-8-8~+rc1/clang/lib/Driver/ToolChains/KFreeBSD.h
++++ llvm-toolchain-snapshot_9~svn353038/clang/lib/Driver/ToolChains/KFreeBSD.h
 @@ -0,0 +1,54 @@
 +//===--- KFreeBSD.h - kFreeBSD ToolChain Implementations ----------*- C++ -*-===//
 +//

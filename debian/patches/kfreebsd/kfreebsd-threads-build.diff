@@ -1,8 +1,8 @@
-Index: llvm-toolchain-7-7.0.1/libcxx/src/thread.cpp
+Index: llvm-toolchain-snapshot_9~svn353038/libcxx/src/thread.cpp
 ===================================================================
---- llvm-toolchain-7-7.0.1.orig/libcxx/src/thread.cpp
-+++ llvm-toolchain-7-7.0.1/libcxx/src/thread.cpp
-@@ -19,7 +19,7 @@
+--- llvm-toolchain-snapshot_9~svn353038.orig/libcxx/src/thread.cpp
++++ llvm-toolchain-snapshot_9~svn353038/libcxx/src/thread.cpp
+@@ -18,7 +18,7 @@
  
  #if defined(__unix__) || (defined(__APPLE__) && defined(__MACH__))
  # include <sys/param.h>

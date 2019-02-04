@@ -1,8 +1,8 @@
-Index: llvm-toolchain-7-7.0.1/unittests/ADT/TripleTest.cpp
+Index: llvm-toolchain-snapshot_9~svn353038/unittests/ADT/TripleTest.cpp
 ===================================================================
---- llvm-toolchain-7-7.0.1.orig/unittests/ADT/TripleTest.cpp
-+++ llvm-toolchain-7-7.0.1/unittests/ADT/TripleTest.cpp
-@@ -99,6 +99,18 @@ TEST(TripleTest, ParsedIDs) {
+--- llvm-toolchain-snapshot_9~svn353038.orig/unittests/ADT/TripleTest.cpp
++++ llvm-toolchain-snapshot_9~svn353038/unittests/ADT/TripleTest.cpp
+@@ -98,6 +98,18 @@ TEST(TripleTest, ParsedIDs) {
    EXPECT_EQ(Triple::Hurd, T.getOS());
    EXPECT_EQ(Triple::GNU, T.getEnvironment());
  

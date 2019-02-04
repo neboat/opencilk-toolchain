@@ -1,8 +1,8 @@
-Index: llvm-toolchain-8-8~+rc1/lldb/source/Plugins/Process/FreeBSD/FreeBSDThread.cpp
+Index: llvm-toolchain-snapshot_9~svn353038/lldb/source/Plugins/Process/FreeBSD/FreeBSDThread.cpp
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/lldb/source/Plugins/Process/FreeBSD/FreeBSDThread.cpp
-+++ llvm-toolchain-8-8~+rc1/lldb/source/Plugins/Process/FreeBSD/FreeBSDThread.cpp
-@@ -9,7 +9,9 @@
+--- llvm-toolchain-snapshot_9~svn353038.orig/lldb/source/Plugins/Process/FreeBSD/FreeBSDThread.cpp
++++ llvm-toolchain-snapshot_9~svn353038/lldb/source/Plugins/Process/FreeBSD/FreeBSDThread.cpp
+@@ -8,7 +8,9 @@
  
  #include <errno.h>
  #include <pthread.h>
@@ -12,11 +12,11 @@ Index: llvm-toolchain-8-8~+rc1/lldb/source/Plugins/Process/FreeBSD/FreeBSDThread
  #include <stdlib.h>
  #include <sys/sysctl.h>
  #include <sys/types.h>
-Index: llvm-toolchain-8-8~+rc1/lldb/source/Plugins/Process/FreeBSD/ProcessFreeBSD.cpp
+Index: llvm-toolchain-snapshot_9~svn353038/lldb/source/Plugins/Process/FreeBSD/ProcessFreeBSD.cpp
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/lldb/source/Plugins/Process/FreeBSD/ProcessFreeBSD.cpp
-+++ llvm-toolchain-8-8~+rc1/lldb/source/Plugins/Process/FreeBSD/ProcessFreeBSD.cpp
-@@ -10,7 +10,9 @@
+--- llvm-toolchain-snapshot_9~svn353038.orig/lldb/source/Plugins/Process/FreeBSD/ProcessFreeBSD.cpp
++++ llvm-toolchain-snapshot_9~svn353038/lldb/source/Plugins/Process/FreeBSD/ProcessFreeBSD.cpp
+@@ -9,7 +9,9 @@
  
  #include <errno.h>
  #include <pthread.h>

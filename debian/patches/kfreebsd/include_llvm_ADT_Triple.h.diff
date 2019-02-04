@@ -1,8 +1,8 @@
-Index: llvm-toolchain-7-7.0.1/include/llvm/ADT/Triple.h
+Index: llvm-toolchain-snapshot_9~svn353038/include/llvm/ADT/Triple.h
 ===================================================================
---- llvm-toolchain-7-7.0.1.orig/include/llvm/ADT/Triple.h
-+++ llvm-toolchain-7-7.0.1/include/llvm/ADT/Triple.h
-@@ -158,7 +158,7 @@ public:
+--- llvm-toolchain-snapshot_9~svn353038.orig/include/llvm/ADT/Triple.h
++++ llvm-toolchain-snapshot_9~svn353038/include/llvm/ADT/Triple.h
+@@ -159,7 +159,7 @@ public:
      FreeBSD,
      Fuchsia,
      IOS,
@@ -11,7 +11,7 @@ Index: llvm-toolchain-7-7.0.1/include/llvm/ADT/Triple.h
      Linux,
      Lv2,        // PS3
      MacOSX,
-@@ -575,8 +575,8 @@ public:
+@@ -578,8 +578,8 @@ public:
    }
  
    /// Tests whether the OS is kFreeBSD.
@@ -22,7 +22,7 @@ Index: llvm-toolchain-7-7.0.1/include/llvm/ADT/Triple.h
    }
  
    /// Tests whether the OS is Hurd.
-@@ -586,7 +586,7 @@ public:
+@@ -594,7 +594,7 @@ public:
  
    /// Tests whether the OS uses glibc.
    bool isOSGlibc() const {
