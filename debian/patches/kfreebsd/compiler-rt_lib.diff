@@ -529,10 +529,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_syscal
  # define internal_syscall __syscall
  # else
  # define internal_syscall syscall
-Index: llvm-toolchain-8-8~+rc1/projects/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.cc
+Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.cc
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/projects/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.cc
-+++ llvm-toolchain-8-8~+rc1/projects/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.cc
+--- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.cc
++++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.cc
 @@ -110,9 +110,9 @@ typedef struct user_fpregs elf_fpregset_
  #include <glob.h>
  #include <obstack.h>
