@@ -111,3 +111,22 @@ D54677-hurd-path_max.diff
 D49754-powerpcspe-clang.diff
 D54409-powerpcspe-register-spilling.diff
 D54584-powerpcspe-double-parameter.diff
+
+# Rust
+D52340-rustc-debuginfo.diff
+
+# kfreebsd
+kfreebsd/clang_lib_Basic_Targets.diff
+kfreebsd/CMakeLists.txt.diff
+kfreebsd/compiler-rt_lib.diff
+kfreebsd/include_llvm_ADT_Triple.h.diff
+kfreebsd/kfreebsd-libcxx-threads-detection.diff
+kfreebsd/kfreebsd-openmp.diff
+kfreebsd/kfreebsd-threads-build.diff
+kfreebsd/kfreebsd-triple-clang.diff
+kfreebsd/kfreebsd-triple.diff
+kfreebsd/lib_Support.diff
+kfreebsd/lib_Target_X86.diff
+kfreebsd/lldb_source_Host_freebsd_Host.cpp.diff
+kfreebsd/lldb_source_Plugins_Process_FreeBSD.diff
+kfreebsd/tools_llvm-shlib_CMakeLists.txt.diff

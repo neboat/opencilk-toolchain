@@ -515,6 +515,13 @@ llvm-toolchain-snapshot (1:8~svn340819-1) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 28 Aug 2018 16:28:24 +0200
 
+llvm-toolchain-7 (1:7.0.1-6) unstable; urgency=medium
+
+  * Add support for kfreebsd (Closes: #921246)
+    Many thanks to Svante Signell for all patches
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Feb 2019 17:27:51 +0100
+
 llvm-toolchain-7 (1:7.0.1-5) unstable; urgency=medium
 
   * Add 'Rules-Requires-Root: no' in debian/control
