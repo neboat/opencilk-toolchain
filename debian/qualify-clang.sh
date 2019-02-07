@@ -383,9 +383,10 @@ echo 'int main() {
 ' > foo.c
 clang-$VERSION -g -o bar foo.c
 
-# ABI issue between gcc & clang
+# ABI issue between gcc & clang with clang 7
 # https://bugs.llvm.org/show_bug.cgi?id=39427
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=913271
+if test $VERSION -eq 7; then
 echo '
 #include <llvm/ADT/ArrayRef.h>
 #include <llvm/ADT/Optional.h>
@@ -427,6 +428,7 @@ if test -f /usr/bin/g++; then
     ./foo
 fi
 rm part1.o part2.o
+fi
 
 if test ! -f /usr/lib/llvm-$VERSION/lib/libomp.so; then
     echo "Install libomp-$VERSION-dev";
