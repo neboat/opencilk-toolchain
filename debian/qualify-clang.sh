@@ -366,6 +366,33 @@ int main(int argc, char **argv)
 clang-$VERSION -fsanitize=address foo.c -o foo -lc
 ./foo &> /dev/null || true
 
+
+echo '
+class a {
+public:
+  ~a();
+};
+template <typename, typename> using b = a;
+struct f {
+  template <typename d> using e = b<a, d>;
+};
+struct g {
+  typedef f::e<int> c;
+};
+class h {
+  struct : g::c {};
+};
+struct m {
+  h i;
+};
+template <typename> void __attribute__((noreturn)) j();
+void k() {
+  m l;
+  j<int>();
+}' > foo.cpp
+clang++-$VERSION -std=c++14 -O3 -fsanitize=address -fsanitize=undefined -c foo.cpp -fno-crash-diagnostics
+
+
 # fails on 32 bit, seems a real BUG in the package, using 64bit static libs?
 LANG=C clang-$VERSION -fsanitize=fuzzer test_fuzzer.cc &> foo.log || true
 if ! grep "No such file or directory" foo.log; then
