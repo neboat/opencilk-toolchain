@@ -1,7 +1,7 @@
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_linux.cc
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_linux.cc
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/sanitizer_common/sanitizer_linux.cc
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_linux.cc
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/sanitizer_common/sanitizer_linux.cc
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_linux.cc
 @@ -84,9 +84,14 @@
  extern "C" {
  // <sys/umtx.h> must be included after <errno.h> and <sys/types.h> on
@@ -44,10 +44,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_linux.
    char *base = (char *)map->l_addr;
    Elf_Ehdr *ehdr = (Elf_Ehdr *)base;
    char *phdrs = base + ehdr->e_phoff;
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_linux_libcdep.cc
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_linux_libcdep.cc
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/sanitizer_common/sanitizer_linux_libcdep.cc
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_linux_libcdep.cc
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/sanitizer_common/sanitizer_linux_libcdep.cc
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_linux_libcdep.cc
 @@ -36,10 +36,12 @@
  #include <syslog.h>
  
@@ -75,10 +75,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_linux_
  #define Elf_Phdr XElf32_Phdr
  #define dl_phdr_info xdl_phdr_info
  #define dl_iterate_phdr(c, b) xdl_iterate_phdr((c), (b))
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_platform.h
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_platform.h
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/sanitizer_common/sanitizer_platform.h
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_platform.h
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/sanitizer_common/sanitizer_platform.h
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_platform.h
 @@ -16,7 +16,7 @@
  #if !defined(__linux__) && !defined(__FreeBSD__) && !defined(__NetBSD__) && \
    !defined(__OpenBSD__) && !defined(__APPLE__) && !defined(_WIN32) && \
@@ -118,192 +118,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_platfo
  
  #if __LP64__ || defined(_WIN64)
  #  define SANITIZER_WORDSIZE 64
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.cc
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/asan/asan_linux.cc
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.cc
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.cc
-@@ -50,7 +50,7 @@
- #include <utmp.h>
- #endif
- 
--#if !SANITIZER_IOS
-+#if !SANITIZER_IOS && !SANITIZER_KFREEBSD
- #include <net/route.h>
- #endif
- 
-@@ -109,7 +109,11 @@ typedef struct user_fpregs elf_fpregset_
- #if SANITIZER_LINUX && !SANITIZER_ANDROID
- #include <glob.h>
- #include <obstack.h>
--#include <mqueue.h>
-+#if SANITIZER_KFREEBSD
-+# include <sys/mqueue.h>
-+#else
-+# include <mqueue.h>
-+#endif
- #include <net/if_ppp.h>
- #include <netax25/ax25.h>
- #include <netipx/ipx.h>
-@@ -146,6 +150,12 @@ typedef struct user_fpregs elf_fpregset_
- #include <linux/if_ppp.h>
- #endif
- 
-+#if SANITIZER_KFREEBSD
-+# include <sys/link_elf.h>
-+#else
-+# include <link.h>
-+#endif
-+
- #if SANITIZER_LINUX
- #include <link.h>
- #include <sys/vfs.h>
-@@ -256,7 +266,7 @@ namespace __sanitizer {
- #endif
- 
- 
--#if SANITIZER_LINUX && !SANITIZER_ANDROID
-+#if SANITIZER_LINUX && !SANITIZER_ANDROID  && !SANITIZER_KFREEBSD
-   unsigned struct_shminfo_sz = sizeof(struct shminfo);
-   unsigned struct_shm_info_sz = sizeof(struct shm_info);
-   int shmctl_ipc_stat = (int)IPC_STAT;
-@@ -286,7 +296,7 @@ namespace __sanitizer {
-       return 0;
-   }
- 
--#if SANITIZER_LINUX
-+#if SANITIZER_LINUX || SANITIZER_KFREEBSD
- unsigned struct_ElfW_Phdr_sz = sizeof(ElfW(Phdr));
- #elif SANITIZER_FREEBSD
- unsigned struct_ElfW_Phdr_sz = sizeof(Elf_Phdr);
-@@ -466,7 +476,7 @@ unsigned struct_ElfW_Phdr_sz = sizeof(El
-   unsigned struct_ppp_stats_sz = sizeof(struct ppp_stats);
- #endif // (SANITIZER_LINUX || SANITIZER_FREEBSD) && !SANITIZER_ANDROID
- 
--#if !SANITIZER_ANDROID && !SANITIZER_MAC
-+#if !SANITIZER_ANDROID && !SANITIZER_MAC && !SANITIZER_KFREEBSD
-   unsigned struct_sioc_sg_req_sz = sizeof(struct sioc_sg_req);
-   unsigned struct_sioc_vif_req_sz = sizeof(struct sioc_vif_req);
- #endif
-@@ -519,7 +529,7 @@ unsigned struct_ElfW_Phdr_sz = sizeof(El
-   unsigned IOCTL_TIOCSPGRP = TIOCSPGRP;
-   unsigned IOCTL_TIOCSTI = TIOCSTI;
-   unsigned IOCTL_TIOCSWINSZ = TIOCSWINSZ;
--#if SANITIZER_LINUX && !SANITIZER_ANDROID
-+#if SANITIZER_LINUX && !SANITIZER_ANDROID && !SANITIZER_KFREEBSD
-   unsigned IOCTL_SIOCGETSGCNT = SIOCGETSGCNT;
-   unsigned IOCTL_SIOCGETVIFCNT = SIOCGETVIFCNT;
- #endif
-@@ -958,7 +968,7 @@ CHECK_SIZE_AND_OFFSET(dl_phdr_info, dlpi
- CHECK_SIZE_AND_OFFSET(dl_phdr_info, dlpi_phnum);
- #endif // SANITIZER_LINUX || SANITIZER_FREEBSD
- 
--#if (SANITIZER_LINUX || SANITIZER_FREEBSD) && !SANITIZER_ANDROID
-+#if (SANITIZER_LINUX || SANITIZER_FREEBSD) && !SANITIZER_ANDROID && !SANITIZER_KFREEBSD
- CHECK_TYPE_SIZE(glob_t);
- CHECK_SIZE_AND_OFFSET(glob_t, gl_pathc);
- CHECK_SIZE_AND_OFFSET(glob_t, gl_pathv);
-@@ -978,8 +988,10 @@ CHECK_SIZE_AND_OFFSET(addrinfo, ai_sockt
- CHECK_SIZE_AND_OFFSET(addrinfo, ai_protocol);
- CHECK_SIZE_AND_OFFSET(addrinfo, ai_protocol);
- CHECK_SIZE_AND_OFFSET(addrinfo, ai_addrlen);
-+#if !SANITIZER_KFREEBSD
- CHECK_SIZE_AND_OFFSET(addrinfo, ai_canonname);
- CHECK_SIZE_AND_OFFSET(addrinfo, ai_addr);
-+#endif
- 
- CHECK_TYPE_SIZE(hostent);
- CHECK_SIZE_AND_OFFSET(hostent, h_name);
-@@ -1001,7 +1013,9 @@ CHECK_SIZE_AND_OFFSET(msghdr, msg_contro
- CHECK_SIZE_AND_OFFSET(msghdr, msg_controllen);
- CHECK_SIZE_AND_OFFSET(msghdr, msg_flags);
- 
-+#if !SANITIZER_KFREEBSD
- CHECK_TYPE_SIZE(cmsghdr);
-+#endif
- CHECK_SIZE_AND_OFFSET(cmsghdr, cmsg_len);
- CHECK_SIZE_AND_OFFSET(cmsghdr, cmsg_level);
- CHECK_SIZE_AND_OFFSET(cmsghdr, cmsg_type);
-@@ -1043,7 +1057,9 @@ CHECK_SIZE_AND_OFFSET(pollfd, fd);
- CHECK_SIZE_AND_OFFSET(pollfd, events);
- CHECK_SIZE_AND_OFFSET(pollfd, revents);
- 
-+#if !SANITIZER_KFREEBSD
- CHECK_TYPE_SIZE(nfds_t);
-+#endif
- 
- CHECK_TYPE_SIZE(sigset_t);
- 
-@@ -1083,7 +1099,9 @@ CHECK_TYPE_SIZE(__kernel_fd_set);
- #endif
- 
- #if !SANITIZER_ANDROID
-+# if !SANITIZER_KFREEBSD
- CHECK_TYPE_SIZE(wordexp_t);
-+# endif
- CHECK_SIZE_AND_OFFSET(wordexp_t, we_wordc);
- CHECK_SIZE_AND_OFFSET(wordexp_t, we_wordv);
- CHECK_SIZE_AND_OFFSET(wordexp_t, we_offs);
-@@ -1116,13 +1134,14 @@ CHECK_TYPE_SIZE(ether_addr);
- 
- #if (SANITIZER_LINUX || SANITIZER_FREEBSD) && !SANITIZER_ANDROID
- CHECK_TYPE_SIZE(ipc_perm);
--# if SANITIZER_FREEBSD
-+#if SANITIZER_FREEBSD && !SANITIZER_KFREEBSD
- CHECK_SIZE_AND_OFFSET(ipc_perm, key);
- CHECK_SIZE_AND_OFFSET(ipc_perm, seq);
--# else
-+#endif
-+#if !SANITIZER_FREEBSD && !SANITIZER_KFREEBSD
- CHECK_SIZE_AND_OFFSET(ipc_perm, __key);
- CHECK_SIZE_AND_OFFSET(ipc_perm, __seq);
--# endif
-+#endif
- CHECK_SIZE_AND_OFFSET(ipc_perm, uid);
- CHECK_SIZE_AND_OFFSET(ipc_perm, gid);
- CHECK_SIZE_AND_OFFSET(ipc_perm, cuid);
-@@ -1161,7 +1180,7 @@ CHECK_SIZE_AND_OFFSET(ifaddrs, ifa_netma
- #ifdef ifa_dstaddr
- #undef ifa_dstaddr
- #endif
--# if SANITIZER_FREEBSD
-+# if SANITIZER_FREEBSD && !SANITIZER_KFREEBSD
- CHECK_SIZE_AND_OFFSET(ifaddrs, ifa_dstaddr);
- # else
- COMPILER_CHECK(sizeof(((__sanitizer_ifaddrs *)nullptr)->ifa_dstaddr) ==
-@@ -1187,15 +1206,19 @@ CHECK_SIZE_AND_OFFSET(timeb, timezone);
- CHECK_SIZE_AND_OFFSET(timeb, dstflag);
- #endif
- 
-+#if !SANITIZER_KFREEBSD
- CHECK_TYPE_SIZE(passwd);
-+#endif
- CHECK_SIZE_AND_OFFSET(passwd, pw_name);
- CHECK_SIZE_AND_OFFSET(passwd, pw_passwd);
- CHECK_SIZE_AND_OFFSET(passwd, pw_uid);
- CHECK_SIZE_AND_OFFSET(passwd, pw_gid);
-+#if !SANITIZER_KFREEBSD
- CHECK_SIZE_AND_OFFSET(passwd, pw_dir);
- CHECK_SIZE_AND_OFFSET(passwd, pw_shell);
-+#endif
- 
--#if !SANITIZER_ANDROID
-+#if !SANITIZER_ANDROID && !SANITIZER_KFREEBSD
- CHECK_SIZE_AND_OFFSET(passwd, pw_gecos);
- #endif
- 
-@@ -1261,7 +1284,7 @@ CHECK_SIZE_AND_OFFSET(cookie_io_function
- CHECK_SIZE_AND_OFFSET(cookie_io_functions_t, close);
- #endif
- 
--#if SANITIZER_LINUX || SANITIZER_FREEBSD
-+#if SANITIZER_LINUX || (SANITIZER_FREEBSD && !SANITIZER_KFREEBSD)
- CHECK_TYPE_SIZE(sem_t);
- #endif
- 
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/asan/asan_linux.cc
-===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/asan/asan_linux.cc
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/asan/asan_linux.cc
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/asan/asan_linux.cc
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/asan/asan_linux.cc
 @@ -38,7 +38,7 @@
  #include <unistd.h>
  #include <unwind.h>
@@ -334,10 +152,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/asan/asan_linux.cc
  #define ucontext_t xucontext_t
  #endif
  
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/ubsan/ubsan_platform.h
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/ubsan/ubsan_platform.h
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/ubsan/ubsan_platform.h
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/ubsan/ubsan_platform.h
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/ubsan/ubsan_platform.h
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/ubsan/ubsan_platform.h
 @@ -15,7 +15,7 @@
  
  // Other platforms should be easy to add, and probably work as-is.
@@ -347,10 +165,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/ubsan/ubsan_platform.h
      (defined(__sun__) && defined(__svr4__)) || \
      defined(_WIN32) || defined(__Fuchsia__) || defined(__rtems__)
  # define CAN_SANITIZE_UB 1
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/tsan/rtl/tsan_rtl_amd64.S
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/tsan/rtl/tsan_rtl_amd64.S
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/tsan/rtl/tsan_rtl_amd64.S
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/tsan/rtl/tsan_rtl_amd64.S
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/tsan/rtl/tsan_rtl_amd64.S
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/tsan/rtl/tsan_rtl_amd64.S
 @@ -197,7 +197,7 @@ ASM_SYMBOL_INTERCEPTOR(setjmp):
    lea 16(%rsp), %rdi
    mov %rdi, %rsi
@@ -387,10 +205,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/tsan/rtl/tsan_rtl_amd64.S
  /* We do not need executable stack.  */
  /* This note is not needed on NetBSD. */
  .section        .note.GNU-stack,"",@progbits
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerDefs.h
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/fuzzer/FuzzerDefs.h
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/fuzzer/FuzzerDefs.h
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerDefs.h
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/fuzzer/FuzzerDefs.h
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/fuzzer/FuzzerDefs.h
 @@ -28,6 +28,7 @@
  #define LIBFUZZER_LINUX 1
  #define LIBFUZZER_NETBSD 0
@@ -424,10 +242,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerDefs.h
  
  #ifdef __x86_64
  #  if __has_attribute(target)
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerUtilPosix.cpp
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/fuzzer/FuzzerUtilPosix.cpp
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/fuzzer/FuzzerUtilPosix.cpp
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerUtilPosix.cpp
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/fuzzer/FuzzerUtilPosix.cpp
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/fuzzer/FuzzerUtilPosix.cpp
 @@ -119,7 +119,7 @@ size_t GetPeakRSSMb() {
    if (getrusage(RUSAGE_SELF, &usage))
      return 0;
@@ -437,10 +255,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerUtilPosix.cpp
      // ru_maxrss is in KiB
      return usage.ru_maxrss >> 10;
    } else if (LIBFUZZER_APPLE) {
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerExtraCounters.cpp
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/fuzzer/FuzzerExtraCounters.cpp
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/fuzzer/FuzzerExtraCounters.cpp
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerExtraCounters.cpp
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/fuzzer/FuzzerExtraCounters.cpp
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/fuzzer/FuzzerExtraCounters.cpp
 @@ -12,7 +12,7 @@
  #include "FuzzerDefs.h"
  
@@ -450,10 +268,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerExtraCounters.cpp
  __attribute__((weak)) extern uint8_t __start___libfuzzer_extra_counters;
  __attribute__((weak)) extern uint8_t __stop___libfuzzer_extra_counters;
  
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerExtFunctionsWeak.cpp
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/fuzzer/FuzzerExtFunctionsWeak.cpp
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/fuzzer/FuzzerExtFunctionsWeak.cpp
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerExtFunctionsWeak.cpp
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/fuzzer/FuzzerExtFunctionsWeak.cpp
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/fuzzer/FuzzerExtFunctionsWeak.cpp
 @@ -14,7 +14,7 @@
  //===----------------------------------------------------------------------===//
  #include "FuzzerDefs.h"
@@ -463,10 +281,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerExtFunctionsWeak.cpp
  
  #include "FuzzerExtFunctions.h"
  #include "FuzzerIO.h"
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerUtilLinux.cpp
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/fuzzer/FuzzerUtilLinux.cpp
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/fuzzer/FuzzerUtilLinux.cpp
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerUtilLinux.cpp
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/fuzzer/FuzzerUtilLinux.cpp
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/fuzzer/FuzzerUtilLinux.cpp
 @@ -10,7 +10,7 @@
  //===----------------------------------------------------------------------===//
  #include "FuzzerDefs.h"
@@ -476,10 +294,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/fuzzer/FuzzerUtilLinux.cpp
  #include "FuzzerCommand.h"
  
  #include <stdlib.h>
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_freebsd.h
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_freebsd.h
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/sanitizer_common/sanitizer_freebsd.h
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_freebsd.h
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/sanitizer_common/sanitizer_freebsd.h
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_freebsd.h
 @@ -21,7 +21,7 @@
  // 32-bit mode.
  #if SANITIZER_FREEBSD && (SANITIZER_WORDSIZE == 32)
@@ -489,10 +307,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_freebs
  #  include <link.h>
  #  include <sys/param.h>
  #  include <ucontext.h>
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_procmaps_bsd.cc
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_procmaps_bsd.cc
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/sanitizer_common/sanitizer_procmaps_bsd.cc
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_procmaps_bsd.cc
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/sanitizer_common/sanitizer_procmaps_bsd.cc
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_procmaps_bsd.cc
 @@ -38,7 +38,7 @@
  // Fix 'kinfo_vmentry' definition on FreeBSD prior v9.2 in 32-bit mode.
  #if SANITIZER_FREEBSD && (SANITIZER_WORDSIZE == 32)
@@ -502,10 +320,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_procma
  #define kinfo_vmentry xkinfo_vmentry
  #endif
  #endif
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.h
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.h
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.h
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.h
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.h
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.h
 @@ -20,7 +20,9 @@
  #include "sanitizer_internal_defs.h"
  #include "sanitizer_platform.h"
@@ -516,10 +334,10 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_platfo
  
  #ifndef __GLIBC_PREREQ
  #define __GLIBC_PREREQ(x, y) 0
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_syscall_generic.inc
+Index: llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_syscall_generic.inc
 ===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/sanitizer_common/sanitizer_syscall_generic.inc
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_syscall_generic.inc
+--- llvm-toolchain-8_8~+rc2.orig/compiler-rt/lib/sanitizer_common/sanitizer_syscall_generic.inc
++++ llvm-toolchain-8_8~+rc2/compiler-rt/lib/sanitizer_common/sanitizer_syscall_generic.inc
 @@ -20,7 +20,7 @@
  # define SYSCALL(name) __NR_ ## name
  #endif
@@ -529,31 +347,3 @@ Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_syscal
  # define internal_syscall __syscall
  # else
  # define internal_syscall syscall
-Index: llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.cc
-===================================================================
---- llvm-toolchain-8-8~+rc1.orig/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.cc
-+++ llvm-toolchain-8-8~+rc1/compiler-rt/lib/sanitizer_common/sanitizer_platform_limits_posix.cc
-@@ -110,9 +110,9 @@ typedef struct user_fpregs elf_fpregset_
- #include <glob.h>
- #include <obstack.h>
- #if SANITIZER_KFREEBSD
--# include <mqueue.h>
--#else
- # include <sys/mqueue.h>
-+#else
-+# include <mqueue.h>
- #endif
- #include <net/if_ppp.h>
- #include <netax25/ax25.h>
-@@ -151,9 +151,9 @@ typedef struct user_fpregs elf_fpregset_
- #endif
- 
- #if SANITIZER_KFREEBSD
--# include <link.h>
--#else
- # include <sys/link_elf.h>
-+#else
-+# include <link.h>
- #endif
- 
- #if SANITIZER_LINUX
