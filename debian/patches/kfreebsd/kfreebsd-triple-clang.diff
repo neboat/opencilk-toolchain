@@ -49,7 +49,25 @@ Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/Gnu.cpp
 ===================================================================
 --- llvm-toolchain-7-7.0.1.orig/clang/lib/Driver/ToolChains/Gnu.cpp
 +++ llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/Gnu.cpp
-@@ -499,6 +499,18 @@ void tools::gnutools::Linker::ConstructJ
+@@ -234,6 +234,8 @@ static const char *getLDMOption(const ll
+   case llvm::Triple::x86:
+     if (T.isOSIAMCU())
+       return "elf_iamcu";
++    if (T.isOSkFreeBSD())
++      return "elf_i386_fbsd";
+     return "elf_i386";
+   case llvm::Triple::aarch64:
+     return "aarch64linux";
+@@ -277,6 +279,8 @@ static const char *getLDMOption(const ll
+   case llvm::Triple::x86_64:
+     if (T.getEnvironment() == llvm::Triple::GNUX32)
+       return "elf32_x86_64";
++    if (T.isOSkFreeBSD())
++      return "elf_x86_64_fbsd";
+     return "elf_x86_64";
+   default:
+     return nullptr;
+@@ -499,6 +503,18 @@ void tools::gnutools::Linker::ConstructJ
          CmdArgs.push_back("--wrap=pthread_create");
  
        CmdArgs.push_back("-lc");
@@ -68,7 +86,7 @@ Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/Gnu.cpp
  
        // Add IAMCU specific libs, if needed.
        if (IsIAMCU)
-@@ -1836,7 +1848,8 @@ void Generic_GCC::GCCInstallationDetecto
+@@ -1836,7 +1852,8 @@ void Generic_GCC::GCCInstallationDetecto
        "x86_64-redhat-linux",    "x86_64-suse-linux",
        "x86_64-manbo-linux-gnu", "x86_64-linux-gnu",
        "x86_64-slackware-linux", "x86_64-unknown-linux",
@@ -78,7 +96,7 @@ Index: llvm-toolchain-7-7.0.1/clang/lib/Driver/ToolChains/Gnu.cpp
    static const char *const X32LibDirs[] = {"/libx32", "/lib"};
    static const char *const X32Triples[] = {
        "x86_64-linux-gnux32",    "x86_64-unknown-linux-gnux32",
-@@ -1847,8 +1860,9 @@ void Generic_GCC::GCCInstallationDetecto
+@@ -1847,8 +1864,9 @@ void Generic_GCC::GCCInstallationDetecto
        "i386-linux-gnu",       "i386-redhat-linux6E",   "i686-redhat-linux",
        "i586-redhat-linux",    "i386-redhat-linux",     "i586-suse-linux",
        "i486-slackware-linux", "i686-montavista-linux", "i586-linux-gnu",
