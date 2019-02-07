@@ -2,10 +2,10 @@ llvm-toolchain-7 (1:7.0.1-7) unstable; urgency=medium
 
   * kfreebsd/kfreebsd-triple-clang.diff: update of the patch to fix
     the kfreebsd FTBFS  (Closes: #921246)
-    Many thanks to Svante Signell for the update
+  * Enable ld gold for kfreebsd-amd64 and kfreebsd-i386
+    Many thanks to Svante Signell for the two updates
 
-
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 07 Feb 2019 17:17:40 +0100
 
 llvm-toolchain-7 (1:7.0.1-6) unstable; urgency=medium
 
