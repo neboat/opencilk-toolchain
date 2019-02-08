@@ -548,7 +548,7 @@ Index: llvm-toolchain-8_8~+rc2/clang/lib/Driver/ToolChains/KFreeBSD.cpp
 +}
 +
 +/* FIXME:
-+/home/srs/DEBs/llvm-toolchain-7/llvm-toolchain-7-7.0.1~+rc2-7/tools/clang/lib/Driver/ToolChains/KFreeBSD.cpp:431:15: error: no declaration matches ‘clang::SanitizerMask clang::driver::toolchains::kFreeBSD::getSupportedSanitizers() const’
++/home/srs/DEBs/llvm-toolchain-7/llvm-toolchain-7-7.0.1~+rc2-7/clang/lib/Driver/ToolChains/KFreeBSD.cpp:431:15: error: no declaration matches ‘clang::SanitizerMask clang::driver::toolchains::kFreeBSD::getSupportedSanitizers() const’
 + SanitizerMask kFreeBSD::getSupportedSanitizers() const {
 +*/
 +SanitizerMask kFreeBSD::getSupportedSanitizers() const {
