@@ -123,7 +123,7 @@ Index: llvm-toolchain-8_8~+rc2/clang/lib/Driver/ToolChains/KFreeBSD.cpp
 +
 +#include "KFreeBSD.h"
 +#include "CommonArgs.h"
-+#include "clang/Basic/VirtualFileSystem.h"
++#include "llvm/Support/VirtualFileSystem.h"
 +#include "clang/Config/config.h"
 +#include "clang/Driver/Driver.h"
 +#include "clang/Driver/Options.h"
