@@ -252,8 +252,14 @@ fi
 clang-$VERSION -fuse-ld=lld -O2 foo.c main.c -o foo
 ./foo > /dev/null
 
-clang-$VERSION -fuse-ld=lld -flto -O2 foo.c main.c -o foo
-./foo > /dev/null
+if ls -al1 /usr/bin/ld.lld|grep ld.lld-$VERSION; then
+# https://bugs.llvm.org/show_bug.cgi?id=40659
+# -fuse-ld=lld will call lld
+# Mismatch of version can fail the check
+# so, only run it when /usr/bin/lld == $VERSION
+    clang-$VERSION -fuse-ld=lld -flto -O2 foo.c main.c -o foo
+    ./foo > /dev/null
+fi
 
 clang-$VERSION -fuse-ld=lld-$VERSION -O2 foo.c main.c -o foo
 ./foo > /dev/null
