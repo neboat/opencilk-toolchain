@@ -1,8 +1,8 @@
-llvm-toolchain-8 (1:8~+rc2-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-8 (1:8~+rc2-1~exp1) unstable; urgency=medium
 
+  * New snapshot release
   * Add support for kfreebsd (Closes: #921246)
     Many thanks to Svante Signell for all patches
-  * experimental New snapshot release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 07 Feb 2019 17:09:15 +0100
 
