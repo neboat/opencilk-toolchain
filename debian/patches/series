@@ -114,14 +114,6 @@ powerpcspe/D49754-powerpcspe-clang.diff
 powerpcspe/D54409-powerpcspe-register-spilling.diff
 powerpcspe/D54584-powerpcspe-double-parameter.diff
 
-
-# Disable https://llvm.org/viewvc/llvm-project?view=revision&revision=352580
-# 7.0.1 was always abi compatible with 7.0
-# Therefor, the libraries are still compatible with the 7.1.0 version
-7.1.0/revert-change-soname-2.diff
-7.1.0/revert-change-soname.diff
-
-
 # kfreebsd
 kfreebsd/clang_lib_Basic_Targets.diff
 kfreebsd/CMakeLists.txt.diff
