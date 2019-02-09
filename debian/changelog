@@ -671,6 +671,15 @@ llvm-toolchain-snapshot (1:7~svn322880-1) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jan 2018 20:50:03 +0100
 
+llvm-toolchain-6.0 (1:6.0.1-11) unstable; urgency=medium
+
+  * Remove 'Multi-Arch: same' in libclang
+    (Closes: #874248)
+  * Cherry-pick various llvm fixes for Julia
+    (Closes: #919628)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 09 Feb 2019 17:22:59 +0100
+
 llvm-toolchain-6.0 (1:6.0.1-10) unstable; urgency=medium
 
   * Fix a baseline violation on armhf (Closes: #914268)

@@ -1,0 +1,24 @@
+From f76abe65e6d07fea5e838c4f8c9a9421c16debb0 Mon Sep 17 00:00:00 2001
+From: Valentin Churavy <v.churavy@gmail.com>
+Date: Thu, 5 Jul 2018 12:37:50 -0400
+Subject: [PATCH] Fix unwind info relocation with large code model on AArch64
+
+---
+ lib/MC/MCObjectFileInfo.cpp                   |  2 ++
+ .../AArch64/ELF_ARM64_large-relocations.s     | 20 +++++++++++++++++++
+ 2 files changed, 22 insertions(+)
+ create mode 100644 test/ExecutionEngine/RuntimeDyld/AArch64/ELF_ARM64_large-relocations.s
+
+Index: llvm-toolchain-6.0-6.0.1/lib/MC/MCObjectFileInfo.cpp
+===================================================================
+--- llvm-toolchain-6.0-6.0.1.orig/lib/MC/MCObjectFileInfo.cpp
++++ llvm-toolchain-6.0-6.0.1/lib/MC/MCObjectFileInfo.cpp
+@@ -291,6 +291,8 @@ void MCObjectFileInfo::initELFMCObjectFi
+     break;
+   case Triple::ppc64:
+   case Triple::ppc64le:
++  case Triple::aarch64:
++  case Triple::aarch64_be:
+   case Triple::x86_64:
+     FDECFIEncoding = dwarf::DW_EH_PE_pcrel |
+                      (Large ? dwarf::DW_EH_PE_sdata8 : dwarf::DW_EH_PE_sdata4);
