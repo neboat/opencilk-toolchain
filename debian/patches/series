@@ -150,7 +150,6 @@ kfreebsd/kfreebsd-openmp.diff
 kfreebsd/kfreebsd-threads-build.diff
 kfreebsd/kfreebsd-triple-clang.diff
 kfreebsd/kfreebsd-triple.diff
-kfreebsd/liblldb-7.install.kfreebsd
 kfreebsd/lib_Support.diff
 kfreebsd/lib_Target_X86.diff
 kfreebsd/lldb_source_Host_freebsd_Host.cpp.diff
