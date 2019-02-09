@@ -1,9 +1,28 @@
-llvm-toolchain-6.0 (1:6.0.1-10) UNRELEASED; urgency=medium
+llvm-toolchain-6.0 (1:6.0.1-11) unstable; urgency=medium
+
+  * Remove 'Multi-Arch: same' in libclang
+    (Closes: #874248)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 24 Jan 2019 08:44:24 +0100
+
+llvm-toolchain-6.0 (1:6.0.1-10) unstable; urgency=medium
+
+  * Fix a baseline violation on armhf (Closes: #914268)
+    Thanks to Adrian Bunk
+    doing that for the Julia package.
 
   [ John Paul Adrian Glaubitz ]
   * Add patch to fix missing include and library paths on x32
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Oct 2018 16:43:31 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 23 Jan 2019 23:25:50 +0100
+
+llvm-toolchain-6.0 (1:6.0.1-9.2) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * debian/patches/D53557-hurd-self-exe-realpath.diff: Fix paths returned by
+    llvm-config (Closes: Bug#911817).
+
+ -- Samuel Thibault <sthibault@debian.org>  Wed, 24 Oct 2018 22:44:54 +0000
 
 llvm-toolchain-6.0 (1:6.0.1-9.1) unstable; urgency=medium
 
