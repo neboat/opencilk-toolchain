@@ -1,14 +1,17 @@
 set -e
-VERSION=9
+ORIG_VERSION=snapshot
 MAJOR_VERSION=9 # 8.0.1
 SVN_REV=`ls -1 *snapshot_$MAJOR_VERSION*svn*bz2 | tail -1|perl -ne 'print "$1\n" if /svn(\d+)/;' | sort -ru`
 #SVN_REV=347285
 VERSION=svn$SVN_REV
 #VERSION=+rc3
-tar jxvf llvm-toolchain-snapshot_$MAJOR_VERSION~$VERSION.orig.tar.bz2
+LLVM_ARCHIVE=llvm-toolchain-snapshot_$MAJOR_VERSION~$VERSION.orig.tar.bz2
+echo "unpack of $LLVM_ARCHIVE"
+tar jxf $LLVM_ARCHIVE
 cd llvm-toolchain-snapshot_$MAJOR_VERSION~$VERSION/ || ( echo "Bad SVN_REV:\"$SVN_REV\"" && exit 1 )
 for f in ../llvm-toolchain-snapshot_$MAJOR_VERSION~$VERSION.orig-clang.tar.bz2 ../llvm-toolchain-snapshot_$MAJOR_VERSION~$VERSION.orig-clang-tools-extra.tar.bz2 ../llvm-toolchain-snapshot_$MAJOR_VERSION~$VERSION.orig-compiler-rt.tar.bz2 ../llvm-toolchain-snapshot_$MAJOR_VERSION~$VERSION.orig-lldb.tar.bz2 ../llvm-toolchain-snapshot_$MAJOR_VERSION~$VERSION.orig-polly.tar.bz2 ../llvm-toolchain-snapshot_$MAJOR_VERSION~$VERSION.orig-libcxxabi.tar.bz2 ../llvm-toolchain-snapshot_$MAJOR_VERSION~$VERSION.orig-libcxx.tar.bz2 ../llvm-toolchain-snapshot_$MAJOR_VERSION~$VERSION.orig-openmp.tar.bz2; do
- 	tar jxvf $f
+	echo "Unpack of $f"
+ 	tar jxf $f
  done
 
 ln -s clang_$MAJOR_VERSION~$VERSION clang

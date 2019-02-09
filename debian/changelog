@@ -562,6 +562,34 @@ llvm-toolchain-snapshot (1:8~svn340819-1) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 28 Aug 2018 16:28:24 +0200
 
+llvm-toolchain-7 (1:7.1.0~svn353565-1~exp1) UNRELEASED; urgency=medium
+
+  * New stable release.
+    To be clear, this is the same as release 7.0.1
+    To be ABI compliant in Debian between 7 and 7.0.1,
+    I took the pr39427-misscompile.diff.
+    7.1.0 is an official release for downstream users to bring
+    back the ABI comptability.
+    I am uploading this new version in the archive to:
+    - avoid question like "why we don't have 7.1.0 in the archive?"
+    - align with upstream
+    - clearly show that we kept the ABI
+    Upstream decided to rename the library from 7 to 7.1.0
+    As I kept the ABI, I reverted the patches (debian/patches/7.1.0/*)
+    More info on https://bugs.llvm.org/show_bug.cgi?id=39427
+    and https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=913271
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 09 Feb 2019 16:34:12 +0100
+
+llvm-toolchain-7 (1:7.0.1-7) unstable; urgency=medium
+
+  * kfreebsd/kfreebsd-triple-clang.diff: update of the patch to fix
+    the kfreebsd FTBFS  (Closes: #921246)
+  * Enable ld gold for kfreebsd-amd64 and kfreebsd-i386
+    Many thanks to Svante Signell for the two updates
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 07 Feb 2019 17:17:40 +0100
+
 llvm-toolchain-7 (1:7.0.1-6) unstable; urgency=medium
 
   * Add support for kfreebsd (Closes: #921246)
@@ -892,6 +920,15 @@ llvm-toolchain-snapshot (1:7~svn322880-1) unstable; urgency=medium
   * Fix the VCS-* tags
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jan 2018 20:50:03 +0100
+
+llvm-toolchain-6.0 (1:6.0.1-11) unstable; urgency=medium
+
+  * Remove 'Multi-Arch: same' in libclang
+    (Closes: #874248)
+  * Cherry-pick various llvm fixes for Julia
+    (Closes: #919628)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 09 Feb 2019 17:22:59 +0100
 
 llvm-toolchain-6.0 (1:6.0.1-10) unstable; urgency=medium
 
