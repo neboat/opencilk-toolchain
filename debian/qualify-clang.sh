@@ -9,7 +9,7 @@ VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 DETAILED_VERSION=$(dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1\2\3,p")
 DEB_HOST_ARCH=$(dpkg-architecture -qDEB_HOST_ARCH)
 
-LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm7_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}-dbgsym_${DETAILED_VERSION}_amd64.deb libclang1-${VERSION}-dbgsym_${DETAILED_VERSION}_amd64.deb"
+LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}-dbgsym_${DETAILED_VERSION}_amd64.deb libclang1-${VERSION}-dbgsym_${DETAILED_VERSION}_amd64.deb"
 echo "To install everything:"
 echo "sudo dpkg -i $LIST"
 L=""
@@ -252,8 +252,14 @@ fi
 clang-$VERSION -fuse-ld=lld -O2 foo.c main.c -o foo
 ./foo > /dev/null
 
-clang-$VERSION -fuse-ld=lld -flto -O2 foo.c main.c -o foo
-./foo > /dev/null
+if ls -al1 /usr/bin/ld.lld|grep ld.lld-$VERSION; then
+# https://bugs.llvm.org/show_bug.cgi?id=40659
+# -fuse-ld=lld will call lld
+# Mismatch of version can fail the check
+# so, only run it when /usr/bin/lld == $VERSION
+    clang-$VERSION -fuse-ld=lld -flto -O2 foo.c main.c -o foo
+    ./foo > /dev/null
+fi
 
 clang-$VERSION -fuse-ld=lld-$VERSION -O2 foo.c main.c -o foo
 ./foo > /dev/null
@@ -366,6 +372,33 @@ int main(int argc, char **argv)
 clang-$VERSION -fsanitize=address foo.c -o foo -lc
 ./foo &> /dev/null || true
 
+
+echo '
+class a {
+public:
+  ~a();
+};
+template <typename, typename> using b = a;
+struct f {
+  template <typename d> using e = b<a, d>;
+};
+struct g {
+  typedef f::e<int> c;
+};
+class h {
+  struct : g::c {};
+};
+struct m {
+  h i;
+};
+template <typename> void __attribute__((noreturn)) j();
+void k() {
+  m l;
+  j<int>();
+}' > foo.cpp
+clang++-$VERSION -std=c++14 -O3 -fsanitize=address -fsanitize=undefined -c foo.cpp -fno-crash-diagnostics
+
+
 # fails on 32 bit, seems a real BUG in the package, using 64bit static libs?
 LANG=C clang-$VERSION -fsanitize=fuzzer test_fuzzer.cc &> foo.log || true
 if ! grep "No such file or directory" foo.log; then
@@ -383,9 +416,10 @@ echo 'int main() {
 ' > foo.c
 clang-$VERSION -g -o bar foo.c
 
-# ABI issue between gcc & clang
+# ABI issue between gcc & clang with clang 7
 # https://bugs.llvm.org/show_bug.cgi?id=39427
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=913271
+if test $VERSION -eq 7; then
 echo '
 #include <llvm/ADT/ArrayRef.h>
 #include <llvm/ADT/Optional.h>
@@ -427,6 +461,7 @@ if test -f /usr/bin/g++; then
     ./foo
 fi
 rm part1.o part2.o
+fi
 
 if test ! -f /usr/lib/llvm-$VERSION/lib/libomp.so; then
     echo "Install libomp-$VERSION-dev";

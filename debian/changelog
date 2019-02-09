@@ -49,12 +49,20 @@ llvm-toolchain-snapshot (1:9~svn351375-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:59:29 +0100
 
-llvm-toolchain-8 (1:8~+rc1-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-8 (1:8~+rc2-1~exp2) unstable; urgency=medium
 
+  * Activate -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN for all
+    gcc
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 08 Feb 2019 21:34:32 +0100
+
+llvm-toolchain-8 (1:8~+rc2-1~exp1) unstable; urgency=medium
+
+  * New snapshot release
   * Add support for kfreebsd (Closes: #921246)
     Many thanks to Svante Signell for all patches
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 04 Feb 2019 23:38:37 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 07 Feb 2019 17:09:15 +0100
 
 llvm-toolchain-8 (1:8~+rc1-1~exp1) experimental; urgency=medium
 
