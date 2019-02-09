@@ -1,8 +1,8 @@
-Index: llvm/lib/Bitcode/Reader/MetadataLoader.cpp
+Index: llvm-toolchain-7_7.0.1~svn352582/lib/Bitcode/Reader/MetadataLoader.cpp
 ===================================================================
---- llvm.orig/lib/Bitcode/Reader/MetadataLoader.cpp
-+++ llvm/lib/Bitcode/Reader/MetadataLoader.cpp
-@@ -1313,7 +1313,7 @@
+--- llvm-toolchain-7_7.0.1~svn352582.orig/lib/Bitcode/Reader/MetadataLoader.cpp
++++ llvm-toolchain-7_7.0.1~svn352582/lib/Bitcode/Reader/MetadataLoader.cpp
+@@ -1308,7 +1308,7 @@ Error MetadataLoader::MetadataLoaderImpl
                             (Context, Tag, Name, File, Line, Scope, BaseType,
                              SizeInBits, AlignInBits, OffsetInBits, Flags,
                              Elements, RuntimeLang, VTableHolder, TemplateParams,
@@ -11,10 +11,10 @@ Index: llvm/lib/Bitcode/Reader/MetadataLoader.cpp
      if (!IsNotUsedInTypeRef && Identifier)
        MetadataList.addTypeRef(*Identifier, *cast<DICompositeType>(CT));
  
-Index: llvm/test/Assembler/debug-variant-discriminator.ll
+Index: llvm-toolchain-7_7.0.1~svn352582/test/Assembler/debug-variant-discriminator.ll
 ===================================================================
---- llvm.orig/test/Assembler/debug-variant-discriminator.ll
-+++ llvm/test/Assembler/debug-variant-discriminator.ll
+--- /dev/null
++++ llvm-toolchain-7_7.0.1~svn352582/test/Assembler/debug-variant-discriminator.ll
 @@ -0,0 +1,14 @@
 +; RUN: llvm-as < %s | llvm-dis | llvm-as | llvm-dis | FileCheck %s
 +; RUN: verify-uselistorder %s
