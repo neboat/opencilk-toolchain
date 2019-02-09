@@ -5,11 +5,11 @@ SVN_REV=`ls -1 *8_$MAJOR_VERSION*svn*bz2 | tail -1|perl -ne 'print "$1\n" if /sv
 #SVN_REV=347285
 VERSION=svn$SVN_REV
 #VERSION=+rc3
-LLVM_ARCHIVE=llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig.tar.bz2
+LLVM_ARCHIVE=llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig.tar.bz2
 echo "unpack of $LLVM_ARCHIVE"
 tar jxf $LLVM_ARCHIVE
-cd llvm-toolchain-8_$MAJOR_VERSION~$VERSION/ || ( echo "Bad SVN_REV:\"$SVN_REV\"" && exit 1 )
-for f in ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-clang.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-clang-tools-extra.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-compiler-rt.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-lldb.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-polly.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-libcxxabi.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-libcxx.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-openmp.tar.bz2; do
+cd llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION/ || ( echo "Bad SVN_REV:\"$SVN_REV\"" && exit 1 )
+for f in ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-clang.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-clang-tools-extra.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-compiler-rt.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-lldb.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-polly.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-libcxxabi.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-libcxx.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-openmp.tar.bz2; do
 	echo "Unpack of $f"
  	tar jxf $f
  done
