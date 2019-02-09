@@ -94,6 +94,9 @@ clang-arm-default-vfp3-on-armv7a.patch
 bootstrap-fix-include-next.diff
 clangd-atomic-cmake.patch
 
+# Rustc
+rustc-aarch64-test-failure.diff
+
 # Fix docs
 remove-apple-clang-manpage.diff
 0049-Use-Debian-provided-MathJax-everywhere.patch
@@ -111,6 +114,13 @@ D54677-hurd-path_max.diff
 D49754-powerpcspe-clang.diff
 D54409-powerpcspe-register-spilling.diff
 D54584-powerpcspe-double-parameter.diff
+
+# Disable https://llvm.org/viewvc/llvm-project?view=revision&revision=352580
+# 7.0.1 was always abi compatible with 7.0
+# Therefor, the libraries are still compatible with the 7.1.0 version
+7.1.0/revert-change-soname-2.diff
+7.1.0/revert-change-soname.diff
+
 
 # kfreebsd
 kfreebsd/clang_lib_Basic_Targets.diff

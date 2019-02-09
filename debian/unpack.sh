@@ -1,14 +1,17 @@
 set -e
-VERSION=8
+ORIG_VERSION=8
 MAJOR_VERSION=8 # 8.0.1
 SVN_REV=`ls -1 *8_$MAJOR_VERSION*svn*bz2 | tail -1|perl -ne 'print "$1\n" if /svn(\d+)/;' | sort -ru`
 #SVN_REV=347285
 VERSION=svn$SVN_REV
 #VERSION=+rc3
-tar jxvf llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig.tar.bz2
+LLVM_ARCHIVE=llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig.tar.bz2
+echo "unpack of $LLVM_ARCHIVE"
+tar jxf $LLVM_ARCHIVE
 cd llvm-toolchain-8_$MAJOR_VERSION~$VERSION/ || ( echo "Bad SVN_REV:\"$SVN_REV\"" && exit 1 )
 for f in ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-clang.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-clang-tools-extra.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-compiler-rt.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-lldb.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-polly.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-libcxxabi.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-libcxx.tar.bz2 ../llvm-toolchain-8_$MAJOR_VERSION~$VERSION.orig-openmp.tar.bz2; do
- 	tar jxvf $f
+	echo "Unpack of $f"
+ 	tar jxf $f
  done
 
 ln -s clang_$MAJOR_VERSION~$VERSION clang
@@ -20,5 +23,5 @@ ln -s openmp_$MAJOR_VERSION~$VERSION openmp
 ln -s libcxx_$MAJOR_VERSION~$VERSION libcxx
 ln -s libcxxabi_$MAJOR_VERSION~$VERSION libcxxabi
 
-cp -R ../8/debian .
+cp -R ../$ORIG_VERSION/debian .
 QUILT_PATCHES=debian/patches/ quilt push -a --fuzz=0

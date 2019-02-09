@@ -18,18 +18,18 @@ set -e
 # To create an rc1 release:
 # sh 4.0/debian/orig-tar.sh RELEASE_40 rc1
 
-SVN_BASE_URL=http://llvm.org/svn/llvm-project/
+SVN_BASE_URL=https://llvm.org/svn/llvm-project/
 MAJOR_VERSION=8
 CURRENT_VERSION=8 # Should be changed to 3.5.1 later
 
 if test -n "$1"; then
-# http://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/branches/google/stable/
+# https://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/branches/google/stable/
 # For example: sh 4.0/debian/orig-tar.sh release_400
     BRANCH=$1
 fi
 
 if test -n "$1" -a -n "$2"; then
-# http://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/tags/RELEASE_34/rc1/
+# https://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/tags/RELEASE_34/rc1/
 # For example: sh 4.0/debian/orig-tar.sh RELEASE_401 rc3 4.0.1
     BRANCH=$1
     TAG=$2
