@@ -111,9 +111,10 @@ impl-path-hurd.diff
 D54677-hurd-path_max.diff
 
 # powerpcspe
-D49754-powerpcspe-clang.diff
-D54409-powerpcspe-register-spilling.diff
-D54584-powerpcspe-double-parameter.diff
+powerpcspe/D49754-powerpcspe-clang.diff
+powerpcspe/D54409-powerpcspe-register-spilling.diff
+powerpcspe/D54584-powerpcspe-double-parameter.diff
+
 
 # Disable https://llvm.org/viewvc/llvm-project?view=revision&revision=352580
 # 7.0.1 was always abi compatible with 7.0
