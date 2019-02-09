@@ -73,3 +73,29 @@ hurd-lib_Support_Unix_Path.inc.diff
 hurd-tools_llvm-shlib_CMakeLists.txt.diff
 D53557-hurd-self-exe-realpath.diff
 clang-arm-default-vfp3-on-armv7a.patch
+
+# Julia compa (to avoid yet-a-new-fork-of-llvm)
+# See bug 919628
+# (1) [unwind] llvm-D27629-AArch64-large_model_6.0.1
+julia/llvm-D27629-AArch64-large_model_4.0.patch
+julia/llvm-D27629-AArch64-large_model_6.0.1.patch
+# (2) [performance] llvm-D34078-vectorize-fdiv
+julia/llvm-D34078-vectorize-fdiv.patch
+# (4) [performance regression] llvm-D42262-jumpthreading-not-i1
+julia/llvm-D42262-jumpthreading-not-i1.patch
+# (14) llvm-D50167-scev-umin
+julia/llvm-D50167-scev-umin.patch
+# (13) llvm-D50010-VNCoercion-ni
+julia/llvm-D50010-VNCoercion-ni.patch
+# (5) [???] llvm-PPC-addrspaces
+julia/llvm-PPC-addrspaces.patch
+# (15) llvm-rL326967-aligned-load
+julia/llvm-rL326967-aligned-load.patch
+# (8) [???] llvm-rL327898
+julia/llvm-rL327898.patch
+# (11) [profiling] llvm-D44892-Perf-integration
+julia/llvm-D44892-Perf-integration.patch
+
+# (12) [bug fix] llvm-D49832-SCEVPred
+#     [bug fix] llvm-rL323946-LSRTy
+# Already applied before
