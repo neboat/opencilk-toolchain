@@ -99,6 +99,7 @@ clang-arm-default-vfp3-on-armv7a.patch
 # For the bootstrap
 bootstrap-fix-include-next.diff
 clangd-atomic-cmake.patch
+pr39427-misscompile.diff
 
 # Rustc
 rustc-aarch64-test-failure.diff
@@ -138,3 +139,20 @@ D52340-rustc-debuginfo.diff
 # 7.0.1 was always abi compatible with 7.0
 # Therefor, the libraries are still compatible with the 7.1.0 version
 revert-change-soname.diff
+
+# kfreebsd
+kfreebsd/clang_lib_Basic_Targets.diff
+kfreebsd/CMakeLists.txt.diff
+kfreebsd/compiler-rt_lib.diff
+kfreebsd/include_llvm_ADT_Triple.h.diff
+kfreebsd/kfreebsd-libcxx-threads-detection.diff
+kfreebsd/kfreebsd-openmp.diff
+kfreebsd/kfreebsd-threads-build.diff
+kfreebsd/kfreebsd-triple-clang.diff
+kfreebsd/kfreebsd-triple.diff
+kfreebsd/liblldb-7.install.kfreebsd
+kfreebsd/lib_Support.diff
+kfreebsd/lib_Target_X86.diff
+kfreebsd/lldb_source_Host_freebsd_Host.cpp.diff
+kfreebsd/lldb_source_Plugins_Process_FreeBSD.diff
+kfreebsd/tools_llvm-shlib_CMakeLists.txt.diff
