@@ -105,10 +105,10 @@ remove-apple-clang-manpage.diff
 reproducible-pch.diff
 
 # Hurd port
-hurd-pathmax.diff
-hurd-EIEIO-undef.diff
-impl-path-hurd.diff
-D54677-hurd-path_max.diff
+hurd/hurd-pathmax.diff
+hurd/hurd-EIEIO-undef.diff
+hurd/impl-path-hurd.diff
+hurd/D54677-hurd-path_max.diff
 
 # powerpcspe
 powerpcspe/D49754-powerpcspe-clang.diff
