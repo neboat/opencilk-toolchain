@@ -78,13 +78,13 @@ openmp-mips-affinity.patch
 bootstrap-with-openmp-version-export-missing.diff
 
 # libcxx
-libcxxabi-test-don-t-fail-extended-long-double.patch
-libcxx-test-fix-lockfree-test-for-i386.patch
-libcxxabi-arm-ehabi-fix.patch
-libcxx-test-atomics-set-compare-exchange-to-be-expected-fails-on-arm.patch
-libcxx-silent-test-libcxx.diff
-libcxx-silent-failure-ppc64el.diff
-libcxx-silent-failure-arm64.diff
+libcxx/libcxxabi-test-don-t-fail-extended-long-double.patch
+libcxx/libcxx-test-fix-lockfree-test-for-i386.patch
+libcxx/libcxxabi-arm-ehabi-fix.patch
+libcxx/libcxx-test-atomics-set-compare-exchange-to-be-expected-fails-on-arm.patch
+libcxx/libcxx-silent-test-libcxx.diff
+libcxx/libcxx-silent-failure-ppc64el.diff
+libcxx/libcxx-silent-failure-arm64.diff
 
 # Rust on ppc
 D51108-rust-powerpc.diff
