@@ -111,19 +111,19 @@ remove-apple-clang-manpage.diff
 reproducible-pch.diff
 
 # Hurd port
-hurd-pathmax.diff
-hurd-EIEIO-undef.diff
-impl-path-hurd.diff
-hurd-lib_Support_Unix_Path.inc.diff
-hurd-tools_llvm-shlib_CMakeLists.txt.diff
-D54079-hurd-openmp.diff
-D54338-hurd-libcxx-threads-build.diff
-D54339-hurd-libcxx-threads-detection.diff
-D54378-hurd-triple.diff
-D54379-hurd-triple-clang.diff
-D54677-hurd-path_max.diff
-hurd-cxx-paths.diff
-D53557-hurd-self-exe-realpath.diff
+hurd/hurd-pathmax.diff
+hurd/hurd-EIEIO-undef.diff
+hurd/impl-path-hurd.diff
+hurd/hurd-lib_Support_Unix_Path.inc.diff
+hurd/hurd-tools_llvm-shlib_CMakeLists.txt.diff
+hurd/D54079-hurd-openmp.diff
+hurd/D54338-hurd-libcxx-threads-build.diff
+hurd/D54339-hurd-libcxx-threads-detection.diff
+hurd/D54378-hurd-triple.diff
+hurd/D54379-hurd-triple-clang.diff
+hurd/D54677-hurd-path_max.diff
+hurd/hurd-cxx-paths.diff
+hurd/D53557-hurd-self-exe-realpath.diff
 
 strip-ignore-deterministic-archives.diff
 
