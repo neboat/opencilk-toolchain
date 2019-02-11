@@ -73,9 +73,9 @@ lldb/lldb-disable-swig-error.diff
 disable-error-xray.diff
 
 # OpenMP
-openmp-check-execstack.diff
-openmp-mips-affinity.patch
-bootstrap-with-openmp-version-export-missing.diff
+openmp/openmp-check-execstack.diff
+openmp/openmp-mips-affinity.patch
+openmp/bootstrap-with-openmp-version-export-missing.diff
 
 # libcxx
 libcxx/libcxxabi-test-don-t-fail-extended-long-double.patch
