@@ -7,11 +7,11 @@ sure their ABI stays in sync.
 
 No known upstream bug about this.
 
-Index: llvm-toolchain-snapshot_7svn337372/libcxxabi/src/cxa_exception.cpp
+Index: llvm-toolchain-snapshot_9~svn353687/libcxxabi/src/cxa_exception.cpp
 ===================================================================
---- llvm-toolchain-snapshot_7svn337372.orig/libcxxabi/src/cxa_exception.cpp
-+++ llvm-toolchain-snapshot_7svn337372/libcxxabi/src/cxa_exception.cpp
-@@ -261,15 +261,16 @@ __cxa_throw(void *thrown_object, std::ty
+--- llvm-toolchain-snapshot_9~svn353687.orig/libcxxabi/src/cxa_exception.cpp
++++ llvm-toolchain-snapshot_9~svn353687/libcxxabi/src/cxa_exception.cpp
+@@ -276,15 +276,16 @@ __cxa_throw(void *thrown_object, std::ty
  
  #ifdef __USING_SJLJ_EXCEPTIONS__
      _Unwind_SjLj_RaiseException(&exception_header->unwindHeader);
@@ -30,7 +30,7 @@ Index: llvm-toolchain-snapshot_7svn337372/libcxxabi/src/cxa_exception.cpp
  // 2.5.3 Exception Handlers
  /*
  The adjusted pointer is computed by the personality routine during phase 1
-@@ -532,7 +533,11 @@ void __cxa_end_catch() {
+@@ -547,7 +548,11 @@ void __cxa_end_catch() {
              //    to touch a foreign exception in any way, that is undefined
              //     behavior.  They likely can't since the only way to catch
              //     a foreign exception is with catch (...)!
@@ -42,7 +42,7 @@ Index: llvm-toolchain-snapshot_7svn337372/libcxxabi/src/cxa_exception.cpp
              globals->caughtExceptions = 0;
          }
      }
-@@ -589,8 +594,10 @@ void __cxa_rethrow() {
+@@ -604,8 +609,10 @@ void __cxa_rethrow() {
      }
  #ifdef __USING_SJLJ_EXCEPTIONS__
      _Unwind_SjLj_RaiseException(&exception_header->unwindHeader);
@@ -54,7 +54,7 @@ Index: llvm-toolchain-snapshot_7svn337372/libcxxabi/src/cxa_exception.cpp
  #endif
  
      //  If we get here, some kind of unwinding error has occurred.
-@@ -714,8 +721,10 @@ __cxa_rethrow_primary_exception(void* th
+@@ -729,8 +736,10 @@ __cxa_rethrow_primary_exception(void* th
          dep_exception_header->unwindHeader.exception_cleanup = dependent_exception_cleanup;
  #ifdef __USING_SJLJ_EXCEPTIONS__
          _Unwind_SjLj_RaiseException(&dep_exception_header->unwindHeader);
@@ -66,13 +66,13 @@ Index: llvm-toolchain-snapshot_7svn337372/libcxxabi/src/cxa_exception.cpp
  #endif
          // Some sort of unwinding error.  Note that terminate is a handler.
          __cxa_begin_catch(&dep_exception_header->unwindHeader);
-Index: llvm-toolchain-snapshot_7svn337372/libcxxabi/src/cxa_exception.hpp
+Index: llvm-toolchain-snapshot_9~svn353687/libcxxabi/src/cxa_exception.hpp
 ===================================================================
---- llvm-toolchain-snapshot_7svn337372.orig/libcxxabi/src/cxa_exception.hpp
-+++ llvm-toolchain-snapshot_7svn337372/libcxxabi/src/cxa_exception.hpp
-@@ -24,6 +24,45 @@ static const uint64_t kOurExceptionClass
- static const uint64_t kOurDependentExceptionClass = 0x434C4E47432B2B01; // CLNGC++\1
- static const uint64_t get_vendor_and_language     = 0xFFFFFFFFFFFFFF00; // mask for CLNGC++
+--- llvm-toolchain-snapshot_9~svn353687.orig/libcxxabi/src/cxa_exception.hpp
++++ llvm-toolchain-snapshot_9~svn353687/libcxxabi/src/cxa_exception.hpp
+@@ -27,6 +27,45 @@ uint64_t __getExceptionClass  (const _Un
+ void     __setExceptionClass  (      _Unwind_Exception*, uint64_t);
+ bool     __isOurExceptionClass(const _Unwind_Exception*);
  
 +#if LIBCXXABI_ARM_EHABI
 +// GCC has _Unwind_Control_Block in unwind.h (unwind_arm_common.h)

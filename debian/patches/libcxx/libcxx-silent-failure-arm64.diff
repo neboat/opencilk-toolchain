@@ -1,24 +1,24 @@
-Index: llvm-toolchain-snapshot_7~svn337372/libcxx/test/std/thread/thread.condition/thread.condition.condvar/wait_for.pass.cpp
+Index: llvm-toolchain-snapshot_9~svn353687/libcxx/test/std/thread/thread.condition/thread.condition.condvar/wait_for.pass.cpp
 ===================================================================
---- llvm-toolchain-snapshot_7~svn337372.orig/libcxx/test/std/thread/thread.condition/thread.condition.condvar/wait_for.pass.cpp
-+++ llvm-toolchain-snapshot_7~svn337372/libcxx/test/std/thread/thread.condition/thread.condition.condvar/wait_for.pass.cpp
-@@ -8,6 +8,7 @@
+--- llvm-toolchain-snapshot_9~svn353687.orig/libcxx/test/std/thread/thread.condition/thread.condition.condvar/wait_for.pass.cpp
++++ llvm-toolchain-snapshot_9~svn353687/libcxx/test/std/thread/thread.condition/thread.condition.condvar/wait_for.pass.cpp
+@@ -7,6 +7,7 @@
  //===----------------------------------------------------------------------===//
  //
  // UNSUPPORTED: libcpp-has-no-threads
 +// XFAIL: *
  
- // <condition_variable>
+ // FLAKY_TEST.
  
-Index: llvm-toolchain-snapshot_7~svn337372/libcxx/test/std/thread/thread.mutex/thread.lock/thread.lock.shared/thread.lock.shared.locking/lock.pass.cpp
+Index: llvm-toolchain-snapshot_9~svn353687/libcxx/test/std/thread/thread.mutex/thread.lock/thread.lock.shared/thread.lock.shared.locking/lock.pass.cpp
 ===================================================================
---- llvm-toolchain-snapshot_7~svn337372.orig/libcxx/test/std/thread/thread.mutex/thread.lock/thread.lock.shared/thread.lock.shared.locking/lock.pass.cpp
-+++ llvm-toolchain-snapshot_7~svn337372/libcxx/test/std/thread/thread.mutex/thread.lock/thread.lock.shared/thread.lock.shared.locking/lock.pass.cpp
-@@ -9,6 +9,7 @@
+--- llvm-toolchain-snapshot_9~svn353687.orig/libcxx/test/std/thread/thread.mutex/thread.lock/thread.lock.shared/thread.lock.shared.locking/lock.pass.cpp
++++ llvm-toolchain-snapshot_9~svn353687/libcxx/test/std/thread/thread.mutex/thread.lock/thread.lock.shared/thread.lock.shared.locking/lock.pass.cpp
+@@ -8,6 +8,7 @@
  //
  // UNSUPPORTED: libcpp-has-no-threads
  // UNSUPPORTED: c++98, c++03, c++11
 +// XFAIL: *
  
- // <shared_mutex>
+ // FLAKY_TEST.
  
