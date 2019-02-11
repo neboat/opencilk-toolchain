@@ -61,27 +61,27 @@ scan-view-fix-path.diff
 fix-scan-view-path.diff
 
 # lldb
-lldb-link-atomic-cmake.patch
-lldb-addversion-suffix-to-llvm-server-exec.patch
-lldb-missing-install.diff
-lldb-disable-swig-error.diff
+lldb/lldb-link-atomic-cmake.patch
+lldb/lldb-addversion-suffix-to-llvm-server-exec.patch
+lldb/lldb-missing-install.diff
+lldb/lldb-disable-swig-error.diff
 
 # Fix arch issue
 disable-error-xray.diff
 
 # OpenMP
-openmp-check-execstack.diff
-openmp-mips-affinity.patch
-bootstrap-with-openmp-version-export-missing.diff
+openmp/openmp-check-execstack.diff
+openmp/openmp-mips-affinity.patch
+openmp/bootstrap-with-openmp-version-export-missing.diff
 
 # libcxx
-libcxxabi-test-don-t-fail-extended-long-double.patch
-libcxx-test-fix-lockfree-test-for-i386.patch
-libcxxabi-arm-ehabi-fix.patch
-libcxx-test-atomics-set-compare-exchange-to-be-expected-fails-on-arm.patch
-libcxx-silent-test-libcxx.diff
-libcxx-silent-failure-ppc64el.diff
-libcxx-silent-failure-arm64.diff
+libcxx/libcxxabi-test-don-t-fail-extended-long-double.patch
+libcxx/libcxx-test-fix-lockfree-test-for-i386.patch
+libcxx/libcxxabi-arm-ehabi-fix.patch
+libcxx/libcxx-test-atomics-set-compare-exchange-to-be-expected-fails-on-arm.patch
+libcxx/libcxx-silent-test-libcxx.diff
+libcxx/libcxx-silent-failure-ppc64el.diff
+libcxx/libcxx-silent-failure-arm64.diff
 
 # Change default optims
 mips-fpxx-enable.diff
@@ -105,9 +105,9 @@ remove-apple-clang-manpage.diff
 reproducible-pch.diff
 
 # Hurd port
-hurd-pathmax.diff
-hurd-EIEIO-undef.diff
-impl-path-hurd.diff
+hurd/hurd-pathmax.diff
+hurd/hurd-EIEIO-undef.diff
+hurd/impl-path-hurd.diff
 
 # powerpcspe
 powerpcspe/D49754-powerpcspe-clang.diff
