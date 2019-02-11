@@ -64,10 +64,10 @@ fix-scan-view-path.diff
 scan-build-clang-X.diff
 
 # lldb
-lldb-link-atomic-cmake.patch
-lldb-addversion-suffix-to-llvm-server-exec.patch
-lldb-missing-install.diff
-lldb-disable-swig-error.diff
+lldb/lldb-link-atomic-cmake.patch
+lldb/lldb-addversion-suffix-to-llvm-server-exec.patch
+lldb/lldb-missing-install.diff
+lldb/lldb-disable-swig-error.diff
 
 # Fix arch issue
 disable-error-xray.diff
