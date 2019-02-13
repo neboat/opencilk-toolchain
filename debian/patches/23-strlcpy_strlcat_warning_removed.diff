@@ -216,3 +216,19 @@ Index: llvm-toolchain-snapshot_9~svn352610/clang/test/Sema/warn-strlcpycat-size.
 -
 -  strlcpy(z, str, sizeof(str)); // expected-warning {{size argument in 'strlcpy' call appears to be size of the source; expected the size of the destination}} expected-note {{change size argument to be the size of the destination}}
 -}
+Index: llvm-toolchain-snapshot_9~svn353820/clang/lib/Basic/Builtins.cpp
+===================================================================
+--- llvm-toolchain-snapshot_9~svn353820.orig/clang/lib/Basic/Builtins.cpp
++++ llvm-toolchain-snapshot_9~svn353820/clang/lib/Basic/Builtins.cpp
+@@ -197,8 +197,8 @@ unsigned Builtin::getFortifiedVariantFun
+   case Builtin::BIstpcpy:    return Builtin::BI__builtin___stpcpy_chk;
+   case Builtin::BIstrcat:    return Builtin::BI__builtin___strcat_chk;
+   case Builtin::BIstrcpy:    return Builtin::BI__builtin___strcpy_chk;
+-  case Builtin::BIstrlcat:   return Builtin::BI__builtin___strlcat_chk;
+-  case Builtin::BIstrlcpy:   return Builtin::BI__builtin___strlcpy_chk;
++//  case Builtin::BIstrlcat:   return Builtin::BI__builtin___strlcat_chk;
++//  case Builtin::BIstrlcpy:   return Builtin::BI__builtin___strlcpy_chk;
+   case Builtin::BIstrncat:   return Builtin::BI__builtin___strncat_chk;
+   case Builtin::BIstrncpy:   return Builtin::BI__builtin___strncpy_chk;
+   case Builtin::BIstpncpy:   return Builtin::BI__builtin___stpncpy_chk;
+
