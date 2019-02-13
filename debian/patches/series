@@ -94,9 +94,6 @@ clang-arm-default-vfp3-on-armv7a.patch
 bootstrap-fix-include-next.diff
 clangd-atomic-cmake.patch
 
-# Rustc
-rustc-aarch64-test-failure.diff
-
 # Fix docs
 remove-apple-clang-manpage.diff
 0049-Use-Debian-provided-MathJax-everywhere.patch
