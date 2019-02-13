@@ -1,6 +1,6 @@
 llvm-toolchain-8 (1:8~+rc2-1~exp2) unstable; urgency=medium
 
-  * Activate -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN for all
+  * Activate -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN for old
     gcc
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 08 Feb 2019 21:34:32 +0100
