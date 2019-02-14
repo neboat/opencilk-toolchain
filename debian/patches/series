@@ -108,8 +108,8 @@ hurd/impl-path-hurd.diff
 
 # powerpcspe
 powerpcspe/D49754-powerpcspe-clang.diff
-powerpcspe/D54409-powerpcspe-register-spilling.diff
 powerpcspe/D54583-powerpcspe-double-parameter.diff
+powerpcspe/D56703-powerpcspe-register-spilling.diff
 
 # kfreebsd
 kfreebsd/clang_lib_Basic_Targets.diff
