@@ -3,11 +3,11 @@ Author: Justin Hibbits <jrh29@alumni.cwru.edu>
 Origin: https://reviews.llvm.org/D49754
 Last-Update: 2018-12-04
 
-Index: llvm-toolchain-snapshot_9~svn351647/clang/include/clang/Driver/Options.td
+Index: llvm-toolchain-snapshot_9~svn354011/clang/include/clang/Driver/Options.td
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/clang/include/clang/Driver/Options.td
-+++ llvm-toolchain-snapshot_9~svn351647/clang/include/clang/Driver/Options.td
-@@ -2179,6 +2179,8 @@ def faltivec : Flag<["-"], "faltivec">,
+--- llvm-toolchain-snapshot_9~svn354011.orig/clang/include/clang/Driver/Options.td
++++ llvm-toolchain-snapshot_9~svn354011/clang/include/clang/Driver/Options.td
+@@ -2184,6 +2184,8 @@ def faltivec : Flag<["-"], "faltivec">,
  def fno_altivec : Flag<["-"], "fno-altivec">, Group<f_Group>, Flags<[DriverOption]>;
  def maltivec : Flag<["-"], "maltivec">, Group<m_ppc_Features_Group>;
  def mno_altivec : Flag<["-"], "mno-altivec">, Group<m_ppc_Features_Group>;
@@ -16,10 +16,10 @@ Index: llvm-toolchain-snapshot_9~svn351647/clang/include/clang/Driver/Options.td
  def mvsx : Flag<["-"], "mvsx">, Group<m_ppc_Features_Group>;
  def mno_vsx : Flag<["-"], "mno-vsx">, Group<m_ppc_Features_Group>;
  def msecure_plt : Flag<["-"], "msecure-plt">, Group<m_ppc_Features_Group>;
-Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Basic/Targets/PPC.cpp
+Index: llvm-toolchain-snapshot_9~svn354011/clang/lib/Basic/Targets/PPC.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/clang/lib/Basic/Targets/PPC.cpp
-+++ llvm-toolchain-snapshot_9~svn351647/clang/lib/Basic/Targets/PPC.cpp
+--- llvm-toolchain-snapshot_9~svn354011.orig/clang/lib/Basic/Targets/PPC.cpp
++++ llvm-toolchain-snapshot_9~svn354011/clang/lib/Basic/Targets/PPC.cpp
 @@ -53,6 +53,8 @@ bool PPCTargetInfo::handleTargetFeatures
        HasFloat128 = true;
      } else if (Feature == "+power9-vector") {
@@ -73,10 +73,10 @@ Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Basic/Targets/PPC.cpp
  };
  
  bool PPCTargetInfo::isValidCPUName(StringRef Name) const {
-Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Basic/Targets/PPC.h
+Index: llvm-toolchain-snapshot_9~svn354011/clang/lib/Basic/Targets/PPC.h
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/clang/lib/Basic/Targets/PPC.h
-+++ llvm-toolchain-snapshot_9~svn351647/clang/lib/Basic/Targets/PPC.h
+--- llvm-toolchain-snapshot_9~svn354011.orig/clang/lib/Basic/Targets/PPC.h
++++ llvm-toolchain-snapshot_9~svn354011/clang/lib/Basic/Targets/PPC.h
 @@ -44,7 +44,8 @@ class LLVM_LIBRARY_VISIBILITY PPCTargetI
      ArchDefinePwr8 = 1 << 12,
      ArchDefinePwr9 = 1 << 13,
@@ -95,19 +95,19 @@ Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Basic/Targets/PPC.h
  
  protected:
    std::string ABI;
-@@ -144,6 +146,8 @@ public:
-                         ArchDefinePwr6x | ArchDefinePwr6 | ArchDefinePwr5x |
-                         ArchDefinePwr5 | ArchDefinePwr4 | ArchDefinePpcgr |
-                         ArchDefinePpcsq)
+@@ -143,6 +145,8 @@ public:
+                      ArchDefinePwr9 | ArchDefinePwr8 | ArchDefinePwr7 |
+                          ArchDefinePwr6 | ArchDefinePwr5x | ArchDefinePwr5 |
+                          ArchDefinePwr4 | ArchDefinePpcgr | ArchDefinePpcsq)
 +              .Cases("e500", "e500v2",
 +                    ArchDefineName | ArchDefine500v2)
                .Default(ArchDefineNone);
      }
      return CPUKnown;
-Index: llvm-toolchain-snapshot_9~svn351647/clang/test/Driver/ppc-features.cpp
+Index: llvm-toolchain-snapshot_9~svn354011/clang/test/Driver/ppc-features.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/clang/test/Driver/ppc-features.cpp
-+++ llvm-toolchain-snapshot_9~svn351647/clang/test/Driver/ppc-features.cpp
+--- llvm-toolchain-snapshot_9~svn354011.orig/clang/test/Driver/ppc-features.cpp
++++ llvm-toolchain-snapshot_9~svn354011/clang/test/Driver/ppc-features.cpp
 @@ -168,6 +168,9 @@
  // RUN: %clang -target powerpc64-unknown-linux-gnu %s -mno-invariant-function-descriptors -minvariant-function-descriptors -### -o %t.o 2>&1 | FileCheck -check-prefix=CHECK-INVFUNCDESC %s
  // CHECK-INVFUNCDESC: "-target-feature" "+invariant-function-descriptors"
@@ -118,10 +118,10 @@ Index: llvm-toolchain-snapshot_9~svn351647/clang/test/Driver/ppc-features.cpp
  // Assembler features
  // RUN: %clang -target powerpc64-unknown-linux-gnu %s -### -o %t.o -no-integrated-as 2>&1 | FileCheck -check-prefix=CHECK_BE_AS_ARGS %s
  // CHECK_BE_AS_ARGS: "-mppc64"
-Index: llvm-toolchain-snapshot_9~svn351647/clang/test/Misc/target-invalid-cpu-note.c
+Index: llvm-toolchain-snapshot_9~svn354011/clang/test/Misc/target-invalid-cpu-note.c
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/clang/test/Misc/target-invalid-cpu-note.c
-+++ llvm-toolchain-snapshot_9~svn351647/clang/test/Misc/target-invalid-cpu-note.c
+--- llvm-toolchain-snapshot_9~svn354011.orig/clang/test/Misc/target-invalid-cpu-note.c
++++ llvm-toolchain-snapshot_9~svn354011/clang/test/Misc/target-invalid-cpu-note.c
 @@ -79,7 +79,7 @@
  // PPC: error: unknown target CPU 'not-a-cpu'
  // PPC: note: valid target CPU values are: generic, 440, 450, 601, 602, 603,
@@ -131,10 +131,10 @@ Index: llvm-toolchain-snapshot_9~svn351647/clang/test/Misc/target-invalid-cpu-no
  // PPC-SAME: power5, pwr5, power5x, pwr5x, power6, pwr6, power6x, pwr6x, power7,
  // PPC-SAME: pwr7, power8, pwr8, power9, pwr9, powerpc, ppc, powerpc64, ppc64,
  // PPC-SAME: powerpc64le, ppc64le
-Index: llvm-toolchain-snapshot_9~svn351647/clang/test/Preprocessor/init.c
+Index: llvm-toolchain-snapshot_9~svn354011/clang/test/Preprocessor/init.c
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/clang/test/Preprocessor/init.c
-+++ llvm-toolchain-snapshot_9~svn351647/clang/test/Preprocessor/init.c
+--- llvm-toolchain-snapshot_9~svn354011.orig/clang/test/Preprocessor/init.c
++++ llvm-toolchain-snapshot_9~svn354011/clang/test/Preprocessor/init.c
 @@ -7016,6 +7016,10 @@
  //
  // PPC32-LINUX-NOT: _CALL_LINUX
