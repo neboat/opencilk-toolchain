@@ -733,10 +733,6 @@ ifneq (,$(filter libclang-common-$(LLVM_VERSION)-dev, $(shell dh_listpackages)))
 else
 	rm -rf $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
 endif
-	dh_install -p llvm-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/LLVMPolly.so
-endif
-ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
-	dh_install -p llvm-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/LLVMgold.so
 endif
 	dh_install --fail-missing
 
