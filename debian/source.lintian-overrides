@@ -15,3 +15,4 @@ source: source-is-missing lldb/lit/Modules/ELF/Inputs/PT_LOAD-overlap-section.el
 source: source-contains-prebuilt-windows-binary lldb/unittests/SymbolFile/DWARF/Inputs/test-dwarf.exe
 source: source-contains-prebuilt-windows-binary lldb/unittests/SymbolFile/PDB/Inputs/test-pdb-types.exe
 source: source-contains-prebuilt-windows-binary lldb/unittests/SymbolFile/PDB/Inputs/test-pdb.exe
+source: source-is-missing lldb/lit/Modules/ELF/Inputs/netbsd-amd64.core
