@@ -18,10 +18,10 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
-Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Driver/ToolChains/Arch/ARM.cpp
+Index: llvm-toolchain-snapshot_9~svn354727/clang/lib/Driver/ToolChains/Arch/ARM.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/clang/lib/Driver/ToolChains/Arch/ARM.cpp
-+++ llvm-toolchain-snapshot_9~svn351647/clang/lib/Driver/ToolChains/Arch/ARM.cpp
+--- llvm-toolchain-snapshot_9~svn354727.orig/clang/lib/Driver/ToolChains/Arch/ARM.cpp
++++ llvm-toolchain-snapshot_9~svn354727/clang/lib/Driver/ToolChains/Arch/ARM.cpp
 @@ -245,7 +245,7 @@ arm::FloatABI arm::getARMFloatABI(const
        case llvm::Triple::MuslEABI:
        case llvm::Triple::EABI:
@@ -30,4 +30,4 @@ Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Driver/ToolChains/Arch/ARM.
 +        ABI = FloatABI::Soft;
          break;
        case llvm::Triple::Android:
-         ABI = (SubArch == 7) ? FloatABI::SoftFP : FloatABI::Soft;
+         ABI = (SubArch >= 7) ? FloatABI::SoftFP : FloatABI::Soft;
