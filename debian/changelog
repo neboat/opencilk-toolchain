@@ -1,6 +1,12 @@
 llvm-toolchain-8 (1:8~+rc3-1~exp1) unstable; urgency=medium
 
   * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 28 Feb 2019 13:42:03 +0100
+
+llvm-toolchain-8 (1:8~+rc3-1~exp1) unstable; urgency=medium
+
+  * New snapshot release
   * Activate -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN for all
     gcc
 
