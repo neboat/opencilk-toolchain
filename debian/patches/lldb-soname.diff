@@ -2,10 +2,10 @@
  lldb/source/API/CMakeLists.txt |   14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
 
-Index: llvm-toolchain-snapshot_8~svn350421/lldb/source/API/CMakeLists.txt
+Index: llvm-toolchain-snapshot_9~svn355269/lldb/source/API/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_8~svn350421.orig/lldb/source/API/CMakeLists.txt
-+++ llvm-toolchain-snapshot_8~svn350421/lldb/source/API/CMakeLists.txt
+--- llvm-toolchain-snapshot_9~svn355269.orig/lldb/source/API/CMakeLists.txt
++++ llvm-toolchain-snapshot_9~svn355269/lldb/source/API/CMakeLists.txt
 @@ -9,7 +9,12 @@ if(NOT LLDB_DISABLE_PYTHON)
    set(lldb_python_wrapper ${lldb_scripts_dir}/LLDBWrapPython.cpp)
  endif()
@@ -40,4 +40,4 @@ Index: llvm-toolchain-snapshot_8~svn350421/lldb/source/API/CMakeLists.txt
 -  )
  endif()
  
- if(LLDB_BUILD_FRAMEWORK)
+ if (NOT LLDB_BUILT_STANDALONE)
