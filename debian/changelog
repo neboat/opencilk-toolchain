@@ -1,3 +1,13 @@
+llvm-toolchain-8 (1:8~+rc2-1~exp3) UNRELEASED; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Commit Ubuntu delta to 8 and snapshot branches
+
+  [ Matthias Klose ]
+  * Remove the autopkg test for a genuine LLVM bug.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 06 Mar 2019 10:16:17 +0100
+
 llvm-toolchain-8 (1:8~+rc2-1~exp2) unstable; urgency=medium
 
   * Activate -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN for old
