@@ -1,0 +1,26 @@
+Index: llvm-toolchain-snapshot_9~svn339515.orig/lib/ExecutionEngine/PerfJITEvents/PerfJITEventListener.cpp
+===================================================================
+--- llvm-toolchain-snapshot_9~svn339515.orig/lib/ExecutionEngine/PerfJITEvents/PerfJITEventListener.cpp	(révision 355787)
++++ llvm-toolchain-snapshot_9~svn339515/lib/ExecutionEngine/PerfJITEvents/PerfJITEventListener.cpp	(copie de travail)
+@@ -265,16 +265,16 @@
+       consumeError(AddrOrErr.takeError());
+       continue;
+     }
+-    uint64_t Addr = *AddrOrErr;
+     uint64_t Size = P.second;
+-
++    object::SectionedAddress Address;
++    Address.Address = *AddrOrErr;
+     // According to spec debugging info has to come before loading the
+     // corresonding code load.
+     DILineInfoTable Lines = Context->getLineInfoForAddressRange(
+-        Addr, Size, FileLineInfoKind::AbsoluteFilePath);
++        Address, Size, FileLineInfoKind::AbsoluteFilePath);
+ 
+-    NotifyDebug(Addr, Lines);
+-    NotifyCode(Name, Addr, Size);
++    NotifyDebug(*AddrOrErr, Lines);
++    NotifyCode(Name, *AddrOrErr, Size);
+   }
+ 
+   Dumpstream->flush();
