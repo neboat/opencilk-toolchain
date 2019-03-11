@@ -3,6 +3,7 @@ llvm-toolchain-snapshot (1:9~svn355787-1~exp1) experimental; urgency=medium
   * Revert the "Remove usr/lib/llvm-@LLVM_VERSION@/lib/LLVM*.so"
     change as it breaks on old version of Debian & Ubuntu
   * New snapshot release
+  * libOptRemarks.so has been renamed to libRemarks.so
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 10 Mar 2019 15:59:52 +0100
 
