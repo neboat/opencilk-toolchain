@@ -222,10 +222,11 @@ libomp.so.5 libomp5 #MINVER#
  __kmp_thread_pool@VERSION 0.20130412
  __kmp_thread_pool_nth@VERSION 0.20130412
 #MISSING: 3.9.0-1# __kmp_wait_32@VERSION 0.20140926
+ __kmp_wait_4@VERSION 9
  __kmp_wait_64@VERSION 0.20140926
 #MISSING: 3.9.0-1# __kmp_wait_oncore@VERSION 0.20140926
 #MISSING: 0.20140926# __kmp_wait_sleep@VERSION 0.20130715
- __kmp_wait_yield_4@VERSION 0.20130715
+#MISSING: 1:9~svn355810-1~exp1+0~20190311081911.852~1.gbp0f20a4# __kmp_wait_yield_4@VERSION 0.20130715
 #MISSING: 3.8.0# __kmp_wait_yield_8@VERSION 0.20130715
  __kmpc_alloc@VERSION 8
  __kmpc_atomic_10@VERSION 0.20130412
@@ -1038,6 +1039,8 @@ libomp.so.5 libomp5 #MINVER#
  omp_get_schedule@VERSION 0.20130412
  omp_get_schedule_@OMP_3.0 0.20131209
  omp_get_schedule_@VERSION 0.20130412
+ omp_get_supported_active_levels@VERSION 9
+ omp_get_supported_active_levels_@VERSION 9
  omp_get_team_num@OMP_4.0 0.20131209
  omp_get_team_num@VERSION 0.20130715
  omp_get_team_num_@OMP_4.0 0.20131209
