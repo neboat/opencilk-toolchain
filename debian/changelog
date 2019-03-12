@@ -1,3 +1,9 @@
+llvm-toolchain-8 (1:8~+rc5-1) unstable; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 12 Mar 2019 12:27:41 +0100
+
 llvm-toolchain-8 (1:8~+rc4-1) unstable; urgency=medium
 
   * New snapshot release
