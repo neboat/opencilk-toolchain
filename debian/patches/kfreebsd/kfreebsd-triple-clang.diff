@@ -95,7 +95,7 @@ Index: llvm-toolchain-snapshot_9~svn354236/clang/lib/Driver/ToolChains/KFreeBSD.
 ===================================================================
 --- /dev/null
 +++ llvm-toolchain-snapshot_9~svn354236/clang/lib/Driver/ToolChains/KFreeBSD.cpp
-@@ -0,0 +1,459 @@
+@@ -0,0 +1,458 @@
 +//===--- KFreeBSD.cpp - kFreeBSD ToolChain Implementations --------*- C++ -*-===//
 +//
 +//                     The LLVM Compiler Infrastructure
@@ -544,7 +544,6 @@ Index: llvm-toolchain-snapshot_9~svn354236/clang/lib/Driver/ToolChains/KFreeBSD.
 +    Res |= SanitizerKind::DataFlow;
 +    Res |= SanitizerKind::Leak;
 +    Res |= SanitizerKind::Thread;
-+    Res |= SanitizerKind::Efficiency;
 +    Res |= SanitizerKind::Scudo;
 +    Res |= SanitizerKind::HWAddress;
 +    Res |= SanitizerKind::KernelHWAddress;
