@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:9~svn356321-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 16 Mar 2019 11:57:35 +0100
+
 llvm-toolchain-snapshot (1:9~svn355787-1~exp1) experimental; urgency=medium
 
   * Revert the "Remove usr/lib/llvm-@LLVM_VERSION@/lib/LLVM*.so"
@@ -84,12 +90,35 @@ llvm-toolchain-snapshot (1:9~svn351375-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:59:29 +0100
 
-llvm-toolchain-8 (1:8~+rc2-1~exp2) unstable; urgency=medium
+llvm-toolchain-8 (1:8~+rc5-1) unstable; urgency=medium
 
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 12 Mar 2019 12:27:41 +0100
+
+llvm-toolchain-8 (1:8~+rc4-1) unstable; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 10 Mar 2019 11:06:14 +0100
+
+llvm-toolchain-8 (1:8~+rc3-1~exp1) unstable; urgency=medium
+
+  * New snapshot release
   * Activate -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN for all
     gcc
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 08 Feb 2019 21:34:32 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 28 Feb 2019 12:33:57 +0100
+
+llvm-toolchain-8 (1:8~+rc2-1~exp3) UNRELEASED; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Commit Ubuntu delta to 8 and snapshot branches
+
+  [ Matthias Klose ]
+  * Remove the autopkg test for a genuine LLVM bug.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 06 Mar 2019 10:16:17 +0100
 
 llvm-toolchain-8 (1:8~+rc2-1~exp1) unstable; urgency=medium
 
