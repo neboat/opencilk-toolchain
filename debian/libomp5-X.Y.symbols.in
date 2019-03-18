@@ -763,8 +763,8 @@ libomp.so.5 libomp5 #MINVER#
  __kmpc_end_serialized_parallel@VERSION 0.20130412
  __kmpc_end_single@VERSION 0.20130412
  __kmpc_end_taskgroup@VERSION 0.20130412
- __kmpc_end_taskq@VERSION 0.20130412
- __kmpc_end_taskq_task@VERSION 0.20130412
+#MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_end_taskq@VERSION 0.20130412
+#MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_end_taskq_task@VERSION 0.20130412
  __kmpc_flush@VERSION 0.20130412
  __kmpc_for_static_fini@VERSION 0.20130412
  __kmpc_for_static_init_4@VERSION 0.20130412
@@ -813,14 +813,14 @@ libomp.so.5 libomp5 #MINVER#
  __kmpc_set_lock@VERSION 0.20130412
  __kmpc_set_nest_lock@VERSION 0.20130412
  __kmpc_single@VERSION 0.20130412
- __kmpc_task@VERSION 0.20130412
- __kmpc_task_buffer@VERSION 0.20130412
+#MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_task@VERSION 0.20130412
+#MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_task_buffer@VERSION 0.20130412
  __kmpc_task_reduction_get_th_data@VERSION 5.0
  __kmpc_task_reduction_init@VERSION 5.0
  __kmpc_taskgroup@VERSION 0.20130412
  __kmpc_taskloop@VERSION 3.9.0
- __kmpc_taskq@VERSION 0.20130412
- __kmpc_taskq_task@VERSION 0.20130412
+#MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_taskq@VERSION 0.20130412
+#MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_taskq_task@VERSION 0.20130412
  __kmpc_team_static_init_4@VERSION 0.20140926
  __kmpc_team_static_init_4u@VERSION 0.20140926
  __kmpc_team_static_init_8@VERSION 0.20140926
