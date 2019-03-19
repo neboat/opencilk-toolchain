@@ -1,3 +1,9 @@
+llvm-toolchain-8 (1:8-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 19 Mar 2019 21:57:02 +0100
+
 llvm-toolchain-8 (1:8~+rc5-2) unstable; urgency=medium
 
   * Try to fix a mips64el FTBFS
