@@ -128,3 +128,8 @@ kfreebsd/lldb_source_Host_freebsd_Host.cpp.diff
 kfreebsd/lldb_source_Plugins_Process_FreeBSD.diff
 kfreebsd/tools_llvm-shlib_CMakeLists.txt.diff
 mips64el-fix.diff
+
+# patches for intel-opencl-clang
+OpenCL-Change-type-of-block-pointer-for-OpenCL.patch
+OpenCL-Simplify-LLVM-IR-generated-for-OpenCL-blocks.patch
+OpenCL-Fix-assertion-due-to-blocks.patch
