@@ -1,7 +1,12 @@
 llvm-toolchain-8 (1:8-2) UNRELEASED; urgency=medium
 
   [ Timo Aaltonen ]
-  * import patches for intel-opencl-clang
+  * import patches for intel-opencl-clang: they are used to fix various issues
+    with opengl and clang-8, and are taken from llvm master branch.
+    - Fix pointer blocks on OpenCL functions, that never pointed to real
+      functions
+    - Fix assertion errors on some OpenCL functions
+    - Refactor a little bit OpenCL calls, by emitting direct block calls.
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 20 Mar 2019 14:36:40 +0100
 
