@@ -5,7 +5,7 @@ llvm-toolchain-8 (1:8-2) unstable; urgency=medium
     See https://bugs.llvm.org/show_bug.cgi?id=41204
 
   [ Timo Aaltonen ]
-  * import patches for intel-opencl-clang: they are used to fix various issues
+  * import patches for intel-opencl-clang: they fix various issues
     with opengl and clang-8, and are taken from llvm master branch.
     - Fix pointer blocks on OpenCL functions, that never pointed to real
       functions
