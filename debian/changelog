@@ -1,4 +1,8 @@
-llvm-toolchain-8 (1:8-2) UNRELEASED; urgency=medium
+llvm-toolchain-8 (1:8-2) unstable; urgency=medium
+
+  * Fix the search path on mips64el (which is causing the stage2
+    build of mips64el to fail
+    See https://bugs.llvm.org/show_bug.cgi?id=41204
 
   [ Timo Aaltonen ]
   * import patches for intel-opencl-clang: they are used to fix various issues
