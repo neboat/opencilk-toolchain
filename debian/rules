@@ -96,7 +96,7 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armhf))
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=armv7l-unknown-linux-gnueabihf
 endif
 
-ifneq (,$(findstring $(DEB_HOST_ARCH),mips64el))
+ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
 # avoid an issue with search path on mips64el
 # https://bugs.llvm.org/show_bug.cgi?id=41204
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=mips64el-linux-gnuabi64

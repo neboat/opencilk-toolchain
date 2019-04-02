@@ -1,3 +1,9 @@
+llvm-toolchain-8 (1:8-3) unstable; urgency=medium
+
+  * Fix the FTBFS on mips (introduced by my previous change)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 02 Apr 2019 11:57:08 +0200
+
 llvm-toolchain-8 (1:8-2) unstable; urgency=medium
 
   * Fix the search path on mips64el (which is causing the stage2
