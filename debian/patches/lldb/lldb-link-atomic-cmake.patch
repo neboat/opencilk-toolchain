@@ -6,11 +6,11 @@ Last-Update: 2016-07-27
  lldb/cmake/LLDBDependencies.cmake |    6 ++++++
  1 file changed, 6 insertions(+)
 
-Index: llvm-toolchain-snapshot_9~svn351647/lldb/source/Utility/CMakeLists.txt
+Index: llvm-toolchain-snapshot_9~svn357377/lldb/source/Utility/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/lldb/source/Utility/CMakeLists.txt
-+++ llvm-toolchain-snapshot_9~svn351647/lldb/source/Utility/CMakeLists.txt
-@@ -32,6 +32,14 @@ endif()
+--- llvm-toolchain-snapshot_9~svn357377.orig/lldb/source/Utility/CMakeLists.txt
++++ llvm-toolchain-snapshot_9~svn357377/lldb/source/Utility/CMakeLists.txt
+@@ -2,6 +2,13 @@ set(LLDB_SYSTEM_LIBS)
  
  list(APPEND LLDB_SYSTEM_LIBS ${system_libs})
  
@@ -21,7 +21,6 @@ Index: llvm-toolchain-snapshot_9~svn351647/lldb/source/Utility/CMakeLists.txt
 +  list(APPEND LLDB_SYSTEM_LIBS atomic)
 +endif()
 +
-+
- if (LLVM_BUILD_STATIC)
-   if (NOT LLDB_DISABLE_PYTHON)
-     list(APPEND LLDB_SYSTEM_LIBS python2.7 util)
+ if (CMAKE_SYSTEM_NAME MATCHES "Windows")
+   list(APPEND LLDB_SYSTEM_LIBS ws2_32 rpcrt4)
+ endif ()
