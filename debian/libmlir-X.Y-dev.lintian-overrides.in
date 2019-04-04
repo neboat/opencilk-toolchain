@@ -1,0 +1,18 @@
+# Not multiarch ready
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRAffineOps.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRAnalysis.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRDialect.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIREDSC.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRExecutionEngine.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRFxpMathOps.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRIR.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRLLVMIR.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRParser.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRPass.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRQuantization.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRStandardOps.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRSupport.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRTargetLLVMIR.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRTransforms.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRTranslation.a
+libmlir-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory usr/lib/llvm-@LLVM_VERSION@/lib/libMLIRVectorOps.a

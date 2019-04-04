@@ -304,6 +304,13 @@ override_dh_auto_configure: preconfigure
 	ln -s ../compiler-rt .; \
 	readlink compiler-rt
 
+	cd projects/ && \
+	if test -h mlir; then \
+		rm mlir; \
+	fi; \
+	ln -s ../mlir .; \
+	readlink mlir
+
 	if test "$(OPENMP_ENABLE)" = yes; then \
 		cd projects/ && \
 		if test -h openmp; then \
@@ -727,7 +734,9 @@ override_dh_install:
 ifeq (${POLLY_ENABLE},yes)
 # only for arch:any builds
 ifneq (,$(filter libclang-common-$(LLVM_VERSION)-dev, $(shell dh_listpackages)))
-	dh_install -p libclang-common-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly
+	if test ! -f debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/PollyConfig.cmake; then \
+	dh_install -p libclang-common-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly; \
+	fi
 # On old Debian & Ubuntu, removing the files is necessary
 	rm -rf debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
 else
@@ -779,6 +788,9 @@ endif
 
 # Libcxxabi
 	$(MAKE) $(MAKE) -C libcxxabi/build check-libcxxabi || true
+
+# MLIR
+	$(MAKE) $(NJOBS) -C $(TARGET_BUILD_STAGE2) check-mlir || true
 
 # LLDB tests
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))

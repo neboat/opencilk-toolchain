@@ -606,3 +606,20 @@ Description: LLVM low level support for a standard C++ library (development file
  .
    * Correctness as defined by the C++ standards.
    * Provide a portable sublayer to ease the porting of libc++
+
+Package: libmlir-9-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+#Depends: libc++abi1-9 (= ${binary:Version}), ${misc:Depends}
+#Breaks: libc++abi-dev (<= 44)
+Provides: libmlir-x.y-dev
+Conflicts: libmlir-x.y-dev
+Replaces: libmlir-x.y-dev
+Description: Multi-Level Intermediate Representation (development files)
+ The MLIR project aims to define a common intermediate representation (IR) that
+ will unify the infrastructure required to execute high performance machine
+ learning models in TensorFlow and similar ML frameworks. This project will
+ include the application of HPC techniques, along with integration of search
+ algorithms like reinforcement learning. This project aims to reduce the cost
+ to bring up new hardware, and improve usability for existing TensorFlow users.

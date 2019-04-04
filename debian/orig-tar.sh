@@ -9,6 +9,7 @@
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-openmp.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-libcxx.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig-libcxxabi.tar.bz2
+# llvm-toolchain-snapshot-3.2_3.2repack.orig-mlir.tar.bz2
 # llvm-toolchain-snapshot-3.2_3.2repack.orig.tar.bz2
 
 set -e
@@ -192,6 +193,13 @@ checkout_sources openmp $(get_svn_url openmp $BRANCH $TAG) $OPENMP_TARGET "$BRAN
 rm -rf $OPENMP_TARGET/www/
 tar jcf $FULL_VERSION.orig-openmp.tar.bz2 $OPENMP_TARGET
 rm -rf $OPENMP_TARGET
+
+# MLIR
+MLIR_TARGET=mlir_$VERSION
+git clone https://github.com/tensorflow/mlir.git $MLIR_TARGET
+rm -rf $MLIR_TARGET/.git
+tar jcf $FULL_VERSION.orig-mlir.tar.bz2 $MLIR_TARGET
+rm -rf $MLIR_TARGET
 
 # LIBCXX
 LIBCXX_TARGET=libcxx_$VERSION
