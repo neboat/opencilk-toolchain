@@ -3,6 +3,7 @@ llvm-toolchain-snapshot (1:9~svn356321-1~exp1) experimental; urgency=medium
   * New snapshot release
   * Remove libc++fs.a (done upstream)
   * add clang-doc in clang-tools
+  * python2.7/site-packages/readline.so removed from liblldb
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 16 Mar 2019 11:57:35 +0100
 
