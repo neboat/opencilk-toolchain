@@ -9,7 +9,7 @@ LLVM_ARCHIVE=llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig.tar.bz2
 echo "unpack of $LLVM_ARCHIVE"
 tar jxf $LLVM_ARCHIVE
 cd llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION/ || ( echo "Bad SVN_REV:\"$SVN_REV\"" && exit 1 )
-for f in ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-clang.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-clang-tools-extra.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-compiler-rt.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-lldb.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-lld.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-polly.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-libcxxabi.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-libcxx.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-openmp.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-mlir.tar.bz2; do
+for f in ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-clang.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-clang-tools-extra.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-compiler-rt.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-lld.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-lldb.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-polly.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-libcxxabi.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-libcxx.tar.bz2 ../llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~$VERSION.orig-openmp.tar.bz2; do
 	echo "Unpack of $f"
  	tar jxf $f
  done
@@ -23,7 +23,6 @@ ln -s lld_$MAJOR_VERSION~$VERSION lld
 ln -s openmp_$MAJOR_VERSION~$VERSION openmp
 ln -s libcxx_$MAJOR_VERSION~$VERSION libcxx
 ln -s libcxxabi_$MAJOR_VERSION~$VERSION libcxxabi
-ln -s mlir_$MAJOR_VERSION~$VERSION mlir
 
 cp -R ../snapshot/debian .
 QUILT_PATCHES=debian/patches/ quilt push -a --fuzz=0
