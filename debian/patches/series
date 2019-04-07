@@ -95,6 +95,7 @@ bootstrap-fix-include-next.diff
 clangd-atomic-cmake.patch
 
 # Fix docs
+#  https://reviews.llvm.org/D60380
 remove-apple-clang-manpage.diff
 0049-Use-Debian-provided-MathJax-everywhere.patch
 
