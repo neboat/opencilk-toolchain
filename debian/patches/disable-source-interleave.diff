@@ -1,10 +1,10 @@
-Index: llvm-toolchain-snapshot_9~svn354439/test/tools/llvm-objdump/X86/source-interleave-x86_64.ll
+Index: llvm-toolchain-snapshot_9~svn357877/test/tools/llvm-objdump/X86/source-interleave-x86_64.ll
 ===================================================================
---- llvm-toolchain-snapshot_9~svn354439.orig/test/tools/llvm-objdump/X86/source-interleave-x86_64.ll
-+++ llvm-toolchain-snapshot_9~svn354439/test/tools/llvm-objdump/X86/source-interleave-x86_64.ll
-@@ -12,6 +12,7 @@
- ;  RUN: FileCheck --input-file %t2 --check-prefix="SOURCE" %t.ll
- ;  RUN: FileCheck --input-file %t3 --check-prefix="SOURCE" %t.ll
+--- llvm-toolchain-snapshot_9~svn357877.orig/test/tools/llvm-objdump/X86/source-interleave-x86_64.ll
++++ llvm-toolchain-snapshot_9~svn357877/test/tools/llvm-objdump/X86/source-interleave-x86_64.ll
+@@ -10,6 +10,7 @@
+ ;  RUN: FileCheck --check-prefix=LINES %t.ll < %t0
+ ;  RUN: FileCheck --check-prefix=SOURCE --strict-whitespace %t.ll < %t2
  ; ModuleID = 'source-interleave-x86_64.bc'
 +; XFAIL: *
  source_filename = "source-interleave-x86_64.c"
