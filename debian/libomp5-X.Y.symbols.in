@@ -194,7 +194,7 @@ libomp.so.5 libomp5 #MINVER#
  OMP_3.1@OMP_3.1 0.20131209
  OMP_4.0@OMP_4.0 0.20131209
  OMP_4.5@OMP_4.5 7
- OMP_NULL_ALLOCATOR@VERSION 8
+#MISSING: 9# OMP_NULL_ALLOCATOR@VERSION 8
  VERSION@VERSION 0.20130412
  _You_must_link_with_Intel_OpenMP_library@VERSION 0.20130412
  _You_must_link_with_exactly_one_OpenMP_library@VERSION 0.20130412
@@ -220,7 +220,7 @@ libomp.so.5 libomp5 #MINVER#
  __kmp_release_64@VERSION 0.20140926
 #MISSING: 3.9.0-1# __kmp_release_oncore@VERSION 0.20140926
  __kmp_thread_pool@VERSION 0.20130412
- __kmp_thread_pool_nth@VERSION 0.20130412
+#MISSING: 9# __kmp_thread_pool_nth@VERSION 0.20130412
 #MISSING: 3.9.0-1# __kmp_wait_32@VERSION 0.20140926
  __kmp_wait_4@VERSION 9
  __kmp_wait_64@VERSION 0.20140926
@@ -727,6 +727,7 @@ libomp.so.5 libomp5 #MINVER#
  __kmpc_copyprivate@VERSION 0.20130412
  __kmpc_critical@VERSION 0.20130412
  __kmpc_critical_with_hint@VERSION 3.8.0
+ __kmpc_destroy_allocator@VERSION 9
  __kmpc_destroy_lock@VERSION 0.20130412
  __kmpc_destroy_nest_lock@VERSION 0.20130412
  __kmpc_dispatch_fini_4@VERSION 0.20130412
@@ -781,6 +782,7 @@ libomp.so.5 libomp5 #MINVER#
  __kmpc_global_num_threads@VERSION 0.20130412
  __kmpc_global_thread_num@VERSION 0.20130412
  __kmpc_in_parallel@VERSION 0.20130412
+ __kmpc_init_allocator@VERSION 9
  __kmpc_init_lock@VERSION 0.20130412
  __kmpc_init_lock_with_hint@VERSION 3.8.0
  __kmpc_init_nest_lock@VERSION 0.20130412
@@ -870,6 +872,7 @@ libomp.so.5 libomp5 #MINVER#
  kmp_get_stacksize_s_@VERSION 0.20130412
  kmp_malloc@VERSION 0.20130412
  kmp_malloc_@VERSION 0.20130412
+ kmp_max_mem_alloc@VERSION 9
  (arch=!armhf !mips64el)kmp_mutex_impl_info@VERSION 7
  kmp_realloc@VERSION 0.20130412
  kmp_realloc_@VERSION 0.20130412
@@ -919,14 +922,18 @@ libomp.so.5 libomp5 #MINVER#
  kmpc_set_stacksize_s@VERSION 0.20130412
  kmpc_unset_affinity_mask_proc@VERSION 0.20130412
  omp_alloc@VERSION 8
- omp_alloc_@VERSION 8
+#MISSING: 9# omp_alloc_@VERSION 8
  omp_capture_affinity@VERSION 8
  omp_capture_affinity_@VERSION 8
  omp_cgroup_mem_alloc@VERSION 8
  omp_const_mem_alloc@VERSION 8
+ omp_const_mem_space@VERSION 9
  omp_control_tool@VERSION 6.0
  omp_control_tool_@VERSION 8
  omp_default_mem_alloc@VERSION 8
+ omp_default_mem_space@VERSION 9
+ omp_destroy_allocator@VERSION 9
+ omp_destroy_allocator_@VERSION 9
  omp_destroy_lock@OMP_1.0 0.20131209
  omp_destroy_lock@OMP_3.0 0.20131209
  omp_destroy_lock@VERSION 0.20130412
@@ -942,7 +949,7 @@ libomp.so.5 libomp5 #MINVER#
  omp_display_affinity@VERSION 8
  omp_display_affinity_@VERSION 8
  omp_free@VERSION 8
- omp_free_@VERSION 8
+#MISSING: 9# omp_free_@VERSION 8
  omp_get_active_level@OMP_3.0 0.20131209
  omp_get_active_level@VERSION 0.20130412
  omp_get_active_level_@OMP_3.0 0.20131209
@@ -1066,6 +1073,7 @@ libomp.so.5 libomp5 #MINVER#
  omp_get_wtime_@OMP_2.0 0.20131209
  omp_get_wtime_@VERSION 0.20130412
  omp_high_bw_mem_alloc@VERSION 8
+ omp_high_bw_mem_space@VERSION 9
  omp_in_final@OMP_3.1 0.20131209
  omp_in_final@VERSION 0.20130412
  omp_in_final_@OMP_3.1 0.20131209
@@ -1074,6 +1082,8 @@ libomp.so.5 libomp5 #MINVER#
  omp_in_parallel@VERSION 0.20130412
  omp_in_parallel_@OMP_1.0 0.20131209
  omp_in_parallel_@VERSION 0.20130412
+ omp_init_allocator@VERSION 9
+ omp_init_allocator_@VERSION 9
  omp_init_lock@OMP_1.0 0.20131209
  omp_init_lock@OMP_3.0 0.20131209
  omp_init_lock@VERSION 0.20130412
@@ -1095,7 +1105,10 @@ libomp.so.5 libomp5 #MINVER#
  omp_is_initial_device_@OMP_4.0 0.20141212
  omp_is_initial_device_@VERSION 0.20141212
  omp_large_cap_mem_alloc@VERSION 8
+ omp_large_cap_mem_space@VERSION 9
  omp_low_lat_mem_alloc@VERSION 8
+ omp_low_lat_mem_space@VERSION 9
+ omp_null_allocator@VERSION 9
  omp_pause_resource@VERSION 9
  omp_pause_resource_@VERSION 9
  omp_pause_resource_all@VERSION 9
