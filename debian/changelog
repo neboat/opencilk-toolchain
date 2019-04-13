@@ -4,7 +4,6 @@ llvm-toolchain-snapshot (1:9~svn358327-1~exp1) experimental; urgency=medium
   * Remove libc++fs.a (done upstream)
   * add clang-doc in clang-tools
   * python2.7/site-packages/readline.so removed from liblldb
-  * New snapshot release
   * libOptRemarks.so has been renamed to libRemarks.so
   * new symbol: omp_get_supported_active_levels
 
