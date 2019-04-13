@@ -1,27 +1,12 @@
-llvm-toolchain-snapshot (1:9~svn356321-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:9~svn358327-1~exp1) experimental; urgency=medium
 
   * New snapshot release
   * Remove libc++fs.a (done upstream)
   * add clang-doc in clang-tools
   * python2.7/site-packages/readline.so removed from liblldb
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 16 Mar 2019 11:57:35 +0100
-
-llvm-toolchain-snapshot (1:9~svn355787-1~exp1) experimental; urgency=medium
-
-  * Revert the "Remove usr/lib/llvm-@LLVM_VERSION@/lib/LLVM*.so"
-    change as it breaks on old version of Debian & Ubuntu
   * New snapshot release
   * libOptRemarks.so has been renamed to libRemarks.so
   * new symbol: omp_get_supported_active_levels
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 10 Mar 2019 15:59:52 +0100
-
-llvm-toolchain-snapshot (1:9~svn354105-1~exp2) UNRELEASED; urgency=medium
-
-  [ Sylvestre Ledru ]
-  * Revert the "Remove usr/lib/llvm-@LLVM_VERSION@/lib/LLVM*.so"
-    change as it breaks on old version of Debian & Ubuntu
 
   [ Gianfranco Costamagna ]
   * Commit Ubuntu delta to 8 and snapshot branches
@@ -29,7 +14,7 @@ llvm-toolchain-snapshot (1:9~svn354105-1~exp2) UNRELEASED; urgency=medium
   [ Matthias Klose ]
   * Remove the autopkg test for a genuine LLVM bug.
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 17 Feb 2019 09:44:01 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 13 Apr 2019 11:06:00 +0200
 
 llvm-toolchain-snapshot (1:9~svn354105-1~exp1) experimental; urgency=medium
 
