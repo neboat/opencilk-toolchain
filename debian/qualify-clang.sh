@@ -520,7 +520,7 @@ int main() {
           std::filesystem::path
       >::value, "");
 }' > foo.cpp
-clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -lc++fs -o o
+clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -o o
 ./o > /dev/null
 
 # Bug LP#1586215
