@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:9~svn358327-1~exp2) experimental; urgency=medium
+
+  * No longer install lldb-test (disable upstream in 358574)
+
+ --
+
 llvm-toolchain-snapshot (1:9~svn358327-1~exp1) experimental; urgency=medium
 
   * New snapshot release
