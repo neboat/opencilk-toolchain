@@ -99,10 +99,6 @@ clangd-atomic-cmake.patch
 remove-apple-clang-manpage.diff
 0049-Use-Debian-provided-MathJax-everywhere.patch
 
-# reproducible
-# See https://reviews.llvm.org/D60379
-reproducible-pch.diff
-
 # Hurd port
 hurd/hurd-pathmax.diff
 hurd/hurd-EIEIO-undef.diff
