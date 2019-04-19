@@ -1,8 +1,8 @@
-Index: llvm-toolchain-7-7.0.1/CMakeLists.txt
+Index: llvm-toolchain-snapshot_9~svn358740/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-7-7.0.1.orig/CMakeLists.txt
-+++ llvm-toolchain-7-7.0.1/CMakeLists.txt
-@@ -821,7 +821,7 @@ if(LLVM_TARGET_IS_CROSSCOMPILE_HOST)
+--- llvm-toolchain-snapshot_9~svn358740.orig/CMakeLists.txt
++++ llvm-toolchain-snapshot_9~svn358740/CMakeLists.txt
+@@ -872,7 +872,7 @@ if(LLVM_TARGET_IS_CROSSCOMPILE_HOST)
  # (this is a variable that CrossCompile sets on recursive invocations)
  endif()
  

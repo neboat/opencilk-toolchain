@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_9~svn353038/lib/Support/Triple.cpp
+Index: llvm-toolchain-snapshot_9~svn358740/lib/Support/Triple.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn353038.orig/lib/Support/Triple.cpp
-+++ llvm-toolchain-snapshot_9~svn353038/lib/Support/Triple.cpp
+--- llvm-toolchain-snapshot_9~svn358740.orig/lib/Support/Triple.cpp
++++ llvm-toolchain-snapshot_9~svn358740/lib/Support/Triple.cpp
 @@ -181,7 +181,7 @@ StringRef Triple::getOSTypeName(OSType K
    case FreeBSD: return "freebsd";
    case Fuchsia: return "fuchsia";
@@ -11,7 +11,7 @@ Index: llvm-toolchain-snapshot_9~svn353038/lib/Support/Triple.cpp
    case Linux: return "linux";
    case Lv2: return "lv2";
    case MacOSX: return "macosx";
-@@ -478,7 +478,7 @@ static Triple::OSType parseOS(StringRef
+@@ -479,7 +479,7 @@ static Triple::OSType parseOS(StringRef
      .StartsWith("freebsd", Triple::FreeBSD)
      .StartsWith("fuchsia", Triple::Fuchsia)
      .StartsWith("ios", Triple::IOS)
@@ -20,11 +20,11 @@ Index: llvm-toolchain-snapshot_9~svn353038/lib/Support/Triple.cpp
      .StartsWith("linux", Triple::Linux)
      .StartsWith("lv2", Triple::Lv2)
      .StartsWith("macos", Triple::MacOSX)
-Index: llvm-toolchain-snapshot_9~svn353038/lib/Support/Unix/Path.inc
+Index: llvm-toolchain-snapshot_9~svn358740/lib/Support/Unix/Path.inc
 ===================================================================
---- llvm-toolchain-snapshot_9~svn353038.orig/lib/Support/Unix/Path.inc
-+++ llvm-toolchain-snapshot_9~svn353038/lib/Support/Unix/Path.inc
-@@ -61,7 +61,7 @@
+--- llvm-toolchain-snapshot_9~svn358740.orig/lib/Support/Unix/Path.inc
++++ llvm-toolchain-snapshot_9~svn358740/lib/Support/Unix/Path.inc
+@@ -62,7 +62,7 @@
  #define FSTATVFS fstatvfs
  #define STATVFS_F_FRSIZE(vfs) vfs.f_frsize
  #else
