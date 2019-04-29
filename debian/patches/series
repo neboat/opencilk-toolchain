@@ -132,3 +132,4 @@ kfreebsd/tools_llvm-shlib_CMakeLists.txt.diff
 OpenCL-Change-type-of-block-pointer-for-OpenCL.patch
 OpenCL-Simplify-LLVM-IR-generated-for-OpenCL-blocks.patch
 OpenCL-Fix-assertion-due-to-blocks.patch
+ubuntu-eoan-distro.patch

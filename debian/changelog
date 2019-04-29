@@ -1,3 +1,13 @@
+llvm-toolchain-8 (1:8.0.1-1~svn) UNRELEASED; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * New upstream release (prepare)
+
+  [ Gianfranco Costamagna ]
+  * Add Ubuntu eoan to supported ubuntu distro
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 07 Apr 2019 13:59:46 +0200
+
 llvm-toolchain-8 (1:8-4) unstable; urgency=medium
 
   * Try to disable mips64el-fix.diff (struct_kernel_stat_sz)
