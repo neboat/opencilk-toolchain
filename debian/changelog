@@ -1,3 +1,11 @@
+llvm-toolchain-8 (1:8-4) unstable; urgency=medium
+
+  * Try to disable mips64el-fix.diff (struct_kernel_stat_sz)
+    to workaround a mips issue with some new C{XX}FLAGS
+    see https://reviews.llvm.org/D59702
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 29 Apr 2019 08:58:57 +0200
+
 llvm-toolchain-8 (1:8-3) unstable; urgency=medium
 
   * Fix the FTBFS on mips (introduced by my previous change)
