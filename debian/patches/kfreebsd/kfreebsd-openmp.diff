@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/kmp.h
+Index: llvm-toolchain-snapshot_9~svn359759/openmp/runtime/src/kmp.h
 ===================================================================
---- llvm-toolchain-snapshot_9~svn358740.orig/openmp/runtime/src/kmp.h
-+++ llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/kmp.h
-@@ -1135,6 +1135,10 @@ extern kmp_uint64 __kmp_now_nsec();
+--- llvm-toolchain-snapshot_9~svn359759.orig/openmp/runtime/src/kmp.h
++++ llvm-toolchain-snapshot_9~svn359759/openmp/runtime/src/kmp.h
+@@ -1177,6 +1177,10 @@ extern kmp_uint64 __kmp_now_nsec();
  /* TODO: tune for KMP_OS_OPENBSD */
  #define KMP_INIT_WAIT 1024U /* initial number of spin-tests   */
  #define KMP_NEXT_WAIT 512U /* susequent number of spin-tests */
@@ -13,10 +13,10 @@ Index: llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/kmp.h
  #endif
  
  #if KMP_ARCH_X86 || KMP_ARCH_X86_64
-Index: llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/kmp_ftn_entry.h
+Index: llvm-toolchain-snapshot_9~svn359759/openmp/runtime/src/kmp_ftn_entry.h
 ===================================================================
---- llvm-toolchain-snapshot_9~svn358740.orig/openmp/runtime/src/kmp_ftn_entry.h
-+++ llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/kmp_ftn_entry.h
+--- llvm-toolchain-snapshot_9~svn359759.orig/openmp/runtime/src/kmp_ftn_entry.h
++++ llvm-toolchain-snapshot_9~svn359759/openmp/runtime/src/kmp_ftn_entry.h
 @@ -535,7 +535,7 @@ int FTN_STDCALL KMP_EXPAND_NAME(FTN_GET_
    int gtid;
  
@@ -26,10 +26,10 @@ Index: llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/kmp_ftn_entry.h
    gtid = __kmp_entry_gtid();
  #elif KMP_OS_WINDOWS
    if (!__kmp_init_parallel ||
-Index: llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/kmp_platform.h
+Index: llvm-toolchain-snapshot_9~svn359759/openmp/runtime/src/kmp_platform.h
 ===================================================================
---- llvm-toolchain-snapshot_9~svn358740.orig/openmp/runtime/src/kmp_platform.h
-+++ llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/kmp_platform.h
+--- llvm-toolchain-snapshot_9~svn359759.orig/openmp/runtime/src/kmp_platform.h
++++ llvm-toolchain-snapshot_9~svn359759/openmp/runtime/src/kmp_platform.h
 @@ -18,6 +18,7 @@
  #define KMP_OS_LINUX 0
  #define KMP_OS_DRAGONFLY 0
@@ -65,11 +65,11 @@ Index: llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/kmp_platform.h
  #undef KMP_OS_UNIX
  #define KMP_OS_UNIX 1
  #endif
-Index: llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/kmp_runtime.cpp
+Index: llvm-toolchain-snapshot_9~svn359759/openmp/runtime/src/kmp_runtime.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn358740.orig/openmp/runtime/src/kmp_runtime.cpp
-+++ llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/kmp_runtime.cpp
-@@ -8211,7 +8211,7 @@ __kmp_determine_reduction_method(
+--- llvm-toolchain-snapshot_9~svn359759.orig/openmp/runtime/src/kmp_runtime.cpp
++++ llvm-toolchain-snapshot_9~svn359759/openmp/runtime/src/kmp_runtime.cpp
+@@ -8228,7 +8228,7 @@ __kmp_determine_reduction_method(
  #if KMP_ARCH_X86_64 || KMP_ARCH_PPC64 || KMP_ARCH_AARCH64 || KMP_ARCH_MIPS64
  
  #if KMP_OS_LINUX || KMP_OS_DRAGONFLY || KMP_OS_FREEBSD || KMP_OS_NETBSD ||     \
@@ -78,19 +78,19 @@ Index: llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/kmp_runtime.cpp
  
      int teamsize_cutoff = 4;
  
-@@ -8239,7 +8239,7 @@ __kmp_determine_reduction_method(
+@@ -8256,7 +8256,7 @@ __kmp_determine_reduction_method(
  
  #elif KMP_ARCH_X86 || KMP_ARCH_ARM || KMP_ARCH_AARCH || KMP_ARCH_MIPS
  
--#if KMP_OS_LINUX || KMP_OS_WINDOWS || KMP_OS_HURD
-+#if KMP_OS_LINUX || KMP_OS_WINDOWS || KMP_OS_HURD || KMP_OS_KFREEBSD
+-#if KMP_OS_LINUX || KMP_OS_FREEBSD || KMP_OS_WINDOWS || KMP_OS_HURD
++#if KMP_OS_LINUX || KMP_OS_FREEBSD || KMP_OS_WINDOWS || KMP_OS_HURD || KMP_OS_KFREEBSD
  
      // basic tuning
  
-Index: llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/z_Linux_util.cpp
+Index: llvm-toolchain-snapshot_9~svn359759/openmp/runtime/src/z_Linux_util.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn358740.orig/openmp/runtime/src/z_Linux_util.cpp
-+++ llvm-toolchain-snapshot_9~svn358740/openmp/runtime/src/z_Linux_util.cpp
+--- llvm-toolchain-snapshot_9~svn359759.orig/openmp/runtime/src/z_Linux_util.cpp
++++ llvm-toolchain-snapshot_9~svn359759/openmp/runtime/src/z_Linux_util.cpp
 @@ -447,7 +447,7 @@ void __kmp_terminate_thread(int gtid) {
  static kmp_int32 __kmp_set_stack_info(int gtid, kmp_info_t *th) {
    int stack_data;
