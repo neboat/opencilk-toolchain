@@ -100,10 +100,6 @@ ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
 # avoid an issue with search path on mips64el
 # https://bugs.llvm.org/show_bug.cgi?id=41204
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=mips64el-linux-gnuabi64
-# Try to workaround another issue with struct_kernel_stat_sz
-# https://reviews.llvm.org/D59702
-  CFLAGS_EXTRA += -mabi=32
-  CXXFLAGS_EXTRA += -mabi=32
 endif
 
 
