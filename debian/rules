@@ -145,6 +145,10 @@ BOOTSTRAP_CXXFLAGS_EXTRA  = $(CXXFLAGS_EXTRA) # Nothing for now. Keeping in case
 CFLAGS_EXTRA             += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
 BOOTSTRAP_CFLAGS_EXTRA    = $(CFLAGS_EXTRA) # Nothing for now. Keeping in case we need it
 
+CFLAGS_EXTRA    += $(CFLAGS_EXTRA)   -flto=thin
+CXXFLAGS_EXTRA  += $(CXXFLAGS_EXTRA) -flto=thin
+LDFLAGS_EXTRA   += $(LDFLAGS_EXTRA)  -flto=thin
+
 # Enable polly (or not)
 POLLY_ENABLE=yes
 ifneq (,$(filter $(DEB_HOST_ARCH), powerpc powerpcspe))
