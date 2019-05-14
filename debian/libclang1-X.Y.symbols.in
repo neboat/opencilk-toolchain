@@ -70,6 +70,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_isDynamicCall@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isExternalSymbol@LLVM_@LLVM_VERSION@ 1:5.0~+rc1~
  clang_Cursor_isFunctionInlined@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_Cursor_isInlineNamespace@LLVM_@LLVM_VERSION@ 1:9~svn360566-1~
  clang_Cursor_isMacroBuiltin@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isMacroFunctionLike@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isNull@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
