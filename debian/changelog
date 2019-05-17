@@ -1,9 +1,8 @@
-llvm-toolchain-8 (1:8.0.1-1~svn) UNRELEASED; urgency=medium
+llvm-toolchain-8 (1:8.0.1~+rc1-1~exp1) experimental; urgency=medium
 
-  [ Sylvestre Ledru ]
-  * New upstream release (prepare)
+  * New testing release
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 13 May 2019 11:46:14 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 17 May 2019 08:33:53 +0200
 
 llvm-toolchain-8 (1:8-5) unstable; urgency=medium
 
