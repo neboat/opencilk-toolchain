@@ -1,5 +1,6 @@
 llvm-toolchain-snapshot (1:9~svn358688-1~exp1) experimental; urgency=medium
 
+<<<<<<<
   * New snapshot release
   * remove debian/patches/reproducible-pch.diff
     done upstream
@@ -15,6 +16,19 @@ llvm-toolchain-snapshot (1:9~svn358688-1~exp1) experimental; urgency=medium
   * libclang-X.Y: add clang_Cursor_isAnonymousRecordDecl and
     clang_Cursor_isInlineNamespace to the list of symbols
   * lldb-static-assert.diff (revert a patch failing the build)
+=======
+  * New snapshot release
+  * remove debian/patches/reproducible-pch.diff
+    done upstream
+  * No longer install lldb-test (disable upstream in 358574)
+  * Install lit-cpuid in llvm-9-tools
+  * libclang-X.Y: add clang_Cursor_isAnonymousRecordDecl and
+    clang_Cursor_isInlineNamespace to the list of symbols
+  * Install usr/lib/llvm-9/lib/{SampleAnalyzerPlugin.so,
+    CheckerDependencyHandlingAnalyzerPlugin.so,
+    CheckerOptionHandlingAnalyzerPlugin.so}
+    in libclang-9-dev
+>>>>>>>
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Apr 2019 19:05:45 +0200
 

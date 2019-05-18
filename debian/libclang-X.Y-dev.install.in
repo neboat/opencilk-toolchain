@@ -3,8 +3,6 @@ usr/lib/llvm-@LLVM_VERSION@/include/clang-c
 usr/lib/llvm-@LLVM_VERSION@/lib/libclang*a
 usr/lib/llvm-@LLVM_VERSION@/lib/libclang*so
 usr/lib/llvm-@LLVM_VERSION@/lib/libfindAllSymbols.a
-
-#usr/include/clang                  /usr/include/
-#usr/include/clang-c                /usr/include/
-#usr/lib/libclang.so                /usr/lib/
-#usr/lib/libclang*a                 /usr/lib/
+usr/lib/llvm-@LLVM_VERSION@/lib/SampleAnalyzerPlugin.so
+usr/lib/llvm-@LLVM_VERSION@/lib/CheckerDependencyHandlingAnalyzerPlugin.so
+usr/lib/llvm-@LLVM_VERSION@/lib/CheckerOptionHandlingAnalyzerPlugin.so
