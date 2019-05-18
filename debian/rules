@@ -219,6 +219,9 @@ ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 	CMAKE_EXTRA += -DLLVM_USE_PERF=yes
 endif
 
+# Use thinlto for the link phase
+CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
+
 DH_OPTIONS=
 OCAML_ENABLE= no
 OCAML_ARCHS := amd64 arm64 armhf i386 ppc64el s390x
