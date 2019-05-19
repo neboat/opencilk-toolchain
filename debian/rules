@@ -820,11 +820,6 @@ endif
 # Managed by debian build system
 	rm -f $(CURDIR)/$(TARGET_BUILD)/lib/python*/site-packages/lldb/_lldb.so
 
-# polly tests
-	if test "$(POLLY_ENABLE)" = yes; then \
-		cd $(TARGET_BUILD)/ && LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ $(MAKE) -C tools/polly/test/ check-polly || true; \
-	fi
-
 # The compression of the code coverage report is done in the
 # hook B21GetCoverageResults on the server
 	if test "$(CODECOVERAGE)" = "yes"; then \
