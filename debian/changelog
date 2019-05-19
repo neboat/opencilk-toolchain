@@ -1,6 +1,5 @@
 llvm-toolchain-snapshot (1:9~svn358688-1~exp1) experimental; urgency=medium
 
-<<<<<<<
   * New snapshot release
   * remove debian/patches/reproducible-pch.diff
     done upstream
@@ -16,7 +15,6 @@ llvm-toolchain-snapshot (1:9~svn358688-1~exp1) experimental; urgency=medium
   * libclang-X.Y: add clang_Cursor_isAnonymousRecordDecl and
     clang_Cursor_isInlineNamespace to the list of symbols
   * lldb-static-assert.diff (revert a patch failing the build)
-=======
   * New snapshot release
   * remove debian/patches/reproducible-pch.diff
     done upstream
@@ -28,7 +26,6 @@ llvm-toolchain-snapshot (1:9~svn358688-1~exp1) experimental; urgency=medium
     CheckerDependencyHandlingAnalyzerPlugin.so,
     CheckerOptionHandlingAnalyzerPlugin.so}
     in libclang-9-dev
->>>>>>>
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Apr 2019 19:05:45 +0200
 
@@ -110,6 +107,70 @@ llvm-toolchain-snapshot (1:9~svn351375-1~exp1) experimental; urgency=medium
   * Remove BugpointPasses.so & TestPlugin.so as they don't ship anymore
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:59:29 +0100
+
+llvm-toolchain-8 (1:8.0.1~+rc1-1~exp2) experimental; urgency=medium
+
+  * Use ThinLTO for the build
+    Option -DLLVM_ENABLE_LTO="Thin" added
+  * WebAssembly is now build by default, remove it from the
+    experimental list
+llvm-toolchain-8 (1:8.0.1~+rc1-1~exp1) experimental; urgency=medium
+
+  * New testing release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 17 May 2019 08:33:53 +0200
+
+llvm-toolchain-8 (1:8-5) unstable; urgency=medium
+
+  * Try another way to address the mips64el issue
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 13 May 2019 11:36:47 +0200
+
+llvm-toolchain-8 (1:8-4) unstable; urgency=medium
+
+  * Try to disable mips64el-fix.diff (struct_kernel_stat_sz)
+    to workaround a mips issue with some new C{XX}FLAGS
+    see https://reviews.llvm.org/D59702
+
+  [ Gianfranco Costamagna ]
+  * Add Ubuntu eoan to supported ubuntu distro
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 29 Apr 2019 08:58:57 +0200
+
+llvm-toolchain-8 (1:8-3) unstable; urgency=medium
+
+  * Fix the FTBFS on mips (introduced by my previous change)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 02 Apr 2019 11:57:08 +0200
+
+llvm-toolchain-8 (1:8-2) unstable; urgency=medium
+
+  * Fix the search path on mips64el (which is causing the stage2
+    build of mips64el to fail
+    See https://bugs.llvm.org/show_bug.cgi?id=41204
+
+  [ Timo Aaltonen ]
+  * import patches for intel-opencl-clang: they fix various issues
+    with opengl and clang-8, and are taken from llvm master branch.
+    - Fix pointer blocks on OpenCL functions, that never pointed to real
+      functions
+    - Fix assertion errors on some OpenCL functions
+    - Refactor a little bit OpenCL calls, by emitting direct block calls.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 20 Mar 2019 14:36:40 +0100
+
+llvm-toolchain-8 (1:8-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 19 Mar 2019 21:57:02 +0100
+
+llvm-toolchain-8 (1:8~+rc5-2) unstable; urgency=medium
+
+  * Try to fix a mips64el FTBFS
+    Cherry-pick of https://patches-gcc.linaro.org/patch/3032/
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 17 Mar 2019 20:18:19 +0100
 
 llvm-toolchain-8 (1:8~+rc5-1) unstable; urgency=medium
 
