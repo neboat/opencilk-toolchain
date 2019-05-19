@@ -5,7 +5,7 @@ llvm-toolchain-8 (1:8.0.1~+rc1-1~exp2) experimental; urgency=medium
   * WebAssembly is now build by default, remove it from the
     experimental list
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 19 May 2019 13:31:37 +0200
 
 llvm-toolchain-8 (1:8.0.1~+rc1-1~exp1) experimental; urgency=medium
 
