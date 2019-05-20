@@ -1,18 +1,11 @@
 llvm-toolchain-8 (1:8.0.1~+rc1-1~exp2) experimental; urgency=medium
 
-<<<<<<<
-  * Use ThinLTO for the build
-    Option -DLLVM_ENABLE_LTO="Thin" added
-  * WebAssembly is now build by default, remove it from the
-    experimental list
-=======
   * Build using thinlto on non stretch, xenial and trusty
     (fails with some undef symbols)
     Option -DLLVM_ENABLE_LTO="Thin" added
   * WebAssembly is now build by default, remove it from the
     experimental list
   * check-polly was executed twice
->>>>>>>
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 19 May 2019 13:31:37 +0200
 
