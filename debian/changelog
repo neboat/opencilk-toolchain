@@ -25,6 +25,8 @@ llvm-toolchain-snapshot (1:9~svn358688-1~exp1) experimental; urgency=medium
     CheckerDependencyHandlingAnalyzerPlugin.so,
     CheckerOptionHandlingAnalyzerPlugin.so}
     in libclang-9-dev
+  * Build using thinlto on non stretch, xenial and trusty
+    (fails with some undef symbols)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Apr 2019 19:05:45 +0200
 

@@ -26,6 +26,8 @@ ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
 endif
 
 VENDOR=$(shell lsb_release -is)
+DISTRO=$(shell lsb_release -sc)
+
 DH_VERSION := $(shell dpkg -s debhelper | grep '^Version' | awk '{print $$2}')
 
 DEB_HOST_MULTIARCH  ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
@@ -220,7 +222,10 @@ ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 endif
 
 # Use thinlto for the link phase
-#CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
+if test ! "$DISTRO" = "stretch" -a ! "$DISTRO" = "xenial"  -a ! "$DISTRO" = "trusty"; then
+# Don't enable for old distros
+	CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
+endif
 
 DH_OPTIONS=
 OCAML_ENABLE= no
