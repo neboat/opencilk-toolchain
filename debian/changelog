@@ -6,7 +6,6 @@ llvm-toolchain-snapshot (1:9~svn358688-1~exp1) experimental; urgency=medium
   * No longer install lldb-test (disable upstream in 358574)
   * Install lit-cpuid in llvm-9-tools
   * libclang-X.Y: add clang_Cursor_isAnonymousRecordDecl to the list of symbols
-  * Use thinlto for the build
   * New snapshot release
   * remove debian/patches/reproducible-pch.diff
     done upstream
