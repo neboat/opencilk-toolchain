@@ -222,7 +222,8 @@ ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 endif
 
 # Use thinlto for the link phase
-if test ! "$DISTRO" = "stretch" -a ! "$DISTRO" = "xenial"  -a ! "$DISTRO" = "trusty"; then
+THIN_UNSUPPORTED_DISTRO := stretch xenial trusty
+ifeq (,$(filter $(DISTRO), $(THIN_UNSUPPORTED_DISTRO)))
 # Don't enable for old distros
 	CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
 endif
@@ -263,6 +264,7 @@ preconfigure:
 	@echo "DEB_HOST_ARCH_BITS=$(DEB_HOST_ARCH_BITS)"
 	@echo "DEB_HOST_ARCH=$(DEB_HOST_ARCH)"
 	@echo "DEB_HOST_ARCH_OS=$(DEB_HOST_ARCH_OS)"
+	@echo "DISTRO=$(DISTRO)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
