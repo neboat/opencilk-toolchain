@@ -49,7 +49,6 @@ silent-llvm-isel-fuzzer.diff
 remove-test-freezing.diff
 disable-llvm-symbolizer-test.diff
 disable-path-test-failing.diff
-disable-source-interleave.diff
 
 # Decrease the freq for the keep alive
 test-keep-alive.diff
