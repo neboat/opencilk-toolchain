@@ -450,6 +450,12 @@ if test ! -f /usr/lib/llvm-$VERSION/include/c++/v1/vector; then
     exit -1;
 fi
 
+if test ! -f /usr/lib/llvm-$VERSION/lib/libc++abi.so; then
+    echo "Install libc++abi-$VERSION-dev";
+    exit -1;
+fi
+
+
 # libc++
 echo '
 #include <vector>
