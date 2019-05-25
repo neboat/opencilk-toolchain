@@ -779,6 +779,15 @@ int main ()
 }
 EOF
 
+F=$(clang-$VERSION --target=x86_64-unknown-linux-gnu --rtlib=compiler-rt --print-libgcc-file-name)
+if test ! $F; then
+	echo "Cannot find $F"
+    echo "TODO check if the exit1 can be put back"
+#	exit 1
+else
+    echo "$F is one of the compiler-rt file"
+fi
+
 # only for AMD64 for now
 # many sanitizers only work on AMD64
 # x32 programs need to be enabled in the kernel bootparams for debian
