@@ -275,6 +275,9 @@ preconfigure:
 			-e "s|@LLVM_VERSION@|$(LLVM_VERSION)|g" $$f > $$f2; \
 	done
 
+	# Make install file executable for dh-exec
+	chmod +x debian/llvm-$(LLVM_VERSION)-dev.install
+
 # Override this two targets. They are trying to manage the .in conversion for me
 override_dh_ocamlinit:
 override_dh_ocamlclean:

@@ -1,3 +1,11 @@
+llvm-toolchain-8 (1:8.0.1~+rc1-1~exp3) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Use dh-exec to exclude lib/LLVM*.so on powerpc and
+    powerpcspe from llvm-X.Y-dev.install.in
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sat, 25 May 2019 12:05:51 +0200
+
 llvm-toolchain-8 (1:8.0.1~+rc1-1~exp2) experimental; urgency=medium
 
   * Build using thinlto on non stretch, xenial and trusty
