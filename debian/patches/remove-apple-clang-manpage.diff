@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_9~svn351647/clang/docs/CommandGuide/clang.rst
+Index: llvm-toolchain-snapshot_9~svn362241/clang/docs/CommandGuide/clang.rst
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/clang/docs/CommandGuide/clang.rst
-+++ llvm-toolchain-snapshot_9~svn351647/clang/docs/CommandGuide/clang.rst
+--- llvm-toolchain-snapshot_9~svn362241.orig/clang/docs/CommandGuide/clang.rst
++++ llvm-toolchain-snapshot_9~svn362241/clang/docs/CommandGuide/clang.rst
 @@ -310,20 +310,10 @@ Clang fully supports cross compilation a
  Depending on how your version of Clang is configured, it may have support for a
  number of cross compilers, or may only support a native target.
@@ -13,7 +13,7 @@ Index: llvm-toolchain-snapshot_9~svn351647/clang/docs/CommandGuide/clang.rst
  
 -.. option:: -mmacosx-version-min=<version>
 -
--  When building for Mac OS X, specify the minimum version supported by your
+-  When building for macOS, specify the minimum version supported by your
 -  application.
 -
 -.. option:: -miphoneos-version-min
