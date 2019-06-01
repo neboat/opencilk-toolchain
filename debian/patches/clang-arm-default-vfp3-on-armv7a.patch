@@ -21,7 +21,7 @@ Index: llvm-toolchain-snapshot_9~svn351647/lib/Target/ARM/ARM.td
  def ARMv7a    : Architecture<"armv7-a",   "ARMv7a",   [HasV7Ops,
 -                                                       FeatureNEON,
 +                                                       FeatureVFP3,
-+                                                       FeatureD16,
++                                                       FeatureVFP3_D16,
                                                         FeatureDB,
                                                         FeatureDSP,
                                                         FeatureAClass]>;
