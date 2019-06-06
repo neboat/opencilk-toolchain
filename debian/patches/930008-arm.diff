@@ -1,0 +1,13 @@
+Index: llvm-toolchain-8-8.0.1~+rc1/lib/Support/Triple.cpp
+===================================================================
+--- llvm-toolchain-8-8.0.1~+rc1.orig/lib/Support/Triple.cpp
++++ llvm-toolchain-8-8.0.1~+rc1/lib/Support/Triple.cpp
+@@ -1620,7 +1620,7 @@ StringRef Triple::getARMCPUForArch(Strin
+     case llvm::Triple::EABIHF:
+     case llvm::Triple::GNUEABIHF:
+     case llvm::Triple::MuslEABIHF:
+-      return "arm1176jzf-s";
++      return "cortex-a7";
+     default:
+       return "arm7tdmi";
+     }

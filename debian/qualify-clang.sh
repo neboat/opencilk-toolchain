@@ -142,6 +142,15 @@ if ! file foo.o 2>&1 | grep -i -q "aarch64"; then
     file foo.o
     exit 42
 fi
+
+clang-$VERSION --target=arm-linux-gnueabihf -dM -E -xc - < /dev/null &> foo.log
+if grep -v -q "#define __ARM_ARCH 7" foo.log; then
+    # bug 930008
+    echo "The target arch for arm should v7"
+    cat foo.log
+    exit 42
+fi
+
 echo '
 #include <string.h>
 int

@@ -136,3 +136,4 @@ ubuntu-eoan-distro.patch
 
 # Mipsel
 D59702-mips64el-fix.diff
+930008-arm.diff
