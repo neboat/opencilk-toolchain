@@ -459,6 +459,12 @@ if test ! -f /usr/lib/llvm-$VERSION/include/c++/v1/vector; then
     exit -1;
 fi
 
+if test ! -f /usr/lib/llvm-$VERSION/lib/libc++abi.so; then
+    echo "Install libc++abi-$VERSION-dev";
+    exit -1;
+fi
+
+
 # libc++
 echo '
 #include <vector>
@@ -781,6 +787,15 @@ int main ()
   return EXIT_SUCCESS;
 }
 EOF
+
+F=$(clang-$VERSION --target=x86_64-unknown-linux-gnu --rtlib=compiler-rt --print-libgcc-file-name)
+if test ! $F; then
+	echo "Cannot find $F"
+    echo "TODO check if the exit1 can be put back"
+#	exit 1
+else
+    echo "$F is one of the compiler-rt file"
+fi
 
 # only for AMD64 for now
 # many sanitizers only work on AMD64

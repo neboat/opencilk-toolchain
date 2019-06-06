@@ -134,6 +134,4 @@ OpenCL-Simplify-LLVM-IR-generated-for-OpenCL-blocks.patch
 OpenCL-Fix-assertion-due-to-blocks.patch
 ubuntu-eoan-distro.patch
 
-# Mipsel
-D59702-mips64el-fix.diff
 930008-arm.diff
