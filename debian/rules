@@ -223,9 +223,12 @@ endif
 
 # Use thinlto for the link phase
 THIN_UNSUPPORTED_DISTRO := stretch xenial trusty
-ifeq (,$(filter $(DISTRO), $(THIN_UNSUPPORTED_DISTRO)))
 # Don't enable for old distros
+ifeq (,$(filter $(DISTRO), $(THIN_UNSUPPORTED_DISTRO)))
+# Only enable it for archs supporting gold
+ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 	CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
+endif
 endif
 
 DH_OPTIONS=
