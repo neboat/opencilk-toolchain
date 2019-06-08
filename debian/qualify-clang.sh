@@ -320,8 +320,8 @@ if ! grep "foo.cpp:3:3" foo.log; then
     exit 42
 fi
 
-echo "vzeroupper" | llvm-exegesis-$VERSION -mode=uops -snippets-file=- &> foo.log
-if ! grep "measurements:" foo.log; then
+echo "vzeroupper" | llvm-exegesis-$VERSION -mode=uops -snippets-file=- &> foo.log || true
+if grep -q -E "(built without libpfm|cannot initialize libpfm)" foo.log; then
     echo "could not run llvm-exegesis correctly"
     cat foo.log
     exit 42
