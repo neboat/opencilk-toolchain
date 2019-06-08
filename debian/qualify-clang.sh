@@ -146,7 +146,7 @@ fi
 clang-$VERSION --target=arm-linux-gnueabihf -dM -E -xc - < /dev/null &> foo.log
 if ! grep -q "#define __ARM_ARCH 7" foo.log; then
     # bug 930008
-    echo "The target arch for arm should v7"
+    echo "The target arch for arm should be v7"
     cat foo.log
     exit 42
 fi
