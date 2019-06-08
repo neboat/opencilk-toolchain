@@ -3,12 +3,12 @@
  tools/llvm-shlib/CMakeLists.txt     |    1 +
  2 files changed, 2 insertions(+), 1 deletion(-)
 
-Index: llvm-toolchain-snapshot_9~svn355786/clang/tools/libclang/CMakeLists.txt
+Index: llvm-toolchain-snapshot_9~svn362869/clang/tools/libclang/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_9~svn355786.orig/clang/tools/libclang/CMakeLists.txt
-+++ llvm-toolchain-snapshot_9~svn355786/clang/tools/libclang/CMakeLists.txt
-@@ -89,7 +89,7 @@ else()
-   set(output_name "clang")
+--- llvm-toolchain-snapshot_9~svn362869.orig/clang/tools/libclang/CMakeLists.txt
++++ llvm-toolchain-snapshot_9~svn362869/clang/tools/libclang/CMakeLists.txt
+@@ -94,7 +94,7 @@ if (UNIX AND ${CMAKE_SYSTEM_NAME} MATCHE
+     remove_definitions("-D_XOPEN_SOURCE=700")
  endif()
  
 -add_clang_library(libclang ${ENABLE_SHARED} ${ENABLE_STATIC}
@@ -16,10 +16,10 @@ Index: llvm-toolchain-snapshot_9~svn355786/clang/tools/libclang/CMakeLists.txt
    OUTPUT_NAME ${output_name}
    ${SOURCES}
    DEPENDS clang-resource-headers
-Index: llvm-toolchain-snapshot_9~svn355786/tools/llvm-shlib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_9~svn362869/tools/llvm-shlib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_9~svn355786.orig/tools/llvm-shlib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_9~svn355786/tools/llvm-shlib/CMakeLists.txt
+--- llvm-toolchain-snapshot_9~svn362869.orig/tools/llvm-shlib/CMakeLists.txt
++++ llvm-toolchain-snapshot_9~svn362869/tools/llvm-shlib/CMakeLists.txt
 @@ -41,6 +41,8 @@ if(LLVM_BUILD_LLVM_DYLIB)
  
    add_llvm_library(LLVM SHARED DISABLE_LLVM_LINK_LLVM_DYLIB SONAME ${SOURCES})
