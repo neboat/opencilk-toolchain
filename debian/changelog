@@ -1,12 +1,6 @@
 llvm-toolchain-snapshot (1:9~svn362869-1~exp1) experimental; urgency=medium
 
   * New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 08 Jun 2019 10:57:39 +0200
-
-llvm-toolchain-snapshot (1:9~svn358688-1~exp1) experimental; urgency=medium
-
-  * New snapshot release
   * remove debian/patches/reproducible-pch.diff
     done upstream
   * No longer install lldb-test (disable upstream in 358574)
@@ -33,8 +27,18 @@ llvm-toolchain-snapshot (1:9~svn358688-1~exp1) experimental; urgency=medium
     in libclang-9-dev
   * Build using thinlto on non stretch, xenial and trusty
     (fails with some undef symbols)
+    Option -DLLVM_ENABLE_LTO="Thin" added
+  * WebAssembly is now build by default, remove it from the
+    experimental list
+  * check-polly was executed twice
+  * Move the default ARM arch from arm1176jzf-s (armv6) to cortex-a7
+    (Closes: #930008)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Apr 2019 19:05:45 +0200
+  [ John Paul Adrian Glaubitz ]
+  * Use dh-exec to exclude lib/LLVM*.so on powerpc and
+    powerpcspe from llvm-X.Y-dev.install.in
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 08 Jun 2019 11:00:42 +0200
 
 llvm-toolchain-snapshot (1:9~svn358327-1~exp1) experimental; urgency=medium
 
