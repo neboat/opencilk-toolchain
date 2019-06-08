@@ -142,6 +142,15 @@ if ! file foo.o 2>&1 | grep -i -q "aarch64"; then
     file foo.o
     exit 42
 fi
+
+clang-$VERSION --target=arm-linux-gnueabihf -dM -E -xc - < /dev/null &> foo.log
+if ! grep -q "#define __ARM_ARCH 7" foo.log; then
+    # bug 930008
+    echo "The target arch for arm should v7"
+    cat foo.log
+    exit 42
+fi
+
 echo '
 #include <string.h>
 int
@@ -449,6 +458,12 @@ if test ! -f /usr/lib/llvm-$VERSION/include/c++/v1/vector; then
     echo "Install libc++-$VERSION-dev";
     exit -1;
 fi
+
+if test ! -f /usr/lib/llvm-$VERSION/lib/libc++abi.so; then
+    echo "Install libc++abi-$VERSION-dev";
+    exit -1;
+fi
+
 
 # libc++
 echo '
@@ -772,6 +787,15 @@ int main ()
   return EXIT_SUCCESS;
 }
 EOF
+
+F=$(clang-$VERSION --target=x86_64-unknown-linux-gnu --rtlib=compiler-rt --print-libgcc-file-name)
+if test ! $F; then
+	echo "Cannot find $F"
+    echo "TODO check if the exit1 can be put back"
+#	exit 1
+else
+    echo "$F is one of the compiler-rt file"
+fi
 
 # only for AMD64 for now
 # many sanitizers only work on AMD64
