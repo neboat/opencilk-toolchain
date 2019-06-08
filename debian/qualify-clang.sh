@@ -320,6 +320,13 @@ if ! grep "foo.cpp:3:3" foo.log; then
     exit 42
 fi
 
+echo "vzeroupper" | llvm-exegesis-$VERSION -mode=uops -snippets-file=- &> foo.log
+if ! grep "measurements:" foo.log; then
+    echo "could not run llvm-exegesis correctly"
+    cat foo.log
+    exit 42
+fi
+
 if test ! -f /usr/lib/llvm-$VERSION/lib/libFuzzer.a; then
     echo "Install libfuzzer-$VERSION-dev";
     exit -1;
