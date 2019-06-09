@@ -652,7 +652,7 @@ if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
 fi
 /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py -source-dir .  matmul.opt.yaml -o ./output > /dev/null
 
-if ! grep "not inlined into" output/foo.c.html 2>&1; then
+if ! grep -q "not inlined into" output/foo.c.html 2>&1; then
     echo "Could not find the output from polly"
     exit -1
 fi
@@ -662,7 +662,7 @@ int foo(int x, int y) __attribute__((always_inline));
 int foo(int x, int y) { return x + y; }
 int bar(int j) { return foo(j, j - 2); }" > foo.cc
 clang-$VERSION -O2 -Rpass=inline foo.cc -c &> foo.log
-if ! grep "cost=always" foo.log; then
+if ! grep -q "cost=always" foo.log; then
     echo "-Rpass fails"
     cat foo.log
     exit 1
@@ -722,12 +722,6 @@ p a
 quit' > lldb-cmd.txt
 lldb-$VERSION -s lldb-cmd.txt ./foo
 
-echo "int main() { return 1; }" > foo.c
-# fails to run on i386 with the following error:
-#clang: error: unsupported option '-fsanitize=efficiency-working-set' for target 'i686-pc-linux-gnu'
-clang-$VERSION -fsanitize=efficiency-working-set -o foo foo.c || true
-./foo > /dev/null || true
-
 
 if test ! -f /usr/lib/llvm-$VERSION/lib/libclangToolingInclusions.a; then
     echo "Install libclang-$VERSION-dev";
@@ -754,9 +748,9 @@ message(FATAL_ERROR "Invalid Clang header path: \${CLANG_INCLUDE_DIRS}")
 endif()
 EOF
 mkdir cmaketest/standard cmaketest/explicit
-echo "Test: CMake find LLVM and Clang in default path"
+# "Test: CMake find LLVM and Clang in default path"
 (cd cmaketest/standard && CC=clang-$VERSION CXX=clang++-$VERSION cmake .. > /dev/null)
-echo "Test: CMake find LLVM and Clang in explicit prefix path"
+# "Test: CMake find LLVM and Clang in explicit prefix path"
 (cd cmaketest/explicit && CC=clang-$VERSION CXX=clang++-$VERSION CMAKE_PREFIX_PATH=/usr/lib/llvm-$VERSION cmake .. > /dev/null)
 rm -rf cmaketest
 
@@ -787,6 +781,12 @@ CLANG=clang-$VERSION
 TEMPDIR=$(mktemp -d); trap "rm -rf \"$TEMPDIR\"" 0
 
 echo "Testing all other sanitizers ..."
+
+echo "int main() { return 1; }" > foo.c
+# fails to run on i386 with the following error:
+#clang: error: unsupported option '-fsanitize=efficiency-working-set' for target 'i686-pc-linux-gnu'
+clang-$VERSION -fsanitize=efficiency-working-set -o foo foo.c || true
+./foo &> /dev/null || true
 
 cat > "$TEMPDIR/test.c" <<EOF
 #include <stdlib.h>
