@@ -27,6 +27,8 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libLLVM-$VERSION.so; then
     echo "Install llvm-$VERSION-dev"
     exit 1
 fi
+
+echo "Testing llvm-$VERSION and llvm-$VERSION-dev ..."
 llvm-config-$VERSION --link-shared --libs &> /dev/null
 
 if llvm-config-$VERSION --cxxflags | grep " \-W"; then
@@ -41,23 +43,11 @@ if grep "File format not recognized" foo.log; then
     exit 1
 fi
 
-echo '#include <stdlib.h>
-int main() {
-  char *x = (char*)malloc(10 * sizeof(char*));
-  free(x);
-  return x[5];
-}
-' > foo.c
-clang-$VERSION -o foo -fsanitize=address -O1 -fno-omit-frame-pointer -g  foo.c
-if ! ./foo 2>&1 | grep -q heap-use-after-free ; then
-    echo "sanitize=address is failing"
-    exit 42
-fi
-
 if test ! -f /usr/bin/scan-build-$VERSION; then
     echo "Install clang-tools-$VERSION"
     exit 1
 fi
+echo "Testing clang-tools-$VERSION ..."
 
 echo '
 void test() {
@@ -77,6 +67,8 @@ if ! grep -q -E "scan-build: 0 bugs found." foo.log; then
 fi
 rm -rf scan-build
 
+echo "Testing clang-$VERSION ..."
+
 rm -f foo.log
 echo 'int main() {return 0;}' > foo.c
 clang-$VERSION foo.c
@@ -86,8 +78,9 @@ clang-$VERSION -c foo.c
 
 # https://bugs.launchpad.net/bugs/1810860
 clang-$VERSION -dumpversion &> foo.log
-if grep 4.2.1 foo.log; then
+if grep -q 4.2.1 foo.log; then
     echo "dumpversion still returns 4.2.1"
+    echo "Will be fixed with clang 9"
 #    exit 1
 fi
 
@@ -97,7 +90,7 @@ void increment(atomic_size_t *arg) {
     atomic_fetch_add(arg, 1);
 } ' > foo.c
 
-clang-$VERSION -v -c foo.c
+clang-$VERSION -v -c foo.c &> /dev/null
 
 echo "#include <fenv.h>" > foo.cc
 NBLINES=$(clang++-$VERSION -P -E foo.cc|wc -l)
@@ -169,6 +162,8 @@ echo '#include <chrono>
 int main() { }' > foo.cpp
 clang++-$VERSION -std=c++11 foo.cpp
 
+echo "Testing code coverage ..."
+
 echo '#include <stdio.h>
 int main() {
 if (1==1) {
@@ -187,6 +182,11 @@ fi
 echo "#include <iterator>" > foo.cpp
 clang++-$VERSION -c foo.cpp
 
+echo "Testing linking ..."
+if test ! -f /usr/lib/llvm-$VERSION/bin/../lib/LLVMgold.so; then
+    echo "Install llvm-$VERSION-dev"
+    exit 1
+fi
 
 echo '#include <stdio.h>
 int main() {
@@ -198,11 +198,6 @@ if (1==1) {
 }
 return 0;}' > foo.c
 rm foo bar.cc
-
-if test ! -f /usr/lib/llvm-$VERSION/bin/../lib/LLVMgold.so; then
-    echo "Install llvm-$VERSION-dev"
-    exit 1
-fi
 
 clang-$VERSION -flto foo.c -o foo
 ./foo > /dev/null
@@ -216,6 +211,8 @@ echo "int foo(void); int main() {foo();	return 0;}">main.c
 clang-$VERSION -flto=thin -O2 foo.c main.c -o foo
 ./foo > /dev/null
 clang-$VERSION -flto=thin -O2 foo.c main.c -c
+
+echo "Testing lld-$VERSION ..."
 
 if test ! -f /usr/bin/lld-$VERSION; then
     echo "Install lld-$VERSION"
@@ -258,6 +255,25 @@ if ! grep "BuildID" foo2.log; then
 fi
 rm foo2 foo2.log
 
+if test ! -f /usr/lib/llvm-$VERSION/bin/llvm-symbolizer; then
+    echo "Install llvm-$VERSION"
+    exit 1
+fi
+
+echo "vzeroupper" | llvm-exegesis-$VERSION -mode=uops -snippets-file=- &> foo.log || true
+if grep -q -E "(built without libpfm|cannot initialize libpfm)" foo.log; then
+    echo "could not run llvm-exegesis correctly"
+    cat foo.log|head
+    exit 42
+fi
+
+if test ! -f /usr/lib/llvm-$VERSION/lib/libFuzzer.a; then
+    echo "Install libfuzzer-$VERSION-dev";
+    exit -1;
+fi
+
+echo "Testing libfuzzer-$VERSION-dev ..."
+
 cat << EOF > test_fuzzer.cc
 #include <stdint.h>
 #include <stddef.h>
@@ -270,6 +286,12 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
 }
 EOF
 
+clang++-$VERSION -fsanitize=address -fsanitize-coverage=edge,trace-pc test_fuzzer.cc /usr/lib/llvm-$VERSION/lib/libFuzzer.a
+if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
+    echo "fuzzer"
+    exit 42
+fi
+
 echo 'int main(int argc, char **argv) {
   int *array = new int[100];
   delete [] array;
@@ -281,11 +303,6 @@ if ! grep "Init done" foo.log; then
     echo "asan verbose mode failed"
     cat foo.log
     exit 42
-fi
-
-if test ! -f /usr/lib/llvm-$VERSION/bin/llvm-symbolizer; then
-    echo "Install llvm-$VERSION"
-    exit 1
 fi
 
 # See also https://bugs.llvm.org/show_bug.cgi?id=39514 why
@@ -320,21 +337,18 @@ if ! grep "foo.cpp:3:3" foo.log; then
     exit 42
 fi
 
-echo "vzeroupper" | llvm-exegesis-$VERSION -mode=uops -snippets-file=- &> foo.log || true
-if grep -q -E "(built without libpfm|cannot initialize libpfm)" foo.log; then
-    echo "could not run llvm-exegesis correctly"
-    cat foo.log
-    exit 42
-fi
+echo "Testing sanitizers ..."
 
-if test ! -f /usr/lib/llvm-$VERSION/lib/libFuzzer.a; then
-    echo "Install libfuzzer-$VERSION-dev";
-    exit -1;
-fi
-
-clang++-$VERSION -fsanitize=address -fsanitize-coverage=edge,trace-pc test_fuzzer.cc /usr/lib/llvm-$VERSION/lib/libFuzzer.a
-if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
-    echo "fuzzer"
+echo '#include <stdlib.h>
+int main() {
+  char *x = (char*)malloc(10 * sizeof(char*));
+  free(x);
+  return x[5];
+}
+' > foo.c
+clang-$VERSION -o foo -fsanitize=address -O1 -fno-omit-frame-pointer -g  foo.c
+if ! ./foo 2>&1 | grep -q heap-use-after-free ; then
+    echo "sanitize=address is failing"
     exit 42
 fi
 
@@ -577,7 +591,7 @@ int main(void)
       return 1;
     return 0;
 }' > foo.c
-clang-$VERSION -Wconversion -Werror foo.c || true
+clang-$VERSION -Wconversion -Werror foo.c &> /dev/null || true
 
 if test -f /usr/bin/g++; then
 g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
@@ -590,6 +604,8 @@ if test ! -f /usr/lib/llvm-$VERSION/include/polly/LinkAllPasses.h; then
     echo "Install libclang-common-$VERSION-dev for polly";
     exit -1;
 fi
+
+echo "Testing polly (libclang-common-$VERSION-dev) ..."
 
 # Polly
 echo "
@@ -675,6 +691,7 @@ if test ! -f /usr/bin/lldb-$VERSION; then
     exit -1;
 fi
 
+echo "Testing lldb-$VERSION ..."
 # bug 913946
 lldb-$VERSION -s lldb-cmd.txt bar
 if dpkg -l|grep -q clang-$VERSION-dbgsym; then
@@ -716,6 +733,8 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libclangToolingInclusions.a; then
     echo "Install libclang-$VERSION-dev";
     exit -1;
 fi
+
+echo "Testing cmake build ..."
 
 rm -rf cmaketest && mkdir cmaketest
 cat > cmaketest/CMakeLists.txt <<EOF
@@ -766,6 +785,8 @@ CLANG=clang-$VERSION
 #shift
 
 TEMPDIR=$(mktemp -d); trap "rm -rf \"$TEMPDIR\"" 0
+
+echo "Testing all other sanitizers ..."
 
 cat > "$TEMPDIR/test.c" <<EOF
 #include <stdlib.h>
