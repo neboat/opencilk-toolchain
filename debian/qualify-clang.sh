@@ -681,19 +681,20 @@ LLVM_PROFILE_FILE="foo-%p.profraw" ./foo
 llvm-profdata-$VERSION merge -output=foo.profdata foo-*.profraw
 clang++-$VERSION -O2 -fprofile-instr-use=foo.profdata foo.cc -o foo
 
-echo "b main
-run
-bt
-quit" > lldb-cmd.txt
-
 if test ! -f /usr/bin/lldb-$VERSION; then
     echo "Install lldb-$VERSION";
     exit -1;
 fi
 
+echo "b main
+run
+bt
+quit" > lldb-cmd.txt
+
 echo "Testing lldb-$VERSION ..."
 # bug 913946
-lldb-$VERSION -s lldb-cmd.txt bar
+lldb-$VERSION -s lldb-cmd.txt bar &> foo.log
+
 if dpkg -l|grep -q clang-$VERSION-dbgsym; then
     # Testing if clang dbg symbol are here
     lldb-$VERSION -s lldb-cmd.txt clang-$VERSION &> foo.log
@@ -720,7 +721,13 @@ r
 n
 p a
 quit' > lldb-cmd.txt
-lldb-$VERSION -s lldb-cmd.txt ./foo
+lldb-$VERSION -s lldb-cmd.txt ./foo &> foo.log
+if ! grep -q "stop reason = step over" foo.log; then
+    echo "Could not find the lldb expected output"
+    cat foo.log
+    exit 42
+fi
+exit 1
 
 
 if test ! -f /usr/lib/llvm-$VERSION/lib/libclangToolingInclusions.a; then
