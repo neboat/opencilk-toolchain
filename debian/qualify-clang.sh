@@ -242,14 +242,14 @@ fi
 # Bug 916975
 clang-$VERSION -O2 foo.c main.c -o foo2
 file foo2 &> foo2.log
-if ! grep "BuildID" foo2.log; then
+if ! grep -q "BuildID" foo2.log; then
     echo "BuildID isn't part of the generated binary (ld generation)"
     exit 1
 fi
 
 strip foo2
 file foo2 &> foo2.log
-if ! grep "BuildID" foo2.log; then
+if ! grep -q "BuildID" foo2.log; then
     echo "BuildID isn't part of the generated binary (stripped)"
     exit 1
 fi
@@ -299,7 +299,7 @@ echo 'int main(int argc, char **argv) {
 }' > foo.cpp
 clang++-$VERSION -O1 -g -fsanitize=address -fno-omit-frame-pointer foo.cpp
 ASAN_OPTIONS=verbosity=1 ./a.out &> foo.log || true
-if ! grep "Init done" foo.log; then
+if ! grep -q "Init done" foo.log; then
     echo "asan verbose mode failed"
     cat foo.log
     exit 42
@@ -308,30 +308,30 @@ fi
 # See also https://bugs.llvm.org/show_bug.cgi?id=39514 why
 # /usr/bin/llvm-symbolizer-7 doesn't work
 ASAN_OPTIONS=verbosity=2:external_symbolizer_path=/usr/lib/llvm-$VERSION/bin/llvm-symbolizer ./a.out &> foo.log || true
-if ! grep "Using llvm-symbolizer" foo.log; then
+if ! grep -q "Using llvm-symbolizer" foo.log; then
     echo "could not find llvm-symbolizer path"
     cat foo.log
     exit 42
 fi
-if ! grep "new\[\](unsigned" foo.log; then
+if ! grep -q "new\[\](unsigned" foo.log; then
     echo "could not symbolize correctly"
     cat foo.log
     exit 42
 fi
 
-if ! grep "foo.cpp:3:3" foo.log; then
+if ! grep -q "foo.cpp:3:3" foo.log; then
     echo "could not symbolize correctly"
     cat foo.log
     exit 42
 fi
 ./a.out &> foo.log || true
-if ! grep "new\[\](unsigned" foo.log; then
+if ! grep -q "new\[\](unsigned" foo.log; then
     echo "could not symbolize correctly"
     cat foo.log
     exit 42
 fi
 
-if ! grep "foo.cpp:3:3" foo.log; then
+if ! grep -q "foo.cpp:3:3" foo.log; then
     echo "could not symbolize correctly"
     cat foo.log
     exit 42
