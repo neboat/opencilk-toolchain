@@ -6,6 +6,7 @@ llvm-toolchain-8 (1:8.0.1~+rc1-1~exp4) experimental; urgency=medium
 
 llvm-toolchain-8 (1:8.0.1~+rc1-1~exp3) experimental; urgency=medium
 
+  * New testing release
   * Only enable thinlto on archs with gold, should fix the ftbfs
   * Add libpfm4-dev as build dep + -DLLVM_ENABLE_LIBPFM=ON as it is
     needed for llvm-exegesis https://bugs.llvm.org/show_bug.cgi?id=42187
