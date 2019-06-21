@@ -7,7 +7,6 @@ clang-analyzer-force-version.diff
 # Disabling features
 23-strlcpy_strlcat_warning_removed.diff
 
-27-fix_clang_stdint.diff
 declare_clear_cache.diff
 unwind-chain-inclusion.diff
 atomic_library_1.diff
@@ -90,7 +89,6 @@ disable-sse2-old-x86.diff
 clang-arm-default-vfp3-on-armv7a.patch
 
 # For the bootstrap
-bootstrap-fix-include-next.diff
 clangd-atomic-cmake.patch
 
 # Fix docs
