@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:9~svn362869-1~exp2) experimental; urgency=medium
+
+  * New snapshot release
+  * Install clang-scan-deps as part of clang-tools
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 15 Jun 2019 10:47:18 +0200
+
 llvm-toolchain-snapshot (1:9~svn362869-1~exp1) experimental; urgency=medium
 
   * New snapshot release
