@@ -1,3 +1,11 @@
+llvm-toolchain-snapshot (1:9~svn362869-1~exp3) UNRELEASED; urgency=medium
+
+  [ Andreas Beckmann ]
+  * For now, lld doesn't generate shared libs. Removing the files
+    (Closes: #857653)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 26 Jun 2019 10:50:52 +0200
+
 llvm-toolchain-snapshot (1:9~svn362869-1~exp2) experimental; urgency=medium
 
   * New snapshot release
