@@ -2,7 +2,7 @@ llvm-toolchain-8 (1:8.0.1~+rc2-1~exp2) UNRELEASED; urgency=medium
 
   [ Andreas Beckmann ]
   * For now, lld doesn't generate shared libs. Removing the files
-    (Closes: #857653)
+    (Closes: #857653, LP: #1829677)
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 26 Jun 2019 10:50:12 +0200
 
