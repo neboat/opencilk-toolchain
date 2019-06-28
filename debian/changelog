@@ -1,4 +1,6 @@
-llvm-toolchain-8 (1:8.0.1~+rc2-1~exp2) experimental; urgency=medium
+llvm-toolchain-8 (1:8.0.1~+rc3-1~exp1) experimental; urgency=medium
+
+  * New testing release
 
   [ Gianfranco Costamagna ]
   * Enable thinlto everywhere except armhf
@@ -8,7 +10,8 @@ llvm-toolchain-8 (1:8.0.1~+rc2-1~exp2) experimental; urgency=medium
   * For now, lld doesn't generate shared libs. Removing the files
     (Closes: #857653, LP: #1829677)
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 26 Jun 2019 10:50:12 +0200
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 Jun 2019 16:25:28 +0200
 
 llvm-toolchain-8 (1:8.0.1~+rc2-1~exp1) experimental; urgency=medium
 
