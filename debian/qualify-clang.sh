@@ -727,8 +727,6 @@ if ! grep -q "stop reason = step over" foo.log; then
     cat foo.log
     exit 42
 fi
-exit 1
-
 
 if test ! -f /usr/lib/llvm-$VERSION/lib/libclangToolingInclusions.a; then
     echo "Install libclang-$VERSION-dev";
