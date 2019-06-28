@@ -227,7 +227,10 @@ THIN_UNSUPPORTED_DISTRO := stretch xenial trusty
 ifeq (,$(filter $(DISTRO), $(THIN_UNSUPPORTED_DISTRO)))
 # Only enable it for archs supporting gold
 ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
+# armhf is not yet quite ready for Thin, it FTBFS
+ifeq (,$(filter $(DEB_HOST_ARCH), armhf))
 	CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
+endif
 endif
 endif
 
