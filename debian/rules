@@ -234,6 +234,13 @@ endif
 endif
 endif
 
+OLD_DH_DISTRO :=  trusty
+ifneq (,$(filter $(DISTRO),$(OLD_DH_DISTRO)))
+# DH doesn't support the [power ...] in install
+# fails with cp: cannot stat 'debian/tmp/[!powerpc': No such file or directory
+	$(shell sed -e "s|\[\!powerpc \!powerpcspe\] ||g" llvm-$(LLVM_VERSION)-dev.install)
+endif
+
 DH_OPTIONS=
 OCAML_ENABLE= no
 OCAML_ARCHS := amd64 arm64 armhf i386 ppc64el s390x
