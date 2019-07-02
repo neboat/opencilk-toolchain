@@ -791,6 +791,7 @@ libomp.so.5 libomp5 #MINVER#
  __kmpc_master@VERSION 0.20130412
  __kmpc_ok_to_fork@VERSION 0.20130412
  __kmpc_omp_reg_task_with_affinity@VERSION 8
+ __kmpc_omp_target_task_alloc@VERSION 9
  __kmpc_omp_task@VERSION 0.20130412
  __kmpc_omp_task_alloc@VERSION 0.20130412
  __kmpc_omp_task_begin_if0@VERSION 0.20130412
@@ -816,13 +817,18 @@ libomp.so.5 libomp5 #MINVER#
  __kmpc_set_nest_lock@VERSION 0.20130412
  __kmpc_single@VERSION 0.20130412
 #MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_task@VERSION 0.20130412
+ __kmpc_task_allow_completion_event@VERSION 9
 #MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_task_buffer@VERSION 0.20130412
  __kmpc_task_reduction_get_th_data@VERSION 5.0
  __kmpc_task_reduction_init@VERSION 5.0
+ __kmpc_task_reduction_modifier_fini@VERSION 9
+ __kmpc_task_reduction_modifier_init@VERSION 9
  __kmpc_taskgroup@VERSION 0.20130412
  __kmpc_taskloop@VERSION 3.9.0
 #MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_taskq@VERSION 0.20130412
 #MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_taskq_task@VERSION 0.20130412
+ __kmpc_taskred_init@VERSION 9
+ __kmpc_taskred_modifier_init@VERSION 9
  __kmpc_team_static_init_4@VERSION 0.20140926
  __kmpc_team_static_init_4u@VERSION 0.20140926
  __kmpc_team_static_init_8@VERSION 0.20140926
@@ -950,6 +956,8 @@ libomp.so.5 libomp5 #MINVER#
  omp_display_affinity_@VERSION 8
  omp_free@VERSION 8
 #MISSING: 9# omp_free_@VERSION 8
+ omp_fulfill_event@VERSION 9
+ omp_fulfill_event_@VERSION 9
  omp_get_active_level@OMP_3.0 0.20131209
  omp_get_active_level@VERSION 0.20130412
  omp_get_active_level_@OMP_3.0 0.20131209

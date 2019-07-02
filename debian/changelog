@@ -1,3 +1,17 @@
+llvm-toolchain-snapshot (1:9~svn364913-1~exp2) experimental; urgency=medium
+
+  * New symbols in libomp5 added in the symbol file
+    - __kmpc_omp_target_task_alloc
+    - __kmpc_task_allow_completion_event
+    - __kmpc_task_reduction_modifier_fini
+    - __kmpc_task_reduction_modifier_init
+    - __kmpc_taskred_init
+    - __kmpc_taskred_modifier_init
+    - omp_fulfill_event
+    - omp_fulfill_event_
+
+ --
+
 llvm-toolchain-snapshot (1:9~svn364913-1~exp1) experimental; urgency=medium
 
   [ Andreas Beckmann ]
