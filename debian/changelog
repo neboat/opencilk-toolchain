@@ -7,7 +7,10 @@ llvm-toolchain-snapshot (1:9~svn362869-1~exp3) UNRELEASED; urgency=medium
   [ Gianfranco Costamagna ]
   * Do not enable Thin on armhf for now, it FTBFS
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 26 Jun 2019 10:50:52 +0200
+  [ Sylvestre Ledru ]
+  * Cherry-pick the recent changes from the 8 branch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 02 Jul 2019 14:36:52 +0200
 
 llvm-toolchain-snapshot (1:9~svn362869-1~exp2) experimental; urgency=medium
 
