@@ -137,9 +137,28 @@ llvm-toolchain-snapshot (1:9~svn351375-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:59:29 +0100
 
-llvm-toolchain-8 (1:8.0.1~+rc1-1~exp3) experimental; urgency=medium
+llvm-toolchain-8 (1:8.0.1~+rc3-1) unstable; urgency=medium
 
+  * New testing release in unstable
+
+  [ Gianfranco Costamagna ]
+  * Enable thinlto everywhere except armhf
+  * Drop wrong exit 1 from testsuite
+
+  [ Andreas Beckmann ]
+  * For now, lld doesn't generate shared libs. Removing the files
+    (Closes: #857653, LP: #1829677)
+
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 Jun 2019 20:15:23 +0200
+
+llvm-toolchain-8 (1:8.0.1~+rc2-1~exp1) experimental; urgency=medium
+
+  * New testing release
   * Only enable thinlto on archs with gold, should fix the ftbfs
+  * Add libpfm4-dev as build dep + -DLLVM_ENABLE_LIBPFM=ON as it is
+    needed for llvm-exegesis https://bugs.llvm.org/show_bug.cgi?id=42187
+  * Improve the rendering of the qualify-clang.sh testsuite
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 08 Jun 2019 11:11:39 +0200
 

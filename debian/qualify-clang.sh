@@ -27,6 +27,8 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libLLVM-$VERSION.so; then
     echo "Install llvm-$VERSION-dev"
     exit 1
 fi
+
+echo "Testing llvm-$VERSION and llvm-$VERSION-dev ..."
 llvm-config-$VERSION --link-shared --libs &> /dev/null
 
 if llvm-config-$VERSION --cxxflags | grep " \-W"; then
@@ -41,23 +43,11 @@ if grep "File format not recognized" foo.log; then
     exit 1
 fi
 
-echo '#include <stdlib.h>
-int main() {
-  char *x = (char*)malloc(10 * sizeof(char*));
-  free(x);
-  return x[5];
-}
-' > foo.c
-clang-$VERSION -o foo -fsanitize=address -O1 -fno-omit-frame-pointer -g  foo.c
-if ! ./foo 2>&1 | grep -q heap-use-after-free ; then
-    echo "sanitize=address is failing"
-    exit 42
-fi
-
 if test ! -f /usr/bin/scan-build-$VERSION; then
     echo "Install clang-tools-$VERSION"
     exit 1
 fi
+echo "Testing clang-tools-$VERSION ..."
 
 echo '
 void test() {
@@ -77,6 +67,8 @@ if ! grep -q -E "scan-build: 0 bugs found." foo.log; then
 fi
 rm -rf scan-build
 
+echo "Testing clang-$VERSION ..."
+
 rm -f foo.log
 echo 'int main() {return 0;}' > foo.c
 clang-$VERSION foo.c
@@ -86,8 +78,9 @@ clang-$VERSION -c foo.c
 
 # https://bugs.launchpad.net/bugs/1810860
 clang-$VERSION -dumpversion &> foo.log
-if grep 4.2.1 foo.log; then
+if grep -q 4.2.1 foo.log; then
     echo "dumpversion still returns 4.2.1"
+    echo "Will be fixed with clang 9"
 #    exit 1
 fi
 
@@ -97,7 +90,7 @@ void increment(atomic_size_t *arg) {
     atomic_fetch_add(arg, 1);
 } ' > foo.c
 
-clang-$VERSION -v -c foo.c
+clang-$VERSION -v -c foo.c &> /dev/null
 
 echo "#include <fenv.h>" > foo.cc
 NBLINES=$(clang++-$VERSION -P -E foo.cc|wc -l)
@@ -146,7 +139,7 @@ fi
 clang-$VERSION --target=arm-linux-gnueabihf -dM -E -xc - < /dev/null &> foo.log
 if ! grep -q "#define __ARM_ARCH 7" foo.log; then
     # bug 930008
-    echo "The target arch for arm should v7"
+    echo "The target arch for arm should be v7"
     cat foo.log
     exit 42
 fi
@@ -169,6 +162,8 @@ echo '#include <chrono>
 int main() { }' > foo.cpp
 clang++-$VERSION -std=c++11 foo.cpp
 
+echo "Testing code coverage ..."
+
 echo '#include <stdio.h>
 int main() {
 if (1==1) {
@@ -187,6 +182,11 @@ fi
 echo "#include <iterator>" > foo.cpp
 clang++-$VERSION -c foo.cpp
 
+echo "Testing linking ..."
+if test ! -f /usr/lib/llvm-$VERSION/bin/../lib/LLVMgold.so; then
+    echo "Install llvm-$VERSION-dev"
+    exit 1
+fi
 
 echo '#include <stdio.h>
 int main() {
@@ -198,11 +198,6 @@ if (1==1) {
 }
 return 0;}' > foo.c
 rm foo bar.cc
-
-if test ! -f /usr/lib/llvm-$VERSION/bin/../lib/LLVMgold.so; then
-    echo "Install llvm-$VERSION-dev"
-    exit 1
-fi
 
 clang-$VERSION -flto foo.c -o foo
 ./foo > /dev/null
@@ -216,6 +211,8 @@ echo "int foo(void); int main() {foo();	return 0;}">main.c
 clang-$VERSION -flto=thin -O2 foo.c main.c -o foo
 ./foo > /dev/null
 clang-$VERSION -flto=thin -O2 foo.c main.c -c
+
+echo "Testing lld-$VERSION ..."
 
 if test ! -f /usr/bin/lld-$VERSION; then
     echo "Install lld-$VERSION"
@@ -245,18 +242,37 @@ fi
 # Bug 916975
 clang-$VERSION -O2 foo.c main.c -o foo2
 file foo2 &> foo2.log
-if ! grep "BuildID" foo2.log; then
+if ! grep -q "BuildID" foo2.log; then
     echo "BuildID isn't part of the generated binary (ld generation)"
     exit 1
 fi
 
 strip foo2
 file foo2 &> foo2.log
-if ! grep "BuildID" foo2.log; then
+if ! grep -q "BuildID" foo2.log; then
     echo "BuildID isn't part of the generated binary (stripped)"
     exit 1
 fi
 rm foo2 foo2.log
+
+if test ! -f /usr/lib/llvm-$VERSION/bin/llvm-symbolizer; then
+    echo "Install llvm-$VERSION"
+    exit 1
+fi
+
+echo "vzeroupper" | llvm-exegesis-$VERSION -mode=uops -snippets-file=- &> foo.log || true
+if grep -q -E "(built without libpfm|cannot initialize libpfm)" foo.log; then
+    echo "could not run llvm-exegesis correctly"
+    cat foo.log|head
+    exit 42
+fi
+
+if test ! -f /usr/lib/llvm-$VERSION/lib/libFuzzer.a; then
+    echo "Install libfuzzer-$VERSION-dev";
+    exit -1;
+fi
+
+echo "Testing libfuzzer-$VERSION-dev ..."
 
 cat << EOF > test_fuzzer.cc
 #include <stdint.h>
@@ -270,6 +286,12 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
 }
 EOF
 
+clang++-$VERSION -fsanitize=address -fsanitize-coverage=edge,trace-pc test_fuzzer.cc /usr/lib/llvm-$VERSION/lib/libFuzzer.a
+if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
+    echo "fuzzer"
+    exit 42
+fi
+
 echo 'int main(int argc, char **argv) {
   int *array = new int[100];
   delete [] array;
@@ -277,57 +299,56 @@ echo 'int main(int argc, char **argv) {
 }' > foo.cpp
 clang++-$VERSION -O1 -g -fsanitize=address -fno-omit-frame-pointer foo.cpp
 ASAN_OPTIONS=verbosity=1 ./a.out &> foo.log || true
-if ! grep "Init done" foo.log; then
+if ! grep -q "Init done" foo.log; then
     echo "asan verbose mode failed"
     cat foo.log
     exit 42
 fi
 
-if test ! -f /usr/lib/llvm-$VERSION/bin/llvm-symbolizer; then
-    echo "Install llvm-$VERSION"
-    exit 1
-fi
-
 # See also https://bugs.llvm.org/show_bug.cgi?id=39514 why
 # /usr/bin/llvm-symbolizer-7 doesn't work
 ASAN_OPTIONS=verbosity=2:external_symbolizer_path=/usr/lib/llvm-$VERSION/bin/llvm-symbolizer ./a.out &> foo.log || true
-if ! grep "Using llvm-symbolizer" foo.log; then
+if ! grep -q "Using llvm-symbolizer" foo.log; then
     echo "could not find llvm-symbolizer path"
     cat foo.log
     exit 42
 fi
-if ! grep "new\[\](unsigned" foo.log; then
+if ! grep -q "new\[\](unsigned" foo.log; then
     echo "could not symbolize correctly"
     cat foo.log
     exit 42
 fi
 
-if ! grep "foo.cpp:3:3" foo.log; then
+if ! grep -q "foo.cpp:3:3" foo.log; then
     echo "could not symbolize correctly"
     cat foo.log
     exit 42
 fi
 ./a.out &> foo.log || true
-if ! grep "new\[\](unsigned" foo.log; then
+if ! grep -q "new\[\](unsigned" foo.log; then
     echo "could not symbolize correctly"
     cat foo.log
     exit 42
 fi
 
-if ! grep "foo.cpp:3:3" foo.log; then
+if ! grep -q "foo.cpp:3:3" foo.log; then
     echo "could not symbolize correctly"
     cat foo.log
     exit 42
 fi
 
-if test ! -f /usr/lib/llvm-$VERSION/lib/libFuzzer.a; then
-    echo "Install libfuzzer-$VERSION-dev";
-    exit -1;
-fi
+echo "Testing sanitizers ..."
 
-clang++-$VERSION -fsanitize=address -fsanitize-coverage=edge,trace-pc test_fuzzer.cc /usr/lib/llvm-$VERSION/lib/libFuzzer.a
-if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
-    echo "fuzzer"
+echo '#include <stdlib.h>
+int main() {
+  char *x = (char*)malloc(10 * sizeof(char*));
+  free(x);
+  return x[5];
+}
+' > foo.c
+clang-$VERSION -o foo -fsanitize=address -O1 -fno-omit-frame-pointer -g  foo.c
+if ! ./foo 2>&1 | grep -q heap-use-after-free ; then
+    echo "sanitize=address is failing"
     exit 42
 fi
 
@@ -570,7 +591,7 @@ int main(void)
       return 1;
     return 0;
 }' > foo.c
-clang-$VERSION -Wconversion -Werror foo.c || true
+clang-$VERSION -Wconversion -Werror foo.c &> /dev/null || true
 
 if test -f /usr/bin/g++; then
 g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
@@ -583,6 +604,8 @@ if test ! -f /usr/lib/llvm-$VERSION/include/polly/LinkAllPasses.h; then
     echo "Install libclang-common-$VERSION-dev for polly";
     exit -1;
 fi
+
+echo "Testing polly (libclang-common-$VERSION-dev) ..."
 
 # Polly
 echo "
@@ -629,7 +652,7 @@ if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
 fi
 /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py -source-dir .  matmul.opt.yaml -o ./output > /dev/null
 
-if ! grep "not inlined into" output/foo.c.html 2>&1; then
+if ! grep -q "not inlined into" output/foo.c.html 2>&1; then
     echo "Could not find the output from polly"
     exit -1
 fi
@@ -639,7 +662,7 @@ int foo(int x, int y) __attribute__((always_inline));
 int foo(int x, int y) { return x + y; }
 int bar(int j) { return foo(j, j - 2); }" > foo.cc
 clang-$VERSION -O2 -Rpass=inline foo.cc -c &> foo.log
-if ! grep "cost=always" foo.log; then
+if ! grep -q "cost=always" foo.log; then
     echo "-Rpass fails"
     cat foo.log
     exit 1
@@ -658,18 +681,20 @@ LLVM_PROFILE_FILE="foo-%p.profraw" ./foo
 llvm-profdata-$VERSION merge -output=foo.profdata foo-*.profraw
 clang++-$VERSION -O2 -fprofile-instr-use=foo.profdata foo.cc -o foo
 
-echo "b main
-run
-bt
-quit" > lldb-cmd.txt
-
 if test ! -f /usr/bin/lldb-$VERSION; then
     echo "Install lldb-$VERSION";
     exit -1;
 fi
 
+echo "b main
+run
+bt
+quit" > lldb-cmd.txt
+
+echo "Testing lldb-$VERSION ..."
 # bug 913946
-lldb-$VERSION -s lldb-cmd.txt bar
+lldb-$VERSION -s lldb-cmd.txt bar &> foo.log
+
 if dpkg -l|grep -q clang-$VERSION-dbgsym; then
     # Testing if clang dbg symbol are here
     lldb-$VERSION -s lldb-cmd.txt clang-$VERSION &> foo.log
@@ -696,19 +721,19 @@ r
 n
 p a
 quit' > lldb-cmd.txt
-lldb-$VERSION -s lldb-cmd.txt ./foo
-
-echo "int main() { return 1; }" > foo.c
-# fails to run on i386 with the following error:
-#clang: error: unsupported option '-fsanitize=efficiency-working-set' for target 'i686-pc-linux-gnu'
-clang-$VERSION -fsanitize=efficiency-working-set -o foo foo.c || true
-./foo > /dev/null || true
-
+lldb-$VERSION -s lldb-cmd.txt ./foo &> foo.log
+if ! grep -q "stop reason = step over" foo.log; then
+    echo "Could not find the lldb expected output"
+    cat foo.log
+    exit 42
+fi
 
 if test ! -f /usr/lib/llvm-$VERSION/lib/libclangToolingInclusions.a; then
     echo "Install libclang-$VERSION-dev";
     exit -1;
 fi
+
+echo "Testing cmake build ..."
 
 rm -rf cmaketest && mkdir cmaketest
 cat > cmaketest/CMakeLists.txt <<EOF
@@ -728,9 +753,9 @@ message(FATAL_ERROR "Invalid Clang header path: \${CLANG_INCLUDE_DIRS}")
 endif()
 EOF
 mkdir cmaketest/standard cmaketest/explicit
-echo "Test: CMake find LLVM and Clang in default path"
+# "Test: CMake find LLVM and Clang in default path"
 (cd cmaketest/standard && CC=clang-$VERSION CXX=clang++-$VERSION cmake .. > /dev/null)
-echo "Test: CMake find LLVM and Clang in explicit prefix path"
+# "Test: CMake find LLVM and Clang in explicit prefix path"
 (cd cmaketest/explicit && CC=clang-$VERSION CXX=clang++-$VERSION CMAKE_PREFIX_PATH=/usr/lib/llvm-$VERSION cmake .. > /dev/null)
 rm -rf cmaketest
 
@@ -759,6 +784,14 @@ CLANG=clang-$VERSION
 #shift
 
 TEMPDIR=$(mktemp -d); trap "rm -rf \"$TEMPDIR\"" 0
+
+echo "Testing all other sanitizers ..."
+
+echo "int main() { return 1; }" > foo.c
+# fails to run on i386 with the following error:
+#clang: error: unsupported option '-fsanitize=efficiency-working-set' for target 'i686-pc-linux-gnu'
+clang-$VERSION -fsanitize=efficiency-working-set -o foo foo.c || true
+./foo &> /dev/null || true
 
 cat > "$TEMPDIR/test.c" <<EOF
 #include <stdlib.h>
