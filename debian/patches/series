@@ -123,3 +123,4 @@ kfreebsd/lldb_source_Plugins_Process_FreeBSD.diff
 kfreebsd/tools_llvm-shlib_CMakeLists.txt.diff
 
 930008-arm.diff
+bootstrap-fix-include-next.diff

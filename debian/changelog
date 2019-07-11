@@ -10,6 +10,8 @@ llvm-toolchain-snapshot (1:9~svn365742-1~exp1) experimental; urgency=medium
     - __kmpc_taskred_modifier_init
     - omp_fulfill_event
     - omp_fulfill_event_
+  * Bring back  bootstrap-fix-include-next.diff which has been removed from
+    an unknow reason
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 11 Jul 2019 11:11:46 +0200
 
