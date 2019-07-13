@@ -1,3 +1,16 @@
+llvm-toolchain-snapshot (1:9~svn366001-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * liblldb.a has been removed
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 13 Jul 2019 15:31:59 +0200
+
+llvm-toolchain-snapshot (1:9~svn365902-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 12 Jul 2019 16:57:37 +0200
+
 llvm-toolchain-snapshot (1:9~svn365742-1~exp1) experimental; urgency=medium
 
   * New snapshot release
