@@ -17,6 +17,7 @@ llvm-toolchain-snapshot (1:9~svn366001-1~exp1) experimental; urgency=medium
     Was failing with "ModuleNotFoundError: No module named 'distutils.sysconfig'"
   * liblldb.a has been removed upstream
   * Ship libclang-cpp1-9 as a new package
+  * Ship python3-lldb-9 as a new package
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 14 Jul 2019 15:36:30 +0200
 
