@@ -14,7 +14,8 @@ llvm-toolchain-snapshot (1:9~svn366001-1~exp1) experimental; urgency=medium
     an unknown reason
   * Remove libc++experimental.a (seems to be not installed)
   * Install python3-setuptools as it seems that lldb moved to python 3
-    Was failing with "ModuleNotFoundError: No module named 'distutils.sysconfig'"
+    Was failing with
+    "ModuleNotFoundError: No module named 'distutils.sysconfig'"
   * liblldb.a has been removed upstream
   * Ship libclang-cpp1-9 as a new package
   * Ship python3-lldb-9 as a new package
