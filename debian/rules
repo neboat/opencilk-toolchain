@@ -235,13 +235,6 @@ endif
 endif
 endif
 
-OLD_DH_DISTRO :=  trusty
-ifneq (,$(filter $(DISTRO),$(OLD_DH_DISTRO)))
-# DH doesn't support the [power ...] in install
-# fails with cp: cannot stat 'debian/tmp/[!powerpc': No such file or directory
-$(shell sed -e "s|\[\!powerpc \!powerpcspe\] ||g" debian/llvm-X.Y-dev.install.in)
-endif
-
 DH_OPTIONS=
 OCAML_ENABLE= no
 OCAML_ARCHS := amd64 arm64 armhf i386 ppc64el s390x
@@ -289,6 +282,12 @@ preconfigure:
 
 	# Make install file executable for dh-exec
 	chmod +x debian/llvm-$(LLVM_VERSION)-dev.install
+
+	# DH doesn't support the [power ...] in install on Ubuntu trusty
+	# fails with cp: cannot stat 'debian/tmp/[!powerpc': No such file or directory
+	if test "$(DISTRO)" = "trusty"; then \
+		sed -i -e "s|\[\!powerpc \!powerpcspe\] ||g" debian/llvm-$(LLVM_VERSION)-dev.install; \
+	fi
 
 # Override this two targets. They are trying to manage the .in conversion for me
 override_dh_ocamlinit:
