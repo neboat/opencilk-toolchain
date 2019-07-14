@@ -622,7 +622,7 @@ endif
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPolly*a
 # Probably useless
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/site-packages/six.py
-    rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
+	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
 	$(MAKE) -C libcxxabi/build install DESTDIR=$(DEB_INST)
