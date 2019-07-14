@@ -1,20 +1,6 @@
 llvm-toolchain-snapshot (1:9~svn366001-1~exp1) experimental; urgency=medium
 
   * New snapshot release
-  * liblldb.a has been removed
-  * Ship libclang-cpp1-9 as a new package
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 13 Jul 2019 15:31:59 +0200
-
-llvm-toolchain-snapshot (1:9~svn365902-1~exp1) experimental; urgency=medium
-
-  * New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 12 Jul 2019 16:57:37 +0200
-
-llvm-toolchain-snapshot (1:9~svn365742-1~exp1) experimental; urgency=medium
-
-  * New snapshot release
   * New symbols in libomp5 added in the symbol file
     - __kmpc_omp_target_task_alloc
     - __kmpc_task_allow_completion_event
@@ -29,8 +15,10 @@ llvm-toolchain-snapshot (1:9~svn365742-1~exp1) experimental; urgency=medium
   * Remove libc++experimental.a (seems to be not installed)
   * Install python3-setuptools as it seems that lldb moved to python 3
     Was failing with "ModuleNotFoundError: No module named 'distutils.sysconfig'"
+  * liblldb.a has been removed upstream
+  * Ship libclang-cpp1-9 as a new package
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 11 Jul 2019 11:11:46 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 14 Jul 2019 15:36:30 +0200
 
 llvm-toolchain-snapshot (1:9~svn364913-1~exp1) experimental; urgency=medium
 
