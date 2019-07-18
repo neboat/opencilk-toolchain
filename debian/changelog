@@ -4,6 +4,12 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
 
+llvm-toolchain-9 (1:9~svn366428-1) unstable; urgency=medium
+
+  * New branch (9)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 16:54:14 +0200
+
 llvm-toolchain-snapshot (1:9~svn366022-1~exp1) experimental; urgency=medium
 
   * New snapshot release
@@ -26,7 +32,7 @@ llvm-toolchain-snapshot (1:9~svn366022-1~exp1) experimental; urgency=medium
   * Ship libclang-cpp1-9 as a new package
   * Ship python3-lldb-9 as a new package
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 14 Jul 2019 20:23:25 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 15:52:37 +0200
 
 llvm-toolchain-snapshot (1:9~svn364913-1~exp1) experimental; urgency=medium
 
@@ -169,6 +175,19 @@ llvm-toolchain-snapshot (1:9~svn351375-1~exp1) experimental; urgency=medium
   * Remove BugpointPasses.so & TestPlugin.so as they don't ship anymore
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:59:29 +0100
+
+llvm-toolchain-8 (1:8.0.1~+rc4-2) unstable; urgency=medium
+
+  * Compile against Python 3
+    (Closes: #931029)
+
+ -- Christian Biesinger <cbiesinger@google.com>  Thu, 18 Jul 2019 14:13:56 -0500
+
+llvm-toolchain-8 (1:8.0.1~+rc4-1) unstable; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 11 Jul 2019 08:39:38 +0200
 
 llvm-toolchain-8 (1:8.0.1~+rc3-1) unstable; urgency=medium
 

@@ -1,4 +1,4 @@
-Source: llvm-toolchain-snapshot
+Source: llvm-toolchain-9
 Section: devel
 Priority: optional
 Rules-Requires-Root: no
@@ -7,12 +7,12 @@ Uploaders: Sylvestre Ledru <sylvestre@debian.org>
 Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
     libffi-dev (>= 3.0.9),
     lsb-release, patchutils, diffstat, xz-utils, python3-dev,
-    libedit-dev, libncurses5-dev, swig, python-six, python-sphinx (>= 1.3.6),
+    libedit-dev, libncurses5-dev, swig, python3-six, python3-sphinx (>= 1.3.6),
     binutils-dev,
     libjsoncpp-dev, pkg-config,
     lcov, procps, help2man, zlib1g-dev,
     g++-multilib [amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
-    libjs-mathjax, python-recommonmark,
+    libjs-mathjax, python3-recommonmark,
     doxygen, gfortran,
     ocaml-nox [amd64 arm64 armhf i386 ppc64el s390x],
     ocaml-findlib [amd64 arm64 armhf i386 ppc64el s390x],
@@ -22,8 +22,8 @@ Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
 Build-Conflicts: oprofile, ocaml, libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev
 Standards-Version: 4.2.1
 Homepage: https://www.llvm.org/
-Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b snapshot
-Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/snapshot
+Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b 9
+Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/9
 
 # ------------- clang -------------
 
@@ -33,7 +33,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang-common-10-dev (= ${binary:Version}),
  libclang1-10 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
-Recommends: llvm-10-dev, python, libomp-10-dev
+Recommends: llvm-10-dev, python3, libomp-10-dev
 Suggests: clang-10-doc
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
@@ -46,7 +46,7 @@ Description: C, C++ and Objective-C compiler
 Package: clang-tools-10
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, clang-10 (= ${binary:Version}),
- python
+ python3
 Description: clang-based tools for C/C++ developments
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -60,7 +60,7 @@ Description: clang-based tools for C/C++ developments
 
 Package: clang-format-10
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python,
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
  libllvm10 (= ${binary:Version})
 Description: Tool to format C/C++/Obj-C code
  Clang-format is both a library and a stand-alone tool with the goal of
@@ -76,9 +76,9 @@ Description: Tool to format C/C++/Obj-C code
 
 Package: clang-tidy-10
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python,
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
  libllvm10 (= ${binary:Version}), libclang-common-10-dev,
- clang-tools-10, python-yaml
+ clang-tools-10, python3-yaml
 Replaces: clang-modernize-10
 Breaks: clang-modernize-10
 Description: clang-based C++ linter tool
@@ -200,7 +200,7 @@ Description: Library for coverage-guided fuzz testing
 Package: python-clang-10
 Section: python
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3
 Replaces: python-clang-3.10, python-clang-3.10, python-clang-x.y
 Breaks: python-clang-3.10, python-clang-3.10
 Conflicts: python-clang-x.y
@@ -316,8 +316,8 @@ Description: Modular compiler and toolchain technologies, libraries and headers
 
 Package: llvm-10-tools
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- python-pygments, python-yaml,
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
+ python3-pygments, python3-yaml,
  llvm-10-dev (= ${binary:Version})
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
@@ -469,7 +469,7 @@ Package: python-lldb-10
 Section: python
 Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m610k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, python, python-six
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3, python3-six
 Conflicts: python-lldb-3.10, python-lldb-3.10, python-lldb-x.y
 Replaces: python-lldb-x.y
 Provides: python-lldb-x.y
