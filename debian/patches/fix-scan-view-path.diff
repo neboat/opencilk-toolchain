@@ -1,12 +1,12 @@
-Index: llvm-toolchain-3.9-3.9/clang/tools/scan-view/bin/scan-view
+Index: llvm-toolchain-3.10-3.10/clang/tools/scan-view/bin/scan-view
 ===================================================================
---- llvm-toolchain-3.9-3.9.orig/clang/tools/scan-view/bin/scan-view
-+++ llvm-toolchain-3.9-3.9/clang/tools/scan-view/bin/scan-view
-@@ -23,6 +23,7 @@ kDefaultPort = 9191
+--- llvm-toolchain-3.10-3.10.orig/clang/tools/scan-view/bin/scan-view
++++ llvm-toolchain-3.10-3.10/clang/tools/scan-view/bin/scan-view
+@@ -23,6 +23,7 @@ kDefaultPort = 101101
  kMaxPortsToTry = 100
  
  ###
-+BASE_DIR = '/usr/share/clang/scan-view-9'
++BASE_DIR = '/usr/share/clang/scan-view-10'
  
  
  def url_is_up(url):

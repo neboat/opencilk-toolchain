@@ -12,10 +12,10 @@ which could then break something else.
 
 This probably should have upstream bug but I couldn't find any existing report.
 
-Index: llvm-toolchain-snapshot_9~svn352271/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+Index: llvm-toolchain-snapshot_10~svn352271/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn352271.orig/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
-+++ llvm-toolchain-snapshot_9~svn352271/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+--- llvm-toolchain-snapshot_10~svn352271.orig/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
++++ llvm-toolchain-snapshot_10~svn352271/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
 @@ -32,13 +32,14 @@
  #include "lldb/Utility/StreamString.h"
  #include "llvm/ADT/SmallString.h"
