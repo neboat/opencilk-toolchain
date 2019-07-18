@@ -1,3 +1,10 @@
+llvm-toolchain-8 (1:8.0.1~+rc4-2) unstable; urgency=medium
+
+  * Compile against Python 3
+    (Closes: #931029)
+
+ -- Christian Biesinger <cbiesinger@google.com>  Thu, 18 Jul 2019 14:13:56 -0500
+
 llvm-toolchain-8 (1:8.0.1~+rc4-1) unstable; urgency=medium
 
   * New snapshot release
