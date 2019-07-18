@@ -12,12 +12,6 @@ Index: llvm-toolchain-9_9~svn366428/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-9_9~svn366428.orig/CMakeLists.txt
 +++ llvm-toolchain-9_9~svn366428/CMakeLists.txt
-@@ -1,4 +1,4 @@
--# See docs/CMake.html for instructions about how to build LLVM with CMake.
-+FindPythonInterp# See docs/CMake.html for instructions about how to build LLVM with CMake.
- 
- cmake_minimum_required(VERSION 3.4.3)
- 
 @@ -643,7 +643,7 @@ option(LLVM_ENABLE_PLUGINS "Enable plugi
  include(HandleLLVMOptions)
  
