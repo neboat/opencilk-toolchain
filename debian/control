@@ -1,4 +1,4 @@
-Source: llvm-toolchain-snapshot
+Source: llvm-toolchain-9
 Section: devel
 Priority: optional
 Rules-Requires-Root: no
@@ -22,8 +22,8 @@ Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
 Build-Conflicts: oprofile, ocaml, libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev
 Standards-Version: 4.2.1
 Homepage: https://www.llvm.org/
-Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b snapshot
-Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/snapshot
+Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b 9
+Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/9
 
 # ------------- clang -------------
 
