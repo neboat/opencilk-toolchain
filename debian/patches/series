@@ -135,3 +135,6 @@ OpenCL-Fix-assertion-due-to-blocks.patch
 ubuntu-eoan-distro.patch
 
 930008-arm.diff
+
+# Python 3
+0050-Remove-explicit-python-version-list.patch
