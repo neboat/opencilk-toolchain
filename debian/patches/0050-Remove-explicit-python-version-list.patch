@@ -1,0 +1,28 @@
+From 61caa3a0c61fd4f2a049e9a14b5f4f74354dbb29 Mon Sep 17 00:00:00 2001
+From: Christian Biesinger <cbiesinger@chromium.org>
+Date: Thu, 18 Jul 2019 14:52:36 -0500
+Subject: [PATCH] Remove explicit python version list
+
+This is required to make -DPYTHON_EXECUTABLE work correctly
+---
+ llvm/CMakeLists.txt | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 81c2bab39ec..e2222d42aae 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -603,10 +603,6 @@ message(STATUS "LLVM default target triple: ${LLVM_DEFAULT_TARGET_TRIPLE}")
+ 
+ include(HandleLLVMOptions)
+ 
+-# Verify that we can find a Python 2 interpreter.  Python 3 is unsupported.
+-# FIXME: We should support systems with only Python 3, but that requires work
+-# on LLDB.
+-set(Python_ADDITIONAL_VERSIONS 2.7)
+ include(FindPythonInterp)
+ if( NOT PYTHONINTERP_FOUND )
+   message(FATAL_ERROR
+-- 
+2.22.0.510.g264f2c817a-goog
+
