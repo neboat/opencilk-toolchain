@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 16:15:20 +0200
+
 llvm-toolchain-snapshot (1:10~svn366022-1~exp2) experimental; urgency=medium
 
   * New version in snapshot (10)

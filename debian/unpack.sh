@@ -1,6 +1,6 @@
 set -e
 ORIG_VERSION=snapshot
-MAJOR_VERSION=9 # 8.0.1
+MAJOR_VERSION=10 # 8.0.1
 SVN_REV=`ls -1 *snapshot_$MAJOR_VERSION*svn*bz2 | tail -1|perl -ne 'print "$1\n" if /svn(\d+)/;' | sort -ru`
 #SVN_REV=347285
 VERSION=svn$SVN_REV
