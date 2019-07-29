@@ -530,8 +530,10 @@ build_doc:
 	done
 
 	mkdir -p debian/man/
-	help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1
-	help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1
+	ls -al clang/tools/scan-view/bin/scan-view
+	clang/tools/scan-view/bin/scan-view --help || true
+	help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1 || true
+	help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1 || true
 
 	CMDS="llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb lldb-mi clang-format clang clang++ clang-tblgen clang-check clang-cpp clang-import-test clang-tidy clang-apply-replacements clang-rename clang-query pp-trace sancov lli modularize clang-include-fixer find-all-symbols clang-reorder-fields ld.lld llvm-tblgen clang-change-namespace clang-offload-bundler"; \
 	for f in $$CMDS; do \
