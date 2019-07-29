@@ -1,6 +1,7 @@
 llvm-toolchain-8 (1:8.0.1-1) unstable; urgency=medium
 
   * New stable release
+  * Ship python3-lldb-8 as a new package
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 27 Jul 2019 23:50:48 +0200
 

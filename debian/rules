@@ -617,7 +617,7 @@ endif
 # Don't think it is used
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPolly*a
 # Probably useless
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python2.7/site-packages/six.py
+	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/site-packages/six.py
 
 	$(MAKE) -C libcxxabi/build install DESTDIR=$(DEB_INST)
 	$(MAKE) -C libcxx/build install DESTDIR=$(DEB_INST)
