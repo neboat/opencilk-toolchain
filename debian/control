@@ -60,7 +60,7 @@ Description: clang-based tools for C/C++ developments
 
 Package: clang-format-9
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python,3
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3
  libllvm9 (= ${binary:Version})
 Description: Tool to format C/C++/Obj-C code
  Clang-format is both a library and a stand-alone tool with the goal of
