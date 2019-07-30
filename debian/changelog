@@ -1,8 +1,8 @@
-llvm-toolchain-9 (1:9~svn366428-1) unstable; urgency=medium
+llvm-toolchain-9 (1:9~+rc1-1~exp1) experimental; urgency=medium
 
-  * New branch (9)
+  * New snapshot release
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 16:54:14 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 29 Jul 2019 22:16:33 +0200
 
 llvm-toolchain-snapshot (1:9~svn366022-1~exp1) experimental; urgency=medium
 
