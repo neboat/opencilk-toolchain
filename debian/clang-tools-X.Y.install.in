@@ -21,7 +21,6 @@ usr/lib/llvm-@LLVM_VERSION@/bin/modularize
 usr/lib/llvm-@LLVM_VERSION@/bin/c-index-test
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-include-fixer
 usr/lib/llvm-@LLVM_VERSION@/bin/find-all-symbols
-usr/lib/llvm-@LLVM_VERSION@/bin/clangd
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-refactor
 usr/lib/llvm-@LLVM_VERSION@/bin/diagtool
 usr/lib/llvm-@LLVM_VERSION@/bin/hmaptool
@@ -50,7 +49,6 @@ usr/bin/find-all-symbols-@LLVM_VERSION@
 usr/bin/clang-include-fixer-@LLVM_VERSION@
 usr/bin/clang-change-namespace-@LLVM_VERSION@
 usr/bin/clang-import-test-@LLVM_VERSION@
-usr/bin/clangd-@LLVM_VERSION@
 usr/bin/clang-refactor-@LLVM_VERSION@
 usr/bin/diagtool-@LLVM_VERSION@
 usr/bin/hmaptool-@LLVM_VERSION@

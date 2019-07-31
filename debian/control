@@ -55,8 +55,7 @@ Description: clang-based tools for C/C++ developments
  Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
  provides most of the support of C++17.
  .
- This package contains some clang-based tools like scan-build, clangd,
- clang-cl, etc.
+ This package contains some clang-based tools like scan-build, clang-cl, etc.
 
 Package: clang-format-8
 Architecture: any
@@ -84,6 +83,21 @@ Description: clang-based C++ linter tool
  errors, like style violations, interface misuse, or bugs that can be deduced
  via static analysis. clang-tidy is modular and provides a convenient interface
  for writing new checks.
+
+Package: clangd-8
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Replaces: clang-tools-8 (<< 8.0.1-1)
+Breaks: clang-tools-8 (<< 8.0.1-1)
+Description: Language server that provides IDE-like features to editors
+ clangd understands your C++ code and adds smart features to your editor:
+  - code completion
+  - compile errors
+  - go-to-definition
+  - and more.
+ .
+ clangd is a language server that implements the Language Server Protocol;
+ it can work with many editors through a plugin.
 
 Package: clang-8-doc
 Architecture: all
