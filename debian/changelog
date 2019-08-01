@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:10~svn366440-1~exp2) UNRELEASED; urgency=medium
+
+  * Fixed wrong shlib generation of libomp5 library 
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 01 Aug 2019 19:05:35 +0200
+
 llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
   * New version in snapshot (10)
