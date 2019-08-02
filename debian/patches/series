@@ -80,6 +80,7 @@ libcxx/libcxx-test-atomics-set-compare-exchange-to-be-expected-fails-on-arm.patc
 libcxx/libcxx-silent-test-libcxx.diff
 libcxx/libcxx-silent-failure-ppc64el.diff
 libcxx/libcxx-silent-failure-arm64.diff
+libcxx/libcxx-riscv64-cycletimer.diff
 
 # Change default optims
 mips-fpxx-enable.diff
@@ -125,3 +126,7 @@ kfreebsd/tools_llvm-shlib_CMakeLists.txt.diff
 930008-arm.diff
 bootstrap-fix-include-next.diff
 
+# riscv64
+clang-riscv64-multiarch.diff
+clang-riscv64-hf-abi.diff
+clang-riscv64-rv64gc.diff
