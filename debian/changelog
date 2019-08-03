@@ -1,7 +1,7 @@
 llvm-toolchain-snapshot (1:10~svn367724-1~exp1) experimental; urgency=medium
 
   [ Gianfranco Costamagna ]
-  * Fixed wrong shlib generation of libomp5 library 
+  * Fixed wrong shlib generation of libomp5 library
 
   [ Aurelien Jarno ]
   * Add support for riscv64:
