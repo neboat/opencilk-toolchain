@@ -11,6 +11,7 @@ llvm-toolchain-snapshot (1:10~svn367724-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
   * New snapshot release
+  * Ship clangd-10 as a new package (Closes: #932432)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 02 Aug 2019 23:32:10 +0200
 
