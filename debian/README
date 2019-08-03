@@ -9,7 +9,7 @@ The current snapshot release is maintained in the "snapshot" branch.
 The easiest way to get all branches is probably to have one
 clone per version:
 
-for f in 4.0 5.0 6.0 7 snapshot; do
+for f in 7 8 9 snapshot; do
     git clone git@salsa.debian.org:pkg-llvm-team/llvm-toolchain.git -b $f $f
 done
 
@@ -55,7 +55,7 @@ branch at
   http://llvm.org/svn/llvm-project/{llvm,...}/branches/release_80
 you should use,
 
-  $ sh snapshot/debian/orig-tar.sh release_80
+  $ sh 8/debian/orig-tar.sh release_80
 
 To retrieve a specific release candidate, you can pass the branch name as the
 first argument, and the tag rc number as the second argument. For example, to
@@ -63,11 +63,11 @@ get the 8.0.1 release candidate rc3 at
   http://llvm.org/svn/llvm-project/{llvm,...}/tags/RELEASE_801/rc3
 you should use,
 
-  $ sh snapshot/debian/orig-tar.sh RELEASE_801 rc3 8.0.1
+  $ sh 8/debian/orig-tar.sh RELEASE_801 rc3 8.0.1
 
 For a stable release, the syntax is:
 
- $ sh snapshot/debian/orig-tar.sh RELEASE_800 final 8.0
+ $ sh 8/debian/orig-tar.sh RELEASE_800 final 8.0
 
 
 Additional maintainer scripts
@@ -80,6 +80,15 @@ set of sanity-check tests and regression tests.
 The script releases/snapshot/debian/prepare-new-release.sh is used when
 preparing a new point release. It automatically replaces version numbers
 in various files of the package.
+
+Making a change to all versions
+===============================
+
+Sometimes, we want to make a change on all branches.
+In that case, start to make the change from the older
+version (example: 8), then, change branch (example: 9) and
+$ git merge origin/8
+to retrieve the changes
 
 
 Change in major upstream version
