@@ -8,6 +8,7 @@ llvm-toolchain-snapshot (1:10~svn367724-1~exp1) experimental; urgency=medium
     - Always link with -latomic on riscv64.
     - patches/clang-riscv64-multiarch.diff: add multiarch paths for riscv64.
     - patches/clang-riscv64-rv64gc.diff: default to lp64d ABI and rv64gc ISA.
+  * Document riscv64 debian specific changes in README.source.
 
   [ Sylvestre Ledru ]
   * New snapshot release

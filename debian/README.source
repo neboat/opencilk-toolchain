@@ -22,6 +22,8 @@ and symlinks are managed by the other package llvm-defaults
 
 * For mips, FPXX is enabled.
 
+* For riscv64, the hard-float ABI is used instead of the float one, and
+  the target CPU is set to RV64GC instead of RV64I.
 
 = Libraries =
 
