@@ -2,6 +2,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/lldb*
 usr/lib/llvm-@LLVM_VERSION@/bin/lldb-mi*
 usr/lib/llvm-@LLVM_VERSION@/bin/lldb-server*
 usr/lib/llvm-@LLVM_VERSION@/bin/lldb-argdumper
+usr/lib/llvm-@LLVM_VERSION@/bin/lit-cpuid
 
 usr/bin/lldb-@LLVM_VERSION@*
 usr/bin/lldb-server-@LLVM_VERSION@*
@@ -9,3 +10,4 @@ usr/bin/lldb-mi-@LLVM_VERSION@*
 usr/bin/lldb-argdumper-@LLVM_VERSION@
 usr/bin/lldb-vscode-@LLVM_VERSION@
 usr/bin/lldb-instr-@LLVM_VERSION@
+usr/bin/lit-cpuid-@LLVM_VERSION@

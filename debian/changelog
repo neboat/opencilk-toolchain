@@ -20,11 +20,22 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
 
-llvm-toolchain-9 (1:9~svn366428-1) unstable; urgency=medium
+llvm-toolchain-9 (1:9~+rc1-1~exp2) experimental; urgency=medium
 
-  * New branch (9)
+  [ Gianfranco Costamagna ]
+  * Fixed wrong shlib generation of libomp5 library
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 16:54:14 +0200
+  [ Sylvestre Ledru ]
+  * Move lit-cpuid from llvm-tools to lldb (wrong package)
+  * Ship clangd-9 as a new package (Closes: #932432)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 03 Aug 2019 11:41:07 +0200
+
+llvm-toolchain-9 (1:9~+rc1-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 29 Jul 2019 22:16:33 +0200
 
 llvm-toolchain-snapshot (1:9~svn366022-1~exp1) experimental; urgency=medium
 
@@ -191,6 +202,17 @@ llvm-toolchain-snapshot (1:9~svn351375-1~exp1) experimental; urgency=medium
   * Remove BugpointPasses.so & TestPlugin.so as they don't ship anymore
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Jan 2019 21:59:29 +0100
+
+llvm-toolchain-8 (1:8.0.1-1) unstable; urgency=medium
+
+  * New stable release
+  * Ship python3-lldb-8 as a new package
+  * Ship clangd-8 as a new package (Closes: #932432)
+
+  [ Gianfranco Costamagna ]
+  * Fixed wrong shlib generation of libomp5 library
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 03 Aug 2019 11:44:29 +0200
 
 llvm-toolchain-8 (1:8.0.1~+rc4-2) unstable; urgency=medium
 
