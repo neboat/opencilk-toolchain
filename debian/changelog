@@ -7,6 +7,14 @@ llvm-toolchain-9 (1:9~+rc1-1~exp2) experimental; urgency=medium
   * Move lit-cpuid from llvm-tools to lldb (wrong package)
   * Ship clangd-9 as a new package (Closes: #932432)
 
+  [ Aurelien Jarno ]
+  * Add support for riscv64:
+    - Always link with -latomic on riscv64.
+    - patches/clang-riscv64-multiarch.diff: add multiarch paths for riscv64.
+    - patches/clang-riscv64-rv64gc.diff: default to lp64d ABI and rv64gc ISA.
+    - patches/libcxx/libcxx-riscv64-cycletimer.diff: backport riscv64
+      cycletimer support from upstream.
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 03 Aug 2019 11:41:07 +0200
 
 llvm-toolchain-9 (1:9~+rc1-1~exp1) experimental; urgency=medium
