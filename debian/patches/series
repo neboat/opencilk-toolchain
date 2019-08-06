@@ -80,6 +80,7 @@ libcxx/libcxx-test-atomics-set-compare-exchange-to-be-expected-fails-on-arm.patc
 libcxx/libcxx-silent-test-libcxx.diff
 libcxx/libcxx-silent-failure-ppc64el.diff
 libcxx/libcxx-silent-failure-arm64.diff
+libcxx/libcxx-riscv64-cycletimer.diff
 
 # Change default optims
 mips-fpxx-enable.diff

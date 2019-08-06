@@ -1,19 +1,8 @@
-llvm-toolchain-9 (1:9~svn367848-1~exp1) UNRELEASED; urgency=medium
-
-  [ Sylvestre Ledru ]
-  * experimental New snapshot release
-  * Disable /libcxx/libcxx-riscv64-cycletimer.diff (merged upstream)
-
-  [ Gianfranco Costamagna ]
-  * clangd: Fix break/replaces missing epoch
-  * Add python to testsuite
-
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 06 Aug 2019 09:40:44 +0200
-
 llvm-toolchain-9 (1:9~+rc1-1~exp2) experimental; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Fixed wrong shlib generation of libomp5 library
+  * Add python to testsuite
 
   [ Sylvestre Ledru ]
   * Move lit-cpuid from llvm-tools to lldb (wrong package)
