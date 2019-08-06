@@ -87,8 +87,8 @@ Description: clang-based C++ linter tool
 Package: clangd-8
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Replaces: clang-tools-8 (<< 8.0.1-1)
-Breaks: clang-tools-8 (<< 8.0.1-1)
+Replaces: clang-tools-8 (<< 1:8.0.1-1)
+Breaks: clang-tools-8 (<< 1:8.0.1-1)
 Description: Language server that provides IDE-like features to editors
  clangd understands your C++ code and adds smart features to your editor:
   - code completion
