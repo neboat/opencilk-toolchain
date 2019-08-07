@@ -1,3 +1,10 @@
+llvm-toolchain-8 (1:8.0.1-3) UNRELEASED; urgency=medium
+
+  * llvm-tools: depend on python2 packages too, the move to python3 was
+    premature and broke opt-viewer.py
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 07 Aug 2019 15:11:36 +0200
+
 llvm-toolchain-8 (1:8.0.1-2) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
