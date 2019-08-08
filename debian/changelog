@@ -1,3 +1,10 @@
+llvm-toolchain-9 (1:9~+rc1-1~exp3) UNRELEASED; urgency=medium
+
+  * Add back python-* dependencies to fix tools not really ready for python3
+  * Fix missing epoch in breaks/replaces
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 08 Aug 2019 13:59:36 +0200
+
 llvm-toolchain-9 (1:9~+rc1-1~exp2) experimental; urgency=medium
 
   [ Gianfranco Costamagna ]
