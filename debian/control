@@ -327,7 +327,8 @@ Description: Modular compiler and toolchain technologies, libraries and headers
 
 Package: llvm-9-tools
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
+Depends: ${shlibs:Depends}, ${misc:Depends}, python, python3,
+ python-pygments, python-yaml,
  python3-pygments, python3-yaml,
  llvm-9-dev (= ${binary:Version})
 Description: Modular compiler and toolchain technologies, tools
@@ -456,8 +457,8 @@ Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm9 (= ${binary:Version}), llvm-9-dev,
  python-lldb-9
 Pre-Depends: ${misc:Pre-Depends}
-Replaces: llvm-9-tools (<< 9~+rc1-1~exp2)
-Breaks: llvm-9-tools (<< 9~+rc1-1~exp2)
+Replaces: llvm-9-tools (<< 1:9~+rc1-1~exp2)
+Breaks: llvm-9-tools (<< 1:9~+rc1-1~exp2)
 Description: Next generation, high-performance debugger
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
