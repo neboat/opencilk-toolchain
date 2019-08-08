@@ -1,6 +1,6 @@
 Test-Command: bash -v ./debian/qualify-clang.sh
-Depends: @, python, cmake, g++, file, dpkg-dev
-# Comment the dbgsym package because of bug #1017528
+Depends: @, cmake, g++, file, dpkg-dev
+# Comment the dbgsym package because of bug #917528
 # dbgsym packages not being available in testing
 # clang-10-dbgsym, libclang1-10-dbgsym
 Restrictions: allow-stderr

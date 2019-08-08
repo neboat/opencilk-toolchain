@@ -249,8 +249,6 @@ Section: libs
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
-Breaks: libllvm3.10v4
-Replaces: libllvm3.10v4
 Description: Modular compiler and toolchain technologies, runtime library
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -327,7 +325,8 @@ Description: Modular compiler and toolchain technologies, libraries and headers
 
 Package: llvm-10-tools
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
+Depends: ${shlibs:Depends}, ${misc:Depends}, python, python3,
+ python-pygments, python-yaml,
  python3-pygments, python3-yaml,
  llvm-10-dev (= ${binary:Version})
 Description: Modular compiler and toolchain technologies, tools
