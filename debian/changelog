@@ -1,19 +1,10 @@
-llvm-toolchain-snapshot (1:10~svn367724-1~exp2) UNRELEASED; urgency=medium
-
-  [ Sylvestre Ledru ]
-  * lldb-mi removed
-
-  [ Gianfranco Costamagna ]
-  * clangd: fix missing epoch in breaks/replaces relationship
-  * testsuite, add python, used in some test
-  * Cherry-pick various fixes from branch 8 and 9, do not break anymore with libllvm3.9v4
-
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 08 Aug 2019 14:04:35 +0200
-
 llvm-toolchain-snapshot (1:10~svn367724-1~exp1) experimental; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Fixed wrong shlib generation of libomp5 library
+  * clangd: fix missing epoch in breaks/replaces relationship
+  * testsuite, add python, used in some test
+  * Cherry-pick various fixes from branch 8 and 9, do not break anymore with libllvm3.9v4
 
   [ Aurelien Jarno ]
   * Add support for riscv64:
@@ -24,9 +15,10 @@ llvm-toolchain-snapshot (1:10~svn367724-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
   * New snapshot release
+  * lldb-mi removed
   * Ship clangd-10 as a new package (Closes: #932432)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 02 Aug 2019 23:32:10 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 13 Aug 2019 21:37:46 +0200
 
 llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
