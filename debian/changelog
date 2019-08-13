@@ -1,7 +1,6 @@
 llvm-toolchain-snapshot (1:10~svn367724-1~exp2) UNRELEASED; urgency=medium
 
   [ Sylvestre Ledru ]
-  * rebase of the patch
   * lldb-mi removed
 
   [ Gianfranco Costamagna ]
