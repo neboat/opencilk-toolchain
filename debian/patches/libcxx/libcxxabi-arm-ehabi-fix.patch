@@ -66,10 +66,10 @@ Index: llvm-toolchain-snapshot_9~svn353687/libcxxabi/src/cxa_exception.cpp
  #endif
          // Some sort of unwinding error.  Note that terminate is a handler.
          __cxa_begin_catch(&dep_exception_header->unwindHeader);
-Index: llvm-toolchain-snapshot_9~svn353687/libcxxabi/src/cxa_exception.hpp
+Index: llvm-toolchain-snapshot_9~svn353687/libcxxabi/src/cxa_exception.h
 ===================================================================
---- llvm-toolchain-snapshot_9~svn353687.orig/libcxxabi/src/cxa_exception.hpp
-+++ llvm-toolchain-snapshot_9~svn353687/libcxxabi/src/cxa_exception.hpp
+--- llvm-toolchain-snapshot_9~svn353687.orig/libcxxabi/src/cxa_exception.h
++++ llvm-toolchain-snapshot_9~svn353687/libcxxabi/src/cxa_exception.h
 @@ -27,6 +27,45 @@ uint64_t __getExceptionClass  (const _Un
  void     __setExceptionClass  (      _Unwind_Exception*, uint64_t);
  bool     __isOurExceptionClass(const _Unwind_Exception*);
