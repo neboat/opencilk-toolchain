@@ -12,11 +12,11 @@ which could then break something else.
 
 This probably should have upstream bug but I couldn't find any existing report.
 
-Index: llvm-toolchain-snapshot_10~svn352271/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+Index: llvm-toolchain-snapshot_10~svn368802/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~svn352271.orig/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
-+++ llvm-toolchain-snapshot_10~svn352271/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
-@@ -32,13 +32,14 @@
+--- llvm-toolchain-snapshot_10~svn368802.orig/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
++++ llvm-toolchain-snapshot_10~svn368802/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+@@ -34,6 +34,7 @@
  #include "lldb/Utility/StreamString.h"
  #include "llvm/ADT/SmallString.h"
  #include "llvm/Support/ScopedPrinter.h"
@@ -24,8 +24,9 @@ Index: llvm-toolchain-snapshot_10~svn352271/lldb/source/Plugins/Process/gdb-remo
  
  #include "ProcessGDBRemoteLog.h"
  
- #if defined(__APPLE__)
- #define DEBUGSERVER_BASENAME "debugserver"
+@@ -42,7 +43,7 @@
+ #elif defined(_WIN32)
+ #define DEBUGSERVER_BASENAME "lldb-server.exe"
  #else
 -#define DEBUGSERVER_BASENAME "lldb-server"
 +# define DEBUGSERVER_BASENAME    "lldb-server-" LLVM_VERSION_STRING
