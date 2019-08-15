@@ -1,0 +1,13 @@
+Index: llvm-toolchain-snapshot-10~svn368743/projects/compiler-rt/lib/hwasan/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot-10~svn368743.orig/projects/compiler-rt/lib/hwasan/CMakeLists.txt
++++ llvm-toolchain-snapshot-10~svn368743/projects/compiler-rt/lib/hwasan/CMakeLists.txt
+@@ -40,7 +40,7 @@ append_list_if(COMPILER_RT_HWASAN_WITH_I
+ 
+ set(HWASAN_RTL_CFLAGS ${SANITIZER_COMMON_CFLAGS})
+ append_rtti_flag(OFF HWASAN_RTL_CFLAGS)
+-append_list_if(COMPILER_RT_HAS_FPIC_FLAG -fPIC HWASAN_RTL_CFLAGS)
++append_list_if(COMPILER_RT_HAS_FPIC_FLAG -fPIC -fuse-ld=gold HWASAN_RTL_CFLAGS)
+ # Prevent clang from generating libc calls.
+ append_list_if(COMPILER_RT_HAS_FFREESTANDING_FLAG -ffreestanding HWASAN_RTL_CFLAGS)
+ 

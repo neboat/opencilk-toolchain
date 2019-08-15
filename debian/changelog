@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:10~svn368740-1~exp2) experimental; urgency=medium
+
+  * Workaround bug https://bugs.llvm.org/show_bug.cgi?id=42994
+    (fails to link on Debian buster)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 14 Aug 2019 13:21:54 +0200
+
 llvm-toolchain-snapshot (1:10~svn368740-1~exp1) experimental; urgency=medium
 
   [ Gianfranco Costamagna ]
@@ -19,6 +26,21 @@ llvm-toolchain-snapshot (1:10~svn368740-1~exp1) experimental; urgency=medium
   * Ship clangd-10 as a new package (Closes: #932432)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 13 Aug 2019 21:37:46 +0200
+
+llvm-toolchain-snapshot (1:10~svn368706-1~exp1) experimental; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * lldb-mi removed
+
+  [ Gianfranco Costamagna ]
+  * clangd: fix missing epoch in breaks/replaces relationship
+  * testsuite, add python, used in some test
+  * Cherry-pick various fixes from branch 8 and 9, do not break anymore with libllvm3.9v4
+
+  [ Sylvestre Ledru ]
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 13 Aug 2019 17:55:41 +0200
 
 llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
