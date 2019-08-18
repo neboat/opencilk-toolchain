@@ -27,7 +27,7 @@ Index: llvm-toolchain-snapshot_10~svn368975/clang/lib/Driver/Driver.cpp
        TC = std::make_unique<toolchains::FreeBSD>(*this, Target, Args);
        break;
 +    case llvm::Triple::kFreeBSD:
-+      TC = llvm::make_unique<toolchains::kFreeBSD>(*this, Target, Args);
++      TC = std::make_unique<toolchains::kFreeBSD>(*this, Target, Args);
 +      break;
      case llvm::Triple::Minix:
        TC = std::make_unique<toolchains::Minix>(*this, Target, Args);
