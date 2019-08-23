@@ -1,3 +1,10 @@
+llvm-toolchain-9 (1:9~+rc2-1~exp2) experimental; urgency=medium
+
+  * Fix the mips* FTBFS
+    See bug 43011 upstream
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 23 Aug 2019 15:02:14 +0200
+
 llvm-toolchain-9 (1:9~+rc2-1~exp1) experimental; urgency=medium
 
   [ Gianfranco Costamagna ]
