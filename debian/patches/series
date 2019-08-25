@@ -130,3 +130,4 @@ clang-riscv64-multiarch.diff
 
 # Compiler-rt - workaround
 workaround-bug-42994-use-linker.diff
+revert-369823-compiler-rt-gwp-asan.diff

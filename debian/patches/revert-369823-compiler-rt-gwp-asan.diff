@@ -1,0 +1,16 @@
+Index: llvm-toolchain-snapshot_10~svn369866/compiler-rt/lib/gwp_asan/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_10~svn369866.orig/compiler-rt/lib/gwp_asan/CMakeLists.txt
++++ llvm-toolchain-snapshot_10~svn369866/compiler-rt/lib/gwp_asan/CMakeLists.txt
+@@ -105,9 +105,8 @@ if (COMPILER_RT_HAS_GWP_ASAN)
+   # core is to link it against a dummy main when DLLVM_USE_SANITIZE_COVERAGE
+   # isn't specified. Instead, here we only build fuzz targets if clang version
+   # is >= 6.0.
+-  if (COMPILER_RT_BUILD_LIBFUZZER AND
+-      "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND
+-      CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 6.0)
++  if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND
++      COMPILER_RT_BUILD_LIBFUZZER)
+     add_executable(stack_trace_compressor_fuzzer
+         stack_trace_compressor_fuzzer.cpp
+         ${GWP_ASAN_SOURCES}
