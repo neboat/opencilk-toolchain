@@ -3,7 +3,6 @@ llvm-toolchain-snapshot (1:10~svn368740-1~exp2) experimental; urgency=medium
   * Workaround bug https://bugs.llvm.org/show_bug.cgi?id=42994
     (fails to link on Debian buster)
   * for Ubuntu xenial: pass PYTHON_EXE to the stage2 build
-  * Revert 369823. See https://reviews.llvm.org/D66682#1644286
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 14 Aug 2019 13:21:54 +0200
 
