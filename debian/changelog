@@ -1,3 +1,11 @@
+llvm-toolchain-9 (1:9~svn370077-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+  * remove 0050-Remove-explicit-python-version-list.patch
+    bug-43011-mips.diff as they are merged upstream
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Aug 2019 23:38:11 +0200
+
 llvm-toolchain-9 (1:9~+rc2-1~exp2) experimental; urgency=medium
 
   * Try to fix the mips* ftbfs
