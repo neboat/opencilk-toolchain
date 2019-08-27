@@ -2,10 +2,10 @@
  clang/lib/Driver/ToolChains.cpp |    2 ++
  1 file changed, 2 insertions(+)
 
-Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Driver/ToolChains/Gnu.cpp
+Index: llvm-toolchain-snapshot_10~svn370025/clang/lib/Driver/ToolChains/Gnu.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/clang/lib/Driver/ToolChains/Gnu.cpp
-+++ llvm-toolchain-snapshot_9~svn351647/clang/lib/Driver/ToolChains/Gnu.cpp
+--- llvm-toolchain-snapshot_10~svn370025.orig/clang/lib/Driver/ToolChains/Gnu.cpp
++++ llvm-toolchain-snapshot_10~svn370025/clang/lib/Driver/ToolChains/Gnu.cpp
 @@ -1,4 +1,5 @@
 -//===--- Gnu.cpp - Gnu Tool and ToolChain Implementations -------*- C++ -*-===//
 +//===--- Gnu.cpp - Gnu Tool and ToolChain Implementations -------*- C++ 
@@ -21,7 +21,7 @@ Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Driver/ToolChains/Gnu.cpp
  #include "clang/Config/config.h" // for GCC_INSTALL_PREFIX
  #include "clang/Driver/Compilation.h"
  #include "clang/Driver/Driver.h"
-@@ -2534,6 +2536,7 @@ void Generic_GCC::AddClangCXXStdlibInclu
+@@ -2612,6 +2614,7 @@ void Generic_GCC::AddClangCXXStdlibInclu
      addLibStdCxxIncludePaths(DriverArgs, CC1Args);
      break;
    }

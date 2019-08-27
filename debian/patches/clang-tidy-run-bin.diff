@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_10~svn3422610/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
+Index: llvm-toolchain-snapshot_10~svn370025/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
 ===================================================================
---- llvm-toolchain-snapshot_10~svn3422610.orig/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
-+++ llvm-toolchain-snapshot_10~svn3422610/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
-@@ -1710,10 +1710,10 @@ def main():
+--- llvm-toolchain-snapshot_10~svn370025.orig/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
++++ llvm-toolchain-snapshot_10~svn370025/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
+@@ -180,10 +180,10 @@ def main():
                                     'clang-tidy and clang-apply-replacements in '
                                     '$PATH.')
    parser.add_argument('-clang-tidy-binary', metavar='PATH',

@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_9~svn359759/libcxx/include/__config
+Index: llvm-toolchain-snapshot_10~svn370025/libcxx/include/__config
 ===================================================================
---- llvm-toolchain-snapshot_9~svn359759.orig/libcxx/include/__config
-+++ llvm-toolchain-snapshot_9~svn359759/libcxx/include/__config
-@@ -1132,6 +1132,7 @@ _LIBCPP_FUNC_VIS extern "C" void __sanit
+--- llvm-toolchain-snapshot_10~svn370025.orig/libcxx/include/__config
++++ llvm-toolchain-snapshot_10~svn370025/libcxx/include/__config
+@@ -1062,6 +1062,7 @@ _LIBCPP_FUNC_VIS extern "C" void __sanit
      !defined(_LIBCPP_HAS_THREAD_API_WIN32) && \
      !defined(_LIBCPP_HAS_THREAD_API_EXTERNAL)
  #  if defined(__FreeBSD__) || \

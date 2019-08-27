@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_5.0~svn297449/clang/tools/scan-view/bin/scan-view
+Index: llvm-toolchain-snapshot_10~svn370025/clang/tools/scan-view/bin/scan-view
 ===================================================================
---- llvm-toolchain-snapshot_5.0~svn297449.orig/clang/tools/scan-view/bin/scan-view
-+++ llvm-toolchain-snapshot_5.0~svn297449/clang/tools/scan-view/bin/scan-view
-@@ -61,7 +61,7 @@ def start_browser(port, options):
+--- llvm-toolchain-snapshot_10~svn370025.orig/clang/tools/scan-view/bin/scan-view
++++ llvm-toolchain-snapshot_10~svn370025/clang/tools/scan-view/bin/scan-view
+@@ -65,7 +65,7 @@ def start_browser(port, options):
  
  def run(port, options, root):
      # Prefer to look relative to the installed binary

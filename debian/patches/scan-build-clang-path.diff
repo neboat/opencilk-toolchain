@@ -2,11 +2,11 @@
  clang/tools/scan-build/bin/scan-build |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Index: llvm-toolchain-snapshot_10~svn356328/clang/tools/scan-build/bin/scan-build
+Index: llvm-toolchain-snapshot_10~svn370025/clang/tools/scan-build/bin/scan-build
 ===================================================================
---- llvm-toolchain-snapshot_10~svn356328.orig/clang/tools/scan-build/bin/scan-build
-+++ llvm-toolchain-snapshot_10~svn356328/clang/tools/scan-build/bin/scan-build
-@@ -1477,7 +1477,7 @@ sub FindClang {
+--- llvm-toolchain-snapshot_10~svn370025.orig/clang/tools/scan-build/bin/scan-build
++++ llvm-toolchain-snapshot_10~svn370025/clang/tools/scan-build/bin/scan-build
+@@ -1478,7 +1478,7 @@ sub FindClang {
    if (!defined $Options{AnalyzerDiscoveryMethod}) {
      $Clang = Cwd::realpath("$RealBin/bin/clang") if (-f "$RealBin/bin/clang");
      if (!defined $Clang || ! -x $Clang) {

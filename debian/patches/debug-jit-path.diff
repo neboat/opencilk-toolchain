@@ -1,8 +1,8 @@
-Index: llvm-toolchain-7_7.0.1~+rc3/lib/ExecutionEngine/PerfJITEvents/PerfJITEventListener.cpp
+Index: llvm-toolchain-snapshot_10~svn370025/lib/ExecutionEngine/PerfJITEvents/PerfJITEventListener.cpp
 ===================================================================
---- llvm-toolchain-7_7.0.1~+rc3.orig/lib/ExecutionEngine/PerfJITEvents/PerfJITEventListener.cpp
-+++ llvm-toolchain-7_7.0.1~+rc3/lib/ExecutionEngine/PerfJITEvents/PerfJITEventListener.cpp
-@@ -294,8 +294,8 @@ bool PerfJITEventListener::InitDebugging
+--- llvm-toolchain-snapshot_10~svn370025.orig/lib/ExecutionEngine/PerfJITEvents/PerfJITEventListener.cpp
++++ llvm-toolchain-snapshot_10~svn370025/lib/ExecutionEngine/PerfJITEvents/PerfJITEventListener.cpp
+@@ -300,8 +300,8 @@ bool PerfJITEventListener::InitDebugging
    // search for location to dump data to
    if (const char *BaseDir = getenv("JITDUMPDIR"))
      Path.append(BaseDir);

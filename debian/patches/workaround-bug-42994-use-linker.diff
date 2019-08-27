@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot-10~svn369645/compiler-rt/lib/hwasan/CMakeLists.txt
+Index: llvm-toolchain-snapshot_10~svn370025/compiler-rt/lib/hwasan/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot-10~svn369645.orig/compiler-rt/lib/hwasan/CMakeLists.txt
-+++ llvm-toolchain-snapshot-10~svn369645/compiler-rt/lib/hwasan/CMakeLists.txt
-@@ -40,9 +40,9 @@ append_list_if(COMPILER_RT_HWASAN_WITH_I
+--- llvm-toolchain-snapshot_10~svn370025.orig/compiler-rt/lib/hwasan/CMakeLists.txt
++++ llvm-toolchain-snapshot_10~svn370025/compiler-rt/lib/hwasan/CMakeLists.txt
+@@ -41,9 +41,9 @@ append_list_if(COMPILER_RT_HWASAN_WITH_I
  
  set(HWASAN_RTL_CFLAGS ${SANITIZER_COMMON_CFLAGS})
  append_rtti_flag(OFF HWASAN_RTL_CFLAGS)
@@ -14,7 +14,7 @@ Index: llvm-toolchain-snapshot-10~svn369645/compiler-rt/lib/hwasan/CMakeLists.tx
  
  set(HWASAN_DYNAMIC_LINK_FLAGS ${SANITIZER_COMMON_LINK_FLAGS})
  
-@@ -54,7 +54,7 @@ if(ANDROID)
+@@ -55,7 +55,7 @@ if(ANDROID)
    endif()
  endif()
  
@@ -23,7 +23,7 @@ Index: llvm-toolchain-snapshot-10~svn369645/compiler-rt/lib/hwasan/CMakeLists.tx
  append_list_if(COMPILER_RT_HAS_FTLS_MODEL_INITIAL_EXEC
    -ftls-model=initial-exec HWASAN_DYNAMIC_CFLAGS)
  append_list_if(MSVC /DEBUG HWASAN_DYNAMIC_LINK_FLAGS)
-@@ -129,7 +129,7 @@ foreach(arch ${HWASAN_SUPPORTED_ARCH})
+@@ -130,7 +130,7 @@ foreach(arch ${HWASAN_SUPPORTED_ARCH})
                                    LIBS clang_rt.hwasan-${arch} clang_rt.hwasan_cxx-${arch}
                                    EXTRA hwasan.syms.extra)
      set(VERSION_SCRIPT_FLAG
