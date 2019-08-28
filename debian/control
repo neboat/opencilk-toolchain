@@ -308,7 +308,8 @@ Description: Modular compiler and toolchain technologies, IR interpreter
 Package: llvm-9-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends},
- llvm-9 (= ${binary:Version}), libllvm9 (= ${binary:Version}), libtinfo-dev
+ llvm-9 (= ${binary:Version}), libllvm9 (= ${binary:Version}), libtinfo-dev,
+ llvm-9-tools (= ${binary:Version})
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
