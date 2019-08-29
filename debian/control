@@ -86,7 +86,8 @@ Description: clang-based C++ linter tool
 
 Package: clangd-9
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ libclang-common-9-dev (= ${binary:Version})
 Replaces: clang-tools-9 (<< 1:9~+rc1-1~exp2)
 Breaks: clang-tools-9 (<< 1:9~+rc1-1~exp2)
 Description: Language server that provides IDE-like features to editors
