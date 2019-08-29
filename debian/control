@@ -86,10 +86,10 @@ Description: clang-based C++ linter tool
 
 Package: clangd-10
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ libclang-common-10-dev (= ${binary:Version})
 Replaces: clang-tools-10 (<< 1:10~svn367724-1~exp1)
 Breaks: clang-tools-10 (<< 1:10~svn367724-1~exp1)
- libclang-common-10-dev (= ${binary:Version})
 Description: Language server that provides IDE-like features to editors
  clangd understands your C++ code and adds smart features to your editor:
   - code completion
