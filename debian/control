@@ -89,6 +89,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Replaces: clang-tools-10 (<< 1:10~svn367724-1~exp1)
 Breaks: clang-tools-10 (<< 1:10~svn367724-1~exp1)
+ libclang-common-10-dev (= ${binary:Version})
 Description: Language server that provides IDE-like features to editors
  clangd understands your C++ code and adds smart features to your editor:
   - code completion
@@ -307,6 +308,7 @@ Package: llvm-10-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.10), ${misc:Depends},
  llvm-10 (= ${binary:Version}), libllvm10 (= ${binary:Version}), libtinfo-dev
+ llvm-10-tools (= ${binary:Version})
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -328,7 +330,6 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python, python3,
  python-pygments, python-yaml,
  python3-pygments, python3-yaml,
- llvm-10-dev (= ${binary:Version})
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -455,8 +456,6 @@ Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm10 (= ${binary:Version}), llvm-10-dev,
  python-lldb-10
 Pre-Depends: ${misc:Pre-Depends}
-Replaces: llvm-9-tools (<< 9~+rc1-1~exp2)
-Breaks: llvm-9-tools (<< 9~+rc1-1~exp2)
 Description: Next generation, high-performance debugger
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM

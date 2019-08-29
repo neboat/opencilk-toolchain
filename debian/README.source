@@ -14,7 +14,7 @@ and symlinks are managed by the other package llvm-defaults
 = CPU extensions =
 
 * For x86, SSE2 extensions are disabled (and the target CPU is i686 instead of
-  pentium4.
+  pentium4).
 
 * For armel, uses float ABI instead of hard.
 
