@@ -86,7 +86,8 @@ Description: clang-based C++ linter tool
 
 Package: clangd-8
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ libclang-common-8-dev  (= ${binary:Version})
 Replaces: clang-tools-8 (<< 1:8.0.1-1)
 Breaks: clang-tools-8 (<< 1:8.0.1-1)
 Description: Language server that provides IDE-like features to editors
