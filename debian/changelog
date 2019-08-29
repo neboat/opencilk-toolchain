@@ -16,6 +16,7 @@ llvm-toolchain-9 (1:9~+rc2-1~exp3) experimental; urgency=medium
     See https://bugs.llvm.org/show_bug.cgi?id=43152
   * Remove the -lc++experimental test from the qualify-clang.sh script
     as the lib has been removed in 9~svn366022-1~exp1
+  * Also install libclang-cpp in /usr/lib/llvm-X/lib/libclang-cpp.so.X
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Aug 2019 23:38:11 +0200
 
