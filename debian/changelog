@@ -10,6 +10,8 @@ llvm-toolchain-9 (1:9~+rc2-1~exp3) experimental; urgency=medium
     requires FileCheck when LLVM_INSTALL_UTILS=ON is enabled (which
     is the case here).
     See https://bugs.llvm.org/show_bug.cgi?id=43035
+  * Also add PYTHON_EXECUTABLE to the CLANG_BOOTSTRAP_PASSTHROUGH option
+    to fix an issue on xenial
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Aug 2019 23:38:11 +0200
 
