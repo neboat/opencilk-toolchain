@@ -639,7 +639,8 @@ int main()
 }
 " > foo.c
 clang-$VERSION -O3 -mllvm -polly foo.c
-clang-$VERSION -O3 -mllvm -polly -mllvm -polly-parallel -lgomp foo.c
+# Comment because of https://bugs.llvm.org/show_bug.cgi?id=43164
+# clang-$VERSION -O3 -mllvm -polly -mllvm -lgomp -polly-parallel foo.c
 clang-$VERSION -O3 -mllvm -polly -mllvm -polly-vectorizer=stripmine foo.c
 clang-$VERSION -S -fsave-optimization-record -emit-llvm foo.c -o matmul.s
 opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
