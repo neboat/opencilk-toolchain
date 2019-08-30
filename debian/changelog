@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:10~svn370407-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 29 Aug 2019 23:08:07 +0200
+
 llvm-toolchain-snapshot (1:10~svn368740-1~exp2) experimental; urgency=medium
 
   * Workaround bug https://bugs.llvm.org/show_bug.cgi?id=42994
