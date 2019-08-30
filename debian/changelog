@@ -1,5 +1,6 @@
-llvm-toolchain-9 (1:9~+rc2-1~exp3) experimental; urgency=medium
+llvm-toolchain-9 (1:9~+rc3-1~exp1) experimental; urgency=medium
 
+  * New snapshot release
   * Update of the license file. Upstream moved to Apache 2
     with LLVM exception (Closes: #935149)
   * experimental New snapshot release
