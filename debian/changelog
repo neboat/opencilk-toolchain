@@ -3,7 +3,6 @@ llvm-toolchain-9 (1:9~+rc3-1~exp1) experimental; urgency=medium
   * New snapshot release
   * Update of the license file. Upstream moved to Apache 2
     with LLVM exception (Closes: #935149)
-  * experimental New snapshot release
   * remove 0050-Remove-explicit-python-version-list.patch
     bug-43011-mips.diff as they are merged upstream
   * llvm-9-dev depends on llvm-9-tools
