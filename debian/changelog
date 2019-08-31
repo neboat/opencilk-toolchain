@@ -18,6 +18,12 @@ llvm-toolchain-9 (1:9~+rc3-1~exp1) experimental; urgency=medium
   * Remove the -lc++experimental test from the qualify-clang.sh script
     as the lib has been removed in 9~svn366022-1~exp1
   * Also install libclang-cpp in /usr/lib/llvm-X/lib/libclang-cpp.so.X
+  * Improve the fix-clang-path-and-build.diff patch
+    If this package was built with libclang-common installed on the system,
+    it could fail with 'use of undeclared identifier' because
+    #include_next was failing as it was expecting the next header to be 
+    libstdc++
+    Now, if the local build headers are found, don't include system's
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Aug 2019 23:38:11 +0200
 
