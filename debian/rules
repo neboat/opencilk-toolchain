@@ -576,6 +576,9 @@ override_dh_auto_install:
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so; \
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT)
 
+	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && mv libclang-cpp.so.$(SONAME_EXT) libclang-cpp-$(LLVM_VERSION).so.$(SONAME_EXT); \
+	ln -s libclang-cpp-$(LLVM_VERSION).so.$(SONAME_EXT) libclang-cpp.so.$(SONAME_EXT)
+
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && rm -f libomp.so; \
 	ln -s libomp.so.$(SONAME_OPENMP) libomp.so
 
