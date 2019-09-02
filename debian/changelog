@@ -5,6 +5,7 @@ llvm-toolchain-9 (1:9~+rc3-1~exp2) experimental; urgency=medium
     to mitigate the issue (the argument should be passed only at the
     second stage of the build process)
     See https://bugs.llvm.org/show_bug.cgi?id=43193
+  * Fix a link issue (Closes: #939172)
 
  --
 
