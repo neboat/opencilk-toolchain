@@ -230,7 +230,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 # armhf is not yet quite ready for Thin, it FTBFS
 # see https://buildd.debian.org/status/fetch.php?pkg=llvm-toolchain-8&arch=armhf&ver=1%3A8.0.1%7E%2Brc2-1%7Eexp1&stamp=1560334266&raw=0
 ifeq (,$(filter $(DEB_HOST_ARCH), armhf))
-	CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
+	CMAKE_EXTRA += -DBOOTSTRAP_LLVM_ENABLE_LTO="Thin"
 endif
 endif
 endif
@@ -390,8 +390,6 @@ override_dh_auto_configure: preconfigure
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 	-DCMAKE_CXX_FLAGS_RELWITHDEBINFO="$(opt_flags)" \
-	-DBOOTSTRAP_CMAKE_CXX_FLAGS='$(BOOTSTRAP_CXXFLAGS_EXTRA)' \
-	-DBOOTSTRAP_CMAKE_C_FLAGS='$(BOOTSTRAP_CFLAGS_EXTRA)' \
 	-DLLVM_LINK_LLVM_DYLIB=ON \
 	-DLLVM_INSTALL_UTILS=ON \
 	-DLLVM_VERSION_SUFFIX= \
@@ -405,9 +403,11 @@ override_dh_auto_configure: preconfigure
 	-DENABLE_LINKER_BUILD_ID=ON \
 	-DPOLLY_BUNDLED_JSONCPP=OFF \
 	-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="AVR" \
-	-DCLANG_ENABLE_BOOTSTRAP=ON \
 	-DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
 	-DCLANG_VENDOR=$(VENDOR) \
+	-DCLANG_ENABLE_BOOTSTRAP=ON \
+	-DBOOTSTRAP_CMAKE_CXX_FLAGS='$(BOOTSTRAP_CXXFLAGS_EXTRA)' \
+	-DBOOTSTRAP_CMAKE_C_FLAGS='$(BOOTSTRAP_CFLAGS_EXTRA)' \
 	-DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE;CMAKE_BUILD_TYPE;CMAKE_CXX_FLAGS_RELWITHDEBINFO;LLVM_LINK_LLVM_DYLIB;LLVM_INSTALL_UTILS;LLVM_VERSION_SUFFIX;LLVM_ENABLE_SPHINX;SPHINX_WARNINGS_AS_ERRORS;LLVM_BUILD_LLVM_DYLIB;LLVM_ENABLE_RTTI;LLVM_ENABLE_FFI;LIBCLANG_LIBRARY_VERSION;ENABLE_LINKER_BUILD_ID;POLLY_BUNDLED_JSONCPP;LLVM_EXPERIMENTAL_TARGETS_TO_BUILD;LLVM_USE_PERF;LLVM_ENABLE_ASSERTIONS;LLVM_BINUTILS_INCDIR;LLVM_HOST_TRIPLE;;LLVM_COMPILER_CHECKED;COMPILER_RT_BUILD_BUILTINS;LIBOMP_LIBFLAGS;CMAKE_SHARED_LINKER_FLAGS;PYTHON_EXECUTABLE"
 
 
@@ -576,6 +576,11 @@ override_dh_auto_install:
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so; \
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT)
 
+	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && mv libclang-cpp.so.$(LLVM_VERSION) libclang-cpp-$(LLVM_VERSION).so.$(SONAME_EXT); \
+	ln -s libclang-cpp-$(LLVM_VERSION).so.$(SONAME_EXT) libclang-cpp.so.$(SONAME_EXT)
+
+
+
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && rm -f libomp.so; \
 	ln -s libomp.so.$(SONAME_OPENMP) libomp.so
 
@@ -707,7 +712,7 @@ endif
 
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
-	rm -rf $(TARGET_BUILD)
+#	rm -rf $(TARGET_BUILD)
 
 
 override_dh_makeshlibs:

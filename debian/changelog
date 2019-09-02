@@ -1,6 +1,15 @@
 llvm-toolchain-snapshot (1:10~svn370407-1~exp1) experimental; urgency=medium
 
   * New snapshot release
+  * Update of the license file. Upstream moved to Apache 2
+    with LLVM exception (Closes: #935149)
+  * Debian moved to gcc-9. This gcc version now refuses -flto="Thin"
+    Move from LLVM_ENABLE_LTO="Thin" to BOOTSTRAP_LLVM_ENABLE_LTO="Thin"
+    to mitigate the issue (the argument should be passed only at the
+    second stage of the build process)
+    See https://bugs.llvm.org/show_bug.cgi?id=43193
+  * Rename libclang-cpp1-10 to libclang-cpp10 to match the soname and libllvm10
+    naming (at some point, all libs should do that ...)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 29 Aug 2019 23:08:07 +0200
 
@@ -55,11 +64,22 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
 
-llvm-toolchain-9 (1:9~+rc2-1~exp3) experimental; urgency=medium
+llvm-toolchain-9 (1:9~+rc3-1~exp2) experimental; urgency=medium
 
+  * Debian moved to gcc-9. This gcc version now refuses -flto="Thin"
+    Move from LLVM_ENABLE_LTO="Thin" to BOOTSTRAP_LLVM_ENABLE_LTO="Thin"
+    to mitigate the issue (the argument should be passed only at the
+    second stage of the build process)
+    See https://bugs.llvm.org/show_bug.cgi?id=43193
+  * Fix a link issue (Closes: #939172)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 02 Sep 2019 10:46:45 +0200
+
+llvm-toolchain-9 (1:9~+rc3-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
   * Update of the license file. Upstream moved to Apache 2
     with LLVM exception (Closes: #935149)
-  * experimental New snapshot release
   * remove 0050-Remove-explicit-python-version-list.patch
     bug-43011-mips.diff as they are merged upstream
   * llvm-9-dev depends on llvm-9-tools
@@ -71,6 +91,17 @@ llvm-toolchain-9 (1:9~+rc2-1~exp3) experimental; urgency=medium
     to fix an issue on xenial
   * Add clangd-X => libclang-common-X-dev dependency
     See https://bugs.llvm.org/show_bug.cgi?id=43152
+  * Remove the -lc++experimental test from the qualify-clang.sh script
+    as the lib has been removed in 9~svn366022-1~exp1
+  * Also install libclang-cpp in /usr/lib/llvm-X/lib/libclang-cpp.so.X
+  * Improve the fix-clang-path-and-build.diff patch
+    If this package was built with libclang-common installed on the system,
+    it could fail with 'use of undeclared identifier' because
+    #include_next was failing as it was expecting the next header to be
+    libstdc++
+    Now, if the local build headers are found, don't include system's
+  * Rename libclang-cpp1-9 to libclang-cpp9 to match the soname and libllvm9
+    naming (at some point, all libs should do that ...)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Aug 2019 23:38:11 +0200
 

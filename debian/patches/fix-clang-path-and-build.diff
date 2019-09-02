@@ -1,31 +1,30 @@
----
- clang/lib/Driver/ToolChains.cpp |    2 ++
- 1 file changed, 2 insertions(+)
-
-Index: llvm-toolchain-snapshot_10~svn370025/clang/lib/Driver/ToolChains/Gnu.cpp
+Index: llvm-toolchain-9-9~+rc3/clang/lib/Driver/ToolChains/Linux.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~svn370025.orig/clang/lib/Driver/ToolChains/Gnu.cpp
-+++ llvm-toolchain-snapshot_10~svn370025/clang/lib/Driver/ToolChains/Gnu.cpp
-@@ -1,4 +1,5 @@
--//===--- Gnu.cpp - Gnu Tool and ToolChain Implementations -------*- C++ -*-===//
-+//===--- Gnu.cpp - Gnu Tool and ToolChain Implementations -------*- C++ 
-+//-*-===//
- //
- // Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
- // See https://llvm.org/LICENSE.txt for license information.
-@@ -15,6 +16,7 @@
- #include "Arch/SystemZ.h"
+--- llvm-toolchain-9-9~+rc3.orig/clang/lib/Driver/ToolChains/Linux.cpp
++++ llvm-toolchain-9-9~+rc3/clang/lib/Driver/ToolChains/Linux.cpp
+@@ -12,6 +12,7 @@
+ #include "Arch/PPC.h"
+ #include "Arch/RISCV.h"
  #include "CommonArgs.h"
- #include "Linux.h"
 +#include "clang/Basic/Version.h"
- #include "clang/Config/config.h" // for GCC_INSTALL_PREFIX
- #include "clang/Driver/Compilation.h"
+ #include "clang/Config/config.h"
+ #include "clang/Driver/Distro.h"
  #include "clang/Driver/Driver.h"
-@@ -2612,6 +2614,7 @@ void Generic_GCC::AddClangCXXStdlibInclu
-     addLibStdCxxIncludePaths(DriverArgs, CC1Args);
-     break;
+@@ -665,7 +666,16 @@ void Linux::AddClangSystemIncludeArgs(co
+   if (!DriverArgs.hasArg(options::OPT_nobuiltininc)) {
+     SmallString<128> P(D.ResourceDir);
+     llvm::sys::path::append(P, "include");
+-    addSystemInclude(DriverArgs, CC1Args, P);
++    if (llvm::sys::fs::exists(P)) {
++        /* Include the build include directory only
++         * Otherwise, it fails with stage2 when clang headers are available on the system
++         * they usually fail because of the include_next. Two llvm/clang headers are found
++         * while we are waiting for the lib C++ (std or not)
++         */
++        addSystemInclude(DriverArgs, CC1Args, P);
++    } else {
++        addSystemInclude(DriverArgs, CC1Args, "/usr/include/clang/" + std::string(CLANG_VERSION_STRING) + "/include/");
++    }
    }
-+  addSystemInclude(DriverArgs, CC1Args, "/usr/include/clang/" + std::string(CLANG_VERSION_STRING) + "/include/");
- }
  
- void
+   if (DriverArgs.hasArg(options::OPT_nostdlibinc))

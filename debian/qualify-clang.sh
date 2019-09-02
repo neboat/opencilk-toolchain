@@ -9,7 +9,7 @@ VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 DETAILED_VERSION=$(dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1\2\3,p")
 DEB_HOST_ARCH=$(dpkg-architecture -qDEB_HOST_ARCH)
 
-LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clangd-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}-dbgsym_${DETAILED_VERSION}_amd64.deb libclang1-${VERSION}-dbgsym_${DETAILED_VERSION}_amd64.deb"
+LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clangd-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}-dbgsym_${DETAILED_VERSION}_amd64.deb libclang1-${VERSION}-dbgsym_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}_${DETAILED_VERSION}_amd64.deb"
 echo "To install everything:"
 echo "sudo dpkg -i $LIST"
 L=""
@@ -161,6 +161,14 @@ clang-$VERSION foo.c
 echo '#include <chrono>
 int main() { }' > foo.cpp
 clang++-$VERSION -std=c++11 foo.cpp
+
+echo "Testing linking clang-cpp ..."
+
+clang-$VERSION -lclang-cpp$VERSION -v foo.cpp -o o &> /dev/null
+if ! ldd o 2>&1|grep -q  libclang-cpp; then
+	echo "Didn't link against libclang-cpp$VERSION"
+	exit 42
+fi
 
 echo "Testing code coverage ..."
 
@@ -379,7 +387,7 @@ struct g {
   typedef f::e<int> c;
 };
 class h {
-  struct : g::c {};
+  struct : g::c { int i; };
 };
 struct m {
   h i;
@@ -517,8 +525,6 @@ fi
 ./o > /dev/null
 clang++-$VERSION -std=c++11 -stdlib=libc++ foo.cpp -o o
 ./o > /dev/null
-clang++-$VERSION -std=c++14 -stdlib=libc++ foo.cpp -lc++experimental -o o
-./o > /dev/null
 
 # Bug 889832
 echo '#include <iostream>
@@ -556,7 +562,7 @@ int main() {
           std::filesystem::path
       >::value, "");
 }' > foo.cpp
-clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -o o
+clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -o o
 ./o > /dev/null
 
 # Bug LP#1586215
@@ -641,7 +647,8 @@ int main()
 }
 " > foo.c
 clang-$VERSION -O3 -mllvm -polly foo.c
-clang-$VERSION -O3 -mllvm -polly -mllvm -polly-parallel -lgomp foo.c
+# Comment because of https://bugs.llvm.org/show_bug.cgi?id=43164
+# clang-$VERSION -O3 -mllvm -polly -mllvm -lgomp -polly-parallel foo.c
 clang-$VERSION -O3 -mllvm -polly -mllvm -polly-vectorizer=stripmine foo.c
 clang-$VERSION -S -fsave-optimization-record -emit-llvm foo.c -o matmul.s
 opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
@@ -842,7 +849,7 @@ fi
 # MARCH should iterate the library architectures via flags
 # LIB should iterate the different libraries
 echo "if it fails, please run"
-echo "apt-get install libc6-dev:i386 libgcc-5-dev:i386 libc6-dev-x32 libx32gcc-5-dev libx32gcc-8-dev"
+echo "apt-get install libc6-dev:i386 libgcc-5-dev:i386 libc6-dev-x32 libx32gcc-5-dev libx32gcc-9-dev"
 for SYSTEM in ""; do
     for MARCH in -m64 -m32 -mx32 "-m32 -march=i686"; do
         for LIB in --rtlib=compiler-rt -fsanitize=address -fsanitize=thread -fsanitize=memory -fsanitize=undefined -fsanitize=dataflow; do # -fsanitize=efficiency-working-set; do
@@ -869,7 +876,7 @@ done
 
 echo "If the following fails, try setting an environment variable such as:"
 echo "OBJC_INCLUDE_PATH=/usr/lib/gcc/x86_64-linux-gnu/8/include"
-echo "libobjc-8-dev should be also installed"
+echo "libobjc-9-dev should be also installed"
 echo "#include <objc/objc.h>" > foo.m
 #clang-$VERSION -c foo.m
 
