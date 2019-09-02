@@ -1,12 +1,6 @@
 llvm-toolchain-snapshot (1:10~svn370632-1~exp1) experimental; urgency=medium
 
   * New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 02 Sep 2019 11:30:08 +0200
-
-llvm-toolchain-snapshot (1:10~svn370407-1~exp1) experimental; urgency=medium
-
-  * New snapshot release
   * Update of the license file. Upstream moved to Apache 2
     with LLVM exception (Closes: #935149)
   * Debian moved to gcc-9. This gcc version now refuses -flto="Thin"
@@ -17,7 +11,7 @@ llvm-toolchain-snapshot (1:10~svn370407-1~exp1) experimental; urgency=medium
   * Rename libclang-cpp1-10 to libclang-cpp10 to match the soname and libllvm10
     naming (at some point, all libs should do that ...)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 29 Aug 2019 23:08:07 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 02 Sep 2019 12:08:08 +0200
 
 llvm-toolchain-snapshot (1:10~svn368740-1~exp2) experimental; urgency=medium
 
