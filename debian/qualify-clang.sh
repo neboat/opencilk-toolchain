@@ -169,6 +169,10 @@ if ! ldd o 2>&1|grep -q  libclang-cpp; then
 	echo "Didn't link against libclang-cpp$VERSION"
 	exit 42
 fi
+./o > /dev/null
+
+# Check that the symlink is correct
+ls -al /usr/lib/llvm-$VERSION/lib/libclang-cpp.so.1 > /dev/null
 
 echo "Testing code coverage ..."
 
