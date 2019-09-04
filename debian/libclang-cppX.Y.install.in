@@ -1,3 +1,2 @@
 usr/lib/llvm-@LLVM_VERSION@/lib/libclang-cpp-@LLVM_VERSION@.so.1 /usr/lib/@DEB_HOST_MULTIARCH@/
 usr/lib/llvm-@LLVM_VERSION@/lib/libclang-cpp.so.1
-usr/lib/llvm-@LLVM_VERSION@/lib/libclang-cpp.so.@LLVM_VERSION@
