@@ -10,8 +10,31 @@ llvm-toolchain-snapshot (1:10~svn370632-1~exp1) experimental; urgency=medium
     See https://bugs.llvm.org/show_bug.cgi?id=43193
   * Rename libclang-cpp1-10 to libclang-cpp10 to match the soname and libllvm10
     naming (at some point, all libs should do that ...)
+  * New symbols in libomp5:
+   - GOMP_loop_nonmonotonic_dynamic_next
+   - GOMP_loop_nonmonotonic_dynamic_start
+   - GOMP_loop_nonmonotonic_guided_next
+   - GOMP_loop_nonmonotonic_guided_start
+   - GOMP_loop_ull_nonmonotonic_dynamic_next
+   - GOMP_loop_ull_nonmonotonic_dynamic_start
+   - GOMP_loop_ull_nonmonotonic_guided_next
+   - GOMP_loop_ull_nonmonotonic_guided_start
+   - GOMP_parallel_loop_nonmonotonic_dynamic
+   - GOMP_parallel_loop_nonmonotonic_guided
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 02 Sep 2019 12:08:08 +0200
+
+llvm-toolchain-snapshot (1:10~svn370027-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Aug 2019 10:31:42 +0200
+
+llvm-toolchain-snapshot (1:10~svn370025-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Aug 2019 09:54:27 +0200
 
 llvm-toolchain-snapshot (1:10~svn368740-1~exp2) experimental; urgency=medium
 
