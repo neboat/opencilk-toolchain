@@ -129,3 +129,4 @@ bootstrap-fix-include-next.diff
 clang-riscv64-multiarch.diff
 clang-riscv64-rv64gc.diff
 
+try-to-unbreak-thinlto.diff
