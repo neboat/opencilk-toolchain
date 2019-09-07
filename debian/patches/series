@@ -128,8 +128,9 @@ bootstrap-fix-include-next.diff
 # riscv64
 clang-riscv64-multiarch.diff
 
+<<<<<<< HEAD
 # Compiler-rt - workaround
 workaround-bug-42994-use-linker.diff
 
-# big 939472
-try-to-unbreak-thinlto.diff
+# bug 939472
+#try-to-unbreak-thinlto.diff
