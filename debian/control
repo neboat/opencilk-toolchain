@@ -173,7 +173,7 @@ Architecture: all
 Priority: optional
 Section: oldlibs
 Description: transitional package
-  This is a transitional package. It can safely be removed.
+ This is a transitional package. It can safely be removed.
 
 Package: libclang-cpp9
 Section: libs
