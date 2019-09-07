@@ -1,9 +1,8 @@
 llvm-toolchain-9 (1:9~+rc3-1~exp3) experimental; urgency=medium
 
-  * Try to disable some options specific to BOOTSTRAP_LLVM_ENABLE_LTO
-    which aren't activated for LLVM_ENABLE_LTO causing the usage
-    of llvm-ar llvm-ranlib. Causing a huge increase of the size
-    of the .deb (because of .a and .so) and issues in the libs
+  * Force gcc before 9 (gcc 8 on Debian unstable) because it causes
+    huge increase of the size of the .deb (because of .a and .so) and
+    issues in the libs
     (Closes: #939472)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Sep 2019 23:27:28 +0200
