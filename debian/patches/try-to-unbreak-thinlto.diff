@@ -1,0 +1,19 @@
+Index: llvm-toolchain-9-9~+rc3/clang/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-9-9~+rc3.orig/clang/CMakeLists.txt
++++ llvm-toolchain-9-9~+rc3/clang/CMakeLists.txt
+@@ -719,11 +719,9 @@ if (CLANG_ENABLE_BOOTSTRAP)
+       if(BOOTSTRAP_LLVM_ENABLE_LLD)
+         set(${CLANG_STAGE}_LINKER -DCMAKE_LINKER=${LLVM_RUNTIME_OUTPUT_INTDIR}/ld.lld)
+       endif()
+-      if(NOT BOOTSTRAP_LLVM_ENABLE_LTO)
+-        add_dependencies(clang-bootstrap-deps llvm-ar llvm-ranlib)
+-        set(${CLANG_STAGE}_AR -DCMAKE_AR=${LLVM_RUNTIME_OUTPUT_INTDIR}/llvm-ar)
+-        set(${CLANG_STAGE}_RANLIB -DCMAKE_RANLIB=${LLVM_RUNTIME_OUTPUT_INTDIR}/llvm-ranlib)
+-      endif()
++      add_dependencies(clang-bootstrap-deps llvm-ar llvm-ranlib)
++      set(${CLANG_STAGE}_AR -DCMAKE_AR=${LLVM_RUNTIME_OUTPUT_INTDIR}/llvm-ar)
++      set(${CLANG_STAGE}_RANLIB -DCMAKE_RANLIB=${LLVM_RUNTIME_OUTPUT_INTDIR}/llvm-ranlib)
+       add_dependencies(clang-bootstrap-deps llvm-objcopy llvm-strip)
+       set(${CLANG_STAGE}_OBJCOPY -DCMAKE_OBJCOPY=${LLVM_RUNTIME_OUTPUT_INTDIR}/llvm-objcopy)
+       set(${CLANG_STAGE}_STRIP -DCMAKE_STRIP=${LLVM_RUNTIME_OUTPUT_INTDIR}/llvm-strip)
