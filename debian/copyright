@@ -121,6 +121,7 @@ Copyright: 2006-2008, Google Inc.
 License: BSD-3-Clause
 
 Files: libcxx/*
+Copyright: 2009-2019
 License: BSD-3-Clause
  This software is provided 'as-is', without any express or implied
  warranty.  In no event will the authors be held liable for any damages
