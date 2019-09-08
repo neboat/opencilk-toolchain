@@ -67,7 +67,7 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++
 	GCC_VERSION := 4.9
 endif
 
-FORCE_NOT_GCC_9_DISTRO := eoan bullseye
+FORCE_NOT_GCC_9_DISTRO := eoan bullseye sid
 ifneq (,$(filter $(DISTRO),$(FORCE_NOT_GCC_9_DISTRO)))
 # Force gcc-8
 	GCC_VERSION := 8
