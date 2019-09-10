@@ -1,3 +1,9 @@
+llvm-toolchain-9 (1:9~+rc4-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 10 Sep 2019 15:25:46 +0200
+
 llvm-toolchain-9 (1:9~+rc3-1~exp3) experimental; urgency=medium
 
   * Force gcc before 9 (gcc 8 on Debian unstable) because it causes
