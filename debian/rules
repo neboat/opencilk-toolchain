@@ -67,8 +67,8 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++
 	GCC_VERSION := 4.9
 endif
 
-FORCE_NOT_GCC_9_DISTRO := eoan bullseye
-ifeq (,$(filter $(DISTRO), $(FORCE_NOT_GCC_9_DISTRO)))
+FORCE_NOT_GCC_9_DISTRO := eoan bullseye sid
+ifneq (,$(filter $(DISTRO),$(FORCE_NOT_GCC_9_DISTRO)))
 # Force gcc-8
 	GCC_VERSION := 8
 endif
@@ -278,6 +278,7 @@ preconfigure:
 	@echo "DEB_HOST_ARCH=$(DEB_HOST_ARCH)"
 	@echo "DEB_HOST_ARCH_OS=$(DEB_HOST_ARCH_OS)"
 	@echo "DISTRO=$(DISTRO)"
+	@echo "GCC_VERSION=$(GCC_VERSION)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
