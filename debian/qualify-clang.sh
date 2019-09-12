@@ -164,7 +164,7 @@ clang++-$VERSION -std=c++11 foo.cpp
 
 echo "Testing linking clang-cpp ..."
 
-clang-$VERSION -lclang-cpp$VERSION -v foo.cpp -o o &> /dev/null
+clang-$VERSION -lclang-cpp$VERSION -v foo.cpp -o o > /dev/null
 if ! ldd o 2>&1|grep -q  libclang-cpp; then
 	echo "Didn't link against libclang-cpp$VERSION"
 	exit 42
