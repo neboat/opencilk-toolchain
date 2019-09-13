@@ -1,3 +1,9 @@
+llvm-toolchain-9 (1:9~+rc5-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 13 Sep 2019 14:45:01 +0200
+
 llvm-toolchain-9 (1:9~+rc4-1~exp1) experimental; urgency=medium
 
   * New snapshot release
