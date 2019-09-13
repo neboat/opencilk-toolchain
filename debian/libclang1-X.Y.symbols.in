@@ -348,6 +348,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_index_isEntityObjCContainerKind@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_index_setClientContainer@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_index_setClientEntity@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_install_aborting_llvm_fatal_error_handler@LLVM_@LLVM_VERSION@ 1:10~svn371796-1~
  clang_isAttribute@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_isConstQualifiedType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_isCursorDefinition@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -379,5 +380,6 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_suspendTranslationUnit@LLVM_@LLVM_VERSION@ 1:5.0~+rc1~
  clang_toggleCrashRecovery@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_tokenize@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_uninstall_llvm_fatal_error_handler@LLVM_@LLVM_VERSION@ 1:10~svn371796-1~
  clang_visitChildren@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_visitChildrenWithBlock@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
