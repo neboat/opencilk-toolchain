@@ -1,14 +1,14 @@
-Index: llvm-toolchain-snapshot_9~svn358740/utils/TableGen/CodeEmitterGen.cpp
+Index: llvm-toolchain-snapshot_10~svn371937/utils/TableGen/CodeEmitterGen.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn358740.orig/utils/TableGen/CodeEmitterGen.cpp
-+++ llvm-toolchain-snapshot_9~svn358740/utils/TableGen/CodeEmitterGen.cpp
-@@ -247,6 +247,9 @@ void CodeEmitterGen::run(raw_ostream &o)
+--- llvm-toolchain-snapshot_10~svn371937.orig/utils/TableGen/CodeEmitterGen.cpp
++++ llvm-toolchain-snapshot_10~svn371937/utils/TableGen/CodeEmitterGen.cpp
+@@ -320,6 +320,9 @@ void CodeEmitterGen::run(raw_ostream &o)
    ArrayRef<const CodeGenInstruction*> NumberedInstructions =
      Target.getInstructionsByEnumValue();
  
 +  o << "// Undef for HURD\n";
 +  o << "#ifdef EIEIO\n#undef EIEIO\n#endif\n";
 +
-   // Emit function declaration
-   o << "uint64_t " << Target.getName();
-   o << "MCCodeEmitter::getBinaryCodeForInstr(const MCInst &MI,\n"
+   // Default to something sensible in case the target doesn't define Inst.
+   BitWidth = 32;
+   for (const CodeGenInstruction *CGI : NumberedInstructions) {
