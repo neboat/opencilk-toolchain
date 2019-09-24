@@ -1,3 +1,10 @@
+llvm-toolchain-9 (1:9~+rc5-1~exp2) experimental; urgency=medium
+
+  * debian/patches/D67877.patch: fix LLVMExports.cmake with upstream-proposed
+    patch (Closes: #941082)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 24 Sep 2019 18:57:31 +0200
+
 llvm-toolchain-9 (1:9~+rc5-1~exp1) experimental; urgency=medium
 
   * New snapshot release
