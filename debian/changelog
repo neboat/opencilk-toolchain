@@ -1,9 +1,10 @@
-llvm-toolchain-snapshot (1:10~svn371291-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:10~svn372920-1~exp1) experimental; urgency=medium
 
   * New snapshot release
   * Add two new symbols to libclang1:
     - clang_install_aborting_llvm_fatal_error_handler
     - clang_uninstall_llvm_fatal_error_handler
+  * site-packages renamed to dist-packages in python3-lldb-10
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 07 Sep 2019 09:07:01 +0200
 

@@ -636,7 +636,7 @@ endif
 # Don't think it is used
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPolly*a
 # Probably useless
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/site-packages/six.py
+	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/six.py
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
