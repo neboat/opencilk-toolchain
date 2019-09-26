@@ -318,8 +318,8 @@ Description: Modular compiler and toolchain technologies, IR interpreter
 Package: llvm-9-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends},
- llvm-9 (= ${binary:Version}), libllvm9 (= ${binary:Version}), libtinfo-dev,
- llvm-9-tools (= ${binary:Version})
+ llvm-9 (= ${binary:Version}), lldb-9-dev (= ${binary:Version}) [ amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m69k sh4 x32 ],
+ libllvm9 (= ${binary:Version}), libtinfo-dev, llvm-9-tools (= ${binary:Version})
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -464,7 +464,7 @@ Description: LLVM-based linker, header files
 Package: lldb-9
 Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc hppa m69k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm9 (= ${binary:Version}), llvm-9-dev,
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm9 (= ${binary:Version}),
  python-lldb-9
 Pre-Depends: ${misc:Pre-Depends}
 Replaces: llvm-9-tools (<< 1:9~+rc1-1~exp2)
