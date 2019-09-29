@@ -80,6 +80,31 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
 
+llvm-toolchain-9 (1:9-1) unstable; urgency=medium
+
+  * New release
+  * Fix the FTBFS on all platform by adding -DCLANG_BUILD_EXAMPLES=OFF
+    to cmake.
+    So, the following libs aren't built anymore:
+       - usr/lib/llvm-9/lib/SampleAnalyzerPlugin.so
+       - usr/lib/llvm-9/lib/CheckerDependencyHandlingAnalyzerPlugin.so
+       - usr/lib/llvm-9/lib/CheckerOptionHandlingAnalyzerPlugin.so
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 24 Sep 2019 21:09:57 +0200
+
+llvm-toolchain-9 (1:9~+rc5-1~exp2) experimental; urgency=medium
+
+  * debian/patches/D67877.patch: fix LLVMExports.cmake with upstream-proposed
+    patch (Closes: #941082)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 24 Sep 2019 18:57:31 +0200
+
+llvm-toolchain-9 (1:9~+rc5-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 13 Sep 2019 14:45:01 +0200
+
 llvm-toolchain-9 (1:9~+rc4-1~exp1) experimental; urgency=medium
 
   * New snapshot release
