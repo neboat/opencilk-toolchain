@@ -131,3 +131,4 @@ clang-riscv64-rv64gc.diff
 
 #try-to-unbreak-thinlto.diff
 D67877.patch
+disable-lit-cpuid-install.diff

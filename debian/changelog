@@ -1,3 +1,12 @@
+llvm-toolchain-9 (1:9-2) unstable; urgency=medium
+
+  * /disable-lit-cpuid-install.diff: Remove the lit-cpuid from the llvm
+    install.
+    It is provided by lldb and we don't want to add this as a new
+    dep from llvm-dev (Closes: #941082 #941306)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 03 Oct 2019 18:14:21 +0200
+
 llvm-toolchain-9 (1:9-1) unstable; urgency=medium
 
   * New release
