@@ -6,5 +6,5 @@ Depends: @, cmake, g++, file, dpkg-dev
 Restrictions: allow-stderr
 
 
-Test: cmake-test
+Tests: cmake-test
 Depends: gcc, build-essential, cmake, llvm-9-dev, libclang-common-9-dev
