@@ -7,4 +7,4 @@ Restrictions: allow-stderr
 
 
 Tests: cmake-test
-Depends: gcc, build-essential, cmake, llvm-9-dev, libclang-common-9-dev
+Depends: gcc, build-essential, cmake, llvm-10-dev, libclang-common-10-dev
