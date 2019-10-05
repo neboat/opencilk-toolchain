@@ -749,6 +749,12 @@ fi
 
 echo "Testing cmake build ..."
 
+if grep -q lit-cpuid /usr/lib/llvm-$VERSION/lib/cmake/llvm/LLVMExports*.cmake; then
+    echo "LLVMExports*.cmake should not have lit-cpuid"
+    echo "it introduces a dependency between llvm-9 => lldb"
+    exit -1
+fi
+
 rm -rf cmaketest && mkdir cmaketest
 cat > cmaketest/CMakeLists.txt <<EOF
 cmake_minimum_required(VERSION 2.8.12)
