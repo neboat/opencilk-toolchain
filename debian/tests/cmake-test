@@ -2,6 +2,7 @@
 
 set -e
 
+# this is taken from libjsoncpp package
 # Presence of $ADTTMP implies that someone will handle cleanup for us, so we
 # can avoid duplicating the effort (signal handling, etc.) here.
 if [ -z "$ADTTMP" ]
@@ -10,6 +11,8 @@ then
 	exit 1
 fi
 
+
+# the idea was taken from spirv-llvm-translator package
 
 cd "$ADTTMP"
 cat <<EOF > CMakeLists.txt
