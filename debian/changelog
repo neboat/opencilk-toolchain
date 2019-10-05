@@ -1,5 +1,12 @@
 llvm-toolchain-9 (1:9-2) unstable; urgency=medium
 
+  [ Gianfranco Costamagna ]
+  * Enable lldb on s390x too, it builds fine now
+  * python*lldb, depend on liblldb-9 to avoid failure during import
+  * Add a basic cmake test to see if the package is imported correctly
+
+  [ Sylvestre Ledru ]
+  * add a cpuid check
   * /disable-lit-cpuid-install.diff: Remove the lit-cpuid from the llvm
     install.
     It is provided by lldb and we don't want to add this as a new
