@@ -4,3 +4,7 @@ Depends: @, cmake, g++, file, dpkg-dev
 # dbgsym packages not being available in testing
 # clang-9-dbgsym, libclang1-9-dbgsym
 Restrictions: allow-stderr
+
+
+Test: cmake-test
+Depends: gcc, build-essential, cmake, llvm-9-dev, libclang-common-9-dev

@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+# Presence of $ADTTMP implies that someone will handle cleanup for us, so we
+# can avoid duplicating the effort (signal handling, etc.) here.
+if [ -z "$ADTTMP" ]
+then
+	echo "Required envvar ADTTMP \"$ADTTMP\" is not set" >&2
+	exit 1
+fi
+
+
+cd "$ADTTMP"
+cat <<EOF > CMakeLists.txt
+cmake_minimum_required(VERSION 2.6.2)
+find_package(LLVM 9.0.0 REQUIRED
+  COMPONENTS
+    Analysis
+    BitReader
+    BitWriter
+    Core
+    Support
+    TransformUtils
+    llvm-as
+    llvm-dis
+)
+
+EOF
+
+
+mkdir build && cd build
+cmake ..
