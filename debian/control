@@ -222,7 +222,7 @@ Description: Library for coverage-guided fuzz testing
 Package: python-clang-9
 Section: python
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python3
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3, libclang-8-dev
 Replaces: python-clang-x.y
 Conflicts: python-clang-x.y
 Provides: python-clang-x.y
