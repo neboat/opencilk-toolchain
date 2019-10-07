@@ -69,7 +69,8 @@ endif
 
 FORCE_NOT_GCC_9_DISTRO := eoan bullseye sid
 ifneq (,$(filter $(DISTRO),$(FORCE_NOT_GCC_9_DISTRO)))
-# Force gcc-8
+# Force gcc before 9 (gcc 8 on Debian unstable) because it causes
+# huge increase of the size of the .deb (because of .a and .so) and issues in the libs
 	GCC_VERSION := 8
 endif
 
