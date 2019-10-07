@@ -1,3 +1,10 @@
+llvm-toolchain-9 (1:9-3) unstable; urgency=medium
+
+  * python-clang-9: missing dependency on libclang-9-dev
+    (Closes: #941890)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 07 Oct 2019 09:47:10 +0200
+
 llvm-toolchain-9 (1:9-2) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
@@ -309,8 +316,6 @@ llvm-toolchain-8 (1:8.0.1-4) unstable; urgency=medium
 
   * Add clangd-X => libclang-common-X-dev dependency
     See https://bugs.llvm.org/show_bug.cgi?id=43152
-  * python-clang-8: missing dependency on libclang-8-dev
-    (Closes: #941890)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 29 Aug 2019 09:42:41 +0200
 
