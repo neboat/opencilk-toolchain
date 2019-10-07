@@ -87,6 +87,13 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
 
+llvm-toolchain-9 (1:9-3) unstable; urgency=medium
+
+  * python-clang-9: missing dependency on libclang-9-dev
+    (Closes: #941890)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 07 Oct 2019 09:47:10 +0200
+
 llvm-toolchain-9 (1:9-2) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
