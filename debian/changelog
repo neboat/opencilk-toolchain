@@ -1,3 +1,9 @@
+llvm-toolchain-9 (1:9.0.1-4) UNRELEASED; urgency=medium
+
+  * Prepare 9.0.1
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 10 Oct 2019 16:27:43 +0200
+
 llvm-toolchain-9 (1:9-3) unstable; urgency=medium
 
   * python-clang-9: missing dependency on libclang-9-dev
