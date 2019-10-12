@@ -872,7 +872,9 @@ endif
 		chmod 0755 `find reports/coverage -type d`; \
 		chmod 0644 `find reports/coverage -type f`; \
 	fi
+else
 override_dh_auto_test:
+	@echo "Skipping tests"
 endif
 
 
