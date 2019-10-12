@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:10~svn373912-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:10~svn374645-1~exp1) experimental; urgency=medium
 
   * New snapshot release
   * Install pp-trace, clang-move and clang-offload-wrapper in
@@ -11,7 +11,7 @@ llvm-toolchain-snapshot (1:10~svn373912-1~exp1) experimental; urgency=medium
     https://bugs.llvm.org/show_bug.cgi?id=43589
   * Added a check in debian/rules to prevent that from happening again
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 04 Oct 2019 15:30:37 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 12 Oct 2019 16:27:53 +0200
 
 llvm-toolchain-snapshot (1:10~svn372920-1~exp1) experimental; urgency=medium
 
