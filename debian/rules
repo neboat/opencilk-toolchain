@@ -434,9 +434,13 @@ debian-full-build:
 	if test "$(BUILD_METHOD)" = "stage2"; then \
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \
 		echo "clang hasn't been built using clang. Bye bye. Check that the stage2 build has been done."; \
+		exit 2; \
 	fi; \
 	fi
-
+	if ldd $(TARGET_BUILD_STAGE2)/lib/libclang-$(LLVM_VERSION).so.1|grep -q libclang-cpp-$(LLVM_VERSION); then \
+		echo "libclang-$(LLVM_VERSION).so.1 depends on libclang-cpp. Should not be the case"; \
+		exit 2; \
+	fi
 	touch $@
 
 debian-libfuzzer-build:

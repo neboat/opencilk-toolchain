@@ -9,6 +9,7 @@ llvm-toolchain-snapshot (1:10~svn373912-1~exp1) experimental; urgency=medium
     Breaking the symbol list (and people should like to libclang-cpp
     if they want to use C++ api)
     https://bugs.llvm.org/show_bug.cgi?id=43589
+  * Added a check in debian/rules to prevent that from happening again
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 04 Oct 2019 15:30:37 +0200
 
