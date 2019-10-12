@@ -3,7 +3,11 @@ llvm-toolchain-snapshot (1:10~svn373912-1~exp1) experimental; urgency=medium
   * New snapshot release
   * Install pp-trace, clang-move and clang-offload-wrapper in
     clang-tools-10
-  * revert-r373769.diff: Try to revert r373769 to see if unbreak
+  * Revert
+    "[clang-tools-extra] [cmake] Link against libclang-cpp whenever
+    possible" as it introduces a dep from libclang to libclang-cpp
+    Breaking the symbol list (and people should like to libclang-cpp
+    if they want to use C++ api)
     https://bugs.llvm.org/show_bug.cgi?id=43589
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 04 Oct 2019 15:30:37 +0200
