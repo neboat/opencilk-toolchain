@@ -29,6 +29,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/clang-doc
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-scan-deps
 usr/lib/llvm-@LLVM_VERSION@/bin/pp-trace
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-move
+usr/lib/llvm-@LLVM_VERSION@/bin/clang-offload-wrapper
 
 tools/clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
 tools/clang/tools/scan-build-py-@LLVM_VERSION@      usr/share/clang/
@@ -61,3 +62,5 @@ usr/bin/clang-doc-@LLVM_VERSION@
 usr/bin/clang-scan-deps-@LLVM_VERSION@
 usr/bin/clang-move-@LLVM_VERSION@
 usr/bin/pp-trace-@LLVM_VERSION@
+usr/bin/clang-offload-wrapper-@LLVM_VERSION@
+

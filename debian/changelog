@@ -1,7 +1,8 @@
 llvm-toolchain-snapshot (1:10~svn373912-1~exp1) experimental; urgency=medium
 
   * New snapshot release
-  * Install pp-trace & clang-move into clang-tools-10
+  * Install pp-trace, clang-move and clang-offload-wrapper in
+    clang-tools-10
   * revert-r373769.diff: Try to revert r373769 to see if unbreak
     https://bugs.llvm.org/show_bug.cgi?id=43589
 
