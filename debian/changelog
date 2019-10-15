@@ -1,8 +1,10 @@
-llvm-toolchain-9 (1:9.0.1-4) UNRELEASED; urgency=medium
+llvm-toolchain-9 (1:9~svn374633-1~exp1) UNRELEASED; urgency=medium
 
   * Prepare 9.0.1
+  * Enable Z3 solver (llvm & clang) to improve the quality of the static
+    analysis results
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 10 Oct 2019 16:27:43 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Oct 2019 09:04:33 +0200
 
 llvm-toolchain-9 (1:9-3) unstable; urgency=medium
 
