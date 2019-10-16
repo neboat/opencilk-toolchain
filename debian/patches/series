@@ -33,7 +33,7 @@ fix-llvm-config-obj-src-root.patch
 # Lib names
 0044-soname.diff
 lldb-soname.diff
-lldb-libname.diff
+#lldb-libname.diff
 openmp-soname.diff
 
 # Disable some tests
@@ -134,4 +134,3 @@ workaround-bug-42994-use-linker.diff
 # bug 939472
 #try-to-unbreak-thinlto.diff
 D67877.patch
-revert-r373786-libclang-cpp.diff

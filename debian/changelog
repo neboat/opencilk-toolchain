@@ -1,3 +1,12 @@
+llvm-toolchain-snapshot (1:10~svn374977-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * lldb-libname.diff: disable for now, seems it that it is now handled
+    by cmake https://reviews.llvm.org/D68858. TODO: check it still work
+  * Remove "revert-r373786-libclang-cpp.diff" (applied upstream)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Oct 2019 09:26:23 +0200
+
 llvm-toolchain-snapshot (1:10~svn374655-1~exp1) experimental; urgency=medium
 
   * New snapshot release
