@@ -156,7 +156,6 @@ if ! grep -q "3 warnings generated." foo.log; then
     echo "Should find 3 warnings"
     exit 1
 fi
-exit 0
 
 # bug 827866
 echo 'bool testAndSet(void *atomic) {
