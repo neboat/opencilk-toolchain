@@ -177,7 +177,7 @@ Description: transitional package
 Package: libclang-cpp9
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm10 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm9 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Replaces: libclang-cpp1-9 (<< 1:9~+rc3-1~exp1)
 Breaks: libclang-cpp1-9 (<< 1:9~+rc3-1~exp1)
