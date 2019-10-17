@@ -177,7 +177,7 @@ Description: transitional package
 Package: libclang-cpp10
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm10 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Replaces: libclang-cpp1-10 (<< 1:10~svn370407-1~exp1)
 Breaks: libclang-cpp1-10 (<< 1:10~svn370407-1~exp1)
