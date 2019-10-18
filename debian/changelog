@@ -6,8 +6,11 @@ llvm-toolchain-snapshot (1:10~svn374977-1~exp1) experimental; urgency=medium
   * Remove "revert-r373786-libclang-cpp.diff" (applied upstream)
   * Add dependency between libclang-cpp => libllvm with the exact version
     (Closes: #942526)
+  * Build using -DCLANG_LINK_CLANG_DYLIB=ON to force the usage of dynamic
+    library instead of static library when building clang tools.
+    Decreases the total size from 510M to 278M (amd64)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Oct 2019 09:26:23 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 18 Oct 2019 21:05:57 +0200
 
 llvm-toolchain-snapshot (1:10~svn374655-1~exp1) experimental; urgency=medium
 
