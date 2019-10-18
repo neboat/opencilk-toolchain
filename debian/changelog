@@ -106,12 +106,21 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
 
+llvm-toolchain-9 (1:9-4) unstable; urgency=medium
+
+  * Add dependency between libclang-cpp => libllvm with the exact version
+    (Closes: #942526)
 llvm-toolchain-9 (1:9-3) unstable; urgency=medium
 
   * python-clang-9: missing dependency on libclang-9-dev
     (Closes: #941890)
+  * Enable Z3 solver (llvm & clang) to improve the quality of the static
+    analysis results
+  * Do not fail the test suite on the -lclang-cpp failing
+    I think I need to create a libclang-cpp-dev package to unblock it
+    (but dunno why it works locally)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 07 Oct 2019 09:47:10 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 17 Oct 2019 18:38:28 +0200
 
 llvm-toolchain-9 (1:9-2) unstable; urgency=medium
 
