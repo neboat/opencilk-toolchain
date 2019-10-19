@@ -27,7 +27,7 @@ set -e
 GIT_BASE_URL=https://github.com/llvm/llvm-project
 
 PATH_DEBIAN="$(pwd)/$(dirname $0)/../"
-cd $PATH_DEBIAN
+cd "$PATH_DEBIAN"
 MAJOR_VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 if test -z "$MAJOR_VERSION"; then
     echo "Could not detect the major version"
@@ -45,17 +45,17 @@ if test -n "$1"; then
 # https://github.com/llvm/llvm-project/tree/release/9.x
 # For example: sh 4.0/debian/orig-tar.sh release/9.x
     BRANCH=$1
-    if ! echo $1|grep release/; then
+    if ! echo "$1"|grep release/; then
         # The first argument is NOT a branch, means that it is a stable release
         FINAL_RELEASE=true
         EXACT_VERSION=$1
     fi
 else
     # No argument, we need trunk
-    cd $PATH_DEBIAN
+    cd "$PATH_DEBIAN"
     SOURCE=$(dpkg-parsechangelog |grep ^Source|awk '{print $2}')
     cd -
-    if test $SOURCE != "llvm-toolchain-snapshot"; then
+    if test "$SOURCE" != "llvm-toolchain-snapshot"; then
        echo "Checkout of the master is only available for llvm-toolchain-snapshot"
        exit 1
     fi
@@ -93,7 +93,7 @@ if test -z  "$TAG" -a -z "$FINAL_RELEASE"; then
     git checkout $BRANCH
     if test $BRANCH != "master"; then
         VERSION=$(echo $BRANCH|cut -d/ -f2|cut -d. -f1)
-        if ! echo $MAJOR_VERSION|grep -q $VERSION; then
+        if ! echo "$MAJOR_VERSION"|grep -q "$VERSION"; then
             echo "mismatch in version: Dir=$MAJOR_VERSION Provided=$VERSION"
             exit 1
         fi
@@ -108,7 +108,7 @@ if test -z  "$TAG" -a -z "$FINAL_RELEASE"; then
     VERSION="${VERSION}~+$(git log -1 --pretty=format:'%ci-%h'|sed -e "s|+\(.*\)-|+|g" -e "s| ||g" -e "s|-||g" -e "s|:||g" )"
 else
 
-    if ! echo $EXACT_VERSION|grep -q $MAJOR_VERSION; then
+    if ! echo "$EXACT_VERSION"|grep -q "$MAJOR_VERSION"; then
         echo "Mismatch in version: Dir=$MAJOR_VERSION Provided=$EXACT_VERSION"
         exit 1
     fi
@@ -119,7 +119,7 @@ else
         VERSION="$VERSION~+$TAG"
     fi
 
-    git checkout $git_tag > /dev/null
+    git checkout "$git_tag" > /dev/null
 
 fi
 
@@ -130,11 +130,11 @@ cd ../
 BASE="llvm-toolchain-${MAJOR_VERSION}_${VERSION}"
 FILENAME="${BASE}.orig.tar.xz"
 echo "Compressing to $FILENAME"
-tar Jcf ../$FILENAME --exclude .git --transform="s/llvm-project/$BASE/" llvm-project
+tar Jcf ../"$FILENAME" --exclude .git --transform="s/llvm-project/$BASE/" llvm-project
 
 export DEBFULLNAME="Sylvestre Ledru"
 export DEBEMAIL="sylvestre@debian.org"
-cd $PATH_DEBIAN
+cd "$PATH_DEBIAN"
 
 if test -z "$DISTRIBUTION"; then
     DISTRIBUTION="experimental"
@@ -144,6 +144,6 @@ if test -n "$RCRELEASE" -o -n "$BRANCH"; then
     EXTRA_DCH_FLAGS="--force-bad-version --allow-lower-version"
 fi
 
-dch $EXTRA_DCH_FLAGS --distribution $DISTRIBUTION --newversion 1:$VERSION-1~exp1 "New snapshot release"
+dch "$EXTRA_DCH_FLAGS" --distribution $DISTRIBUTION --newversion 1:"$VERSION"-1~exp1 "New snapshot release"
 
 exit 0
