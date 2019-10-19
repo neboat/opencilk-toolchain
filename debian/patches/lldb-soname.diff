@@ -2,10 +2,10 @@
  lldb/source/API/CMakeLists.txt |   14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
 
-Index: llvm-toolchain-snapshot_9~svn365742/lldb/source/API/CMakeLists.txt
+Index: llvm-toolchain-9_9.0.0/lldb/source/API/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_9~svn365742.orig/lldb/source/API/CMakeLists.txt
-+++ llvm-toolchain-snapshot_9~svn365742/lldb/source/API/CMakeLists.txt
+--- llvm-toolchain-9_9.0.0.orig/lldb/source/API/CMakeLists.txt
++++ llvm-toolchain-9_9.0.0/lldb/source/API/CMakeLists.txt
 @@ -13,7 +13,12 @@ if(LLDB_BUILD_FRAMEWORK)
    set(option_install_prefix INSTALL_PREFIX ${LLDB_FRAMEWORK_INSTALL_DIR})
  endif()

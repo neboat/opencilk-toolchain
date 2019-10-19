@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_9~svn353038/llvm/tools/llvm-shlib/CMakeLists.txt
+Index: llvm-toolchain-9_9.0.0/llvm/tools/llvm-shlib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_9~svn353038.orig/llvm/tools/llvm-shlib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_9~svn353038/llvm/tools/llvm-shlib/CMakeLists.txt
-@@ -46,6 +46,7 @@ if(LLVM_BUILD_LLVM_DYLIB)
+--- llvm-toolchain-9_9.0.0.orig/llvm/tools/llvm-shlib/CMakeLists.txt
++++ llvm-toolchain-9_9.0.0/llvm/tools/llvm-shlib/CMakeLists.txt
+@@ -49,6 +49,7 @@ if(LLVM_BUILD_LLVM_DYLIB)
    list(REMOVE_DUPLICATES LIB_NAMES)
    if(("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux") OR (MINGW) OR (HAIKU)
       OR ("${CMAKE_SYSTEM_NAME}" STREQUAL "FreeBSD")

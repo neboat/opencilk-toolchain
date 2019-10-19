@@ -4,11 +4,11 @@
  clang/tools/clang-format/clang-format.py      |    2 +-
  3 files changed, 3 insertions(+), 3 deletions(-)
 
-Index: llvm-toolchain-snapshot_9~svn342269/clang/tools/clang-format/clang-format-diff.py
+Index: llvm-toolchain-9_9.0.0/clang/tools/clang-format/clang-format-diff.py
 ===================================================================
---- llvm-toolchain-snapshot_9~svn342269.orig/clang/tools/clang-format/clang-format-diff.py
-+++ llvm-toolchain-snapshot_9~svn342269/clang/tools/clang-format/clang-format-diff.py
-@@ -57,7 +57,7 @@ def main():
+--- llvm-toolchain-9_9.0.0.orig/clang/tools/clang-format/clang-format-diff.py
++++ llvm-toolchain-9_9.0.0/clang/tools/clang-format/clang-format-diff.py
+@@ -58,7 +58,7 @@ def main():
    parser.add_argument('-style',
                        help='formatting style to apply (LLVM, Google, Chromium, '
                        'Mozilla, WebKit)')
@@ -17,10 +17,10 @@ Index: llvm-toolchain-snapshot_9~svn342269/clang/tools/clang-format/clang-format
                        help='location of binary to use for clang-format')
    args = parser.parse_args()
  
-Index: llvm-toolchain-snapshot_9~svn342269/clang/tools/clang-format/clang-format.el
+Index: llvm-toolchain-9_9.0.0/clang/tools/clang-format/clang-format.el
 ===================================================================
---- llvm-toolchain-snapshot_9~svn342269.orig/clang/tools/clang-format/clang-format.el
-+++ llvm-toolchain-snapshot_9~svn342269/clang/tools/clang-format/clang-format.el
+--- llvm-toolchain-9_9.0.0.orig/clang/tools/clang-format/clang-format.el
++++ llvm-toolchain-9_9.0.0/clang/tools/clang-format/clang-format.el
 @@ -36,7 +36,7 @@
    :group 'tools)
  
@@ -30,10 +30,10 @@ Index: llvm-toolchain-snapshot_9~svn342269/clang/tools/clang-format/clang-format
        "clang-format")
    "Location of the clang-format executable.
  
-Index: llvm-toolchain-snapshot_9~svn342269/clang/tools/clang-format/clang-format.py
+Index: llvm-toolchain-9_9.0.0/clang/tools/clang-format/clang-format.py
 ===================================================================
---- llvm-toolchain-snapshot_9~svn342269.orig/clang/tools/clang-format/clang-format.py
-+++ llvm-toolchain-snapshot_9~svn342269/clang/tools/clang-format/clang-format.py
+--- llvm-toolchain-9_9.0.0.orig/clang/tools/clang-format/clang-format.py
++++ llvm-toolchain-9_9.0.0/clang/tools/clang-format/clang-format.py
 @@ -36,7 +36,7 @@ import vim
  
  # set g:clang_format_path to the path to clang-format if it is not on the path

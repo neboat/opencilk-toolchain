@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_8~svn342269/openmp/runtime/CMakeLists.txt
+Index: llvm-toolchain-9_9.0.0/openmp/runtime/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_8~svn342269.orig/openmp/runtime/CMakeLists.txt
-+++ llvm-toolchain-snapshot_8~svn342269/openmp/runtime/CMakeLists.txt
-@@ -355,7 +355,8 @@ else()
+--- llvm-toolchain-9_9.0.0.orig/openmp/runtime/CMakeLists.txt
++++ llvm-toolchain-9_9.0.0/openmp/runtime/CMakeLists.txt
+@@ -338,7 +338,8 @@ else()
    set(LIBOMP_INSTALL_KIND ARCHIVE)
  endif()
  

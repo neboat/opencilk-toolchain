@@ -1,7 +1,7 @@
-Index: llvm-toolchain-9-9~+rc3/clang/lib/Driver/ToolChains/Linux.cpp
+Index: llvm-toolchain-9_9.0.0/clang/lib/Driver/ToolChains/Linux.cpp
 ===================================================================
---- llvm-toolchain-9-9~+rc3.orig/clang/lib/Driver/ToolChains/Linux.cpp
-+++ llvm-toolchain-9-9~+rc3/clang/lib/Driver/ToolChains/Linux.cpp
+--- llvm-toolchain-9_9.0.0.orig/clang/lib/Driver/ToolChains/Linux.cpp
++++ llvm-toolchain-9_9.0.0/clang/lib/Driver/ToolChains/Linux.cpp
 @@ -12,6 +12,7 @@
  #include "Arch/PPC.h"
  #include "Arch/RISCV.h"
@@ -10,7 +10,7 @@ Index: llvm-toolchain-9-9~+rc3/clang/lib/Driver/ToolChains/Linux.cpp
  #include "clang/Config/config.h"
  #include "clang/Driver/Distro.h"
  #include "clang/Driver/Driver.h"
-@@ -665,7 +666,16 @@ void Linux::AddClangSystemIncludeArgs(co
+@@ -661,7 +662,16 @@ void Linux::AddClangSystemIncludeArgs(co
    if (!DriverArgs.hasArg(options::OPT_nobuiltininc)) {
      SmallString<128> P(D.ResourceDir);
      llvm::sys::path::append(P, "include");

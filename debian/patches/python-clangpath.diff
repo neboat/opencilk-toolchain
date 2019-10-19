@@ -2,11 +2,11 @@
  clang/bindings/python/clang/cindex.py |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Index: llvm-toolchain-snapshot_9~svn342269/clang/bindings/python/clang/cindex.py
+Index: llvm-toolchain-9_9.0.0/clang/bindings/python/clang/cindex.py
 ===================================================================
---- llvm-toolchain-snapshot_9~svn342269.orig/clang/bindings/python/clang/cindex.py
-+++ llvm-toolchain-snapshot_9~svn342269/clang/bindings/python/clang/cindex.py
-@@ -4144,7 +4144,7 @@ class Config:
+--- llvm-toolchain-9_9.0.0.orig/clang/bindings/python/clang/cindex.py
++++ llvm-toolchain-9_9.0.0/clang/bindings/python/clang/cindex.py
+@@ -4160,7 +4160,7 @@ class Config(object):
          elif name == 'Windows':
              file = 'libclang.dll'
          else:

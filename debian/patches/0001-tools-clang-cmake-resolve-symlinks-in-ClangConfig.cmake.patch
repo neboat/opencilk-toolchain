@@ -12,10 +12,10 @@ Partially addresses PR37128
  cmake/modules/CMakeLists.txt | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/cmake/modules/CMakeLists.txt b/cmake/modules/CMakeLists.txt
-index be6d1d7257..bcb61f6cc8 100644
---- a/clang/cmake/modules/CMakeLists.txt
-+++ b/clang/cmake/modules/CMakeLists.txt
+Index: llvm-toolchain-9_9.0.0/clang/cmake/modules/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-9_9.0.0.orig/clang/cmake/modules/CMakeLists.txt
++++ llvm-toolchain-9_9.0.0/clang/cmake/modules/CMakeLists.txt
 @@ -30,10 +30,10 @@ set(CLANG_CONFIG_EXPORTS_FILE)
  # Generate ClangConfig.cmake for the install tree.
  set(CLANG_CONFIG_CODE "
@@ -29,6 +29,3 @@ index be6d1d7257..bcb61f6cc8 100644
  foreach(p ${_count})
    set(CLANG_CONFIG_CODE "${CLANG_CONFIG_CODE}
  get_filename_component(CLANG_INSTALL_PREFIX \"\${CLANG_INSTALL_PREFIX}\" PATH)")
--- 
-2.17.0
-

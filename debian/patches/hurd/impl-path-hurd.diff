@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_9~svn359674/llvm/lib/Support/Unix/Path.inc
+Index: llvm-toolchain-9_9.0.0/llvm/lib/Support/Unix/Path.inc
 ===================================================================
---- llvm-toolchain-snapshot_9~svn359674.orig/llvm/lib/Support/Unix/Path.inc
-+++ llvm-toolchain-snapshot_9~svn359674/llvm/lib/Support/Unix/Path.inc
-@@ -202,7 +202,7 @@ std::string getMainExecutable(const char
+--- llvm-toolchain-9_9.0.0.orig/llvm/lib/Support/Unix/Path.inc
++++ llvm-toolchain-9_9.0.0/llvm/lib/Support/Unix/Path.inc
+@@ -203,7 +203,7 @@ std::string getMainExecutable(const char
    // If we don't have procfs mounted, fall back to argv[0]
    if (getprogpath(exe_path, argv0) != NULL)
      return exe_path;

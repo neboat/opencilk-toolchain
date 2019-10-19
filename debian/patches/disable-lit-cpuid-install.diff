@@ -1,7 +1,7 @@
-Index: llvm-toolchain-9-9/lldb/utils/lit-cpuid/CMakeLists.txt
+Index: llvm-toolchain-9_9.0.0/lldb/utils/lit-cpuid/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-9-9.orig/lldb/utils/lit-cpuid/CMakeLists.txt
-+++ llvm-toolchain-9-9/lldb/utils/lit-cpuid/CMakeLists.txt
+--- llvm-toolchain-9_9.0.0.orig/lldb/utils/lit-cpuid/CMakeLists.txt
++++ llvm-toolchain-9_9.0.0/lldb/utils/lit-cpuid/CMakeLists.txt
 @@ -1,4 +1,4 @@
 -add_llvm_utility(lit-cpuid
 +add_lldb_executable(lit-cpuid

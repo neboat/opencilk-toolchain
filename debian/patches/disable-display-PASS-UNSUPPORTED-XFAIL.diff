@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_4.0~svn280802/lldb/third_party/Python/module/unittest2/unittest2/runner.py
+Index: llvm-toolchain-9_9.0.0/lldb/third_party/Python/module/unittest2/unittest2/runner.py
 ===================================================================
---- llvm-toolchain-snapshot_4.0~svn280802.orig/lldb/third_party/Python/module/unittest2/unittest2/runner.py
-+++ llvm-toolchain-snapshot_4.0~svn280802/lldb/third_party/Python/module/unittest2/unittest2/runner.py
+--- llvm-toolchain-9_9.0.0.orig/lldb/third_party/Python/module/unittest2/unittest2/runner.py
++++ llvm-toolchain-9_9.0.0/lldb/third_party/Python/module/unittest2/unittest2/runner.py
 @@ -174,9 +174,9 @@ class TextTestRunner(unittest.TextTestRu
          if hasattr(result, 'separator2'):
              self.stream.writeln(result.separator2)

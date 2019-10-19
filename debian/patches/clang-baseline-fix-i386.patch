@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_9~svn351647/clang/lib/Driver/ToolChains/Arch/X86.cpp
+Index: llvm-toolchain-9_9.0.0/clang/lib/Driver/ToolChains/Arch/X86.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/clang/lib/Driver/ToolChains/Arch/X86.cpp
-+++ llvm-toolchain-snapshot_9~svn351647/clang/lib/Driver/ToolChains/Arch/X86.cpp
+--- llvm-toolchain-9_9.0.0.orig/clang/lib/Driver/ToolChains/Arch/X86.cpp
++++ llvm-toolchain-9_9.0.0/clang/lib/Driver/ToolChains/Arch/X86.cpp
 @@ -100,8 +100,8 @@ const char *x86::getX86TargetCPU(const A
    case llvm::Triple::Haiku:
      return "i586";

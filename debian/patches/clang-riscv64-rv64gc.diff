@@ -1,8 +1,8 @@
-diff --git a/clang/lib/Driver/ToolChains/Arch/RISCV.cpp b/clang/lib/Driver/ToolChains/Arch/RISCV.cpp
-index b6768de4d29..9671ea270ef 100644
---- a/clang/lib/Driver/ToolChains/Arch/RISCV.cpp
-+++ b/clang/lib/Driver/ToolChains/Arch/RISCV.cpp
-@@ -350,6 +350,13 @@ void riscv::getRISCVTargetFeatures(const Driver &D, const ArgList &Args,
+Index: llvm-toolchain-9_9.0.0/clang/lib/Driver/ToolChains/Arch/RISCV.cpp
+===================================================================
+--- llvm-toolchain-9_9.0.0.orig/clang/lib/Driver/ToolChains/Arch/RISCV.cpp
++++ llvm-toolchain-9_9.0.0/clang/lib/Driver/ToolChains/Arch/RISCV.cpp
+@@ -350,6 +350,13 @@ void riscv::getRISCVTargetFeatures(const
  
      // Handle all other types of extensions.
      getExtensionFeatures(D, Args, Features, MArch, OtherExts);
@@ -16,18 +16,18 @@ index b6768de4d29..9671ea270ef 100644
    }
  
    // -mrelax is default, unless -mno-relax is specified.
-@@ -375,5 +382,5 @@ StringRef riscv::getRISCVABI(const ArgList &Args, const llvm::Triple &Triple) {
+@@ -375,5 +382,5 @@ StringRef riscv::getRISCVABI(const ArgLi
    if (Arg *A = Args.getLastArg(options::OPT_mabi_EQ))
      return A->getValue();
  
 -  return Triple.getArch() == llvm::Triple::riscv32 ? "ilp32" : "lp64";
 +  return Triple.getArch() == llvm::Triple::riscv32 ? "ilp32" : "lp64d";
  }
-diff --git a/clang/lib/Driver/ToolChains/Clang.cpp b/clang/lib/Driver/ToolChains/Clang.cpp
-index 60062d5c327..bb4536cafb0 100644
---- a/clang/lib/Driver/ToolChains/Clang.cpp
-+++ b/clang/lib/Driver/ToolChains/Clang.cpp
-@@ -1850,7 +1850,7 @@ void Clang::AddRISCVTargetArgs(const ArgList &Args,
+Index: llvm-toolchain-9_9.0.0/clang/lib/Driver/ToolChains/Clang.cpp
+===================================================================
+--- llvm-toolchain-9_9.0.0.orig/clang/lib/Driver/ToolChains/Clang.cpp
++++ llvm-toolchain-9_9.0.0/clang/lib/Driver/ToolChains/Clang.cpp
+@@ -1862,7 +1862,7 @@ void Clang::AddRISCVTargetArgs(const Arg
    else if (Triple.getArch() == llvm::Triple::riscv32)
      ABIName = "ilp32";
    else if (Triple.getArch() == llvm::Triple::riscv64)

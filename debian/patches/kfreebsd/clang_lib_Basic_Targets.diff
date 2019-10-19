@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_9~svn358740/clang/lib/Basic/Targets.cpp
+Index: llvm-toolchain-9_9.0.0/clang/lib/Basic/Targets.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn358740.orig/clang/lib/Basic/Targets.cpp
-+++ llvm-toolchain-snapshot_9~svn358740/clang/lib/Basic/Targets.cpp
-@@ -472,8 +472,8 @@ TargetInfo *AllocateTarget(const llvm::T
+--- llvm-toolchain-9_9.0.0.orig/clang/lib/Basic/Targets.cpp
++++ llvm-toolchain-9_9.0.0/clang/lib/Basic/Targets.cpp
+@@ -459,8 +459,8 @@ TargetInfo *AllocateTarget(const llvm::T
        return new OpenBSDI386TargetInfo(Triple, Opts);
      case llvm::Triple::FreeBSD:
        return new FreeBSDTargetInfo<X86_32TargetInfo>(Triple, Opts);
@@ -13,7 +13,7 @@ Index: llvm-toolchain-snapshot_9~svn358740/clang/lib/Basic/Targets.cpp
      case llvm::Triple::Minix:
        return new MinixTargetInfo<X86_32TargetInfo>(Triple, Opts);
      case llvm::Triple::Solaris:
-@@ -531,8 +531,8 @@ TargetInfo *AllocateTarget(const llvm::T
+@@ -518,8 +518,8 @@ TargetInfo *AllocateTarget(const llvm::T
        return new FreeBSDTargetInfo<X86_64TargetInfo>(Triple, Opts);
      case llvm::Triple::Fuchsia:
        return new FuchsiaTargetInfo<X86_64TargetInfo>(Triple, Opts);
@@ -24,11 +24,11 @@ Index: llvm-toolchain-snapshot_9~svn358740/clang/lib/Basic/Targets.cpp
      case llvm::Triple::Solaris:
        return new SolarisTargetInfo<X86_64TargetInfo>(Triple, Opts);
      case llvm::Triple::Win32: {
-Index: llvm-toolchain-snapshot_9~svn358740/clang/lib/Basic/Targets/OSTargets.h
+Index: llvm-toolchain-9_9.0.0/clang/lib/Basic/Targets/OSTargets.h
 ===================================================================
---- llvm-toolchain-snapshot_9~svn358740.orig/clang/lib/Basic/Targets/OSTargets.h
-+++ llvm-toolchain-snapshot_9~svn358740/clang/lib/Basic/Targets/OSTargets.h
-@@ -234,7 +234,7 @@ public:
+--- llvm-toolchain-9_9.0.0.orig/clang/lib/Basic/Targets/OSTargets.h
++++ llvm-toolchain-9_9.0.0/clang/lib/Basic/Targets/OSTargets.h
+@@ -265,7 +265,7 @@ public:
  
  // GNU/kFreeBSD Target
  template <typename Target>
@@ -37,7 +37,7 @@ Index: llvm-toolchain-snapshot_9~svn358740/clang/lib/Basic/Targets/OSTargets.h
  protected:
    void getOSDefines(const LangOptions &Opts, const llvm::Triple &Triple,
                      MacroBuilder &Builder) const override {
-@@ -251,7 +251,7 @@ protected:
+@@ -282,7 +282,7 @@ protected:
    }
  
  public:
