@@ -414,7 +414,7 @@ LIBCXX_CMAKE_OPTIONS := \
 	-DCMAKE_MODULE_LINKER_FLAGS="" \
 	-DCMAKE_AR=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-ar \
 	-DCMAKE_RANLIB=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-ranlib \
-	-DLLVM_EXTERNAL_LIT=$(BASE_PATH)/utils/lit/lit.py \
+	-DLLVM_EXTERNAL_LIT=$(BASE_PATH)/llvm/utils/lit/lit.py \
 	-DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
 	$(CMAKE_EXTRA) \
 	$(CMAKE_EXTRA_LIBCXX)
@@ -613,12 +613,12 @@ endif
 	# copy the vim files (except that tablegen does not exist for indent
 	VIM_DIRS="ftdetect ftplugin syntax indent"; \
 	for dir in $$VIM_DIRS; do \
-		cp -f $(CURDIR)/utils/vim/$$dir/llvm.vim $(CURDIR)/utils/vim/$$dir/llvm-$(LLVM_VERSION).vim; \
-		if test -f $(CURDIR)/utils/vim/$$dir/tablegen.vim; then \
-			cp -f $(CURDIR)/utils/vim/$$dir/tablegen.vim $(CURDIR)/utils/vim/$$dir/tablegen-$(LLVM_VERSION).vim; \
+		cp -f $(CURDIR)/llvm/utils/vim/$$dir/llvm.vim $(CURDIR)/llvm/utils/vim/$$dir/llvm-$(LLVM_VERSION).vim; \
+		if test -f $(CURDIR)/llvm/utils/vim/$$dir/tablegen.vim; then \
+			cp -f $(CURDIR)/llvm/utils/vim/$$dir/tablegen.vim $(CURDIR)/llvm/utils/vim/$$dir/tablegen-$(LLVM_VERSION).vim; \
 		fi; \
 	done
-	cp -f $(CURDIR)/utils/vim/vimrc $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION)-vimrc
+	cp -f $(CURDIR)/llvm/utils/vim/vimrc $(CURDIR)/llvm/utils/vim/llvm-$(LLVM_VERSION)-vimrc
 
 	cp -f $(CURDIR)/clang/tools/clang-format/clang-format-diff.py $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
 
