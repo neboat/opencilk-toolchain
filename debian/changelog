@@ -1,9 +1,14 @@
-llvm-toolchain-9 (1:9-4) unstable; urgency=medium
+llvm-toolchain-9 (1:9.0.0-1) unstable; urgency=medium
 
+  * Repack to move to git
+  * Move the checkout of the sources from svn to git
+  * Use -DLLVM_ENABLE_PROJECTS instead of symlinks
+  * Use -DBOOTSTRAP_LLVM_ENABLE_LTO instead of
+    -DLLVM_ENABLE_LTO (not sure what it wasn't done)
   * Add dependency between libclang-cpp => libllvm with the exact version
     (Closes: #942526)
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 19 Oct 2019 10:30:41 +0200
 
 llvm-toolchain-9 (1:9-3) unstable; urgency=medium
 
