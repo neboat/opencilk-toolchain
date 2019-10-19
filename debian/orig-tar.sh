@@ -14,13 +14,15 @@
 set -e
 
 # commands:
-#  sh -v 8/debian/orig-tar.sh release/8.x
-#  sh -v 8/debian/orig-tar.sh 8.0.0 rc3
-#  sh -v 8/debian/orig-tar.sh 8.0.1 rc3
+#  sh 9/debian/orig-tar.sh release/9.x
+#  sh 9/debian/orig-tar.sh 9.0.0 rc3
+#  sh 9/debian/orig-tar.sh 9.0.1 rc3
+# Stable release
+#  sh 9/debian/orig-tar.sh 9.0.0 9.0.0
 
 
 # To create an rc1 release:
-# sh 4.0/debian/orig-tar.sh RELEASE_40 rc1
+# sh 4.0/debian/orig-tar.sh release/9.x
 
 GIT_BASE_URL=https://github.com/llvm/llvm-project
 
@@ -36,16 +38,20 @@ if test -z "$CURRENT_VERSION"; then
     echo "Could not detect the full version"
     exit 1
 fi
-echo $MAJOR_VERSION
-echo $CURRENT_VERSION
 cd -
 
 
 if test -n "$1"; then
-# https://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/branches/google/stable/
-# For example: sh 4.0/debian/orig-tar.sh release_400
+# https://github.com/llvm/llvm-project/tree/release/9.x
+# For example: sh 4.0/debian/orig-tar.sh release/9.x
     BRANCH=$1
+    if ! echo $1|grep release/; then
+        # The first argument is NOT a branch, means that it is a stable release
+        FINAL_RELEASE=true
+        EXACT_VERSION=$1
+    fi
 else
+    # No argument, we need trunk
     cd $PATH_DEBIAN
     SOURCE=$(dpkg-parsechangelog |grep ^Source|awk '{print $2}')
     cd -
@@ -57,13 +63,11 @@ else
 fi
 
 if test -n "$1" -a -n "$2"; then
-# https://llvm.org/svn/llvm-project/{cfe,llvm,compiler-rt,...}/tags/RELEASE_34/rc1/
-# For example: sh 4.0/debian/orig-tar.sh RELEASE_401 rc3 4.0.1
+# https://github.com/llvm/llvm-project/releases/tag/llvmorg-9.0.0
+# For example: sh 4.0/debian/orig-tar.sh 4.0.1 rc3
+# or  sh 9/debian/orig-tar.sh 9.0.0
     TAG=$2
     RCRELEASE="true"
-    if test -z "$3"; then
-        echo "Please provide the exact version. Used for the tarball name  Ex: 4.0.1"
-    fi
     EXACT_VERSION=$1
 fi
 
@@ -73,10 +77,10 @@ cd git-archive
 if test -d llvm-project; then
     # Update it
     cd llvm-project
-    git remote update
-    git reset --hard origin/master
+    git remote update > /dev/null
+    git reset --hard origin/master > /dev/null
     git clean -qfd
-    git checkout master
+    git checkout master > /dev/null
     cd ..
 else
     # Download it
@@ -84,7 +88,7 @@ else
 fi
 
 cd llvm-project
-if test -z  "$TAG"; then
+if test -z  "$TAG" -a -z "$FINAL_RELEASE"; then
     # Building a branch
     git checkout $BRANCH
     if test $BRANCH != "master"; then
@@ -110,12 +114,11 @@ else
     fi
     git_tag="llvmorg-$EXACT_VERSION"
     VERSION=$EXACT_VERSION
-
-    if test -n "$TAG"; then
+    if test -n "$TAG" -a -z "$FINAL_RELEASE"; then
         git_tag="$git_tag-$TAG"
         VERSION="$VERSION~+$TAG"
     fi
-    echo $git_tag
+
     git checkout $git_tag > /dev/null
 
 fi
@@ -123,11 +126,11 @@ fi
 # cleanup
 rm -rf */www/
 
-cd -
+cd ../
 BASE="llvm-toolchain-${MAJOR_VERSION}_${VERSION}"
 FILENAME="${BASE}.orig.tar.xz"
 echo "Compressing to $FILENAME"
-tar Jcf $FILENAME --exclude .git --transform="s/llvm-project/$BASE/" llvm-project
+tar Jcf ../$FILENAME --exclude .git --transform="s/llvm-project/$BASE/" llvm-project
 
 export DEBFULLNAME="Sylvestre Ledru"
 export DEBEMAIL="sylvestre@debian.org"

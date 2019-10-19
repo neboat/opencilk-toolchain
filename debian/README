@@ -69,7 +69,8 @@ you should use,
 
 For a stable release, the syntax is:
 
- $ sh 9/debian/orig-tar.sh 9.0
+ $ sh 9/debian/orig-tar.sh 9.0.0
+
 
 Additional maintainer scripts
 =============================
