@@ -1,6 +1,7 @@
-llvm-toolchain-snapshot (1:10~svn374977-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:10~svn375339-1~exp1) experimental; urgency=medium
 
   * New snapshot release
+  * Last upload before the move to git
   * lldb-libname.diff: disable for now, seems it that it is now handled
     by cmake https://reviews.llvm.org/D68858. TODO: check it still work
   * Remove "revert-r373786-libclang-cpp.diff" (applied upstream)
@@ -10,7 +11,7 @@ llvm-toolchain-snapshot (1:10~svn374977-1~exp1) experimental; urgency=medium
     library instead of static library when building clang tools.
     Decreases the total size from 510M to 278M (amd64)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 18 Oct 2019 21:05:57 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 19 Oct 2019 12:19:36 +0200
 
 llvm-toolchain-snapshot (1:10~svn374655-1~exp1) experimental; urgency=medium
 
