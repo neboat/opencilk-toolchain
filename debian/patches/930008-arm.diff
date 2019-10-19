@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_9~svn362869/lib/Support/Triple.cpp
+Index: llvm-toolchain-snapshot_9~svn362869/llvm/lib/Support/Triple.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn362869.orig/lib/Support/Triple.cpp
-+++ llvm-toolchain-snapshot_9~svn362869/lib/Support/Triple.cpp
+--- llvm-toolchain-snapshot_9~svn362869.orig/llvm/lib/Support/Triple.cpp
++++ llvm-toolchain-snapshot_9~svn362869/llvm/lib/Support/Triple.cpp
 @@ -1644,7 +1644,7 @@ StringRef Triple::getARMCPUForArch(Strin
      case llvm::Triple::EABIHF:
      case llvm::Triple::GNUEABIHF:

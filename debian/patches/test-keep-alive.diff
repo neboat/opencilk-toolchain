@@ -1,7 +1,7 @@
-Index: llvm-toolchain-5.0-5.0.1~+rc1/utils/lit/lit/ProgressBar.py
+Index: llvm-toolchain-5.0-5.0.1~+rc1/llvm/utils/lit/lit/ProgressBar.py
 ===================================================================
---- llvm-toolchain-5.0-5.0.1~+rc1.orig/utils/lit/lit/ProgressBar.py
-+++ llvm-toolchain-5.0-5.0.1~+rc1/utils/lit/lit/ProgressBar.py
+--- llvm-toolchain-5.0-5.0.1~+rc1.orig/llvm/utils/lit/lit/ProgressBar.py
++++ llvm-toolchain-5.0-5.0.1~+rc1/llvm/utils/lit/lit/ProgressBar.py
 @@ -189,15 +189,7 @@ class SimpleProgressBar:
              return
  

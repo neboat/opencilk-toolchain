@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_9~svn358740/lib/Target/X86/X86Subtarget.cpp
+Index: llvm-toolchain-snapshot_9~svn358740/llvm/lib/Target/X86/X86Subtarget.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn358740.orig/lib/Target/X86/X86Subtarget.cpp
-+++ llvm-toolchain-snapshot_9~svn358740/lib/Target/X86/X86Subtarget.cpp
+--- llvm-toolchain-snapshot_9~svn358740.orig/llvm/lib/Target/X86/X86Subtarget.cpp
++++ llvm-toolchain-snapshot_9~svn358740/llvm/lib/Target/X86/X86Subtarget.cpp
 @@ -284,7 +284,7 @@ void X86Subtarget::initSubtargetFeatures
    if (StackAlignOverride)
      stackAlignment = StackAlignOverride;
@@ -11,10 +11,10 @@ Index: llvm-toolchain-snapshot_9~svn358740/lib/Target/X86/X86Subtarget.cpp
      stackAlignment = 16;
  
    // Some CPUs have more overhead for gather. The specified overhead is relative
-Index: llvm-toolchain-snapshot_9~svn358740/lib/Target/X86/X86Subtarget.h
+Index: llvm-toolchain-snapshot_9~svn358740/llvm/lib/Target/X86/X86Subtarget.h
 ===================================================================
---- llvm-toolchain-snapshot_9~svn358740.orig/lib/Target/X86/X86Subtarget.h
-+++ llvm-toolchain-snapshot_9~svn358740/lib/Target/X86/X86Subtarget.h
+--- llvm-toolchain-snapshot_9~svn358740.orig/llvm/lib/Target/X86/X86Subtarget.h
++++ llvm-toolchain-snapshot_9~svn358740/llvm/lib/Target/X86/X86Subtarget.h
 @@ -738,7 +738,7 @@ public:
    bool isTargetMachO() const { return TargetTriple.isOSBinFormatMachO(); }
  

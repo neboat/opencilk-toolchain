@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_9~svn351647/include/llvm/Support/ARMTargetParser.def
+Index: llvm-toolchain-snapshot_9~svn351647/llvm/include/llvm/Support/ARMTargetParser.def
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/include/llvm/Support/ARMTargetParser.def
-+++ llvm-toolchain-snapshot_9~svn351647/include/llvm/Support/ARMTargetParser.def
+--- llvm-toolchain-snapshot_9~svn351647.orig/llvm/include/llvm/Support/ARMTargetParser.def
++++ llvm-toolchain-snapshot_9~svn351647/llvm/include/llvm/Support/ARMTargetParser.def
 @@ -74,7 +74,7 @@ ARM_ARCH("armv6kz", ARMV6KZ, "6KZ", "v6k
  ARM_ARCH("armv6-m", ARMV6M, "6-M", "v6m", ARMBuildAttrs::CPUArch::v6_M,
            FK_NONE, ARM::AEK_NONE)
@@ -11,10 +11,10 @@ Index: llvm-toolchain-snapshot_9~svn351647/include/llvm/Support/ARMTargetParser.
  ARM_ARCH("armv7ve", ARMV7VE, "7VE", "v7ve", ARMBuildAttrs::CPUArch::v7,
            FK_NEON, (ARM::AEK_SEC | ARM::AEK_MP | ARM::AEK_VIRT |
            ARM::AEK_HWDIVARM | ARM::AEK_HWDIVTHUMB | ARM::AEK_DSP))
-Index: llvm-toolchain-snapshot_9~svn351647/lib/Target/ARM/ARM.td
+Index: llvm-toolchain-snapshot_9~svn351647/llvm/lib/Target/ARM/ARM.td
 ===================================================================
---- llvm-toolchain-snapshot_9~svn351647.orig/lib/Target/ARM/ARM.td
-+++ llvm-toolchain-snapshot_9~svn351647/lib/Target/ARM/ARM.td
+--- llvm-toolchain-snapshot_9~svn351647.orig/llvm/lib/Target/ARM/ARM.td
++++ llvm-toolchain-snapshot_9~svn351647/llvm/lib/Target/ARM/ARM.td
 @@ -595,7 +595,8 @@ def ARMv6sm   : Architecture<"armv6s-m",
                                                         FeatureStrictAlign]>;
  
