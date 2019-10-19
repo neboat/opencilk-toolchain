@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+PROJECTS="clang;clang-tools-extra;libcxx;libcxxabi;lldb;compiler-rt;lld;polly;debuginfo-tests"
+
 TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
 DEB_INST		:= $(CURDIR)/debian/tmp/
@@ -311,55 +313,6 @@ override_dh_auto_configure: preconfigure
 	sed -e "s|@DEB_PATCHSETVERSION@|$(DEBIAN_REVISION)|" \
 		debian/debian_path.h > clang/include/clang/Debian/debian_path.h
 
-# Remove some old symlinks
-	cd tools/ && \
-		if test -h clang; then \
-			rm clang; \
-		fi; \
-		ln -s ../clang .; \
-	readlink clang
-
-	if test "$(POLLY_ENABLE)" = yes; then \
-		cd tools/ && \
-		if test -h polly; then \
-			rm polly; \
-		fi; \
-		ln -s ../polly .; \
-	fi
-
-	if test "$(LLD_ENABLE)" = yes; then \
-	cd tools/ && \
-		if test -h lld; then \
-			rm lld; \
-		fi; \
-		ln -s ../lld .; \
-	readlink lld; \
-	fi
-
-	if test "$(LLDB_ENABLE)" = yes; then \
-		cd tools/ && \
-		if test -h lldb; then \
-		   rm lldb; \
-		fi; \
-		ln -s ../lldb .; \
-	fi
-
-	cd projects/ && \
-	if test -h compiler-rt; then \
-		rm compiler-rt; \
-	fi; \
-	ln -s ../compiler-rt .; \
-	readlink compiler-rt
-
-	if test "$(OPENMP_ENABLE)" = yes; then \
-		cd projects/ && \
-		if test -h openmp; then \
-			rm openmp; \
-		fi; \
-		ln -s ../openmp .; \
-		readlink openmp; \
-	fi
-
 	# Configure coverity (we need the compilers) + work around perf issues
 	-(if test $(COVERITY_ENABLE) -eq 1; then \
 		export PATH=$$PATH:/opt/cov-analysis/bin/; \
@@ -381,10 +334,6 @@ override_dh_auto_configure: preconfigure
 			--xml-option append_arg:"replace/llvm::AlignOf<NextTy>::Alignment/(llvm::AlignOf<NextTy>::Alignment)"; \
 	fi)
 
-	# Due to bug upstream, no symlink here
-	rm -fr tools/clang/tools/extra
-	cp -R -H clang-tools-extra tools/clang/tools/extra
-
 	echo "Running tests: $(RUN_TEST)"
 
 	# if cmake is installed in /tmp/cmake/ uses it
@@ -395,7 +344,8 @@ override_dh_auto_configure: preconfigure
 	fi; \
 	echo "Using cmake: $$CMAKE_BIN"; \
 	cd $(TARGET_BUILD) && \
-	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../ \
+	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../llvm/ \
+	-DLLVM_ENABLE_PROJECTS=$(PROJECTS) \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
