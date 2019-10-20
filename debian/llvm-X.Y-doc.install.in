@@ -1,4 +1,4 @@
-docs/_build/html usr/share/doc/llvm-@LLVM_VERSION@-doc/
+llvm/docs/_build/html usr/share/doc/llvm-@LLVM_VERSION@-doc/
 #usr/lib/llvm-@LLVM_VERSION@/docs/llvm/html.tar.gz
 #usr/lib/llvm-@LLVM_VERSION@/docs/llvm/ocamldoc.tar.gz
 #usr/lib/llvm-@LLVM_VERSION@/docs/llvm/html/Dummy.html
