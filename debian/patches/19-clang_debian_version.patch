@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~svn370025/clang/lib/Basic/Version.cpp
+Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/Basic/Version.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~svn370025.orig/clang/lib/Basic/Version.cpp
-+++ llvm-toolchain-snapshot_10~svn370025/clang/lib/Basic/Version.cpp
+--- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/clang/lib/Basic/Version.cpp
++++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/Basic/Version.cpp
 @@ -14,6 +14,7 @@
  #include "clang/Basic/LLVM.h"
  #include "clang/Config/config.h"

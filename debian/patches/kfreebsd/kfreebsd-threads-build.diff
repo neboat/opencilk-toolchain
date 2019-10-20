@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_9~svn353038/libcxx/src/thread.cpp
+Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/src/thread.cpp
 ===================================================================
---- llvm-toolchain-snapshot_9~svn353038.orig/libcxx/src/thread.cpp
-+++ llvm-toolchain-snapshot_9~svn353038/libcxx/src/thread.cpp
+--- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/libcxx/src/thread.cpp
++++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/src/thread.cpp
 @@ -18,7 +18,7 @@
  
  #if defined(__unix__) || (defined(__APPLE__) && defined(__MACH__))

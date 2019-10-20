@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~svn370025/openmp/runtime/src/CMakeLists.txt
+Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/openmp/runtime/src/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_10~svn370025.orig/openmp/runtime/src/CMakeLists.txt
-+++ llvm-toolchain-snapshot_10~svn370025/openmp/runtime/src/CMakeLists.txt
+--- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/openmp/runtime/src/CMakeLists.txt
++++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/openmp/runtime/src/CMakeLists.txt
 @@ -167,7 +167,8 @@ endif()
  
  # Linking command will include libraries in LIBOMP_CONFIGURED_LIBFLAGS

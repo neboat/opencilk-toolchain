@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~svn370025/compiler-rt/lib/hwasan/CMakeLists.txt
+Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/compiler-rt/lib/hwasan/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_10~svn370025.orig/compiler-rt/lib/hwasan/CMakeLists.txt
-+++ llvm-toolchain-snapshot_10~svn370025/compiler-rt/lib/hwasan/CMakeLists.txt
+--- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/compiler-rt/lib/hwasan/CMakeLists.txt
++++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/compiler-rt/lib/hwasan/CMakeLists.txt
 @@ -41,9 +41,9 @@ append_list_if(COMPILER_RT_HWASAN_WITH_I
  
  set(HWASAN_RTL_CFLAGS ${SANITIZER_COMMON_CFLAGS})

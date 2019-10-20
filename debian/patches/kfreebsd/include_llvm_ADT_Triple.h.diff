@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~svn370025/llvm/include/llvm/ADT/Triple.h
+Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/include/llvm/ADT/Triple.h
 ===================================================================
---- llvm-toolchain-snapshot_10~svn370025.orig/llvm/include/llvm/ADT/Triple.h
-+++ llvm-toolchain-snapshot_10~svn370025/llvm/include/llvm/ADT/Triple.h
+--- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/include/llvm/ADT/Triple.h
++++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/include/llvm/ADT/Triple.h
 @@ -161,7 +161,7 @@ public:
      FreeBSD,
      Fuchsia,

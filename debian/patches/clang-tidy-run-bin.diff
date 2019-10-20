@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~svn370025/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
+Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
 ===================================================================
---- llvm-toolchain-snapshot_10~svn370025.orig/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
-+++ llvm-toolchain-snapshot_10~svn370025/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
+--- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
++++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
 @@ -180,10 +180,10 @@ def main():
                                     'clang-tidy and clang-apply-replacements in '
                                     '$PATH.')
