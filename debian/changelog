@@ -1,3 +1,10 @@
+llvm-toolchain-9 (1:9.0.0-2) unstable; urgency=medium
+
+  * polly, openmp & lldb aren't enabled for every platform
+    So, add to PROJECTS only when enabled
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 20 Oct 2019 17:27:50 +0200
+
 llvm-toolchain-9 (1:9.0.0-1) unstable; urgency=medium
 
   * Repack to move to git
