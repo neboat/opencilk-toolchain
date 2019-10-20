@@ -144,6 +144,6 @@ if test -n "$RCRELEASE" -o -n "$BRANCH"; then
     EXTRA_DCH_FLAGS="--force-bad-version --allow-lower-version"
 fi
 
-dch "$EXTRA_DCH_FLAGS" --distribution $DISTRIBUTION --newversion 1:"$VERSION"-1~exp1 "New snapshot release"
+dch $EXTRA_DCH_FLAGS --distribution $DISTRIBUTION --newversion 1:"$VERSION"-1~exp1 "New snapshot release"
 
 exit 0
