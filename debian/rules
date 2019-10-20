@@ -179,7 +179,7 @@ OPENMP_ENABLE=yes
 ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel powerpc powerpcspe riscv64 sparc64 s390x x32))
   OPENMP_ENABLE=no
 else
-  PROJECTS= += ";openmp"
+  PROJECTS += ";openmp"
 endif
 
 RUN_TEST=yes
