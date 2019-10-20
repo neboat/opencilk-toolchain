@@ -201,7 +201,7 @@ if ! ldd o 2>&1|grep -q  libclang-cpp; then
 	echo "Didn't link against libclang-cpp$VERSION"
 #	exit 42
 fi
-./o > /dev/null
+#./o > /dev/null
 
 # Check that the symlink is correct
 ls -al /usr/lib/llvm-$VERSION/lib/libclang-cpp.so.1 > /dev/null
@@ -328,12 +328,18 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
        __builtin_trap();
   return 0;
 }
+
 EOF
 
 clang++-$VERSION -fsanitize=address -fsanitize-coverage=edge,trace-pc test_fuzzer.cc /usr/lib/llvm-$VERSION/lib/libFuzzer.a
 if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
-    echo "fuzzer"
+    echo "fuzzer failed"
     exit 42
+fi
+
+clang++-$VERSION -fsanitize=address,fuzzer test_fuzzer.cc
+if ! ./a.out 2>&1 | grep -q "libFuzzer: deadly signal"; then
+    echo "fuzzer failed"
 fi
 
 echo 'int main(int argc, char **argv) {
@@ -380,6 +386,79 @@ if ! grep -q "foo.cpp:3:3" foo.log; then
     cat foo.log
     exit 42
 fi
+
+# Example from https://github.com/google/fuzzing/blob/master/tutorial/libFuzzerTutorial.md
+# coverage fuzzing
+cat << EOF > StandaloneFuzzTargetMain.c
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+extern int LLVMFuzzerTestOneInput(const unsigned char *data, size_t size);
+__attribute__((weak)) extern int LLVMFuzzerInitialize(int *argc, char ***argv);
+int main(int argc, char **argv) {
+  fprintf(stderr, "StandaloneFuzzTargetMain: running %d inputs\n", argc - 1);
+  if (LLVMFuzzerInitialize)
+    LLVMFuzzerInitialize(&argc, &argv);
+  for (int i = 1; i < argc; i++) {
+    fprintf(stderr, "Running: %s\n", argv[i]);
+    FILE *f = fopen(argv[i], "r");
+    assert(f);
+    fseek(f, 0, SEEK_END);
+    size_t len = ftell(f);
+    fseek(f, 0, SEEK_SET);
+    unsigned char *buf = (unsigned char*)malloc(len);
+    size_t n_read = fread(buf, 1, len, f);
+    fclose(f);
+    assert(n_read == len);
+    LLVMFuzzerTestOneInput(buf, len);
+    free(buf);
+    fprintf(stderr, "Done:    %s: (%zd bytes)\n", argv[i], n_read);
+  }
+}
+EOF
+
+cat << EOF > fuzz_me.cc
+#include <stdint.h>
+#include <stddef.h>
+
+bool FuzzMe(const uint8_t *Data, size_t DataSize) {
+  return DataSize >= 3 &&
+      Data[0] == 'F' &&
+      Data[1] == 'U' &&
+      Data[2] == 'Z' &&
+      Data[3] == 'Z';
+}
+
+extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
+  FuzzMe(Data, Size);
+  return 0;
+}
+EOF
+clang-9 -fprofile-instr-generate -fcoverage-mapping fuzz_me.cc StandaloneFuzzTargetMain.c
+
+rm -rf CORPUS
+mkdir -p CORPUS
+echo -n A > CORPUS/A
+./a.out CORPUS/*
+if ! ./a.out CORPUS/* 2>&1 | grep -q "running 1 inputs"; then
+    echo "Coverage fuzzing failed"
+    exit 1
+fi
+llvm-profdata-$VERSION merge -sparse *.profraw -o default.profdata
+llvm-cov-$VERSION show a.out -instr-profile=default.profdata -name=FuzzMe &> foo.log
+if ! grep -q "return DataSize >= 3" foo.log; then
+    echo "llvm-cov didn't show the expected output in fuzzing"
+    exit 1
+fi
+echo -n FUZA > CORPUS/FUZA && ./a.out CORPUS/*
+llvm-profdata-$VERSION merge -sparse *.profraw -o default.profdata
+llvm-cov-$VERSION show a.out -instr-profile=default.profdata -name=FuzzMe &> foo.log
+if ! grep -q "Data\[3\] == 'Z';" foo.log; then
+    echo "llvm-cov didn't show the expected output in fuzzing"
+    exit 1
+fi
+rm -rf CORPUS fuzz_me.cc StandaloneFuzzTargetMain.c
 
 echo "Testing sanitizers ..."
 
