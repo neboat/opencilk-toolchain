@@ -80,6 +80,7 @@ if test -d llvm-project; then
     git reset --hard origin/master > /dev/null
     git clean -qfd
     git checkout master > /dev/null
+    git pull
     cd ..
 else
     # Download it
