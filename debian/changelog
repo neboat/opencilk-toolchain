@@ -126,6 +126,13 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
 
+llvm-toolchain-9 (1:9.0.0-2) unstable; urgency=medium
+
+  * polly, openmp & lldb aren't enabled for every platform
+    So, add to PROJECTS only when enabled
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 20 Oct 2019 17:27:50 +0200
+
 llvm-toolchain-9 (1:9.0.0-1) unstable; urgency=medium
 
   * Repack to move to git

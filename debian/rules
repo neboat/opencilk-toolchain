@@ -1,6 +1,7 @@
 #!/usr/bin/make -f
 
-PROJECTS="clang;clang-tools-extra;libcxx;libcxxabi;lldb;compiler-rt;lld;polly;debuginfo-tests;openmp"
+# polly, openmp & lldb aren't enabled for every platform
+PROJECTS="clang;clang-tools-extra;libcxx;libcxxabi;compiler-rt;lld;debuginfo-tests"
 
 TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
@@ -175,12 +176,16 @@ BOOTSTRAP_CFLAGS_EXTRA    = $(CFLAGS_EXTRA) # Nothing for now. Keeping in case w
 POLLY_ENABLE=yes
 ifneq (,$(filter $(DEB_HOST_ARCH), powerpc powerpcspe))
   POLLY_ENABLE=no
+else
+  PROJECTS += ";polly"
 endif
 
 # Enable openmp (or not)
 OPENMP_ENABLE=yes
 ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel powerpc powerpcspe riscv64 sparc64 s390x x32))
   OPENMP_ENABLE=no
+else
+  PROJECTS= += ";openmp"
 endif
 
 RUN_TEST=yes
@@ -224,11 +229,12 @@ LLDB_DISABLE_ARCHS := hurd-i386 ia64 powerpc powerpcspe ppc64 riscv64 sparc64
 # hurd has threading issues
 ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 # Disable LLDB for this arch.
-		LLDB_ENABLE=no
+	LLDB_ENABLE=no
 else
 # See https://llvm.org/bugs/show_bug.cgi?id=28898
 # Enable it again as it seems it is fixed upstream https://bugs.llvm.org/show_bug.cgi?id=35291
 #	CMAKE_EXTRA += -DLLDB_DISABLE_LIBEDIT=ON
+	PROJECTS += ";lldb"
 endif
 
 LLD_ENABLE=yes
