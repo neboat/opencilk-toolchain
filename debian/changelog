@@ -12,7 +12,7 @@ llvm-toolchain-snapshot (1:10~+20191019070539+bdcad0aca0a-1~exp2) experimental; 
   * Use -DBOOTSTRAP_LLVM_ENABLE_LTO instead of
     -DLLVM_ENABLE_LTO (not sure what it wasn't done)
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 20 Oct 2019 13:55:30 +0200
 
 llvm-toolchain-snapshot (1:10~svn375339-1~exp1) experimental; urgency=medium
 
