@@ -1,3 +1,19 @@
+llvm-toolchain-snapshot (1:10~+20191019070539+bdcad0aca0a-1~exp2) experimental; urgency=medium
+
+  * Repack to move to git
+  * Change the versionning scheme to git:
+    Infos of the last commit
+    - ~+ (this syntax is to make sure that this version > ~svn)
+    - date
+    - hour/minute/second
+    - short git hash
+  * Move the checkout of the sources from svn to git
+  * Use -DLLVM_ENABLE_PROJECTS instead of symlinks
+  * Use -DBOOTSTRAP_LLVM_ENABLE_LTO instead of
+    -DLLVM_ENABLE_LTO (not sure what it wasn't done)
+
+ --
+
 llvm-toolchain-snapshot (1:10~svn375339-1~exp1) experimental; urgency=medium
 
   * New snapshot release
