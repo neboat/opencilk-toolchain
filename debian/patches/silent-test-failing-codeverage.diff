@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~svn370107/test/ThinLTO/X86/autoupgrade.ll
+Index: llvm-toolchain-snapshot_10~svn370107/llvm/test/ThinLTO/X86/autoupgrade.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~svn370107.orig/test/ThinLTO/X86/autoupgrade.ll
-+++ llvm-toolchain-snapshot_10~svn370107/test/ThinLTO/X86/autoupgrade.ll
+--- llvm-toolchain-snapshot_10~svn370107.orig/llvm/test/ThinLTO/X86/autoupgrade.ll
++++ llvm-toolchain-snapshot_10~svn370107/llvm/test/ThinLTO/X86/autoupgrade.ll
 @@ -3,6 +3,8 @@
  ; RUN: opt -module-summary %s -o %t.bc
  ; RUN: llvm-lto -thinlto-action=thinlink -o %t3.bc %t.bc %p/Inputs/autoupgrade.bc

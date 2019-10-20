@@ -16,10 +16,10 @@ Index: llvm-toolchain-snapshot_10~svn371290/clang/tools/libclang/CMakeLists.txt
    OUTPUT_NAME ${output_name}
    ${SOURCES}
  
-Index: llvm-toolchain-snapshot_10~svn371290/tools/llvm-shlib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_10~svn371290/llvm/tools/llvm-shlib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_10~svn371290.orig/tools/llvm-shlib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_10~svn371290/tools/llvm-shlib/CMakeLists.txt
+--- llvm-toolchain-snapshot_10~svn371290.orig/llvm/tools/llvm-shlib/CMakeLists.txt
++++ llvm-toolchain-snapshot_10~svn371290/llvm/tools/llvm-shlib/CMakeLists.txt
 @@ -44,6 +44,8 @@ if(LLVM_BUILD_LLVM_DYLIB)
    endif()
    add_llvm_library(LLVM SHARED DISABLE_LLVM_LINK_LLVM_DYLIB SONAME ${INSTALL_WITH_TOOLCHAIN} ${SOURCES})

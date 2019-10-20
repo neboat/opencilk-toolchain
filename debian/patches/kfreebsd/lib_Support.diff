@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~svn370025/lib/Support/Triple.cpp
+Index: llvm-toolchain-snapshot_10~svn370025/llvm/lib/Support/Triple.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~svn370025.orig/lib/Support/Triple.cpp
-+++ llvm-toolchain-snapshot_10~svn370025/lib/Support/Triple.cpp
+--- llvm-toolchain-snapshot_10~svn370025.orig/llvm/lib/Support/Triple.cpp
++++ llvm-toolchain-snapshot_10~svn370025/llvm/lib/Support/Triple.cpp
 @@ -183,7 +183,7 @@ StringRef Triple::getOSTypeName(OSType K
    case FreeBSD: return "freebsd";
    case Fuchsia: return "fuchsia";
@@ -20,10 +20,10 @@ Index: llvm-toolchain-snapshot_10~svn370025/lib/Support/Triple.cpp
      .StartsWith("linux", Triple::Linux)
      .StartsWith("lv2", Triple::Lv2)
      .StartsWith("macos", Triple::MacOSX)
-Index: llvm-toolchain-snapshot_10~svn370025/lib/Support/Unix/Path.inc
+Index: llvm-toolchain-snapshot_10~svn370025/llvm/lib/Support/Unix/Path.inc
 ===================================================================
---- llvm-toolchain-snapshot_10~svn370025.orig/lib/Support/Unix/Path.inc
-+++ llvm-toolchain-snapshot_10~svn370025/lib/Support/Unix/Path.inc
+--- llvm-toolchain-snapshot_10~svn370025.orig/llvm/lib/Support/Unix/Path.inc
++++ llvm-toolchain-snapshot_10~svn370025/llvm/lib/Support/Unix/Path.inc
 @@ -62,7 +62,7 @@
  #define FSTATVFS fstatvfs
  #define STATVFS_F_FRSIZE(vfs) vfs.f_frsize

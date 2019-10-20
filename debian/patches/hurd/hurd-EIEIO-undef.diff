@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~svn372737/utils/TableGen/CodeEmitterGen.cpp
+Index: llvm-toolchain-snapshot_10~svn372737/llvm/utils/TableGen/CodeEmitterGen.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~svn372737.orig/utils/TableGen/CodeEmitterGen.cpp
-+++ llvm-toolchain-snapshot_10~svn372737/utils/TableGen/CodeEmitterGen.cpp
+--- llvm-toolchain-snapshot_10~svn372737.orig/llvm/utils/TableGen/CodeEmitterGen.cpp
++++ llvm-toolchain-snapshot_10~svn372737/llvm/utils/TableGen/CodeEmitterGen.cpp
 @@ -395,6 +395,9 @@ void CodeEmitterGen::run(raw_ostream &o)
    ArrayRef<const CodeGenInstruction*> NumberedInstructions =
      Target.getInstructionsByEnumValue();

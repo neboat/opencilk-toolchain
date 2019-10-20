@@ -31,10 +31,10 @@ Index: llvm-toolchain-snapshot_10~svn370407/lldb/include/lldb/lldb-defines.h
  #if !defined(UINT32_MAX)
  #define UINT32_MAX 4294967295U
  #endif
-Index: llvm-toolchain-snapshot_10~svn370407/tools/dsymutil/DwarfLinker.cpp
+Index: llvm-toolchain-snapshot_10~svn370407/llvm/tools/dsymutil/DwarfLinker.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~svn370407.orig/tools/dsymutil/DwarfLinker.cpp
-+++ llvm-toolchain-snapshot_10~svn370407/tools/dsymutil/DwarfLinker.cpp
+--- llvm-toolchain-snapshot_10~svn370407.orig/llvm/tools/dsymutil/DwarfLinker.cpp
++++ llvm-toolchain-snapshot_10~svn370407/llvm/tools/dsymutil/DwarfLinker.cpp
 @@ -100,6 +100,11 @@
  #include <utility>
  #include <vector>

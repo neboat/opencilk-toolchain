@@ -81,10 +81,10 @@ Index: llvm-toolchain-snapshot_9~svn363555/clang/docs/doxygen.cfg.in
  
  # The MATHJAX_EXTENSIONS tag can be used to specify one or more MathJax
  # extension names that should be enabled during MathJax rendering. For example
-Index: llvm-toolchain-snapshot_9~svn363555/docs/doxygen.cfg.in
+Index: llvm-toolchain-snapshot_9~svn363555/llvm/docs/doxygen.cfg.in
 ===================================================================
---- llvm-toolchain-snapshot_9~svn363555.orig/docs/doxygen.cfg.in
-+++ llvm-toolchain-snapshot_9~svn363555/docs/doxygen.cfg.in
+--- llvm-toolchain-snapshot_9~svn363555.orig/llvm/docs/doxygen.cfg.in
++++ llvm-toolchain-snapshot_9~svn363555/llvm/docs/doxygen.cfg.in
 @@ -1433,7 +1433,7 @@ MATHJAX_FORMAT         = HTML-CSS
  # The default value is: http://cdn.mathjax.org/mathjax/latest.
  # This tag requires that the tag USE_MATHJAX is set to YES.
