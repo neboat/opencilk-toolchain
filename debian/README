@@ -9,7 +9,7 @@ The current snapshot release is maintained in the "snapshot" branch.
 The easiest way to get all branches is probably to have one
 clone per version:
 
-for f in 7 8 9 snapshot; do
+for f in 8 9 snapshot; do
     git clone git@salsa.debian.org:pkg-llvm-team/llvm-toolchain.git -b $f $f
 done
 
@@ -23,7 +23,7 @@ Steps for manually building a snapshot release
      $ sh snapshot/debian/orig-tar.sh
 
    which will retrieve the latest version for each LLVM subproject (llvm,
-   clang, lldb, etc.) from the main development (upstream SVN). and repack it
+   clang, lldb, etc.) from the main development (upstream github). and repack it
    as a set of tarballs.
 
 2) Unpack the original tarballs and apply quilt debian patches.
@@ -33,8 +33,10 @@ Steps for manually building a snapshot release
      $ sh unpack.sh
 
    which will unpack the source tree inside a new directory such as
-   branches/llvm-toolchain-snapshot_3.10~svn26101042. Depending on the current
-   snapshot version number and svn release, the directory name will be
+   branches/llvm-toolchain-snapshot_3.9~+20191018225217+3b113a2be6d.
+   (date+hour+short git hash).
+   Depending on the current snapshot version number and git release,
+   the directory name will be
    different.
 
    Quilt patches will then be applied.
@@ -52,22 +54,23 @@ Retrieving a specific branch or release candidate with orig-tar.sh
 When using orig-tar.sh, if you need to retrieve a specific branch, you can pass
 the branch name as the first argument. For example, to get the 10 release
 branch at
-  http://llvm.org/svn/llvm-project/{llvm,...}/branches/release_100
+  https://github.com/llvm/llvm-project/branches
 you should use,
 
-  $ sh snapshot/debian/orig-tar.sh release_100
+  $ sh 9/debian/orig-tar.sh release/9.x
 
 To retrieve a specific release candidate, you can pass the branch name as the
 first argument, and the tag rc number as the second argument. For example, to
-get the 10.0.1 release candidate rc3 at
-  http://llvm.org/svn/llvm-project/{llvm,...}/tags/RELEASE_1001/rc3
+get the 9.0.1 release candidate rc3 at
+  https://github.com/llvm/llvm-project/tags
 you should use,
 
-  $ sh snapshot/debian/orig-tar.sh RELEASE_1001 rc3 10.0.1
+  $ sh 9/debian/orig-tar.sh 9.0.1 rc3
 
 For a stable release, the syntax is:
 
- $ sh snapshot/debian/orig-tar.sh RELEASE_1000 final 10.0
+ $ sh 9/debian/orig-tar.sh 9.0.0
+
 
 Additional maintainer scripts
 =============================

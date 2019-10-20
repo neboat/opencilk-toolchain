@@ -9,7 +9,7 @@ usr/lib/llvm-@LLVM_VERSION@/share/opt-viewer/opt-diff.py
 usr/lib/llvm-@LLVM_VERSION@/share/opt-viewer/optpmap.py
 usr/lib/llvm-@LLVM_VERSION@/share/opt-viewer/opt-stats.py
 
-utils/lit/*             /usr/lib/llvm-@LLVM_VERSION@/build/utils/lit/
+llvm/utils/lit/*             /usr/lib/llvm-@LLVM_VERSION@/build/utils/lit/
 
 usr/bin/count-@LLVM_VERSION@
 usr/bin/FileCheck-@LLVM_VERSION@

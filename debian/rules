@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+PROJECTS="clang;clang-tools-extra;libcxx;libcxxabi;lldb;compiler-rt;lld;polly;debuginfo-tests;openmp"
+
 TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
 DEB_INST		:= $(CURDIR)/debian/tmp/
@@ -245,7 +247,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 # armhf is not yet quite ready for Thin, it FTBFS
 # see https://buildd.debian.org/status/fetch.php?pkg=llvm-toolchain-8&arch=armhf&ver=1%3A8.0.1%7E%2Brc2-1%7Eexp1&stamp=1560334266&raw=0
 ifeq (,$(filter $(DEB_HOST_ARCH), armhf))
-	CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
+	CMAKE_EXTRA += -DBOOTSTRAP_LLVM_ENABLE_LTO="Thin"
 endif
 endif
 endif
@@ -317,55 +319,6 @@ override_dh_auto_configure: preconfigure
 	sed -e "s|@DEB_PATCHSETVERSION@|$(DEBIAN_REVISION)|" \
 		debian/debian_path.h > clang/include/clang/Debian/debian_path.h
 
-# Remove some old symlinks
-	cd tools/ && \
-		if test -h clang; then \
-			rm clang; \
-		fi; \
-		ln -s ../clang .; \
-	readlink clang
-
-	if test "$(POLLY_ENABLE)" = yes; then \
-		cd tools/ && \
-		if test -h polly; then \
-			rm polly; \
-		fi; \
-		ln -s ../polly .; \
-	fi
-
-	if test "$(LLD_ENABLE)" = yes; then \
-	cd tools/ && \
-		if test -h lld; then \
-			rm lld; \
-		fi; \
-		ln -s ../lld .; \
-	readlink lld; \
-	fi
-
-	if test "$(LLDB_ENABLE)" = yes; then \
-		cd tools/ && \
-		if test -h lldb; then \
-		   rm lldb; \
-		fi; \
-		ln -s ../lldb .; \
-	fi
-
-	cd projects/ && \
-	if test -h compiler-rt; then \
-		rm compiler-rt; \
-	fi; \
-	ln -s ../compiler-rt .; \
-	readlink compiler-rt
-
-	if test "$(OPENMP_ENABLE)" = yes; then \
-		cd projects/ && \
-		if test -h openmp; then \
-			rm openmp; \
-		fi; \
-		ln -s ../openmp .; \
-		readlink openmp; \
-	fi
-
 	# Configure coverity (we need the compilers) + work around perf issues
 	-(if test $(COVERITY_ENABLE) -eq 1; then \
 		export PATH=$$PATH:/opt/cov-analysis/bin/; \
@@ -387,10 +340,6 @@ override_dh_auto_configure: preconfigure
 			--xml-option append_arg:"replace/llvm::AlignOf<NextTy>::Alignment/(llvm::AlignOf<NextTy>::Alignment)"; \
 	fi)
 
-	# Due to bug upstream, no symlink here
-	rm -fr tools/clang/tools/extra
-	cp -R -H clang-tools-extra tools/clang/tools/extra
-
 	echo "Running tests: $(RUN_TEST)"
 
 	# if cmake is installed in /tmp/cmake/ uses it
@@ -401,7 +350,8 @@ override_dh_auto_configure: preconfigure
 	fi; \
 	echo "Using cmake: $$CMAKE_BIN"; \
 	cd $(TARGET_BUILD) && \
-	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../ \
+	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../llvm/ \
+	-DLLVM_ENABLE_PROJECTS=$(PROJECTS) \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
@@ -475,7 +425,7 @@ LIBCXX_CMAKE_OPTIONS := \
 	-DCMAKE_MODULE_LINKER_FLAGS="" \
 	-DCMAKE_AR=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-ar \
 	-DCMAKE_RANLIB=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-ranlib \
-	-DLLVM_EXTERNAL_LIT=$(BASE_PATH)/utils/lit/lit.py \
+	-DLLVM_EXTERNAL_LIT=$(BASE_PATH)/llvm/utils/lit/lit.py \
 	-DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
 	$(CMAKE_EXTRA) \
 	$(CMAKE_EXTRA_LIBCXX)
@@ -529,7 +479,7 @@ override_dh_prep: build_doc
 	dh_prep
 
 build_doc:
-	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
+	cd $(CURDIR)/llvm/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	cd $(CURDIR)/clang/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	-(if test "$(OCAML_ENABLE)" = yes; then \
 	make $(NJOBS) -C "$(TARGET_BUILD_STAGE2)/docs" ocaml_doc; \
@@ -673,12 +623,12 @@ endif
 	# copy the vim files (except that tablegen does not exist for indent
 	VIM_DIRS="ftdetect ftplugin syntax indent"; \
 	for dir in $$VIM_DIRS; do \
-		cp -f $(CURDIR)/utils/vim/$$dir/llvm.vim $(CURDIR)/utils/vim/$$dir/llvm-$(LLVM_VERSION).vim; \
-		if test -f $(CURDIR)/utils/vim/$$dir/tablegen.vim; then \
-			cp -f $(CURDIR)/utils/vim/$$dir/tablegen.vim $(CURDIR)/utils/vim/$$dir/tablegen-$(LLVM_VERSION).vim; \
+		cp -f $(CURDIR)/llvm/utils/vim/$$dir/llvm.vim $(CURDIR)/llvm/utils/vim/$$dir/llvm-$(LLVM_VERSION).vim; \
+		if test -f $(CURDIR)/llvm/utils/vim/$$dir/tablegen.vim; then \
+			cp -f $(CURDIR)/llvm/utils/vim/$$dir/tablegen.vim $(CURDIR)/llvm/utils/vim/$$dir/tablegen-$(LLVM_VERSION).vim; \
 		fi; \
 	done
-	cp -f $(CURDIR)/utils/vim/vimrc $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION)-vimrc
+	cp -f $(CURDIR)/llvm/utils/vim/vimrc $(CURDIR)/llvm/utils/vim/llvm-$(LLVM_VERSION)-vimrc
 
 	cp -f $(CURDIR)/clang/tools/clang-format/clang-format-diff.py $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
 
