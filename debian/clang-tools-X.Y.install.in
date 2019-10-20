@@ -28,9 +28,9 @@ usr/lib/llvm-@LLVM_VERSION@/bin/clang-extdef-mapping
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-doc
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-scan-deps
 
-tools/clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
-tools/clang/tools/scan-build-py-@LLVM_VERSION@      usr/share/clang/
-tools/clang/tools/scan-view-@LLVM_VERSION@       usr/share/clang/
+clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
+clang/tools/scan-build-py-@LLVM_VERSION@      usr/share/clang/
+clang/tools/scan-view-@LLVM_VERSION@       usr/share/clang/
 
 usr/lib/llvm-@LLVM_VERSION@/share/clang/run-find-all-symbols.py
 usr/lib/llvm-@LLVM_VERSION@/share/clang/clang-include-fixer.py
