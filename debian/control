@@ -32,7 +32,7 @@ Package: clang-9
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang-common-9-dev (= ${binary:Version}),
- libclang1-9 (= ${binary:Version}), libc6-dev, binutils
+ libclang-cpp9 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-9-dev, python3, libomp-9-dev
 Suggests: clang-9-doc
