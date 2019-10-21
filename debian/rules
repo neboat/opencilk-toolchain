@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 # polly, openmp & lldb aren't enabled for every platform
-PROJECTS="clang;clang-tools-extra;libcxx;libcxxabi;compiler-rt;lld;debuginfo-tests"
+PROJECTS = clang;clang-tools-extra;libcxx;libcxxabi;compiler-rt;lld;debuginfo-tests
 
 TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
@@ -171,7 +171,7 @@ POLLY_ENABLE=yes
 ifneq (,$(filter $(DEB_HOST_ARCH), powerpc powerpcspe))
   POLLY_ENABLE=no
 else
-  PROJECTS += ";polly"
+  PROJECTS+=;polly
 endif
 
 # Enable openmp (or not)
@@ -179,7 +179,7 @@ OPENMP_ENABLE=yes
 ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel powerpc powerpcspe riscv64 sparc64 s390x x32))
   OPENMP_ENABLE=no
 else
-  PROJECTS += ";openmp"
+  PROJECTS+=;openmp
 endif
 
 RUN_TEST=yes
@@ -228,7 +228,7 @@ else
 # See https://llvm.org/bugs/show_bug.cgi?id=28898
 # Enable it again as it seems it is fixed upstream https://bugs.llvm.org/show_bug.cgi?id=35291
 #	CMAKE_EXTRA += -DLLDB_DISABLE_LIBEDIT=ON
-	PROJECTS += ";lldb"
+	PROJECTS+=;lldb
 endif
 
 LLD_ENABLE=yes
@@ -279,6 +279,8 @@ endif
 %:
 	dh $@ $(DH_OPTIONS)
 
+# For some reasons, some spaces are added, removing them
+PROJECTS_LIST := $(shell echo "$(PROJECTS)"|sed -e "s| ||g")
 
 preconfigure:
 	@echo "DEB_HOST_MULTIARCH=$(DEB_HOST_MULTIARCH)"
@@ -288,6 +290,7 @@ preconfigure:
 	@echo "DEB_HOST_ARCH_OS=$(DEB_HOST_ARCH_OS)"
 	@echo "DISTRO=$(DISTRO)"
 	@echo "GCC_VERSION=$(GCC_VERSION)"
+	@echo 'PROJECTS=$(PROJECTS_LIST)'
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
@@ -351,7 +354,7 @@ override_dh_auto_configure: preconfigure
 	echo "Using cmake: $$CMAKE_BIN"; \
 	cd $(TARGET_BUILD) && \
 	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../llvm/ \
-	-DLLVM_ENABLE_PROJECTS=$(PROJECTS) \
+	-DLLVM_ENABLE_PROJECTS="$(PROJECTS_LIST)" \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
