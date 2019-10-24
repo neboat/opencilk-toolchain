@@ -4,6 +4,12 @@ llvm-toolchain-9 (1:9.0.0-2) unstable; urgency=medium
     So, add to PROJECTS only when enabled
   * clang: Force the installation of libclang-cpp with the exact same version
     and remove libclang as dep
+  * For some reasons, building compiler-rt with the github method
+    is changing some options. It seems that it adds -m elf_i386 to the
+    linker. Causing a build failure.
+    See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=942864
+    https://bugs.llvm.org/show_bug.cgi?id=43677
+    trying to remove the flag in compiler-rt-fuzzer-remove-elf_i386.diff
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 20 Oct 2019 17:27:50 +0200
 
