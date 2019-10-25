@@ -132,4 +132,4 @@ clang-riscv64-rv64gc.diff
 #try-to-unbreak-thinlto.diff
 D67877.patch
 disable-lit-cpuid-install.diff
-compiler-rt-fuzzer-remove-elf_i386.diff
+disable-fuzzer-compiler-rt.diff
