@@ -5,7 +5,6 @@ REV=`ls -1 *$ORIG_VERSION_$MAJOR_VERSION*~+*xz | tail -1|perl -ne 'print "$1\n" 
 
 #SVN_REV=347285
 VERSION=$REV
-echo $VERSION
 #VERSION=+rc3
 LLVM_ARCHIVE=llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~+$VERSION.orig.tar.xz
 echo "unpack of $LLVM_ARCHIVE"
