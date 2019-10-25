@@ -1,0 +1,14 @@
+Index: llvm-toolchain-snapshot_10~+20191025004812+60b403e75cd/compiler-rt/lib/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_10~+20191025004812+60b403e75cd.orig/compiler-rt/lib/CMakeLists.txt
++++ llvm-toolchain-snapshot_10~+20191025004812+60b403e75cd/compiler-rt/lib/CMakeLists.txt
+@@ -56,6 +56,6 @@ if(COMPILER_RT_BUILD_XRAY)
+   compiler_rt_build_runtime(xray)
+ endif()
+ 
+-if(COMPILER_RT_BUILD_LIBFUZZER)
+-  compiler_rt_build_runtime(fuzzer)
+-endif()
++#if(COMPILER_RT_BUILD_LIBFUZZER)
++#  compiler_rt_build_runtime(fuzzer)
++#endif()
