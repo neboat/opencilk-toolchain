@@ -141,6 +141,11 @@ llvm-toolchain-9 (1:9.0.0-2) unstable; urgency=medium
     See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=942864
     https://bugs.llvm.org/show_bug.cgi?id=43677
     disable-fuzzer-compiler-rt.diff
+  * Disable all kfreebsd patches:
+    - Needs rebasing on snapshot often
+    - Didn't build on Debian for a while
+    - Not forwarded upstream
+    - No support from the team
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 20 Oct 2019 17:27:50 +0200
 
