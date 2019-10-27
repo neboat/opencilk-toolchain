@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~+20191025004812+60b403e75cd/compiler-rt/lib/CMakeLists.txt
+Index: llvm-toolchain-9-9.0.0/compiler-rt/lib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191025004812+60b403e75cd.orig/compiler-rt/lib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_10~+20191025004812+60b403e75cd/compiler-rt/lib/CMakeLists.txt
+--- llvm-toolchain-9-9.0.0.orig/compiler-rt/lib/CMakeLists.txt
++++ llvm-toolchain-9-9.0.0/compiler-rt/lib/CMakeLists.txt
 @@ -56,6 +56,6 @@ if(COMPILER_RT_BUILD_XRAY)
    compiler_rt_build_runtime(xray)
  endif()
@@ -12,3 +12,33 @@ Index: llvm-toolchain-snapshot_10~+20191025004812+60b403e75cd/compiler-rt/lib/CM
 +#if(COMPILER_RT_BUILD_LIBFUZZER)
 +#  compiler_rt_build_runtime(fuzzer)
 +#endif()
+Index: llvm-toolchain-9-9.0.0/clang/runtime/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-9-9.0.0.orig/clang/runtime/CMakeLists.txt
++++ llvm-toolchain-9-9.0.0/clang/runtime/CMakeLists.txt
+@@ -130,7 +130,7 @@ if(LLVM_BUILD_EXTERNAL_COMPILER_RT AND E
+       FileCheck count not llvm-nm llvm-objdump llvm-symbolizer)
+ 
+     # Add top-level targets for various compiler-rt test suites.
+-    set(COMPILER_RT_TEST_SUITES check-fuzzer check-asan check-hwasan check-asan-dynamic check-dfsan
++    set(COMPILER_RT_TEST_SUITES check-asan check-hwasan check-asan-dynamic check-dfsan
+       check-lsan check-msan check-sanitizer check-tsan check-ubsan check-ubsan-minimal
+       check-profile check-cfi check-cfi-and-supported check-safestack check-gwp_asan)
+     foreach(test_suite ${COMPILER_RT_TEST_SUITES})
+Index: llvm-toolchain-9-9.0.0/compiler-rt/test/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-9-9.0.0.orig/compiler-rt/test/CMakeLists.txt
++++ llvm-toolchain-9-9.0.0/compiler-rt/test/CMakeLists.txt
+@@ -56,9 +56,9 @@ if(COMPILER_RT_CAN_EXECUTE_TESTS)
+     compiler_rt_test_runtime(sanitizer_common)
+ 
+     # OpenBSD not supporting asan, cannot run the tests
+-    if(COMPILER_RT_BUILD_LIBFUZZER AND NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "OpenBSD" AND NOT ANDROID)
+-      compiler_rt_test_runtime(fuzzer)
+-    endif()
++#    if(COMPILER_RT_BUILD_LIBFUZZER AND NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "OpenBSD" AND NOT ANDROID)
++#      compiler_rt_test_runtime(fuzzer)
++#    endif()
+ 
+     foreach(sanitizer ${COMPILER_RT_SANITIZERS_TO_BUILD})
+       # cfi testing is gated on ubsan
