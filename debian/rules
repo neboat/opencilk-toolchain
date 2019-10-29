@@ -247,7 +247,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 # armhf is not yet quite ready for Thin, it FTBFS
 # see https://buildd.debian.org/status/fetch.php?pkg=llvm-toolchain-8&arch=armhf&ver=1%3A8.0.1%7E%2Brc2-1%7Eexp1&stamp=1560334266&raw=0
 ifeq (,$(filter $(DEB_HOST_ARCH), armhf))
-	CMAKE_EXTRA += -DBOOTSTRAP_LLVM_ENABLE_LTO="Thin"
+	CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
 endif
 endif
 endif

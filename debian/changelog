@@ -1,3 +1,12 @@
+llvm-toolchain-9 (1:9.0.0-3~exp1) experimental; urgency=medium
+
+  * Revert the change -DBOOTSTRAP_LLVM_ENABLE_LTO to use
+    -DLLVM_ENABLE_LTO to see if it fixes 943623
+    and/or 942864
+    Disable disable-fuzzer-compiler-rt.diff to evaluate the whole thing
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 29 Oct 2019 20:05:38 +0100
+
 llvm-toolchain-9 (1:9.0.0-2) unstable; urgency=medium
 
   * polly, openmp & lldb aren't enabled for every platform
