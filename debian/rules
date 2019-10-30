@@ -70,6 +70,12 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++
 	GCC_VERSION := 4.9
 endif
 
+Z3_FLAG=
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libz3-dev) gt 4.7.0; echo $$?),0)
+# Too old version of gcc. Force 4.9
+	Z3_FLAG = -DLLVM_ENABLE_Z3_SOLVER=ON
+endif
+
 FORCE_NOT_GCC_9_DISTRO := eoan bullseye sid
 ifneq (,$(filter $(DISTRO),$(FORCE_NOT_GCC_9_DISTRO)))
 # Force gcc before 9 (gcc 8 on Debian unstable) because it causes
@@ -371,7 +377,7 @@ override_dh_auto_configure: preconfigure
 	-DLIBCLANG_LIBRARY_VERSION=$(SONAME_EXT) \
 	-DENABLE_LINKER_BUILD_ID=ON \
 	-DPOLLY_BUNDLED_JSONCPP=OFF \
-	-DLLVM_ENABLE_Z3_SOLVER=ON \
+	$(Z3_FLAG) \
 	-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="AVR" \
 	-DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
 	-DCLANG_VENDOR=$(VENDOR) \
