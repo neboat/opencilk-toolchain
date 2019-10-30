@@ -8,24 +8,23 @@
  test/Feature/load_module.ll               |    1 +
  4 files changed, 5 insertions(+), 1 deletion(-)
 
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/BugPoint/metadata.ll
+Index: llvm-toolchain-snapshot_10~+2019103014341007006cb181f086a/llvm/test/BugPoint/metadata.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/BugPoint/metadata.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/BugPoint/metadata.ll
-@@ -7,7 +7,8 @@
- ;
- ; RUN: bugpoint -load %llvmshlibdir/BugpointPasses%shlibext %s -output-prefix %t-notype -bugpoint-crashcalls -silence-passes -disable-namedmd-remove -disable-strip-debuginfo > /dev/null
- ; RUN: llvm-dis %t-notype-reduced-simplified.bc -o - | FileCheck %s --check-prefix=NOTYPE
--;
+--- llvm-toolchain-snapshot_10~+2019103014341007006cb181f086a.orig/llvm/test/BugPoint/metadata.ll
++++ llvm-toolchain-snapshot_10~+2019103014341007006cb181f086a/llvm/test/BugPoint/metadata.ll
+@@ -18,6 +18,8 @@
+ ; NOTYPE: !DICompileUnit
+ ; NOTYPE-NOT: !DIBasicType
+ 
 +; XFAIL: *
 +
- ; Bugpoint should keep the call's metadata attached to the call.
- 
- ; CHECK: call void @foo(), !dbg ![[LOC:[0-9]+]], !attach ![[CALL:[0-9]+]]
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Feature/load_module.ll
+ %rust_task = type {}
+ define void @test(i32* %a, i8* %b) !dbg !9 {
+     %s = mul i8 22, 9, !attach !0, !dbg !10
+Index: llvm-toolchain-snapshot_10~+2019103014341007006cb181f086a/llvm/test/Feature/load_module.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/Feature/load_module.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Feature/load_module.ll
+--- llvm-toolchain-snapshot_10~+2019103014341007006cb181f086a.orig/llvm/test/Feature/load_module.ll
++++ llvm-toolchain-snapshot_10~+2019103014341007006cb181f086a/llvm/test/Feature/load_module.ll
 @@ -3,6 +3,7 @@
  ; RUN:   -disable-output 2>&1 | grep Hello
  ; REQUIRES: plugins
