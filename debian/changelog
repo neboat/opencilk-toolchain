@@ -8,6 +8,8 @@ llvm-toolchain-9 (1:9.0.0-3~exp2) experimental; urgency=medium
   * disable-fuzzer-compiler-rt.diff: bring back this patch.
     Still breaks i386 compiler-rt/fuzzer
     Disable fuzzer only for i386
+  * Use stage2 files to build the doc. For some reasons, clang-tools-extra
+    html generation stopped working
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 30 Oct 2019 19:09:12 +0100
 
