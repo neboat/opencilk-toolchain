@@ -91,6 +91,7 @@ cd llvm-project
 if test -z  "$TAG" -a -z "$FINAL_RELEASE"; then
     # Building a branch
     git checkout $BRANCH
+    git pull
     if test $BRANCH != "master"; then
         VERSION=$(echo $BRANCH|cut -d/ -f2|cut -d. -f1)
         if ! echo "$MAJOR_VERSION"|grep -q "$VERSION"; then
@@ -120,6 +121,7 @@ else
     fi
 
     git checkout "$git_tag" > /dev/null
+    git pull
 
 fi
 
