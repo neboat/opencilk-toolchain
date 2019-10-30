@@ -2,16 +2,16 @@ Index: llvm-toolchain-9-9.0.0/compiler-rt/lib/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-9-9.0.0.orig/compiler-rt/lib/CMakeLists.txt
 +++ llvm-toolchain-9-9.0.0/compiler-rt/lib/CMakeLists.txt
-@@ -56,6 +56,6 @@ if(COMPILER_RT_BUILD_XRAY)
-   compiler_rt_build_runtime(xray)
+@@ -57,5 +57,8 @@ if(COMPILER_RT_BUILD_XRAY)
  endif()
  
--if(COMPILER_RT_BUILD_LIBFUZZER)
+ if(COMPILER_RT_BUILD_LIBFUZZER)
 -  compiler_rt_build_runtime(fuzzer)
--endif()
-+#if(COMPILER_RT_BUILD_LIBFUZZER)
-+#  compiler_rt_build_runtime(fuzzer)
-+#endif()
++  if(NOT CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "i386" AND
++     NOT CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "i686")
++    compiler_rt_build_runtime(fuzzer)
++  endif()
+ endif()
 Index: llvm-toolchain-9-9.0.0/clang/runtime/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-9-9.0.0.orig/clang/runtime/CMakeLists.txt
@@ -29,16 +29,15 @@ Index: llvm-toolchain-9-9.0.0/compiler-rt/test/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-9-9.0.0.orig/compiler-rt/test/CMakeLists.txt
 +++ llvm-toolchain-9-9.0.0/compiler-rt/test/CMakeLists.txt
-@@ -56,9 +56,9 @@ if(COMPILER_RT_CAN_EXECUTE_TESTS)
-     compiler_rt_test_runtime(sanitizer_common)
+@@ -57,7 +57,10 @@ if(COMPILER_RT_CAN_EXECUTE_TESTS)
  
      # OpenBSD not supporting asan, cannot run the tests
--    if(COMPILER_RT_BUILD_LIBFUZZER AND NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "OpenBSD" AND NOT ANDROID)
+     if(COMPILER_RT_BUILD_LIBFUZZER AND NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "OpenBSD" AND NOT ANDROID)
 -      compiler_rt_test_runtime(fuzzer)
--    endif()
-+#    if(COMPILER_RT_BUILD_LIBFUZZER AND NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "OpenBSD" AND NOT ANDROID)
-+#      compiler_rt_test_runtime(fuzzer)
-+#    endif()
++      if(NOT CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "i386" AND
++         NOT CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "i686")
++           compiler_rt_test_runtime(fuzzer)
++      endif()
+     endif()
  
      foreach(sanitizer ${COMPILER_RT_SANITIZERS_TO_BUILD})
-       # cfi testing is gated on ubsan

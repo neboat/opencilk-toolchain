@@ -1,7 +1,8 @@
 llvm-toolchain-9 (1:9.0.0-3~exp2) experimental; urgency=medium
 
-  * disable-fuzzer-compiler-rt.diff: bring back this patch
+  * disable-fuzzer-compiler-rt.diff: bring back this patch.
     Still breaks i386 compiler-rt/fuzzer
+    Disable fuzzer only for i386
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 30 Oct 2019 08:25:18 +0100
 
