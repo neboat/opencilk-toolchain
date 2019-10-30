@@ -1,6 +1,5 @@
 llvm-toolchain-9 (1:9.0.0-3~exp2) experimental; urgency=medium
 
-<<<<<<<
   [ Weston Ortiz ]
   * Remove incorrect Breaks/Conflicts for lldb-9 package
     https://bugs.llvm.org/show_bug.cgi?id=43451
@@ -11,19 +10,9 @@ llvm-toolchain-9 (1:9.0.0-3~exp2) experimental; urgency=medium
     Disable fuzzer only for i386
   * Use stage2 files to build the doc. For some reasons, clang-tools-extra
     html generation stopped working
-=======
-  [ Weston Ortiz ]
-  * Remove incorrect Breaks/Conflicts for lldb-9 package
-    https://bugs.llvm.org/show_bug.cgi?id=43451
-
-  [ Sylvestre Ledru ]
-  * disable-fuzzer-compiler-rt.diff: bring back this patch.
-    Still breaks i386 compiler-rt/fuzzer
-    Disable fuzzer only for i386
   * Disable z3 when the version is tool old
->>>>>>>
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 30 Oct 2019 19:09:12 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 31 Oct 2019 00:29:09 +0100
 
 llvm-toolchain-9 (1:9.0.0-3~exp1) experimental; urgency=medium
 
