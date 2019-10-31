@@ -1,3 +1,11 @@
+llvm-toolchain-9 (1:9.0.0-3) unstable; urgency=medium
+
+  * Seems to be ok, uploading to unstable
+    (Closes: #942864) fuzzer issues
+    (Closes: #943623) libclangIndex.a are llvm ir bitcode
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 31 Oct 2019 20:36:09 +0100
+
 llvm-toolchain-9 (1:9.0.0-3~exp2) experimental; urgency=medium
 
   [ Weston Ortiz ]
