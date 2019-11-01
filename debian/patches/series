@@ -97,7 +97,6 @@ remove-apple-clang-manpage.diff
 0049-Use-Debian-provided-MathJax-everywhere.patch
 
 # Hurd port
-hurd/hurd-pathmax.diff
 hurd/hurd-EIEIO-undef.diff
 hurd/impl-path-hurd.diff
 
