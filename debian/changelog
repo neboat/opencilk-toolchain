@@ -1,8 +1,12 @@
 llvm-toolchain-9 (1:9.0.0-5) UNRELEASED; urgency=medium
 
+  [ Samuel Thibault ]
   * hurd-cxx-paths.diff: Re-introduce patch to find C++ headers.
 
- -- Samuel Thibault <sthibault@debian.org>  Sat, 02 Nov 2019 10:22:27 +0100
+  [ Sylvestre Ledru ]
+  * Add libz3-dev as dependencies on llvm-X.Y-dev (Closes: #943996)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 02 Nov 2019 12:23:40 +0100
 
 llvm-toolchain-9 (1:9.0.0-4) unstable; urgency=medium
 
