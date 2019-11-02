@@ -1,6 +1,8 @@
 llvm-toolchain-9 (1:9.0.0-5) UNRELEASED; urgency=medium
 
   * hurd-cxx-paths.diff: Re-introduce patch to find C++ headers.
+  * hurd-EIEIO-undef.diff: Drop patch, already fixed a different way upstream.
+  * hurd-pathmax.diff: Drop now-useless parts.
 
  -- Samuel Thibault <sthibault@debian.org>  Sat, 02 Nov 2019 10:22:27 +0100
 
