@@ -2,6 +2,8 @@ llvm-toolchain-9 (1:9.0.0-5) UNRELEASED; urgency=medium
 
   [ Samuel Thibault ]
   * hurd-cxx-paths.diff: Re-introduce patch to find C++ headers.
+  * hurd-EIEIO-undef.diff: Drop patch, already fixed a different way upstream.
+  * hurd-pathmax.diff: Drop now-useless parts.
 
   [ Sylvestre Ledru ]
   * Add libz3-dev as dependencies on llvm-X.Y-dev (Closes: #943996)

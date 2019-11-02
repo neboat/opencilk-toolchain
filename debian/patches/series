@@ -98,7 +98,6 @@ remove-apple-clang-manpage.diff
 
 # Hurd port
 hurd/hurd-pathmax.diff
-hurd/hurd-EIEIO-undef.diff
 hurd/impl-path-hurd.diff
 hurd/hurd-cxx-paths.diff
 
