@@ -100,6 +100,7 @@ remove-apple-clang-manpage.diff
 hurd/hurd-pathmax.diff
 hurd/hurd-EIEIO-undef.diff
 hurd/impl-path-hurd.diff
+hurd/hurd-cxx-paths.diff
 
 # powerpcspe
 #powerpcspe/D49754-powerpcspe-clang.diff

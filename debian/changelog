@@ -1,3 +1,9 @@
+llvm-toolchain-9 (1:9.0.0-5) UNRELEASED; urgency=medium
+
+  * hurd-cxx-paths.diff: Re-introduce patch to find C++ headers.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sat, 02 Nov 2019 10:22:27 +0100
+
 llvm-toolchain-9 (1:9.0.0-4) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
