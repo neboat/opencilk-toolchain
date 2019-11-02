@@ -1,5 +1,9 @@
 llvm-toolchain-9 (1:9.0.0-4) unstable; urgency=medium
 
+  [ Gianfranco Costamagna ]
+  * Add also Ubuntu focal to the gcc-8 arch list
+
+  [ Sylvestre Ledru ]
   * Update build-dep libpfm4-dev to linux-any.
     Thanks to Samuel Thibault for the patch
 
