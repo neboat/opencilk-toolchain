@@ -8,6 +8,10 @@ llvm-toolchain-9 (1:9.0.0-5) UNRELEASED; urgency=medium
   [ Sylvestre Ledru ]
   * Add libz3-dev as dependencies on llvm-X.Y-dev (Closes: #943996)
 
+  [ Gianfranco Costamagna ]
+  * Revert Addition of Ubuntu focal on arch list, disable thin everywhere
+    instead
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 02 Nov 2019 12:23:40 +0100
 
 llvm-toolchain-9 (1:9.0.0-4) unstable; urgency=medium
