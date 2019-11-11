@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/Basic/Version.cpp
+Index: llvm-toolchain-snapshot_10~+201911111222550800646d927175e/clang/lib/Basic/Version.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/clang/lib/Basic/Version.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/Basic/Version.cpp
+--- llvm-toolchain-snapshot_10~+201911111222550800646d927175e.orig/clang/lib/Basic/Version.cpp
++++ llvm-toolchain-snapshot_10~+201911111222550800646d927175e/clang/lib/Basic/Version.cpp
 @@ -14,6 +14,7 @@
  #include "clang/Basic/LLVM.h"
  #include "clang/Config/config.h"
@@ -18,4 +18,4 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/Basic/Ve
 +  OS << ToolName << " version " CLANG_VERSION_STRING "-" DEB_PATCHSETVERSION " "
       << getClangFullRepositoryVersion();
  
-   // If vendor supplied, include the base LLVM version as well.
+   return OS.str();
