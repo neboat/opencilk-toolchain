@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:10~+20191019070539+bdcad0aca0a-1~exp2) experimental; urgency=medium
+llvm-toolchain-snapshot (1:10~+20191112124518+44e5879f0fb-1~exp1) experimental; urgency=medium
 
   * Repack to move to git
   * Change the versionning scheme to git:
@@ -13,8 +13,9 @@ llvm-toolchain-snapshot (1:10~+20191019070539+bdcad0aca0a-1~exp2) experimental; 
     -DLLVM_ENABLE_LTO (not sure what it wasn't done)
   * clang: Force the installation of libclang-cpp with the exact same version
     and remove libclang as dep
+  * Bunch of changes coming from the branch 9
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 20 Oct 2019 13:55:30 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 12 Nov 2019 14:26:11 +0100
 
 llvm-toolchain-snapshot (1:10~svn375339-1~exp1) experimental; urgency=medium
 
