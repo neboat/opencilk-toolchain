@@ -38,13 +38,13 @@ if test -z "$CURRENT_VERSION"; then
     echo "Could not detect the full version"
     exit 1
 fi
-cd -
+cd - &> /dev/null
 
 if test -n "$1"; then
 # https://github.com/llvm/llvm-project/tree/release/9.x
 # For example: sh 4.0/debian/orig-tar.sh release/9.x
     BRANCH=$1
-    if ! echo "$1"|grep release/; then
+    if ! echo "$1"|grep -q release/; then
         # The first argument is NOT a branch, means that it is a stable release
         FINAL_RELEASE=true
         EXACT_VERSION=$1
@@ -53,7 +53,7 @@ else
     # No argument, we need trunk
     cd "$PATH_DEBIAN"
     SOURCE=$(dpkg-parsechangelog |grep ^Source|awk '{print $2}')
-    cd -
+    cd - &> /dev/null
     if test "$SOURCE" != "llvm-toolchain-snapshot"; then
        echo "Checkout of the master is only available for llvm-toolchain-snapshot"
        exit 1
