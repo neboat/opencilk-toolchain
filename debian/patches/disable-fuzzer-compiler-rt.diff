@@ -29,4 +29,3 @@ Index: llvm-toolchain-snapshot_10~+20191019070539+bdcad0aca0a/compiler-rt/test/C
  
      foreach(sanitizer ${COMPILER_RT_SANITIZERS_TO_BUILD})
        # cfi testing is gated on ubsan
-
