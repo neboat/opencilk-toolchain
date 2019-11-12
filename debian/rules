@@ -253,7 +253,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 # armhf is not yet quite ready for Thin, it FTBFS
 # see https://buildd.debian.org/status/fetch.php?pkg=llvm-toolchain-8&arch=armhf&ver=1%3A8.0.1%7E%2Brc2-1%7Eexp1&stamp=1560334266&raw=0
 ifeq (,$(filter $(DEB_HOST_ARCH), armhf))
-	CMAKE_EXTRA += -DBOOTSTRAP_LLVM_ENABLE_LTO="Thin"
+	CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
 endif
 endif
 endif
@@ -494,8 +494,7 @@ build_doc:
 	make $(NJOBS) -C "$(TARGET_BUILD_STAGE2)/docs" ocaml_doc; \
 	fi)
 
-# Continue if failing, Ubuntu precise cannot generate manpages as sphinx is too old
-	-(cd $(TARGET_BUILD) && make $(NJOBS) docs-llvm-html docs-clang-html docs-clang-tools-html docs-polly-html docs-polly-man docs-clang-tools-man docs-clang-man docs-llvm-man)
+	cd $(TARGET_BUILD_STAGE2) && make $(NJOBS) docs-llvm-html docs-clang-html docs-clang-tools-html docs-polly-html docs-polly-man docs-clang-tools-man docs-clang-man docs-llvm-man
 
 # Rename manpages
 	d=$(CURDIR)/docs/_build/man/; \
@@ -512,7 +511,7 @@ build_doc:
 	cd $(CURDIR)/clang/docs/_build/man/; mv clang.1 clang-$(LLVM_VERSION).1
 
 # Remove the copy of jquery. See bug #701087
-	for d in $(TARGET_BUILD)/docs/html/_static/ $(TARGET_BUILD)/tools/clang/docs/html/_static/ $(TARGET_BUILD)/tools/clang/tools/extra/docs/html/_static/; do \
+	for d in $(TARGET_BUILD_STAGE2)/docs/html/_static/ $(TARGET_BUILD_STAGE2)/tools/clang/docs/html/_static/ $(TARGET_BUILD_STAGE2)/tools/clang/tools/extra/docs/html/_static/; do \
 		cd $$d && rm -f jquery.js && ln -s /usr/share/javascript/jquery/jquery.js && cd -; \
 		cd $$d && rm -f underscore.js && ln -s /usr/share/javascript/underscore/underscore.js && cd -; \
 	done
@@ -676,9 +675,9 @@ endif
 	fi
 
 	mkdir -p $(CURDIR)/debian/usr/share/doc/llvm-$(LLVM_VERSION)-doc/ $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/
-	cp -R $(TARGET_BUILD)/docs/html $(CURDIR)/debian/usr/share/doc/llvm-$(LLVM_VERSION)-doc/
-	cp -R $(TARGET_BUILD)/tools/clang/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/
-	cp -R $(TARGET_BUILD)/tools/clang/tools/extra/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/clang-extra
+	cp -R $(TARGET_BUILD_STAGE2)/docs/html $(CURDIR)/debian/usr/share/doc/llvm-$(LLVM_VERSION)-doc/
+	cp -R $(TARGET_BUILD_STAGE2)/tools/clang/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/
+	cp -R $(TARGET_BUILD_STAGE2)/tools/clang/tools/extra/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/clang-extra
 
 # Rename OCaml bindings
 	if test "$(OCAML_ENABLE)" = yes; then \

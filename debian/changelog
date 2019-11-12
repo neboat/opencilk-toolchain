@@ -128,6 +128,56 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
 
+llvm-toolchain-9 (1:9.0.0-4) UNRELEASED; urgency=medium
+
+  [ Samuel Thibault ]
+  * hurd-cxx-paths.diff: Re-introduce patch to find C++ headers.
+  * hurd-EIEIO-undef.diff: Drop patch, already fixed a different way upstream.
+  * hurd-pathmax.diff: Drop now-useless parts.
+
+  [ Sylvestre Ledru ]
+  * Add libz3-dev as dependencies on llvm-X.Y-dev (Closes: #943996)
+  * Update build-dep libpfm4-dev to linux-any.
+    Thanks to Samuel Thibault for the patch
+
+  [ Gianfranco Costamagna ]
+  * Add also Ubuntu focal to the gcc-8 arch list
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 05 Nov 2019 10:30:26 +0100
+
+llvm-toolchain-9 (1:9.0.0-3) unstable; urgency=medium
+
+  * Seems to be ok, uploading to unstable
+    (Closes: #942864) fuzzer issues
+    (Closes: #943623) libclangIndex.a are llvm ir bitcode
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 31 Oct 2019 20:36:09 +0100
+
+llvm-toolchain-9 (1:9.0.0-3~exp2) experimental; urgency=medium
+
+  [ Weston Ortiz ]
+  * Remove incorrect Breaks/Conflicts for lldb-9 package
+    https://bugs.llvm.org/show_bug.cgi?id=43451
+
+  [ Sylvestre Ledru ]
+  * disable-fuzzer-compiler-rt.diff: bring back this patch.
+    Still breaks i386 compiler-rt/fuzzer
+    Disable fuzzer only for i386
+  * Use stage2 files to build the doc. For some reasons, clang-tools-extra
+    html generation stopped working
+  * Disable z3 when the version is tool old
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 31 Oct 2019 00:29:09 +0100
+
+llvm-toolchain-9 (1:9.0.0-3~exp1) experimental; urgency=medium
+
+  * Revert the change -DBOOTSTRAP_LLVM_ENABLE_LTO to use
+    -DLLVM_ENABLE_LTO to see if it fixes 943623
+    and/or 942864
+    Disable disable-fuzzer-compiler-rt.diff to evaluate the whole thing
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 29 Oct 2019 20:05:38 +0100
+
 llvm-toolchain-9 (1:9.0.0-2) unstable; urgency=medium
 
   * polly, openmp & lldb aren't enabled for every platform

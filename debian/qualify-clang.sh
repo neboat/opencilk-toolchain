@@ -858,6 +858,17 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libclangToolingInclusions.a; then
     exit -1;
 fi
 
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=943623
+rm *.o
+/usr/bin/ar x /usr/lib/llvm-$VERSION/lib/libclangIndex.a &> /dev/null
+file *.o a> foo.log
+rm *.o
+if grep "LLVM IR bitcode" foo.log; then
+    echo "found LLVM IR bitcode in the libclangIndex.a file"
+    echo "Should be elf"
+    exit -2
+fi
+
 echo "Testing cmake build ..."
 
 if grep -q lit-cpuid /usr/lib/llvm-$VERSION/lib/cmake/llvm/LLVMExports*.cmake; then

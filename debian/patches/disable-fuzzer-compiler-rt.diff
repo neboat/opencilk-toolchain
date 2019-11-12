@@ -2,11 +2,11 @@ Index: llvm-toolchain-snapshot_10~+20191019070539+bdcad0aca0a/compiler-rt/lib/CM
 ===================================================================
 --- llvm-toolchain-snapshot_10~+20191019070539+bdcad0aca0a.orig/compiler-rt/lib/CMakeLists.txt
 +++ llvm-toolchain-snapshot_10~+20191019070539+bdcad0aca0a/compiler-rt/lib/CMakeLists.txt
-@@ -56,6 +56,6 @@ if(COMPILER_RT_BUILD_XRAY)
+@@ -56,6 +56,7 @@ if(COMPILER_RT_BUILD_XRAY)
    compiler_rt_build_runtime(xray)
  endif()
  
--if(COMPILER_RT_BUILD_LIBFUZZER)
+ if(COMPILER_RT_BUILD_LIBFUZZER)
 -  compiler_rt_build_runtime(fuzzer)
 -endif()
 +#if(COMPILER_RT_BUILD_LIBFUZZER)
@@ -29,3 +29,4 @@ Index: llvm-toolchain-snapshot_10~+20191019070539+bdcad0aca0a/compiler-rt/test/C
  
      foreach(sanitizer ${COMPILER_RT_SANITIZERS_TO_BUILD})
        # cfi testing is gated on ubsan
+
