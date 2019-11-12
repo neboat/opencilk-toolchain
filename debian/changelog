@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:10~+20191112124518+44e5879f0fb-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:10~+201911120943210600592dd459242-1~exp1) UNRELEASED; urgency=medium
 
   * Repack to move to git
   * Change the versionning scheme to git:
@@ -15,7 +15,7 @@ llvm-toolchain-snapshot (1:10~+20191112124518+44e5879f0fb-1~exp1) experimental; 
     and remove libclang as dep
   * Bunch of changes coming from the branch 9
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 12 Nov 2019 14:26:11 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 12 Nov 2019 16:51:40 +0100
 
 llvm-toolchain-snapshot (1:10~svn375339-1~exp1) experimental; urgency=medium
 
