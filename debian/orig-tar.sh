@@ -86,6 +86,7 @@ if test -d llvm-project; then
     cd ..
 else
     # Download it
+    echo "Cloning the repo in $(pwd)"
     git clone $GIT_BASE_URL
 fi
 
