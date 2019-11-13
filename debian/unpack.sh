@@ -16,5 +16,5 @@ echo "unpack of $LLVM_ARCHIVE"
 tar Jxf $LLVM_ARCHIVE
 cd llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~+$VERSION/
 
-cp -R ../snapshot/debian .
+cp -R ../$ORIG_VERSION/debian .
 QUILT_PATCHES=debian/patches/ quilt push -a --fuzz=0
