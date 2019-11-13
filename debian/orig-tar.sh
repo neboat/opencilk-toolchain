@@ -76,6 +76,8 @@ cd git-archive
 if test -d llvm-project; then
     # Update it
     cd llvm-project
+    git clean -qfd
+    git checkout .
     git remote update > /dev/null
     git reset --hard origin/master > /dev/null
     git clean -qfd
