@@ -6,6 +6,11 @@ REV=`ls -1 *$ORIG_VERSION_$MAJOR_VERSION*~+*xz | tail -1|perl -ne 'print "$1\n" 
 #SVN_REV=347285
 VERSION=$REV
 #VERSION=+rc3
+
+if test -z "$VERSION"; then
+	echo "Could not find the version"
+	exit 0
+fi
 LLVM_ARCHIVE=llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~+$VERSION.orig.tar.xz
 echo "unpack of $LLVM_ARCHIVE"
 tar Jxf $LLVM_ARCHIVE
