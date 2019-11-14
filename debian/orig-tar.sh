@@ -143,7 +143,7 @@ cd ../
 BASE="llvm-toolchain-${MAJOR_VERSION}_${VERSION}"
 FILENAME="${BASE}.orig.tar.xz"
 echo "Compressing to $FILENAME"
-tar Jcf $CURRENT_PATH/"$FILENAME" --exclude .git --transform="s/llvm-project/$BASE/" $EXPORT_PATH/llvm-project
+tar Jcf $CURRENT_PATH/"$FILENAME" --exclude .git --transform="s|llvm-project|$BASE|" -C $EXPORT_PATH llvm-project
 
 export DEBFULLNAME="Sylvestre Ledru"
 export DEBEMAIL="sylvestre@debian.org"
