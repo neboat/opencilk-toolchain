@@ -28,8 +28,8 @@ EXPORT_PATH=$(pwd)
 
 if test -n "${JENKINS_HOME}"; then
     # For apt.llvm.org, reuse the same repo
-    echo "Built from Jenkins. Will export the repo in ${JENKINS_HOME}"
-    EXPORT_PATH=${JENKINS_HOME}
+    echo "Built from Jenkins. Will export the repo in $HOME/"
+    EXPORT_PATH="$HOME/"
 fi
 
 GIT_BASE_URL=https://github.com/llvm/llvm-project
