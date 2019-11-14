@@ -22,7 +22,15 @@ set -e
 
 
 # To create an rc1 release:
-# sh 4.0/debian/orig-tar.sh release/9.x
+# sh 9/debian/orig-tar.sh release/9.x
+CURRENT_PATH=$(pwd)
+EXPORT_PATH=$(pwd)
+
+if test -n "${JENKINS_HOME}"; then
+    # For apt.llvm.org, reuse the same repo
+    echo "Built from Jenkins. Will export the repo in ${JENKINS_HOME}"
+    EXPORT_PATH=${JENKINS_HOME}
+fi
 
 GIT_BASE_URL=https://github.com/llvm/llvm-project
 
@@ -73,9 +81,10 @@ fi
 # Update or retrieve the repo
 mkdir -p git-archive
 cd git-archive
-if test -d llvm-project; then
+if test -d $EXPORT_PATH/llvm-project; then
+    echo "Updating repo in $EXPORT_PATH/llvm-project"
     # Update it
-    cd llvm-project
+    cd $EXPORT_PATH/llvm-project
     git clean -qfd
     git checkout .
     git remote update > /dev/null
@@ -86,11 +95,11 @@ if test -d llvm-project; then
     cd ..
 else
     # Download it
-    echo "Cloning the repo in $(pwd)"
-    git clone $GIT_BASE_URL
+    echo "Cloning the repo in $EXPORT_PATH/llvm-project"
+    git clone $GIT_BASE_URL $EXPORT_PATH/llvm-project
 fi
 
-cd llvm-project
+cd $EXPORT_PATH/llvm-project
 if test -z  "$TAG" -a -z "$FINAL_RELEASE"; then
     # Building a branch
     git checkout $BRANCH
@@ -134,7 +143,7 @@ cd ../
 BASE="llvm-toolchain-${MAJOR_VERSION}_${VERSION}"
 FILENAME="${BASE}.orig.tar.xz"
 echo "Compressing to $FILENAME"
-tar Jcf ../"$FILENAME" --exclude .git --transform="s/llvm-project/$BASE/" llvm-project
+tar Jcf $CURRENT_PATH/"$FILENAME" --exclude .git --transform="s/llvm-project/$BASE/" $EXPORT_PATH/llvm-project
 
 export DEBFULLNAME="Sylvestre Ledru"
 export DEBEMAIL="sylvestre@debian.org"
