@@ -1,6 +1,9 @@
 llvm-toolchain-snapshot (1:10~+201911120943210600592dd459242-1~exp2) unstable; urgency=medium
 
   * Change of the version layout date+short git version
+  * Install /usr/lib/llvm-@LLVM_VERSION@/lib/libarcher_static.a
+    /usr/lib/llvm-@LLVM_VERSION@/lib/libarcher.so in libomp-X-dev
+
 
  --
 
