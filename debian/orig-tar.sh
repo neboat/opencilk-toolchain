@@ -115,7 +115,7 @@ else
     fi
     git_tag="llvmorg-$EXACT_VERSION"
     VERSION=$EXACT_VERSION
-    if test -n "$TAG" -a -z "$FINAL_RELEASE"; then
+    if test -n "$TAG"; then
         git_tag="$git_tag-$TAG"
         VERSION="$VERSION~+$TAG"
     fi
