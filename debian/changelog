@@ -1,4 +1,4 @@
-llvm-toolchain-9 (1:9.0.0-4) UNRELEASED; urgency=medium
+llvm-toolchain-9 (1:9.0.0-4) unstable; urgency=medium
 
   [ Samuel Thibault ]
   * hurd-cxx-paths.diff: Re-introduce patch to find C++ headers.
