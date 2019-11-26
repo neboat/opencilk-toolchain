@@ -90,15 +90,7 @@ endif
 export CC=gcc-$(GCC_VERSION)
 export CXX=g++-$(GCC_VERSION)
 
-opt_flags = -O2 -DNDEBUG
-
-# Only enable g1 on archs which needs it (it fixes an OOM during dh_strip due to huge symbols)
-ifeq ($(DEB_HOST_ARCH_BITS),32)
-opt_flags += -g1
-else
-# Should be -g, but this causes buildd disk space issues
-opt_flags += -g1
-endif
+opt_flags = -O2 -DNDEBUG -g1
 
 ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   opt_flags += -marm
