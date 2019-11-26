@@ -70,10 +70,12 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++
 	GCC_VERSION := 4.9
 endif
 
-Z3_FLAG=
+Z3_FLAG = -DLLVM_ENABLE_Z3_SOLVER=OFF
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libz3-dev) gt 4.7.0; echo $$?),0)
-# Too old version of gcc. Force 4.9
+# no ocaml support in main for Ubuntu
+ifneq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
 	Z3_FLAG = -DLLVM_ENABLE_Z3_SOLVER=ON
+endif
 endif
 
 FORCE_NOT_GCC_9_DISTRO := eoan focal bullseye sid
