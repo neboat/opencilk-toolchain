@@ -10,6 +10,17 @@ llvm-toolchain-9 (1:9.0.1~+rc1-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 24 Nov 2019 14:51:29 +0100
 
+llvm-toolchain-9 (1:9.0.0-5) UNRELEASED; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Patch cmake files to disable the z3 support in Ubuntu
+  * Simplify rules file to put -g1 everywhere
+
+  [ Sylvestre Ledru ]
+  * Add a project in the cmake-test to silent a warning
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 26 Nov 2019 09:24:38 +0100
+
 llvm-toolchain-9 (1:9.0.0-4) unstable; urgency=medium
 
   [ Samuel Thibault ]
