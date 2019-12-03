@@ -1,3 +1,11 @@
+llvm-toolchain-9 (1:9~+20191203075642+e99a087fff6-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+  * Fix some paths, upstream moved from site-packages
+    to dist-packages for python packages
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 03 Dec 2019 07:59:28 +0100
+
 llvm-toolchain-9 (1:9.0.1~+rc1-1~exp2) experimental; urgency=medium
 
   * Add a project in the cmake-test to silent a warning
