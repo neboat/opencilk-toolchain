@@ -30,3 +30,5 @@ llvm/utils/emacs/emacs.el		    usr/share/emacs/site-lisp/llvm-@LLVM_VERSION@/
 llvm/utils/emacs/llvm-mode.el	    usr/share/emacs/site-lisp/llvm-@LLVM_VERSION@/
 llvm/utils/emacs/tablegen-mode.el	usr/share/emacs/site-lisp/llvm-@LLVM_VERSION@/
 
+usr/lib/llvm-@LLVM_VERSION@/bin/yaml-bench
+usr/bin/yaml-bench-@LLVM_VERSION@
