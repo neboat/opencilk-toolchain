@@ -2,7 +2,7 @@ llvm-toolchain-9 (1:9.0.1~+rc1-1~exp2) experimental; urgency=medium
 
   * Add a project in the cmake-test to silent a warning
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 03 Dec 2019 07:56:16 +0100
 
 llvm-toolchain-9 (1:9.0.1~+rc1-1~exp1) experimental; urgency=medium
 
