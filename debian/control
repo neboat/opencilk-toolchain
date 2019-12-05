@@ -320,8 +320,6 @@ Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends},
  llvm-9 (= ${binary:Version}), libllvm9 (= ${binary:Version}), libtinfo-dev,
  llvm-9-tools (= ${binary:Version}), libz3-dev
-Breaks: libclang-common-9-dev (<< 9.0.1~+rc1-1~exp2)
-Replaces: libclang-common-9-dev (<< 9.0.1~+rc1-1~exp2)
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -343,6 +341,9 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python, python3,
  python-pygments, python-yaml,
  python3-pygments, python3-yaml
+# Because of yaml-bench
+Breaks: libclang-common-9-dev (<< 9.0.1~+rc1-1~exp2)
+Replaces: libclang-common-9-dev (<< 9.0.1~+rc1-1~exp2)
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
