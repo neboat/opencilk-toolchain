@@ -22,7 +22,7 @@ llvm-toolchain-9 (1:9.0.0-5) UNRELEASED; urgency=medium
   * Simplify rules file to put -g1 everywhere
 
   [ Sylvestre Ledru ]
-  * Add a project in the cmake-test to silent a warning
+  * Add a project in the cmake-test to silent a warning (Closes: #945489)
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 26 Nov 2019 09:24:38 +0100
 
