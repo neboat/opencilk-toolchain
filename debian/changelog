@@ -1,11 +1,13 @@
-llvm-toolchain-9 (1:9.0.1~+rc1-1~exp2) experimental; urgency=medium
+llvm-toolchain-9 (1:9.0.1~+rc2-1~exp1) experimental; urgency=medium
 
+  * New snapshot release
   * Fix some paths, upstream moved from site-packages
     to dist-packages for python packages
   * Move yaml-bench from libclang-common-X.Y-dev to llvm-X.Y-tools where
     it belongs
     See http://lists.llvm.org/pipermail/llvm-dev/2019-December/137337.html
   * Add a project in the cmake-test to silent a warning
+    (Closes: #945489)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 03 Dec 2019 07:56:16 +0100
 
