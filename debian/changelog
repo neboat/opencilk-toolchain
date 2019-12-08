@@ -2,6 +2,10 @@ llvm-toolchain-9 (1:9.0.1~+rc2-1~exp2) UNRELEASED; urgency=medium
 
   * Use secure URI in debian/watch.
   * Move source package lintian overrides to debian/source.
+  * Remove patches force-gcc-header-obj.diff, hurd-pathmax.diff, impl-
+    path-hurd.diff, libcxxabi-arm-ehabi-fix.patch, libcxxabi-test-don-t-
+    fail-extended-long-double.patch, revert-change-soname.diff, try-to-
+    unbreak-thinlto.diff that are missing from debian/patches/series.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Dec 2019 21:02:49 +0100
 
