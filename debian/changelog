@@ -1,6 +1,7 @@
 llvm-toolchain-9 (1:9.0.1~+rc2-1~exp2) UNRELEASED; urgency=medium
 
   * Use secure URI in debian/watch.
+  * Move source package lintian overrides to debian/source.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Dec 2019 21:02:49 +0100
 
