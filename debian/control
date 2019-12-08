@@ -167,7 +167,6 @@ Description: Clang library - Common development package
 Package: libclang-cpp1-9
 Depends: libclang-cpp9, ${misc:Depends}
 Architecture: all
-Priority: optional
 Section: oldlibs
 Description: transitional package
  This is a transitional package. It can safely be removed.
