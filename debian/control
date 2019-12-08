@@ -4,7 +4,7 @@ Priority: optional
 Rules-Requires-Root: no
 Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
 Uploaders: Sylvestre Ledru <sylvestre@debian.org>
-Build-Depends: debhelper-compat (= 12), cmake, chrpath, texinfo, sharutils,
+Build-Depends: debhelper (>= 12~), cmake, chrpath, texinfo, sharutils,
     libffi-dev (>= 3.0.9),
     lsb-release, patchutils, diffstat, xz-utils, python3-dev,
     libedit-dev, libncurses5-dev, swig, python3-six, python3-sphinx (>= 1.3.6),
