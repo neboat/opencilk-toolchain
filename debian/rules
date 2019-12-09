@@ -747,7 +747,7 @@ else
 	rm -rf $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
 endif
 endif
-	dh_install
+	dh_install --fail-missing
 
 override_dh_installdeb:
 # Managed by the package
@@ -857,6 +857,3 @@ override_dh_auto_clean:
 	fi
 
 .PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build
-
-override_dh_missing:
-	dh_missing --fail-missing
