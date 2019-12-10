@@ -3,9 +3,9 @@ llvm-toolchain-snapshot (1:10~+201911120943210600592dd459242-1~exp2) unstable; u
   * Change of the version layout date+short git version
   * Install /usr/lib/llvm-@LLVM_VERSION@/lib/libarcher_static.a
     /usr/lib/llvm-@LLVM_VERSION@/lib/libarcher.so in libomp-X-dev
+  * Install usr/lib/llvm-@LLVm_VERSION@/lib/clang/@LLVM_VERSION_FULL@/bin/hwasan_symbolize in clang-tools-X.Y
 
-
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 10 Dec 2019 14:11:20 +0100
 
 llvm-toolchain-snapshot (1:10~+201911120943210600592dd459242-1~exp1) UNRELEASED; urgency=medium
 
