@@ -128,6 +128,7 @@ bootstrap-fix-include-next.diff
 # riscv64
 clang-riscv64-multiarch.diff
 clang-riscv64-rv64gc.diff
+llvm-riscv64-fix-cffi.diff
 
 #try-to-unbreak-thinlto.diff
 D67877.patch
