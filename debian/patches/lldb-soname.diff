@@ -2,10 +2,10 @@
  lldb/source/API/CMakeLists.txt |   14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
 
-Index: llvm-toolchain-snapshot_10~+20191113090841+5b9e4daef06/lldb/source/API/CMakeLists.txt
+Index: llvm-toolchain-snapshot_10~+20191215044521+fd7dca98373/lldb/source/API/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191113090841+5b9e4daef06.orig/lldb/source/API/CMakeLists.txt
-+++ llvm-toolchain-snapshot_10~+20191113090841+5b9e4daef06/lldb/source/API/CMakeLists.txt
+--- llvm-toolchain-snapshot_10~+20191215044521+fd7dca98373.orig/lldb/source/API/CMakeLists.txt
++++ llvm-toolchain-snapshot_10~+20191215044521+fd7dca98373/lldb/source/API/CMakeLists.txt
 @@ -14,7 +14,12 @@ if(LLDB_BUILD_FRAMEWORK)
    set(option_framework FRAMEWORK)
  endif()
@@ -30,7 +30,7 @@ Index: llvm-toolchain-snapshot_10~+20191113090841+5b9e4daef06/lldb/source/API/CM
  
  if (NOT CMAKE_SYSTEM_NAME MATCHES "Windows")
 @@ -157,11 +162,6 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Windows"
-   if (MSVC AND NOT LLDB_DISABLE_PYTHON)
+   if (MSVC AND LLDB_ENABLE_PYTHON)
      target_link_libraries(liblldb PRIVATE ${PYTHON_LIBRARY})
    endif()
 -else()
