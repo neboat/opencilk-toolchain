@@ -1,6 +1,19 @@
-llvm-toolchain-9 (1:9.0.1~+rc2-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-9 (1:9.0.1~+rc3-2) unstable; urgency=medium
+
+  * Team upload.
+  [ Gianfranco Costamagna ]
+  * Commit Breaks/Replaces into git
+
+  [ Julian Andres Klode ]
+  * Fix llvm-9-tools Breaks/Replaces libclang-common-9-dev (<< 1:9.0.1~+rc2)
+    (Closes: #946473)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 19 Dec 2019 00:26:04 +0100
+
+llvm-toolchain-9 (1:9.0.1~+rc3-1) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
+  * New snapshot release + upload to unstable
   * Use secure URI in debian/watch.
   * Move source package lintian overrides to debian/source.
   * Remove patches force-gcc-header-obj.diff, hurd-pathmax.diff, impl-
@@ -15,14 +28,7 @@ llvm-toolchain-9 (1:9.0.1~+rc2-1~exp2) UNRELEASED; urgency=medium
   * llvm-riscv64-fix-cffi.diff: backport patch to fix CFI directives on
     riscv64 from master.
 
-  [ Gianfranco Costamagna ]
-  * Commit Breaks/Replaces into git
-
-  [ Julian Andres Klode ]
-  * Fix llvm-9-tools Breaks/Replaces libclang-common-9-dev (<< 1:9.0.1~+rc2)
-    (Closes: #946473)
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Dec 2019 21:02:49 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 14 Dec 2019 12:43:17 +0100
 
 llvm-toolchain-9 (1:9.0.1~+rc2-1~exp1) experimental; urgency=medium
 
