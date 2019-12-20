@@ -137,5 +137,4 @@ disable-fuzzer-compiler-rt.diff
 no-z3.patch
 
 # bug #946874
-# fails to build.needs some polish
-# D71028-mips-rust-test.diff
+D71028-mips-rust-test.diff

@@ -8,6 +8,9 @@ binary atomics. It is used for storing result from comparing values in addition
 to the one that is used for actual result of operation.
 
 https://reviews.llvm.org/D71028
+
+Changed-by: James Clarke <jrtc27@debian.org>
+[Backported to 9 by replacing Register with unsigned]
 ---
  llvm/lib/Target/Mips/Mips64InstrInfo.td     |    9 +
  llvm/lib/Target/Mips/MipsExpandPseudo.cpp   |  219 +-
@@ -126,7 +129,7 @@ Index: llvm-toolchain-9-9.0.1~+rc3/llvm/lib/Target/Mips/MipsExpandPseudo.cpp
 +
 +    assert(I->getNumOperands() == 10 &&
 +           "Atomics min|max|umin|umax use an additional register");
-+    Register Scratch4 = I->getOperand(9).getReg();
++    unsigned Scratch4 = I->getOperand(9).getReg();
 +
 +    unsigned SLTScratch4 = IsUnsigned ? SLTu : SLT;
 +    unsigned SELIncr = IsMax ? SELNEZ : SELEQZ;
@@ -297,10 +300,10 @@ Index: llvm-toolchain-9-9.0.1~+rc3/llvm/lib/Target/Mips/MipsExpandPseudo.cpp
 +
 +    assert(I->getNumOperands() == 5 &&
 +           "Atomics min|max|umin|umax use an additional register");
-+    Register Scratch2 = I->getOperand(4).getReg();
++    unsigned Scratch2 = I->getOperand(4).getReg();
 +
 +    // On Mips64 result of slt is GPR32.
-+    Register Scratch2_32 =
++    unsigned Scratch2_32 =
 +        (Size == 8) ? STI->getRegisterInfo()->getSubReg(Scratch2, Mips::sub_32)
 +                    : Scratch2;
 +
@@ -508,7 +511,7 @@ Index: llvm-toolchain-9-9.0.1~+rc3/llvm/lib/Target/Mips/MipsISelLowering.cpp
 +          .addReg(Scratch, RegState::Define | RegState::EarlyClobber |
 +                               RegState::Implicit | RegState::Dead);
 +  if (NeedsAdditionalReg) {
-+    Register Scratch2 =
++    unsigned Scratch2 =
 +        RegInfo.createVirtualRegister(RegInfo.getRegClass(OldVal));
 +    MIB.addReg(Scratch2, RegState::Define | RegState::EarlyClobber |
 +                             RegState::Implicit | RegState::Dead);
@@ -595,7 +598,7 @@ Index: llvm-toolchain-9-9.0.1~+rc3/llvm/lib/Target/Mips/MipsISelLowering.cpp
 +          .addReg(Scratch3, RegState::EarlyClobber | RegState::Define |
 +                                RegState::Dead | RegState::Implicit);
 +  if (NeedsAdditionalReg) {
-+    Register Scratch4 = RegInfo.createVirtualRegister(RC);
++    unsigned Scratch4 = RegInfo.createVirtualRegister(RC);
 +    MIB.addReg(Scratch4, RegState::EarlyClobber | RegState::Define |
 +                             RegState::Dead | RegState::Implicit);
 +  }
