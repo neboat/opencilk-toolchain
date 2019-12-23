@@ -2,11 +2,11 @@
  lib/Support/CommandLine.cpp |    4 ++++
  1 file changed, 4 insertions(+)
 
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/lib/Support/CommandLine.cpp
+Index: llvm-toolchain-snapshot_10~+20191223101759+5762648c46b/llvm/lib/Support/CommandLine.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/lib/Support/CommandLine.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/lib/Support/CommandLine.cpp
-@@ -2378,6 +2378,10 @@ public:
+--- llvm-toolchain-snapshot_10~+20191223101759+5762648c46b.orig/llvm/lib/Support/CommandLine.cpp
++++ llvm-toolchain-snapshot_10~+20191223101759+5762648c46b/llvm/lib/Support/CommandLine.cpp
+@@ -2473,6 +2473,10 @@ public:
      OS << " " << LLVM_VERSION_INFO;
  #endif
      OS << "\n  ";
@@ -14,6 +14,6 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/lib/Support/C
 +    OS << LLVM_DEBIAN_INFO;
 +#endif
 +    OS << "\n  ";
- #ifndef __OPTIMIZE__
+ #if LLVM_IS_DEBUG_BUILD
      OS << "DEBUG build";
  #else
