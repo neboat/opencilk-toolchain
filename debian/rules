@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 # polly, openmp & lldb aren't enabled for every platform
-PROJECTS = clang;clang-tools-extra;libcxx;libcxxabi;compiler-rt;lld;debuginfo-tests
+PROJECTS = clang;clang-tools-extra;libcxx;libcxxabi;compiler-rt;lld;debuginfo-tests;mlir
 
 TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
