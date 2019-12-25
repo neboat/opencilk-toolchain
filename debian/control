@@ -346,8 +346,7 @@ Description: Modular compiler and toolchain technologies, libraries and headers
 
 Package: llvm-9-tools
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python, python3,
- python-pygments, python-yaml,
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
  python3-pygments, python3-yaml
 # Because of yaml-bench
 Breaks: libclang-common-9-dev (<< 1:9.0.1~+rc2)
