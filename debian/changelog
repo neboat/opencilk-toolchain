@@ -1,18 +1,13 @@
-llvm-toolchain-snapshot (1:10~+20191223101759+5762648c46b-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:10~+20191225064807+aff6c9db9a9-1~exp1) experimental; urgency=medium
 
   * experimental New snapshot release
-  * Enable mlir
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 23 Dec 2019 22:20:52 +0100
-
-llvm-toolchain-snapshot (1:10~+201911120943210600592dd459242-1~exp2) unstable; urgency=medium
-
+  * Sync 9 into 10
   * Change of the version layout date+short git version
   * Install /usr/lib/llvm-@LLVM_VERSION@/lib/libarcher_static.a
     /usr/lib/llvm-@LLVM_VERSION@/lib/libarcher.so in libomp-X-dev
   * Install usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/bin/hwasan_symbolize in clang-tools-X.Y
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 10 Dec 2019 14:11:20 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 25 Dec 2019 23:26:41 +0100
 
 llvm-toolchain-snapshot (1:10~+201911120943210600592dd459242-1~exp1) UNRELEASED; urgency=medium
 
