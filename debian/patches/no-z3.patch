@@ -5,11 +5,11 @@ Author: Gianfranco Costamagna <locutusofborg@debian.org>
 
 Last-Update: 2019-11-26
 
-Index: llvm-toolchain-9-9.0.0/llvm/CMakeLists.txt
+Index: llvm-toolchain-snapshot_10~+20191225062409+aff6c9db9a9/llvm/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-9-9.0.0.orig/llvm/CMakeLists.txt
-+++ llvm-toolchain-9-9.0.0/llvm/CMakeLists.txt
-@@ -340,24 +340,22 @@
+--- llvm-toolchain-snapshot_10~+20191225062409+aff6c9db9a9.orig/llvm/CMakeLists.txt
++++ llvm-toolchain-snapshot_10~+20191225062409+aff6c9db9a9/llvm/CMakeLists.txt
+@@ -351,24 +351,22 @@ option(LLVM_ENABLE_ZLIB "Use zlib for co
  
  set(LLVM_Z3_INSTALL_DIR "" CACHE STRING "Install directory of the Z3 solver.")
  
