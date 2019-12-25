@@ -339,8 +339,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, python, python3,
  python-pygments, python-yaml,
  python3-pygments, python3-yaml,
 # Because of yaml-bench
-Breaks: libclang-common-10-dev (<< 10~+201911120943210600592dd459242-1~exp2)
-Replaces: libclang-common-10-dev (<< 10~+201911120943210600592dd459242-1~exp2)
+Breaks: libclang-common-10-dev (<< 10~+20191225064807+aff6c9db9a9-1~exp1)
+Replaces: libclang-common-10-dev (<< 10~+20191225064807+aff6c9db9a9-1~exp1)
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
