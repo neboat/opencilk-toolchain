@@ -125,9 +125,6 @@ bootstrap-fix-include-next.diff
 
 # riscv64
 clang-riscv64-multiarch.diff
-clang-riscv64-rv64gc.diff
-llvm-riscv64-fix-cffi.diff
-D60657-riscv-pcrel_lo.diff
 
 # Compiler-rt - workaround
 workaround-bug-42994-use-linker.diff
@@ -137,6 +134,3 @@ workaround-bug-42994-use-linker.diff
 D67877.patch
 disable-fuzzer-compiler-rt.diff
 no-z3.patch
-
-# bug #946874
-D71028-mips-rust-test.diff
