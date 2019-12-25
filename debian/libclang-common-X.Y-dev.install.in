@@ -4,8 +4,4 @@ usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION@*/lib
 usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION@*/*.txt
 usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION@*/share/*.txt
 
-usr/lib/llvm-@LLVM_VERSION@/bin/yaml-bench
-
-usr/bin/yaml-bench-@LLVM_VERSION@
-
 

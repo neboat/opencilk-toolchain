@@ -29,4 +29,3 @@ llvm/utils/vim/llvm-@LLVM_VERSION@-vimrc		            usr/share/vim/addons
 llvm/utils/emacs/emacs.el		    usr/share/emacs/site-lisp/llvm-@LLVM_VERSION@/
 llvm/utils/emacs/llvm-mode.el	    usr/share/emacs/site-lisp/llvm-@LLVM_VERSION@/
 llvm/utils/emacs/tablegen-mode.el	usr/share/emacs/site-lisp/llvm-@LLVM_VERSION@/
-

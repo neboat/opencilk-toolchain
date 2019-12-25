@@ -138,7 +138,85 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
 
-llvm-toolchain-9 (1:9.0.0-4) UNRELEASED; urgency=medium
+llvm-toolchain-9 (1:9.0.1-2) unstable; urgency=medium
+
+  [ James Clarke ]
+  * Include upstream patch D71028 for rust mips tests (Closes: #946874)
+
+  [ Aurelien Jarno ]
+  * Include upstream patch D60657 for rust support on riscv64.
+
+ -- James Clarke <jrtc27@debian.org>  Fri, 20 Dec 2019 18:30:29 +0000
+
+llvm-toolchain-9 (1:9.0.1-1) unstable; urgency=medium
+
+  * New stable release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 19 Dec 2019 13:48:21 +0100
+
+llvm-toolchain-9 (1:9.0.1~+rc3-2) unstable; urgency=medium
+
+  * Team upload.
+  [ Gianfranco Costamagna ]
+  * Commit Breaks/Replaces into git
+
+  [ Julian Andres Klode ]
+  * Fix llvm-9-tools Breaks/Replaces libclang-common-9-dev (<< 1:9.0.1~+rc2)
+    (Closes: #946473)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 19 Dec 2019 00:26:04 +0100
+
+llvm-toolchain-9 (1:9.0.1~+rc3-1) unstable; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * New snapshot release + upload to unstable
+  * Use secure URI in debian/watch.
+  * Move source package lintian overrides to debian/source.
+  * Remove patches force-gcc-header-obj.diff, hurd-pathmax.diff, impl-
+    path-hurd.diff, libcxxabi-arm-ehabi-fix.patch, libcxxabi-test-don-t-
+    fail-extended-long-double.patch, revert-change-soname.diff, try-to-
+    unbreak-thinlto.diff that are missing from debian/patches/series.
+  * Rely on pre-initialized dpkg-architecture variables.
+  * Move transitional package libclang-cpp1-9 to oldlibs/optional per
+    policy 4.0.1.
+
+  [ Aurelien Jarno ]
+  * llvm-riscv64-fix-cffi.diff: backport patch to fix CFI directives on
+    riscv64 from master.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 14 Dec 2019 12:43:17 +0100
+
+llvm-toolchain-9 (1:9.0.1~+rc2-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * Fix some paths, upstream moved from site-packages
+    to dist-packages for python packages
+  * Move yaml-bench from libclang-common-X.Y-dev to llvm-X.Y-tools where
+    it belongs
+    See http://lists.llvm.org/pipermail/llvm-dev/2019-December/137337.html
+  * Add a project in the cmake-test to silent a warning
+    (Closes: #945489)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 03 Dec 2019 07:56:16 +0100
+
+llvm-toolchain-9 (1:9.0.1~+rc1-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 24 Nov 2019 14:51:29 +0100
+
+llvm-toolchain-9 (1:9.0.0-5) UNRELEASED; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Patch cmake files to disable the z3 support in Ubuntu
+  * Simplify rules file to put -g1 everywhere
+
+  [ Sylvestre Ledru ]
+  * Add a project in the cmake-test to silent a warning (Closes: #945489)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 26 Nov 2019 09:24:38 +0100
+
+llvm-toolchain-9 (1:9.0.0-4) unstable; urgency=medium
 
   [ Samuel Thibault ]
   * hurd-cxx-paths.diff: Re-introduce patch to find C++ headers.

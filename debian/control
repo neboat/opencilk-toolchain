@@ -169,7 +169,6 @@ Description: Clang library - Common development package
 Package: libclang-cpp1-10
 Depends: libclang-cpp10, ${misc:Depends}
 Architecture: all
-Priority: optional
 Section: oldlibs
 Description: transitional package
  This is a transitional package. It can safely be removed.
@@ -339,6 +338,9 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python, python3,
  python-pygments, python-yaml,
  python3-pygments, python3-yaml,
+# Because of yaml-bench
+Breaks: libclang-common-10-dev (<< 10~+201911120943210600592dd459242-1~exp2)
+Replaces: libclang-common-10-dev (<< 10~+201911120943210600592dd459242-1~exp2)
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other

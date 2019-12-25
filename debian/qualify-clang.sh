@@ -67,6 +67,19 @@ if ! grep -q -E "scan-build: 0 bugs found." foo.log; then
 fi
 rm -rf scan-build
 
+echo 'namespace mozilla {
+namespace dom {
+void foo();
+}
+}
+' > foo.cpp
+clang-tidy-$VERSION -checks='modernize-concat-nested-namespaces' foo.cpp -extra-arg=-std=c++17 &> foo.log
+if ! grep -q "nested namespaces can " foo.log; then
+    echo "Clang-tidy didn't detect the issue"
+    cat foo.log
+    exit 1
+fi
+
 echo "Testing clang-$VERSION ..."
 
 rm -f foo.log
