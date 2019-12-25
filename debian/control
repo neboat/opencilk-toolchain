@@ -218,13 +218,14 @@ Description: Library for coverage-guided fuzz testing
  instrumentation.
 
 
-Package: python-clang-9
+Package: python3-clang-9
 Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3, libclang-9-dev
-Replaces: python-clang-x.y
+Replaces: python-clang-x.y, python-clang-9 (<< 1:9.0.1-3)
 Conflicts: python-clang-x.y
 Provides: python-clang-x.y
+Breaks: python-clang-9 (<< 1:9.0.1-3)
 Description: Clang Python Bindings
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -234,6 +235,14 @@ Description: Clang Python Bindings
  provides most of the support of C++17.
  .
  This binding package provides access to the Clang compiler and libraries.
+
+Package: python-clang-9
+Depends: python3-clang-9, ${misc:Depends}
+Architecture: any
+Priority: optional
+Section: oldlibs
+Description: transitional package to python3-clang-9
+ This is a transitional package. It can safely be removed.
 
 
 Package: clang-9-examples
