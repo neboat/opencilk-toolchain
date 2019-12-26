@@ -479,7 +479,11 @@ build_doc:
 	make $(NJOBS) -C "$(TARGET_BUILD_STAGE2)/docs" ocaml_doc; \
 	fi)
 
-	cd $(TARGET_BUILD_STAGE2) && make $(NJOBS) docs-llvm-html docs-clang-html docs-clang-tools-html docs-polly-html docs-polly-man docs-clang-tools-man docs-clang-man docs-llvm-man
+	make $(NJOBS) -C $(TARGET_BUILD_STAGE2) docs-llvm-html docs-clang-html docs-clang-tools-html docs-clang-tools-man docs-clang-man docs-llvm-man
+
+ifeq (${POLLY_ENABLE},yes)
+	make $(NJOBS) -C $(TARGET_BUILD_STAGE2) docs-polly-html docs-polly-man
+endif
 
 # Rename manpages
 	d=$(CURDIR)/docs/_build/man/; \

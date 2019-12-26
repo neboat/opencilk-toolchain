@@ -1,3 +1,10 @@
+llvm-toolchain-9 (1:9.0.1-4) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Build polly docs and manpages only when polly is enabled (Closes: #947236)
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Thu, 26 Dec 2019 22:48:03 +0100
+
 llvm-toolchain-9 (1:9.0.1-3) unstable; urgency=medium
 
   * Introduce python3-clang-9 (closes: #942826)
