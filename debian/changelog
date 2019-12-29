@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:10~+20191225064807+aff6c9db9a9-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:10~+20191229124255+ef4febd85b5-1~exp1) experimental; urgency=medium
 
   * experimental New snapshot release
   * Sync 9 into 10
@@ -7,9 +7,9 @@ llvm-toolchain-snapshot (1:10~+20191225064807+aff6c9db9a9-1~exp1) experimental; 
     /usr/lib/llvm-@LLVM_VERSION@/lib/libarcher.so in libomp-X-dev
   * Install usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/bin/hwasan_symbolize in clang-tools-X.Y
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 25 Dec 2019 23:26:41 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 29 Dec 2019 12:47:15 +0100
 
-llvm-toolchain-snapshot (1:10~+201911120943210600592dd459242-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:10~+201911120943210600592dd459242-1~exp1) experimental; urgency=medium
 
   * Repack to move to git
   * Change the versionning scheme to git:
