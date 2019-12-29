@@ -6,6 +6,9 @@ llvm-toolchain-snapshot (1:10~+20191229124255+ef4febd85b5-1~exp1) experimental; 
   * Install /usr/lib/llvm-@LLVM_VERSION@/lib/libarcher_static.a
     /usr/lib/llvm-@LLVM_VERSION@/lib/libarcher.so in libomp-X-dev
   * Install usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/bin/hwasan_symbolize in clang-tools-X.Y
+  * Introduce python3-clang-10 (closes: #942826)
+  * Remove python-lldb-10
+  * Remove Python 2 deps (Closes: #945695)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 29 Dec 2019 12:47:15 +0100
 
@@ -139,6 +142,18 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
   * New version in snapshot (10)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
+
+llvm-toolchain-9 (1:9.0.1-3) unstable; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Build polly docs and manpages only when polly is enabled (Closes: #947236)
+
+  [ Sylvestre Ledru ]
+  * Introduce python3-clang-9 (closes: #942826)
+  * Remove python-lldb-9
+  * Remove Python 2 deps (Closes: #945695)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 29 Dec 2019 12:37:34 +0100
 
 llvm-toolchain-9 (1:9.0.1-2) unstable; urgency=medium
 
