@@ -1,6 +1,8 @@
-llvm-toolchain-snapshot (1:10~+20191229124255+ef4febd85b5-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:10~++20191229111838+6991d5728f1-1~exp1) experimental; urgency=medium
 
   * experimental New snapshot release
+  * Add a '+' in the version (as the old upload is high than the one without)
+    Will be removed in 11
   * Sync 9 into 10
   * Change of the version layout date+short git version
   * Install /usr/lib/llvm-@LLVM_VERSION@/lib/libarcher_static.a
