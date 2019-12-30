@@ -9,6 +9,9 @@ llvm-toolchain-snapshot (1:10~+20191229124255+ef4febd85b5-1~exp1) experimental; 
   * Introduce python3-clang-10 (closes: #942826)
   * Remove python-lldb-10
   * Remove Python 2 deps (Closes: #945695)
+  * Disable the polly testsuite:
+    - freezing in the current build
+    - not a big deal if failing
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 29 Dec 2019 12:47:15 +0100
 

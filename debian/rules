@@ -821,9 +821,9 @@ endif
 endif
 
 # Polly tests
-ifeq (${POLLY_ENABLE},yes)
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-polly || true
-endif
+#ifeq (${POLLY_ENABLE},yes)
+#	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-polly || true
+#endif
 
 # Managed by debian build system
 	rm -f $(CURDIR)/$(TARGET_BUILD)/lib/python*/*-packages/lldb/_lldb.so
