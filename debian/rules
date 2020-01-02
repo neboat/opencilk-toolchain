@@ -543,6 +543,8 @@ override_dh_auto_install:
 	rm -f $(DEB_INST)/usr/share/clang/scan-build-$(LLVM_VERSION)/libexec/*.bat $(DEB_INST)/usr/share/clang/scan-build-$(LLVM_VERSION)/bin/*.bat
 
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libExampleIRTransforms.a
+	# Remove an example - introduced in https://reviews.llvm.org/D61446
+	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libBye.a
 
 	cp $(TARGET_BUILD_STAGE2)/bin/clang-query $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin
 
