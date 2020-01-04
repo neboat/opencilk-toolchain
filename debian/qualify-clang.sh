@@ -148,8 +148,12 @@ void testBitwiseRules(unsigned int a, int b) {
   clang_analyzer_eval((b | -2) >= 0); // expected-warning{{FALSE}}
 }
 ' > foo.c
-# Should work
-clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -verify -analyzer-config eagerly-assume=false -analyzer-constraints=z3 foo.c
+if dpkg -l|grep -q libz3-dev; then
+   # Should work
+    clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -verify -analyzer-config eagerly-assume=false -analyzer-constraints=z3 foo.c
+else
+    echo "z3 support not available"
+fi
 
 # Should fail
 clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -verify -analyzer-config eagerly-assume=false foo.c &> foo.log || true
@@ -158,10 +162,14 @@ if grep -q "File a.c Line 7: UNKNOWN" foo.log; then
     exit 1
 fi
 
-clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -analyzer-constraints=z3 foo.c &> foo.log
-if ! grep -q "2 warnings generated." foo.log; then
-    echo "Should find 2 warnings"
-    exit 1
+if dpkg -l|grep -q libz3-dev; then
+    clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -analyzer-constraints=z3 foo.c &> foo.log
+    if ! grep -q "2 warnings generated." foo.log; then
+        echo "Should find 2 warnings"
+        exit 1
+    fi
+else
+    echo "z3 support not available"
 fi
 
 clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection foo.c &> foo.log

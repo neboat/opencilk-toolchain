@@ -134,3 +134,5 @@ workaround-bug-42994-use-linker.diff
 D67877.patch
 disable-fuzzer-compiler-rt.diff
 no-z3.patch
+
+python3-shebang.patch
