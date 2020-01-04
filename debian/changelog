@@ -1,3 +1,11 @@
+llvm-toolchain-9 (1:9.0.1-4) unstable; urgency=medium
+
+  * Source only upload to sid
+  * Force a python3 shebang on python modules to fix testsuite
+  * Do not run z3 tests if z3 support is not enabled
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 04 Jan 2020 08:52:02 +0100
+
 llvm-toolchain-9 (1:9.0.1-3) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
