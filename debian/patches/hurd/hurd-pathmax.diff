@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00/clang/lib/Basic/FileManager.cpp
+Index: llvm-toolchain-snapshot_10~++20200108101405+78ce19b7e1d/clang/lib/Basic/FileManager.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00.orig/clang/lib/Basic/FileManager.cpp
-+++ llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00/clang/lib/Basic/FileManager.cpp
-@@ -522,6 +522,12 @@ FileManager::getNoncachedStatValue(Strin
+--- llvm-toolchain-snapshot_10~++20200108101405+78ce19b7e1d.orig/clang/lib/Basic/FileManager.cpp
++++ llvm-toolchain-snapshot_10~++20200108101405+78ce19b7e1d/clang/lib/Basic/FileManager.cpp
+@@ -526,6 +526,12 @@ FileManager::getNoncachedStatValue(Strin
    return std::error_code();
  }
  
@@ -15,10 +15,10 @@ Index: llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00/clang/lib/Basic
  void FileManager::GetUniqueIDMapping(
                     SmallVectorImpl<const FileEntry *> &UIDToFiles) const {
    UIDToFiles.clear();
-Index: llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00/lldb/include/lldb/lldb-defines.h
+Index: llvm-toolchain-snapshot_10~++20200108101405+78ce19b7e1d/lldb/include/lldb/lldb-defines.h
 ===================================================================
---- llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00.orig/lldb/include/lldb/lldb-defines.h
-+++ llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00/lldb/include/lldb/lldb-defines.h
+--- llvm-toolchain-snapshot_10~++20200108101405+78ce19b7e1d.orig/lldb/include/lldb/lldb-defines.h
++++ llvm-toolchain-snapshot_10~++20200108101405+78ce19b7e1d/lldb/include/lldb/lldb-defines.h
 @@ -27,6 +27,11 @@
  #define INT32_MAX 2147483647
  #endif
@@ -31,26 +31,10 @@ Index: llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00/lldb/include/ll
  #if !defined(UINT32_MAX)
  #define UINT32_MAX 4294967295U
  #endif
-Index: llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00/llvm/tools/dsymutil/DwarfLinker.cpp
+Index: llvm-toolchain-snapshot_10~++20200108101405+78ce19b7e1d/polly/lib/External/ppcg/cuda_common.c
 ===================================================================
---- llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00.orig/llvm/tools/dsymutil/DwarfLinker.cpp
-+++ llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00/llvm/tools/dsymutil/DwarfLinker.cpp
-@@ -102,6 +102,11 @@
- #include <utility>
- #include <vector>
- 
-+// For GNU Hurd
-+#if defined(__GNU__) && !defined(PATH_MAX)
-+# define PATH_MAX 4096
-+#endif
-+
- namespace llvm {
- namespace dsymutil {
- 
-Index: llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00/polly/lib/External/ppcg/cuda_common.c
-===================================================================
---- llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00.orig/polly/lib/External/ppcg/cuda_common.c
-+++ llvm-toolchain-snapshot_10~+2019110201231805002d77b0cad00/polly/lib/External/ppcg/cuda_common.c
+--- llvm-toolchain-snapshot_10~++20200108101405+78ce19b7e1d.orig/polly/lib/External/ppcg/cuda_common.c
++++ llvm-toolchain-snapshot_10~++20200108101405+78ce19b7e1d/polly/lib/External/ppcg/cuda_common.c
 @@ -15,6 +15,11 @@
  #include "cuda_common.h"
  #include "ppcg.h"
