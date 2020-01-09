@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/lldb/scripts/lldb.swig
+Index: llvm-toolchain-snapshot_10~++20200109103418+595ac8c46ea/lldb/bindings/python.swig
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/lldb/scripts/lldb.swig
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/lldb/scripts/lldb.swig
+--- llvm-toolchain-snapshot_10~++20200109103418+595ac8c46ea.orig/lldb/bindings/python.swig
++++ llvm-toolchain-snapshot_10~++20200109103418+595ac8c46ea/lldb/bindings/python.swig
 @@ -50,7 +50,7 @@ except ImportError:
  %enddef
  // These versions will not generate working python modules, so error out early.
