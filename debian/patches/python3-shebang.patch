@@ -120,6 +120,78 @@ Description: change all shebangs to Python3
  #
  #===- clang-format-diff.py - ClangFormat Diff Reformatter ----*- python -*--===#
  #
+--- llvm-toolchain-9-9.0.1.orig/clang/tools/clang-format/git-clang-format
++++ llvm-toolchain-9-9.0.1/clang/tools/clang-format/git-clang-format
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ #===- git-clang-format - ClangFormat Git Integration ---------*- python -*--===#
+ #
+--- llvm-toolchain-9-9.0.1.orig/clang/tools/scan-build-py/bin/analyze-build
++++ llvm-toolchain-9-9.0.1/clang/tools/scan-build-py/bin/analyze-build
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+--- llvm-toolchain-9-9.0.1.orig/clang/tools/scan-build-py/bin/analyze-c++
++++ llvm-toolchain-9-9.0.1/clang/tools/scan-build-py/bin/analyze-c++
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+--- llvm-toolchain-9-9.0.1.orig/clang/tools/scan-build-py/bin/analyze-cc
++++ llvm-toolchain-9-9.0.1/clang/tools/scan-build-py/bin/analyze-cc
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+--- llvm-toolchain-9-9.0.1.orig/clang/tools/scan-build-py/bin/intercept-build
++++ llvm-toolchain-9-9.0.1/clang/tools/scan-build-py/bin/intercept-build
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+--- llvm-toolchain-9-9.0.1.orig/clang/tools/scan-build-py/bin/intercept-c++
++++ llvm-toolchain-9-9.0.1/clang/tools/scan-build-py/bin/intercept-c++
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+--- llvm-toolchain-9-9.0.1.orig/clang/tools/scan-build-py/bin/intercept-cc
++++ llvm-toolchain-9-9.0.1/clang/tools/scan-build-py/bin/intercept-cc
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+--- llvm-toolchain-9-9.0.1.orig/clang/tools/scan-build-py/bin/scan-build
++++ llvm-toolchain-9-9.0.1/clang/tools/scan-build-py/bin/scan-build
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+--- llvm-toolchain-9-9.0.1.orig/clang/tools/scan-view/bin/scan-view
++++ llvm-toolchain-9-9.0.1/clang/tools/scan-view/bin/scan-view
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ from __future__ import print_function
+ 
 --- llvm-toolchain-9-9.0.1.orig/clang/tools/scan-view/share/Reporter.py
 +++ llvm-toolchain-9-9.0.1/clang/tools/scan-view/share/Reporter.py
 @@ -1,4 +1,4 @@
@@ -152,6 +224,38 @@ Description: change all shebangs to Python3
  from __future__ import absolute_import, division, print_function
  import sys
  from socket import *
+--- llvm-toolchain-9-9.0.1.orig/clang/utils/CaptureCmd
++++ llvm-toolchain-9-9.0.1/clang/utils/CaptureCmd
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ """CaptureCmd - A generic tool for capturing information about the
+ invocations of another program.
+--- llvm-toolchain-9-9.0.1.orig/clang/utils/CmpDriver
++++ llvm-toolchain-9-9.0.1/clang/utils/CmpDriver
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ """
+ A simple utility that compares tool invocations and exit codes issued by
+--- llvm-toolchain-9-9.0.1.orig/clang/utils/FindSpecRefs
++++ llvm-toolchain-9-9.0.1/clang/utils/FindSpecRefs
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import os
+ import re
+--- llvm-toolchain-9-9.0.1.orig/clang/utils/FuzzTest
++++ llvm-toolchain-9-9.0.1/clang/utils/FuzzTest
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ """
+ This is a generic fuzz testing tool, see --help for more information.
 --- llvm-toolchain-9-9.0.1.orig/clang/utils/TestUtils/deep-stack.py
 +++ llvm-toolchain-9-9.0.1/clang/utils/TestUtils/deep-stack.py
 @@ -1,4 +1,4 @@
@@ -240,6 +344,22 @@ Description: change all shebangs to Python3
  """Calls C-Reduce to create a minimal reproducer for clang crashes.
  
  Output files:
+--- llvm-toolchain-9-9.0.1.orig/clang/utils/hmaptool/hmaptool
++++ llvm-toolchain-9-9.0.1/clang/utils/hmaptool/hmaptool
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ from __future__ import absolute_import, division, print_function
+ 
+ import json
+--- llvm-toolchain-9-9.0.1.orig/clang/utils/modfuzz.py
++++ llvm-toolchain-9-9.0.1/clang/utils/modfuzz.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ 
+ # To use:
+ #  1) Update the 'decls' list below with your fuzzing configuration.
 --- llvm-toolchain-9-9.0.1.orig/clang/utils/token-delta.py
 +++ llvm-toolchain-9-9.0.1/clang/utils/token-delta.py
 @@ -1,4 +1,4 @@
@@ -328,6 +448,14 @@ Description: change all shebangs to Python3
  
  import os
  import tempfile
+--- llvm-toolchain-9-9.0.1.orig/libcxx/utils/google-benchmark/mingw.py
++++ llvm-toolchain-9-9.0.1/libcxx/utils/google-benchmark/mingw.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ # encoding: utf-8
+ 
+ import argparse
 --- llvm-toolchain-9-9.0.1.orig/libcxx/utils/google-benchmark/tools/compare.py
 +++ llvm-toolchain-9-9.0.1/libcxx/utils/google-benchmark/tools/compare.py
 @@ -1,4 +1,4 @@
@@ -384,6 +512,14 @@ Description: change all shebangs to Python3
  #
  # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
  # See https://llvm.org/LICENSE.txt for license information.
+--- llvm-toolchain-9-9.0.1.orig/lldb/examples/python/file_extract.py
++++ llvm-toolchain-9-9.0.1/lldb/examples/python/file_extract.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ 
+ import string
+ import struct
 --- llvm-toolchain-9-9.0.1.orig/lldb/lit/Quit/expect_exit_code.py
 +++ llvm-toolchain-9-9.0.1/lldb/lit/Quit/expect_exit_code.py
 @@ -1,4 +1,4 @@
@@ -392,6 +528,25 @@ Description: change all shebangs to Python3
  
  import subprocess
  import sys
+--- llvm-toolchain-9-9.0.1.orig/lldb/lit/helper/build.py
++++ llvm-toolchain-9-9.0.1/lldb/lit/helper/build.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ 
+ from __future__ import print_function
+ 
+--- llvm-toolchain-9-9.0.1.orig/lldb/lldb.xcodeproj/project.pbxproj
++++ llvm-toolchain-9-9.0.1/lldb/lldb.xcodeproj/project.pbxproj
+@@ -7499,7 +7499,7 @@
+ 			);
+ 			runOnlyForDeploymentPostprocessing = 0;
+ 			shellPath = /bin/sh;
+-			shellScript = "/usr/bin/env python -u $SRCROOT/scripts/Xcode/build-llvm.py\n";
++			shellScript = "/usr/bin/env python3 -u $SRCROOT/scripts/Xcode/build-llvm.py\n";
+ 		};
+ 		26DC6A5813380D4300FF7998 /* Prepare Swig Bindings */ = {
+ 			isa = PBXShellScriptBuildPhase;
 --- llvm-toolchain-9-9.0.1.orig/lldb/packages/Python/lldbsuite/test/attic/tester.py
 +++ llvm-toolchain-9-9.0.1/lldb/packages/Python/lldbsuite/test/attic/tester.py
 @@ -1,4 +1,4 @@
@@ -464,6 +619,17 @@ Description: change all shebangs to Python3
  """
  Tests that the event system reports issues during decorator
  handling as errors.
+--- llvm-toolchain-9-9.0.1.orig/lldb/scripts/Python/finish-swig-Python-LLDB.sh
++++ llvm-toolchain-9-9.0.1/lldb/scripts/Python/finish-swig-Python-LLDB.sh
+@@ -55,7 +55,7 @@ else
+ fi
+ 
+ OS_NAME=`uname -s`
+-PYTHON=${PYTHON_EXECUTABLE:-/usr/bin/env python}
++PYTHON=${PYTHON_EXECUTABLE:-/usr/bin/env python3}
+ PYTHON_VERSION=`${PYTHON} -c 'import sys; print("{}.{}".format(sys.version_info.major, sys.version_info.minor))'`
+ 
+ if [ $Debug -eq 1 ]
 --- llvm-toolchain-9-9.0.1.orig/lldb/scripts/Xcode/build-llvm.py
 +++ llvm-toolchain-9-9.0.1/lldb/scripts/Xcode/build-llvm.py
 @@ -1,4 +1,4 @@
@@ -472,6 +638,22 @@ Description: change all shebangs to Python3
  
  import errno
  import hashlib
+--- llvm-toolchain-9-9.0.1.orig/lldb/scripts/Xcode/package-clang-resource-headers.py
++++ llvm-toolchain-9-9.0.1/lldb/scripts/Xcode/package-clang-resource-headers.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ 
+ # package-clang-resource-headers.py
+ #
+--- llvm-toolchain-9-9.0.1.orig/lldb/scripts/analyze-project-deps.py
++++ llvm-toolchain-9-9.0.1/lldb/scripts/analyze-project-deps.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ 
+ import argparse
+ import itertools
 --- llvm-toolchain-9-9.0.1.orig/lldb/scripts/buildbot.py
 +++ llvm-toolchain-9-9.0.1/lldb/scripts/buildbot.py
 @@ -1,4 +1,4 @@
@@ -560,6 +742,14 @@ Description: change all shebangs to Python3
  
  """
  Convert the raw message sources from git patch emails to git-am friendly files.
+--- llvm-toolchain-9-9.0.1.orig/lldb/utils/lldb-dotest/lldb-dotest.in
++++ llvm-toolchain-9-9.0.1/lldb/utils/lldb-dotest/lldb-dotest.in
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ import subprocess
+ import sys
+ 
 --- llvm-toolchain-9-9.0.1.orig/lldb/utils/lui/lui.py
 +++ llvm-toolchain-9-9.0.1/lldb/utils/lui/lui.py
 @@ -1,4 +1,4 @@
@@ -688,6 +878,14 @@ Description: change all shebangs to Python3
  
  from __future__ import print_function
  
+--- llvm-toolchain-9-9.0.1.orig/llvm/runtimes/llvm-strip-link.in
++++ llvm-toolchain-9-9.0.1/llvm/runtimes/llvm-strip-link.in
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ 
+ import os
 --- llvm-toolchain-9-9.0.1.orig/llvm/test/BugPoint/compile-custom.ll.py
 +++ llvm-toolchain-9-9.0.1/llvm/test/BugPoint/compile-custom.ll.py
 @@ -1,4 +1,4 @@
@@ -752,6 +950,14 @@ Description: change all shebangs to Python3
  
  from __future__ import print_function
  
+--- llvm-toolchain-9-9.0.1.orig/llvm/utils/Misc/zkill
++++ llvm-toolchain-9-9.0.1/llvm/utils/Misc/zkill
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import os
+ import re
 --- llvm-toolchain-9-9.0.1.orig/llvm/utils/Reviewing/find_interesting_reviews.py
 +++ llvm-toolchain-9-9.0.1/llvm/utils/Reviewing/find_interesting_reviews.py
 @@ -1,4 +1,4 @@
@@ -776,6 +982,14 @@ Description: change all shebangs to Python3
  #
  # Given a previous good compile narrow down miscompiles.
  # Expects two directories named "before" and "after" each containing a set of
+--- llvm-toolchain-9-9.0.1.orig/llvm/utils/benchmark/mingw.py
++++ llvm-toolchain-9-9.0.1/llvm/utils/benchmark/mingw.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ # encoding: utf-8
+ 
+ import argparse
 --- llvm-toolchain-9-9.0.1.orig/llvm/utils/benchmark/tools/compare.py
 +++ llvm-toolchain-9-9.0.1/llvm/utils/benchmark/tools/compare.py
 @@ -1,4 +1,4 @@
@@ -792,6 +1006,22 @@ Description: change all shebangs to Python3
  
  """
  strip_asm.py - Cleanup ASM output for the specified file
+--- llvm-toolchain-9-9.0.1.orig/llvm/utils/bisect
++++ llvm-toolchain-9-9.0.1/llvm/utils/bisect
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import os
+ import sys
+--- llvm-toolchain-9-9.0.1.orig/llvm/utils/bisect-skip-count
++++ llvm-toolchain-9-9.0.1/llvm/utils/bisect-skip-count
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # This script is used to bisect skip and count arguments for --debug-counter.
+ # It is similar to bisect, except it understands how to increase skip and decrease count
+ #
 --- llvm-toolchain-9-9.0.1.orig/llvm/utils/bugpoint_gisel_reducer.py
 +++ llvm-toolchain-9-9.0.1/llvm/utils/bugpoint_gisel_reducer.py
 @@ -1,4 +1,4 @@
@@ -808,6 +1038,14 @@ Description: change all shebangs to Python3
  # Given a -print-before-all -print-module-scope log from an opt invocation,
  # chunk it into a series of individual IR files, one for each pass invocation.
  # If the log ends with an obvious stack trace, try to split off a separate
+--- llvm-toolchain-9-9.0.1.orig/llvm/utils/clang-parse-diagnostics-file
++++ llvm-toolchain-9-9.0.1/llvm/utils/clang-parse-diagnostics-file
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import os
+ import plistlib
 --- llvm-toolchain-9-9.0.1.orig/llvm/utils/create_ladder_graph.py
 +++ llvm-toolchain-9-9.0.1/llvm/utils/create_ladder_graph.py
 @@ -1,4 +1,4 @@
@@ -832,6 +1070,14 @@ Description: change all shebangs to Python3
  
  # This script extracts the VPlan digraphs from the vectoriser debug messages
  # and saves them in individual dot files (one for each plan). Optionally, and
+--- llvm-toolchain-9-9.0.1.orig/llvm/utils/git-svn/git-llvm
++++ llvm-toolchain-9-9.0.1/llvm/utils/git-svn/git-llvm
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # ======- git-llvm - LLVM Git Help Integration ---------*- python -*--========#
+ #
 --- llvm-toolchain-9-9.0.1.orig/llvm/utils/gn/build/run_tablegen.py
 +++ llvm-toolchain-9-9.0.1/llvm/utils/gn/build/run_tablegen.py
 @@ -1,4 +1,4 @@
@@ -992,6 +1238,14 @@ Description: change all shebangs to Python3
  
  import sys
  
+--- llvm-toolchain-9-9.0.1.orig/llvm/utils/llvm-build/llvm-build
++++ llvm-toolchain-9-9.0.1/llvm/utils/llvm-build/llvm-build
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import llvmbuild
+ 
 --- llvm-toolchain-9-9.0.1.orig/llvm/utils/llvm-gisel-cov.py
 +++ llvm-toolchain-9-9.0.1/llvm/utils/llvm-gisel-cov.py
 @@ -1,4 +1,4 @@
@@ -1000,6 +1254,14 @@ Description: change all shebangs to Python3
  """
  Summarize the information in the given coverage files.
  
+--- llvm-toolchain-9-9.0.1.orig/llvm/utils/llvm-lit/llvm-lit.in
++++ llvm-toolchain-9-9.0.1/llvm/utils/llvm-lit/llvm-lit.in
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ 
+ import os
 --- llvm-toolchain-9-9.0.1.orig/llvm/utils/prepare-code-coverage-artifact.py
 +++ llvm-toolchain-9-9.0.1/llvm/utils/prepare-code-coverage-artifact.py
 @@ -1,4 +1,4 @@
