@@ -93,8 +93,9 @@ clang-$VERSION -c foo.c
 clang-$VERSION -dumpversion &> foo.log
 if grep -q 4.2.1 foo.log; then
     echo "dumpversion still returns 4.2.1"
-    echo "Will be fixed with clang 9"
-#    exit 1
+    echo "it should return the clang version"
+    cat foo.log
+    exit 1
 fi
 
 # bug 903709

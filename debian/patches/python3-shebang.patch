@@ -150,6 +150,96 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/clang
  #
  #===- clang-format-diff.py - ClangFormat Diff Reformatter ----*- python -*--===#
  #
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/clang-format/git-clang-format
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/tools/clang-format/git-clang-format
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/clang-format/git-clang-format
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ #===- git-clang-format - ClangFormat Git Integration ---------*- python -*--===#
+ #
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/analyze-build
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/tools/scan-build-py/bin/analyze-build
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/analyze-build
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/analyze-c++
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/tools/scan-build-py/bin/analyze-c++
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/analyze-c++
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/analyze-cc
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/tools/scan-build-py/bin/analyze-cc
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/analyze-cc
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/intercept-build
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/tools/scan-build-py/bin/intercept-build
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/intercept-build
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/intercept-c++
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/tools/scan-build-py/bin/intercept-c++
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/intercept-c++
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/intercept-cc
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/tools/scan-build-py/bin/intercept-cc
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/intercept-cc
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/scan-build
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/tools/scan-build-py/bin/scan-build
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-build-py/bin/scan-build
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ # See https://llvm.org/LICENSE.txt for license information.
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-view/bin/scan-view
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/tools/scan-view/bin/scan-view
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-view/bin/scan-view
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ from __future__ import print_function
+ 
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/tools/scan-view/share/Reporter.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/tools/scan-view/share/Reporter.py
@@ -190,6 +280,46 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/CInde
  from __future__ import absolute_import, division, print_function
  import sys
  from socket import *
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/CaptureCmd
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/utils/CaptureCmd
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/CaptureCmd
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ """CaptureCmd - A generic tool for capturing information about the
+ invocations of another program.
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/CmpDriver
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/utils/CmpDriver
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/CmpDriver
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ """
+ A simple utility that compares tool invocations and exit codes issued by
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/FindSpecRefs
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/utils/FindSpecRefs
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/FindSpecRefs
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import os
+ import re
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/FuzzTest
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/utils/FuzzTest
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/FuzzTest
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ """
+ This is a generic fuzz testing tool, see --help for more information.
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/TestUtils/deep-stack.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/utils/TestUtils/deep-stack.py
@@ -300,6 +430,26 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/credu
  """Calls C-Reduce to create a minimal reproducer for clang crashes.
  
  Output files:
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/hmaptool/hmaptool
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/utils/hmaptool/hmaptool
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/hmaptool/hmaptool
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ from __future__ import absolute_import, division, print_function
+ 
+ import json
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/modfuzz.py
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/utils/modfuzz.py
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/modfuzz.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ 
+ # To use:
+ #  1) Update the 'decls' list below with your fuzzing configuration.
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/clang/utils/token-delta.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/clang/utils/token-delta.py
@@ -400,6 +550,16 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/libcxx/utils/gene
  
  import os
  import tempfile
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/libcxx/utils/google-benchmark/mingw.py
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/libcxx/utils/google-benchmark/mingw.py
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/libcxx/utils/google-benchmark/mingw.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ # encoding: utf-8
+ 
+ import argparse
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/libcxx/utils/google-benchmark/tools/compare.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/libcxx/utils/google-benchmark/tools/compare.py
@@ -470,6 +630,16 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/lld/utils/benchma
  #
  # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
  # See https://llvm.org/LICENSE.txt for license information.
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/lldb/examples/python/file_extract.py
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/lldb/examples/python/file_extract.py
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/lldb/examples/python/file_extract.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ 
+ import string
+ import struct
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/lldb/packages/Python/lldbsuite/test/bench.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/lldb/packages/Python/lldbsuite/test/bench.py
@@ -540,6 +710,16 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/lldb/packages/Pyt
  
  import binascii
  import json
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/lldb/scripts/analyze-project-deps.py
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/lldb/scripts/analyze-project-deps.py
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/lldb/scripts/analyze-project-deps.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ 
+ import argparse
+ import itertools
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/lldb/scripts/swig_bot.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/lldb/scripts/swig_bot.py
@@ -610,6 +790,16 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/lldb/third_party/
  
  '''This module implements a Finite State Machine (FSM). In addition to state
  this FSM also maintains a user defined "memory". So this FSM can be used as a
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/lldb/utils/lldb-dotest/lldb-dotest.in
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/lldb/utils/lldb-dotest/lldb-dotest.in
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/lldb/utils/lldb-dotest/lldb-dotest.in
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ import subprocess
+ import sys
+ 
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/lldb/utils/lui/lui.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/lldb/utils/lui/lui.py
@@ -750,6 +940,16 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/examples/Kal
  
  from __future__ import print_function
  
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/runtimes/llvm-strip-link.in
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/runtimes/llvm-strip-link.in
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/runtimes/llvm-strip-link.in
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ 
+ import os
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/test/BugPoint/compile-custom.ll.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/test/BugPoint/compile-custom.ll.py
@@ -820,26 +1020,16 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/tools/opt-vi
  
  from __future__ import print_function
  
-Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/Reviewing/find_interesting_reviews.py
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/Misc/zkill
 ===================================================================
---- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/Reviewing/find_interesting_reviews.py
-+++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/Reviewing/find_interesting_reviews.py
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/Misc/zkill
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/Misc/zkill
 @@ -1,4 +1,4 @@
 -#!/usr/bin/env python
 +#!/usr/bin/env python3
  
- from __future__ import print_function
- 
-Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/Target/ARM/analyze-match-table.py
-===================================================================
---- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/Target/ARM/analyze-match-table.py
-+++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/Target/ARM/analyze-match-table.py
-@@ -1,4 +1,4 @@
--#!/usr/bin/env python
-+#!/usr/bin/env python3
- 
- from __future__ import print_function
- 
+ import os
+ import re
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/abtest.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/abtest.py
@@ -850,6 +1040,16 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/abtest
  #
  # Given a previous good compile narrow down miscompiles.
  # Expects two directories named "before" and "after" each containing a set of
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/benchmark/mingw.py
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/benchmark/mingw.py
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/benchmark/mingw.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ # encoding: utf-8
+ 
+ import argparse
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/benchmark/tools/compare.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/benchmark/tools/compare.py
@@ -870,6 +1070,26 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/benchm
  
  """
  strip_asm.py - Cleanup ASM output for the specified file
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/bisect
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/bisect
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/bisect
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # The way you use this is you create a script that takes in as its first
+ # argument a count. The script passes into LLVM the count via a command
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/bisect-skip-count
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/bisect-skip-count
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/bisect-skip-count
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # This script is used to bisect skip and count arguments for --debug-counter.
+ # It is similar to bisect, except it understands how to increase skip and decrease count
+ #
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/bugpoint_gisel_reducer.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/bugpoint_gisel_reducer.py
@@ -890,6 +1110,16 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/chunk-
  # Given a -print-before-all -print-module-scope log from an opt invocation,
  # chunk it into a series of individual IR files, one for each pass invocation.
  # If the log ends with an obvious stack trace, try to split off a separate
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/clang-parse-diagnostics-file
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/clang-parse-diagnostics-file
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/clang-parse-diagnostics-file
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import os
+ import plistlib
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/create_ladder_graph.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/create_ladder_graph.py
@@ -920,6 +1150,16 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/extrac
  
  # This script extracts the VPlan digraphs from the vectoriser debug messages
  # and saves them in individual dot files (one for each plan). Optionally, and
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/git-svn/git-llvm
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/git-svn/git-llvm
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/git-svn/git-llvm
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # ======- git-llvm - LLVM Git Help Integration ---------*- python -*--========#
+ #
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/gn/build/run_tablegen.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/gn/build/run_tablegen.py
@@ -1110,6 +1350,16 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/lit/te
  
  import sys
  
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/llvm-build/llvm-build
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/llvm-build/llvm-build
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/llvm-build/llvm-build
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import llvmbuild
+ 
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/llvm-gisel-cov.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/llvm-gisel-cov.py
@@ -1120,6 +1370,16 @@ Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/llvm-g
  """
  Summarize the information in the given coverage files.
  
+Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/llvm-lit/llvm-lit.in
+===================================================================
+--- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/llvm-lit/llvm-lit.in
++++ llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/llvm-lit/llvm-lit.in
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ 
+ import os
 Index: llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af/llvm/utils/prepare-code-coverage-artifact.py
 ===================================================================
 --- llvm-toolchain-snapshot_10~++20200111121610+142ba7d76af.orig/llvm/utils/prepare-code-coverage-artifact.py
