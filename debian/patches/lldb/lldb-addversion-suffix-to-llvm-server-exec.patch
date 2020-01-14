@@ -12,11 +12,11 @@ which could then break something else.
 
 This probably should have upstream bug but I couldn't find any existing report.
 
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+Index: llvm-toolchain-snapshot_10~++20200114112031+ddbc0b1e516/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
-@@ -34,6 +34,7 @@
+--- llvm-toolchain-snapshot_10~++20200114112031+ddbc0b1e516.orig/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
++++ llvm-toolchain-snapshot_10~++20200114112031+ddbc0b1e516/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunication.cpp
+@@ -35,6 +35,7 @@
  #include "lldb/Utility/StreamString.h"
  #include "llvm/ADT/SmallString.h"
  #include "llvm/Support/ScopedPrinter.h"
@@ -24,7 +24,7 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/lldb/source/Plugin
  
  #include "ProcessGDBRemoteLog.h"
  
-@@ -42,7 +43,7 @@
+@@ -43,7 +44,7 @@
  #elif defined(_WIN32)
  #define DEBUGSERVER_BASENAME "lldb-server.exe"
  #else
