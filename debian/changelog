@@ -1,7 +1,7 @@
-llvm-toolchain-snapshot (1:10~++20200104105135+2306f43ccb4-1~exp1) experimental; urgency=medium
+llvm-toolchain-10 (1:10~++20200104105135+2306f43ccb4-1~exp1) experimental; urgency=medium
 
+  * Branch llvm-toolchain-10 into its own branch
   * Merge recent 9 changes (python 3 and testsuite mostly)
-  * experimental New snapshot release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 04 Jan 2020 10:56:15 +0100
 
