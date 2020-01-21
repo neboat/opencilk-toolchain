@@ -5,7 +5,7 @@ llvm-toolchain-10 (1:10~+20200120101212+de4b2a7fad6-1~exp1) experimental; urgenc
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 20 Jan 2020 23:14:23 +0100
 
-llvm-toolchain-snapshot (1:10~++20191229111838+6991d5728f1-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:10~+20191229111838+6991d5728f1-1~exp1) experimental; urgency=medium
 
   * experimental New snapshot release
   * Add a '+' in the version (as the old upload is high than the one without)
