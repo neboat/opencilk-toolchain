@@ -325,7 +325,7 @@ Package: llvm-10-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.10), ${misc:Depends},
  llvm-10 (= ${binary:Version}), libllvm10 (= ${binary:Version}), libtinfo-dev,
- llvm-10-tools (= ${binary:Version}), libz3-dev
+ llvm-10-tools (= ${binary:Version}), libclang-cpp10 (= ${binary:Version}), libz3-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
