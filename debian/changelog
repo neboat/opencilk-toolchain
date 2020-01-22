@@ -1,4 +1,4 @@
-llvm-toolchain-10 (1:10~++20200121023453+de4b2a7fad6-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-10 (1:10~++20200121023453+de4b2a7fad6-1~exp1) experimental; urgency=medium
 
   * Branch llvm-toolchain-10 into its own branch
   * Merge recent 9 changes (python 3 and testsuite mostly)
