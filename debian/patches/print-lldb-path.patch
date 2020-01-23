@@ -1,18 +1,14 @@
 Author: Gianfranco Costamagna <locutusofborg@debian.org>
 Last-Update: 2020-01-21
 
-Index: llvm-toolchain-9-9.0.1/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
-===================================================================
---- llvm-toolchain-9-9.0.1.orig/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
-+++ llvm-toolchain-9-9.0.1/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
-@@ -337,8 +337,8 @@
-   llvm::sys::path::append(path, style, LLDB_PYTHON_RELATIVE_LIBDIR);
- #else
-   llvm::sys::path::append(path, style,
--                          "python" + llvm::Twine(PY_MAJOR_VERSION) + "." +
--                              llvm::Twine(PY_MINOR_VERSION),
-+                          "python" /*+ llvm::Twine(PY_MAJOR_VERSION)*/ + "3"
-+                              /*llvm::Twine(PY_MINOR_VERSION)*/,
-                           "site-packages");
- #endif
- }
+--- llvm-toolchain-snapshot-10~++20191229111838+6991d5728f1.orig/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
++++ llvm-toolchain-snapshot-10~++20191229111838+6991d5728f1/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
+@@ -353,6 +353,8 @@ void ScriptInterpreterPython::ComputePyt
+   // x86_64, or bin on Windows).
+   llvm::sys::path::remove_filename(path);
+   llvm::sys::path::append(path, LLDB_PYTHON_RELATIVE_LIBDIR);
++  // remove double "lib/lib" statement
++  std::replace(path.begin(), path.end(), '/lib/lib/', '/lib/');
+ 
+ #if defined(_WIN32)
+   // This will be injected directly through FileSpec.GetDirectory().SetString(),
