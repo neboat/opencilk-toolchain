@@ -18,7 +18,7 @@ cd "$ADTTMP"
 cat <<EOF > CMakeLists.txt
 cmake_minimum_required(VERSION 2.6.2)
 project(cmake-test)
-find_package(LLVM 10.0.0 REQUIRED
+find_package(LLVM 11.0.0 REQUIRED
   COMPONENTS
     Analysis
     BitReader
