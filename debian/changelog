@@ -1,3 +1,9 @@
+llvm-toolchain-9 (1:9.0.1-8) UNRELEASED; urgency=medium
+
+  * Add two new python autopkgtests to avoid regressions in the future
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 23 Jan 2020 10:08:27 +0100
+
 llvm-toolchain-9 (1:9.0.1-7) unstable; urgency=medium
 
   * Add dependency on libclang-cpp-9 from llvm-9-dev (Closes: #946761)
