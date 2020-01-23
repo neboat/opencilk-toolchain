@@ -1,7 +1,4 @@
-llvm-toolchain-10 (1:10~++20200121023453+de4b2a7fad6-1~exp1) experimental; urgency=medium
-
-  * Branch llvm-toolchain-10 into its own branch
-  * Merge recent 9 changes (python 3 and testsuite mostly)
+llvm-toolchain-10 (1:10~++20200121023453+de4b2a7fad6-1~exp2) UNRELEASED; urgency=medium
 
   [ Gianfranco Costamagna ]
   * fix lldb-10 -P path print (Closes: #945445)
@@ -9,7 +6,14 @@ llvm-toolchain-10 (1:10~++20200121023453+de4b2a7fad6-1~exp1) experimental; urgen
   * Drop version constraint from libffi-dev library, satisfied since
     old-old-stable
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 20 Jan 2020 23:14:23 +0100
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 23 Jan 2020 16:34:23 +0100
+
+llvm-toolchain-10 (1:10~++20200121023453+de4b2a7fad6-1~exp1) experimental; urgency=medium
+
+  * Branch llvm-toolchain-10 into its own branch
+  * Merge recent 9 changes (python 3 and testsuite mostly)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 21 Jan 2020 14:38:02 +0100
 
 llvm-toolchain-snapshot (1:10~+20191229111838+6991d5728f1-1~exp1) experimental; urgency=medium
 
