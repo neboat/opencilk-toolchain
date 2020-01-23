@@ -415,7 +415,7 @@ Description: Modular compiler and toolchain technologies, examples
 # ------------- lld -------------
 
 Package: lld-10
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m610k powerpcspe ppc64 sh4 sparc64 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm10 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -425,7 +425,7 @@ Description: LLVM-based linker
  Project.
 
 Package: liblld-10
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m610k powerpcspe ppc64 sh4 sparc64 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm10 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -439,7 +439,7 @@ Description: LLVM-based linker, library
 
 Package: liblld-10-dev
 Section: libdevel
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m610k powerpcspe ppc64 sh4 sparc64 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lld-10 (= ${binary:Version}),
  liblld-10 (= ${binary:Version})
@@ -455,7 +455,7 @@ Description: LLVM-based linker, header files
 # ------------- lldb -------------
 
 Package: lldb-10
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m610k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm10 (= ${binary:Version}), llvm-10-dev,
  python3-lldb-10
@@ -466,7 +466,7 @@ Description: Next generation, high-performance debugger
  Project, such as the Clang expression parser and LLVM disassembler.
 
 Package: liblldb-10
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m610k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm10 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -480,7 +480,7 @@ Description: Next generation, high-performance debugger, library
 
 Package: python3-lldb-10
 Section: python
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m610k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}, python3-six
 Conflicts: python3-lldb-x.y
@@ -496,7 +496,7 @@ Description: Next generation, high-performance debugger, python3 lib
 
 Package: liblldb-10-dev
 Section: libdevel
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m610k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-10 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
