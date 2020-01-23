@@ -166,13 +166,6 @@ Description: Clang library - Common development package
  This package contains the Clang generic headers and some libraries
  (profiling, etc).
 
-Package: libclang-cpp1-10
-Depends: libclang-cpp10, ${misc:Depends}
-Architecture: all
-Section: oldlibs
-Description: transitional package
- This is a transitional package. It can safely be removed.
-
 Package: libclang-cpp10
 Section: libs
 Architecture: any
@@ -235,14 +228,6 @@ Description: Clang Python Bindings
  provides most of the support of C++17.
  .
  This binding package provides access to the Clang compiler and libraries.
-
-Package: python-clang-10
-Depends: python3-clang-10, ${misc:Depends}
-Architecture: any
-Priority: optional
-Section: oldlibs
-Description: transitional package to python3-clang-10
- This is a transitional package. It can safely be removed.
 
 
 Package: clang-10-examples
