@@ -3,7 +3,13 @@ llvm-toolchain-10 (1:10~++20200121023453+de4b2a7fad6-1~exp1) experimental; urgen
   * Branch llvm-toolchain-10 into its own branch
   * Merge recent 9 changes (python 3 and testsuite mostly)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 21 Jan 2020 14:38:02 +0100
+  [ Gianfranco Costamagna ]
+  * fix lldb-10 -P path print (Closes: #945445)
+  * Fix lldb python installation path and symlinks
+  * Drop version constraint from libffi-dev library, satisfied since
+    old-old-stable
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 20 Jan 2020 23:14:23 +0100
 
 llvm-toolchain-snapshot (1:10~+20191229111838+6991d5728f1-1~exp1) experimental; urgency=medium
 
@@ -154,6 +160,20 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
   * New version in snapshot (10)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
+
+llvm-toolchain-9 (1:9.0.1-8) unstable; urgency=medium
+
+  * Add two new python autopkgtests to avoid regressions in the future
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 23 Jan 2020 10:08:27 +0100
+
+llvm-toolchain-9 (1:9.0.1-7) unstable; urgency=medium
+
+  * Add dependency on libclang-cpp-9 from llvm-9-dev (Closes: #946761)
+  * fix lldb-9 -P path print (Closes: #945445)
+  * Fix lldb python installation path and symlinks
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 21 Jan 2020 13:05:06 +0100
 
 llvm-toolchain-9 (1:9.0.1-6) unstable; urgency=medium
 

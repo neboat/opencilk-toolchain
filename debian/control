@@ -5,7 +5,7 @@ Rules-Requires-Root: no
 Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
 Uploaders: Sylvestre Ledru <sylvestre@debian.org>
 Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
-    libffi-dev (>= 3.0.9),
+    libffi-dev,
     lsb-release, patchutils, diffstat, xz-utils, python3-dev,
     libedit-dev, libncurses5-dev, swig, python3-six, python3-sphinx (>= 1.3.6),
     binutils-dev,
@@ -323,9 +323,9 @@ Description: Modular compiler and toolchain technologies, IR interpreter
 
 Package: llvm-10-dev
 Architecture: any
-Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.10), ${misc:Depends},
+Depends: ${shlibs:Depends}, libffi-dev, ${misc:Depends},
  llvm-10 (= ${binary:Version}), libllvm10 (= ${binary:Version}), libtinfo-dev,
- llvm-10-tools (= ${binary:Version}), libz3-dev
+ llvm-10-tools (= ${binary:Version}), libclang-cpp10 (= ${binary:Version}), libz3-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
