@@ -1,4 +1,13 @@
-llvm-toolchain-snapshot (1:11~+20200119104557+84217ad6611-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:11~++20200124010400+805c157e8ae-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+  * Install clang-tidy headers in libclang-X.Y-dev
+    Path: usr/lib/llvm-11/include/clang-tidy/
+    Introduced upstream in https://reviews.llvm.org/D73236
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 24 Jan 2020 13:06:56 +0100
+
+llvm-toolchain-snapshot (1:11~++20200123111717+04fd2041561-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
   * experimental New snapshot release - 11
@@ -10,7 +19,7 @@ llvm-toolchain-snapshot (1:11~+20200119104557+84217ad6611-1~exp1) UNRELEASED; ur
   * Drop version constraint from libffi-dev library, satisfied since
     old-old-stable
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 04 Jan 2020 10:56:15 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 23 Jan 2020 14:52:30 +0100
 
 llvm-toolchain-snapshot (1:10~++20191229111838+6991d5728f1-1~exp1) experimental; urgency=medium
 
