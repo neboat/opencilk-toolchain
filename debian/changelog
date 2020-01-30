@@ -9,6 +9,8 @@ llvm-toolchain-snapshot (1:11~++20200124010400+805c157e8ae-1~exp1) UNRELEASED; u
   [ Samuel Thibault ]
   * hurd/hurd-cxx-paths.diff: Drop part of patch applied upstream, fix it so
     it can be applied.
+  * clang-tools-X.Y.install.in: Do not try to install hwasan_symbolize on
+    hurd-any.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 24 Jan 2020 13:06:56 +0100
 
