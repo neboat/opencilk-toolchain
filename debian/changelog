@@ -1,4 +1,4 @@
-llvm-toolchain-10 (1:10~++20200121023453+de4b2a7fad6-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-10 (1:10.0.0~+rc1-1~exp1) experimental; urgency=medium
 
   [ Gianfranco Costamagna ]
   * fix lldb-10 -P path print (Closes: #945445)
@@ -6,7 +6,10 @@ llvm-toolchain-10 (1:10~++20200121023453+de4b2a7fad6-1~exp2) UNRELEASED; urgency
   * Drop version constraint from libffi-dev library, satisfied since
     old-old-stable
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 23 Jan 2020 16:34:23 +0100
+  [ Sylvestre Ledru ]
+  * First RC release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 03 Feb 2020 10:30:50 +0100
 
 llvm-toolchain-10 (1:10~++20200121023453+de4b2a7fad6-1~exp1) experimental; urgency=medium
 
