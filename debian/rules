@@ -75,15 +75,6 @@ ifneq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
 endif
 endif
 
-FORCE_NOT_GCC_9_DISTRO := eoan focal bullseye sid
-ifneq (,$(filter $(DISTRO),$(FORCE_NOT_GCC_9_DISTRO)))
-# Force gcc before 9 (gcc 8 on Debian unstable) because it causes
-# huge increase of the size of the .deb (because of .a and .so) and issues in the libs
-	GCC_VERSION := 8
-endif
-
-
-
 export CC=gcc-$(GCC_VERSION)
 export CXX=g++-$(GCC_VERSION)
 
