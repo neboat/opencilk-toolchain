@@ -331,7 +331,7 @@ llvm-toolchain-9 (1:9.0.0-3~exp2) experimental; urgency=medium
     Disable fuzzer only for i386
   * Use stage2 files to build the doc. For some reasons, clang-tools-extra
     html generation stopped working
-  * Disable z3 when the version is tool old
+  * Disable z3 when the version is too old
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 31 Oct 2019 00:29:09 +0100
 
