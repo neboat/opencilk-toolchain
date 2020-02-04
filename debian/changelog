@@ -8,6 +8,12 @@ llvm-toolchain-10 (1:10.0.0~+rc1-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
   * First RC release
+  * For now, disable ThinLTO usage because:
+      - LLVM_ENABLE_LTO doesn't work with gcc >= 9 (option not accepted)
+      - BOOTSTRAP_LLVM_ENABLE_LTO is producing some large binary
+        (uses llvm ir instead of binary code)
+        See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=943623
+  * Thanks to this previous change, don't hardcode gcc 8
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 03 Feb 2020 10:30:50 +0100
 
