@@ -31,7 +31,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/pp-trace
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-move
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-offload-wrapper
 
-usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/bin/hwasan_symbolize
+[!armhf !ppc64el] usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/bin/hwasan_symbolize
 
 clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
 clang/tools/scan-build-py-@LLVM_VERSION@      usr/share/clang/
