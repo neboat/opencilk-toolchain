@@ -296,7 +296,7 @@ preconfigure:
 	done
 
 	# Make install file executable for dh-exec
-	chmod +x debian/llvm-$(LLVM_VERSION)-dev.install
+	chmod +x debian/llvm-$(LLVM_VERSION)-dev.install debian/clang-tools-$(LLVM_VERSION).install.in
 
 	# DH doesn't support the [power ...] in install on Ubuntu trusty
 	# fails with cp: cannot stat 'debian/tmp/[!powerpc': No such file or directory
