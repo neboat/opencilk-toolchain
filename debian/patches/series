@@ -97,6 +97,7 @@ remove-apple-clang-manpage.diff
 0049-Use-Debian-provided-MathJax-everywhere.patch
 
 # Hurd port
+hurd/hurd-cxx-paths.diff
 hurd/hurd-pathmax.diff
 
 # powerpcspe
