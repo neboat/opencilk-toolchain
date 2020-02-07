@@ -1,9 +1,16 @@
 llvm-toolchain-snapshot (1:11~++20200124010400+805c157e8ae-1~exp1) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * experimental New snapshot release
   * Install clang-tidy headers in libclang-X.Y-dev
     Path: usr/lib/llvm-11/include/clang-tidy/
     Introduced upstream in https://reviews.llvm.org/D73236
+
+  [ Samuel Thibault ]
+  * hurd/hurd-cxx-paths.diff: Drop part of patch applied upstream, fix it so
+    it can be applied.
+  * clang-tools-X.Y.install.in: Do not try to install hwasan_symbolize on
+    hurd-any.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 24 Jan 2020 13:06:56 +0100
 
