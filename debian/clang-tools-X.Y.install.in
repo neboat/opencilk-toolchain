@@ -1,3 +1,5 @@
+#!/usr/bin/dh-exec
+
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-check
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-apply-replacements
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-query
