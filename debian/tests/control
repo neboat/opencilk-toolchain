@@ -8,3 +8,9 @@ Restrictions: allow-stderr
 
 Tests: cmake-test
 Depends: gcc, build-essential, cmake, llvm-10-dev, libclang-common-10-dev
+
+Test-Command: python3 -c "import lldb; print(lldb.__file__); print(lldb)"
+Depends: python3-lldb-10
+
+Test-Command: python3 -c "import clang; print(clang.__file__); print(clang)"
+Depends: python3-clang-10

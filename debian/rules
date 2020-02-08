@@ -75,15 +75,6 @@ ifneq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
 endif
 endif
 
-FORCE_NOT_GCC_9_DISTRO := eoan focal bullseye sid
-ifneq (,$(filter $(DISTRO),$(FORCE_NOT_GCC_9_DISTRO)))
-# Force gcc before 9 (gcc 8 on Debian unstable) because it causes
-# huge increase of the size of the .deb (because of .a and .so) and issues in the libs
-	GCC_VERSION := 8
-endif
-
-
-
 export CC=gcc-$(GCC_VERSION)
 export CXX=g++-$(GCC_VERSION)
 
@@ -244,7 +235,13 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 # armhf is not yet quite ready for Thin, it FTBFS
 # see https://buildd.debian.org/status/fetch.php?pkg=llvm-toolchain-8&arch=armhf&ver=1%3A8.0.1%7E%2Brc2-1%7Eexp1&stamp=1560334266&raw=0
 ifeq (,$(filter $(DEB_HOST_ARCH), armhf))
-	CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
+# Use BOOTSTRAP_LLVM_ENABLE_LTO to make sure that it isn't used
+# when running stage1 with gcc
+# For now, disable ThinLTO usage because:
+# * LLVM_ENABLE_LTO doesn't work with gcc >= 9 (option not accepted)
+# * BOOTSTRAP_LLVM_ENABLE_LTO is producing some large binary
+#   See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=943623
+#	CMAKE_EXTRA += -DBOOTSTRAP_LLVM_ENABLE_LTO="Thin"
 endif
 endif
 endif
@@ -299,7 +296,7 @@ preconfigure:
 	done
 
 	# Make install file executable for dh-exec
-	chmod +x debian/llvm-$(LLVM_VERSION)-dev.install
+	chmod +x debian/llvm-$(LLVM_VERSION)-dev.install debian/clang-tools-$(LLVM_VERSION).install
 
 	# DH doesn't support the [power ...] in install on Ubuntu trusty
 	# fails with cp: cannot stat 'debian/tmp/[!powerpc': No such file or directory
@@ -595,9 +592,6 @@ endif
 	echo "Please visit https://github.com/google/sanitizers/wiki/AddressSanitizer for help" >> $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/README.txt
 # Path changed. Make a copy of it
 	cp $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/README.txt $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/share/README.txt
-
-# idem for the lldb python binding
-	mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python3/dist-packages/lldb/
 
 # Remove things that CMake  install but which aren't packaged yet,
 # or are packaged from the source or build tree.

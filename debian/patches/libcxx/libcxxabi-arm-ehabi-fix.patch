@@ -7,10 +7,10 @@ sure their ABI stays in sync.
 
 No known upstream bug about this.
 
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxxabi/src/cxa_exception.cpp
+Index: llvm-toolchain-10_10~++20200205105438+211aa5bf59e/libcxxabi/src/cxa_exception.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/libcxxabi/src/cxa_exception.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxxabi/src/cxa_exception.cpp
+--- llvm-toolchain-10_10~++20200205105438+211aa5bf59e.orig/libcxxabi/src/cxa_exception.cpp
++++ llvm-toolchain-10_10~++20200205105438+211aa5bf59e/libcxxabi/src/cxa_exception.cpp
 @@ -275,15 +275,16 @@ __cxa_throw(void *thrown_object, std::ty
  
  #ifdef __USING_SJLJ_EXCEPTIONS__
@@ -66,10 +66,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxxabi/src/cxa_
  #endif
          // Some sort of unwinding error.  Note that terminate is a handler.
          __cxa_begin_catch(&dep_exception_header->unwindHeader);
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxxabi/src/cxa_exception.h
+Index: llvm-toolchain-10_10~++20200205105438+211aa5bf59e/libcxxabi/src/cxa_exception.h
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/libcxxabi/src/cxa_exception.h
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxxabi/src/cxa_exception.h
+--- llvm-toolchain-10_10~++20200205105438+211aa5bf59e.orig/libcxxabi/src/cxa_exception.h
++++ llvm-toolchain-10_10~++20200205105438+211aa5bf59e/libcxxabi/src/cxa_exception.h
 @@ -27,6 +27,45 @@ _LIBCXXABI_HIDDEN uint64_t __getExceptio
  _LIBCXXABI_HIDDEN void     __setExceptionClass  (      _Unwind_Exception*, uint64_t);
  _LIBCXXABI_HIDDEN bool     __isOurExceptionClass(const _Unwind_Exception*);
@@ -114,5 +114,5 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxxabi/src/cxa_
 +#endif
 +
  struct _LIBCXXABI_HIDDEN __cxa_exception {
- #if defined(__LP64__) || defined(_LIBCXXABI_ARM_EHABI)
-     // This is a new field to support C++ 0x exception_ptr.
+ #if defined(__LP64__) || defined(_WIN64) || defined(_LIBCXXABI_ARM_EHABI)
+     // Now _Unwind_Exception is marked with __attribute__((aligned)),

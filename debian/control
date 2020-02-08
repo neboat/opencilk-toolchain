@@ -3,9 +3,9 @@ Section: devel
 Priority: optional
 Rules-Requires-Root: no
 Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
-Uploaders: Sylvestre Ledru <sylvestre@debian.org>
+Uploaders: Sylvestre Ledru <sylvestre@debian.org>, Gianfranco Costamagna <locutusofborg@debian.org>
 Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
-    libffi-dev (>= 3.0.9),
+    libffi-dev,
     lsb-release, patchutils, diffstat, xz-utils, python3-dev,
     libedit-dev, libncurses5-dev, swig, python3-six, python3-sphinx (>= 1.3.6),
     binutils-dev,
@@ -19,7 +19,6 @@ Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
     libctypes-ocaml-dev [amd64 arm64 armhf i386 ppc64el s390x],
     dh-exec, dh-ocaml [amd64 arm64 armhf i386 ppc64el s390x],
     libpfm4-dev [linux-any], python3-setuptools, libz3-dev,
-    g++-8 | g++-7 | g++-6 | g++-5 | g++-4.7
 Build-Conflicts: oprofile, ocaml
 Standards-Version: 4.2.1
 Homepage: https://www.llvm.org/
@@ -166,13 +165,6 @@ Description: Clang library - Common development package
  This package contains the Clang generic headers and some libraries
  (profiling, etc).
 
-Package: libclang-cpp1-10
-Depends: libclang-cpp10, ${misc:Depends}
-Architecture: all
-Section: oldlibs
-Description: transitional package
- This is a transitional package. It can safely be removed.
-
 Package: libclang-cpp10
 Section: libs
 Architecture: any
@@ -235,14 +227,6 @@ Description: Clang Python Bindings
  provides most of the support of C++17.
  .
  This binding package provides access to the Clang compiler and libraries.
-
-Package: python-clang-10
-Depends: python3-clang-10, ${misc:Depends}
-Architecture: any
-Priority: optional
-Section: oldlibs
-Description: transitional package to python3-clang-10
- This is a transitional package. It can safely be removed.
 
 
 Package: clang-10-examples
@@ -323,9 +307,9 @@ Description: Modular compiler and toolchain technologies, IR interpreter
 
 Package: llvm-10-dev
 Architecture: any
-Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.10), ${misc:Depends},
+Depends: ${shlibs:Depends}, libffi-dev, ${misc:Depends},
  llvm-10 (= ${binary:Version}), libllvm10 (= ${binary:Version}), libtinfo-dev,
- llvm-10-tools (= ${binary:Version}), libz3-dev
+ llvm-10-tools (= ${binary:Version}), libclang-cpp10 (= ${binary:Version}), libz3-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -430,7 +414,7 @@ Description: Modular compiler and toolchain technologies, examples
 # ------------- lld -------------
 
 Package: lld-10
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m610k powerpcspe ppc64 sh4 sparc64 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm10 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -440,7 +424,7 @@ Description: LLVM-based linker
  Project.
 
 Package: liblld-10
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m610k powerpcspe ppc64 sh4 sparc64 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm10 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -454,7 +438,7 @@ Description: LLVM-based linker, library
 
 Package: liblld-10-dev
 Section: libdevel
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m610k powerpcspe ppc64 sh4 sparc64 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lld-10 (= ${binary:Version}),
  liblld-10 (= ${binary:Version})
@@ -470,7 +454,7 @@ Description: LLVM-based linker, header files
 # ------------- lldb -------------
 
 Package: lldb-10
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m610k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm10 (= ${binary:Version}), llvm-10-dev,
  python3-lldb-10
@@ -481,7 +465,7 @@ Description: Next generation, high-performance debugger
  Project, such as the Clang expression parser and LLVM disassembler.
 
 Package: liblldb-10
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m610k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm10 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -495,9 +479,9 @@ Description: Next generation, high-performance debugger, library
 
 Package: python3-lldb-10
 Section: python
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m610k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}, python3-six
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}, liblldb-10 (= ${binary:Version}), python3-six
 Conflicts: python3-lldb-x.y
 Replaces: python3-lldb-x.y
 Provides: python3-lldb-x.y
@@ -511,7 +495,7 @@ Description: Next generation, high-performance debugger, python3 lib
 
 Package: liblldb-10-dev
 Section: libdevel
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m610k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-10 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}

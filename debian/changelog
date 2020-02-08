@@ -1,11 +1,43 @@
-llvm-toolchain-10 (1:10~++20200104105135+2306f43ccb4-1~exp1) experimental; urgency=medium
+llvm-toolchain-10 (1:10.0.0~+rc1-1~exp2) experimental; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * Do not try to install hwasan_symbolize on armhf ppc64el
+    as it isn't built
+
+  [ Samuel Thibault ]
+  * hurd/hurd-cxx-paths.diff: Fix patch so it can be applied.
+  * clang-tools-X.Y.install.in: Do not try to install hwasan_symbolize on
+    hurd-any.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 06 Feb 2020 10:37:39 +0100
+
+llvm-toolchain-10 (1:10.0.0~+rc1-1~exp1) experimental; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * fix lldb-10 -P path print (Closes: #945445)
+  * Fix lldb python installation path and symlinks
+  * Drop version constraint from libffi-dev library, satisfied since
+    old-old-stable
+
+  [ Sylvestre Ledru ]
+  * First RC release
+  * For now, disable ThinLTO usage because:
+      - LLVM_ENABLE_LTO doesn't work with gcc >= 9 (option not accepted)
+      - BOOTSTRAP_LLVM_ENABLE_LTO is producing some large binary
+        (uses llvm ir instead of binary code)
+        See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=943623
+  * Thanks to this previous change, don't hardcode gcc 8
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 03 Feb 2020 10:30:50 +0100
+
+llvm-toolchain-10 (1:10~++20200121023453+de4b2a7fad6-1~exp1) experimental; urgency=medium
 
   * Branch llvm-toolchain-10 into its own branch
   * Merge recent 9 changes (python 3 and testsuite mostly)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 04 Jan 2020 10:56:15 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 21 Jan 2020 14:38:02 +0100
 
-llvm-toolchain-snapshot (1:10~++20191229111838+6991d5728f1-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:10~+20191229111838+6991d5728f1-1~exp1) experimental; urgency=medium
 
   * experimental New snapshot release
   * Add a '+' in the version (as the old upload is high than the one without)
@@ -154,6 +186,20 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
   * New version in snapshot (10)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
+
+llvm-toolchain-9 (1:9.0.1-8) unstable; urgency=medium
+
+  * Add two new python autopkgtests to avoid regressions in the future
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 23 Jan 2020 10:08:27 +0100
+
+llvm-toolchain-9 (1:9.0.1-7) unstable; urgency=medium
+
+  * Add dependency on libclang-cpp-9 from llvm-9-dev (Closes: #946761)
+  * fix lldb-9 -P path print (Closes: #945445)
+  * Fix lldb python installation path and symlinks
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 21 Jan 2020 13:05:06 +0100
 
 llvm-toolchain-9 (1:9.0.1-6) unstable; urgency=medium
 
@@ -304,7 +350,7 @@ llvm-toolchain-9 (1:9.0.0-3~exp2) experimental; urgency=medium
     Disable fuzzer only for i386
   * Use stage2 files to build the doc. For some reasons, clang-tools-extra
     html generation stopped working
-  * Disable z3 when the version is tool old
+  * Disable z3 when the version is too old
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 31 Oct 2019 00:29:09 +0100
 
