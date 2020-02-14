@@ -7,7 +7,12 @@ llvm-toolchain-10 (1:10.0.0~+rc2-1~exp1) experimental; urgency=medium
     as it isn't built
     (Closes: #950899)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 14 Feb 2020 09:46:43 +0100
+  [ Samuel Thibault ]
+  * hurd/hurd-cxx-paths.diff: Fix patch so it can be applied.
+  * clang-tools-X.Y.install.in: Do not try to install hwasan_symbolize on
+    hurd-any.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 06 Feb 2020 10:37:39 +0100
 
 llvm-toolchain-10 (1:10.0.0~+rc1-1~exp1) experimental; urgency=medium
 

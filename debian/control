@@ -22,8 +22,8 @@ Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
 Build-Conflicts: oprofile, ocaml
 Standards-Version: 4.2.1
 Homepage: https://www.llvm.org/
-Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b 9
-Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/9
+Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b 10
+Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/10
 
 # ------------- clang -------------
 
