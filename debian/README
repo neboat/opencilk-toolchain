@@ -9,7 +9,7 @@ The current snapshot release is maintained in the "snapshot" branch.
 The easiest way to get all branches is probably to have one
 clone per version:
 
-for f in 8 9 snapshot; do
+for f in 8 9 10 snapshot; do
     git clone git@salsa.debian.org:pkg-llvm-team/llvm-toolchain.git -b $f $f
 done
 
@@ -57,7 +57,7 @@ branch at
   https://github.com/llvm/llvm-project/branches
 you should use,
 
-  $ sh 9/debian/orig-tar.sh release/9.x
+  $ sh 10/debian/orig-tar.sh release/10.x
 
 To retrieve a specific release candidate, you can pass the branch name as the
 first argument, and the tag rc number as the second argument. For example, to
@@ -65,11 +65,11 @@ get the 9.0.1 release candidate rc3 at
   https://github.com/llvm/llvm-project/tags
 you should use,
 
-  $ sh 9/debian/orig-tar.sh 9.0.1 rc3
+  $ sh 10/debian/orig-tar.sh 10.0.1 rc3
 
 For a stable release, the syntax is:
 
- $ sh 9/debian/orig-tar.sh 9.0.0
+ $ sh 10/debian/orig-tar.sh 10.0.0
 
 
 Additional maintainer scripts
