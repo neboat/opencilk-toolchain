@@ -1,3 +1,11 @@
+llvm-toolchain-10 (1:10.0.0~+rc2-2) unstable; urgency=medium
+
+  * Pass -DCOMPILER_RT_USE_LIBCXX=NO to the build system
+    to bring fuzzer library back
+    https://bugs.llvm.org/show_bug.cgi?id=41956
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 16 Feb 2020 17:35:25 +0100
+
 llvm-toolchain-10 (1:10.0.0~+rc2-1) unstable; urgency=medium
 
   * Upload to unstable to get ci.debian.net testing
