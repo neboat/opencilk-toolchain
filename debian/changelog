@@ -1,4 +1,4 @@
-llvm-toolchain-10 (1:10.0.0~+rc2-1) unstabe; urgency=medium
+llvm-toolchain-10 (1:10.0.0~+rc2-1) unstable; urgency=medium
 
   * Upload to unstable to get ci.debian.net testing
   * Also disable hwasan_symbolize on armel s390x powerpc ppc64
