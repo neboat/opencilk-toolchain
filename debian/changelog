@@ -1,3 +1,9 @@
+llvm-toolchain-10 (1:10.0.0~+rc2-3) UNRELEASED; urgency=medium
+
+  * Patch to convert old python3 cgi method into the new html one 
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 25 Feb 2020 14:57:08 +0100
+
 llvm-toolchain-10 (1:10.0.0~+rc2-2) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
