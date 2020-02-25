@@ -138,3 +138,4 @@ no-z3.patch
 
 python3-shebang.patch
 print-lldb-path.patch
+no-cgi.patch
