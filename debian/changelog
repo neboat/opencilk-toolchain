@@ -1,3 +1,10 @@
+llvm-toolchain-9 (1:9.0.1-9) UNRELEASED; urgency=medium
+
+  * Add patch to fix python3.8 test failures with deprecated cgi method, move
+    to new html parser
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 25 Feb 2020 15:28:58 +0100
+
 llvm-toolchain-9 (1:9.0.1-8) unstable; urgency=medium
 
   * Add two new python autopkgtests to avoid regressions in the future
