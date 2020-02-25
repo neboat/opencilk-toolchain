@@ -296,7 +296,7 @@ preconfigure:
 	done
 
 	# Make install file executable for dh-exec
-	chmod +x debian/llvm-$(LLVM_VERSION)-dev.install debian/clang-tools-$(LLVM_VERSION).install
+	chmod +x debian/llvm-$(LLVM_VERSION)-dev.install debian/clang-tools-$(LLVM_VERSION).install debian/libomp-$(LLVM_VERSION)-dev.install
 
 	# DH doesn't support the [power ...] in install on Ubuntu trusty
 	# fails with cp: cannot stat 'debian/tmp/[!powerpc': No such file or directory
@@ -363,9 +363,10 @@ override_dh_auto_configure: preconfigure
 	-DLLVM_ENABLE_FFI=ON \
 	$(CMAKE_EXTRA) \
 	-DLIBCLANG_LIBRARY_VERSION=$(SONAME_EXT) \
-        -DCLANG_LINK_CLANG_DYLIB=ON \
+	-DCLANG_LINK_CLANG_DYLIB=ON \
 	-DENABLE_LINKER_BUILD_ID=ON \
 	-DPOLLY_BUNDLED_JSONCPP=OFF \
+	-DCOMPILER_RT_USE_LIBCXX=NO \
 	$(Z3_FLAG) \
 	-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="AVR" \
 	-DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
