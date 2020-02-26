@@ -2,18 +2,20 @@ Description: cgi method is deprecated, use html instead
 Author: Gianfranco Costamagna <locutusofborg@debian.org>
 Last-Update: 2020-02-25
 
---- llvm-toolchain-10-10.0.0~+rc2.orig/llvm/tools/opt-viewer/opt-viewer.py
-+++ llvm-toolchain-10-10.0.0~+rc2/llvm/tools/opt-viewer/opt-viewer.py
+Index: llvm-toolchain-snapshot_11~++20200226094814+34d0e1bd6d0/llvm/tools/opt-viewer/opt-viewer.py
+===================================================================
+--- llvm-toolchain-snapshot_11~++20200226094814+34d0e1bd6d0.orig/llvm/tools/opt-viewer/opt-viewer.py
++++ llvm-toolchain-snapshot_11~++20200226094814+34d0e1bd6d0/llvm/tools/opt-viewer/opt-viewer.py
 @@ -3,7 +3,7 @@
  from __future__ import print_function
  
  import argparse
 -import cgi
 +import html
- import codecs
  import errno
  import functools
-@@ -200,7 +200,7 @@ class IndexRenderer:
+ import io
+@@ -197,7 +197,7 @@ class IndexRenderer:
          self.max_hottest_remarks_on_index = max_hottest_remarks_on_index
  
      def render_entry(self, r, odd):
@@ -22,9 +24,11 @@ Last-Update: 2020-02-25
          print(u'''
  <tr>
  <td class=\"column-entry-{odd}\"><a href={r.Link}>{r.DebugLocString}</a></td>
---- llvm-toolchain-10-10.0.0~+rc2.orig/llvm/tools/opt-viewer/optrecord.py
-+++ llvm-toolchain-10-10.0.0~+rc2/llvm/tools/opt-viewer/optrecord.py
-@@ -10,7 +10,7 @@ except ImportError:
+Index: llvm-toolchain-snapshot_11~++20200226094814+34d0e1bd6d0/llvm/tools/opt-viewer/optrecord.py
+===================================================================
+--- llvm-toolchain-snapshot_11~++20200226094814+34d0e1bd6d0.orig/llvm/tools/opt-viewer/optrecord.py
++++ llvm-toolchain-snapshot_11~++20200226094814+34d0e1bd6d0/llvm/tools/opt-viewer/optrecord.py
+@@ -11,7 +11,7 @@ except ImportError:
      print("For faster parsing, you may want to install libYAML for PyYAML")
      from yaml import Loader
  
@@ -33,7 +37,7 @@ Last-Update: 2020-02-25
  from collections import defaultdict
  import fnmatch
  import functools
-@@ -158,7 +158,7 @@ class Remark(yaml.YAMLObject):
+@@ -159,7 +159,7 @@ class Remark(yaml.YAMLObject):
          (key, value) = list(mapping.items())[0]
  
          if key == 'Caller' or key == 'Callee' or key == 'DirectCallee':
