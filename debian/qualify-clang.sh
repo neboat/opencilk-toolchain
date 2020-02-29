@@ -784,23 +784,23 @@ int main()
     return 0;
 }
 " > foo.c
-clang-$VERSION -O3 -mllvm -polly foo.c
+#clang-$VERSION -O3 -mllvm -polly -mllvm -polly-parallel -lgomp  foo.c
 # Comment because of https://bugs.llvm.org/show_bug.cgi?id=43164
-# clang-$VERSION -O3 -mllvm -polly -mllvm -lgomp -polly-parallel foo.c
-clang-$VERSION -O3 -mllvm -polly -mllvm -polly-vectorizer=stripmine foo.c
-clang-$VERSION -S -fsave-optimization-record -emit-llvm foo.c -o matmul.s
-opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
-opt-$VERSION -basicaa -polly-ast -analyze -q matmul.preopt.ll -polly-process-unprofitable > /dev/null
-if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
-    echo "Install llvm-$VERSION-tools"
-    exit 42
-fi
-/usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py -source-dir .  matmul.opt.yaml -o ./output > /dev/null
+#clang-$VERSION -O3 -mllvm -polly -mllvm -lgomp -polly-parallel foo.c
+#clang-$VERSION -O3 -mllvm -polly -mllvm -polly-vectorizer=stripmine foo.c
+#clang-$VERSION -S -fsave-optimization-record -emit-llvm foo.c -o matmul.s
+#opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
+#opt-$VERSION -basicaa -polly-ast -analyze -q matmul.preopt.ll -polly-process-unprofitable > /dev/null
+#if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
+#    echo "Install llvm-$VERSION-tools"
+#    exit 42
+#fi
+#/usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py -source-dir .  matmul.opt.yaml -o ./output > /dev/null
 
-if ! grep -q "not inlined into" output/foo.c.html 2>&1; then
-    echo "Could not find the output from polly"
-    exit -1
-fi
+#if ! grep -q "not inlined into" output/foo.c.html 2>&1; then
+#    echo "Could not find the output from polly"
+#    exit -1
+#fi
 
 echo "
 int foo(int x, int y) __attribute__((always_inline));

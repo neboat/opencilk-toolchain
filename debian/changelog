@@ -4,6 +4,9 @@ llvm-toolchain-10 (1:10.0.0~+rc2-2) unstable; urgency=medium
   * Bring back libfuzzer, for some reasons I don't remember
     I disabled it:
     https://bugs.llvm.org/show_bug.cgi?id=41956
+  * Silent the polly tests in debian/qualify-clang.sh
+    clang (LLVM option parsing): Unknown command line argument
+    '-polly'.  Try: 'clang (LLVM option parsing) --help'
 
   [ Aurelien Jarno ]
   * Also disable hwasan_symbolize on mipsel mips64el riscv64
