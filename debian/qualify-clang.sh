@@ -458,7 +458,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
   return 0;
 }
 EOF
-clang-9 -fprofile-instr-generate -fcoverage-mapping fuzz_me.cc StandaloneFuzzTargetMain.c
+clang-$VERSION -fprofile-instr-generate -fcoverage-mapping fuzz_me.cc StandaloneFuzzTargetMain.c
 
 rm -rf CORPUS
 mkdir -p CORPUS
