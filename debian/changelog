@@ -1,8 +1,8 @@
 llvm-toolchain-10 (1:10.0.0~+rc2-2) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
-  * Pass -DCOMPILER_RT_USE_LIBCXX=NO to the build system
-    to bring fuzzer library back
+  * Bring back libfuzzer, for some reasons I don't remember
+    I disabled it:
     https://bugs.llvm.org/show_bug.cgi?id=41956
 
   [ Aurelien Jarno ]
