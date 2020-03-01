@@ -31,6 +31,14 @@ llvm-toolchain-snapshot (1:11~++20200123111717+04fd2041561-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 23 Jan 2020 14:52:30 +0100
 
+llvm-toolchain-10 (1:10.0.0~+rc2-3) unstable; urgency=medium
+
+  * Disable libfuzzer on x86
+    https://bugs.llvm.org/show_bug.cgi?id=43677
+    FTBFS otherwise
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Mar 2020 20:59:25 +0100
+
 llvm-toolchain-10 (1:10.0.0~+rc2-2) unstable; urgency=medium
 
   [ Sylvestre Ledru ]

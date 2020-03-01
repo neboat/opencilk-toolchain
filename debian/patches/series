@@ -135,6 +135,7 @@ workaround-bug-42994-use-linker.diff
 # bug 939472
 #try-to-unbreak-thinlto.diff
 D67877.patch
+disable-fuzzer-compiler-rt-x86.diff
 no-z3.patch
 
 python3-shebang.patch
