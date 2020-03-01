@@ -31,23 +31,23 @@ llvm-toolchain-snapshot (1:11~++20200123111717+04fd2041561-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 23 Jan 2020 14:52:30 +0100
 
-llvm-toolchain-10 (1:10.0.0~+rc2-3) UNRELEASED; urgency=medium
-
-  * Patch to convert old python3 cgi method into the new html one 
-
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 25 Feb 2020 14:57:08 +0100
-
 llvm-toolchain-10 (1:10.0.0~+rc2-2) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
-  * Pass -DCOMPILER_RT_USE_LIBCXX=NO to the build system
-    to bring fuzzer library back
+  * Bring back libfuzzer, for some reasons I don't remember
+    I disabled it:
     https://bugs.llvm.org/show_bug.cgi?id=41956
+  * Silent the polly tests in debian/qualify-clang.sh
+    clang (LLVM option parsing): Unknown command line argument
+    '-polly'.  Try: 'clang (LLVM option parsing) --help'
 
   [ Aurelien Jarno ]
   * Also disable hwasan_symbolize on mipsel mips64el riscv64
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 16 Feb 2020 17:35:25 +0100
+  [ Gianfranco Costamagna ]
+  * Patch to convert old python3 cgi method into the new html one
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 29 Feb 2020 14:04:22 +0100
 
 llvm-toolchain-10 (1:10.0.0~+rc2-1) unstable; urgency=medium
 
