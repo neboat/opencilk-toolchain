@@ -1,6 +1,13 @@
+llvm-toolchain-10 (1:10.0.0~+rc2-3) unstable; urgency=medium
+
+  * Disable libfuzzer on x86
+    https://bugs.llvm.org/show_bug.cgi?id=43677
+    FTBFS otherwise
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Mar 2020 20:59:25 +0100
+
 llvm-toolchain-10 (1:10.0.0~+rc2-2) unstable; urgency=medium
 
-<<<<<<<
   [ Sylvestre Ledru ]
   * Bring back libfuzzer, for some reasons I don't remember
     I disabled it:
@@ -14,18 +21,6 @@ llvm-toolchain-10 (1:10.0.0~+rc2-2) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Patch to convert old python3 cgi method into the new html one
-=======
-  [ Sylvestre Ledru ]
-  * Pass -DCOMPILER_RT_USE_LIBCXX=NO to the build system
-    to bring fuzzer library back
-    https://bugs.llvm.org/show_bug.cgi?id=41956
-
-  [ Aurelien Jarno ]
-  * Also disable hwasan_symbolize on mipsel mips64el riscv64
-
-  [ Gianfranco Costamagna ]
-  * Patch to convert old python3 cgi method into the new html one
->>>>>>>
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 29 Feb 2020 14:04:22 +0100
 
