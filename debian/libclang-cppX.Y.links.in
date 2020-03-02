@@ -1,2 +1,4 @@
-/usr/lib/@DEB_HOST_MULTIARCH@/libclang-cpp-@LLVM_VERSION@.so.1 usr/lib/llvm-@LLVM_VERSION@/lib/libclang-cpp.so.1
-/usr/lib/@DEB_HOST_MULTIARCH@/libclang-cpp-@LLVM_VERSION@.so.1 /usr/lib/@DEB_HOST_MULTIARCH@/libclang-cpp@LLVM_VERSION@.so
+usr/lib/x86_64-linux-gnu/libclang-cpp-@LLVM_VERSION@.so.1 usr/lib/llvm-@LLVM_VERSION@/lib/libclang-cpp.so.1
+/usr/lib/llvm-@LLVM_VERSION@/lib/libclang-cpp.so.1         usr/lib/llvm-@LLVM_VERSION@/libclang-cpp-@LLVM_VERSION@.so.1
+/usr/lib/x86_64-linux-gnu/libclang-cpp-@LLVM_VERSION@.so.1 usr/lib/x86_64-linux-gnu/libclang-cpp@LLVM_VERSION@.so
+/usr/lib/llvm-@LLVM_VERSION@/lib/libclang-cpp.so.1         usr/lib/llvm-@LLVM_VERSION@/lib/libclang-cpp.so.@LLVM_VERSION@
