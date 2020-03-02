@@ -5,6 +5,7 @@ llvm-toolchain-10 (1:10.0.0~+rc2-3) unstable; urgency=medium
     FTBFS otherwise
   * Add a libclang-cpp10-dev package (needed to unbreak the cmake)
     https://bugs.llvm.org/show_bug.cgi?id=42432
+    This makes libclang-cpp10 usable and polish the links and dups
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Mar 2020 20:59:25 +0100
 
