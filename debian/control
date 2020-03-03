@@ -22,8 +22,8 @@ Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
 Build-Conflicts: oprofile, ocaml
 Standards-Version: 4.2.1
 Homepage: https://www.llvm.org/
-Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b 10
-Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/10
+Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b snapshot
+Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/snapshot
 
 # ------------- clang -------------
 
@@ -186,14 +186,14 @@ Description: C++ interface to the Clang library
  locations with elements within the AST, and other facilities that support
  Clang-based development tools.
 
-Package: libclang-cpp10-dev
+Package: libclang-cpp11-dev
 Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- libclang-cpp10 (= ${binary:Version})
-# Move of libclang-cpp.so into libclang-cpp10.dev
-Breaks: libclang-10-dev (<< 1:10.0.0~+rc2-3)
-Replaces: libclang-10-dev (<< 1:10.0.0~+rc2-3)
+ libclang-cpp11 (= ${binary:Version})
+# Move of libclang-cpp.so into libclang-cpp11.dev
+Breaks: libclang-11-dev (<< 1:11~++20200124010400+805c157e8ae-1~exp1)
+Replaces: libclang-11-dev (<< 1:11~++20200124010400+805c157e8ae-1~exp1)
 Description: C++ interface to the Clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -211,7 +211,7 @@ Description: C++ interface to the Clang library
  Clang-based development tools.
  .
  This package contains the Clang headers to develop extensions over
- libclang-cpp10.
+ libclang-cpp11.
 
 
 Package: libfuzzer-11-dev
