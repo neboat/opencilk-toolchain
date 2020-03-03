@@ -40,8 +40,8 @@ Description: C, C++ and Objective-C compiler
  based on the LLVM compiler. Its goal is to offer a replacement to the
  GNU Compiler Collection (GCC).
  .
- Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
- provides most of the support of C++17.
+ Clang implements all of the ISO C++ 1998, 11, 14 and 17 standards and also
+ provides most of the support of C++20.
 
 Package: clang-tools-11
 Architecture: any
@@ -52,8 +52,8 @@ Description: clang-based tools for C/C++ developments
  based on the LLVM compiler. Its goal is to offer a replacement to the
  GNU Compiler Collection (GCC).
  .
- Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
- provides most of the support of C++17.
+ Clang implements all of the ISO C++ 1998, 11, 14 and 17 standards and also
+ provides most of the support of C++20.
  .
  This package contains some clang-based tools like scan-build, clang-cl, etc.
 
@@ -107,8 +107,8 @@ Description: C, C++ and Objective-C compiler - Documentation
  based on the LLVM compiler. Its goal is to offer a replacement to the
  GNU Compiler Collection (GCC).
  .
- Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
- provides most of the support of C++17.
+ Clang implements all of the ISO C++ 1998, 11, 14 and 17 standards and also
+ provides most of the support of C++20.
  .
  This package contains the documentation.
 
@@ -122,8 +122,8 @@ Description: C interface to the Clang library
  based on the LLVM compiler. Its goal is to offer a replacement to the
  GNU Compiler Collection (GCC).
  .
- Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
- provides most of the support of C++17.
+ Clang implements all of the ISO C++ 1998, 11, 14 and 17 standards and also
+ provides most of the support of C++20.
  .
  This package contains the Clang library.
  .
@@ -144,8 +144,8 @@ Description: Clang library - Development package
  based on the LLVM compiler. Its goal is to offer a replacement to the
  GNU Compiler Collection (GCC).
  .
- Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
- provides most of the support of C++17.
+ Clang implements all of the ISO C++ 1998, 11, 14 and 17 standards and also
+ provides most of the support of C++20.
  .
  This package contains the Clang headers to develop extensions over
  libclang1-11.
@@ -159,8 +159,8 @@ Description: Clang library - Common development package
  based on the LLVM compiler. Its goal is to offer a replacement to the
  GNU Compiler Collection (GCC).
  .
- Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
- provides most of the support of C++17.
+ Clang implements all of the ISO C++ 1998, 11, 14 and 17 standards and also
+ provides most of the support of C++20.
  .
  This package contains the Clang generic headers and some libraries
  (profiling, etc).
@@ -175,8 +175,8 @@ Description: C++ interface to the Clang library
  based on the LLVM compiler. Its goal is to offer a replacement to the
  GNU Compiler Collection (GCC).
  .
- Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
- provides most of the support of C++17.
+ Clang implements all of the ISO C++ 1998, 11, 14 and 17 standards and also
+ provides most of the support of C++20.
  .
  This package contains the Clang C++ library.
  .
@@ -185,6 +185,33 @@ Description: C++ interface to the Clang library
  loading already-parsed ASTs, traversing the AST, associating physical source
  locations with elements within the AST, and other facilities that support
  Clang-based development tools.
+
+Package: libclang-cpp10-dev
+Architecture: any
+Section: libdevel
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
+ libclang-cpp10 (= ${binary:Version})
+# Move of libclang-cpp.so into libclang-cpp10.dev
+Breaks: libclang-10-dev (<< 1:10.0.0~+rc2-3)
+Replaces: libclang-10-dev (<< 1:10.0.0~+rc2-3)
+Description: C++ interface to the Clang library
+ Clang project is a C, C++, Objective C and Objective C++ front-end
+ based on the LLVM compiler. Its goal is to offer a replacement to the
+ GNU Compiler Collection (GCC).
+ .
+ Clang implements all of the ISO C++ 1998, 11, 14 and 17 standards and also
+ provides most of the support of C++20.
+ .
+ This package contains the Clang C++ library.
+ .
+ The C++ Interface to Clang provides an API that exposes
+ facilities for parsing source code into an abstract syntax tree (AST),
+ loading already-parsed ASTs, traversing the AST, associating physical source
+ locations with elements within the AST, and other facilities that support
+ Clang-based development tools.
+ .
+ This package contains the Clang headers to develop extensions over
+ libclang-cpp10.
 
 
 Package: libfuzzer-11-dev
@@ -220,8 +247,8 @@ Description: Clang Python Bindings
  based on the LLVM compiler. Its goal is to offer a replacement to the
  GNU Compiler Collection (GCC).
  .
- Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
- provides most of the support of C++17.
+ Clang implements all of the ISO C++ 1998, 11, 14 and 17 standards and also
+ provides most of the support of C++20.
  .
  This binding package provides access to the Clang compiler and libraries.
 
@@ -234,8 +261,8 @@ Description: Clang examples
  based on the LLVM compiler. Its goal is to offer a replacement to the
  GNU Compiler Collection (GCC).
  .
- Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
- provides most of the support of C++17.
+ Clang implements all of the ISO C++ 1998, 11, 14 and 17 standards and also
+ provides most of the support of C++20.
  .
  This package contains the Clang examples.
 

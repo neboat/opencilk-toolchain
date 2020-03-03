@@ -551,13 +551,11 @@ override_dh_auto_install:
 	chrpath -d libcxxabi/build/lib/libc++abi.so.1.0
 	chrpath -d libcxx/build/lib/libc++.so.1.0
 
+	: # libclang
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so; \
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT)
 
-	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && mv libclang-cpp.so.$(LLVM_VERSION) libclang-cpp-$(LLVM_VERSION).so.$(SONAME_EXT); \
-	ln -s libclang-cpp-$(LLVM_VERSION).so.$(SONAME_EXT) libclang-cpp.so.$(SONAME_EXT); \
-	ln -s libclang-cpp-$(LLVM_VERSION).so.$(SONAME_EXT) libclang-cpp.so.$(LLVM_VERSION)
-
+	: # libomp
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && rm -f libomp.so; \
 	ln -s libomp.so.$(SONAME_OPENMP) libomp.so
 
