@@ -7,11 +7,11 @@
  clang/test/Sema/warn-strlcpycat-size.c                    |   55 --------------
  6 files changed, 25 insertions(+), 78 deletions(-)
 
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/include/clang/Basic/Builtins.def
+Index: llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9/clang/include/clang/Basic/Builtins.def
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/clang/include/clang/Basic/Builtins.def
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/include/clang/Basic/Builtins.def
-@@ -546,8 +546,8 @@ BUILTIN(__builtin___memset_chk, "v*v*izz
+--- llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9.orig/clang/include/clang/Basic/Builtins.def
++++ llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9/clang/include/clang/Basic/Builtins.def
+@@ -547,8 +547,8 @@ BUILTIN(__builtin___memset_chk, "v*v*izz
  BUILTIN(__builtin___stpcpy_chk, "c*c*cC*z", "nF")
  BUILTIN(__builtin___strcat_chk, "c*c*cC*z", "nF")
  BUILTIN(__builtin___strcpy_chk, "c*c*cC*z", "nF")
@@ -22,7 +22,7 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/include/clan
  BUILTIN(__builtin___strncat_chk, "c*c*cC*zz", "nF")
  BUILTIN(__builtin___strncpy_chk, "c*c*cC*zz", "nF")
  BUILTIN(__builtin___stpncpy_chk, "c*c*cC*zz", "nF")
-@@ -1011,8 +1011,8 @@ LIBBUILTIN(getcontext, "iK*",     "fj",
+@@ -1021,8 +1021,8 @@ LIBBUILTIN(getcontext, "iK*",     "fj",
  LIBBUILTIN(_longjmp, "vJi",       "fr",    "setjmp.h", ALL_GNU_LANGUAGES)
  LIBBUILTIN(siglongjmp, "vSJi",    "fr",    "setjmp.h", ALL_GNU_LANGUAGES)
  // non-standard but very common
@@ -33,11 +33,11 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/include/clan
  //   id objc_msgSend(id, SEL, ...)
  LIBBUILTIN(objc_msgSend, "GGH.",   "f",     "objc/message.h", OBJC_LANG)
  // long double objc_msgSend_fpret(id self, SEL op, ...)
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/AST/Decl.cpp
+Index: llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9/clang/lib/AST/Decl.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/clang/lib/AST/Decl.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/AST/Decl.cpp
-@@ -3817,13 +3817,13 @@ unsigned FunctionDecl::getMemoryFunction
+--- llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9.orig/clang/lib/AST/Decl.cpp
++++ llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9/clang/lib/AST/Decl.cpp
+@@ -3872,13 +3872,13 @@ unsigned FunctionDecl::getMemoryFunction
    case Builtin::BImemmove:
      return Builtin::BImemmove;
  
@@ -57,11 +57,11 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/AST/Decl
  
    case Builtin::BI__builtin_memcmp:
    case Builtin::BImemcmp:
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/Sema/SemaChecking.cpp
+Index: llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9/clang/lib/Sema/SemaChecking.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/clang/lib/Sema/SemaChecking.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/Sema/SemaChecking.cpp
-@@ -335,8 +335,8 @@ void Sema::checkFortifiedBuiltinMemoryFu
+--- llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9.orig/clang/lib/Sema/SemaChecking.cpp
++++ llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9/clang/lib/Sema/SemaChecking.cpp
+@@ -640,8 +640,8 @@ void Sema::checkFortifiedBuiltinMemoryFu
    case Builtin::BI__builtin___memcpy_chk:
    case Builtin::BI__builtin___memmove_chk:
    case Builtin::BI__builtin___memset_chk:
@@ -72,7 +72,7 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/Sema/Sem
    case Builtin::BI__builtin___strncat_chk:
    case Builtin::BI__builtin___strncpy_chk:
    case Builtin::BI__builtin___stpncpy_chk:
-@@ -4404,9 +4404,10 @@ bool Sema::CheckFunctionCall(FunctionDec
+@@ -3977,9 +3977,10 @@ bool Sema::CheckFunctionCall(FunctionDec
      return false;
  
    // Handle memory setting and copying functions.
@@ -86,27 +86,26 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/Sema/Sem
      CheckStrncatArguments(TheCall, FnInfo);
    else
      CheckMemaccessArguments(TheCall, CMId, FnInfo);
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
+Index: llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
-@@ -398,9 +398,9 @@ GenericTaintChecker::TaintPropagationRul
+--- llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9.orig/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
++++ llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
+@@ -476,9 +476,9 @@ GenericTaintChecker::TaintPropagationRul
      case Builtin::BIstrncpy:
      case Builtin::BIstrncat:
-       return TaintPropagationRule({1, 2}, {0, ReturnValueIndex});
+       return {{1, 2}, {0, ReturnValueIndex}};
 -    case Builtin::BIstrlcpy:
--    case Builtin::BIstrlcat:
--      return TaintPropagationRule({1, 2}, {0});
-+//    case Builtin::BIstrlcpy:
-+//    case Builtin::BIstrlcat:
-+//      return TaintPropagationRule({1, 2}, {0});
++/*    case Builtin::BIstrlcpy:
+     case Builtin::BIstrlcat:
+-      return {{1, 2}, {0}};
++      return {{1, 2}, {0}};*/
      case Builtin::BIstrndup:
-       return TaintPropagationRule({0, 1}, {ReturnValueIndex});
+       return {{0, 1}, {ReturnValueIndex}};
  
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/test/Sema/builtins.c
+Index: llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9/clang/test/Sema/builtins.c
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/clang/test/Sema/builtins.c
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/test/Sema/builtins.c
+--- llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9.orig/clang/test/Sema/builtins.c
++++ llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9/clang/test/Sema/builtins.c
 @@ -199,11 +199,9 @@ void test18() {
  
    ptr = __builtin___memccpy_chk(dst, src, '\037', sizeof(src), sizeof(dst));
@@ -149,9 +148,9 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/test/Sema/bu
  // rdar://11076881
  char * Test20(char *p, const char *in, unsigned n)
  {
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/test/Sema/warn-strlcpycat-size.c
+Index: llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9/clang/test/Sema/warn-strlcpycat-size.c
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/clang/test/Sema/warn-strlcpycat-size.c
+--- llvm-toolchain-snapshot_11~++20200304103426+f545ede91c9.orig/clang/test/Sema/warn-strlcpycat-size.c
 +++ /dev/null
 @@ -1,55 +0,0 @@
 -// RUN: %clang_cc1 -Wstrlcpy-strlcat-size -verify -fsyntax-only %s
