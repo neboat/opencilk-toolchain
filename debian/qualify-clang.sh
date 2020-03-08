@@ -114,8 +114,12 @@ if test $NBLINES -lt 100; then
     exit 42
 fi
 
-echo '#include <emmintrin.h>' > foo.cc
-clang++-$VERSION -c foo.cc
+if [ $DEB_HOST_ARCH != "arm64" ]; then
+    # Fails on arm64 with
+    # /usr/lib/llvm-10/lib/clang/10.0.0/include/mmintrin.h:33:5: error: use of undeclared identifier '__builtin_ia32_emms'; did you mean '__builtin_isless'?
+    echo '#include <emmintrin.h>' > foo.cc
+    clang++-$VERSION -c foo.cc
+fi
 
 # Bug 913213
 echo '#include <limits.h>' | clang-$VERSION -E - > /dev/null
