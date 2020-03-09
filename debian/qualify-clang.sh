@@ -80,6 +80,72 @@ if ! grep -q "nested namespaces can " foo.log; then
     cat foo.log
     exit 1
 fi
+echo "Testing clangd-$VERSION ..."
+
+echo '{
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "processId": 123,
+    "rootPath": "clangd-10",
+    "capabilities": {
+      "textDocument": {
+        "completion": {
+          "completionItem": {
+            "snippetSupport": true
+          }
+        }
+      }
+    },
+    "trace": "off"
+  }
+}
+---
+{"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"uri":"test:///main.cpp","languageId":"cpp","version":1,"text":"int func_with_args(int a, int b);\nint main() {\nfunc_with\n}"}}}
+---
+{"jsonrpc":"2.0","id":1,"method":"textDocument/completion","params":{"textDocument":{"uri":"test:///main.cpp"},"position":{"line":2,"character":7}}}
+---
+{"jsonrpc":"2.0","id":4,"method":"shutdown"}
+---
+{"jsonrpc":"2.0","method":"exit"}
+' > a.json
+
+clangd-$VERSION -lit-test -pch-storage=memory < a.json &> foo.log
+if ! grep -q '"insertText": "func_with_args(${1:int a}, ${2:int b})",' foo.log; then
+    echo "clangd didn't export what we were expecting"
+    cat foo.log
+    exit 1
+fi
+
+rm -rf cmaketest && mkdir cmaketest
+cat > cmaketest/CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 2.8.12)
+project(SanityCheck)
+add_library(MyLibrary foo.cpp)
+EOF
+mkdir cmaketest/standard
+cp foo.cpp cmaketest/
+cp a.json cmaketest/standard
+cd cmaketest/standard
+
+# run with cmake
+
+CXX=clang-$VERSION cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .. > /dev/null
+# TODO this test is useless as it doesn't leverage foo.cpp or the compiledb
+clangd-$VERSION -lit-test -pch-storage=memory < a.json &> foo.log
+if ! grep -q '"insertText": "func_with_args(${1:int a}, ${2:int b})",' foo.log; then
+    echo "clangd didn't export what we were expecting"
+    cat foo.log
+    exit 1
+fi
+cd -
+rm -rf cmaketest
+
+
+
+
+
 
 echo "Testing clang-$VERSION ..."
 
