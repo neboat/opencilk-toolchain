@@ -81,6 +81,133 @@ if ! grep -q "nested namespaces can " foo.log; then
     exit 1
 fi
 
+
+rm -rf cmaketest && mkdir cmaketest
+cat > cmaketest/CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 2.8.12)
+project(SanityCheck)
+add_library(MyLibrary foo.cpp)
+EOF
+mkdir cmaketest/standard
+cp foo.cpp cmaketest/
+cd cmaketest/standard
+# run with cmake
+CXX=clang-$VERSION cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .. > /dev/null
+
+clang-tidy-$VERSION -checks='modernize-concat-nested-namespaces' ../foo.cpp -extra-arg=-std=c++17 -fix &> foo.log
+if ! grep -q "namespace mozilla::dom" ../foo.cpp; then
+    echo "clang-tidy autofix didn't work"
+    cat foo.log
+    exit 1
+fi
+cd -
+rm -rf cmaketest
+
+echo "Testing clangd-$VERSION ..."
+
+echo '{
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "processId": 123,
+    "rootPath": "clangd",
+    "capabilities": {
+      "textDocument": {
+        "completion": {
+          "completionItem": {
+            "snippetSupport": true
+          }
+        }
+      }
+    },
+    "trace": "off"
+  }
+}
+---
+{"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"uri":"test:///main.cpp","languageId":"cpp","version":1,"text":"int func_with_args(int a, int b);\nint main() {\nfunc_with\n}"}}}
+---
+{"jsonrpc":"2.0","id":1,"method":"textDocument/completion","params":{"textDocument":{"uri":"test:///main.cpp"},"position":{"line":2,"character":7}}}
+---
+{"jsonrpc":"2.0","id":4,"method":"shutdown"}
+---
+{"jsonrpc":"2.0","method":"exit"}
+' > a.json
+
+clangd-$VERSION -lit-test -pch-storage=memory < a.json &> foo.log
+if ! grep -q '"insertText": "func_with_args(${1:int a}, ${2:int b})",' foo.log; then
+    echo "clangd didn't export what we were expecting"
+    cat foo.log
+    exit 1
+fi
+
+echo 'namespace mozilla {
+namespace dom {
+void foo();
+
+int fonction_avec_args(int a, float b);
+int main() {
+fonction_avec_args
+}
+
+}
+}
+' > foo.cpp
+content=$(sed ':a;N;$!ba;s/\n/\\n/g' foo.cpp)
+echo '{
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "processId": 123,
+    "rootPath": "clangd",
+    "capabilities": {
+      "textDocument": {
+        "completion": {
+          "completionItem": {
+            "snippetSupport": true
+          }
+        }
+      }
+    },
+    "trace": "off"
+  }
+}
+---
+{"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"uri":"file:///'$(pwd)'/cmaketest/foo.cpp","languageId":"cpp","version":1,"text":"'$content'"}}}
+---
+{"jsonrpc":"2.0","id":1,"method":"textDocument/completion","params":{"textDocument":{"uri":"file:///'$(pwd)'/cmaketest/foo.cpp"},"position":{"line":6,"character":18}}}
+---
+{"jsonrpc":"2.0","id":4,"method":"shutdown"}
+---
+{"jsonrpc":"2.0","method":"exit"}
+' > a.json
+
+rm -rf cmaketest && mkdir cmaketest
+cat > cmaketest/CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 2.8.12)
+project(SanityCheck)
+add_library(MyLibrary foo.cpp)
+EOF
+mkdir cmaketest/standard
+cp foo.cpp cmaketest/
+cp a.json cmaketest/standard
+cd cmaketest/standard
+
+# run with cmake
+
+CXX=clang-$VERSION cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .. > /dev/null
+# TODO this test is useless as it doesn't leverage foo.cpp or the compiledb
+clangd-$VERSION -lit-test -pch-storage=memory < a.json &> foo.log
+if ! grep -q '"insertText": "fonction_avec_args(${1:int a}, ${2:float b})",' foo.log; then
+    echo "clangd didn't export what we were expecting"
+    cat foo.log
+    exit 1
+fi
+cd -
+rm -rf cmaketest
+
+
 echo "Testing clang-$VERSION ..."
 
 rm -f foo.log
@@ -114,8 +241,12 @@ if test $NBLINES -lt 100; then
     exit 42
 fi
 
-echo '#include <emmintrin.h>' > foo.cc
-clang++-$VERSION -c foo.cc
+if [ $DEB_HOST_ARCH != "arm64" ]; then
+    # Fails on arm64 with
+    # /usr/lib/llvm-10/lib/clang/10.0.0/include/mmintrin.h:33:5: error: use of undeclared identifier '__builtin_ia32_emms'; did you mean '__builtin_isless'?
+    echo '#include <emmintrin.h>' > foo.cc
+    clang++-$VERSION -c foo.cc
+fi
 
 # Bug 913213
 echo '#include <limits.h>' | clang-$VERSION -E - > /dev/null
