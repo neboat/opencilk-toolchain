@@ -118,6 +118,48 @@ if ! grep -q '"insertText": "func_with_args(${1:int a}, ${2:int b})",' foo.log; 
     exit 1
 fi
 
+echo 'namespace mozilla {
+namespace dom {
+void foo();
+
+int fonction_avec_args(int a, float b);
+int main() {
+fonction_avec_args
+}
+
+}
+}
+' > foo.cpp
+content=$(sed ':a;N;$!ba;s/\n/\\n/g' foo.cpp)
+echo '{
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "processId": 123,
+    "rootPath": "clangd-10",
+    "capabilities": {
+      "textDocument": {
+        "completion": {
+          "completionItem": {
+            "snippetSupport": true
+          }
+        }
+      }
+    },
+    "trace": "off"
+  }
+}
+---
+{"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"uri":"file:///'$(pwd)'/cmaketest/foo.cpp","languageId":"cpp","version":1,"text":"'$content'"}}}
+---
+{"jsonrpc":"2.0","id":1,"method":"textDocument/completion","params":{"textDocument":{"uri":"file:///'$(pwd)'/cmaketest/foo.cpp"},"position":{"line":6,"character":18}}}
+---
+{"jsonrpc":"2.0","id":4,"method":"shutdown"}
+---
+{"jsonrpc":"2.0","method":"exit"}
+' > a.json
+
 rm -rf cmaketest && mkdir cmaketest
 cat > cmaketest/CMakeLists.txt <<EOF
 cmake_minimum_required(VERSION 2.8.12)
@@ -134,17 +176,13 @@ cd cmaketest/standard
 CXX=clang-$VERSION cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .. > /dev/null
 # TODO this test is useless as it doesn't leverage foo.cpp or the compiledb
 clangd-$VERSION -lit-test -pch-storage=memory < a.json &> foo.log
-if ! grep -q '"insertText": "func_with_args(${1:int a}, ${2:int b})",' foo.log; then
+if ! grep -q '"insertText": "fonction_avec_args(${1:int a}, ${2:float b})",' foo.log; then
     echo "clangd didn't export what we were expecting"
     cat foo.log
     exit 1
 fi
 cd -
 rm -rf cmaketest
-
-
-
-
 
 
 echo "Testing clang-$VERSION ..."
