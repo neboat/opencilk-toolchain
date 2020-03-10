@@ -80,6 +80,29 @@ if ! grep -q "nested namespaces can " foo.log; then
     cat foo.log
     exit 1
 fi
+
+
+rm -rf cmaketest && mkdir cmaketest
+cat > cmaketest/CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 2.8.12)
+project(SanityCheck)
+add_library(MyLibrary foo.cpp)
+EOF
+mkdir cmaketest/standard
+cp foo.cpp cmaketest/
+cd cmaketest/standard
+# run with cmake
+CXX=clang-$VERSION cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .. > /dev/null
+
+clang-tidy-$VERSION -checks='modernize-concat-nested-namespaces' ../foo.cpp -extra-arg=-std=c++17 -fix &> foo.log
+if ! grep -q "namespace mozilla::dom" ../foo.cpp; then
+    echo "clang-tidy autofix didn't work"
+    cat foo.log
+    exit 1
+fi
+cd -
+rm -rf cmaketest
+
 echo "Testing clangd-$VERSION ..."
 
 echo '{
