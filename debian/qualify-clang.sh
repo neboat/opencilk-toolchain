@@ -111,7 +111,7 @@ echo '{
   "method": "initialize",
   "params": {
     "processId": 123,
-    "rootPath": "clangd-10",
+    "rootPath": "clangd",
     "capabilities": {
       "textDocument": {
         "completion": {
@@ -160,7 +160,7 @@ echo '{
   "method": "initialize",
   "params": {
     "processId": 123,
-    "rootPath": "clangd-10",
+    "rootPath": "clangd",
     "capabilities": {
       "textDocument": {
         "completion": {
