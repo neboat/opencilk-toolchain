@@ -110,8 +110,6 @@ echo '{
   "id": 0,
   "method": "initialize",
   "params": {
-    "processId": 123,
-    "rootPath": "clangd",
     "capabilities": {
       "textDocument": {
         "completion": {
@@ -125,13 +123,44 @@ echo '{
   }
 }
 ---
-{"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"uri":"test:///main.cpp","languageId":"cpp","version":1,"text":"int func_with_args(int a, int b);\nint main() {\nfunc_with\n}"}}}
+{
+    "jsonrpc": "2.0",
+    "method": "textDocument/didOpen",
+    "params": {
+        "textDocument": {
+            "uri": "test:///main.cpp",
+            "languageId": "cpp",
+            "version": 1,
+            "text": "int func_with_args(int a, int b);\nint main() {\nfunc_with\n}"
+        }
+    }
+}
 ---
-{"jsonrpc":"2.0","id":1,"method":"textDocument/completion","params":{"textDocument":{"uri":"test:///main.cpp"},"position":{"line":2,"character":7}}}
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "textDocument/completion",
+    "params": {
+        "textDocument": {
+            "uri": "test:///main.cpp"
+        },
+        "position": {
+            "line": 2,
+            "character": 7
+         }
+     }
+}
 ---
-{"jsonrpc":"2.0","id":4,"method":"shutdown"}
+{
+    "jsonrpc": "2.0",
+    "id": 4,
+    "method": "shutdown"
+}
 ---
-{"jsonrpc":"2.0","method":"exit"}
+{
+    "jsonrpc": "2.0",
+    "method": "exit"
+}
 ' > a.json
 
 clangd-$VERSION -lit-test -pch-storage=memory < a.json &> foo.log
@@ -159,8 +188,6 @@ echo '{
   "id": 0,
   "method": "initialize",
   "params": {
-    "processId": 123,
-    "rootPath": "clangd",
     "capabilities": {
       "textDocument": {
         "completion": {
@@ -174,13 +201,44 @@ echo '{
   }
 }
 ---
-{"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"uri":"file:///'$(pwd)'/cmaketest/foo.cpp","languageId":"cpp","version":1,"text":"'$content'"}}}
+{
+    "jsonrpc": "2.0",
+    "method": "textDocument/didOpen",
+    "params": {
+        "textDocument": {
+            "uri": "file:///'$(pwd)'/cmaketest/foo.cpp",
+            "languageId": "cpp",
+            "version": 1,
+            "text": "'$content'"
+        }
+    }
+}
 ---
-{"jsonrpc":"2.0","id":1,"method":"textDocument/completion","params":{"textDocument":{"uri":"file:///'$(pwd)'/cmaketest/foo.cpp"},"position":{"line":6,"character":18}}}
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "textDocument/completion",
+    "params": {
+        "textDocument": {
+             "uri": "file:///'$(pwd)'/cmaketest/foo.cpp"
+        },
+        "position": {
+             "line": 6,
+             "character": 18
+         }
+    }
+}
 ---
-{"jsonrpc":"2.0","id":4,"method":"shutdown"}
+{
+    "jsonrpc": "2.0",
+    "id": 4,
+    "method": "shutdown"
+}
 ---
-{"jsonrpc":"2.0","method":"exit"}
+{
+    "jsonrpc": "2.0",
+    "method": "exit"
+}
 ' > a.json
 
 rm -rf cmaketest && mkdir cmaketest
