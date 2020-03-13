@@ -1,5 +1,6 @@
 llvm-toolchain-10 (1:10.0.0~+rc4-1) unstable; urgency=medium
 
+  * Fourth RC release
   * Disable the emmintrin.h build test in qualify-clang.sh on arm64
   * Add some tests for clangd usage
 
