@@ -732,8 +732,12 @@ LANG=C clang-$VERSION -fsanitize=fuzzer test_fuzzer.cc &> foo.log || true
 if ! grep "No such file or directory" foo.log; then
     # This isn't failing on 64, so, look at the results
     if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
-        echo "fuzzer"
-        exit 42
+        echo "fuzzer. Output:"
+        ./a.out
+        if [ $DEB_HOST_ARCH != "arm64" ]; then
+            # Don't fail on arm64
+            exit 42
+        fi
     fi
 fi
 
