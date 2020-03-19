@@ -1,4 +1,4 @@
-llvm-toolchain-9 (1:9.0.1-10) UNRELEASED; urgency=medium
+llvm-toolchain-9 (1:9.0.1-10) unstable; urgency=medium
 
   * debian/patches/947f9692440836dcb8d88b74b69dd379d85974ce.patch:
     - cherry-pick upstream fix for glibc 2.31
