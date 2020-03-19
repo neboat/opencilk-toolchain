@@ -1,8 +1,9 @@
-llvm-toolchain-10 (1:10.0.0~+rc4-2) unstable; urgency=medium
+llvm-toolchain-10 (1:10.0.0~+rc5-1) unstable; urgency=medium
 
+  * Fith RC release
   * Make autopkgtest/qualify-clang.sh work on arm64
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 15 Mar 2020 16:18:07 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 19 Mar 2020 15:59:43 +0100
 
 llvm-toolchain-10 (1:10.0.0~+rc4-1) unstable; urgency=medium
 
