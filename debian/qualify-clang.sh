@@ -733,7 +733,7 @@ if ! grep "No such file or directory" foo.log; then
     # This isn't failing on 64, so, look at the results
     if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
         echo "fuzzer. Output:"
-        ./a.out
+        ./a.out || true
         if [ $DEB_HOST_ARCH != "arm64" ]; then
             # Don't fail on arm64
             exit 42
