@@ -833,6 +833,8 @@ int main() {
           std::filesystem::path
       >::value, "");
 }' > foo.cpp
+clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -o o
+./o > /dev/null
 clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -o o
 ./o > /dev/null
 
