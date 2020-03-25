@@ -794,6 +794,8 @@ fi
 ./o > /dev/null
 clang++-$VERSION -std=c++11 -stdlib=libc++ foo.cpp -o o
 ./o > /dev/null
+clang++-$VERSION -std=c++14 -stdlib=libc++ foo.cpp -lc++experimental -o o
+./o > /dev/null
 
 # Bug 889832
 echo '#include <iostream>
@@ -831,7 +833,7 @@ int main() {
           std::filesystem::path
       >::value, "");
 }' > foo.cpp
-clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -o o
+clang++-$VERSION -std=c++17 -stdlib=libc++ foo.cpp -lc++experimental -o o
 ./o > /dev/null
 
 # Bug LP#1586215
