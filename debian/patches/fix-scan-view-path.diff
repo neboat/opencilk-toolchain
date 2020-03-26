@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_11~+20200119110253+84217ad6611/clang/tools/scan-view/bin/scan-view
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/tools/scan-view/bin/scan-view
 ===================================================================
---- llvm-toolchain-snapshot_11~+20200119110253+84217ad6611.orig/clang/tools/scan-view/bin/scan-view
-+++ llvm-toolchain-snapshot_11~+20200119110253+84217ad6611/clang/tools/scan-view/bin/scan-view
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/clang/tools/scan-view/bin/scan-view
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/tools/scan-view/bin/scan-view
 @@ -28,6 +28,7 @@ kDefaultPort = 8181
  kMaxPortsToTry = 100
  

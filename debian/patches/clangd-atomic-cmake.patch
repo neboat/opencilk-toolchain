@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang-tools-extra/clangd/CMakeLists.txt
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang-tools-extra/clangd/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/clang-tools-extra/clangd/CMakeLists.txt
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang-tools-extra/clangd/CMakeLists.txt
-@@ -34,6 +34,11 @@ if(NOT HAVE_CXX_ATOMICS64_WITHOUT_LIB)
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/clang-tools-extra/clangd/CMakeLists.txt
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang-tools-extra/clangd/CMakeLists.txt
+@@ -34,6 +34,11 @@ if(NOT HAVE_CXX_ATOMICS_WITHOUT_LIB OR N
    list(APPEND CLANGD_ATOMIC_LIB "atomic")
  endif()
  

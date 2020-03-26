@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/include/llvm/Support/ARMTargetParser.def
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/include/llvm/Support/ARMTargetParser.def
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/include/llvm/Support/ARMTargetParser.def
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/include/llvm/Support/ARMTargetParser.def
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/include/llvm/Support/ARMTargetParser.def
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/include/llvm/Support/ARMTargetParser.def
 @@ -76,7 +76,7 @@ ARM_ARCH("armv6kz", ARMV6KZ, "6KZ", "v6k
  ARM_ARCH("armv6-m", ARMV6M, "6-M", "v6m", ARMBuildAttrs::CPUArch::v6_M,
            FK_NONE, ARM::AEK_NONE)
@@ -11,11 +11,11 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/include/llvm/
  ARM_ARCH("armv7ve", ARMV7VE, "7VE", "v7ve", ARMBuildAttrs::CPUArch::v7,
            FK_NEON, (ARM::AEK_SEC | ARM::AEK_MP | ARM::AEK_VIRT |
            ARM::AEK_HWDIVARM | ARM::AEK_HWDIVTHUMB | ARM::AEK_DSP))
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/lib/Target/ARM/ARM.td
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/lib/Target/ARM/ARM.td
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/lib/Target/ARM/ARM.td
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/lib/Target/ARM/ARM.td
-@@ -673,7 +673,8 @@ def ARMv6sm   : Architecture<"armv6s-m",
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/lib/Target/ARM/ARM.td
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/lib/Target/ARM/ARM.td
+@@ -691,7 +691,8 @@ def ARMv6sm   : Architecture<"armv6s-m",
                                                         FeatureStrictAlign]>;
  
  def ARMv7a    : Architecture<"armv7-a",   "ARMv7a",   [HasV7Ops,

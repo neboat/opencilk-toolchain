@@ -1,7 +1,7 @@
-Index: llvm-toolchain-10-10.0.0~+rc2/compiler-rt/lib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/lib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-10-10.0.0~+rc2.orig/compiler-rt/lib/CMakeLists.txt
-+++ llvm-toolchain-10-10.0.0~+rc2/compiler-rt/lib/CMakeLists.txt
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/compiler-rt/lib/CMakeLists.txt
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/lib/CMakeLists.txt
 @@ -57,5 +57,8 @@ if(COMPILER_RT_BUILD_XRAY)
  endif()
  
@@ -12,10 +12,10 @@ Index: llvm-toolchain-10-10.0.0~+rc2/compiler-rt/lib/CMakeLists.txt
 +      compiler_rt_build_runtime(fuzzer)
 +    endif()
  endif()
-Index: llvm-toolchain-10-10.0.0~+rc2/compiler-rt/test/CMakeLists.txt
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/test/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-10-10.0.0~+rc2.orig/compiler-rt/test/CMakeLists.txt
-+++ llvm-toolchain-10-10.0.0~+rc2/compiler-rt/test/CMakeLists.txt
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/compiler-rt/test/CMakeLists.txt
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/test/CMakeLists.txt
 @@ -55,7 +55,10 @@ if(COMPILER_RT_CAN_EXECUTE_TESTS)
  
      # OpenBSD not supporting asan, cannot run the tests

@@ -2,10 +2,10 @@
  lldb/source/API/CMakeLists.txt |   14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
 
-Index: llvm-toolchain-snapshot_10~++20200103094450+3186b18b998/lldb/source/API/CMakeLists.txt
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/lldb/source/API/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_10~++20200103094450+3186b18b998.orig/lldb/source/API/CMakeLists.txt
-+++ llvm-toolchain-snapshot_10~++20200103094450+3186b18b998/lldb/source/API/CMakeLists.txt
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/lldb/source/API/CMakeLists.txt
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/lldb/source/API/CMakeLists.txt
 @@ -19,7 +19,12 @@ if(LLDB_BUILD_FRAMEWORK)
    set(option_framework FRAMEWORK)
  endif()
@@ -20,7 +20,7 @@ Index: llvm-toolchain-snapshot_10~++20200103094450+3186b18b998/lldb/source/API/C
    SBAddress.cpp
    SBAttachInfo.cpp
    SBBlock.cpp
-@@ -151,7 +156,7 @@ endif()
+@@ -160,7 +165,7 @@ endif()
  
  set_target_properties(liblldb
    PROPERTIES
@@ -29,7 +29,7 @@ Index: llvm-toolchain-snapshot_10~++20200103094450+3186b18b998/lldb/source/API/C
  )
  
  if (NOT CMAKE_SYSTEM_NAME MATCHES "Windows")
-@@ -176,11 +181,6 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Windows"
+@@ -185,11 +190,6 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Windows"
    if (MSVC AND LLDB_ENABLE_PYTHON)
      target_link_libraries(liblldb PRIVATE ${PYTHON_LIBRARIES})
    endif()

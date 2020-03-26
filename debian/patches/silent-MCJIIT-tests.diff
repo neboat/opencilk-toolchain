@@ -18,10 +18,10 @@
  test/Feature/load_module.ll                                             |    1 -
  17 files changed, 14 insertions(+), 17 deletions(-)
 
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/MCJIT/cross-module-sm-pic-a.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/MCJIT/cross-module-sm-pic-a.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/MCJIT/cross-module-sm-pic-a.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/MCJIT/cross-module-sm-pic-a.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/MCJIT/cross-module-sm-pic-a.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/MCJIT/cross-module-sm-pic-a.ll
 @@ -1,5 +1,5 @@
  ; RUN: %lli -extra-module=%p/Inputs/cross-module-b.ll -relocation-model=pic -code-model=small %s > /dev/null
 -; XFAIL: mips-, mipsel-, i686, i386
@@ -29,10 +29,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  
  declare i32 @FB()
  
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/MCJIT/eh-lg-pic.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/MCJIT/eh-lg-pic.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/MCJIT/eh-lg-pic.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/MCJIT/eh-lg-pic.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/MCJIT/eh-lg-pic.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/MCJIT/eh-lg-pic.ll
 @@ -1,6 +1,6 @@
  ; REQUIRES: cxx-shared-library
  ; RUN: %lli -relocation-model=pic -code-model=large %s
@@ -41,10 +41,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  declare i8* @__cxa_allocate_exception(i64)
  declare void @__cxa_throw(i8*, i8*, i8*)
  declare i32 @__gxx_personality_v0(...)
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/MCJIT/multi-module-sm-pic-a.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/MCJIT/multi-module-sm-pic-a.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/MCJIT/multi-module-sm-pic-a.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/MCJIT/multi-module-sm-pic-a.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/MCJIT/multi-module-sm-pic-a.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/MCJIT/multi-module-sm-pic-a.ll
 @@ -1,5 +1,5 @@
  ; RUN: %lli -extra-module=%p/Inputs/multi-module-b.ll -extra-module=%p/Inputs/multi-module-c.ll -relocation-model=pic -code-model=small %s > /dev/null
 -; XFAIL: mips-, mipsel-, i686, i386
@@ -52,10 +52,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  
  declare i32 @FB()
  
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/MCJIT/stubs-sm-pic.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/MCJIT/stubs-sm-pic.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/MCJIT/stubs-sm-pic.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/MCJIT/stubs-sm-pic.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/MCJIT/stubs-sm-pic.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/MCJIT/stubs-sm-pic.ll
 @@ -1,5 +1,5 @@
  ; RUN: %lli -disable-lazy-compilation=false -relocation-model=pic -code-model=small %s
 -; XFAIL: mips-, mipsel-, i686, i386, aarch64, arm
@@ -63,10 +63,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  
  define i32 @main() nounwind {
  entry:
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/MCJIT/test-global-init-nonzero-sm-pic.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/MCJIT/test-global-init-nonzero-sm-pic.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/MCJIT/test-global-init-nonzero-sm-pic.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/MCJIT/test-global-init-nonzero-sm-pic.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/MCJIT/test-global-init-nonzero-sm-pic.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/MCJIT/test-global-init-nonzero-sm-pic.ll
 @@ -1,5 +1,5 @@
  ; RUN: %lli -relocation-model=pic -code-model=small %s > /dev/null
 -; XFAIL: mips-, mipsel-, aarch64, arm, i686, i386
@@ -74,10 +74,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  
  @count = global i32 1, align 4
  
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/MCJIT/test-ptr-reloc-sm-pic.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/MCJIT/test-ptr-reloc-sm-pic.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/MCJIT/test-ptr-reloc-sm-pic.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/MCJIT/test-ptr-reloc-sm-pic.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/MCJIT/test-ptr-reloc-sm-pic.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/MCJIT/test-ptr-reloc-sm-pic.ll
 @@ -1,5 +1,5 @@
  ; RUN: %lli -O0 -relocation-model=pic -code-model=small %s
 -; XFAIL: mips-, mipsel-, aarch64, arm, i686, i386
@@ -85,10 +85,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  
  @.str = private unnamed_addr constant [6 x i8] c"data1\00", align 1
  @ptr = global i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str, i32 0, i32 0), align 4
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/cross-module-sm-pic-a.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/cross-module-sm-pic-a.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/OrcMCJIT/cross-module-sm-pic-a.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/cross-module-sm-pic-a.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/OrcMCJIT/cross-module-sm-pic-a.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/cross-module-sm-pic-a.ll
 @@ -1,5 +1,5 @@
  ; RUN: %lli -jit-kind=orc-mcjit -extra-module=%p/Inputs/cross-module-b.ll -relocation-model=pic -code-model=small %s > /dev/null
 -; XFAIL: mips-, mipsel-, i686, i386
@@ -96,10 +96,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  
  declare i32 @FB()
  
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/eh-lg-pic.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/eh-lg-pic.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/OrcMCJIT/eh-lg-pic.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/eh-lg-pic.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/OrcMCJIT/eh-lg-pic.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/eh-lg-pic.ll
 @@ -1,6 +1,6 @@
  ; REQUIRES: cxx-shared-library
  ; RUN: %lli -jit-kind=orc-mcjit -relocation-model=pic -code-model=large %s
@@ -108,10 +108,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  declare i8* @__cxa_allocate_exception(i64)
  declare void @__cxa_throw(i8*, i8*, i8*)
  declare i32 @__gxx_personality_v0(...)
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/multi-module-sm-pic-a.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/multi-module-sm-pic-a.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/OrcMCJIT/multi-module-sm-pic-a.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/multi-module-sm-pic-a.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/OrcMCJIT/multi-module-sm-pic-a.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/multi-module-sm-pic-a.ll
 @@ -1,5 +1,5 @@
  ; RUN: %lli -jit-kind=orc-mcjit -extra-module=%p/Inputs/multi-module-b.ll -extra-module=%p/Inputs/multi-module-c.ll -relocation-model=pic -code-model=small %s > /dev/null
 -; XFAIL: mips-, mipsel-, i686, i386
@@ -119,10 +119,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  
  declare i32 @FB()
  
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/remote/test-global-init-nonzero-sm-pic.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/remote/test-global-init-nonzero-sm-pic.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/OrcMCJIT/remote/test-global-init-nonzero-sm-pic.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/remote/test-global-init-nonzero-sm-pic.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/OrcMCJIT/remote/test-global-init-nonzero-sm-pic.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/remote/test-global-init-nonzero-sm-pic.ll
 @@ -1,6 +1,6 @@
  ; RUN: %lli -jit-kind=orc-mcjit -remote-mcjit -mcjit-remote-process=lli-child-target%exeext \
  ; RUN:   -relocation-model=pic -code-model=small %s > /dev/null
@@ -131,10 +131,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  ; UNSUPPORTED: powerpc64-unknown-linux-gnu
  ; Remove UNSUPPORTED for powerpc64-unknown-linux-gnu if problem caused by r266663 is fixed
  
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/remote/test-ptr-reloc-sm-pic.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/remote/test-ptr-reloc-sm-pic.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/OrcMCJIT/remote/test-ptr-reloc-sm-pic.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/remote/test-ptr-reloc-sm-pic.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/OrcMCJIT/remote/test-ptr-reloc-sm-pic.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/remote/test-ptr-reloc-sm-pic.ll
 @@ -1,6 +1,6 @@
  ; RUN: %lli -jit-kind=orc-mcjit -remote-mcjit -mcjit-remote-process=lli-child-target%exeext \
  ; RUN:   -O0 -relocation-model=pic -code-model=small %s
@@ -143,10 +143,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  ; UNSUPPORTED: powerpc64-unknown-linux-gnu
  ; Remove UNSUPPORTED for powerpc64-unknown-linux-gnu if problem caused by r266663 is fixed
  
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/stubs-sm-pic.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/stubs-sm-pic.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/OrcMCJIT/stubs-sm-pic.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/stubs-sm-pic.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/OrcMCJIT/stubs-sm-pic.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/stubs-sm-pic.ll
 @@ -1,5 +1,5 @@
  ; RUN: %lli -jit-kind=orc-mcjit -disable-lazy-compilation=false -relocation-model=pic -code-model=small %s
 -; XFAIL: mips-, mipsel-, i686, i386, aarch64, arm
@@ -154,10 +154,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  
  define i32 @main() nounwind {
  entry:
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/test-global-init-nonzero-sm-pic.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/test-global-init-nonzero-sm-pic.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/OrcMCJIT/test-global-init-nonzero-sm-pic.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/test-global-init-nonzero-sm-pic.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/OrcMCJIT/test-global-init-nonzero-sm-pic.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/test-global-init-nonzero-sm-pic.ll
 @@ -1,5 +1,5 @@
  ; RUN: %lli -jit-kind=orc-mcjit -relocation-model=pic -code-model=small %s > /dev/null
 -; XFAIL: mips-, mipsel-, aarch64, arm, i686, i386
@@ -165,10 +165,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  
  @count = global i32 1, align 4
  
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/test-ptr-reloc-sm-pic.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/test-ptr-reloc-sm-pic.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/ExecutionEngine/OrcMCJIT/test-ptr-reloc-sm-pic.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/ExecutionEngine/OrcMCJIT/test-ptr-reloc-sm-pic.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/ExecutionEngine/OrcMCJIT/test-ptr-reloc-sm-pic.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/ExecutionEngine/OrcMCJIT/test-ptr-reloc-sm-pic.ll
 @@ -1,5 +1,5 @@
  ; RUN: %lli -jit-kind=orc-mcjit -O0 -relocation-model=pic -code-model=small %s
 -; XFAIL: mips-, mipsel-, aarch64, arm, i686, i386
@@ -176,10 +176,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Executio
  
  @.str = private unnamed_addr constant [6 x i8] c"data1\00", align 1
  @ptr = global i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str, i32 0, i32 0), align 4
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Feature/load_module.ll
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/Feature/load_module.ll
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/test/Feature/load_module.ll
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/test/Feature/load_module.ll
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/Feature/load_module.ll
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/Feature/load_module.ll
 @@ -3,7 +3,6 @@
  ; RUN:   -disable-output 2>&1 | grep Hello
  ; REQUIRES: plugins

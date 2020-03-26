@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~+201911111222550800646d927175e/clang/lib/Basic/Version.cpp
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/lib/Basic/Version.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+201911111222550800646d927175e.orig/clang/lib/Basic/Version.cpp
-+++ llvm-toolchain-snapshot_10~+201911111222550800646d927175e/clang/lib/Basic/Version.cpp
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/clang/lib/Basic/Version.cpp
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/lib/Basic/Version.cpp
 @@ -14,6 +14,7 @@
  #include "clang/Basic/LLVM.h"
  #include "clang/Config/config.h"
@@ -10,7 +10,7 @@ Index: llvm-toolchain-snapshot_10~+201911111222550800646d927175e/clang/lib/Basic
  #include <cstdlib>
  #include <cstring>
  
-@@ -124,7 +125,7 @@ std::string getClangToolFullVersion(Stri
+@@ -97,7 +98,7 @@ std::string getClangToolFullVersion(Stri
  #ifdef CLANG_VENDOR
    OS << CLANG_VENDOR;
  #endif

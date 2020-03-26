@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/lib/Support/Triple.cpp
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/lib/Support/Triple.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/llvm/lib/Support/Triple.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/llvm/lib/Support/Triple.cpp
-@@ -1646,7 +1646,7 @@ StringRef Triple::getARMCPUForArch(Strin
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/lib/Support/Triple.cpp
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/lib/Support/Triple.cpp
+@@ -1658,7 +1658,7 @@ StringRef Triple::getARMCPUForArch(Strin
      case llvm::Triple::EABIHF:
      case llvm::Triple::GNUEABIHF:
      case llvm::Triple::MuslEABIHF:

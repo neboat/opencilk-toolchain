@@ -3,10 +3,10 @@
  clang/test/CodeGen/linux-arm-atomic.c |   10 ++++++++++
  2 files changed, 24 insertions(+)
 
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/test/CodeGen/linux-arm-atomic.c
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/test/CodeGen/linux-arm-atomic.c
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/clang/test/CodeGen/linux-arm-atomic.c
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/clang/test/CodeGen/linux-arm-atomic.c
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/clang/test/CodeGen/linux-arm-atomic.c
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/test/CodeGen/linux-arm-atomic.c
 @@ -1,5 +1,15 @@
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv7-unknown-linux | FileCheck %s
  // RUN: %clang_cc1 %s -emit-llvm -o - -triple=armv6-unknown-linux | FileCheck %s

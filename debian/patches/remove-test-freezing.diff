@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
 @@ -1,29 +0,0 @@
 -// RUN: %clangxx -O2 %s -o %t && %run %t 2>&1 | FileCheck %s
 -

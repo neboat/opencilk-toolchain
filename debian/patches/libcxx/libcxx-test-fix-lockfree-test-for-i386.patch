@@ -10,10 +10,10 @@ To set instruction support one can check __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 defi
 
 Bug: https://llvm.org/bugs/show_bug.cgi?id=19355
 
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/atomics/atomics.lockfree/isalwayslockfree.pass.cpp
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/libcxx/test/std/atomics/atomics.lockfree/isalwayslockfree.pass.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/libcxx/test/std/atomics/atomics.lockfree/isalwayslockfree.pass.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/atomics/atomics.lockfree/isalwayslockfree.pass.cpp
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/libcxx/test/std/atomics/atomics.lockfree/isalwayslockfree.pass.cpp
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/libcxx/test/std/atomics/atomics.lockfree/isalwayslockfree.pass.cpp
 @@ -21,6 +21,14 @@
  # error Feature test macro missing.
  #endif

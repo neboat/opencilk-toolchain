@@ -8,10 +8,10 @@ libcxx tests default to -O0 compilation so these test need to be marked failing
 on arm to allow installing packages. Use cases is so borderline failure that it
 shouldn't prevent building the package. (64bit atomics in 32bit mode)
 
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_strong.pass.cpp
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_strong.pass.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_strong.pass.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_strong.pass.cpp
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_strong.pass.cpp
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_strong.pass.cpp
 @@ -7,6 +7,7 @@
  //===----------------------------------------------------------------------===//
  //
@@ -20,10 +20,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/at
  //  ... assertion fails line 34
  
  // <atomic>
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_strong_explicit.pass.cpp
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_strong_explicit.pass.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_strong_explicit.pass.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_strong_explicit.pass.cpp
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_strong_explicit.pass.cpp
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_strong_explicit.pass.cpp
 @@ -7,6 +7,7 @@
  //===----------------------------------------------------------------------===//
  //
@@ -32,10 +32,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/at
  //  ... assertion fails line 38
  
  // <atomic>
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_weak.pass.cpp
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_weak.pass.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_weak.pass.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_weak.pass.cpp
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_weak.pass.cpp
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_weak.pass.cpp
 @@ -7,6 +7,7 @@
  //===----------------------------------------------------------------------===//
  //
@@ -44,10 +44,10 @@ Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/at
  //  ... assertion fails line 34
  
  // <atomic>
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_weak_explicit.pass.cpp
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_weak_explicit.pass.cpp
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_weak_explicit.pass.cpp
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_weak_explicit.pass.cpp
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_weak_explicit.pass.cpp
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/libcxx/test/std/atomics/atomics.types.operations/atomics.types.operations.req/atomic_compare_exchange_weak_explicit.pass.cpp
 @@ -7,6 +7,7 @@
  //===----------------------------------------------------------------------===//
  //

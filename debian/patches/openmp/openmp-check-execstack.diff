@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/openmp/runtime/tools/check-execstack.pl
+Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/openmp/runtime/tools/check-execstack.pl
 ===================================================================
---- llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3.orig/openmp/runtime/tools/check-execstack.pl
-+++ llvm-toolchain-snapshot_10~+20191020075550+5b8546023f3/openmp/runtime/tools/check-execstack.pl
+--- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/openmp/runtime/tools/check-execstack.pl
++++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/openmp/runtime/tools/check-execstack.pl
 @@ -45,7 +45,8 @@ sub execstack($) {
      #    GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RWE 0x4
      # Linux* OS Intel(R) 64:
