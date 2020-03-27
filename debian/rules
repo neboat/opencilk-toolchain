@@ -75,6 +75,12 @@ ifneq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
 endif
 endif
 
+ZARCH=z196
+ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
+ZARCH=z13
+endif
+CMAKE_EXTRA += -DCLANG_SYSTEMZ_DEFAULT_ARCH=$(ZARCH)
+
 export CC=gcc-$(GCC_VERSION)
 export CXX=g++-$(GCC_VERSION)
 

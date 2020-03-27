@@ -1,0 +1,39 @@
+From 3d76b4f33d2e9b5f8ec1e0a5866f9bafc7d6186d Mon Sep 17 00:00:00 2001
+From: Dimitri John Ledkov <xnox@ubuntu.com>
+Date: Tue, 10 Mar 2020 12:26:39 +0000
+Subject: [PATCH] systemz: allow configuring default SYSTEMZ_DEFAULT_ARCH.
+
+Signed-off-by: Dimitri John Ledkov <xnox@ubuntu.com>
+---
+ CMakeLists.txt                         | 4 ++++
+ lib/Driver/ToolChains/Arch/SystemZ.cpp | 2 +-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+Index: llvm-toolchain-10-10.0.0~+rc5/clang/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-10-10.0.0~+rc5.orig/clang/CMakeLists.txt
++++ llvm-toolchain-10-10.0.0~+rc5/clang/CMakeLists.txt
+@@ -306,6 +306,10 @@ if (NOT DEFINED MATCHED_ARCH OR "${CMAKE
+     "Default architecture for OpenMP offloading to Nvidia GPUs." FORCE)
+ endif()
+ 
++set(CLANG_SYSTEMZ_DEFAULT_ARCH "z10" CACHE STRING
++  "SystemZ Default Arch")
++add_definitions( -DCLANG_SYSTEMZ_DEFAULT_ARCH="${CLANG_SYSTEMZ_DEFAULT_ARCH}")
++
+ set(CLANG_VENDOR ${PACKAGE_VENDOR} CACHE STRING
+   "Vendor-specific text for showing with version information.")
+ 
+Index: llvm-toolchain-10-10.0.0~+rc5/clang/lib/Driver/ToolChains/Arch/SystemZ.cpp
+===================================================================
+--- llvm-toolchain-10-10.0.0~+rc5.orig/clang/lib/Driver/ToolChains/Arch/SystemZ.cpp
++++ llvm-toolchain-10-10.0.0~+rc5/clang/lib/Driver/ToolChains/Arch/SystemZ.cpp
+@@ -30,7 +30,7 @@ std::string systemz::getSystemZTargetCPU
+ 
+     return CPUName;
+   }
+-  return "z10";
++  return CLANG_SYSTEMZ_DEFAULT_ARCH;
+ }
+ 
+ void systemz::getSystemZTargetFeatures(const ArgList &Args,
