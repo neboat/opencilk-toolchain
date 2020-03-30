@@ -75,6 +75,7 @@ ifneq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
 endif
 endif
 
+# Change the default CPU for s390x
 ZARCH=z196
 ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
 ZARCH=z13
