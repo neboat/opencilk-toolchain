@@ -276,7 +276,8 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
 llvm-toolchain-9 (1:9.0.1-11) unstable; urgency=medium
 
-  * Allow to build g++ 9 & 10 to fix a gcc build dependency (closes: #955144)
+  * Allow one to build g++ 9 & 10 to fix a gcc build dependency
+    (closes: #955144)
     And disable thin lto on all archs
     It needs gcc-8 after after 8 will reject the -flto=thin arg
     And BOOTSTRAP_LLVM_ENABLE_LTO wil generate .so with llvm IR instead
