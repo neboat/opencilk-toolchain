@@ -74,12 +74,13 @@ ifneq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
 endif
 endif
 
-FORCE_NOT_GCC_9_DISTRO := eoan focal bullseye sid
-ifneq (,$(filter $(DISTRO),$(FORCE_NOT_GCC_9_DISTRO)))
-# Force gcc before 9 (gcc 8 on Debian unstable) because it causes
-# huge increase of the size of the .deb (because of .a and .so) and issues in the libs
-	GCC_VERSION := 8
-endif
+# Disable as we don't build with thin lto anymore
+# FORCE_NOT_GCC_9_DISTRO := eoan focal bullseye sid
+# ifneq (,$(filter $(DISTRO),$(FORCE_NOT_GCC_9_DISTRO)))
+# # Force gcc before 9 (gcc 8 on Debian unstable) because it causes
+# # huge increase of the size of the .deb (because of .a and .so) and issues in the libs
+# 	GCC_VERSION := 8
+# endif
 
 
 
@@ -243,7 +244,12 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 # armhf is not yet quite ready for Thin, it FTBFS
 # see https://buildd.debian.org/status/fetch.php?pkg=llvm-toolchain-8&arch=armhf&ver=1%3A8.0.1%7E%2Brc2-1%7Eexp1&stamp=1560334266&raw=0
 ifeq (,$(filter $(DEB_HOST_ARCH), armhf))
-	CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
+	CMAKE_EXTRA +=
+# Disable thin lto on all archs
+# it needs gcc-8 after after 8 will reject the -flto=thin arg
+# And BOOTSTRAP_LLVM_ENABLE_LTO wil generate .so with llvm IR instead
+# of native code
+# -DLLVM_ENABLE_LTO="Thin"
 endif
 endif
 endif
