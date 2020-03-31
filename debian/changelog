@@ -146,7 +146,7 @@ llvm-toolchain-snapshot (1:10~+20191229111838+6991d5728f1-1~exp1) experimental; 
 llvm-toolchain-snapshot (1:10~+201911120943210600592dd459242-1~exp1) experimental; urgency=medium
 
   * Repack to move to git
-  * Change the versionning scheme to git:
+  * Change the versioning scheme to git:
     Infos of the last commit
     - ~+ (this syntax is to make sure that this version > ~svn)
     - date
@@ -280,7 +280,7 @@ llvm-toolchain-9 (1:9.0.1-11) unstable; urgency=medium
     (closes: #955144)
     And disable thin lto on all archs
     It needs gcc-8 after after 8 will reject the -flto=thin arg
-    And BOOTSTRAP_LLVM_ENABLE_LTO wil generate .so with llvm IR instead
+    And BOOTSTRAP_LLVM_ENABLE_LTO will generate .so with llvm IR instead
     of native code
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 31 Mar 2020 21:11:56 +0200
