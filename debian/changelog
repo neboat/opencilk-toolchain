@@ -300,14 +300,10 @@ llvm-toolchain-9 (1:9.0.1-9) unstable; urgency=medium
 
 llvm-toolchain-9 (1:9.0.1-8) unstable; urgency=medium
 
-<<<<<<<
-  * Add two new python autopkgtests to avoid regressions in the future
-=======
   * Add two new python autopkgtests to avoid regressions in the future
   * Fix m68k architecture
   * Add Myself to uploaders
   * Revert site-packages/dist-packages hacking mv, this is done upstream now
->>>>>>>
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 23 Jan 2020 14:30:57 +0100
 
