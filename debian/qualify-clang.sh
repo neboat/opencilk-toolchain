@@ -110,8 +110,6 @@ echo '{
   "id": 0,
   "method": "initialize",
   "params": {
-    "processId": 123,
-    "rootPath": "clangd",
     "capabilities": {
       "textDocument": {
         "completion": {
@@ -125,13 +123,44 @@ echo '{
   }
 }
 ---
-{"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"uri":"test:///main.cpp","languageId":"cpp","version":1,"text":"int func_with_args(int a, int b);\nint main() {\nfunc_with\n}"}}}
+{
+    "jsonrpc": "2.0",
+    "method": "textDocument/didOpen",
+    "params": {
+        "textDocument": {
+            "uri": "test:///main.cpp",
+            "languageId": "cpp",
+            "version": 1,
+            "text": "int func_with_args(int a, int b);\nint main() {\nfunc_with\n}"
+        }
+    }
+}
 ---
-{"jsonrpc":"2.0","id":1,"method":"textDocument/completion","params":{"textDocument":{"uri":"test:///main.cpp"},"position":{"line":2,"character":7}}}
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "textDocument/completion",
+    "params": {
+        "textDocument": {
+            "uri": "test:///main.cpp"
+        },
+        "position": {
+            "line": 2,
+            "character": 7
+         }
+     }
+}
 ---
-{"jsonrpc":"2.0","id":4,"method":"shutdown"}
+{
+    "jsonrpc": "2.0",
+    "id": 4,
+    "method": "shutdown"
+}
 ---
-{"jsonrpc":"2.0","method":"exit"}
+{
+    "jsonrpc": "2.0",
+    "method": "exit"
+}
 ' > a.json
 
 clangd-$VERSION -lit-test -pch-storage=memory < a.json &> foo.log
@@ -159,8 +188,6 @@ echo '{
   "id": 0,
   "method": "initialize",
   "params": {
-    "processId": 123,
-    "rootPath": "clangd",
     "capabilities": {
       "textDocument": {
         "completion": {
@@ -174,13 +201,44 @@ echo '{
   }
 }
 ---
-{"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"uri":"file:///'$(pwd)'/cmaketest/foo.cpp","languageId":"cpp","version":1,"text":"'$content'"}}}
+{
+    "jsonrpc": "2.0",
+    "method": "textDocument/didOpen",
+    "params": {
+        "textDocument": {
+            "uri": "file:///'$(pwd)'/cmaketest/foo.cpp",
+            "languageId": "cpp",
+            "version": 1,
+            "text": "'$content'"
+        }
+    }
+}
 ---
-{"jsonrpc":"2.0","id":1,"method":"textDocument/completion","params":{"textDocument":{"uri":"file:///'$(pwd)'/cmaketest/foo.cpp"},"position":{"line":6,"character":18}}}
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "textDocument/completion",
+    "params": {
+        "textDocument": {
+             "uri": "file:///'$(pwd)'/cmaketest/foo.cpp"
+        },
+        "position": {
+             "line": 6,
+             "character": 18
+         }
+    }
+}
 ---
-{"jsonrpc":"2.0","id":4,"method":"shutdown"}
+{
+    "jsonrpc": "2.0",
+    "id": 4,
+    "method": "shutdown"
+}
 ---
-{"jsonrpc":"2.0","method":"exit"}
+{
+    "jsonrpc": "2.0",
+    "method": "exit"
+}
 ' > a.json
 
 rm -rf cmaketest && mkdir cmaketest
@@ -642,6 +700,40 @@ int main(int argc, char **argv)
 clang-$VERSION -fsanitize=address foo.c -o foo -lc
 ./foo &> /dev/null || true
 
+echo '
+#include <pthread.h>
+#include <stdio.h>
+
+int Global;
+
+void *Thread1(void *x) {
+  Global++;
+  return NULL;
+}
+
+void *Thread2(void *x) {
+  Global--;
+  return NULL;
+}
+
+int main() {
+  pthread_t t[2];
+  pthread_create(&t[0], NULL, Thread1, NULL);
+  pthread_create(&t[1], NULL, Thread2, NULL);
+  pthread_join(t[0], NULL);
+  pthread_join(t[1], NULL);
+} ' > foo.c
+
+clang-$VERSION -o foo -fsanitize=thread -g -O1 foo.c
+if ! strings ./foo 2>&1 | grep -q "tsan"; then
+    echo "binary doesn't contain tsan code"
+    strings foo
+    exit 42
+fi
+if ! ./foo 2>&1 | grep -q "data race"; then
+    echo "sanitize=address is failing"
+    exit 42
+fi
 
 echo '
 class a {
@@ -674,8 +766,12 @@ LANG=C clang-$VERSION -fsanitize=fuzzer test_fuzzer.cc &> foo.log || true
 if ! grep "No such file or directory" foo.log; then
     # This isn't failing on 64, so, look at the results
     if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
-        echo "fuzzer"
-        exit 42
+        echo "fuzzer. Output:"
+        ./a.out || true
+        if [ $DEB_HOST_ARCH != "arm64" ]; then
+            # Don't fail on arm64
+            exit 42
+        fi
     fi
 fi
 

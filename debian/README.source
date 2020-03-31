@@ -25,6 +25,9 @@ and symlinks are managed by the other package llvm-defaults
 * For riscv64, the hard-float ABI is used instead of the float one, and
   the target CPU is set to RV64GC instead of RV64I.
 
+* For s390x: set default abi to z196 for debian, and z13 for ubuntu.
+  See https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-10/+bug/1864226
+
 = Libraries =
 
 * sonames are created
@@ -32,5 +35,5 @@ and symlinks are managed by the other package llvm-defaults
 * Build-ID are enabled
 
 
- -- Sylvestre Ledru <sylvestre@debian.org>, Wed, 26 Dec 2018 22:56:30 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>, Mon, 30 Mar 2020 11:08:10 +0200
 
