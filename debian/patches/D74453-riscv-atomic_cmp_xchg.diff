@@ -1,0 +1,189 @@
+From 616289ed29225c0ddfe5699c7fdf42a0fcbe0ab4 Mon Sep 17 00:00:00 2001
+From: Jessica Clarke <jrtc27@jrtc27.com>
+Date: Wed, 1 Apr 2020 15:50:47 +0100
+Subject: [PATCH] [LegalizeTypes][RISCV] Correctly sign-extend comparison for
+ ATOMIC_CMP_XCHG
+
+Summary:
+Currently, the comparison argument used for ATOMIC_CMP_XCHG is legalised
+with GetPromotedInteger, which leaves the upper bits of the value
+undefind. Since this is used for comparing in an LR/SC loop with a
+full-width comparison, we must sign extend it. We introduce a new
+getExtendForAtomicCmpSwapArg to complement getExtendForAtomicOps, since
+many targets have compare-and-swap instructions (or pseudos) that
+correctly handle an any-extend input, and the existing function
+determines the extension of the result, whereas we are concerned with
+the input.
+
+This is related to https://reviews.llvm.org/D58829, which solved the
+issue for ATOMIC_CMP_SWAP_WITH_SUCCESS, but not the simpler
+ATOMIC_CMP_SWAP.
+
+Reviewers: asb, lenary, efriedma
+
+Reviewed By: asb
+
+Subscribers: arichardson, hiraditya, rbar, johnrusso, simoncook, sabuasal, niosHD, kito-cheng, shiva0217, MaskRay, zzheng, edward-jones, rogfer01, MartinMosbeck, brucehoult, the_o, rkruppe, jfb, PkmX, jocewei, psnobl, benna, Jim, s.egerton, pzheng, sameer.abuasal, apazos, luismarques, evandro, llvm-commits
+
+Tags: #llvm
+
+Differential Revision: https://reviews.llvm.org/D74453
+---
+ llvm/include/llvm/CodeGen/TargetLowering.h     | 12 ++++++++++++
+ .../SelectionDAG/LegalizeIntegerTypes.cpp      | 18 +++++++++++++++++-
+ llvm/lib/Target/RISCV/RISCVISelLowering.h      |  4 ++++
+ llvm/test/CodeGen/RISCV/atomic-cmpxchg.ll      | 10 ++++++++++
+ 4 files changed, 43 insertions(+), 1 deletion(-)
+
+diff --git a/llvm/include/llvm/CodeGen/TargetLowering.h b/llvm/include/llvm/CodeGen/TargetLowering.h
+index fefa8daa60a1..99601c436651 100644
+--- a/llvm/include/llvm/CodeGen/TargetLowering.h
++++ b/llvm/include/llvm/CodeGen/TargetLowering.h
+@@ -1962,6 +1962,18 @@ class TargetLoweringBase {
+     return ISD::ZERO_EXTEND;
+   }
+ 
++  /// Returns how the platform's atomic compare and swap expects its comparison
++  /// value to be extended (ZERO_EXTEND, SIGN_EXTEND, or ANY_EXTEND). This is
++  /// separate from getExtendForAtomicOps, which is concerned with the
++  /// sign-extension of the instruction's output, whereas here we are concerned
++  /// with the sign-extension of the input. For targets with compare-and-swap
++  /// instructions (or sub-word comparisons in their LL/SC loop expansions),
++  /// the input can be ANY_EXTEND, but the output will still have a specific
++  /// extension.
++  virtual ISD::NodeType getExtendForAtomicCmpSwapArg() const {
++    return ISD::ANY_EXTEND;
++  }
++
+   /// @}
+ 
+   /// Returns true if we should normalize
+diff --git a/llvm/lib/CodeGen/SelectionDAG/LegalizeIntegerTypes.cpp b/llvm/lib/CodeGen/SelectionDAG/LegalizeIntegerTypes.cpp
+index 0248b5121e3f..ed67f7dc8ea3 100644
+--- a/llvm/lib/CodeGen/SelectionDAG/LegalizeIntegerTypes.cpp
++++ b/llvm/lib/CodeGen/SelectionDAG/LegalizeIntegerTypes.cpp
+@@ -278,8 +278,24 @@ SDValue DAGTypeLegalizer::PromoteIntRes_AtomicCmpSwap(AtomicSDNode *N,
+     return Res.getValue(1);
+   }
+ 
+-  SDValue Op2 = GetPromotedInteger(N->getOperand(2));
++  // Op2 is used for the comparison and thus must be extended according to the
++  // target's atomic operations. Op3 is merely stored and so can be left alone.
++  SDValue Op2 = N->getOperand(2);
+   SDValue Op3 = GetPromotedInteger(N->getOperand(3));
++  switch (TLI.getExtendForAtomicCmpSwapArg()) {
++  case ISD::SIGN_EXTEND:
++    Op2 = SExtPromotedInteger(Op2);
++    break;
++  case ISD::ZERO_EXTEND:
++    Op2 = ZExtPromotedInteger(Op2);
++    break;
++  case ISD::ANY_EXTEND:
++    Op2 = GetPromotedInteger(Op2);
++    break;
++  default:
++    llvm_unreachable("Invalid atomic op extension");
++  }
++
+   SDVTList VTs =
+       DAG.getVTList(Op2.getValueType(), N->getValueType(1), MVT::Other);
+   SDValue Res = DAG.getAtomicCmpSwap(
+diff --git a/llvm/lib/Target/RISCV/RISCVISelLowering.h b/llvm/lib/Target/RISCV/RISCVISelLowering.h
+index 929169dd62d9..f76abf22e4db 100644
+--- a/llvm/lib/Target/RISCV/RISCVISelLowering.h
++++ b/llvm/lib/Target/RISCV/RISCVISelLowering.h
+@@ -129,6 +129,10 @@ class RISCVTargetLowering : public TargetLowering {
+     return ISD::SIGN_EXTEND;
+   }
+ 
++  ISD::NodeType getExtendForAtomicCmpSwapArg() const override {
++    return ISD::SIGN_EXTEND;
++  }
++
+   bool shouldExpandShift(SelectionDAG &DAG, SDNode *N) const override {
+     if (DAG.getMachineFunction().getFunction().hasMinSize())
+       return false;
+diff --git a/llvm/test/CodeGen/RISCV/atomic-cmpxchg.ll b/llvm/test/CodeGen/RISCV/atomic-cmpxchg.ll
+index 43da05ebe7c7..f2691ba1a771 100644
+--- a/llvm/test/CodeGen/RISCV/atomic-cmpxchg.ll
++++ b/llvm/test/CodeGen/RISCV/atomic-cmpxchg.ll
+@@ -1628,6 +1628,7 @@ define void @cmpxchg_i32_monotonic_monotonic(i32* %ptr, i32 %cmp, i32 %val) noun
+ ;
+ ; RV64IA-LABEL: cmpxchg_i32_monotonic_monotonic:
+ ; RV64IA:       # %bb.0:
++; RV64IA-NEXT:    sext.w a1, a1
+ ; RV64IA-NEXT:  .LBB20_1: # =>This Inner Loop Header: Depth=1
+ ; RV64IA-NEXT:    lr.w a3, (a0)
+ ; RV64IA-NEXT:    bne a3, a1, .LBB20_3
+@@ -1680,6 +1681,7 @@ define void @cmpxchg_i32_acquire_monotonic(i32* %ptr, i32 %cmp, i32 %val) nounwi
+ ;
+ ; RV64IA-LABEL: cmpxchg_i32_acquire_monotonic:
+ ; RV64IA:       # %bb.0:
++; RV64IA-NEXT:    sext.w a1, a1
+ ; RV64IA-NEXT:  .LBB21_1: # =>This Inner Loop Header: Depth=1
+ ; RV64IA-NEXT:    lr.w.aq a3, (a0)
+ ; RV64IA-NEXT:    bne a3, a1, .LBB21_3
+@@ -1732,6 +1734,7 @@ define void @cmpxchg_i32_acquire_acquire(i32* %ptr, i32 %cmp, i32 %val) nounwind
+ ;
+ ; RV64IA-LABEL: cmpxchg_i32_acquire_acquire:
+ ; RV64IA:       # %bb.0:
++; RV64IA-NEXT:    sext.w a1, a1
+ ; RV64IA-NEXT:  .LBB22_1: # =>This Inner Loop Header: Depth=1
+ ; RV64IA-NEXT:    lr.w.aq a3, (a0)
+ ; RV64IA-NEXT:    bne a3, a1, .LBB22_3
+@@ -1784,6 +1787,7 @@ define void @cmpxchg_i32_release_monotonic(i32* %ptr, i32 %cmp, i32 %val) nounwi
+ ;
+ ; RV64IA-LABEL: cmpxchg_i32_release_monotonic:
+ ; RV64IA:       # %bb.0:
++; RV64IA-NEXT:    sext.w a1, a1
+ ; RV64IA-NEXT:  .LBB23_1: # =>This Inner Loop Header: Depth=1
+ ; RV64IA-NEXT:    lr.w a3, (a0)
+ ; RV64IA-NEXT:    bne a3, a1, .LBB23_3
+@@ -1836,6 +1840,7 @@ define void @cmpxchg_i32_release_acquire(i32* %ptr, i32 %cmp, i32 %val) nounwind
+ ;
+ ; RV64IA-LABEL: cmpxchg_i32_release_acquire:
+ ; RV64IA:       # %bb.0:
++; RV64IA-NEXT:    sext.w a1, a1
+ ; RV64IA-NEXT:  .LBB24_1: # =>This Inner Loop Header: Depth=1
+ ; RV64IA-NEXT:    lr.w a3, (a0)
+ ; RV64IA-NEXT:    bne a3, a1, .LBB24_3
+@@ -1888,6 +1893,7 @@ define void @cmpxchg_i32_acq_rel_monotonic(i32* %ptr, i32 %cmp, i32 %val) nounwi
+ ;
+ ; RV64IA-LABEL: cmpxchg_i32_acq_rel_monotonic:
+ ; RV64IA:       # %bb.0:
++; RV64IA-NEXT:    sext.w a1, a1
+ ; RV64IA-NEXT:  .LBB25_1: # =>This Inner Loop Header: Depth=1
+ ; RV64IA-NEXT:    lr.w.aq a3, (a0)
+ ; RV64IA-NEXT:    bne a3, a1, .LBB25_3
+@@ -1940,6 +1946,7 @@ define void @cmpxchg_i32_acq_rel_acquire(i32* %ptr, i32 %cmp, i32 %val) nounwind
+ ;
+ ; RV64IA-LABEL: cmpxchg_i32_acq_rel_acquire:
+ ; RV64IA:       # %bb.0:
++; RV64IA-NEXT:    sext.w a1, a1
+ ; RV64IA-NEXT:  .LBB26_1: # =>This Inner Loop Header: Depth=1
+ ; RV64IA-NEXT:    lr.w.aq a3, (a0)
+ ; RV64IA-NEXT:    bne a3, a1, .LBB26_3
+@@ -1992,6 +1999,7 @@ define void @cmpxchg_i32_seq_cst_monotonic(i32* %ptr, i32 %cmp, i32 %val) nounwi
+ ;
+ ; RV64IA-LABEL: cmpxchg_i32_seq_cst_monotonic:
+ ; RV64IA:       # %bb.0:
++; RV64IA-NEXT:    sext.w a1, a1
+ ; RV64IA-NEXT:  .LBB27_1: # =>This Inner Loop Header: Depth=1
+ ; RV64IA-NEXT:    lr.w.aqrl a3, (a0)
+ ; RV64IA-NEXT:    bne a3, a1, .LBB27_3
+@@ -2044,6 +2052,7 @@ define void @cmpxchg_i32_seq_cst_acquire(i32* %ptr, i32 %cmp, i32 %val) nounwind
+ ;
+ ; RV64IA-LABEL: cmpxchg_i32_seq_cst_acquire:
+ ; RV64IA:       # %bb.0:
++; RV64IA-NEXT:    sext.w a1, a1
+ ; RV64IA-NEXT:  .LBB28_1: # =>This Inner Loop Header: Depth=1
+ ; RV64IA-NEXT:    lr.w.aqrl a3, (a0)
+ ; RV64IA-NEXT:    bne a3, a1, .LBB28_3
+@@ -2096,6 +2105,7 @@ define void @cmpxchg_i32_seq_cst_seq_cst(i32* %ptr, i32 %cmp, i32 %val) nounwind
+ ;
+ ; RV64IA-LABEL: cmpxchg_i32_seq_cst_seq_cst:
+ ; RV64IA:       # %bb.0:
++; RV64IA-NEXT:    sext.w a1, a1
+ ; RV64IA-NEXT:  .LBB29_1: # =>This Inner Loop Header: Depth=1
+ ; RV64IA-NEXT:    lr.w.aqrl a3, (a0)
+ ; RV64IA-NEXT:    bne a3, a1, .LBB29_3
