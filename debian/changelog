@@ -278,6 +278,13 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
 
+llvm-toolchain-9 (1:9.0.1-12) UNRELEASED; urgency=medium
+
+  * Cherry-pick upstream patch D74453 to fix atomic compare-and-swap on
+    riscv64.
+
+ -- Jessica Clarke <jrtc27@debian.org>  Wed, 01 Apr 2020 16:23:55 +0100
+
 llvm-toolchain-9 (1:9.0.1-11) unstable; urgency=medium
 
   * Allow one to build g++ 9 & 10 to fix a gcc build dependency
