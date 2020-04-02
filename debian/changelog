@@ -1,8 +1,9 @@
-llvm-toolchain-10 (1:10.0.0-2) UNRELEASED; urgency=medium
+llvm-toolchain-10 (1:10.0.0-2) unstable; urgency=medium
 
   [ Dimitri John Ledkov <xnox@ubuntu.com> ]
   * s390x: set default abi to z196 for debian, and z13 for ubuntu.
     LP: #1864226
+
   [ Matthias Klose <doko@ubuntu.com> ]
   * Apply D76596.diff, proposed backport from the trunk. LP: #1867173.
 
