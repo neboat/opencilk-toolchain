@@ -1,3 +1,11 @@
+llvm-toolchain-10 (1:10.0.0-3) unstable; urgency=medium
+
+  [ Jessica Clarke ]
+  * Cherry-pick upstream patch D74453 to fix atomic compare-and-swap on
+    riscv64.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 02 Apr 2020 21:48:13 +0200
+
 llvm-toolchain-10 (1:10.0.0-2) unstable; urgency=medium
 
   [ Dimitri John Ledkov <xnox@ubuntu.com> ]
