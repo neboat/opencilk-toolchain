@@ -6,6 +6,7 @@ llvm-toolchain-10 (1:10.0.0-2) unstable; urgency=medium
 
   [ Matthias Klose <doko@ubuntu.com> ]
   * Apply D76596.diff, proposed backport from the trunk. LP: #1867173.
+    This was causing postgresql to FTBFS with llvm 10
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 27 Mar 2020 05:16:28 +0100
 
