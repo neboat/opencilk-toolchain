@@ -1,0 +1,57 @@
+Index: llvm-toolchain-10-10.0.0/clang/lib/Driver/ToolChains/Gnu.cpp
+===================================================================
+--- llvm-toolchain-10-10.0.0.orig/clang/lib/Driver/ToolChains/Gnu.cpp
++++ llvm-toolchain-10-10.0.0/clang/lib/Driver/ToolChains/Gnu.cpp
+@@ -1570,13 +1570,16 @@ static void findRISCVBareMetalMultilibs(
+     Result.Multilibs = RISCVMultilibs;
+ }
+ 
+-static void findRISCVMultilibs(const Driver &D,
++static bool findRISCVMultilibs(const Driver &D,
+                                const llvm::Triple &TargetTriple, StringRef Path,
+                                const ArgList &Args, DetectedMultilibs &Result) {
+-  if (TargetTriple.getOS() == llvm::Triple::UnknownOS)
+-    return findRISCVBareMetalMultilibs(D, TargetTriple, Path, Args, Result);
++  if (TargetTriple.getOS() == llvm::Triple::UnknownOS) {
++    findRISCVBareMetalMultilibs(D, TargetTriple, Path, Args, Result);
++    return true;
++  }
+ 
+   FilterNonExistent NonExistent(Path, "/crtbegin.o", D.getVFS());
++  Multilib Default;
+   Multilib Ilp32 = makeMultilib("lib32/ilp32").flag("+m32").flag("+mabi=ilp32");
+   Multilib Ilp32f =
+       makeMultilib("lib32/ilp32f").flag("+m32").flag("+mabi=ilp32f");
+@@ -1587,7 +1590,7 @@ static void findRISCVMultilibs(const Dri
+   Multilib Lp64d = makeMultilib("lib64/lp64d").flag("+m64").flag("+mabi=lp64d");
+   MultilibSet RISCVMultilibs =
+       MultilibSet()
+-          .Either({Ilp32, Ilp32f, Ilp32d, Lp64, Lp64f, Lp64d})
++          .Either({Default, Ilp32, Ilp32f, Ilp32d, Lp64, Lp64f, Lp64d})
+           .FilterOut(NonExistent);
+ 
+   Multilib::flags_list Flags;
+@@ -1603,8 +1606,11 @@ static void findRISCVMultilibs(const Dri
+   addMultilibFlag(ABIName == "lp64f", "mabi=lp64f", Flags);
+   addMultilibFlag(ABIName == "lp64d", "mabi=lp64d", Flags);
+ 
+-  if (RISCVMultilibs.select(Flags, Result.SelectedMultilib))
+-    Result.Multilibs = RISCVMultilibs;
++  if (!RISCVMultilibs.select(Flags, Result.SelectedMultilib))
++    return false;
++
++  Result.Multilibs = RISCVMultilibs;
++  return true;
+ }
+ 
+ static bool findBiarchMultilibs(const Driver &D,
+@@ -2382,7 +2388,8 @@ bool Generic_GCC::GCCInstallationDetecto
+     if (!findMIPSMultilibs(D, TargetTriple, Path, Args, Detected))
+       return false;
+   } else if (TargetTriple.isRISCV()) {
+-    findRISCVMultilibs(D, TargetTriple, Path, Args, Detected);
++    if (!findRISCVMultilibs(D, TargetTriple, Path, Args, Detected))
++      return false;
+   } else if (isMSP430(TargetArch)) {
+     findMSP430Multilibs(D, TargetTriple, Path, Args, Detected);
+   } else if (TargetArch == llvm::Triple::avr) {
