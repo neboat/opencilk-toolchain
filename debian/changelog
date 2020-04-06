@@ -1,7 +1,15 @@
 llvm-toolchain-9 (1:9.0.1-12) UNRELEASED; urgency=medium
 
+  [ Jessica Clarke ]
   * Cherry-pick upstream patch D74453 to fix atomic compare-and-swap on
     riscv64.
+
+  [ William Grant ]
+  * debian/patches/riscv64-multilib-empty.patch: Adjust riscv64 GCC detector
+    to also check for existence of crtbegin.o in the default multilib dir,
+    like most other ports. Fixes FTBFS on riscv64, since on Ubuntu
+    /usr/lib/gcc/riscv64-linux-gnu/10 exists but is empty (gcc-10-base is
+    installed, but libgcc-10-dev is not).
 
  -- Jessica Clarke <jrtc27@debian.org>  Wed, 01 Apr 2020 16:23:55 +0100
 
