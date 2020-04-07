@@ -140,3 +140,4 @@ no-z3.patch
 
 python3-shebang.patch
 print-lldb-path.patch
+disable-D77574-caused-PR-45453.diff

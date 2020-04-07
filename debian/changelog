@@ -1,11 +1,14 @@
-llvm-toolchain-snapshot (1:11~++20200325101830+b58902bc72c-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:11~++20200407100707+717a4608676-1~exp1) UNRELEASED; urgency=medium
 
   * New snapshot release
   * Bring back libc++-experimental
   * remove no-cgi.patch - applied upstream
   * Also install liblldMachO2.a in liblld
+  * Reoder the cmake arg
+  * disable-D77574-caused-PR-45453.diff: revert a change to address:
+    https://bugs.llvm.org/show_bug.cgi?id=45453
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 25 Mar 2020 22:21:47 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 07 Apr 2020 10:10:24 +0200
 
 llvm-toolchain-snapshot (1:11~++20200307074845+ec1d1f6ae70-1~exp1) experimental; urgency=medium
 
