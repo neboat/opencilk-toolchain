@@ -36,6 +36,9 @@ GIT_BASE_URL=https://github.com/llvm/llvm-project
 
 PATH_DEBIAN="$(pwd)/$(dirname $0)/../"
 cd "$PATH_DEBIAN"
+
+git stash && git pull && git stash apply
+
 MAJOR_VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 if test -z "$MAJOR_VERSION"; then
     echo "Could not detect the major version"
