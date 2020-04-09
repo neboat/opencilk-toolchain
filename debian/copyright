@@ -86,10 +86,6 @@ License: public-domain
  polly/lib/JSON/LICENSE.txt claims that these files are in the public domain, but
  the machine-readable copyright spec requires additional clarification.
 
-Files: polly/tools/GPURuntime/*
-Copyright: Polly Team
-License: U-OF-I-BSD-LIKE or MIT
-
 Files: llvm/llvmtest/YAMLParser/*
 Copyright: 2006 Kirill Simonov
 License: MIT
