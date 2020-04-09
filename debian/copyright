@@ -50,7 +50,7 @@ Copyright: 1992, 1993, 1994 Henry Spencer
 License: BSD-3-clause
 
 Files: lib/Support/MD5.cpp llvm/include/llvm/Support/MD5.h
-Copyright: 2001 Alexander Peslyak aka Solar Designer <solar at openwall.com>
+Copyright: 2001 Alexander Peslyak <solar at openwall.com>
 License: solar-public-domain
  This software was written by Alexander Peslyak in 2001.  No copyright is
  claimed, and the software is hereby placed in the public domain.
