@@ -94,7 +94,7 @@ Files: polly/tools/GPURuntime/*
 Copyright: Polly Team
 License: U-OF-I-BSD-LIKE or MIT
 
-Files: test/YAMLParser/*
+Files: llvm/llvmtest/YAMLParser/*
 Copyright: 2006 Kirill Simonov
 License: MIT
 
