@@ -128,6 +128,7 @@ bootstrap-fix-include-next.diff
 
 # riscv64
 clang-riscv64-multiarch.diff
+D74453-riscv-atomic_cmp_xchg.diff
 
 # Compiler-rt - workaround
 workaround-bug-42994-use-linker.diff

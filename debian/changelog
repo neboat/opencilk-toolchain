@@ -41,11 +41,34 @@ llvm-toolchain-snapshot (1:11~++20200123111717+04fd2041561-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 23 Jan 2020 14:52:30 +0100
 
-llvm-toolchain-10 (1:10.0.0-2) UNRELEASED; urgency=medium
+llvm-toolchain-10 (1:10.0.0-3) unstable; urgency=medium
+
+  * ppc64el/autopkgtest: Just like with arm64, ignore two tests
+  * Update the copyright file with recent changes (Closes: #956287)
+    Thanks to Michael Lustfield for the detective work
+
+  [ Jessica Clarke ]
+  * Cherry-pick upstream patch D74453 to fix atomic compare-and-swap on
+    riscv64.
+
+  [ William Grant ]
+  * debian/patches/riscv64-multilib-empty.patch: Adjust riscv64 GCC detector
+    to also check for existence of crtbegin.o in the default multilib dir,
+    like most other ports. Fixes FTBFS on riscv64, since on Ubuntu
+    /usr/lib/gcc/riscv64-linux-gnu/10 exists but is empty (gcc-10-base is
+    installed, but libgcc-10-dev is not).
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 02 Apr 2020 21:48:13 +0200
+
+llvm-toolchain-10 (1:10.0.0-2) unstable; urgency=medium
 
   [ Dimitri John Ledkov <xnox@ubuntu.com> ]
   * s390x: set default abi to z196 for debian, and z13 for ubuntu.
     LP: #1864226
+
+  [ Matthias Klose <doko@ubuntu.com> ]
+  * Apply D76596.diff, proposed backport from the trunk. LP: #1867173.
+    This was causing postgresql to FTBFS with llvm 10
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 27 Mar 2020 05:16:28 +0100
 
@@ -189,7 +212,7 @@ llvm-toolchain-snapshot (1:10~+20191229111838+6991d5728f1-1~exp1) experimental; 
 llvm-toolchain-snapshot (1:10~+201911120943210600592dd459242-1~exp1) experimental; urgency=medium
 
   * Repack to move to git
-  * Change the versionning scheme to git:
+  * Change the versioning scheme to git:
     Infos of the last commit
     - ~+ (this syntax is to make sure that this version > ~svn)
     - date
@@ -317,13 +340,20 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
 
+llvm-toolchain-9 (1:9.0.1-12) UNRELEASED; urgency=medium
+
+  * Cherry-pick upstream patch D74453 to fix atomic compare-and-swap on
+    riscv64.
+
+ -- Jessica Clarke <jrtc27@debian.org>  Wed, 01 Apr 2020 16:23:55 +0100
+
 llvm-toolchain-9 (1:9.0.1-11) unstable; urgency=medium
 
   * Allow one to build g++ 9 & 10 to fix a gcc build dependency
     (closes: #955144)
     And disable thin lto on all archs
     It needs gcc-8 after after 8 will reject the -flto=thin arg
-    And BOOTSTRAP_LLVM_ENABLE_LTO wil generate .so with llvm IR instead
+    And BOOTSTRAP_LLVM_ENABLE_LTO will generate .so with llvm IR instead
     of native code
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 31 Mar 2020 21:11:56 +0200
