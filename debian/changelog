@@ -5,6 +5,8 @@ llvm-toolchain-snapshot (1:11~++20200407100707+717a4608676-1~exp1) UNRELEASED; u
   * remove no-cgi.patch - applied upstream
   * Also install liblldMachO2.a in liblld
   * Reoder the cmake arg
+  * Update the copyright file with recent changes (Closes: #956287)
+    Thanks to Michael Lustfield for the detective work
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 07 Apr 2020 10:10:24 +0200
 
