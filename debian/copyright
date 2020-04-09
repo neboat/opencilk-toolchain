@@ -120,6 +120,10 @@ Files: llvm/utils/unittest/googletest/*
 Copyright: 2006-2008, Google Inc.
 License: BSD-3-Clause
 
+Files: llvm/utils/unittest/googlemock/*
+Copyright: 2008, Google Inc.
+License: BSD-3-Clause
+
 Files: libcxx/*
 Copyright: 2009-2019
 License: BSD-3-Clause
