@@ -1,6 +1,8 @@
 llvm-toolchain-10 (1:10.0.0-3) unstable; urgency=medium
 
   * ppc64el/autopkgtest: Just like with arm64, ignore two tests
+  * Update the copyright file with recent changes (Closes: #956287)
+    Thanks to Michael Lustfield for the detective work
 
   [ Jessica Clarke ]
   * Cherry-pick upstream patch D74453 to fix atomic compare-and-swap on
