@@ -116,7 +116,7 @@ License: Apple
  Please see the License for the specific language governing rights and
  limitations under the License.
 
-Files: utils/unittest/googletest/*
+Files: llvm/utils/unittest/googletest/*
 Copyright: 2006-2008, Google Inc.
 License: BSD-3-Clause
 
