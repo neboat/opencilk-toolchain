@@ -24,10 +24,6 @@ License: APACHE-2-LLVM-EXCEPTIONS
  the License, but only in their entirety and only with respect to the Combined
  Software.
 
-Files: clang/lib/Headers/*
-Copyright: 2003-2007 University of Illinois at Urbana-Champaign
-License: Expat
-
 Files: compiler-rt/lib/BlocksRuntime/Block.h
 Copyright: 2008-2010 Apple, Inc.
 License: MIT
@@ -125,6 +121,8 @@ Copyright: 2008, Google Inc.
 License: BSD-3-Clause
 
 Files: clang/lib/Headers/cuda_wrappers/*
+ clang/lib/Headers/avx512vlvp2intersectintrin.h
+ clang/lib/Headers/avx512vp2intersectintrin.h
 Copyright: 2016-2020, Google Inc.
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
