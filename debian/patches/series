@@ -145,3 +145,4 @@ d21664cce1db8debe2528f36b1fbd2b8af9c9401.patch
 0001-systemz-allow-configuring-default-SYSTEMZ_DEFAULT_AR.patch
 
 D76596.diff
+riscv64-multilib-empty.patch
