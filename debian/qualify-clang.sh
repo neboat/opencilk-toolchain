@@ -1053,6 +1053,29 @@ LLVM_PROFILE_FILE="foo-%p.profraw" ./foo
 llvm-profdata-$VERSION merge -output=foo.profdata foo-*.profraw
 clang++-$VERSION -O2 -fprofile-instr-use=foo.profdata foo.cc -o foo
 
+# https://bugs.llvm.org/show_bug.cgi?id=44870
+cat <<EOF > foo.cpp
+#include <clang/CodeGen/BackendUtil.h>
+
+using namespace clang;
+
+int main() {
+  DiagnosticsEngine* diags;
+  HeaderSearchOptions* hsOpts;
+  CodeGenOptions* cgOpts;
+  TargetOptions* tOpts;
+  LangOptions* lOpts;
+  llvm::DataLayout* tDesc;
+  llvm::Module* m;
+  BackendAction* action;
+  std::unique_ptr<raw_pwrite_stream> AsmOutStream;
+
+  EmitBackendOutput(*diags, *hsOpts, *cgOpts, *tOpts, *lOpts, *tDesc, m, *action, std::move(AsmOutStream));
+}
+EOF
+clang++-$VERSION foo.cpp -o test -lclangBasic -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangCodeGen -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangFrontend -lclangDriver -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -lclangBasic -ldl  /usr/lib/llvm-10/lib/libLLVM-10.so -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -ldl  -I /usr/lib/llvm-$VERSION/include/ -L/usr/lib/llvm-$VERSION/lib/ -lPolly -lPollyPPCG -lPollyISL
+
+
 if test ! -f /usr/bin/lldb-$VERSION; then
     echo "Install lldb-$VERSION";
     exit -1;
