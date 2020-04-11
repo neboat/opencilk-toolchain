@@ -243,7 +243,7 @@ llvm-toolchain-snapshot (1:11~++20200621103028+10b0539772d-1~exp1) UNRELEASED; u
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 21 Jun 2020 10:33:23 +0200
 
-llvm-toolchain-snapshot (1:11~++20200410111154+35052267023-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:11~++20200411120955+c65e6079fc9-1~exp1) UNRELEASED; urgency=medium
 
   * New snapshot release
   * Bring back libc++-experimental
@@ -253,7 +253,7 @@ llvm-toolchain-snapshot (1:11~++20200410111154+35052267023-1~exp1) experimental;
   * Update the copyright file with recent changes (Closes: #956287)
     Thanks to Michael Lustfield for the detective work
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 11 Apr 2020 12:03:35 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 11 Apr 2020 12:27:18 +0200
 
 llvm-toolchain-snapshot (1:11~++20200409051253+d08105482e1-1~exp1) experimental; urgency=medium
 
