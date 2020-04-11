@@ -1015,23 +1015,23 @@ int main()
     return 0;
 }
 " > foo.c
-#clang-$VERSION -O3 -mllvm -polly -mllvm -polly-parallel -lgomp  foo.c
+clang-$VERSION -O3 -mllvm -polly -mllvm -polly-parallel -lgomp  foo.c
 # Comment because of https://bugs.llvm.org/show_bug.cgi?id=43164
 #clang-$VERSION -O3 -mllvm -polly -mllvm -lgomp -polly-parallel foo.c
-#clang-$VERSION -O3 -mllvm -polly -mllvm -polly-vectorizer=stripmine foo.c
-#clang-$VERSION -S -fsave-optimization-record -emit-llvm foo.c -o matmul.s
-#opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
-#opt-$VERSION -basicaa -polly-ast -analyze -q matmul.preopt.ll -polly-process-unprofitable > /dev/null
-#if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
-#    echo "Install llvm-$VERSION-tools"
-#    exit 42
-#fi
-#/usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py -source-dir .  matmul.opt.yaml -o ./output > /dev/null
+clang-$VERSION -O3 -mllvm -polly -mllvm -polly-vectorizer=stripmine foo.c
+clang-$VERSION -S -fsave-optimization-record -emit-llvm foo.c -o matmul.s
+opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
+opt-$VERSION -basicaa -polly-ast -analyze -q matmul.preopt.ll -polly-process-unprofitable > /dev/null
+if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
+    echo "Install llvm-$VERSION-tools"
+    exit 42
+fi
+/usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py -source-dir .  matmul.opt.yaml -o ./output > /dev/null
 
-#if ! grep -q "not inlined into" output/foo.c.html 2>&1; then
-#    echo "Could not find the output from polly"
-#    exit -1
-#fi
+if ! grep -q "not inlined into" output/foo.c.html 2>&1; then
+    echo "Could not find the output from polly"
+    exit -1
+fi
 
 echo "
 int foo(int x, int y) __attribute__((always_inline));
@@ -1056,6 +1056,29 @@ clang++-$VERSION -O2 -fprofile-instr-generate foo.cc -o foo
 LLVM_PROFILE_FILE="foo-%p.profraw" ./foo
 llvm-profdata-$VERSION merge -output=foo.profdata foo-*.profraw
 clang++-$VERSION -O2 -fprofile-instr-use=foo.profdata foo.cc -o foo
+
+# https://bugs.llvm.org/show_bug.cgi?id=44870
+cat <<EOF > foo.cpp
+#include <clang/CodeGen/BackendUtil.h>
+
+using namespace clang;
+
+int main() {
+  DiagnosticsEngine* diags;
+  HeaderSearchOptions* hsOpts;
+  CodeGenOptions* cgOpts;
+  TargetOptions* tOpts;
+  LangOptions* lOpts;
+  llvm::DataLayout* tDesc;
+  llvm::Module* m;
+  BackendAction* action;
+  std::unique_ptr<raw_pwrite_stream> AsmOutStream;
+
+  EmitBackendOutput(*diags, *hsOpts, *cgOpts, *tOpts, *lOpts, *tDesc, m, *action, std::move(AsmOutStream));
+}
+EOF
+clang++-$VERSION foo.cpp -o test -lclangBasic -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangCodeGen -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangFrontend -lclangDriver -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -lclangBasic -ldl  /usr/lib/llvm-10/lib/libLLVM-10.so -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -ldl  -I /usr/lib/llvm-$VERSION/include/ -L/usr/lib/llvm-$VERSION/lib/ -lPolly -lPollyPPCG -lPollyISL
+
 
 if test ! -f /usr/bin/lldb-$VERSION; then
     echo "Install lldb-$VERSION";
