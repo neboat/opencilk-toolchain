@@ -1,4 +1,4 @@
-llvm-toolchain-9 (1:9.0.1-12) UNRELEASED; urgency=medium
+llvm-toolchain-9 (1:9.0.1-12) unstable; urgency=medium
 
   [ Jessica Clarke ]
   * Cherry-pick upstream patch D74453 to fix atomic compare-and-swap on
