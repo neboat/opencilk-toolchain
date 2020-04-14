@@ -141,7 +141,7 @@ no-z3.patch
 python3-shebang.patch
 print-lldb-path.patch
 no-cgi.patch
-d21664cce1db8debe2528f36b1fbd2b8af9c9401.patch
+try-to-fix-polly-link.patch
 
 0001-systemz-allow-configuring-default-SYSTEMZ_DEFAULT_AR.patch
 
