@@ -2,6 +2,7 @@ llvm-toolchain-10 (1:10.0.0-4) unstable; urgency=medium
 
   * Also ship polly libs in libclang-common-10-dev.
     Fixes bug #44870 (upstream)
+  * move risc patches into their own directory
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 10 Apr 2020 10:27:41 +0200
 

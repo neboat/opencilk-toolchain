@@ -125,8 +125,9 @@ hurd/hurd-pathmax.diff
 bootstrap-fix-include-next.diff
 
 # riscv64
-clang-riscv64-multiarch.diff
-D74453-riscv-atomic_cmp_xchg.diff
+risc/clang-riscv64-multiarch.diff
+risc/D74453-riscv-atomic_cmp_xchg.diff
+risc/riscv64-multilib-empty.patch
 
 # Compiler-rt - workaround
 workaround-bug-42994-use-linker.diff
@@ -145,4 +146,3 @@ d21664cce1db8debe2528f36b1fbd2b8af9c9401.patch
 0001-systemz-allow-configuring-default-SYSTEMZ_DEFAULT_AR.patch
 
 D76596.diff
-riscv64-multilib-empty.patch
