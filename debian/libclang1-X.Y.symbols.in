@@ -149,6 +149,7 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Type_getOffsetOf@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Type_getSizeOf@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Type_getTemplateArgumentAsType@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_Type_getValueType@LLVM_@LLVM_VERSION@ 1:@LLVM_VERSION@~++20200417041528+cc0ec3fdb9d-1~
  clang_Type_isTransparentTagTypedef@LLVM_@LLVM_VERSION@ 1:5.0~svn302377-1~
  clang_Type_visitFields@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_VerbatimBlockLineComment_getText@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~

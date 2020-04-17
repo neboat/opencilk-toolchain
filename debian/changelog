@@ -3,6 +3,7 @@ llvm-toolchain-snapshot (1:11~++20200416103106+997f33cfeec-1~exp1) UNRELEASED; u
   * experimental New snapshot release
   * Add -DLLVM_POLLY_LINK_INTO_TOOLS=OFF to workaround
     https://bugs.llvm.org/show_bug.cgi?id=45571
+  * New symbol clang_Type_getValueType added
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Apr 2020 10:34:32 +0200
 
