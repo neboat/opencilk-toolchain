@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/lib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_11~++20200418115741+8e0c5f72005/compiler-rt/lib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/compiler-rt/lib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/lib/CMakeLists.txt
-@@ -57,5 +57,8 @@ if(COMPILER_RT_BUILD_XRAY)
+--- llvm-toolchain-snapshot_11~++20200418115741+8e0c5f72005.orig/compiler-rt/lib/CMakeLists.txt
++++ llvm-toolchain-snapshot_11~++20200418115741+8e0c5f72005/compiler-rt/lib/CMakeLists.txt
+@@ -57,7 +57,10 @@ if(COMPILER_RT_BUILD_XRAY)
  endif()
  
  if(COMPILER_RT_BUILD_LIBFUZZER)
@@ -12,10 +12,12 @@ Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/lib/C
 +      compiler_rt_build_runtime(fuzzer)
 +    endif()
  endif()
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/test/CMakeLists.txt
+ 
+ # It doesn't normally make sense to build runtimes when a sanitizer is enabled,
+Index: llvm-toolchain-snapshot_11~++20200418115741+8e0c5f72005/compiler-rt/test/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/compiler-rt/test/CMakeLists.txt
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/test/CMakeLists.txt
+--- llvm-toolchain-snapshot_11~++20200418115741+8e0c5f72005.orig/compiler-rt/test/CMakeLists.txt
++++ llvm-toolchain-snapshot_11~++20200418115741+8e0c5f72005/compiler-rt/test/CMakeLists.txt
 @@ -55,7 +55,10 @@ if(COMPILER_RT_CAN_EXECUTE_TESTS)
  
      # OpenBSD not supporting asan, cannot run the tests
