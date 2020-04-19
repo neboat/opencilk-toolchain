@@ -16,5 +16,13 @@ echo "unpack of $LLVM_ARCHIVE"
 tar Jxf $LLVM_ARCHIVE
 cd llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~+$VERSION/
 
+VER_FOUND=$(grep "PACKAGE_VERSION " libcxx/CMakeLists.txt|awk '{print $2}'|cut -d\) -f1)
+if test "${MAJOR_VERSION}.0.0" != "$VER_FOUND"; then
+    echo "Mismatch of version"
+    echo "Expected $MAJOR_VERSION / Found $VER_FOUND"
+    echo "Update unpack.sh"
+    exit 1
+fi
+
 cp -R ../$ORIG_VERSION/debian .
 QUILT_PATCHES=debian/patches/ quilt push -a --fuzz=0
