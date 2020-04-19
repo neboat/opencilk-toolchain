@@ -52,10 +52,18 @@ llvm-toolchain-snapshot (1:11~++20200123111717+04fd2041561-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 23 Jan 2020 14:52:30 +0100
 
+llvm-toolchain-10 (1:10.0.1-1~++20200417104440+92d5c1be9ee) UNRELEASED; urgency=medium
+
+  * prepare version 10.0.1 (go back to 10.0.0-5 for debian if needed)
+  * Enable LLVM_ENABLE_DUMP (Closes: #956966)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 17 Apr 2020 23:24:13 +0200
+
 llvm-toolchain-10 (1:10.0.0-4) unstable; urgency=medium
 
   * Also ship polly libs in libclang-common-10-dev.
     Fixes bug #44870 (upstream)
+  * move risc patches into their own directory
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 10 Apr 2020 10:27:41 +0200
 
