@@ -298,6 +298,14 @@ if ! ./foo.bc|grep -q "lli foo"; then
     exit 1
 fi
 
+clang-$VERSION -O3 -emit-llvm foo.c -c -o foo.bc
+chmod +x foo.bc
+if ! ./foo.bc|grep -q "lli foo"; then
+    echo "executing ./foo.bc failed"
+    ./foo.bc
+    exit 1
+fi
+
 echo '#include <stddef.h>' > foo.c
 clang-$VERSION -c foo.c
 
@@ -1318,6 +1326,6 @@ fi
 
 #clean up
 rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.* test_fuzzer.cc foo.* o
-rm -rf output matmul.* *profraw opt.ll foo.ll foo.s
+rm -rf output matmul.* *profraw opt.ll
 
 echo "Completed"
