@@ -305,6 +305,11 @@ if ! ./foo.bc|grep -q "lli foo"; then
     ./foo.bc
     exit 1
 fi
+if ! llvm-dis-$VERSION < foo.bc|grep -q "lli foo"; then
+    echo "llvm assembly code failed"
+    llvm-dis-$VERSION < foo.bc
+    exit 1
+fi
 
 echo '#include <stddef.h>' > foo.c
 clang-$VERSION -c foo.c
