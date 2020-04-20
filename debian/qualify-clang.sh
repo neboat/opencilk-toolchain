@@ -272,6 +272,25 @@ rm -f foo.log
 echo 'int main() {return 0;}' > foo.c
 clang-$VERSION foo.c
 
+echo '#include <stdio.h>
+int main() {
+printf("lli foo");
+return 0;
+}' > foo.c
+clang-$VERSION -S -emit-llvm foo.c
+llc-$VERSION foo.ll
+if ! lli-$VERSION foo.ll|grep -q "lli foo"; then
+    echo "Not lli correct output"
+    lli-$VERSION foo.ll
+    exit 1
+fi
+opt-$VERSION -S -O3 foo.ll -o opt.ll
+if ! lli-$VERSION opt.ll|grep -q "lli foo"; then
+    echo "Not lli correct output after opt"
+    lli-$VERSION opt.ll
+    exit 1
+fi
+
 echo '#include <stddef.h>' > foo.c
 clang-$VERSION -c foo.c
 
@@ -1292,6 +1311,6 @@ fi
 
 #clean up
 rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.* test_fuzzer.cc foo.* o
-rm -rf output matmul.* *profraw
+rm -rf output matmul.* *profraw opt.ll foo.ll foo.s
 
 echo "Completed"
