@@ -100,7 +100,7 @@ if ! grep -q "namespace mozilla::dom" ../foo.cpp; then
     cat foo.log
     exit 1
 fi
-cd -
+cd - &> /dev/null
 rm -rf cmaketest
 
 echo "Testing clangd-$VERSION ..."
@@ -262,7 +262,7 @@ if ! grep -q '"insertText": "fonction_avec_args(${1:int a}, ${2:float b})",' foo
     cat foo.log
     exit 1
 fi
-cd -
+cd - &> /dev/null
 rm -rf cmaketest
 
 
@@ -447,7 +447,7 @@ clang++-$VERSION -std=c++11 foo.cpp
 
 echo "Testing linking clang-cpp ..."
 
-clang-$VERSION -lclang-cpp$VERSION -v foo.cpp -o o > /dev/null || true
+clang-$VERSION -lclang-cpp$VERSION -v foo.cpp -o o &> /dev/null || true
 if ! ldd o 2>&1|grep -q  libclang-cpp; then
 	echo "Didn't link against libclang-cpp$VERSION"
 	exit 42
@@ -691,7 +691,7 @@ clang-$VERSION -fprofile-instr-generate -fcoverage-mapping fuzz_me.cc Standalone
 rm -rf CORPUS
 mkdir -p CORPUS
 echo -n A > CORPUS/A
-./a.out CORPUS/*
+./a.out CORPUS/* &> /dev/null
 if ! ./a.out CORPUS/* 2>&1 | grep -q "running 1 inputs"; then
     echo "Coverage fuzzing failed"
     exit 1
@@ -702,7 +702,7 @@ if ! grep -q "return DataSize >= 3" foo.log; then
     echo "llvm-cov didn't show the expected output in fuzzing"
     exit 1
 fi
-echo -n FUZA > CORPUS/FUZA && ./a.out CORPUS/*
+echo -n FUZA > CORPUS/FUZA && ./a.out CORPUS/* &> /dev/null
 llvm-profdata-$VERSION merge -sparse *.profraw -o default.profdata
 llvm-cov-$VERSION show a.out -instr-profile=default.profdata -name=FuzzMe &> foo.log
 if ! grep -q "Data\[3\] == 'Z';" foo.log; then
