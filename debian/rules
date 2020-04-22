@@ -181,6 +181,11 @@ RUN_TEST=yes
 ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	RUN_TEST=no
 endif
+ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
+ifeq (riscv64,$(DEB_HOST_ARCH))
+	RUN_TEST=no
+endif
+endif
 
 ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # enable the build using scan-build
