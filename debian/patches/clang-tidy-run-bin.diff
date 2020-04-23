@@ -1,10 +1,10 @@
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
+Index: llvm-toolchain-snapshot_11~++20200423113502+bbb7921da97/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
-@@ -180,10 +180,10 @@ def main():
-                                    'clang-tidy and clang-apply-replacements in '
-                                    '$PATH.')
+--- llvm-toolchain-snapshot_11~++20200423113502+bbb7921da97.orig/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
++++ llvm-toolchain-snapshot_11~++20200423113502+bbb7921da97/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
+@@ -186,10 +186,10 @@ def main():
+                       action='store_true', help='allow alpha checkers from '
+                                                 'clang-analyzer.')
    parser.add_argument('-clang-tidy-binary', metavar='PATH',
 -                      default='clang-tidy',
 +                      default='clang-tidy-11',
