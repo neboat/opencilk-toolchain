@@ -47,7 +47,7 @@ if test -z "$CURRENT_VERSION"; then
     exit 1
 fi
 cd - &> /dev/null
-
+echo "MAJOR_VERSION=$MAJOR_VERSION / CURRENT_VERSION=$CURRENT_VERSION"
 if test -n "$1"; then
 # https://github.com/llvm/llvm-project/tree/release/9.x
 # For example: sh 4.0/debian/orig-tar.sh release/9.x
