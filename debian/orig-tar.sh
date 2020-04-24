@@ -118,7 +118,7 @@ if test -z  "$TAG" -a -z "$FINAL_RELEASE"; then
     # the + is here to make sure that this version is considered more recent than the svn
     # dpkg --compare-versions 10~svn374977-1~exp1 lt 10~+2019-svn374977-1~exp1
     # to verify that
-    VERSION="${VERSION}~++$(date +'%Y%m%d%I%M%S')+$(git log -1 --pretty=format:'%h')"
+    VERSION="${CURRENT_VERSION}~++$(date +'%Y%m%d%I%M%S')+$(git log -1 --pretty=format:'%h')"
 else
 
     if ! echo "$EXACT_VERSION"|grep -q "$MAJOR_VERSION"; then
