@@ -5,6 +5,8 @@ llvm-toolchain-10 (1:10.0.1-1~++20200417104440+92d5c1be9ee) UNRELEASED; urgency=
   * Enable LLVM_ENABLE_DUMP (Closes: #956966)
   * Move binfmt-support as Recommends llvm-10-runtime
     instead of a strong dependencies (Closes: #958127)
+  * build libc++ with -DLIBCXX_USE_COMPILER_RT=YES
+    and -DLIBCXXABI_USE_COMPILER_RT=YES
 
   [ Gianfranco Costamagna ]
   * Don't run tests on riscv64/Ubuntu for now, the virtual machines timeout
