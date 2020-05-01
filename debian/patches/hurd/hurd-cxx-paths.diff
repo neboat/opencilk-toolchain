@@ -2,11 +2,11 @@ hurd: find c++ headers
 
 This should be factorized with Linux.cpp and the GNU/kFreeBSD case.
 
-Index: llvm-toolchain-9-9.0.0/clang/lib/Driver/ToolChains/Hurd.cpp
+Index: llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4/clang/lib/Driver/ToolChains/Hurd.cpp
 ===================================================================
---- llvm-toolchain-9-9.0.0.orig/clang/lib/Driver/ToolChains/Hurd.cpp
-+++ llvm-toolchain-9-9.0.0/clang/lib/Driver/ToolChains/Hurd.cpp
-@@ -61,21 +61,107 @@ static StringRef getOSLibDir(const llvm:
+--- llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4.orig/clang/lib/Driver/ToolChains/Hurd.cpp
++++ llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4/clang/lib/Driver/ToolChains/Hurd.cpp
+@@ -61,6 +61,15 @@ static StringRef getOSLibDir(const llvm:
    return Triple.isArch32Bit() ? "lib" : "lib64";
  }
  
@@ -19,40 +19,10 @@ Index: llvm-toolchain-9-9.0.0/clang/lib/Driver/ToolChains/Hurd.cpp
 +      addPathIfExists(D, InstallPath + Path, Paths);
 +}
 +
- Hurd::Hurd(const Driver &D, const llvm::Triple &Triple,
-            const ArgList &Args)
+ Hurd::Hurd(const Driver &D, const llvm::Triple &Triple, const ArgList &Args)
      : Generic_ELF(D, Triple, Args) {
-+  GCCInstallation.init(Triple, Args);
-+  Multilibs = GCCInstallation.getMultilibs();
-+  SelectedMultilib = GCCInstallation.getMultilib();
    std::string SysRoot = computeSysRoot();
-+
-+  // Cross-compiling binutils and GCC installations (vanilla and openSUSE at
-+  // least) put various tools in a triple-prefixed directory off of the parent
-+  // of the GCC installation. We use the GCC triple here to ensure that we end
-+  // up with tools that support the same amount of cross compiling as the
-+  // detected GCC installation. For example, if we find a GCC installation
-+  // targeting x86_64, but it is a bi-arch GCC installation, it can also be
-+  // used to target i386.
-+  // FIXME: This seems unlikely to be Linux- or Hurd-specific.
-+  ToolChain::path_list &PPaths = getProgramPaths();
-+  if (GCCInstallation.isValid()) {
-+    PPaths.push_back(Twine(GCCInstallation.getParentLibPath() + "/../" +
-+                           GCCInstallation.getTriple().str() + "/bin")
-+                         .str());
-+  }
-+
-+  // The selection of paths to try here is designed to match the patterns which
-+  // the GCC driver itself uses, as this is part of the GCC-compatible driver.
-+  // This was determined by running GCC in a fake filesystem, creating all
-+  // possible permutations of these directories, and seeing which ones it added
-+  // to the link paths.
-   path_list &Paths = getFilePaths();
- 
-   const std::string OSLibDir = getOSLibDir(Triple, Args);
-   const std::string MultiarchTriple = getMultiarchTriple(D, Triple, SysRoot);
- 
- #ifdef ENABLE_LINKER_BUILD_ID
+@@ -73,8 +82,61 @@ Hurd::Hurd(const Driver &D, const llvm::
    ExtraOpts.push_back("--build-id");
  #endif
  
@@ -116,7 +86,7 @@ Index: llvm-toolchain-9-9.0.0/clang/lib/Driver/ToolChains/Hurd.cpp
    // FIXME: It's not clear whether we should use the driver's installed
    // directory ('Dir' below) or the ResourceDir.
    if (StringRef(D.Dir).startswith(SysRoot)) {
-@@ -85,8 +175,40 @@ Hurd::Hurd(const Driver &D, const llvm::
+@@ -88,8 +150,40 @@ Hurd::Hurd(const Driver &D, const llvm::
    addPathIfExists(D, SysRoot + "/usr/lib/" + MultiarchTriple, Paths);
    addPathIfExists(D, SysRoot + "/usr/lib/../" + OSLibDir, Paths);
  
@@ -159,7 +129,7 @@ Index: llvm-toolchain-9-9.0.0/clang/lib/Driver/ToolChains/Hurd.cpp
    // FIXME: It's not clear whether we should use the driver's installed
    // directory ('Dir' below) or the ResourceDir.
    if (StringRef(D.Dir).startswith(SysRoot))
-@@ -153,6 +275,17 @@ void Hurd::AddClangSystemIncludeArgs(con
+@@ -156,6 +250,17 @@ void Hurd::AddClangSystemIncludeArgs(con
  
    // Lacking those, try to detect the correct set of system includes for the
    // target triple.
@@ -177,10 +147,13 @@ Index: llvm-toolchain-9-9.0.0/clang/lib/Driver/ToolChains/Hurd.cpp
    if (getTriple().getArch() == llvm::Triple::x86) {
      std::string Path = SysRoot + "/usr/include/i386-gnu";
      if (D.getVFS().exists(Path))
-@@ -166,3 +299,94 @@ void Hurd::AddClangSystemIncludeArgs(con
- 
-   addExternCSystemInclude(DriverArgs, CC1Args, SysRoot + "/usr/include");
+@@ -171,6 +276,102 @@ void Hurd::AddClangSystemIncludeArgs(con
  }
+ 
+ void Hurd::addExtraOpts(llvm::opt::ArgStringList &CmdArgs) const {
++  for (const auto &Opt : ExtraOpts)
++    CmdArgs.push_back(Opt.c_str());
++}
 +
 +static std::string DetectLibcxxIncludePath(llvm::vfs::FileSystem &vfs,
 +                                           StringRef base) {
@@ -272,10 +245,15 @@ Index: llvm-toolchain-9-9.0.0/clang/lib/Driver/ToolChains/Hurd.cpp
 +      break;
 +  }
 +}
-Index: llvm-toolchain-9-9.0.0/clang/lib/Driver/ToolChains/Hurd.h
++
++void Hurd::addExtraOpts(llvm::opt::ArgStringList &CmdArgs) const {
+   for (const auto &Opt : ExtraOpts)
+     CmdArgs.push_back(Opt.c_str());
+ }
+Index: llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4/clang/lib/Driver/ToolChains/Hurd.h
 ===================================================================
---- llvm-toolchain-9-9.0.0.orig/clang/lib/Driver/ToolChains/Hurd.h
-+++ llvm-toolchain-9-9.0.0/clang/lib/Driver/ToolChains/Hurd.h
+--- llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4.orig/clang/lib/Driver/ToolChains/Hurd.h
++++ llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4/clang/lib/Driver/ToolChains/Hurd.h
 @@ -26,6 +26,12 @@ public:
    void
    AddClangSystemIncludeArgs(const llvm::opt::ArgList &DriverArgs,
@@ -287,5 +265,5 @@ Index: llvm-toolchain-9-9.0.0/clang/lib/Driver/ToolChains/Hurd.h
 +      const llvm::opt::ArgList &DriverArgs,
 +      llvm::opt::ArgStringList &CC1Args) const override;
  
-   virtual std::string computeSysRoot() const;
+   std::string computeSysRoot() const;
  
