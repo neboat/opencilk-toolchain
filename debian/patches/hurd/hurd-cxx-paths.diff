@@ -2,10 +2,10 @@ hurd: find c++ headers
 
 This should be factorized with Linux.cpp and the GNU/kFreeBSD case.
 
-Index: llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4/clang/lib/Driver/ToolChains/Hurd.cpp
+Index: llvm-toolchain-10_10.0.1~++20200502100653+d4d4c6bf834/clang/lib/Driver/ToolChains/Hurd.cpp
 ===================================================================
---- llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4.orig/clang/lib/Driver/ToolChains/Hurd.cpp
-+++ llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4/clang/lib/Driver/ToolChains/Hurd.cpp
+--- llvm-toolchain-10_10.0.1~++20200502100653+d4d4c6bf834.orig/clang/lib/Driver/ToolChains/Hurd.cpp
++++ llvm-toolchain-10_10.0.1~++20200502100653+d4d4c6bf834/clang/lib/Driver/ToolChains/Hurd.cpp
 @@ -61,6 +61,15 @@ static StringRef getOSLibDir(const llvm:
    return Triple.isArch32Bit() ? "lib" : "lib64";
  }
@@ -147,13 +147,10 @@ Index: llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4/clang/lib/Driver/To
    if (getTriple().getArch() == llvm::Triple::x86) {
      std::string Path = SysRoot + "/usr/include/i386-gnu";
      if (D.getVFS().exists(Path))
-@@ -171,6 +276,102 @@ void Hurd::AddClangSystemIncludeArgs(con
+@@ -174,3 +279,94 @@ void Hurd::addExtraOpts(llvm::opt::ArgSt
+   for (const auto &Opt : ExtraOpts)
+     CmdArgs.push_back(Opt.c_str());
  }
- 
- void Hurd::addExtraOpts(llvm::opt::ArgStringList &CmdArgs) const {
-+  for (const auto &Opt : ExtraOpts)
-+    CmdArgs.push_back(Opt.c_str());
-+}
 +
 +static std::string DetectLibcxxIncludePath(llvm::vfs::FileSystem &vfs,
 +                                           StringRef base) {
@@ -245,15 +242,10 @@ Index: llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4/clang/lib/Driver/To
 +      break;
 +  }
 +}
-+
-+void Hurd::addExtraOpts(llvm::opt::ArgStringList &CmdArgs) const {
-   for (const auto &Opt : ExtraOpts)
-     CmdArgs.push_back(Opt.c_str());
- }
-Index: llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4/clang/lib/Driver/ToolChains/Hurd.h
+Index: llvm-toolchain-10_10.0.1~++20200502100653+d4d4c6bf834/clang/lib/Driver/ToolChains/Hurd.h
 ===================================================================
---- llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4.orig/clang/lib/Driver/ToolChains/Hurd.h
-+++ llvm-toolchain-10_10.0.1~++20200501105331+060f2f815c4/clang/lib/Driver/ToolChains/Hurd.h
+--- llvm-toolchain-10_10.0.1~++20200502100653+d4d4c6bf834.orig/clang/lib/Driver/ToolChains/Hurd.h
++++ llvm-toolchain-10_10.0.1~++20200502100653+d4d4c6bf834/clang/lib/Driver/ToolChains/Hurd.h
 @@ -26,6 +26,12 @@ public:
    void
    AddClangSystemIncludeArgs(const llvm::opt::ArgList &DriverArgs,
