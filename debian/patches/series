@@ -145,5 +145,4 @@ try-to-fix-polly-link.patch
 
 0001-systemz-allow-configuring-default-SYSTEMZ_DEFAULT_AR.patch
 
-D76596.diff
 ubuntu-groovy.diff

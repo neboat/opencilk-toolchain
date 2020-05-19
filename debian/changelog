@@ -1,4 +1,4 @@
-llvm-toolchain-10 (1:10.0.1~++20200425120926+b11ecd19654-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-10 (1:10.0.1~++20200519081431+4b2f37b2202-1~exp1) UNRELEASED; urgency=medium
 
   [ Sylvestre Ledru ]
   * prepare version 10.0.1 (go back to 10.0.0-5 for debian if needed)
@@ -7,12 +7,13 @@ llvm-toolchain-10 (1:10.0.1~++20200425120926+b11ecd19654-1~exp1) UNRELEASED; urg
     instead of a strong dependencies (Closes: #958127)
   * build libc++ with -DLIBCXX_USE_COMPILER_RT=YES
     and -DLIBCXXABI_USE_COMPILER_RT=YES
+  * Remove D76596.diff (merged upstream)
 
   [ Gianfranco Costamagna ]
   * Don't run tests on riscv64/Ubuntu for now, the virtual machines timeout
     during testsuite (probably lack of proper capable hardware to run it)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 17 Apr 2020 23:24:13 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 19 May 2020 08:17:26 +0200
 
 llvm-toolchain-10 (1:10.0.0-4) unstable; urgency=medium
 
