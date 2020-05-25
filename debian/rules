@@ -417,7 +417,7 @@ debian-full-build:
 
 debian-libfuzzer-build:
 ifeq (${LIBFUZZER_ENABLE},yes)
-	cd $(TARGET_BUILD) \
+	cd $(TARGET_BUILD); \
 	CFLAGS=`dpkg-buildflags --get CFLAGS`; \
 	CFLAGS="$$CFLAGS `dpkg-buildflags --get CPPFLAGS`"; \
 	echo $$CFLAGS; \
