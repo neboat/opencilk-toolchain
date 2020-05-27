@@ -1,3 +1,11 @@
+llvm-toolchain-10 (1:10.0.1~+rc1-1~exp2) experimental; urgency=medium
+
+  * Pass CLANG_VENDOR to CLANG_BOOTSTRAP_PASSTHROUGH
+    Fix https://bugs.llvm.org/show_bug.cgi?id=38998
+    For our friends of https://github.com/ClangBuiltLinux/
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 May 2020 15:24:00 +0200
+
 llvm-toolchain-10 (1:10.0.1~+rc1-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
