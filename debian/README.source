@@ -20,7 +20,7 @@ and symlinks are managed by the other package llvm-defaults
 
 * For armv7-a, NEON extensions are disabled.
 
-* For mips, FPXX is enabled.
+* For mips, FPXX is enabled, MADD4 instructions are disabled.
 
 
 = Libraries =

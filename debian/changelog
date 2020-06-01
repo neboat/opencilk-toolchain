@@ -1,3 +1,10 @@
+llvm-toolchain-9 (1:9.0.1-13) UNRELEASED; urgency=medium
+
+  [ Aurelien Jarno ]
+  * Add mips-force-nomadd4.diff to default to +nomadd4 on MIPS.
+
+ -- Aurelien Jarno <aurel32@debian.org>  Mon, 01 Jun 2020 23:17:06 +0200
+
 llvm-toolchain-9 (1:9.0.1-12) unstable; urgency=medium
 
   [ Jessica Clarke ]
