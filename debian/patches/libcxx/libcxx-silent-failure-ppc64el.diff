@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/libcxx/test/libcxx/atomics/atomics.align/align.pass.sh.cpp
+Index: llvm-toolchain-snapshot_11~++20200606122450+1eda9bfd612/libcxx/test/libcxx/atomics/atomics.align/align.pass.pass.cpp
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/libcxx/test/libcxx/atomics/atomics.align/align.pass.sh.cpp
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/libcxx/test/libcxx/atomics/atomics.align/align.pass.sh.cpp
-@@ -13,7 +13,7 @@
- //
+--- llvm-toolchain-snapshot_11~++20200606122450+1eda9bfd612.orig/libcxx/test/libcxx/atomics/atomics.align/align.pass.pass.cpp
++++ llvm-toolchain-snapshot_11~++20200606122450+1eda9bfd612/libcxx/test/libcxx/atomics/atomics.align/align.pass.pass.cpp
+@@ -11,7 +11,7 @@
+ 
  // GCC currently fails because it needs -fabi-version=6 to fix mangling of
  // std::atomic when used with __attribute__((vector(X))).
 -// XFAIL: gcc
