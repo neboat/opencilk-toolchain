@@ -141,8 +141,8 @@ no-z3.patch
 python3-shebang.patch
 print-lldb-path.patch
 no-cgi.patch
-try-to-fix-polly-link.patch
 
 0001-systemz-allow-configuring-default-SYSTEMZ_DEFAULT_AR.patch
 
 ubuntu-groovy.diff
+clang_vendor_pass_stage2.diff
