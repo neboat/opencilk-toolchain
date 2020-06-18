@@ -9,6 +9,7 @@ llvm-toolchain-snapshot (1:11~++20200416103106+997f33cfeec-1~exp1) UNRELEASED; u
   * Upstream change ad97ccf6b26a29262c9cbf5b3e7f6e84c6dcf55f
     broke clangd-atomic-cmake.patch causing some undef symbol on
     i386 and atomic
+  * Also install ompt-multiplex.h in libomp-X-dev
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Apr 2020 10:34:32 +0200
 
