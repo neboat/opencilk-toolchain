@@ -14,28 +14,28 @@ Date:   Thu Jun 18 14:04:34 2020 -0700
     
     Differential revision: https://reviews.llvm.org/D75284
 
-diff --git a/llvm/docs/conf.py b/llvm/docs/conf.py
-index c92ede3ea44..13bbc826de8 100644
---- a/llvm/docs/conf.py
-+++ b/llvm/docs/conf.py
-@@ -26,15 +26,16 @@ from datetime import date
+diff --git b/llvm/docs/conf.py a/llvm/docs/conf.py
+index 13bbc826de8..c92ede3ea44 100644
+--- b/llvm/docs/conf.py
++++ a/llvm/docs/conf.py
+@@ -26,16 +26,15 @@ from datetime import date
  
  # Add any Sphinx extension module names here, as strings. They can be extensions
  # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
--extensions = ['sphinx.ext.intersphinx', 'sphinx.ext.todo']
-+extensions = ['sphinx.ext.intersphinx', 'sphinx.ext.todo', 'recommonmark']
+-extensions = ['sphinx.ext.intersphinx', 'sphinx.ext.todo', 'recommonmark']
++extensions = ['sphinx.ext.intersphinx', 'sphinx.ext.todo']
  
  # Add any paths that contain templates here, relative to this directory.
  templates_path = ['_templates']
  
  # The suffix of source filenames.
--source_suffix = ['.rst', '.md']
--
--source_parsers = {'.md': 'recommonmark.parser.CommonMarkParser'}
-+source_suffix = {
-+    '.rst': 'restructuredtext',
-+    '.md': 'markdown',
-+}
+-source_suffix = {
+-    '.rst': 'restructuredtext',
+-    '.md': 'markdown',
+-}
++source_suffix = ['.rst', '.md']
++
++source_parsers = {'.md': 'recommonmark.parser.CommonMarkParser'}
  
  # The encoding of source files.
  #source_encoding = 'utf-8-sig'
