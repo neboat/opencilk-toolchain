@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:11~++20200416103106+997f33cfeec-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:11~++20200617103614+2eaadfc4fe6-1~exp1) UNRELEASED; urgency=medium
 
   * experimental New snapshot release
   * Add -DLLVM_POLLY_LINK_INTO_TOOLS=OFF to workaround
@@ -10,8 +10,10 @@ llvm-toolchain-snapshot (1:11~++20200416103106+997f33cfeec-1~exp1) UNRELEASED; u
     broke clangd-atomic-cmake.patch causing some undef symbol on
     i386 and atomic
   * Also install ompt-multiplex.h in libomp-X-dev
+  * revert-sphinx-deprecation.diff: revert the sphinx update as it breaks debian
+    buster
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Apr 2020 10:34:32 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 17 Jun 2020 22:39:16 +0200
 
 llvm-toolchain-snapshot (1:11~++20200410111154+35052267023-1~exp1) experimental; urgency=medium
 
@@ -24,6 +26,18 @@ llvm-toolchain-snapshot (1:11~++20200410111154+35052267023-1~exp1) experimental;
     Thanks to Michael Lustfield for the detective work
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 11 Apr 2020 12:03:35 +0200
+
+llvm-toolchain-snapshot (1:11~++20200409051253+d08105482e1-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+  * Bring back libc++-experimental
+  * remove no-cgi.patch - applied upstream
+  * Also install liblldMachO2.a in liblld
+  * Reoder the cmake arg
+  * Update the copyright file with recent changes (Closes: #956287)
+    Thanks to Michael Lustfield for the detective work
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 09 Apr 2020 17:21:05 +0200
 
 llvm-toolchain-snapshot (1:11~++20200307074845+ec1d1f6ae70-1~exp1) experimental; urgency=medium
 
