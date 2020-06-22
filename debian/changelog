@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:11~++20200617103614+2eaadfc4fe6-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:11~++20200623122106+cd6848f6e1d-1~exp1) experimental; urgency=medium
 
   * experimental New snapshot release
   * Add -DLLVM_POLLY_LINK_INTO_TOOLS=OFF to workaround
@@ -10,10 +10,10 @@ llvm-toolchain-snapshot (1:11~++20200617103614+2eaadfc4fe6-1~exp1) UNRELEASED; u
     broke clangd-atomic-cmake.patch causing some undef symbol on
     i386 and atomic
   * Also install ompt-multiplex.h in libomp-X-dev
-  * revert-sphinx-deprecation.diff: revert the sphinx update as it breaks debian
-    buster
+  * revert-sphinx-deprecation.diff: revert the sphinx update as it breaks
+    debian buster
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 17 Jun 2020 22:39:16 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 23 Jun 2020 00:24:07 +0200
 
 llvm-toolchain-snapshot (1:11~++20200410111154+35052267023-1~exp1) experimental; urgency=medium
 
