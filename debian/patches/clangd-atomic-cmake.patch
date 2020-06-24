@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_11~++20200617103614+2eaadfc4fe6/clang-tools-extra/clangd/CMakeLists.txt
+Index: llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc/clang-tools-extra/clangd/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200617103614+2eaadfc4fe6.orig/clang-tools-extra/clangd/CMakeLists.txt
-+++ llvm-toolchain-snapshot_11~++20200617103614+2eaadfc4fe6/clang-tools-extra/clangd/CMakeLists.txt
+--- llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc.orig/clang-tools-extra/clangd/CMakeLists.txt
++++ llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc/clang-tools-extra/clangd/CMakeLists.txt
 @@ -27,6 +27,11 @@ set(LLVM_LINK_COMPONENTS
    FrontendOpenMP
    )
@@ -20,5 +20,5 @@ Index: llvm-toolchain-snapshot_11~++20200617103614+2eaadfc4fe6/clang-tools-extra
    ${LLVM_PTHREAD_LIB}
 +  ${CLANGD_ATOMIC_LIB}
    ${ALL_CLANG_TIDY_CHECKS}
-   )
  
+   DEPENDS

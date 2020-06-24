@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/lib/Basic/FileManager.cpp
+Index: llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc/clang/lib/Basic/FileManager.cpp
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/clang/lib/Basic/FileManager.cpp
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/lib/Basic/FileManager.cpp
-@@ -526,6 +526,12 @@ FileManager::getNoncachedStatValue(Strin
+--- llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc.orig/clang/lib/Basic/FileManager.cpp
++++ llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc/clang/lib/Basic/FileManager.cpp
+@@ -528,6 +528,12 @@ FileManager::getNoncachedStatValue(Strin
    return std::error_code();
  }
  
@@ -15,10 +15,10 @@ Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/lib/Basic/F
  void FileManager::GetUniqueIDMapping(
                     SmallVectorImpl<const FileEntry *> &UIDToFiles) const {
    UIDToFiles.clear();
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/lldb/include/lldb/lldb-defines.h
+Index: llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc/lldb/include/lldb/lldb-defines.h
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/lldb/include/lldb/lldb-defines.h
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/lldb/include/lldb/lldb-defines.h
+--- llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc.orig/lldb/include/lldb/lldb-defines.h
++++ llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc/lldb/include/lldb/lldb-defines.h
 @@ -27,6 +27,11 @@
  #define INT32_MAX 2147483647
  #endif
@@ -31,10 +31,10 @@ Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/lldb/include/lldb
  #if !defined(UINT32_MAX)
  #define UINT32_MAX 4294967295U
  #endif
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/polly/lib/External/ppcg/cuda_common.c
+Index: llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc/polly/lib/External/ppcg/cuda_common.c
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/polly/lib/External/ppcg/cuda_common.c
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/polly/lib/External/ppcg/cuda_common.c
+--- llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc.orig/polly/lib/External/ppcg/cuda_common.c
++++ llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc/polly/lib/External/ppcg/cuda_common.c
 @@ -15,6 +15,11 @@
  #include "cuda_common.h"
  #include "ppcg.h"
