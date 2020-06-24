@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:11~++20200624010232+05e10ee0aee-1~exp1) UNRELEASED; urgency=medium
+
+  * Remove no-z3.patch, seems to be merged upstream
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 24 Jun 2020 13:05:45 +0200
+
 llvm-toolchain-snapshot (1:11~++20200623122106+cd6848f6e1d-1~exp1) experimental; urgency=medium
 
   * experimental New snapshot release
@@ -14,6 +20,39 @@ llvm-toolchain-snapshot (1:11~++20200623122106+cd6848f6e1d-1~exp1) experimental;
     debian buster
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 23 Jun 2020 00:24:07 +0200
+
+llvm-toolchain-snapshot (1:11~++20200621103028+10b0539772d-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+  * Add -DLLVM_POLLY_LINK_INTO_TOOLS=OFF to workaround
+    https://bugs.llvm.org/show_bug.cgi?id=45571
+  * New symbol clang_Type_getValueType added
+  * Install usr/lib/llvm-11/lib/cmake/lld/*.cmake
+    in liblld-11-dev
+  * Upstream change ad97ccf6b26a29262c9cbf5b3e7f6e84c6dcf55f
+    broke clangd-atomic-cmake.patch causing some undef symbol on
+    i386 and atomic
+  * Also install ompt-multiplex.h in libomp-X-dev
+  * revert-sphinx-deprecation.diff: revert the sphinx update as it breaks debian
+    buster
+  * experimental New snapshot release
+  * Add -DLLVM_POLLY_LINK_INTO_TOOLS=OFF to workaround
+    https://bugs.llvm.org/show_bug.cgi?id=45571
+  * New symbol clang_Type_getValueType added
+  * Install usr/lib/llvm-11/lib/cmake/lld/*.cmake
+    in liblld-11-dev
+  * Upstream change ad97ccf6b26a29262c9cbf5b3e7f6e84c6dcf55f
+    broke clangd-atomic-cmake.patch causing some undef symbol on
+    i386 and atomic
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 21 Jun 2020 10:33:23 +0200
 
 llvm-toolchain-snapshot (1:11~++20200410111154+35052267023-1~exp1) experimental; urgency=medium
 
