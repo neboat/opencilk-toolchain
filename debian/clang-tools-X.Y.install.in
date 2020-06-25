@@ -18,7 +18,6 @@ usr/lib/llvm-@LLVM_VERSION@/libexec/c++-analyzer
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-offload-bundler
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-reorder-fields
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-change-namespace
-usr/lib/llvm-@LLVM_VERSION@/bin/clang-import-test
 usr/lib/llvm-@LLVM_VERSION@/bin/modularize
 usr/lib/llvm-@LLVM_VERSION@/bin/c-index-test
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-include-fixer
@@ -57,7 +56,6 @@ usr/bin/clang-reorder-fields-@LLVM_VERSION@
 usr/bin/find-all-symbols-@LLVM_VERSION@
 usr/bin/clang-include-fixer-@LLVM_VERSION@
 usr/bin/clang-change-namespace-@LLVM_VERSION@
-usr/bin/clang-import-test-@LLVM_VERSION@
 usr/bin/clang-refactor-@LLVM_VERSION@
 usr/bin/diagtool-@LLVM_VERSION@
 usr/bin/hmaptool-@LLVM_VERSION@

@@ -1,6 +1,8 @@
 llvm-toolchain-snapshot (1:11~++20200624010232+05e10ee0aee-1~exp1) UNRELEASED; urgency=medium
 
   * Remove no-z3.patch, seems to be merged upstream
+  * No longer install clang-import-test (upstream change)
+    See https://reviews.llvm.org/D82169
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 24 Jun 2020 13:05:45 +0200
 
