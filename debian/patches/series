@@ -126,7 +126,6 @@ bootstrap-fix-include-next.diff
 
 # riscv64
 risc/clang-riscv64-multiarch.diff
-risc/D74453-riscv-atomic_cmp_xchg.diff
 risc/riscv64-multilib-empty.patch
 
 # Compiler-rt - workaround
