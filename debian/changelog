@@ -1,5 +1,6 @@
-llvm-toolchain-snapshot (1:11~++20200624010232+05e10ee0aee-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:11~++20200627051547+74dc081ef2d-1~exp1) UNRELEASED; urgency=medium
 
+  * libc++ requires the LLVM_PATH, adding it
   * Remove no-z3.patch, seems to be merged upstream
   * No longer install clang-import-test (upstream change)
     See https://reviews.llvm.org/D82169
