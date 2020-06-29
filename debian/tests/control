@@ -5,6 +5,9 @@ Depends: @, cmake, g++, file, dpkg-dev
 # clang-10-dbgsym, libclang1-10-dbgsym
 Restrictions: allow-stderr
 
+Tests: integration-test-suite-test
+Depends: @, cmake, libstdc++-9-dev
+Restrictions: allow-stderr
 
 Tests: cmake-test
 Depends: gcc, build-essential, cmake, llvm-10-dev, libclang-common-10-dev
