@@ -1,5 +1,19 @@
 llvm-toolchain-10 (1:10.0.1~+rc1-1~exp2) experimental; urgency=medium
 
+  * New snapshot release
+  * Ship with integration-test-suite-test and run it with autopkgtest
+    integration-test-suite-test is a project started by Serge Guelton and myself.
+    The goal is to provide a set of tests to verify that llvm/clang/etc
+    are working as expected in a distro (Linux, BSD, etc).
+    But also to bring a set of expectations of what a LLVM toolchain should
+    looks like when shipping to users.
+    Serge is taking care of that work for Fedora/Redhat.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 29 Jun 2020 11:38:51 +0200
+
+llvm-toolchain-10 (1:10.0.1~+rc2-1~exp1) experimental; urgency=medium
+
+  * New rc release
   * Pass CLANG_VENDOR to CLANG_BOOTSTRAP_PASSTHROUGH
     Fix https://bugs.llvm.org/show_bug.cgi?id=38998
     For our friends of https://github.com/ClangBuiltLinux/
