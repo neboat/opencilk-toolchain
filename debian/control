@@ -311,7 +311,8 @@ Description: Modular compiler and toolchain technologies
 
 Package: llvm-11-runtime
 Architecture: any
-Depends: binfmt-support, ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: binfmt-support
 Description: Modular compiler and toolchain technologies, IR interpreter
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other

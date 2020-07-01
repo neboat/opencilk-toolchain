@@ -33,6 +33,20 @@ if test -n "${JENKINS_HOME}"; then
 fi
 
 GIT_BASE_URL=https://github.com/llvm/llvm-project
+GIT_TOOLCHAIN_CHECK=https://github.com/opencollab/llvm-toolchain-integration-test-suite.git
+
+
+function reset-repo {
+    cd $1
+    git clean -qfd
+    git checkout .
+    git remote update > /dev/null
+    git reset --hard origin/master > /dev/null
+    git clean -qfd
+    git checkout master > /dev/null
+    git pull
+    cd -
+}
 
 PATH_DEBIAN="$(pwd)/$(dirname $0)/../"
 cd "$PATH_DEBIAN"
@@ -44,13 +58,15 @@ if test -z "$MAJOR_VERSION"; then
     echo "Could not detect the major version"
     exit 1
 fi
+
 CURRENT_VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1,p")
 if test -z "$CURRENT_VERSION"; then
     echo "Could not detect the full version"
     exit 1
 fi
-cd - &> /dev/null
 
+cd - &> /dev/null
+echo "MAJOR_VERSION=$MAJOR_VERSION / CURRENT_VERSION=$CURRENT_VERSION"
 if test -n "$1"; then
 # https://github.com/llvm/llvm-project/tree/release/9.x
 # For example: sh 4.0/debian/orig-tar.sh release/9.x
@@ -87,19 +103,20 @@ cd git-archive
 if test -d $EXPORT_PATH/llvm-project; then
     echo "Updating repo in $EXPORT_PATH/llvm-project"
     # Update it
-    cd $EXPORT_PATH/llvm-project
-    git clean -qfd
-    git checkout .
-    git remote update > /dev/null
-    git reset --hard origin/master > /dev/null
-    git clean -qfd
-    git checkout master > /dev/null
-    git pull
-    cd ..
+    reset-repo $EXPORT_PATH/llvm-project
 else
     # Download it
     echo "Cloning the repo in $EXPORT_PATH/llvm-project"
     git clone $GIT_BASE_URL $EXPORT_PATH/llvm-project
+fi
+
+if test -d $EXPORT_PATH/llvm-toolchain-integration-test-suite; then
+    echo "Updating repo in $EXPORT_PATH/llvm-toolchain-integration-test-suite"
+    # Update it
+    reset-repo $EXPORT_PATH/llvm-toolchain-integration-test-suite
+else
+    echo "Clone llvm-toolchain-integration-test-suite into $EXPORT_PATH/llvm-toolchain-integration-test-suite"
+    git clone $GIT_TOOLCHAIN_CHECK $EXPORT_PATH/llvm-toolchain-integration-test-suite
 fi
 
 cd $EXPORT_PATH/llvm-project
@@ -121,7 +138,7 @@ if test -z  "$TAG" -a -z "$FINAL_RELEASE"; then
     # the + is here to make sure that this version is considered more recent than the svn
     # dpkg --compare-versions 10~svn374977-1~exp1 lt 10~+2019-svn374977-1~exp1
     # to verify that
-    VERSION="${VERSION}~++$(date +'%Y%m%d%I%M%S')+$(git log -1 --pretty=format:'%h')"
+    VERSION="${CURRENT_VERSION}~++$(date +'%Y%m%d%I%M%S')+$(git log -1 --pretty=format:'%h')"
 else
 
     if ! echo "$EXACT_VERSION"|grep -q "$MAJOR_VERSION"; then
@@ -145,8 +162,11 @@ rm -rf */www/
 cd ../
 BASE="llvm-toolchain-${MAJOR_VERSION}_${VERSION}"
 FILENAME="${BASE}.orig.tar.xz"
+
+cp -R llvm-toolchain-integration-test-suite llvm-project/integration-test-suite
 echo "Compressing to $FILENAME"
 tar Jcf $CURRENT_PATH/"$FILENAME" --exclude .git --transform="s|llvm-project|$BASE|" -C $EXPORT_PATH llvm-project
+rm -rf llvm-project/integration-test-suite
 
 export DEBFULLNAME="Sylvestre Ledru"
 export DEBEMAIL="sylvestre@debian.org"

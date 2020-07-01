@@ -4,7 +4,6 @@ MAJOR_VERSION=11 # 8.0.1
 REV=`ls -1 *${ORIG_VERSION}_${MAJOR_VERSION}*~+*xz | tail -1|perl -ne 'print "$1\n" if /~\+(.*)\.orig/;'  | sort -ru`
 
 VERSION=$REV
-#VERSION=+rc3
 
 if test -z "$VERSION"; then
 	echo "Could not find the version"

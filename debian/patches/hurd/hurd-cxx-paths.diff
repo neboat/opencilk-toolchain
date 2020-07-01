@@ -3,10 +3,6 @@ hurd: find c++ headers
 This should be factorized with Linux.cpp and the GNU/kFreeBSD case.
 
 Index: llvm-toolchain-snapshot_11~++20200207025749+c29003813ab/clang/lib/Driver/ToolChains/Hurd.cpp
-===================================================================
---- llvm-toolchain-snapshot_11~++20200207025749+c29003813ab.orig/clang/lib/Driver/ToolChains/Hurd.cpp
-+++ llvm-toolchain-snapshot_11~++20200207025749+c29003813ab/clang/lib/Driver/ToolChains/Hurd.cpp
-@@ -89,8 +89,40 @@ Hurd::Hurd(const Driver &D, const llvm::
    addPathIfExists(D, SysRoot + "/usr/lib/" + MultiarchTriple, Paths);
    addPathIfExists(D, SysRoot + "/usr/lib/../" + OSLibDir, Paths);
  

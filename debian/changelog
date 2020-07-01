@@ -114,12 +114,46 @@ llvm-toolchain-snapshot (1:11~++20200123111717+04fd2041561-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 23 Jan 2020 14:52:30 +0100
 
-llvm-toolchain-10 (1:10.0.1-1~++20200417104440+92d5c1be9ee) UNRELEASED; urgency=medium
+llvm-toolchain-10 (1:10.0.1~+rc1-1~exp2) experimental; urgency=medium
 
-  * prepare version 10.0.1 (go back to 10.0.0-5 for debian if needed)
+  * New snapshot release
+  * Ship with integration-test-suite-test and run it with autopkgtest
+    integration-test-suite-test is a project started by Serge Guelton and myself.
+    The goal is to provide a set of tests to verify that llvm/clang/etc
+    are working as expected in a distro (Linux, BSD, etc).
+    But also to bring a set of expectations of what a LLVM toolchain should
+    looks like when shipping to users.
+    Serge is taking care of that work for Fedora/Redhat.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 29 Jun 2020 11:38:51 +0200
+
+llvm-toolchain-10 (1:10.0.1~+rc2-1~exp1) experimental; urgency=medium
+
+  * New rc release
+  * Pass CLANG_VENDOR to CLANG_BOOTSTRAP_PASSTHROUGH
+    Fix https://bugs.llvm.org/show_bug.cgi?id=38998
+    For our friends of https://github.com/ClangBuiltLinux/
+  * remove try-to-fix-polly-link.patch and D74453-riscv-atomic_cmp_xchg.diff
+    (applied upstream)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 May 2020 15:24:00 +0200
+
+llvm-toolchain-10 (1:10.0.1~+rc1-1~exp1) experimental; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * first rc of 10.0.1
   * Enable LLVM_ENABLE_DUMP (Closes: #956966)
+  * Move binfmt-support as Recommends llvm-10-runtime
+    instead of a strong dependencies (Closes: #958127)
+  * build libc++ with -DLIBCXX_USE_COMPILER_RT=YES
+    and -DLIBCXXABI_USE_COMPILER_RT=YES
+  * Remove D76596.diff (merged upstream)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 17 Apr 2020 23:24:13 +0200
+  [ Gianfranco Costamagna ]
+  * Don't run tests on riscv64/Ubuntu for now, the virtual machines timeout
+    during testsuite (probably lack of proper capable hardware to run it)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 19 May 2020 08:17:26 +0200
 
 llvm-toolchain-10 (1:10.0.0-4) unstable; urgency=medium
 
