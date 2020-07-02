@@ -1,4 +1,10 @@
-llvm-toolchain-10 (1:10.0.1~+rc1-1~exp2) experimental; urgency=medium
+llvm-toolchain-10 (1:10.0.1~++20200629113538+77d76b71d7d-1~exp2) unstable; urgency=medium
+
+  * integration-test-suite-test also needs g++ for a test
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 02 Jul 2020 09:10:39 +0200
+
+llvm-toolchain-10 (1:10.0.1~++20200629113538+77d76b71d7d-1~exp1) UNRELEASED; urgency=medium
 
   * New snapshot release
   * Ship with integration-test-suite-test and run it with autopkgtest
@@ -20,7 +26,7 @@ llvm-toolchain-10 (1:10.0.1~+rc2-1~exp1) experimental; urgency=medium
   * remove try-to-fix-polly-link.patch and D74453-riscv-atomic_cmp_xchg.diff
     (applied upstream)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 May 2020 15:24:00 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 27 Jun 2020 11:28:28 +0200
 
 llvm-toolchain-10 (1:10.0.1~+rc1-1~exp1) experimental; urgency=medium
 
