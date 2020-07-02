@@ -36,7 +36,8 @@ GIT_BASE_URL=https://github.com/llvm/llvm-project
 GIT_TOOLCHAIN_CHECK=https://github.com/opencollab/llvm-toolchain-integration-test-suite.git
 
 
-function reset-repo {
+reset-repo ()
+{
     cd $1
     git clean -qfd
     git checkout .
