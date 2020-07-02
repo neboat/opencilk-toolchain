@@ -6,7 +6,7 @@ Depends: @, cmake, g++, file, dpkg-dev
 Restrictions: allow-stderr
 
 Tests: integration-test-suite-test
-Depends: @, cmake, libstdc++-9-dev
+Depends: @, cmake, libstdc++-9-dev, g++
 Restrictions: allow-stderr
 
 Tests: cmake-test
