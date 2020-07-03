@@ -36,7 +36,7 @@ GIT_BASE_URL=https://github.com/llvm/llvm-project
 GIT_TOOLCHAIN_CHECK=https://github.com/opencollab/llvm-toolchain-integration-test-suite.git
 
 
-reset-repo ()
+reset_repo ()
 {
     cd $1
     git clean -qfd
@@ -101,7 +101,7 @@ cd git-archive
 if test -d $EXPORT_PATH/llvm-project; then
     echo "Updating repo in $EXPORT_PATH/llvm-project"
     # Update it
-    reset-repo $EXPORT_PATH/llvm-project
+    reset_repo $EXPORT_PATH/llvm-project
 else
     # Download it
     echo "Cloning the repo in $EXPORT_PATH/llvm-project"
@@ -111,7 +111,7 @@ fi
 if test -d $EXPORT_PATH/llvm-toolchain-integration-test-suite; then
     echo "Updating repo in $EXPORT_PATH/llvm-toolchain-integration-test-suite"
     # Update it
-    reset-repo $EXPORT_PATH/llvm-toolchain-integration-test-suite
+    reset_repo $EXPORT_PATH/llvm-toolchain-integration-test-suite
 else
     echo "Clone llvm-toolchain-integration-test-suite into $EXPORT_PATH/llvm-toolchain-integration-test-suite"
     git clone $GIT_TOOLCHAIN_CHECK $EXPORT_PATH/llvm-toolchain-integration-test-suite
