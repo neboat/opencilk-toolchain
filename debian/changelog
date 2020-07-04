@@ -5,6 +5,8 @@ llvm-toolchain-9 (1:9.0.1-13) UNRELEASED; urgency=medium
 
   [ Ximin Luo ]
   * Add 373184.patch to fix soundness issue affecting rustc. (Closes: #959877)
+  * Add f8e146f3430de3a6cd904f3f3f7aa1bfaefee14c.patch to fix big-endian
+    miscompilation affecting rustc.
 
  -- Aurelien Jarno <aurel32@debian.org>  Mon, 01 Jun 2020 23:17:06 +0200
 
