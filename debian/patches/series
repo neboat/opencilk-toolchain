@@ -97,9 +97,6 @@ remove-apple-clang-manpage.diff
 0049-Use-Debian-provided-MathJax-everywhere.patch
 
 # Hurd port
-# Disable for now as it breaks the ci:
-#  /build/llvm-toolchain-snapshot-11~++20200210115111+5e1d7bb6798/clang/lib/Driver/ToolChains/Hurd.cpp:110:66: error: invalid initialization of reference of type 'const string& {aka const std::__cxx11::basic_string<char>&}' from expression of type 'llvm::StringRef'
-#hurd/hurd-cxx-paths.diff
 hurd/hurd-pathmax.diff
 
 # powerpcspe
