@@ -7,6 +7,10 @@ llvm-toolchain-10 (1:10.0.1~+rc4-1) unstable; urgency=medium
     And make sure that the test is only executed when installed correctly
     Otherwise, fails with
     "./foo.bc: cannot execute binary file: Exec format error"
+  * patches/remove-trailing-space-version.diff: cherry-pick an upstream patch
+    to address https://bugs.llvm.org/show_bug.cgi?id=38998#c15
+    trailing whitespace of clang full version causing a display issue
+    when building the linux kernel with clang
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 08 Jul 2020 10:49:26 +0200
 

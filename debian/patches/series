@@ -145,3 +145,4 @@ no-cgi.patch
 
 ubuntu-groovy.diff
 clang_vendor_pass_stage2.diff
+remove-trailing-space-version.diff

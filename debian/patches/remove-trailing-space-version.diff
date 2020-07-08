@@ -1,0 +1,47 @@
+commit bbea4d5e6b82a683dccaa8f4916e2a44f5dd3490
+Author: Sylvestre Ledru <sylvestre@debian.org>
+Date:   Wed Jul 8 13:33:34 2020 +0200
+
+    clang: Don't show a trailing space with --version when not built from the repo
+    
+    Reported here:
+    https://bugs.llvm.org/show_bug.cgi?id=38998#c15
+    
+    Reviewers: hans
+    
+    Differential Revision: https://reviews.llvm.org/D83386
+
+diff --git a/clang/lib/Basic/Version.cpp b/clang/lib/Basic/Version.cpp
+index c4b7d34ed16..286107cab9d 100644
+--- a/clang/lib/Basic/Version.cpp
++++ b/clang/lib/Basic/Version.cpp
+@@ -97,8 +97,12 @@ std::string getClangToolFullVersion(StringRef ToolName) {
+ #ifdef CLANG_VENDOR
+   OS << CLANG_VENDOR;
+ #endif
+-  OS << ToolName << " version " CLANG_VERSION_STRING " "
+-     << getClangFullRepositoryVersion();
++  OS << ToolName << " version " CLANG_VERSION_STRING;
++
++  std::string repo = getClangFullRepositoryVersion();
++  if (!repo.empty()) {
++    OS << " " << repo;
++  }
+ 
+   return OS.str();
+ }
+@@ -111,7 +115,13 @@ std::string getClangFullCPPVersion() {
+ #ifdef CLANG_VENDOR
+   OS << CLANG_VENDOR;
+ #endif
+-  OS << "Clang " CLANG_VERSION_STRING " " << getClangFullRepositoryVersion();
++  OS << "Clang " CLANG_VERSION_STRING;
++
++  std::string repo = getClangFullRepositoryVersion();
++  if (!repo.empty()) {
++    OS << " " << repo;
++  }
++
+   return OS.str();
+ }
+ 
