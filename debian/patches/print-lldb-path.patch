@@ -1,11 +1,11 @@
 Author: Gianfranco Costamagna <locutusofborg@debian.org>
 Last-Update: 2020-01-21
 
-Index: llvm-toolchain-snapshot_11~++20200409051253+d08105482e1/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
+Index: llvm-toolchain-snapshot_11~++20200708031542+64363a9d930/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200409051253+d08105482e1.orig/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
-+++ llvm-toolchain-snapshot_11~++20200409051253+d08105482e1/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
-@@ -371,6 +371,8 @@ void ScriptInterpreterPython::ComputePyt
+--- llvm-toolchain-snapshot_11~++20200708031542+64363a9d930.orig/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
++++ llvm-toolchain-snapshot_11~++20200708031542+64363a9d930/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
+@@ -365,6 +365,8 @@ void ScriptInterpreterPython::ComputePyt
    // x86_64, or bin on Windows).
    llvm::sys::path::remove_filename(path);
    llvm::sys::path::append(path, LLDB_PYTHON_RELATIVE_LIBDIR);

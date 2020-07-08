@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/lib/Basic/Version.cpp
+Index: llvm-toolchain-snapshot_11~++20200708031542+64363a9d930/clang/lib/Basic/Version.cpp
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/clang/lib/Basic/Version.cpp
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/lib/Basic/Version.cpp
+--- llvm-toolchain-snapshot_11~++20200708031542+64363a9d930.orig/clang/lib/Basic/Version.cpp
++++ llvm-toolchain-snapshot_11~++20200708031542+64363a9d930/clang/lib/Basic/Version.cpp
 @@ -14,6 +14,7 @@
  #include "clang/Basic/LLVM.h"
  #include "clang/Config/config.h"
@@ -14,8 +14,8 @@ Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/lib/Basic/V
  #ifdef CLANG_VENDOR
    OS << CLANG_VENDOR;
  #endif
--  OS << ToolName << " version " CLANG_VERSION_STRING " "
+-  OS << ToolName << " version " CLANG_VERSION_STRING;
 +  OS << ToolName << " version " CLANG_VERSION_STRING "-" DEB_PATCHSETVERSION " "
-      << getClangFullRepositoryVersion();
  
-   return OS.str();
+   std::string repo = getClangFullRepositoryVersion();
+   if (!repo.empty()) {
