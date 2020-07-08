@@ -15,7 +15,7 @@ Index: llvm-toolchain-snapshot_11~++20200708031542+64363a9d930/clang/lib/Basic/V
    OS << CLANG_VENDOR;
  #endif
 -  OS << ToolName << " version " CLANG_VERSION_STRING;
-+  OS << ToolName << " version " CLANG_VERSION_STRING "-" DEB_PATCHSETVERSION " "
++  OS << ToolName << " version " CLANG_VERSION_STRING "-" DEB_PATCHSETVERSION;
  
    std::string repo = getClangFullRepositoryVersion();
    if (!repo.empty()) {
