@@ -1,5 +1,6 @@
-llvm-toolchain-10 (1:10.0.1~+rc3-2) unstable; urgency=medium
+llvm-toolchain-10 (1:10.0.1~+rc4-1) unstable; urgency=medium
 
+  * New RC release (of course, I was wrong)
   * Add binfmt-support to one of the autopkgtest tests
     Otherwise, fails with
     "./foo.bc: cannot execute binary file: Exec format error"
