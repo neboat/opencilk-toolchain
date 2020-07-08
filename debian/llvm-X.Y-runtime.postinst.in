@@ -3,7 +3,7 @@
 set -e
 
 if test "$1" = "configure"; then
-    if test -x /usr/sbin/update-binfmts; then
+	if which update-binfmts >/dev/null; then
         update-binfmts --import llvm-@LLVM_VERSION@-runtime.binfmt || true
     fi
 fi

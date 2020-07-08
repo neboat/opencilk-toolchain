@@ -122,24 +122,36 @@ llvm-toolchain-snapshot (1:11~++20200123111717+04fd2041561-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 23 Jan 2020 14:52:30 +0100
 
-llvm-toolchain-10 (1:10.0.1~++20200629113538+77d76b71d7d-1~exp2) unstable; urgency=medium
+llvm-toolchain-10 (1:10.0.1~+rc4-1) unstable; urgency=medium
 
-  * integration-test-suite-test also needs g++ for a test
+  * New RC release (of course, I was wrong)
+  * Update the binfmt-support postinstall to match what is done elsewhere
+    in Debian
+  * Add binfmt-support to one of the autopkgtest tests
+    And make sure that the test is only executed when installed correctly
+    Otherwise, fails with
+    "./foo.bc: cannot execute binary file: Exec format error"
+  * patches/remove-trailing-space-version.diff: cherry-pick an upstream patch
+    to address https://bugs.llvm.org/show_bug.cgi?id=38998#c15
+    trailing whitespace of clang full version causing a display issue
+    when building the linux kernel with clang
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 02 Jul 2020 09:10:39 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 08 Jul 2020 10:49:26 +0200
 
-llvm-toolchain-10 (1:10.0.1~++20200629113538+77d76b71d7d-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-10 (1:10.0.1~+rc3-1) unstable; urgency=medium
 
-  * New snapshot release
+  * New rc release. Should be the last (this is why I am
+    uploading to unstable)
   * Ship with integration-test-suite-test and run it with autopkgtest
-    integration-test-suite-test is a project started by Serge Guelton and myself.
+    integration-test-suite-test is a project started by Serge Guelton
+    and myself.
     The goal is to provide a set of tests to verify that llvm/clang/etc
     are working as expected in a distro (Linux, BSD, etc).
     But also to bring a set of expectations of what a LLVM toolchain should
     looks like when shipping to users.
     Serge is taking care of that work for Fedora/Redhat.
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 29 Jun 2020 11:38:51 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 07 Jul 2020 09:44:59 +0200
 
 llvm-toolchain-10 (1:10.0.1~+rc2-1~exp1) experimental; urgency=medium
 
