@@ -1,27 +1,14 @@
-commit bbea4d5e6b82a683dccaa8f4916e2a44f5dd3490
-Author: Sylvestre Ledru <sylvestre@debian.org>
-Date:   Wed Jul 8 13:33:34 2020 +0200
-
-    clang: Don't show a trailing space with --version when not built from the repo
-    
-    Reported here:
-    https://bugs.llvm.org/show_bug.cgi?id=38998#c15
-    
-    Reviewers: hans
-    
-    Differential Revision: https://reviews.llvm.org/D83386
-
-diff --git a/clang/lib/Basic/Version.cpp b/clang/lib/Basic/Version.cpp
-index c4b7d34ed16..286107cab9d 100644
---- a/clang/lib/Basic/Version.cpp
-+++ b/clang/lib/Basic/Version.cpp
-@@ -97,8 +97,12 @@ std::string getClangToolFullVersion(StringRef ToolName) {
+Index: llvm-toolchain-10_10.0.1~+rc1/clang/lib/Basic/Version.cpp
+===================================================================
+--- llvm-toolchain-10_10.0.1~+rc1.orig/clang/lib/Basic/Version.cpp
++++ llvm-toolchain-10_10.0.1~+rc1/clang/lib/Basic/Version.cpp
+@@ -125,8 +125,12 @@ std::string getClangToolFullVersion(Stri
  #ifdef CLANG_VENDOR
    OS << CLANG_VENDOR;
  #endif
--  OS << ToolName << " version " CLANG_VERSION_STRING " "
+-  OS << ToolName << " version " CLANG_VERSION_STRING "-" DEB_PATCHSETVERSION " "
 -     << getClangFullRepositoryVersion();
-+  OS << ToolName << " version " CLANG_VERSION_STRING;
++  OS << ToolName << " version " CLANG_VERSION_STRING "-" DEB_PATCHSETVERSION;
 +
 +  std::string repo = getClangFullRepositoryVersion();
 +  if (!repo.empty()) {
@@ -30,7 +17,7 @@ index c4b7d34ed16..286107cab9d 100644
  
    return OS.str();
  }
-@@ -111,7 +115,13 @@ std::string getClangFullCPPVersion() {
+@@ -139,7 +143,13 @@ std::string getClangFullCPPVersion() {
  #ifdef CLANG_VENDOR
    OS << CLANG_VENDOR;
  #endif
