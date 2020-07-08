@@ -4,6 +4,7 @@ llvm-toolchain-10 (1:10.0.1~+rc4-1) unstable; urgency=medium
   * Update the binfmt-support postinstall to match what is done elsewhere
     in Debian
   * Add binfmt-support to one of the autopkgtest tests
+    And make sure that the test is only executed when installed correctly
     Otherwise, fails with
     "./foo.bc: cannot execute binary file: Exec format error"
 

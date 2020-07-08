@@ -290,21 +290,26 @@ if ! lli-$VERSION opt.ll|grep -q "lli foo"; then
     lli-$VERSION opt.ll
     exit 1
 fi
-clang-$VERSION -O3 -emit-llvm foo.c -c -o foo.bc
-chmod +x foo.bc
-if ! ./foo.bc|grep -q "lli foo"; then
-    echo "executing ./foo.bc failed"
-    ./foo.bc
-    exit 1
-fi
 
 clang-$VERSION -O3 -emit-llvm foo.c -c -o foo.bc
 chmod +x foo.bc
-if ! ./foo.bc|grep -q "lli foo"; then
-    echo "executing ./foo.bc failed"
-    ./foo.bc
-    exit 1
-fi
+# only run if the binfmt is installed correctly
+if /usr/sbin/update-binfmts --display llvm-$VERSION-runtime.binfmt &> /dev/null; then
+    if ! ./foo.bc|grep -q "lli foo"; then
+        echo "executing ./foo.bc failed"
+        ./foo.bc
+        exit 1
+    fi
+
+    clang-$VERSION -O3 -emit-llvm foo.c -c -o foo.bc
+    chmod +x foo.bc
+    if ! ./foo.bc|grep -q "lli foo"; then
+        echo "executing ./foo.bc failed"
+        ./foo.bc
+        exit 1
+    fi
+fi # binfmt test
+
 if ! llvm-dis-$VERSION < foo.bc|grep -q "lli foo"; then
     echo "llvm assembly code failed"
     llvm-dis-$VERSION < foo.bc
