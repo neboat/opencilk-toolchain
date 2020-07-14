@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc/clang-tools-extra/clangd/CMakeLists.txt
+Index: llvm-toolchain-snapshot_11~++20200714101840+aef60af34ec/clang-tools-extra/clangd/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc.orig/clang-tools-extra/clangd/CMakeLists.txt
-+++ llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc/clang-tools-extra/clangd/CMakeLists.txt
-@@ -27,6 +27,11 @@ set(LLVM_LINK_COMPONENTS
-   FrontendOpenMP
+--- llvm-toolchain-snapshot_11~++20200714101840+aef60af34ec.orig/clang-tools-extra/clangd/CMakeLists.txt
++++ llvm-toolchain-snapshot_11~++20200714101840+aef60af34ec/clang-tools-extra/clangd/CMakeLists.txt
+@@ -28,6 +28,11 @@ set(LLVM_LINK_COMPONENTS
+   Option
    )
  
 +if(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "i386" OR
@@ -14,7 +14,7 @@ Index: llvm-toolchain-snapshot_11~++20200624084348+31c40f2d6bc/clang-tools-extra
  add_clang_library(clangDaemon
    AST.cpp
    ClangdLSPServer.cpp
-@@ -99,6 +104,7 @@ add_clang_library(clangDaemon
+@@ -104,6 +109,7 @@ add_clang_library(clangDaemon
    clangdSupport
    clangTidy
    ${LLVM_PTHREAD_LIB}
