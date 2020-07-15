@@ -1,15 +1,13 @@
-llvm-toolchain-snapshot (1:11~++20200702111259+07bda98b6af-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:12~++20200701093119+ffee8040534-1~exp2) UNRELEASED; urgency=medium
 
-  * experimental New snapshot release
+  [ Sylvestre Ledru ]
+  * Snapshot is now -12
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 02 Jul 2020 11:16:03 +0200
-
-llvm-toolchain-snapshot (1:11~++20200701093119+ffee8040534-1~exp2) UNRELEASED; urgency=medium
-
+  [ Samuel Thibault ]
   * debian/patches/hurd/hurd-EIEIO-undef.diff: Remove, upstreamed.
   * debian/patches/hurd/hurd-cxx-paths.diff: Remove, upstreamed.
 
- -- Samuel Thibault <sthibault@debian.org>  Tue, 07 Jul 2020 18:05:31 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Jul 2020 17:26:10 +0200
 
 llvm-toolchain-snapshot (1:11~++20200701093119+ffee8040534-1~exp1) experimental; urgency=medium
 

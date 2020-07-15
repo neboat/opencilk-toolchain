@@ -33,7 +33,7 @@ Steps for manually building a snapshot release
      $ sh unpack.sh
 
    which will unpack the source tree inside a new directory such as
-   branches/llvm-toolchain-snapshot_3.9~+20191018225217+3b113a2be6d.
+   branches/llvm-toolchain-snapshot_3.9~+20191018225217+3b123a2be6d.
    (date+hour+short git hash).
    Depending on the current snapshot version number and git release,
    the directory name will be
