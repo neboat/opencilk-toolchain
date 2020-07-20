@@ -1,7 +1,13 @@
 llvm-toolchain-10 (1:10.0.1~+rc4-2) UNRELEASED; urgency=medium
 
+  [ Samuel Thibault ]
   * patches/hurd/hurd-cxx-paths.diff: Refresh, some of the factorization was
     backported from 11 to 10.
+
+  [ Gianfranco Costamagna ]
+  * debian/patches/mips-force-nomadd4.patch: Apply and rebase patch to disable
+    nomadd4 on mips* (Closes: #964989)
+    - thanks Yunqiang Su <wzssyqa@gmail.com> for the patch
 
  -- Samuel Thibault <sthibault@debian.org>  Tue, 07 Jul 2020 18:39:08 +0200
 
