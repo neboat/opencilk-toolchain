@@ -352,7 +352,9 @@ override_dh_auto_configure: preconfigure
 	echo "Running tests: $(RUN_TEST)"
 
 	# if cmake is installed in /tmp/cmake/ uses it
-	# Used to build llvm on old ubuntu (precise) on the llvm.org/apt/ ci
+	# Used to build llvm on Debian & Ubuntu with a recent cmake
+	# on the llvm.org/apt/ ci
+	# Use D24cmake as hook to download/setup
 	CMAKE_BIN=cmake; \
 	if test -f /tmp/cmake/bin/cmake; then \
 		CMAKE_BIN=/tmp/cmake/bin/cmake; \
