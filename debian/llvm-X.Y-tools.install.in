@@ -2,6 +2,7 @@
 usr/lib/llvm-@LLVM_VERSION@/bin/count
 usr/lib/llvm-@LLVM_VERSION@/bin/FileCheck
 usr/lib/llvm-@LLVM_VERSION@/bin/not
+usr/lib/llvm-@LLVM_VERSION@/bin/split-file
 usr/lib/llvm-@LLVM_VERSION@/bin/yaml-bench
 usr/lib/llvm-@LLVM_VERSION@/share/opt-viewer/opt-viewer.py
 usr/lib/llvm-@LLVM_VERSION@/share/opt-viewer/optrecord.py
@@ -17,3 +18,4 @@ usr/bin/count-@LLVM_VERSION@
 usr/bin/FileCheck-@LLVM_VERSION@
 usr/bin/not-@LLVM_VERSION@
 usr/bin/yaml-bench-@LLVM_VERSION@
+usr/bin/split-file-@LLVM_VERSION@

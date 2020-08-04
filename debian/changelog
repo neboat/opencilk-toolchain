@@ -1,9 +1,10 @@
-llvm-toolchain-snapshot (1:12~++20200803010113+d1007478f19-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:12~++20200804122259+4be13b15d69-1~exp1) UNRELEASED; urgency=medium
 
   * Install omp.h in instead of /usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/include/
     instead of /usr/lib/llvm-@LLVM_VERSION@/include/openmp/omp
+  * Install split-file in llvm-X-tools (like lit)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 03 Aug 2020 13:04:50 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 04 Aug 2020 12:26:34 +0200
 
 llvm-toolchain-snapshot (1:12~++20200715052739+d6e79e3dd6d-1~exp1) experimental; urgency=medium
 
