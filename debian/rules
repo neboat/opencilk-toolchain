@@ -358,6 +358,7 @@ override_dh_auto_configure: preconfigure
 	CMAKE_BIN=cmake; \
 	if test -f /tmp/cmake/bin/cmake; then \
 		CMAKE_BIN=/tmp/cmake/bin/cmake; \
+		LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/; \
 	fi; \
 	echo "Using cmake: $$CMAKE_BIN"; \
 	cd $(TARGET_BUILD) && \
