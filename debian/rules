@@ -260,7 +260,7 @@ endif
 
 DH_OPTIONS=
 OCAML_ENABLE= no
-OCAML_ARCHS := amd64 arm64 armhf i386 ppc64el s390x
+OCAML_ARCHS := amd64 arm64 armhf ppc64el s390x
 ifneq (,$(filter $(DEB_HOST_ARCH),$(OCAML_ARCHS)))
 # Enable OCAML for this arch.
 	OCAML_ENABLE=yes
