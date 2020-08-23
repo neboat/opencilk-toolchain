@@ -3,13 +3,15 @@ llvm-toolchain-9 (1:9.0.1-14) unstable; urgency=medium
   * debian/patches/b288d90b39f4b905c02092a9bfcfd6d78f99b191.patch:
   * debian/patches/3185c30c54d0af5bffbff3bcfd721668d086ff10.patch:
     - cherry-pick upstream fixes for ppc64el build failure (Closes: #968174)
+  * Previous version closed bug: 964988 (Closes: #964988)
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 15 Aug 2020 21:53:41 +0200
 
 llvm-toolchain-9 (1:9.0.1-13) unstable; urgency=medium
 
   [ Aurelien Jarno ]
-  * Add mips-force-nomadd4.diff to default to +nomadd4 on MIPS.
+  * Add mips-force-nomadd4.diff to default to +nomadd4 on MIPS. (Closes:
+    #964988)
 
   [ Ximin Luo ]
   * Add 373184.patch to fix soundness issue affecting rustc. (Closes: #959877)
