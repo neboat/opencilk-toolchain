@@ -1,4 +1,4 @@
-llvm-toolchain-10 (1:10.0.1~+rc4-2) UNRELEASED; urgency=medium
+llvm-toolchain-10 (1:10.0.1-2) unstable; urgency=medium
 
   [ Samuel Thibault ]
   * patches/hurd/hurd-cxx-paths.diff: Refresh, some of the factorization was
@@ -9,7 +9,17 @@ llvm-toolchain-10 (1:10.0.1~+rc4-2) UNRELEASED; urgency=medium
     nomadd4 on mips* (Closes: #964989)
     - thanks Yunqiang Su <wzssyqa@gmail.com> for the patch
 
- -- Samuel Thibault <sthibault@debian.org>  Tue, 07 Jul 2020 18:39:08 +0200
+  [ Steve Langasek ]
+  * Drop ocaml support on i386, which pulls in a series of packages which
+    is not reasonable to support.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 23 Aug 2020 22:57:55 +0200
+
+llvm-toolchain-10 (1:10.0.1-1) unstable; urgency=medium
+
+  * New release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 21 Jul 2020 18:29:06 +0200
 
 llvm-toolchain-10 (1:10.0.1~+rc4-1) unstable; urgency=medium
 
