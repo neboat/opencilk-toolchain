@@ -1,9 +1,15 @@
 llvm-toolchain-11 (1:11.0.0~+rc2-2) UNRELEASED; urgency=medium
 
+  [ Gianfranco Costamagna ]
   * Disable ocaml support on i386, not reasonable to support it there
     (specially for Ubuntu)
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 24 Aug 2020 09:19:14 +0200
+  [ Sylvestre Ledru ]
+  * Also link against -latomic on mipsel to fix
+   /usr/[...]/atomic_base.h:426: undefined reference to `__atomic_load_8'
+   for lld to fix the FTBFS
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 25 Aug 2020 10:44:00 +0200
 
 llvm-toolchain-11 (1:11.0.0~+rc2-1) unstable; urgency=medium
 

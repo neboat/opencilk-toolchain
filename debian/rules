@@ -53,7 +53,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),i386 armel mips mipsel powerpc powerpcspe risc
 CMAKE_EXTRA += -DLIBOMP_LIBFLAGS="-latomic" -DCMAKE_SHARED_LINKER_FLAGS="-latomic"
 endif
 
-ifneq (,$(filter $(DEB_HOST_ARCH),armel riscv64))
+ifneq (,$(filter $(DEB_HOST_ARCH),armel riscv64 mipsel))
 # For some reason, in the stage2 build, when clang is used to compile
 # itself. The atomic detection is failing on armel and riscv64. Forcing the inclusion everywhere.
 LDFLAGS_EXTRA += -latomic
