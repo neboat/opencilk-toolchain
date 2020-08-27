@@ -296,6 +296,7 @@ chmod +x foo.bc
 # only run if the binfmt is installed correctly
 /usr/sbin/update-binfmts --display llvm-$VERSION-runtime.binfmt &> foo.log || true
 if grep -q "interpreter = /usr/bin/lli-" foo.log; then
+    /usr/sbin/update-binfmts --enable llvm-$VERSION-runtime.binfmt
     if ! ./foo.bc|grep -q "lli foo"; then
         echo "executing ./foo.bc failed"
         ./foo.bc
