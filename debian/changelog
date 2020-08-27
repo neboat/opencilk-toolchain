@@ -9,6 +9,12 @@ llvm-toolchain-11 (1:11.0.0~+rc2-2) unstable; urgency=medium
   * Also link against -latomic on mipsel to fix
    /usr/[...]/atomic_base.h:426: undefined reference to `__atomic_load_8'
    for lld to fix the FTBFS
+  * Fix a FTBFS on armel with libcxx-armhf-ftbfs.diff
+    atomic:2780:16: error: use of undeclared identifier '__libcpp_signed_lock_free'
+    typedef atomic<__libcpp_signed_lock_free> atomic_signed_lock_free;
+               ^
+    atomic:2781:16: error: unknown type name '__libcpp_unsigned_lock_free'; did you mean 'atomic_signed_lock_free'?
+    typedef atomic<__libcpp_unsigned_lock_free> atomic_unsigned_lock_free;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 25 Aug 2020 10:44:00 +0200
 
