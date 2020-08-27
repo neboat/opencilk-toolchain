@@ -295,6 +295,7 @@ clang-$VERSION -O3 -emit-llvm foo.c -c -o foo.bc
 chmod +x foo.bc
 # only run if the binfmt is installed correctly
 if /usr/sbin/update-binfmts --display llvm-$VERSION-runtime.binfmt &> /dev/null; then
+    /usr/sbin/update-binfmts --enable llvm-$VERSION-runtime.binfmt
     if ! ./foo.bc|grep -q "lli foo"; then
         echo "executing ./foo.bc failed"
         ./foo.bc
