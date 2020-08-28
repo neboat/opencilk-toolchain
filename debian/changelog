@@ -1,3 +1,10 @@
+llvm-toolchain-10 (1:10.0.1-4) unstable; urgency=medium
+
+  * Fix testsuite by ignoring binfmts test
+    (can't be enabled on autopkgtests)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 28 Aug 2020 21:54:05 +0200
+
 llvm-toolchain-10 (1:10.0.1-3) unstable; urgency=medium
 
   * Fix testsuite by enabling binfmts support before using it
