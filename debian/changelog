@@ -1,3 +1,10 @@
+llvm-toolchain-11 (1:11.0.0~+rc2-3) unstable; urgency=medium
+
+  * Fix testsuite by ignoring binfmts test
+    (can't be enabled on autopkgtests)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 28 Aug 2020 21:56:49 +0200
+
 llvm-toolchain-11 (1:11.0.0~+rc2-2) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
