@@ -2,7 +2,7 @@
 
 set -e
 
-LLVM_VERSION=10
+LLVM_VERSION=11
 
 # this is taken from libjsoncpp package
 # Presence of $ADTTMP implies that someone will handle cleanup for us, so we

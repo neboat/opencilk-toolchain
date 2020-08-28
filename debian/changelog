@@ -1,3 +1,9 @@
+llvm-toolchain-11 (1:11.0.0~+rc2-4) unstable; urgency=medium
+
+  * integration-test-suite-test: change the configuration for 11
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 Aug 2020 23:08:33 +0200
+
 llvm-toolchain-11 (1:11.0.0~+rc2-3) unstable; urgency=medium
 
   * Fix testsuite by ignoring binfmts test
