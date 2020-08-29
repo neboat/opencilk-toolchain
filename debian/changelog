@@ -1,3 +1,11 @@
+llvm-toolchain-10 (1:10.0.1-5) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Use dh-exec to exclude lib/libPolly*.a on powerpc and
+    powerpcspe from libclang-common-X.Y-dev.install.in
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sat, 29 Aug 2020 15:44:24 +0200
+
 llvm-toolchain-10 (1:10.0.1-4) unstable; urgency=medium
 
   * Fix testsuite by ignoring binfmts test
