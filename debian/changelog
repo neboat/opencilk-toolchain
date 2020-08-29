@@ -1,3 +1,10 @@
+llvm-toolchain-11 (1:11.0.0~+rc2-5) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Link against libatomic on powerpc to fix FTBFS in stage2
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sat, 29 Aug 2020 15:11:20 +0200
+
 llvm-toolchain-11 (1:11.0.0~+rc2-4) unstable; urgency=medium
 
   * integration-test-suite-test: change the configuration for 11
