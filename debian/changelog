@@ -2,6 +2,8 @@ llvm-toolchain-11 (1:11.0.0~+rc2-5) UNRELEASED; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Link against libatomic on powerpc to fix FTBFS in stage2
+  * Use dh-exec to exclude lib/libPolly*.a on powerpc and
+    powerpcspe from libclang-common-X.Y-dev.install.in
 
  -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sat, 29 Aug 2020 15:11:20 +0200
 
