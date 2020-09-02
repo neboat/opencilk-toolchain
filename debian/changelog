@@ -24,6 +24,81 @@ llvm-toolchain-snapshot (1:12~++20200715052739+d6e79e3dd6d-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 08 Jul 2020 15:19:14 +0200
 
+llvm-toolchain-11 (1:11.0.0~+rc2-5) unstable; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Link against libatomic on powerpc to fix FTBFS in stage2
+  * Use dh-exec to exclude lib/libPolly*.a on powerpc and
+    powerpcspe from libclang-common-X.Y-dev.install.in
+
+  [ Gianfranco Costamagna ]
+  * autopkgtests: ignore binfmts enable command return value.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 31 Aug 2020 12:26:58 +0200
+
+llvm-toolchain-11 (1:11.0.0~+rc2-4) unstable; urgency=medium
+
+  * integration-test-suite-test: change the configuration for 11
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 Aug 2020 23:08:33 +0200
+
+llvm-toolchain-11 (1:11.0.0~+rc2-3) unstable; urgency=medium
+
+  * Fix testsuite by ignoring binfmts test
+    (can't be enabled on autopkgtests)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 28 Aug 2020 21:56:49 +0200
+
+llvm-toolchain-11 (1:11.0.0~+rc2-2) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Disable ocaml support on i386, not reasonable to support it there
+    (specially for Ubuntu)
+  * Enable binfmt support before using it in tests, to fix them
+
+  [ Sylvestre Ledru ]
+  * Also link against -latomic on mipsel to fix
+   /usr/[...]/atomic_base.h:426: undefined reference to `__atomic_load_8'
+   for lld to fix the FTBFS
+  * Fix a FTBFS on armel with libcxx-armhf-ftbfs.diff
+    atomic:2780:16: error: use of undeclared identifier '__libcpp_signed_lock_free'
+    typedef atomic<__libcpp_signed_lock_free> atomic_signed_lock_free;
+               ^
+    atomic:2781:16: error: unknown type name '__libcpp_unsigned_lock_free'; did you mean 'atomic_signed_lock_free'?
+    typedef atomic<__libcpp_unsigned_lock_free> atomic_unsigned_lock_free;
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 25 Aug 2020 10:44:00 +0200
+
+llvm-toolchain-11 (1:11.0.0~+rc2-1) unstable; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 20 Aug 2020 22:17:47 +0200
+
+llvm-toolchain-11 (1:11.0.0~+rc1-2) unstable; urgency=medium
+
+  * Don't install ompt-multiplex.h on armhf, mipsel and mips64el
+    (Closes: #967944)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 05 Aug 2020 15:23:25 +0200
+
+llvm-toolchain-11 (1:11.0.0~+rc1-1) unstable; urgency=medium
+
+  * Testing release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 29 Jul 2020 17:46:57 +0200
+
+llvm-toolchain-11 (1:11~++20200715043845+0e377e253c1-1~exp1) experimental; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * branching of snapshot into 11
+
+  [ Samuel Thibault ]
+  * debian/patches/hurd/hurd-EIEIO-undef.diff: Remove, upstreamed.
+  * debian/patches/hurd/hurd-cxx-paths.diff: Remove, upstreamed.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Jul 2020 16:30:36 +0200
+
 llvm-toolchain-snapshot (1:11~++20200701093119+ffee8040534-1~exp1) experimental; urgency=medium
 
   * New snapshot release
@@ -140,6 +215,61 @@ llvm-toolchain-snapshot (1:11~++20200123111717+04fd2041561-1~exp1) experimental;
     old-old-stable
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 23 Jan 2020 14:52:30 +0100
+
+llvm-toolchain-10 (1:10.0.1-6) unstable; urgency=medium
+
+  * Add debian/* to the copyright file. Uses the same license
+    as LLVM
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 02 Sep 2020 13:55:46 +0200
+
+llvm-toolchain-10 (1:10.0.1-5) unstable; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Use dh-exec to exclude lib/libPolly*.a on powerpc and
+    powerpcspe from libclang-common-X.Y-dev.install.in
+
+  [ Gianfranco Costamagna ]
+  * autopkgtests: ignore binfmts enable command return value.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 31 Aug 2020 12:28:24 +0200
+
+llvm-toolchain-10 (1:10.0.1-4) unstable; urgency=medium
+
+  * Fix testsuite by ignoring binfmts test
+    (can't be enabled on autopkgtests)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 28 Aug 2020 21:54:05 +0200
+
+llvm-toolchain-10 (1:10.0.1-3) unstable; urgency=medium
+
+  * Fix testsuite by enabling binfmts support before using it
+    (the default is disabled)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 27 Aug 2020 12:42:20 +0200
+
+llvm-toolchain-10 (1:10.0.1-2) unstable; urgency=medium
+
+  [ Samuel Thibault ]
+  * patches/hurd/hurd-cxx-paths.diff: Refresh, some of the factorization was
+    backported from 11 to 10.
+
+  [ Gianfranco Costamagna ]
+  * debian/patches/mips-force-nomadd4.patch: Apply and rebase patch to disable
+    nomadd4 on mips* (Closes: #964989)
+    - thanks Yunqiang Su <wzssyqa@gmail.com> for the patch
+
+  [ Steve Langasek ]
+  * Drop ocaml support on i386, which pulls in a series of packages which
+    is not reasonable to support.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 23 Aug 2020 22:57:55 +0200
+
+llvm-toolchain-10 (1:10.0.1-1) unstable; urgency=medium
+
+  * New release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 21 Jul 2020 18:29:06 +0200
 
 llvm-toolchain-10 (1:10.0.1~+rc4-1) unstable; urgency=medium
 
