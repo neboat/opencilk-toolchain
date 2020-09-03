@@ -410,8 +410,8 @@ else
 fi
 
 clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection foo.c &> foo.log
-if ! grep -q "3 warnings generated." foo.log; then
-    echo "Should find 3 warnings"
+if ! grep -q "warnings generated." foo.log; then
+    echo "Should find at least 2 warnings"
     exit 1
 fi
 
