@@ -1,12 +1,12 @@
 Test-Command: bash -v ./debian/qualify-clang.sh
-Depends: @, cmake, g++, file, dpkg-dev, binfmt-support
+Depends: @, cmake, make, g++, file, dpkg-dev, binfmt-support
 # Comment the dbgsym package because of bug #917528
 # dbgsym packages not being available in testing
 # clang-11-dbgsym, libclang1-11-dbgsym
 Restrictions: allow-stderr
 
 Tests: integration-test-suite-test
-Depends: @, cmake, libstdc++-9-dev, g++
+Depends: @, cmake, make, g++, libstdc++-10-dev
 Restrictions: allow-stderr
 
 Tests: cmake-test
