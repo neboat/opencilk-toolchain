@@ -9,6 +9,13 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_CXIndex_getGlobalOptions@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_CXIndex_setGlobalOptions@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_CXIndex_setInvocationEmissionPathOption@LLVM_@LLVM_VERSION@ 1:6.0~svn320926-1~
+ clang_CXRewriter_create@LLVM_@LLVM_VERSION@ 1:12~++20200906115111+ff218cbc84f-1~
+ clang_CXRewriter_dispose@LLVM_@LLVM_VERSION@ 1:12~++20200906115111+ff218cbc84f-1~
+ clang_CXRewriter_insertTextBefore@LLVM_@LLVM_VERSION@ 1:12~++20200906115111+ff218cbc84f-1~
+ clang_CXRewriter_overwriteChangedFiles@LLVM_@LLVM_VERSION@ 1:12~++20200906115111+ff218cbc84f-1~
+ clang_CXRewriter_removeText@LLVM_@LLVM_VERSION@ 1:12~++20200906115111+ff218cbc84f-1~
+ clang_CXRewriter_replaceText@LLVM_@LLVM_VERSION@ 1:12~++20200906115111+ff218cbc84f-1~
+ clang_CXRewriter_writeMainFileToStdOut@LLVM_@LLVM_VERSION@ 1:12~++20200906115111+ff218cbc84f-1~
  clang_CXXConstructor_isConvertingConstructor@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_CXXConstructor_isCopyConstructor@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_CXXConstructor_isDefaultConstructor@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
@@ -63,7 +70,10 @@ libclang-@LLVM_VERSION@.so.1 libclang1-@LLVM_VERSION@ #MINVER#
  clang_Cursor_getTemplateArgumentUnsignedValue@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_getTemplateArgumentValue@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_getTranslationUnit@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_Cursor_getVarDeclInitializer@LLVM_@LLVM_VERSION@ 1:12~++20200906115111+ff218cbc84f-1~
  clang_Cursor_hasAttrs@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
+ clang_Cursor_hasVarDeclExternalStorage@LLVM_@LLVM_VERSION@ 1:12~++20200906115111+ff218cbc84f-1~
+ clang_Cursor_hasVarDeclGlobalStorage@LLVM_@LLVM_VERSION@ 1:12~++20200906115111+ff218cbc84f-1~
  clang_Cursor_isAnonymous@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~
  clang_Cursor_isAnonymousRecordDecl@LLVM_@LLVM_VERSION@ 1:9~svn359771-1~
  clang_Cursor_isBitField@LLVM_@LLVM_VERSION@ 1:5.0~svn298832-1~

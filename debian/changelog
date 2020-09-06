@@ -4,6 +4,17 @@ llvm-toolchain-snapshot (1:12~++20200804122259+4be13b15d69-1~exp1) UNRELEASED; u
   * Install omp.h in instead of /usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/include/
     instead of /usr/lib/llvm-@LLVM_VERSION@/include/openmp/omp
   * Install split-file in llvm-X-tools (like lit)
+  * Add new symbols to libclang1:
+   - clang_CXRewriter_create
+   - clang_CXRewriter_dispose
+   - clang_CXRewriter_insertTextBefore
+   - clang_CXRewriter_overwriteChangedFiles
+   - clang_CXRewriter_removeText
+   - clang_CXRewriter_replaceText
+   - clang_CXRewriter_writeMainFileToStdOut
+   - clang_Cursor_getVarDeclInitializer
+   - clang_Cursor_hasVarDeclExternalStorage
+   - clang_Cursor_hasVarDeclGlobalStorage
 
   [ John Paul Adrian Glaubitz ]
   * Link against libatomic on mipsel to fix FTBFS in stage2
