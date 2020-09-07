@@ -2,6 +2,7 @@ llvm-toolchain-11 (1:11.0.0~+rc2-6) unstable; urgency=medium
 
   * Fix "libc++-11-dev includes libc++abi-11-dev headers"
     (Closes: #969274)
+  * Install llvm examples in llvm-11-examples (Closes: #969339)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 07 Sep 2020 13:32:26 +0200
 
