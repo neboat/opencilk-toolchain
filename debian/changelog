@@ -1,6 +1,7 @@
-llvm-toolchain-snapshot (1:12~++20200804122259+4be13b15d69-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:12~++20200929085817+962a247aebb-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
+  * New snapshot release
   * Install omp.h in instead of /usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/include/
     instead of /usr/lib/llvm-@LLVM_VERSION@/include/openmp/omp
   * Install split-file in llvm-X-tools (like lit)
@@ -26,7 +27,7 @@ llvm-toolchain-snapshot (1:12~++20200804122259+4be13b15d69-1~exp1) UNRELEASED; u
     - debian/patches/powerpcspe/D54583-powerpcspe-double-parameter.diff
     - debian/patches/powerpcspe/D56703-powerpcspe-register-spilling.diff
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 04 Aug 2020 12:26:34 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 29 Sep 2020 21:01:53 +0200
 
 llvm-toolchain-snapshot (1:12~++20200715052739+d6e79e3dd6d-1~exp1) experimental; urgency=medium
 
