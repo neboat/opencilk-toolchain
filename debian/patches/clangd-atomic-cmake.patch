@@ -1,10 +1,10 @@
-Index: llvm-toolchain-snapshot_12~++20200720020250+6384ec40994/clang-tools-extra/clangd/CMakeLists.txt
+Index: llvm-toolchain-snapshot_12~++20200911085730+f787fe15d8e/clang-tools-extra/clangd/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_12~++20200720020250+6384ec40994.orig/clang-tools-extra/clangd/CMakeLists.txt
-+++ llvm-toolchain-snapshot_12~++20200720020250+6384ec40994/clang-tools-extra/clangd/CMakeLists.txt
-@@ -32,6 +32,11 @@ if(MSVC AND NOT CLANG_CL)
-  set_source_files_properties(CompileCommands.cpp PROPERTIES COMPILE_FLAGS -wd4130) # disables C4130: logical operation on address of string constant
- endif()
+--- llvm-toolchain-snapshot_12~++20200911085730+f787fe15d8e.orig/clang-tools-extra/clangd/CMakeLists.txt
++++ llvm-toolchain-snapshot_12~++20200911085730+f787fe15d8e/clang-tools-extra/clangd/CMakeLists.txt
+@@ -35,6 +35,11 @@ endif()
+ 
+ include_directories(BEFORE "${CMAKE_CURRENT_BINARY_DIR}/../clang-tidy")
  
 +if(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "i386" OR
 +   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "i686")
@@ -14,7 +14,7 @@ Index: llvm-toolchain-snapshot_12~++20200720020250+6384ec40994/clang-tools-extra
  add_clang_library(clangDaemon
    AST.cpp
    ClangdLSPServer.cpp
-@@ -108,6 +113,7 @@ add_clang_library(clangDaemon
+@@ -111,6 +116,7 @@ add_clang_library(clangDaemon
    clangdSupport
    clangTidy
    ${LLVM_PTHREAD_LIB}
