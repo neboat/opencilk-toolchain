@@ -2,10 +2,10 @@
  lldb/source/API/CMakeLists.txt |   14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
 
-Index: llvm-toolchain-snapshot_12~++20200817104344+45cc86b09bc/lldb/source/API/CMakeLists.txt
+Index: llvm-toolchain-snapshot_12~++20200913082648+c0bcd11068f/lldb/source/API/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_12~++20200817104344+45cc86b09bc.orig/lldb/source/API/CMakeLists.txt
-+++ llvm-toolchain-snapshot_12~++20200817104344+45cc86b09bc/lldb/source/API/CMakeLists.txt
+--- llvm-toolchain-snapshot_12~++20200913082648+c0bcd11068f.orig/lldb/source/API/CMakeLists.txt
++++ llvm-toolchain-snapshot_12~++20200913082648+c0bcd11068f/lldb/source/API/CMakeLists.txt
 @@ -19,7 +19,12 @@ if(LLDB_ENABLE_LUA)
    set(lldb_lua_wrapper ${lua_bindings_dir}/LLDBWrapLua.cpp)
  endif()
@@ -29,8 +29,8 @@ Index: llvm-toolchain-snapshot_12~++20200817104344+45cc86b09bc/lldb/source/API/C
  )
  
  if (NOT CMAKE_SYSTEM_NAME MATCHES "Windows")
-@@ -188,11 +193,6 @@ if ( CMAKE_SYSTEM_NAME MATCHES "Windows"
-   if (MSVC AND LLDB_ENABLE_PYTHON)
+@@ -188,11 +193,6 @@ if (MSVC)
+   if (LLDB_ENABLE_PYTHON)
      target_link_libraries(liblldb PRIVATE ${Python3_LIBRARIES})
    endif()
 -else()
