@@ -43,6 +43,7 @@ llvm-toolchain-snapshot (1:12~++20200715052739+d6e79e3dd6d-1~exp1) experimental;
 llvm-toolchain-11 (1:11.0.0~+rc3-1) unstable; urgency=medium
 
   * New snapshot release
+  * New rc release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 22 Sep 2020 17:19:40 +0200
 
