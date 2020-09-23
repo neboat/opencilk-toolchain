@@ -40,6 +40,23 @@ llvm-toolchain-snapshot (1:12~++20200715052739+d6e79e3dd6d-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 08 Jul 2020 15:19:14 +0200
 
+llvm-toolchain-11 (1:11.0.0~+rc3-2) unstable; urgency=medium
+
+  * Update of the symbol list of libomp5:
+    - GOMP_loop_maybe_nonmonotonic_runtime_next
+    - GOMP_loop_maybe_nonmonotonic_runtime_start
+    - GOMP_loop_nonmonotonic_runtime_next
+    - GOMP_loop_nonmonotonic_runtime_start
+    - GOMP_loop_ull_maybe_nonmonotonic_runtime_next
+    - GOMP_loop_ull_maybe_nonmonotonic_runtime_start
+    - GOMP_loop_ull_nonmonotonic_runtime_next
+    - GOMP_loop_ull_nonmonotonic_runtime_start
+    - GOMP_parallel_loop_maybe_nonmonotonic_runtime
+    - GOMP_parallel_loop_nonmonotonic_runtime
+    - omp_display_env
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 23 Sep 2020 22:34:11 +0200
+
 llvm-toolchain-11 (1:11.0.0~+rc3-1) unstable; urgency=medium
 
   * New rc release
