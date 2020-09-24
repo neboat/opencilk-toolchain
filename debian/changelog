@@ -1,7 +1,12 @@
 llvm-toolchain-10 (1:10.0.1-6) unstable; urgency=medium
 
+  [ Sylvestre Ledru ]
   * Add debian/* to the copyright file. Uses the same license
     as LLVM
+
+  [ Julien Cristau ]
+  * Cherry-pick "[PowerPC] PPCBoolRetToInt: Don't translate Constant's
+    operands".  Fixes rustc crash building firefox-esr.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 02 Sep 2020 13:55:46 +0200
 
