@@ -1,3 +1,10 @@
+llvm-toolchain-10 (1:10.0.1-7) UNRELEASED; urgency=medium
+
+  * debian/patches/hurd/hurd-cxx-paths.diff: Add missing GCC installation
+    initialization.
+
+ -- Samuel Thibault <sthibault@debian.org>  Thu, 27 Aug 2020 17:06:44 +0200
+
 llvm-toolchain-10 (1:10.0.1-6) unstable; urgency=medium
 
   [ Sylvestre Ledru ]

@@ -3,13 +3,13 @@ hurd: find c++ headers
 This should be factorized with Linux.cpp and the GNU/kFreeBSD case.
 
 ---
- clang/lib/Driver/ToolChains/Hurd.cpp |  146 ++++++++++++++++++++++++++++++++++-
+ clang/lib/Driver/ToolChains/Hurd.cpp |  149 ++++++++++++++++++++++++++++++++++-
  clang/lib/Driver/ToolChains/Hurd.h   |    3 
- 2 files changed, 145 insertions(+), 4 deletions(-)
+ 2 files changed, 148 insertions(+), 4 deletions(-)
 
 --- a/clang/lib/Driver/ToolChains/Hurd.cpp
 +++ b/clang/lib/Driver/ToolChains/Hurd.cpp
-@@ -61,6 +61,15 @@ static StringRef getOSLibDir(const llvm:
+@@ -61,8 +61,20 @@ static StringRef getOSLibDir(const llvm:
    return Triple.isArch32Bit() ? "lib" : "lib64";
  }
  
@@ -24,8 +24,13 @@ This should be factorized with Linux.cpp and the GNU/kFreeBSD case.
 +
  Hurd::Hurd(const Driver &D, const llvm::Triple &Triple, const ArgList &Args)
      : Generic_ELF(D, Triple, Args) {
++  GCCInstallation.init(Triple, Args);
++  Multilibs = GCCInstallation.getMultilibs();
++  SelectedMultilib = GCCInstallation.getMultilib();
    std::string SysRoot = computeSysRoot();
-@@ -73,8 +82,61 @@ Hurd::Hurd(const Driver &D, const llvm::
+   path_list &Paths = getFilePaths();
+ 
+@@ -73,8 +85,61 @@ Hurd::Hurd(const Driver &D, const llvm::
    ExtraOpts.push_back("--build-id");
  #endif
  
@@ -89,7 +94,7 @@ This should be factorized with Linux.cpp and the GNU/kFreeBSD case.
    // FIXME: It's not clear whether we should use the driver's installed
    // directory ('Dir' below) or the ResourceDir.
    if (StringRef(D.Dir).startswith(SysRoot)) {
-@@ -88,8 +150,40 @@ Hurd::Hurd(const Driver &D, const llvm::
+@@ -88,8 +153,40 @@ Hurd::Hurd(const Driver &D, const llvm::
    addPathIfExists(D, SysRoot + "/usr/lib/" + MultiarchTriple, Paths);
    addPathIfExists(D, SysRoot + "/usr/lib/../" + OSLibDir, Paths);
  
@@ -132,7 +137,7 @@ This should be factorized with Linux.cpp and the GNU/kFreeBSD case.
    // FIXME: It's not clear whether we should use the driver's installed
    // directory ('Dir' below) or the ResourceDir.
    if (StringRef(D.Dir).startswith(SysRoot))
-@@ -156,6 +250,17 @@ void Hurd::AddClangSystemIncludeArgs(con
+@@ -156,6 +253,17 @@ void Hurd::AddClangSystemIncludeArgs(con
  
    // Lacking those, try to detect the correct set of system includes for the
    // target triple.
@@ -150,7 +155,7 @@ This should be factorized with Linux.cpp and the GNU/kFreeBSD case.
    if (getTriple().getArch() == llvm::Triple::x86) {
      std::string Path = SysRoot + "/usr/include/i386-gnu";
      if (D.getVFS().exists(Path))
-@@ -174,3 +279,36 @@ void Hurd::addExtraOpts(llvm::opt::ArgSt
+@@ -174,3 +282,36 @@ void Hurd::addExtraOpts(llvm::opt::ArgSt
    for (const auto &Opt : ExtraOpts)
      CmdArgs.push_back(Opt.c_str());
  }
