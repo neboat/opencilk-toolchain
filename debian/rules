@@ -187,6 +187,11 @@ ifeq (riscv64,$(DEB_HOST_ARCH))
 endif
 endif
 
+# llvm tests timeout, disable it on mipsel
+ifeq (mipsel,$(DEB_HOST_ARCH))
+	RUN_TEST=no
+endif
+
 ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # enable the build using scan-build
 # The package are installed through the variable declarations:
