@@ -58,6 +58,12 @@ llvm-toolchain-11 (1:11.0.0~+rc3-2) unstable; urgency=medium
     clang (LLVM option parsing): Unknown command line argument '-polly'.
     Try: 'clang (LLVM option parsing) --help'
     Also found in autopkgtest
+  * Bring back LLVM_POLLY_LINK_INTO_TOOLS=ON to workaround the error
+    clang (LLVM option parsing): Unknown command line argument '-polly'.
+    Try: 'clang (LLVM option parsing) --help'
+    Fix autopkgtest
+  * In the autopkgtest tests, update the opt arguments (-q removed and
+    -basicaa renamed to -basic-aa)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 26 Sep 2020 21:29:05 +0200
 
