@@ -12,8 +12,12 @@ llvm-toolchain-11 (1:11.0.0~+rc3-2) unstable; urgency=medium
     - GOMP_parallel_loop_maybe_nonmonotonic_runtime
     - GOMP_parallel_loop_nonmonotonic_runtime
     - omp_display_env
+  * Bring back LLVM_POLLY_LINK_INTO_TOOLS=ON to workaround the error
+    clang (LLVM option parsing): Unknown command line argument '-polly'.
+    Try: 'clang (LLVM option parsing) --help'
+    Also found in autopkgtest
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 23 Sep 2020 22:34:11 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 26 Sep 2020 21:29:05 +0200
 
 llvm-toolchain-11 (1:11.0.0~+rc3-1) unstable; urgency=medium
 
