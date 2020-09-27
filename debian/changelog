@@ -64,8 +64,9 @@ llvm-toolchain-11 (1:11.0.0~+rc3-2) unstable; urgency=medium
     Fix autopkgtest
   * In the autopkgtest tests, update the opt arguments (-q removed and
     -basicaa renamed to -basic-aa)
+  * Disable test executions on mipsel (timeout)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 26 Sep 2020 21:29:05 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 27 Sep 2020 14:26:16 +0200
 
 llvm-toolchain-11 (1:11.0.0~+rc3-1) unstable; urgency=medium
 
