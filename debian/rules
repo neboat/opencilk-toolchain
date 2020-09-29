@@ -786,6 +786,8 @@ override_dh_installdeb:
 # Remove them from the libclang-common package
 	rm -f $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/include/omp*.h
 
+# Remove some libc++ abi files in the libc++ file. See bug #969274
+	rm -f $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/c++/__cxxabi_config.h $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/c++/cxxabi.h
 # Remove auto generated python pyc
 	find $(CURDIR)/debian/llvm-$(LLVM_VERSION)-tools/usr/lib/llvm-$(LLVM_VERSION)/ -name '*.pyc' | xargs -r rm -f
 
