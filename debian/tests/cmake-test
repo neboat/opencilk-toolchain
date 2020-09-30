@@ -2,6 +2,8 @@
 
 set -e
 
+LLVM_VERSION=12
+
 # this is taken from libjsoncpp package
 # Presence of $ADTTMP implies that someone will handle cleanup for us, so we
 # can avoid duplicating the effort (signal handling, etc.) here.
@@ -18,7 +20,7 @@ cd "$ADTTMP"
 cat <<EOF > CMakeLists.txt
 cmake_minimum_required(VERSION 2.6.2)
 project(cmake-test)
-find_package(LLVM 12.0.0 REQUIRED
+find_package(LLVM $LLVM_VERSION REQUIRED
   COMPONENTS
     Analysis
     BitReader
