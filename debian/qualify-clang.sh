@@ -385,9 +385,16 @@ void testBitwiseRules(unsigned int a, int b) {
   clang_analyzer_eval((b | -2) >= 0); // expected-warning{{FALSE}}
 }
 ' > foo.c
-if dpkg -l|grep -q libz3-dev; then
-   # Should work
+
+clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -analyzer-constraints=z3 foo.c &> foo.log
+if ! grep -q "fatal error: error in backend: LLVM was not compiled with Z3 support, rebuild with -DLLVM_ENABLE_Z3_SOLVER=ON" foo.log; then
+    # Should work
     clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -verify -analyzer-config eagerly-assume=false -analyzer-constraints=z3 foo.c
+    clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -analyzer-constraints=z3 foo.c &> foo.log
+    if ! grep -q "2 warnings generated." foo.log; then
+        echo "Should find 2 warnings"
+        exit 1
+    fi
 else
     echo "z3 support not available"
 fi
@@ -397,16 +404,6 @@ clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core
 if grep -q "File a.c Line 7: UNKNOWN" foo.log; then
     echo "Should fail without -analyzer-constraints=z3"
     exit 1
-fi
-
-if dpkg -l|grep -q libz3-dev; then
-    clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -analyzer-constraints=z3 foo.c &> foo.log
-    if ! grep -q "2 warnings generated." foo.log; then
-        echo "Should find 2 warnings"
-        exit 1
-    fi
-else
-    echo "z3 support not available"
 fi
 
 clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection foo.c &> foo.log
