@@ -2,10 +2,10 @@
  lldb/source/API/CMakeLists.txt |   14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
 
-Index: llvm-toolchain-snapshot_12~++20200913082648+c0bcd11068f/lldb/source/API/CMakeLists.txt
+Index: llvm-toolchain-snapshot_12~++20201006102312+4a8c70c3194/lldb/source/API/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_12~++20200913082648+c0bcd11068f.orig/lldb/source/API/CMakeLists.txt
-+++ llvm-toolchain-snapshot_12~++20200913082648+c0bcd11068f/lldb/source/API/CMakeLists.txt
+--- llvm-toolchain-snapshot_12~++20201006102312+4a8c70c3194.orig/lldb/source/API/CMakeLists.txt
++++ llvm-toolchain-snapshot_12~++20201006102312+4a8c70c3194/lldb/source/API/CMakeLists.txt
 @@ -19,7 +19,12 @@ if(LLDB_ENABLE_LUA)
    set(lldb_lua_wrapper ${lua_bindings_dir}/LLDBWrapLua.cpp)
  endif()
@@ -40,4 +40,4 @@ Index: llvm-toolchain-snapshot_12~++20200913082648+c0bcd11068f/lldb/source/API/C
 -  )
  endif()
  
- if (NOT LLDB_BUILT_STANDALONE)
+ # The Clang expression parser in LLDB requires the Clang resource directory to function.
