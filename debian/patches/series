@@ -137,4 +137,4 @@ disable-fuzzer-compiler-rt-x86.diff
 python3-shebang.patch
 print-lldb-path.patch
 libcxx-armhf-ftbfs.diff
-fix-clang-format-bug-47589.diff
+fix-clang-format-bug-47589.patch
