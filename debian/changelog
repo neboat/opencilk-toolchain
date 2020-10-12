@@ -1,3 +1,9 @@
+llvm-toolchain-11 (1:11.0.0-2) unstable; urgency=medium
+
+  * Fix a clang-format issue. Fix bug #47589
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 12 Oct 2020 15:15:27 +0200
+
 llvm-toolchain-11 (1:11.0.0-1) unstable; urgency=medium
 
   * New upstream release
