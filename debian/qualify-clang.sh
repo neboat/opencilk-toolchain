@@ -345,7 +345,7 @@ if test $NBLINES -lt 100; then
     exit 42
 fi
 
-if [ $DEB_HOST_ARCH != "arm64" -a $DEB_HOST_ARCH != "ppc64el" ]; then
+if [ $DEB_HOST_ARCH == "amd64" -o $DEB_HOST_ARCH == "i386" ]; then
     # Fails on arm64 with
     # /usr/lib/llvm-10/lib/clang/10.0.0/include/mmintrin.h:33:5: error: use of undeclared identifier '__builtin_ia32_emms'; did you mean '__builtin_isless'?
     echo '#include <emmintrin.h>' > foo.cc
@@ -385,9 +385,16 @@ void testBitwiseRules(unsigned int a, int b) {
   clang_analyzer_eval((b | -2) >= 0); // expected-warning{{FALSE}}
 }
 ' > foo.c
-if dpkg -l|grep -q libz3-dev; then
-   # Should work
+
+clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -analyzer-constraints=z3 foo.c &> foo.log
+if ! grep -q "LLVM was not compiled with Z3 support" foo.log; then
+    # Should work
     clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -verify -analyzer-config eagerly-assume=false -analyzer-constraints=z3 foo.c
+    clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -analyzer-constraints=z3 foo.c &> foo.log
+    if ! grep -q "2 warnings generated." foo.log; then
+        echo "Should find 2 warnings"
+        exit 1
+    fi
 else
     echo "z3 support not available"
 fi
@@ -397,16 +404,6 @@ clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core
 if grep -q "File a.c Line 7: UNKNOWN" foo.log; then
     echo "Should fail without -analyzer-constraints=z3"
     exit 1
-fi
-
-if dpkg -l|grep -q libz3-dev; then
-    clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection -analyzer-constraints=z3 foo.c &> foo.log
-    if ! grep -q "2 warnings generated." foo.log; then
-        echo "Should find 2 warnings"
-        exit 1
-    fi
-else
-    echo "z3 support not available"
 fi
 
 clang-$VERSION -cc1  -analyze -analyzer-constraints=range -analyzer-checker=core,debug.ExprInspection foo.c &> foo.log
@@ -814,7 +811,7 @@ if ! grep "No such file or directory" foo.log; then
     if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
         echo "fuzzer. Output:"
         ./a.out || true
-        if [ $DEB_HOST_ARCH != "arm64" -a $DEB_HOST_ARCH != "ppc64el" ]; then
+        if [ $DEB_HOST_ARCH == "amd64" -o $DEB_HOST_ARCH == "i386" ]; then
             # Don't fail on arm64 and ppc64el
             exit 42
         fi
@@ -1123,7 +1120,7 @@ int main() {
   EmitBackendOutput(*diags, *hsOpts, *cgOpts, *tOpts, *lOpts, *tDesc, m, *action, std::move(AsmOutStream));
 }
 EOF
-clang++-$VERSION foo.cpp -o test -lclangBasic -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangCodeGen -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangFrontend -lclangDriver -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -lclangBasic -ldl  /usr/lib/llvm-10/lib/libLLVM-10.so -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -ldl  -I /usr/lib/llvm-$VERSION/include/ -L/usr/lib/llvm-$VERSION/lib/  `llvm-config-$VERSION --cxxflags --ldflags --libs all`
+clang++-$VERSION foo.cpp -o test -lclangBasic -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangCodeGen -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangFrontend -lclangDriver -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -lclangBasic -ldl  /usr/lib/llvm-$VERSION/lib/libLLVM-$VERSION.so -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -ldl  -I /usr/lib/llvm-$VERSION/include/ -L/usr/lib/llvm-$VERSION/lib/  `llvm-config-$VERSION --cxxflags --ldflags --libs all`
 
 if test ! -f /usr/bin/lldb-$VERSION; then
     echo "Install lldb-$VERSION";
@@ -1341,6 +1338,6 @@ fi
 
 #clean up
 rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.* test_fuzzer.cc foo.* o
-rm -rf output matmul.* *profraw opt.ll
+rm -rf output matmul.* *profraw opt.ll a.json default.profdata test
 
 echo "Completed"
