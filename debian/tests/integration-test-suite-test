@@ -5,17 +5,17 @@ set -e
 LLVM_VERSION=11
 
 # this is taken from libjsoncpp package
-# Presence of $ADTTMP implies that someone will handle cleanup for us, so we
+# Presence of $AUTOPKGTEST_TMP implies that someone will handle cleanup for us, so we
 # can avoid duplicating the effort (signal handling, etc.) here.
-if [ -z "$ADTTMP" ]
+if [ -z "$AUTOPKGTEST_TMP" ]
 then
-	echo "Required envvar ADTTMP \"$ADTTMP\" is not set" >&2
+	echo "Required envvar AUTOPKGTEST_TMP \"$AUTOPKGTEST_TMP\" is not set" >&2
 	exit 1
 fi
 
 # Copy the integration repo to the temp dir
-cp -Rv integration-test-suite/* "$ADTTMP"/
-cd "$ADTTMP"
+cp -Rv integration-test-suite/* "$AUTOPKGTEST_TMP"/
+cd "$AUTOPKGTEST_TMP"
 
 mkdir build
 cd build
