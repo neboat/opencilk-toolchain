@@ -1,7 +1,11 @@
 llvm-toolchain-10 (1:10.0.1-7) UNRELEASED; urgency=medium
 
+  [ Samuel Thibault ]
   * debian/patches/hurd/hurd-cxx-paths.diff: Add missing GCC installation
     initialization.
+
+  [ Sylvestre Ledru ]
+  * Replace use of deprecated $ADTTMP with $AUTOPKGTEST_TMP.
 
  -- Samuel Thibault <sthibault@debian.org>  Thu, 27 Aug 2020 17:06:44 +0200
 
