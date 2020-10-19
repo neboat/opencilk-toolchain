@@ -1,3 +1,11 @@
+llvm-toolchain-11 (1:11.0.0-3) unstable; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * Rebuild to fix the coinstall issues (Closes: #972323)
+  * Replace use of deprecated $ADTTMP with $AUTOPKGTEST_TMP.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 19 Oct 2020 14:21:50 +0200
+
 llvm-toolchain-11 (1:11.0.0-2) unstable; urgency=medium
 
   * Fix a clang-format issue. Fix bug #47589
