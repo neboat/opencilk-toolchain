@@ -1,9 +1,9 @@
-llvm-toolchain-snapshot (1:12~++20201006102312+4a8c70c3194-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:12~++20201019021526+5a8ac3cc63d-1~exp1) UNRELEASED; urgency=medium
 
   * experimental New snapshot release
-  * experimental New snapshot release
+  * Remove hwasan_symbolize (seems to be removed upstream)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 06 Oct 2020 10:26:53 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 19 Oct 2020 14:19:16 +0200
 
 llvm-toolchain-snapshot (1:12~++20200929085817+962a247aebb-1~exp1) experimental; urgency=medium
 
@@ -35,6 +35,37 @@ llvm-toolchain-snapshot (1:12~++20200929085817+962a247aebb-1~exp1) experimental;
     - debian/patches/powerpcspe/D56703-powerpcspe-register-spilling.diff
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 29 Sep 2020 21:01:53 +0200
+
+llvm-toolchain-snapshot (1:12~++20200804122259+4be13b15d69-1~exp2) UNRELEASED; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * New snapshot release
+  * Install omp.h in instead of /usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/include/
+    instead of /usr/lib/llvm-@LLVM_VERSION@/include/openmp/omp
+  * Install split-file in llvm-X-tools (like lit)
+  * Add new symbols to libclang1:
+   - clang_CXRewriter_create
+   - clang_CXRewriter_dispose
+   - clang_CXRewriter_insertTextBefore
+   - clang_CXRewriter_overwriteChangedFiles
+   - clang_CXRewriter_removeText
+   - clang_CXRewriter_replaceText
+   - clang_CXRewriter_writeMainFileToStdOut
+   - clang_Cursor_getVarDeclInitializer
+   - clang_Cursor_hasVarDeclExternalStorage
+   - clang_Cursor_hasVarDeclGlobalStorage
+
+  [ John Paul Adrian Glaubitz ]
+  * Link against libatomic on mipsel to fix FTBFS in stage2
+  * Link against libatomic on powerpc to fix FTBFS in stage2
+  * Use dh-exec to exclude lib/libPolly*.a on powerpc and
+    powerpcspe from libclang-common-X.Y-dev.install.in
+  * Drop powerpcspe patches merged upstream:
+    - debian/patches/powerpcspe/D49754-powerpcspe-clang.diff
+    - debian/patches/powerpcspe/D54583-powerpcspe-double-parameter.diff
+    - debian/patches/powerpcspe/D56703-powerpcspe-register-spilling.diff
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 29 Sep 2020 20:57:09 +0200
 
 llvm-toolchain-snapshot (1:12~++20200715052739+d6e79e3dd6d-1~exp1) experimental; urgency=medium
 

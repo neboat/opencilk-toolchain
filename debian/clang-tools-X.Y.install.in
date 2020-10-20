@@ -32,8 +32,6 @@ usr/lib/llvm-@LLVM_VERSION@/bin/pp-trace
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-move
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-offload-wrapper
 
-[!armel !armhf !ppc64el !hurd-any !s390x !powerpc !ppc64 !mipsel !mips64el !sparc64 !riscv64] usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/bin/hwasan_symbolize
-
 clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
 clang/tools/scan-build-py-@LLVM_VERSION@      usr/share/clang/
 clang/tools/scan-view-@LLVM_VERSION@       usr/share/clang/
