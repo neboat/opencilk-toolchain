@@ -138,3 +138,6 @@ python3-shebang.patch
 print-lldb-path.patch
 libcxx-armhf-ftbfs.diff
 fix-clang-format-bug-47589.patch
+0001-tsan-doesn-t-work-on-arm.patch
+0002-Disable-test_asan_heap.c-for-arm-30.patch
+0003-leaksan-add-a-test-31.patch

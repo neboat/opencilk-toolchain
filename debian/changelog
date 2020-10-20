@@ -1,3 +1,10 @@
+llvm-toolchain-11 (1:11.0.0-4) unstable; urgency=medium
+
+  * Cherry-pick some fixes from
+    https://github.com/opencollab/llvm-toolchain-integration-test-suite/
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 20 Oct 2020 22:21:59 +0200
+
 llvm-toolchain-11 (1:11.0.0-3) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
