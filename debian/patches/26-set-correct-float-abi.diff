@@ -18,16 +18,16 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/lib/Driver/ToolChains/Arch/ARM.cpp
+Index: llvm-toolchain-snapshot_12~++20201021043814+26459e6d8ee/clang/lib/Driver/ToolChains/Arch/ARM.cpp
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/clang/lib/Driver/ToolChains/Arch/ARM.cpp
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/lib/Driver/ToolChains/Arch/ARM.cpp
-@@ -253,7 +253,7 @@ arm::FloatABI arm::getARMFloatABI(const
-       case llvm::Triple::MuslEABI:
-       case llvm::Triple::EABI:
-         // EABI is always AAPCS, and if it was not marked 'hard', it's softfp
--        ABI = FloatABI::SoftFP;
-+        ABI = FloatABI::Soft;
-         break;
-       case llvm::Triple::Android:
-         ABI = (SubArch >= 7) ? FloatABI::SoftFP : FloatABI::Soft;
+--- llvm-toolchain-snapshot_12~++20201021043814+26459e6d8ee.orig/clang/lib/Driver/ToolChains/Arch/ARM.cpp
++++ llvm-toolchain-snapshot_12~++20201021043814+26459e6d8ee/clang/lib/Driver/ToolChains/Arch/ARM.cpp
+@@ -214,7 +214,7 @@ arm::FloatABI arm::getDefaultFloatABI(co
+     case llvm::Triple::MuslEABI:
+     case llvm::Triple::EABI:
+       // EABI is always AAPCS, and if it was not marked 'hard', it's softfp
+-      return FloatABI::SoftFP;
++      return FloatABI::Soft;
+     case llvm::Triple::Android:
+       return (SubArch >= 7) ? FloatABI::SoftFP : FloatABI::Soft;
+     default:
