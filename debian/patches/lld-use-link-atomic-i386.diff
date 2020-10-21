@@ -1,7 +1,7 @@
-Index: llvm-toolchain-11-11.0.0/lld/tools/lld/CMakeLists.txt
+Index: llvm-toolchain-snapshot_12~++20201021113808+88241ffb563/lld/tools/lld/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-11-11.0.0.orig/lld/tools/lld/CMakeLists.txt
-+++ llvm-toolchain-11-11.0.0/lld/tools/lld/CMakeLists.txt
+--- llvm-toolchain-snapshot_12~++20201021113808+88241ffb563.orig/lld/tools/lld/CMakeLists.txt
++++ llvm-toolchain-snapshot_12~++20201021113808+88241ffb563/lld/tools/lld/CMakeLists.txt
 @@ -2,9 +2,14 @@ set(LLVM_LINK_COMPONENTS
    Support
    )
