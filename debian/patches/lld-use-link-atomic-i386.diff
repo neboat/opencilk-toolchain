@@ -1,0 +1,20 @@
+Index: llvm-toolchain-11-11.0.0/lld/tools/lld/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-11-11.0.0.orig/lld/tools/lld/CMakeLists.txt
++++ llvm-toolchain-11-11.0.0/lld/tools/lld/CMakeLists.txt
+@@ -2,9 +2,14 @@ set(LLVM_LINK_COMPONENTS
+   Support
+   )
+ 
++if(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "i386" OR
++   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "i686")
++  list(APPEND LLD_ATOMIC_LIB "atomic")
++endif()
++
+ add_lld_tool(lld
+   lld.cpp
+-
++  ${LLD_ATOMIC_LIB}
+   SUPPORT_PLUGINS
+   )
+ export_executable_symbols_for_plugins(lld)
