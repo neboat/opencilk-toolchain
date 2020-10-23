@@ -1,3 +1,9 @@
+llvm-toolchain-9 (1:9.0.1-16) UNRELEASED; urgency=low
+
+  * Replace use of deprecated $ADTTMP with $AUTOPKGTEST_TMP.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 23 Oct 2020 09:32:39 -0000
+
 llvm-toolchain-9 (1:9.0.1-15) unstable; urgency=medium
 
   * Ensure fixfilepath feature is disabled.  The fixfilepath
