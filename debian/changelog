@@ -1,3 +1,12 @@
+llvm-toolchain-9 (1:9.0.1-15) unstable; urgency=medium
+
+  * Ensure fixfilepath feature is disabled.  The fixfilepath
+    feature sets a -ffile-prefix-map flag, which is only
+    supported in clang-10. (Closes: #972751).
+    Thanks to Vagrant Cascadian for the patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 23 Oct 2020 09:14:16 +0200
+
 llvm-toolchain-9 (1:9.0.1-14) unstable; urgency=medium
 
   * debian/patches/b288d90b39f4b905c02092a9bfcfd6d78f99b191.patch:
