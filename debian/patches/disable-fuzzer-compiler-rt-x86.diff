@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_12~++20201016112810+f16cecf3752/compiler-rt/lib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_12~++20201028113421+ebfc427bbe0/compiler-rt/lib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_12~++20201016112810+f16cecf3752.orig/compiler-rt/lib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_12~++20201016112810+f16cecf3752/compiler-rt/lib/CMakeLists.txt
-@@ -57,7 +57,10 @@ if(COMPILER_RT_BUILD_XRAY)
+--- llvm-toolchain-snapshot_12~++20201028113421+ebfc427bbe0.orig/compiler-rt/lib/CMakeLists.txt
++++ llvm-toolchain-snapshot_12~++20201028113421+ebfc427bbe0/compiler-rt/lib/CMakeLists.txt
+@@ -59,7 +59,10 @@ if(COMPILER_RT_BUILD_XRAY)
  endif()
  
  if(COMPILER_RT_BUILD_LIBFUZZER)
@@ -13,11 +13,11 @@ Index: llvm-toolchain-snapshot_12~++20201016112810+f16cecf3752/compiler-rt/lib/C
 +    endif()
  endif()
  
- if(COMPILER_RT_BUILD_MEMPROF AND COMPILER_RT_HAS_SANITIZER_COMMON AND
-Index: llvm-toolchain-snapshot_12~++20201016112810+f16cecf3752/compiler-rt/test/CMakeLists.txt
+ if(COMPILER_RT_BUILD_MEMPROF AND COMPILER_RT_HAS_SANITIZER_COMMON)
+Index: llvm-toolchain-snapshot_12~++20201028113421+ebfc427bbe0/compiler-rt/test/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_12~++20201016112810+f16cecf3752.orig/compiler-rt/test/CMakeLists.txt
-+++ llvm-toolchain-snapshot_12~++20201016112810+f16cecf3752/compiler-rt/test/CMakeLists.txt
+--- llvm-toolchain-snapshot_12~++20201028113421+ebfc427bbe0.orig/compiler-rt/test/CMakeLists.txt
++++ llvm-toolchain-snapshot_12~++20201028113421+ebfc427bbe0/compiler-rt/test/CMakeLists.txt
 @@ -55,7 +55,10 @@ if(COMPILER_RT_CAN_EXECUTE_TESTS)
  
      # OpenBSD not supporting asan, cannot run the tests

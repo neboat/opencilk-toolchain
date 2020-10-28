@@ -8,10 +8,10 @@
  test/Feature/load_module.ll               |    1 +
  4 files changed, 5 insertions(+), 1 deletion(-)
 
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/BugPoint/metadata.ll
+Index: llvm-toolchain-snapshot_12~++20201028113421+ebfc427bbe0/llvm/test/BugPoint/metadata.ll
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/BugPoint/metadata.ll
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/BugPoint/metadata.ll
+--- llvm-toolchain-snapshot_12~++20201028113421+ebfc427bbe0.orig/llvm/test/BugPoint/metadata.ll
++++ llvm-toolchain-snapshot_12~++20201028113421+ebfc427bbe0/llvm/test/BugPoint/metadata.ll
 @@ -18,6 +18,8 @@
  ; NOTYPE: !DICompileUnit
  ; NOTYPE-NOT: !DIBasicType
@@ -21,15 +21,3 @@ Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/BugPoin
  %rust_task = type {}
  define void @test(i32* %a, i8* %b) !dbg !9 {
      %s = mul i8 22, 9, !attach !0, !dbg !10
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/Feature/load_module.ll
-===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/test/Feature/load_module.ll
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/test/Feature/load_module.ll
-@@ -3,6 +3,7 @@
- ; RUN:   -disable-output 2>&1 | grep Hello
- ; REQUIRES: plugins
- ; FIXME: On Cygming, it might fail without building LLVMHello manually.
-+; XFAIL: *
- 
- @junk = global i32 0
- 

@@ -1,11 +1,31 @@
-llvm-toolchain-snapshot (1:12~++20201019021526+5a8ac3cc63d-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:12~++20201028113421+ebfc427bbe0-1~exp1) UNRELEASED; urgency=medium
 
   * experimental New snapshot release
   * lld-use-link-atomic-i386.diff Try to workaround a linker error
     error: undefined reference to '__atomic_load'
     on sid i386
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 19 Oct 2020 14:19:16 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Oct 2020 23:37:38 +0100
+
+llvm-toolchain-snapshot (1:12~++20201016112810+f16cecf3752-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 16 Oct 2020 23:31:35 +0200
 
 llvm-toolchain-snapshot (1:12~++20200929085817+962a247aebb-1~exp1) experimental; urgency=medium
 
