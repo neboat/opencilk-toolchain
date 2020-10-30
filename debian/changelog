@@ -2,7 +2,7 @@ llvm-toolchain-11 (1:11.0.0-4) unstable; urgency=medium
 
   * Cherry-pick some fixes from
     https://github.com/opencollab/llvm-toolchain-integration-test-suite/
-  * hwasan_symbolize is no longer built
+  * Only install hwasan_symbolize when found
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 29 Oct 2020 15:44:04 +0100
 
