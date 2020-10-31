@@ -410,6 +410,7 @@ override_dh_auto_configure: preconfigure
 	FOUND_VERSION=`grep LLVM_VERSION_STRING build-llvm/include/llvm/Config/llvm-config.h|cut -d\" -f2`; \
 	if ! echo "$(LLVM_VERSION_FULL)"|grep "$$FOUND_VERSION"; then \
 		echo "mistmatch of version. Found: $$FOUND_VERSION / Expected: $(LLVM_VERSION_FULL)"; \
+		exit 1; \
 	fi
 
 # make
