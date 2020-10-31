@@ -1,11 +1,6 @@
-llvm-toolchain-9 (1:9.0.1-16) UNRELEASED; urgency=low
+llvm-toolchain-9 (1:9.0.1-15) unstable; urgency=low
 
   * Replace use of deprecated $ADTTMP with $AUTOPKGTEST_TMP.
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 23 Oct 2020 09:32:39 -0000
-
-llvm-toolchain-9 (1:9.0.1-15) unstable; urgency=medium
-
   * Ensure fixfilepath feature is disabled.  The fixfilepath
     feature sets a -ffile-prefix-map flag, which is only
     supported in clang-10. (Closes: #972751).
@@ -13,7 +8,7 @@ llvm-toolchain-9 (1:9.0.1-15) unstable; urgency=medium
   * Don't use gold on ppc64el. It fails to build in that case
     (Closes: #972317)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 23 Oct 2020 09:14:16 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 31 Oct 2020 14:09:15 +0100
 
 llvm-toolchain-9 (1:9.0.1-14) unstable; urgency=medium
 
