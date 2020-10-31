@@ -688,14 +688,6 @@ endif
 # Managed in python*-lldb-X.Y.links.in
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/lldb/_lldb.so
 
-# For some reasons, hwasan_symbolize is sometimes built
-	echo "Debug"
-	find . -iname hwasan_symbolize
-	if test -f $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/bin/hwasan_symbolize; then \
-		mkdir -p $(CURDIR)/debian/clang-tools-$(LLVM_VERSION)/usr/bin/; \
-		mv $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/bin/hwasan_symbolize $(CURDIR)/debian/clang-tools-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/bin/; \
-	fi
-
 # Manage the polly files. Sometimes, we build them. Sometimes not.
 	if test "$(POLLY_ENABLE)" = yes; then \
 		mkdir -p $(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/ $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly/; \
