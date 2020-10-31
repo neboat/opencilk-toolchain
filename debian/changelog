@@ -282,7 +282,14 @@ llvm-toolchain-snapshot (1:11~++20200123111717+04fd2041561-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 23 Jan 2020 14:52:30 +0100
 
-llvm-toolchain-10 (1:10.0.1-7) UNRELEASED; urgency=medium
+llvm-toolchain-10 (1:10.0.1-8) unstable; urgency=medium
+
+  * Don't use gold on ppc64el. It fails to build in that case
+    (Closes: #972317)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 31 Oct 2020 14:13:25 +0100
+
+llvm-toolchain-10 (1:10.0.1-7) unstable; urgency=medium
 
   [ Samuel Thibault ]
   * debian/patches/hurd/hurd-cxx-paths.diff: Add missing GCC installation
@@ -290,8 +297,9 @@ llvm-toolchain-10 (1:10.0.1-7) UNRELEASED; urgency=medium
 
   [ Sylvestre Ledru ]
   * Replace use of deprecated $ADTTMP with $AUTOPKGTEST_TMP.
+  * Rebuild to address the incompat issues (Closes: #972282)
 
- -- Samuel Thibault <sthibault@debian.org>  Thu, 27 Aug 2020 17:06:44 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 22 Oct 2020 22:29:07 +0200
 
 llvm-toolchain-10 (1:10.0.1-6) unstable; urgency=medium
 
@@ -719,10 +727,52 @@ llvm-toolchain-snapshot (1:10~svn366440-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2019 18:58:32 +0200
 
-llvm-toolchain-9 (1:9.0.1-12) UNRELEASED; urgency=medium
+llvm-toolchain-9 (1:9.0.1-15) unstable; urgency=low
+
+  * Replace use of deprecated $ADTTMP with $AUTOPKGTEST_TMP.
+  * Ensure fixfilepath feature is disabled.  The fixfilepath
+    feature sets a -ffile-prefix-map flag, which is only
+    supported in clang-10. (Closes: #972751).
+    Thanks to Vagrant Cascadian for the patch
+  * Don't use gold on ppc64el. It fails to build in that case
+    (Closes: #972317)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 31 Oct 2020 14:09:15 +0100
+
+llvm-toolchain-9 (1:9.0.1-14) unstable; urgency=medium
+
+  * debian/patches/b288d90b39f4b905c02092a9bfcfd6d78f99b191.patch:
+  * debian/patches/3185c30c54d0af5bffbff3bcfd721668d086ff10.patch:
+    - cherry-pick upstream fixes for ppc64el build failure (Closes: #968174)
+  * Previous version closed bug: 964988 (Closes: #964988)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 15 Aug 2020 21:53:41 +0200
+
+llvm-toolchain-9 (1:9.0.1-13) unstable; urgency=medium
+
+  [ Aurelien Jarno ]
+  * Add mips-force-nomadd4.diff to default to +nomadd4 on MIPS. (Closes:
+    #964988)
+
+  [ Ximin Luo ]
+  * Add 373184.patch to fix soundness issue affecting rustc. (Closes: #959877)
+  * Add f8e146f3430de3a6cd904f3f3f7aa1bfaefee14c.patch to fix big-endian
+    miscompilation affecting rustc.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 07 Jul 2020 18:18:00 +0200
+
+llvm-toolchain-9 (1:9.0.1-12) unstable; urgency=medium
 
   * Cherry-pick upstream patch D74453 to fix atomic compare-and-swap on
     riscv64.
+    riscv64.
+
+  [ William Grant ]
+  * debian/patches/riscv64-multilib-empty.patch: Adjust riscv64 GCC detector
+    to also check for existence of crtbegin.o in the default multilib dir,
+    like most other ports. Fixes FTBFS on riscv64, since on Ubuntu
+    /usr/lib/gcc/riscv64-linux-gnu/10 exists but is empty (gcc-10-base is
+    installed, but libgcc-10-dev is not).
 
  -- Jessica Clarke <jrtc27@debian.org>  Wed, 01 Apr 2020 16:23:55 +0100
 

@@ -20,7 +20,7 @@ and symlinks are managed by the other package llvm-defaults
 
 * For armv7-a, NEON extensions are disabled.
 
-* For mips, FPXX is enabled.
+* For mips, FPXX is enabled, MADD4 instructions are disabled.
 
 * For riscv64, the hard-float ABI is used instead of the float one, and
   the target CPU is set to RV64GC instead of RV64I.
