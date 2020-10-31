@@ -3,6 +3,8 @@ llvm-toolchain-11 (1:11.0.0-4) unstable; urgency=medium
   * Cherry-pick some fixes from
     https://github.com/opencollab/llvm-toolchain-integration-test-suite/
   * Only install hwasan_symbolize when found
+  * Don't use gold on ppc64el. It fails to build in that case
+    (Closes: #972317)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 29 Oct 2020 15:44:04 +0100
 
