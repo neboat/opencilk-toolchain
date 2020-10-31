@@ -83,6 +83,7 @@ libcxx/libcxx-silent-failure-arm64.diff
 
 # Change default optims
 mips-fpxx-enable.diff
+mips-force-nomadd4.diff
 26-set-correct-float-abi.diff
 clang-baseline-fix-i386.patch
 disable-sse2-old-x86.diff
@@ -148,3 +149,4 @@ clang_vendor_pass_stage2.diff
 remove-trailing-space-version.diff
 mips-force-nomadd4.patch
 PowerPC-PPCBoolRetToInt-Dont-translate-Constants-operands.diff
+
