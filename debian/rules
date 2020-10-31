@@ -309,7 +309,9 @@ preconfigure:
 	@echo "DEB_HOST_ARCH_OS=$(DEB_HOST_ARCH_OS)"
 	@echo "DISTRO=$(DISTRO)"
 	@echo "GCC_VERSION=$(GCC_VERSION)"
-	@echo 'PROJECTS=$(PROJECTS_LIST)'
+	@echo "PROJECTS=$(PROJECTS_LIST)"
+	@echo "LLVM_VERSION=$(LLVM_VERSION)"
+	@echo "LLVM_VERSION_FULL=$(LLVM_VERSION_FULL)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
