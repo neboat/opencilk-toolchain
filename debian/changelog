@@ -1,3 +1,10 @@
+llvm-toolchain-11 (1:11.0.0-5) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Limit maximum parallel link jobs to 4 on sparc and sparc64
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sat, 31 Oct 2020 15:13:44 +0100
+
 llvm-toolchain-11 (1:11.0.0-4) unstable; urgency=medium
 
   * Cherry-pick some fixes from
