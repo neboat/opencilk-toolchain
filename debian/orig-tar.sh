@@ -135,6 +135,14 @@ if test -z  "$TAG" -a -z "$FINAL_RELEASE"; then
         VERSION=$MAJOR_VERSION
         MAJOR_VERSION=snapshot
     fi
+    # When upstream released X, they will update X to have X.0.1
+    # In general, in Debian, we will keep X until X.0.1 is released (or rc in experimental)
+    # However, on apt.llvm.org, we will update the version to have X.0.1
+    # This code is doing that.
+    MAJOR=$(grep "set(LLVM_VERSION_MAJOR" llvm/CMakeLists.txt|sed -e "s|.*LLVM_VERSION_MAJOR \(.*\))|\1|")
+    MINOR=$(grep "set(LLVM_VERSION_MINOR" llvm/CMakeLists.txt|sed -e "s|.*LLVM_VERSION_MINOR \(.*\))|\1|")
+    PATCH=$(grep "set(LLVM_VERSION_PATCH" llvm/CMakeLists.txt|sed -e "s|.*LLVM_VERSION_PATCH \(.*\))|\1|")
+    CURRENT_VERSION="$MAJOR.$MINOR.$PATCH"
     # the + is here to make sure that this version is considered more recent than the svn
     # dpkg --compare-versions 10~svn374977-1~exp1 lt 10~+2019-svn374977-1~exp1
     # to verify that
