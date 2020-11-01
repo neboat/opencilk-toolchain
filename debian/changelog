@@ -6,30 +6,11 @@ llvm-toolchain-snapshot (1:12~++20201028113421+ebfc427bbe0-1~exp1) UNRELEASED; u
     error: undefined reference to '__atomic_load'
     on sid i386
   * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
 
   [ John Paul Adrian Glaubitz ]
   * Limit maximum parallel link jobs to 4 on sparc and sparc64
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Oct 2020 23:37:38 +0100
-
-llvm-toolchain-snapshot (1:12~++20201016112810+f16cecf3752-1~exp1) UNRELEASED; urgency=medium
-
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 16 Oct 2020 23:31:35 +0200
 
 llvm-toolchain-snapshot (1:12~++20200929085817+962a247aebb-1~exp1) experimental; urgency=medium
 
