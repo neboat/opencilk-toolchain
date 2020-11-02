@@ -136,8 +136,9 @@ D74453-riscv-atomic_cmp_xchg.diff
 #try-to-unbreak-thinlto.diff
 D67877.patch
 disable-lit-cpuid-install.diff
-disable-fuzzer-compiler-rt.diff
 no-z3.patch
+
+x86-fuzzer.patch
 
 # bug #946874
 D71028-mips-rust-test.diff

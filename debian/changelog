@@ -1,3 +1,10 @@
+llvm-toolchain-9 (1:9.0.1-16) UNRELEASED; urgency=medium
+
+  [ Adrian Bunk ]
+  * Fix the fuzzer build on i386.
+
+ -- Adrian Bunk <bunk@debian.org>  Thu, 05 Nov 2020 20:50:05 +0200
+
 llvm-toolchain-9 (1:9.0.1-15) unstable; urgency=low
 
   * Replace use of deprecated $ADTTMP with $AUTOPKGTEST_TMP.
