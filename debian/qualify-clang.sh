@@ -592,9 +592,14 @@ if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
     exit 42
 fi
 
-clang++-$VERSION -fsanitize=address,fuzzer test_fuzzer.cc
-if ! ./a.out 2>&1 | grep -q "libFuzzer: deadly signal"; then
-    echo "fuzzer failed"
+# do not fail on i386 because of:
+# https://bugs.llvm.org/show_bug.cgi?id=43677
+# https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/-/commit/9d4d39eef90f5106080ab7f4394a5a4d743cac05
+if [ $DEB_HOST_ARCH != "i386" ]; then
+    clang++-$VERSION -fsanitize=address,fuzzer test_fuzzer.cc
+    if ! ./a.out 2>&1 | grep -q "libFuzzer: deadly signal"; then
+        echo "fuzzer failed"
+    fi
 fi
 
 echo 'int main(int argc, char **argv) {
