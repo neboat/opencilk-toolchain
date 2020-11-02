@@ -84,13 +84,6 @@ llvm-toolchain-snapshot (1:12~++20200715052739+d6e79e3dd6d-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 08 Jul 2020 15:19:14 +0200
 
-llvm-toolchain-11 (1:11.0.0-5) unstable; urgency=medium
-
-  * qualify-clang.sh: skip a fuzzer test in i386 because of
-    https://bugs.llvm.org/show_bug.cgi?id=43677
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 02 Nov 2020 12:44:42 +0100
-
 llvm-toolchain-11 (1:11.0.0-4) unstable; urgency=medium
 
   * Cherry-pick some fixes from
