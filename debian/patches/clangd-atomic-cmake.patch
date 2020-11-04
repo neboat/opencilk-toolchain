@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_12~++20200911085730+f787fe15d8e/clang-tools-extra/clangd/CMakeLists.txt
+Index: llvm-toolchain-snapshot_12~++20201104064833+d8f531c42c7/clang-tools-extra/clangd/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_12~++20200911085730+f787fe15d8e.orig/clang-tools-extra/clangd/CMakeLists.txt
-+++ llvm-toolchain-snapshot_12~++20200911085730+f787fe15d8e/clang-tools-extra/clangd/CMakeLists.txt
-@@ -35,6 +35,11 @@ endif()
+--- llvm-toolchain-snapshot_12~++20201104064833+d8f531c42c7.orig/clang-tools-extra/clangd/CMakeLists.txt
++++ llvm-toolchain-snapshot_12~++20201104064833+d8f531c42c7/clang-tools-extra/clangd/CMakeLists.txt
+@@ -38,6 +38,11 @@ endif()
  
  include_directories(BEFORE "${CMAKE_CURRENT_BINARY_DIR}/../clang-tidy")
  
@@ -14,11 +14,11 @@ Index: llvm-toolchain-snapshot_12~++20200911085730+f787fe15d8e/clang-tools-extra
  add_clang_library(clangDaemon
    AST.cpp
    ClangdLSPServer.cpp
-@@ -111,6 +116,7 @@ add_clang_library(clangDaemon
-   clangdSupport
-   clangTidy
+@@ -142,6 +147,7 @@ clang_target_link_libraries(clangDaemon
+ target_link_libraries(clangDaemon
+   PRIVATE
    ${LLVM_PTHREAD_LIB}
 +  ${CLANGD_ATOMIC_LIB}
-   ${ALL_CLANG_TIDY_CHECKS}
  
-   DEPENDS
+   clangTidy
+   ${ALL_CLANG_TIDY_CHECKS}
