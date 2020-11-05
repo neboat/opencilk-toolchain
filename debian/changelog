@@ -1,3 +1,10 @@
+llvm-toolchain-11 (1:11.0.0-5) UNRELEASED; urgency=medium
+
+  [ Adrian Bunk ]
+  * Fix the fuzzer build on i386.
+
+ -- Adrian Bunk <bunk@debian.org>  Thu, 05 Nov 2020 17:27:30 +0200
+
 llvm-toolchain-11 (1:11.0.0-4) unstable; urgency=medium
 
   * Cherry-pick some fixes from
