@@ -5,6 +5,7 @@ llvm-toolchain-snapshot (1:12~++20201028113421+ebfc427bbe0-1~exp1) UNRELEASED; u
   * lld-use-link-atomic-i386.diff Try to workaround a linker error
     error: undefined reference to '__atomic_load'
     on sid i386
+  * Bring back gold for ppc64el. Doko thinks it is fixed.
 
   [ John Paul Adrian Glaubitz ]
   * Limit maximum parallel link jobs to 4 on sparc and sparc64
