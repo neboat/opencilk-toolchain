@@ -1,6 +1,5 @@
-llvm-toolchain-snapshot (1:12~++20201028113421+ebfc427bbe0-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:12~++20201105093023+cc2a2bb5ce5-1~exp1) UNRELEASED; urgency=medium
 
-  [ Sylvestre Ledru ]
   * experimental New snapshot release
   * lld-use-link-atomic-i386.diff Try to workaround a linker error
     error: undefined reference to '__atomic_load'
@@ -10,7 +9,24 @@ llvm-toolchain-snapshot (1:12~++20201028113421+ebfc427bbe0-1~exp1) UNRELEASED; u
   [ John Paul Adrian Glaubitz ]
   * Limit maximum parallel link jobs to 4 on sparc and sparc64
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Oct 2020 23:37:38 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 05 Nov 2020 09:42:14 +0100
+
+llvm-toolchain-snapshot (1:12~++20201027122433+d26dd743084-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+  * lld-use-link-atomic-i386.diff Try to workaround a linker error
+    error: undefined reference to '__atomic_load'
+    on sid i386
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Oct 2020 12:27:53 +0100
 
 llvm-toolchain-snapshot (1:12~++20200929085817+962a247aebb-1~exp1) experimental; urgency=medium
 
