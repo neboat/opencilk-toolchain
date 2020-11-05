@@ -128,7 +128,8 @@ workaround-bug-42994-use-linker.diff
 # bug 939472
 #try-to-unbreak-thinlto.diff
 D67877.patch
-disable-fuzzer-compiler-rt-x86.diff
+
+x86-fuzzer.patch
 
 python3-shebang.patch
 print-lldb-path.patch

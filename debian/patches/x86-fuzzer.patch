@@ -1,0 +1,14 @@
+Description: fuzzer: EMULATION_ARGUMENT is also required when building on i386 for x86_64
+Author: Adrian Bunk <bunk@debian.org>
+
+--- llvm-toolchain-11-11.0.0.orig/compiler-rt/lib/fuzzer/CMakeLists.txt
++++ llvm-toolchain-11-11.0.0/compiler-rt/lib/fuzzer/CMakeLists.txt
+@@ -121,6 +121,8 @@ if(OS_NAME MATCHES "Linux|Fuchsia" AND
+   macro(partially_link_libcxx name dir arch)
+     if(${arch} MATCHES "i386")
+       set(EMULATION_ARGUMENT "-m" "elf_i386")
++    elseif(${arch} MATCHES "x86_64")
++      set(EMULATION_ARGUMENT "-m" "elf_x86_64")
+     else()
+       set(EMULATION_ARGUMENT "")
+     endif()
