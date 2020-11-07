@@ -1,15 +1,12 @@
 llvm-toolchain-11 (1:11.0.0-5) UNRELEASED; urgency=medium
 
-<<<<<<<
   [ Adrian Bunk ]
   * Fix the fuzzer build on i386.
-=======
-  * qualify-clang.sh: skip a fuzzer test in i386 because of
-    https://bugs.llvm.org/show_bug.cgi?id=43677
-  * Ignore some tests on i386 to get autopkgtest fixed (Closes: #972334)
->>>>>>>
 
- -- Adrian Bunk <bunk@debian.org>  Thu, 05 Nov 2020 17:27:30 +0200
+  [ Sylvestre Ledru ]
+  * Ignore some tests on i386 to get autopkgtest fixed (Closes: #972334)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 07 Nov 2020 15:53:51 +0100
 
 llvm-toolchain-11 (1:11.0.0-4) unstable; urgency=medium
 
