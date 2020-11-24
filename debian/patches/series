@@ -135,3 +135,4 @@ python3-shebang.patch
 print-lldb-path.patch
 libcxx-armhf-ftbfs.diff
 lld-use-link-atomic-i386.diff
+workaround-bug-48259.diff
