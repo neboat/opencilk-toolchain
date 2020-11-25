@@ -1,8 +1,12 @@
 llvm-toolchain-snapshot (1:12~++20201124100523+245052ac3080-1~exp1) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * experimental New snapshot release
   * Workaround a static_assert on https://bugs.llvm.org/show_bug.cgi?id=48259
     "static assertion failed: Recycler allocation size is less than object size!"
+
+  [ Gianfranco Costamagna ]
+  * Add upstream patch D92052 to fix a gcn offload compiler issue with gcc (Closes: #975692)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 24 Nov 2020 10:08:59 +0100
 
