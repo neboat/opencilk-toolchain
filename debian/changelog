@@ -1,7 +1,8 @@
 llvm-toolchain-11 (1:11.0.0-6) UNRELEASED; urgency=medium
 
   [ Gianfranco Costamagna ]
-  * Add upstream patch D92052 to fix a gcn offload compiler issue with gcc (Closes: #975692)
+  * gnu-assembler-compat.diff: Add upstream patch D92052 to fix a 
+    gcn offload compiler issue with gcc (Closes: #975692)
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 25 Nov 2020 10:18:22 +0100
 
