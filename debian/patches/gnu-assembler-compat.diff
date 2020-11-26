@@ -2,7 +2,7 @@ Index: llvm/lib/MC/MCParser/ELFAsmParser.cpp
 ===================================================================
 --- a/llvm/lib/MC/MCParser/ELFAsmParser.cpp
 +++ b/llvm/lib/MC/MCParser/ELFAsmParser.cpp
-@@ -644,10 +644,13 @@
+@@ -652,10 +652,13 @@
        !(SectionName == ".eh_frame" && Type == ELF::SHT_PROGBITS))
      Error(loc, "changed section type for " + SectionName + ", expected: 0x" +
                     utohexstr(Section->getType()));
@@ -22,49 +22,44 @@ Index: llvm/test/MC/ELF/section-entsize-changed.s
 ===================================================================
 --- a/llvm/test/MC/ELF/section-entsize-changed.s
 +++ b/llvm/test/MC/ELF/section-entsize-changed.s
-@@ -10,3 +10,26 @@
+@@ -10,3 +10,23 @@
  .pushsection .foo,"aM",@progbits,4
  
  .pushsection .foo,"aM",@progbits,1
 +
-+
 +bar:
-+.section .bar,"ax",@progbits
-+
 +.section .bar
 +
-+# CHECK: {{.*}}.s:[[# @LINE+1]]:1: error: changed section flags for .bar, expected: 0x6
++# CHECK: {{.*}}.s:[[# @LINE+1]]:1: error: changed section flags for .bar, expected: 0x0
 +.section .bar,"awx",@progbits
 +
-+# CHECK: {{.*}}.s:[[# @LINE+1]]:1: error: changed section flags for .bar, expected: 0x6
++# CHECK: {{.*}}.s:[[# @LINE+1]]:1: error: changed section flags for .bar, expected: 0x0
 +.pushsection .bar,"a",@progbits
 +
 +.pushsection .bar
 +
 +foobar:
-+.section .foobar,"ax",@progbits; .byte 1
++.section .foobar,"ax",@progbits
 +
 +# CHECK: {{.*}}.s:[[# @LINE+1]]:1: error: changed section flags for .foobar, expected: 0x6
-+.section .foobar,"",@progbits; .byte 2
++.section .foobar,"",@progbits
 +
 +# CHECK: {{.*}}.s:[[# @LINE+1]]:1: error: changed section flags for .foobar, expected: 0x6
-+.section .foobar,"a",@progbits; .byte 3
++.section .foobar,"a",@progbits
 Index: llvm/test/MC/ELF/section-omitted-attributes.s
 ===================================================================
 --- /dev/null
 +++ llvm/test/MC/ELF/section-omitted-attributes.s
-@@ -0,0 +1,21 @@
+@@ -0,0 +1,19 @@
 +# RUN: llvm-mc -triple=x86_64 %s -o - | FileCheck %s
 +
-+// CHECK: .section        .foo,"aM",@progbits,1
-+// CHECK: .section        .bar,"aM",@progbits,4
++# CHECK: .section        .foo,"aM",@progbits,1
++# CHECK: .section        .bar,"aM",@progbits,4
 +
 +foo:
 +.section .foo,"aM",@progbits,1
 +
 +.section .foo
-+
-+.pushsection .foo
 +
 +.pushsection .foo
 +
