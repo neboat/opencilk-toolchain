@@ -97,14 +97,24 @@ llvm-toolchain-snapshot (1:12~++20200715052739+d6e79e3dd6d-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 08 Jul 2020 15:19:14 +0200
 
-llvm-toolchain-11 (1:11.0.0-6) UNRELEASED; urgency=medium
+llvm-toolchain-11 (1:11.0.1~+rc1-1~exp2) UNRELEASED; urgency=medium
+
+  [ Alexander Volkov ]
+  * Fix description of libclang-cpp11-dev package.
+
+ -- Alexander Volkov <avolkov@astralinux.ru>  Thu, 26 Nov 2020 21:17:48 +0300
+
+llvm-toolchain-11 (1:11.0.1~+rc1-1~exp1) experimental; urgency=medium
 
   [ Gianfranco Costamagna ]
   * gnu-assembler-compat.diff: Add upstream patch D92052 to fix a 
     gcn offload compiler issue with gcc (Closes: #975692)
-    (disable until it is approved upstream)
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 25 Nov 2020 10:18:22 +0100
+  [ Sylvestre Ledru ]
+  * New snapshot release
+  * Remove fix-clang-format-bug-47589.patch (applied upstream)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 26 Nov 2020 10:14:43 +0100
 
 llvm-toolchain-11 (1:11.0.0-5) unstable; urgency=medium
 

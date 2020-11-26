@@ -208,8 +208,8 @@ Description: C++ interface to the Clang library
  locations with elements within the AST, and other facilities that support
  Clang-based development tools.
  .
- This package contains the Clang headers to develop extensions over
- libclang-cpp12.
+ This package contains symlinks without a version number, which needed by
+ linker at build time.
 
 
 Package: libfuzzer-12-dev
