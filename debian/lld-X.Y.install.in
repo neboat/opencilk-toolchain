@@ -7,6 +7,6 @@ usr/lib/llvm-@LLVM_VERSION@/bin/wasm-ld
 
 usr/bin/lld-link-@LLVM_VERSION@
 usr/bin/ld.lld-@LLVM_VERSION@
-usr/bin/ld64.lld-@LLVM_VERSION@*
+usr/bin/ld64.lld*-@LLVM_VERSION@
 usr/bin/lld-@LLVM_VERSION@*
 usr/bin/wasm-ld-@LLVM_VERSION@
