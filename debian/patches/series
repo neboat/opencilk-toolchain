@@ -140,3 +140,5 @@ python3-shebang.patch
 print-lldb-path.patch
 libcxx-armhf-ftbfs.diff
 silent-integration-test-suite-i386.diff
+gnu-assembler-compat.diff
+
