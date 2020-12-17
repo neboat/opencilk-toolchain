@@ -1,4 +1,4 @@
-llvm-toolchain-11 (1:11.0.1~+rc1-1~exp2) unstable; urgency=medium
+llvm-toolchain-11 (1:11.0.1~+rc1-1) unstable; urgency=medium
 
   [ Alexander Volkov ]
   * Fix description of libclang-cpp11-dev package.
