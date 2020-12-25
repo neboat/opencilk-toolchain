@@ -724,7 +724,7 @@ override_dh_makeshlibs:
 	dh_makeshlibs -pliblldb-$(LLVM_VERSION) -V"liblldb-$(LLVM_VERSION) (>= 1:9~svn298832-1~)"
 	dh_makeshlibs -plibllvm$(LLVM_VERSION) -V"libllvm$(LLVM_VERSION) (>= 1:9~svn298832-1~)"
 	dh_makeshlibs -plibomp$(SONAME_OPENMP)-$(LLVM_VERSION) -V"libomp$(SONAME_OPENMP)-$(LLVM_VERSION) (>= 1:9~svn298832-1~)"
-	dh_makeshlibs --remaining-packages
+	dh_makeshlibs --remaining-packages -V
 
 override_dh_shlibdeps:
 # Ignore asan libraries. They would trigger dependencies to multiarch libraries
