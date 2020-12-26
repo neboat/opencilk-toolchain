@@ -1,10 +1,17 @@
 llvm-toolchain-11 (1:11.0.1~++20201216111106+280e47ea0e83-1~exp1) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * experimental New snapshot release
   * Remove "gnu-assembler-compat.diff" for apt.llvm.org as applied upstream
     Should be part of rc2
+  * Disable the patch for real
+  * rebase of the patch
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Dec 2020 11:14:19 +0100
+  [ Gianfranco Costamagna ]
+  * Drop old patch, upstream now
+  * Run dh_makeshlibs with -V parameter (Closes: #977814)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 25 Dec 2020 23:29:49 +0100
 
 llvm-toolchain-11 (1:11.0.1~+rc1-1~exp2) UNRELEASED; urgency=medium
 
