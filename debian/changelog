@@ -2,8 +2,6 @@ llvm-toolchain-11 (1:11.0.1~++20201216111106+280e47ea0e83-1~exp1) UNRELEASED; ur
 
   [ Sylvestre Ledru ]
   * experimental New snapshot release
-  * Remove "gnu-assembler-compat.diff" for apt.llvm.org as applied upstream
-    Should be part of rc2
   * Disable the patch for real
   * rebase of the patch
 
@@ -13,17 +11,28 @@ llvm-toolchain-11 (1:11.0.1~++20201216111106+280e47ea0e83-1~exp1) UNRELEASED; ur
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 25 Dec 2020 23:29:49 +0100
 
-llvm-toolchain-11 (1:11.0.1~+rc1-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-11 (1:11.0.1~+rc2-1) unstable; urgency=medium
+
+  * New snapshot release
+  * Remove 'gnu-assembler-compat.diff' - merged upstream
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 19 Dec 2020 09:38:48 +0100
+
+llvm-toolchain-11 (1:11.0.1~+rc1-1) unstable; urgency=medium
 
   [ Alexander Volkov ]
   * Fix description of libclang-cpp11-dev package.
 
- -- Alexander Volkov <avolkov@astralinux.ru>  Thu, 26 Nov 2020 21:17:48 +0300
+  [ Sylvestre Ledru ]
+  * Upload to unstable to help doko with gcc
+    11.0.1 will be released before the freeze
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Dec 2020 22:41:48 +0100
 
 llvm-toolchain-11 (1:11.0.1~+rc1-1~exp1) experimental; urgency=medium
 
   [ Gianfranco Costamagna ]
-  * gnu-assembler-compat.diff: Add upstream patch D92052 to fix a 
+  * gnu-assembler-compat.diff: Add upstream patch D92052 to fix a
     gcn offload compiler issue with gcc (Closes: #975692)
 
   [ Sylvestre Ledru ]
