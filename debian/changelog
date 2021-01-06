@@ -1,3 +1,9 @@
+llvm-toolchain-11 (1:11.0.1-2) unstable; urgency=medium
+
+  * Fix the changelog
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Jan 2021 20:16:26 +0100
+
 llvm-toolchain-11 (1:11.0.1-1) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
