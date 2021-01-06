@@ -1,6 +1,22 @@
+llvm-toolchain-11 (1:11.0.1-1) unstable; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * New stable release
+
+  [ Gianfranco Costamagna ]
+  * Drop old patch, upstream now
+  * Run dh_makeshlibs with -V parameter (Closes: #977814)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Jan 2021 09:21:24 +0100
+
 llvm-toolchain-11 (1:11.0.1~+rc2-1) unstable; urgency=medium
 
+<<<<<<<
   * New snapshot release
+=======
+  * New snapshot release
+  * Remove 'gnu-assembler-compat.diff' - merged upstream
+>>>>>>>
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 19 Dec 2020 09:38:48 +0100
 
