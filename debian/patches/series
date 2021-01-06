@@ -132,6 +132,7 @@ workaround-bug-42994-use-linker.diff
 
 # bug 939472
 #try-to-unbreak-thinlto.diff
+D67877.patch
 
 x86-fuzzer.patch
 
@@ -140,3 +141,4 @@ print-lldb-path.patch
 libcxx-armhf-ftbfs.diff
 silent-integration-test-suite-i386.diff
 
+D94072.diff
