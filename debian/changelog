@@ -1,15 +1,13 @@
-llvm-toolchain-11 (1:11.0.1~++20201216111106+280e47ea0e83-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-11 (1:11.0.1-1) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
-  * experimental New snapshot release
-  * Disable the patch for real
-  * rebase of the patch
+  * New stable release
 
   [ Gianfranco Costamagna ]
   * Drop old patch, upstream now
   * Run dh_makeshlibs with -V parameter (Closes: #977814)
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 25 Dec 2020 23:29:49 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Jan 2021 09:21:24 +0100
 
 llvm-toolchain-11 (1:11.0.1~+rc2-1) unstable; urgency=medium
 
