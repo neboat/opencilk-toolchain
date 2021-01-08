@@ -1,9 +1,12 @@
-llvm-toolchain-9 (1:9.0.1-16) UNRELEASED; urgency=medium
+llvm-toolchain-9 (1:9.0.1-16) unstable; urgency=medium
 
   [ Adrian Bunk ]
   * Fix the fuzzer build on i386.
 
- -- Adrian Bunk <bunk@debian.org>  Thu, 05 Nov 2020 20:50:05 +0200
+  [ Gianfranco Costamagna ]
+  * Add two patches backported to fix ppc64el julia build (Closes: #974779)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 08 Jan 2021 12:48:25 +0100
 
 llvm-toolchain-9 (1:9.0.1-15) unstable; urgency=low
 
