@@ -1,14 +1,14 @@
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/openmp/runtime/src/CMakeLists.txt
+Index: llvm-toolchain-snapshot_12~++20210121083532+f2fd41d7897e/openmp/runtime/src/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/openmp/runtime/src/CMakeLists.txt
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/openmp/runtime/src/CMakeLists.txt
-@@ -168,7 +168,8 @@ endif()
- 
- # Linking command will include libraries in LIBOMP_CONFIGURED_LIBFLAGS
- libomp_get_libflags(LIBOMP_CONFIGURED_LIBFLAGS)
--target_link_libraries(omp ${LIBOMP_CONFIGURED_LIBFLAGS} ${CMAKE_DL_LIBS})
-+target_link_libraries(omp ${LIBOMP_CONFIGURED_LIBFLAGS} ${CMAKE_DL_LIBS}
-+  "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exports_so.txt")
- 
- # Create *.inc before compiling any sources
- # objects depend on : .inc files
+--- llvm-toolchain-snapshot_12~++20210121083532+f2fd41d7897e.orig/openmp/runtime/src/CMakeLists.txt
++++ llvm-toolchain-snapshot_12~++20210121083532+f2fd41d7897e/openmp/runtime/src/CMakeLists.txt
+@@ -138,7 +138,8 @@ libomp_get_libflags(LIBOMP_CONFIGURED_LI
+ if(OPENMP_STANDALONE_BUILD OR (NOT OPENMP_ENABLE_LIBOMPTARGET_PROFILING))
+   add_library(omp ${LIBOMP_LIBRARY_KIND} ${LIBOMP_SOURCE_FILES})
+   # Linking command will include libraries in LIBOMP_CONFIGURED_LIBFLAGS
+-  target_link_libraries(omp ${LIBOMP_CONFIGURED_LIBFLAGS} ${CMAKE_DL_LIBS})
++  target_link_libraries(omp ${LIBOMP_CONFIGURED_LIBFLAGS} ${CMAKE_DL_LIBS}
++    "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exports_so.txt")
+ else()
+   add_llvm_library(omp ${LIBOMP_LIBRARY_KIND} ${LIBOMP_SOURCE_FILES} PARTIAL_SOURCES_INTENDED
+     LINK_LIBS ${LIBOMP_CONFIGURED_LIBFLAGS} ${CMAKE_DL_LIBS}
