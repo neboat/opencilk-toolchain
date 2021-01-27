@@ -1,7 +1,7 @@
-llvm-toolchain-snapshot (1:12~++20201124100523+245052ac3080-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:13~++20201124100523+245052ac3080-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
-  * experimental New snapshot release
+  * New branch (12 => 13)
   * Workaround a static_assert on https://bugs.llvm.org/show_bug.cgi?id=48259
     "static assertion failed: Recycler allocation size is less than object size!"
   * Also install usr/lib/llvm-12/bin/ld64.lld.darwinnew & usr/bin/ld64.lld.darwinnew-12
@@ -10,7 +10,7 @@ llvm-toolchain-snapshot (1:12~++20201124100523+245052ac3080-1~exp1) UNRELEASED; 
   [ Gianfranco Costamagna ]
   * Add upstream patch D92052 to fix a gcn offload compiler issue with gcc (Closes: #975692)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 25 Nov 2020 11:03:18 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jan 2021 16:02:16 +0100
 
 llvm-toolchain-snapshot (1:12~++20201105093023+cc2a2bb5ce5-1~exp1) experimental; urgency=medium
 
@@ -24,6 +24,15 @@ llvm-toolchain-snapshot (1:12~++20201105093023+cc2a2bb5ce5-1~exp1) experimental;
   * Limit maximum parallel link jobs to 4 on sparc and sparc64
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 05 Nov 2020 09:42:14 +0100
+
+llvm-toolchain-snapshot (1:12~++20201019023155+5a8ac3cc63d-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 19 Oct 2020 14:35:27 +0200
 
 llvm-toolchain-snapshot (1:12~++20200929085817+962a247aebb-1~exp1) experimental; urgency=medium
 
@@ -55,6 +64,24 @@ llvm-toolchain-snapshot (1:12~++20200929085817+962a247aebb-1~exp1) experimental;
     - debian/patches/powerpcspe/D56703-powerpcspe-register-spilling.diff
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 29 Sep 2020 21:01:53 +0200
+
+llvm-toolchain-snapshot (1:12~++20200902060857+888049b97a7-1~exp1) UNRELEASED; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * Install omp.h in instead of /usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/include/
+    instead of /usr/lib/llvm-@LLVM_VERSION@/include/openmp/omp
+  * Install split-file in llvm-X-tools (like lit)
+
+  [ John Paul Adrian Glaubitz ]
+  * Link against libatomic on mipsel to fix FTBFS in stage2
+  * Link against libatomic on powerpc to fix FTBFS in stage2
+  * Use dh-exec to exclude lib/libPolly*.a on powerpc and
+    powerpcspe from libclang-common-X.Y-dev.install.in
+
+  [ Sylvestre Ledru ]
+  * experimental New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 02 Sep 2020 18:12:46 +0200
 
 llvm-toolchain-snapshot (1:12~++20200804122259+4be13b15d69-1~exp2) UNRELEASED; urgency=medium
 
@@ -359,7 +386,22 @@ llvm-toolchain-snapshot (1:11~++20200621103028+10b0539772d-1~exp1) UNRELEASED; u
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 21 Jun 2020 10:33:23 +0200
 
-llvm-toolchain-snapshot (1:11~++20200411120955+c65e6079fc9-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:11~++20200520051603+e8f6b0e583c-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+  * Add -DLLVM_POLLY_LINK_INTO_TOOLS=OFF to workaround
+    https://bugs.llvm.org/show_bug.cgi?id=45571
+  * New symbol clang_Type_getValueType added
+  * Install usr/lib/llvm-11/lib/cmake/lld/*.cmake
+    in liblld-11-dev
+  * Upstream change ad97ccf6b26a29262c9cbf5b3e7f6e84c6dcf55f
+    broke clangd-atomic-cmake.patch causing some undef symbol on
+    i386 and atomic
+  * experimental New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 20 May 2020 17:19:34 +0200
+
+llvm-toolchain-snapshot (1:11~++20200411120955+c65e6079fc9-1~exp1) experimental; urgency=medium
 
   * New snapshot release
   * Bring back libc++-experimental
