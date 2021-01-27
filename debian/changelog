@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:12~++20201124100523+245052ac3080-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-12 (1:12~++20210126092700+956d8e02e8a5-1~exp1) UNRELEASED; urgency=medium
 
   [ Sylvestre Ledru ]
   * experimental New snapshot release
@@ -10,7 +10,7 @@ llvm-toolchain-snapshot (1:12~++20201124100523+245052ac3080-1~exp1) UNRELEASED; 
   [ Gianfranco Costamagna ]
   * Add upstream patch D92052 to fix a gcn offload compiler issue with gcc (Closes: #975692)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 25 Nov 2020 11:03:18 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jan 2021 15:48:54 +0100
 
 llvm-toolchain-snapshot (1:12~++20201105093023+cc2a2bb5ce5-1~exp1) experimental; urgency=medium
 
