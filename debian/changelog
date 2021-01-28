@@ -1,7 +1,13 @@
-llvm-toolchain-12 (1:12~++20210126092700+956d8e02e8a5-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-12 (1:12.0.0~+rc1-1~exp1) experimental; urgency=medium
+
+  * 12.0 rc1 has been tagged
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 28 Jan 2021 12:16:40 +0100
+
+llvm-toolchain-12 (1:12.0.0~++20210127035054+8e464dd76bef-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
-  * experimental New snapshot release
+  * experimental New snapshot release now 12 as branched
   * Workaround a static_assert on https://bugs.llvm.org/show_bug.cgi?id=48259
     "static assertion failed: Recycler allocation size is less than object size!"
   * Also install usr/lib/llvm-12/bin/ld64.lld.darwinnew & usr/bin/ld64.lld.darwinnew-12
@@ -10,7 +16,7 @@ llvm-toolchain-12 (1:12~++20210126092700+956d8e02e8a5-1~exp1) UNRELEASED; urgenc
   [ Gianfranco Costamagna ]
   * Add upstream patch D92052 to fix a gcn offload compiler issue with gcc (Closes: #975692)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jan 2021 15:48:54 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jan 2021 15:54:15 +0100
 
 llvm-toolchain-snapshot (1:12~++20201105093023+cc2a2bb5ce5-1~exp1) experimental; urgency=medium
 
