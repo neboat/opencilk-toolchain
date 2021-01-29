@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_12~++20210121083532+f2fd41d7897e/openmp/runtime/src/CMakeLists.txt
+Index: llvm-toolchain-snapshot_13~++20210129063721+010b176cdefb/openmp/runtime/src/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_12~++20210121083532+f2fd41d7897e.orig/openmp/runtime/src/CMakeLists.txt
-+++ llvm-toolchain-snapshot_12~++20210121083532+f2fd41d7897e/openmp/runtime/src/CMakeLists.txt
-@@ -138,7 +138,8 @@ libomp_get_libflags(LIBOMP_CONFIGURED_LI
- if(OPENMP_STANDALONE_BUILD OR (NOT OPENMP_ENABLE_LIBOMPTARGET_PROFILING))
+--- llvm-toolchain-snapshot_13~++20210129063721+010b176cdefb.orig/openmp/runtime/src/CMakeLists.txt
++++ llvm-toolchain-snapshot_13~++20210129063721+010b176cdefb/openmp/runtime/src/CMakeLists.txt
+@@ -146,7 +146,8 @@ libomp_get_libflags(LIBOMP_CONFIGURED_LI
+ if(OPENMP_STANDALONE_BUILD OR (NOT OPENMP_ENABLE_LIBOMP_PROFILING))
    add_library(omp ${LIBOMP_LIBRARY_KIND} ${LIBOMP_SOURCE_FILES})
    # Linking command will include libraries in LIBOMP_CONFIGURED_LIBFLAGS
 -  target_link_libraries(omp ${LIBOMP_CONFIGURED_LIBFLAGS} ${CMAKE_DL_LIBS})
