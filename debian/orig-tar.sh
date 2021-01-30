@@ -41,9 +41,9 @@ reset_repo ()
     git clean -qfd
     git checkout .
     git remote update > /dev/null
-    git reset --hard origin/master > /dev/null
+    git reset --hard origin/main > /dev/null
     git clean -qfd
-    git checkout master > /dev/null
+    git checkout main > /dev/null
     git pull
     cd -
 }
@@ -82,10 +82,10 @@ else
     SOURCE=$(dpkg-parsechangelog |grep ^Source|awk '{print $2}')
     cd - &> /dev/null
     if test "$SOURCE" != "llvm-toolchain-snapshot"; then
-       echo "Checkout of the master is only available for llvm-toolchain-snapshot"
+       echo "Checkout of the main is only available for llvm-toolchain-snapshot"
        exit 1
     fi
-    BRANCH="master"
+    BRANCH="main"
 fi
 
 if test -n "$1" -a -n "$2"; then
@@ -124,14 +124,14 @@ if test -z  "$TAG" -a -z "$FINAL_RELEASE"; then
     # Building a branch
     git checkout $BRANCH
     git reset --hard origin/$BRANCH
-    if test $BRANCH != "master"; then
+    if test $BRANCH != "main"; then
         VERSION=$(echo $BRANCH|cut -d/ -f2|cut -d. -f1)
         if ! echo "$MAJOR_VERSION"|grep -q "$VERSION"; then
             echo "mismatch in version: Dir=$MAJOR_VERSION Provided=$VERSION"
             exit 1
         fi
     else
-        # No argument, take master. So, it can only be snapshot
+        # No argument, take main. So, it can only be snapshot
         VERSION=$MAJOR_VERSION
         MAJOR_VERSION=snapshot
     fi
