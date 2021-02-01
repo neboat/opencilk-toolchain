@@ -183,6 +183,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel powerpc powerpcspe riscv64 sparc6
   OPENMP_ENABLE=no
 else
   PROJECTS+=;openmp
+  CMAKE_EXTRA += -DLIBOMPTARGET_BUILD_NVPTX_BCLIB=ON
 endif
 
 RUN_TEST=yes
