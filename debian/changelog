@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:13~++20201124100523+245052ac3080-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
   * New branch (12 => 13)
@@ -10,7 +10,7 @@ llvm-toolchain-snapshot (1:13~++20201124100523+245052ac3080-1~exp1) experimental
   [ Gianfranco Costamagna ]
   * Add upstream patch D92052 to fix a gcn offload compiler issue with gcc (Closes: #975692)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jan 2021 16:02:16 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
 
 llvm-toolchain-snapshot (1:12~++20201105093023+cc2a2bb5ce5-1~exp1) experimental; urgency=medium
 
