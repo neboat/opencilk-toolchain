@@ -1,3 +1,13 @@
+llvm-toolchain-11 (1:11.1.0-1) unstable; urgency=medium
+
+  * New upstream release
+    Should be mostly minor fixes
+    Was driven by https://bugs.llvm.org/show_bug.cgi?id=46526
+    but as we are not impacted, I reverted the change in
+    debian/patches/revert-abi-change-clang.diff
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 17 Feb 2021 08:59:36 +0100
+
 llvm-toolchain-11 (1:11.0.1-2) unstable; urgency=medium
 
   * Fix the changelog
