@@ -1,3 +1,19 @@
+llvm-toolchain-snapshot (1:13~++20210218085556+fcdef15d77bd-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Feb 2021 08:59:36 +0100
+
+llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp2) experimental; urgency=medium
+
+  * Enable OpenMP offload capabilities for NVDIA GPUs
+    See https://bugzilla.redhat.com/show_bug.cgi?id=1922914
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 01 Feb 2021 09:04:16 +0100
+
 llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
