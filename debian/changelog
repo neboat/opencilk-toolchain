@@ -1,9 +1,7 @@
 llvm-toolchain-snapshot (1:13~++20210218085556+fcdef15d77bd-1~exp1) UNRELEASED; urgency=medium
 
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
+  * New snapshot release
+  * "run-clang-tidy" install it
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Feb 2021 08:59:36 +0100
 
