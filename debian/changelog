@@ -1,8 +1,6 @@
 llvm-toolchain-12 (1:12.0.0~++rc2-1~exp1) experimental; urgency=medium
 
   * New rc release
-  * Enable OpenMP offload capabilities for NVDIA GPUs
-    See https://bugzilla.redhat.com/show_bug.cgi?id=1922914
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 24 Feb 2021 10:18:02 +0100
 
