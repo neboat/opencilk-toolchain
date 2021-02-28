@@ -225,10 +225,14 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  GOMP_taskloop_ull@VERSION 7
  GOMP_taskwait@GOMP_2.0 0.20131209
  GOMP_taskwait@VERSION 0.20130412
+ GOMP_taskwait_depend@GOMP_5.0 12
+ GOMP_taskwait_depend@VERSION 12
  GOMP_taskyield@GOMP_3.0 0.20131209
  GOMP_taskyield@VERSION 0.20131209
  GOMP_teams@GOMP_4.0 0.20140926
  GOMP_teams@VERSION 0.20140926
+ GOMP_teams_reg@GOMP_5.0 12
+ GOMP_teams_reg@VERSION 12
  OMP_1.0@OMP_1.0 0.20131209
  OMP_2.0@OMP_2.0 0.20131209
  OMP_3.0@OMP_3.0 0.20131209
@@ -762,6 +766,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_begin@VERSION 0.20130412
  __kmpc_bound_num_threads@VERSION 0.20130412
  __kmpc_bound_thread_num@VERSION 0.20130412
+ __kmpc_calloc@VERSION 12
  __kmpc_cancel@VERSION 0.20131209
  __kmpc_cancel_barrier@VERSION 0.20131209
  __kmpc_cancellationpoint@VERSION 0.20131209
@@ -850,6 +855,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_push_num_teams@VERSION 0.20130715
  __kmpc_push_num_threads@VERSION 0.20130412
  __kmpc_push_proc_bind@VERSION 0.20130412
+ __kmpc_realloc@VERSION 12
  __kmpc_reduce@VERSION 0.20130412
  __kmpc_reduce_nowait@VERSION 0.20130412
  __kmpc_serialized_parallel@VERSION 0.20130412
@@ -866,6 +872,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_task_reduction_modifier_init@VERSION 9
  __kmpc_taskgroup@VERSION 0.20130412
  __kmpc_taskloop@VERSION 3.9.0
+ __kmpc_taskloop_5@VERSION 12
 #MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_taskq@VERSION 0.20130412
 #MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_taskq_task@VERSION 0.20130412
  __kmpc_taskred_init@VERSION 9
@@ -970,6 +977,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  kmpc_unset_affinity_mask_proc@VERSION 0.20130412
  omp_alloc@VERSION 8
 #MISSING: 9# omp_alloc_@VERSION 8
+ omp_calloc@VERSION 12
  omp_capture_affinity@VERSION 8
  omp_capture_affinity_@VERSION 8
  omp_cgroup_mem_alloc@VERSION 8
@@ -1165,6 +1173,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_pause_resource_all@VERSION 9
  omp_pause_resource_all_@VERSION 9
  omp_pteam_mem_alloc@VERSION 8
+ omp_realloc@VERSION 12
  omp_set_affinity_format@VERSION 8
  omp_set_affinity_format_@VERSION 8
  omp_set_default_allocator@VERSION 8
@@ -1243,3 +1252,40 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  ompc_set_num_threads@VERSION 0.20130412
  ompc_set_schedule@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)ompt_start_tool@VERSION 6.0
+libomptarget.so.12 libomp5-12 #MINVER#
+ VERS1.0@VERS1.0 12
+ __kmpc_push_target_tripcount@VERS1.0 12
+ __tgt_mapper_num_components@VERS1.0 12
+ __tgt_push_mapper_component@VERS1.0 12
+ __tgt_register_lib@VERS1.0 12
+ __tgt_register_requires@VERS1.0 12
+ __tgt_target@VERS1.0 12
+ __tgt_target_data_begin@VERS1.0 12
+ __tgt_target_data_begin_mapper@VERS1.0 12
+ __tgt_target_data_begin_nowait@VERS1.0 12
+ __tgt_target_data_begin_nowait_mapper@VERS1.0 12
+ __tgt_target_data_end@VERS1.0 12
+ __tgt_target_data_end_mapper@VERS1.0 12
+ __tgt_target_data_end_nowait@VERS1.0 12
+ __tgt_target_data_end_nowait_mapper@VERS1.0 12
+ __tgt_target_data_update@VERS1.0 12
+ __tgt_target_data_update_mapper@VERS1.0 12
+ __tgt_target_data_update_nowait@VERS1.0 12
+ __tgt_target_data_update_nowait_mapper@VERS1.0 12
+ __tgt_target_mapper@VERS1.0 12
+ __tgt_target_nowait@VERS1.0 12
+ __tgt_target_nowait_mapper@VERS1.0 12
+ __tgt_target_teams@VERS1.0 12
+ __tgt_target_teams_mapper@VERS1.0 12
+ __tgt_target_teams_nowait@VERS1.0 12
+ __tgt_target_teams_nowait_mapper@VERS1.0 12
+ __tgt_unregister_lib@VERS1.0 12
+ omp_get_initial_device@VERS1.0 12
+ omp_get_num_devices@VERS1.0 12
+ omp_target_alloc@VERS1.0 12
+ omp_target_associate_ptr@VERS1.0 12
+ omp_target_disassociate_ptr@VERS1.0 12
+ omp_target_free@VERS1.0 12
+ omp_target_is_present@VERS1.0 12
+ omp_target_memcpy@VERS1.0 12
+ omp_target_memcpy_rect@VERS1.0 12
