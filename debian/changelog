@@ -2,6 +2,12 @@ llvm-toolchain-9 (1:9.0.1-16) unstable; urgency=medium
 
   * Only enable libomp-9-doc on supported archs
 
+  [ Adrian Bunk ]
+  * Fix the fuzzer build on i386.
+
+  [ Gianfranco Costamagna ]
+  * Add two patches backported to fix ppc64el julia build (Closes: #974779)
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 01 Mar 2021 10:44:34 +0100
 
 llvm-toolchain-9 (1:9.0.1-15) unstable; urgency=low

@@ -136,8 +136,9 @@ D74453-riscv-atomic_cmp_xchg.diff
 #try-to-unbreak-thinlto.diff
 D67877.patch
 disable-lit-cpuid-install.diff
-disable-fuzzer-compiler-rt.diff
 no-z3.patch
+
+x86-fuzzer.patch
 
 # bug #946874
 D71028-mips-rust-test.diff
@@ -152,3 +153,7 @@ riscv64-multilib-empty.patch
 
 f8e146f3430de3a6cd904f3f3f7aa1bfaefee14c.patch
 3185c30c54d0af5bffbff3bcfd721668d086ff10.patch
+
+# bug 974779
+llvm9-D71443-PPC-MC-redef-symbol.patch
+llvm-9.0-D78196.patch
