@@ -8,8 +8,9 @@ llvm-toolchain-12 (1:12.0.0~++rc2-1~exp2) experimental; urgency=medium
     - __kmpc_realloc
     - __kmpc_taskloop_5
     And all libomptarget.so.12
+  * Only enable libomp-12-doc on supported archs
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 28 Feb 2021 15:07:36 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 01 Mar 2021 10:53:05 +0100
 
 llvm-toolchain-12 (1:12.0.0~++rc2-1~exp1) experimental; urgency=medium
 
