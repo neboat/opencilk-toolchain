@@ -1,3 +1,9 @@
+llvm-toolchain-9 (1:9.0.1-16) unstable; urgency=medium
+
+  * Only enable libomp-9-doc on supported archs
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 01 Mar 2021 10:44:34 +0100
+
 llvm-toolchain-9 (1:9.0.1-15) unstable; urgency=low
 
   * Replace use of deprecated $ADTTMP with $AUTOPKGTEST_TMP.
