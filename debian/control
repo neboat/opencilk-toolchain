@@ -562,7 +562,7 @@ Description: LLVM OpenMP runtime
 
 Package: libomp-11-doc
 Section: doc
-Architecture: all
+Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
 Replaces: libiomp-x.y-doc
 Breaks: libiomp-x.y-doc
