@@ -75,6 +75,10 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++
 	GCC_VERSION := 4.9
 endif
 
+ifneq (,$(filter $(DEB_HOST_ARCH),riscv64))
+	GCC_VERSION := 11
+endif
+
 Z3_FLAG = -DLLVM_ENABLE_Z3_SOLVER=OFF
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libz3-dev) gt 4.7.0; echo $$?),0)
 # no ocaml support in main for Ubuntu
