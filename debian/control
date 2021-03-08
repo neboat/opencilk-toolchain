@@ -348,9 +348,6 @@ Package: llvm-9-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
  python3-pygments, python3-yaml
-# Because of yaml-bench
-Breaks: libclang-common-9-dev (<< 1:9.0.1~+rc2)
-Replaces: libclang-common-9-dev (<< 1:9.0.1~+rc2)
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
