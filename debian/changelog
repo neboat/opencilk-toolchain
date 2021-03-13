@@ -1,8 +1,12 @@
 llvm-toolchain-snapshot (1:13~++20210218085556+fcdef15d77bd-1~exp1) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * New snapshot release
   * "run-clang-tidy" install it
   * Only enable libomp-13-doc on supported archs
+
+  [ John Paul Adrian Glaubitz ]
+  * Add upstream patch D98574 to fix clang macro definitions on sparc64
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Feb 2021 08:59:36 +0100
 

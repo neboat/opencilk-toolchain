@@ -1,0 +1,40 @@
+--- llvm-toolchain-snapshot-13~++20210129063721+010b176cdefb.orig/clang/lib/Basic/Targets/Sparc.cpp
++++ llvm-toolchain-snapshot-13~++20210129063721+010b176cdefb/clang/lib/Basic/Targets/Sparc.cpp
+@@ -156,9 +156,12 @@ void SparcV8TargetInfo::getTargetDefines
+       Builder.defineMacro("__sparcv8__");
+       break;
+     case CG_V9:
+-      Builder.defineMacro("__sparcv9");
+-      Builder.defineMacro("__sparcv9__");
+       Builder.defineMacro("__sparc_v9__");
++      // Linux doesn't need these variants, but the BSDs do.
++      if (getTriple().getOS() != llvm::Triple::Linux) {
++        Builder.defineMacro("__sparcv9");
++        Builder.defineMacro("__sparcv9__");
++      }
+       break;
+     }
+   }
+@@ -239,13 +242,17 @@ void SparcV8TargetInfo::getTargetDefines
+ void SparcV9TargetInfo::getTargetDefines(const LangOptions &Opts,
+                                          MacroBuilder &Builder) const {
+   SparcTargetInfo::getTargetDefines(Opts, Builder);
+-  Builder.defineMacro("__sparcv9");
+   Builder.defineMacro("__arch64__");
+-  // Solaris doesn't need these variants, but the BSDs do.
+-  if (getTriple().getOS() != llvm::Triple::Solaris) {
+-    Builder.defineMacro("__sparc64__");
++  if (getTriple().getOS() == llvm::Triple::Linux) {
+     Builder.defineMacro("__sparc_v9__");
+-    Builder.defineMacro("__sparcv9__");
++  } else {
++    Builder.defineMacro("__sparcv9");
++    // Solaris doesn't need these variants, but the BSDs do.
++    if (getTriple().getOS() != llvm::Triple::Solaris) {
++      Builder.defineMacro("__sparc64__");
++      Builder.defineMacro("__sparc_v9__");
++      Builder.defineMacro("__sparcv9__");
++    }
+   }
+ 
+   Builder.defineMacro("__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1");
