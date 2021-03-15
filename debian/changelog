@@ -1,3 +1,16 @@
+llvm-toolchain-12 (1:12.0.0~++rc2-1) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Upload to sid
+
+  [ Sylvestre Ledru ]
+  * Ignore source: invalid-arch-string-in-source-relation riscv64 [build-depends: g++-11 [riscv64]]
+
+  [ Matthias Klose ]
+  * Also disable CMake's package validation check for omptarget target files (Closes: #983838).
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 15 Mar 2021 11:18:42 +0100
+
 llvm-toolchain-12 (1:12.0.0~++rc2-1~exp2) experimental; urgency=medium
 
   * Refresh the openmp symbol list
@@ -11,7 +24,7 @@ llvm-toolchain-12 (1:12.0.0~++rc2-1~exp2) experimental; urgency=medium
   * Only enable libomp-12-doc on supported archs
 
   [ Matthias Klose <doko@ubuntu.com> ]
-  * Build using GCC 11 on riscv64.
+  * Build using GCC 11 on riscv64 (Closes: #983837).
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 02 Mar 2021 13:25:24 +0100
 
