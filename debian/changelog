@@ -1,4 +1,4 @@
-llvm-toolchain-12 (1:12.0.0~++rc2-1) unstable; urgency=medium
+llvm-toolchain-12 (1:12.0.0~++rc3-1) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Upload to sid
@@ -10,6 +10,12 @@ llvm-toolchain-12 (1:12.0.0~++rc2-1) unstable; urgency=medium
   * Also disable CMake's package validation check for omptarget target files (Closes: #983838).
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 15 Mar 2021 11:18:42 +0100
+
+llvm-toolchain-12 (1:12.0.0~++rc3-1~exp1) experimental; urgency=medium
+
+  * New testing upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 10 Mar 2021 16:11:07 +0100
 
 llvm-toolchain-12 (1:12.0.0~++rc2-1~exp2) experimental; urgency=medium
 
