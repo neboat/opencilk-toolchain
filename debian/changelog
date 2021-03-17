@@ -1,3 +1,10 @@
+llvm-toolchain-12 (1:12.0.0~++rc3-3) unstable; urgency=medium
+
+  * Cherry-pick upstream commit e3cd3a3c91524c957e06bb0170343548f02b6842
+    bring back Reporter.py needing to make scan-view work.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 17 Mar 2021 13:11:46 +0100
+
 llvm-toolchain-12 (1:12.0.0~++rc3-2) unstable; urgency=medium
 
   * Fixup omptarget regex error, missing escape
