@@ -767,15 +767,18 @@ int main() {
   pthread_join(t[1], NULL);
 } ' > foo.c
 
-clang-$VERSION -o foo -fsanitize=thread -g -O1 foo.c
-if ! strings ./foo 2>&1 | grep -q "tsan"; then
-    echo "binary doesn't contain tsan code"
-    strings foo
-    exit 42
-fi
-if ! ./foo 2>&1 | grep -q "data race"; then
-    echo "sanitize=address is failing"
-    exit 42
+# fails on i386 with: clang: error: unsupported option '-fsanitize=thread' for target 'i686-pc-linux-gnu'
+if [ $DEB_HOST_ARCH != "i386" ]; then
+    clang-$VERSION -o foo -fsanitize=thread -g -O1 foo.c
+    if ! strings ./foo 2>&1 | grep -q "tsan"; then
+        echo "binary doesn't contain tsan code"
+        strings foo
+        exit 42
+    fi
+    if ! ./foo 2>&1 | grep -q "data race"; then
+        echo "sanitize=address is failing"
+        exit 42
+    fi
 fi
 
 echo '
