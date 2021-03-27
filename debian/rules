@@ -1,5 +1,5 @@
 #!/usr/bin/make -f
-65;6201;1c
+
 # polly, openmp & lldb aren't enabled for every platform
 PROJECTS = clang;clang-tools-extra;libcxx;libcxxabi;compiler-rt;lld;debuginfo-tests
 
