@@ -1,5 +1,5 @@
 #!/usr/bin/make -f
-
+65;6201;1c
 # polly, openmp & lldb aren't enabled for every platform
 PROJECTS = clang;clang-tools-extra;libcxx;libcxxabi;compiler-rt;lld;debuginfo-tests
 
@@ -283,9 +283,8 @@ endif
 
 # if cmake is installed in /tmp/cmake/ uses it
 # Used to build llvm on old ubuntu (precise) on the llvm.org/apt/ ci
-CMAKE_BIN=cmake; \
-
-ifeq (,$(wildcard /tmp/cmake/bin/cmake))
+CMAKE_BIN=cmake
+ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 	CMAKE_BIN=/tmp/cmake/bin/cmake
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/
 endif
@@ -358,11 +357,9 @@ override_dh_auto_configure: preconfigure
 	fi)
 
 	echo "Running tests: $(RUN_TEST)"
-	if test -f /tmp/cmake/bin/cmake; then \
-	fi; \
-	echo "Using cmake: $$CMAKE_BIN"; \
+	echo "Using cmake: $(CMAKE_BIN)"; \
 	cd $(TARGET_BUILD) && \
-	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../llvm/ \
+	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../llvm/ \
 	-DLLVM_ENABLE_PROJECTS="$(PROJECTS_LIST)" \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
@@ -443,9 +440,9 @@ debian-libcxx-build:
 	mkdir -p libcxx/build
 	mkdir -p libcxxabi/build
 
-	echo "Using cmake: $$CMAKE_BIN"; \
+	echo "Using cmake: $(CMAKE_BIN)"; \
 	cd libcxxabi/build && \
-	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../ \
+	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
 	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
@@ -460,9 +457,9 @@ debian-libcxxabi-build:
 
 	mkdir -p libcxxabi/build
 
-	echo "Using cmake: $$CMAKE_BIN"; \
+	echo "Using cmake: $(CMAKE_BIN)"; \
 	cd libcxx/build && \
-	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../ \
+	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXX_CXX_ABI=libcxxabi \
 	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
