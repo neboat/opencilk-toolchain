@@ -475,6 +475,7 @@ debian-libcxx-build:
 	CMAKE_BIN=cmake; \
 	if test -f /tmp/cmake/bin/cmake; then \
 		CMAKE_BIN=/tmp/cmake/bin/cmake; \
+		export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/; \
 	fi; \
 	echo "Using cmake: $$CMAKE_BIN"; \
 	cd libcxxabi/build && \
