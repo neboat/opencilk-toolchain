@@ -420,6 +420,9 @@ VERBOSE=VERBOSE=1
 #VERBOSE=-v
 
 debian-full-build:
+	if test -f /tmp/cmake/bin/cmake; then \
+		export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/; \
+	fi; \
 	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CFLAGS="$(CFLAGS_EXTRA)" CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 $(BUILD_METHOD)
 
 # Check the stage 2 build worked
@@ -497,6 +500,7 @@ debian-libcxxabi-build:
 	CMAKE_BIN=cmake; \
 	if test -f /tmp/cmake/bin/cmake; then \
 		CMAKE_BIN=/tmp/cmake/bin/cmake; \
+		export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/; \
 	fi; \
 	echo "Using cmake: $$CMAKE_BIN"; \
 	cd libcxx/build && \
