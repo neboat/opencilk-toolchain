@@ -304,6 +304,7 @@ preconfigure:
 	@echo "DISTRO=$(DISTRO)"
 	@echo "GCC_VERSION=$(GCC_VERSION)"
 	@echo 'PROJECTS=$(PROJECTS_LIST)'
+	@echo 'LD_LIBRARY_PATH=$(LD_LIBRARY_PATH)'
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
