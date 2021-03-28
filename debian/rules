@@ -373,14 +373,9 @@ override_dh_auto_configure: preconfigure
 	# Used to build llvm on Debian & Ubuntu with a recent cmake
 	# on the llvm.org/apt/ ci
 	# Use D24cmake as hook to download/setup
-	CMAKE_BIN=cmake; \
-	if test -f /tmp/cmake/bin/cmake; then \
-		CMAKE_BIN=/tmp/cmake/bin/cmake; \
-		LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/; \
-	fi; \
 	echo "Using cmake: $$CMAKE_BIN"; \
 	cd $(TARGET_BUILD) && \
-	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH $(PRE_PROCESS_CONF) $$CMAKE_BIN ../llvm/ \
+	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH) $(PRE_PROCESS_CONF) $(CMAKE_BIN) ../llvm/ \
 	-DLLVM_ENABLE_PROJECTS="$(PROJECTS_LIST)" \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
