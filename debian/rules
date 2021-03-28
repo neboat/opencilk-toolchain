@@ -301,7 +301,7 @@ endif
 CMAKE_BIN=cmake
 ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 	CMAKE_BIN=/tmp/cmake/bin/cmake
-	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/
+	export LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):/tmp/cmake/bin/
 endif
 
 %:
@@ -842,7 +842,7 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 			ln -s lldb/_lldb.so; \
 		fi
 	if test "$(CODECOVERAGE)" = "no"; then \
-	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ $(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lldb || true; \
+	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(CURDIR)/$(TARGET_BUILD)/lib/ $(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lldb || true; \
 	fi
 	# remove the workaround
 	rm $(CURDIR)/$(TARGET_BUILD)/lib/python*/*-packages/_lldb.so
