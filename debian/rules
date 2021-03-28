@@ -313,6 +313,8 @@ preconfigure:
 	@echo "PROJECTS=$(PROJECTS_LIST)"
 	@echo "LLVM_VERSION=$(LLVM_VERSION)"
 	@echo "LLVM_VERSION_FULL=$(LLVM_VERSION_FULL)"
+	@echo 'LD_LIBRARY_PATH=$(LD_LIBRARY_PATH)'
+	@echo 'CMAKE_BIN=$(CMAKE_BIN)'
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
