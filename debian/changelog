@@ -4,6 +4,7 @@ llvm-toolchain-snapshot (1:13~++20210218085556+fcdef15d77bd-1~exp1) UNRELEASED; 
   * New snapshot release
   * "run-clang-tidy" install it
   * Only enable libomp-13-doc on supported archs
+  * Cherry-pick https://reviews.llvm.org/D99501 to allow -flto=auto
 
   [ John Paul Adrian Glaubitz ]
   * Add upstream patch D98574 to fix clang macro definitions on sparc64
