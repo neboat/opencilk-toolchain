@@ -65,7 +65,7 @@ endif
 
 # Ensure fixfilepath feature is disabled.  The fixfilepath feature
 # sets a -ffile-prefix-map flag, which is only supported in clang-10.
-export DEB_BUILD_MAINT_OPTIONS=reproducible=-fixfilepath optimize=-lto
+export DEB_BUILD_MAINT_OPTIONS=reproducible=-fixfilepath
 
 # Cxx flags for building libcxx and libcxxabi
 LIBCXXFLAGS := $(shell dpkg-buildflags --get CXXFLAGS) $(shell dpkg-buildflags --get CPPFLAGS)
