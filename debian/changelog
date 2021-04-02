@@ -1,3 +1,10 @@
+llvm-toolchain-12 (1:12.0.0~++rc4-2) unstable; urgency=medium
+
+  * Verify that /proc is mounted. It makes some unexpected issues when
+    building from a chroot without /proc
+
+ --
+
 llvm-toolchain-12 (1:12.0.0~++rc4-1) unstable; urgency=medium
 
   * New testing upstream release
