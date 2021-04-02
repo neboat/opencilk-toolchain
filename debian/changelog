@@ -5,12 +5,15 @@ llvm-toolchain-snapshot (1:13~++20210218085556+fcdef15d77bd-1~exp1) UNRELEASED; 
   * "run-clang-tidy" install it
   * Only enable libomp-13-doc on supported archs
   * Cherry-pick https://reviews.llvm.org/D99501 to allow -flto=auto
+  * Revert https://reviews.llvm.org/D95727 as it is causing some issues like:
+    - /usr/bin/ld: ./build-llvm/lib/ExecutionEngine/Interpreter/./llvm/lib/ExecutionEngine/Interpreter/ExternalFunctions.cpp:135: undefined reference to `ffi_type_pointer'
+    -  Host compiler must support std::atomic!
 
   [ John Paul Adrian Glaubitz ]
   * Add upstream patch D98574 to fix clang macro definitions on sparc64
   * Add upstream patch D98575 to fix 32-bit compiler-rt build on sparc64
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Feb 2021 08:59:36 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 02 Apr 2021 13:58:28 +0200
 
 llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp2) experimental; urgency=medium
 
