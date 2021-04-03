@@ -5,9 +5,6 @@ llvm-toolchain-snapshot (1:13~++20210218085556+fcdef15d77bd-1~exp1) UNRELEASED; 
   * "run-clang-tidy" install it
   * Only enable libomp-13-doc on supported archs
   * Cherry-pick https://reviews.llvm.org/D99501 to allow -flto=auto
-  * Revert https://reviews.llvm.org/D95727 as it is causing some issues like:
-    - /usr/bin/ld: ./build-llvm/lib/ExecutionEngine/Interpreter/./llvm/lib/ExecutionEngine/Interpreter/ExternalFunctions.cpp:135: undefined reference to `ffi_type_pointer'
-    -  Host compiler must support std::atomic!
   * Verify that /proc is mounted. It makes some unexpected issues when
     building from a chroot without /proc
   * Fix the __config_site include issue
