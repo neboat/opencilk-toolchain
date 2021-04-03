@@ -37,8 +37,8 @@ Index: llvm-toolchain-snapshot_13~++20210403101115+95f448aa86cd/llvm/tools/llvm-
 ===================================================================
 --- llvm-toolchain-snapshot_13~++20210403101115+95f448aa86cd.orig/llvm/tools/llvm-shlib/CMakeLists.txt
 +++ llvm-toolchain-snapshot_13~++20210403101115+95f448aa86cd/llvm/tools/llvm-shlib/CMakeLists.txt
-@@ -33,10 +33,6 @@ if(LLVM_BUILD_LLVM_DYLIB)
-   add_llvm_library(LLVM SHARED DISABLE_LLVM_LINK_LLVM_DYLIB SONAME ${INSTALL_WITH_TOOLCHAIN} ${SOURCES})
+@@ -35,10 +35,6 @@ if(LLVM_BUILD_LLVM_DYLIB)
+   set_property(TARGET LLVM PROPERTY VERSION "1") # Append .1 to SONAME
  
    list(REMOVE_DUPLICATES LIB_NAMES)
 -
