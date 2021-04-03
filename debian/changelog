@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:13~++20210218085556+fcdef15d77bd-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:13~++20210403031832+89afec348dbd-1~exp1) UNRELEASED; urgency=medium
 
   [ Sylvestre Ledru ]
   * New snapshot release
@@ -9,12 +9,14 @@ llvm-toolchain-snapshot (1:13~++20210218085556+fcdef15d77bd-1~exp1) UNRELEASED; 
     building from a chroot without /proc
   * Fix the __config_site include issue
   * Revert D95727 for causing bug 49818
+  * Revert 4c2da8641087f7b734337a6e6306329cd2535d60..HEAD clang/lib/Driver/ToolChains/
+    and 7e0cc45ced230b4ef3a9d8eaedfbe92e75f21916 to fix 49827
 
   [ John Paul Adrian Glaubitz ]
   * Add upstream patch D98574 to fix clang macro definitions on sparc64
   * Add upstream patch D98575 to fix 32-bit compiler-rt build on sparc64
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 02 Apr 2021 13:58:28 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 03 Apr 2021 15:22:07 +0200
 
 llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp2) experimental; urgency=medium
 

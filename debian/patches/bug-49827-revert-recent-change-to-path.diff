@@ -1,0 +1,1300 @@
+diff --git b/clang/lib/Driver/ToolChains/AIX.h a/clang/lib/Driver/ToolChains/AIX.h
+index 1534af950c88..c6aac09ddfac 100644
+--- b/clang/lib/Driver/ToolChains/AIX.h
++++ a/clang/lib/Driver/ToolChains/AIX.h
+@@ -77,10 +77,6 @@ public:
+   // Set default DWARF version to 3 for now as latest AIX OS supports version 3.
+   unsigned GetDefaultDwarfVersion() const override { return 3; }
+ 
+-  llvm::DebuggerKind getDefaultDebuggerTuning() const override {
+-    return llvm::DebuggerKind::DBX;
+-  }
+-
+ protected:
+   Tool *buildAssembler() const override;
+   Tool *buildLinker() const override;
+diff --git b/clang/lib/Driver/ToolChains/AMDGPU.cpp a/clang/lib/Driver/ToolChains/AMDGPU.cpp
+index 2ce040cfca01..d6cf5a868555 100644
+--- b/clang/lib/Driver/ToolChains/AMDGPU.cpp
++++ a/clang/lib/Driver/ToolChains/AMDGPU.cpp
+@@ -186,12 +186,6 @@ RocmInstallationDetector::getInstallationPathCandidates() {
+     ROCmSearchDirs.emplace_back(RocmPathArg.str());
+     DoPrintROCmSearchDirs();
+     return ROCmSearchDirs;
+-  } else if (const char *RocmPathEnv = ::getenv("ROCM_PATH")) {
+-    if (!StringRef(RocmPathEnv).empty()) {
+-      ROCmSearchDirs.emplace_back(RocmPathEnv);
+-      DoPrintROCmSearchDirs();
+-      return ROCmSearchDirs;
+-    }
+   }
+ 
+   // Try to find relative to the compiler binary.
+@@ -253,43 +247,6 @@ RocmInstallationDetector::getInstallationPathCandidates() {
+ 
+   ROCmSearchDirs.emplace_back(D.SysRoot + "/opt/rocm",
+                               /*StrictChecking=*/true);
+-
+-  // Find the latest /opt/rocm-{release} directory.
+-  std::error_code EC;
+-  std::string LatestROCm;
+-  llvm::VersionTuple LatestVer;
+-  // Get ROCm version from ROCm directory name.
+-  auto GetROCmVersion = [](StringRef DirName) {
+-    llvm::VersionTuple V;
+-    std::string VerStr = DirName.drop_front(strlen("rocm-")).str();
+-    // The ROCm directory name follows the format of
+-    // rocm-{major}.{minor}.{subMinor}[-{build}]
+-    std::replace(VerStr.begin(), VerStr.end(), '-', '.');
+-    V.tryParse(VerStr);
+-    return V;
+-  };
+-  for (llvm::vfs::directory_iterator
+-           File = D.getVFS().dir_begin(D.SysRoot + "/opt", EC),
+-           FileEnd;
+-       File != FileEnd && !EC; File.increment(EC)) {
+-    llvm::StringRef FileName = llvm::sys::path::filename(File->path());
+-    if (!FileName.startswith("rocm-"))
+-      continue;
+-    if (LatestROCm.empty()) {
+-      LatestROCm = FileName.str();
+-      LatestVer = GetROCmVersion(LatestROCm);
+-      continue;
+-    }
+-    auto Ver = GetROCmVersion(FileName);
+-    if (LatestVer < Ver) {
+-      LatestROCm = FileName.str();
+-      LatestVer = Ver;
+-    }
+-  }
+-  if (!LatestROCm.empty())
+-    ROCmSearchDirs.emplace_back(D.SysRoot + "/opt/" + LatestROCm,
+-                                /*StrictChecking=*/true);
+-
+   DoPrintROCmSearchDirs();
+   return ROCmSearchDirs;
+ }
+diff --git b/clang/lib/Driver/ToolChains/Clang.cpp a/clang/lib/Driver/ToolChains/Clang.cpp
+index 3d5cdb3acd24..95275b14cabe 100644
+--- b/clang/lib/Driver/ToolChains/Clang.cpp
++++ a/clang/lib/Driver/ToolChains/Clang.cpp
+@@ -1051,9 +1051,6 @@ static void RenderDebugEnablingArgs(const ArgList &Args, ArgStringList &CmdArgs,
+   case llvm::DebuggerKind::SCE:
+     CmdArgs.push_back("-debugger-tuning=sce");
+     break;
+-  case llvm::DebuggerKind::DBX:
+-    CmdArgs.push_back("-debugger-tuning=dbx");
+-    break;
+   default:
+     break;
+   }
+@@ -2339,8 +2336,7 @@ void Clang::DumpCompilationDatabaseFragmentToDir(
+       Twine(llvm::sys::path::filename(Input.getFilename())) + ".%%%%.json");
+   int FD;
+   SmallString<256> TempPath;
+-  Err = llvm::sys::fs::createUniqueFile(Path, FD, TempPath,
+-                                        llvm::sys::fs::OF_Text);
++  Err = llvm::sys::fs::createUniqueFile(Path, FD, TempPath);
+   if (Err) {
+     Driver.Diag(diag::err_drv_compilationdatabase) << Path << Err.message();
+     return;
+@@ -2552,8 +2548,6 @@ static void CollectArgsForIntegratedAssembler(Compilation &C,
+         // -fdebug-compilation-dir (without '=') here.
+         CmdArgs.push_back("-fdebug-compilation-dir");
+         CmdArgs.push_back(Value.data());
+-      } else if (Value == "--version") {
+-        D.PrintVersion(C, llvm::outs());
+       } else {
+         D.Diag(diag::err_drv_unsupported_option_argument)
+             << A->getOption().getName() << Value;
+@@ -3900,8 +3894,6 @@ static void renderDebugOptions(const ToolChain &TC, const Driver &D,
+         DebuggerTuning = llvm::DebuggerKind::LLDB;
+       else if (A->getOption().matches(options::OPT_gsce))
+         DebuggerTuning = llvm::DebuggerKind::SCE;
+-      else if (A->getOption().matches(options::OPT_gdbx))
+-        DebuggerTuning = llvm::DebuggerKind::DBX;
+       else
+         DebuggerTuning = llvm::DebuggerKind::GDB;
+     }
+@@ -3972,15 +3964,12 @@ static void renderDebugOptions(const ToolChain &TC, const Driver &D,
+   // Column info is included by default for everything except SCE and
+   // CodeView. Clang doesn't track end columns, just starting columns, which,
+   // in theory, is fine for CodeView (and PDB).  In practice, however, the
+-  // Microsoft debuggers don't handle missing end columns well, and the AIX
+-  // debugger DBX also doesn't handle the columns well, so it's better not to
+-  // include any column info.
++  // Microsoft debuggers don't handle missing end columns well, so it's better
++  // not to include any column info.
+   if (const Arg *A = Args.getLastArg(options::OPT_gcolumn_info))
+     (void)checkDebugInfoOption(A, Args, D, TC);
+   if (!Args.hasFlag(options::OPT_gcolumn_info, options::OPT_gno_column_info,
+-                    !EmitCodeView &&
+-                        (DebuggerTuning != llvm::DebuggerKind::SCE &&
+-                         DebuggerTuning != llvm::DebuggerKind::DBX)))
++                    !EmitCodeView && DebuggerTuning != llvm::DebuggerKind::SCE))
+     CmdArgs.push_back("-gno-column-info");
+ 
+   // FIXME: Move backend command line options to the module.
+@@ -4883,9 +4872,8 @@ void Clang::ConstructJob(Compilation &C, const JobAction &JA,
+                   options::OPT_fno_experimental_relative_cxx_abi_vtables);
+ 
+   // Handle segmented stacks.
+-  if (Args.hasFlag(options::OPT_fsplit_stack, options::OPT_fno_split_stack,
+-                   false))
+-    CmdArgs.push_back("-fsplit-stack");
++  if (Args.hasArg(options::OPT_fsplit_stack))
++    CmdArgs.push_back("-split-stacks");
+ 
+   RenderFloatingPointOptions(TC, D, OFastEnabled, Args, CmdArgs, JA);
+ 
+@@ -5051,21 +5039,6 @@ void Clang::ConstructJob(Compilation &C, const JobAction &JA,
+ 
+   RenderTargetOptions(Triple, Args, KernelOrKext, CmdArgs);
+ 
+-  // FIXME: For now we want to demote any errors to warnings, when they have
+-  // been raised for asking the wrong question of scalable vectors, such as
+-  // asking for the fixed number of elements. This may happen because code that
+-  // is not yet ported to work for scalable vectors uses the wrong interfaces,
+-  // whereas the behaviour is actually correct. Emitting a warning helps bring
+-  // up scalable vector support in an incremental way. When scalable vector
+-  // support is stable enough, all uses of wrong interfaces should be considered
+-  // as errors, but until then, we can live with a warning being emitted by the
+-  // compiler. This way, Clang can be used to compile code with scalable vectors
+-  // and identify possible issues.
+-  if (isa<BackendJobAction>(JA)) {
+-    CmdArgs.push_back("-mllvm");
+-    CmdArgs.push_back("-treat-scalable-fixed-error-as-warning");
+-  }
+-
+   // These two are potentially updated by AddClangCLArgs.
+   codegenoptions::DebugInfoKind DebugInfoKind = codegenoptions::NoDebugInfo;
+   bool EmitCodeView = false;
+@@ -5133,9 +5106,8 @@ void Clang::ConstructJob(Compilation &C, const JobAction &JA,
+ 
+   if (D.CCPrintHeaders && !D.CCGenDiagnostics) {
+     CmdArgs.push_back("-header-include-file");
+-    CmdArgs.push_back(!D.CCPrintHeadersFilename.empty()
+-                          ? D.CCPrintHeadersFilename.c_str()
+-                          : "-");
++    CmdArgs.push_back(D.CCPrintHeadersFilename ? D.CCPrintHeadersFilename
++                                               : "-");
+     CmdArgs.push_back("-sys-header-deps");
+   }
+   Args.AddLastArg(CmdArgs, options::OPT_P);
+@@ -5143,9 +5115,8 @@ void Clang::ConstructJob(Compilation &C, const JobAction &JA,
+ 
+   if (D.CCLogDiagnostics && !D.CCGenDiagnostics) {
+     CmdArgs.push_back("-diagnostic-log-file");
+-    CmdArgs.push_back(!D.CCLogDiagnosticsFilename.empty()
+-                          ? D.CCLogDiagnosticsFilename.c_str()
+-                          : "-");
++    CmdArgs.push_back(D.CCLogDiagnosticsFilename ? D.CCLogDiagnosticsFilename
++                                                 : "-");
+   }
+ 
+   // Give the gen diagnostics more chances to succeed, by avoiding intentional
+diff --git b/clang/lib/Driver/ToolChains/CommonArgs.cpp a/clang/lib/Driver/ToolChains/CommonArgs.cpp
+index 6baf1d1acbb3..62432b5b7576 100644
+--- b/clang/lib/Driver/ToolChains/CommonArgs.cpp
++++ a/clang/lib/Driver/ToolChains/CommonArgs.cpp
+@@ -550,8 +550,6 @@ void tools::addLTOOptions(const ToolChain &ToolChain, const ArgList &Args,
+       CmdArgs.push_back("-plugin-opt=-debugger-tune=lldb");
+     else if (A->getOption().matches(options::OPT_gsce))
+       CmdArgs.push_back("-plugin-opt=-debugger-tune=sce");
+-    else if (A->getOption().matches(options::OPT_gdbx))
+-      CmdArgs.push_back("-plugin-opt=-debugger-tune=dbx");
+     else
+       CmdArgs.push_back("-plugin-opt=-debugger-tune=gdb");
+   }
+diff --git b/clang/lib/Driver/ToolChains/Darwin.cpp a/clang/lib/Driver/ToolChains/Darwin.cpp
+index bc59b6beafc7..a09a69f946ef 100644
+--- b/clang/lib/Driver/ToolChains/Darwin.cpp
++++ a/clang/lib/Driver/ToolChains/Darwin.cpp
+@@ -373,18 +373,6 @@ void darwin::Linker::AddLinkArgs(Compilation &C, const ArgList &Args,
+       D.Diag(diag::err_drv_bitcode_unsupported_on_toolchain);
+   }
+ 
+-  // If GlobalISel is enabled, pass it through to LLVM.
+-  if (Arg *A = Args.getLastArg(options::OPT_fglobal_isel,
+-                               options::OPT_fno_global_isel)) {
+-    if (A->getOption().matches(options::OPT_fglobal_isel)) {
+-      CmdArgs.push_back("-mllvm");
+-      CmdArgs.push_back("-global-isel");
+-      // Disable abort and fall back to SDAG silently.
+-      CmdArgs.push_back("-mllvm");
+-      CmdArgs.push_back("-global-isel-abort=0");
+-    }
+-  }
+-
+   Args.AddLastArg(CmdArgs, options::OPT_prebind);
+   Args.AddLastArg(CmdArgs, options::OPT_noprebind);
+   Args.AddLastArg(CmdArgs, options::OPT_nofixprebinding);
+diff --git b/clang/lib/Driver/ToolChains/Flang.cpp a/clang/lib/Driver/ToolChains/Flang.cpp
+index bf2a19e7c54a..153a1dfc8592 100644
+--- b/clang/lib/Driver/ToolChains/Flang.cpp
++++ a/clang/lib/Driver/ToolChains/Flang.cpp
+@@ -42,9 +42,7 @@ void Flang::AddPreprocessingOptions(const ArgList &Args,
+ 
+ void Flang::AddOtherOptions(const ArgList &Args, ArgStringList &CmdArgs) const {
+   Args.AddAllArgs(CmdArgs,
+-                  {options::OPT_module_dir, options::OPT_fdebug_module_writer,
+-                   options::OPT_fintrinsic_modules_path, options::OPT_pedantic,
+-                   options::OPT_std_EQ});
++                  {options::OPT_module_dir, options::OPT_fdebug_module_writer});
+ }
+ 
+ void Flang::ConstructJob(Compilation &C, const JobAction &JA,
+diff --git b/clang/lib/Driver/ToolChains/FreeBSD.cpp a/clang/lib/Driver/ToolChains/FreeBSD.cpp
+index c508af655ac2..d59bb6f8c3b0 100644
+--- b/clang/lib/Driver/ToolChains/FreeBSD.cpp
++++ a/clang/lib/Driver/ToolChains/FreeBSD.cpp
+@@ -409,8 +409,8 @@ void FreeBSD::addLibCxxIncludePaths(const llvm::opt::ArgList &DriverArgs,
+ void FreeBSD::addLibStdCxxIncludePaths(
+     const llvm::opt::ArgList &DriverArgs,
+     llvm::opt::ArgStringList &CC1Args) const {
+-  addLibStdCXXIncludePaths(getDriver().SysRoot + "/usr/include/c++/4.2", "", "",
+-                           DriverArgs, CC1Args);
++  addLibStdCXXIncludePaths(getDriver().SysRoot, "/usr/include/c++/4.2", "", "",
++                           "", "", DriverArgs, CC1Args);
+ }
+ 
+ void FreeBSD::AddCXXStdlibLibArgs(const ArgList &Args,
+diff --git b/clang/lib/Driver/ToolChains/Fuchsia.cpp a/clang/lib/Driver/ToolChains/Fuchsia.cpp
+index 17671b37ad1d..8e086010a984 100644
+--- b/clang/lib/Driver/ToolChains/Fuchsia.cpp
++++ a/clang/lib/Driver/ToolChains/Fuchsia.cpp
+@@ -95,8 +95,6 @@ void fuchsia::Linker::ConstructJob(Compilation &C, const JobAction &JA,
+     std::string Dyld = D.DyldPrefix;
+     if (SanArgs.needsAsanRt() && SanArgs.needsSharedRt())
+       Dyld += "asan/";
+-    if (SanArgs.needsHwasanRt() && SanArgs.needsSharedRt())
+-      Dyld += "hwasan/";
+     if (SanArgs.needsTsanRt() && SanArgs.needsSharedRt())
+       Dyld += "tsan/";
+     Dyld += "ld.so.1";
+@@ -212,41 +210,23 @@ Fuchsia::Fuchsia(const Driver &D, const llvm::Triple &Triple,
+                           .flag("+fsanitize=address")
+                           .flag("-fexceptions")
+                           .flag("+fno-exceptions"));
+-  // HWASan has higher priority because we always want the instrumentated
+-  // version.
+-  Multilibs.push_back(
+-      Multilib("hwasan", {}, {}, 4).flag("+fsanitize=hwaddress"));
+-  // Use the hwasan+noexcept variant with HWASan and -fno-exceptions.
+-  Multilibs.push_back(Multilib("hwasan+noexcept", {}, {}, 5)
+-                          .flag("+fsanitize=hwaddress")
+-                          .flag("-fexceptions")
+-                          .flag("+fno-exceptions"));
+   // Use the relative vtables ABI.
+   // TODO: Remove these multilibs once relative vtables are enabled by default
+   // for Fuchsia.
+-  Multilibs.push_back(Multilib("relative-vtables", {}, {}, 6)
++  Multilibs.push_back(Multilib("relative-vtables", {}, {}, 4)
+                           .flag("+fexperimental-relative-c++-abi-vtables"));
+-  Multilibs.push_back(Multilib("relative-vtables+noexcept", {}, {}, 7)
++  Multilibs.push_back(Multilib("relative-vtables+noexcept", {}, {}, 5)
+                           .flag("+fexperimental-relative-c++-abi-vtables")
+                           .flag("-fexceptions")
+                           .flag("+fno-exceptions"));
+-  Multilibs.push_back(Multilib("relative-vtables+asan", {}, {}, 8)
++  Multilibs.push_back(Multilib("relative-vtables+asan", {}, {}, 6)
+                           .flag("+fexperimental-relative-c++-abi-vtables")
+                           .flag("+fsanitize=address"));
+-  Multilibs.push_back(Multilib("relative-vtables+asan+noexcept", {}, {}, 9)
++  Multilibs.push_back(Multilib("relative-vtables+asan+noexcept", {}, {}, 7)
+                           .flag("+fexperimental-relative-c++-abi-vtables")
+                           .flag("+fsanitize=address")
+                           .flag("-fexceptions")
+                           .flag("+fno-exceptions"));
+-  Multilibs.push_back(Multilib("relative-vtables+hwasan", {}, {}, 10)
+-                          .flag("+fexperimental-relative-c++-abi-vtables")
+-                          .flag("+fsanitize=hwaddress"));
+-  Multilibs.push_back(Multilib("relative-vtables+hwasan+noexcept", {}, {}, 11)
+-                          .flag("+fexperimental-relative-c++-abi-vtables")
+-                          .flag("+fsanitize=hwaddress")
+-                          .flag("-fexceptions")
+-                          .flag("+fno-exceptions"));
+-
+   Multilibs.FilterOut([&](const Multilib &M) {
+     std::vector<std::string> RD = FilePaths(M);
+     return std::all_of(RD.begin(), RD.end(), [&](std::string P) {
+@@ -259,8 +239,6 @@ Fuchsia::Fuchsia(const Driver &D, const llvm::Triple &Triple,
+       Args.hasFlag(options::OPT_fexceptions, options::OPT_fno_exceptions, true),
+       "fexceptions", Flags);
+   addMultilibFlag(getSanitizerArgs().needsAsanRt(), "fsanitize=address", Flags);
+-  addMultilibFlag(getSanitizerArgs().needsHwasanRt(), "fsanitize=hwaddress",
+-                  Flags);
+ 
+   addMultilibFlag(
+       Args.hasFlag(options::OPT_fexperimental_relative_cxx_abi_vtables,
+@@ -365,9 +343,7 @@ void Fuchsia::AddClangCXXStdlibIncludeArgs(const ArgList &DriverArgs,
+   switch (GetCXXStdlibType(DriverArgs)) {
+   case ToolChain::CST_Libcxx: {
+     SmallString<128> P(getDriver().Dir);
+-    llvm::sys::path::append(P, "..", "include");
+-    std::string Version = detectLibcxxVersion(P);
+-    llvm::sys::path::append(P, "c++", Version);
++    llvm::sys::path::append(P, "..", "include", "c++", "v1");
+     addSystemInclude(DriverArgs, CC1Args, P.str());
+     break;
+   }
+@@ -392,7 +368,6 @@ void Fuchsia::AddCXXStdlibLibArgs(const ArgList &Args,
+ SanitizerMask Fuchsia::getSupportedSanitizers() const {
+   SanitizerMask Res = ToolChain::getSupportedSanitizers();
+   Res |= SanitizerKind::Address;
+-  Res |= SanitizerKind::HWAddress;
+   Res |= SanitizerKind::PointerCompare;
+   Res |= SanitizerKind::PointerSubtract;
+   Res |= SanitizerKind::Fuzzer;
+diff --git b/clang/lib/Driver/ToolChains/Gnu.cpp a/clang/lib/Driver/ToolChains/Gnu.cpp
+index c08972f0d700..38971288e38f 100644
+--- b/clang/lib/Driver/ToolChains/Gnu.cpp
++++ a/clang/lib/Driver/ToolChains/Gnu.cpp
+@@ -1955,8 +1955,7 @@ void Generic_GCC::GCCInstallationDetector::init(
+ 
+   // Loop over the various components which exist and select the best GCC
+   // installation available. GCC installs are ranked by version number.
+-  const GCCVersion VersionZero = GCCVersion::Parse("0.0.0");
+-  Version = VersionZero;
++  Version = GCCVersion::Parse("0.0.0");
+   for (const std::string &Prefix : Prefixes) {
+     auto &VFS = D.getVFS();
+     if (!VFS.exists(Prefix))
+@@ -1989,10 +1988,6 @@ void Generic_GCC::GCCInstallationDetector::init(
+         ScanLibDirForGCCTriple(TargetTriple, Args, LibDir, Candidate, true,
+                                GCCDirExists, GCCCrossDirExists);
+     }
+-
+-    // Skip other prefixes once a GCC installation is found.
+-    if (Version > VersionZero)
+-      break;
+   }
+ }
+ 
+@@ -2106,17 +2101,15 @@ void Generic_GCC::GCCInstallationDetector::AddDefaultGCCPrefixes(
+       "x86_64-manbo-linux-gnu", "x86_64-linux-gnu",
+       "x86_64-slackware-linux", "x86_64-unknown-linux",
+       "x86_64-amazon-linux",    "x86_64-linux-android"};
+-  static const char *const X32Triples[] = {"x86_64-linux-gnux32",
+-                                           "x86_64-pc-linux-gnux32"};
+-  static const char *const X32LibDirs[] = {"/libx32", "/lib"};
++  static const char *const X32LibDirs[] = {"/libx32"};
+   static const char *const X86LibDirs[] = {"/lib32", "/lib"};
+   static const char *const X86Triples[] = {
+-      "i586-linux-gnu",     "i686-linux-gnu",
+-      "i686-pc-linux-gnu",  "i386-redhat-linux6E",
+-      "i686-redhat-linux",  "i386-redhat-linux",
+-      "i586-suse-linux",    "i686-montavista-linux",
+-      "i686-linux-android", "i386-gnu",
+-  };
++      "i686-linux-gnu",       "i686-pc-linux-gnu",     "i486-linux-gnu",
++      "i386-linux-gnu",       "i386-redhat-linux6E",   "i686-redhat-linux",
++      "i586-redhat-linux",    "i386-redhat-linux",     "i586-suse-linux",
++      "i486-slackware-linux", "i686-montavista-linux", "i586-linux-gnu",
++      "i686-linux-android",   "i386-gnu",              "i486-gnu",
++      "i586-gnu",             "i686-gnu"};
+ 
+   static const char *const M68kLibDirs[] = {"/lib"};
+   static const char *const M68kTriples[] = {
+@@ -2339,19 +2332,17 @@ void Generic_GCC::GCCInstallationDetector::AddDefaultGCCPrefixes(
+     TripleAliases.append(begin(AVRTriples), end(AVRTriples));
+     break;
+   case llvm::Triple::x86_64:
++    LibDirs.append(begin(X86_64LibDirs), end(X86_64LibDirs));
++    TripleAliases.append(begin(X86_64Triples), end(X86_64Triples));
++    // x32 is always available when x86_64 is available, so adding it as
++    // secondary arch with x86_64 triples
+     if (TargetTriple.getEnvironment() == llvm::Triple::GNUX32) {
+-      LibDirs.append(begin(X32LibDirs), end(X32LibDirs));
+-      TripleAliases.append(begin(X32Triples), end(X32Triples));
+-      BiarchLibDirs.append(begin(X86_64LibDirs), end(X86_64LibDirs));
++      BiarchLibDirs.append(begin(X32LibDirs), end(X32LibDirs));
+       BiarchTripleAliases.append(begin(X86_64Triples), end(X86_64Triples));
+     } else {
+-      LibDirs.append(begin(X86_64LibDirs), end(X86_64LibDirs));
+-      TripleAliases.append(begin(X86_64Triples), end(X86_64Triples));
+-      BiarchLibDirs.append(begin(X32LibDirs), end(X32LibDirs));
+-      BiarchTripleAliases.append(begin(X32Triples), end(X32Triples));
++      BiarchLibDirs.append(begin(X86LibDirs), end(X86LibDirs));
++      BiarchTripleAliases.append(begin(X86Triples), end(X86Triples));
+     }
+-    BiarchLibDirs.append(begin(X86LibDirs), end(X86LibDirs));
+-    BiarchTripleAliases.append(begin(X86Triples), end(X86Triples));
+     break;
+   case llvm::Triple::x86:
+     LibDirs.append(begin(X86LibDirs), end(X86LibDirs));
+@@ -2361,8 +2352,6 @@ void Generic_GCC::GCCInstallationDetector::AddDefaultGCCPrefixes(
+       TripleAliases.append(begin(X86Triples), end(X86Triples));
+       BiarchLibDirs.append(begin(X86_64LibDirs), end(X86_64LibDirs));
+       BiarchTripleAliases.append(begin(X86_64Triples), end(X86_64Triples));
+-      BiarchLibDirs.append(begin(X32LibDirs), end(X32LibDirs));
+-      BiarchTripleAliases.append(begin(X32Triples), end(X32Triples));
+     }
+     break;
+   case llvm::Triple::m68k:
+@@ -2512,6 +2501,7 @@ void Generic_GCC::GCCInstallationDetector::ScanLibDirForGCCTriple(
+     const llvm::Triple &TargetTriple, const ArgList &Args,
+     const std::string &LibDir, StringRef CandidateTriple,
+     bool NeedsBiarchSuffix, bool GCCDirExists, bool GCCCrossDirExists) {
++  llvm::Triple::ArchType TargetArch = TargetTriple.getArch();
+   // Locations relative to the system lib directory where GCC's triple-specific
+   // directories might reside.
+   struct GCCLibSuffix {
+@@ -2535,7 +2525,24 @@ void Generic_GCC::GCCInstallationDetector::ScanLibDirForGCCTriple(
+       // files in that location, not just GCC installation data.
+       {CandidateTriple.str(), "..",
+        TargetTriple.getVendor() == llvm::Triple::Freescale ||
+-           TargetTriple.getVendor() == llvm::Triple::OpenEmbedded}};
++       TargetTriple.getVendor() == llvm::Triple::OpenEmbedded},
++
++      // Natively multiarch systems sometimes put the GCC triple-specific
++      // directory within their multiarch lib directory, resulting in the
++      // triple appearing twice.
++      {CandidateTriple.str() + "/gcc/" + CandidateTriple.str(), "../../..",
++       TargetTriple.getOS() != llvm::Triple::Solaris},
++
++      // Deal with cases (on Ubuntu) where the system architecture could be i386
++      // but the GCC target architecture could be (say) i686.
++      // FIXME: It may be worthwhile to generalize this and look for a second
++      // triple.
++      {"i386-linux-gnu/gcc/" + CandidateTriple.str(), "../../..",
++       (TargetArch == llvm::Triple::x86 &&
++        TargetTriple.getOS() != llvm::Triple::Solaris)},
++      {"i386-gnu/gcc/" + CandidateTriple.str(), "../../..",
++       (TargetArch == llvm::Triple::x86 &&
++        TargetTriple.getOS() != llvm::Triple::Solaris)}};
+ 
+   for (auto &Suffix : Suffixes) {
+     if (!Suffix.Active)
+@@ -2772,6 +2779,15 @@ bool Generic_GCC::IsIntegratedAssemblerDefault() const {
+   }
+ }
+ 
++static void addMultilibsFilePaths(const Driver &D, const MultilibSet &Multilibs,
++                                  const Multilib &Multilib,
++                                  StringRef InstallPath,
++                                  ToolChain::path_list &Paths) {
++  if (const auto &PathsCallback = Multilibs.filePathsCallback())
++    for (const auto &Path : PathsCallback(Multilib))
++      addPathIfExists(D, InstallPath + Path, Paths);
++}
++
+ void Generic_GCC::PushPPaths(ToolChain::path_list &PPaths) {
+   // Cross-compiling binutils and GCC installations (vanilla and openSUSE at
+   // least) put various tools in a triple-prefixed directory off of the parent
+@@ -2798,13 +2814,12 @@ void Generic_GCC::AddMultilibPaths(const Driver &D,
+     const std::string &LibPath =
+         std::string(GCCInstallation.getParentLibPath());
+ 
++    // Add toolchain / multilib specific file paths.
++    addMultilibsFilePaths(D, Multilibs, SelectedMultilib,
++                          GCCInstallation.getInstallPath(), Paths);
++
+     // Sourcery CodeBench MIPS toolchain holds some libraries under
+     // a biarch-like suffix of the GCC installation.
+-    if (const auto &PathsCallback = Multilibs.filePathsCallback())
+-      for (const auto &Path : PathsCallback(SelectedMultilib))
+-        addPathIfExists(D, GCCInstallation.getInstallPath() + Path, Paths);
+-
+-    // Add lib/gcc/$triple/$version, with an optional /multilib suffix.
+     addPathIfExists(
+         D, GCCInstallation.getInstallPath() + SelectedMultilib.gccSuffix(),
+         Paths);
+@@ -2841,8 +2856,10 @@ void Generic_GCC::AddMultilibPaths(const Driver &D,
+     // the cross. Note that GCC does include some of these directories in some
+     // configurations but this seems somewhere between questionable and simply
+     // a bug.
+-    if (StringRef(LibPath).startswith(SysRoot))
++    if (StringRef(LibPath).startswith(SysRoot)) {
++      addPathIfExists(D, LibPath + "/" + MultiarchTriple, Paths);
+       addPathIfExists(D, LibPath + "/../" + OSLibDir, Paths);
++    }
+   }
+ }
+ 
+@@ -2850,7 +2867,24 @@ void Generic_GCC::AddMultiarchPaths(const Driver &D,
+                                     const std::string &SysRoot,
+                                     const std::string &OSLibDir,
+                                     path_list &Paths) {
++  // Try walking via the GCC triple path in case of biarch or multiarch GCC
++  // installations with strange symlinks.
+   if (GCCInstallation.isValid()) {
++    addPathIfExists(D,
++                    SysRoot + "/usr/lib/" + GCCInstallation.getTriple().str() +
++                        "/../../" + OSLibDir,
++                    Paths);
++
++    // Add the 'other' biarch variant path
++    Multilib BiarchSibling;
++    if (GCCInstallation.getBiarchSibling(BiarchSibling)) {
++      addPathIfExists(
++          D, GCCInstallation.getInstallPath() + BiarchSibling.gccSuffix(),
++                      Paths);
++    }
++
++    // See comments above on the multilib variant for details of why this is
++    // included even from outside the sysroot.
+     const std::string &LibPath =
+         std::string(GCCInstallation.getParentLibPath());
+     const llvm::Triple &GCCTriple = GCCInstallation.getTriple();
+@@ -2858,32 +2892,31 @@ void Generic_GCC::AddMultiarchPaths(const Driver &D,
+     addPathIfExists(
+         D, LibPath + "/../" + GCCTriple.str() + "/lib" + Multilib.osSuffix(),
+                     Paths);
++
++    // See comments above on the multilib variant for details of why this is
++    // only included from within the sysroot.
++    if (StringRef(LibPath).startswith(SysRoot))
++      addPathIfExists(D, LibPath, Paths);
+   }
+ }
+ 
+ void Generic_GCC::AddMultilibIncludeArgs(const ArgList &DriverArgs,
+                                          ArgStringList &CC1Args) const {
+   // Add include directories specific to the selected multilib set and multilib.
+-  if (!GCCInstallation.isValid())
+-    return;
+-  // gcc TOOL_INCLUDE_DIR.
+-  const llvm::Triple &GCCTriple = GCCInstallation.getTriple();
+-  std::string LibPath(GCCInstallation.getParentLibPath());
+-  addSystemInclude(DriverArgs, CC1Args,
+-                   Twine(LibPath) + "/../" + GCCTriple.str() + "/include");
+-
+-  const auto &Callback = Multilibs.includeDirsCallback();
+-  if (Callback) {
+-    for (const auto &Path : Callback(GCCInstallation.getMultilib()))
+-      addExternCSystemIncludeIfExists(DriverArgs, CC1Args,
+-                                      GCCInstallation.getInstallPath() + Path);
++  if (GCCInstallation.isValid()) {
++    const auto &Callback = Multilibs.includeDirsCallback();
++    if (Callback) {
++      for (const auto &Path : Callback(GCCInstallation.getMultilib()))
++        addExternCSystemIncludeIfExists(
++            DriverArgs, CC1Args, GCCInstallation.getInstallPath() + Path);
++    }
+   }
+ }
+ 
+ void Generic_GCC::AddClangCXXStdlibIncludeArgs(const ArgList &DriverArgs,
+                                                ArgStringList &CC1Args) const {
+-  if (DriverArgs.hasArg(options::OPT_nostdinc, options::OPT_nostdincxx,
+-                        options::OPT_nostdlibinc))
++  if (DriverArgs.hasArg(options::OPT_nostdlibinc) ||
++      DriverArgs.hasArg(options::OPT_nostdincxx))
+     return;
+ 
+   switch (GetCXXStdlibType(DriverArgs)) {
+@@ -2897,13 +2930,32 @@ void Generic_GCC::AddClangCXXStdlibIncludeArgs(const ArgList &DriverArgs,
+   }
+ }
+ 
++static std::string DetectLibcxxIncludePath(llvm::vfs::FileSystem &vfs,
++                                           StringRef base) {
++  std::error_code EC;
++  int MaxVersion = 0;
++  std::string MaxVersionString;
++  for (llvm::vfs::directory_iterator LI = vfs.dir_begin(base, EC), LE;
++       !EC && LI != LE; LI = LI.increment(EC)) {
++    StringRef VersionText = llvm::sys::path::filename(LI->path());
++    int Version;
++    if (VersionText[0] == 'v' &&
++        !VersionText.slice(1, StringRef::npos).getAsInteger(10, Version)) {
++      if (Version > MaxVersion) {
++        MaxVersion = Version;
++        MaxVersionString = std::string(VersionText);
++      }
++    }
++  }
++  return MaxVersion ? (base + "/" + MaxVersionString).str() : "";
++}
++
+ void
+ Generic_GCC::addLibCxxIncludePaths(const llvm::opt::ArgList &DriverArgs,
+                                    llvm::opt::ArgStringList &CC1Args) const {
+   auto AddIncludePath = [&](std::string Path) {
+-    std::string Version = detectLibcxxVersion(Path);
+-    std::string IncludePath = Path + "/c++/" + Version;
+-    if (Version.empty() || !getVFS().exists(IncludePath))
++    std::string IncludePath = DetectLibcxxIncludePath(getVFS(), Path);
++    if (IncludePath.empty() || !getVFS().exists(IncludePath))
+       return false;
+     addSystemInclude(DriverArgs, CC1Args, IncludePath);
+     return true;
+@@ -2911,53 +2963,48 @@ Generic_GCC::addLibCxxIncludePaths(const llvm::opt::ArgList &DriverArgs,
+   // Android never uses the libc++ headers installed alongside the toolchain,
+   // which are generally incompatible with the NDK libraries anyway.
+   if (!getTriple().isAndroid())
+-    if (AddIncludePath(getDriver().Dir + "/../include"))
++    if (AddIncludePath(getDriver().Dir + "/../include/c++"))
+       return;
+   // If this is a development, non-installed, clang, libcxx will
+   // not be found at ../include/c++ but it likely to be found at
+   // one of the following two locations:
+   std::string SysRoot = computeSysRoot();
+-  if (AddIncludePath(SysRoot + "/usr/local/include"))
++  if (AddIncludePath(SysRoot + "/usr/local/include/c++"))
+     return;
+-  if (AddIncludePath(SysRoot + "/usr/include"))
++  if (AddIncludePath(SysRoot + "/usr/include/c++"))
+     return;
+ }
+ 
+-bool Generic_GCC::addLibStdCXXIncludePaths(Twine IncludeDir, StringRef Triple,
+-                                           Twine IncludeSuffix,
+-                                           const llvm::opt::ArgList &DriverArgs,
+-                                           llvm::opt::ArgStringList &CC1Args,
+-                                           bool DetectDebian) const {
+-  if (!getVFS().exists(IncludeDir))
++/// Helper to add the variant paths of a libstdc++ installation.
++bool Generic_GCC::addLibStdCXXIncludePaths(
++    Twine Base, Twine Suffix, StringRef GCCTriple, StringRef GCCMultiarchTriple,
++    StringRef TargetMultiarchTriple, Twine IncludeSuffix,
++    const ArgList &DriverArgs, ArgStringList &CC1Args) const {
++  if (!getVFS().exists(Base + Suffix))
+     return false;
+ 
+-  // GPLUSPLUS_INCLUDE_DIR
+-  addSystemInclude(DriverArgs, CC1Args, IncludeDir);
+-  // GPLUSPLUS_TOOL_INCLUDE_DIR. If Triple is not empty, add a target-dependent
+-  // include directory.
+-  if (!Triple.empty()) {
+-    if (DetectDebian) {
+-      // Debian native gcc has an awful patch g++-multiarch-incdir.diff which
+-      // uses include/x86_64-linux-gnu/c++/10$IncludeSuffix instead of
+-      // include/c++/10/x86_64-linux-gnu$IncludeSuffix.
+-      std::string Dir = IncludeDir.str();
+-      StringRef Include =
+-          llvm::sys::path::parent_path(llvm::sys::path::parent_path(Dir));
+-      std::string Path =
+-          (Include + "/" + Triple + Dir.substr(Include.size()) + IncludeSuffix)
+-              .str();
+-      if (getVFS().exists(Path))
+-        addSystemInclude(DriverArgs, CC1Args, Path);
+-      else
+-        addSystemInclude(DriverArgs, CC1Args,
+-                         IncludeDir + "/" + Triple + IncludeSuffix);
+-    } else {
+-      addSystemInclude(DriverArgs, CC1Args,
+-                       IncludeDir + "/" + Triple + IncludeSuffix);
+-    }
++  addSystemInclude(DriverArgs, CC1Args, Base + Suffix);
++
++  // The vanilla GCC layout of libstdc++ headers uses a triple subdirectory. If
++  // that path exists or we have neither a GCC nor target multiarch triple, use
++  // this vanilla search path.
++  if ((GCCMultiarchTriple.empty() && TargetMultiarchTriple.empty()) ||
++      getVFS().exists(Base + Suffix + "/" + GCCTriple + IncludeSuffix)) {
++    addSystemInclude(DriverArgs, CC1Args,
++                     Base + Suffix + "/" + GCCTriple + IncludeSuffix);
++  } else {
++    // Otherwise try to use multiarch naming schemes which have normalized the
++    // triples and put the triple before the suffix.
++    //
++    // GCC surprisingly uses *both* the GCC triple with a multilib suffix and
++    // the target triple, so we support that here.
++    addSystemInclude(DriverArgs, CC1Args,
++                     Base + "/" + GCCMultiarchTriple + Suffix + IncludeSuffix);
++    addSystemInclude(DriverArgs, CC1Args,
++                     Base + "/" + TargetMultiarchTriple + Suffix);
+   }
+-  // GPLUSPLUS_BACKWARD_INCLUDE_DIR
+-  addSystemInclude(DriverArgs, CC1Args, IncludeDir + "/backward");
++
++  addSystemInclude(DriverArgs, CC1Args, Base + Suffix + "/backward");
+   return true;
+ }
+ 
+@@ -2975,17 +3022,17 @@ Generic_GCC::addGCCLibStdCxxIncludePaths(const llvm::opt::ArgList &DriverArgs,
+   StringRef InstallDir = GCCInstallation.getInstallPath();
+   StringRef TripleStr = GCCInstallation.getTriple().str();
+   const Multilib &Multilib = GCCInstallation.getMultilib();
++  const std::string GCCMultiarchTriple = getMultiarchTriple(
++      getDriver(), GCCInstallation.getTriple(), getDriver().SysRoot);
++  const std::string TargetMultiarchTriple =
++      getMultiarchTriple(getDriver(), getTriple(), getDriver().SysRoot);
+   const GCCVersion &Version = GCCInstallation.getVersion();
+ 
+-  // Try /../$triple/include/c++/$version then /../include/c++/$version.
+-  if (addLibStdCXXIncludePaths(
+-          LibDir.str() + "/../" + TripleStr + "/include/c++/" + Version.Text,
+-          TripleStr, Multilib.includeSuffix(), DriverArgs, CC1Args))
+-    return true;
+-  // Detect Debian g++-multiarch-incdir.diff.
+-  if (addLibStdCXXIncludePaths(LibDir.str() + "/../include/c++/" + Version.Text,
+-                               TripleStr, Multilib.includeSuffix(), DriverArgs,
+-                               CC1Args, /*Debian=*/true))
++  // The primary search for libstdc++ supports multiarch variants.
++  if (addLibStdCXXIncludePaths(LibDir.str() + "/../include",
++                               "/c++/" + Version.Text, TripleStr,
++                               GCCMultiarchTriple, TargetMultiarchTriple,
++                               Multilib.includeSuffix(), DriverArgs, CC1Args))
+     return true;
+ 
+   // Otherwise, fall back on a bunch of options which don't use multiarch
+@@ -3000,7 +3047,9 @@ Generic_GCC::addGCCLibStdCxxIncludePaths(const llvm::opt::ArgList &DriverArgs,
+   };
+ 
+   for (const auto &IncludePath : LibStdCXXIncludePathCandidates) {
+-    if (addLibStdCXXIncludePaths(IncludePath, TripleStr,
++    if (addLibStdCXXIncludePaths(IncludePath, /*Suffix*/ "", TripleStr,
++                                 /*GCCMultiarchTriple*/ "",
++                                 /*TargetMultiarchTriple*/ "",
+                                  Multilib.includeSuffix(), DriverArgs, CC1Args))
+       return true;
+   }
+diff --git b/clang/lib/Driver/ToolChains/Gnu.h a/clang/lib/Driver/ToolChains/Gnu.h
+index bcd0807174b0..90d3bafc1f00 100644
+--- b/clang/lib/Driver/ToolChains/Gnu.h
++++ a/clang/lib/Driver/ToolChains/Gnu.h
+@@ -351,11 +351,12 @@ protected:
+   addGCCLibStdCxxIncludePaths(const llvm::opt::ArgList &DriverArgs,
+                            llvm::opt::ArgStringList &CC1Args) const;
+ 
+-  bool addLibStdCXXIncludePaths(Twine IncludeDir, StringRef Triple,
++  bool addLibStdCXXIncludePaths(Twine Base, Twine Suffix, StringRef GCCTriple,
++                                StringRef GCCMultiarchTriple,
++                                StringRef TargetMultiarchTriple,
+                                 Twine IncludeSuffix,
+                                 const llvm::opt::ArgList &DriverArgs,
+-                                llvm::opt::ArgStringList &CC1Args,
+-                                bool DetectDebian = false) const;
++                                llvm::opt::ArgStringList &CC1Args) const;
+ 
+   /// @}
+ 
+diff --git b/clang/lib/Driver/ToolChains/Haiku.cpp a/clang/lib/Driver/ToolChains/Haiku.cpp
+index a79f0f7622ad..18f550c9ceca 100644
+--- b/clang/lib/Driver/ToolChains/Haiku.cpp
++++ a/clang/lib/Driver/ToolChains/Haiku.cpp
+@@ -29,6 +29,6 @@ void Haiku::addLibCxxIncludePaths(const llvm::opt::ArgList &DriverArgs,
+ 
+ void Haiku::addLibStdCxxIncludePaths(const llvm::opt::ArgList &DriverArgs,
+                                      llvm::opt::ArgStringList &CC1Args) const {
+-  addLibStdCXXIncludePaths(getDriver().SysRoot + "/system/develop/headers/c++",
+-                           getTriple().str(), "", DriverArgs, CC1Args);
++  addLibStdCXXIncludePaths(getDriver().SysRoot, "/system/develop/headers/c++",
++                           getTriple().str(), "", "", "", DriverArgs, CC1Args);
+ }
+diff --git b/clang/lib/Driver/ToolChains/Hexagon.cpp a/clang/lib/Driver/ToolChains/Hexagon.cpp
+index e58b666dbfc0..fb54f73bcd4c 100644
+--- b/clang/lib/Driver/ToolChains/Hexagon.cpp
++++ a/clang/lib/Driver/ToolChains/Hexagon.cpp
+@@ -613,15 +613,15 @@ void HexagonToolChain::addLibCxxIncludePaths(
+     llvm::opt::ArgStringList &CC1Args) const {
+   const Driver &D = getDriver();
+   if (!D.SysRoot.empty() && getTriple().isMusl())
+-    addLibStdCXXIncludePaths(D.SysRoot + "/usr/include/c++/v1", "", "",
+-                             DriverArgs, CC1Args);
++    addLibStdCXXIncludePaths(D.SysRoot + "/usr/include/c++/v1", "", "", "", "",
++                             "", DriverArgs, CC1Args);
+   else if (getTriple().isMusl())
+-    addLibStdCXXIncludePaths("/usr/include/c++/v1", "", "", DriverArgs,
+-                             CC1Args);
++    addLibStdCXXIncludePaths("/usr/include/c++/v1", "", "", "", "", "",
++                             DriverArgs, CC1Args);
+   else {
+     std::string TargetDir = getHexagonTargetDir(D.InstalledDir, D.PrefixDirs);
+-    addLibStdCXXIncludePaths(TargetDir + "/hexagon/include/c++/v1", "", "",
+-                             DriverArgs, CC1Args);
++    addLibStdCXXIncludePaths(TargetDir, "/hexagon/include/c++/v1", "", "", "",
++                             "", DriverArgs, CC1Args);
+   }
+ }
+ void HexagonToolChain::addLibStdCxxIncludePaths(
+@@ -629,7 +629,7 @@ void HexagonToolChain::addLibStdCxxIncludePaths(
+     llvm::opt::ArgStringList &CC1Args) const {
+   const Driver &D = getDriver();
+   std::string TargetDir = getHexagonTargetDir(D.InstalledDir, D.PrefixDirs);
+-  addLibStdCXXIncludePaths(TargetDir + "/hexagon/include/c++", "", "",
++  addLibStdCXXIncludePaths(TargetDir, "/hexagon/include/c++", "", "", "", "",
+                            DriverArgs, CC1Args);
+ }
+ 
+diff --git b/clang/lib/Driver/ToolChains/Linux.cpp a/clang/lib/Driver/ToolChains/Linux.cpp
+index 826e937c839e..ad98013dd4f0 100644
+--- b/clang/lib/Driver/ToolChains/Linux.cpp
++++ a/clang/lib/Driver/ToolChains/Linux.cpp
+@@ -58,42 +58,70 @@ std::string Linux::getMultiarchTriple(const Driver &D,
+   // regardless of what the actual target triple is.
+   case llvm::Triple::arm:
+   case llvm::Triple::thumb:
+-    if (IsAndroid)
++    if (IsAndroid) {
+       return "arm-linux-androideabi";
+-    if (TargetEnvironment == llvm::Triple::GNUEABIHF)
+-      return "arm-linux-gnueabihf";
+-    return "arm-linux-gnueabi";
++    } else if (TargetEnvironment == llvm::Triple::GNUEABIHF) {
++      if (D.getVFS().exists(SysRoot + "/lib/arm-linux-gnueabihf"))
++        return "arm-linux-gnueabihf";
++    } else {
++      if (D.getVFS().exists(SysRoot + "/lib/arm-linux-gnueabi"))
++        return "arm-linux-gnueabi";
++    }
++    break;
+   case llvm::Triple::armeb:
+   case llvm::Triple::thumbeb:
+-    if (TargetEnvironment == llvm::Triple::GNUEABIHF)
+-      return "armeb-linux-gnueabihf";
+-    return "armeb-linux-gnueabi";
++    if (TargetEnvironment == llvm::Triple::GNUEABIHF) {
++      if (D.getVFS().exists(SysRoot + "/lib/armeb-linux-gnueabihf"))
++        return "armeb-linux-gnueabihf";
++    } else {
++      if (D.getVFS().exists(SysRoot + "/lib/armeb-linux-gnueabi"))
++        return "armeb-linux-gnueabi";
++    }
++    break;
+   case llvm::Triple::x86:
+     if (IsAndroid)
+       return "i686-linux-android";
+-    return "i386-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/i386-linux-gnu"))
++      return "i386-linux-gnu";
++    break;
+   case llvm::Triple::x86_64:
+     if (IsAndroid)
+       return "x86_64-linux-android";
+-    if (TargetEnvironment == llvm::Triple::GNUX32)
+-      return "x86_64-linux-gnux32";
+-    return "x86_64-linux-gnu";
++    // We don't want this for x32, otherwise it will match x86_64 libs
++    if (TargetEnvironment != llvm::Triple::GNUX32 &&
++        D.getVFS().exists(SysRoot + "/lib/x86_64-linux-gnu"))
++      return "x86_64-linux-gnu";
++    break;
+   case llvm::Triple::aarch64:
+     if (IsAndroid)
+       return "aarch64-linux-android";
+-    return "aarch64-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/aarch64-linux-gnu"))
++      return "aarch64-linux-gnu";
++    break;
+   case llvm::Triple::aarch64_be:
+-    return "aarch64_be-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/aarch64_be-linux-gnu"))
++      return "aarch64_be-linux-gnu";
++    break;
+ 
+   case llvm::Triple::m68k:
+-    return "m68k-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/m68k-linux-gnu"))
++      return "m68k-linux-gnu";
++    break;
+ 
+-  case llvm::Triple::mips:
+-    return IsMipsR6 ? "mipsisa32r6-linux-gnu" : "mips-linux-gnu";
+-  case llvm::Triple::mipsel:
++  case llvm::Triple::mips: {
++    std::string MT = IsMipsR6 ? "mipsisa32r6-linux-gnu" : "mips-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/" + MT))
++      return MT;
++    break;
++  }
++  case llvm::Triple::mipsel: {
+     if (IsAndroid)
+       return "mipsel-linux-android";
+-    return IsMipsR6 ? "mipsisa32r6el-linux-gnu" : "mipsel-linux-gnu";
++    std::string MT = IsMipsR6 ? "mipsisa32r6el-linux-gnu" : "mipsel-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/" + MT))
++      return MT;
++    break;
++  }
+   case llvm::Triple::mips64: {
+     std::string MT = std::string(IsMipsR6 ? "mipsisa64r6" : "mips64") +
+                      "-linux-" + (IsMipsN32Abi ? "gnuabin32" : "gnuabi64");
+@@ -117,19 +145,33 @@ std::string Linux::getMultiarchTriple(const Driver &D,
+   case llvm::Triple::ppc:
+     if (D.getVFS().exists(SysRoot + "/lib/powerpc-linux-gnuspe"))
+       return "powerpc-linux-gnuspe";
+-    return "powerpc-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/powerpc-linux-gnu"))
++      return "powerpc-linux-gnu";
++    break;
+   case llvm::Triple::ppcle:
+-    return "powerpcle-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/powerpcle-linux-gnu"))
++      return "powerpcle-linux-gnu";
++    break;
+   case llvm::Triple::ppc64:
+-    return "powerpc64-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/powerpc64-linux-gnu"))
++      return "powerpc64-linux-gnu";
++    break;
+   case llvm::Triple::ppc64le:
+-    return "powerpc64le-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/powerpc64le-linux-gnu"))
++      return "powerpc64le-linux-gnu";
++    break;
+   case llvm::Triple::sparc:
+-    return "sparc-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/sparc-linux-gnu"))
++      return "sparc-linux-gnu";
++    break;
+   case llvm::Triple::sparcv9:
+-    return "sparc64-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/sparc64-linux-gnu"))
++      return "sparc64-linux-gnu";
++    break;
+   case llvm::Triple::systemz:
+-    return "s390x-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/s390x-linux-gnu"))
++      return "s390x-linux-gnu";
++    break;
+   }
+   return TargetTriple.str();
+ }
+@@ -265,6 +307,16 @@ Linux::Linux(const Driver &D, const llvm::Triple &Triple, const ArgList &Args)
+ 
+   Generic_GCC::AddMultilibPaths(D, SysRoot, OSLibDir, MultiarchTriple, Paths);
+ 
++  // Similar to the logic for GCC above, if we currently running Clang inside
++  // of the requested system root, add its parent library paths to
++  // those searched.
++  // FIXME: It's not clear whether we should use the driver's installed
++  // directory ('Dir' below) or the ResourceDir.
++  if (StringRef(D.Dir).startswith(SysRoot)) {
++    addPathIfExists(D, D.Dir + "/../lib/" + MultiarchTriple, Paths);
++    addPathIfExists(D, D.Dir + "/../" + OSLibDir, Paths);
++  }
++
+   addPathIfExists(D, SysRoot + "/lib/" + MultiarchTriple, Paths);
+   addPathIfExists(D, SysRoot + "/lib/../" + OSLibDir, Paths);
+ 
+@@ -398,14 +450,6 @@ std::string Linux::getDynamicLinker(const ArgList &Args) const {
+       ArchName = "armeb";
+       IsArm = true;
+       break;
+-    case llvm::Triple::x86:
+-      ArchName = "i386";
+-      break;
+-    case llvm::Triple::x86_64:
+-      ArchName = Triple.getEnvironment() == llvm::Triple::MuslX32
+-                     ? "x32"
+-                     : Triple.getArchName().str();
+-      break;
+     default:
+       ArchName = Triple.getArchName().str();
+     }
+@@ -540,10 +584,9 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
+   if (DriverArgs.hasArg(clang::driver::options::OPT_nostdinc))
+     return;
+ 
+-  // Add 'include' in the resource directory, which is similar to
+-  // GCC_INCLUDE_DIR (private headers) in GCC. Note: the include directory
+-  // contains some files conflicting with system /usr/include. musl systems
+-  // prefer the /usr/include copies which are more relevant.
++  if (!DriverArgs.hasArg(options::OPT_nostdlibinc))
++    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/usr/local/include");
++
+   SmallString<128> ResourceDirInclude(D.ResourceDir);
+   llvm::sys::path::append(ResourceDirInclude, "include");
+   if (!DriverArgs.hasArg(options::OPT_nobuiltininc) &&
+@@ -553,11 +596,6 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
+   if (DriverArgs.hasArg(options::OPT_nostdlibinc))
+     return;
+ 
+-  // LOCAL_INCLUDE_DIR
+-  addSystemInclude(DriverArgs, CC1Args, SysRoot + "/usr/local/include");
+-  // TOOL_INCLUDE_DIR
+-  AddMultilibIncludeArgs(DriverArgs, CC1Args);
+-
+   // Check for configure-time C include directories.
+   StringRef CIncludeDirs(C_INCLUDE_DIRS);
+   if (CIncludeDirs != "") {
+@@ -571,13 +609,177 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
+     return;
+   }
+ 
+-  // On systems using multiarch and Android, add /usr/include/$triple before
+-  // /usr/include.
+-  std::string MultiarchIncludeDir = getMultiarchTriple(D, getTriple(), SysRoot);
+-  if (!MultiarchIncludeDir.empty() &&
+-      D.getVFS().exists(SysRoot + "/usr/include/" + MultiarchIncludeDir))
+-    addExternCSystemInclude(DriverArgs, CC1Args,
+-                            SysRoot + "/usr/include/" + MultiarchIncludeDir);
++  // Lacking those, try to detect the correct set of system includes for the
++  // target triple.
++
++  AddMultilibIncludeArgs(DriverArgs, CC1Args);
++
++  // Implement generic Debian multiarch support.
++  const StringRef X86_64MultiarchIncludeDirs[] = {
++      "/usr/include/x86_64-linux-gnu",
++
++      // FIXME: These are older forms of multiarch. It's not clear that they're
++      // in use in any released version of Debian, so we should consider
++      // removing them.
++      "/usr/include/i686-linux-gnu/64", "/usr/include/i486-linux-gnu/64"};
++  const StringRef X86MultiarchIncludeDirs[] = {
++      "/usr/include/i386-linux-gnu",
++
++      // FIXME: These are older forms of multiarch. It's not clear that they're
++      // in use in any released version of Debian, so we should consider
++      // removing them.
++      "/usr/include/x86_64-linux-gnu/32", "/usr/include/i686-linux-gnu",
++      "/usr/include/i486-linux-gnu"};
++  const StringRef AArch64MultiarchIncludeDirs[] = {
++      "/usr/include/aarch64-linux-gnu"};
++  const StringRef ARMMultiarchIncludeDirs[] = {
++      "/usr/include/arm-linux-gnueabi"};
++  const StringRef ARMHFMultiarchIncludeDirs[] = {
++      "/usr/include/arm-linux-gnueabihf"};
++  const StringRef ARMEBMultiarchIncludeDirs[] = {
++      "/usr/include/armeb-linux-gnueabi"};
++  const StringRef ARMEBHFMultiarchIncludeDirs[] = {
++      "/usr/include/armeb-linux-gnueabihf"};
++  const StringRef M68kMultiarchIncludeDirs[] = {"/usr/include/m68k-linux-gnu"};
++  const StringRef MIPSMultiarchIncludeDirs[] = {"/usr/include/mips-linux-gnu"};
++  const StringRef MIPSELMultiarchIncludeDirs[] = {
++      "/usr/include/mipsel-linux-gnu"};
++  const StringRef MIPS64MultiarchIncludeDirs[] = {
++      "/usr/include/mips64-linux-gnuabi64"};
++  const StringRef MIPS64ELMultiarchIncludeDirs[] = {
++      "/usr/include/mips64el-linux-gnuabi64"};
++  const StringRef MIPSN32MultiarchIncludeDirs[] = {
++      "/usr/include/mips64-linux-gnuabin32"};
++  const StringRef MIPSN32ELMultiarchIncludeDirs[] = {
++      "/usr/include/mips64el-linux-gnuabin32"};
++  const StringRef MIPSR6MultiarchIncludeDirs[] = {
++      "/usr/include/mipsisa32-linux-gnu"};
++  const StringRef MIPSR6ELMultiarchIncludeDirs[] = {
++      "/usr/include/mipsisa32r6el-linux-gnu"};
++  const StringRef MIPS64R6MultiarchIncludeDirs[] = {
++      "/usr/include/mipsisa64r6-linux-gnuabi64"};
++  const StringRef MIPS64R6ELMultiarchIncludeDirs[] = {
++      "/usr/include/mipsisa64r6el-linux-gnuabi64"};
++  const StringRef MIPSN32R6MultiarchIncludeDirs[] = {
++      "/usr/include/mipsisa64r6-linux-gnuabin32"};
++  const StringRef MIPSN32R6ELMultiarchIncludeDirs[] = {
++      "/usr/include/mipsisa64r6el-linux-gnuabin32"};
++  const StringRef PPCMultiarchIncludeDirs[] = {
++      "/usr/include/powerpc-linux-gnu",
++      "/usr/include/powerpc-linux-gnuspe"};
++  const StringRef PPCLEMultiarchIncludeDirs[] = {
++      "/usr/include/powerpcle-linux-gnu"};
++  const StringRef PPC64MultiarchIncludeDirs[] = {
++      "/usr/include/powerpc64-linux-gnu"};
++  const StringRef PPC64LEMultiarchIncludeDirs[] = {
++      "/usr/include/powerpc64le-linux-gnu"};
++  const StringRef SparcMultiarchIncludeDirs[] = {
++      "/usr/include/sparc-linux-gnu"};
++  const StringRef Sparc64MultiarchIncludeDirs[] = {
++      "/usr/include/sparc64-linux-gnu"};
++  const StringRef SYSTEMZMultiarchIncludeDirs[] = {
++      "/usr/include/s390x-linux-gnu"};
++  ArrayRef<StringRef> MultiarchIncludeDirs;
++  switch (getTriple().getArch()) {
++  case llvm::Triple::x86_64:
++    MultiarchIncludeDirs = X86_64MultiarchIncludeDirs;
++    break;
++  case llvm::Triple::x86:
++    MultiarchIncludeDirs = X86MultiarchIncludeDirs;
++    break;
++  case llvm::Triple::aarch64:
++  case llvm::Triple::aarch64_be:
++    MultiarchIncludeDirs = AArch64MultiarchIncludeDirs;
++    break;
++  case llvm::Triple::arm:
++  case llvm::Triple::thumb:
++    if (getTriple().getEnvironment() == llvm::Triple::GNUEABIHF)
++      MultiarchIncludeDirs = ARMHFMultiarchIncludeDirs;
++    else
++      MultiarchIncludeDirs = ARMMultiarchIncludeDirs;
++    break;
++  case llvm::Triple::armeb:
++  case llvm::Triple::thumbeb:
++    if (getTriple().getEnvironment() == llvm::Triple::GNUEABIHF)
++      MultiarchIncludeDirs = ARMEBHFMultiarchIncludeDirs;
++    else
++      MultiarchIncludeDirs = ARMEBMultiarchIncludeDirs;
++    break;
++  case llvm::Triple::m68k:
++    MultiarchIncludeDirs = M68kMultiarchIncludeDirs;
++    break;
++  case llvm::Triple::mips:
++    if (getTriple().getSubArch() == llvm::Triple::MipsSubArch_r6)
++      MultiarchIncludeDirs = MIPSR6MultiarchIncludeDirs;
++    else
++      MultiarchIncludeDirs = MIPSMultiarchIncludeDirs;
++    break;
++  case llvm::Triple::mipsel:
++    if (getTriple().getSubArch() == llvm::Triple::MipsSubArch_r6)
++      MultiarchIncludeDirs = MIPSR6ELMultiarchIncludeDirs;
++    else
++      MultiarchIncludeDirs = MIPSELMultiarchIncludeDirs;
++    break;
++  case llvm::Triple::mips64:
++    if (getTriple().getSubArch() == llvm::Triple::MipsSubArch_r6)
++      if (getTriple().getEnvironment() == llvm::Triple::GNUABIN32)
++        MultiarchIncludeDirs = MIPSN32R6MultiarchIncludeDirs;
++      else
++        MultiarchIncludeDirs = MIPS64R6MultiarchIncludeDirs;
++    else if (getTriple().getEnvironment() == llvm::Triple::GNUABIN32)
++      MultiarchIncludeDirs = MIPSN32MultiarchIncludeDirs;
++    else
++      MultiarchIncludeDirs = MIPS64MultiarchIncludeDirs;
++    break;
++  case llvm::Triple::mips64el:
++    if (getTriple().getSubArch() == llvm::Triple::MipsSubArch_r6)
++      if (getTriple().getEnvironment() == llvm::Triple::GNUABIN32)
++        MultiarchIncludeDirs = MIPSN32R6ELMultiarchIncludeDirs;
++      else
++        MultiarchIncludeDirs = MIPS64R6ELMultiarchIncludeDirs;
++    else if (getTriple().getEnvironment() == llvm::Triple::GNUABIN32)
++      MultiarchIncludeDirs = MIPSN32ELMultiarchIncludeDirs;
++    else
++      MultiarchIncludeDirs = MIPS64ELMultiarchIncludeDirs;
++    break;
++  case llvm::Triple::ppc:
++    MultiarchIncludeDirs = PPCMultiarchIncludeDirs;
++    break;
++  case llvm::Triple::ppcle:
++    MultiarchIncludeDirs = PPCLEMultiarchIncludeDirs;
++    break;
++  case llvm::Triple::ppc64:
++    MultiarchIncludeDirs = PPC64MultiarchIncludeDirs;
++    break;
++  case llvm::Triple::ppc64le:
++    MultiarchIncludeDirs = PPC64LEMultiarchIncludeDirs;
++    break;
++  case llvm::Triple::sparc:
++    MultiarchIncludeDirs = SparcMultiarchIncludeDirs;
++    break;
++  case llvm::Triple::sparcv9:
++    MultiarchIncludeDirs = Sparc64MultiarchIncludeDirs;
++    break;
++  case llvm::Triple::systemz:
++    MultiarchIncludeDirs = SYSTEMZMultiarchIncludeDirs;
++    break;
++  default:
++    break;
++  }
++
++  const std::string AndroidMultiarchIncludeDir =
++      std::string("/usr/include/") +
++      getMultiarchTriple(D, getTriple(), SysRoot);
++  const StringRef AndroidMultiarchIncludeDirs[] = {AndroidMultiarchIncludeDir};
++  if (getTriple().isAndroid())
++    MultiarchIncludeDirs = AndroidMultiarchIncludeDirs;
++
++  for (StringRef Dir : MultiarchIncludeDirs) {
++    if (D.getVFS().exists(SysRoot + Dir)) {
++      addExternCSystemInclude(DriverArgs, CC1Args, SysRoot + Dir);
++      break;
++    }
++  }
+ 
+   if (getTriple().getOS() == llvm::Triple::RTEMS)
+     return;
+@@ -621,7 +823,9 @@ void Linux::addLibStdCxxIncludePaths(const llvm::opt::ArgList &DriverArgs,
+   };
+ 
+   for (const auto &IncludePath : LibStdCXXIncludePathCandidates) {
+-    if (addLibStdCXXIncludePaths(IncludePath, TripleStr,
++    if (addLibStdCXXIncludePaths(IncludePath, /*Suffix*/ "", TripleStr,
++                                 /*GCCMultiarchTriple*/ "",
++                                 /*TargetMultiarchTriple*/ "",
+                                  Multilib.includeSuffix(), DriverArgs, CC1Args))
+       break;
+   }
+diff --git b/clang/lib/Driver/ToolChains/Myriad.cpp a/clang/lib/Driver/ToolChains/Myriad.cpp
+index f31466633104..ab0df5d8f168 100644
+--- b/clang/lib/Driver/ToolChains/Myriad.cpp
++++ a/clang/lib/Driver/ToolChains/Myriad.cpp
+@@ -260,7 +260,7 @@ void MyriadToolChain::addLibStdCxxIncludePaths(
+   const Multilib &Multilib = GCCInstallation.getMultilib();
+   addLibStdCXXIncludePaths(
+       LibDir.str() + "/../" + TripleStr.str() + "/include/c++/" + Version.Text,
+-      TripleStr, Multilib.includeSuffix(), DriverArgs, CC1Args);
++      "", TripleStr, "", "", Multilib.includeSuffix(), DriverArgs, CC1Args);
+ }
+ 
+ // MyriadToolChain handles several triples:
+diff --git b/clang/lib/Driver/ToolChains/NetBSD.cpp a/clang/lib/Driver/ToolChains/NetBSD.cpp
+index 1ce5a2a203c2..48bf061c6650 100644
+--- b/clang/lib/Driver/ToolChains/NetBSD.cpp
++++ a/clang/lib/Driver/ToolChains/NetBSD.cpp
+@@ -452,8 +452,8 @@ void NetBSD::addLibCxxIncludePaths(const llvm::opt::ArgList &DriverArgs,
+ 
+ void NetBSD::addLibStdCxxIncludePaths(const llvm::opt::ArgList &DriverArgs,
+                                       llvm::opt::ArgStringList &CC1Args) const {
+-  addLibStdCXXIncludePaths(getDriver().SysRoot + "/usr/include/g++", "", "",
+-                           DriverArgs, CC1Args);
++  addLibStdCXXIncludePaths(getDriver().SysRoot, "/usr/include/g++", "", "", "",
++                           "", DriverArgs, CC1Args);
+ }
+ 
+ llvm::ExceptionHandling NetBSD::GetExceptionModel(const ArgList &Args) const {
+diff --git b/clang/lib/Driver/ToolChains/RISCVToolchain.cpp a/clang/lib/Driver/ToolChains/RISCVToolchain.cpp
+index 9a29cc0985fc..0dc12c7a84b5 100644
+--- b/clang/lib/Driver/ToolChains/RISCVToolchain.cpp
++++ a/clang/lib/Driver/ToolChains/RISCVToolchain.cpp
+@@ -112,8 +112,7 @@ void RISCVToolChain::addLibStdCxxIncludePaths(
+   StringRef TripleStr = GCCInstallation.getTriple().str();
+   const Multilib &Multilib = GCCInstallation.getMultilib();
+   addLibStdCXXIncludePaths(computeSysRoot() + "/include/c++/" + Version.Text,
+-                           TripleStr, Multilib.includeSuffix(), DriverArgs,
+-                           CC1Args);
++      "", TripleStr, "", "", Multilib.includeSuffix(), DriverArgs, CC1Args);
+ }
+ 
+ std::string RISCVToolChain::computeSysRoot() const {
+diff --git b/clang/lib/Driver/ToolChains/Solaris.cpp a/clang/lib/Driver/ToolChains/Solaris.cpp
+index 4d1af094f481..4ed4d839ad10 100644
+--- b/clang/lib/Driver/ToolChains/Solaris.cpp
++++ a/clang/lib/Driver/ToolChains/Solaris.cpp
+@@ -283,7 +283,9 @@ void Solaris::addLibStdCxxIncludePaths(
+   const GCCVersion &Version = GCCInstallation.getVersion();
+ 
+   // The primary search for libstdc++ supports multiarch variants.
+-  addLibStdCXXIncludePaths(LibDir.str() + "/../include/c++/" + Version.Text,
+-                           TripleStr, Multilib.includeSuffix(), DriverArgs,
+-                           CC1Args);
++  addLibStdCXXIncludePaths(LibDir.str() + "/../include", "/c++/" + Version.Text,
++                           TripleStr,
++                           /*GCCMultiarchTriple*/ "",
++                           /*TargetMultiarchTriple*/ "",
++                           Multilib.includeSuffix(), DriverArgs, CC1Args);
+ }
+diff --git b/clang/lib/Driver/ToolChains/WebAssembly.cpp a/clang/lib/Driver/ToolChains/WebAssembly.cpp
+index e1ca90b195e2..8c4d99b8ad07 100644
+--- b/clang/lib/Driver/ToolChains/WebAssembly.cpp
++++ a/clang/lib/Driver/ToolChains/WebAssembly.cpp
+@@ -294,36 +294,6 @@ void WebAssembly::addClangTargetOptions(const ArgList &DriverArgs,
+     CC1Args.push_back("-target-feature");
+     CC1Args.push_back("+exception-handling");
+   }
+-
+-  for (const Arg *A : DriverArgs.filtered(options::OPT_mllvm)) {
+-    StringRef Opt = A->getValue(0);
+-    if (Opt.startswith("-emscripten-cxx-exceptions-allowed")) {
+-      // '-mllvm -emscripten-cxx-exceptions-allowed' should be used with
+-      // '-mllvm -enable-emscripten-cxx-exceptions'
+-      bool EmExceptionArgExists = false;
+-      for (const Arg *A : DriverArgs.filtered(options::OPT_mllvm)) {
+-        if (StringRef(A->getValue(0)) == "-enable-emscripten-cxx-exceptions") {
+-          EmExceptionArgExists = true;
+-          break;
+-        }
+-      }
+-      if (!EmExceptionArgExists)
+-        getDriver().Diag(diag::err_drv_argument_only_allowed_with)
+-            << "-mllvm -emscripten-cxx-exceptions-allowed"
+-            << "-mllvm -enable-emscripten-cxx-exceptions";
+-
+-      // Prevent functions specified in -emscripten-cxx-exceptions-allowed list
+-      // from being inlined before reaching the wasm backend.
+-      StringRef FuncNamesStr = Opt.split('=').second;
+-      SmallVector<StringRef, 4> FuncNames;
+-      FuncNamesStr.split(FuncNames, ',');
+-      for (auto Name : FuncNames) {
+-        CC1Args.push_back("-mllvm");
+-        CC1Args.push_back(DriverArgs.MakeArgString("--force-attribute=" + Name +
+-                                                   ":noinline"));
+-      }
+-    }
+-  }
+ }
+ 
+ ToolChain::RuntimeLibType WebAssembly::GetDefaultRuntimeLibType() const {
