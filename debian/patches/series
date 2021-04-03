@@ -140,3 +140,4 @@ libcxx-armhf-ftbfs.diff
 lld-use-link-atomic-i386.diff
 lower-python-dep.diff
 D99501-ignore-lto-auto.diff
+revert-D95727-causes-49818.diff

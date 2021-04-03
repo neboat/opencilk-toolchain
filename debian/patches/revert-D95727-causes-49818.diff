@@ -1,0 +1,50 @@
+commit 43ceb74eb1a5801662419fb66a6bf0d5414f1ec5
+Author: Tom Stellard <tstellar@redhat.com>
+Date:   Wed Mar 31 21:35:04 2021 -0700
+
+    llvm-shlib: Create object libraries for each component and link against them
+    
+    This makes it possible to build libLLVM.so without first creating a
+    static library for each component.  In the case where only libLLVM.so is
+    built (i.e. ninja LLVM) this eliminates 150 linker jobs.
+    
+    Reviewed By: stellaraccident
+    
+    Differential Revision: https://reviews.llvm.org/D95727
+
+diff --git b/llvm/cmake/modules/AddLLVM.cmake a/llvm/cmake/modules/AddLLVM.cmake
+index c7a50b7a393e..2f055c779962 100644
+--- b/llvm/cmake/modules/AddLLVM.cmake
++++ a/llvm/cmake/modules/AddLLVM.cmake
+@@ -488,7 +488,6 @@ function(llvm_add_library name)
+           add_dependencies(${obj_name} ${link_lib})
+         endif()
+       endforeach()
+-      target_link_libraries(${obj_name} ${ARG_LINK_LIBS})
+     endif()
+   endif()
+ 
+@@ -747,7 +746,7 @@ function(add_llvm_component_library name)
+     "COMPONENT_NAME;ADD_TO_COMPONENT"
+     ""
+     ${ARGN})
+-  add_llvm_library(${name} COMPONENT_LIB OBJECT ${ARG_UNPARSED_ARGUMENTS})
++  add_llvm_library(${name} COMPONENT_LIB ${ARG_UNPARSED_ARGUMENTS})
+   string(REGEX REPLACE "^LLVM" "" component_name ${name})
+   set_property(TARGET ${name} PROPERTY LLVM_COMPONENT_NAME ${component_name})
+ 
+diff --git b/llvm/tools/llvm-shlib/CMakeLists.txt a/llvm/tools/llvm-shlib/CMakeLists.txt
+index 728995ad8b29..b0ee19049e6f 100644
+--- b/llvm/tools/llvm-shlib/CMakeLists.txt
++++ a/llvm/tools/llvm-shlib/CMakeLists.txt
+@@ -33,10 +33,6 @@ if(LLVM_BUILD_LLVM_DYLIB)
+   add_llvm_library(LLVM SHARED DISABLE_LLVM_LINK_LLVM_DYLIB SONAME ${INSTALL_WITH_TOOLCHAIN} ${SOURCES})
+ 
+   list(REMOVE_DUPLICATES LIB_NAMES)
+-
+-  # Link against the object libraries instead of static libraries.
+-  list(TRANSFORM LIB_NAMES PREPEND "obj.")
+-
+   if(("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux") OR (MINGW) OR (HAIKU)
+      OR ("${CMAKE_SYSTEM_NAME}" STREQUAL "FreeBSD")
+      OR ("${CMAKE_SYSTEM_NAME}" STREQUAL "GNU")
