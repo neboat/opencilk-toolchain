@@ -19,3 +19,6 @@ source: source-is-missing lldb/lit/Modules/ELF/Inputs/netbsd-amd64.core
 source: source-is-missing llgo/third_party/gofrontend/libgo/go/debug/dwarf/testdata/*.elf*
 source: source-is-missing llgo/third_party/gofrontend/libgo/go/debug/elf/testdata/gcc-*-exec
 source: source-is-missing llgo/third_party/gofrontend/libgo/go/debug/elf/testdata/*.obj
+
+# By design
+source: invalid-arch-string-in-source-relation riscv64 [build-depends: g++-11 [riscv64]]

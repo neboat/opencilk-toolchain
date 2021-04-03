@@ -36,6 +36,94 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
 
+llvm-toolchain-12 (1:12.0.0~++rc4-2) unstable; urgency=medium
+
+  * Verify that /proc is mounted. It makes some unexpected issues when
+    building from a chroot without /proc
+llvm-toolchain-12 (1:12.0.0~++rc4-1) unstable; urgency=medium
+
+  * New testing upstream release
+  * Cherry-pick https://reviews.llvm.org/D99501 to allow -flto=auto
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 01 Apr 2021 08:56:19 +0200
+
+llvm-toolchain-12 (1:12.0.0~++rc3-4) unstable; urgency=medium
+
+  * dont' fail fsanitize=thread on i386, not supported
+  * Don't hard fail on z3 failures with "set -e" at the begin, if z3 support is not available we do fail and exit testsuite without checking the log
+  * Don't force gcc-11 anymore on riscv64, gcc-10 has the fixes now
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 20 Mar 2021 17:16:26 +0100
+
+llvm-toolchain-12 (1:12.0.0~++rc3-3) unstable; urgency=medium
+
+  * Cherry-pick upstream commit e3cd3a3c91524c957e06bb0170343548f02b6842
+    bring back Reporter.py needing to make scan-view work.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 17 Mar 2021 13:11:46 +0100
+
+llvm-toolchain-12 (1:12.0.0~++rc3-2) unstable; urgency=medium
+
+  * Fixup omptarget regex error, missing escape
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 15 Mar 2021 21:04:46 +0100
+
+llvm-toolchain-12 (1:12.0.0~++rc3-1) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Upload to sid
+
+  [ Sylvestre Ledru ]
+  * Ignore source: invalid-arch-string-in-source-relation riscv64 [build-depends: g++-11 [riscv64]]
+
+  [ Matthias Klose ]
+  * Also disable CMake's package validation check for omptarget target files (Closes: #983838).
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 15 Mar 2021 11:18:42 +0100
+
+llvm-toolchain-12 (1:12.0.0~++rc3-1~exp1) experimental; urgency=medium
+
+  * New testing upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 10 Mar 2021 16:11:07 +0100
+
+llvm-toolchain-12 (1:12.0.0~++rc2-1~exp2) experimental; urgency=medium
+
+  * Refresh the openmp symbol list
+    In libomp.so.5:
+    - GOMP_taskwait_depend
+    - GOMP_teams_reg
+    - __kmpc_calloc
+    - __kmpc_realloc
+    - __kmpc_taskloop_5
+    And all libomptarget.so.12
+  * Only enable libomp-12-doc on supported archs
+
+  [ Matthias Klose <doko@ubuntu.com> ]
+  * Build using GCC 11 on riscv64 (Closes: #983837).
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 02 Mar 2021 13:25:24 +0100
+
+llvm-toolchain-12 (1:12.0.0~++rc2-1~exp1) experimental; urgency=medium
+
+  * New rc release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 24 Feb 2021 10:18:02 +0100
+
+llvm-toolchain-12 (1:12.0.0~++20210127035054+8e464dd76bef-1~exp1) experimental; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * experimental New snapshot release now 12 as branched
+  * Workaround a static_assert on https://bugs.llvm.org/show_bug.cgi?id=48259
+    "static assertion failed: Recycler allocation size is less than object size!"
+  * Also install usr/lib/llvm-12/bin/ld64.lld.darwinnew & usr/bin/ld64.lld.darwinnew-12
+  * Also install usr/lib/llvm-12/lib/libomptarget.so.12 in libomp5-12
+
+  [ Gianfranco Costamagna ]
+  * Add upstream patch D92052 to fix a gcn offload compiler issue with gcc (Closes: #975692)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jan 2021 15:54:15 +0100
+
 llvm-toolchain-snapshot (1:12~++20201105093023+cc2a2bb5ce5-1~exp1) experimental; urgency=medium
 
   * experimental New snapshot release

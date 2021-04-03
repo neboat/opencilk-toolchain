@@ -183,6 +183,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel powerpc powerpcspe riscv64 sparc6
   OPENMP_ENABLE=no
 else
   PROJECTS+=;openmp
+#  CMAKE_EXTRA += -DLIBOMPTARGET_BUILD_NVPTX_BCLIB=ON -DLLVM_ENABLE_RUNTIMES=openmp
 endif
 
 RUN_TEST=yes
@@ -403,7 +404,6 @@ override_dh_auto_configure: preconfigure
 	-DLIBCLANG_LIBRARY_VERSION=$(SONAME_EXT) \
 	-DCLANG_LINK_CLANG_DYLIB=ON \
 	-DENABLE_LINKER_BUILD_ID=ON \
-	-DPOLLY_BUNDLED_JSONCPP=OFF \
 	-DCOMPILER_RT_USE_LIBCXX=NO \
 	$(Z3_FLAG) \
 	-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="AVR" \
@@ -427,6 +427,9 @@ VERBOSE=VERBOSE=1
 #VERBOSE=-v
 
 debian-full-build:
+	if test -f /tmp/cmake/bin/cmake; then \
+		export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/; \
+	fi; \
 	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CFLAGS="$(CFLAGS_EXTRA)" CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 $(BUILD_METHOD)
 
 # Check the stage 2 build worked
@@ -683,7 +686,7 @@ endif
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/include/llvm/Support/LICENSE.TXT
 
 # Disable CMake's package validation checks for target files that we may remove.
-	sed -i '/_IMPORT_CHECK_TARGETS \(Polly\|sancov\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
+	sed -i '/_IMPORT_CHECK_TARGETS \(Polly\|sancov\|omptarget\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 
 # Disable CMake's package validation checks for binaries that may not be installed
 	sed -i 's|.*_IMPORT_CHECK_FILES_FOR_.*/bin/.*)|#&|' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
