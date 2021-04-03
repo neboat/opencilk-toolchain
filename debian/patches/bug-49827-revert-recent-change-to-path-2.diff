@@ -8,11 +8,11 @@ Date:   Fri Mar 26 16:37:29 2021 -0400
     
     Differential Revision: https://reviews.llvm.org/D98554
 
-diff --git b/clang/include/clang/Driver/Driver.h a/clang/include/clang/Driver/Driver.h
-index 469c000c952c..54c20620910b 100644
---- b/clang/include/clang/Driver/Driver.h
-+++ a/clang/include/clang/Driver/Driver.h
-@@ -157,16 +157,16 @@ public:
+Index: llvm-toolchain-snapshot_13~++20210403105842+b32e76c6d507/clang/include/clang/Driver/Driver.h
+===================================================================
+--- llvm-toolchain-snapshot_13~++20210403105842+b32e76c6d507.orig/clang/include/clang/Driver/Driver.h
++++ llvm-toolchain-snapshot_13~++20210403105842+b32e76c6d507/clang/include/clang/Driver/Driver.h
+@@ -158,16 +158,16 @@ public:
    std::string HostBits, HostMachine, HostSystem, HostRelease;
  
    /// The file to log CC_PRINT_PROC_STAT_FILE output to, if enabled.
@@ -33,11 +33,11 @@ index 469c000c952c..54c20620910b 100644
  
    /// A list of inputs and their types for the given arguments.
    typedef SmallVector<std::pair<types::ID, const llvm::opt::Arg *>, 16>
-diff --git b/clang/lib/Driver/Compilation.cpp a/clang/lib/Driver/Compilation.cpp
-index f28c23a59940..d33055739080 100644
---- b/clang/lib/Driver/Compilation.cpp
-+++ a/clang/lib/Driver/Compilation.cpp
-@@ -170,11 +170,10 @@ int Compilation::ExecuteCommand(const Command &C,
+Index: llvm-toolchain-snapshot_13~++20210403105842+b32e76c6d507/clang/lib/Driver/Compilation.cpp
+===================================================================
+--- llvm-toolchain-snapshot_13~++20210403105842+b32e76c6d507.orig/clang/lib/Driver/Compilation.cpp
++++ llvm-toolchain-snapshot_13~++20210403105842+b32e76c6d507/clang/lib/Driver/Compilation.cpp
+@@ -170,11 +170,10 @@ int Compilation::ExecuteCommand(const Co
  
      // Follow gcc implementation of CC_PRINT_OPTIONS; we could also cache the
      // output stream.
@@ -51,11 +51,11 @@ index f28c23a59940..d33055739080 100644
            llvm::sys::fs::OF_Append | llvm::sys::fs::OF_Text));
        if (EC) {
          getDriver().Diag(diag::err_drv_cc_print_options_failure)
-diff --git b/clang/lib/Driver/Driver.cpp a/clang/lib/Driver/Driver.cpp
-index 171d3d5b5b88..0918ea455811 100644
---- b/clang/lib/Driver/Driver.cpp
-+++ a/clang/lib/Driver/Driver.cpp
-@@ -135,13 +135,14 @@ Driver::Driver(StringRef ClangExecutable, StringRef TargetTriple,
+Index: llvm-toolchain-snapshot_13~++20210403105842+b32e76c6d507/clang/lib/Driver/Driver.cpp
+===================================================================
+--- llvm-toolchain-snapshot_13~++20210403105842+b32e76c6d507.orig/clang/lib/Driver/Driver.cpp
++++ llvm-toolchain-snapshot_13~++20210403105842+b32e76c6d507/clang/lib/Driver/Driver.cpp
+@@ -135,13 +135,14 @@ Driver::Driver(StringRef ClangExecutable
      : Diags(Diags), VFS(std::move(VFS)), Mode(GCCMode),
        SaveTemps(SaveTempsNone), BitcodeEmbed(EmbedNone), LTOMode(LTOK_None),
        ClangExecutable(ClangExecutable), SysRoot(DEFAULT_SYSROOT),
@@ -77,7 +77,7 @@ index 171d3d5b5b88..0918ea455811 100644
    // Provide a sane fallback if no VFS is specified.
    if (!this->VFS)
      this->VFS = llvm::vfs::getRealFileSystem();
-@@ -4056,7 +4057,7 @@ void Driver::BuildJobs(Compilation &C) const {
+@@ -4059,7 +4060,7 @@ void Driver::BuildJobs(Compilation &C) c
        else
          LinkingOutput = getDefaultImageName();
  
@@ -86,7 +86,7 @@ index 171d3d5b5b88..0918ea455811 100644
          using namespace llvm;
          // Human readable output.
          outs() << sys::path::filename(Cmd.getExecutable()) << ": "
-@@ -4079,7 +4080,7 @@ void Driver::BuildJobs(Compilation &C) const {
+@@ -4082,7 +4083,7 @@ void Driver::BuildJobs(Compilation &C) c
              << '\n';
          Out.flush();
          std::error_code EC;
@@ -95,39 +95,11 @@ index 171d3d5b5b88..0918ea455811 100644
                                  llvm::sys::fs::OF_Append |
                                      llvm::sys::fs::OF_Text);
          if (EC)
-diff --git b/clang/lib/Driver/ToolChains/Clang.cpp a/clang/lib/Driver/ToolChains/Clang.cpp
-index 804f528838c5..f8cc23198e67 100644
---- b/clang/lib/Driver/ToolChains/Clang.cpp
-+++ a/clang/lib/Driver/ToolChains/Clang.cpp
-@@ -5108,9 +5108,8 @@ void Clang::ConstructJob(Compilation &C, const JobAction &JA,
- 
-   if (D.CCPrintHeaders && !D.CCGenDiagnostics) {
-     CmdArgs.push_back("-header-include-file");
--    CmdArgs.push_back(!D.CCPrintHeadersFilename.empty()
--                          ? D.CCPrintHeadersFilename.c_str()
--                          : "-");
-+    CmdArgs.push_back(D.CCPrintHeadersFilename ? D.CCPrintHeadersFilename
-+                                               : "-");
-     CmdArgs.push_back("-sys-header-deps");
-   }
-   Args.AddLastArg(CmdArgs, options::OPT_P);
-@@ -5118,9 +5117,8 @@ void Clang::ConstructJob(Compilation &C, const JobAction &JA,
- 
-   if (D.CCLogDiagnostics && !D.CCGenDiagnostics) {
-     CmdArgs.push_back("-diagnostic-log-file");
--    CmdArgs.push_back(!D.CCLogDiagnosticsFilename.empty()
--                          ? D.CCLogDiagnosticsFilename.c_str()
--                          : "-");
-+    CmdArgs.push_back(D.CCLogDiagnosticsFilename ? D.CCLogDiagnosticsFilename
-+                                                 : "-");
-   }
- 
-   // Give the gen diagnostics more chances to succeed, by avoiding intentional
-diff --git b/clang/tools/driver/driver.cpp a/clang/tools/driver/driver.cpp
-index ee3ffe3012d1..c3a3aab066ac 100644
---- b/clang/tools/driver/driver.cpp
-+++ a/clang/tools/driver/driver.cpp
-@@ -244,28 +244,25 @@ static void getCLEnvVarOptions(std::string &EnvValue, llvm::StringSaver &Saver,
+Index: llvm-toolchain-snapshot_13~++20210403105842+b32e76c6d507/clang/tools/driver/driver.cpp
+===================================================================
+--- llvm-toolchain-snapshot_13~++20210403105842+b32e76c6d507.orig/clang/tools/driver/driver.cpp
++++ llvm-toolchain-snapshot_13~++20210403105842+b32e76c6d507/clang/tools/driver/driver.cpp
+@@ -244,28 +244,25 @@ static void getCLEnvVarOptions(std::stri
  }
  
  static void SetBackdoorDriverOutputsFromEnvVars(Driver &TheDriver) {
@@ -140,7 +112,11 @@ index ee3ffe3012d1..c3a3aab066ac 100644
 -    }
 -    return OptSet;
 -  };
--
++  // Handle CC_PRINT_OPTIONS and CC_PRINT_OPTIONS_FILE.
++  TheDriver.CCPrintOptions = !!::getenv("CC_PRINT_OPTIONS");
++  if (TheDriver.CCPrintOptions)
++    TheDriver.CCPrintOptionsFilename = ::getenv("CC_PRINT_OPTIONS_FILE");
+ 
 -  TheDriver.CCPrintOptions =
 -      CheckEnvVar("CC_PRINT_OPTIONS", "CC_PRINT_OPTIONS_FILE",
 -                  TheDriver.CCPrintOptionsFilename);
@@ -153,11 +129,6 @@ index ee3ffe3012d1..c3a3aab066ac 100644
 -  TheDriver.CCPrintProcessStats =
 -      CheckEnvVar("CC_PRINT_PROC_STAT", "CC_PRINT_PROC_STAT_FILE",
 -                  TheDriver.CCPrintStatReportFilename);
-+  // Handle CC_PRINT_OPTIONS and CC_PRINT_OPTIONS_FILE.
-+  TheDriver.CCPrintOptions = !!::getenv("CC_PRINT_OPTIONS");
-+  if (TheDriver.CCPrintOptions)
-+    TheDriver.CCPrintOptionsFilename = ::getenv("CC_PRINT_OPTIONS_FILE");
-+
 +  // Handle CC_PRINT_HEADERS and CC_PRINT_HEADERS_FILE.
 +  TheDriver.CCPrintHeaders = !!::getenv("CC_PRINT_HEADERS");
 +  if (TheDriver.CCPrintHeaders)
