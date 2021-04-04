@@ -295,16 +295,6 @@ ifneq (,$(filter $(DEB_HOST_ARCH), mips64 mips64el))
 	LIBOMP_ARCH = mips64
 endif
 
-# if cmake is installed in /tmp/cmake/ uses it
-# Used to build llvm on Debian & Ubuntu with a recent cmake
-# on the llvm.org/apt/ ci
-# Use D24cmake as hook to download/setup
-CMAKE_BIN=cmake
-ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
-	CMAKE_BIN=/tmp/cmake/bin/cmake
-	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/
-endif
-
 %:
 	dh $@ $(DH_OPTIONS)
 
@@ -328,8 +318,6 @@ preconfigure:
 	@echo "PROJECTS=$(PROJECTS_LIST)"
 	@echo "LLVM_VERSION=$(LLVM_VERSION)"
 	@echo "LLVM_VERSION_FULL=$(LLVM_VERSION_FULL)"
-	@echo 'LD_LIBRARY_PATH=$(LD_LIBRARY_PATH)'
-	@echo 'CMAKE_BIN=$(CMAKE_BIN)'
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
@@ -384,9 +372,18 @@ override_dh_auto_configure: preconfigure
 
 	echo "Running tests: $(RUN_TEST)"
 
+	# if cmake is installed in /tmp/cmake/ uses it
+	# Used to build llvm on Debian & Ubuntu with a recent cmake
+	# on the llvm.org/apt/ ci
+	# Use D24cmake as hook to download/setup
+	CMAKE_BIN=cmake; \
+	if test -f /tmp/cmake/bin/cmake; then \
+		CMAKE_BIN=/tmp/cmake/bin/cmake; \
+		LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/; \
+	fi; \
 	echo "Using cmake: $$CMAKE_BIN"; \
 	cd $(TARGET_BUILD) && \
-	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH) $(PRE_PROCESS_CONF) $(CMAKE_BIN) ../llvm/ \
+	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH $(PRE_PROCESS_CONF) $$CMAKE_BIN ../llvm/ \
 	-DLLVM_ENABLE_PROJECTS="$(PROJECTS_LIST)" \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
@@ -427,9 +424,6 @@ VERBOSE=VERBOSE=1
 #VERBOSE=-v
 
 debian-full-build:
-	if test -f /tmp/cmake/bin/cmake; then \
-		export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/; \
-	fi; \
 	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CFLAGS="$(CFLAGS_EXTRA)" CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 $(BUILD_METHOD)
 
 # Check the stage 2 build worked
@@ -482,9 +476,13 @@ debian-libcxx-build:
 	mkdir -p libcxx/build
 	mkdir -p libcxxabi/build
 
-	echo "Using cmake: $(CMAKE_BIN)"; \
+	CMAKE_BIN=cmake; \
+	if test -f /tmp/cmake/bin/cmake; then \
+		CMAKE_BIN=/tmp/cmake/bin/cmake; \
+	fi; \
+	echo "Using cmake: $$CMAKE_BIN"; \
 	cd libcxxabi/build && \
-	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
+	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../ \
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
 	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
@@ -499,9 +497,13 @@ debian-libcxxabi-build:
 
 	mkdir -p libcxxabi/build
 
-	echo "Using cmake: $(CMAKE_BIN)"; \
+	CMAKE_BIN=cmake; \
+	if test -f /tmp/cmake/bin/cmake; then \
+		CMAKE_BIN=/tmp/cmake/bin/cmake; \
+	fi; \
+	echo "Using cmake: $$CMAKE_BIN"; \
 	cd libcxx/build && \
-	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
+	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../ \
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXX_CXX_ABI=libcxxabi \
 	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
