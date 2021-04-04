@@ -1,0 +1,160 @@
+diff --git a/llvm/include/llvm/MC/MCAsmInfo.h b/llvm/include/llvm/MC/MCAsmInfo.h
+--- a/llvm/include/llvm/MC/MCAsmInfo.h
++++ b/llvm/include/llvm/MC/MCAsmInfo.h
+@@ -449,6 +449,9 @@
+   // %hi(), and similar unary operators.
+   bool HasMipsExpressions = false;
+ 
++  // If true, use Motorola-style integers in Assembly (ex. $0ac).
++  bool UseMotorolaIntegers = false;
++
+   // If true, emit function descriptor symbol on AIX.
+   bool NeedsFunctionDescriptors = false;
+ 
+@@ -740,6 +743,7 @@
+   void setRelaxELFRelocations(bool V) { RelaxELFRelocations = V; }
+   bool hasMipsExpressions() const { return HasMipsExpressions; }
+   bool needsFunctionDescriptors() const { return NeedsFunctionDescriptors; }
++  bool shouldUseMotorolaIntegers() const { return UseMotorolaIntegers; }
+ };
+ 
+ } // end namespace llvm
+diff --git a/llvm/include/llvm/MC/MCParser/MCAsmLexer.h b/llvm/include/llvm/MC/MCParser/MCAsmLexer.h
+--- a/llvm/include/llvm/MC/MCParser/MCAsmLexer.h
++++ b/llvm/include/llvm/MC/MCParser/MCAsmLexer.h
+@@ -53,6 +53,7 @@
+   bool LexMasmHexFloats = false;
+   bool LexMasmIntegers = false;
+   bool LexMasmStrings = false;
++  bool LexMotorolaIntegers = false;
+   bool UseMasmDefaultRadix = false;
+   unsigned DefaultRadix = 10;
+   AsmCommentConsumer *CommentConsumer = nullptr;
+@@ -171,6 +172,10 @@
+   /// Set whether to lex masm-style string literals, such as 'Can''t find file'
+   /// and "This ""value"" not found".
+   void setLexMasmStrings(bool V) { LexMasmStrings = V; }
++
++  /// Set whether to lex Motorola-style integer literals, such as $deadbeef or
++  /// %01010110.
++  void setLexMotorolaIntegers(bool V) { LexMotorolaIntegers = V; }
+ };
+ 
+ } // end namespace llvm
+diff --git a/llvm/lib/MC/MCParser/AsmLexer.cpp b/llvm/lib/MC/MCParser/AsmLexer.cpp
+--- a/llvm/lib/MC/MCParser/AsmLexer.cpp
++++ b/llvm/lib/MC/MCParser/AsmLexer.cpp
+@@ -33,6 +33,7 @@
+ 
+ AsmLexer::AsmLexer(const MCAsmInfo &MAI) : MAI(MAI) {
+   AllowAtInIdentifier = !StringRef(MAI.getCommentString()).startswith("@");
++  LexMotorolaIntegers = MAI.shouldUseMotorolaIntegers();
+ }
+ 
+ AsmLexer::~AsmLexer() = default;
+@@ -422,6 +423,32 @@
+     return intToken(Result, Value);
+   }
+ 
++  // Motorola hex integers: $[0-9a-fA-F]+
++  if (LexMotorolaIntegers && CurPtr[-1] == '$') {
++    const char *NumStart = CurPtr;
++    while (isHexDigit(CurPtr[0]))
++      ++CurPtr;
++
++    APInt Result(128, 0);
++    if (StringRef(NumStart, CurPtr - NumStart).getAsInteger(16, Result))
++      return ReturnError(TokStart, "invalid hexadecimal number");
++
++    return intToken(StringRef(TokStart, CurPtr - TokStart), Result);
++  }
++
++  // Motorola binary integers: %[01]+
++  if (LexMotorolaIntegers && CurPtr[-1] == '%') {
++    const char *NumStart = CurPtr;
++    while (*CurPtr == '0' || *CurPtr == '1')
++      ++CurPtr;
++
++    APInt Result(128, 0);
++    if (StringRef(NumStart, CurPtr - NumStart).getAsInteger(2, Result))
++      return ReturnError(TokStart, "invalid binary number");
++
++    return intToken(StringRef(TokStart, CurPtr - TokStart), Result);
++  }
++
+   // Decimal integer: [1-9][0-9]*
+   if (CurPtr[-1] != '0' || CurPtr[0] == '.') {
+     unsigned Radix = doHexLookAhead(CurPtr, 10, LexMasmIntegers);
+@@ -780,7 +807,12 @@
+   case '}': return AsmToken(AsmToken::RCurly, StringRef(TokStart, 1));
+   case '*': return AsmToken(AsmToken::Star, StringRef(TokStart, 1));
+   case ',': return AsmToken(AsmToken::Comma, StringRef(TokStart, 1));
+-  case '$': return AsmToken(AsmToken::Dollar, StringRef(TokStart, 1));
++  case '$':
++    if (LexMotorolaIntegers && isHexDigit(*CurPtr)) {
++      return LexDigit();
++    }
++
++    return AsmToken(AsmToken::Dollar, StringRef(TokStart, 1));
+   case '@': return AsmToken(AsmToken::At, StringRef(TokStart, 1));
+   case '\\': return AsmToken(AsmToken::BackSlash, StringRef(TokStart, 1));
+   case '=':
+@@ -815,6 +847,10 @@
+     }
+     return AsmToken(AsmToken::Exclaim, StringRef(TokStart, 1));
+   case '%':
++    if (LexMotorolaIntegers && (*CurPtr == '0' || *CurPtr == '1')) {
++      return LexDigit();
++    }
++
+     if (MAI.hasMipsExpressions()) {
+       AsmToken::TokenKind Operator;
+       unsigned OperatorLength;
+diff --git a/llvm/lib/Target/M68k/MCTargetDesc/M68kMCAsmInfo.cpp b/llvm/lib/Target/M68k/MCTargetDesc/M68kMCAsmInfo.cpp
+--- a/llvm/lib/Target/M68k/MCTargetDesc/M68kMCAsmInfo.cpp
++++ b/llvm/lib/Target/M68k/MCTargetDesc/M68kMCAsmInfo.cpp
+@@ -31,5 +31,6 @@
+   // Exceptions handling
+   ExceptionsType = ExceptionHandling::DwarfCFI;
+ 
++  UseMotorolaIntegers = true;
+   CommentString = ";";
+ }
+diff --git a/llvm/test/MC/AsmParser/motorola_integers.s b/llvm/test/MC/AsmParser/motorola_integers.s
+new file mode 100644
+--- /dev/null
++++ b/llvm/test/MC/AsmParser/motorola_integers.s
+@@ -0,0 +1,10 @@
++# RUN: llvm-mc -triple i386-unknown-unknown -motorola-integers %s | FileCheck %s
++
++# CHECK: .set a, 2882400009
++.set a, $aBcDeF09
++# CHECK: .set b, 256
++.set b, $0100
++# CHECK: .set c, 10
++.set c, %01010
++# CHECK: .set d, 1
++.set d, %1
+diff --git a/llvm/tools/llvm-mc/llvm-mc.cpp b/llvm/tools/llvm-mc/llvm-mc.cpp
+--- a/llvm/tools/llvm-mc/llvm-mc.cpp
++++ b/llvm/tools/llvm-mc/llvm-mc.cpp
+@@ -173,6 +173,10 @@
+     "masm-hexfloats",
+     cl::desc("Enable MASM-style hex float initializers (3F800000r)"));
+ 
++static cl::opt<bool> LexMotorolaIntegers(
++    "motorola-integers",
++    cl::desc("Enable binary and hex Motorola integers (%110 and $ABC)"));
++
+ static cl::opt<bool> NoExecStack("no-exec-stack",
+                                  cl::desc("File doesn't need an exec stack"));
+ 
+@@ -305,6 +309,7 @@
+   Parser->setTargetParser(*TAP);
+   Parser->getLexer().setLexMasmIntegers(LexMasmIntegers);
+   Parser->getLexer().setLexMasmHexFloats(LexMasmHexFloats);
++  Parser->getLexer().setLexMotorolaIntegers(LexMotorolaIntegers);
+ 
+   int Res = Parser->Run(NoInitialTextSection);
+ 
+
