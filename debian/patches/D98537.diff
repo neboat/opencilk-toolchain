@@ -1010,16 +1010,6 @@ diff --git a/llvm/lib/Target/M68k/M68kInstrInfo.td b/llvm/lib/Target/M68k/M68kIn
  //===----------------------------------------------------------------------===//
  // Predicates
  //===----------------------------------------------------------------------===//
-diff --git a/llvm/lib/Target/M68k/MCTargetDesc/M68kMCAsmInfo.cpp b/llvm/lib/Target/M68k/MCTargetDesc/M68kMCAsmInfo.cpp
---- a/llvm/lib/Target/M68k/MCTargetDesc/M68kMCAsmInfo.cpp
-+++ b/llvm/lib/Target/M68k/MCTargetDesc/M68kMCAsmInfo.cpp
-@@ -31,5 +31,6 @@
-   // Exceptions handling
-   ExceptionsType = ExceptionHandling::DwarfCFI;
- 
-+  UseMotorolaIntegers = true;
-   CommentString = ";";
- }
 diff --git a/llvm/test/MC/M68k/instructions.s b/llvm/test/MC/M68k/instructions.s
 new file mode 100644
 --- /dev/null
