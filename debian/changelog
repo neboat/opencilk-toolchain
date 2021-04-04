@@ -9,8 +9,6 @@ llvm-toolchain-snapshot (1:13~++20210403031832+89afec348dbd-1~exp1) UNRELEASED; 
     building from a chroot without /proc
   * Fix the __config_site include issue
   * Revert D95727 for causing bug 49818
-  * Revert 4c2da8641087f7b734337a6e6306329cd2535d60..HEAD clang/lib/Driver/ToolChains/
-    and 7e0cc45ced230b4ef3a9d8eaedfbe92e75f21916 to fix 49827
 
   [ John Paul Adrian Glaubitz ]
   * Add upstream patch D98574 to fix clang macro definitions on sparc64
