@@ -1,0 +1,48 @@
+diff --git a/llvm/lib/Target/M68k/M68kAsmPrinter.cpp b/llvm/lib/Target/M68k/M68kAsmPrinter.cpp
+--- a/llvm/lib/Target/M68k/M68kAsmPrinter.cpp
++++ b/llvm/lib/Target/M68k/M68kAsmPrinter.cpp
+@@ -65,6 +65,6 @@
+ 
+ void M68kAsmPrinter::emitEndOfAsmFile(Module &M) {}
+ 
+-extern "C" void LLVMInitializeM68kAsmPrinter() {
++extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeM68kAsmPrinter() {
+   RegisterAsmPrinter<M68kAsmPrinter> X(getTheM68kTarget());
+ }
+diff --git a/llvm/lib/Target/M68k/M68kTargetMachine.cpp b/llvm/lib/Target/M68k/M68kTargetMachine.cpp
+--- a/llvm/lib/Target/M68k/M68kTargetMachine.cpp
++++ b/llvm/lib/Target/M68k/M68kTargetMachine.cpp
+@@ -28,7 +28,7 @@
+ 
+ #define DEBUG_TYPE "m68k"
+ 
+-extern "C" void LLVMInitializeM68kTarget() {
++extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeM68kTarget() {
+   RegisterTargetMachine<M68kTargetMachine> X(getTheM68kTarget());
+ }
+ 
+diff --git a/llvm/lib/Target/M68k/MCTargetDesc/M68kMCTargetDesc.cpp b/llvm/lib/Target/M68k/MCTargetDesc/M68kMCTargetDesc.cpp
+--- a/llvm/lib/Target/M68k/MCTargetDesc/M68kMCTargetDesc.cpp
++++ b/llvm/lib/Target/M68k/MCTargetDesc/M68kMCTargetDesc.cpp
+@@ -106,7 +106,7 @@
+   return new M68kInstPrinter(MAI, MII, MRI);
+ }
+ 
+-extern "C" void LLVMInitializeM68kTargetMC() {
++extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeM68kTargetMC() {
+   Target &T = getTheM68kTarget();
+ 
+   // Register the MC asm info.
+diff --git a/llvm/lib/Target/M68k/TargetInfo/M68kTargetInfo.cpp b/llvm/lib/Target/M68k/TargetInfo/M68kTargetInfo.cpp
+--- a/llvm/lib/Target/M68k/TargetInfo/M68kTargetInfo.cpp
++++ b/llvm/lib/Target/M68k/TargetInfo/M68kTargetInfo.cpp
+@@ -21,7 +21,7 @@
+ }
+ } // namespace llvm
+ 
+-extern "C" void LLVMInitializeM68kTargetInfo() {
++extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeM68kTargetInfo() {
+   RegisterTarget<Triple::m68k, /*HasJIT=*/true> X(
+       getTheM68kTarget(), "m68k", "Motorola 68000 family", "M68k");
+ }
+

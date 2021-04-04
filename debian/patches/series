@@ -122,6 +122,7 @@ bootstrap-fix-include-next.diff
 D98519.diff
 D98537.diff
 D98540.diff
+D99869.diff
 
 # riscv64
 risc/clang-riscv64-multiarch.diff
