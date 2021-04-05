@@ -145,4 +145,3 @@ print-lldb-path.patch
 libcxx-armhf-ftbfs.diff
 lld-use-link-atomic-i386.diff
 lower-python-dep.diff
-revert-D95727-causes-49818.diff

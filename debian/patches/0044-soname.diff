@@ -3,10 +3,10 @@
  tools/llvm-shlib/CMakeLists.txt     |    1 +
  2 files changed, 2 insertions(+), 1 deletion(-)
 
-Index: llvm-toolchain-snapshot_13~++20210402105632+a4ac847c8ef0/clang/tools/libclang/CMakeLists.txt
+Index: llvm-toolchain-snapshot_13~++20210405105538+828ec9e9e5da/clang/tools/libclang/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_13~++20210402105632+a4ac847c8ef0.orig/clang/tools/libclang/CMakeLists.txt
-+++ llvm-toolchain-snapshot_13~++20210402105632+a4ac847c8ef0/clang/tools/libclang/CMakeLists.txt
+--- llvm-toolchain-snapshot_13~++20210405105538+828ec9e9e5da.orig/clang/tools/libclang/CMakeLists.txt
++++ llvm-toolchain-snapshot_13~++20210405105538+828ec9e9e5da/clang/tools/libclang/CMakeLists.txt
 @@ -96,7 +96,7 @@ if (UNIX AND ${CMAKE_SYSTEM_NAME} MATCHE
      remove_definitions("-D_XOPEN_SOURCE=700")
  endif()
@@ -16,10 +16,10 @@ Index: llvm-toolchain-snapshot_13~++20210402105632+a4ac847c8ef0/clang/tools/libc
    OUTPUT_NAME ${output_name}
    ${SOURCES}
  
-Index: llvm-toolchain-snapshot_13~++20210402105632+a4ac847c8ef0/llvm/tools/llvm-shlib/CMakeLists.txt
+Index: llvm-toolchain-snapshot_13~++20210405105538+828ec9e9e5da/llvm/tools/llvm-shlib/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_13~++20210402105632+a4ac847c8ef0.orig/llvm/tools/llvm-shlib/CMakeLists.txt
-+++ llvm-toolchain-snapshot_13~++20210402105632+a4ac847c8ef0/llvm/tools/llvm-shlib/CMakeLists.txt
+--- llvm-toolchain-snapshot_13~++20210405105538+828ec9e9e5da.orig/llvm/tools/llvm-shlib/CMakeLists.txt
++++ llvm-toolchain-snapshot_13~++20210405105538+828ec9e9e5da/llvm/tools/llvm-shlib/CMakeLists.txt
 @@ -32,6 +32,8 @@ if(LLVM_BUILD_LLVM_DYLIB)
    endif()
    add_llvm_library(LLVM SHARED DISABLE_LLVM_LINK_LLVM_DYLIB SONAME ${INSTALL_WITH_TOOLCHAIN} ${SOURCES})
@@ -27,5 +27,5 @@ Index: llvm-toolchain-snapshot_13~++20210402105632+a4ac847c8ef0/llvm/tools/llvm-
 +  set_property(TARGET LLVM PROPERTY VERSION "1") # Append .1 to SONAME
 +
    list(REMOVE_DUPLICATES LIB_NAMES)
- 
-   # Link against the object libraries instead of static libraries.
+   if(("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux") OR (MINGW) OR (HAIKU)
+      OR ("${CMAKE_SYSTEM_NAME}" STREQUAL "FreeBSD")
