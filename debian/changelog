@@ -4,7 +4,6 @@ llvm-toolchain-snapshot (1:13~++20210403031832+89afec348dbd-1~exp1) UNRELEASED; 
   * New snapshot release
   * "run-clang-tidy" install it
   * Only enable libomp-13-doc on supported archs
-  * Cherry-pick https://reviews.llvm.org/D99501 to allow -flto=auto
   * Verify that /proc is mounted. It makes some unexpected issues when
     building from a chroot without /proc
   * Fix the __config_site include issue
