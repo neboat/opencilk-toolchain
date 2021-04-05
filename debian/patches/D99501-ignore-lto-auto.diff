@@ -1,7 +1,8 @@
-diff --git a/clang/include/clang/Driver/Options.td b/clang/include/clang/Driver/Options.td
---- a/clang/include/clang/Driver/Options.td
-+++ b/clang/include/clang/Driver/Options.td
-@@ -4155,6 +4155,8 @@
+Index: llvm-toolchain-12_12.0.0~+rc4/clang/include/clang/Driver/Options.td
+===================================================================
+--- llvm-toolchain-12_12.0.0~+rc4.orig/clang/include/clang/Driver/Options.td
++++ llvm-toolchain-12_12.0.0~+rc4/clang/include/clang/Driver/Options.td
+@@ -4005,6 +4005,8 @@ defm reorder_blocks : BooleanFFlag<"reor
  defm branch_count_reg : BooleanFFlag<"branch-count-reg">, Group<clang_ignored_gcc_optimization_f_Group>;
  defm default_inline : BooleanFFlag<"default-inline">, Group<clang_ignored_gcc_optimization_f_Group>;
  defm fat_lto_objects : BooleanFFlag<"fat-lto-objects">, Group<clang_ignored_gcc_optimization_f_Group>;
@@ -10,4 +11,3 @@ diff --git a/clang/include/clang/Driver/Options.td b/clang/include/clang/Driver/
  defm float_store : BooleanFFlag<"float-store">, Group<clang_ignored_gcc_optimization_f_Group>;
  defm friend_injection : BooleanFFlag<"friend-injection">, Group<clang_ignored_f_Group>;
  defm function_attribute_list : BooleanFFlag<"function-attribute-list">, Group<clang_ignored_f_Group>;
-
