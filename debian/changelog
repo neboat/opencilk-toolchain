@@ -15,7 +15,6 @@ llvm-toolchain-snapshot (1:13~++20210403031832+89afec348dbd-1~exp1) UNRELEASED; 
   * Enable building the new experimental M68k backend
   * Add upstream patch D98537 to implement AsmParser on m68k
   * Add upstream patch D98540 to implement Disassembler on m68k
-  * Add upstream patch D99869 to fix public function visibility on m68k
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 03 Apr 2021 15:22:07 +0200
 
