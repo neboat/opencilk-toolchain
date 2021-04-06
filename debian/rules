@@ -119,6 +119,9 @@ ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=mips64el-linux-gnuabi64
 endif
 
+ifneq (,$(filter $(DEB_HOST_ARCH),x32))
+  CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=x86_64-linux-gnux32
+endif
 
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) ge 4.8-20121128-1~ ; echo $$?),0)
 	control_vars = '-Vdep:devlibs=libstdc++-$(GCC_VERSION)-dev, libgcc-$(GCC_VERSION)-dev' \
