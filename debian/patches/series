@@ -119,10 +119,8 @@ hurd/hurd-pathmax.diff
 bootstrap-fix-include-next.diff
 
 # m68k
-#m68k/D98519.diff
 #m68k/D98537.diff
 #m68k/D98540.diff
-#m68k/D99869.diff
 
 # riscv64
 risc/clang-riscv64-multiarch.diff
