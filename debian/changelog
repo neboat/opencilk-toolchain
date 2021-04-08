@@ -1,9 +1,10 @@
-llvm-toolchain-12 (1:12.0.0~++rc4-2) unstable; urgency=medium
+llvm-toolchain-12 (1:12.0.0~++rc5-1) unstable; urgency=medium
 
+  * New testing upstream release
   * Verify that /proc is mounted. It makes some unexpected issues when
     building from a chroot without /proc
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 08 Apr 2021 18:04:07 +0200
 
 llvm-toolchain-12 (1:12.0.0~++rc4-1) unstable; urgency=medium
 
