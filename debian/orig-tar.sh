@@ -140,10 +140,7 @@ if test -z  "$TAG" -a -z "$FINAL_RELEASE"; then
         # In general, in Debian, we will keep X until X.0.1 is released (or rc in experimental)
         # However, on apt.llvm.org, we will update the version to have X.0.1
         # This code is doing that.
-        MAJOR=$(grep "set(LLVM_VERSION_MAJOR" llvm/CMakeLists.txt|tr -d -c '[0-9]')
-        MINOR=$(grep "set(LLVM_VERSION_MINOR" llvm/CMakeLists.txt|tr -d -c '[0-9]')
-        PATCH=$(grep "set(LLVM_VERSION_PATCH" llvm/CMakeLists.txt|tr -d -c '[0-9]')
-        CURRENT_VERSION="$MAJOR.$MINOR.$PATCH"
+        CURRENT_VERSION="$(grep -oP 'set\(\s*LLVM_VERSION_(MAJOR|MINOR|PATCH)\s\K[0-9]+' llvm/CMakeLists.txt | paste -sd '.')"
     fi
     # the + is here to make sure that this version is considered more recent than the svn
     # dpkg --compare-versions 10~svn374977-1~exp1 lt 10~+2019-svn374977-1~exp1
