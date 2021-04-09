@@ -17,7 +17,6 @@ llvm-toolchain-snapshot (1:13~++20210403031832+89afec348dbd-1~exp1) UNRELEASED; 
   * Add upstream patch D98540 to implement Disassembler on m68k
   * Set LLVM_HOST_TRIPLE to x86_64-linux-gnux32 on x32
   * Set LLVM_DEFAULT_TARGET_TRIPLE to x86_64-linux-gnux32 on x32
-  * Skip installation of missing hwasan_symbolize on x32
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 03 Apr 2021 15:22:07 +0200
 
