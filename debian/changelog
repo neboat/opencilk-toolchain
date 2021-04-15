@@ -2,6 +2,9 @@ llvm-toolchain-12 (1:12.0.0-3) UNRELEASED; urgency=medium
 
   [ Matthias Klose ]
   * Improve the clean rule
+  * Disable again LTO
+  * Create a new package llvm-12-linker-tools:
+    Contains the LLVMgold and LLVMPolly linker plugins.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 15 Apr 2021 13:27:57 +0200
 

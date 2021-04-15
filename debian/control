@@ -31,10 +31,13 @@ Package: clang-12
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang-common-12-dev (= ${binary:Version}),
+ llvm-12-linker-tools (= ${binary:Version}),
  libclang1-12 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-12-dev, python3, libomp-12-dev
 Suggests: clang-12-doc
+Breaks: llvm-12-dev (<< 1:12.0.0~++rc5-1ubuntu1)
+Replaces: llvm-12-dev (<< 1:12.0.0~++rc5-1ubuntu1)
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -279,10 +282,24 @@ Description: Modular compiler and toolchain technologies, runtime library
  .
  This package contains the LLVM runtime library.
 
+Package: llvm-12-linker-tools
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Breaks: llvm-12-dev (<< 1:12.0.0~++rc5-1ubuntu2), clang-12 (<< 1:12.0.0~++rc5-1ubuntu2)
+Replaces: llvm-12-dev (<< 1:12.0.0~++rc5-1ubuntu2), clang-12 (<< 1:12.0.0~++rc5-1ubuntu2)
+Description: Modular compiler and toolchain technologies
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, just-in-time code generators, and many other
+ compiler-related programs.
+ .
+ This package contains the LLVMgold and LLVMPolly linker plugins.
+
 Package: llvm-12
 Architecture: any
 Suggests: llvm-12-doc
-Depends: llvm-12-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: llvm-12-runtime (= ${binary:Version}),
+ llvm-12-linker-tools (= ${binary:Version}),
+ ${shlibs:Depends}, ${misc:Depends}
 Recommends: llvm-12-dev
 Description: Modular compiler and toolchain technologies
  LLVM is a collection of libraries and tools that make it easy to build
