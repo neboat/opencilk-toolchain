@@ -1,3 +1,10 @@
+llvm-toolchain-12 (1:12.0.0-3) UNRELEASED; urgency=medium
+
+  [ Matthias Klose ]
+  * Improve the clean rule
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 15 Apr 2021 13:27:57 +0200
+
 llvm-toolchain-12 (1:12.0.0-1) unstable; urgency=medium
 
   * New upstream release
