@@ -307,7 +307,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Breaks: llvm-12-dev (<< 1:12.0.0~++rc5-1ubuntu2), clang-12 (<< 1:12.0.0~++rc5-1ubuntu2)
 Replaces: llvm-12-dev (<< 1:12.0.0~++rc5-1ubuntu2), clang-12 (<< 1:12.0.0~++rc5-1ubuntu2)
-Description: Modular compiler and toolchain technologies
+Description: Modular compiler and toolchain technologies - Plugins
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
  compiler-related programs.
