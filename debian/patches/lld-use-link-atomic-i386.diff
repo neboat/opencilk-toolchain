@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_12~++20201021061106+4b7dafd9046/lld/tools/lld/CMakeLists.txt
+Index: llvm-toolchain-snapshot_13~++20210416111933+08843a0c3f3e/lld/tools/lld/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_12~++20201021061106+4b7dafd9046.orig/lld/tools/lld/CMakeLists.txt
-+++ llvm-toolchain-snapshot_12~++20201021061106+4b7dafd9046/lld/tools/lld/CMakeLists.txt
+--- llvm-toolchain-snapshot_13~++20210416111933+08843a0c3f3e.orig/lld/tools/lld/CMakeLists.txt
++++ llvm-toolchain-snapshot_13~++20210416111933+08843a0c3f3e/lld/tools/lld/CMakeLists.txt
 @@ -1,10 +1,18 @@
 +set(LLD_ATOMIC_LIB "")
 +
@@ -29,4 +29,4 @@ Index: llvm-toolchain-snapshot_12~++20201021061106+4b7dafd9046/lld/tools/lld/CMa
 +  ${LLD_ATOMIC_LIB}
    )
  
- install(TARGETS lld
+ if(HAVE_LIBXAR)
