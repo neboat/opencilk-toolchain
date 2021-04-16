@@ -1,6 +1,6 @@
 set -e
 ORIG_VERSION=12
-MAJOR_VERSION=12 # 8.0.1
+MAJOR_VERSION=12.0.0 # 8.0.1
 REV=`ls -1 *${ORIG_VERSION}_${MAJOR_VERSION}*~+*xz | tail -1|perl -ne 'print "$1\n" if /~\+(.*)\.orig/;'  | sort -ru`
 
 VERSION=$REV
