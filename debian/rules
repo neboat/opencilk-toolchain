@@ -351,16 +351,6 @@ preconfigure:
 		debian/llvm-$(LLVM_VERSION)-dev.install \
 		debian/llvm-$(LLVM_VERSION)-linker-tools.install
 
-
-	# workaround the breaks/replaces/conflicts introduced with llvm-12-linker-tools
-	# we update the version to make it work with apt.llvm.org
-	# Yeah, this is ugly but I don't know how to do better
-	if test "$(LLVM_VERSION)" = "12"; then \
-		if echo "$(LLVM_VERSION_SNAPSHOT)"|grep -q "++"; then \
-			sed -i -e "s|(<< 1:12.0.0-2)|(<< 12.0.0~++20210418)|g" debian/control; \
-		fi; \
-	fi
-
 	# DH doesn't support the [power ...] in install on Ubuntu trusty
 	# fails with cp: cannot stat 'debian/tmp/[!powerpc': No such file or directory
 	if test "$(DISTRO)" = "trusty"; then \
