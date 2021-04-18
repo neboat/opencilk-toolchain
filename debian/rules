@@ -17,6 +17,7 @@ GCC_VERSION              := $(subst /usr/bin/g++-,,$(GXX_VERSIONED_EXECUTABLE))
 
 LLVM_VERSION   := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 LLVM_VERSION_FULL := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1,p")
+LLVM_VERSION_SNAPSHOT := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:(.*),\1,p")
 ifeq ($(LLVM_VERSION),$(LLVM_VERSION_FULL))
 	LLVM_VERSION_FULL := $(LLVM_VERSION).0.0
 endif
@@ -327,6 +328,7 @@ preconfigure:
 	@echo "PROJECTS=$(PROJECTS_LIST)"
 	@echo "LLVM_VERSION=$(LLVM_VERSION)"
 	@echo "LLVM_VERSION_FULL=$(LLVM_VERSION_FULL)"
+	@echo "LLVM_VERSION_SNAPSHOT=$(LLVM_VERSION_SNAPSHOT)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
@@ -344,6 +346,16 @@ preconfigure:
 		debian/libomp-$(LLVM_VERSION)-dev.install \
 		debian/llvm-$(LLVM_VERSION)-dev.install \
 		debian/llvm-$(LLVM_VERSION)-linker-tools.install
+
+
+	# workaround the breaks/replaces/conflicts introduced with llvm-12-linker-tools
+	# we update the version to make it work with apt.llvm.org
+	# Yeah, this is ugly but I don't know how to do better
+	if test "$(LLVM_VERSION)" = "12"; then \
+		if echo "$(LLVM_VERSION_SNAPSHOT)"|grep -q "++"; then \
+			sed -i -e "s|(<< 1:12.0.0-2)|(<< 12.0.0~++20210418)|g" debian/control; \
+		fi; \
+	fi
 
 	# DH doesn't support the [power ...] in install on Ubuntu trusty
 	# fails with cp: cannot stat 'debian/tmp/[!powerpc': No such file or directory
