@@ -281,7 +281,6 @@ Description: Modular compiler and toolchain technologies, runtime library
  .
  This package contains the LLVM runtime library.
 
-<<<<<<< HEAD
 Package: llvm-13-linker-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -301,27 +300,6 @@ Depends: llvm-13-runtime (= ${binary:Version}),
  llvm-13-linker-tools (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
 Recommends: llvm-13-dev
-=======
-Package: llvm-12-linker-tools
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Breaks: llvm-12-dev (<< 1:12.0.0-2), clang-12 (<< 1:12.0.0-2)
-Replaces: llvm-12-dev (<< 1:12.0.0-2), clang-12 (<< 1:12.0.0-2)
-Description: Modular compiler and toolchain technologies - Plugins
- LLVM is a collection of libraries and tools that make it easy to build
- compilers, optimizers, just-in-time code generators, and many other
- compiler-related programs.
- .
- This package contains the LLVMgold and LLVMPolly linker plugins.
-
-Package: llvm-12
-Architecture: any
-Suggests: llvm-12-doc
-Depends: llvm-12-runtime (= ${binary:Version}),
- llvm-12-linker-tools (= ${binary:Version}),
- ${shlibs:Depends}, ${misc:Depends}
-Recommends: llvm-12-dev
->>>>>>> 608f891a (* Disable again LTO)
 Description: Modular compiler and toolchain technologies
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
