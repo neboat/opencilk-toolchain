@@ -17,6 +17,7 @@ GCC_VERSION              := $(subst /usr/bin/g++-,,$(GXX_VERSIONED_EXECUTABLE))
 
 LLVM_VERSION   := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 LLVM_VERSION_FULL := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1,p")
+LLVM_VERSION_SNAPSHOT := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:(.*),\1,p")
 ifeq ($(LLVM_VERSION),$(LLVM_VERSION_FULL))
 	LLVM_VERSION_FULL := $(LLVM_VERSION).0.0
 endif
@@ -65,7 +66,8 @@ endif
 
 # Ensure fixfilepath feature is disabled.  The fixfilepath feature
 # sets a -ffile-prefix-map flag, which is only supported in clang-10.
-export DEB_BUILD_MAINT_OPTIONS=reproducible=-fixfilepath
+# Disable also lto
+export DEB_BUILD_MAINT_OPTIONS=reproducible=-fixfilepath optimize=-lto
 
 # Cxx flags for building libcxx and libcxxabi
 LIBCXXFLAGS := $(shell dpkg-buildflags --get CXXFLAGS) $(shell dpkg-buildflags --get CPPFLAGS)
@@ -299,6 +301,14 @@ ifneq (,$(filter $(DEB_HOST_ARCH), mips64 mips64el))
 	LIBOMP_ARCH = mips64
 endif
 
+# if cmake is installed in /tmp/cmake/ uses it
+# Used to build llvm on old ubuntu (precise) on the llvm.org/apt/ ci
+CMAKE_BIN=cmake
+ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
+	CMAKE_BIN=/tmp/cmake/bin/cmake
+	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/
+endif
+
 %:
 	dh $@ $(DH_OPTIONS)
 
@@ -322,6 +332,7 @@ preconfigure:
 	@echo "PROJECTS=$(PROJECTS_LIST)"
 	@echo "LLVM_VERSION=$(LLVM_VERSION)"
 	@echo "LLVM_VERSION_FULL=$(LLVM_VERSION_FULL)"
+	@echo "LLVM_VERSION_SNAPSHOT=$(LLVM_VERSION_SNAPSHOT)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
@@ -333,7 +344,22 @@ preconfigure:
 	done
 
 	# Make install file executable for dh-exec
-	chmod +x debian/llvm-$(LLVM_VERSION)-dev.install debian/libclang-common-$(LLVM_VERSION)-dev.install debian/clang-tools-$(LLVM_VERSION).install debian/libomp-$(LLVM_VERSION)-dev.install
+	chmod +x \
+		debian/clang-tools-$(LLVM_VERSION).install \
+		debian/libclang-common-$(LLVM_VERSION)-dev.install \
+		debian/libomp-$(LLVM_VERSION)-dev.install \
+		debian/llvm-$(LLVM_VERSION)-dev.install \
+		debian/llvm-$(LLVM_VERSION)-linker-tools.install
+
+
+	# workaround the breaks/replaces/conflicts introduced with llvm-12-linker-tools
+	# we update the version to make it work with apt.llvm.org
+	# Yeah, this is ugly but I don't know how to do better
+	if test "$(LLVM_VERSION)" = "12"; then \
+		if echo "$(LLVM_VERSION_SNAPSHOT)"|grep -q "++"; then \
+			sed -i -e "s|(<< 1:12.0.0-2)|(<< 12.0.0~++20210418)|g" debian/control; \
+		fi; \
+	fi
 
 	# DH doesn't support the [power ...] in install on Ubuntu trusty
 	# fails with cp: cannot stat 'debian/tmp/[!powerpc': No such file or directory
@@ -375,20 +401,11 @@ override_dh_auto_configure: preconfigure
 	fi)
 
 	echo "Running tests: $(RUN_TEST)"
-
-	# if cmake is installed in /tmp/cmake/ uses it
-	# Used to build llvm on Debian & Ubuntu with a recent cmake
-	# on the llvm.org/apt/ ci
-	# Use D24cmake as hook to download/setup
-	CMAKE_BIN=cmake; \
-	if test -f /tmp/cmake/bin/cmake; then \
-		CMAKE_BIN=/tmp/cmake/bin/cmake; \
-		LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/; \
-	fi; \
-	echo "Using cmake: $$CMAKE_BIN"; \
+	echo "Using cmake: $(CMAKE_BIN)"; \
 	cd $(TARGET_BUILD) && \
-	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH $(PRE_PROCESS_CONF) $$CMAKE_BIN ../llvm/ \
+	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH $(PRE_PROCESS_CONF) $(CMAKE_BIN) ../llvm/ \
 	-DLLVM_ENABLE_PROJECTS="$(PROJECTS_LIST)" \
+	-DCMAKE_SUPPRESS_REGENERATION=ON \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
@@ -480,13 +497,9 @@ debian-libcxx-build:
 	mkdir -p libcxx/build
 	mkdir -p libcxxabi/build
 
-	CMAKE_BIN=cmake; \
-	if test -f /tmp/cmake/bin/cmake; then \
-		CMAKE_BIN=/tmp/cmake/bin/cmake; \
-	fi; \
-	echo "Using cmake: $$CMAKE_BIN"; \
+	echo "Using cmake: $(CMAKE_BIN)"; \
 	cd libcxxabi/build && \
-	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../ \
+	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
 	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
@@ -501,13 +514,9 @@ debian-libcxxabi-build:
 
 	mkdir -p libcxxabi/build
 
-	CMAKE_BIN=cmake; \
-	if test -f /tmp/cmake/bin/cmake; then \
-		CMAKE_BIN=/tmp/cmake/bin/cmake; \
-	fi; \
-	echo "Using cmake: $$CMAKE_BIN"; \
+	echo "Using cmake: $(CMAKE_BIN)"; \
 	cd libcxx/build && \
-	$(PRE_PROCESS_CONF) $$CMAKE_BIN ../ \
+	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXX_CXX_ABI=libcxxabi \
 	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
@@ -914,5 +923,11 @@ override_dh_auto_clean:
 	if test -f lld/docs/ld.lld-$(LLVM_VERSION).1; then \
 		mv lld/docs/ld.lld-$(LLVM_VERSION).1 lld/docs/ld.lld.1; \
 	fi
+	for f in debian/*.in; do \
+		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
+		rm -f $$f2; \
+	done
+	: # for some reason, the docs are written to debian/usr and debian/man ...
+	rm -rf debian/usr debian/man
 
 .PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build

@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:13~++20210403031832+89afec348dbd-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:13~++20210418105309+a0898f0cecc7-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
   * New snapshot release
@@ -16,7 +16,7 @@ llvm-toolchain-snapshot (1:13~++20210403031832+89afec348dbd-1~exp1) UNRELEASED; 
   * Set LLVM_HOST_TRIPLE to x86_64-linux-gnux32 on x32
   * Set LLVM_DEFAULT_TARGET_TRIPLE to x86_64-linux-gnux32 on x32
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 03 Apr 2021 15:22:07 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 18 Apr 2021 11:00:31 +0200
 
 llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp2) experimental; urgency=medium
 
@@ -39,10 +39,39 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
 
-llvm-toolchain-12 (1:12.0.0~++rc4-2) unstable; urgency=medium
+llvm-toolchain-12 (1:12.0.0-2) UNRELEASED; urgency=medium
 
+  [ Matthias Klose ]
+  * Improve the clean rule
+  * Disable again LTO
+  * Create a new package llvm-12-linker-tools:
+    Contains the LLVMgold and LLVMPolly linker plugins.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 15 Apr 2021 13:27:57 +0200
+
+llvm-toolchain-12 (1:12.0.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 15 Apr 2021 07:57:57 +0200
+
+llvm-toolchain-12 (1:12.0.0~++rc5-2) unstable; urgency=medium
+
+  * Add -DCMAKE_SUPPRESS_REGENERATION=ON to limit the number of calls
+    to cmake
+    Try to workaround a bug on llvm-toolchain-stretch-12-binaries
+    architecture=s390x,stretch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 10 Apr 2021 14:59:07 +0200
+
+llvm-toolchain-12 (1:12.0.0~++rc5-1) unstable; urgency=medium
+
+  * New testing upstream release
   * Verify that /proc is mounted. It makes some unexpected issues when
     building from a chroot without /proc
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 08 Apr 2021 18:04:07 +0200
+
 llvm-toolchain-12 (1:12.0.0~++rc4-1) unstable; urgency=medium
 
   * New testing upstream release
