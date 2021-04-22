@@ -1,3 +1,10 @@
+llvm-toolchain-11 (1:11.1.0-2) unstable; urgency=medium
+
+  * Disable lto. Hopefully workaround the issue
+    https://bugs.llvm.org/show_bug.cgi?id=50031
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 22 Apr 2021 22:08:49 +0200
+
 llvm-toolchain-11 (1:11.1.0-1) unstable; urgency=medium
 
   * New upstream release
