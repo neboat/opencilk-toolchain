@@ -185,7 +185,7 @@ endif
 
 # Enable openmp (or not)
 OPENMP_ENABLE=yes
-ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel powerpc powerpcspe riscv64 sparc64 s390x x32))
+ifneq (,$(filter $(DEB_HOST_ARCH), m68k mips mipsel powerpc powerpcspe riscv64 sparc64 s390x x32))
   OPENMP_ENABLE=no
 else
   PROJECTS+=;openmp
