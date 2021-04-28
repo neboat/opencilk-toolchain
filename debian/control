@@ -451,7 +451,7 @@ Description: Modular compiler and toolchain technologies, examples
 # ------------- lld -------------
 
 Package: lld-12
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm12 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -461,7 +461,7 @@ Description: LLVM-based linker
  Project.
 
 Package: liblld-12
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm12 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -475,7 +475,7 @@ Description: LLVM-based linker, library
 
 Package: liblld-12-dev
 Section: libdevel
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lld-12 (= ${binary:Version}),
  liblld-12 (= ${binary:Version})

@@ -1,5 +1,7 @@
 llvm-toolchain-12 (1:12.0.0-2) UNRELEASED; urgency=medium
 
+  * Also build lld on s390x
+
   [ Matthias Klose ]
   * Improve the clean rule
   * Disable again LTO
