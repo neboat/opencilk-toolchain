@@ -1,3 +1,9 @@
+llvm-toolchain-11 (1:11.1.0-3) unstable; urgency=medium
+
+  * Also build lld on s390x
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Apr 2021 22:30:40 +0200
+
 llvm-toolchain-11 (1:11.1.0-2) unstable; urgency=medium
 
   * Disable lto. Hopefully workaround the issue
