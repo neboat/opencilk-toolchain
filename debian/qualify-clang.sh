@@ -1020,6 +1020,15 @@ g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-
 ./o > /dev/null
 fi
 
+# libclc
+
+if test ! -f /usr/lib/clc/amdgcn--amdhsa.bc; then
+    echo "Install libclc-$VERSION";
+    exit -1;
+fi
+
+LLVM_CONFIG=llvm-config-$VERSION ./libclc/check_external_calls.sh /usr/lib/clc/amdgcn--amdhsa.bc > /dev/null
+
 
 if test ! -f /usr/lib/llvm-$VERSION/include/polly/LinkAllPasses.h; then
     echo "Install libclang-common-$VERSION-dev for polly";
