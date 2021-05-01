@@ -522,7 +522,26 @@ debian-libcxxabi-build:
 	$(PRE_PROCESS_CONF) make $(NJOBS) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)"
 	touch $@
 
-override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build
+debian-libclc-build:
+# Builds libclc
+
+	mkdir -p libclc/build
+
+	CMAKE_BIN=cmake; \
+	if test -f /tmp/cmake/bin/cmake; then \
+		CMAKE_BIN=/tmp/cmake/bin/cmake; \
+	fi; \
+	echo "Using cmake: $$CMAKE_BIN"; \
+	cd libclc/build && \
+	$$CMAKE_BIN ../ \
+	-DCMAKE_INSTALL_DATADIR=/usr/lib \
+	-DCMAKE_INSTALL_INCLUDEDIR=/usr/include \
+	-DLLVM_CONFIG=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-config \
+	-DLIBCLC_TARGETS_TO_BUILD="amdgcn--;amdgcn--amdhsa;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl"; \
+	make $(NJOBS) $(VERBOSE)
+	touch $@
+
+override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build debian-libclc-build
 
 override_dh_prep: build_doc
 	dh_prep
@@ -656,6 +675,7 @@ endif
 
 	$(MAKE) -C libcxxabi/build install DESTDIR=$(DEB_INST)
 	$(MAKE) -C libcxx/build install DESTDIR=$(DEB_INST)
+	$(MAKE) -C libclc/build install DESTDIR=$(DEB_INST)
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
@@ -855,6 +875,9 @@ endif
 # Libcxxabi
 	$(MAKE) $(MAKE) -C libcxxabi/build check-libcxxabi || true
 
+# Libclc
+	$(MAKE) $(MAKE) -C libclc/build test || true
+
 # LLDB tests
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
@@ -915,7 +938,7 @@ override_dh_auto_clean:
 	rm -f $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
-	rm -rf libcxx/build libcxxabi/build
+	rm -rf libcxx/build libcxxabi/build libclc/build
 	if test -f lld/docs/ld.lld-$(LLVM_VERSION).1; then \
 		mv lld/docs/ld.lld-$(LLVM_VERSION).1 lld/docs/ld.lld.1; \
 	fi
@@ -926,4 +949,4 @@ override_dh_auto_clean:
 	: # for some reason, the docs are written to debian/usr and debian/man ...
 	rm -rf debian/usr debian/man
 
-.PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build
+.PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build debian-libclc-build

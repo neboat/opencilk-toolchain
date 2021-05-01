@@ -674,3 +674,40 @@ Description: LLVM low level support for a standard C++ library (development file
  .
    * Correctness as defined by the C++ standards.
    * Provide a portable sublayer to ease the porting of libc++
+
+# ------------- libclc -------------
+
+Package: libclc-12
+Section: libs
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+ libclc-12-dev (= ${binary:Version}),
+ libclang-common-12-dev,
+Breaks: libclc-amdgcn, libclc-ptx, libclc-r600
+Provides: libclc-x.y
+Conflicts: libclc-x.y
+Replaces: libclc-x.y, libclc-amdgcn, libclc-ptx, libclc-r600,
+Description: OpenCL C language implementation - platform support
+ libclc is an open implementation of the OpenCL C programming language,
+ as specified by the OpenCL 1.1 Specification.
+ .
+ This package contains support for the amdgcn (AMD GPU), PTX and r600
+ platforms.
+
+Package: libclc-12-dev
+Section: libdevel
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+Breaks: libclc-dev
+Provides: libclc-x.y-dev
+Conflicts: libclc-x.y-dev
+Replaces: libclc-dev, libclc-x.y-dev
+Description: OpenCL C language implementation - development files
+ libclc is an open implementation of the OpenCL C programming language,
+ as specified by the OpenCL 1.1 Specification.
+ .
+ This package contains development header files.
