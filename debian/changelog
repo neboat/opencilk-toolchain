@@ -1,15 +1,13 @@
-llvm-toolchain-12 (1:12.0.0-4) UNRELEASED; urgency=medium
-
-  * Build libclc. (Closes: #942709)
-
- -- Timo Aaltonen <tjaalton@debian.org>  Sat, 01 May 2021 01:01:52 +0300
-
 llvm-toolchain-12 (1:12.0.0-3) unstable; urgency=medium
 
+  [ Timo Aaltonen ]
+  * Build libclc. (Closes: #942709)
+
+  [ Sylvestre Ledru ]
   * Upload to unstable
   * Also build lld on s390x
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Apr 2021 22:51:23 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 01 May 2021 19:33:27 +0200
 
 llvm-toolchain-12 (1:12.0.0-2) experimental; urgency=medium
 
