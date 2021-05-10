@@ -258,10 +258,6 @@ ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 	CMAKE_EXTRA += -DLLVM_USE_PERF=yes -DLLVM_ENABLE_LIBPFM=ON
 endif
 
-# Use thinlto for the link phase
-THIN_UNSUPPORTED_DISTRO := stretch xenial trusty
-# Don't enable for old distros
-ifeq (,$(filter $(DISTRO), $(THIN_UNSUPPORTED_DISTRO)))
 # Only enable it for archs supporting gold
 ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 # armhf is not yet quite ready for Thin, it FTBFS
@@ -274,7 +270,6 @@ ifeq (,$(filter $(DEB_HOST_ARCH), armhf))
 # * BOOTSTRAP_LLVM_ENABLE_LTO is producing some large binary
 #   See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=943623
 #	CMAKE_EXTRA += -DBOOTSTRAP_LLVM_ENABLE_LTO="Thin"
-endif
 endif
 endif
 
@@ -350,12 +345,6 @@ preconfigure:
 		debian/libomp-$(LLVM_VERSION)-dev.install \
 		debian/llvm-$(LLVM_VERSION)-dev.install \
 		debian/llvm-$(LLVM_VERSION)-linker-tools.install
-
-	# DH doesn't support the [power ...] in install on Ubuntu trusty
-	# fails with cp: cannot stat 'debian/tmp/[!powerpc': No such file or directory
-	if test "$(DISTRO)" = "trusty"; then \
-		sed -i -e "s|\[\!powerpc \!powerpcspe\] ||g" debian/llvm-$(LLVM_VERSION)-dev.install; \
-	fi
 
 # Override this two targets. They are trying to manage the .in conversion for me
 override_dh_ocamlinit:
