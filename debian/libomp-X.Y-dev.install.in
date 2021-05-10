@@ -7,5 +7,3 @@
 /usr/lib/llvm-@LLVM_VERSION@/lib/libomp*.so
 [!armhf !mips64el] /usr/lib/llvm-@LLVM_VERSION@/lib/libarcher_static.a
 [!armhf !mips64el] /usr/lib/llvm-@LLVM_VERSION@/lib/libarcher.so
-
-/usr/lib/llvm-@LLVM_VERSION@/lib/libomptarget-amdgcn-*.bc

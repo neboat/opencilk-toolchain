@@ -3,7 +3,6 @@ llvm-toolchain-snapshot (1:13~++20210418105309+a0898f0cecc7-1~exp2) UNRELEASED; 
   * Enable lld on s390x
   * remove libomptarget from openmp. done by upstream
     in f2f88f3e7a110b2d4d9da446e45f0dba040e62b2
-    but install /usr/lib/llvm-13/lib/libomptarget-amdgcn-*.bc
 
   [ John Paul Adrian Glaubitz ]
   * Disable OpenMP on m68k
