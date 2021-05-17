@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/lib/hwasan/CMakeLists.txt
+Index: llvm-toolchain-snapshot_13~++20210517085206+0f417789192e/compiler-rt/lib/hwasan/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/compiler-rt/lib/hwasan/CMakeLists.txt
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/lib/hwasan/CMakeLists.txt
-@@ -43,9 +43,9 @@ append_list_if(COMPILER_RT_HWASAN_WITH_I
+--- llvm-toolchain-snapshot_13~++20210517085206+0f417789192e.orig/compiler-rt/lib/hwasan/CMakeLists.txt
++++ llvm-toolchain-snapshot_13~++20210517085206+0f417789192e/compiler-rt/lib/hwasan/CMakeLists.txt
+@@ -45,9 +45,9 @@ append_list_if(COMPILER_RT_HWASAN_WITH_I
  
  set(HWASAN_RTL_CFLAGS ${SANITIZER_COMMON_CFLAGS})
  append_rtti_flag(OFF HWASAN_RTL_CFLAGS)
@@ -14,7 +14,7 @@ Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/lib/h
  
  set(HWASAN_DYNAMIC_LINK_FLAGS ${SANITIZER_COMMON_LINK_FLAGS})
  
-@@ -57,7 +57,7 @@ if(ANDROID)
+@@ -59,7 +59,7 @@ if(ANDROID)
    endif()
  endif()
  
@@ -23,12 +23,12 @@ Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/lib/h
  append_list_if(COMPILER_RT_HAS_FTLS_MODEL_INITIAL_EXEC
    -ftls-model=initial-exec HWASAN_DYNAMIC_CFLAGS)
  append_list_if(MSVC /DEBUG HWASAN_DYNAMIC_LINK_FLAGS)
-@@ -132,7 +132,7 @@ foreach(arch ${HWASAN_SUPPORTED_ARCH})
-                                   LIBS clang_rt.hwasan-${arch} clang_rt.hwasan_cxx-${arch}
+@@ -153,7 +153,7 @@ function(add_hwasan_runtimes arch use_al
+                                   LIBS ${hwasan_runtime}-${arch} ${hwasan_runtime}_cxx-${arch}
                                    EXTRA hwasan.syms.extra)
      set(VERSION_SCRIPT_FLAG
--         -Wl,--version-script,${CMAKE_CURRENT_BINARY_DIR}/clang_rt.hwasan-dynamic-${arch}.vers)
-+         -Wl,--version-script,${CMAKE_CURRENT_BINARY_DIR}/clang_rt.hwasan-dynamic-${arch}.vers -fuse-ld=gold)
+-         -Wl,--version-script,${CMAKE_CURRENT_BINARY_DIR}/${hwasan_runtime}-dynamic-${arch}.vers)
++         -Wl,--version-script,${CMAKE_CURRENT_BINARY_DIR}/${hwasan_runtime}-dynamic-${arch}.vers -fuse-ld=gold)
      set_property(SOURCE
        ${CMAKE_CURRENT_BINARY_DIR}/dummy.cpp
        APPEND PROPERTY
