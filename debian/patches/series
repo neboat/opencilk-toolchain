@@ -83,6 +83,7 @@ libcxx/libcxx-silent-failure-arm64.diff
 # Change default optims
 mips/mips-fpxx-enable.diff
 mips/mips-force-nomadd4.patch
+mips/mips-D101773-reloc.patch
 
 26-set-correct-float-abi.diff
 clang-baseline-fix-i386.patch
