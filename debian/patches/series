@@ -123,8 +123,8 @@ bootstrap-fix-include-next.diff
 risc/clang-riscv64-multiarch.diff
 
 # sparc64
-D98574.patch
-D98575.patch
+sparc/sparc-D98574-clang-def.patch
+sparc/sparc-D98575-compiler-rt.patch
 
 # Compiler-rt - workaround
 workaround-bug-42994-use-linker.diff
