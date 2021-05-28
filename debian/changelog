@@ -4,7 +4,12 @@ llvm-toolchain-12 (1:12.0.1~+rc1-1~exp2) UNRELEASED; urgency=medium
   * Add upstream patch D98574 to fix clang macro definitions on sparc64
   * Add upstream patch D98575 to fix 32-bit compiler-rt build on sparc64
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Thu, 27 May 2021 11:07:43 +0200
+  [ Sylvestre Ledru ]
+  * Add -fvisibility-inlines-hidden -Bsymbolic-functions -fno-semantic-interposition
+    to the args to make clang faster
+    See https://github.com/ClangBuiltLinux/tc-build/issues/150#issuecomment-849935207
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 May 2021 10:53:08 +0200
 
 llvm-toolchain-12 (1:12.0.1~+rc1-1~exp1) unstable; urgency=medium
 
