@@ -1,16 +1,4 @@
-llvm-toolchain-12 (1:12.0.1~++20210528111127+328a6ec95532-1~exp1) UNRELEASED; urgency=medium
-
-  * experimental New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 May 2021 23:14:58 +0200
-
-llvm-toolchain-12 (1:12.0.1-rc1) unstable; urgency=medium
-
-  * New testing upstream release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 26 May 2021 12:45:40 +0200
-
-llvm-toolchain-12 (1:12.0.1~+rc1-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-12 (1:12.0.1~+rc1-1) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Add upstream patch D98574 to fix clang macro definitions on sparc64
@@ -25,7 +13,7 @@ llvm-toolchain-12 (1:12.0.1~+rc1-1~exp2) UNRELEASED; urgency=medium
     thanks to Ximin Luo
     (Closes: #988965)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 May 2021 10:53:08 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 May 2021 23:27:27 +0200
 
 llvm-toolchain-12 (1:12.0.1~+rc1-1~exp1) unstable; urgency=medium
 
