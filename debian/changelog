@@ -5,9 +5,6 @@ llvm-toolchain-12 (1:12.0.1~+rc1-1) unstable; urgency=medium
   * Add upstream patch D98575 to fix 32-bit compiler-rt build on sparc64
 
   [ Sylvestre Ledru ]
-  * Add -fvisibility-inlines-hidden -Bsymbolic-functions -fno-semantic-interposition
-    to the args to make clang faster
-    See https://github.com/ClangBuiltLinux/tc-build/issues/150#issuecomment-849935207
   * backport D101773 to fix an llvm ir issue on mipsel
     in mips/mips-D101773-reloc.patch
     thanks to Ximin Luo

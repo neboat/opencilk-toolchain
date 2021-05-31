@@ -38,8 +38,8 @@ DH_VERSION := $(shell dpkg -s debhelper | grep '^Version' | awk '{print $$2}')
 include /usr/share/dpkg/architecture.mk
 
 LDFLAGS_EXTRA =
-CXXFLAGS_EXTRA = -fvisibility-inlines-hidden -fno-semantic-interposition # performance reasons
-CFLAGS_EXTRA = -Bsymbolic-functions # perf reasons
+CXXFLAGS_EXTRA =
+CFLAGS_EXTRA =
 CONFIGURE_EXTRA =
 CMAKE_EXTRA = -DPYTHON_EXECUTABLE=/usr/bin/python3
 
