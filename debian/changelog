@@ -9,9 +9,8 @@ llvm-toolchain-12 (1:12.0.1~+rc1-1) unstable; urgency=medium
     in mips/mips-D101773-reloc.patch
     thanks to Ximin Luo
     (Closes: #988965)
-  * Build libc++ & libc++abi with -fPIC to fix upstream bug 43604
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 01 Jun 2021 13:34:34 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 May 2021 23:27:27 +0200
 
 llvm-toolchain-12 (1:12.0.1~+rc1-1~exp1) unstable; urgency=medium
 
