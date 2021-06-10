@@ -2,10 +2,10 @@
  lldb/source/API/CMakeLists.txt |   14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
 
-Index: llvm-toolchain-snapshot_12~++20201006102312+4a8c70c3194/lldb/source/API/CMakeLists.txt
+Index: llvm-toolchain-snapshot_13~++20210610102058+aaaeb4b160fe/lldb/source/API/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_12~++20201006102312+4a8c70c3194.orig/lldb/source/API/CMakeLists.txt
-+++ llvm-toolchain-snapshot_12~++20201006102312+4a8c70c3194/lldb/source/API/CMakeLists.txt
+--- llvm-toolchain-snapshot_13~++20210610102058+aaaeb4b160fe.orig/lldb/source/API/CMakeLists.txt
++++ llvm-toolchain-snapshot_13~++20210610102058+aaaeb4b160fe/lldb/source/API/CMakeLists.txt
 @@ -19,7 +19,12 @@ if(LLDB_ENABLE_LUA)
    set(lldb_lua_wrapper ${lua_bindings_dir}/LLDBWrapLua.cpp)
  endif()
@@ -29,15 +29,22 @@ Index: llvm-toolchain-snapshot_12~++20201006102312+4a8c70c3194/lldb/source/API/C
  )
  
  if (NOT CMAKE_SYSTEM_NAME MATCHES "Windows")
-@@ -188,11 +193,6 @@ if (MSVC)
-   if (LLDB_ENABLE_PYTHON)
-     target_link_libraries(liblldb PRIVATE ${Python3_LIBRARIES})
-   endif()
--else()
+@@ -182,12 +187,12 @@ if (NOT CMAKE_SYSTEM_NAME MATCHES "Windo
+   set_target_properties(liblldb_exports PROPERTIES FOLDER "lldb misc")
+ endif()
+ 
+-if (NOT MSVC)
 -  set_target_properties(liblldb
 -    PROPERTIES
 -    OUTPUT_NAME lldb
 -  )
- endif()
+-endif()
++#if (NOT MSVC)
++#  set_target_properties(liblldb
++#    PROPERTIES
++#    OUTPUT_NAME lldb
++#    )
++#endif()
  
  # The Clang expression parser in LLDB requires the Clang resource directory to function.
+ if (TARGET clang-resource-headers)
