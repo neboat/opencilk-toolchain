@@ -1,353 +1,650 @@
-diff --git a/clang/test/Frontend/optimization-remark-with-hotness-new-pm.c b/clang/test/Frontend/optimization-remark-with-hotness-new-pm.c
---- a/clang/test/Frontend/optimization-remark-with-hotness-new-pm.c
-+++ b/clang/test/Frontend/optimization-remark-with-hotness-new-pm.c
-@@ -73,7 +73,7 @@
-   // THRESHOLD-NOT: hotness
-   // NO_PGO: '-fdiagnostics-show-hotness' requires profile-guided optimization information
-   // NO_PGO: '-fdiagnostics-hotness-threshold=' requires profile-guided optimization information
--  // expected-remark@+1 {{foo inlined into bar with (cost=always): always inline attribute at callsite bar:8 (hotness:}}
-+  // expected-remark@+1 {{foo inlined into bar with (cost=always): always inline attribute at callsite bar:8:10; (hotness:}}
-   sum += foo(x, x - 2);
- }
+commit 2193347e72fad6a78ce4a96c8d89f9a43a028e79
+Author: Sushma Unnibhavi <sushmaunnibhavi425@gmail.com>
+Date:   Wed Jun 16 10:45:12 2021 -0600
+
+    [M68k][GloballSel] Adding initial GlobalISel infrastructure
+    
+    Wiring up GlobalISel for the M68k backend
+    
+    Differential Revision: https://reviews.llvm.org/D101819
+
+diff --git b/llvm/include/llvm/CodeGen/GlobalISel/CallLowering.h a/llvm/include/llvm/CodeGen/GlobalISel/CallLowering.h
+index 7b45c4dd293a..0fa8ba63a119 100644
+--- b/llvm/include/llvm/CodeGen/GlobalISel/CallLowering.h
++++ a/llvm/include/llvm/CodeGen/GlobalISel/CallLowering.h
+@@ -568,10 +568,6 @@ public:
+                  ArrayRef<ArrayRef<Register>> ArgRegs, Register SwiftErrorVReg,
+                  std::function<unsigned()> GetCalleeReg) const;
  
-diff --git a/clang/test/Frontend/optimization-remark-with-hotness.c b/clang/test/Frontend/optimization-remark-with-hotness.c
---- a/clang/test/Frontend/optimization-remark-with-hotness.c
-+++ b/clang/test/Frontend/optimization-remark-with-hotness.c
-@@ -66,7 +66,7 @@
-   // THRESHOLD-NOT: hotness
-   // NO_PGO: '-fdiagnostics-show-hotness' requires profile-guided optimization information
-   // NO_PGO: '-fdiagnostics-hotness-threshold=' requires profile-guided optimization information
--  // expected-remark@+1 {{foo inlined into bar with (cost=always): always inliner at callsite bar:8 (hotness:}}
-+  // expected-remark@+1 {{foo inlined into bar with (cost=always): always inliner at callsite bar:8:10; (hotness:}}
-   sum += foo(x, x - 2);
- }
+-  /// For targets which want to use big-endian can enable it with
+-  /// enableBigEndian() hook
+-  virtual bool enableBigEndian() const { return false; }
+-
+   /// For targets which support the "returned" parameter attribute, returns
+   /// true if the given type is a valid one to use with "returned".
+   virtual bool isTypeIsValidForThisReturn(EVT Ty) const { return false; }
+diff --git b/llvm/lib/CodeGen/GlobalISel/IRTranslator.cpp a/llvm/lib/CodeGen/GlobalISel/IRTranslator.cpp
+index 6d205677e15f..7cb015b26f07 100644
+--- b/llvm/lib/CodeGen/GlobalISel/IRTranslator.cpp
++++ a/llvm/lib/CodeGen/GlobalISel/IRTranslator.cpp
+@@ -3122,9 +3122,7 @@ bool IRTranslator::runOnMachineFunction(MachineFunction &CurMF) {
  
-diff --git a/llvm/include/llvm/Analysis/InlineAdvisor.h b/llvm/include/llvm/Analysis/InlineAdvisor.h
---- a/llvm/include/llvm/Analysis/InlineAdvisor.h
-+++ b/llvm/include/llvm/Analysis/InlineAdvisor.h
-@@ -121,6 +121,25 @@
-   bool Recorded = false;
- };
+   assert(PendingPHIs.empty() && "stale PHIs");
  
-+class DefaultInlineAdvice : public InlineAdvice {
-+public:
-+  DefaultInlineAdvice(InlineAdvisor *Advisor, CallBase &CB,
-+                      Optional<InlineCost> OIC, OptimizationRemarkEmitter &ORE,
-+                      bool EmitRemarks = true)
-+      : InlineAdvice(Advisor, CB, ORE, OIC.hasValue()), OriginalCB(&CB),
-+        OIC(OIC), EmitRemarks(EmitRemarks) {}
-+
-+private:
-+  void recordUnsuccessfulInliningImpl(const InlineResult &Result) override;
-+  void recordInliningWithCalleeDeletedImpl() override;
-+  void recordInliningImpl() override;
-+
-+private:
-+  CallBase *const OriginalCB;
-+  Optional<InlineCost> OIC;
-+  bool EmitRemarks;
-+};
-+
- /// Interface for deciding whether to inline a call site or not.
- class InlineAdvisor {
- public:
-diff --git a/llvm/include/llvm/Analysis/ReplayInlineAdvisor.h b/llvm/include/llvm/Analysis/ReplayInlineAdvisor.h
---- a/llvm/include/llvm/Analysis/ReplayInlineAdvisor.h
-+++ b/llvm/include/llvm/Analysis/ReplayInlineAdvisor.h
-@@ -25,13 +25,14 @@
- class ReplayInlineAdvisor : public InlineAdvisor {
- public:
-   ReplayInlineAdvisor(FunctionAnalysisManager &FAM, LLVMContext &Context,
--                      StringRef RemarksFile);
-+                      StringRef RemarksFile, bool EmitRemarks);
-   std::unique_ptr<InlineAdvice> getAdvice(CallBase &CB) override;
-   bool areReplayRemarksLoaded() const { return HasReplayRemarks; }
+-  // Targets which want to use big endian can enable it using
+-  // enableBigEndian()
+-  if (!DL->isLittleEndian() && !CLI->enableBigEndian()) {
++  if (!DL->isLittleEndian()) {
+     // Currently we don't properly handle big endian code.
+     OptimizationRemarkMissed R("gisel-irtranslator", "GISelFailure",
+                                F.getSubprogram(), &F.getEntryBlock());
+diff --git b/llvm/lib/Target/M68k/CMakeLists.txt a/llvm/lib/Target/M68k/CMakeLists.txt
+index 0e7bcff8dc20..9511cd8195af 100644
+--- b/llvm/lib/Target/M68k/CMakeLists.txt
++++ a/llvm/lib/Target/M68k/CMakeLists.txt
+@@ -2,9 +2,7 @@ add_llvm_component_group(M68k)
  
- private:
-   StringSet<> InlineSitesFromRemarks;
-   bool HasReplayRemarks = false;
-+  bool EmitRemarks = false;
- };
- } // namespace llvm
- #endif // LLVM_ANALYSIS_REPLAYINLINEADVISOR_H
-diff --git a/llvm/lib/Analysis/InlineAdvisor.cpp b/llvm/lib/Analysis/InlineAdvisor.cpp
---- a/llvm/lib/Analysis/InlineAdvisor.cpp
-+++ b/llvm/lib/Analysis/InlineAdvisor.cpp
-@@ -48,41 +48,28 @@
-                         cl::desc("Scale to limit the cost of inline deferral"),
-                         cl::init(2), cl::Hidden);
+ set(LLVM_TARGET_DEFINITIONS M68k.td)
  
--namespace {
--class DefaultInlineAdvice : public InlineAdvice {
+-tablegen(LLVM M68kGenGlobalISel.inc       -gen-global-isel)
+ tablegen(LLVM M68kGenRegisterInfo.inc     -gen-register-info)
+-tablegen(LLVM M68kGenRegisterBank.inc     -gen-register-bank)
+ tablegen(LLVM M68kGenInstrInfo.inc        -gen-instr-info)
+ tablegen(LLVM M68kGenSubtargetInfo.inc    -gen-subtarget)
+ tablegen(LLVM M68kGenMCCodeBeads.inc      -gen-code-beads)
+@@ -17,10 +15,6 @@ tablegen(LLVM M68kGenAsmMatcher.inc       -gen-asm-matcher)
+ add_public_tablegen_target(M68kCommonTableGen)
+ 
+ add_llvm_target(M68kCodeGen
+-  GlSel/M68kCallLowering.cpp
+-  GlSel/M68kInstructionSelector.cpp
+-  GlSel/M68kLegalizerInfo.cpp
+-  GlSel/M68kRegisterBankInfo.cpp
+   M68kAsmPrinter.cpp
+   M68kCollapseMOVEMPass.cpp
+   M68kExpandPseudo.cpp
+@@ -40,7 +34,6 @@ add_llvm_target(M68kCodeGen
+   AsmPrinter
+   CodeGen
+   Core
+-  GlobalISel
+   MC
+   SelectionDAG
+   Support
+diff --git b/llvm/lib/Target/M68k/GlSel/M68kCallLowering.cpp a/llvm/lib/Target/M68k/GlSel/M68kCallLowering.cpp
+deleted file mode 100644
+index 9f58834c8523..000000000000
+--- b/llvm/lib/Target/M68k/GlSel/M68kCallLowering.cpp
++++ /dev/null
+@@ -1,51 +0,0 @@
+-//===-- M68kCallLowering.cpp - Call lowering -------------------*- C++ -*-===//
+-//
+-// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+-// See https://llvm.org/LICENSE.txt for license information.
+-// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+-//
+-//===----------------------------------------------------------------------===//
+-//
+-/// \file
+-/// This file implements the lowering of LLVM calls to machine code calls for
+-/// GlobalISel.
+-//
+-//===----------------------------------------------------------------------===//
+-
+-#include "M68kCallLowering.h"
+-#include "M68kISelLowering.h"
+-#include "M68kInstrInfo.h"
+-#include "llvm/CodeGen/GlobalISel/MachineIRBuilder.h"
+-using namespace llvm;
+-
+-M68kCallLowering::M68kCallLowering(const M68kTargetLowering &TLI)
+-    : CallLowering(&TLI) {}
+-
+-bool M68kCallLowering::lowerReturn(MachineIRBuilder &MIRBuilder,
+-                                   const Value *Val, ArrayRef<Register> VRegs,
+-                                   FunctionLoweringInfo &FLI,
+-                                   Register SwiftErrorVReg) const {
+-
+-  if (Val)
+-    return false;
+-  MIRBuilder.buildInstr(M68k::RTS);
+-  return true;
+-}
+-
+-bool M68kCallLowering::lowerFormalArguments(MachineIRBuilder &MIRBuilder,
+-                                            const Function &F,
+-                                            ArrayRef<ArrayRef<Register>> VRegs,
+-                                            FunctionLoweringInfo &FLI) const {
+-
+-  if (F.arg_empty())
+-    return true;
+-
+-  return false;
+-}
+-
+-bool M68kCallLowering::lowerCall(MachineIRBuilder &MIRBuilder,
+-                                 CallLoweringInfo &Info) const {
+-  return false;
+-}
+-
+-bool M68kCallLowering::enableBigEndian() const { return true; }
+diff --git b/llvm/lib/Target/M68k/GlSel/M68kCallLowering.h a/llvm/lib/Target/M68k/GlSel/M68kCallLowering.h
+deleted file mode 100644
+index b58db2322e27..000000000000
+--- b/llvm/lib/Target/M68k/GlSel/M68kCallLowering.h
++++ /dev/null
+@@ -1,49 +0,0 @@
+-//===-- M68kCallLowering.h - Call lowering -------------------*- C++ -*-===//
+-//
+-// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+-// See https://llvm.org/LICENSE.txt for license information.
+-// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+-//
+-//===----------------------------------------------------------------------===//
+-//
+-/// \file
+-/// This file implements the lowering of LLVM calls to machine code calls for
+-/// GlobalISel.
+-//
+-//===----------------------------------------------------------------------===//
+-
+-#ifndef LLVM_LIB_TARGET_M68K_GLSEL_M68KCALLLOWERING_H
+-#define LLVM_LIB_TARGET_M68K_GLSEL_M68KCALLLOWERING_H
+-
+-#include "llvm/CodeGen/CallingConvLower.h"
+-#include "llvm/CodeGen/GlobalISel/CallLowering.h"
+-#include "llvm/CodeGen/ValueTypes.h"
+-
+-namespace llvm {
+-
+-class M68kTargetLowering;
+-
+-class M68kCallLowering : public CallLowering {
+-  // TODO: We are only supporting return instruction with no value at this time
+-  // point
+-
 -public:
--  DefaultInlineAdvice(DefaultInlineAdvisor *Advisor, CallBase &CB,
--                      Optional<InlineCost> OIC, OptimizationRemarkEmitter &ORE)
--      : InlineAdvice(Advisor, CB, ORE, OIC.hasValue()), OriginalCB(&CB),
--        OIC(OIC) {}
+-  M68kCallLowering(const M68kTargetLowering &TLI);
 -
--private:
--  void recordUnsuccessfulInliningImpl(const InlineResult &Result) override {
--    using namespace ore;
--    llvm::setInlineRemark(*OriginalCB, std::string(Result.getFailureReason()) +
--                                           "; " + inlineCostStr(*OIC));
--    ORE.emit([&]() {
--      return OptimizationRemarkMissed(DEBUG_TYPE, "NotInlined", DLoc, Block)
--             << NV("Callee", Callee) << " will not be inlined into "
--             << NV("Caller", Caller) << ": "
--             << NV("Reason", Result.getFailureReason());
--    });
--  }
-+void DefaultInlineAdvice::recordUnsuccessfulInliningImpl(
-+    const InlineResult &Result) {
-+  using namespace ore;
-+  llvm::setInlineRemark(*OriginalCB, std::string(Result.getFailureReason()) +
-+                                         "; " + inlineCostStr(*OIC));
-+  ORE.emit([&]() {
-+    return OptimizationRemarkMissed(DEBUG_TYPE, "NotInlined", DLoc, Block)
-+           << NV("Callee", Callee) << " will not be inlined into "
-+           << NV("Caller", Caller) << ": "
-+           << NV("Reason", Result.getFailureReason());
-+  });
-+}
- 
--  void recordInliningWithCalleeDeletedImpl() override {
-+void DefaultInlineAdvice::recordInliningWithCalleeDeletedImpl() {
-+  if (EmitRemarks)
-     emitInlinedInto(ORE, DLoc, Block, *Callee, *Caller, *OIC);
--  }
-+}
- 
--  void recordInliningImpl() override {
-+void DefaultInlineAdvice::recordInliningImpl() {
-+  if (EmitRemarks)
-     emitInlinedInto(ORE, DLoc, Block, *Callee, *Caller, *OIC);
--  }
+-  bool lowerReturn(MachineIRBuilder &MIRBuilder, const Value *Val,
+-                   ArrayRef<Register> VRegs, FunctionLoweringInfo &FLI,
+-                   Register SwiftErrorVReg) const override;
 -
--private:
--  CallBase *const OriginalCB;
--  Optional<InlineCost> OIC;
+-  bool lowerFormalArguments(MachineIRBuilder &MIRBuilder, const Function &F,
+-                            ArrayRef<ArrayRef<Register>> VRegs,
+-                            FunctionLoweringInfo &FLI) const override;
+-
+-  bool lowerCall(MachineIRBuilder &MIRBuilder,
+-                 CallLoweringInfo &Info) const override;
+-
+-  bool enableBigEndian() const override;
 -};
 -
--} // namespace
-+}
- 
- llvm::Optional<llvm::InlineCost> static getDefaultInlineAdvice(
-     CallBase &CB, FunctionAnalysisManager &FAM, const InlineParams &Params) {
-@@ -389,10 +376,10 @@
-     StringRef Name = DIL->getScope()->getSubprogram()->getLinkageName();
-     if (Name.empty())
-       Name = DIL->getScope()->getSubprogram()->getName();
--    CallSiteLoc << Name.str() << ":" << llvm::utostr(Offset);
--    if (Discriminator) {
-+    CallSiteLoc << Name.str() << ":" << llvm::utostr(Offset) << ":"
-+                << llvm::utostr(DIL->getColumn());
-+    if (Discriminator)
-       CallSiteLoc << "." << llvm::utostr(Discriminator);
--    }
-     First = false;
-   }
- 
-@@ -415,11 +402,14 @@
-     StringRef Name = DIL->getScope()->getSubprogram()->getLinkageName();
-     if (Name.empty())
-       Name = DIL->getScope()->getSubprogram()->getName();
--    Remark << Name << ":" << ore::NV("Line", Offset);
-+    Remark << Name << ":" << ore::NV("Line", Offset) << ":"
-+           << ore::NV("Column", DIL->getColumn());
-     if (Discriminator)
-       Remark << "." << ore::NV("Disc", Discriminator);
-     First = false;
-   }
-+
-+  Remark << ";";
- }
- 
- void llvm::emitInlinedInto(OptimizationRemarkEmitter &ORE, DebugLoc DLoc,
-diff --git a/llvm/lib/Analysis/ReplayInlineAdvisor.cpp b/llvm/lib/Analysis/ReplayInlineAdvisor.cpp
---- a/llvm/lib/Analysis/ReplayInlineAdvisor.cpp
-+++ b/llvm/lib/Analysis/ReplayInlineAdvisor.cpp
-@@ -6,8 +6,10 @@
- //
- //===----------------------------------------------------------------------===//
- //
--// This file implements ReplayInlineAdvisor that replays inline decision based
--// on previous inline remarks from optimization remark log.
-+// This file implements ReplayInlineAdvisor that replays inline decisions based
-+// on previous inline remarks from optimization remark log. This is a best
-+// effort approach useful for testing compiler/source changes while holding
-+// inlining steady.
- //
- //===----------------------------------------------------------------------===//
- 
-@@ -22,8 +24,9 @@
- 
- ReplayInlineAdvisor::ReplayInlineAdvisor(FunctionAnalysisManager &FAM,
-                                          LLVMContext &Context,
--                                         StringRef RemarksFile)
--    : InlineAdvisor(FAM), HasReplayRemarks(false) {
-+                                         StringRef RemarksFile,
-+                                         bool EmitRemarks)
-+    : InlineAdvisor(FAM), HasReplayRemarks(false), EmitRemarks(EmitRemarks) {
-   auto BufferOrErr = MemoryBuffer::getFileOrSTDIN(RemarksFile);
-   std::error_code EC = BufferOrErr.getError();
-   if (EC) {
-@@ -32,16 +35,24 @@
-   }
- 
-   // Example for inline remarks to parse:
--  //   _Z3subii inlined into main [details] at callsite sum:1 @ main:3.1
-+  //   main:3:1.1: _Z3subii inlined into main at callsite sum:1 @ main:3:1.1
-   // We use the callsite string after `at callsite` to replay inlining.
-   line_iterator LineIt(*BufferOrErr.get(), /*SkipBlanks=*/true);
-   for (; !LineIt.is_at_eof(); ++LineIt) {
-     StringRef Line = *LineIt;
-     auto Pair = Line.split(" at callsite ");
--    if (Pair.second.empty())
-+
-+    auto Callee = Pair.first.split(" inlined into").first.rsplit(": ").second;
-+
-+    auto CallSite = Pair.second.split(";").first;
-+
-+    if (Callee.empty() || CallSite.empty())
-       continue;
--    InlineSitesFromRemarks.insert(Pair.second);
-+
-+    std::string Combined = (Callee + CallSite).str();
-+    InlineSitesFromRemarks.insert(Combined);
-   }
-+
-   HasReplayRemarks = true;
- }
- 
-@@ -52,9 +63,19 @@
-   auto &ORE = FAM.getResult<OptimizationRemarkEmitterAnalysis>(Caller);
- 
-   if (InlineSitesFromRemarks.empty())
--    return std::make_unique<InlineAdvice>(this, CB, ORE, false);
-+    return std::make_unique<DefaultInlineAdvice>(this, CB, None, ORE,
-+                                                 EmitRemarks);
- 
-   std::string CallSiteLoc = getCallSiteLocation(CB.getDebugLoc());
--  bool InlineRecommended = InlineSitesFromRemarks.count(CallSiteLoc) > 0;
--  return std::make_unique<InlineAdvice>(this, CB, ORE, InlineRecommended);
-+  StringRef Callee = CB.getCalledFunction()->getName();
-+  std::string Combined = (Callee + CallSiteLoc).str();
-+  auto Iter = InlineSitesFromRemarks.find(Combined);
-+
-+  Optional<InlineCost> InlineRecommended = None;
-+  if (Iter != InlineSitesFromRemarks.end()) {
-+    InlineRecommended = llvm::InlineCost::getAlways("found in replay");
-+  }
-+
-+  return std::make_unique<DefaultInlineAdvice>(this, CB, InlineRecommended, ORE,
-+                                               EmitRemarks);
- }
-diff --git a/llvm/lib/Transforms/IPO/SampleProfile.cpp b/llvm/lib/Transforms/IPO/SampleProfile.cpp
---- a/llvm/lib/Transforms/IPO/SampleProfile.cpp
-+++ b/llvm/lib/Transforms/IPO/SampleProfile.cpp
-@@ -1960,7 +1960,7 @@
- 
-   if (FAM && !ProfileInlineReplayFile.empty()) {
-     ExternalInlineAdvisor = std::make_unique<ReplayInlineAdvisor>(
--        *FAM, Ctx, ProfileInlineReplayFile);
-+        *FAM, Ctx, ProfileInlineReplayFile, /*EmitRemarks=*/false);
-     if (!ExternalInlineAdvisor->areReplayRemarksLoaded())
-       ExternalInlineAdvisor.reset();
-   }
-diff --git a/llvm/test/Transforms/Inline/optimization-remarks-passed-yaml.ll b/llvm/test/Transforms/Inline/optimization-remarks-passed-yaml.ll
---- a/llvm/test/Transforms/Inline/optimization-remarks-passed-yaml.ll
-+++ b/llvm/test/Transforms/Inline/optimization-remarks-passed-yaml.ll
-@@ -22,7 +22,7 @@
- ;  4       return foo();
- ;  5     }
- 
--; CHECK: remark: /tmp/s.c:4:10: foo inlined into bar with (cost={{[0-9\-]+}}, threshold={{[0-9]+}}) at callsite bar:1 (hotness: 30)
-+; CHECK: remark: /tmp/s.c:4:10: foo inlined into bar with (cost={{[0-9\-]+}}, threshold={{[0-9]+}}) at callsite bar:1:10; (hotness: 30)
- 
- ; YAML:      --- !Passed
- ; YAML-NEXT: Pass:            inline
-@@ -46,6 +46,9 @@
- ; YAML-NEXT:   - String:          bar
- ; YAML-NEXT:   - String:          ':'
- ; YAML-NEXT:   - Line:            '1'
-+; YAML-NEXT:   - String:          ':'
-+; YAML-NEXT:   - Column:          '10'
-+; YAML-NEXT:   - String:          ';'
- ; YAML-NEXT: ...
- 
- ; ModuleID = '/tmp/s.c'
-diff --git a/llvm/test/Transforms/SampleProfile/Inputs/inline-replay.txt b/llvm/test/Transforms/SampleProfile/Inputs/inline-replay.txt
---- a/llvm/test/Transforms/SampleProfile/Inputs/inline-replay.txt
-+++ b/llvm/test/Transforms/SampleProfile/Inputs/inline-replay.txt
-@@ -1,2 +1,2 @@
--remark: calls.cc:10:0: _Z3sumii inlined into main to match profiling context with (cost=45, threshold=337) at callsite main:3.1
--remark: calls.cc:4:0: _Z3subii inlined into main to match profiling context with (cost=-5, threshold=337) at callsite _Z3sumii:1 @ main:3.1
-+remark: calls.cc:10:0: _Z3sumii inlined into main to match profiling context with (cost=45, threshold=337) at callsite main:3:0.1;
-+remark: calls.cc:4:0: _Z3subii inlined into main to match profiling context with (cost=-5, threshold=337) at callsite _Z3sumii:1:0 @ main:3:0.1;
-diff --git a/llvm/test/Transforms/SampleProfile/inline-replay.ll b/llvm/test/Transforms/SampleProfile/inline-replay.ll
---- a/llvm/test/Transforms/SampleProfile/inline-replay.ll
-+++ b/llvm/test/Transforms/SampleProfile/inline-replay.ll
-@@ -119,4 +119,4 @@
- 
- ; REPLAY: _Z3sumii inlined into main
- ; REPLAY: _Z3subii inlined into main
--; REPLA-NOT: _Z3subii inlined into _Z3sumii
-+; REPLAY-NOT: _Z3subii inlined into _Z3sumii
-diff --git a/llvm/test/Transforms/SampleProfile/remarks-hotness.ll b/llvm/test/Transforms/SampleProfile/remarks-hotness.ll
---- a/llvm/test/Transforms/SampleProfile/remarks-hotness.ll
-+++ b/llvm/test/Transforms/SampleProfile/remarks-hotness.ll
-@@ -36,7 +36,7 @@
- ; YAML-MISS-NEXT: Function:        _Z7caller2v
- ; YAML-MISS-NEXT: Hotness:         2
- 
--; CHECK-RPASS: _Z7callee1v inlined into _Z7caller1v with (cost=-30, threshold=4500) at callsite _Z7caller1v:1 (hotness: 401)
-+; CHECK-RPASS: _Z7callee1v inlined into _Z7caller1v with (cost=-30, threshold=4500) at callsite _Z7caller1v:1:10; (hotness: 401)
- ; CHECK-RPASS-NOT: _Z7callee2v not inlined into _Z7caller2v because it should never be inlined (cost=never): noinline function attribute (hotness: 2)
- 
- ; ModuleID = 'remarks-hotness.cpp'
-@@ -93,4 +93,3 @@
- !17 = distinct !DISubprogram(name: "caller2", linkageName: "_Z7caller2v", scope: !1, file: !1, line: 13, type: !8, scopeLine: 13, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
- !18 = !DILocation(line: 14, column: 10, scope: !17)
- !19 = !DILocation(line: 14, column: 3, scope: !17)
+-} // end namespace llvm
 -
-diff --git a/llvm/test/Transforms/SampleProfile/remarks.ll b/llvm/test/Transforms/SampleProfile/remarks.ll
---- a/llvm/test/Transforms/SampleProfile/remarks.ll
-+++ b/llvm/test/Transforms/SampleProfile/remarks.ll
-@@ -21,8 +21,8 @@
+-#endif // LLVM_LIB_TARGET_M68K_GLSEL_M68KCALLLOWERING_H
+diff --git b/llvm/lib/Target/M68k/GlSel/M68kInstructionSelector.cpp a/llvm/lib/Target/M68k/GlSel/M68kInstructionSelector.cpp
+deleted file mode 100644
+index 9ac4ab9a5ba1..000000000000
+--- b/llvm/lib/Target/M68k/GlSel/M68kInstructionSelector.cpp
++++ /dev/null
+@@ -1,90 +0,0 @@
+-//===- M68kInstructionSelector.cpp ------------------------------*- C++ -*-===//
+-//===----------------------------------------------------------------------===//
+-/// \file
+-/// This file implements the targeting of the InstructionSelector class for
+-/// M68k.
+-/// \todo This should be generated by TableGen.
+-//===----------------------------------------------------------------------===//
+-
+-#include "M68kRegisterBankInfo.h"
+-#include "M68kSubtarget.h"
+-#include "M68kTargetMachine.h"
+-#include "llvm/CodeGen/GlobalISel/InstructionSelector.h"
+-#include "llvm/CodeGen/GlobalISel/InstructionSelectorImpl.h"
+-#include "llvm/Support/Debug.h"
+-
+-#define DEBUG_TYPE "m68k-isel"
+-
+-using namespace llvm;
+-
+-#define GET_GLOBALISEL_PREDICATE_BITSET
+-#include "M68kGenGlobalISel.inc"
+-#undef GET_GLOBALISEL_PREDICATE_BITSET
+-
+-namespace {
+-
+-class M68kInstructionSelector : public InstructionSelector {
+-public:
+-  M68kInstructionSelector(const M68kTargetMachine &TM, const M68kSubtarget &STI,
+-                          const M68kRegisterBankInfo &RBI);
+-
+-  bool select(MachineInstr &I) override;
+-  static const char *getName() { return DEBUG_TYPE; }
+-
+-private:
+-  bool selectImpl(MachineInstr &I, CodeGenCoverage &CoverageInfo) const;
+-
+-  const M68kTargetMachine &TM;
+-  const M68kInstrInfo &TII;
+-  const M68kRegisterInfo &TRI;
+-  const M68kRegisterBankInfo &RBI;
+-
+-#define GET_GLOBALISEL_PREDICATES_DECL
+-#include "M68kGenGlobalISel.inc"
+-#undef GET_GLOBALISEL_PREDICATES_DECL
+-
+-#define GET_GLOBALISEL_TEMPORARIES_DECL
+-#include "M68kGenGlobalISel.inc"
+-#undef GET_GLOBALISEL_TEMPORARIES_DECL
+-};
+-
+-} // end anonymous namespace
+-
+-#define GET_GLOBALISEL_IMPL
+-#include "M68kGenGlobalISel.inc"
+-#undef GET_GLOBALISEL_IMPL
+-
+-M68kInstructionSelector::M68kInstructionSelector(
+-    const M68kTargetMachine &TM, const M68kSubtarget &STI,
+-    const M68kRegisterBankInfo &RBI)
+-    : InstructionSelector(), TM(TM), TII(*STI.getInstrInfo()),
+-      TRI(*STI.getRegisterInfo()), RBI(RBI),
+-
+-#define GET_GLOBALISEL_PREDICATES_INIT
+-#include "M68kGenGlobalISel.inc"
+-#undef GET_GLOBALISEL_PREDICATES_INIT
+-#define GET_GLOBALISEL_TEMPORARIES_INIT
+-#include "M68kGenGlobalISel.inc"
+-#undef GET_GLOBALISEL_TEMPORARIES_INIT
+-{
+-}
+-
+-bool M68kInstructionSelector::select(MachineInstr &I) {
+-  // Certain non-generic instructions also need some special handling.
+-  if (!isPreISelGenericOpcode(I.getOpcode()))
+-    return true;
+-
+-  if (selectImpl(I, *CoverageInfo))
+-    return true;
+-
+-  return false;
+-}
+-
+-namespace llvm {
+-InstructionSelector *
+-createM68kInstructionSelector(const M68kTargetMachine &TM,
+-                              const M68kSubtarget &Subtarget,
+-                              const M68kRegisterBankInfo &RBI) {
+-  return new M68kInstructionSelector(TM, Subtarget, RBI);
+-}
+-} // end namespace llvm
+diff --git b/llvm/lib/Target/M68k/GlSel/M68kLegalizerInfo.cpp a/llvm/lib/Target/M68k/GlSel/M68kLegalizerInfo.cpp
+deleted file mode 100644
+index f1f810918d15..000000000000
+--- b/llvm/lib/Target/M68k/GlSel/M68kLegalizerInfo.cpp
++++ /dev/null
+@@ -1,24 +0,0 @@
+-//===-- M68kLegalizerInfo.cpp ----------------------------------*- C++ -*-===//
+-//
+-// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+-// See https://llvm.org/LICENSE.txt for license information.
+-// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+-//
+-//===----------------------------------------------------------------------===//
+-/// \file
+-/// This file implements the targeting of the Machinelegalizer class for M68k.
+-//===----------------------------------------------------------------------===//
+-
+-#include "M68kLegalizerInfo.h"
+-#include "llvm/CodeGen/GlobalISel/LegalizerHelper.h"
+-#include "llvm/CodeGen/GlobalISel/LegalizerInfo.h"
+-#include "llvm/CodeGen/TargetOpcodes.h"
+-#include "llvm/CodeGen/ValueTypes.h"
+-#include "llvm/IR/DerivedTypes.h"
+-#include "llvm/IR/Type.h"
+-
+-using namespace llvm;
+-
+-M68kLegalizerInfo::M68kLegalizerInfo(const M68kSubtarget &ST) {
+-  getLegacyLegalizerInfo().computeTables();
+-}
+diff --git b/llvm/lib/Target/M68k/GlSel/M68kLegalizerInfo.h a/llvm/lib/Target/M68k/GlSel/M68kLegalizerInfo.h
+deleted file mode 100644
+index 205aa81aedcc..000000000000
+--- b/llvm/lib/Target/M68k/GlSel/M68kLegalizerInfo.h
++++ /dev/null
+@@ -1,29 +0,0 @@
+-//===- M68kLegalizerInfo --------------------------------------*- C++ -*-==//
+-//
+-// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+-// See https://llvm.org/LICENSE.txt for license information.
+-// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+-//
+-//===----------------------------------------------------------------------===//
+-/// \file
+-/// This file declares the targeting of the MachineLegalizer class for
+-/// M68k.
+-/// \todo This should be generated by TableGen.
+-//===----------------------------------------------------------------------===//
+-
+-#ifndef LLVM_LIB_TARGET_M68K_GLSEL_M68KLEGALIZERINFO_H
+-#define LLVM_LIB_TARGET_M68K_GLSEL_M68KLEGALIZERINFO_H
+-
+-#include "llvm/CodeGen/GlobalISel/LegalizerInfo.h"
+-
+-namespace llvm {
+-
+-class M68kSubtarget;
+-
+-/// This struct provides the information for the target register banks.
+-struct M68kLegalizerInfo : public LegalizerInfo {
+-public:
+-  M68kLegalizerInfo(const M68kSubtarget &ST);
+-};
+-} // end namespace llvm
+-#endif // LLVM_LIB_TARGET_M68K_GLSEL_M68KLEGALIZERINFO_H
+diff --git b/llvm/lib/Target/M68k/GlSel/M68kRegisterBankInfo.cpp a/llvm/lib/Target/M68k/GlSel/M68kRegisterBankInfo.cpp
+deleted file mode 100644
+index d12478624655..000000000000
+--- b/llvm/lib/Target/M68k/GlSel/M68kRegisterBankInfo.cpp
++++ /dev/null
+@@ -1,27 +0,0 @@
+-//===-- M68kRegisterBankInfo.cpp -------------------------------*- C++ -*-===//
+-//
+-// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+-// See https://llvm.org/LICENSE.txt for license information.
+-// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+-//
+-//===----------------------------------------------------------------------===//
+-/// \file
+-/// This file implements the targeting of the RegisterBankInfo class for M68k.
+-/// \todo This should be generated by TableGen.
+-//===----------------------------------------------------------------------===//
+-
+-#include "M68kRegisterBankInfo.h"
+-#include "MCTargetDesc/M68kMCTargetDesc.h"
+-#include "llvm/CodeGen/GlobalISel/RegisterBank.h"
+-#include "llvm/CodeGen/GlobalISel/RegisterBankInfo.h"
+-#include "llvm/CodeGen/MachineRegisterInfo.h"
+-#include "llvm/CodeGen/TargetRegisterInfo.h"
+-
+-#define GET_TARGET_REGBANK_IMPL
+-#include "M68kGenRegisterBank.inc"
+-#undef GET_TARGET_REGBANK_IMPL
+-
+-using namespace llvm;
+-
+-M68kRegisterBankInfo::M68kRegisterBankInfo(const TargetRegisterInfo &TRI)
+-    : M68kGenRegisterBankInfo() {}
+diff --git b/llvm/lib/Target/M68k/GlSel/M68kRegisterBankInfo.h a/llvm/lib/Target/M68k/GlSel/M68kRegisterBankInfo.h
+deleted file mode 100644
+index 9b97cc4a6dd4..000000000000
+--- b/llvm/lib/Target/M68k/GlSel/M68kRegisterBankInfo.h
++++ /dev/null
+@@ -1,39 +0,0 @@
+-//===-- M68kRegisterBankInfo.h ---------------------------------*- C++ -*-===//
+-//
+-// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+-// See https://llvm.org/LICENSE.txt for license information.
+-// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+-//
+-//===----------------------------------------------------------------------===//
+-/// \file
+-/// This file declares the targeting of the RegisterBankInfo class for M68k.
+-/// \todo This should be generated by TableGen.
+-//===----------------------------------------------------------------------===//
+-
+-#ifndef LLVM_LIB_TARGET_M68K_GLSEL_M68KREGISTERBANKINFO_H
+-#define LLVM_LIB_TARGET_M68K_GLSEL_M68KREGISTERBANKINFO_H
+-
+-#include "llvm/CodeGen/GlobalISel/RegisterBankInfo.h"
+-
+-#define GET_REGBANK_DECLARATIONS
+-#include "M68kGenRegisterBank.inc"
+-#undef GET_REGBANK_DECLARATIONS
+-
+-namespace llvm {
+-
+-class TargetRegisterInfo;
+-
+-class M68kGenRegisterBankInfo : public RegisterBankInfo {
+-protected:
+-#define GET_TARGET_REGBANK_CLASS
+-#include "M68kGenRegisterBank.inc"
+-#undef GET_TARGET_REGBANK_CLASS
+-};
+-
+-/// This class provides the information for the target register banks.
+-class M68kRegisterBankInfo final : public M68kGenRegisterBankInfo {
+-public:
+-  M68kRegisterBankInfo(const TargetRegisterInfo &TRI);
+-};
+-} // end namespace llvm
+-#endif
+diff --git b/llvm/lib/Target/M68k/GlSel/M68kRegisterBanks.td a/llvm/lib/Target/M68k/GlSel/M68kRegisterBanks.td
+deleted file mode 100644
+index 2d1e74f78480..000000000000
+--- b/llvm/lib/Target/M68k/GlSel/M68kRegisterBanks.td
++++ /dev/null
+@@ -1,15 +0,0 @@
+-//===-- M68kRegisterBanks.td - Describe the M68k Banks -------*- tablegen -*-===//
+-//
+-// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+-// See https://llvm.org/LICENSE.txt for license information.
+-// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+-//
+-//===----------------------------------------------------------------------===//
+-///
+-/// \file
+-/// Define the M68k register banks used for GlobalISel.
+-///
+-//===----------------------------------------------------------------------===//
+-
+-/// General Purpose Registers. Here we define a register bank with name AnyGPR
+-def GPRRegBank : RegisterBank<"AnyGPR", [DR8]>;
+diff --git b/llvm/lib/Target/M68k/M68k.h a/llvm/lib/Target/M68k/M68k.h
+index cef40bee7d93..98e508836323 100644
+--- b/llvm/lib/Target/M68k/M68k.h
++++ a/llvm/lib/Target/M68k/M68k.h
+@@ -18,9 +18,6 @@
+ namespace llvm {
  
- ; We are expecting foo() to be inlined in main() (almost all the cycles are
- ; spent inside foo).
--; CHECK: remark: remarks.cc:13:21: _Z3foov inlined into main to match profiling context with (cost=130, threshold=225) at callsite main:0
--; CHECK: remark: remarks.cc:9:19: rand inlined into main to match profiling context with (cost=always): always inline attribute at callsite _Z3foov:6 @ main:0
-+; CHECK: remark: remarks.cc:13:21: _Z3foov inlined into main to match profiling context with (cost=130, threshold=225) at callsite main:0:21;
-+; CHECK: remark: remarks.cc:9:19: rand inlined into main to match profiling context with (cost=always): always inline attribute at callsite _Z3foov:6:19 @ main:0:21;
+ class FunctionPass;
+-class InstructionSelector;
+-class M68kRegisterBankInfo;
+-class M68kSubtarget;
+ class M68kTargetMachine;
  
- ; The back edge for the loop is the hottest edge in the loop subgraph.
- ; CHECK: remark: remarks.cc:6:9: most popular destination for conditional branches at remarks.cc:5:3
-@@ -53,6 +53,9 @@
- ;YAML-NEXT:    - String:          main
- ;YAML-NEXT:    - String:          ':'
- ;YAML-NEXT:    - Line:            '0'
-+;YAML-NEXT:    - String:          ':'
-+;YAML-NEXT:    - Column:          '21'
-+;YAML-NEXT:    - String:          ';'
- ;YAML-NEXT:  ...
- ;YAML:       --- !Passed
- ;YAML-NEXT:  Pass:            sample-profile-inline
-@@ -74,10 +77,15 @@
- ;YAML-NEXT:    - String:          _Z3foov
- ;YAML-NEXT:    - String:          ':'
- ;YAML-NEXT:    - Line:            '6'
-+;YAML-NEXT:    - String:          ':'
-+;YAML-NEXT:    - Column:          '19'
- ;YAML-NEXT:    - String:          ' @ '
- ;YAML-NEXT:    - String:          main
- ;YAML-NEXT:    - String:          ':'
- ;YAML-NEXT:    - Line:            '0'
-+;YAML-NEXT:    - String:          ':'
-+;YAML-NEXT:    - Column:          '21'
-+;YAML-NEXT:    - String:          ';'
- ;YAML:  --- !Analysis
- ;YAML-NEXT:  Pass:            sample-profile
- ;YAML-NEXT:  Name:            AppliedSamples
-
+ /// This pass converts a legalized DAG into a M68k-specific DAG, ready for
+@@ -48,10 +45,6 @@ FunctionPass *createM68kCollapseMOVEMPass();
+ /// so that all possible MOVEs are present.
+ FunctionPass *createM68kConvertMOVToMOVMPass();
+ 
+-InstructionSelector *
+-createM68kInstructionSelector(const M68kTargetMachine &, const M68kSubtarget &,
+-                              const M68kRegisterBankInfo &);
+-
+ } // namespace llvm
+ 
+ #endif
+diff --git b/llvm/lib/Target/M68k/M68k.td a/llvm/lib/Target/M68k/M68k.td
+index 669eb32f46f1..1493c6c98feb 100644
+--- b/llvm/lib/Target/M68k/M68k.td
++++ a/llvm/lib/Target/M68k/M68k.td
+@@ -78,7 +78,6 @@ def : Proc<"M68060",  [ FeatureISA60 ]>;
+ //===----------------------------------------------------------------------===//
+ 
+ include "M68kRegisterInfo.td"
+-include "GlSel/M68kRegisterBanks.td"
+ 
+ //===----------------------------------------------------------------------===//
+ // Instruction Descriptions
+diff --git b/llvm/lib/Target/M68k/M68kSubtarget.cpp a/llvm/lib/Target/M68k/M68kSubtarget.cpp
+index 8cf2b8c93739..cd886bb1df3a 100644
+--- b/llvm/lib/Target/M68k/M68kSubtarget.cpp
++++ a/llvm/lib/Target/M68k/M68kSubtarget.cpp
+@@ -12,9 +12,6 @@
+ //===----------------------------------------------------------------------===//
+ 
+ #include "M68kSubtarget.h"
+-#include "GlSel/M68kCallLowering.h"
+-#include "GlSel/M68kLegalizerInfo.h"
+-#include "GlSel/M68kRegisterBankInfo.cpp"
+ 
+ #include "M68k.h"
+ #include "M68kMachineFunction.h"
+@@ -54,30 +51,7 @@ M68kSubtarget::M68kSubtarget(const Triple &TT, StringRef CPU, StringRef FS,
+       UserReservedRegister(M68k::NUM_TARGET_REGS), TM(TM), TSInfo(),
+       InstrInfo(initializeSubtargetDependencies(CPU, TT, FS, TM)),
+       FrameLowering(*this, this->getStackAlignment()), TLInfo(TM, *this),
+-      TargetTriple(TT) {
+-  CallLoweringInfo.reset(new M68kCallLowering(*getTargetLowering()));
+-  Legalizer.reset(new M68kLegalizerInfo(*this));
+-
+-  auto *RBI = new M68kRegisterBankInfo(*getRegisterInfo());
+-  RegBankInfo.reset(RBI);
+-  InstSelector.reset(createM68kInstructionSelector(TM, *this, *RBI));
+-}
+-
+-const CallLowering *M68kSubtarget::getCallLowering() const {
+-  return CallLoweringInfo.get();
+-}
+-
+-InstructionSelector *M68kSubtarget::getInstructionSelector() const {
+-  return InstSelector.get();
+-}
+-
+-const LegalizerInfo *M68kSubtarget::getLegalizerInfo() const {
+-  return Legalizer.get();
+-}
+-
+-const RegisterBankInfo *M68kSubtarget::getRegBankInfo() const {
+-  return RegBankInfo.get();
+-}
++      TargetTriple(TT) {}
+ 
+ bool M68kSubtarget::isPositionIndependent() const {
+   return TM.isPositionIndependent();
+diff --git b/llvm/lib/Target/M68k/M68kSubtarget.h a/llvm/lib/Target/M68k/M68kSubtarget.h
+index f45cb7edca1f..c46945f3b5d1 100644
+--- b/llvm/lib/Target/M68k/M68kSubtarget.h
++++ a/llvm/lib/Target/M68k/M68kSubtarget.h
+@@ -19,10 +19,6 @@
+ #include "M68kInstrInfo.h"
+ 
+ #include "llvm/ADT/BitVector.h"
+-#include "llvm/CodeGen/GlobalISel/CallLowering.h"
+-#include "llvm/CodeGen/GlobalISel/InstructionSelector.h"
+-#include "llvm/CodeGen/GlobalISel/LegalizerInfo.h"
+-#include "llvm/CodeGen/GlobalISel/RegisterBankInfo.h"
+ #include "llvm/CodeGen/SelectionDAGTargetInfo.h"
+ #include "llvm/CodeGen/TargetSubtargetInfo.h"
+ #include "llvm/IR/DataLayout.h"
+@@ -163,19 +159,6 @@ public:
+   const InstrItineraryData *getInstrItineraryData() const override {
+     return &InstrItins;
+   }
+-
+-protected:
+-  // GlobalISel related APIs.
+-  std::unique_ptr<CallLowering> CallLoweringInfo;
+-  std::unique_ptr<InstructionSelector> InstSelector;
+-  std::unique_ptr<LegalizerInfo> Legalizer;
+-  std::unique_ptr<RegisterBankInfo> RegBankInfo;
+-
+-public:
+-  const CallLowering *getCallLowering() const override;
+-  InstructionSelector *getInstructionSelector() const override;
+-  const LegalizerInfo *getLegalizerInfo() const override;
+-  const RegisterBankInfo *getRegBankInfo() const override;
+ };
+ } // namespace llvm
+ 
+diff --git b/llvm/lib/Target/M68k/M68kTargetMachine.cpp a/llvm/lib/Target/M68k/M68kTargetMachine.cpp
+index 5b8fd3d41b14..fe69d29ba926 100644
+--- b/llvm/lib/Target/M68k/M68kTargetMachine.cpp
++++ a/llvm/lib/Target/M68k/M68kTargetMachine.cpp
+@@ -13,18 +13,14 @@
+ 
+ #include "M68kTargetMachine.h"
+ #include "M68k.h"
++#include "TargetInfo/M68kTargetInfo.h"
++
+ #include "M68kSubtarget.h"
+ #include "M68kTargetObjectFile.h"
+-#include "TargetInfo/M68kTargetInfo.h"
+-#include "llvm/CodeGen/GlobalISel/IRTranslator.h"
+-#include "llvm/CodeGen/GlobalISel/InstructionSelect.h"
+-#include "llvm/CodeGen/GlobalISel/Legalizer.h"
+-#include "llvm/CodeGen/GlobalISel/RegBankSelect.h"
++
+ #include "llvm/CodeGen/Passes.h"
+ #include "llvm/CodeGen/TargetPassConfig.h"
+ #include "llvm/IR/LegacyPassManager.h"
+-#include "llvm/InitializePasses.h"
+-#include "llvm/PassRegistry.h"
+ #include "llvm/Support/TargetRegistry.h"
+ #include <memory>
+ 
+@@ -34,8 +30,6 @@ using namespace llvm;
+ 
+ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeM68kTarget() {
+   RegisterTargetMachine<M68kTargetMachine> X(getTheM68kTarget());
+-  auto *PR = PassRegistry::getPassRegistry();
+-  initializeGlobalISel(*PR);
+ }
+ 
+ namespace {
+@@ -140,10 +134,7 @@ public:
+   const M68kSubtarget &getM68kSubtarget() const {
+     return *getM68kTargetMachine().getSubtargetImpl();
+   }
+-  bool addIRTranslator() override;
+-  bool addLegalizeMachineIR() override;
+-  bool addRegBankSelect() override;
+-  bool addGlobalInstructionSelect() override;
++
+   bool addInstSelector() override;
+   void addPreSched2() override;
+   void addPreEmitPass() override;
+@@ -161,26 +152,6 @@ bool M68kPassConfig::addInstSelector() {
+   return false;
+ }
+ 
+-bool M68kPassConfig::addIRTranslator() {
+-  addPass(new IRTranslator());
+-  return false;
+-}
+-
+-bool M68kPassConfig::addLegalizeMachineIR() {
+-  addPass(new Legalizer());
+-  return false;
+-}
+-
+-bool M68kPassConfig::addRegBankSelect() {
+-  addPass(new RegBankSelect());
+-  return false;
+-}
+-
+-bool M68kPassConfig::addGlobalInstructionSelect() {
+-  addPass(new InstructionSelect());
+-  return false;
+-}
+-
+ void M68kPassConfig::addPreSched2() { addPass(createM68kExpandPseudoPass()); }
+ 
+ void M68kPassConfig::addPreEmitPass() {
+diff --git b/llvm/test/CodeGen/M68k/GlobalISel/irtranslator-ret.ll a/llvm/test/CodeGen/M68k/GlobalISel/irtranslator-ret.ll
+deleted file mode 100644
+index 38849e30bf77..000000000000
+--- b/llvm/test/CodeGen/M68k/GlobalISel/irtranslator-ret.ll
++++ /dev/null
+@@ -1,7 +0,0 @@
+-; RUN: llc -mtriple=m68k -global-isel -stop-after=irtranslator < %s | FileCheck %s
+-
+-; CHECK: name: noArgRetVoid
+-; CHECK: RTS
+-define void @noArgRetVoid() {
+-  ret void
+-}
