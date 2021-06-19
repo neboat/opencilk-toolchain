@@ -139,3 +139,4 @@ print-lldb-path.patch
 libcxx-armhf-ftbfs.diff
 lld-use-link-atomic-i386.diff
 lower-python-dep.diff
+revert-D94333-m86k-link-issue.diff

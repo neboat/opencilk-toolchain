@@ -1,0 +1,353 @@
+diff --git a/clang/test/Frontend/optimization-remark-with-hotness-new-pm.c b/clang/test/Frontend/optimization-remark-with-hotness-new-pm.c
+--- a/clang/test/Frontend/optimization-remark-with-hotness-new-pm.c
++++ b/clang/test/Frontend/optimization-remark-with-hotness-new-pm.c
+@@ -73,7 +73,7 @@
+   // THRESHOLD-NOT: hotness
+   // NO_PGO: '-fdiagnostics-show-hotness' requires profile-guided optimization information
+   // NO_PGO: '-fdiagnostics-hotness-threshold=' requires profile-guided optimization information
+-  // expected-remark@+1 {{foo inlined into bar with (cost=always): always inline attribute at callsite bar:8 (hotness:}}
++  // expected-remark@+1 {{foo inlined into bar with (cost=always): always inline attribute at callsite bar:8:10; (hotness:}}
+   sum += foo(x, x - 2);
+ }
+ 
+diff --git a/clang/test/Frontend/optimization-remark-with-hotness.c b/clang/test/Frontend/optimization-remark-with-hotness.c
+--- a/clang/test/Frontend/optimization-remark-with-hotness.c
++++ b/clang/test/Frontend/optimization-remark-with-hotness.c
+@@ -66,7 +66,7 @@
+   // THRESHOLD-NOT: hotness
+   // NO_PGO: '-fdiagnostics-show-hotness' requires profile-guided optimization information
+   // NO_PGO: '-fdiagnostics-hotness-threshold=' requires profile-guided optimization information
+-  // expected-remark@+1 {{foo inlined into bar with (cost=always): always inliner at callsite bar:8 (hotness:}}
++  // expected-remark@+1 {{foo inlined into bar with (cost=always): always inliner at callsite bar:8:10; (hotness:}}
+   sum += foo(x, x - 2);
+ }
+ 
+diff --git a/llvm/include/llvm/Analysis/InlineAdvisor.h b/llvm/include/llvm/Analysis/InlineAdvisor.h
+--- a/llvm/include/llvm/Analysis/InlineAdvisor.h
++++ b/llvm/include/llvm/Analysis/InlineAdvisor.h
+@@ -121,6 +121,25 @@
+   bool Recorded = false;
+ };
+ 
++class DefaultInlineAdvice : public InlineAdvice {
++public:
++  DefaultInlineAdvice(InlineAdvisor *Advisor, CallBase &CB,
++                      Optional<InlineCost> OIC, OptimizationRemarkEmitter &ORE,
++                      bool EmitRemarks = true)
++      : InlineAdvice(Advisor, CB, ORE, OIC.hasValue()), OriginalCB(&CB),
++        OIC(OIC), EmitRemarks(EmitRemarks) {}
++
++private:
++  void recordUnsuccessfulInliningImpl(const InlineResult &Result) override;
++  void recordInliningWithCalleeDeletedImpl() override;
++  void recordInliningImpl() override;
++
++private:
++  CallBase *const OriginalCB;
++  Optional<InlineCost> OIC;
++  bool EmitRemarks;
++};
++
+ /// Interface for deciding whether to inline a call site or not.
+ class InlineAdvisor {
+ public:
+diff --git a/llvm/include/llvm/Analysis/ReplayInlineAdvisor.h b/llvm/include/llvm/Analysis/ReplayInlineAdvisor.h
+--- a/llvm/include/llvm/Analysis/ReplayInlineAdvisor.h
++++ b/llvm/include/llvm/Analysis/ReplayInlineAdvisor.h
+@@ -25,13 +25,14 @@
+ class ReplayInlineAdvisor : public InlineAdvisor {
+ public:
+   ReplayInlineAdvisor(FunctionAnalysisManager &FAM, LLVMContext &Context,
+-                      StringRef RemarksFile);
++                      StringRef RemarksFile, bool EmitRemarks);
+   std::unique_ptr<InlineAdvice> getAdvice(CallBase &CB) override;
+   bool areReplayRemarksLoaded() const { return HasReplayRemarks; }
+ 
+ private:
+   StringSet<> InlineSitesFromRemarks;
+   bool HasReplayRemarks = false;
++  bool EmitRemarks = false;
+ };
+ } // namespace llvm
+ #endif // LLVM_ANALYSIS_REPLAYINLINEADVISOR_H
+diff --git a/llvm/lib/Analysis/InlineAdvisor.cpp b/llvm/lib/Analysis/InlineAdvisor.cpp
+--- a/llvm/lib/Analysis/InlineAdvisor.cpp
++++ b/llvm/lib/Analysis/InlineAdvisor.cpp
+@@ -48,41 +48,28 @@
+                         cl::desc("Scale to limit the cost of inline deferral"),
+                         cl::init(2), cl::Hidden);
+ 
+-namespace {
+-class DefaultInlineAdvice : public InlineAdvice {
+-public:
+-  DefaultInlineAdvice(DefaultInlineAdvisor *Advisor, CallBase &CB,
+-                      Optional<InlineCost> OIC, OptimizationRemarkEmitter &ORE)
+-      : InlineAdvice(Advisor, CB, ORE, OIC.hasValue()), OriginalCB(&CB),
+-        OIC(OIC) {}
+-
+-private:
+-  void recordUnsuccessfulInliningImpl(const InlineResult &Result) override {
+-    using namespace ore;
+-    llvm::setInlineRemark(*OriginalCB, std::string(Result.getFailureReason()) +
+-                                           "; " + inlineCostStr(*OIC));
+-    ORE.emit([&]() {
+-      return OptimizationRemarkMissed(DEBUG_TYPE, "NotInlined", DLoc, Block)
+-             << NV("Callee", Callee) << " will not be inlined into "
+-             << NV("Caller", Caller) << ": "
+-             << NV("Reason", Result.getFailureReason());
+-    });
+-  }
++void DefaultInlineAdvice::recordUnsuccessfulInliningImpl(
++    const InlineResult &Result) {
++  using namespace ore;
++  llvm::setInlineRemark(*OriginalCB, std::string(Result.getFailureReason()) +
++                                         "; " + inlineCostStr(*OIC));
++  ORE.emit([&]() {
++    return OptimizationRemarkMissed(DEBUG_TYPE, "NotInlined", DLoc, Block)
++           << NV("Callee", Callee) << " will not be inlined into "
++           << NV("Caller", Caller) << ": "
++           << NV("Reason", Result.getFailureReason());
++  });
++}
+ 
+-  void recordInliningWithCalleeDeletedImpl() override {
++void DefaultInlineAdvice::recordInliningWithCalleeDeletedImpl() {
++  if (EmitRemarks)
+     emitInlinedInto(ORE, DLoc, Block, *Callee, *Caller, *OIC);
+-  }
++}
+ 
+-  void recordInliningImpl() override {
++void DefaultInlineAdvice::recordInliningImpl() {
++  if (EmitRemarks)
+     emitInlinedInto(ORE, DLoc, Block, *Callee, *Caller, *OIC);
+-  }
+-
+-private:
+-  CallBase *const OriginalCB;
+-  Optional<InlineCost> OIC;
+-};
+-
+-} // namespace
++}
+ 
+ llvm::Optional<llvm::InlineCost> static getDefaultInlineAdvice(
+     CallBase &CB, FunctionAnalysisManager &FAM, const InlineParams &Params) {
+@@ -389,10 +376,10 @@
+     StringRef Name = DIL->getScope()->getSubprogram()->getLinkageName();
+     if (Name.empty())
+       Name = DIL->getScope()->getSubprogram()->getName();
+-    CallSiteLoc << Name.str() << ":" << llvm::utostr(Offset);
+-    if (Discriminator) {
++    CallSiteLoc << Name.str() << ":" << llvm::utostr(Offset) << ":"
++                << llvm::utostr(DIL->getColumn());
++    if (Discriminator)
+       CallSiteLoc << "." << llvm::utostr(Discriminator);
+-    }
+     First = false;
+   }
+ 
+@@ -415,11 +402,14 @@
+     StringRef Name = DIL->getScope()->getSubprogram()->getLinkageName();
+     if (Name.empty())
+       Name = DIL->getScope()->getSubprogram()->getName();
+-    Remark << Name << ":" << ore::NV("Line", Offset);
++    Remark << Name << ":" << ore::NV("Line", Offset) << ":"
++           << ore::NV("Column", DIL->getColumn());
+     if (Discriminator)
+       Remark << "." << ore::NV("Disc", Discriminator);
+     First = false;
+   }
++
++  Remark << ";";
+ }
+ 
+ void llvm::emitInlinedInto(OptimizationRemarkEmitter &ORE, DebugLoc DLoc,
+diff --git a/llvm/lib/Analysis/ReplayInlineAdvisor.cpp b/llvm/lib/Analysis/ReplayInlineAdvisor.cpp
+--- a/llvm/lib/Analysis/ReplayInlineAdvisor.cpp
++++ b/llvm/lib/Analysis/ReplayInlineAdvisor.cpp
+@@ -6,8 +6,10 @@
+ //
+ //===----------------------------------------------------------------------===//
+ //
+-// This file implements ReplayInlineAdvisor that replays inline decision based
+-// on previous inline remarks from optimization remark log.
++// This file implements ReplayInlineAdvisor that replays inline decisions based
++// on previous inline remarks from optimization remark log. This is a best
++// effort approach useful for testing compiler/source changes while holding
++// inlining steady.
+ //
+ //===----------------------------------------------------------------------===//
+ 
+@@ -22,8 +24,9 @@
+ 
+ ReplayInlineAdvisor::ReplayInlineAdvisor(FunctionAnalysisManager &FAM,
+                                          LLVMContext &Context,
+-                                         StringRef RemarksFile)
+-    : InlineAdvisor(FAM), HasReplayRemarks(false) {
++                                         StringRef RemarksFile,
++                                         bool EmitRemarks)
++    : InlineAdvisor(FAM), HasReplayRemarks(false), EmitRemarks(EmitRemarks) {
+   auto BufferOrErr = MemoryBuffer::getFileOrSTDIN(RemarksFile);
+   std::error_code EC = BufferOrErr.getError();
+   if (EC) {
+@@ -32,16 +35,24 @@
+   }
+ 
+   // Example for inline remarks to parse:
+-  //   _Z3subii inlined into main [details] at callsite sum:1 @ main:3.1
++  //   main:3:1.1: _Z3subii inlined into main at callsite sum:1 @ main:3:1.1
+   // We use the callsite string after `at callsite` to replay inlining.
+   line_iterator LineIt(*BufferOrErr.get(), /*SkipBlanks=*/true);
+   for (; !LineIt.is_at_eof(); ++LineIt) {
+     StringRef Line = *LineIt;
+     auto Pair = Line.split(" at callsite ");
+-    if (Pair.second.empty())
++
++    auto Callee = Pair.first.split(" inlined into").first.rsplit(": ").second;
++
++    auto CallSite = Pair.second.split(";").first;
++
++    if (Callee.empty() || CallSite.empty())
+       continue;
+-    InlineSitesFromRemarks.insert(Pair.second);
++
++    std::string Combined = (Callee + CallSite).str();
++    InlineSitesFromRemarks.insert(Combined);
+   }
++
+   HasReplayRemarks = true;
+ }
+ 
+@@ -52,9 +63,19 @@
+   auto &ORE = FAM.getResult<OptimizationRemarkEmitterAnalysis>(Caller);
+ 
+   if (InlineSitesFromRemarks.empty())
+-    return std::make_unique<InlineAdvice>(this, CB, ORE, false);
++    return std::make_unique<DefaultInlineAdvice>(this, CB, None, ORE,
++                                                 EmitRemarks);
+ 
+   std::string CallSiteLoc = getCallSiteLocation(CB.getDebugLoc());
+-  bool InlineRecommended = InlineSitesFromRemarks.count(CallSiteLoc) > 0;
+-  return std::make_unique<InlineAdvice>(this, CB, ORE, InlineRecommended);
++  StringRef Callee = CB.getCalledFunction()->getName();
++  std::string Combined = (Callee + CallSiteLoc).str();
++  auto Iter = InlineSitesFromRemarks.find(Combined);
++
++  Optional<InlineCost> InlineRecommended = None;
++  if (Iter != InlineSitesFromRemarks.end()) {
++    InlineRecommended = llvm::InlineCost::getAlways("found in replay");
++  }
++
++  return std::make_unique<DefaultInlineAdvice>(this, CB, InlineRecommended, ORE,
++                                               EmitRemarks);
+ }
+diff --git a/llvm/lib/Transforms/IPO/SampleProfile.cpp b/llvm/lib/Transforms/IPO/SampleProfile.cpp
+--- a/llvm/lib/Transforms/IPO/SampleProfile.cpp
++++ b/llvm/lib/Transforms/IPO/SampleProfile.cpp
+@@ -1960,7 +1960,7 @@
+ 
+   if (FAM && !ProfileInlineReplayFile.empty()) {
+     ExternalInlineAdvisor = std::make_unique<ReplayInlineAdvisor>(
+-        *FAM, Ctx, ProfileInlineReplayFile);
++        *FAM, Ctx, ProfileInlineReplayFile, /*EmitRemarks=*/false);
+     if (!ExternalInlineAdvisor->areReplayRemarksLoaded())
+       ExternalInlineAdvisor.reset();
+   }
+diff --git a/llvm/test/Transforms/Inline/optimization-remarks-passed-yaml.ll b/llvm/test/Transforms/Inline/optimization-remarks-passed-yaml.ll
+--- a/llvm/test/Transforms/Inline/optimization-remarks-passed-yaml.ll
++++ b/llvm/test/Transforms/Inline/optimization-remarks-passed-yaml.ll
+@@ -22,7 +22,7 @@
+ ;  4       return foo();
+ ;  5     }
+ 
+-; CHECK: remark: /tmp/s.c:4:10: foo inlined into bar with (cost={{[0-9\-]+}}, threshold={{[0-9]+}}) at callsite bar:1 (hotness: 30)
++; CHECK: remark: /tmp/s.c:4:10: foo inlined into bar with (cost={{[0-9\-]+}}, threshold={{[0-9]+}}) at callsite bar:1:10; (hotness: 30)
+ 
+ ; YAML:      --- !Passed
+ ; YAML-NEXT: Pass:            inline
+@@ -46,6 +46,9 @@
+ ; YAML-NEXT:   - String:          bar
+ ; YAML-NEXT:   - String:          ':'
+ ; YAML-NEXT:   - Line:            '1'
++; YAML-NEXT:   - String:          ':'
++; YAML-NEXT:   - Column:          '10'
++; YAML-NEXT:   - String:          ';'
+ ; YAML-NEXT: ...
+ 
+ ; ModuleID = '/tmp/s.c'
+diff --git a/llvm/test/Transforms/SampleProfile/Inputs/inline-replay.txt b/llvm/test/Transforms/SampleProfile/Inputs/inline-replay.txt
+--- a/llvm/test/Transforms/SampleProfile/Inputs/inline-replay.txt
++++ b/llvm/test/Transforms/SampleProfile/Inputs/inline-replay.txt
+@@ -1,2 +1,2 @@
+-remark: calls.cc:10:0: _Z3sumii inlined into main to match profiling context with (cost=45, threshold=337) at callsite main:3.1
+-remark: calls.cc:4:0: _Z3subii inlined into main to match profiling context with (cost=-5, threshold=337) at callsite _Z3sumii:1 @ main:3.1
++remark: calls.cc:10:0: _Z3sumii inlined into main to match profiling context with (cost=45, threshold=337) at callsite main:3:0.1;
++remark: calls.cc:4:0: _Z3subii inlined into main to match profiling context with (cost=-5, threshold=337) at callsite _Z3sumii:1:0 @ main:3:0.1;
+diff --git a/llvm/test/Transforms/SampleProfile/inline-replay.ll b/llvm/test/Transforms/SampleProfile/inline-replay.ll
+--- a/llvm/test/Transforms/SampleProfile/inline-replay.ll
++++ b/llvm/test/Transforms/SampleProfile/inline-replay.ll
+@@ -119,4 +119,4 @@
+ 
+ ; REPLAY: _Z3sumii inlined into main
+ ; REPLAY: _Z3subii inlined into main
+-; REPLA-NOT: _Z3subii inlined into _Z3sumii
++; REPLAY-NOT: _Z3subii inlined into _Z3sumii
+diff --git a/llvm/test/Transforms/SampleProfile/remarks-hotness.ll b/llvm/test/Transforms/SampleProfile/remarks-hotness.ll
+--- a/llvm/test/Transforms/SampleProfile/remarks-hotness.ll
++++ b/llvm/test/Transforms/SampleProfile/remarks-hotness.ll
+@@ -36,7 +36,7 @@
+ ; YAML-MISS-NEXT: Function:        _Z7caller2v
+ ; YAML-MISS-NEXT: Hotness:         2
+ 
+-; CHECK-RPASS: _Z7callee1v inlined into _Z7caller1v with (cost=-30, threshold=4500) at callsite _Z7caller1v:1 (hotness: 401)
++; CHECK-RPASS: _Z7callee1v inlined into _Z7caller1v with (cost=-30, threshold=4500) at callsite _Z7caller1v:1:10; (hotness: 401)
+ ; CHECK-RPASS-NOT: _Z7callee2v not inlined into _Z7caller2v because it should never be inlined (cost=never): noinline function attribute (hotness: 2)
+ 
+ ; ModuleID = 'remarks-hotness.cpp'
+@@ -93,4 +93,3 @@
+ !17 = distinct !DISubprogram(name: "caller2", linkageName: "_Z7caller2v", scope: !1, file: !1, line: 13, type: !8, scopeLine: 13, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !2)
+ !18 = !DILocation(line: 14, column: 10, scope: !17)
+ !19 = !DILocation(line: 14, column: 3, scope: !17)
+-
+diff --git a/llvm/test/Transforms/SampleProfile/remarks.ll b/llvm/test/Transforms/SampleProfile/remarks.ll
+--- a/llvm/test/Transforms/SampleProfile/remarks.ll
++++ b/llvm/test/Transforms/SampleProfile/remarks.ll
+@@ -21,8 +21,8 @@
+ 
+ ; We are expecting foo() to be inlined in main() (almost all the cycles are
+ ; spent inside foo).
+-; CHECK: remark: remarks.cc:13:21: _Z3foov inlined into main to match profiling context with (cost=130, threshold=225) at callsite main:0
+-; CHECK: remark: remarks.cc:9:19: rand inlined into main to match profiling context with (cost=always): always inline attribute at callsite _Z3foov:6 @ main:0
++; CHECK: remark: remarks.cc:13:21: _Z3foov inlined into main to match profiling context with (cost=130, threshold=225) at callsite main:0:21;
++; CHECK: remark: remarks.cc:9:19: rand inlined into main to match profiling context with (cost=always): always inline attribute at callsite _Z3foov:6:19 @ main:0:21;
+ 
+ ; The back edge for the loop is the hottest edge in the loop subgraph.
+ ; CHECK: remark: remarks.cc:6:9: most popular destination for conditional branches at remarks.cc:5:3
+@@ -53,6 +53,9 @@
+ ;YAML-NEXT:    - String:          main
+ ;YAML-NEXT:    - String:          ':'
+ ;YAML-NEXT:    - Line:            '0'
++;YAML-NEXT:    - String:          ':'
++;YAML-NEXT:    - Column:          '21'
++;YAML-NEXT:    - String:          ';'
+ ;YAML-NEXT:  ...
+ ;YAML:       --- !Passed
+ ;YAML-NEXT:  Pass:            sample-profile-inline
+@@ -74,10 +77,15 @@
+ ;YAML-NEXT:    - String:          _Z3foov
+ ;YAML-NEXT:    - String:          ':'
+ ;YAML-NEXT:    - Line:            '6'
++;YAML-NEXT:    - String:          ':'
++;YAML-NEXT:    - Column:          '19'
+ ;YAML-NEXT:    - String:          ' @ '
+ ;YAML-NEXT:    - String:          main
+ ;YAML-NEXT:    - String:          ':'
+ ;YAML-NEXT:    - Line:            '0'
++;YAML-NEXT:    - String:          ':'
++;YAML-NEXT:    - Column:          '21'
++;YAML-NEXT:    - String:          ';'
+ ;YAML:  --- !Analysis
+ ;YAML-NEXT:  Pass:            sample-profile
+ ;YAML-NEXT:  Name:            AppliedSamples
+

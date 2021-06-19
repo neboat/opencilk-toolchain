@@ -6,6 +6,8 @@ llvm-toolchain-snapshot (1:13~++20210418105309+a0898f0cecc7-1~exp2) UNRELEASED; 
     but install /usr/lib/llvm-13/lib/libomptarget-amdgcn-*.bc
     Only install these files on amd64, ppc64el & arm64
     See openmp/libomptarget/deviceRTLs/amdgcn/CMakeLists.txt
+  * Revert D94333.diff as it breaks the ci
+    https://reviews.llvm.org/D94333#2829043
 
   [ John Paul Adrian Glaubitz ]
   * Disable OpenMP on m68k
