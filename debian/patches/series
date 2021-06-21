@@ -54,7 +54,6 @@ test-keep-alive.diff
 
 # scan-build
 scan-build-clang-path.diff
-install-scan-build-py.diff
 scan-view-fix-path.diff
 fix-scan-view-path.diff
 
