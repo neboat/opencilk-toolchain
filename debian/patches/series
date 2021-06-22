@@ -142,3 +142,4 @@ libcxx-armhf-ftbfs.diff
 lld-use-link-atomic-i386.diff
 #bring-reporter-back.patch
 D99501-ignore-lto-auto.diff
+scan-build-py-fix-analyze-path.diff

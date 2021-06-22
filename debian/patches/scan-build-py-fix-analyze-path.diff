@@ -1,0 +1,15 @@
+Index: llvm-toolchain-12-12.0.1~+rc2/clang/tools/scan-build-py/libscanbuild/analyze.py
+===================================================================
+--- llvm-toolchain-12-12.0.1~+rc2.orig/clang/tools/scan-build-py/libscanbuild/analyze.py
++++ llvm-toolchain-12-12.0.1~+rc2/clang/tools/scan-build-py/libscanbuild/analyze.py
+@@ -39,8 +39,8 @@ from libscanbuild.shell import decode
+ 
+ __all__ = ['scan_build', 'analyze_build', 'analyze_compiler_wrapper']
+ 
+-COMPILER_WRAPPER_CC = 'analyze-cc'
+-COMPILER_WRAPPER_CXX = 'analyze-c++'
++COMPILER_WRAPPER_CC = '/usr/share/clang/scan-build-py-12/bin/analyze-cc'
++COMPILER_WRAPPER_CXX = '/usr/share/clang/scan-build-py-12/bin/analyze-c++'
+ 
+ CTU_EXTDEF_MAP_FILENAME = 'externalDefMap.txt'
+ CTU_TEMP_DEFMAP_FOLDER = 'tmpExternalDefMaps'
