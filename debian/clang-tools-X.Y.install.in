@@ -32,11 +32,36 @@ usr/lib/llvm-@LLVM_VERSION@/bin/pp-trace
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-move
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-offload-wrapper
 
+usr/lib/llvm-@LLVM_VERSION@/bin/analyze-build
+usr/lib/llvm-@LLVM_VERSION@/bin/intercept-build
+usr/lib/llvm-@LLVM_VERSION@/bin/scan-build-py
+usr/lib/llvm-@LLVM_VERSION@/lib/libear/__init__.py
+usr/lib/llvm-@LLVM_VERSION@/lib/libear/config.h.in
+usr/lib/llvm-@LLVM_VERSION@/lib/libear/ear.c
+usr/lib/llvm-@LLVM_VERSION@/lib/libscanbuild/__init__.py
+usr/lib/llvm-@LLVM_VERSION@/lib/libscanbuild/analyze.py
+usr/lib/llvm-@LLVM_VERSION@/lib/libscanbuild/arguments.py
+usr/lib/llvm-@LLVM_VERSION@/lib/libscanbuild/clang.py
+usr/lib/llvm-@LLVM_VERSION@/lib/libscanbuild/compilation.py
+usr/lib/llvm-@LLVM_VERSION@/lib/libscanbuild/intercept.py
+usr/lib/llvm-@LLVM_VERSION@/lib/libscanbuild/report.py
+usr/lib/llvm-@LLVM_VERSION@/lib/libscanbuild/resources/scanview.css
+usr/lib/llvm-@LLVM_VERSION@/lib/libscanbuild/resources/selectable.js
+usr/lib/llvm-@LLVM_VERSION@/lib/libscanbuild/resources/sorttable.js
+usr/lib/llvm-@LLVM_VERSION@/lib/libscanbuild/shell.py
+usr/lib/llvm-@LLVM_VERSION@/libexec/analyze-c++
+usr/lib/llvm-@LLVM_VERSION@/libexec/analyze-cc
+usr/lib/llvm-@LLVM_VERSION@/libexec/intercept-c++
+usr/lib/llvm-@LLVM_VERSION@/libexec/intercept-cc
+
 [!armel !armhf !ppc64el !hurd-any !s390x !powerpc !ppc64 !mipsel !mips64el !sparc64 !riscv64] usr/lib/llvm-@LLVM_VERSION@/lib/clang/@LLVM_VERSION_FULL@/bin/hwasan_symbolize
 
 clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
-clang/tools/scan-build-py-@LLVM_VERSION@      usr/share/clang/
 clang/tools/scan-view-@LLVM_VERSION@       usr/share/clang/
+
+usr/bin/scan-build-py-@LLVM_VERSION@
+usr/bin/analyze-build-@LLVM_VERSION@
+usr/bin/intercept-build-@LLVM_VERSION@
 
 usr/lib/llvm-@LLVM_VERSION@/share/clang/run-find-all-symbols.py
 usr/lib/llvm-@LLVM_VERSION@/share/clang/clang-include-fixer.py
