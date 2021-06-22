@@ -3,6 +3,8 @@ llvm-toolchain-snapshot (1:13~++20210622094539+d919b73564fa-1~exp1) UNRELEASED; 
   * Refresh the lib of symbols in libomp
   * As scan-build-py is installed by default ( https://reviews.llvm.org/D104138 )
     update of the code
+  * Fix the path to analyze-{cc,c++} for scan-build-py with
+    --intercept-first (scan-build-py-fix-analyze-path.diff)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 08 May 2021 13:12:43 +0200
 

@@ -139,3 +139,4 @@ libcxx-armhf-ftbfs.diff
 lld-use-link-atomic-i386.diff
 lower-python-dep.diff
 revert-D94333-m86k-link-issue.diff
+scan-build-py-fix-analyze-path.diff
