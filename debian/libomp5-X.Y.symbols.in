@@ -39,6 +39,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  GOMP_loop_doacross_guided_start@VERSION 7
  GOMP_loop_doacross_runtime_start@GOMP_4.5 7
  GOMP_loop_doacross_runtime_start@VERSION 7
+ GOMP_loop_doacross_start@GOMP_5.0 13
+ GOMP_loop_doacross_start@VERSION 13
  GOMP_loop_doacross_static_start@GOMP_4.5 7
  GOMP_loop_doacross_static_start@VERSION 7
  GOMP_loop_dynamic_next@GOMP_1.0 0.20131209
@@ -83,6 +85,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  GOMP_loop_ordered_runtime_next@VERSION 0.20130412
  GOMP_loop_ordered_runtime_start@GOMP_1.0 0.20131209
  GOMP_loop_ordered_runtime_start@VERSION 0.20130412
+ GOMP_loop_ordered_start@GOMP_5.0 13
+ GOMP_loop_ordered_start@VERSION 13
  GOMP_loop_ordered_static_next@GOMP_1.0 0.20131209
  GOMP_loop_ordered_static_next@VERSION 0.20130412
  GOMP_loop_ordered_static_start@GOMP_1.0 0.20131209
@@ -91,6 +95,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  GOMP_loop_runtime_next@VERSION 0.20130412
  GOMP_loop_runtime_start@GOMP_1.0 0.20131209
  GOMP_loop_runtime_start@VERSION 0.20130412
+ GOMP_loop_start@GOMP_5.0 13
+ GOMP_loop_start@VERSION 13
  GOMP_loop_static_next@GOMP_1.0 0.20131209
  GOMP_loop_static_next@VERSION 0.20130412
  GOMP_loop_static_start@GOMP_1.0 0.20131209
@@ -101,6 +107,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  GOMP_loop_ull_doacross_guided_start@VERSION 7
  GOMP_loop_ull_doacross_runtime_start@GOMP_4.5 7
  GOMP_loop_ull_doacross_runtime_start@VERSION 7
+ GOMP_loop_ull_doacross_start@GOMP_5.0 13
+ GOMP_loop_ull_doacross_start@VERSION 13
  GOMP_loop_ull_doacross_static_start@GOMP_4.5 7
  GOMP_loop_ull_doacross_static_start@VERSION 7
  GOMP_loop_ull_dynamic_next@GOMP_2.0 0.20131209
@@ -139,6 +147,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  GOMP_loop_ull_ordered_runtime_next@VERSION 0.20130412
  GOMP_loop_ull_ordered_runtime_start@GOMP_2.0 0.20131209
  GOMP_loop_ull_ordered_runtime_start@VERSION 0.20130412
+ GOMP_loop_ull_ordered_start@GOMP_5.0 13
+ GOMP_loop_ull_ordered_start@VERSION 13
  GOMP_loop_ull_ordered_static_next@GOMP_2.0 0.20131209
  GOMP_loop_ull_ordered_static_next@VERSION 0.20130412
  GOMP_loop_ull_ordered_static_start@GOMP_2.0 0.20131209
@@ -147,6 +157,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  GOMP_loop_ull_runtime_next@VERSION 0.20130412
  GOMP_loop_ull_runtime_start@GOMP_2.0 0.20131209
  GOMP_loop_ull_runtime_start@VERSION 0.20130412
+ GOMP_loop_ull_start@GOMP_5.0 13
+ GOMP_loop_ull_start@VERSION 13
  GOMP_loop_ull_static_next@GOMP_2.0 0.20131209
  GOMP_loop_ull_static_next@VERSION 0.20130412
  GOMP_loop_ull_static_start@GOMP_2.0 0.20131209
@@ -183,12 +195,16 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  GOMP_parallel_loop_static@VERSION 0.20140926
  GOMP_parallel_loop_static_start@GOMP_1.0 0.20131209
  GOMP_parallel_loop_static_start@VERSION 0.20130412
+ GOMP_parallel_reductions@GOMP_5.0 13
+ GOMP_parallel_reductions@VERSION 13
  GOMP_parallel_sections@GOMP_4.0 0.20140926
  GOMP_parallel_sections@VERSION 0.20140926
  GOMP_parallel_sections_start@GOMP_1.0 0.20131209
  GOMP_parallel_sections_start@VERSION 0.20130412
  GOMP_parallel_start@GOMP_1.0 0.20131209
  GOMP_parallel_start@VERSION 0.20130412
+ GOMP_sections2_start@GOMP_5.0 13
+ GOMP_sections2_start@VERSION 13
  GOMP_sections_end@GOMP_1.0 0.20131209
  GOMP_sections_end@VERSION 0.20130412
  GOMP_sections_end_cancel@GOMP_4.0 0.20140926
@@ -215,8 +231,14 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  GOMP_target_update@VERSION 0.20140926
  GOMP_task@GOMP_2.0 0.20131209
  GOMP_task@VERSION 0.20130412
+ GOMP_task_reduction_remap@GOMP_5.0 13
+ GOMP_task_reduction_remap@VERSION 13
  GOMP_taskgroup_end@GOMP_4.0 0.20140926
  GOMP_taskgroup_end@VERSION 0.20140926
+ GOMP_taskgroup_reduction_register@GOMP_5.0 13
+ GOMP_taskgroup_reduction_register@VERSION 13
+ GOMP_taskgroup_reduction_unregister@GOMP_5.0 13
+ GOMP_taskgroup_reduction_unregister@VERSION 13
  GOMP_taskgroup_start@GOMP_4.0 0.20140926
  GOMP_taskgroup_start@VERSION 0.20140926
  GOMP_taskloop@GOMP_4.5 7
@@ -233,12 +255,15 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  GOMP_teams@VERSION 0.20140926
  GOMP_teams_reg@GOMP_5.0 12
  GOMP_teams_reg@VERSION 12
+ GOMP_workshare_task_reduction_unregister@GOMP_5.0 13
+ GOMP_workshare_task_reduction_unregister@VERSION 13
  OMP_1.0@OMP_1.0 0.20131209
  OMP_2.0@OMP_2.0 0.20131209
  OMP_3.0@OMP_3.0 0.20131209
  OMP_3.1@OMP_3.1 0.20131209
  OMP_4.0@OMP_4.0 0.20131209
  OMP_4.5@OMP_4.5 7
+ OMP_5.0@OMP_5.0 13
 #MISSING: 9# OMP_NULL_ALLOCATOR@VERSION 8
  VERSION@VERSION 0.20130412
  _You_must_link_with_Intel_OpenMP_library@VERSION 0.20130412
@@ -803,6 +828,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_end@VERSION 0.20130412
  __kmpc_end_barrier_master@VERSION 0.20130412
  __kmpc_end_critical@VERSION 0.20130412
+ __kmpc_end_masked@VERSION 13
  __kmpc_end_master@VERSION 0.20130412
  __kmpc_end_ordered@VERSION 0.20130412
  __kmpc_end_reduce@VERSION 0.20130412
@@ -812,6 +838,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_end_taskgroup@VERSION 0.20130412
 #MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_end_taskq@VERSION 0.20130412
 #MISSING: 1:9~svn356360-1~exp1+0~20190318101504.2390~1.gbp54c1e7# __kmpc_end_taskq_task@VERSION 0.20130412
+ __kmpc_error@VERSION 13
  __kmpc_flush@VERSION 0.20130412
  __kmpc_for_static_fini@VERSION 0.20130412
  __kmpc_for_static_init_4@VERSION 0.20130412
@@ -834,6 +861,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_init_nest_lock@VERSION 0.20130412
  __kmpc_init_nest_lock_with_hint@VERSION 3.8.0
  __kmpc_invoke_task_func@VERSION 0.20130412
+ __kmpc_masked@VERSION 13
  __kmpc_master@VERSION 0.20130412
  __kmpc_ok_to_fork@VERSION 0.20130412
  __kmpc_omp_reg_task_with_affinity@VERSION 8
@@ -853,6 +881,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_proxy_task_completed@VERSION 0.20150401
  __kmpc_proxy_task_completed_ooo@VERSION 0.20150401
  __kmpc_push_num_teams@VERSION 0.20130715
+ __kmpc_push_num_teams_51@VERSION 13
  __kmpc_push_num_threads@VERSION 0.20130412
  __kmpc_push_proc_bind@VERSION 0.20130412
  __kmpc_realloc@VERSION 12
@@ -978,7 +1007,9 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_alloc@VERSION 8
 #MISSING: 9# omp_alloc_@VERSION 8
  omp_calloc@VERSION 12
+ omp_capture_affinity@OMP_5.0 13
  omp_capture_affinity@VERSION 8
+ omp_capture_affinity_@OMP_5.0 13
  omp_capture_affinity_@VERSION 8
  omp_cgroup_mem_alloc@VERSION 8
  omp_const_mem_alloc@VERSION 8
@@ -1001,7 +1032,9 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_destroy_nest_lock_@OMP_1.0 0.20131209
  omp_destroy_nest_lock_@OMP_3.0 0.20131209
  omp_destroy_nest_lock_@VERSION 0.20130412
+ omp_display_affinity@OMP_5.0 13
  omp_display_affinity@VERSION 8
+ omp_display_affinity_@OMP_5.0 13
  omp_display_affinity_@VERSION 8
  omp_display_env@VERSION 11
  omp_display_env_@VERSION 11
@@ -1013,7 +1046,9 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_get_active_level@VERSION 0.20130412
  omp_get_active_level_@OMP_3.0 0.20131209
  omp_get_active_level_@VERSION 0.20130412
+ omp_get_affinity_format@OMP_5.0 13
  omp_get_affinity_format@VERSION 8
+ omp_get_affinity_format_@OMP_5.0 13
  omp_get_affinity_format_@VERSION 8
  omp_get_ancestor_thread_num@OMP_3.0 0.20131209
  omp_get_ancestor_thread_num@VERSION 0.20130412
@@ -1035,7 +1070,9 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_get_dynamic@VERSION 0.20130412
  omp_get_dynamic_@OMP_1.0 0.20131209
  omp_get_dynamic_@VERSION 0.20130412
+ omp_get_initial_device@OMP_4.5 13
  omp_get_initial_device@VERSION 8
+ omp_get_initial_device_@OMP_4.5 13
  omp_get_initial_device_@VERSION 8
  omp_get_level@OMP_3.0 0.20131209
  omp_get_level@VERSION 0.20130412
@@ -1049,6 +1086,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_get_max_task_priority@VERSION 3.9.0
  omp_get_max_task_priority_@OMP_4.5 7
  omp_get_max_task_priority_@VERSION 3.9.0
+ omp_get_max_teams@VERSION 13
+ omp_get_max_teams_@VERSION 13
  omp_get_max_threads@OMP_1.0 0.20131209
  omp_get_max_threads@VERSION 0.20130412
  omp_get_max_threads_@OMP_1.0 0.20131209
@@ -1115,6 +1154,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_get_team_size@VERSION 0.20130412
  omp_get_team_size_@OMP_3.0 0.20131209
  omp_get_team_size_@VERSION 0.20130412
+ omp_get_teams_thread_limit@VERSION 13
+ omp_get_teams_thread_limit_@VERSION 13
  omp_get_thread_limit@OMP_3.0 0.20131209
  omp_get_thread_limit@VERSION 0.20130412
  omp_get_thread_limit_@OMP_3.0 0.20131209
@@ -1168,13 +1209,19 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_low_lat_mem_alloc@VERSION 8
  omp_low_lat_mem_space@VERSION 9
  omp_null_allocator@VERSION 9
+ omp_pause_resource@OMP_5.0 13
  omp_pause_resource@VERSION 9
+ omp_pause_resource_@OMP_5.0 13
  omp_pause_resource_@VERSION 9
+ omp_pause_resource_all@OMP_5.0 13
  omp_pause_resource_all@VERSION 9
+ omp_pause_resource_all_@OMP_5.0 13
  omp_pause_resource_all_@VERSION 9
  omp_pteam_mem_alloc@VERSION 8
  omp_realloc@VERSION 12
+ omp_set_affinity_format@OMP_5.0 13
  omp_set_affinity_format@VERSION 8
+ omp_set_affinity_format_@OMP_5.0 13
  omp_set_affinity_format_@VERSION 8
  omp_set_default_allocator@VERSION 8
  omp_set_default_allocator_@VERSION 8
@@ -1206,6 +1253,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_set_nested@VERSION 0.20130412
  omp_set_nested_@OMP_1.0 0.20131209
  omp_set_nested_@VERSION 0.20130412
+ omp_set_num_teams@VERSION 13
+ omp_set_num_teams_@VERSION 13
  omp_set_num_threads@OMP_1.0 0.20131209
  omp_set_num_threads@VERSION 0.20130412
  omp_set_num_threads_@OMP_1.0 0.20131209
@@ -1214,6 +1263,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_set_schedule@VERSION 0.20130412
  omp_set_schedule_@OMP_3.0 0.20131209
  omp_set_schedule_@VERSION 0.20130412
+ omp_set_teams_thread_limit@VERSION 13
+ omp_set_teams_thread_limit_@VERSION 13
 #MISSING: 8# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)omp_state_info@VERSION 6.0
  omp_test_lock@OMP_1.0 0.20131209
  omp_test_lock@OMP_3.0 0.20131209
