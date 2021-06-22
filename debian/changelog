@@ -1,4 +1,4 @@
-llvm-toolchain-11 (1:11.1.0-3) unstable; urgency=medium
+llvm-toolchain-11 (1:11.1.0-3~exp1) experimental; urgency=medium
 
   * Also build lld on s390x
   * Fix the path to analyze-{cc,c++} for scan-build-py with
