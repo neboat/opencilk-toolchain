@@ -1,18 +1,10 @@
 llvm-toolchain-snapshot (1:13~++20210622094539+d919b73564fa-1~exp1) UNRELEASED; urgency=medium
 
-<<<<<<<
-  * Refresh the lib of symbols in libomp
-  * As scan-build-py is installed by default ( https://reviews.llvm.org/D104138 )
-    update of the code
-  * Fix the path to analyze-{cc,c++} for scan-build-py with
-    --intercept-first (scan-build-py-fix-analyze-path.diff)
-=======
   * Refresh the lib of symbols in libomp
   * As scan-build-py is installed by default ( https://reviews.llvm.org/D104138 )
     update of the code
   * Revert "Revert D94333.diff as it breaks the ci
     https://reviews.llvm.org/D94333#2829043"
->>>>>>>
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 23 Jun 2021 09:46:10 +0200
 
