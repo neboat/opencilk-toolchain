@@ -3,6 +3,8 @@ llvm-toolchain-11 (1:11.1.0-3~exp1) experimental; urgency=medium
   * Also build lld on s390x
   * Fix the path to analyze-{cc,c++} for scan-build-py with
     --intercept-first (scan-build-py-fix-analyze-path.diff)
+  * Backport bug #47591 to fix a miscompilation in bpftrace
+    (Closes: #990220)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Apr 2021 22:30:40 +0200
 

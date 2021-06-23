@@ -143,3 +143,4 @@ silent-integration-test-suite-i386.diff
 0001-Add-minor-version-to-libclang.so-and-libclang-cpp.so.patch
 revert-abi-change-clang.diff
 scan-build-py-fix-analyze-path.diff
+D91833-bpftrace-fix-code-gen.diff
