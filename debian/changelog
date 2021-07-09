@@ -7,6 +7,7 @@ llvm-toolchain-snapshot (1:13~++20210622094539+d919b73564fa-1~exp1) UNRELEASED; 
     https://reviews.llvm.org/D94333#2829043"
   * Install usr/lib/llvm-13/lib/cmake/openmp/FindOpenMPTarget.cmake
     in libomp-13-dev.install
+  * Revert of D103865 for causing bug 51026
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 23 Jun 2021 09:46:10 +0200
 
