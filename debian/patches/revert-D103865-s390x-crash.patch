@@ -15,11 +15,11 @@ Date:   Fri Jun 4 19:32:03 2021 -0500
     
     Differential Revision: https://reviews.llvm.org/D103865
 
-diff --git b/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp a/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp
-index 5cded589c06a..a9d0ed030e5a 100644
---- b/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp
-+++ a/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp
-@@ -541,30 +541,6 @@ void SystemZAsmPrinter::emitInstruction(const MachineInstr *MI) {
+Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp
+===================================================================
+--- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp
++++ llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp
+@@ -541,30 +541,6 @@ void SystemZAsmPrinter::emitInstruction(
      LowerPATCHPOINT(*MI, Lower);
      return;
  
@@ -50,7 +50,7 @@ index 5cded589c06a..a9d0ed030e5a 100644
    default:
      Lower.lower(MI, LoweredMI);
      break;
-@@ -722,19 +698,6 @@ void SystemZAsmPrinter::LowerPATCHPOINT(const MachineInstr &MI,
+@@ -722,19 +698,6 @@ void SystemZAsmPrinter::LowerPATCHPOINT(
                              getSubtargetInfo());
  }
  
@@ -70,7 +70,7 @@ index 5cded589c06a..a9d0ed030e5a 100644
  // Convert a SystemZ-specific constant pool modifier into the associated
  // MCSymbolRefExpr variant kind.
  static MCSymbolRefExpr::VariantKind
-@@ -783,7 +746,6 @@ bool SystemZAsmPrinter::PrintAsmMemoryOperand(const MachineInstr *MI,
+@@ -790,7 +753,6 @@ bool SystemZAsmPrinter::PrintAsmMemoryOp
  }
  
  void SystemZAsmPrinter::emitEndOfAsmFile(Module &M) {
@@ -78,10 +78,10 @@ index 5cded589c06a..a9d0ed030e5a 100644
    emitStackMaps(SM);
  }
  
-diff --git b/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h a/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h
-index 11b731103c17..2d7562c7238d 100644
---- b/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h
-+++ a/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h
+Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h
+===================================================================
+--- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h
++++ llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h
 @@ -9,11 +9,10 @@
  #ifndef LLVM_LIB_TARGET_SYSTEMZ_SYSTEMZASMPRINTER_H
  #define LLVM_LIB_TARGET_SYSTEMZ_SYSTEMZASMPRINTER_H
@@ -95,7 +95,7 @@ index 11b731103c17..2d7562c7238d 100644
  #include "llvm/Support/Compiler.h"
  
  namespace llvm {
-@@ -27,33 +26,6 @@ class LLVM_LIBRARY_VISIBILITY SystemZAsmPrinter : public AsmPrinter {
+@@ -27,33 +26,6 @@ class LLVM_LIBRARY_VISIBILITY SystemZAsm
  private:
    StackMaps SM;
  
@@ -137,11 +137,11 @@ index 11b731103c17..2d7562c7238d 100644
  };
  } // end namespace llvm
  
-diff --git b/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp a/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp
-index 6b6fdcaf5630..6d5a469c2e72 100644
---- b/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp
-+++ a/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp
-@@ -7795,89 +7795,43 @@ MachineBasicBlock *SystemZTargetLowering::emitMemMemWrapper(
+Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp
+===================================================================
+--- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp
++++ llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp
+@@ -7795,89 +7795,43 @@ MachineBasicBlock *SystemZTargetLowering
    uint64_t DestDisp = MI.getOperand(1).getImm();
    MachineOperand SrcBase = earlyUseOperand(MI.getOperand(2));
    uint64_t SrcDisp = MI.getOperand(3).getImm();
@@ -253,7 +253,7 @@ index 6b6fdcaf5630..6d5a469c2e72 100644
  
      //  LoopMBB:
      //   %ThisDestReg = phi [ %StartDestReg, StartMBB ],
-@@ -7892,6 +7846,7 @@ MachineBasicBlock *SystemZTargetLowering::emitMemMemWrapper(
+@@ -7892,6 +7846,7 @@ MachineBasicBlock *SystemZTargetLowering
      //
      // The prefetch is used only for MVC.  The JLH is used only for CLC.
      MBB = LoopMBB;
@@ -261,7 +261,7 @@ index 6b6fdcaf5630..6d5a469c2e72 100644
      BuildMI(MBB, DL, TII->get(SystemZ::PHI), ThisDestReg)
        .addReg(StartDestReg).addMBB(StartMBB)
        .addReg(NextDestReg).addMBB(NextMBB);
-@@ -7927,6 +7882,7 @@ MachineBasicBlock *SystemZTargetLowering::emitMemMemWrapper(
+@@ -7927,6 +7882,7 @@ MachineBasicBlock *SystemZTargetLowering
      //
      // The AGHI, CGHI and JLH should be converted to BRCTG by later passes.
      MBB = NextMBB;
@@ -269,7 +269,7 @@ index 6b6fdcaf5630..6d5a469c2e72 100644
      BuildMI(MBB, DL, TII->get(SystemZ::LA), NextDestReg)
        .addReg(ThisDestReg).addImm(256).addReg(0);
      if (!HaveSingleBase)
-@@ -7942,39 +7898,18 @@ MachineBasicBlock *SystemZTargetLowering::emitMemMemWrapper(
+@@ -7942,39 +7898,18 @@ MachineBasicBlock *SystemZTargetLowering
      MBB->addSuccessor(LoopMBB);
      MBB->addSuccessor(DoneMBB);
  
@@ -318,7 +318,7 @@ index 6b6fdcaf5630..6d5a469c2e72 100644
      // The previous iteration might have created out-of-range displacements.
      // Apply them using LAY if so.
      if (!isUInt<12>(DestDisp)) {
-@@ -8004,10 +7939,10 @@ MachineBasicBlock *SystemZTargetLowering::emitMemMemWrapper(
+@@ -8004,10 +7939,10 @@ MachineBasicBlock *SystemZTargetLowering
          .setMemRefs(MI.memoperands());
      DestDisp += ThisLength;
      SrcDisp += ThisLength;
@@ -331,7 +331,7 @@ index 6b6fdcaf5630..6d5a469c2e72 100644
        MachineBasicBlock *NextMBB = SystemZ::splitBlockBefore(MI, MBB);
        BuildMI(MBB, DL, TII->get(SystemZ::BRC))
          .addImm(SystemZ::CCMASK_ICMP).addImm(SystemZ::CCMASK_CMP_NE)
-@@ -8498,7 +8433,6 @@ MachineBasicBlock *SystemZTargetLowering::EmitInstrWithCustomInserter(
+@@ -8498,7 +8433,6 @@ MachineBasicBlock *SystemZTargetLowering
      return emitMemMemWrapper(MI, MBB, SystemZ::OC);
    case SystemZ::XCSequence:
    case SystemZ::XCLoop:
@@ -339,11 +339,11 @@ index 6b6fdcaf5630..6d5a469c2e72 100644
      return emitMemMemWrapper(MI, MBB, SystemZ::XC);
    case SystemZ::CLCSequence:
    case SystemZ::CLCLoop:
-diff --git b/llvm/lib/Target/SystemZ/SystemZInstrFormats.td a/llvm/lib/Target/SystemZ/SystemZInstrFormats.td
-index bc2fe8e4c4c3..2c0750908504 100644
---- b/llvm/lib/Target/SystemZ/SystemZInstrFormats.td
-+++ a/llvm/lib/Target/SystemZ/SystemZInstrFormats.td
-@@ -5253,7 +5253,6 @@ multiclass CondUnaryRSYPseudoAndMemFold<string mnemonic,
+Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZInstrFormats.td
+===================================================================
+--- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/lib/Target/SystemZ/SystemZInstrFormats.td
++++ llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZInstrFormats.td
+@@ -5253,7 +5253,6 @@ multiclass CondUnaryRSYPseudoAndMemFold<
  // The Sequence form uses a straight-line sequence of instructions and
  // the Loop form uses a loop of length-256 instructions followed by
  // another instruction to handle the excess.
@@ -351,7 +351,7 @@ index bc2fe8e4c4c3..2c0750908504 100644
  multiclass MemorySS<string mnemonic, bits<8> opcode,
                      SDPatternOperator sequence, SDPatternOperator loop> {
    def "" : SideEffectBinarySSa<mnemonic, opcode>;
-@@ -5266,10 +5265,6 @@ multiclass MemorySS<string mnemonic, bits<8> opcode,
+@@ -5266,10 +5265,6 @@ multiclass MemorySS<string mnemonic, bit
                                     imm64:$length, GR64:$count256),
                        [(loop bdaddr12only:$dest, bdaddr12only:$src,
                               imm64:$length, GR64:$count256)]>;
@@ -362,11 +362,11 @@ index bc2fe8e4c4c3..2c0750908504 100644
    }
  }
  
-diff --git b/llvm/lib/Target/SystemZ/SystemZInstrInfo.td a/llvm/lib/Target/SystemZ/SystemZInstrInfo.td
-index ca095074001b..76d0381649c6 100644
---- b/llvm/lib/Target/SystemZ/SystemZInstrInfo.td
-+++ a/llvm/lib/Target/SystemZ/SystemZInstrInfo.td
-@@ -2165,12 +2165,8 @@ let Predicates = [FeatureDeflateConversion],
+Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZInstrInfo.td
+===================================================================
+--- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/lib/Target/SystemZ/SystemZInstrInfo.td
++++ llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZInstrInfo.td
+@@ -2165,12 +2165,8 @@ let Predicates = [FeatureDeflateConversi
  
  // Execute.
  let hasSideEffects = 1 in {
@@ -381,11 +381,11 @@ index ca095074001b..76d0381649c6 100644
  }
  
  //===----------------------------------------------------------------------===//
-diff --git b/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp a/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp
-index 4a9ea69d101c..ca5ca7257bab 100644
---- b/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp
-+++ a/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp
-@@ -81,12 +81,11 @@ SDValue SystemZSelectionDAGInfo::EmitTargetCodeForMemset(
+Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp
+===================================================================
+--- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp
++++ llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp
+@@ -81,12 +81,11 @@ SDValue SystemZSelectionDAGInfo::EmitTar
    if (IsVolatile)
      return SDValue();
  
@@ -399,7 +399,7 @@ index 4a9ea69d101c..ca5ca7257bab 100644
        // Handle cases that can be done using at most two of
        // MVI, MVHI, MVHHI and MVGHI.  The latter two can only be
        // used if ByteVal is all zeros or all ones; in other casees,
-@@ -126,6 +125,7 @@ SDValue SystemZSelectionDAGInfo::EmitTargetCodeForMemset(
+@@ -126,6 +125,7 @@ SDValue SystemZSelectionDAGInfo::EmitTar
      assert(Bytes >= 2 && "Should have dealt with 0- and 1-byte cases already");
  
      // Handle the special case of a memset of 0, which can use XC.
@@ -407,7 +407,7 @@ index 4a9ea69d101c..ca5ca7257bab 100644
      if (CByte && CByte->getZExtValue() == 0)
        return emitMemMem(DAG, DL, SystemZISD::XC, SystemZISD::XC_LOOP,
                          Chain, Dst, Dst, Bytes);
-@@ -138,18 +138,6 @@ SDValue SystemZSelectionDAGInfo::EmitTargetCodeForMemset(
+@@ -138,18 +138,6 @@ SDValue SystemZSelectionDAGInfo::EmitTar
      return emitMemMem(DAG, DL, SystemZISD::MVC, SystemZISD::MVC_LOOP,
                        Chain, DstPlus1, Dst, Bytes - 1);
    }
@@ -426,10 +426,9 @@ index 4a9ea69d101c..ca5ca7257bab 100644
    return SDValue();
  }
  
-diff --git b/llvm/test/CodeGen/SystemZ/memset-05.ll a/llvm/test/CodeGen/SystemZ/memset-05.ll
-deleted file mode 100644
-index 780d107d7e59..000000000000
---- b/llvm/test/CodeGen/SystemZ/memset-05.ll
+Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/test/CodeGen/SystemZ/memset-05.ll
+===================================================================
+--- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/test/CodeGen/SystemZ/memset-05.ll
 +++ /dev/null
 @@ -1,101 +0,0 @@
 -; Test memset 0 with variable length
