@@ -80,8 +80,10 @@ libcxx/libcxx-silent-failure-ppc64el.diff
 libcxx/libcxx-silent-failure-arm64.diff
 
 # Change default optims
-mips-fpxx-enable.diff
-mips-force-nomadd4.patch
+mips/mips-fpxx-enable.diff
+mips/mips-force-nomadd4.patch
+mips/mips-D101773-reloc.patch
+
 26-set-correct-float-abi.diff
 clang-baseline-fix-i386.patch
 disable-sse2-old-x86.diff
@@ -129,7 +131,7 @@ workaround-bug-42994-use-linker.diff
 
 # bug 939472
 #try-to-unbreak-thinlto.diff
-D67877.patch
+#D67877-cmake-clang-example.patch
 
 x86-fuzzer.patch
 
@@ -140,3 +142,4 @@ lld-use-link-atomic-i386.diff
 lower-python-dep.diff
 scan-build-py-fix-analyze-path.diff
 revert-D103865-s390x-crash.patch
+

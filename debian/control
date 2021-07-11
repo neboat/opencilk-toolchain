@@ -9,6 +9,7 @@ Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
     lsb-release, patchutils, diffstat, xz-utils, python3-dev,
     libedit-dev, libncurses5-dev, swig, python3-six, python3-sphinx (>= 1.3.6),
     binutils-dev,
+    libxml2-dev, # for llvm-mt
     libjsoncpp-dev, pkg-config,
     lcov, procps, help2man, zlib1g-dev,
     g++-multilib [amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
@@ -348,6 +349,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev, ${misc:Depends},
  llvm-13 (= ${binary:Version}), libllvm13 (= ${binary:Version}), libtinfo-dev,
  llvm-13-tools (= ${binary:Version}), libclang-cpp13 (= ${binary:Version}), libz3-dev
+ libxml2-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -673,3 +675,40 @@ Description: LLVM low level support for a standard C++ library (development file
  .
    * Correctness as defined by the C++ standards.
    * Provide a portable sublayer to ease the porting of libc++
+
+# ------------- libclc -------------
+
+Package: libclc-12
+Section: libs
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+ libclc-12-dev (= ${binary:Version}),
+ libclang-common-12-dev,
+Breaks: libclc-amdgcn, libclc-ptx, libclc-r600
+Provides: libclc-x.y
+Conflicts: libclc-x.y
+Replaces: libclc-x.y, libclc-amdgcn, libclc-ptx, libclc-r600,
+Description: OpenCL C language implementation - platform support
+ libclc is an open implementation of the OpenCL C programming language,
+ as specified by the OpenCL 1.1 Specification.
+ .
+ This package contains support for the amdgcn (AMD GPU), PTX and r600
+ platforms.
+
+Package: libclc-12-dev
+Section: libdevel
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+Breaks: libclc-dev
+Provides: libclc-x.y-dev
+Conflicts: libclc-x.y-dev
+Replaces: libclc-dev, libclc-x.y-dev
+Description: OpenCL C language implementation - development files
+ libclc is an open implementation of the OpenCL C programming language,
+ as specified by the OpenCL 1.1 Specification.
+ .
+ This package contains development header files.
