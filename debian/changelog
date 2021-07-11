@@ -252,17 +252,70 @@ llvm-toolchain-snapshot (1:12~++20200715052739+d6e79e3dd6d-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 08 Jul 2020 15:19:14 +0200
 
-llvm-toolchain-11 (1:11.0.1~+rc1-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-11 (1:11.1.0-1~exp2) experimental; urgency=medium
+
+  [ Krzysztof Aleksander Pyrkosz ]
+  * Add libxml2 as a dependency as it is necessary
+    for llvm manifest tool (llvm-mt)
+    (Closes: #990537)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 11 Jul 2021 23:32:10 +0200
+
+llvm-toolchain-11 (1:11.1.0-1~exp1) experimental; urgency=medium
+
+  * New upstream release
+    Should be mostly minor fixes
+    Was driven by https://bugs.llvm.org/show_bug.cgi?id=46526
+    but as we are not impacted, I reverted the change in
+    debian/patches/revert-abi-change-clang.diff
+  * Also build lld on s390x
+  * Fix the path to analyze-{cc,c++} for scan-build-py with
+    --intercept-first (scan-build-py-fix-analyze-path.diff)
+  * Backport bug #47591 to fix a miscompilation in bpftrace
+    (Closes: #990220)
+  * Only enable libomp-11-doc on supported archs
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 01 Mar 2021 10:50:19 +0100
+
+llvm-toolchain-11 (1:11.0.1-2) unstable; urgency=medium
+
+  * Fix the changelog
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Jan 2021 20:16:26 +0100
+
+llvm-toolchain-11 (1:11.0.1-1) unstable; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * New stable release
+
+  [ Gianfranco Costamagna ]
+  * Drop old patch, upstream now
+  * Run dh_makeshlibs with -V parameter (Closes: #977814)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Jan 2021 09:21:24 +0100
+
+llvm-toolchain-11 (1:11.0.1~+rc2-1) unstable; urgency=medium
+
+  * New snapshot release
+  * Remove 'gnu-assembler-compat.diff' - merged upstream
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 19 Dec 2020 09:38:48 +0100
+
+llvm-toolchain-11 (1:11.0.1~+rc1-1) unstable; urgency=medium
 
   [ Alexander Volkov ]
   * Fix description of libclang-cpp11-dev package.
 
- -- Alexander Volkov <avolkov@astralinux.ru>  Thu, 26 Nov 2020 21:17:48 +0300
+  [ Sylvestre Ledru ]
+  * Upload to unstable to help doko with gcc
+    11.0.1 will be released before the freeze
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Dec 2020 22:41:48 +0100
 
 llvm-toolchain-11 (1:11.0.1~+rc1-1~exp1) experimental; urgency=medium
 
   [ Gianfranco Costamagna ]
-  * gnu-assembler-compat.diff: Add upstream patch D92052 to fix a 
+  * gnu-assembler-compat.diff: Add upstream patch D92052 to fix a
     gcn offload compiler issue with gcc (Closes: #975692)
 
   [ Sylvestre Ledru ]

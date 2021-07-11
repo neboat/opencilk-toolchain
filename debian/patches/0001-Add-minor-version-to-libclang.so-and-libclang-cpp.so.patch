@@ -1,0 +1,58 @@
+From 3a8282376b6c2bb65a3bb580c10d4da1296d8df1 Mon Sep 17 00:00:00 2001
+From: Tom Stellard <tstellar@redhat.com>
+Date: Thu, 21 Jan 2021 11:35:48 -0800
+Subject: [PATCH] Add minor version to libclang.so and libclang-cpp.so SONAME
+
+This patch is for the release/11.x branch.  We need to bump the SONAME, because
+the ABI of the shared library is changing
+
+Reviewed By: sylvestre.ledru, cuviper
+
+Differential Revision: https://reviews.llvm.org/D94941
+---
+ clang/CMakeLists.txt                   | 2 +-
+ clang/tools/clang-shlib/CMakeLists.txt | 5 -----
+ clang/tools/libclang/CMakeLists.txt    | 1 -
+ 3 files changed, 1 insertion(+), 7 deletions(-)
+
+diff --git b/clang/CMakeLists.txt a/clang/CMakeLists.txt
+index bb4b801f01c8..2e06c5fd9028 100644
+--- b/clang/CMakeLists.txt
++++ a/clang/CMakeLists.txt
+@@ -509,7 +509,7 @@ set(CLANG_EXECUTABLE_VERSION
+     "${CLANG_VERSION_MAJOR}" CACHE STRING
+     "Major version number that will be appended to the clang executable name")
+ set(LIBCLANG_LIBRARY_VERSION
+-    "${CLANG_VERSION_MAJOR}.${CLANG_VERSION_MINOR}" CACHE STRING
++    "${CLANG_VERSION_MAJOR}" CACHE STRING
+     "Major version number that will be appended to the libclang library")
+ mark_as_advanced(CLANG_EXECUTABLE_VERSION LIBCLANG_LIBRARY_VERSION)
+ 
+diff --git b/clang/tools/clang-shlib/CMakeLists.txt a/clang/tools/clang-shlib/CMakeLists.txt
+index 47ff80418bb0..5949223fc8e3 100644
+--- b/clang/tools/clang-shlib/CMakeLists.txt
++++ a/clang/tools/clang-shlib/CMakeLists.txt
+@@ -48,8 +48,3 @@ add_clang_library(clang-cpp
+                   ${_OBJECTS}
+                   LINK_LIBS
+                   ${_DEPS})
+-
+-    set_target_properties(clang-cpp
+-      PROPERTIES
+-      VERSION ${LIBCLANG_LIBRARY_VERSION}
+-      SOVERSION ${LIBCLANG_LIBRARY_VERSION})
+diff --git b/clang/tools/libclang/CMakeLists.txt a/clang/tools/libclang/CMakeLists.txt
+index 5cd9ac5cddc1..a4077140acee 100644
+--- b/clang/tools/libclang/CMakeLists.txt
++++ a/clang/tools/libclang/CMakeLists.txt
+@@ -150,7 +150,6 @@ if(ENABLE_SHARED)
+   else()
+     set_target_properties(libclang
+       PROPERTIES
+-      SOVERSION ${LIBCLANG_LIBRARY_VERSION}
+       VERSION ${LIBCLANG_LIBRARY_VERSION}
+       DEFINE_SYMBOL _CINDEX_LIB_)
+     # FIXME: _CINDEX_LIB_ affects dllexport/dllimport on Win32.
+-- 
+2.29.2
+
