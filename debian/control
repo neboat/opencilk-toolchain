@@ -9,6 +9,7 @@ Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
     lsb-release, patchutils, diffstat, xz-utils, python3-dev,
     libedit-dev, libncurses5-dev, swig, python3-six, python3-sphinx (>= 1.3.6),
     binutils-dev,
+    libxml2-dev, # for llvm-mt
     libjsoncpp-dev, pkg-config,
     lcov, procps, help2man, zlib1g-dev,
     g++-multilib [amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
@@ -333,7 +334,8 @@ Package: llvm-11-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev, ${misc:Depends},
  llvm-11 (= ${binary:Version}), libllvm11 (= ${binary:Version}), libtinfo-dev,
- llvm-11-tools (= ${binary:Version}), libclang-cpp11 (= ${binary:Version}), libz3-dev
+ llvm-11-tools (= ${binary:Version}), libclang-cpp11 (= ${binary:Version}), libz3-dev,
+ libxml2-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other

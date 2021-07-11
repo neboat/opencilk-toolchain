@@ -1,3 +1,12 @@
+llvm-toolchain-11 (1:11.1.0-1~exp2) experimental; urgency=medium
+
+  [ Krzysztof Aleksander Pyrkosz ]
+  * Add libxml2 as a dependency as it is necessary
+    for llvm manifest tool (llvm-mt)
+    (Closes: #990537)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 11 Jul 2021 23:32:10 +0200
+
 llvm-toolchain-11 (1:11.1.0-1~exp1) experimental; urgency=medium
 
   * New upstream release
