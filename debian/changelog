@@ -1,27 +1,15 @@
-llvm-toolchain-11 (1:11.1.0-3~exp1) experimental; urgency=medium
-
-  * Also build lld on s390x
-  * Fix the path to analyze-{cc,c++} for scan-build-py with
-    --intercept-first (scan-build-py-fix-analyze-path.diff)
-  * Backport bug #47591 to fix a miscompilation in bpftrace
-    (Closes: #990220)
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Apr 2021 22:30:40 +0200
-
-llvm-toolchain-11 (1:11.1.0-2) unstable; urgency=medium
-
-  * Disable lto. Hopefully workaround the issue
-    https://bugs.llvm.org/show_bug.cgi?id=50031
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 22 Apr 2021 22:08:49 +0200
-
-llvm-toolchain-11 (1:11.1.0-1) unstable; urgency=medium
+llvm-toolchain-11 (1:11.1.0-1~exp1) experimental; urgency=medium
 
   * New upstream release
     Should be mostly minor fixes
     Was driven by https://bugs.llvm.org/show_bug.cgi?id=46526
     but as we are not impacted, I reverted the change in
     debian/patches/revert-abi-change-clang.diff
+  * Also build lld on s390x
+  * Fix the path to analyze-{cc,c++} for scan-build-py with
+    --intercept-first (scan-build-py-fix-analyze-path.diff)
+  * Backport bug #47591 to fix a miscompilation in bpftrace
+    (Closes: #990220)
   * Only enable libomp-11-doc on supported archs
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 01 Mar 2021 10:50:19 +0100
