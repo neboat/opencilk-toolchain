@@ -26,6 +26,13 @@ llvm-toolchain-12 (1:12.0.1~+rc2-1) unstable; urgency=medium
 
 llvm-toolchain-12 (1:12.0.1~+rc1-1) unstable; urgency=medium
 
+  [ Kasper Kantz ]
+  * Add riscv64 architecture in control
+    enable liblldb, libomp and others which are
+    currently unavailable in riscv64 repository.
+
+llvm-toolchain-12 (1:12.0.1~+rc1-1) unstable; urgency=medium
+
   [ John Paul Adrian Glaubitz ]
   * Add upstream patch D98574 to fix clang macro definitions on sparc64
   * Add upstream patch D98575 to fix 32-bit compiler-rt build on sparc64
