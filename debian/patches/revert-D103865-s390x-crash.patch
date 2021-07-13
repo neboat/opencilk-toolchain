@@ -15,10 +15,10 @@ Date:   Fri Jun 4 19:32:03 2021 -0500
     
     Differential Revision: https://reviews.llvm.org/D103865
 
-Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp
+Index: llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp
 ===================================================================
---- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp
-+++ llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp
+--- llvm-toolchain-snapshot_13~++20210713123051+af55335924ea.orig/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp
++++ llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/lib/Target/SystemZ/SystemZAsmPrinter.cpp
 @@ -541,30 +541,6 @@ void SystemZAsmPrinter::emitInstruction(
      LowerPATCHPOINT(*MI, Lower);
      return;
@@ -70,7 +70,7 @@ Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/
  // Convert a SystemZ-specific constant pool modifier into the associated
  // MCSymbolRefExpr variant kind.
  static MCSymbolRefExpr::VariantKind
-@@ -790,7 +753,6 @@ bool SystemZAsmPrinter::PrintAsmMemoryOp
+@@ -793,7 +756,6 @@ bool SystemZAsmPrinter::PrintAsmMemoryOp
  }
  
  void SystemZAsmPrinter::emitEndOfAsmFile(Module &M) {
@@ -78,10 +78,10 @@ Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/
    emitStackMaps(SM);
  }
  
-Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h
+Index: llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h
 ===================================================================
---- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h
-+++ llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h
+--- llvm-toolchain-snapshot_13~++20210713123051+af55335924ea.orig/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h
++++ llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/lib/Target/SystemZ/SystemZAsmPrinter.h
 @@ -9,11 +9,10 @@
  #ifndef LLVM_LIB_TARGET_SYSTEMZ_SYSTEMZASMPRINTER_H
  #define LLVM_LIB_TARGET_SYSTEMZ_SYSTEMZASMPRINTER_H
@@ -137,10 +137,10 @@ Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/
  };
  } // end namespace llvm
  
-Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp
+Index: llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp
 ===================================================================
---- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp
-+++ llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp
+--- llvm-toolchain-snapshot_13~++20210713123051+af55335924ea.orig/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp
++++ llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/lib/Target/SystemZ/SystemZISelLowering.cpp
 @@ -7795,89 +7795,43 @@ MachineBasicBlock *SystemZTargetLowering
    uint64_t DestDisp = MI.getOperand(1).getImm();
    MachineOperand SrcBase = earlyUseOperand(MI.getOperand(2));
@@ -339,10 +339,10 @@ Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/
      return emitMemMemWrapper(MI, MBB, SystemZ::XC);
    case SystemZ::CLCSequence:
    case SystemZ::CLCLoop:
-Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZInstrFormats.td
+Index: llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/lib/Target/SystemZ/SystemZInstrFormats.td
 ===================================================================
---- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/lib/Target/SystemZ/SystemZInstrFormats.td
-+++ llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZInstrFormats.td
+--- llvm-toolchain-snapshot_13~++20210713123051+af55335924ea.orig/llvm/lib/Target/SystemZ/SystemZInstrFormats.td
++++ llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/lib/Target/SystemZ/SystemZInstrFormats.td
 @@ -5253,7 +5253,6 @@ multiclass CondUnaryRSYPseudoAndMemFold<
  // The Sequence form uses a straight-line sequence of instructions and
  // the Loop form uses a loop of length-256 instructions followed by
@@ -362,10 +362,10 @@ Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/
    }
  }
  
-Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZInstrInfo.td
+Index: llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/lib/Target/SystemZ/SystemZInstrInfo.td
 ===================================================================
---- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/lib/Target/SystemZ/SystemZInstrInfo.td
-+++ llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZInstrInfo.td
+--- llvm-toolchain-snapshot_13~++20210713123051+af55335924ea.orig/llvm/lib/Target/SystemZ/SystemZInstrInfo.td
++++ llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/lib/Target/SystemZ/SystemZInstrInfo.td
 @@ -2165,12 +2165,8 @@ let Predicates = [FeatureDeflateConversi
  
  // Execute.
@@ -381,10 +381,10 @@ Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/
  }
  
  //===----------------------------------------------------------------------===//
-Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp
+Index: llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp
 ===================================================================
---- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp
-+++ llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp
+--- llvm-toolchain-snapshot_13~++20210713123051+af55335924ea.orig/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp
++++ llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/lib/Target/SystemZ/SystemZSelectionDAGInfo.cpp
 @@ -81,12 +81,11 @@ SDValue SystemZSelectionDAGInfo::EmitTar
    if (IsVolatile)
      return SDValue();
@@ -426,9 +426,9 @@ Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/lib/Target/
    return SDValue();
  }
  
-Index: llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c/llvm/test/CodeGen/SystemZ/memset-05.ll
+Index: llvm-toolchain-snapshot_13~++20210713123051+af55335924ea/llvm/test/CodeGen/SystemZ/memset-05.ll
 ===================================================================
---- llvm-toolchain-snapshot_13~++20210709090531+88326bbce38c.orig/llvm/test/CodeGen/SystemZ/memset-05.ll
+--- llvm-toolchain-snapshot_13~++20210713123051+af55335924ea.orig/llvm/test/CodeGen/SystemZ/memset-05.ll
 +++ /dev/null
 @@ -1,101 +0,0 @@
 -; Test memset 0 with variable length
