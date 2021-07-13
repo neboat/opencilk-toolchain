@@ -1,3 +1,12 @@
+llvm-toolchain-12 (1:12.0.1-2) unstable; urgency=medium
+
+  [ Kasper Kantz ]
+  * Add riscv64 architecture in control
+    enable liblldb, libomp and others which are
+    currently unavailable in riscv64 repository.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 13 Jul 2021 09:44:27 +0200
+
 llvm-toolchain-12 (1:12.0.1-1) unstable; urgency=medium
 
   * New upsream release
@@ -23,13 +32,6 @@ llvm-toolchain-12 (1:12.0.1~+rc2-1) unstable; urgency=medium
   * New testing upstream release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 21 Jun 2021 16:06:36 +0200
-
-llvm-toolchain-12 (1:12.0.1~+rc1-1) unstable; urgency=medium
-
-  [ Kasper Kantz ]
-  * Add riscv64 architecture in control
-    enable liblldb, libomp and others which are
-    currently unavailable in riscv64 repository.
 
 llvm-toolchain-12 (1:12.0.1~+rc1-1) unstable; urgency=medium
 
