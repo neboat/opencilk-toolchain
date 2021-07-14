@@ -520,7 +520,8 @@ debian-libclc-build:
 	-DCMAKE_INSTALL_DATADIR=/usr/lib \
 	-DCMAKE_INSTALL_INCLUDEDIR=/usr/include \
 	-DLLVM_CONFIG=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-config \
-	-DLIBCLC_TARGETS_TO_BUILD="amdgcn--;amdgcn--amdhsa;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl"; \
+	-DLIBCLC_TARGETS_TO_BUILD="amdgcn--;amdgcn--amdhsa;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl" \
+	-DCMAKE_LLAsm_FLAGS=-cl-no-stdinc -DCMAKE_CLC_FLAGS=-cl-no-stdinc && \
 	make $(NJOBS) $(VERBOSE)
 	touch $@
 
