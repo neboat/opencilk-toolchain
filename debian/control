@@ -678,14 +678,14 @@ Description: LLVM low level support for a standard C++ library (development file
 
 # ------------- libclc -------------
 
-Package: libclc-12
+Package: libclc-13
 Section: libs
 Architecture: all
 Multi-Arch: foreign
 Depends:
  ${misc:Depends},
- libclc-12-dev (= ${binary:Version}),
- libclang-common-12-dev,
+ libclc-13-dev (= ${binary:Version}),
+ libclang-common-13-dev,
 Breaks: libclc-amdgcn, libclc-ptx, libclc-r600
 Provides: libclc-x.y
 Conflicts: libclc-x.y
@@ -697,7 +697,7 @@ Description: OpenCL C language implementation - platform support
  This package contains support for the amdgcn (AMD GPU), PTX and r600
  platforms.
 
-Package: libclc-12-dev
+Package: libclc-13-dev
 Section: libdevel
 Architecture: all
 Multi-Arch: foreign
