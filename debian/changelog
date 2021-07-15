@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:13~++20210714114159+03a4702c884a-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:13~++20210622094539+d919b73564fa-1~exp1) UNRELEASED; urgency=medium
 
   * Refresh the lib of symbols in libomp
   * As scan-build-py is installed by default ( https://reviews.llvm.org/D104138 )
@@ -8,10 +8,8 @@ llvm-toolchain-snapshot (1:13~++20210714114159+03a4702c884a-1~exp1) UNRELEASED; 
   * Install usr/lib/llvm-13/lib/cmake/openmp/FindOpenMPTarget.cmake
     in libomp-13-dev.install
   * Revert of D103865 for causing bug 51026
-  * Workaround a compilation issue with libclc
-    https://bugs.llvm.org/show_bug.cgi?id=51063
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 14 Jul 2021 22:45:43 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 23 Jun 2021 09:46:10 +0200
 
 llvm-toolchain-snapshot (1:13~++20210619101720+e1adf90826a5-1~exp1) experimental; urgency=medium
 
