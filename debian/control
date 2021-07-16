@@ -349,8 +349,8 @@ Package: llvm-12-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev, ${misc:Depends},
  llvm-12 (= ${binary:Version}), libllvm12 (= ${binary:Version}), libtinfo-dev,
- llvm-12-tools (= ${binary:Version}), libclang-cpp12 (= ${binary:Version}), libz3-dev
- libxml2-dev
+ llvm-12-tools (= ${binary:Version}), libclang-cpp12 (= ${binary:Version}),
+ libz3-dev, libxml2-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
