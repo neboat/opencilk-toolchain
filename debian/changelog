@@ -1,11 +1,17 @@
 llvm-toolchain-11 (1:11.1.0-1~exp2) experimental; urgency=medium
 
+  * Fix the default binary path for scan-build-py to clang-11 (instead of
+    clang) - see scan-build-py-fix-default-bin.diff
+    tested by
+    https://github.com/opencollab/llvm-toolchain-integration-test-suite/
+
   [ Krzysztof Aleksander Pyrkosz ]
   * Add libxml2 as a dependency as it is necessary
     for llvm manifest tool (llvm-mt)
     (Closes: #990537)
+    - not really working for now
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 11 Jul 2021 23:32:10 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 17 Jul 2021 20:13:57 +0200
 
 llvm-toolchain-11 (1:11.1.0-1~exp1) experimental; urgency=medium
 
