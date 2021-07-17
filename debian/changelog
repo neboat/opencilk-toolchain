@@ -5,7 +5,7 @@ llvm-toolchain-12 (1:12.0.1-2) unstable; urgency=medium
     enable liblldb, libomp and others which are
     currently unavailable in riscv64 repository.
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 13 Jul 2021 09:44:27 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 12 Jul 2021 08:19:59 +0200
 
 llvm-toolchain-12 (1:12.0.1-1) unstable; urgency=medium
 
