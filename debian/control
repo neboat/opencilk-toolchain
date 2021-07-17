@@ -388,7 +388,7 @@ Description: Modular compiler and toolchain technologies, tools
 
 Package: libllvm-13-ocaml-dev
 Section: ocaml
-Architecture: amd64 arm64 armhf ppc64el s390x
+Architecture: amd64 arm64 armhf ppc64el s390x riscv64
 Suggests: llvm-13-doc
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-13-dev (= ${binary:Version})
 Replaces: libllvm-x.y-ocaml-dev
@@ -452,7 +452,7 @@ Description: Modular compiler and toolchain technologies, examples
 # ------------- lld -------------
 
 Package: lld-13
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm13 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -462,7 +462,7 @@ Description: LLVM-based linker
  Project.
 
 Package: liblld-13
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm13 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -476,7 +476,7 @@ Description: LLVM-based linker, library
 
 Package: liblld-13-dev
 Section: libdevel
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lld-13 (= ${binary:Version}),
  liblld-13 (= ${binary:Version})
@@ -492,7 +492,7 @@ Description: LLVM-based linker, header files
 # ------------- lldb -------------
 
 Package: lldb-13
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32 riscv64
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm13 (= ${binary:Version}), llvm-13-dev,
  python3-lldb-13
@@ -503,7 +503,7 @@ Description: Next generation, high-performance debugger
  Project, such as the Clang expression parser and LLVM disassembler.
 
 Package: liblldb-13
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32 riscv64
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm13 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -517,7 +517,7 @@ Description: Next generation, high-performance debugger, library
 
 Package: python3-lldb-13
 Section: python
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32 riscv64
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}, liblldb-13 (= ${binary:Version}), python3-six
 Conflicts: python3-lldb-x.y
@@ -533,7 +533,7 @@ Description: Next generation, high-performance debugger, python3 lib
 
 Package: liblldb-13-dev
 Section: libdevel
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32 riscv64
 # ia64 hurd powerpc powerpcspe ppc64 alpha s390x sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-13 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -551,7 +551,7 @@ Description: Next generation, high-performance debugger, header files
 
 Package: libomp-13-dev
 Section: libdevel
-Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64
+Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
 Depends: libomp5-13 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Suggests: libomp-13-doc
 Breaks: libiomp-dev (<< 3.7-1), libomp-dev (<< 44)
@@ -565,7 +565,7 @@ Description: LLVM OpenMP runtime - dev package
 
 Package: libomp5-13
 Multi-Arch: same
-Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64
+Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Breaks: libomp5 (<< 44)
 Provides: libomp-x.y
@@ -578,7 +578,7 @@ Description: LLVM OpenMP runtime
 
 Package: libomp-13-doc
 Section: doc
-Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64
+Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
 Replaces: libiomp-x.y-doc
 Breaks: libiomp-x.y-doc
