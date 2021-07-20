@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:13~++20210715093511+afc760ef3527-1~exp2) unstable; urgency=medium
+
+  * revert the s390 as it is probably fixed
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 20 Jul 2021 09:42:50 +0200
+
 llvm-toolchain-snapshot (1:13~++20210715093511+afc760ef3527-1~exp1) UNRELEASED; urgency=medium
 
   * Refresh the lib of symbols in libomp
