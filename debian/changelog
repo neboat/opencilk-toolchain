@@ -1,5 +1,7 @@
 llvm-toolchain-12 (1:12.0.1-2) unstable; urgency=medium
 
+  * Generate libunwind-12 & libunwind-12-dev packages
+
   [ Kasper Kantz ]
   * Add riscv64 architecture in control
     enable liblldb, libomp and others which are

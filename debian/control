@@ -713,3 +713,40 @@ Description: OpenCL C language implementation - development files
  as specified by the OpenCL 1.1 Specification.
  .
  This package contains development header files.
+
+# ------------- libunwind -------------
+
+Package: libunwind-12
+Section: libs
+Architecture: any
+Multi-Arch: same
+Depends: ${shlibs:Depends},
+ ${misc:Depends}
+Provides: libunwind-x.y
+Conflicts: libunwind-x.y
+Replaces: libunwind-x.y
+Description: production-quality unwinder
+ libunwind is a production-quality unwinder, with platform support for DWARF
+ unwind info, SjLj, and ARM EHABI.
+ .
+ The low level libunwind API was designed to work either in-process (aka local)
+ or to operate on another process (aka remote), but only the local path has
+ been implemented. Remote unwinding remains as future work.
+
+Package: libunwind-12-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends:
+ ${misc:Depends},
+Breaks: libunwind-dev
+Provides: libunwind-x.y-dev
+Conflicts: libunwind-x.y-dev
+Replaces: libunwind-dev, libunwind-x.y-dev
+Description: production-quality unwinder
+ libunwind is a production-quality unwinder, with platform support for DWARF
+ unwind info, SjLj, and ARM EHABI.
+ .
+ The low level libunwind API was designed to work either in-process (aka local)
+ or to operate on another process (aka remote), but only the local path has
+ been implemented. Remote unwinding remains as future work.
