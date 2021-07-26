@@ -1,5 +1,11 @@
 llvm-toolchain-12 (1:12.0.1-2) unstable; urgency=medium
 
+  * Add the following option to the libc++ build:
+    -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON
+    -DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON
+    -DLIBCXX_STATICALLY_LINK_ABI_IN_SHARED_LIBRARY=OFF
+     to address upstream bug 46321
+
   [ Kasper Kantz ]
   * Add riscv64 architecture in control
     enable liblldb, libomp and others which are
@@ -13,7 +19,7 @@ llvm-toolchain-12 (1:12.0.1-2) unstable; urgency=medium
   [ Jordan Justen ]
   * d/rules: Adjust cmake defines to fix libclc.pc paths
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 12 Jul 2021 08:19:59 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Jul 2021 00:01:29 +0200
 
 llvm-toolchain-12 (1:12.0.1-1) unstable; urgency=medium
 
