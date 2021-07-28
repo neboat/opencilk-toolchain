@@ -1,4 +1,10 @@
-llvm-toolchain-snapshot (1:13~++20210715093511+afc760ef3527-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-13 (1:13~++20210720093711+b2e25572d2a7-1~exp1) experimental; urgency=medium
+
+  * Branching of snapshot into 13
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 20 Jul 2021 09:40:58 +0200
+
+llvm-toolchain-snapshot (1:13~++20210715093511+afc760ef3527-1~exp1) experimental; urgency=medium
 
   * Refresh the lib of symbols in libomp
   * As scan-build-py is installed by default ( https://reviews.llvm.org/D104138 )
