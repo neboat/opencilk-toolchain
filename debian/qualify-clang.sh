@@ -939,6 +939,20 @@ clang++-$VERSION -std=c++11 -stdlib=libc++ foo.cpp -o o
 clang++-$VERSION -std=c++14 -stdlib=libc++ foo.cpp -lc++experimental -o o
 ./o > /dev/null
 
+# Bug 46321
+cat > test.cpp << EOF
+#include <iostream>
+int main() {
+  std::cout << "Hello World!" << std::endl;
+}
+EOF
+clang++-$VERSION -stdlib=libc++ -unwindlib=libunwind -rtlib=compiler-rt -static-libstdc++ -static-libgcc test.cpp &> /dev/null || true
+
+clang++-$VERSION -stdlib=libc++ -static-libstdc++ -fuse-ld=lld -l:libc++abi.a test.cpp -o test
+./test
+
+clang++-$VERSION -stdlib=libc++ -nostdlib++ test.cpp -l:libc++.a -l:libc++abi.a -pthread -o test
+
 # Bug 889832
 echo '#include <iostream>
 int main() {}'  | clang++-$VERSION -std=c++1z  -x c++ -stdlib=libc++ -
