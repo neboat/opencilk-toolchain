@@ -9,7 +9,7 @@ VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 DETAILED_VERSION=$(dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1\2\3,p")
 DEB_HOST_ARCH=$(dpkg-architecture -qDEB_HOST_ARCH)
 
-LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clangd-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}_${DETAILED_VERSION}_amd64.deb clang-tidy-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclc-${VERSION}_${DETAILED_VERSION}_all.deb libclc-${VERSION}-dev_${DETAILED_VERSION}_all.deb llvm-${VERSION}-linker-tools_${DETAILED_VERSION}_amd64.deb"
+LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clangd-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}_${DETAILED_VERSION}_amd64.deb clang-tidy-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclc-${VERSION}_${DETAILED_VERSION}_all.deb libclc-${VERSION}-dev_${DETAILED_VERSION}_all.deb llvm-${VERSION}-linker-tools_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}_${DETAILED_VERSION}_all.deb libunwind-${VERSION}-dev_${DETAILED_VERSION}_all.deb"
 echo "To install everything:"
 echo "sudo apt --purge remove 'libomp5-*' 'libc++*dev' 'libc++*' 'python3-lldb-*' 'libclc-*' 'libclc-*dev'"
 echo "sudo dpkg -i $LIST"
@@ -939,6 +939,21 @@ clang++-$VERSION -std=c++11 -stdlib=libc++ foo.cpp -o o
 clang++-$VERSION -std=c++14 -stdlib=libc++ foo.cpp -lc++experimental -o o
 ./o > /dev/null
 
+# Bug 46321
+cat > test.cpp << EOF
+#include <iostream>
+int main() {
+  std::cout << "Hello World!" << std::endl;
+}
+EOF
+clang++-$VERSION -stdlib=libc++ -unwindlib=libunwind -rtlib=compiler-rt -static-libstdc++ -static-libgcc test.cpp &> /dev/null || true
+
+clang++-$VERSION -stdlib=libc++ -static-libstdc++ -fuse-ld=lld -l:libc++abi.a test.cpp -o test
+./test
+
+clang++-$VERSION -stdlib=libc++ -nostdlib++ test.cpp -l:libc++.a -l:libc++abi.a -pthread -o test
+./test
+
 # Bug 889832
 echo '#include <iostream>
 int main() {}'  | clang++-$VERSION -std=c++1z  -x c++ -stdlib=libc++ -
@@ -1030,6 +1045,123 @@ fi
 
 LLVM_CONFIG=llvm-config-$VERSION /usr/lib/llvm-$VERSION/share/libclc/check_external_calls.sh /usr/lib/clc/amdgcn--amdhsa.bc > /dev/null
 
+# libunwind
+echo "Testing libunwind-$VERSION-dev ..."
+
+if test ! -f /usr/include/libunwind/unwind.h; then
+    echo "Install libunwind-$VERSION-dev";
+    exit -1;
+fi
+echo '
+#include <libunwind.h>
+#include <stdlib.h>
+
+void backtrace(int lower_bound) {
+  unw_context_t context;
+  unw_getcontext(&context);
+
+  unw_cursor_t cursor;
+  unw_init_local(&cursor, &context);
+
+  int n = 0;
+  do {
+    ++n;
+    if (n > 100) {
+      abort();
+    }
+  } while (unw_step(&cursor) > 0);
+
+  if (n < lower_bound) {
+    abort();
+  }
+}
+
+void test1(int i) {
+  backtrace(i);
+}
+
+void test2(int i, int j) {
+  backtrace(i);
+  test1(j);
+}
+
+void test3(int i, int j, int k) {
+  backtrace(i);
+  test2(j, k);
+}
+
+void test_no_info() {
+  unw_context_t context;
+  unw_getcontext(&context);
+
+  unw_cursor_t cursor;
+  unw_init_local(&cursor, &context);
+
+  unw_proc_info_t info;
+  int ret = unw_get_proc_info(&cursor, &info);
+  if (ret != UNW_ESUCCESS)
+    abort();
+
+  // Set the IP to an address clearly outside any function.
+  unw_set_reg(&cursor, UNW_REG_IP, (unw_word_t)0);
+
+  ret = unw_get_proc_info(&cursor, &info);
+  if (ret != UNW_ENOINFO)
+    abort();
+}
+
+int main(int, char**) {
+  test1(1);
+  test2(1, 2);
+  test3(1, 2, 3);
+  test_no_info();
+  return 0;
+}'> foo.cpp
+clang++-$VERSION foo.cpp -lunwind -ldl -I /usr/include/libunwind
+./a.out
+clang++-$VERSION foo.cpp -unwindlib=libunwind -rtlib=compiler-rt -I/usr/include/libunwind
+./a.out
+
+echo '
+#include <assert.h>
+#include <dlfcn.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <unwind.h>
+
+_Unwind_Reason_Code frame_handler(struct _Unwind_Context* ctx, void* arg) {
+  (void)arg;
+  Dl_info info = { 0, 0, 0, 0 };
+
+  // Unwind util the main is reached, above frames depend on the platform and
+  // architecture.
+  if (dladdr(reinterpret_cast<void *>(_Unwind_GetIP(ctx)), &info) &&
+      info.dli_sname && !strcmp("main", info.dli_sname)) {
+    _Exit(0);
+  }
+  return _URC_NO_REASON;
+}
+
+void signal_handler(int signum) {
+  (void)signum;
+  _Unwind_Backtrace(frame_handler, NULL);
+  _Exit(-1);
+}
+
+int main(int, char**) {
+  signal(SIGUSR1, signal_handler);
+  kill(getpid(), SIGUSR1);
+  return -2;
+}
+'> foo.cpp
+clang++-$VERSION foo.cpp /usr/lib/llvm-$VERSION/lib/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl
+./a.out||true
+clang++-$VERSION foo.cpp -unwindlib=libunwind -rtlib=compiler-rt -I/usr/include/libunwind -ldl
+./a.out||true
 
 if test ! -f /usr/lib/llvm-$VERSION/include/polly/LinkAllPasses.h; then
     echo "Install libclang-common-$VERSION-dev for polly";

@@ -76,6 +76,14 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
 llvm-toolchain-12 (1:12.0.1-2) unstable; urgency=medium
 
+  * Generate libunwind-12 & libunwind-12-dev packages
+  * Add the following option to the libc++ build:
+    -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON
+    -DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON
+    -DLIBCXX_STATICALLY_LINK_ABI_IN_SHARED_LIBRARY=OFF
+     to address upstream bug 46321
+  * Make libc++abi use libunwind
+
   [ Kasper Kantz ]
   * Add riscv64 architecture in control
     enable liblldb, libomp and others which are
@@ -85,6 +93,28 @@ llvm-toolchain-12 (1:12.0.1-2) unstable; urgency=medium
   * Add libxml2 as a dependency as it is necessary
     for llvm manifest tool (llvm-mt)
     (Closes: #990537)
+
+  [ Jordan Justen ]
+  * d/rules: Adjust cmake defines to fix libclc.pc paths
+  * Add the following option to the libc++ build:
+    -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON
+    -DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON
+    -DLIBCXX_STATICALLY_LINK_ABI_IN_SHARED_LIBRARY=OFF
+     to address upstream bug 46321
+  * Build libunwind
+
+  [ Kasper Kantz ]
+  * Add riscv64 architecture in control
+    enable liblldb, libomp and others which are
+    currently unavailable in riscv64 repository.
+
+  [ Krzysztof Aleksander Pyrkosz ]
+  * Add libxml2 as a dependency as it is necessary
+    for llvm manifest tool (llvm-mt)
+    (Closes: #990537)
+
+  [ Jordan Justen ]
+  * d/rules: Adjust cmake defines to fix libclc.pc paths
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 12 Jul 2021 08:19:59 +0200
 
