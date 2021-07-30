@@ -952,6 +952,7 @@ clang++-$VERSION -stdlib=libc++ -static-libstdc++ -fuse-ld=lld -l:libc++abi.a te
 ./test
 
 clang++-$VERSION -stdlib=libc++ -nostdlib++ test.cpp -l:libc++.a -l:libc++abi.a -pthread -o test
+./test
 
 # Bug 889832
 echo '#include <iostream>
