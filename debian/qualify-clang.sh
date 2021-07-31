@@ -813,9 +813,15 @@ if ! grep "No such file or directory" foo.log; then
     # This isn't failing on 64, so, look at the results
     if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
         echo "fuzzer. Output:"
+<<<<<<< Updated upstream
         ./a.out || true
         if [ $DEB_HOST_ARCH == "amd64" -o $DEB_HOST_ARCH == "i386" ]; then
             # Don't fail on arm64 and ppc64el
+=======
+        ./a.out
+        if [ $DEB_HOST_ARCH != "arm64" ]; then
+            # Don't fail on arm64
+>>>>>>> Stashed changes
             exit 42
         fi
     fi
