@@ -1,0 +1,2 @@
+usr/lib/llvm-@LLVM_VERSION@/lib/libunwind.so /usr/lib/x86_64-linux-gnu/libunwind.so
+usr/lib/llvm-@LLVM_VERSION@/lib/libunwind.a /usr/lib/x86_64-linux-gnu/libunwind.a
