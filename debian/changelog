@@ -1,6 +1,11 @@
 llvm-toolchain-13 (1:13~++20210720093711+b2e25572d2a7-1~exp1) experimental; urgency=medium
 
   * Branching of snapshot into 13
+  * Adjust libclang:
+    - upstream decided to make it stable starting from 13, with the soname
+    - for now, I am not planning to rename libclang1-13 to libclang13 as it will
+      cause too much churn for a small gain as we will keep libllvm (while
+      losing the capability to have different versions in parallel installed)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 20 Jul 2021 09:40:58 +0200
 
