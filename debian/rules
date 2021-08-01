@@ -193,7 +193,7 @@ endif
 
 # Enable libunwind (or not)
 LIBUNWIND_ENABLE=yes
-ifneq (,$(filter $(DEB_HOST_ARCH), amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64 sparc sparc64))
+ifneq (,$(filter $(DEB_HOST_ARCH), s390x))
   LIBUNWIND_ENABLE=no
 else
   PROJECTS+=;libunwind
