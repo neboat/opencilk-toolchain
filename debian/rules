@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 # polly, openmp & lldb aren't enabled for every platform
-PROJECTS = clang;clang-tools-extra;libcxx;libcxxabi;compiler-rt;lld;debuginfo-tests;libunwind
+PROJECTS = clang;clang-tools-extra;libcxx;libcxxabi;compiler-rt;lld;debuginfo-tests
 
 TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
@@ -189,6 +189,14 @@ ifneq (,$(filter $(DEB_HOST_ARCH), m68k mips mipsel powerpc powerpcspe riscv64 s
 else
   PROJECTS+=;openmp
 #  CMAKE_EXTRA += -DLIBOMPTARGET_BUILD_NVPTX_BCLIB=ON -DLLVM_ENABLE_RUNTIMES=openmp
+endif
+
+# Enable libunwind (or not)
+LIBUNWIND_ENABLE=yes
+ifneq (,$(filter $(DEB_HOST_ARCH), amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64 sparc sparc64))
+  LIBUNWIND_ENABLE=no
+else
+  PROJECTS+=;libunwind
 endif
 
 RUN_TEST=yes
@@ -618,8 +626,10 @@ override_dh_auto_install:
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && rm -f libomp.so; \
 	ln -s libomp.so.$(SONAME_OPENMP) libomp.so
 
-	mkdir -p debian/tmp/usr/include/libunwind
-	cp -R libunwind/include/* debian/tmp/usr/include/libunwind/
+	if test "$(LIBUNWIND_ENABLE)" = yes; then \
+		mkdir -p debian/tmp/usr/include/libunwind; \
+		cp -R libunwind/include/* debian/tmp/usr/include/libunwind/; \
+	fi
 
 	if test "$(OPENMP_ENABLE)" = yes; then \
 		mkdir -p debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp; \
