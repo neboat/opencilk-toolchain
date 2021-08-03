@@ -41,6 +41,7 @@ libclang-@LLVM_VERSION@.so.13 libclang1-@LLVM_VERSION@ #MINVER#
  clang_CompileCommand_getMappedSourceContent@LLVM_13 1:5.0~svn298832-1~
  clang_CompileCommand_getMappedSourcePath@LLVM_13 1:5.0~svn298832-1~
  clang_CompileCommand_getNumArgs@LLVM_13 1:5.0~svn298832-1~
+ clang_CompileCommand_getNumMappedSources@LLVM_13 1:14~++20210802064328+d6d0b6559e97-1~
  clang_CompileCommands_dispose@LLVM_13 1:5.0~svn298832-1~
  clang_CompileCommands_getCommand@LLVM_13 1:5.0~svn298832-1~
  clang_CompileCommands_getSize@LLVM_13 1:5.0~svn298832-1~
