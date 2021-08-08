@@ -82,7 +82,7 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 llvm-toolchain-12 (1:12.0.1-4) UNRELEASED; urgency=medium
 
   * Make libunwind-dev depends on libunwind
-  * Don't build libunwind on armel & mipsel
+  * Don't build libunwind on hurd, armel, powerpc & mipsel
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Aug 2021 10:58:54 +0200
 
