@@ -734,6 +734,7 @@ Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64 sparc sparc6
 Multi-Arch: same
 Depends:
  ${misc:Depends},
+ libunwind-13 (= ${binary:Version})
 Breaks: libunwind-dev
 Provides: libunwind-x.y-dev
 Conflicts: libunwind-x.y-dev
