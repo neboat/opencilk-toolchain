@@ -79,6 +79,13 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
 
+llvm-toolchain-12 (1:12.0.1-4) UNRELEASED; urgency=medium
+
+  * Make libunwind-dev depends on libunwind
+  * Don't build libunwind on armel & mipsel
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Aug 2021 10:58:54 +0200
+
 llvm-toolchain-12 (1:12.0.1-3) unstable; urgency=medium
 
   * Build libunwind only on amd64 arm64 armhf i386
