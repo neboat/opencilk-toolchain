@@ -1,6 +1,7 @@
 llvm-toolchain-12 (1:12.0.1-4) UNRELEASED; urgency=medium
 
   * Make libunwind-dev depends on libunwind
+  * Don't build libunwind on armel & mipsel
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Aug 2021 10:58:54 +0200
 
