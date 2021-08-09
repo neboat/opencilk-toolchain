@@ -952,7 +952,8 @@ int main() {
   std::cout << "Hello World!" << std::endl;
 }
 EOF
-clang++-$VERSION -stdlib=libc++ -unwindlib=libunwind -rtlib=compiler-rt -static-libstdc++ -static-libgcc test.cpp &> /dev/null || true
+clang++-$VERSION -stdlib=libc++ -unwindlib=libunwind -rtlib=compiler-rt -static-libstdc++ -static-libgcc test.cpp  -lpthread -ldl -o test
+./test
 
 clang++-$VERSION -stdlib=libc++ -static-libstdc++ -fuse-ld=lld -l:libc++abi.a test.cpp -o test
 ./test
