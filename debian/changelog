@@ -3,6 +3,8 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
   * revert the s390 as it is probably fixed
   * Rename some lld libs. Following 7a6482216ff02f81ed02ff4936f1b22d4b5a9a6c
     lldMachO=>lldMachOOld and lldMachO2=>lldMach
+  * scan-build-py - Force the file open in utf-8. Fails on -14 on bionic
+    otherwise
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
