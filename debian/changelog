@@ -1,3 +1,9 @@
+llvm-toolchain-13 (1:13~++20210731010128+6eaf46beb462-1~exp2) experimental; urgency=medium
+
+  * Add symbol clang_CompileCommand_getNumMappedSources to libclang
+
+ --
+
 llvm-toolchain-13 (1:13~++20210731010128+6eaf46beb462-1~exp1) experimental; urgency=medium
 
   * Branching of snapshot into 13
