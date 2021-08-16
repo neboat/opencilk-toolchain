@@ -14,6 +14,7 @@ for F in $LIST; do
 done
 
 echo "once you copy the old version into a new branch"
+echo "edit debian/rules, maybe update SONAME_CLANG"
 echo "edit debian/control, update the VCS links"
 echo "edit debian/control, update the source pkg name"
 echo "edit debian/changelog, update the source pkg name"
