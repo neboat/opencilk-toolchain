@@ -1333,6 +1333,15 @@ if grep "LLVM IR bitcode" foo.log; then
     echo "Should be elf"
     exit -2
 fi
+echo "
+from ctypes import *
+libclang="/usr/lib/llvm-$VERSION/lib/libclang-$VERSION.so.1"
+lib = CDLL(libclang)
+fun = lib.clang_getAddressSpace
+print(fun)
+" > foo.py
+python3 foo.py|grep _FuncPtr
+rm foo.py
 
 echo "Testing cmake build ..."
 
