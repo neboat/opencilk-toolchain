@@ -35,6 +35,7 @@ endif
 
 VENDOR=$(shell lsb_release -is)
 DISTRO=$(shell lsb_release -sc)
+DISTRO_RELEASE=$(shell lsb_release -sr)
 
 DH_VERSION := $(shell dpkg -s debhelper | grep '^Version' | awk '{print $$2}')
 
@@ -138,6 +139,25 @@ else ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}
 		'-Vdep:devlibs-objc=libobjc-$(GCC_VERSION)-dev'
 else
 	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev'
+endif
+
+ENABLE_SPRIV = yes
+# Disable spirv on Debian older than bullseye (11)
+ifeq ($(shell dpkg-vendor --is Debian && echo yes),yes)
+ifeq ($(shell dpkg --compare-versions $(DISTRO_RELEASE) lt 11 ; echo $$?),0)
+	ENABLE_SPRIV = no
+endif
+endif
+# Disable spirv on Ubuntu older than focal (20.04)
+ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
+ifeq ($(shell dpkg --compare-versions $(DISTRO_RELEASE) lt 20 ; echo $$?),0)
+	ENABLE_SPRIV = no
+endif
+endif
+
+LIBCLC_TARGETS_TO_BUILD="amdgcn--;amdgcn--amdhsa;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl"
+ifeq ($(ENABLE_SPRIV),yes)
+	LIBCLC_TARGETS_TO_BUILD := $(LIBCLC_TARGETS_TO_BUILD)";spirv-mesa3d-;spirv64-mesa3d-"
 endif
 
 # Disabled:
@@ -539,7 +559,7 @@ debian-libclc-build:
 	-DCMAKE_INSTALL_DATADIR=lib \
 	-DCMAKE_INSTALL_INCLUDEDIR=include \
 	-DLLVM_CONFIG=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-config \
-	-DLIBCLC_TARGETS_TO_BUILD="amdgcn--;amdgcn--amdhsa;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl"; \
+	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
 	make $(NJOBS) $(VERBOSE)
 	touch $@
 
@@ -765,10 +785,10 @@ endif
 
 
 override_dh_makeshlibs:
-	dh_makeshlibs -plibclang$(SONAME_EXT)-$(LLVM_VERSION) -V"libclang$(SONAME_EXT)-$(LLVM_VERSION) (>= 1:9~svn298832-1~)" -- -c4
-	dh_makeshlibs -pliblldb-$(LLVM_VERSION) -V"liblldb-$(LLVM_VERSION) (>= 1:9~svn298832-1~)"
-	dh_makeshlibs -plibllvm$(LLVM_VERSION) -V"libllvm$(LLVM_VERSION) (>= 1:9~svn298832-1~)"
-	dh_makeshlibs -plibomp$(SONAME_OPENMP)-$(LLVM_VERSION) -V"libomp$(SONAME_OPENMP)-$(LLVM_VERSION) (>= 1:9~svn298832-1~)"
+	dh_makeshlibs -plibclang$(SONAME_EXT)-$(LLVM_VERSION)
+	dh_makeshlibs -pliblldb-$(LLVM_VERSION)
+	dh_makeshlibs -plibllvm$(LLVM_VERSION)
+	dh_makeshlibs -plibomp$(SONAME_OPENMP)-$(LLVM_VERSION)
 	dh_makeshlibs --remaining-packages -V
 
 override_dh_shlibdeps:
@@ -789,10 +809,10 @@ override_dh_strip:
 	find $(TARGET_BUILD) -name '*.o' -o -name '*.a' -type f | xargs -r rm -f
 ifeq (0, $(strip $(shell dpkg --compare-versions $(DH_VERSION) ge 9.20160114; echo $$?)))
 	: # If we don't have the right version of debhelper, don't run the option
-	dh_strip -p libclang$(SONAME_EXT)-$(LLVM_VERSION) --dbgsym-migration='libclang$(SONAME_EXT)-$(LLVM_VERSION)-dbg (<< 1:9~svn327768-1~)'
-	dh_strip -p libllvm$(LLVM_VERSION) --dbgsym-migration='libllvm$(LLVM_VERSION)-dbg (<< 1:9~svn327768-1~)'
-	dh_strip -p liblldb-$(LLVM_VERSION) --dbgsym-migration='liblldb-$(LLVM_VERSION)-dbg (<< 1:9~svn327768-1~)'
-	dh_strip -p libomp$(SONAME_OPENMP)-$(LLVM_VERSION) --dbgsym-migration='libomp$(SONAME_OPENMP)-$(LLVM_VERSION)-dbg (<< 1:9~svn327768-1~)'
+	dh_strip -p libclang$(SONAME_EXT)-$(LLVM_VERSION) --dbgsym-migration='libclang$(SONAME_EXT)-$(LLVM_VERSION)-dbg'
+	dh_strip -p libllvm$(LLVM_VERSION) --dbgsym-migration='libllvm$(LLVM_VERSION)-dbg'
+	dh_strip -p liblldb-$(LLVM_VERSION) --dbgsym-migration='liblldb-$(LLVM_VERSION)-dbg'
+	dh_strip -p libomp$(SONAME_OPENMP)-$(LLVM_VERSION) --dbgsym-migration='libomp$(SONAME_OPENMP)-$(LLVM_VERSION)-dbg'
 endif
 # ifeq (${LLD_ENABLE},yes)
 # 	PATH=$(CURDIR)/:$$PATH dh_strip -p liblld-$(LLVM_VERSION) --dbg-package=liblld-$(LLVM_VERSION)-dbg
@@ -854,7 +874,7 @@ ifeq (${RUN_TEST},yes)
 ARCH_LLVM_TEST_OK := i386 amd64
 
 override_dh_auto_test:
-
+    echo "Running tests: $(RUN_TEST)"
 # LLVM tests
 ifneq (,$(findstring $(DEB_HOST_ARCH),$(ARCH_LLVM_TEST_OK)))
 # logs the output to check-llvm_build_log.txt for validation through autopkgtest
