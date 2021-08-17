@@ -1,12 +1,19 @@
-llvm-toolchain-13 (1:13~++20210731010128+6eaf46beb462-1~exp2) experimental; urgency=medium
+llvm-toolchain-13 (1:13.0.0~+rc1-1) unstable; urgency=medium
 
+  * Upload to Unstable
   * Add symbol clang_CompileCommand_getNumMappedSources to libclang
   * Add a new variable called SONAME_CLANG as
     clang soname has started with llvm-toolchain-13.
     it is normal that 13 is what is seen in 14 or later version as
     it is bumped only with abi changes
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Aug 2021 15:48:27 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Aug 2021 16:00:12 +0200
+
+llvm-toolchain-13 (1:13.0.0~+rc1-1~exp1) unstable; urgency=medium
+
+  * New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 03 Aug 2021 09:36:26 +0200
 
 llvm-toolchain-13 (1:13~++20210731010128+6eaf46beb462-1~exp1) experimental; urgency=medium
 
