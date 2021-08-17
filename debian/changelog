@@ -1,13 +1,14 @@
-llvm-toolchain-12 (1:12.0.1-4) UNRELEASED; urgency=medium
+llvm-toolchain-12 (1:12.0.1-4) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
   * Make libunwind-dev depends on libunwind
   * Don't build libunwind on hurd, armel, powerpc & mipsel
+  * Remove old svn reference in the usage dh_strip & dh_makeshlibs
 
   [ Jordan Justen ]
   * libclc: Include libclc spir-v outputs (used by Mesa opencl)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Aug 2021 10:58:54 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Aug 2021 22:04:17 +0200
 
 llvm-toolchain-12 (1:12.0.1-3) unstable; urgency=medium
 
