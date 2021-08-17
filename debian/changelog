@@ -1,7 +1,11 @@
 llvm-toolchain-12 (1:12.0.1-4) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * Make libunwind-dev depends on libunwind
   * Don't build libunwind on hurd, armel, powerpc & mipsel
+
+  [ Jordan Justen ]
+  * libclc: Include libclc spir-v outputs (used by Mesa opencl)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Aug 2021 10:58:54 +0200
 
