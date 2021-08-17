@@ -142,5 +142,4 @@ lld-use-link-atomic-i386.diff
 lower-python-dep.diff
 scan-build-py-fix-analyze-path.diff
 scan-build-py-fix-default-bin.diff
-scan-build-py-force-utf-8-opening.diff
 libclc-llvm-spirv.diff
