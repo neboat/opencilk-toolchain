@@ -1494,6 +1494,6 @@ fi
 
 #clean up
 rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.* test_fuzzer.cc foo.* o
-rm -rf output matmul.* *profraw opt.ll a.json default.profdata test
+rm -rf output matmul.* *profraw opt.ll a.json default.profdata test test.cpp
 
 echo "Completed"
