@@ -11,7 +11,7 @@ DEB_HOST_ARCH=$(dpkg-architecture -qDEB_HOST_ARCH)
 
 LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clangd-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}_${DETAILED_VERSION}_amd64.deb clang-tidy-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclc-${VERSION}_${DETAILED_VERSION}_all.deb libclc-${VERSION}-dev_${DETAILED_VERSION}_all.deb llvm-${VERSION}-linker-tools_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb"
 echo "To install everything:"
-echo "sudo apt --purge remove 'libomp5-*' 'libc++*dev' 'libc++*' 'python3-lldb-*' 'libclc-*' 'libclc-*dev'"
+echo "sudo apt --purge remove 'libomp5-*' 'libc++*dev' 'libc++*' 'python3-lldb-*' 'libunwind-*dev' 'libclc-*' 'libclc-*dev'"
 echo "sudo dpkg -i $LIST"
 L=""
 for f in $LIST; do
@@ -813,15 +813,9 @@ if ! grep "No such file or directory" foo.log; then
     # This isn't failing on 64, so, look at the results
     if ! ./a.out 2>&1 | grep -q -E "(Test unit written|PreferSmall)"; then
         echo "fuzzer. Output:"
-<<<<<<< Updated upstream
         ./a.out || true
         if [ $DEB_HOST_ARCH == "amd64" -o $DEB_HOST_ARCH == "i386" ]; then
             # Don't fail on arm64 and ppc64el
-=======
-        ./a.out
-        if [ $DEB_HOST_ARCH != "arm64" ]; then
-            # Don't fail on arm64
->>>>>>> Stashed changes
             exit 42
         fi
     fi
@@ -953,13 +947,13 @@ int main() {
 }
 EOF
 clang++-$VERSION -stdlib=libc++ -unwindlib=libunwind -rtlib=compiler-rt -static-libstdc++ -static-libgcc test.cpp  -lpthread -ldl -o test
-./test
+./test > /dev/null
 
 clang++-$VERSION -stdlib=libc++ -static-libstdc++ -fuse-ld=lld -l:libc++abi.a test.cpp -o test
-./test
+./test > /dev/null
 
 clang++-$VERSION -stdlib=libc++ -nostdlib++ test.cpp -l:libc++.a -l:libc++abi.a -pthread -o test
-./test
+./test > /dev/null
 
 # Bug 889832
 echo '#include <iostream>
@@ -1339,6 +1333,25 @@ if grep "LLVM IR bitcode" foo.log; then
     echo "Should be elf"
     exit -2
 fi
+echo "
+from ctypes import *
+libclang="/usr/lib/llvm-$VERSION/lib/libclang-$VERSION.so.1"
+lib = CDLL(libclang)
+fun = lib.clang_getAddressSpace
+print(fun)
+" > foo.py
+python3 foo.py|grep _FuncPtr
+rm foo.py
+
+echo "
+from ctypes import *
+libclang='/usr/lib/llvm-$VERSION/lib/libclang-$VERSION.so.1'
+lib = CDLL(libclang)
+fun = lib.clang_getAddressSpace
+print(fun)
+" > foo.py
+python3 foo.py|grep _FuncPtr
+rm foo.py
 
 echo "Testing cmake build ..."
 
@@ -1490,6 +1503,6 @@ fi
 
 #clean up
 rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.* test_fuzzer.cc foo.* o
-rm -rf output matmul.* *profraw opt.ll a.json default.profdata test
+rm -rf output matmul.* *profraw opt.ll a.json default.profdata test test.cpp
 
 echo "Completed"

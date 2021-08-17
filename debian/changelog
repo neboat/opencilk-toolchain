@@ -8,6 +8,16 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
+llvm-toolchain-13 (1:13~++20210731010128+6eaf46beb462-1~exp2) experimental; urgency=medium
+
+  * Add symbol clang_CompileCommand_getNumMappedSources to libclang
+  * Add a new variable called SONAME_CLANG as
+    clang soname has started with llvm-toolchain-13.
+    it is normal that 13 is what is seen in 14 or later version as
+    it is bumped only with abi changes
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Aug 2021 15:48:27 +0200
+
 llvm-toolchain-13 (1:13~++20210731010128+6eaf46beb462-1~exp1) experimental; urgency=medium
 
   * Branching of snapshot into 13
@@ -89,12 +99,21 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
 
-llvm-toolchain-12 (1:12.0.1-4) UNRELEASED; urgency=medium
+llvm-toolchain-12 (1:12.0.1-5) unstable; urgency=medium
 
+  [ Jordan Justen ]
+  * libclc: Include libclc spir-v outputs (used by Mesa opencl)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Aug 2021 10:19:22 +0200
+
+llvm-toolchain-12 (1:12.0.1-4) unstable; urgency=medium
+
+  [ Sylvestre Ledru ]
   * Make libunwind-dev depends on libunwind
   * Don't build libunwind on hurd, armel, powerpc & mipsel
+  * Remove old svn reference in the usage dh_strip & dh_makeshlibs
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Aug 2021 10:58:54 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 16 Aug 2021 22:04:17 +0200
 
 llvm-toolchain-12 (1:12.0.1-3) unstable; urgency=medium
 
