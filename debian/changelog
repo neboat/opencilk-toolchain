@@ -105,7 +105,6 @@ llvm-toolchain-12 (1:12.0.1-5) unstable; urgency=medium
 
 llvm-toolchain-12 (1:12.0.1-4) unstable; urgency=medium
 
-  [ Sylvestre Ledru ]
   * Make libunwind-dev depends on libunwind
   * Don't build libunwind on hurd, armel, powerpc & mipsel
   * Remove old svn reference in the usage dh_strip & dh_makeshlibs
