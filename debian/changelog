@@ -41,6 +41,7 @@ llvm-toolchain-13 (1:13~++20210731010128+6eaf46beb462-1~exp1) experimental; urge
     - for now, I am not planning to rename libclang1-13 to libclang13 as it will
       cause too much churn for a small gain as we will keep libllvm (while
       losing the capability to have different versions in parallel installed)
+      See upstream c7b3a91017d26266d7556b1ac7c49b06f0109b91
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 20 Jul 2021 09:40:58 +0200
 
