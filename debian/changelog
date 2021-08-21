@@ -1,6 +1,7 @@
-llvm-toolchain-13 (1:13.0.0~+rc1-2) UNRELEASED; urgency=medium
+llvm-toolchain-13 (1:13.0.0~+rc1-2) unstable; urgency=medium
 
   * clang-soname-extract-version.diff: improve the upstream declaration
+  * Fix the libclang links
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 19 Aug 2021 18:13:56 +0200
 
