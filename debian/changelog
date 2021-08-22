@@ -16,6 +16,13 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
+llvm-toolchain-13 (1:13.0.0~+rc1-2) unstable; urgency=medium
+
+  * clang-soname-extract-version.diff: improve the upstream declaration
+  * Fix the libclang links
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 19 Aug 2021 18:13:56 +0200
+
 llvm-toolchain-13 (1:13.0.0~+rc1-1) unstable; urgency=medium
 
   * Upload to Unstable
