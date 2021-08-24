@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/include/clang/Basic/X86Target.def
+Index: llvm-toolchain-snapshot_14~++20210824065029+d2e103644be3/llvm/include/llvm/Support/X86TargetParser.def
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/clang/include/clang/Basic/X86Target.def
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/include/clang/Basic/X86Target.def
-@@ -312,7 +312,7 @@ CPU_SPECIFIC("pentium_mmx", 'D', "+mmx")
+--- llvm-toolchain-snapshot_14~++20210824065029+d2e103644be3.orig/llvm/include/llvm/Support/X86TargetParser.def
++++ llvm-toolchain-snapshot_14~++20210824065029+d2e103644be3/llvm/include/llvm/Support/X86TargetParser.def
+@@ -224,7 +224,7 @@ CPU_SPECIFIC("pentium_mmx", 'D', "+mmx")
  CPU_SPECIFIC("pentium_ii", 'E', "+cmov,+mmx")
  CPU_SPECIFIC("pentium_iii", 'H', "+cmov,+mmx,+sse")
  CPU_SPECIFIC_ALIAS("pentium_iii_no_xmm_regs", "pentium_iii")
