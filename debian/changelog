@@ -6,7 +6,7 @@ llvm-toolchain-snapshot (1:14~++20210817085703+f5616a981c60-1~exp1) UNRELEASED; 
     merged upstream
 
   [ John Paul Adrian Glaubitz ]
-  * Disable libunwind on m68k and x32
+  * Disable libunwind on m68k, sparc64 and x32
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Aug 2021 21:01:03 +0200
 
