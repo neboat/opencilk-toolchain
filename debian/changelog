@@ -1,7 +1,7 @@
 llvm-toolchain-13 (1:13.0.0~+rc1-3) UNRELEASED; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
-  * Disable libunwind on m68k and x32
+  * Disable libunwind on m68k, sparc64 and x32
 
  -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Tue, 24 Aug 2021 16:54:44 +0200
 
