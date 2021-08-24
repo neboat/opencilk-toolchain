@@ -4,6 +4,7 @@ llvm-toolchain-snapshot (1:14~++20210817085703+f5616a981c60-1~exp1) UNRELEASED; 
   * experimental New snapshot release
   * remove "scan-build-py-force-utf-8-opening.diff"
     merged upstream
+  * Also install libomptarget-nvptx in libomp-X.Y-dev next to amdgcn
 
   [ John Paul Adrian Glaubitz ]
   * Disable libunwind on m68k, sparc64 and x32
