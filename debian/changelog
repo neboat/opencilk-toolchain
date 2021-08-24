@@ -1,8 +1,12 @@
 llvm-toolchain-snapshot (1:14~++20210817085703+f5616a981c60-1~exp1) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * experimental New snapshot release
   * remove "scan-build-py-force-utf-8-opening.diff"
     merged upstream
+
+  [ John Paul Adrian Glaubitz ]
+  * Disable libunwind on m68k and x32
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Aug 2021 21:01:03 +0200
 
