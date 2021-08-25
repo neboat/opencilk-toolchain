@@ -122,7 +122,7 @@ llvm-toolchain-12 (1:12.0.1-5) unstable; urgency=medium
   [ Jordan Justen ]
   * Include SPIR-V (*.spv) outputs in libclc package
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Aug 2021 10:19:22 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 25 Aug 2021 10:18:14 +0200
 
 llvm-toolchain-12 (1:12.0.1-4) unstable; urgency=medium
 
