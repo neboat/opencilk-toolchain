@@ -3,7 +3,10 @@ llvm-toolchain-13 (1:13.0.0~+rc1-3) UNRELEASED; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * Disable libunwind on m68k, sparc64 and x32
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Tue, 24 Aug 2021 16:54:44 +0200
+  [ Gianfranco Costamagna ]
+  * integration-test-suite-test: fix build by using 13 as default version
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 26 Aug 2021 16:05:13 +0200
 
 llvm-toolchain-13 (1:13.0.0~+rc1-2) unstable; urgency=medium
 
