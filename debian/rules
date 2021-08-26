@@ -192,7 +192,7 @@ endif
 
 # Enable openmp (or not)
 OPENMP_ENABLE=yes
-ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel powerpc powerpcspe riscv64 sparc64 s390x x32))
+ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel powerpc powerpcspe sparc64 s390x x32))
   OPENMP_ENABLE=no
 else
   PROJECTS+=;openmp
@@ -255,7 +255,7 @@ else
 endif
 
 LLDB_ENABLE=yes
-LLDB_DISABLE_ARCHS := hurd-i386 ia64 powerpc powerpcspe ppc64 riscv64 sparc64
+LLDB_DISABLE_ARCHS := hurd-i386 ia64 powerpc powerpcspe ppc64 sparc64
 # hurd has threading issues
 ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 # Disable LLDB for this arch.
@@ -291,7 +291,7 @@ endif
 
 DH_OPTIONS=
 OCAML_ENABLE= no
-OCAML_ARCHS := amd64 arm64 armhf ppc64el s390x
+OCAML_ARCHS := amd64 arm64 armhf ppc64el riscv64 s390x
 ifneq (,$(filter $(DEB_HOST_ARCH),$(OCAML_ARCHS)))
 # Enable OCAML for this arch.
 	OCAML_ENABLE=yes
