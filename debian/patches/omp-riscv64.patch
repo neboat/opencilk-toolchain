@@ -1,0 +1,23 @@
+Description: Define the affinity for riscv64
+Last-Update: 2021-08-27
+
+--- llvm-toolchain-12-12.0.1.orig/openmp/runtime/src/kmp_affinity.h
++++ llvm-toolchain-12-12.0.1/openmp/runtime/src/kmp_affinity.h
+@@ -209,6 +209,17 @@ public:
+ #elif __NR_sched_getaffinity != 123
+ #error Wrong code for getaffinity system call.
+ #endif /* __NR_sched_getaffinity */
++#elif KMP_ARCH_RISCV64
++#ifndef __NR_sched_setaffinity
++#define __NR_sched_setaffinity 122
++#elif __NR_sched_setaffinity != 122
++#error Wrong code for setaffinity system call.
++#endif /* __NR_sched_setaffinity */
++#ifndef __NR_sched_getaffinity
++#define __NR_sched_getaffinity 123
++#elif __NR_sched_getaffinity != 123
++#error Wrong code for getaffinity system call.
++#endif /* __NR_sched_getaffinity */
+ #elif KMP_ARCH_X86_64
+ #ifndef __NR_sched_setaffinity
+ #define __NR_sched_setaffinity 203

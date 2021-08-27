@@ -117,6 +117,12 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
 
+llvm-toolchain-12 (1:12.0.1-7) UNRELEASED; urgency=medium
+
+  * Add a patch to fix omp build on riscv64
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 27 Aug 2021 10:43:26 +0200
+
 llvm-toolchain-12 (1:12.0.1-6) unstable; urgency=medium
 
   * Fixup build process on riscv64, the architecture building was enabled
