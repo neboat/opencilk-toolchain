@@ -1,0 +1,13 @@
+diff --git a/libclc/CMakeLists.txt b/libclc/CMakeLists.txt
+index b8b5ceff086c..5964468358f2 100644
+--- a/libclc/CMakeLists.txt
++++ b/libclc/CMakeLists.txt
+@@ -97,7 +97,7 @@ find_program( LLVM_CLANG clang PATHS ${LLVM_BINDIR} NO_DEFAULT_PATH )
+ find_program( LLVM_AS llvm-as PATHS ${LLVM_BINDIR} NO_DEFAULT_PATH )
+ find_program( LLVM_LINK llvm-link PATHS ${LLVM_BINDIR} NO_DEFAULT_PATH )
+ find_program( LLVM_OPT opt PATHS ${LLVM_BINDIR} NO_DEFAULT_PATH )
+-find_program( LLVM_SPIRV llvm-spirv PATHS ${LLVM_BINDIR} NO_DEFAULT_PATH )
++find_program( LLVM_SPIRV llvm-spirv PATHS ${LLVM_BINDIR})
+ 
+ # Print toolchain
+ message( "clang: ${LLVM_CLANG}" )

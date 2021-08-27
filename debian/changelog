@@ -6,10 +6,20 @@ llvm-toolchain-snapshot (1:14~++20210817085703+f5616a981c60-1~exp1) UNRELEASED; 
     merged upstream
   * Also install libomptarget-nvptx in libomp-X.Y-dev next to amdgcn
 
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Aug 2021 21:01:03 +0200
+
+llvm-toolchain-13 (1:13.0.0~+rc2-1~exp1) UNRELEASED; urgency=medium
+
   [ John Paul Adrian Glaubitz ]
   * Disable libunwind on m68k, sparc64 and x32
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Aug 2021 21:01:03 +0200
+  [ Gianfranco Costamagna ]
+  * integration-test-suite-test: fix build by using 13 as default version
+
+  [ Sylvestre Ledru ]
+  * experimental New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 27 Aug 2021 09:36:35 +0200
 
 llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; urgency=medium
 
@@ -127,12 +137,29 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
 
+llvm-toolchain-12 (1:12.0.1-7) UNRELEASED; urgency=medium
+
+  * Add a patch to fix omp build on riscv64
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 27 Aug 2021 10:43:26 +0200
+
+llvm-toolchain-12 (1:12.0.1-6) unstable; urgency=medium
+
+  * Fixup build process on riscv64, the architecture building was enabled
+    in control file but not in rules file, neither required build-deps were
+    installed. (note: this should fail, but at least we will have a build log
+    stored.
+  * Add ocaml support on riscv64.
+  * Don't require hello package on i386 (helps Ubuntu alternate dependencies)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 26 Aug 2021 15:33:24 +0200
+
 llvm-toolchain-12 (1:12.0.1-5) unstable; urgency=medium
 
   [ Jordan Justen ]
-  * libclc: Include libclc spir-v outputs (used by Mesa opencl)
+  * Include SPIR-V (*.spv) outputs in libclc package
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Aug 2021 10:19:22 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 25 Aug 2021 10:18:14 +0200
 
 llvm-toolchain-12 (1:12.0.1-4) unstable; urgency=medium
 
