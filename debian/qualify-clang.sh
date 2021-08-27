@@ -1205,10 +1205,18 @@ int main()
 }
 " > foo.c
 clang-$VERSION -O3 -mllvm -polly -mllvm -polly-parallel -lgomp  foo.c
-# Comment because of https://bugs.llvm.org/show_bug.cgi?id=43164
-#clang-$VERSION -O3 -mllvm -polly -mllvm -lgomp -polly-parallel foo.c
 clang-$VERSION -O3 -mllvm -polly -mllvm -polly-vectorizer=stripmine foo.c
 clang-$VERSION -S -fsave-optimization-record -emit-llvm foo.c -o matmul.s
+# broken https://bugs.llvm.org/show_bug.cgi?id=51642
+test -s matmul.opt.yaml||true
+
+clang-$VERSION -S -O2 -fsave-optimization-record -emit-llvm foo.c -o matmul.s
+if ! test -s matmul.opt.yaml; then
+    echo "-fsave-optimization-record generated an empty file"
+    exit 1
+fi
+
+
 opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
 opt-$VERSION -basic-aa -polly-ast -analyze matmul.preopt.ll -polly-process-unprofitable > /dev/null
 if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
