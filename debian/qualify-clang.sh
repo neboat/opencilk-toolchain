@@ -1225,7 +1225,7 @@ if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
 fi
 /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py -source-dir .  matmul.opt.yaml -o ./output > /dev/null
 
-if ! grep -q "not inlined into" output/foo.c.html 2>&1; then
+if ! grep -q "inlined into" output/foo.c.html 2>&1; then
     echo "Could not find the output from polly"
     exit -1
 fi
