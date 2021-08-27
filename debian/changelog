@@ -1,12 +1,13 @@
-llvm-toolchain-snapshot (1:14~++20210817085703+f5616a981c60-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:14~++20210827124555+d4d459e7475b-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
   * experimental New snapshot release
   * remove "scan-build-py-force-utf-8-opening.diff"
     merged upstream
   * Also install libomptarget-nvptx in libomp-X.Y-dev next to amdgcn
+  * Upload the various changes from 12 & 13
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Aug 2021 21:01:03 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 27 Aug 2021 12:50:04 +0200
 
 llvm-toolchain-13 (1:13.0.0~+rc2-1) unstable; urgency=medium
 
