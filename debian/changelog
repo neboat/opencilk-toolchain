@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:14~++20210827124555+d4d459e7475b-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:14~++20210827020436+15b2a8e7faf6-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
   * experimental New snapshot release
@@ -6,8 +6,14 @@ llvm-toolchain-snapshot (1:14~++20210827124555+d4d459e7475b-1~exp1) experimental
     merged upstream
   * Also install libomptarget-nvptx in libomp-X.Y-dev next to amdgcn
   * Upload the various changes from 12 & 13
+  * remove "scan-build-py-force-utf-8-opening.diff"
+    merged upstream
+  * Also install libomptarget-nvptx in libomp-X.Y-dev next to amdgcn
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 27 Aug 2021 12:50:04 +0200
+  [ John Paul Adrian Glaubitz ]
+  * Disable libunwind on m68k, sparc64 and x32
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 27 Aug 2021 14:21:10 +0200
 
 llvm-toolchain-13 (1:13.0.0~+rc2-1) unstable; urgency=medium
 
