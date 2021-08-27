@@ -117,7 +117,7 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 llvm-toolchain-12 (1:12.0.1-5) unstable; urgency=medium
 
   [ Jordan Justen ]
-  * libclc: Include libclc spir-v outputs (used by Mesa opencl)
+  * Include SPIR-V (*.spv) outputs in libclc package
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Aug 2021 10:19:22 +0200
 
