@@ -15,12 +15,13 @@ Build-Depends: debhelper (>= 9.0), cmake, chrpath, texinfo, sharutils,
     g++-multilib [amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
     libjs-mathjax, python3-recommonmark,
     doxygen, gfortran,
-    ocaml-nox [amd64 arm64 armhf ppc64el s390x],
-    ocaml-findlib [amd64 arm64 armhf ppc64el s390x],
-    libctypes-ocaml-dev [amd64 arm64 armhf ppc64el s390x],
-    dh-exec, dh-ocaml [amd64 arm64 armhf ppc64el s390x],
+    ocaml-nox [amd64 arm64 armhf ppc64el riscv64 s390x],
+    ocaml-findlib [amd64 arm64 armhf ppc64el riscv64 s390x],
+    libctypes-ocaml-dev [amd64 arm64 armhf ppc64el riscv64 s390x],
+    dh-exec, dh-ocaml [amd64 arm64 armhf ppc64el riscv64 s390x],
     libpfm4-dev [linux-any], python3-setuptools, libz3-dev,
-    llvm-spirv | hello, spirv-tools | hello
+    llvm-spirv [ amd64 arm64 armel armhf mips64el mipsel ppc64el s390x ] <!stage1> | hello [!i386],
+    spirv-tools [ linux-any ] | hello [ !i386]
 # "| hello" is for older buster/bionic distros without spirv support
 Build-Conflicts: oprofile, ocaml
 Standards-Version: 4.2.1
