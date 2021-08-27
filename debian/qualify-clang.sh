@@ -1207,6 +1207,12 @@ int main()
 clang-$VERSION -O3 -mllvm -polly -mllvm -polly-parallel -lgomp  foo.c
 clang-$VERSION -O3 -mllvm -polly -mllvm -polly-vectorizer=stripmine foo.c
 clang-$VERSION -S -fsave-optimization-record -emit-llvm foo.c -o matmul.s
+# It was broken https://bugs.llvm.org/show_bug.cgi?id=51642
+if ! test -s matmul.opt.yaml; then
+    echo "-fsave-optimization-record generated an empty file"
+    exit 1
+fi
+test -s matmul.s
 opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
 opt-$VERSION -basic-aa -polly-ast -analyze matmul.preopt.ll -polly-process-unprofitable > /dev/null
 if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
