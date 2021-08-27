@@ -8,7 +8,7 @@ llvm-toolchain-snapshot (1:14~++20210817085703+f5616a981c60-1~exp1) UNRELEASED; 
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 17 Aug 2021 21:01:03 +0200
 
-llvm-toolchain-13 (1:13.0.0~+rc2-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-13 (1:13.0.0~+rc2-1) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Disable libunwind on m68k, sparc64 and x32
@@ -17,9 +17,9 @@ llvm-toolchain-13 (1:13.0.0~+rc2-1~exp1) UNRELEASED; urgency=medium
   * integration-test-suite-test: fix build by using 13 as default version
 
   [ Sylvestre Ledru ]
-  * experimental New snapshot release
+  * New testing release
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 27 Aug 2021 09:36:35 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 27 Aug 2021 09:43:28 +0200
 
 llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; urgency=medium
 
