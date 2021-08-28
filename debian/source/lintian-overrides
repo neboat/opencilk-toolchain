@@ -21,4 +21,4 @@ source: source-is-missing llgo/third_party/gofrontend/libgo/go/debug/elf/testdat
 source: source-is-missing llgo/third_party/gofrontend/libgo/go/debug/elf/testdata/*.obj
 
 # By design
-source: invalid-arch-string-in-source-relation riscv64 [build-depends: g++-11 [riscv64]]
+source: invalid-arch-string-in-source-relation riscv64*
