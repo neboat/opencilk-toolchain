@@ -716,7 +716,7 @@ Description: OpenCL C language implementation - development files
 
 Package: libunwind-14
 Section: libs
-Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64 sparc sparc64
+Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
 Multi-Arch: same
 Depends: ${shlibs:Depends},
  ${misc:Depends}
@@ -733,7 +733,7 @@ Description: production-quality unwinder
 
 Package: libunwind-14-dev
 Section: libdevel
-Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64 sparc sparc64
+Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
 Multi-Arch: same
 Depends:
  ${misc:Depends},
