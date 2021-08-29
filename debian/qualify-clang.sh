@@ -955,6 +955,18 @@ clang++-$VERSION -stdlib=libc++ -static-libstdc++ -fuse-ld=lld -l:libc++abi.a te
 clang++-$VERSION -stdlib=libc++ -nostdlib++ test.cpp -l:libc++.a -l:libc++abi.a -pthread -o test
 ./test > /dev/null
 
+# bug https://bugs.llvm.org/show_bug.cgi?id=43604
+
+cat > test.cpp << EOF
+#include <iostream>
+__attribute__((visibility("default")))
+extern "C" void plugin() {
+        std::cout << "Hello World from a plugin!" << std::endl;
+}
+EOF
+clang++-$VERSION -shared -o plugin.so -fvisibility=hidden foo.cpp -static-libstdc++ || true
+clang++-$VERSION -shared -o plugin.so -fvisibility=hidden foo.cpp -stdlib=libc++ -static-libstdc++ ||true
+
 # Bug 889832
 echo '#include <iostream>
 int main() {}'  | clang++-$VERSION -std=c++1z  -x c++ -stdlib=libc++ -
