@@ -68,6 +68,11 @@ if ! grep -q -E "scan-build: 0 bugs found." foo.log; then
 fi
 rm -rf scan-build
 
+if test ! -f /usr/bin/clang-tidy-$VERSION; then
+    echo "Install clang-tidy-$VERSION"
+    exit 1
+fi
+
 echo 'namespace mozilla {
 namespace dom {
 void foo();
