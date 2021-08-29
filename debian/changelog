@@ -1,8 +1,11 @@
 llvm-toolchain-12 (1:12.0.1-7) UNRELEASED; urgency=medium
 
+  *  cmake: use ON instead of YES for consistency
+
+  [  Gianfranco Costamagna ]
   * Add a patch to fix omp build on riscv64
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 27 Aug 2021 10:43:26 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 29 Aug 2021 15:15:18 +0200
 
 llvm-toolchain-12 (1:12.0.1-6) unstable; urgency=medium
 
