@@ -1,15 +1,11 @@
 #!/usr/bin/make -f
 
 # polly, openmp & lldb aren't enabled for every platform
-PROJECTS = clang;clang-tools-extra;lld;debuginfo-tests
-RUNTIMES = compiler-rt;libcxx;libcxxabi
+PROJECTS = clang;clang-tools-extra;libcxx;libcxxabi;compiler-rt;lld;debuginfo-tests
 
 TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
 DEB_INST		:= $(CURDIR)/debian/tmp/
-
-# Disable to move the previous method
-BUILD_METHOD := stage2
 
 GXX_VERSIONED_PACKAGE    := $(shell dpkg-query -W -f '$${Depends}' g++ | grep -o 'g++-[0-9][0-9.]*' | tail -n1 )
 GXX_VERSIONED_EXECUTABLE := $(shell dpkg -L $(GXX_VERSIONED_PACKAGE) | grep '/usr/bin/g++-[0-9][0-9.]*' | xargs ls -d | tail -n1 )
@@ -196,7 +192,7 @@ OPENMP_ENABLE=yes
 ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel powerpc powerpcspe sparc64 s390x x32))
   OPENMP_ENABLE=no
 else
-  RUNTIMES+=;openmp
+  PROJECTS+=;openmp
 endif
 
 # Enable libunwind (or not)
@@ -204,9 +200,9 @@ LIBUNWIND_ENABLE=yes
 ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel mipsel hurd-i386 powerpc))
   LIBUNWIND_ENABLE=no
 else
-  RUNTIMES += ;libunwind
+  PROJECTS += ;libunwind
   CMAKE_LIBCXX_EXTRA += -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
-	-DDLIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
+	-DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
 	-DLIBCXXABI_STATICALLY_LINK_UNWINDER_IN_SHARED_LIBRARY=OFF \
 	-DLIBCXXABI_STATICALLY_LINK_UNWINDER_IN_STATIC_LIBRARY=ON \
 	-DLIBUNWIND_USE_COMPILER_RT=ON
@@ -329,7 +325,7 @@ endif
 
 # For some reasons, some spaces are added, removing them
 PROJECTS_LIST := $(shell echo "$(PROJECTS)"|sed -e "s| ||g")
-RUNTIMES_LIST := $(shell echo "$(RUNTIMES)"|sed -e "s| ||g")
+#RUNTIMES_LIST := $(shell echo "$(RUNTIMES)"|sed -e "s| ||g")
 
 preconfigure:
 
@@ -346,7 +342,7 @@ preconfigure:
 	@echo "DISTRO=$(DISTRO)"
 	@echo "GCC_VERSION=$(GCC_VERSION)"
 	@echo "PROJECTS=$(PROJECTS_LIST)"
-	@echo "RUNTIMES=$(RUNTIMES_LIST)"
+#	@echo "RUNTIMES=$(RUNTIMES_LIST)"
 	@echo "LLVM_VERSION=$(LLVM_VERSION)"
 	@echo "LLVM_VERSION_FULL=$(LLVM_VERSION_FULL)"
 	@echo "LLVM_VERSION_SNAPSHOT=$(LLVM_VERSION_SNAPSHOT)"
@@ -383,25 +379,6 @@ preconfigure:
 	if test "$(LLVM_SPIRV_INSTALLED)" = "yes"; then \
 		sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install; \
 	fi
-
-# The various options to build libc++ and libc++abi
-
-LIBCXX_CMAKE_OPTIONS := \
-	-DLIBCXX_USE_COMPILER_RT=ON \
-	-DLIBCXXABI_USE_COMPILER_RT=ON \
-	-DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
-	-DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON \
-	-DLIBCXX_STATICALLY_LINK_ABI_IN_SHARED_LIBRARY=OFF \
-	-DLIBCXX_CXX_ABI=libcxxabi \
-	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
-	-DLIBCXX_CXX_ABI_LIBRARY_PATH=$(BASE_PATH)/libcxxabi/build/lib \
-	-DLIBCXX_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
-	-DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
-	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
-	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
-	-DLIBCXXABI_LIBCXX_INCLUDES=$(BASE_PATH)/libcxx/include \
-	-DLIBCXXABI_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
-	$(CMAKE_LIBCXX_EXTRA)
 
 # Override this two targets. They are trying to manage the .in conversion for me
 override_dh_ocamlinit:
@@ -440,7 +417,6 @@ override_dh_auto_configure: preconfigure
 	echo "Using cmake: $(CMAKE_BIN)"; \
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH $(PRE_PROCESS_CONF) $(CMAKE_BIN) -S llvm/ -B $(TARGET_BUILD) \
 	-DLLVM_ENABLE_PROJECTS="$(PROJECTS_LIST)" \
-	-DLLVM_ENABLE_RUNTIMES="$(RUNTIMES_LIST)" \
 	-DCMAKE_SUPPRESS_REGENERATION=ON \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
@@ -456,7 +432,6 @@ override_dh_auto_configure: preconfigure
 	-DLLVM_ENABLE_FFI=ON \
 	-DLLVM_ENABLE_DUMP=ON \
 	$(CMAKE_EXTRA) \
-	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCLANG_LIBRARY_VERSION=$(SONAME_EXT) \
 	-DCLANG_LINK_CLANG_DYLIB=ON \
 	-DENABLE_LINKER_BUILD_ID=ON \
@@ -483,14 +458,12 @@ VERBOSE=VERBOSE=1
 #VERBOSE=-v
 
 debian-full-build:
-	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CFLAGS="$(CFLAGS_EXTRA)" CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 stage2 compiler-rt runtimes
+	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CFLAGS="$(CFLAGS_EXTRA)" CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 stage2
 
 # Check the stage 2 build worked
-	if test "$(BUILD_METHOD)" = "stage2"; then \
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \
 		echo "clang hasn't been built using clang. Bye bye. Check that the stage2 build has been done."; \
 		exit 2; \
-	fi; \
 	fi
 	if ldd $(TARGET_BUILD_STAGE2)/lib/libclang-$(LLVM_VERSION).so.1|grep -q libclang-cpp-$(LLVM_VERSION); then \
 		echo "libclang-$(LLVM_VERSION).so.1 depends on libclang-cpp. Should not be the case"; \
@@ -510,6 +483,71 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 	ar ruv libFuzzer.a Fuzzer*.o
 endif
 	touch $@
+
+# The various options to build libc++ and libc++abi
+
+LIBCXX_CMAKE_OPTIONS := \
+	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
+	-DLLVM_CONFIG_PATH=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-config \
+	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
+	-DCMAKE_CXX_COMPILER=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/clang++ \
+	-DCMAKE_C_COMPILER=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/clang \
+	-DCMAKE_CXX_FLAGS="$(LIBCXXFLAGS)" \
+	-DCMAKE_EXE_LINKER_FLAGS="" \
+	-DCMAKE_SHARED_LINKER_FLAGS="" \
+	-DCMAKE_MODULE_LINKER_FLAGS="" \
+	-DCMAKE_AR=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-ar \
+	-DCMAKE_RANLIB=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-ranlib \
+	-DLIBCXX_USE_COMPILER_RT=ON \
+	-DLIBCXXABI_USE_COMPILER_RT=ON \
+	-DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
+	-DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON \
+	-DLIBCXX_STATICALLY_LINK_ABI_IN_SHARED_LIBRARY=OFF \
+	-DLIBCXX_CXX_ABI=libcxxabi \
+	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
+	-DLIBCXX_CXX_ABI_LIBRARY_PATH=$(BASE_PATH)/libcxxabi/build/lib \
+	-DLIBCXX_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
+	-DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
+	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
+	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
+	-DLIBCXXABI_LIBCXX_INCLUDES=$(BASE_PATH)/libcxx/include \
+	-DLIBCXXABI_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
+	$(CMAKE_EXTRA) \
+	$(CMAKE_LIBCXX_EXTRA)
+
+debian-libcxx-build:
+# Builds libcxx
+	mkdir -p libcxx/build
+	mkdir -p libcxxabi/build
+	echo "Using cmake: $(CMAKE_BIN)"; \
+	cd libcxxabi/build && \
+	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
+	$(LIBCXX_CMAKE_OPTIONS) \
+	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
+	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
+	-DLIBCXXABI_LIBCXX_INCLUDES=$(BASE_PATH)/libcxx/include \
+	-DLIBCXXABI_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
+	-DLLVM_ENABLE_RTTI=ON \
+	$(CMAKE_LIBCXX_EXTRA) && \
+	$(PRE_PROCESS_CONF) make $(NJOBS) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)"
+	touch $@
+
+debian-libcxxabi-build:
+# Builds libcxxabi
+	mkdir -p libcxxabi/build
+	echo "Using cmake: $(CMAKE_BIN)"; \
+	cd libcxx/build && \
+	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
+	$(LIBCXX_CMAKE_OPTIONS) \
+	-DLIBCXX_CXX_ABI=libcxxabi \
+	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
+	-DLIBCXX_CXX_ABI_LIBRARY_PATH=$(BASE_PATH)/libcxxabi/build/lib \
+	-DLIBCXX_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
+	-DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
+	$(CMAKE_LIBCXX_EXTRA) && \
+	$(PRE_PROCESS_CONF) make $(NJOBS) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)"
+	touch $@
+
 
 debian-libclc-build:
 # Builds libclc
@@ -531,7 +569,7 @@ debian-libclc-build:
 	make $(NJOBS) $(VERBOSE)
 	touch $@
 
-override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build
+override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build debian-libclc-build
 
 override_dh_prep: build_doc
 	dh_prep
@@ -589,11 +627,8 @@ override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
 	rm -rf $(find $(TARGET_BUILD) -wholename '*CMakeFiles*' -not -name CMakeLists.txt -a -name "*.dir" -type d)
 	# install/fast enables a make install without recompiling temporary files
-	if test "$(BUILD_METHOD)" = "stage2"; then \
-		$(MAKE) -C $(TARGET_BUILD) $(VERBOSE) stage2-install install-runtimes DESTDIR=$(DEB_INST)/; \
-	else \
-		$(MAKE) -C $(TARGET_BUILD) $(VERBOSE) install DESTDIR=$(DEB_INST)/; \
-	fi
+	$(MAKE) -C $(TARGET_BUILD) $(VERBOSE) stage2-install DESTDIR=$(DEB_INST)/
+
 	# Not used on Linux.
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/argdumper
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/clang/clang-format-bbedit.applescript
@@ -666,6 +701,9 @@ endif
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/six.py
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
+
+	$(MAKE) -C libcxxabi/build install DESTDIR=$(DEB_INST)
+	$(MAKE) -C libcxx/build install DESTDIR=$(DEB_INST)
 
 	$(MAKE) -C libclc/build install DESTDIR=$(DEB_INST)
 
@@ -745,7 +783,7 @@ endif
 
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
-	rm -rf $(TARGET_BUILD)
+#	rm -rf $(TARGET_BUILD)
 
 
 override_dh_makeshlibs:
@@ -861,8 +899,11 @@ endif
 # Sanitizer
 	$(MAKE) $(NJOBS) -C $(TARGET_BUILD_STAGE2) check-sanitizer || true
 
-# Libcxx & libcxxabi
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD_STAGE2) check-runtimes || true
+# Libcxx
+	$(MAKE) $(NJOBS) -C libcxx/build check-libcxx || true
+
+# Libcxxabi
+	$(MAKE) $(MAKE) -C libcxxabi/build check-libcxxabi || true
 
 # Libclc
 	$(MAKE) $(MAKE) -C libclc/build test || true
