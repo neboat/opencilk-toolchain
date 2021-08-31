@@ -3,7 +3,11 @@ llvm-toolchain-snapshot (1:14~++20210827020436+15b2a8e7faf6-1~exp2) UNRELEASED; 
   [ John Paul Adrian Glaubitz ]
   * Disable libunwind-X.Y{-dev} packages on sparc and sparc64
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sun, 29 Aug 2021 21:28:50 +0200
+  [ Sylvestre Ledru ]
+  * Ship clang-repl
+    See https://reviews.llvm.org/D106813
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 31 Aug 2021 22:17:35 +0200
 
 llvm-toolchain-snapshot (1:14~++20210827020436+15b2a8e7faf6-1~exp1) experimental; urgency=medium
 
