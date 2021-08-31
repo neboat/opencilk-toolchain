@@ -31,6 +31,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/clang-scan-deps
 usr/lib/llvm-@LLVM_VERSION@/bin/pp-trace
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-move
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-offload-wrapper
+usr/lib/llvm-@LLVM_VERSION@/bin/clang-repl
 
 usr/lib/llvm-@LLVM_VERSION@/bin/analyze-build
 usr/lib/llvm-@LLVM_VERSION@/bin/intercept-build
@@ -90,3 +91,4 @@ usr/bin/clang-scan-deps-@LLVM_VERSION@
 usr/bin/clang-move-@LLVM_VERSION@
 usr/bin/pp-trace-@LLVM_VERSION@
 usr/bin/clang-offload-wrapper-@LLVM_VERSION@
+usr/bin/clang-repl-@LLVM_VERSION@
