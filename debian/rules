@@ -500,10 +500,8 @@ LIBCXX_CMAKE_OPTIONS := \
 	-DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
 	$(CMAKE_EXTRA)
 
-debian-libcxx-build:
-# Builds libcxx
-	mkdir -p libcxx/build
-	mkdir -p libcxxabi/build
+debian-libcxxabi-build:
+# Builds libcxxabi
 	echo "Using cmake: $(CMAKE_BIN)"; \
 	cd libcxxabi/build && \
 	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
@@ -514,13 +512,12 @@ debian-libcxx-build:
 	-DLIBCXXABI_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
 	-DLIBCXXABI_USE_COMPILER_RT=YES \
 	-DLLVM_ENABLE_RTTI=ON \
-	$(CMAKE_LIBCXX_EXTRA) && \
+	$(CMAKE_LIBCXX_EXTRA) && cd build && \
 	$(PRE_PROCESS_CONF) make $(NJOBS) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)"
 	touch $@
 
-debian-libcxxabi-build:
-# Builds libcxxabi
-	mkdir -p libcxxabi/build
+debian-libcxx-build:
+# Builds libcxx
 	echo "Using cmake: $(CMAKE_BIN)"; \
 	cd libcxx/build && \
 	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
@@ -560,7 +557,7 @@ debian-libclc-build:
 	make $(NJOBS) $(VERBOSE)
 	touch $@
 
-override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build debian-libclc-build
+override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libcxxabi-build debian-libcxx-build debian-libclc-build
 
 override_dh_prep: build_doc
 	dh_prep
