@@ -128,27 +128,12 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
 llvm-toolchain-12 (1:12.0.1-7) UNRELEASED; urgency=medium
 
-  * cmake: use ON instead of YES for consistency
   * Add debian/source/options to ignore the diff (much much faster to repack)
-  * Add LIBCXXABI_ENABLE_STATIC_UNWINDER=ON
-    LIBCXXABI_STATICALLY_LINK_UNWINDER_IN_SHARED_LIBRARY=OFF
-    LIBCXXABI_STATICALLY_LINK_UNWINDER_IN_STATIC_LIBRARY=ON
-    to libc++ when libunwind is built
-    Matches what is done on brew:
-    https://bit.ly/3kDNpC9
 
   [  Gianfranco Costamagna ]
   * Add a patch to fix omp build on riscv64
-  * cmake: use ON instead of YES for consistency
-  * Add LIBCXXABI_ENABLE_STATIC_UNWINDER=ON
-    LIBCXXABI_STATICALLY_LINK_UNWINDER_IN_SHARED_LIBRARY=OFF
-    LIBCXXABI_STATICALLY_LINK_UNWINDER_IN_STATIC_LIBRARY=ON
-    to libc++ when libunwind is built
-    Matches what is done on brew:
-    https://bit.ly/3kDNpC9
 
-  [  Gianfranco Costamagna ]
-  * Add a patch to fix omp build on riscv64
+  [ Sylvestre Ledru ]
   * cmake: use ON instead of YES for consistency
   * Add LIBCXXABI_ENABLE_STATIC_UNWINDER=ON
     LIBCXXABI_STATICALLY_LINK_UNWINDER_IN_SHARED_LIBRARY=OFF
@@ -158,9 +143,6 @@ llvm-toolchain-12 (1:12.0.1-7) UNRELEASED; urgency=medium
     https://bit.ly/3kDNpC9
   * Don't generate the llvm-mcmarkup & lldb-mi manpages (don't exist anymore)
     (LP: #1940713)
-
-  [  Gianfranco Costamagna ]
-  * Add a patch to fix omp build on riscv64
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 29 Aug 2021 15:15:18 +0200
 
