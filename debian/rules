@@ -501,8 +501,9 @@ LIBCXX_CMAKE_OPTIONS := \
 debian-libcxxabi-build:
 # Builds libcxxabi
 	echo "Using cmake: $(CMAKE_BIN)"; \
-	cd libcxxabi/build && \
-	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
+	cd libcxxabi && \
+	$(PRE_PROCESS_CONF) $(CMAKE_BIN) \
+	-S . -B build \
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
 	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
@@ -517,8 +518,9 @@ debian-libcxxabi-build:
 debian-libcxx-build:
 # Builds libcxx
 	echo "Using cmake: $(CMAKE_BIN)"; \
-	cd libcxx/build && \
-	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
+	cd libcxx && \
+	$(PRE_PROCESS_CONF) $(CMAKE_BIN) \
+	-S . -B build \
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXX_CXX_ABI=libcxxabi \
 	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
