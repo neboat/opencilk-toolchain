@@ -130,12 +130,6 @@ llvm-toolchain-12 (1:12.0.1-7) unstable; urgency=medium
 
   * Add debian/source/options to ignore the diff (much much faster to repack)
   * cmake: use ON instead of YES for consistency
-  * Add LIBCXXABI_ENABLE_STATIC_UNWINDER=ON
-    LIBCXXABI_STATICALLY_LINK_UNWINDER_IN_SHARED_LIBRARY=OFF
-    LIBCXXABI_STATICALLY_LINK_UNWINDER_IN_STATIC_LIBRARY=ON
-    to libc++ when libunwind is built
-    Matches what is done on brew:
-    https://bit.ly/3kDNpC9
   * Don't generate the llvm-mcmarkup & lldb-mi manpages (don't exist anymore)
     (LP: #1940713)
 

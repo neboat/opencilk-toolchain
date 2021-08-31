@@ -426,7 +426,6 @@ override_dh_auto_configure: preconfigure
 	-DLLVM_ENABLE_RTTI=ON \
 	-DLLVM_ENABLE_FFI=ON \
 	-DLLVM_ENABLE_DUMP=ON \
-	$(CMAKE_EXTRA) \
 	-DLIBCLANG_LIBRARY_VERSION=$(SONAME_EXT) \
 	-DCLANG_LINK_CLANG_DYLIB=ON \
 	-DENABLE_LINKER_BUILD_ID=ON \
@@ -514,6 +513,17 @@ debian-libcxxabi-build:
 	$(CMAKE_LIBCXX_EXTRA) && cd build && \
 	$(PRE_PROCESS_CONF) make $(NJOBS) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)"
 	touch $@
+
+# Fails with    $<TARGET_LINKER_FILE:unwind_static>
+#  No target "unwind_static"
+# on 12. Will test with 13
+# -DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
+#    -DLIBCXXABI_STATICALLY_LINK_UNWINDER_IN_SHARED_LIBRARY=OFF \
+#    -DLIBCXXABI_STATICALLY_LINK_UNWINDER_IN_STATIC_LIBRARY=ON \
+N
+#-    to libc++ when libunwind is built
+#-    Matches what is done on brew:
+#-    https://bit.ly/3kDNpC9
 
 debian-libcxx-build:
 # Builds libcxx
