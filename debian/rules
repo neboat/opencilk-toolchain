@@ -260,7 +260,7 @@ else
 endif
 
 LLDB_ENABLE=yes
-LLDB_DISABLE_ARCHS := hurd-i386 ia64 powerpc powerpcspe ppc64 sparc64
+LLDB_DISABLE_ARCHS := hurd-i386 ia64 powerpc powerpcspe ppc64 riscv64 sparc64
 # hurd has threading issues
 ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 # Disable LLDB for this arch.
