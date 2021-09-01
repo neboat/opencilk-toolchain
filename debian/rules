@@ -7,9 +7,6 @@ TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
 DEB_INST		:= $(CURDIR)/debian/tmp/
 
-# Disable to move the previous method
-BUILD_METHOD := stage2
-
 GXX_VERSIONED_PACKAGE    := $(shell dpkg-query -W -f '$${Depends}' g++ | grep -o 'g++-[0-9][0-9.]*' | tail -n1 )
 GXX_VERSIONED_EXECUTABLE := $(shell dpkg -L $(GXX_VERSIONED_PACKAGE) | grep '/usr/bin/g++-[0-9][0-9.]*' | xargs ls -d | tail -n1 )
 GCC_VERSION              := $(subst /usr/bin/g++-,,$(GXX_VERSIONED_EXECUTABLE))
@@ -107,7 +104,7 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   # See http://lists.llvm.org/pipermail/llvm-dev/2016-May/099761.html
   CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
   # Check for ancient libstdc++ fails due to atomics usage
-  CMAKE_EXTRA_LIBCXX += -DLLVM_COMPILER_CHECKED=ON
+  CMAKE_LIBCXX_EXTRA += -DLLVM_COMPILER_CHECKED=ON
   # Prevent clang from getting a > v4t default
   # See bug #868779
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabi
@@ -204,7 +201,6 @@ ifneq (,$(filter $(DEB_HOST_ARCH), m68k mips mipsel powerpc powerpcspe sparc64 s
   OPENMP_ENABLE=no
 else
   PROJECTS+=;openmp
-#  CMAKE_EXTRA += -DLIBOMPTARGET_BUILD_NVPTX_BCLIB=ON -DLLVM_ENABLE_RUNTIMES=openmp
 endif
 
 # Enable libunwind (or not)
@@ -212,8 +208,9 @@ LIBUNWIND_ENABLE=yes
 ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel m68k mipsel hurd-i386 powerpc sparc64 x32))
   LIBUNWIND_ENABLE=no
 else
-  PROJECTS+=;libunwind
-  CMAKE_LIBCXX_EXTRA += -DLIBCXXABI_USE_LLVM_UNWINDER=YES
+  PROJECTS += ;libunwind
+  CMAKE_LIBCXX_EXTRA += -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
+	-DLIBUNWIND_USE_COMPILER_RT=ON
 endif
 
 RUN_TEST=yes
@@ -263,7 +260,7 @@ else
 endif
 
 LLDB_ENABLE=yes
-LLDB_DISABLE_ARCHS := hurd-i386 ia64 powerpc powerpcspe ppc64 sparc64
+LLDB_DISABLE_ARCHS := hurd-i386 ia64 powerpc powerpcspe ppc64 riscv64 sparc64
 # hurd has threading issues
 ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 # Disable LLDB for this arch.
@@ -333,6 +330,7 @@ endif
 
 # For some reasons, some spaces are added, removing them
 PROJECTS_LIST := $(shell echo "$(PROJECTS)"|sed -e "s| ||g")
+#RUNTIMES_LIST := $(shell echo "$(RUNTIMES)"|sed -e "s| ||g")
 
 preconfigure:
 
@@ -349,6 +347,7 @@ preconfigure:
 	@echo "DISTRO=$(DISTRO)"
 	@echo "GCC_VERSION=$(GCC_VERSION)"
 	@echo "PROJECTS=$(PROJECTS_LIST)"
+#	@echo "RUNTIMES=$(RUNTIMES_LIST)"
 	@echo "LLVM_VERSION=$(LLVM_VERSION)"
 	@echo "LLVM_VERSION_FULL=$(LLVM_VERSION_FULL)"
 	@echo "LLVM_VERSION_SNAPSHOT=$(LLVM_VERSION_SNAPSHOT)"
@@ -411,14 +410,14 @@ override_dh_auto_configure: preconfigure
 
 	echo "Running tests: $(RUN_TEST)"
 	echo "Using cmake: $(CMAKE_BIN)"; \
-	cd $(TARGET_BUILD) && \
-	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH $(PRE_PROCESS_CONF) $(CMAKE_BIN) ../llvm/ \
+	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH $(PRE_PROCESS_CONF) $(CMAKE_BIN) -S llvm/ -B $(TARGET_BUILD) \
 	-DLLVM_ENABLE_PROJECTS="$(PROJECTS_LIST)" \
 	-DCMAKE_SUPPRESS_REGENERATION=ON \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 	-DCMAKE_CXX_FLAGS_RELWITHDEBINFO="$(opt_flags)" \
+	-DCMAKE_POSITION_INDEPENDENT_CODE=ON \
 	-DLLVM_LINK_LLVM_DYLIB=ON \
 	-DLLVM_INSTALL_UTILS=ON \
 	-DLLVM_VERSION_SUFFIX= \
@@ -427,7 +426,6 @@ override_dh_auto_configure: preconfigure
 	-DLLVM_ENABLE_RTTI=ON \
 	-DLLVM_ENABLE_FFI=ON \
 	-DLLVM_ENABLE_DUMP=ON \
-	$(CMAKE_EXTRA) \
 	-DLIBCLANG_LIBRARY_VERSION=$(SONAME_EXT) \
 	-DCLANG_LINK_CLANG_DYLIB=ON \
 	-DENABLE_LINKER_BUILD_ID=ON \
@@ -455,19 +453,19 @@ VERBOSE=VERBOSE=1
 #VERBOSE=-v
 
 debian-full-build:
-	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CFLAGS="$(CFLAGS_EXTRA)" CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 $(BUILD_METHOD)
+	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CFLAGS="$(CFLAGS_EXTRA)" CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 stage2
 
 # Check the stage 2 build worked
-	if test "$(BUILD_METHOD)" = "stage2"; then \
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \
 		echo "clang hasn't been built using clang. Bye bye. Check that the stage2 build has been done."; \
 		exit 2; \
-	fi; \
 	fi
 	if ldd $(TARGET_BUILD_STAGE2)/lib/libclang-$(LLVM_VERSION).so.1|grep -q libclang-cpp-$(LLVM_VERSION); then \
 		echo "libclang-$(LLVM_VERSION).so.1 depends on libclang-cpp. Should not be the case"; \
 		exit 2; \
 	fi
+#	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CFLAGS="$(CFLAGS_EXTRA)" CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 runtimes
+
 	touch $@
 
 debian-libfuzzer-build:
@@ -481,6 +479,7 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 endif
 	touch $@
 
+# The various options to build libc++ and libc++abi
 
 LIBCXX_CMAKE_OPTIONS := \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
@@ -496,49 +495,57 @@ LIBCXX_CMAKE_OPTIONS := \
 	-DCMAKE_RANLIB=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-ranlib \
 	-DLLVM_EXTERNAL_LIT=$(BASE_PATH)/llvm/utils/lit/lit.py \
 	-DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
-	-DLIBCXX_USE_COMPILER_RT=YES \
-	-DLIBCXXABI_USE_COMPILER_RT=YES \
-	-DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
-	-DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON \
-	-DLIBCXX_STATICALLY_LINK_ABI_IN_SHARED_LIBRARY=OFF \
-	$(CMAKE_EXTRA) \
-	$(CMAKE_EXTRA_LIBCXX)
-
-debian-libcxx-build:
-# Builds libcxx
-
-	mkdir -p libcxx/build
-	mkdir -p libcxxabi/build
-	echo "Using cmake: $(CMAKE_BIN)"; \
-	cd libcxxabi/build && \
-	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
-	$(LIBCXX_CMAKE_OPTIONS) \
-	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
-	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
-	-DLIBCXXABI_LIBCXX_INCLUDES=$(BASE_PATH)/$(TARGET_BUILD_STAGE2)/include/c++/v1/ \
-	-DLIBCXXABI_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
-	-DLLVM_ENABLE_RTTI=ON \
-	$(CMAKE_LIBCXX_EXTRA) && \
-	$(PRE_PROCESS) make $(NJOBS) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)"
-	touch $@
+	$(CMAKE_EXTRA)
 
 debian-libcxxabi-build:
 # Builds libcxxabi
-
-	mkdir -p libcxxabi/build
-
 	echo "Using cmake: $(CMAKE_BIN)"; \
-	cd libcxx/build && \
-	$(PRE_PROCESS_CONF) $(CMAKE_BIN) ../ \
+	cd libcxxabi && \
+	$(PRE_PROCESS_CONF) $(CMAKE_BIN) \
+	-S . -B build \
+	$(LIBCXX_CMAKE_OPTIONS) \
+	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
+	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
+	-DLIBCXXABI_LIBCXX_INCLUDES=$(BASE_PATH)/libcxx/include \
+	-DLIBCXXABI_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
+	-DLIBCXXABI_USE_COMPILER_RT=YES \
+	-DLLVM_ENABLE_RTTI=ON \
+	$(CMAKE_LIBCXX_EXTRA) && cd build && \
+	$(PRE_PROCESS) make $(NJOBS) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)"
+	touch $@
+
+# Fails with    $<TARGET_LINKER_FILE:unwind_static>
+#  No target "unwind_static"
+# on 12. Will test with 13
+# -DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
+#    -DLIBCXXABI_STATICALLY_LINK_UNWINDER_IN_SHARED_LIBRARY=OFF \
+#    -DLIBCXXABI_STATICALLY_LINK_UNWINDER_IN_STATIC_LIBRARY=ON \
+N
+#-    to libc++ when libunwind is built
+#-    Matches what is done on brew:
+#-    https://bit.ly/3kDNpC9
+
+debian-libcxx-build:
+# Builds libcxx
+	echo "Using cmake: $(CMAKE_BIN)"; \
+	cd libcxx && \
+	$(PRE_PROCESS_CONF) $(CMAKE_BIN) \
+	-S . -B build \
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXX_CXX_ABI=libcxxabi \
 	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
 	-DLIBCXX_CXX_ABI_LIBRARY_PATH=$(BASE_PATH)/libcxxabi/build/lib \
 	-DLIBCXX_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
 	-DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
-	$(CMAKE_LIBCXX_EXTRA) && \
+	-DLIBCXX_USE_COMPILER_RT=YES \
+	-DLIBCXX_USE_COMPILER_RT=ON \
+	-DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
+	-DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON \
+	-DLIBCXX_STATICALLY_LINK_ABI_IN_SHARED_LIBRARY=OFF \
+	$(CMAKE_LIBCXX_EXTRA) && cd build && \
 	$(PRE_PROCESS) make $(NJOBS) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)"
 	touch $@
+
 
 debian-libclc-build:
 # Builds libclc
@@ -560,7 +567,7 @@ debian-libclc-build:
 	make $(NJOBS) $(VERBOSE)
 	touch $@
 
-override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build debian-libclc-build
+override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libcxxabi-build debian-libcxx-build debian-libclc-build
 
 override_dh_prep: build_doc
 	dh_prep
@@ -604,7 +611,7 @@ endif
 	help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1 || true
 	help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1 || true
 
-	CMDS="llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb lldb-mi clang-format clang-repl clang clang++ clang-tblgen clang-check clang-cpp clang-tidy clang-apply-replacements clang-rename clang-query pp-trace sancov lli modularize clang-include-fixer find-all-symbols clang-reorder-fields ld.lld llvm-tblgen clang-change-namespace clang-offload-bundler clangd"; \
+	CMDS="llvm-dwarfdump llvm-mc llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb clang-format clang-repl clang clang++ clang-tblgen clang-check clang-cpp clang-tidy clang-apply-replacements clang-rename clang-query pp-trace sancov lli modularize clang-include-fixer find-all-symbols clang-reorder-fields ld.lld llvm-tblgen clang-change-namespace clang-offload-bundler clangd"; \
 	for f in $$CMDS; do \
 		echo "Generating manpage of $$f"; \
 		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-info --version-string=$(LLVM_VERSION) $(TARGET_BUILD_STAGE2)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1 || true; \
@@ -618,11 +625,8 @@ override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
 	rm -rf $(find $(TARGET_BUILD) -wholename '*CMakeFiles*' -not -name CMakeLists.txt -a -name "*.dir" -type d)
 	# install/fast enables a make install without recompiling temporary files
-	if test "$(BUILD_METHOD)" = "stage2"; then \
-		$(MAKE) -C $(TARGET_BUILD) $(VERBOSE) stage2-install DESTDIR=$(DEB_INST)/; \
-	else \
-		$(MAKE) -C $(TARGET_BUILD) $(VERBOSE) install DESTDIR=$(DEB_INST)/; \
-	fi
+	$(MAKE) -C $(TARGET_BUILD) $(VERBOSE) stage2-install DESTDIR=$(DEB_INST)/
+
 	# Not used on Linux.
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/argdumper
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/clang/clang-format-bbedit.applescript
@@ -697,9 +701,9 @@ endif
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
-
 	$(MAKE) -C libcxxabi/build install DESTDIR=$(DEB_INST)
 	$(MAKE) -C libcxx/build install DESTDIR=$(DEB_INST)
+
 	$(MAKE) -C libclc/build install DESTDIR=$(DEB_INST)
 
 # Rename binaries
@@ -778,7 +782,7 @@ endif
 
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
-	rm -rf $(TARGET_BUILD)
+#	rm -rf $(TARGET_BUILD)
 
 
 override_dh_makeshlibs:

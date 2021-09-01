@@ -49,6 +49,15 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
+llvm-toolchain-13 (1:13.0.0~+rc2-2) UNRELEASED; urgency=medium
+
+  * Build with -DCMAKE_POSITION_INDEPENDENT_CODE=ON to libc++ and libc++abi
+
+  [ John Paul Adrian Glaubitz ]
+  * Disable libunwind-X.Y{-dev} packages on sparc and sparc64
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 29 Aug 2021 14:52:16 +0200
+
 llvm-toolchain-13 (1:13.0.0~+rc1-2) unstable; urgency=medium
 
   * clang-soname-extract-version.diff: improve the upstream declaration
@@ -155,11 +164,19 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
 
-llvm-toolchain-12 (1:12.0.1-7) UNRELEASED; urgency=medium
+llvm-toolchain-12 (1:12.0.1-7) unstable; urgency=medium
 
+  * Add debian/source/options to ignore the diff (much much faster to repack)
+  * cmake: use ON instead of YES for consistency
+  * Don't generate the llvm-mcmarkup & lldb-mi manpages (don't exist anymore)
+    (LP: #1940713)
+
+  [  Gianfranco Costamagna ]
   * Add a patch to fix omp build on riscv64
+  * Don't build lldb on riscv64, fails to build due to missing
+    CreateHostNativeRegisterContextLinux implementation on this architecture.
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 27 Aug 2021 10:43:26 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 31 Aug 2021 20:56:40 +0200
 
 llvm-toolchain-12 (1:12.0.1-6) unstable; urgency=medium
 
@@ -527,6 +544,13 @@ llvm-toolchain-snapshot (1:12~++20200715052739+d6e79e3dd6d-1~exp1) experimental;
   * debian/patches/hurd/hurd-cxx-paths.diff: Remove, upstreamed.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 08 Jul 2020 15:19:14 +0200
+
+llvm-toolchain-11 (1:11.1.0-1~exp3) UNRELEASED; urgency=medium
+
+  * Cherry-pick upstream commit to fix a libgl1-mesa-dri texture failure.
+    (Closes: #989545)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 01 Sep 2021 12:24:34 +0200
 
 llvm-toolchain-11 (1:11.1.0-1~exp2) experimental; urgency=medium
 
