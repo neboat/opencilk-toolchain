@@ -1,0 +1,197 @@
+Description: This is a cherry-pick of upstream commits bf41c4d29e44 and c5a1eb9b0a76
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=989545
+Index: llvm-toolchain-11-11.0.1/llvm/include/llvm/CodeGen/MachineOperand.h
+===================================================================
+--- llvm-toolchain-11-11.0.1.orig/llvm/include/llvm/CodeGen/MachineOperand.h
++++ llvm-toolchain-11-11.0.1/llvm/include/llvm/CodeGen/MachineOperand.h
+@@ -728,12 +728,12 @@
+   /// ChangeToImmediate - Replace this operand with a new immediate operand of
+   /// the specified value.  If an operand is known to be an immediate already,
+   /// the setImm method should be used.
+-  void ChangeToImmediate(int64_t ImmVal);
++  void ChangeToImmediate(int64_t ImmVal, unsigned TargetFlags = 0);
+ 
+   /// ChangeToFPImmediate - Replace this operand with a new FP immediate operand
+   /// of the specified value.  If an operand is known to be an FP immediate
+   /// already, the setFPImm method should be used.
+-  void ChangeToFPImmediate(const ConstantFP *FPImm);
++  void ChangeToFPImmediate(const ConstantFP *FPImm, unsigned TargetFlags = 0);
+ 
+   /// ChangeToES - Replace this operand with a new external symbol operand.
+   void ChangeToES(const char *SymName, unsigned TargetFlags = 0);
+@@ -743,10 +743,10 @@
+                   unsigned TargetFlags = 0);
+ 
+   /// ChangeToMCSymbol - Replace this operand with a new MC symbol operand.
+-  void ChangeToMCSymbol(MCSymbol *Sym);
++  void ChangeToMCSymbol(MCSymbol *Sym, unsigned TargetFlags = 0);
+ 
+   /// Replace this operand with a frame index.
+-  void ChangeToFrameIndex(int Idx);
++  void ChangeToFrameIndex(int Idx, unsigned TargetFlags = 0);
+ 
+   /// Replace this operand with a target index.
+   void ChangeToTargetIndex(unsigned Idx, int64_t Offset,
+Index: llvm-toolchain-11-11.0.1/llvm/lib/CodeGen/MachineOperand.cpp
+===================================================================
+--- llvm-toolchain-11-11.0.1.orig/llvm/lib/CodeGen/MachineOperand.cpp
++++ llvm-toolchain-11-11.0.1/llvm/lib/CodeGen/MachineOperand.cpp
+@@ -153,22 +153,25 @@
+ /// ChangeToImmediate - Replace this operand with a new immediate operand of
+ /// the specified value.  If an operand is known to be an immediate already,
+ /// the setImm method should be used.
+-void MachineOperand::ChangeToImmediate(int64_t ImmVal) {
++void MachineOperand::ChangeToImmediate(int64_t ImmVal, unsigned TargetFlags) {
+   assert((!isReg() || !isTied()) && "Cannot change a tied operand into an imm");
+ 
+   removeRegFromUses();
+ 
+   OpKind = MO_Immediate;
+   Contents.ImmVal = ImmVal;
++  setTargetFlags(TargetFlags);
+ }
+ 
+-void MachineOperand::ChangeToFPImmediate(const ConstantFP *FPImm) {
++void MachineOperand::ChangeToFPImmediate(const ConstantFP *FPImm,
++                                         unsigned TargetFlags) {
+   assert((!isReg() || !isTied()) && "Cannot change a tied operand into an imm");
+ 
+   removeRegFromUses();
+ 
+   OpKind = MO_FPImmediate;
+   Contents.CFP = FPImm;
++  setTargetFlags(TargetFlags);
+ }
+ 
+ void MachineOperand::ChangeToES(const char *SymName,
+@@ -197,7 +200,7 @@
+   setTargetFlags(TargetFlags);
+ }
+ 
+-void MachineOperand::ChangeToMCSymbol(MCSymbol *Sym) {
++void MachineOperand::ChangeToMCSymbol(MCSymbol *Sym, unsigned TargetFlags) {
+   assert((!isReg() || !isTied()) &&
+          "Cannot change a tied operand into an MCSymbol");
+ 
+@@ -205,9 +208,10 @@
+ 
+   OpKind = MO_MCSymbol;
+   Contents.Sym = Sym;
++  setTargetFlags(TargetFlags);
+ }
+ 
+-void MachineOperand::ChangeToFrameIndex(int Idx) {
++void MachineOperand::ChangeToFrameIndex(int Idx, unsigned TargetFlags) {
+   assert((!isReg() || !isTied()) &&
+          "Cannot change a tied operand into a FrameIndex");
+ 
+@@ -215,6 +219,7 @@
+ 
+   OpKind = MO_FrameIndex;
+   setIndex(Idx);
++  setTargetFlags(TargetFlags);
+ }
+ 
+ void MachineOperand::ChangeToTargetIndex(unsigned Idx, int64_t Offset,
+Index: llvm-toolchain-11-11.0.1/llvm/lib/Target/AMDGPU/SIFoldOperands.cpp
+===================================================================
+--- llvm-toolchain-11-11.0.1.orig/llvm/lib/Target/AMDGPU/SIFoldOperands.cpp
++++ llvm-toolchain-11-11.0.1/llvm/lib/Target/AMDGPU/SIFoldOperands.cpp
+@@ -282,9 +282,6 @@
+   assert(!Fold.needsShrink() && "not handled");
+ 
+   if (Fold.isImm()) {
+-    // FIXME: ChangeToImmediate should probably clear the subreg flags. It's
+-    // reinterpreted as TargetFlags.
+-    Old.setSubReg(0);
+     Old.ChangeToImmediate(Fold.ImmToFold);
+     return true;
+   }
+@@ -819,8 +816,6 @@
+ 
+         UseMI->setDesc(TII->get(AMDGPU::S_MOV_B32));
+ 
+-        // FIXME: ChangeToImmediate should clear subreg
+-        UseMI->getOperand(1).setSubReg(0);
+         if (OpToFold.isImm())
+           UseMI->getOperand(1).ChangeToImmediate(OpToFold.getImm());
+         else
+Index: llvm-toolchain-11-11.0.1/llvm/lib/Target/AMDGPU/SIInstrInfo.cpp
+===================================================================
+--- llvm-toolchain-11-11.0.1.orig/llvm/lib/Target/AMDGPU/SIInstrInfo.cpp
++++ llvm-toolchain-11-11.0.1/llvm/lib/Target/AMDGPU/SIInstrInfo.cpp
+@@ -2588,7 +2588,6 @@
+ 
+     UseMI.setDesc(get(NewOpc));
+     UseMI.getOperand(1).ChangeToImmediate(Imm.getSExtValue());
+-    UseMI.getOperand(1).setTargetFlags(0);
+     UseMI.addImplicitDefUseOperands(*UseMI.getParent()->getParent());
+     return true;
+   }
+Index: llvm-toolchain-11-11.0.1/llvm/lib/Target/AMDGPU/SIShrinkInstructions.cpp
+===================================================================
+--- llvm-toolchain-11-11.0.1.orig/llvm/lib/Target/AMDGPU/SIShrinkInstructions.cpp
++++ llvm-toolchain-11-11.0.1/llvm/lib/Target/AMDGPU/SIShrinkInstructions.cpp
+@@ -84,21 +84,19 @@
+         MachineOperand &MovSrc = Def->getOperand(1);
+         bool ConstantFolded = false;
+ 
+-        if (MovSrc.isImm() && (isInt<32>(MovSrc.getImm()) ||
+-                               isUInt<32>(MovSrc.getImm()))) {
+-          // It's possible to have only one component of a super-reg defined by
+-          // a single mov, so we need to clear any subregister flag.
+-          Src0.setSubReg(0);
+-          Src0.ChangeToImmediate(MovSrc.getImm());
+-          ConstantFolded = true;
+-        } else if (MovSrc.isFI()) {
+-          Src0.setSubReg(0);
+-          Src0.ChangeToFrameIndex(MovSrc.getIndex());
+-          ConstantFolded = true;
+-        } else if (MovSrc.isGlobal()) {
+-          Src0.ChangeToGA(MovSrc.getGlobal(), MovSrc.getOffset(),
+-                          MovSrc.getTargetFlags());
+-          ConstantFolded = true;
++        if (TII->isOperandLegal(MI, Src0Idx, &MovSrc)) {
++          if (MovSrc.isImm() &&
++              (isInt<32>(MovSrc.getImm()) || isUInt<32>(MovSrc.getImm()))) {
++            Src0.ChangeToImmediate(MovSrc.getImm());
++            ConstantFolded = true;
++          } else if (MovSrc.isFI()) {
++            Src0.ChangeToFrameIndex(MovSrc.getIndex());
++            ConstantFolded = true;
++          } else if (MovSrc.isGlobal()) {
++            Src0.ChangeToGA(MovSrc.getGlobal(), MovSrc.getOffset(),
++                            MovSrc.getTargetFlags());
++            ConstantFolded = true;
++          }
+         }
+ 
+         if (ConstantFolded) {
+Index: llvm-toolchain-11-11.0.1/llvm/test/CodeGen/AMDGPU/shrink-instructions-illegal-fold.mir
+===================================================================
+--- /dev/null
++++ llvm-toolchain-11-11.0.1/llvm/test/CodeGen/AMDGPU/shrink-instructions-illegal-fold.mir
+@@ -0,0 +1,23 @@
++# RUN: llc -march=amdgcn -mcpu=gfx900 -run-pass=si-shrink-instructions --verify-machineinstrs %s -o - | FileCheck %s
++
++# Make sure immediate folding into V_CNDMASK respects constant bus restrictions.
++---
++
++name:            shrink_cndmask_illegal_imm_folding
++tracksRegLiveness: true
++body:             |
++  bb.0:
++    liveins: $vgpr0, $vgpr1
++    ; CHECK-LABEL: name: shrink_cndmask_illegal_imm_folding
++    ; CHECK: [[COPY:%[0-9]+]]:vgpr_32 = COPY $vgpr0
++    ; CHECK: [[MOV:%[0-9]+]]:vgpr_32 = V_MOV_B32_e32 32768, implicit $exec
++    ; CHECK: V_CMP_EQ_U32_e32 0, [[COPY]], implicit-def $vcc, implicit $exec
++    ; CHECK: V_CNDMASK_B32_e32 [[MOV]], killed [[COPY]], implicit $vcc, implicit $exec
++
++    %0:vgpr_32 = COPY $vgpr0
++    %1:vgpr_32 = V_MOV_B32_e32 32768, implicit $exec
++    V_CMP_EQ_U32_e32 0, %0:vgpr_32, implicit-def $vcc, implicit $exec
++    %2:vgpr_32 = V_CNDMASK_B32_e64 0, %1:vgpr_32, 0, killed %0:vgpr_32, $vcc, implicit $exec
++    S_NOP 0
++
++...
