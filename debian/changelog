@@ -9,7 +9,7 @@ llvm-toolchain-snapshot (1:14~++20210827020436+15b2a8e7faf6-1~exp2) UNRELEASED; 
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 31 Aug 2021 22:17:35 +0200
 
-llvm-toolchain-snapshot (1:14~++20210827020436+15b2a8e7faf6-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:14~++20210827071740+3ec634e65a02-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
   * experimental New snapshot release
@@ -24,7 +24,14 @@ llvm-toolchain-snapshot (1:14~++20210827020436+15b2a8e7faf6-1~exp1) experimental
   [ John Paul Adrian Glaubitz ]
   * Disable libunwind on m68k, sparc64 and x32
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 27 Aug 2021 14:21:10 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 27 Aug 2021 21:56:14 +0200
+
+llvm-toolchain-snapshot (1:14~++20210827020436+15b2a8e7faf6-1~exp2) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Disable libunwind-X.Y{-dev} packages on sparc and sparc64
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sun, 29 Aug 2021 21:28:50 +0200
 
 llvm-toolchain-13 (1:13.0.0~+rc2-1) unstable; urgency=medium
 
