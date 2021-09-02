@@ -1,3 +1,11 @@
+llvm-toolchain-13 (1:13.0.0~+rc2-3) UNRELEASED; urgency=medium
+
+  * compiler-rt scudo, don't add the option
+    -mno-omit-leaf-frame-pointer when building on
+    armel & armhf
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 02 Sep 2021 21:35:26 +0200
+
 llvm-toolchain-13 (1:13.0.0~+rc2-2) unstable; urgency=medium
 
   * Build with -DCMAKE_POSITION_INDEPENDENT_CODE=ON to libc++ and libc++abi
