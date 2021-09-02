@@ -9,6 +9,7 @@ llvm-toolchain-12 (1:12.0.1-7) unstable; urgency=medium
   * Add a patch to fix omp build on riscv64
   * Don't build lldb on riscv64, fails to build due to missing
     CreateHostNativeRegisterContextLinux implementation on this architecture.
+  * Refresh symbols on riscv64
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 31 Aug 2021 20:56:40 +0200
 
