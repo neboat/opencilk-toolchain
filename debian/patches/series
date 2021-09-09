@@ -145,4 +145,3 @@ scan-build-py-fix-default-bin.diff
 
 libclc-llvm-spirv.diff
 omp-riscv64.patch
-disable-no-omit-leaf.diff
