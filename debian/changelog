@@ -1,4 +1,4 @@
-llvm-toolchain-13 (1:13.0.0~+rc2-3) UNRELEASED; urgency=medium
+llvm-toolchain-13 (1:13.0.0~+rc2-3) unstable; urgency=medium
 
   * compiler-rt scudo, don't add the option
     -mno-omit-leaf-frame-pointer when building on
