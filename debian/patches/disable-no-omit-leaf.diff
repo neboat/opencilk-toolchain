@@ -1,18 +1,30 @@
-Index: llvm-toolchain-13-13.0.0~+rc2/compiler-rt/lib/scudo/standalone/CMakeLists.txt
-===================================================================
---- llvm-toolchain-13-13.0.0~+rc2.orig/compiler-rt/lib/scudo/standalone/CMakeLists.txt
-+++ llvm-toolchain-13-13.0.0~+rc2/compiler-rt/lib/scudo/standalone/CMakeLists.txt
-@@ -123,9 +123,10 @@ if (COMPILER_RT_HAS_GWP_ASAN)
-   list(APPEND SCUDO_OBJECT_LIBS
+commit f53652203e4974eac67d2e409650c3f22909d7e2
+Author: Tom Stellard <tstellar@redhat.com>
+Date:   Wed Sep 8 21:10:38 2021 -0700
+
+    scudo: Only add no-omit-frame-pointer flags when the compiler supports them
+    
+    Reviewed By: cryptoad
+    
+    Differential Revision: https://reviews.llvm.org/D109196
+    
+    (cherry picked from commit 9ee64c374605683ae80b9641d5312a72c2a67336)
+
+diff --git a/compiler-rt/lib/scudo/standalone/CMakeLists.txt b/compiler-rt/lib/scudo/standalone/CMakeLists.txt
+index 8c3708d3a45f..d6ffa448d7e0 100644
+--- a/compiler-rt/lib/scudo/standalone/CMakeLists.txt
++++ b/compiler-rt/lib/scudo/standalone/CMakeLists.txt
+@@ -124,8 +124,11 @@ if (COMPILER_RT_HAS_GWP_ASAN)
         RTGwpAsan RTGwpAsanBacktraceLibc RTGwpAsanSegvHandler
         RTGwpAsanOptionsParser)
--
+ 
 -  list(APPEND SCUDO_CFLAGS -DGWP_ASAN_HOOKS -fno-omit-frame-pointer
 -                           -mno-omit-leaf-frame-pointer)
-+  if (NOT ${arch} STREQUAL "armhf" AND NOT ${arch} STREQUAL "armel")
-+    list(APPEND SCUDO_CFLAGS -DGWP_ASAN_HOOKS -fno-omit-frame-pointer
-+      -mno-omit-leaf-frame-pointer)
-+  endif()
++  append_list_if(COMPILER_RT_HAS_OMIT_FRAME_POINTER_FLAG -fno-omit-frame-pointer
++                                                         -mno-omit-leaf-frame-pointer
++                 SCUDO_CFLAGS)
++  list(APPEND SCUDO_CFLAGS -DGWP_ASAN_HOOKS)
++
  endif()
  
  set(SCUDO_LINK_LIBS)
