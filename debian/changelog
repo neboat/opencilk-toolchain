@@ -1,9 +1,8 @@
-llvm-toolchain-13 (1:13.0.0~+rc2-4) unstable; urgency=medium
+llvm-toolchain-13 (1:13.0.0~+rc3-1) unstable; urgency=medium
 
-  * Remove debian/patches/disable-no-omit-leaf.diff to unbreak
-    apt.llvm.org
-    Will be fixed in rc3
-    If rc2 needs an upload, please revert this commit
+  * New testing release
+  * Remove debian/patches/disable-no-omit-leaf.diff
+    as it is fixed upstream
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 11 Sep 2021 09:48:23 +0200
 
