@@ -2494,7 +2494,7 @@ llvm-toolchain-7 (1:7.1.0~svn353565-1~exp1) UNRELEASED; urgency=medium
     To be ABI compliant in Debian between 7 and 7.0.1,
     I took the pr39427-misscompile.diff.
     7.1.0 is an official release for downstream users to bring
-    back the ABI comptability.
+    back the ABI compatibility.
     I am uploading this new version in the archive to:
     - avoid question like "why we don't have 7.1.0 in the archive?"
     - align with upstream
