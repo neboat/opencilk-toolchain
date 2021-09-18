@@ -150,6 +150,16 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
 
+llvm-toolchain-12 (1:12.0.1-9) unstable; urgency=medium
+
+  * Replace make by ninja for the build process
+    It is now more tested than make by upstream
+    And it is supposed to be faster
+    Removed openmp/bootstrap-with-openmp-version-export-missing.diff
+    as it seems that the ninja move fixed it
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 18 Sep 2021 11:03:29 +0200
+
 llvm-toolchain-12 (1:12.0.1-8) unstable; urgency=medium
 
   * Add back CMAKE_EXTRA to build LLVM gold (Closes: #993664)
@@ -255,7 +265,7 @@ llvm-toolchain-12 (1:12.0.1-2) unstable; urgency=medium
 
 llvm-toolchain-12 (1:12.0.1-1) unstable; urgency=medium
 
-  * New upsream release
+  * New uptsream release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 09 Jul 2021 09:13:12 +0200
 
@@ -2678,7 +2688,7 @@ llvm-toolchain-7 (1:7.1.0~svn353565-1~exp1) UNRELEASED; urgency=medium
     To be ABI compliant in Debian between 7 and 7.0.1,
     I took the pr39427-misscompile.diff.
     7.1.0 is an official release for downstream users to bring
-    back the ABI comptability.
+    back the ABI compatibility.
     I am uploading this new version in the archive to:
     - avoid question like "why we don't have 7.1.0 in the archive?"
     - align with upstream

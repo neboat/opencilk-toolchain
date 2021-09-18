@@ -137,7 +137,7 @@ else
 	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev'
 endif
 
-ifeq ($(shell which llvm-spirv),)
+ifeq ($(shell type -p llvm-spirv),)
 LLVM_SPIRV_INSTALLED = no
 else
 LLVM_SPIRV_INSTALLED = yes
@@ -325,6 +325,8 @@ ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/
 endif
 
+GENERATOR=Ninja
+
 %:
 	dh $@ $(DH_OPTIONS)
 
@@ -410,7 +412,11 @@ override_dh_auto_configure: preconfigure
 
 	echo "Running tests: $(RUN_TEST)"
 	echo "Using cmake: $(CMAKE_BIN)"; \
+	CFLAGS="$(CFLAGS_EXTRA)" \
+	CXXFLAGS="$(CXXFLAGS_EXTRA)"  \
+	LDFLAGS="$(LDFLAGS_EXTRA)" \
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH $(PRE_PROCESS_CONF) $(CMAKE_BIN) -S llvm/ -B $(TARGET_BUILD) \
+	-G $(GENERATOR) \
 	-DLLVM_ENABLE_PROJECTS="$(PROJECTS_LIST)" \
 	-DCMAKE_SUPPRESS_REGENERATION=ON \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
@@ -440,20 +446,24 @@ override_dh_auto_configure: preconfigure
 	-DLLVM_POLLY_LINK_INTO_TOOLS=ON \
 	-DBOOTSTRAP_CMAKE_CXX_FLAGS='$(BOOTSTRAP_CXXFLAGS_EXTRA)' \
 	-DBOOTSTRAP_CMAKE_C_FLAGS='$(BOOTSTRAP_CFLAGS_EXTRA)' \
-	-DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE;CMAKE_BUILD_TYPE;CMAKE_CXX_FLAGS_RELWITHDEBINFO;LLVM_LINK_LLVM_DYLIB;LLVM_INSTALL_UTILS;LLVM_VERSION_SUFFIX;LLVM_ENABLE_SPHINX;SPHINX_WARNINGS_AS_ERRORS;LLVM_BUILD_LLVM_DYLIB;LLVM_ENABLE_RTTI;LLVM_ENABLE_FFI;LIBCLANG_LIBRARY_VERSION;ENABLE_LINKER_BUILD_ID;POLLY_BUNDLED_JSONCPP;LLVM_EXPERIMENTAL_TARGETS_TO_BUILD;LLVM_USE_PERF;LLVM_ENABLE_ASSERTIONS;LLVM_BINUTILS_INCDIR;LLVM_HOST_TRIPLE;LLVM_COMPILER_CHECKED;COMPILER_RT_BUILD_BUILTINS;LIBOMP_LIBFLAGS;CMAKE_SHARED_LINKER_FLAGS;PYTHON_EXECUTABLE;LLVM_ENABLE_Z3_SOLVER;LLVM_POLLY_LINK_INTO_TOOLS;CLANG_VENDOR;LIBUNWIND_USE_COMPILER_RT" || tail -100 build-llvm/CMakeFiles/CMakeError.log
+	-DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE;CMAKE_BUILD_TYPE;CMAKE_CXX_FLAGS_RELWITHDEBINFO;LLVM_LINK_LLVM_DYLIB;LLVM_INSTALL_UTILS;LLVM_VERSION_SUFFIX;LLVM_ENABLE_SPHINX;SPHINX_WARNINGS_AS_ERRORS;LLVM_BUILD_LLVM_DYLIB;LLVM_ENABLE_RTTI;LLVM_ENABLE_FFI;LIBCLANG_LIBRARY_VERSION;ENABLE_LINKER_BUILD_ID;POLLY_BUNDLED_JSONCPP;LLVM_EXPERIMENTAL_TARGETS_TO_BUILD;LLVM_USE_PERF;LLVM_ENABLE_ASSERTIONS;LLVM_BINUTILS_INCDIR;LLVM_HOST_TRIPLE;LLVM_COMPILER_CHECKED;COMPILER_RT_BUILD_BUILTINS;LIBOMP_LIBFLAGS;CMAKE_SHARED_LINKER_FLAGS;PYTHON_EXECUTABLE;LLVM_ENABLE_Z3_SOLVER;LLVM_POLLY_LINK_INTO_TOOLS;CLANG_VENDOR;LIBUNWIND_USE_COMPILER_RT"|| tail -100 build-llvm/CMakeFiles/CMakeError.log
 	FOUND_VERSION=`grep LLVM_VERSION_STRING build-llvm/include/llvm/Config/llvm-config.h|cut -d\" -f2`; \
 	if ! echo "$(LLVM_VERSION_FULL)"|grep "$$FOUND_VERSION"; then \
 		echo "mistmatch of version. Found: $$FOUND_VERSION / Expected: $(LLVM_VERSION_FULL)"; \
 		exit 1; \
 	fi
 
+
+ifeq (Ninja, $(GENERATOR))
+# ninja
+VERBOSE=-v
+else
 # make
 VERBOSE=VERBOSE=1
-# ninja
-#VERBOSE=-v
+endif
 
 debian-full-build:
-	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CFLAGS="$(CFLAGS_EXTRA)" CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 stage2
+	$(PRE_PROCESS) ninja $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) stage2
 
 # Check the stage 2 build worked
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \
@@ -502,8 +512,10 @@ debian-libcxxabi-build:
 # Builds libcxxabi
 	echo "Using cmake: $(CMAKE_BIN)"; \
 	cd libcxxabi && \
+	CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)" \
 	$(PRE_PROCESS_CONF) $(CMAKE_BIN) \
 	-S . -B build \
+	-G $(GENERATOR) \
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
 	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
@@ -511,8 +523,8 @@ debian-libcxxabi-build:
 	-DLIBCXXABI_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
 	-DLIBCXXABI_USE_COMPILER_RT=ON \
 	-DLLVM_ENABLE_RTTI=ON \
-	$(CMAKE_LIBCXX_EXTRA) && cd build && \
-	$(PRE_PROCESS_CONF) make $(NJOBS) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)"
+	$(CMAKE_LIBCXX_EXTRA) &&  \
+	$(PRE_PROCESS_CONF) ninja -C build/ $(VERBOSE)
 	touch $@
 
 # Fails with    $<TARGET_LINKER_FILE:unwind_static>
@@ -531,7 +543,9 @@ debian-libcxx-build:
 	echo "Using cmake: $(CMAKE_BIN)"; \
 	cd libcxx && \
 	$(PRE_PROCESS_CONF) $(CMAKE_BIN) \
+	CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)" \
 	-S . -B build \
+	-G $(GENERATOR) \
 	$(LIBCXX_CMAKE_OPTIONS) \
 	-DLIBCXX_CXX_ABI=libcxxabi \
 	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
@@ -542,8 +556,8 @@ debian-libcxx-build:
 	-DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
 	-DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON \
 	-DLIBCXX_STATICALLY_LINK_ABI_IN_SHARED_LIBRARY=OFF \
-	$(CMAKE_LIBCXX_EXTRA) && cd build && \
-	$(PRE_PROCESS_CONF) make $(NJOBS) $(VERBOSE) CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)"
+	$(CMAKE_LIBCXX_EXTRA) && \
+	$(PRE_PROCESS_CONF) ninja -C build/ $(VERBOSE)
 	touch $@
 
 
@@ -559,12 +573,13 @@ debian-libclc-build:
 	echo "Using cmake: $$CMAKE_BIN"; \
 	cd libclc/build && \
 	$$CMAKE_BIN ../ \
+	-G $(GENERATOR) \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DCMAKE_INSTALL_DATADIR=lib \
 	-DCMAKE_INSTALL_INCLUDEDIR=include \
 	-DLLVM_CONFIG=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-config \
 	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
-	make $(NJOBS) $(VERBOSE)
+	ninja $(VERBOSE)
 	touch $@
 
 override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libcxxabi-build debian-libcxx-build debian-libclc-build
@@ -576,13 +591,13 @@ build_doc:
 	cd $(CURDIR)/llvm/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	cd $(CURDIR)/clang/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	-(if test "$(OCAML_ENABLE)" = yes; then \
-	make $(NJOBS) -C "$(TARGET_BUILD_STAGE2)/docs" ocaml_doc; \
+	ninja -C "$(TARGET_BUILD_STAGE2)" ocaml_doc; \
 	fi)
 
-	make $(NJOBS) -C $(TARGET_BUILD_STAGE2) docs-llvm-html docs-clang-html docs-clang-tools-html docs-clang-tools-man docs-clang-man docs-llvm-man
+	ninja -C $(TARGET_BUILD_STAGE2) docs-llvm-html docs-clang-html docs-clang-tools-html docs-clang-tools-man docs-clang-man docs-llvm-man
 
 ifeq (${POLLY_ENABLE},yes)
-	make $(NJOBS) -C $(TARGET_BUILD_STAGE2) docs-polly-html docs-polly-man
+	ninja -C $(TARGET_BUILD_STAGE2) docs-polly-html docs-polly-man
 endif
 
 # Rename manpages
@@ -625,7 +640,7 @@ override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
 	rm -rf $(find $(TARGET_BUILD) -wholename '*CMakeFiles*' -not -name CMakeLists.txt -a -name "*.dir" -type d)
 	# install/fast enables a make install without recompiling temporary files
-	$(MAKE) -C $(TARGET_BUILD) $(VERBOSE) stage2-install DESTDIR=$(DEB_INST)/
+	DESTDIR=$(DEB_INST)/ ninja -C $(TARGET_BUILD) $(VERBOSE) stage2-install
 
 	# Not used on Linux.
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/argdumper
@@ -701,10 +716,9 @@ endif
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
-	$(MAKE) -C libcxxabi/build install DESTDIR=$(DEB_INST)
-	$(MAKE) -C libcxx/build install DESTDIR=$(DEB_INST)
-
-	$(MAKE) -C libclc/build install DESTDIR=$(DEB_INST)
+	DESTDIR=$(DEB_INST) ninja -C libcxxabi/build install
+	DESTDIR=$(DEB_INST) ninja -C libcxx/build install
+	DESTDIR=$(DEB_INST) ninja -C libclc/build install
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
@@ -879,33 +893,33 @@ override_dh_auto_test:
 # LLVM tests
 ifneq (,$(findstring $(DEB_HOST_ARCH),$(ARCH_LLVM_TEST_OK)))
 # logs the output to check-llvm_build_log.txt for validation through autopkgtest
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) stage2-check-llvm | tee check-llvm_build_log.txt
+	ninja -C $(TARGET_BUILD) stage2-check-llvm | tee check-llvm_build_log.txt
 else
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) stage2-check-llvm || true
+	ninja -C $(TARGET_BUILD) stage2-check-llvm || true
 endif
 
 # Clang tests
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) stage2-check-clang || true
+	ninja -C $(TARGET_BUILD) stage2-check-clang || true
 
 # Clang extra tests (ex: clang-tidy)
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD_STAGE2) check-clang-tools || true
+	ninja -C $(TARGET_BUILD_STAGE2) check-clang-tools || true
 
 # LLD tests
 ifeq (${LLD_ENABLE},yes)
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD_STAGE2) check-lld || true
+	ninja -C $(TARGET_BUILD_STAGE2) check-lld || true
 endif
 
 # Sanitizer
-	$(MAKE) $(NJOBS) -C $(TARGET_BUILD_STAGE2) check-sanitizer || true
+	ninja -C $(TARGET_BUILD_STAGE2) check-sanitizer || true
 
 # Libcxx
-	$(MAKE) $(NJOBS) -C libcxx/build check-libcxx || true
+	ninja -C libcxx/build check-libcxx || true
 
 # Libcxxabi
-	$(MAKE) $(MAKE) -C libcxxabi/build check-libcxxabi || true
+	ninja -C libcxxabi/build check-libcxxabi || true
 
 # Libclc
-	$(MAKE) $(MAKE) -C libclc/build test || true
+	ninja -C libclc/build test || true
 
 # LLDB tests
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
@@ -916,7 +930,7 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 			ln -s lldb/_lldb.so; \
 		fi
 	if test "$(CODECOVERAGE)" = "no"; then \
-	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ $(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lldb || true; \
+	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ ninja -C $(TARGET_BUILD) check-lldb || true; \
 	fi
 	# remove the workaround
 	rm $(CURDIR)/$(TARGET_BUILD)/lib/python*/*-packages/_lldb.so
@@ -925,7 +939,7 @@ endif
 
 # Polly tests
 #ifeq (${POLLY_ENABLE},yes)
-#	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-polly || true
+#	ninja -C $(TARGET_BUILD) check-polly || true
 #endif
 
 # Managed by debian build system
