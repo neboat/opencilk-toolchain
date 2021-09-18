@@ -1,3 +1,13 @@
+llvm-toolchain-12 (1:12.0.1-9) unstable; urgency=medium
+
+  * Replace make by ninja for the build process
+    It is now more tested than make by upstream
+    And it is supposed to be faster
+    Removed openmp/bootstrap-with-openmp-version-export-missing.diff
+    as it seems that the ninja move fixed it
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 18 Sep 2021 11:03:29 +0200
+
 llvm-toolchain-12 (1:12.0.1-8) unstable; urgency=medium
 
   * Add back CMAKE_EXTRA to build LLVM gold (Closes: #993664)

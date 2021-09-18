@@ -70,7 +70,6 @@ disable-error-xray.diff
 # OpenMP
 openmp/openmp-check-execstack.diff
 openmp/openmp-mips-affinity.patch
-openmp/bootstrap-with-openmp-version-export-missing.diff
 
 # libcxx
 libcxx/libcxxabi-test-don-t-fail-extended-long-double.patch
