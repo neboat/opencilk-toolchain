@@ -137,7 +137,7 @@ else
 	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev'
 endif
 
-ifeq ($(shell type -p llvm-spirv),)
+ifeq $(shell bash -c "type -p llvm-spirv"))
 LLVM_SPIRV_INSTALLED = no
 else
 LLVM_SPIRV_INSTALLED = yes
@@ -796,7 +796,7 @@ endif
 
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
-#	rm -rf $(TARGET_BUILD)
+	rm -rf $(TARGET_BUILD)
 
 
 override_dh_makeshlibs:
