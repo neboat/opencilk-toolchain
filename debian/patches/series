@@ -139,6 +139,7 @@ print-lldb-path.patch
 libcxx-armhf-ftbfs.diff
 lld-use-link-atomic-i386.diff
 lower-python-dep.diff
+scan-build-py-fix-analyze-path.diff
 scan-build-py-fix-default-bin.diff
 
 libclc-llvm-spirv.diff
