@@ -137,7 +137,7 @@ else
 	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev'
 endif
 
-ifeq $(shell bash -c "type -p llvm-spirv"))
+ifeq $(shell bash -c "type -p llvm-spirv")
 LLVM_SPIRV_INSTALLED = no
 else
 LLVM_SPIRV_INSTALLED = yes
