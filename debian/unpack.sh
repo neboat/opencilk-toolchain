@@ -15,7 +15,7 @@ tar Jxf $LLVM_ARCHIVE
 cd llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~+$VERSION/
 
 VER_FOUND=$(grep "PACKAGE_VERSION " libcxx/CMakeLists.txt|awk '{print $2}'|cut -d\) -f1)
-if test "${MAJOR_VERSION}" != "$VER_FOUND" -a "${MAJOR_VERSION}.0.0" != "$VER_FOUND" -a "${MAJOR_VERSION}.0.0git" != "$VER_FOUND"; then
+if test "${MAJOR_VERSION}" != "$VER_FOUND" -a "${MAJOR_VERSION}.0.0" != "$VER_FOUND" -a "${MAJOR_VERSION}.0.0git" != "$VER_FOUND" -a "${MAJOR_VERSION}git" != "$VER_FOUND"; then
     echo "Mismatch of version"
     echo "Expected $MAJOR_VERSION / Found $VER_FOUND"
     echo "Update unpack.sh"
