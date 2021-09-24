@@ -5,6 +5,8 @@ llvm-toolchain-snapshot (1:14~++20210924122635+4a57f5d1e1c5-1~exp1) experimental
   * remove "scan-build-py-force-utf-8-opening.diff"
     merged upstream
   * Also install libomptarget-nvptx in libomp-X.Y-dev next to amdgcn
+  * the libc++* & libunwind builds are installed in directory with triple
+  * remove the libc++ & libc++abi tasks as they are part of the process now
   * Add -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF. it was turn on by default
     in https://reviews.llvm.org/D107799
     It was causing the second cmake (stage2) build to fail on z3 or libffi.
