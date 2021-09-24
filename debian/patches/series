@@ -144,4 +144,3 @@ scan-build-py-fix-default-bin.diff
 
 libclc-llvm-spirv.diff
 omp-riscv64.patch
-libcxx/libccxx-revert-patch-build.patch
