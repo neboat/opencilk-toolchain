@@ -9,7 +9,9 @@ llvm-toolchain-snapshot (1:14~++20210918111948+6a2c2263fbca-1~exp1) UNRELEASED; 
     in https://reviews.llvm.org/D107799
     It was causing the second cmake (stage2) build to fail on z3 or libffi.
     Sign that the compiler didn't work correctly.
-  * Revert D109342 (bug 51774) for causing build issue on libc++ include
+  * libcxxabi: Unbreak the CI by adding a silly symlink to _config_site
+    Far from perfect but it should be fixed by the runtime move:
+    https://reviews.llvm.org/D89013#3017317
 
   [ John Paul Adrian Glaubitz ]
   * Disable libunwind on m68k, sparc64 and x32

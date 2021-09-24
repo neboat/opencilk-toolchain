@@ -511,6 +511,12 @@ LIBCXX_CMAKE_OPTIONS := \
 
 debian-libcxxabi-build:
 # Builds libcxxabi
+# Ugly workaround to fix the regression caused by
+# https://reviews.llvm.org/D89013
+# Will probably be fixed when moving to runtimes
+	cd $(CURDIR)/$(TARGET_BUILD_STAGE2)/include/c++/v1 && \
+	ln -sf ../../*/c++/v1/__config_site
+
 	echo "Using cmake: $(CMAKE_BIN)"; \
 	cd libcxxabi && \
 	CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)" \
