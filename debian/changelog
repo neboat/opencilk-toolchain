@@ -3,6 +3,8 @@ llvm-toolchain-9 (1:9.0.1-17) unstable; urgency=medium
   * Remove an old breaks/replaces for 9 which was causing
     some issues on Debian buster. Thanks to Julien Wajsberg
     for the bug report
+  * bump autopkgtest cmake version (Closes: #994501)
+    Thanks to Timo Röhling for the patch
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 08 Mar 2021 12:05:07 +0100
 
