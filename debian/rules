@@ -588,7 +588,7 @@ debian-libclc-build:
 	ninja $(VERBOSE)
 	touch $@
 
-override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libcxxabi-build debian-libcxx-build debian-libclc-build
+override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build
 
 override_dh_prep: build_doc
 	dh_prep
