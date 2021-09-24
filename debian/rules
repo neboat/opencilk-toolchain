@@ -662,8 +662,6 @@ override_dh_auto_install:
 
 	# Only run on executable, not script
 	chrpath -d `find $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary'|cut -d: -f1`
-	chrpath -d libcxxabi/build/lib/libc++abi.so.1.0
-	chrpath -d libcxx/build/lib/libc++.so.1.0
 
 	: # libclang
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && \
@@ -722,8 +720,6 @@ endif
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
-	DESTDIR=$(DEB_INST) ninja -C libcxxabi/build install
-	DESTDIR=$(DEB_INST) ninja -C libcxx/build install
 	DESTDIR=$(DEB_INST) ninja -C libclc/build install
 
 # Rename binaries
@@ -919,10 +915,10 @@ endif
 	ninja -C $(TARGET_BUILD_STAGE2) check-sanitizer || true
 
 # Libcxx
-	ninja -C libcxx/build check-libcxx || true
+	ninja -C $(TARGET_BUILD_STAGE2) check-libcxx || true
 
 # Libcxxabi
-	ninja -C libcxxabi/build check-libcxxabi || true
+	ninja -C $(TARGET_BUILD_STAGE2) check-libcxxabi || true
 
 # Libclc
 	ninja -C libclc/build test || true
@@ -987,7 +983,7 @@ override_dh_auto_clean:
 	rm -f $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
-	rm -rf libcxx/build libcxxabi/build libclc/build
+	rm -rf libclc/build
 	if test -f lld/docs/ld.lld-$(LLVM_VERSION).1; then \
 		mv lld/docs/ld.lld-$(LLVM_VERSION).1 lld/docs/ld.lld.1; \
 	fi
@@ -998,4 +994,4 @@ override_dh_auto_clean:
 	: # for some reason, the docs are written to debian/usr and debian/man ...
 	rm -rf debian/usr debian/man
 
-.PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libcxx-build debian-libcxxabi-build debian-libclc-build
+.PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libclc-build
