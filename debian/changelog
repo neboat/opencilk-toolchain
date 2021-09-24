@@ -2,6 +2,8 @@ llvm-toolchain-11 (1:11.1.0-1~exp3) UNRELEASED; urgency=medium
 
   * Cherry-pick upstream commit to fix a libgl1-mesa-dri texture failure.
     (Closes: #989545)
+  * bump autopkgtest cmake version (Closes: #994501)
+    Thanks to Timo Röhling for the patch
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 01 Sep 2021 12:24:34 +0200
 
