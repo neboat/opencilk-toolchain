@@ -489,6 +489,7 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 endif
 	touch $@
 
+# Libc++ doesn't build with:
 # Fails with    $<TARGET_LINKER_FILE:unwind_static>
 #  No target "unwind_static"
 # on 12. Will test with 13
