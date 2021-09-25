@@ -5,8 +5,10 @@ llvm-toolchain-9 (1:9.0.1-17) unstable; urgency=medium
     for the bug report
   * bump autopkgtest cmake version (Closes: #994501)
     Thanks to Timo Röhling for the patch
+  * cherry pick 68d5235cb58f988c71b403334cd9482d663841ab to build
+    with newer version of the kernel
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 08 Mar 2021 12:05:07 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 25 Sep 2021 16:00:36 +0200
 
 llvm-toolchain-9 (1:9.0.1-16) unstable; urgency=medium
 
