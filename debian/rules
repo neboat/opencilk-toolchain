@@ -489,50 +489,6 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 endif
 	touch $@
 
-# The various options to build libc++ and libc++abi
-
-LIBCXX_CMAKE_OPTIONS := \
-	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
-	-DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-	-DLLVM_CONFIG_PATH=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-config \
-	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
-	-DCMAKE_CXX_COMPILER=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/clang++ \
-	-DCMAKE_C_COMPILER=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/clang \
-	-DCMAKE_CXX_FLAGS="$(LIBCXXFLAGS)" \
-	-DCMAKE_EXE_LINKER_FLAGS="" \
-	-DCMAKE_SHARED_LINKER_FLAGS="" \
-	-DCMAKE_MODULE_LINKER_FLAGS="" \
-	-DCMAKE_AR=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-ar \
-	-DCMAKE_RANLIB=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-ranlib \
-	-DLLVM_EXTERNAL_LIT=$(BASE_PATH)/llvm/utils/lit/lit.py \
-	-DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
-	$(CMAKE_EXTRA)
-
-debian-libcxxabi-build:
-# Builds libcxxabi
-# Ugly workaround to fix the regression caused by
-# https://reviews.llvm.org/D89013
-# Will probably be fixed when moving to runtimes
-	cd $(CURDIR)/$(TARGET_BUILD_STAGE2)/include/c++/v1 && \
-	ln -sf ../../*/c++/v1/__config_site
-
-	echo "Using cmake: $(CMAKE_BIN)"; \
-	cd libcxxabi && \
-	CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)" \
-	$(PRE_PROCESS_CONF) $(CMAKE_BIN) \
-	-S . -B build \
-	-G $(GENERATOR) \
-	$(LIBCXX_CMAKE_OPTIONS) \
-	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
-	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
-	-DLIBCXXABI_LIBCXX_INCLUDES=$(BASE_PATH)/$(TARGET_BUILD_STAGE2)/include/c++/v1/ \
-	-DLIBCXXABI_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
-	-DLIBCXXABI_USE_COMPILER_RT=ON \
-	-DLLVM_ENABLE_RTTI=ON \
-	$(CMAKE_LIBCXX_EXTRA) &&  \
-	$(PRE_PROCESS) ninja -C build/ $(VERBOSE)
-	touch $@
-
 # Fails with    $<TARGET_LINKER_FILE:unwind_static>
 #  No target "unwind_static"
 # on 12. Will test with 13
@@ -543,29 +499,6 @@ N
 #-    to libc++ when libunwind is built
 #-    Matches what is done on brew:
 #-    https://bit.ly/3kDNpC9
-
-debian-libcxx-build:
-# Builds libcxx
-	echo "Using cmake: $(CMAKE_BIN)"; \
-	cd libcxx && \
-	$(PRE_PROCESS_CONF) $(CMAKE_BIN) \
-	CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)" \
-	-S . -B build \
-	-G $(GENERATOR) \
-	$(LIBCXX_CMAKE_OPTIONS) \
-	-DLIBCXX_CXX_ABI=libcxxabi \
-	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
-	-DLIBCXX_CXX_ABI_LIBRARY_PATH=$(BASE_PATH)/libcxxabi/build/lib \
-	-DLIBCXX_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
-	-DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
-	-DLIBCXX_USE_COMPILER_RT=ON \
-	-DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
-	-DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON \
-	-DLIBCXX_STATICALLY_LINK_ABI_IN_SHARED_LIBRARY=OFF \
-	$(CMAKE_LIBCXX_EXTRA) && \
-	$(PRE_PROCESS) ninja -C build/ $(VERBOSE)
-	touch $@
-
 
 debian-libclc-build:
 # Builds libclc
