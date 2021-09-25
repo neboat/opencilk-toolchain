@@ -146,3 +146,4 @@ scan-build-py-fix-analyze-path.diff
 D91833-bpftrace-fix-code-gen.diff
 scan-build-py-fix-default-bin.diff
 mesa-texture-failure.patch
+remove-cyclades.diff
