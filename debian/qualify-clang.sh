@@ -1176,7 +1176,7 @@ int main(int, char**) {
   return -2;
 }
 '> foo.cpp
-clang++-$VERSION foo.cpp /usr/lib/llvm-$VERSION/lib/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl
+clang++-$VERSION foo.cpp /usr/lib/llvm-$VERSION/lib/*/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl
 ./a.out||true
 clang++-$VERSION foo.cpp -unwindlib=libunwind -rtlib=compiler-rt -I/usr/include/libunwind -ldl
 ./a.out||true
