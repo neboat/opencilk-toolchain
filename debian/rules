@@ -744,7 +744,9 @@ override_dh_makeshlibs:
 
 override_dh_shlibdeps:
 # Ignore asan libraries. They would trigger dependencies to multiarch libraries
-	dh_shlibdeps -l$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ -Xlibclang_rt.asan -Xlibclang_rt.asan -Xlibclang_rt.asan-*.so -Xlibclang_rt.asan-*.so
+	T=$(shell debian/tmp/usr/bin/clang++-$(LLVM_VERSION) -v 2>&1|grep Target:|awk '{print $$2}'); \
+	echo $TT; \
+	dh_shlibdeps -l$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/$$T/ -Xlibclang_rt.asan -Xlibclang_rt.asan -Xlibclang_rt.asan-*.so -Xlibclang_rt.asan-*.so
 
 override_dh_installman:
 	if test -f lld/docs/ld.lld.1; then \
