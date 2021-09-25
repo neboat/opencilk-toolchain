@@ -124,8 +124,9 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
-llvm-toolchain-13 (1:13.0.0~+rc3-2) unstable; urgency=medium
+llvm-toolchain-13 (1:13.0.0~+rc4-1) unstable; urgency=medium
 
+  * New testing release
   * Ship clang-repl
     See https://reviews.llvm.org/D106813
   * Replace make by ninja for the build process
