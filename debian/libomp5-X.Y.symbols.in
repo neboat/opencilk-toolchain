@@ -833,6 +833,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_end_ordered@VERSION 0.20130412
  __kmpc_end_reduce@VERSION 0.20130412
  __kmpc_end_reduce_nowait@VERSION 0.20130412
+ __kmpc_end_scope@VERSION 1:14~++20210924100737+f3f25ffc04c0
  __kmpc_end_serialized_parallel@VERSION 0.20130412
  __kmpc_end_single@VERSION 0.20130412
  __kmpc_end_taskgroup@VERSION 0.20130412
@@ -887,6 +888,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_realloc@VERSION 12
  __kmpc_reduce@VERSION 0.20130412
  __kmpc_reduce_nowait@VERSION 0.20130412
+ __kmpc_scope@VERSION 1:14~++20210924100737+f3f25ffc04c0
  __kmpc_serialized_parallel@VERSION 0.20130412
  __kmpc_set_default_allocator@VERSION 8
  __kmpc_set_lock@VERSION 0.20130412
@@ -1004,6 +1006,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  kmpc_set_stacksize@VERSION 0.20130412
  kmpc_set_stacksize_s@VERSION 0.20130412
  kmpc_unset_affinity_mask_proc@VERSION 0.20130412
+ libomp_start_tool@VERSION 1:14~++20210924100737+f3f25ffc04c0
  omp_alloc@VERSION 8
 #MISSING: 9# omp_alloc_@VERSION 8
  omp_calloc@VERSION 12
