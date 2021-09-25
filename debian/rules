@@ -590,13 +590,13 @@ build_doc:
 	cd $(CURDIR)/llvm/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	cd $(CURDIR)/clang/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	-(if test "$(OCAML_ENABLE)" = yes; then \
-	ninja -C "$(TARGET_BUILD_STAGE2)" ocaml_doc; \
+	ninja -C "$(TARGET_BUILD_STAGE2)" ocaml_doc $(VERBOSE); \
 	fi)
 
-	ninja -C $(TARGET_BUILD_STAGE2) docs-llvm-html docs-clang-html docs-clang-tools-html docs-clang-tools-man docs-clang-man docs-llvm-man
+	ninja -C $(TARGET_BUILD_STAGE2) docs-llvm-html docs-clang-html docs-clang-tools-html docs-clang-tools-man docs-clang-man docs-llvm-man $(VERBOSE)
 
 ifeq (${POLLY_ENABLE},yes)
-	ninja -C $(TARGET_BUILD_STAGE2) docs-polly-html docs-polly-man
+	ninja -C $(TARGET_BUILD_STAGE2) docs-polly-html docs-polly-man $(VERBOSE)
 endif
 
 # Rename manpages
@@ -715,9 +715,9 @@ endif
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
-	DESTDIR=$(DEB_INST) ninja -C libcxxabi/build install
-	DESTDIR=$(DEB_INST) ninja -C libcxx/build install
-	DESTDIR=$(DEB_INST) ninja -C libclc/build install
+	DESTDIR=$(DEB_INST) ninja -C libcxxabi/build install $(VERBOSE)
+	DESTDIR=$(DEB_INST) ninja -C libcxx/build install $(VERBOSE)
+	DESTDIR=$(DEB_INST) ninja -C libclc/build install $(VERBOSE)
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
