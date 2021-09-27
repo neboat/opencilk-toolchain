@@ -1,3 +1,16 @@
+llvm-toolchain-9 (1:9.0.1-18) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Cherry-pick nmu again. (version 16.1)
+  * bump minimum cmake version on qualify-clang.sh too
+  * simplify cmake test without minor version
+  [ Andreas Beckmann <anbe@debian.org> ]
+  * clang-9: Drop Recommends: libomp-9-dev which is not co-installable with
+    libomp-11-dev (and libomp-dev) for smoother upgrades of libomp-dev from
+    buster to bullseye.  (Closes: #990452)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 27 Sep 2021 15:02:13 +0200
+
 llvm-toolchain-9 (1:9.0.1-17) unstable; urgency=medium
 
   * Remove an old breaks/replaces for 9 which was causing
