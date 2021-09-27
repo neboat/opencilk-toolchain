@@ -10,7 +10,7 @@ Depends: @, cmake, make, g++, libstdc++-10-dev
 Restrictions: allow-stderr
 
 Tests: cmake-test
-Depends: gcc, build-essential, cmake, llvm-11-dev, libclang-common-11-dev
+Depends: gcc, build-essential, cmake, llvm-11-dev
 
 Test-Command: python3 -c "import lldb; print(lldb.__file__); print(lldb)"
 Depends: python3-lldb-11
