@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:14~++20210926041028+6063e6b499c7-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:14~++20210926041028+6063e6b499c7-1~exp1) experimental; urgency=medium
 
   * experimental New snapshot release
   * Bring back the libc++/libc++abi options
