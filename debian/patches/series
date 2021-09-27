@@ -147,3 +147,5 @@ D91833-bpftrace-fix-code-gen.diff
 scan-build-py-fix-default-bin.diff
 mesa-texture-failure.patch
 remove-cyclades.diff
+D99501-ignore-lto-auto.diff
+fix-missing-include-limit.patch

@@ -1,0 +1,31 @@
+Index: llvm-toolchain-12-12.0.0~++rc3/clang/include/clang/Driver/Driver.h
+===================================================================
+--- llvm-toolchain-12-12.0.0~++rc3.orig/clang/include/clang/Driver/Driver.h
++++ llvm-toolchain-12-12.0.0~++rc3/clang/include/clang/Driver/Driver.h
+@@ -51,7 +51,8 @@ enum LTOKind {
+   LTOK_None,
+   LTOK_Full,
+   LTOK_Thin,
+-  LTOK_Unknown
++  LTOK_Unknown,
++  LTOK_Ignored
+ };
+ 
+ /// Driver - Encapsulate logic for constructing compilation processes
+Index: llvm-toolchain-12-12.0.0~++rc3/clang/lib/Driver/Driver.cpp
+===================================================================
+--- llvm-toolchain-12-12.0.0~++rc3.orig/clang/lib/Driver/Driver.cpp
++++ llvm-toolchain-12-12.0.0~++rc3/clang/lib/Driver/Driver.cpp
+@@ -608,9 +608,12 @@ void Driver::setLTOMode(const llvm::opt:
+   LTOMode = llvm::StringSwitch<LTOKind>(LTOName)
+                 .Case("full", LTOK_Full)
+                 .Case("thin", LTOK_Thin)
++                .Case("auto", LTOK_Ignored)
++                .Case("jobserver", LTOK_Ignored)
+                 .Default(LTOK_Unknown);
+ 
+   if (LTOMode == LTOK_Unknown) {
++    // FIXME: check if argument is a number, then ignore, or handle it
+     assert(A);
+     Diag(diag::err_drv_unsupported_option_argument) << A->getOption().getName()
+                                                     << A->getValue();
