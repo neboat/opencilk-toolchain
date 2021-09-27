@@ -38,7 +38,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang-common-13-dev (= ${binary:Version}),
  libclang1-13 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
-Recommends: llvm-13-dev, python3, libomp-13-dev
+Recommends: llvm-13-dev, python3
+# libomp-13-dev
 Suggests: clang-13-doc
 Breaks: llvm-13-dev (<< 1:13~++20210129063721)
 Replaces: llvm-13-dev (<< 1:13~++20210129063721)

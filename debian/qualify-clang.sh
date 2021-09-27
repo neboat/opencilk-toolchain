@@ -89,7 +89,7 @@ fi
 
 rm -rf cmaketest && mkdir cmaketest
 cat > cmaketest/CMakeLists.txt <<EOF
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.7)
 project(SanityCheck)
 add_library(MyLibrary foo.cpp)
 EOF
@@ -248,7 +248,7 @@ echo '{
 
 rm -rf cmaketest && mkdir cmaketest
 cat > cmaketest/CMakeLists.txt <<EOF
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.7)
 project(SanityCheck)
 add_library(MyLibrary foo.cpp)
 EOF
@@ -1378,7 +1378,7 @@ fi
 
 rm -rf cmaketest && mkdir cmaketest
 cat > cmaketest/CMakeLists.txt <<EOF
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.7)
 project(SanityCheck)
 find_package(LLVM $VERSION REQUIRED CONFIG)
 message(STATUS "LLVM_CMAKE_DIR: \${LLVM_CMAKE_DIR}")
@@ -1403,7 +1403,7 @@ rm -rf cmaketest
 # Test case for bug #900440
 rm -rf cmaketest && mkdir cmaketest
 cat > cmaketest/CMakeLists.txt <<EOF
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.7)
 project(testllvm)
 
 find_package(LLVM CONFIG REQUIRED)
