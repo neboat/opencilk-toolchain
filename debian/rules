@@ -829,6 +829,18 @@ override_dh_installdeb:
 # Remove auto generated python pyc
 	find $(CURDIR)/debian/llvm-$(LLVM_VERSION)-tools/usr/lib/llvm-$(LLVM_VERSION)/ -name '*.pyc' | xargs -r rm -f
 
+# Symlink the weird llvm triple to Debian's
+# I know it is ugly but I cannot use debian dh_links as I don't know what
+# will be the llvm triple on other archs
+
+	T=$(shell grep LLVM_HOST_TRIPLE $(CURDIR)/debian/llvm-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMConfig.cmake|cut -d\" -f2); \
+	echo "triple = $$T"; \
+	cd $(CURDIR)/debian/libc++abi1-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
+	ln -s $$T $(DEB_HOST_MULTIARCH); \
+	cd - && cd $(CURDIR)/debian/libunwind-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
+    ln -s $$T $(DEB_HOST_MULTIARCH)
+
+
 ifeq (${RUN_TEST},yes)
 # List of the archs we know we have 100 % tests working
 ARCH_LLVM_TEST_OK := i386 amd64
