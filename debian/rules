@@ -593,13 +593,13 @@ build_doc:
 	cd $(CURDIR)/llvm/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	cd $(CURDIR)/clang/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	-(if test "$(OCAML_ENABLE)" = yes; then \
-	ninja -C "$(TARGET_BUILD_STAGE2)" ocaml_doc; \
+	ninja -C "$(TARGET_BUILD_STAGE2)" $(VERBOSE) ocaml_doc; \
 	fi)
 
-	ninja -C $(TARGET_BUILD_STAGE2) docs-llvm-html docs-clang-html docs-clang-tools-html docs-clang-tools-man docs-clang-man docs-llvm-man
+	ninja -C $(TARGET_BUILD_STAGE2) $(VERBOSE) docs-llvm-html docs-clang-html docs-clang-tools-html docs-clang-tools-man docs-clang-man docs-llvm-man
 
 ifeq (${POLLY_ENABLE},yes)
-	ninja -C $(TARGET_BUILD_STAGE2) docs-polly-html docs-polly-man
+	ninja -C $(TARGET_BUILD_STAGE2) $(VERBOSE) docs-polly-html docs-polly-man
 endif
 
 # Rename manpages
@@ -717,9 +717,9 @@ endif
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
-	DESTDIR=$(DEB_INST) ninja -C libcxxabi/build install
-	DESTDIR=$(DEB_INST) ninja -C libcxx/build install
-	DESTDIR=$(DEB_INST) ninja -C libclc/build install
+	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libcxxabi/build install
+	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libcxx/build install
+	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libclc/build install
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
@@ -894,33 +894,33 @@ override_dh_auto_test:
 # LLVM tests
 ifneq (,$(findstring $(DEB_HOST_ARCH),$(ARCH_LLVM_TEST_OK)))
 # logs the output to check-llvm_build_log.txt for validation through autopkgtest
-	ninja -C $(TARGET_BUILD) stage2-check-llvm | tee check-llvm_build_log.txt
+	ninja $(VERBOSE) -C $(TARGET_BUILD) stage2-check-llvm | tee check-llvm_build_log.txt
 else
-	ninja -C $(TARGET_BUILD) stage2-check-llvm || true
+	ninja $(VERBOSE) -C $(TARGET_BUILD) stage2-check-llvm || true
 endif
 
 # Clang tests
-	ninja -C $(TARGET_BUILD) stage2-check-clang || true
+	ninja $(VERBOSE) -C $(TARGET_BUILD) stage2-check-clang || true
 
 # Clang extra tests (ex: clang-tidy)
-	ninja -C $(TARGET_BUILD_STAGE2) check-clang-tools || true
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-clang-tools || true
 
 # LLD tests
 ifeq (${LLD_ENABLE},yes)
-	ninja -C $(TARGET_BUILD_STAGE2) check-lld || true
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-lld || true
 endif
 
 # Sanitizer
-	ninja -C $(TARGET_BUILD_STAGE2) check-sanitizer || true
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-sanitizer || true
 
 # Libcxx
-	ninja -C libcxx/build check-libcxx || true
+	ninja $(VERBOSE) -C libcxx/build check-libcxx || true
 
 # Libcxxabi
-	ninja -C libcxxabi/build check-libcxxabi || true
+	ninja $(VERBOSE) -C libcxxabi/build check-libcxxabi || true
 
 # Libclc
-	ninja -C libclc/build test || true
+	ninja $(VERBOSE) -C libclc/build test || true
 
 # LLDB tests
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
@@ -931,7 +931,7 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 			ln -s lldb/_lldb.so; \
 		fi
 	if test "$(CODECOVERAGE)" = "no"; then \
-	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ ninja -C $(TARGET_BUILD) check-lldb || true; \
+	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ ninja $(VERBOSE) -C $(TARGET_BUILD) check-lldb || true; \
 	fi
 	# remove the workaround
 	rm $(CURDIR)/$(TARGET_BUILD)/lib/python*/*-packages/_lldb.so
