@@ -1,3 +1,14 @@
+llvm-toolchain-11 (1:11.1.0-2) unstable; urgency=medium
+
+  * Add two patches from ubuntu to fix lto and gcc-11 build failures
+  * Use minimum version for cmake-test
+  * Don't require libclang-11-dev on cmake-test
+  * Add new llvm-11-linker-tools (from Ubuntu)
+  * Merge new fixes from branch=9
+  * clang-11: Drop Recommends: libomp-11-dev
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 27 Sep 2021 15:50:46 +0200
+
 llvm-toolchain-11 (1:11.1.0-1) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
