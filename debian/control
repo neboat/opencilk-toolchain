@@ -38,7 +38,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang-common-14-dev (= ${binary:Version}),
  libclang1-14 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
-Recommends: llvm-14-dev, python3, libomp-14-dev
+Recommends: llvm-14-dev, python3
+# libomp-14-dev
 Suggests: clang-14-doc
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
