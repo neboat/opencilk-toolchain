@@ -287,8 +287,8 @@ Description: Modular compiler and toolchain technologies, runtime library
 Package: llvm-11-linker-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Breaks: llvm-11-dev (<< 1:11.1.0-2)
-Replaces: llvm-11-dev (<< 1:11.1.0-2)
+Breaks: llvm-11-dev (<< 1:11.1.0-3)
+Replaces: llvm-11-dev (<< 1:11.1.0-3)
 Description: Modular compiler and toolchain technologies
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
