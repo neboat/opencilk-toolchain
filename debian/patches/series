@@ -158,3 +158,5 @@ f8e146f3430de3a6cd904f3f3f7aa1bfaefee14c.patch
 llvm9-D71443-PPC-MC-redef-symbol.patch
 llvm-9.0-D78196.patch
 remove-cyclades.diff
+D99501-ignore-lto-auto.diff
+fix-missing-include-limit.patch
