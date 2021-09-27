@@ -457,13 +457,8 @@ override_dh_auto_configure: preconfigure
 	fi
 
 
-ifeq (Ninja, $(GENERATOR))
 # ninja
 VERBOSE=-v
-else
-# make
-VERBOSE=VERBOSE=1
-endif
 
 debian-full-build:
 	$(PRE_PROCESS) ninja $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) stage2
