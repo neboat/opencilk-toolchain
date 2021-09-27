@@ -34,7 +34,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang-common-9-dev (= ${binary:Version}),
  libclang-cpp9 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
-Recommends: llvm-9-dev, python3, libomp-9-dev
+Recommends: llvm-9-dev, python3,
+# libomp-9-dev
 Suggests: clang-9-doc
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
