@@ -327,6 +327,8 @@ ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/
 endif
 
+GENERATOR=Ninja
+
 %:
 	dh $@ $(DH_OPTIONS)
 
@@ -433,8 +435,11 @@ override_dh_auto_configure: preconfigure
 
 	echo "Running tests: $(RUN_TEST)"
 	echo "Using cmake: $(CMAKE_BIN)"; \
-	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH \
-	$(PRE_PROCESS_CONF) $(CMAKE_BIN) -S llvm/ -B $(TARGET_BUILD) \
+	CFLAGS="$(CFLAGS_EXTRA)" \
+	CXXFLAGS="$(CXXFLAGS_EXTRA)"  \
+	LDFLAGS="$(LDFLAGS_EXTRA)" \
+	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH $(PRE_PROCESS_CONF) $(CMAKE_BIN) -S llvm/ -B $(TARGET_BUILD) \
+	-G $(GENERATOR) \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 	-DCMAKE_SUPPRESS_REGENERATION=ON \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
@@ -532,7 +537,7 @@ endif
 debian-full-build:
 #	linker hack so stage2 can link against stage1 libs at runtime
 	LD_LIBRARY_PATH=$(STAGE1_LIB_DIR):$$LD_LIBRARY_PATH \
-	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CFLAGS="$(CFLAGS_EXTRA)" CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 stage2
+	$(PRE_PROCESS) ninja $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) stage2
 
 # Check the stage 2 build worked
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \
@@ -570,6 +575,7 @@ debian-libclc-build:
 	echo "Using cmake: $$CMAKE_BIN"; \
 	cd libclc/build && \
 	$$CMAKE_BIN ../ \
+	-G $(GENERATOR) \
 	-DCMAKE_C_COMPILER=$(BASE_PATH)/$(TARGET_BUILD_STAGE2)/bin/clang \
 	-DCMAKE_CXX_COMPILER=$(BASE_PATH)/$(TARGET_BUILD_STAGE2)/bin/clang++ \
 	-DCMAKE_INSTALL_PREFIX=/usr \
@@ -577,7 +583,7 @@ debian-libclc-build:
 	-DCMAKE_INSTALL_INCLUDEDIR=include \
 	-DLLVM_CONFIG=$(BASE_PATH)/$(TARGET_BUILD_STAGE2)/bin/llvm-config \
 	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
-	make $(NJOBS) $(VERBOSE)
+	ninja $(NJOBS) $(VERBOSE)
 	touch $@
 
 override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build
@@ -638,7 +644,7 @@ override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
 	rm -rf $(find $(TARGET_BUILD) -wholename '*CMakeFiles*' -not -name CMakeLists.txt -a -name "*.dir" -type d)
 	# install/fast enables a make install without recompiling temporary files
-	$(MAKE) -C $(TARGET_BUILD) $(VERBOSE) stage2-install DESTDIR=$(DEB_INST)/
+	DESTDIR=$(DEB_INST)/ ninja -C $(TARGET_BUILD) $(VERBOSE) stage2-install
 
 	# Not used on Linux.
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/argdumper
@@ -929,7 +935,7 @@ endif
 
 # Polly tests
 #ifeq (${POLLY_ENABLE},yes)
-#	$(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-polly || true
+#	ninja -C $(TARGET_BUILD) check-polly || true
 #endif
 
 # Managed by debian build system
