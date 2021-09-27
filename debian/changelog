@@ -1,4 +1,4 @@
-llvm-toolchain-11 (1:11.1.0-2) unstable; urgency=medium
+llvm-toolchain-11 (1:11.1.0-3) unstable; urgency=medium
 
   * Add two patches from ubuntu to fix lto and gcc-11 build failures
   * Use minimum version for cmake-test
@@ -8,6 +8,12 @@ llvm-toolchain-11 (1:11.1.0-2) unstable; urgency=medium
   * clang-11: Drop Recommends: libomp-11-dev
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 27 Sep 2021 15:50:46 +0200
+
+llvm-toolchain-11 (1:11.1.0-2) unstable; urgency=medium
+
+  * Ajust the cmake test to unbreak autopkgtest
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Sep 2021 22:02:43 +0200
 
 llvm-toolchain-11 (1:11.1.0-1) unstable; urgency=medium
 
