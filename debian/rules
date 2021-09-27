@@ -801,7 +801,6 @@ else
 endif
 
 override_dh_install:
-#	cp $(TARGET_BUILD)/lib/libLLVM-$(LLVM_VERSION).so $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION).so.$(SONAME_EXT)
 ifeq (${POLLY_ENABLE},yes)
 # only for arch:any builds
 ifneq (,$(filter libclang-common-$(LLVM_VERSION)-dev, $(shell dh_listpackages)))
