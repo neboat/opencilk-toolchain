@@ -1,0 +1,2 @@
+usr/lib/llvm-@LLVM_VERSION@/lib/@DEB_HOST_MULTIARCH@/libunwind.so /usr/lib/x86_64-linux-gnu/libunwind.so
+usr/lib/llvm-@LLVM_VERSION@/lib/@DEB_HOST_MULTIARCH@/libunwind.a /usr/lib/x86_64-linux-gnu/libunwind.a
