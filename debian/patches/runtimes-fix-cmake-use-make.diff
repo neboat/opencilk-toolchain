@@ -1,0 +1,33 @@
+Index: llvm-toolchain-12_12.0.1/clang/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-12_12.0.1.orig/clang/CMakeLists.txt
++++ llvm-toolchain-12_12.0.1/clang/CMakeLists.txt
+@@ -854,8 +854,14 @@ if (CLANG_ENABLE_BOOTSTRAP)
+     # exclude from main target
+     set_target_properties(${NEXT_CLANG_STAGE} PROPERTIES _EP_${target}_EXCLUDE_FROM_MAIN On)
+ 
++    set(cmake_or_make_cmd ${CMAKE_COMMAND} --build <BINARY_DIR> --target ${target})
++    get_filename_component(make_cmd ${CMAKE_MAKE_PROGRAM} NAME)
++    if(make_cmd STREQUAL "gmake")
++      set(cmake_or_make_cmd $(MAKE) -C <BINARY_DIR> ${target})
++    endif()
++
+     ExternalProject_Add_Step(${NEXT_CLANG_STAGE} ${target}
+-      COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR> --target ${target}
++      COMMAND ${cmake_or_make_cmd}
+       COMMENT "Performing ${target} for '${NEXT_CLANG_STAGE}'"
+       DEPENDEES configure
+       USES_TERMINAL 1
+Index: llvm-toolchain-12_12.0.1/llvm/runtimes/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-12_12.0.1.orig/llvm/runtimes/CMakeLists.txt
++++ llvm-toolchain-12_12.0.1/llvm/runtimes/CMakeLists.txt
+@@ -440,7 +440,7 @@ if(runtimes)
+     # build directory cannot find the C++ headers in certain configurations.
+     # I need to build a mechanism for runtime projects to provide CMake code
+     # that executes at LLVM configuration time to handle this case.
+-    add_dependencies(clang-bootstrap-deps runtimes-configure)
++    #add_dependencies(clang-bootstrap-deps runtimes-configure)
+     # We need to add the runtimes as a dependency because compiler-rt can be
+     # built as part of runtimes and we need the profile runtime for PGO
+     add_dependencies(clang-bootstrap-deps runtimes)

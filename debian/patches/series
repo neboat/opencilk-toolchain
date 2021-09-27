@@ -27,7 +27,6 @@ do-not-fail-on-unexpected-pass.diff
 disable-display-PASS-UNSUPPORTED-XFAIL.diff
 
 # llvm-config
-fix-llvm-config-obj-src-root.patch
 0001-llvm-cmake-resolve-symlinks-in-LLVMConfig.cmake.patch
 
 # Lib names
@@ -146,3 +145,9 @@ scan-build-py-fix-default-bin.diff
 
 libclc-llvm-spirv.diff
 omp-riscv64.patch
+runtimes-fix-cmake-use-make.diff
+llvm-fix-lld-linker-check.diff
+compilerrt-fix-warn-xray-testing.diff
+openmp-fix-runtimes-build.diff
+libclc-fix-prepare_builtins-rpath.diff
+libcxx-libatomic-only-with-gcc-rtlib.diff
