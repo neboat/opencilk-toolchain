@@ -371,12 +371,35 @@ llvm-toolchain-snapshot (1:12~++20200715052739+d6e79e3dd6d-1~exp1) experimental;
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 08 Jul 2020 15:19:14 +0200
 
-llvm-toolchain-11 (1:11.1.0-1~exp3) UNRELEASED; urgency=medium
+llvm-toolchain-11 (1:11.1.0-3) unstable; urgency=medium
 
+  * Add two patches from ubuntu to fix lto and gcc-11 build failures
+  * Use minimum version for cmake-test
+  * Don't require libclang-11-dev on cmake-test
+  * Add new llvm-11-linker-tools (from Ubuntu)
+  * Merge new fixes from branch=9
+  * clang-11: Drop Recommends: libomp-11-dev
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 27 Sep 2021 15:50:46 +0200
+
+llvm-toolchain-11 (1:11.1.0-2) unstable; urgency=medium
+
+  * Ajust the cmake test to unbreak autopkgtest
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Sep 2021 22:02:43 +0200
+
+llvm-toolchain-11 (1:11.1.0-1) unstable; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * Upload to unstable
+  * bump autopkgtest cmake version (Closes: #994501)
+    Thanks to Timo Röhling for the patch
+
+  [ Gianfranco Costamagna ]
   * Cherry-pick upstream commit to fix a libgl1-mesa-dri texture failure.
     (Closes: #989545)
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 01 Sep 2021 12:24:34 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 24 Sep 2021 12:54:55 +0200
 
 llvm-toolchain-11 (1:11.1.0-1~exp2) experimental; urgency=medium
 
@@ -457,6 +480,41 @@ llvm-toolchain-11 (1:11.0.1~+rc1-1~exp1) experimental; urgency=medium
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 26 Nov 2020 10:14:43 +0100
 
 llvm-toolchain-11 (1:11.0.0-5) unstable; urgency=medium
+
+llvm-toolchain-9 (1:9.0.1-19) unstable; urgency=medium
+
+  * Add two patches from ubuntu to fix lto and gcc-11 build failures
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 27 Sep 2021 15:39:19 +0200
+
+llvm-toolchain-9 (1:9.0.1-18) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Cherry-pick nmu again. (version 16.1)
+  * bump minimum cmake version on qualify-clang.sh too
+  * simplify cmake test without minor version
+  [ Andreas Beckmann <anbe@debian.org> ]
+  * clang-9: Drop Recommends: libomp-9-dev which is not co-installable with
+    libomp-11-dev (and libomp-dev) for smoother upgrades of libomp-dev from
+    buster to bullseye.  (Closes: #990452)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 27 Sep 2021 15:02:13 +0200
+
+llvm-toolchain-9 (1:9.0.1-17) unstable; urgency=medium
+
+  * Remove an old breaks/replaces for 9 which was causing
+    some issues on Debian buster. Thanks to Julien Wajsberg
+    for the bug report
+  * bump autopkgtest cmake version (Closes: #994501)
+    Thanks to Timo Röhling for the patch
+  * cherry pick 68d5235cb58f988c71b403334cd9482d663841ab to build
+    with newer version of the kernel
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 25 Sep 2021 16:00:36 +0200
+
+llvm-toolchain-9 (1:9.0.1-16) unstable; urgency=medium
+
+  * Only enable libomp-9-doc on supported archs
 
   [ Adrian Bunk ]
   * Fix the fuzzer build on i386.
@@ -1236,8 +1294,8 @@ llvm-toolchain-9 (1:9.0.1-13) unstable; urgency=medium
 
 llvm-toolchain-9 (1:9.0.1-12) unstable; urgency=medium
 
+  [ Jessica Clarke ]
   * Cherry-pick upstream patch D74453 to fix atomic compare-and-swap on
-    riscv64.
     riscv64.
 
   [ William Grant ]

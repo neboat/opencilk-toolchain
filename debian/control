@@ -39,7 +39,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  llvm-12-linker-tools (= ${binary:Version}),
  libclang1-12 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
-Recommends: llvm-12-dev, python3, libomp-12-dev
+Recommends: llvm-12-dev, python3
+# libomp-12-dev
 Suggests: clang-12-doc
 Breaks: llvm-12-dev (<< 1:12.0.0-2)
 Replaces: llvm-12-dev (<< 1:12.0.0-2)
