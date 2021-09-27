@@ -32,6 +32,7 @@ Package: clang-11
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang-common-11-dev (= ${binary:Version}),
+ llvm-11-linker-tools (= ${binary:Version}),
  libclang1-11 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-11-dev, python3, libomp-11-dev
@@ -282,10 +283,24 @@ Description: Modular compiler and toolchain technologies, runtime library
  .
  This package contains the LLVM runtime library.
 
+Package: llvm-11-linker-tools
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Breaks: llvm-11-dev (<< 1:11.1.0-2)
+Replaces: llvm-11-dev (<< 1:11.1.0-2)
+Description: Modular compiler and toolchain technologies
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, just-in-time code generators, and many other
+ compiler-related programs.
+ .
+ This package contains the LLVMgold and LLVMPolly linker plugins.
+
 Package: llvm-11
 Architecture: any
 Suggests: llvm-11-doc
-Depends: llvm-11-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: llvm-11-runtime (= ${binary:Version}),
+ llvm-11-linker-tools (= ${binary:Version}),
+ ${shlibs:Depends}, ${misc:Depends}
 Recommends: llvm-11-dev
 Description: Modular compiler and toolchain technologies
  LLVM is a collection of libraries and tools that make it easy to build
