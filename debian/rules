@@ -166,6 +166,7 @@ BINUTILS_GOLD_ARCHS := amd64 arm64 armhf i386 ppc64 ppc64el x32 s390x hurd-i386 
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.23.1-1~exp3 ; echo $$?),0)
 ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 	STAGE1_CMAKE_EXTRA += -DLLVM_USE_LINKER=gold
+	CMAKE_EXTRA += -DLLVM_BINUTILS_INCDIR=/usr/include/
 endif
 endif
 
