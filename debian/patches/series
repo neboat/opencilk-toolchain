@@ -125,9 +125,6 @@ risc/clang-riscv64-multiarch.diff
 sparc/sparc-D98574-clang-def.patch
 sparc/sparc-D98575-compiler-rt.patch
 
-# Compiler-rt - workaround
-#workaround-bug-42994-use-linker.diff
-
 # bug 939472
 #try-to-unbreak-thinlto.diff
 #D67877-cmake-clang-example.patch
