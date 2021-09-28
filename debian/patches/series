@@ -126,7 +126,7 @@ sparc/sparc-D98574-clang-def.patch
 sparc/sparc-D98575-compiler-rt.patch
 
 # Compiler-rt - workaround
-workaround-bug-42994-use-linker.diff
+#workaround-bug-42994-use-linker.diff
 
 # bug 939472
 #try-to-unbreak-thinlto.diff
