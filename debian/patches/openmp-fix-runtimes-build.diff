@@ -10,6 +10,15 @@ Index: llvm-toolchain-12_12.0.1/llvm/runtimes/CMakeLists.txt
                                        -DCMAKE_C_COMPILER_TARGET=${TARGET_TRIPLE}
                                        -DCMAKE_CXX_COMPILER_TARGET=${TARGET_TRIPLE}
                                        -DCMAKE_ASM_COMPILER_TARGET=${TARGET_TRIPLE}
+@@ -440,7 +441,7 @@ if(runtimes)
+     # build directory cannot find the C++ headers in certain configurations.
+     # I need to build a mechanism for runtime projects to provide CMake code
+     # that executes at LLVM configuration time to handle this case.
+-    add_dependencies(clang-bootstrap-deps runtimes-configure)
++    #add_dependencies(clang-bootstrap-deps runtimes-configure)
+     # We need to add the runtimes as a dependency because compiler-rt can be
+     # built as part of runtimes and we need the profile runtime for PGO
+     add_dependencies(clang-bootstrap-deps runtimes)
 Index: llvm-toolchain-12_12.0.1/openmp/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-12_12.0.1.orig/openmp/CMakeLists.txt

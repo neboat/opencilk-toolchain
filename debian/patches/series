@@ -145,7 +145,6 @@ scan-build-py-fix-default-bin.diff
 
 libclc-llvm-spirv.diff
 omp-riscv64.patch
-runtimes-fix-cmake-use-make.diff
 llvm-fix-lld-linker-check.diff
 compilerrt-fix-warn-xray-testing.diff
 openmp-fix-runtimes-build.diff
