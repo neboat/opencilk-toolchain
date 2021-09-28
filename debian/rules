@@ -662,20 +662,20 @@ override_dh_auto_install:
 	# Only run on executable, not script
 	chrpath -d `find $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary'|cut -d: -f1`
 
+	: # libclang
+	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT); \
+	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT)
+
 	if test "$(LIBUNWIND_ENABLE)" = yes; then \
 		mkdir -p debian/tmp/usr/include/libunwind; \
 		cp -R libunwind/include/* debian/tmp/usr/include/libunwind/; \
 	fi
 
-	: # libclang
-	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT); \
-	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT)
-
 	: # libomp
 	if test "$(OPENMP_ENABLE)" = yes; then \
 		cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && mv libomp.so libomp.so.$(SONAME_OPENMP); \
 		ln -s libomp.so.$(SONAME_OPENMP) libomp.so; \
-		cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && cp libomp.so.$(SONAME_OPENMP) libomp-$(LLVM_VERSION).so.$(SONAME_OPENMP); \
+		cp libomp.so.$(SONAME_OPENMP) libomp-$(LLVM_VERSION).so.$(SONAME_OPENMP); \
 	fi
 
 # Remove artifact (where compiler-rt is built)
