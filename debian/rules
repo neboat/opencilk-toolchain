@@ -661,8 +661,6 @@ endif
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
-	DESTDIR=$(DEB_INST) ninja -C libcxxabi/build install $(VERBOSE)
-	DESTDIR=$(DEB_INST) ninja -C libcxx/build install $(VERBOSE)
 	DESTDIR=$(DEB_INST) ninja -C libclc/build install $(VERBOSE)
 
 # Rename binaries
