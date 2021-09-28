@@ -965,7 +965,7 @@ override_dh_gencontrol:
 
 override_dh_auto_clean:
 	rm -rf $(TARGET_BUILD) tools/clang/include/clang/Debian/debian_path.h docs/_build/ clang/docs/_build tools/clang/docs/_html/
-#	rm -rf clang/include/clang/Debian
+	rm -rf clang/include/clang/Debian
 # QA tools
 	rm -rf cov-int/ reports/
 	rm -f `ls debian/*.in|sed -e "s|.in$$||g"`
