@@ -197,7 +197,7 @@ endif
 
 # Enable libunwind (or not)
 LIBUNWIND_ENABLE=yes
-ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel mipsel hurd-i386 powerpc))
+ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel mipsel hurd-i386 powerpc sparc sparc64 x32))
   LIBUNWIND_ENABLE=no
 else
   PROJECTS += ;libunwind
