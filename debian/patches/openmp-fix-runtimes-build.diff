@@ -164,16 +164,3 @@ Index: llvm-toolchain-12_12.0.1/openmp/tools/archer/CMakeLists.txt
    install(TARGETS archer archer_static
      LIBRARY DESTINATION ${OPENMP_INSTALL_LIBDIR}
      ARCHIVE DESTINATION ${OPENMP_INSTALL_LIBDIR})
-Index: llvm-toolchain-12_12.0.1/runtimes/CMakeLists.txt
-===================================================================
---- llvm-toolchain-12_12.0.1.orig/runtimes/CMakeLists.txt
-+++ llvm-toolchain-12_12.0.1/runtimes/CMakeLists.txt
-@@ -97,7 +97,7 @@ include(HandleLLVMOptions)
- include(FindPythonInterp)
- 
- # Remove the -nostdlib++ option we've added earlier.
--string(REPLACE "-nostdlib++" "" CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS}")
-+#string(REPLACE "-nostdlib++" "" CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS}")
- 
- # Use libtool instead of ar if you are both on an Apple host, and targeting Apple.
- if(CMAKE_HOST_APPLE AND APPLE)
