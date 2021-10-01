@@ -667,7 +667,7 @@ override_dh_auto_install:
 
 	: # libomp
 	if test "$(OPENMP_ENABLE)" = yes; then \
-		cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && mv libomp.so libomp.so.$(SONAME_OPENMP); \
+		cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib; \
 		ln -s libomp.so.$(SONAME_OPENMP) libomp.so; \
 		cp libomp.so.$(SONAME_OPENMP) libomp-$(LLVM_VERSION).so.$(SONAME_OPENMP); \
 	fi

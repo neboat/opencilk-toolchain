@@ -127,16 +127,6 @@ Index: llvm-toolchain-12_12.0.1/openmp/runtime/CMakeLists.txt
  # Shared library can be switched to a static library
  set(LIBOMP_ENABLE_SHARED TRUE CACHE BOOL
    "Shared library instead of static library?")
-@@ -358,8 +362,7 @@ else()
-   set(LIBOMP_INSTALL_KIND ARCHIVE)
- endif()
- 
--set(LIBOMP_LIB_FILE ${LIBOMP_LIB_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX}.${LIBOMP_VERSION_MAJOR})
--
-+set(LIBOMP_LIB_FILE ${LIBOMP_LIB_NAME}${LIBOMP_LIBRARY_SUFFIX})
- 
- # Optional backwards compatibility aliases.
- set(LIBOMP_INSTALL_ALIASES TRUE CACHE BOOL
 Index: llvm-toolchain-12_12.0.1/openmp/runtime/src/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-12_12.0.1.orig/openmp/runtime/src/CMakeLists.txt
