@@ -768,7 +768,7 @@ endif
 	if test "$(POLLY_ENABLE)" = yes; then \
 		mkdir -p $(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/ $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly/; \
 		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPolly* \
-		$(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
+		$(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
 		rm -rf $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly; \
 		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/include/polly/ \
 		$(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/; \
