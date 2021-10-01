@@ -527,13 +527,8 @@ override_dh_auto_configure: preconfigure
 		exit 1; \
 	fi
 
-ifeq (Ninja, $(GENERATOR))
 # ninja
 VERBOSE=-v
-else
-# make
-VERBOSE=VERBOSE=1
-endif
 
 debian-full-build:
 	echo "Using cmake: $(CMAKE_BIN)"
