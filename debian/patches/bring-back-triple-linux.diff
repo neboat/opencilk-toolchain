@@ -8,10 +8,10 @@ Date:   Tue Sep 28 18:23:17 2021 +0300
     
     This reverts commit f9dbca68d48e705f6d45df8f58d6b2ee88bce76c.
 
-diff --git b/llvm/CMakeLists.txt a/llvm/CMakeLists.txt
-index f10f8d66d0b8..069fb8b7c0f8 100644
---- b/llvm/CMakeLists.txt
-+++ a/llvm/CMakeLists.txt
+Index: llvm-toolchain-snapshot_14~++20211002104316+f33274c7bf44/llvm/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_14~++20211002104316+f33274c7bf44.orig/llvm/CMakeLists.txt
++++ llvm-toolchain-snapshot_14~++20211002104316+f33274c7bf44/llvm/CMakeLists.txt
 @@ -677,7 +677,13 @@ endif()
  set(LLVM_TARGET_TRIPLE_ENV CACHE STRING "The name of environment variable to override default target. Disabled by blank.")
  mark_as_advanced(LLVM_TARGET_TRIPLE_ENV)
