@@ -143,3 +143,4 @@ scan-build-py-fix-default-bin.diff
 
 libclc-llvm-spirv.diff
 omp-riscv64.patch
+bring-back-triple-linux.diff

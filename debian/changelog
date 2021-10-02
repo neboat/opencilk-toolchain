@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:14~++20210926041028+6063e6b499c7-1~exp2) experimental; urgency=medium
+
+  * The triple change has been reverted. Keep it in Debian bring-back-triple-linux.diff
+
+ --
+
 llvm-toolchain-snapshot (1:14~++20210926041028+6063e6b499c7-1~exp1) experimental; urgency=medium
 
   * experimental New snapshot release
