@@ -2,9 +2,6 @@ llvm-toolchain-snapshot (1:14~++20210926041028+6063e6b499c7-1~exp2) experimental
 
   * The triple change has been reverted. Keep it in Debian bring-back-triple-linux.diff
   * Fix the "all" build
-
- --
-
 llvm-toolchain-snapshot (1:14~++20210926041028+6063e6b499c7-1~exp1) experimental; urgency=medium
 
   * experimental New snapshot release
@@ -292,6 +289,15 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
   * Add upstream patch D92052 to fix a gcn offload compiler issue with gcc (Closes: #975692)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
+
+llvm-toolchain-12 (1:12.0.1-10) UNRELEASED; urgency=medium
+
+  * If parallel is not set in DEB_BUILD_OPTIONS, use nproc
+
+  [ John Paul Adrian Glaubitz ]
+  * Disable libunwind on sparc, sparc64 and x32
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 02 Oct 2021 10:50:27 +0200
 
 llvm-toolchain-12 (1:12.0.1-9) unstable; urgency=medium
 
