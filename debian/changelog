@@ -4,6 +4,8 @@ llvm-toolchain-snapshot (1:14~++20211002060945+9452ec722ce0-1~exp1) experimental
   * Fix the "all" build
   * Disable LIBCXX_USE_COMPILER_RT on s390x as it fails. See bug 52022
   * Adjust the libomp_start_tool visibility on armhf
+  * Be more flexible to install libomptarget-*.bc
+    (ex: libomptarget-new-nvptx-*.bc are new)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 02 Oct 2021 18:15:52 +0200
 
