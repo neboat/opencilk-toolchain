@@ -989,7 +989,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  kmpc_set_stacksize@VERSION 0.20130412
  kmpc_set_stacksize_s@VERSION 0.20130412
  kmpc_unset_affinity_mask_proc@VERSION 0.20130412
- libomp_start_tool@VERSION 1:14~++20210924100737+f3f25ffc04c0
+ (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)libomp_start_tool@VERSION 1:14~++20210924100737+f3f25ffc04c0
  omp_alloc@VERSION 8
  omp_calloc@VERSION 12
  omp_capture_affinity@OMP_5.0 13
