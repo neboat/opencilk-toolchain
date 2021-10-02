@@ -81,11 +81,6 @@ Index: llvm-toolchain-12_12.0.1/openmp/libomptarget/plugins/CMakeLists.txt
        # Install plugin under the lib destination folder.
        install(TARGETS "omptarget.rtl.${tmachine_libname}"
          LIBRARY DESTINATION "${OPENMP_INSTALL_LIBDIR}")
-@@ -79,4 +81,3 @@ add_subdirectory(remote)
- # Make sure the parent scope can see the plugins that will be created.
- set(LIBOMPTARGET_SYSTEM_TARGETS "${LIBOMPTARGET_SYSTEM_TARGETS}" PARENT_SCOPE)
- set(LIBOMPTARGET_TESTED_PLUGINS "${LIBOMPTARGET_TESTED_PLUGINS}" PARENT_SCOPE)
--
 Index: llvm-toolchain-12_12.0.1/openmp/libomptarget/plugins/cuda/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-12_12.0.1.orig/openmp/libomptarget/plugins/cuda/CMakeLists.txt
@@ -131,7 +126,15 @@ Index: llvm-toolchain-12_12.0.1/openmp/runtime/src/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-12_12.0.1.orig/openmp/runtime/src/CMakeLists.txt
 +++ llvm-toolchain-12_12.0.1/openmp/runtime/src/CMakeLists.txt
-@@ -162,6 +162,8 @@ set_target_properties(omp PROPERTIES
+@@ -134,6 +134,7 @@ endif()
+ if(NOT ${LIBOMP_USE_STDCPPLIB})
+   set(LIBOMP_LINKER_LANGUAGE C)
+   set(CMAKE_CXX_IMPLICIT_LINK_LIBRARIES)
++  set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -nostdlib++")
+ else()
+   set(LIBOMP_LINKER_LANGUAGE CXX)
+ endif()
+@@ -162,6 +163,8 @@ set_target_properties(omp PROPERTIES
    LINKER_LANGUAGE ${LIBOMP_LINKER_LANGUAGE}
  )
  
