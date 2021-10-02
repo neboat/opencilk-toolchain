@@ -1,9 +1,11 @@
 llvm-toolchain-12 (1:12.0.1-10) UNRELEASED; urgency=medium
 
+  * If parallel is not set in DEB_BUILD_OPTIONS, use nproc
+
   [ John Paul Adrian Glaubitz ]
   * Disable libunwind on sparc, sparc64 and x32
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Wed, 29 Sep 2021 18:48:35 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 02 Oct 2021 10:50:27 +0200
 
 llvm-toolchain-12 (1:12.0.1-9) unstable; urgency=medium
 
