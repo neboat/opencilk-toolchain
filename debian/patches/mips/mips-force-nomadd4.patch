@@ -6,10 +6,10 @@ support both, we have to disabled those instructions.
 For that, the patch below basically corresponds to the --with-madd4=no
 used on the GCC side.
 
-Index: llvm-toolchain-snapshot_12~++20201031095131+aab71d44431/clang/lib/Basic/Targets/Mips.h
+Index: llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9/clang/lib/Basic/Targets/Mips.h
 ===================================================================
---- llvm-toolchain-snapshot_12~++20201031095131+aab71d44431.orig/clang/lib/Basic/Targets/Mips.h
-+++ llvm-toolchain-snapshot_12~++20201031095131+aab71d44431/clang/lib/Basic/Targets/Mips.h
+--- llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9.orig/clang/lib/Basic/Targets/Mips.h
++++ llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9/clang/lib/Basic/Targets/Mips.h
 @@ -332,6 +332,8 @@ public:
          HasMSA = true;
        else if (Feature == "+nomadd4")
@@ -19,13 +19,13 @@ Index: llvm-toolchain-snapshot_12~++20201031095131+aab71d44431/clang/lib/Basic/T
        else if (Feature == "+fp64")
          FPMode = FP64;
        else if (Feature == "-fp64")
-Index: llvm-toolchain-snapshot_12~++20201031095131+aab71d44431/llvm/lib/Target/Mips/MipsSubtarget.cpp
+Index: llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9/llvm/lib/Target/Mips/MipsSubtarget.cpp
 ===================================================================
---- llvm-toolchain-snapshot_12~++20201031095131+aab71d44431.orig/llvm/lib/Target/Mips/MipsSubtarget.cpp
-+++ llvm-toolchain-snapshot_12~++20201031095131+aab71d44431/llvm/lib/Target/Mips/MipsSubtarget.cpp
+--- llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9.orig/llvm/lib/Target/Mips/MipsSubtarget.cpp
++++ llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9/llvm/lib/Target/Mips/MipsSubtarget.cpp
 @@ -80,7 +80,7 @@ MipsSubtarget::MipsSubtarget(const Tripl
        InMips16HardFloat(Mips16HardFloat), InMicroMipsMode(false), HasDSP(false),
-       HasDSPR2(false), HasDSPR3(false), AllowMixed16_32(Mixed16_32 | Mips_Os16),
+       HasDSPR2(false), HasDSPR3(false), AllowMixed16_32(Mixed16_32 || Mips_Os16),
        Os16(Mips_Os16), HasMSA(false), UseTCCInDIV(false), HasSym32(false),
 -      HasEVA(false), DisableMadd4(false), HasMT(false), HasCRC(false),
 +      HasEVA(false), DisableMadd4(true), HasMT(false), HasCRC(false),
