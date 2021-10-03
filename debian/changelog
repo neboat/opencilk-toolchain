@@ -675,8 +675,6 @@ llvm-toolchain-11 (1:11.0.1~+rc1-1~exp1) experimental; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 26 Nov 2020 10:14:43 +0100
 
-llvm-toolchain-11 (1:11.0.0-5) unstable; urgency=medium
-
 llvm-toolchain-9 (1:9.0.1-19) unstable; urgency=medium
 
   * Add two patches from ubuntu to fix lto and gcc-11 build failures
