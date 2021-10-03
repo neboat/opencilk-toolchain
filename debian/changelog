@@ -1,6 +1,8 @@
 llvm-toolchain-12 (1:12.0.1-10) UNRELEASED; urgency=medium
 
   * If parallel is not set in DEB_BUILD_OPTIONS, use nproc
+  * Add source-is-missing llvm/test/* / lldb/test/* / lld/test/*
+    to the source override
 
   [ John Paul Adrian Glaubitz ]
   * Disable libunwind on sparc, sparc64 and x32
