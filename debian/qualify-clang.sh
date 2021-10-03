@@ -1418,6 +1418,17 @@ mkdir cmaketest/foo/
 rm -rf cmaketest
 
 
+# Test case for bug #994827
+rm -rf cmaketest && mkdir cmaketest
+cat > cmaketest/CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 3.18)
+project(testllvm)
+
+find_package(Clang REQUIRED CONFIG HINTS "/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/clang/")
+EOF
+mkdir cmaketest/foo/
+(cd cmaketest/foo && cmake .. > /dev/null)
+rm -rf cmaketest
 
 
 CLANG=clang-$VERSION

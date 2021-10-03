@@ -1,3 +1,10 @@
+llvm-toolchain-13 (1:13.0.0-2) unstable; urgency=medium
+
+  * Fix the libclang detection in cmake
+    (Closes: #994827)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Oct 2021 22:38:18 +0200
+
 llvm-toolchain-13 (1:13.0.0-1) unstable; urgency=medium
 
   * New upstream release
