@@ -1,3 +1,9 @@
+llvm-toolchain-13 (1:13.0.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 01 Oct 2021 09:08:08 +0200
+
 llvm-toolchain-13 (1:13.0.0~+rc4-1) unstable; urgency=medium
 
   * New testing release
