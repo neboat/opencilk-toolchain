@@ -83,7 +83,7 @@ export DEB_BUILD_MAINT_OPTIONS=reproducible=-fixfilepath optimize=-lto
 # Cxx flags for building libcxx and libcxxabi
 LIBCXXFLAGS := $(shell dpkg-buildflags --get CXXFLAGS) $(shell dpkg-buildflags --get CPPFLAGS)
 
-ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) lt 9 ; echo $$?),0)
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) lt 8 ; echo $$?),0)
 # Too old version of gcc. Force gcc 11
 # Should be triggered only on bionic
 # https://reviews.llvm.org/D110338
