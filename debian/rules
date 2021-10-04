@@ -56,6 +56,11 @@ ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
 	LIBCXX_USE_COMPILER_RT := OFF
 endif
 
+ifneq (,$(filter $(DEB_HOST_ARCH),armel x32))
+# See https://bugs.llvm.org/show_bug.cgi?id=52022
+	LIBCXX_USE_COMPILER_RT := OFF
+endif
+
 ifneq (,$(filter $(DEB_HOST_ARCH),i386 armel mips mipsel powerpc powerpcspe riscv64))
 CMAKE_EXTRA += -DLIBOMP_LIBFLAGS="-latomic" -DCMAKE_SHARED_LINKER_FLAGS="-latomic"
 endif

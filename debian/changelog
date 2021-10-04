@@ -2,7 +2,7 @@ llvm-toolchain-snapshot (1:14~++20211002060945+9452ec722ce0-1~exp1) experimental
 
   * The triple change has been reverted. Keep it in Debian bring-back-triple-linux.diff
   * Fix the "all" build
-  * Disable LIBCXX_USE_COMPILER_RT on s390x as it fails. See bug 52022
+  * Disable LIBCXX_USE_COMPILER_RT on s390x, armel and x32 as it fails. See bug 52022
   * Adjust the libomp_start_tool visibility on armhf
   * Be more flexible to install libomptarget-*.bc
     (ex: libomptarget-new-nvptx-*.bc are new)
