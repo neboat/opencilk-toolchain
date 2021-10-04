@@ -1283,7 +1283,7 @@ int main() {
   CodeGenOptions* cgOpts;
   TargetOptions* tOpts;
   LangOptions* lOpts;
-  llvm::DataLayout* tDesc;
+  llvm::StringRef* tDesc;
   llvm::Module* m;
   BackendAction* action;
   std::unique_ptr<raw_pwrite_stream> AsmOutStream;
