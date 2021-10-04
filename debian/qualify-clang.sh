@@ -1250,9 +1250,18 @@ fi
 echo "
 int foo(int x, int y) __attribute__((always_inline));
 int foo(int x, int y) { return x + y; }
-int bar(int j) { return foo(j, j - 2); }" > foo.cc
+int bar(int j) { return foo(j, j - 2); }
+int sum = 0;
+
+int main(int argc, const char *argv[]) {
+  for (int i = 0; i < 30; i++)
+    bar(argc);
+  return sum;
+}
+
+" > foo.cc
 clang-$VERSION -O2 -Rpass=inline foo.cc -c &> foo.log
-if ! grep -q "cost=always" foo.log; then
+if ! grep -q -E "(inlined into main with|cost=always)" foo.log; then
     echo "-Rpass fails"
     cat foo.log
     exit 1
@@ -1283,7 +1292,7 @@ int main() {
   CodeGenOptions* cgOpts;
   TargetOptions* tOpts;
   LangOptions* lOpts;
-  llvm::DataLayout* tDesc;
+  llvm::StringRef* tDesc;
   llvm::Module* m;
   BackendAction* action;
   std::unique_ptr<raw_pwrite_stream> AsmOutStream;
@@ -1291,7 +1300,7 @@ int main() {
   EmitBackendOutput(*diags, *hsOpts, *cgOpts, *tOpts, *lOpts, *tDesc, m, *action, std::move(AsmOutStream));
 }
 EOF
-clang++-$VERSION foo.cpp -o test -lclangBasic -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangCodeGen -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangFrontend -lclangDriver -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -lclangBasic -ldl  /usr/lib/llvm-$VERSION/lib/libLLVM-$VERSION.so -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -ldl  -I /usr/lib/llvm-$VERSION/include/ -L/usr/lib/llvm-$VERSION/lib/ -lPolly -lPollyPPCG -lPollyISL
+clang++-$VERSION foo.cpp -o test -lclangBasic -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangCodeGen -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangFrontend -lclangDriver -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -lclangBasic -ldl  /usr/lib/llvm-$VERSION/lib/libLLVM-$VERSION.so -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -ldl  -I /usr/lib/llvm-$VERSION/include/ -L/usr/lib/llvm-$VERSION/lib/ -lPolly -lPollyISL
 
 if test ! -f /usr/bin/lldb-$VERSION; then
     echo "Install lldb-$VERSION";
@@ -1418,6 +1427,17 @@ mkdir cmaketest/foo/
 rm -rf cmaketest
 
 
+# Test case for bug #994827
+rm -rf cmaketest && mkdir cmaketest
+cat > cmaketest/CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 3.18)
+project(testllvm)
+
+find_package(Clang REQUIRED CONFIG HINTS "/usr/lib/llvm-$LLVM_VERSION/lib/cmake/clang/")
+EOF
+mkdir cmaketest/foo/
+(cd cmaketest/foo && cmake .. > /dev/null)
+rm -rf cmaketest
 
 
 CLANG=clang-$VERSION
