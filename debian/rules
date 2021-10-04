@@ -42,16 +42,17 @@ CXXFLAGS_EXTRA =
 CFLAGS_EXTRA =
 CONFIGURE_EXTRA =
 CMAKE_EXTRA = -DPYTHON_EXECUTABLE=/usr/bin/python3
-CMAKE_LIBCXX_EXTRA =
 STAGE1_CMAKE_EXTRA =
 # prepend bootstrap prefix to CMAKE_EXTRA vars
 BOOTSTRAP_CMAKE_EXTRA = $(foreach extra,$(CMAKE_EXTRA), $(subst -D,-DBOOTSTRAP_,$(extra)))
 
-BASE_PATH	:= $(CURDIR)
+BASE_PATH := $(CURDIR)
+STAGE1_BIN_DIR := $(BASE_PATH)/$(TARGET_BUILD)/bin
 STAGE1_LIB_DIR := $(BASE_PATH)/$(TARGET_BUILD)/lib
+STAGE2_BIN_DIR := $(BASE_PATH)/$(TARGET_BUILD_STAGE2)/bin
 STAGE2_LIB_DIR := $(BASE_PATH)/$(TARGET_BUILD_STAGE2)/lib
-LIBCXX_EXCEPTIONS :=ON
 
+LIBCXX_EXCEPTIONS := ON
 ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
 	LIBCXX_EXCEPTIONS :=OFF
 endif
@@ -114,8 +115,6 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   # See http://lists.llvm.org/pipermail/llvm-dev/2016-May/099761.html
   CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
   STAGE1_CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
-  # Check for ancient libstdc++ fails due to atomics usage
-  CMAKE_LIBCXX_EXTRA += -DLLVM_COMPILER_CHECKED=ON
   # Prevent clang from getting a > v4t default
   # See bug #868779
   STAGE1_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabi
@@ -154,13 +153,6 @@ LIBCLC_TARGETS_TO_BUILD="amdgcn--;amdgcn--amdhsa;r600--;nvptx--;nvptx64--;nvptx-
 ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	LIBCLC_TARGETS_TO_BUILD := $(LIBCLC_TARGETS_TO_BUILD)";spirv-mesa3d-;spirv64-mesa3d-"
 endif
-
-# Disabled:
-#  Host compiler does not support '-fuse-ld=lld'
-# USE_LLD_ARCHS := amd64
-# ifneq (,$(filter $(DEB_HOST_ARCH),$(USE_LLD_ARCHS)))
-# 	CMAKE_EXTRA += -DLLVM_ENABLE_LLD=ON
-# endif
 
 BINUTILS_GOLD_ARCHS := amd64 arm64 armhf i386 ppc64 ppc64el x32 s390x hurd-i386 kfreebsd-amd64 kfreebsd-i386
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.23.1-1~exp3 ; echo $$?),0)
@@ -335,15 +327,15 @@ endif
 
 GENERATOR=Ninja
 
+# enables cmake build targets like stage2-[target_name]
+ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-sanitizer;llvm-config;test-suite
+
 %:
 	dh $@ $(DH_OPTIONS)
 
 # For some reasons, some spaces are added, removing them
 PROJECTS_LIST := $(shell echo "$(PROJECTS)"|sed -e "s| ||g")
 RUNTIMES_LIST := $(shell echo "$(RUNTIMES)"|sed -e "s| ||g")
-
-# enables cmake build targets like stage2-[target_name]
-ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-sanitizer;llvm-config;test-suite
 
 preconfigure:
 
@@ -554,33 +546,27 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 	CFLAGS=`dpkg-buildflags --get CFLAGS`; \
 	CFLAGS="$$CFLAGS `dpkg-buildflags --get CPPFLAGS`"; \
 	echo $$CFLAGS; \
-	$(BASE_PATH)/$(TARGET_BUILD_STAGE2)/bin/clang++ -c $$CFLAGS -std=c++11 $(BASE_PATH)/compiler-rt/lib/fuzzer/*.cpp -IFuzzer; \
+	$(STAGE2_BIN_DIR)/clang++ -c $$CFLAGS -std=c++11 $(BASE_PATH)/compiler-rt/lib/fuzzer/*.cpp -IFuzzer; \
 	ar ruv libFuzzer.a Fuzzer*.o
 endif
 	touch $@
 
 debian-libclc-build:
 # Builds libclc
-
 	mkdir -p libclc/build
-
-	CMAKE_BIN=cmake; \
-	if test -f /tmp/cmake/bin/cmake; then \
-		CMAKE_BIN=/tmp/cmake/bin/cmake; \
-	fi; \
-	echo "Using cmake: $$CMAKE_BIN"; \
+	echo "Using cmake: $(CMAKE_BIN)"
 	cd libclc/build && \
-	$$CMAKE_BIN ../ \
+	$(CMAKE_BIN) ../ \
 	-G $(GENERATOR) \
-	-DCMAKE_C_COMPILER=$(BASE_PATH)/$(TARGET_BUILD_STAGE2)/bin/clang \
-	-DCMAKE_CXX_COMPILER=$(BASE_PATH)/$(TARGET_BUILD_STAGE2)/bin/clang++ \
+	-DCMAKE_C_COMPILER=$(STAGE2_BIN_DIR)/clang \
+	-DCMAKE_CXX_COMPILER=$(STAGE2_BIN_DIR)/clang++ \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DCMAKE_INSTALL_DATADIR=lib \
 	-DCMAKE_INSTALL_INCLUDEDIR=include \
 	-DCMAKE_SHARED_LINKER_FLAGS="-L$(STAGE2_LIB_DIR)" \
 	-DCMAKE_MODULE_LINKER_FLAGS="-L$(STAGE2_LIB_DIR)" \
 	-DCMAKE_EXE_LINKER_FLAGS="-L$(STAGE2_LIB_DIR)" \
-	-DLLVM_CONFIG=$(BASE_PATH)/$(TARGET_BUILD_STAGE2)/bin/llvm-config \
+	-DLLVM_CONFIG=$(STAGE2_BIN_DIR)/llvm-config \
 	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
 	ninja $(NJOBS) $(VERBOSE)
 	touch $@
