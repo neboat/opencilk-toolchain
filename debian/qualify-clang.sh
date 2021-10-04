@@ -1250,9 +1250,18 @@ fi
 echo "
 int foo(int x, int y) __attribute__((always_inline));
 int foo(int x, int y) { return x + y; }
-int bar(int j) { return foo(j, j - 2); }" > foo.cc
+int bar(int j) { return foo(j, j - 2); }
+int sum = 0;
+
+int main(int argc, const char *argv[]) {
+  for (int i = 0; i < 30; i++)
+    bar(argc);
+  return sum;
+}
+
+" > foo.cc
 clang-$VERSION -O2 -Rpass=inline foo.cc -c &> foo.log
-if ! grep -q "cost=always" foo.log; then
+if ! grep -q -E "(inlined into main with|cost=always)" foo.log; then
     echo "-Rpass fails"
     cat foo.log
     exit 1
