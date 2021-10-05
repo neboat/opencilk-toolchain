@@ -245,7 +245,8 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # no need to run tests in this case
 	RUN_TEST=no
 	CONFIGURE_EXTRA += --enable-assertions
-	CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
+# will also be applied to stage2 via CLANG_BOOTSTRAP_PASSTHROUGH
+	STAGE1_CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
 endif
 
 ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
@@ -258,7 +259,8 @@ ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
 	PRE_PROCESS_CONF=
 	COVERITY_ENABLE=1
 	CONFIGURE_EXTRA += --enable-assertions
-	CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
+# will also be applied to stage2 via CLANG_BOOTSTRAP_PASSTHROUGH
+	STAGE1_CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
 # no need to run tests in this case
 	RUN_TEST=no
 else
@@ -452,7 +454,6 @@ override_dh_auto_configure: preconfigure
 	-DLLVM_TARGETS_TO_BUILD=Native \
 	-DLLVM_ENABLE_PROJECTS="$(PROJECTS_LIST)" \
 	-DLLVM_ENABLE_RUNTIMES="$(RUNTIMES_LIST)" \
-	-DLLVM_ENABLE_ASSERTIONS=ON \
 	-DLLVM_ENABLE_PIC=ON \
 	-DLLVM_ENABLE_RTTI=ON \
 	-DLVVM_ENABLE_ZLIB=OFF \
