@@ -1,3 +1,10 @@
+llvm-toolchain-13 (1:13.0.0-3) unstable; urgency=medium
+
+  * libc++-13-dev should depends on libunwind-13-dev
+    (Closes: #995810)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Oct 2021 12:52:10 +0200
+
 llvm-toolchain-13 (1:13.0.0-2) unstable; urgency=medium
 
   * Fix the libclang detection in cmake

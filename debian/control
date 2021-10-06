@@ -624,7 +624,8 @@ Package: libc++-13-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libc++1-13 (= ${binary:Version}), ${misc:Depends}
+Depends: libc++1-13 (= ${binary:Version}), ${misc:Depends},
+ libunwind-13-dev
 Breaks: libc++-dev (<< 44)
 Provides: libc++-x.y-dev
 Conflicts: libc++-x.y-dev
