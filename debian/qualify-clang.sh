@@ -375,11 +375,10 @@ int main() {
     return 0;
 } ' > bar.cc
 
-# llvm runtimes are now default, gnu runtimes must now be specified to be used
 g++ -c foo.cc && g++ foo.o bar.cc && ./a.out  > /dev/null || true
-clang++-$VERSION -stdlib=libstdc++ -c foo.cc && clang++-$VERSION -stdlib=libstdc++ -rtlib=libgcc foo.o bar.cc && ./a.out  > /dev/null
-g++ -c foo.cc && clang++-$VERSION -stdlib=libstdc++ -rtlib=libgcc foo.o bar.cc && ./a.out  > /dev/null || true
-clang++-$VERSION -stdlib=libstdc++ -c foo.cc -fPIC && g++ foo.o bar.cc && ./a.out > /dev/null || true
+clang++-$VERSION -c foo.cc && clang++-$VERSION foo.o bar.cc && ./a.out  > /dev/null
+g++ -c foo.cc && clang++-$VERSION foo.o bar.cc && ./a.out  > /dev/null || true
+clang++-$VERSION -c foo.cc -fPIC && g++ foo.o bar.cc && ./a.out > /dev/null || true
 
 ## test z3
 echo '
@@ -526,7 +525,7 @@ fi
 clang-$VERSION -fuse-ld=lld -O2 foo.c main.c -o foo
 ./foo > /dev/null
 
-if ls -al1 /usr/bin/ld.lld-*|grep ld.lld-$VERSION; then
+if ls -al1 /usr/bin/ld.lld|grep ld.lld-$VERSION; then
 # https://bugs.llvm.org/show_bug.cgi?id=40659
 # -fuse-ld=lld will call lld
 # Mismatch of version can fail the check
@@ -730,7 +729,7 @@ int main() {
   return x[5];
 }
 ' > foo.c
-clang-$VERSION -o foo -fsanitize=address -O1 -fno-omit-frame-pointer -g -lunwind foo.c
+clang-$VERSION -o foo -fsanitize=address -O1 -fno-omit-frame-pointer -g  foo.c
 if ! ./foo 2>&1 | grep -q heap-use-after-free ; then
     echo "sanitize=address is failing"
     exit 42
@@ -746,7 +745,7 @@ int main(int argc, char **argv)
 }' > foo.c
 
 # segfaults on 32bit with "-lc" library (also 6.0 does segfault)
-clang-$VERSION -fsanitize=address foo.c -o foo -lc -lunwind
+clang-$VERSION -fsanitize=address foo.c -o foo -lc
 ./foo &> /dev/null || true
 
 echo '
@@ -775,7 +774,7 @@ int main() {
 
 # fails on i386 with: clang: error: unsupported option '-fsanitize=thread' for target 'i686-pc-linux-gnu'
 if [ $DEB_HOST_ARCH != "i386" ]; then
-    clang-$VERSION -o foo -fsanitize=thread -g -O1 -lunwind foo.c
+    clang-$VERSION -o foo -fsanitize=thread -g -O1 foo.c
     if ! strings ./foo 2>&1 | grep -q "tsan"; then
         echo "binary doesn't contain tsan code"
         strings foo
@@ -952,13 +951,13 @@ int main() {
   std::cout << "Hello World!" << std::endl;
 }
 EOF
-clang++-$VERSION -stdlib=libc++ -unwindlib=libunwind -rtlib=compiler-rt -static-libstdc++ -static-libgcc test.cpp -lpthread -ldl -o test
+clang++-$VERSION -stdlib=libc++ -unwindlib=libunwind -rtlib=compiler-rt -static-libstdc++ -static-libgcc test.cpp  -lpthread -ldl -o test
 ./test > /dev/null
 
-clang++-$VERSION -stdlib=libc++ -static-libstdc++ -fuse-ld=lld -l:libc++abi.a -l:libunwind.a test.cpp -o test
+clang++-$VERSION -stdlib=libc++ -static-libstdc++ -fuse-ld=lld -l:libc++abi.a test.cpp -o test
 ./test > /dev/null
 
-clang++-$VERSION -stdlib=libc++ -nostdlib++ test.cpp -l:libc++.a -l:libc++abi.a -l:libunwind.a -pthread -o test
+clang++-$VERSION -stdlib=libc++ -nostdlib++ test.cpp -l:libc++.a -l:libc++abi.a -pthread -o test
 ./test > /dev/null
 
 # Bug 889832
@@ -979,7 +978,7 @@ if ! ldd o 2>&1|grep -q  libc++abi.so.1; then
 fi
 
 # Use the libc++abi and uses the libstc++ headers
-clang++-$VERSION -stdlib=libstdc++ -lc++abi -lunwind foo.cpp -o o
+clang++-$VERSION -lc++abi foo.cpp -o o
 ./o > /dev/null
 if ! ldd o 2>&1|grep -q libstdc++.so.; then
     echo "not linked against libstdc++"
@@ -1482,7 +1481,7 @@ for SYSTEM in ""; do
             XARGS="$SYSTEM $MARCH $LIB"
             printf "\nTest: clang %s\n" "$XARGS"
             rm -f "$TEMPDIR/test"
-            "$CLANG" $XARGS -lunwind -o "$TEMPDIR/test" "$@" "$TEMPDIR/test.c" || true
+            "$CLANG" $XARGS -o "$TEMPDIR/test" "$@" "$TEMPDIR/test.c" || true
             [ ! -e "$TEMPDIR/test" ] || { "$TEMPDIR/test" || printf 'Error\n'; }
         done
     done
