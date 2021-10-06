@@ -1,3 +1,6 @@
+include required runtimes as dependencies to openmp targets to make sure
+they are built first when included as part of a runtimes build since openmp
+can depend on them
 Index: llvm-toolchain-12_12.0.1/llvm/runtimes/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-12_12.0.1.orig/llvm/runtimes/CMakeLists.txt

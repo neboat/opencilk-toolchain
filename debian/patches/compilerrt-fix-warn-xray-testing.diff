@@ -1,3 +1,4 @@
+suppress warnings for xray and testing when not enabled
 Index: llvm-toolchain-12_12.0.1/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
 ===================================================================
 --- llvm-toolchain-12_12.0.1.orig/compiler-rt/cmake/Modules/CompilerRTUtils.cmake

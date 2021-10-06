@@ -1,3 +1,4 @@
+if libatomic is found only link it if libgcc is the rtlib
 Index: llvm-toolchain-12_12.0.1/libcxx/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-12_12.0.1.orig/libcxx/CMakeLists.txt

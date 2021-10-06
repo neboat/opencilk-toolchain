@@ -1,3 +1,5 @@
+remove regex anchor in lld linker detection to account for vendor, if
+specified, being prepended to lld version string
 Index: llvm-toolchain-12_12.0.1/llvm/cmake/modules/AddLLVM.cmake
 ===================================================================
 --- llvm-toolchain-12_12.0.1.orig/llvm/cmake/modules/AddLLVM.cmake

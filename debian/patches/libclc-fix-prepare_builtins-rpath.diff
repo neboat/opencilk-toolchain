@@ -1,3 +1,5 @@
+set rpath for prepare_builtins build utility to find correct stage2
+libs at runtime when executed as part of a build
 Index: llvm-toolchain-12_12.0.1/libclc/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-12_12.0.1.orig/libclc/CMakeLists.txt
