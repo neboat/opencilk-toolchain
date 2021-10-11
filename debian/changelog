@@ -6,6 +6,10 @@ llvm-toolchain-snapshot (1:14~++20211002060945+9452ec722ce0-1~exp1) experimental
   * Adjust the libomp_start_tool visibility on armhf
   * Be more flexible to install libomptarget-*.bc
     (ex: libomptarget-new-nvptx-*.bc are new)
+  * Force the i386 triple -DLLVM_HOST_TRIPLE=i386-linux-gnu
+    Sometimes, on i386, the library detection is failing (often on z3
+    or ffi)
+    'Could NOT find Z3:'
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 02 Oct 2021 18:15:52 +0200
 
