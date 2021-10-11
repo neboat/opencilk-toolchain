@@ -2,6 +2,7 @@ llvm-toolchain-13 (1:13.0.0-3) unstable; urgency=medium
 
   * libc++-13-dev should depends on libunwind-13-dev
     (Closes: #995810)
+  * Disable a tsan test on i386
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Oct 2021 12:52:10 +0200
 
