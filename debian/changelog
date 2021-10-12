@@ -1,13 +1,11 @@
 llvm-toolchain-12 (1:12.0.1-11) UNRELEASED; urgency=medium
 
-  * evolve build configuration in rules file to leverage a two stage build with
-    runtimes support whereby the resulting stage2 (final) compiler is used to
-    build the stage2 (final) runtimes and all stage2 artifacts are free of gnu
-    compiler and c++ runtimes dependencies
-  * stage2 runtimes (built as part of the main stage2 build) now include
-    compiler-rt, libcxx and libcxxabi as well as libunwind and openmp where
-    supported. Additionally, legacy corresponding standalone build targets are
-    removed from the rules file
+  * evolve llvm build configuration in rules to leverage the two stage build
+    with runtimes support whereby the resulting stage2 (final) compiler is used
+    to build the stage2 (final) runtimes as part of a single monolithic build
+  * the stage2 runtimes build now includes compiler-rt, libcxx and libcxxabi as
+    well as libunwind and openmp where supported. Additionally, legacy
+    corresponding standalone build targets are removed from the rules file
   * patch openmp build to include required runtimes as dependencies to build
     targets so they are built first when included as part of a runtimes build
     since openmp can depend on them
