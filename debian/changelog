@@ -1,3 +1,13 @@
+llvm-toolchain-13 (1:13.0.0-4) unstable; urgency=medium
+
+  * Instead of using llvm-* to install binaries in llvm-X.Y
+    list all the binaries one by one.
+    It will prevent "llvm-omp-device-info" to be installed in
+    llvm-X.Y which caused an explicit dependency on libomp
+    which caused llvm-X.Y to be NOT coinstallable anymore
+
+ --
+
 llvm-toolchain-13 (1:13.0.0-3) unstable; urgency=medium
 
   * libc++-13-dev should depends on libunwind-13-dev
