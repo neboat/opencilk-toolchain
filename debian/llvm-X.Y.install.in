@@ -34,7 +34,6 @@ usr/lib/llvm-@LLVM_VERSION@/bin/llvm-mt
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-nm
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-objcopy
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-objdump
-usr/lib/llvm-@LLVM_VERSION@/bin/llvm-omp-device-info
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-opt-report
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-pdbutil
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-profdata
@@ -118,7 +117,6 @@ usr/bin/llvm-mt-@LLVM_VERSION@
 usr/bin/llvm-nm-@LLVM_VERSION@
 usr/bin/llvm-objcopy-@LLVM_VERSION@
 usr/bin/llvm-objdump-@LLVM_VERSION@
-usr/bin/llvm-omp-device-info-@LLVM_VERSION@
 usr/bin/llvm-opt-report-@LLVM_VERSION@
 usr/bin/llvm-otool-@LLVM_VERSION@
 usr/bin/llvm-pdbutil-@LLVM_VERSION@

@@ -7,7 +7,7 @@ llvm-toolchain-13 (1:13.0.0-4) unstable; urgency=medium
     which caused llvm-X.Y to be NOT coinstallable anymore
   * Move llvm-omp-device-info-X.Y from llvm-X to libompX-dev
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 13 Oct 2021 13:29:51 +0200
 
 llvm-toolchain-13 (1:13.0.0-3) unstable; urgency=medium
 
