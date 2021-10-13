@@ -144,3 +144,4 @@ scan-build-py-fix-default-bin.diff
 libclc-llvm-spirv.diff
 omp-riscv64.patch
 bring-back-triple-linux.diff
+test-disable-lldb-i386.diff
