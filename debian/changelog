@@ -604,7 +604,7 @@ llvm-toolchain-11 (1:11.1.0-3) unstable; urgency=medium
 
 llvm-toolchain-11 (1:11.1.0-2) unstable; urgency=medium
 
-  * Ajust the cmake test to unbreak autopkgtest
+  * Adjust the cmake test to unbreak autopkgtest
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Sep 2021 22:02:43 +0200
 
@@ -995,7 +995,7 @@ llvm-toolchain-snapshot (1:11~++20200411120955+c65e6079fc9-1~exp1) experimental;
   * Bring back libc++-experimental
   * remove no-cgi.patch - applied upstream
   * Also install liblldMachO2.a in liblld
-  * Reoder the cmake arg
+  * Reorder the cmake arg
   * Update the copyright file with recent changes (Closes: #956287)
     Thanks to Michael Lustfield for the detective work
 
@@ -1007,7 +1007,7 @@ llvm-toolchain-snapshot (1:11~++20200409051253+d08105482e1-1~exp1) experimental;
   * Bring back libc++-experimental
   * remove no-cgi.patch - applied upstream
   * Also install liblldMachO2.a in liblld
-  * Reoder the cmake arg
+  * Reorder the cmake arg
   * Update the copyright file with recent changes (Closes: #956287)
     Thanks to Michael Lustfield for the detective work
 
