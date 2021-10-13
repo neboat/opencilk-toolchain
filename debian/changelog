@@ -5,6 +5,7 @@ llvm-toolchain-13 (1:13.0.0-4) unstable; urgency=medium
     It will prevent "llvm-omp-device-info" to be installed in
     llvm-X.Y which caused an explicit dependency on libomp
     which caused llvm-X.Y to be NOT coinstallable anymore
+  * Move llvm-omp-device-info-X.Y from llvm-X to libompX-dev
 
  --
 

@@ -11,3 +11,6 @@
 [amd64 ppc64el arm64] /usr/lib/llvm-@LLVM_VERSION@/lib/libomptarget-amdgcn-*.bc
 
 usr/lib/llvm-@LLVM_VERSION@/lib/cmake/openmp/*.cmake
+
+usr/lib/llvm-@LLVM_VERSION@/bin/llvm-omp-device-info
+usr/bin/llvm-omp-device-info-@LLVM_VERSION@
