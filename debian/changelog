@@ -6,6 +6,7 @@ llvm-toolchain-13 (1:13.0.0-4) unstable; urgency=medium
     llvm-X.Y which caused an explicit dependency on libomp
     which caused llvm-X.Y to be NOT coinstallable anymore
   * Move llvm-omp-device-info-X.Y from llvm-X to libompX-dev
+    Fixes upstream #52162
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 13 Oct 2021 13:29:51 +0200
 
