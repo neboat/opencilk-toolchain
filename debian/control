@@ -620,7 +620,7 @@ Package: libc++-14-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libc++1-14 (= ${binary:Version}), ${misc:Depends}
+Depends: libc++1-14 (= ${binary:Version}), ${misc:Depends},
  libunwind-14-dev
 Breaks: libc++-dev (<< 44)
 Provides: libc++-x.y-dev
