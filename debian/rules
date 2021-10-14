@@ -771,9 +771,7 @@ override_dh_makeshlibs:
 
 override_dh_shlibdeps:
 # Ignore asan libraries. They would trigger dependencies to multiarch libraries
-	T=$(shell grep LLVM_HOST_TRIPLE $(CURDIR)/debian/llvm-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMConfig.cmake|cut -d\" -f2); \
-	echo "target = $$T"; \
-	dh_shlibdeps -l$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/$$T/ -Xlibclang_rt.asan -Xlibclang_rt.asan -Xlibclang_rt.asan-*.so -Xlibclang_rt.asan-*.so
+	dh_shlibdeps -l$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ -Xlibclang_rt.asan -Xlibclang_rt.asan -Xlibclang_rt.asan-*.so -Xlibclang_rt.asan-*.so
 
 override_dh_installman:
 	if test -f lld/docs/ld.lld.1; then \
@@ -847,19 +845,6 @@ override_dh_installdeb:
 	rm -f $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/c++/__cxxabi_config.h $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/c++/cxxabi.h
 # Remove auto generated python pyc
 	find $(CURDIR)/debian/llvm-$(LLVM_VERSION)-tools/usr/lib/llvm-$(LLVM_VERSION)/ -name '*.pyc' | xargs -r rm -f
-
-# Symlink the weird llvm triple to Debian's
-# I know it is ugly but I cannot use debian dh_links as I don't know what
-# will be the llvm triple on other archs
-# Don't run when "all" is built
-	if test -f $(CURDIR)/debian/llvm-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMConfig.cmake; then \
-		T=$(shell grep LLVM_HOST_TRIPLE $(CURDIR)/debian/llvm-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMConfig.cmake|cut -d\" -f2); \
-		echo "triple = $$T"; \
-		cd $(CURDIR)/debian/libc++abi1-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
-		ln -s $$T $(DEB_HOST_MULTIARCH); \
-		cd - && cd $(CURDIR)/debian/libunwind-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
-	    ln -s $$T $(DEB_HOST_MULTIARCH); \
-	fi
 
 
 ifeq (${RUN_TEST},yes)
