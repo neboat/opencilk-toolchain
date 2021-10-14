@@ -1,7 +1,9 @@
 #!/usr/bin/make -f
 
-# polly, openmp & lldb aren't enabled for every platform
-PROJECTS = clang;clang-tools-extra;libcxx;libcxxabi;compiler-rt;lld;debuginfo-tests
+# polly & lldb aren't enabled for every platform
+PROJECTS = clang;clang-tools-extra;lld;debuginfo-tests
+# openmp & libunwind aren't enabled for every platform
+RUNTIMES = compiler-rt;libcxx;libcxxabi
 
 TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
@@ -40,17 +42,24 @@ CXXFLAGS_EXTRA =
 CFLAGS_EXTRA =
 CONFIGURE_EXTRA =
 CMAKE_EXTRA = -DPYTHON_EXECUTABLE=/usr/bin/python3
-CMAKE_LIBCXX_EXTRA =
+STAGE1_CMAKE_EXTRA =
+# prepend bootstrap prefix to CMAKE_EXTRA vars
+BOOTSTRAP_CMAKE_EXTRA = $(foreach extra,$(CMAKE_EXTRA), $(subst -D,-DBOOTSTRAP_,$(extra)))
 
-BASE_PATH	:= $(CURDIR)
-LIBCXX_EXCEPTIONS :=ON
+BASE_PATH := $(CURDIR)
+STAGE1_BIN_DIR := $(BASE_PATH)/$(TARGET_BUILD)/bin
+STAGE1_LIB_DIR := $(BASE_PATH)/$(TARGET_BUILD)/lib
+STAGE2_BIN_DIR := $(BASE_PATH)/$(TARGET_BUILD_STAGE2)/bin
+STAGE2_LIB_DIR := $(BASE_PATH)/$(TARGET_BUILD_STAGE2)/lib
 
+LIBCXX_EXCEPTIONS := ON
 ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
 	LIBCXX_EXCEPTIONS :=OFF
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),i386 armel mips mipsel powerpc powerpcspe riscv64))
-CMAKE_EXTRA += -DLIBOMP_LIBFLAGS="-latomic" -DCMAKE_SHARED_LINKER_FLAGS="-latomic"
+CMAKE_EXTRA += -DCMAKE_SHARED_LINKER_FLAGS="-latomic"
+STAGE1_CMAKE_EXTRA += -DCMAKE_SHARED_LINKER_FLAGS="-latomic"
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),sparc sparc64))
@@ -83,6 +92,7 @@ ifneq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
 	Z3_FLAG = -DLLVM_ENABLE_Z3_SOLVER=ON
 endif
 endif
+CMAKE_EXTRA += $(Z3_FLAG)
 
 # Change the default CPU for s390x
 ZARCH=z196
@@ -101,23 +111,22 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   # 3.8 fails to build, disable the compiler_rt builtins
   # See http://lists.llvm.org/pipermail/llvm-dev/2016-May/099761.html
   CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
-  # Check for ancient libstdc++ fails due to atomics usage
-  CMAKE_LIBCXX_EXTRA += -DLLVM_COMPILER_CHECKED=ON
+  STAGE1_CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
   # Prevent clang from getting a > v4t default
   # See bug #868779
-  CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabi
+  STAGE1_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabi
 endif
 
 
 ifneq (,$(findstring $(DEB_HOST_ARCH),armhf))
 # avoid an issue with openmp on armhf
-  CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=armv7l-unknown-linux-gnueabihf
+  STAGE1_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=armv7l-unknown-linux-gnueabihf
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
 # avoid an issue with search path on mips64el
 # https://bugs.llvm.org/show_bug.cgi?id=41204
-  CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=mips64el-linux-gnuabi64
+  STAGE1_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=mips64el-linux-gnuabi64
 endif
 
 
@@ -142,23 +151,11 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	LIBCLC_TARGETS_TO_BUILD := $(LIBCLC_TARGETS_TO_BUILD)";spirv-mesa3d-;spirv64-mesa3d-"
 endif
 
-# Disabled:
-#  Host compiler does not support '-fuse-ld=lld'
-# USE_LLD_ARCHS := amd64
-# ifneq (,$(filter $(DEB_HOST_ARCH),$(USE_LLD_ARCHS)))
-# 	CMAKE_EXTRA += -DLLVM_ENABLE_LLD=ON
-# endif
-
 BINUTILS_GOLD_ARCHS := amd64 arm64 armhf i386 ppc64 ppc64el x32 s390x hurd-i386 kfreebsd-amd64 kfreebsd-i386
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.23.1-1~exp3 ; echo $$?),0)
 ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
-# -fused-ld=gold enables the gold linker (but is not supported by all archs / distro)
-	LDFLAGS_EXTRA += -fuse-ld=gold
-#--no-keep-files-mapped --no-map-whole-files
-	CXXFLAGS_EXTRA += -fuse-ld=gold
-	CFLAGS_EXTRA += -fuse-ld=gold
-#-Wl,--no-keep-files-mapped -Wl,--no-map-whole-files
-	CMAKE_EXTRA += -DLLVM_BINUTILS_INCDIR=/usr/include/
+	STAGE1_CMAKE_EXTRA += -DLLVM_USE_LINKER=gold
+	STAGE1_CMAKE_EXTRA += -DLLVM_BINUTILS_INCDIR=/usr/include/
 endif
 endif
 
@@ -175,11 +172,12 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 endif
 
 # Enable for bootstrap
-LDFLAGS_EXTRA            += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option -Wl,--build-id
-CXXFLAGS_EXTRA           += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
-BOOTSTRAP_CXXFLAGS_EXTRA  = $(CXXFLAGS_EXTRA) # Nothing for now. Keeping in case we need it
-CFLAGS_EXTRA             += -fPIC -Wno-unused-command-line-argument -Wno-unknown-warning-option
-BOOTSTRAP_CFLAGS_EXTRA    = $(CFLAGS_EXTRA) # Nothing for now. Keeping in case we need it
+CFLAGS_EXTRA             += -Wno-unused-command-line-argument
+CXXFLAGS_EXTRA           += -Wno-unused-command-line-argument
+LDFLAGS_EXTRA            += -Wno-unused-command-line-argument -Wl,--build-id
+BOOTSTRAP_CFLAGS_EXTRA    = $(CFLAGS_EXTRA)
+BOOTSTRAP_CXXFLAGS_EXTRA  = $(CXXFLAGS_EXTRA)
+BOOTSTRAP_LDFLAGS_EXTRA   =
 
 # Enable polly (or not)
 POLLY_ENABLE=yes
@@ -189,22 +187,28 @@ else
   PROJECTS+=;polly
 endif
 
-# Enable openmp (or not)
-OPENMP_ENABLE=yes
-ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel powerpc powerpcspe sparc64 s390x x32))
-  OPENMP_ENABLE=no
-else
-  PROJECTS+=;openmp
-endif
-
 # Enable libunwind (or not)
 LIBUNWIND_ENABLE=yes
 ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel mipsel hurd-i386 powerpc sparc sparc64 x32))
   LIBUNWIND_ENABLE=no
 else
-  PROJECTS += ;libunwind
-  CMAKE_LIBCXX_EXTRA += -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
-	-DLIBUNWIND_USE_COMPILER_RT=ON
+  RUNTIMES += ;libunwind
+# this is also added to stage2 via CLANG_BOOTSTRAP_PASSTHROUGH
+  STAGE1_CMAKE_EXTRA += -DLIBCXXABI_USE_LLVM_UNWINDER=ON
+endif
+
+# Enable openmp (or not)
+OPENMP_ENABLE=yes
+ifneq (,$(filter $(DEB_HOST_ARCH), mips mipsel powerpc powerpcspe sparc64 s390x x32))
+  OPENMP_ENABLE=no
+else
+  RUNTIMES+=;openmp
+# this is also added to stage2 via CLANG_BOOTSTRAP_PASSTHROUGH
+  STAGE1_CMAKE_EXTRA += -DLIBOMP_LIBFLAGS="-lm"
+ifeq ($(LIBUNWIND_ENABLE),yes)
+# this is also added to stage2 via CLANG_BOOTSTRAP_PASSTHROUGH
+  STAGE1_CMAKE_EXTRA += -DOPENMP_USE_LLVM_UNWINDER=ON
+endif
 endif
 
 RUN_TEST=yes
@@ -233,7 +237,8 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # no need to run tests in this case
 	RUN_TEST=no
 	CONFIGURE_EXTRA += --enable-assertions
-	CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
+# will also be applied to stage2 via CLANG_BOOTSTRAP_PASSTHROUGH
+	STAGE1_CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
 endif
 
 ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
@@ -246,7 +251,8 @@ ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
 	PRE_PROCESS_CONF=
 	COVERITY_ENABLE=1
 	CONFIGURE_EXTRA += --enable-assertions
-	CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
+# will also be applied to stage2 via CLANG_BOOTSTRAP_PASSTHROUGH
+	STAGE1_CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
 # no need to run tests in this case
 	RUN_TEST=no
 else
@@ -270,7 +276,7 @@ LLD_ENABLE=yes
 
 ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 # only for linux
-	CMAKE_EXTRA += -DLLVM_USE_PERF=yes -DLLVM_ENABLE_LIBPFM=ON
+	CMAKE_EXTRA += -DLLVM_USE_PERF=ON -DLLVM_ENABLE_LIBPFM=ON
 endif
 
 # Only enable it for archs supporting gold
@@ -321,12 +327,15 @@ endif
 
 GENERATOR=Ninja
 
+# enables cmake build targets like stage2-[target_name]
+ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-sanitizer;llvm-config;test-suite
+
 %:
 	dh $@ $(DH_OPTIONS)
 
 # For some reasons, some spaces are added, removing them
 PROJECTS_LIST := $(shell echo "$(PROJECTS)"|sed -e "s| ||g")
-#RUNTIMES_LIST := $(shell echo "$(RUNTIMES)"|sed -e "s| ||g")
+RUNTIMES_LIST := $(shell echo "$(RUNTIMES)"|sed -e "s| ||g")
 
 preconfigure:
 
@@ -343,7 +352,7 @@ preconfigure:
 	@echo "DISTRO=$(DISTRO)"
 	@echo "GCC_VERSION=$(GCC_VERSION)"
 	@echo "PROJECTS=$(PROJECTS_LIST)"
-#	@echo "RUNTIMES=$(RUNTIMES_LIST)"
+	@echo "RUNTIMES=$(RUNTIMES_LIST)"
 	@echo "LLVM_VERSION=$(LLVM_VERSION)"
 	@echo "LLVM_VERSION_FULL=$(LLVM_VERSION_FULL)"
 	@echo "LLVM_VERSION_SNAPSHOT=$(LLVM_VERSION_SNAPSHOT)"
@@ -414,6 +423,14 @@ override_dh_auto_configure: preconfigure
 			--xml-option append_arg:"replace/llvm::AlignOf<NextTy>::Alignment/(llvm::AlignOf<NextTy>::Alignment)"; \
 	fi)
 
+# Fails with No target "unwind_static"
+#    -DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
+#    -DLIBCXXABI_STATICALLY_LINK_UNWINDER_IN_SHARED_LIBRARY=OFF \
+#    -DLIBCXXABI_STATICALLY_LINK_UNWINDER_IN_STATIC_LIBRARY=ON \
+#-    to libc++ when libunwind is built
+#-    Matches what is done on brew:
+#-    https://bit.ly/3kDNpC9
+
 	echo "Running tests: $(RUN_TEST)"
 	echo "Using cmake: $(CMAKE_BIN)"; \
 	CFLAGS="$(CFLAGS_EXTRA)" \
@@ -421,49 +438,92 @@ override_dh_auto_configure: preconfigure
 	LDFLAGS="$(LDFLAGS_EXTRA)" \
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH $(PRE_PROCESS_CONF) $(CMAKE_BIN) -S llvm/ -B $(TARGET_BUILD) \
 	-G $(GENERATOR) \
-	-DLLVM_ENABLE_PROJECTS="$(PROJECTS_LIST)" \
-	-DCMAKE_SUPPRESS_REGENERATION=ON \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
-	-DCMAKE_VERBOSE_MAKEFILE=ON \
-	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
-	-DCMAKE_CXX_FLAGS_RELWITHDEBINFO="$(opt_flags)" \
-	-DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-	-DLLVM_LINK_LLVM_DYLIB=ON \
-	-DLLVM_INSTALL_UTILS=ON \
-	-DLLVM_VERSION_SUFFIX= \
-	-DLLVM_ENABLE_SPHINX=ON \
-	-DSPHINX_WARNINGS_AS_ERRORS=OFF \
-	-DLLVM_ENABLE_RTTI=ON \
-	-DLLVM_ENABLE_FFI=ON \
-	-DLLVM_ENABLE_DUMP=ON \
-	-DLIBCLANG_LIBRARY_VERSION=$(SONAME_EXT) \
-	-DCLANG_LINK_CLANG_DYLIB=ON \
+	-DCMAKE_SUPPRESS_REGENERATION=ON \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DPACKAGE_VENDOR=$(VENDOR) \
 	-DENABLE_LINKER_BUILD_ID=ON \
-	-DCOMPILER_RT_USE_LIBCXX=NO \
-	-DLIBUNWIND_USE_COMPILER_RT=ON \
-	$(Z3_FLAG) \
-	$(CMAKE_EXTRA) \
-	-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="AVR" \
+	-DLLVM_TARGETS_TO_BUILD=Native \
+	-DLLVM_ENABLE_PROJECTS="$(PROJECTS_LIST)" \
+	-DLLVM_ENABLE_RUNTIMES="$(RUNTIMES_LIST)" \
+	-DLLVM_ENABLE_PIC=ON \
+	-DLLVM_ENABLE_RTTI=ON \
+	-DLVVM_ENABLE_ZLIB=OFF \
+	-DLLVM_BUILD_DOCS=OFF \
+	-DLLVM_INCLUDE_GO_TESTS=OFF \
 	-DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
-	-DCLANG_VENDOR=$(VENDOR) \
-	-DCLANG_ENABLE_BOOTSTRAP=ON \
+	-DCLANG_PLUGIN_SUPPORT=OFF \
 	-DCLANG_BUILD_EXAMPLES=OFF \
-	-DLLVM_POLLY_LINK_INTO_TOOLS=ON \
-	-DBOOTSTRAP_CMAKE_CXX_FLAGS='$(BOOTSTRAP_CXXFLAGS_EXTRA)' \
-	-DBOOTSTRAP_CMAKE_C_FLAGS='$(BOOTSTRAP_CFLAGS_EXTRA)' \
-	-DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_VERBOSE_MAKEFILE;CMAKE_BUILD_TYPE;CMAKE_CXX_FLAGS_RELWITHDEBINFO;LLVM_LINK_LLVM_DYLIB;LLVM_INSTALL_UTILS;LLVM_VERSION_SUFFIX;LLVM_ENABLE_SPHINX;SPHINX_WARNINGS_AS_ERRORS;LLVM_BUILD_LLVM_DYLIB;LLVM_ENABLE_RTTI;LLVM_ENABLE_FFI;LIBCLANG_LIBRARY_VERSION;ENABLE_LINKER_BUILD_ID;POLLY_BUNDLED_JSONCPP;LLVM_EXPERIMENTAL_TARGETS_TO_BUILD;LLVM_USE_PERF;LLVM_ENABLE_ASSERTIONS;LLVM_BINUTILS_INCDIR;LLVM_HOST_TRIPLE;LLVM_COMPILER_CHECKED;COMPILER_RT_BUILD_BUILTINS;LIBOMP_LIBFLAGS;CMAKE_SHARED_LINKER_FLAGS;PYTHON_EXECUTABLE;LLVM_ENABLE_Z3_SOLVER;LLVM_POLLY_LINK_INTO_TOOLS;CLANG_VENDOR;LIBUNWIND_USE_COMPILER_RT"; \
+	-DCLANG_DEFAULT_LINKER=ld \
+	-DCLANG_DEFAULT_CXX_STDLIB=libstdc++ \
+	-DCLANG_DEFAULT_RTLIB=libgcc \
+	-DCOMPILER_RT_BUILD_XRAY=OFF \
+	-DCOMPILER_RT_INCLUDE_TESTS=OFF \
+	-DCOMPILER_RT_USE_LIBCXX=NO \
+	-DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
+	-DLIBUNWIND_ENABLE_SHARED=ON \
+	-DLIBUNWIND_USE_COMPILER_RT=ON \
+	-DLIBUNWIND_INSTALL_LIBRARY=OFF \
+	-DLIBCXXABI_ENABLE_SHARED=ON \
+	-DLIBCXXABI_USE_COMPILER_RT=ON \
+	-DLIBCXXABI_INSTALL_LIBRARY=OFF \
+	-DLIBCXX_ENABLE_SHARED=ON \
+	-DLIBCXX_USE_COMPILER_RT=ON \
+	-DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
+	-DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON \
+	-DLIBCXX_STATICALLY_LINK_ABI_IN_SHARED_LIBRARY=OFF \
+	-DLIBCXX_INSTALL_LIBRARY=OFF \
+	-DOPENMP_ENABLE_LIBOMP_PROFILING=OFF \
+	-DOPENMP_ENABLE_LIBOMPTARGET_PROFILING=OFF \
+	-DLIBOMP_ENABLE_RTTI=OFF \
+	-DLIBOMP_OMPT_SUPPORT=OFF \
+	$(STAGE1_CMAKE_EXTRA) \
+	-DBUILTINS_CMAKE_ARGS="-DCMAKE_SYSTEM_NAME=Linux;-DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF" \
+	-DRUNTIMES_CMAKE_ARGS="-DCMAKE_SYSTEM_NAME=Linux;-DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF" \
+	-DCLANG_ENABLE_BOOTSTRAP=ON \
+	-DCLANG_BOOTSTRAP_TARGETS="$(ENABLED_STAGE2_CMAKE_BUILD_TARGETS)" \
+	-DBOOTSTRAP_CMAKE_BUILD_TYPE=RelWithDebInfo \
+	-DBOOTSTRAP_CMAKE_C_FLAGS_RELWITHDEBINFO="$(opt_flags)" \
+	-DBOOTSTRAP_CMAKE_CXX_FLAGS_RELWITHDEBINFO="$(opt_flags)" \
+	-DBOOTSTRAP_CMAKE_CXX_FLAGS="$(BOOTSTRAP_CXXFLAGS_EXTRA)" \
+	-DBOOTSTRAP_CMAKE_C_FLAGS="$(BOOTSTRAP_CFLAGS_EXTRA)" \
+	-DBOOTSTRAP_CMAKE_SHARED_LINKER_FLAGS="$(BOOTSTRAP_LDFLAGS_EXTRA)" \
+	-DBOOTSTRAP_CMAKE_MODULE_LINKER_FLAGS="$(BOOTSTRAP_LDFLAGS_EXTRA)" \
+	-DBOOTSTRAP_CMAKE_EXE_LINKER_FLAGS="$(BOOTSTRAP_LDFLAGS_EXTRA)" \
+	-DBOOTSTRAP_LLVM_ENABLE_FFI=ON \
+	-DBOOTSTRAP_LLVM_ENABLE_DUMP=ON \
+	-DBOOTSTRAP_LLVM_ENABLE_LIBPFM=ON \
+	-DBOOTSTRAP_LLVM_ENABLE_SPHINX=ON \
+	-DBOOTSTRAP_SPHINX_WARNINGS_AS_ERRORS=OFF \
+	-DBOOTSTRAP_LLVM_USE_RELATIVE_PATHS_IN_FILES=ON \
+	-DBOOTSTRAP_LLVM_INSTALL_UTILS=ON \
+	-DBOOTSTRAP_LLVM_VERSION_SUFFIX= \
+	-DBOOTSTRAP_LLVM_POLLY_LINK_INTO_TOOLS=ON \
+	-DBOOTSTRAP_LLVM_EXPERIMENTAL_TARGETS_TO_BUILD="AVR" \
+	-DBOOTSTRAP_LLVM_LINK_LLVM_DYLIB=ON \
+	-DBOOTSTRAP_CLANG_LINK_CLANG_DYLIB=ON \
+	-DBOOTSTRAP_LIBCLANG_LIBRARY_VERSION=$(SONAME_EXT) \
+	-DBOOTSTRAP_LIBCXXABI_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
+	-DBOOTSTRAP_LIBCXX_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
+	-DBOOTSTRAP_LIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
+	$(BOOTSTRAP_CMAKE_EXTRA) \
+	-DBOOTSTRAP_BUILTINS_CMAKE_ARGS="-DCMAKE_SYSTEM_NAME=Linux;-DCMAKE_BUILD_TYPE=RelWithDebInfo;-DCMAKE_C_FLAGS_RELWITHDEBINFO=$(opt_flags);-DCMAKE_CXX_FLAGS_RELWITHDEBINFO=$(opt_flags);-DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF" \
+	-DBOOTSTRAP_RUNTIMES_CMAKE_ARGS="-DCMAKE_CXX_FLAGS=$(BOOTSTRAP_CXXFLAGS_EXTRA);-DCMAKE_EXE_LINKER_FLAGS=$(BOOTSTRAP_LDFLAGS_EXTRA) -L$(STAGE1_LIB_DIR);-DCMAKE_SHARED_LINKER_FLAGS=$(BOOTSTRAP_LDFLAGS_EXTRA) -L$(STAGE1_LIB_DIR);-DCMAKE_MODULE_LINKER_FLAGS=$(BOOTSTRAP_LDFLAGS_EXTRA) -L$(STAGE1_LIB_DIR);-DCMAKE_SYSTEM_NAME=Linux;-DCMAKE_BUILD_TYPE=RelWithDebInfo;-DCMAKE_C_FLAGS_RELWITHDEBINFO=$(opt_flags);-DCMAKE_CXX_FLAGS_RELWITHDEBINFO=$(opt_flags);-DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF" \
+	-DCLANG_BOOTSTRAP_PASSTHROUGH="CMAKE_INSTALL_PREFIX;CMAKE_SUPPRESS_REGENERATION;ENABLE_LINKER_BUILD_ID;LLVM_HOST_TRIPLE;LLVM_ENABLE_PIC;LLVM_ENABLE_RTTI;LLVM_ENABLE_ASSERTIONS;LLVM_INCLUDE_GO_TESTS;LLVM_BINUTILS_INCDIR;LLVM_USE_LINKER;CLANG_DEFAULT_LINKER;CLANG_DEFAULT_CXX_STDLIB;CLANG_DEFAULT_RTLIB;COMPILER_RT_USE_LIBCXX;COMPILER_RT_USE_BUILTINS_LIBRARY;COMPILER_RT_INCLUDE_TESTS;LIBUNWIND_ENABLE_SHARED;LIBCXXABI_ENABLE_SHARED;LIBCXXABI_USE_COMPILER_RT;LIBCXXABI_USE_LLVM_UNWINDER;LIBCXX_USE_COMPILER_RT;LIBCXX_ENABLE_SHARED;LIBCXX_ENABLE_STATIC_ABI_LIBRARY;LIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY;LIBCXX_STATICALLY_LINK_ABI_IN_SHARED_LIBRARY;OPENMP_USE_LLVM_UNWINDER;LIBOMP_LIBFLAGS;LIBOMP_ENABLE_RTTI;PYTHON_EXECUTABLE"
 	FOUND_VERSION=`grep LLVM_VERSION_STRING build-llvm/include/llvm/Config/llvm-config.h|cut -d\" -f2`; \
 	if ! echo "$(LLVM_VERSION_FULL)"|grep "$$FOUND_VERSION"; then \
 		echo "mistmatch of version. Found: $$FOUND_VERSION / Expected: $(LLVM_VERSION_FULL)"; \
 		exit 1; \
 	fi
 
-
 # ninja
 VERBOSE=-v
 
 debian-full-build:
-	$(PRE_PROCESS) ninja $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) stage2
+	echo "Using cmake: $(CMAKE_BIN)"
+#	linker hack so stage2 can link against stage1 libs at runtime
+	LD_LIBRARY_PATH=$(STAGE1_LIB_DIR):$$LD_LIBRARY_PATH \
+	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) $(NJOBS) --target stage2
 
 # Check the stage 2 build worked
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \
@@ -474,8 +534,6 @@ debian-full-build:
 		echo "libclang-$(LLVM_VERSION).so.1 depends on libclang-cpp. Should not be the case"; \
 		exit 2; \
 	fi
-#	$(PRE_PROCESS) make $(NJOBS) -C $(TARGET_BUILD) $(VERBOSE) CFLAGS="$(CFLAGS_EXTRA)" CXXFLAGS="$(CXXFLAGS_EXTRA)"  LDFLAGS="$(LDFLAGS_EXTRA)" REQUIRES_RTTI=1 DEBUGMAKE=1 runtimes
-
 	touch $@
 
 debian-libfuzzer-build:
@@ -484,104 +542,33 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 	CFLAGS=`dpkg-buildflags --get CFLAGS`; \
 	CFLAGS="$$CFLAGS `dpkg-buildflags --get CPPFLAGS`"; \
 	echo $$CFLAGS; \
-	$(BASE_PATH)/$(TARGET_BUILD_STAGE2)/bin/clang++ -c $$CFLAGS -std=c++11 $(BASE_PATH)/compiler-rt/lib/fuzzer/*.cpp -IFuzzer; \
+	$(STAGE2_BIN_DIR)/clang++ -c $$CFLAGS -std=c++11 $(BASE_PATH)/compiler-rt/lib/fuzzer/*.cpp -IFuzzer; \
 	ar ruv libFuzzer.a Fuzzer*.o
 endif
 	touch $@
 
-# The various options to build libc++ and libc++abi
-
-LIBCXX_CMAKE_OPTIONS := \
-	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
-	-DLLVM_CONFIG_PATH=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-config \
-	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
-	-DCMAKE_CXX_COMPILER=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/clang++ \
-	-DCMAKE_C_COMPILER=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/clang \
-	-DCMAKE_CXX_FLAGS="$(LIBCXXFLAGS)" \
-	-DCMAKE_EXE_LINKER_FLAGS="" \
-	-DCMAKE_SHARED_LINKER_FLAGS="" \
-	-DCMAKE_MODULE_LINKER_FLAGS="" \
-	-DCMAKE_AR=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-ar \
-	-DCMAKE_RANLIB=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-ranlib \
-	-DLLVM_EXTERNAL_LIT=$(BASE_PATH)/llvm/utils/lit/lit.py \
-	-DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
-	$(CMAKE_EXTRA)
-
-debian-libcxxabi-build:
-# Builds libcxxabi
-	echo "Using cmake: $(CMAKE_BIN)"; \
-	cd libcxxabi && \
-	CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)" \
-	$(PRE_PROCESS_CONF) $(CMAKE_BIN) \
-	-S . -B build \
-	-G $(GENERATOR) \
-	$(LIBCXX_CMAKE_OPTIONS) \
-	-DLIBCXXABI_LIBCXX_PATH=$(BASE_PATH)/libcxx \
-	-DLIBCXXABI_LIBCXX_LIBRARY_PATH=$(BASE_PATH)/libcxx/build/lib \
-	-DLIBCXXABI_LIBCXX_INCLUDES=$(BASE_PATH)/libcxx/include \
-	-DLIBCXXABI_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
-	-DLIBCXXABI_USE_COMPILER_RT=ON \
-	-DLLVM_ENABLE_RTTI=ON \
-	$(CMAKE_LIBCXX_EXTRA) &&  \
-	$(PRE_PROCESS_CONF) ninja -C build/ $(VERBOSE)
-	touch $@
-
-# Fails with    $<TARGET_LINKER_FILE:unwind_static>
-#  No target "unwind_static"
-# on 12. Will test with 13
-# -DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
-#    -DLIBCXXABI_STATICALLY_LINK_UNWINDER_IN_SHARED_LIBRARY=OFF \
-#    -DLIBCXXABI_STATICALLY_LINK_UNWINDER_IN_STATIC_LIBRARY=ON \
-N
-#-    to libc++ when libunwind is built
-#-    Matches what is done on brew:
-#-    https://bit.ly/3kDNpC9
-
-debian-libcxx-build:
-# Builds libcxx
-	echo "Using cmake: $(CMAKE_BIN)"; \
-	cd libcxx && \
-	$(PRE_PROCESS_CONF) $(CMAKE_BIN) \
-	CXXFLAGS="$(CXXFLAGS_EXTRA)" LDFLAGS="$(LDFLAGS_EXTRA)" \
-	-S . -B build \
-	-G $(GENERATOR) \
-	$(LIBCXX_CMAKE_OPTIONS) \
-	-DLIBCXX_CXX_ABI=libcxxabi \
-	-DLIBCXX_CXX_ABI_INCLUDE_PATHS=$(BASE_PATH)/libcxxabi/include \
-	-DLIBCXX_CXX_ABI_LIBRARY_PATH=$(BASE_PATH)/libcxxabi/build/lib \
-	-DLIBCXX_ENABLE_EXCEPTIONS=$(LIBCXX_EXCEPTIONS) \
-	-DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
-	-DLIBCXX_USE_COMPILER_RT=ON \
-	-DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
-	-DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON \
-	-DLIBCXX_STATICALLY_LINK_ABI_IN_SHARED_LIBRARY=OFF \
-	$(CMAKE_LIBCXX_EXTRA) && \
-	$(PRE_PROCESS_CONF) ninja -C build/ $(VERBOSE)
-	touch $@
-
-
 debian-libclc-build:
 # Builds libclc
-
 	mkdir -p libclc/build
-
-	CMAKE_BIN=cmake; \
-	if test -f /tmp/cmake/bin/cmake; then \
-		CMAKE_BIN=/tmp/cmake/bin/cmake; \
-	fi; \
-	echo "Using cmake: $$CMAKE_BIN"; \
+	echo "Using cmake: $(CMAKE_BIN)"
 	cd libclc/build && \
-	$$CMAKE_BIN ../ \
+	$(CMAKE_BIN) ../ \
 	-G $(GENERATOR) \
+	-DCMAKE_C_COMPILER=$(STAGE2_BIN_DIR)/clang \
+	-DCMAKE_CXX_COMPILER=$(STAGE2_BIN_DIR)/clang++ \
+	-DCMAKE_CXX_FLAGS="$(BOOTSTRAP_CXXFLAGS_EXTRA)" \
+	-DCMAKE_SHARED_LINKER_FLAGS="$(BOOTSTRAP_LDFLAGS_EXTRA) -L$(STAGE2_LIB_DIR)" \
+	-DCMAKE_MODULE_LINKER_FLAGS="$(BOOTSTRAP_LDFLAGS_EXTRA) -L$(STAGE2_LIB_DIR)" \
+	-DCMAKE_EXE_LINKER_FLAGS="$(BOOTSTRAP_LDFLAGS_EXTRA) -L$(STAGE2_LIB_DIR)" \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DCMAKE_INSTALL_DATADIR=lib \
 	-DCMAKE_INSTALL_INCLUDEDIR=include \
-	-DLLVM_CONFIG=$(CURDIR)/$(TARGET_BUILD_STAGE2)/bin/llvm-config \
+	-DLLVM_CONFIG=$(STAGE2_BIN_DIR)/llvm-config \
 	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
-	ninja $(VERBOSE)
+	ninja $(NJOBS) $(VERBOSE)
 	touch $@
 
-override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libcxxabi-build debian-libcxx-build debian-libclc-build
+override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build
 
 override_dh_prep: build_doc
 	dh_prep
@@ -655,26 +642,21 @@ override_dh_auto_install:
 
 	# Only run on executable, not script
 	chrpath -d `find $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary'|cut -d: -f1`
-	chrpath -d libcxxabi/build/lib/libc++abi.so.1.0
-	chrpath -d libcxx/build/lib/libc++.so.1.0
 
 	: # libclang
-	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT) libclang-$(LLVM_VERSION).so; \
+	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && rm -f libclang.so.$(SONAME_EXT); \
 	ln -s libclang-$(LLVM_VERSION).so.$(SONAME_EXT) libclang.so.$(SONAME_EXT)
-
-	: # libomp
-	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && rm -f libomp.so; \
-	ln -s libomp.so.$(SONAME_OPENMP) libomp.so
 
 	if test "$(LIBUNWIND_ENABLE)" = yes; then \
 		mkdir -p debian/tmp/usr/include/libunwind; \
 		cp -R libunwind/include/* debian/tmp/usr/include/libunwind/; \
 	fi
 
+	: # libomp
 	if test "$(OPENMP_ENABLE)" = yes; then \
-		mkdir -p debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp; \
-		cp -f openmp/runtime/exports/common*/include/* debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/include/openmp; \
-		cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib && cp libomp.so.$(SONAME_OPENMP) libomp-$(LLVM_VERSION).so.$(SONAME_OPENMP); \
+		cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib; \
+		ln -s libomp.so.$(SONAME_OPENMP) libomp.so; \
+		cp libomp.so.$(SONAME_OPENMP) libomp-$(LLVM_VERSION).so.$(SONAME_OPENMP); \
 	fi
 
 # Remove artifact (where compiler-rt is built)
@@ -714,8 +696,6 @@ endif
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
-	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libcxxabi/build install
-	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libcxx/build install
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libclc/build install
 
 # Rename binaries
@@ -769,8 +749,8 @@ endif
 # Manage the polly files. Sometimes, we build them. Sometimes not.
 	if test "$(POLLY_ENABLE)" = yes; then \
 		mkdir -p $(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/ $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly/; \
-		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libpolly* \
-		$(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
+		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPolly* \
+		$(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
 		rm -rf $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly; \
 		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/include/polly/ \
 		$(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/; \
@@ -911,10 +891,10 @@ endif
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-sanitizer || true
 
 # Libcxx
-	ninja $(VERBOSE) -C libcxx/build check-libcxx || true
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxx || true
 
 # Libcxxabi
-	ninja $(VERBOSE) -C libcxxabi/build check-libcxxabi || true
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxxabi || true
 
 # Libclc
 	ninja $(VERBOSE) -C libclc/build test || true

@@ -1412,8 +1412,9 @@ echo "Testing all other sanitizers ..."
 echo "int main() { return 1; }" > foo.c
 # fails to run on i386 with the following error:
 #clang: error: unsupported option '-fsanitize=efficiency-working-set' for target 'i686-pc-linux-gnu'
-clang-$VERSION -fsanitize=efficiency-working-set -o foo foo.c || true
-./foo &> /dev/null || true
+# seems like esan was removed from clang: https://github.com/llvm/llvm-project/commit/885b790f89b6068ec4caad8eaa51aa8098327059
+#clang-$VERSION -fsanitize=efficiency-working-set -o foo foo.c || true
+#./foo &> /dev/null || true
 
 cat > "$TEMPDIR/test.c" <<EOF
 #include <stdlib.h>

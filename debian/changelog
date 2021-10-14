@@ -1,3 +1,26 @@
+llvm-toolchain-12 (1:12.0.1-11) UNRELEASED; urgency=medium
+
+  * evolve llvm build configuration in rules to leverage the two stage build
+    with runtimes support whereby the resulting stage2 (final) compiler is used
+    to build the stage2 (final) runtimes as part of a single monolithic build
+  * the stage2 runtimes build now includes compiler-rt, libcxx and libcxxabi as
+    well as libunwind and openmp where supported. Additionally, legacy
+    corresponding standalone build targets are removed from the rules file
+  * patch openmp build to include required runtimes as dependencies to build
+    targets so they are built first when included as part of a runtimes build
+    since openmp can depend on them
+  * patch libclc build to set rpath for prepare_builtins build utility to find
+    correct stage2 libs at runtime when executed as part of a build
+  * patch libcxx build so that if libatomic is found, only link it if libgcc is
+    the rtlib
+  * patch compiler-rt build to suppress xray and testing warns when not enabled
+  * patch llvm linker detection to account for vendor being prepended to lld
+    version string
+  * remove several existing patches incorporating workarounds no longer required
+    by the modified build configuration
+
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Wed, 06 Oct 2021 01:25:08 -0700
+
 llvm-toolchain-12 (1:12.0.1-10) UNRELEASED; urgency=medium
 
   * If parallel is not set in DEB_BUILD_OPTIONS, use nproc
