@@ -1261,7 +1261,7 @@ int main(int argc, const char *argv[]) {
 
 " > foo.cc
 clang-$VERSION -O2 -Rpass=inline foo.cc -c &> foo.log
-if ! grep -q -E "(inlined into main with|cost=always)" foo.log; then
+if ! grep -q -E "(inlined into|cost=always)" foo.log; then
     echo "-Rpass fails"
     cat foo.log
     exit 1
