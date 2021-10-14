@@ -1,6 +1,7 @@
 llvm-toolchain-snapshot (1:14~++20211002060945+9452ec722ce0-1~exp1) experimental; urgency=medium
 
-  * The triple change has been reverted. Keep it in Debian bring-back-triple-linux.diff
+  * Remove the triple patch. it is causing the library search path to fail.
+    Add a test in debian/qualify-clang.sh to verify we don't regress
   * Fix the "all" build
   * Disable LIBCXX_USE_COMPILER_RT on s390x, armel and x32 as it fails. See bug 52022
   * Adjust the libomp_start_tool visibility on armhf

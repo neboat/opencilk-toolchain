@@ -1426,6 +1426,26 @@ mkdir cmaketest/foo/
 (cd cmaketest/foo && cmake .. > /dev/null)
 rm -rf cmaketest
 
+# Make sure the triple change doesn't break the world
+# https://reviews.llvm.org/D107799#3027607
+if dpkg -l|grep -q zlib1g-dev; then
+    rm -rf cmaketest && mkdir cmaketest
+    cat > cmaketest/CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 3.0)
+project(test)
+find_package(ZLIB)
+EOF
+    mkdir cmaketest/foo/
+    cd cmaketest/foo &&  CC=clang-$VERSION CXX=clang++-$VERSION cmake .. &> foo.log
+    if grep "Could NOT find ZLIB" foo.log; then
+        echo "clang hasn't been able to find zlib dev even if it is on the system"
+        echo "https://reviews.llvm.org/D107799#3027607"
+        cat foo.log
+        exit 1
+    fi
+    cd -
+    rm -rf cmaketest
+fi
 
 # Test case for bug #994827
 rm -rf cmaketest && mkdir cmaketest
