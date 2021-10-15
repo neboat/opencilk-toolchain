@@ -19,7 +19,6 @@ llvm-toolchain-snapshot (1:14~++20210926041028+6063e6b499c7-1~exp1) experimental
 
   * experimental New snapshot release
   * Bring back the libc++/libc++abi options
-  * Fix the libc++/libc++abi symlink issues after their moves in the triple directory
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 26 Sep 2021 16:14:44 +0200
 
