@@ -1,3 +1,9 @@
+llvm-toolchain-13 (1:13.0.0-6) unstable; urgency=medium
+
+  * Remove omp-device-info from LLVMExports.cmake (Closes: #996551)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 15 Oct 2021 10:45:30 +0200
+
 llvm-toolchain-13 (1:13.0.0-5) unstable; urgency=medium
 
   *  Restrict the dependency on libunwind-13-dev from Package: libc++-13-dev
