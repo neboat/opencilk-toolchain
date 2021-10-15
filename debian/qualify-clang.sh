@@ -904,7 +904,7 @@ if test ! -f /usr/lib/llvm-$VERSION/include/c++/v1/vector; then
     exit -1;
 fi
 
-if test ! -f /usr/lib/llvm-$VERSION/lib/*/libc++abi.so; then
+if test ! -f /usr/lib/llvm-$VERSION/lib/libc++abi.so; then
     echo "Install libc++abi-$VERSION-dev";
     exit -1;
 fi
@@ -1176,7 +1176,7 @@ int main(int, char**) {
   return -2;
 }
 '> foo.cpp
-clang++-$VERSION foo.cpp /usr/lib/llvm-$VERSION/lib/*/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl
+clang++-$VERSION foo.cpp /usr/lib/llvm-$VERSION/lib/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl
 ./a.out||true
 clang++-$VERSION foo.cpp -unwindlib=libunwind -rtlib=compiler-rt -I/usr/include/libunwind -ldl
 ./a.out||true
