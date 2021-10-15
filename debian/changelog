@@ -12,7 +12,6 @@ llvm-toolchain-snapshot (1:14~++20211002060945+9452ec722ce0-1~exp1) experimental
     or ffi)
     'Could NOT find Z3:'
   * Add '-DCMAKE_FIND_DEBUG_MODE=true' to help wit debugging
-  * Install usr/lib/llvm-14/lib/lua/5.3/lldb.so in liblldb-14
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 02 Oct 2021 18:15:52 +0200
 
