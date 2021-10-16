@@ -57,18 +57,14 @@ ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
 	LIBCXX_EXCEPTIONS :=OFF
 endif
 
-ifneq (,$(filter $(DEB_HOST_ARCH),i386 armel mips mipsel powerpc powerpcspe riscv64))
-CMAKE_EXTRA += -DCMAKE_SHARED_LINKER_FLAGS="-latomic"
-STAGE1_CMAKE_EXTRA += -DCMAKE_SHARED_LINKER_FLAGS="-latomic"
-endif
-
 ifneq (,$(filter $(DEB_HOST_ARCH),sparc sparc64))
 CMAKE_EXTRA += -DLLVM_PARALLEL_LINK_JOBS=4
 endif
 
-ifneq (,$(filter $(DEB_HOST_ARCH),armel mipsel powerpc riscv64))
+ifneq (,$(filter $(DEB_HOST_ARCH),i386 armel mips mipsel powerpc powerpcspe riscv64))
 # For some reason, in the stage2 build, when clang is used to compile
-# itself. The atomic detection is failing on armel and riscv64. Forcing the inclusion everywhere.
+# itself. The atomic detection is failing on armel and riscv64. Forcing the inclusion
+# everywhere and in all stages
 LDFLAGS_EXTRA += -latomic
 endif
 
