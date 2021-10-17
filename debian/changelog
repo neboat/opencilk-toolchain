@@ -13,6 +13,9 @@ llvm-toolchain-12 (1:12.0.1-11) unstable; urgency=medium
   * reorganize flags and cmake options around stages for the toolchain build
   * set baseline arch to armv5t, remove older 3.8 workaround for armel build
   * update to debian host triple for the armhf build
+  [ Jordan Justen ]
+  * d/rules: Add amdgcn-mesa-mesa3d to libclc build.
+    Closes: #993904, #995069
 =======
   [ Jordan Justen ]
   * d/rules: Add amdgcn-mesa-mesa3d to libclc build.
