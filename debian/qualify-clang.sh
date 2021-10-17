@@ -1049,6 +1049,12 @@ if test ! -f /usr/lib/clc/amdgcn--amdhsa.bc; then
     exit -1;
 fi
 
+if test ! -f /usr/lib/clc/polaris10-amdgcn-mesa-mesa3d.bc; then
+    # Make sure that #993904 and #995069 don't come back
+    echo "/usr/lib/clc/polaris10-amdgcn-mesa-mesa3d.bc doesn't exist"
+    exit 1
+fi
+
 LLVM_CONFIG=llvm-config-$VERSION /usr/lib/llvm-$VERSION/share/libclc/check_external_calls.sh /usr/lib/clc/amdgcn--amdhsa.bc > /dev/null
 
 # libunwind
