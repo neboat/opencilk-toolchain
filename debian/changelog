@@ -148,6 +148,14 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
+llvm-toolchain-13 (1:13.0.0-5) unstable; urgency=medium
+
+  *  Restrict the dependency on libunwind-13-dev from Package: libc++-13-dev
+     on amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
+     (Closes: #996462)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 14 Oct 2021 12:33:15 +0200
+
 llvm-toolchain-13 (1:13.0.0-4) unstable; urgency=medium
 
   * Instead of using llvm-* to install binaries in llvm-X.Y
