@@ -1,4 +1,4 @@
-llvm-toolchain-12 (1:12.0.1-11) UNRELEASED; urgency=medium
+llvm-toolchain-12 (1:12.0.1-11) unstable; urgency=medium
 
   [ Jordan Justen ]
   * d/rules: Add amdgcn-mesa-mesa3d to libclc build.
