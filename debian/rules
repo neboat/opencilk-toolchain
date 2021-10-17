@@ -146,7 +146,7 @@ else
 LLVM_SPIRV_INSTALLED = yes
 endif
 
-LIBCLC_TARGETS_TO_BUILD="amdgcn--;amdgcn--amdhsa;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl"
+LIBCLC_TARGETS_TO_BUILD="amdgcn--;amdgcn--amdhsa;amdgcn-mesa-mesa3d;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl"
 ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	LIBCLC_TARGETS_TO_BUILD := $(LIBCLC_TARGETS_TO_BUILD)";spirv-mesa3d-;spirv64-mesa3d-"
 endif
