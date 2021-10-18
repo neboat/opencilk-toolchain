@@ -559,10 +559,10 @@ Section: libdevel
 Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
 Depends: libomp5-13 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Suggests: libomp-13-doc
-Breaks: libiomp-dev (<< 3.7-1), libomp-dev (<< 44), llvm-13 (<< 1:13.0.0~++20211013044936)
+Breaks: libiomp-dev (<< 3.7-1), libomp-dev (<< 44), llvm-13 (<< 1:13.0.0-4)
 Provides: libomp-x.y-dev
 Conflicts: libomp-x.y-dev
-Replaces: libomp-x.y-dev, llvm-13 (<< 1:13.0.0~++20211013044936)
+Replaces: libomp-x.y-dev, llvm-13 (<< 1:13.0.0-4)
 Description: LLVM OpenMP runtime - dev package
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
