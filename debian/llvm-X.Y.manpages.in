@@ -1,4 +1,4 @@
-docs/_build/man/*
+llvm/docs/_build/man/*
 debian/man/llvm-dwarfdump-@LLVM_VERSION@.1
 debian/man/llvm-mc-@LLVM_VERSION@.1
 debian/man/llvm-objdump-@LLVM_VERSION@.1

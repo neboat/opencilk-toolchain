@@ -3,6 +3,8 @@ llvm-toolchain-13 (1:13.0.0-6) unstable; urgency=medium
   * Remove omp-device-info from LLVMExports.cmake (Closes: #996551)
   * Fix a atomic issue. Thanks to YunQiang Su for the patch
     Partial fix for #995827
+  * Bring back the llvm manpages (Closes: #995684)
+    Were generated at the wrong place
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 15 Oct 2021 10:45:30 +0200
 
