@@ -126,8 +126,7 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
 endif
 
 ifneq (,$(findstring $(DEB_HOST_ARCH),armhf))
-# avoid an issue with openmp on armhf
-  STAGE1_AND_STAGE2_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=armv7l-unknown-linux-gnueabihf
+  STAGE1_AND_STAGE2_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabihf
   STAGE1_AND_STAGE2_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
 endif
 
@@ -136,7 +135,6 @@ ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
 # https://bugs.llvm.org/show_bug.cgi?id=41204
   STAGE1_AND_STAGE2_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=mips64el-linux-gnuabi64
 endif
-
 
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) ge 4.8-20121128-1~ ; echo $$?),0)
 	control_vars = '-Vdep:devlibs=libstdc++-$(GCC_VERSION)-dev, libgcc-$(GCC_VERSION)-dev' \
