@@ -585,7 +585,7 @@ ifeq (${POLLY_ENABLE},yes)
 endif
 
 # Rename manpages
-	d=$(CURDIR)/docs/_build/man/; \
+	d=$(CURDIR)/llvm/docs/_build/man/; \
 	if test -d $$d; then \
 		cd $$d; \
 		for f in *.1; do \
@@ -943,7 +943,7 @@ override_dh_gencontrol:
 
 
 override_dh_auto_clean:
-	rm -rf $(TARGET_BUILD) tools/clang/include/clang/Debian/debian_path.h docs/_build/ clang/docs/_build tools/clang/docs/_html/
+	rm -rf $(TARGET_BUILD) tools/clang/include/clang/Debian/debian_path.h llvm/docs/_build/ clang/docs/_build tools/clang/docs/_html/
 # QA tools
 	rm -rf cov-int/ reports/
 	rm -f `ls debian/*.in|sed -e "s|.in$$||g"`

@@ -44,6 +44,12 @@ if grep "File format not recognized" foo.log; then
     exit 1
 fi
 
+# Test #995684
+if test ! -f /usr/share/man/man1/llc-$VERSION.1.gz; then
+    echo "llvm manpage are missing (using llc as an example)"
+    exit 1
+fi
+
 if test ! -f /usr/bin/scan-build-$VERSION; then
     echo "Install clang-tools-$VERSION"
     exit 1
