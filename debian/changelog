@@ -1,6 +1,9 @@
 llvm-toolchain-13 (1:13.0.1-8) UNRELEASED; urgency=medium
 
-  * New changelog
+  [ Sylvestre Ledru ]
+  * Disable the build of libclc on old Ubuntu (Groovy & focal)
+    as llvm-spir is too old on these version.
+    See bug #52200
 
  -- Jordan Justen <jljusten@debian.org>  Wed, 26 Oct 2022 10:13:59 -0700
 
