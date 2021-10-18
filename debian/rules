@@ -42,6 +42,12 @@ CONFIGURE_EXTRA =
 CFLAGS_EXTRA = -Wno-unused-command-line-argument
 CXXFLAGS_EXTRA = -Wno-unused-command-line-argument
 LDFLAGS_EXTRA = -Wno-unused-command-line-argument -Wl,--build-id
+
+# We use a stage2 build. It means that a first clang is built using gcc,
+# a second clang is built with the first
+# And the various compoments are built using the second clang.
+# See https://llvm.org/docs/AdvancedBuilds.html
+
 # stage 1 toolchain build only
 STAGE1_CFLAGS_EXTRA = $(CFLAGS_EXTRA)
 STAGE1_CXXFLAGS_EXTRA = $(CXXFLAGS_EXTRA)
