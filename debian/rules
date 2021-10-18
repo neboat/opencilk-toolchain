@@ -161,7 +161,12 @@ endif
 ifeq ($(shell which llvm-spirv),)
 LLVM_SPIRV_INSTALLED = no
 else
-LLVM_SPIRV_INSTALLED = yes
+	ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' llvm-spirv) ge 10.0.0 ; echo $$?),0)
+# Too old llvm-spirv version are failing. See #52200
+		LLVM_SPIRV_INSTALLED = yes
+	else
+		LLVM_SPIRV_INSTALLED = no
+	endif
 endif
 
 LIBCLC_TARGETS_TO_BUILD="amdgcn--;amdgcn--amdhsa;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl"
