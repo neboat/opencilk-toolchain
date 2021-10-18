@@ -602,7 +602,7 @@ endif
 	fi
 # the clang doc generation only generates clang manpage
 # When it will do more, we should move that in the loop above
-	cd $(CURDIR)/clang/docs/_build/man/; mv clang.1 clang-$(LLVM_VERSION).1
+	cd $(CURDIR)/clang/docs/_build/man/ && mv clang.1 clang-$(LLVM_VERSION).1
 
 # Remove the copy of jquery. See bug #701087
 	for d in $(TARGET_BUILD_STAGE2)/docs/html/_static/ $(TARGET_BUILD_STAGE2)/tools/clang/docs/html/_static/ $(TARGET_BUILD_STAGE2)/tools/clang/tools/extra/docs/html/_static/; do \
