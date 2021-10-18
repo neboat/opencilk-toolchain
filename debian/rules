@@ -117,16 +117,13 @@ export CXX=g++-$(GCC_VERSION)
 opt_flags = -O2 -DNDEBUG -g1
 
 ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
-  opt_flags += -marm
-  # 3.8 fails to build, disable the compiler_rt builtins
-  # See http://lists.llvm.org/pipermail/llvm-dev/2016-May/099761.html
-  STAGE1_AND_STAGE2_CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
-  # Prevent clang from getting a > v4t default
-  # See bug #868779
+# https://wiki.debian.org/ArmEabiPort
+# since debian buster (10) armel baseline is 5T
+  STAGE2_CFLAGS_EXTRA += -march=armv5t
+  STAGE2_CXXFLAGS_EXTRA += -march=armv5t
   STAGE1_AND_STAGE2_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabi
   STAGE1_AND_STAGE2_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
 endif
-
 
 ifneq (,$(findstring $(DEB_HOST_ARCH),armhf))
 # avoid an issue with openmp on armhf
