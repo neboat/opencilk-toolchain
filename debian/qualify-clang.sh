@@ -1305,6 +1305,7 @@ if dpkg -l|grep -q clang-$VERSION-dbgsym; then
     if ! grep "main at driver.cpp" foo.log; then
         echo "Could not find the debug info"
         echo "Or the main() of clang isn't in driver.cpp anymore"
+        cat foo.log
         exit -1
     fi
 else
