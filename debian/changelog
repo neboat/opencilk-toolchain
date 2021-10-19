@@ -1,10 +1,19 @@
 llvm-toolchain-12 (1:12.0.1-11) unstable; urgency=medium
 
-  [ Jordan Justen ]
-  * d/rules: Add amdgcn-mesa-mesa3d to libclc build.
-    Closes: #993904, #995069
+  * add missing LIBUNWIND_USE_COMPILER_RT to CLANG_BOOTSTRAP_PASSTHROUGH to link
+    correct compiler-rt lib in stage2
+  * consolidate two conditionals for libatomic that were essentially the same,
+    but the one removed could conflict with BOOTSTRAP_SHARED_LINK_FLAGS
+    elsewhere in the rules file
+  * attempt to fix arm builtins by adding COMPILER_RT_DEFAULT_TARGET_ONLY=ON to
+    armel and armhf toolchain build options to prevent related arches that might
+    not be supported on the build host from being included in the build (like
+    armv6m soft-float on the armhf build host)
+  * reorganize flags and cmake options around stages for the toolchain build
+  * set baseline arch to armv5t, remove older 3.8 workaround for armel build
+  * update to debian host triple for the armhf build
 
- -- Jordan Justen <jljusten@debian.org>  Sun, 17 Oct 2021 01:17:06 -0700
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Sat, 16 Oct 2021 09:07:25 -0700
 
 llvm-toolchain-12 (1:12.0.1-10) unstable; urgency=medium
 
