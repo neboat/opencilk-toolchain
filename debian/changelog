@@ -1,3 +1,12 @@
+llvm-toolchain-12 (1:12.0.1-12) unstable; urgency=medium
+
+  * re-disable building builtins on armel as they still fail
+  * add patch to libcxxabi cmake build for adding builtins to lib flags fixing
+    an issue where builtins were not being linked into libcxxabi when
+    LIBCXXABI_USE_COMPILER_RT=ON
+
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Tue, 19 Oct 2021 01:28:50 -0700
+
 llvm-toolchain-12 (1:12.0.1-11) unstable; urgency=medium
 
   * add missing LIBUNWIND_USE_COMPILER_RT to CLANG_BOOTSTRAP_PASSTHROUGH to link
