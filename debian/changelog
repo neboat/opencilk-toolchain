@@ -1,9 +1,9 @@
 llvm-toolchain-12 (1:12.0.1-12) unstable; urgency=medium
 
-  * re-disable building builtins on armel as they still fail
+  * re-disable building builtins on armel as they still fail (Closes: #996828)
   * add patch to libcxxabi cmake build for adding builtins to lib flags fixing
     an issue where builtins were not being linked into libcxxabi when
-    LIBCXXABI_USE_COMPILER_RT=ON
+    LIBCXXABI_USE_COMPILER_RT=ON (Closes: #996796)
 
  -- Erik Maciejewski <mr.emacski@gmail.com>  Tue, 19 Oct 2021 01:28:50 -0700
 
