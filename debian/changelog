@@ -1,3 +1,9 @@
+llvm-toolchain-13 (1:13.0.0-8) UNRELEASED; urgency=medium
+
+  * Trim trailing whitespace.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 20 Oct 2021 23:08:57 -0000
+
 llvm-toolchain-13 (1:13.0.0-7) unstable; urgency=medium
 
   * Remove omp-device-info from LLVMExports.cmake (Closes: #996551)

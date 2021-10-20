@@ -508,7 +508,7 @@ Description: Next generation, high-performance debugger
  Project, such as the Clang expression parser and LLVM disassembler.
 
 Package: liblldb-13
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32 
+Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha riscv64 s390x sparc64 have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm13 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
