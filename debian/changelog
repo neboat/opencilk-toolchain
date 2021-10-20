@@ -1,16 +1,14 @@
-llvm-toolchain-13 (1:13.0.0-8) UNRELEASED; urgency=medium
-
-  * Trim trailing whitespace.
-  * Update watch file format version to 4.
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 20 Oct 2021 23:08:57 -0000
-
 llvm-toolchain-13 (1:13.0.0-7) unstable; urgency=medium
 
   * Remove omp-device-info from LLVMExports.cmake (Closes: #996551)
     For real this time
   * Fix the link issue (hopefully on all archs) (Closes: #995827)
     customs LDFLAGS were not passed to the stage2
+  * Trim trailing whitespace.
+  * Update watch file format version to 4.
+  * Update to compat 11.
+    oldstable has 12
+    bionic has 11
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 20 Oct 2021 07:36:28 +0200
 
