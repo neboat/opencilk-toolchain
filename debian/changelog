@@ -1,6 +1,7 @@
 llvm-toolchain-13 (1:13.0.0-8) UNRELEASED; urgency=medium
 
   * Trim trailing whitespace.
+  * Update watch file format version to 4.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 20 Oct 2021 23:08:57 -0000
 
