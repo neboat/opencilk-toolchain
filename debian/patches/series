@@ -145,4 +145,4 @@ scan-build-py-fix-default-bin.diff
 libclc-llvm-spirv.diff
 omp-riscv64.patch
 test-disable-lldb-i386.diff
-unbreak-atomic-arm.diff
+unbreak-atomic-mips.diff
