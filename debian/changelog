@@ -2,6 +2,8 @@ llvm-toolchain-13 (1:13.0.0-7) unstable; urgency=medium
 
   * Remove omp-device-info from LLVMExports.cmake (Closes: #996551)
     For real this time
+  * Fix the link issue (hopefully on all archs) (Closes: #995827)
+    customs LDFLAGS were not passed to the stage2
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 20 Oct 2021 07:36:28 +0200
 
