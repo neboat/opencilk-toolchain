@@ -148,3 +148,4 @@ libclc-fix-prepare_builtins-rpath.diff
 libcxx-libatomic-only-with-gcc-rtlib.diff
 libcxxabi-fix-link-builtins.diff
 llvm-runtimes-builtins-build-check.diff
+compilerrt-builtins-arch-fix-armhf.diff
