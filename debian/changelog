@@ -1,3 +1,14 @@
+llvm-toolchain-12 (1:12.0.1-13) unstable; urgency=medium
+
+  * update rules to incorporate relevant arch specific configs from snapshot
+  * patch llvm runtimes cmake build to add a check and only set up and build
+    compiler-rt builtins if they have not been disabled in a runtimes build
+  * patch compiler-rt builtins cmake build to fix default arch detection for
+    armhf by adding the same target triple handling used for compiler-rt libs
+  * remove legacy var for use when libcxx was a standalone build
+
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Wed, 20 Oct 2021 09:04:42 -0700
+
 llvm-toolchain-12 (1:12.0.1-12) unstable; urgency=medium
 
   * re-disable building builtins on armel as they still fail (Closes: #996828)
