@@ -93,9 +93,6 @@ endif
 # Disable also lto
 export DEB_BUILD_MAINT_OPTIONS=reproducible=-fixfilepath optimize=-lto
 
-# Cxx flags for building libcxx and libcxxabi
-LIBCXXFLAGS := $(shell dpkg-buildflags --get CXXFLAGS) $(shell dpkg-buildflags --get CPPFLAGS)
-
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) lt 4.9-20140411-1~ ; echo $$?),0)
 # Too old version of gcc. Force 4.9
 	GCC_VERSION := 4.9
