@@ -147,3 +147,4 @@ openmp-fix-runtimes-build.diff
 libclc-fix-prepare_builtins-rpath.diff
 libcxx-libatomic-only-with-gcc-rtlib.diff
 libcxxabi-fix-link-builtins.diff
+llvm-runtimes-builtins-build-check.diff
