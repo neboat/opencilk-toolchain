@@ -1,3 +1,20 @@
+llvm-toolchain-12 (1:12.0.1-14) unstable; urgency=medium
+
+  * fix build flag inconsistencies (potentially causing build failures) by
+    utilizing dpkg-buildflags for defaults where appropriate and making sure all
+    flags intended for a given stage are also applied to the stage's builtins
+    and runtimes builds
+  * re-enable fixfilepath for use with dpkg-buildflags in debian/rules as it has
+    been supported since clang-10
+  * establish a consistent STAGE_[stage]_ prefix naming scheme for stage
+    variables and replace STAGE1_AND_STAGE2_ prefix with STAGE_ALL_ prefix for
+    better future-proofing in debian/rules
+  * add explicit s390x build options to debian/rules, set
+    LLVM_HOST_TRIPLE=s390x-linux-gnu and COMPILER_RT_DEFAULT_TARGET_ONLY=ON
+    so that builtins are only built for the explicit host arch (Closes: #996802)
+
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Fri, 22 Oct 2021 03:12:48 -0700
+
 llvm-toolchain-12 (1:12.0.1-13) unstable; urgency=medium
 
   * update rules to incorporate relevant arch specific configs from snapshot
