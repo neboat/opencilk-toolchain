@@ -127,12 +127,12 @@ export CXX=g++-$(GCC_VERSION)
 opt_flags = -O2 -DNDEBUG -g1
 
 ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
-# https://wiki.debian.org/ArmEabiPort
-# since debian buster (10) armel baseline is 5T
-  STAGE_2_CFLAGS_EXTRA += -march=armv5t
-  STAGE_2_CXXFLAGS_EXTRA += -march=armv5t
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabi
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
+# align arch profile with debian baseline
+# https://wiki.debian.org/ArmEabiPort
+  CFLAGS_EXTRA += -march=armv5t
+  CXXFLAGS_EXTRA += -march=armv5t
 # disable compiler-rt builtins (not supported for baseline armel arch: armv5t)
 # See http://lists.llvm.org/pipermail/llvm-dev/2016-May/099761.html
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
@@ -144,6 +144,10 @@ endif
 ifneq (,$(findstring $(DEB_HOST_ARCH),armhf))
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabihf
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
+# align arch profile with debian baseline
+# https://wiki.debian.org/ArmHardFloatPort#Minimum_CPU_.26_FPU
+  CFLAGS_EXTRA += -march=armv7-a -mfpu=vfpv3-d16
+  CXXFLAGS_EXTRA += -march=armv7-a -mfpu=vfpv3-d16
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),i386))
