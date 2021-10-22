@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:14~++20211018020854+59a994e8daee-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:14~++20211022081626+13755436bb3d-1~exp1) UNRELEASED; urgency=medium
 
   * Remove the triple patch. it is causing the library search path to fail.
     Add a test in debian/qualify-clang.sh to verify we don't regress
@@ -15,8 +15,9 @@ llvm-toolchain-snapshot (1:14~++20211018020854+59a994e8daee-1~exp1) UNRELEASED; 
   * Disable the build of libclc on old Ubuntu (Groovy & focal)
     as llvm-spir is too old on these version.
     See bug #52200
+  * Adjust the sphinx build as the makefile have been removed
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 18 Oct 2021 16:14:57 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 22 Oct 2021 08:21:06 +0200
 
 llvm-toolchain-snapshot (1:14~++20210926041028+6063e6b499c7-1~exp1) experimental; urgency=medium
 

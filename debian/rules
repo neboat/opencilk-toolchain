@@ -557,8 +557,16 @@ override_dh_prep: build_doc
 	dh_prep
 
 build_doc:
-	cd $(CURDIR)/llvm/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
-	cd $(CURDIR)/clang/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
+	BUILDDIR="_build"; \
+	ALLSPHINXOPTS="-d $$BUILDDIR/doctrees ."; \
+	cd $(CURDIR)/llvm/docs && \
+		sphinx-build -b html $$ALLSPHINXOPTS $$BUILDDIR/html && \
+		sphinx-build -b man $$ALLSPHINXOPTS $$BUILDDIR/man && \
+	cd -; \
+	cd $(CURDIR)/clang/docs && \
+		sphinx-build -b html $$ALLSPHINXOPTS $$BUILDDIR/html && \
+		sphinx-build -b man $$ALLSPHINXOPTS $$BUILDDIR/man
+
 	-(if test "$(OCAML_ENABLE)" = yes; then \
 	ninja -C "$(TARGET_BUILD_STAGE2)" $(VERBOSE) ocaml_doc; \
 	fi)
