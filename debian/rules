@@ -165,6 +165,8 @@ ifneq (,$(filter $(DEB_HOST_ARCH),x32))
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
+  STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=s390x-linux-gnu
+  STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
   LIBCXX_EXCEPTIONS := OFF
 # See https://bugs.llvm.org/show_bug.cgi?id=52022
   LIBCXX_USE_COMPILER_RT := OFF
