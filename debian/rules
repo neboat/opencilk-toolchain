@@ -133,7 +133,7 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   STAGE_2_CXXFLAGS_EXTRA += -march=armv5t
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabi
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
-# 12 still failing to build, disable the compiler_rt builtins
+# disable compiler-rt builtins (not supported for baseline armel arch: armv5t)
 # See http://lists.llvm.org/pipermail/llvm-dev/2016-May/099761.html
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
   COMPILER_RT_USE_BUILTINS_LIBRARY := OFF
@@ -157,17 +157,19 @@ ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=mips64el-linux-gnuabi64
 endif
 
-ifneq (,$(filter $(DEB_HOST_ARCH),x32))
-  STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=x86_64-linux-gnux32
-  STAGE_ALL_CMAKE_EXTRA += -DLLVM_DEFAULT_TARGET_TRIPLE=x86_64-linux-gnux32
-# See https://bugs.llvm.org/show_bug.cgi?id=52022
-  LIBCXX_USE_COMPILER_RT := OFF
-endif
-
 ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=s390x-linux-gnu
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
   LIBCXX_EXCEPTIONS := OFF
+# disable compiler-rt builtins (not supported for s390x)
+  STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
+  COMPILER_RT_USE_BUILTINS_LIBRARY := OFF
+  LIBCXX_USE_COMPILER_RT := OFF
+endif
+
+ifneq (,$(filter $(DEB_HOST_ARCH),x32))
+  STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=x86_64-linux-gnux32
+  STAGE_ALL_CMAKE_EXTRA += -DLLVM_DEFAULT_TARGET_TRIPLE=x86_64-linux-gnux32
 # See https://bugs.llvm.org/show_bug.cgi?id=52022
   LIBCXX_USE_COMPILER_RT := OFF
 endif
