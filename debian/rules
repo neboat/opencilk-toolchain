@@ -40,11 +40,11 @@ include /usr/share/dpkg/architecture.mk
 CONFIGURE_EXTRA =
 
 # set up global build flags (dpkg-buildflags)
-
+# disable lto
+export DEB_BUILD_MAINT_OPTIONS=optimize=-lto
 # these are handled on a per stage / build basis
 export DEB_CFLAGS_MAINT_STRIP=-g -O2
 export DEB_CXXFLAGS_MAINT_STRIP=-g -O2
-
 # additional global build flags
 export DEB_CFLAGS_MAINT_APPEND=-Wno-unused-command-line-argument
 export DEB_CXXFLAGS_MAINT_APPEND=-Wno-unused-command-line-argument
@@ -99,11 +99,6 @@ ifneq (,$(filter $(DEB_HOST_ARCH),i386 armel mips mipsel powerpc powerpcspe risc
 # everywhere and in all stages
 LDFLAGS_EXTRA += -latomic
 endif
-
-# Ensure fixfilepath feature is disabled.  The fixfilepath feature
-# sets a -ffile-prefix-map flag, which is only supported in clang-10.
-# Disable also lto
-export DEB_BUILD_MAINT_OPTIONS=reproducible=-fixfilepath optimize=-lto
 
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) lt 4.9-20140411-1~ ; echo $$?),0)
 # Too old version of gcc. Force 4.9
