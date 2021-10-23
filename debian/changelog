@@ -1,4 +1,4 @@
-llvm-toolchain-13 (1:13.0.0-8) unstable; urgency=medium
+llvm-toolchain-12 (1:12.0.1-15) unstable; urgency=medium
 
   * Disable lldb on mipsel and mips64el as it isn't supported
     See https://reviews.llvm.org/D102872
