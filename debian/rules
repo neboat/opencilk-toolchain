@@ -161,6 +161,11 @@ ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=mips64el-linux-gnuabi64
 endif
 
+ifneq (,$(filter $(DEB_HOST_ARCH),powerpc))
+  STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=powerpc-linux-gnu
+  STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
+endif
+
 ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=s390x-linux-gnu
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
