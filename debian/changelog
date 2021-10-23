@@ -1,3 +1,11 @@
+llvm-toolchain-13 (1:13.0.0-8) unstable; urgency=medium
+
+  * Disable lldb on mipsel and mips64el as it isn't supported
+    See https://reviews.llvm.org/D102872
+    (Closes: #997011)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 23 Oct 2021 10:33:56 +0200
+
 llvm-toolchain-13 (1:13.0.0-7) unstable; urgency=medium
 
   * Remove omp-device-info from LLVMExports.cmake (Closes: #996551)
