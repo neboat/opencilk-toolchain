@@ -14,7 +14,7 @@ Build-Depends: debhelper (>= 9.0), cmake, ninja-build,
     libxml2-dev,
     libjsoncpp-dev, pkg-config,
     lcov, procps, help2man, zlib1g-dev,
-    g++-multilib [amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
+    g++-multilib [amd64 i386 kfreebsd-amd64 mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
     libjs-mathjax, python3-recommonmark,
     doxygen, gfortran,
     ocaml-nox [amd64 arm64 armhf ppc64el riscv64 s390x],
@@ -459,7 +459,7 @@ Description: Modular compiler and toolchain technologies, examples
 # ------------- lld -------------
 
 Package: lld-12
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64
+Architecture: amd64 arm64 armel armhf i386 mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm12 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -469,7 +469,7 @@ Description: LLVM-based linker
  Project.
 
 Package: liblld-12
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64
+Architecture: amd64 arm64 armel armhf i386 mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm12 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
@@ -483,7 +483,7 @@ Description: LLVM-based linker, library
 
 Package: liblld-12-dev
 Section: libdevel
-Architecture: amd64 arm64 armel armhf i386 mips mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64
+Architecture: amd64 arm64 armel armhf i386 mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lld-12 (= ${binary:Version}),
  liblld-12 (= ${binary:Version})
@@ -499,7 +499,7 @@ Description: LLVM-based linker, header files
 # ------------- lldb -------------
 
 Package: lldb-12
-Architecture: amd64 arm64 armel armhf i386 mips ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
+Architecture: amd64 arm64 armel armhf i386 ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha riscv64 sparc64 mipsel mips64el have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm12 (= ${binary:Version}), llvm-12-dev,
  python3-lldb-12
