@@ -137,7 +137,6 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
 # See http://lists.llvm.org/pipermail/llvm-dev/2016-May/099761.html
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
   COMPILER_RT_USE_BUILTINS_LIBRARY := OFF
-# See https://bugs.llvm.org/show_bug.cgi?id=52022
   LIBCXX_USE_COMPILER_RT := OFF
 endif
 
@@ -179,8 +178,6 @@ endif
 ifneq (,$(filter $(DEB_HOST_ARCH),x32))
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=x86_64-linux-gnux32
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_DEFAULT_TARGET_TRIPLE=x86_64-linux-gnux32
-# See https://bugs.llvm.org/show_bug.cgi?id=52022
-  LIBCXX_USE_COMPILER_RT := OFF
 endif
 
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) ge 4.8-20121128-1~ ; echo $$?),0)
@@ -236,6 +233,9 @@ endif
 LIBUNWIND_ENABLE=yes
 ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel mipsel hurd-i386 powerpc sparc sparc64 x32))
   LIBUNWIND_ENABLE=no
+# do not use compiler-rt builtins for libcxx (libcxxabi) when libunwind is
+# disabled since the gnu implementation in libgcc_s will then be required
+  LIBCXX_USE_COMPILER_RT := OFF
 else
   RUNTIMES += ;libunwind
   STAGE_ALL_CMAKE_EXTRA += -DLIBCXXABI_USE_LLVM_UNWINDER=ON
