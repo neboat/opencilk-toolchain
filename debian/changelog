@@ -4,6 +4,17 @@ llvm-toolchain-12 (1:12.0.1-15) unstable; urgency=medium
     See https://reviews.llvm.org/D102872
     (Closes: #997011)
 
+  [ Erik Maciejewski ]
+  * disable compiler-rt builtins for unsupported arch s390x in debian/rules
+  * set arm toolchain arch profiles explicitly to debian baselines in
+    debian/rules as the target host triples alone are ambiguous and compiler
+    defaults and debian baselines may not align
+  * add arch specific config for powerpc to debian/rules and set host target
+    triple and compiler-rt config to force correct arch profile for builtins
+  * set LIBCXX_USE_COMPILER_RT to OFF in debian/rules to disable builtins when
+    libunwind is not enabled since the unwind implementation with gnu builtins
+    will then be required
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 23 Oct 2021 10:33:56 +0200
 
 llvm-toolchain-12 (1:12.0.1-14) unstable; urgency=medium
