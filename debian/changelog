@@ -1,3 +1,18 @@
+llvm-toolchain-12 (1:12.0.1-16) unstable; urgency=medium
+
+  * use make variables populated by /usr/share/dpkg/buildflags.mk and remove
+    _EXTRA suffix from STAGE_1_ and STAGE_2_ flag vars to improve clarity and
+    readability for the multi-stage setup in debian/rules
+  * remove some redundant cmake options (options with the same value as their
+    default) from, and move PYTHON_EXECUTABLE cmake option to, the cmake
+    configure command in debian/rules
+  * re-disable fixfilepath in dpkg-buildflags in favor of using the more llvm
+    aware implementation provided by the llvm-project by setting
+    LLVM_USE_RELATIVE_PATHS_IN_FILES=ON in both stages of the toolchain
+    build in debian/rules
+
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Tue, 26 Oct 2021 12:14:18 -0700
+
 llvm-toolchain-12 (1:12.0.1-15) unstable; urgency=medium
 
   * Disable lldb on mipsel and mips64el as it isn't supported
