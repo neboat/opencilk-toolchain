@@ -8,6 +8,7 @@ Restrictions: allow-stderr
 Tests: integration-test-suite-test
 Depends: @, cmake, make, g++, libstdc++-10-dev
 Restrictions: allow-stderr
+Architecture: amd64 arm64
 
 Tests: cmake-test
 Depends: gcc, build-essential, cmake, llvm-12-dev

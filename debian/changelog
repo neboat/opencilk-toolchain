@@ -1,5 +1,6 @@
 llvm-toolchain-12 (1:12.0.1-16) unstable; urgency=medium
 
+  [ Erik Maciejewski ]
   * use make variables populated by /usr/share/dpkg/buildflags.mk and remove
     _EXTRA suffix from STAGE_1_ and STAGE_2_ flag vars to improve clarity and
     readability for the multi-stage setup in debian/rules
@@ -11,7 +12,10 @@ llvm-toolchain-12 (1:12.0.1-16) unstable; urgency=medium
     LLVM_USE_RELATIVE_PATHS_IN_FILES=ON in both stages of the toolchain
     build in debian/rules
 
- -- Erik Maciejewski <mr.emacski@gmail.com>  Tue, 26 Oct 2021 12:14:18 -0700
+  [ Sylvestre Ledru ]
+  * autopkgtest/integration-test-suite-test: restrict to arm64/amd64 for now
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 28 Oct 2021 16:45:49 +0200
 
 llvm-toolchain-12 (1:12.0.1-15) unstable; urgency=medium
 
