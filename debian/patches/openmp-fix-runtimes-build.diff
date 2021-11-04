@@ -5,15 +5,15 @@ Index: llvm-toolchain-12_12.0.1/llvm/runtimes/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-12_12.0.1.orig/llvm/runtimes/CMakeLists.txt
 +++ llvm-toolchain-12_12.0.1/llvm/runtimes/CMakeLists.txt
-@@ -236,6 +236,7 @@ function(runtime_default_target)
-                                       -DLLVM_DEFAULT_TARGET_TRIPLE=${TARGET_TRIPLE}
+@@ -233,6 +233,7 @@ function(runtime_default_target)
                                        -DLLVM_ENABLE_PROJECTS_USED=${LLVM_ENABLE_PROJECTS_USED}
                                        -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=${LLVM_ENABLE_PER_TARGET_RUNTIME_DIR_default}
+                                       -DLLVM_BUILD_TOOLS=${LLVM_BUILD_TOOLS}
 +                                      -DCMAKE_SYSTEM_PROCESSOR=${CMAKE_SYSTEM_PROCESSOR}
-                                       -DCMAKE_C_COMPILER_TARGET=${TARGET_TRIPLE}
-                                       -DCMAKE_CXX_COMPILER_TARGET=${TARGET_TRIPLE}
-                                       -DCMAKE_ASM_COMPILER_TARGET=${TARGET_TRIPLE}
-@@ -440,7 +441,7 @@ if(runtimes)
+                                       -DCMAKE_C_COMPILER_WORKS=ON
+                                       -DCMAKE_CXX_COMPILER_WORKS=ON
+                                       -DCMAKE_ASM_COMPILER_WORKS=ON
+@@ -448,7 +449,7 @@ if(runtimes)
      # build directory cannot find the C++ headers in certain configurations.
      # I need to build a mechanism for runtime projects to provide CMake code
      # that executes at LLVM configuration time to handle this case.
@@ -55,22 +55,6 @@ Index: llvm-toolchain-12_12.0.1/openmp/CMakeLists.txt
  # Build host runtime library, after LIBOMPTARGET variables are set since they are needed
  # to enable time profiling support in the OpenMP runtime.
  add_subdirectory(runtime)
-Index: llvm-toolchain-12_12.0.1/openmp/cmake/HandleOpenMPOptions.cmake
-===================================================================
---- llvm-toolchain-12_12.0.1.orig/openmp/cmake/HandleOpenMPOptions.cmake
-+++ llvm-toolchain-12_12.0.1/openmp/cmake/HandleOpenMPOptions.cmake
-@@ -29,7 +29,8 @@ append_if(OPENMP_HAVE_WNO_EXTRA_FLAG "-W
- append_if(OPENMP_HAVE_WNO_PEDANTIC_FLAG "-Wno-pedantic" CMAKE_C_FLAGS CMAKE_CXX_FLAGS)
- append_if(OPENMP_HAVE_WNO_MAYBE_UNINITIALIZED_FLAG "-Wno-maybe-uninitialized" CMAKE_C_FLAGS CMAKE_CXX_FLAGS)
- 
--append_if(OPENMP_HAVE_STD_GNUPP14_FLAG "-std=gnu++14" CMAKE_CXX_FLAGS)
--if (NOT OPENMP_HAVE_STD_GNUPP14_FLAG)
--  append_if(OPENMP_HAVE_STD_CPP14_FLAG "-std=c++14" CMAKE_CXX_FLAGS)
-+# prefer c++14 over gnu++14?
-+append_if(OPENMP_HAVE_STD_CPP14_FLAG "-std=c++14" CMAKE_CXX_FLAGS)
-+if (NOT OPENMP_HAVE_STD_CPP14_FLAG)
-+  append_if(OPENMP_HAVE_STD_GNUPP14_FLAG "-std=gnu++14" CMAKE_CXX_FLAGS)
- endif()
 Index: llvm-toolchain-12_12.0.1/openmp/libomptarget/plugins/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-12_12.0.1.orig/openmp/libomptarget/plugins/CMakeLists.txt
@@ -101,9 +85,9 @@ Index: llvm-toolchain-12_12.0.1/openmp/libomptarget/src/CMakeLists.txt
 ===================================================================
 --- llvm-toolchain-12_12.0.1.orig/openmp/libomptarget/src/CMakeLists.txt
 +++ llvm-toolchain-12_12.0.1/openmp/libomptarget/src/CMakeLists.txt
-@@ -48,6 +48,8 @@ set_target_properties(omptarget
-   PROPERTIES
-   LIBRARY_OUTPUT_DIRECTORY ${LIBOMPTARGET_LIBRARY_DIR})
+@@ -38,6 +38,8 @@ target_link_libraries(omptarget PRIVATE
+   ${CMAKE_DL_LIBS}
+   "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exports")
  
 +add_runtimes_build_depends_if_needed(omptarget)
 +
