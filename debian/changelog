@@ -1,3 +1,12 @@
+llvm-toolchain-13 (1:13.0.0-10) unstable; urgency=medium
+
+  * patch compiler-rt build to add option to disable scudo standalone allocator
+    as it is not always supported by all debian baseline arch profiles
+  * add COMPILER_RT_BUILD_SCUDO_STANDALONE=OFF to armel build in debian/rules
+    since the baseline armv5t arch profile is not supported
+
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Fri, 05 Nov 2021 16:38:43 -0700
+
 llvm-toolchain-13 (1:13.0.0-9) unstable; urgency=medium
 
   * Merge migration to 2stage runtimes build 12 => 13

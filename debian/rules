@@ -141,6 +141,8 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
   COMPILER_RT_USE_BUILTINS_LIBRARY := OFF
   LIBCXX_USE_COMPILER_RT := OFF
+# disable scudo standalone (not supported for baseline armel arch: armv5t)
+  STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_BUILD_SCUDO_STANDALONE=OFF
 endif
 
 ifneq (,$(findstring $(DEB_HOST_ARCH),armhf))
