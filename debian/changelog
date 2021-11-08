@@ -1,6 +1,7 @@
 llvm-toolchain-13 (1:13.0.0-9) unstable; urgency=medium
 
   * Upload to unstable (all green on exp)
+  * Fix an autopkgtest test (Closes: #997902)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 08 Nov 2021 14:09:25 +0100
 
