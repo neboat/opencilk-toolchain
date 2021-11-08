@@ -1,4 +1,4 @@
-llvm-toolchain-13 (1:13.0.0-10) unstable; urgency=medium
+llvm-toolchain-13 (1:13.0.0-9~exp2) experimental; urgency=medium
 
   * patch compiler-rt build to add option to disable scudo standalone allocator
     as it is not always supported by all debian baseline arch profiles
