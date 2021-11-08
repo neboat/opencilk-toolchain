@@ -1,3 +1,9 @@
+llvm-toolchain-13 (1:13.0.0-9) unstable; urgency=medium
+
+  * Upload to unstable (all green on exp)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 08 Nov 2021 14:09:25 +0100
+
 llvm-toolchain-13 (1:13.0.0-9~exp2) experimental; urgency=medium
 
   * patch compiler-rt build to add option to disable scudo standalone allocator
