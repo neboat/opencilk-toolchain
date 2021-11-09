@@ -47,6 +47,7 @@ llvm-toolchain-snapshot (1:14~++20211113102219+b5ff187b7b51-1~exp1) experimental
     - __kmpc_atomic_val_8_cas_cpt
     - omp_aligned_alloc
     - omp_aligned_calloc
+  * Install llvm-tli-checker in llvm-X.Y
 
   [ Erik Maciejewski ]
   * Merge migration to 2stage runtimes build 13 => 14
