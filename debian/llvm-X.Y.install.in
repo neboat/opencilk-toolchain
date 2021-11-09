@@ -67,6 +67,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/llvm-ranlib
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-readelf
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-strip
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-windres
+usr/lib/llvm-@LLVM_VERSION@/bin/llvm-tli-checker
 usr/lib/llvm-@LLVM_VERSION@/bin/opt*
 usr/lib/llvm-@LLVM_VERSION@/bin/bugpoint*
 usr/lib/llvm-@LLVM_VERSION@/bin/llc*
@@ -140,6 +141,7 @@ usr/bin/llvm-tblgen-@LLVM_VERSION@
 usr/bin/llvm-undname-@LLVM_VERSION@
 usr/bin/llvm-windres-@LLVM_VERSION@
 usr/bin/llvm-xray-@LLVM_VERSION@
+usr/bin/llvm-tli-checker-@LLVM_VERSION@
 usr/bin/opt*
 usr/bin/bugpoint*
 usr/bin/llc*
