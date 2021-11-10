@@ -600,7 +600,7 @@ llvm-toolchain-12 (1:12.0.0~++rc4-1) unstable; urgency=medium
 
 llvm-toolchain-12 (1:12.0.0~++rc3-4) unstable; urgency=medium
 
-  * dont' fail fsanitize=thread on i386, not supported
+  * Don't fail fsanitize=thread on i386, not supported
   * Don't hard fail on z3 failures with "set -e" at the begin, if z3 support is not available we do fail and exit testsuite without checking the log
   * Don't force gcc-11 anymore on riscv64, gcc-10 has the fixes now
 
