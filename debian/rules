@@ -195,7 +195,7 @@ else
 	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev'
 endif
 
-ifeq ($(shell which llvm-spirv),)
+ifeq ($(shell command -v llvm-spirv),)
 LLVM_SPIRV_INSTALLED = no
 else
 LLVM_SPIRV_INSTALLED = yes
