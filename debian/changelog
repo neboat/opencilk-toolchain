@@ -152,6 +152,61 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
+llvm-toolchain-13 (1:13.0.0-9) unstable; urgency=medium
+
+  * Upload to unstable (all green on exp)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 08 Nov 2021 14:09:25 +0100
+
+llvm-toolchain-13 (1:13.0.0-9~exp2) experimental; urgency=medium
+
+  * patch compiler-rt build to add option to disable scudo standalone allocator
+    as it is not always supported by all debian baseline arch profiles
+  * add COMPILER_RT_BUILD_SCUDO_STANDALONE=OFF to armel build in debian/rules
+    since the baseline armv5t arch profile is not supported
+
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Fri, 05 Nov 2021 16:38:43 -0700
+
+llvm-toolchain-13 (1:13.0.0-9~exp1) experimental; urgency=medium
+
+  * Merge migration to 2stage runtimes build 12 => 13
+  * Adjust openmp runtime quilt patches from branch 12 for changes in upstream
+    (llvmorg-13.0.0) sources
+
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Wed, 03 Nov 2021 20:03:56 -0700
+
+llvm-toolchain-13 (1:13.0.0-8) unstable; urgency=medium
+
+  * Disable lldb on mipsel and mips64el as it isn't supported
+    See https://reviews.llvm.org/D102872
+    (Closes: #997011)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 23 Oct 2021 10:33:56 +0200
+
+llvm-toolchain-13 (1:13.0.0-7) unstable; urgency=medium
+
+  * Remove omp-device-info from LLVMExports.cmake (Closes: #996551)
+    For real this time
+  * Fix the link issue (hopefully on all archs) (Closes: #995827)
+    customs LDFLAGS were not passed to the stage2
+  * Trim trailing whitespace.
+  * Update watch file format version to 4.
+  * Update to compat 11.
+    oldstable has 12
+    bionic has 11
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 20 Oct 2021 07:36:28 +0200
+
+llvm-toolchain-13 (1:13.0.0-6) unstable; urgency=medium
+
+  * Remove omp-device-info from LLVMExports.cmake (Closes: #996551)
+  * Fix a atomic issue. Thanks to YunQiang Su for the patch
+    Partial fix for #995827
+  * Bring back the llvm manpages (Closes: #995684)
+    Were generated at the wrong place
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 15 Oct 2021 10:45:30 +0200
+
 llvm-toolchain-13 (1:13.0.0-5) unstable; urgency=medium
 
   *  Restrict the dependency on libunwind-13-dev from Package: libc++-13-dev
@@ -349,8 +404,129 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
 
-llvm-toolchain-12 (1:12.0.1-10) UNRELEASED; urgency=medium
+llvm-toolchain-12 (1:12.0.1-16) unstable; urgency=medium
 
+  [ Erik Maciejewski ]
+  * use make variables populated by /usr/share/dpkg/buildflags.mk and remove
+    _EXTRA suffix from STAGE_1_ and STAGE_2_ flag vars to improve clarity and
+    readability for the multi-stage setup in debian/rules
+  * remove some redundant cmake options (options with the same value as their
+    default) from, and move PYTHON_EXECUTABLE cmake option to, the cmake
+    configure command in debian/rules
+  * re-disable fixfilepath in dpkg-buildflags in favor of using the more llvm
+    aware implementation provided by the llvm-project by setting
+    LLVM_USE_RELATIVE_PATHS_IN_FILES=ON in both stages of the toolchain
+    build in debian/rules
+
+  [ Sylvestre Ledru ]
+  * autopkgtest/integration-test-suite-test: restrict to arm64/amd64 for now
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 28 Oct 2021 16:45:49 +0200
+
+llvm-toolchain-12 (1:12.0.1-15) unstable; urgency=medium
+
+  * Disable lldb on mipsel and mips64el as it isn't supported
+    See https://reviews.llvm.org/D102872
+    (Closes: #997011)
+
+  [ Erik Maciejewski ]
+  * disable compiler-rt builtins for unsupported arch s390x in debian/rules
+  * set arm toolchain arch profiles explicitly to debian baselines in
+    debian/rules as the target host triples alone are ambiguous and compiler
+    defaults and debian baselines may not align
+  * add arch specific config for powerpc to debian/rules and set host target
+    triple and compiler-rt config to force correct arch profile for builtins
+  * set LIBCXX_USE_COMPILER_RT to OFF in debian/rules to disable builtins when
+    libunwind is not enabled since the unwind implementation with gnu builtins
+    will then be required
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 23 Oct 2021 10:33:56 +0200
+
+llvm-toolchain-12 (1:12.0.1-14) unstable; urgency=medium
+
+  * fix build flag inconsistencies (potentially causing build failures) by
+    utilizing dpkg-buildflags for defaults where appropriate and making sure all
+    flags intended for a given stage are also applied to the stage's builtins
+    and runtimes builds
+  * re-enable fixfilepath for use with dpkg-buildflags in debian/rules as it has
+    been supported since clang-10
+  * establish a consistent STAGE_[stage]_ prefix naming scheme for stage
+    variables and replace STAGE1_AND_STAGE2_ prefix with STAGE_ALL_ prefix for
+    better future-proofing in debian/rules
+  * modify stage dir var names to use new prefix scheme in debian/rules
+  * add explicit s390x build options to debian/rules, set
+    LLVM_HOST_TRIPLE=s390x-linux-gnu and COMPILER_RT_DEFAULT_TARGET_ONLY=ON
+    so that builtins are only built for the explicit host arch (Closes: #996802)
+
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Fri, 22 Oct 2021 03:12:48 -0700
+
+llvm-toolchain-12 (1:12.0.1-13) unstable; urgency=medium
+
+  * update rules to incorporate relevant arch specific configs from snapshot
+  * patch llvm runtimes cmake build to add a check and only set up and build
+    compiler-rt builtins if they have not been disabled in a runtimes build
+  * patch compiler-rt builtins cmake build to fix default arch detection for
+    armhf by adding the same target triple handling used for compiler-rt libs
+  * remove legacy var for use when libcxx was a standalone build
+
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Wed, 20 Oct 2021 09:04:42 -0700
+
+llvm-toolchain-12 (1:12.0.1-12) unstable; urgency=medium
+
+  * re-disable building builtins on armel as they still fail (Closes: #996828)
+  * add patch to libcxxabi cmake build for adding builtins to lib flags fixing
+    an issue where builtins were not being linked into libcxxabi when
+    LIBCXXABI_USE_COMPILER_RT=ON (Closes: #996796)
+
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Tue, 19 Oct 2021 01:28:50 -0700
+
+llvm-toolchain-12 (1:12.0.1-11) unstable; urgency=medium
+
+  * add missing LIBUNWIND_USE_COMPILER_RT to CLANG_BOOTSTRAP_PASSTHROUGH to link
+    correct compiler-rt lib in stage2
+  * consolidate two conditionals for libatomic that were essentially the same,
+    but the one removed could conflict with BOOTSTRAP_SHARED_LINK_FLAGS
+    elsewhere in the rules file
+  * attempt to fix arm builtins by adding COMPILER_RT_DEFAULT_TARGET_ONLY=ON to
+    armel and armhf toolchain build options to prevent related arches that might
+    not be supported on the build host from being included in the build (like
+    armv6m soft-float on the armhf build host)
+  * reorganize flags and cmake options around stages for the toolchain build
+  * set baseline arch to armv5t, remove older 3.8 workaround for armel build
+  * update to debian host triple for the armhf build
+
+  [ Jordan Justen ]
+  * d/rules: Add amdgcn-mesa-mesa3d to libclc build.
+    Closes: #993904, #995069
+
+  [ Sylvestre Ledru ]
+  * Bring back the llvm manpages (Closes: #995684)
+    Were generated at the wrong place
+
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Sat, 16 Oct 2021 09:07:25 -0700
+
+llvm-toolchain-12 (1:12.0.1-10) unstable; urgency=medium
+
+  * evolve llvm build configuration in rules to leverage the two stage build
+    with runtimes support whereby the resulting stage2 (final) compiler is used
+    to build the stage2 (final) runtimes as part of a single monolithic build
+  * the stage2 runtimes build now includes compiler-rt, libcxx and libcxxabi as
+    well as libunwind and openmp where supported. Additionally, legacy
+    corresponding standalone build targets are removed from the rules file
+  * patch openmp build to include required runtimes as dependencies to build
+    targets so they are built first when included as part of a runtimes build
+    since openmp can depend on them
+  * patch libclc build to set rpath for prepare_builtins build utility to find
+    correct stage2 libs at runtime when executed as part of a build
+  * patch libcxx build so that if libatomic is found, only link it if libgcc is
+    the rtlib
+  * patch compiler-rt build to suppress xray and testing warns when not enabled
+  * patch llvm linker detection to account for vendor being prepended to lld
+    version string
+  * remove several existing patches incorporating workarounds no longer required
+    by the modified build configuration
+
+  [ Sylvestre Ledru ]
   * If parallel is not set in DEB_BUILD_OPTIONS, use nproc
   * Add source-is-missing llvm/test/* / lldb/test/* / lld/test/*
     to the source override
@@ -359,7 +535,7 @@ llvm-toolchain-12 (1:12.0.1-10) UNRELEASED; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * Disable libunwind on sparc, sparc64 and x32
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 02 Oct 2021 10:50:27 +0200
+ -- Erik Maciejewski <mr.emacski@gmail.com>  Wed, 06 Oct 2021 01:25:08 -0700
 
 llvm-toolchain-12 (1:12.0.1-9) unstable; urgency=medium
 
