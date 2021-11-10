@@ -17,6 +17,9 @@ llvm-toolchain-snapshot (1:14~++20211022081626+13755436bb3d-1~exp1) UNRELEASED; 
     See bug #52200
   * Adjust the sphinx build as the makefile have been removed
 
+  [ Erik Maciejewski ]
+  * Merge migration to 2stage runtimes build 13 => 14
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 22 Oct 2021 08:21:06 +0200
 
 llvm-toolchain-snapshot (1:14~++20210926041028+6063e6b499c7-1~exp1) experimental; urgency=medium
