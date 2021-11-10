@@ -504,8 +504,6 @@ Description: Next generation, high-performance debugger
  reusable components which highly leverage existing libraries in the larger LLVM
  Project, such as the Clang expression parser and LLVM disassembler.
 
-Architecture: amd64 arm64 armel armhf i386 ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
-# ia64 hurd powerpc powerpcspe ppc64 alpha riscv64 s390x sparc64 mipsel mips64el have been removed
 Package: liblldb-14
 Architecture: amd64 arm64 armel armhf i386 ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha riscv64 s390x sparc64 mipsel mips64el have been removed
