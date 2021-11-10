@@ -54,7 +54,7 @@ include /usr/share/dpkg/buildflags.mk
 
 # We use a stage2 build. It means that a first clang is built using gcc,
 # a second clang is built with the first
-# And the various compoments are built using the second clang.
+# And the various components are built using the second clang.
 # See https://llvm.org/docs/AdvancedBuilds.html
 
 # collect additional flags for all stages all builds
