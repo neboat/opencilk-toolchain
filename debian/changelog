@@ -1,3 +1,10 @@
+llvm-toolchain-13 (1:13.0.0-10) unstable; urgency=medium
+
+  * Add back -DLLVM_VERSION_SUFFIX=. Useless for 13 but necessary for snapshot
+    Otherwise, it adds "git" to the libs
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 11 Nov 2021 22:45:25 +0100
+
 llvm-toolchain-13 (1:13.0.0-9) unstable; urgency=medium
 
   * Upload to unstable (all green on exp)
