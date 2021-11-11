@@ -17,6 +17,15 @@ llvm-toolchain-snapshot (1:14~++20211022081626+13755436bb3d-1~exp2) UNRELEASED; 
     See bug #52200
   * Adjust the sphinx build as the makefile have been removed
   * Install llvm-tli-checker in llvm-X.Y
+  * Add new symbols to libomp
+    - GOMP_5.0.1
+    - GOMP_alloc
+    - GOMP_free
+    - __kmpc_aligned_alloc
+    - __kmpc_atomic_float10_max
+    - __kmpc_atomic_float10_min
+    - omp_aligned_alloc
+    - omp_aligned_calloc
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 09 Nov 2021 11:36:13 +0100
 
