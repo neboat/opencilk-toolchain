@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 # polly & lldb aren't enabled for every platform
-PROJECTS = clang;clang-tools-extra;lld;debuginfo-tests
+PROJECTS = clang;clang-tools-extra;lld;cross-project-tests
 # openmp & libunwind aren't enabled for every platform
 RUNTIMES = compiler-rt;libcxx;libcxxabi
 
