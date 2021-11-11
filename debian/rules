@@ -54,7 +54,7 @@ include /usr/share/dpkg/buildflags.mk
 
 # We use a stage2 build. It means that a first clang is built using gcc,
 # a second clang is built with the first
-# And the various compoments are built using the second clang.
+# And the various components are built using the second clang.
 # See https://llvm.org/docs/AdvancedBuilds.html
 
 # collect additional flags for all stages all builds
@@ -490,6 +490,7 @@ override_dh_auto_configure: preconfigure
 	$(PRE_PROCESS_CONF) $(CMAKE_BIN) -S llvm/ -B $(TARGET_BUILD) \
 	-G $(GENERATOR) \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
+	-DLLVM_VERSION_SUFFIX= \
 	-DCMAKE_SUPPRESS_REGENERATION=ON \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS="$(STAGE_1_CFLAGS)" \

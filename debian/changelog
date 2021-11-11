@@ -155,9 +155,17 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
+llvm-toolchain-13 (1:13.0.0-10) unstable; urgency=medium
+
+  * Add back -DLLVM_VERSION_SUFFIX=. Useless for 13 but necessary for snapshot
+    Otherwise, it adds "git" to the libs
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 11 Nov 2021 22:45:25 +0100
+
 llvm-toolchain-13 (1:13.0.0-9) unstable; urgency=medium
 
   * Upload to unstable (all green on exp)
+  * Fix an autopkgtest test (Closes: #997902)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 08 Nov 2021 14:09:25 +0100
 
@@ -752,7 +760,7 @@ llvm-toolchain-12 (1:12.0.0~++rc4-1) unstable; urgency=medium
 
 llvm-toolchain-12 (1:12.0.0~++rc3-4) unstable; urgency=medium
 
-  * dont' fail fsanitize=thread on i386, not supported
+  * Don't fail fsanitize=thread on i386, not supported
   * Don't hard fail on z3 failures with "set -e" at the begin, if z3 support is not available we do fail and exit testsuite without checking the log
   * Don't force gcc-11 anymore on riscv64, gcc-10 has the fixes now
 
