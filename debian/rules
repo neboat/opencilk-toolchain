@@ -323,6 +323,7 @@ ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 # Disable LLDB for this arch.
 	LLDB_ENABLE=no
 else
+	STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_LUA=OFF
 	PROJECTS+=;lldb
 endif
 
