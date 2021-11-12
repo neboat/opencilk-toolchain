@@ -20,6 +20,33 @@ llvm-toolchain-snapshot (1:14~++20211111061527+d56b171ee965-1~exp1) UNRELEASED; 
     was created. It was leading to some build failures depending
     on the package installed on the build system.
     Force the deactivation of the lua build when lldb is built.
+  * libomp: add new symbols
+    - GOMP_5.0.1
+    - GOMP_alloc
+    - GOMP_free
+    - __kmpc_aligned_alloc
+    - __kmpc_atomic_bool_1_cas
+    - __kmpc_atomic_bool_1_cas_cpt
+    - __kmpc_atomic_bool_2_cas
+    - __kmpc_atomic_bool_2_cas_cpt
+    - __kmpc_atomic_bool_4_cas
+    - __kmpc_atomic_bool_4_cas_cpt
+    - __kmpc_atomic_bool_8_cas
+    - __kmpc_atomic_bool_8_cas_cpt
+    - __kmpc_atomic_float10_max
+    - __kmpc_atomic_float10_max_cpt
+    - __kmpc_atomic_float10_min
+    - __kmpc_atomic_float10_min_cpt
+    - __kmpc_atomic_val_1_cas
+    - __kmpc_atomic_val_1_cas_cpt
+    - __kmpc_atomic_val_2_cas
+    - __kmpc_atomic_val_2_cas_cpt
+    - __kmpc_atomic_val_4_cas
+    - __kmpc_atomic_val_4_cas_cpt
+    - __kmpc_atomic_val_8_cas
+    - __kmpc_atomic_val_8_cas_cpt
+    - omp_aligned_alloc
+    - omp_aligned_calloc
 
   [ Erik Maciejewski ]
   * Merge migration to 2stage runtimes build 13 => 14
