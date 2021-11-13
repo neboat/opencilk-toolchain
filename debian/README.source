@@ -4,6 +4,13 @@ as possible from upstream.
 However, because of the objectives of Debian, besides paths, some changes are
 made.
 
+The Debian packaging is also used by apt.llvm.org.
+
+From 12.0.1-10 & 13.0.0-9, the build system use the runtimes build system.
+This is now the upstream preferred way to build llvm.
+It means that some projects like libc++ or compiler-rt are built once clang
+is built.
+
 = File names =
 
 * To make sure that most of the llvm-toolchain packages are co-installable,

@@ -44,6 +44,12 @@ if grep "File format not recognized" foo.log; then
     exit 1
 fi
 
+# Test #995684
+if test ! -f /usr/share/man/man1/llc-$VERSION.1.gz; then
+    echo "llvm manpage are missing (using llc as an example)"
+    exit 1
+fi
+
 if test ! -f /usr/bin/scan-build-$VERSION; then
     echo "Install clang-tools-$VERSION"
     exit 1
@@ -1061,6 +1067,12 @@ if test ! -f /usr/lib/clc/amdgcn--amdhsa.bc; then
     exit -1;
 fi
 
+if test ! -f /usr/lib/clc/polaris10-amdgcn-mesa-mesa3d.bc; then
+    # Make sure that #993904 and #995069 don't come back
+    echo "/usr/lib/clc/polaris10-amdgcn-mesa-mesa3d.bc doesn't exist"
+    exit 1
+fi
+
 LLVM_CONFIG=llvm-config-$VERSION /usr/lib/llvm-$VERSION/share/libclc/check_external_calls.sh /usr/lib/clc/amdgcn--amdhsa.bc > /dev/null
 
 # libunwind
@@ -1322,6 +1334,7 @@ if dpkg -l|grep -q clang-$VERSION-dbgsym; then
     if ! grep "main at driver.cpp" foo.log; then
         echo "Could not find the debug info"
         echo "Or the main() of clang isn't in driver.cpp anymore"
+        cat foo.log
         exit -1
     fi
 else
@@ -1471,8 +1484,9 @@ echo "Testing all other sanitizers ..."
 echo "int main() { return 1; }" > foo.c
 # fails to run on i386 with the following error:
 #clang: error: unsupported option '-fsanitize=efficiency-working-set' for target 'i686-pc-linux-gnu'
-clang-$VERSION -fsanitize=efficiency-working-set -o foo foo.c || true
-./foo &> /dev/null || true
+# seems like esan was removed from clang: https://github.com/llvm/llvm-project/commit/885b790f89b6068ec4caad8eaa51aa8098327059
+#clang-$VERSION -fsanitize=efficiency-working-set -o foo foo.c || true
+#./foo &> /dev/null || true
 
 cat > "$TEMPDIR/test.c" <<EOF
 #include <stdlib.h>

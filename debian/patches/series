@@ -27,7 +27,6 @@ do-not-fail-on-unexpected-pass.diff
 disable-display-PASS-UNSUPPORTED-XFAIL.diff
 
 # llvm-config
-fix-llvm-config-obj-src-root.patch
 0001-llvm-cmake-resolve-symlinks-in-LLVMConfig.cmake.patch
 
 # Lib names
@@ -125,9 +124,6 @@ risc/clang-riscv64-multiarch.diff
 D98574.patch
 D98575.patch
 
-# Compiler-rt - workaround
-workaround-bug-42994-use-linker.diff
-
 # bug 939472
 #try-to-unbreak-thinlto.diff
 #D67877-cmake-clang-example.patch
@@ -137,10 +133,19 @@ x86-fuzzer.patch
 python3-shebang.patch
 print-lldb-path.patch
 libcxx-armhf-ftbfs.diff
-lld-use-link-atomic-i386.diff
 lower-python-dep.diff
 scan-build-py-fix-default-bin.diff
 
 libclc-llvm-spirv.diff
 omp-riscv64.patch
 test-disable-lldb-i386.diff
+unbreak-atomic-mips.diff
+llvm-fix-lld-linker-check.diff
+compilerrt-fix-warn-xray-testing.diff
+openmp-fix-runtimes-build.diff
+libclc-fix-prepare_builtins-rpath.diff
+libcxx-libatomic-only-with-gcc-rtlib.diff
+libcxxabi-fix-link-builtins.diff
+llvm-runtimes-builtins-build-check.diff
+compilerrt-builtins-arch-fix-armhf.diff
+compilerrt-build-scudo-standalone-option.diff
