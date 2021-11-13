@@ -302,14 +302,6 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_atomic_32@VERSION 0.20130412
  __kmpc_atomic_4@VERSION 0.20130412
  __kmpc_atomic_8@VERSION 0.20130412
- __kmpc_atomic_bool_1_cas@VERSION 14
- __kmpc_atomic_bool_1_cas_cpt@VERSION 14
- __kmpc_atomic_bool_2_cas@VERSION 14
- __kmpc_atomic_bool_2_cas_cpt@VERSION 14
- __kmpc_atomic_bool_4_cas@VERSION 14
- __kmpc_atomic_bool_4_cas_cpt@VERSION 14
- __kmpc_atomic_bool_8_cas@VERSION 14
- __kmpc_atomic_bool_8_cas_cpt@VERSION 14
  __kmpc_atomic_cmplx10_add@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_cmplx10_add_cpt@VERSION 0.20130412
  __kmpc_atomic_cmplx10_div@VERSION 0.20130412
@@ -688,9 +680,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float10_div_rev@VERSION 0.20130412
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float10_div_rev_fp@VERSION 4.0
  __kmpc_atomic_float10_max@VERSION 14
- __kmpc_atomic_float10_max_cpt@VERSION 14
  __kmpc_atomic_float10_min@VERSION 14
- __kmpc_atomic_float10_min_cpt@VERSION 14
  __kmpc_atomic_float10_mul@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float10_mul_cpt@VERSION 0.20130412
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float10_mul_cpt_fp@VERSION 4.0
@@ -792,14 +782,6 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float8_swp@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float8_wr@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_start@VERSION 0.20130412
- __kmpc_atomic_val_1_cas@VERSION 14
- __kmpc_atomic_val_1_cas_cpt@VERSION 14
- __kmpc_atomic_val_2_cas@VERSION 14
- __kmpc_atomic_val_2_cas_cpt@VERSION 14
- __kmpc_atomic_val_4_cas@VERSION 14
- __kmpc_atomic_val_4_cas_cpt@VERSION 14
- __kmpc_atomic_val_8_cas@VERSION 14
- __kmpc_atomic_val_8_cas_cpt@VERSION 14
  __kmpc_barrier@VERSION 0.20130412
  __kmpc_barrier_master@VERSION 0.20130412
  __kmpc_barrier_master_nowait@VERSION 0.20130412

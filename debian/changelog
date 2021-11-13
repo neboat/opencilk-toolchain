@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:14~++20211113102219+b5ff187b7b51-1~exp2) experimental; urgency=medium
+
+  * Adjust the libomp5 symbols
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 13 Nov 2021 23:09:12 +0100
+
 llvm-toolchain-snapshot (1:14~++20211113102219+b5ff187b7b51-1~exp1) experimental; urgency=medium
 
   * Remove the triple patch. it is causing the library search path to fail.
