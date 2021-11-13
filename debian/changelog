@@ -1,8 +1,9 @@
-llvm-toolchain-snapshot (1:14~++20211113102219+b5ff187b7b51-1~exp2) experimental; urgency=medium
+llvm-toolchain-snapshot (1:14~++20211113111058+6a40854ce507-1~exp1) experimental; urgency=medium
 
+  * experimental New snapshot release
   * Adjust the libomp5 symbols
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 13 Nov 2021 23:09:12 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 13 Nov 2021 23:15:48 +0100
 
 llvm-toolchain-snapshot (1:14~++20211113102219+b5ff187b7b51-1~exp1) experimental; urgency=medium
 
@@ -193,17 +194,9 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
-llvm-toolchain-13 (1:13.0.0-10) unstable; urgency=medium
-
-  * Add back -DLLVM_VERSION_SUFFIX=. Useless for 13 but necessary for snapshot
-    Otherwise, it adds "git" to the libs
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 11 Nov 2021 22:45:25 +0100
-
 llvm-toolchain-13 (1:13.0.0-9) unstable; urgency=medium
 
   * Upload to unstable (all green on exp)
-  * Fix an autopkgtest test (Closes: #997902)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 08 Nov 2021 14:09:25 +0100
 
