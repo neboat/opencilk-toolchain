@@ -811,7 +811,7 @@ endif
 	sed -i 's|.*_IMPORT_CHECK_FILES_FOR_.*/bin/.*)|#&|' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
 
 # Adjust to the existing symlink. See #994827
-	sed -i "s|libclang-$(LLVM_VERSION).so.$(LLVM_VERSION).*\"|libclang-$(LLVM_VERSION).so.1\"|" $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-relwithdebinfo.cmake
+	sed -i "s|libclang-$(LLVM_VERSION).so.$(LLVM_VERSION).*\"|libclang-$(LLVM_VERSION).so.1\"|" $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
 
 # Managed in python*-lldb-X.Y.links.in
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/lldb/_lldb.so
