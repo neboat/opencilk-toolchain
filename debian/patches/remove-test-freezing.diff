@@ -1,11 +1,12 @@
-Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
+Index: llvm-toolchain-snapshot_14~++20211114113341+fbe72e41b99d/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
 ===================================================================
---- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
+--- llvm-toolchain-snapshot_14~++20211114113341+fbe72e41b99d.orig/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
 +++ /dev/null
-@@ -1,33 +0,0 @@
+@@ -1,35 +0,0 @@
 -// RUN: %clangxx -O2 %s -o %t && %run %t 2>&1 | FileCheck %s
 -
 -#include <stdio.h>
+-#include <unistd.h>
 -
 -#if !defined(__GLIBC_PREREQ)
 -#define __GLIBC_PREREQ(a, b) 0
@@ -15,10 +16,11 @@ Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/compiler-rt/test
 -// glbc version 2.16.
 -#if __GLIBC_PREREQ(2, 16)
 -extern "C" long sysconf(int name) {
--  if (name == 158 /*_SC_SIGSTKSZ */) {
--    // Asan calls it during initialization but late enough to succeed.
+-#  ifdef _SC_SIGSTKSZ
+-  // Asan needs this one during initialization but late enough to succeed.
+-  if (name == _SC_SIGSTKSZ)
 -    return 0x10000;
--  }
+-#  endif
 -  fprintf(stderr, "sysconf wrapper called: %d\n", name);
 -  return 0;
 -}
