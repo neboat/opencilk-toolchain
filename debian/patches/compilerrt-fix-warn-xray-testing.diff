@@ -1,9 +1,9 @@
 suppress warnings for xray and testing when not enabled
-Index: llvm-toolchain-12_12.0.1/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
+Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
 ===================================================================
---- llvm-toolchain-12_12.0.1.orig/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
-+++ llvm-toolchain-12_12.0.1/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
-@@ -242,15 +242,15 @@ macro(load_llvm_config)
+--- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
++++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
+@@ -323,15 +323,15 @@ macro(load_llvm_config)
  
      # Detect if we have the LLVMXRay and TestingSupport library installed and
      # available from llvm-config.
@@ -22,7 +22,7 @@ Index: llvm-toolchain-12_12.0.1/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
        string(REGEX REPLACE "[ \t]*[\r\n]+[ \t]*" ";" CONFIG_OUTPUT ${CONFIG_OUTPUT})
        list(GET CONFIG_OUTPUT 0 LDFLAGS)
        list(GET CONFIG_OUTPUT 1 LIBLIST)
-@@ -267,7 +267,7 @@ macro(load_llvm_config)
+@@ -348,7 +348,7 @@ macro(load_llvm_config)
        RESULT_VARIABLE HAD_ERROR
        OUTPUT_VARIABLE CONFIG_OUTPUT
        ERROR_QUIET)

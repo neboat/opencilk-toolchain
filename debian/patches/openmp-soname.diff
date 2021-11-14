@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/openmp/runtime/CMakeLists.txt
+Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/openmp/runtime/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/openmp/runtime/CMakeLists.txt
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/openmp/runtime/CMakeLists.txt
-@@ -341,7 +341,8 @@ else()
+--- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/openmp/runtime/CMakeLists.txt
++++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/openmp/runtime/CMakeLists.txt
+@@ -371,7 +371,8 @@ else()
    set(LIBOMP_INSTALL_KIND ARCHIVE)
  endif()
  

@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_14~++20200423143502+bbb7921da97/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
+Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
 ===================================================================
---- llvm-toolchain-snapshot_14~++20200423143502+bbb7921da97.orig/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
-+++ llvm-toolchain-snapshot_14~++20200423143502+bbb7921da97/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
-@@ -186,10 +186,10 @@ def main():
+--- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
++++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
+@@ -194,10 +194,10 @@ def main():
                        action='store_true', help='allow alpha checkers from '
                                                  'clang-analyzer.')
    parser.add_argument('-clang-tidy-binary', metavar='PATH',

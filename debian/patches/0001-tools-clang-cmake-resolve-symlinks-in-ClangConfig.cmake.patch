@@ -12,11 +12,11 @@ Partially addresses PR37128
  cmake/modules/CMakeLists.txt | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/cmake/modules/CMakeLists.txt
+Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/clang/cmake/modules/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/clang/cmake/modules/CMakeLists.txt
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/cmake/modules/CMakeLists.txt
-@@ -30,10 +30,10 @@ set(CLANG_CONFIG_EXPORTS_FILE)
+--- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/clang/cmake/modules/CMakeLists.txt
++++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/clang/cmake/modules/CMakeLists.txt
+@@ -31,10 +31,10 @@ set(CLANG_CONFIG_LLVM_CMAKE_DIR)
  # Generate ClangConfig.cmake for the install tree.
  set(CLANG_CONFIG_CODE "
  # Compute the installation prefix from this LLVMConfig.cmake file location.

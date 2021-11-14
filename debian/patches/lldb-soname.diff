@@ -2,10 +2,10 @@
  lldb/source/API/CMakeLists.txt |   14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
 
-Index: llvm-toolchain-snapshot_13~++20210610102058+aaaeb4b160fe/lldb/source/API/CMakeLists.txt
+Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/lldb/source/API/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_13~++20210610102058+aaaeb4b160fe.orig/lldb/source/API/CMakeLists.txt
-+++ llvm-toolchain-snapshot_13~++20210610102058+aaaeb4b160fe/lldb/source/API/CMakeLists.txt
+--- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/lldb/source/API/CMakeLists.txt
++++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/lldb/source/API/CMakeLists.txt
 @@ -19,7 +19,12 @@ if(LLDB_ENABLE_LUA)
    set(lldb_lua_wrapper ${lua_bindings_dir}/LLDBWrapLua.cpp)
  endif()
@@ -20,7 +20,7 @@ Index: llvm-toolchain-snapshot_13~++20210610102058+aaaeb4b160fe/lldb/source/API/
    SBAddress.cpp
    SBAttachInfo.cpp
    SBBlock.cpp
-@@ -163,7 +168,7 @@ endif()
+@@ -162,7 +167,7 @@ endif()
  
  set_target_properties(liblldb
    PROPERTIES
@@ -29,7 +29,7 @@ Index: llvm-toolchain-snapshot_13~++20210610102058+aaaeb4b160fe/lldb/source/API/
  )
  
  if (NOT CMAKE_SYSTEM_NAME MATCHES "Windows")
-@@ -182,12 +187,12 @@ if (NOT CMAKE_SYSTEM_NAME MATCHES "Windo
+@@ -181,12 +186,12 @@ if (NOT CMAKE_SYSTEM_NAME MATCHES "Windo
    set_target_properties(liblldb_exports PROPERTIES FOLDER "lldb misc")
  endif()
  

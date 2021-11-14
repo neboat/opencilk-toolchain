@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/lib/Driver/ToolChains/Arch/Mips.cpp
+Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/clang/lib/Driver/ToolChains/Arch/Mips.cpp
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/clang/lib/Driver/ToolChains/Arch/Mips.cpp
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/lib/Driver/ToolChains/Arch/Mips.cpp
-@@ -468,10 +468,10 @@ bool mips::isFP64ADefault(const llvm::Tr
+--- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/clang/lib/Driver/ToolChains/Arch/Mips.cpp
++++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/clang/lib/Driver/ToolChains/Arch/Mips.cpp
+@@ -467,10 +467,10 @@ bool mips::isFP64ADefault(const llvm::Tr
  
  bool mips::isFPXXDefault(const llvm::Triple &Triple, StringRef CPUName,
                           StringRef ABIName, mips::FloatABI FloatABI) {

@@ -12,11 +12,11 @@ Partially addresses PR37128
  cmake/modules/CMakeLists.txt | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/cmake/modules/CMakeLists.txt
+Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/llvm/cmake/modules/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/llvm/cmake/modules/CMakeLists.txt
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/llvm/cmake/modules/CMakeLists.txt
-@@ -88,10 +88,10 @@ file(COPY .
+--- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/llvm/cmake/modules/CMakeLists.txt
++++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/llvm/cmake/modules/CMakeLists.txt
+@@ -101,10 +101,10 @@ file(COPY .
  # Generate LLVMConfig.cmake for the install tree.
  set(LLVM_CONFIG_CODE "
  # Compute the installation prefix from this LLVMConfig.cmake file location.

@@ -1,10 +1,10 @@
 add a check and only set up and build compiler-rt builtins if they have
 not been disabled
-Index: llvm-toolchain-12_12.0.1/llvm/runtimes/CMakeLists.txt
+Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/llvm/runtimes/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-12_12.0.1.orig/llvm/runtimes/CMakeLists.txt
-+++ llvm-toolchain-12_12.0.1/llvm/runtimes/CMakeLists.txt
-@@ -131,7 +131,12 @@ endfunction()
+--- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/llvm/runtimes/CMakeLists.txt
++++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/llvm/runtimes/CMakeLists.txt
+@@ -132,7 +132,12 @@ endfunction()
  # is required because the other runtimes need the builtin libraries present
  # before the just-built compiler can pass the configuration tests.
  get_compiler_rt_path(compiler_rt_path)

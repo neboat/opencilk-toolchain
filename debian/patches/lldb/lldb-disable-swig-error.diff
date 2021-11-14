@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_12~++20200812084744+2ad7e1a301f/lldb/bindings/python/python.swig
+Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/lldb/bindings/python/python.swig
 ===================================================================
---- llvm-toolchain-snapshot_12~++20200812084744+2ad7e1a301f.orig/lldb/bindings/python/python.swig
-+++ llvm-toolchain-snapshot_12~++20200812084744+2ad7e1a301f/lldb/bindings/python/python.swig
-@@ -50,7 +50,7 @@ except ImportError:
+--- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/lldb/bindings/python/python.swig
++++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/lldb/bindings/python/python.swig
+@@ -54,7 +54,7 @@ except ImportError:
  %enddef
  // These versions will not generate working python modules, so error out early.
  #if SWIG_VERSION >= 0x030009 && SWIG_VERSION < 0x030011

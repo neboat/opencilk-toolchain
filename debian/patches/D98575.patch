@@ -1,6 +1,8 @@
---- llvm-toolchain-snapshot-13~++20210129063721+010b176cdefb.orig/compiler-rt/cmake/base-config-ix.cmake
-+++ llvm-toolchain-snapshot-13~++20210129063721+010b176cdefb/compiler-rt/cmake/base-config-ix.cmake
-@@ -189,8 +189,12 @@ macro(test_targets)
+Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/compiler-rt/cmake/base-config-ix.cmake
+===================================================================
+--- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/compiler-rt/cmake/base-config-ix.cmake
++++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/compiler-rt/cmake/base-config-ix.cmake
+@@ -220,8 +220,12 @@ macro(test_targets)
      elseif("${COMPILER_RT_DEFAULT_TARGET_ARCH}" MATCHES "s390x")
        test_target_arch(s390x "" "")
      elseif("${COMPILER_RT_DEFAULT_TARGET_ARCH}" MATCHES "sparc")
