@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
+Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
-@@ -1,29 +0,0 @@
+--- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
++++ /dev/null
+@@ -1,33 +0,0 @@
 -// RUN: %clangxx -O2 %s -o %t && %run %t 2>&1 | FileCheck %s
 -
 -#include <stdio.h>
@@ -15,7 +15,11 @@ Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/compiler-rt/test/
 -// glbc version 2.16.
 -#if __GLIBC_PREREQ(2, 16)
 -extern "C" long sysconf(int name) {
--  fprintf(stderr, "sysconf wrapper called\n");
+-  if (name == 158 /*_SC_SIGSTKSZ */) {
+-    // Asan calls it during initialization but late enough to succeed.
+-    return 0x10000;
+-  }
+-  fprintf(stderr, "sysconf wrapper called: %d\n", name);
 -  return 0;
 -}
 -#endif  // defined(__GLIBC_PREREQ) && __GLIBC_PREREQ(2, 16)
