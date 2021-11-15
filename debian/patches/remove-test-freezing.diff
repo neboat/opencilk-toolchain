@@ -1,41 +1,10 @@
-Index: llvm-toolchain-snapshot_14~++20211114113341+fbe72e41b99d/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
+Index: llvm-toolchain-snapshot_14~++20211115123243+1e77b09538c1/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
 ===================================================================
---- llvm-toolchain-snapshot_14~++20211114113341+fbe72e41b99d.orig/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
-+++ /dev/null
-@@ -1,36 +0,0 @@
--// RUN: %clangxx -O2 %s -o %t && %run %t 2>&1 | FileCheck %s
--
--#include <stdio.h>
--#include <unistd.h>
--
--#if !defined(__GLIBC_PREREQ)
--#define __GLIBC_PREREQ(a, b) 0
--#endif
--
--// getauxval() used instead of sysconf() in GetPageSize() is defined starting
--// glbc version 2.16.
--// Does not work with 2.31 and above at it calls sysconf for SIGSTKSZ.
--#if __GLIBC_PREREQ(2, 16) && !__GLIBC_PREREQ(2, 31)
--extern "C" long sysconf(int name) {
--#  ifdef _SC_SIGSTKSZ
--  // Asan needs this one during initialization but late enough to succeed.
--  if (name == _SC_SIGSTKSZ)
--    return 0x10000;
--#  endif
--  fprintf(stderr, "sysconf wrapper called: %d\n", name);
--  return 0;
--}
--#endif
--
--int main() {
--  // All we need to check is that the sysconf() interceptor defined above was
--  // not called. Should it get called, it will crash right there, any
--  // instrumented code executed before sanitizer init is finished will crash
--  // accessing non-initialized sanitizer internals. Even if it will not crash
--  // in some configuration, it should never be called anyway.
--  fprintf(stderr, "Passed\n");
--  // CHECK-NOT: sysconf wrapper called
--  // CHECK: Passed
--  // CHECK-NOT: sysconf wrapper called
--  return 0;
--}
+--- llvm-toolchain-snapshot_14~++20211115123243+1e77b09538c1.orig/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
++++ llvm-toolchain-snapshot_14~++20211115123243+1e77b09538c1/compiler-rt/test/sanitizer_common/TestCases/Linux/sysconf_interceptor_bypass_test.cpp
+@@ -1,4 +1,5 @@
+ // RUN: %clangxx -O2 %s -o %t && %run %t 2>&1 | FileCheck %s
++// XFAIL: *
+ 
+ #include <stdio.h>
+ 
