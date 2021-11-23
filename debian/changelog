@@ -1,3 +1,11 @@
+llvm-toolchain-snapshot (1:14~++20211113111058+6a40854ce507-1~exp2) experimental; urgency=medium
+
+  * Revert 6623c02d70c3732dbea59c6d79c69501baf9627b in disable-float16.diff
+    for breaking the CI:
+    https://reviews.llvm.org/D114099
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 23 Nov 2021 13:44:07 +0100
+
 llvm-toolchain-snapshot (1:14~++20211113111058+6a40854ce507-1~exp1) experimental; urgency=medium
 
   * experimental New snapshot release

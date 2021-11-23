@@ -1,0 +1,208 @@
+commit 6623c02d70c3732dbea59c6d79c69501baf9627b
+Author: Zahira Ammarguellat <zahira.ammarguellat@intel.com>
+Date:   Wed Nov 17 11:53:36 2021 -0500
+
+    The _Float16 type is supported on x86 systems with SSE2 enabled.
+    Operations are emulated by software emulation and “float” instructions.
+    This patch is allowing the support of _Float16 type without the use of
+    -max512fp16 flag. The final goal being, perform _Float16 emulation for
+    all arithmetic expressions.
+
+diff --git b/clang/docs/LanguageExtensions.rst a/clang/docs/LanguageExtensions.rst
+index dfdb01b8ff54..60b1ed383a1f 100644
+--- b/clang/docs/LanguageExtensions.rst
++++ a/clang/docs/LanguageExtensions.rst
+@@ -673,7 +673,7 @@ targets pending ABI standardization:
+ * 64-bit ARM (AArch64)
+ * AMDGPU
+ * SPIR
+-* X86 (Available with feature SSE2 and up enabled)
++* X86 (Only available under feature AVX512-FP16)
+ 
+ ``_Float16`` will be supported on more targets as they define ABIs for it.
+ 
+diff --git b/clang/docs/ReleaseNotes.rst a/clang/docs/ReleaseNotes.rst
+index d2fa7ff05a16..104d2e908d80 100644
+--- b/clang/docs/ReleaseNotes.rst
++++ a/clang/docs/ReleaseNotes.rst
+@@ -187,7 +187,6 @@ X86 Support in Clang
+ --------------------
+ 
+ - Support for ``AVX512-FP16`` instructions has been added.
+-- Support for ``_Float16`` type has been added.
+ 
+ Arm and AArch64 Support in Clang
+ --------------------------------
+diff --git b/clang/lib/Basic/Targets/X86.cpp a/clang/lib/Basic/Targets/X86.cpp
+index 5e3686893719..454a7743dded 100644
+--- b/clang/lib/Basic/Targets/X86.cpp
++++ a/clang/lib/Basic/Targets/X86.cpp
+@@ -239,9 +239,9 @@ bool X86TargetInfo::handleTargetFeatures(std::vector<std::string> &Features,
+       HasAVX512ER = true;
+     } else if (Feature == "+avx512fp16") {
+       HasAVX512FP16 = true;
++      HasFloat16 = true;
+     } else if (Feature == "+avx512pf") {
+       HasAVX512PF = true;
+-      HasLegalHalfType = true;
+     } else if (Feature == "+avx512dq") {
+       HasAVX512DQ = true;
+     } else if (Feature == "+avx512bitalg") {
+@@ -369,8 +369,6 @@ bool X86TargetInfo::handleTargetFeatures(std::vector<std::string> &Features,
+                          .Default(NoXOP);
+     XOPLevel = std::max(XOPLevel, XLevel);
+   }
+-  // Turn on _float16 for x86 (feature sse2)
+-  HasFloat16 = SSELevel >= SSE2;
+ 
+   // LLVM doesn't have a separate switch for fpmath, so only accept it if it
+   // matches the selected sse level.
+diff --git b/clang/test/CodeGen/X86/Float16-arithmetic.c a/clang/test/CodeGen/X86/Float16-arithmetic.c
+deleted file mode 100644
+index 7f7b3ff59442..000000000000
+--- b/clang/test/CodeGen/X86/Float16-arithmetic.c
++++ /dev/null
+@@ -1,73 +0,0 @@
+-// RUN: %clang_cc1 -triple  x86_64-unknown-unknown -emit-llvm  \
+-// RUN: < %s  | FileCheck %s --check-prefixes=CHECK
+-
+-_Float16 add1(_Float16 a, _Float16 b) {
+-  // CHECK-LABEL: define{{.*}} half @add1
+-  // CHECK: alloca half
+-  // CHECK: alloca half
+-  // CHECK: store half {{.*}}, half*
+-  // CHECK: store half {{.*}}, half*
+-  // CHECK: load half, half*
+-  // CHECK: load half, half* {{.*}}
+-  // CHECK: fadd half {{.*}}, {{.*}}
+-  // CHECK: ret half
+-  return a + b;
+-}
+-
+-_Float16 add2(_Float16 a, _Float16 b, _Float16 c) {
+-  // CHECK-LABEL: define{{.*}} half @add2
+-  // CHECK: alloca half
+-  // CHECK: alloca half
+-  // CHECK: alloca half
+-  // CHECK: store half {{.*}}, half*
+-  // CHECK: store half {{.*}}, half*
+-  // CHECK: store half {{.*}}, half*
+-  // CHECK: load half, half* {{.*}}
+-  // CHECK: load half, half* {{.*}}
+-  // CHECK: fadd half {{.*}}, {{.*}}
+-  // CHECK: load half, half* {{.*}}
+-  // CHECK: fadd half {{.*}}, {{.*}}
+-  // CHECK: ret half
+-    return a + b + c;
+-}
+-
+-_Float16 sub(_Float16 a, _Float16 b) {
+-  // CHECK-LABEL: define{{.*}} half @sub
+-  // CHECK: alloca half
+-  // CHECK: alloca half
+-  // CHECK: store half {{.*}}, half*
+-  // CHECK: store half {{.*}}, half*
+-  // CHECK: load half, half*
+-  // CHECK: load half, half* {{.*}}
+-  // CHECK: fsub half {{.*}}, {{.*}}
+-  // CHECK: ret half
+-  return a - b;
+-}
+-
+-_Float16 div(_Float16 a, _Float16 b) {
+-  // CHECK-LABEL: define{{.*}} half @div
+-  // CHECK: alloca half
+-  // CHECK: alloca half
+-  // CHECK: store half {{.*}}, half*
+-  // CHECK: store half {{.*}}, half*
+-  // CHECK: load half, half* {{.*}}
+-  // CHECK: load half, half* {{.*}}
+-  // CHECK: fdiv half {{.*}}, {{.*}}
+-  // CHECK: ret half
+-  return a / b;
+-}
+-
+-_Float16 mul(_Float16 a, _Float16 b) {
+-  // CHECK-LABEL: define{{.*}} half @mul
+-  // CHECK: alloca half
+-  // CHECK: alloca half
+-  // CHECK: store half {{.*}}, half*
+-  // CHECK: store half {{.*}}, half*
+-  // CHECK: load half, half* {{.*}}
+-  // CHECK: load half, half* {{.*}}
+-  // CHECK: fmul half {{.*}}, {{.*}}
+-  // CHECK: ret half
+-  return a * b;
+-}
+-
+-
+diff --git b/clang/test/CodeGen/X86/fp16-abi.c a/clang/test/CodeGen/X86/avx512fp16-abi.c
+similarity index 94%
+rename from clang/test/CodeGen/X86/fp16-abi.c
+rename to clang/test/CodeGen/X86/avx512fp16-abi.c
+index 62a914f878c7..114427428055 100644
+--- b/clang/test/CodeGen/X86/fp16-abi.c
++++ a/clang/test/CodeGen/X86/avx512fp16-abi.c
+@@ -1,7 +1,5 @@
+ // RUN: %clang_cc1 -triple x86_64-linux -emit-llvm  -target-feature +avx512fp16 < %s | FileCheck %s --check-prefixes=CHECK,CHECK-C
+-// RUN: %clang_cc1 -triple x86_64-linux -emit-llvm  < %s | FileCheck %s --check-prefixes=CHECK,CHECK-C
+ // RUN: %clang_cc1 -triple x86_64-linux -emit-llvm  -target-feature +avx512fp16 -x c++ -std=c++11 < %s | FileCheck %s --check-prefixes=CHECK,CHECK-CPP
+-// RUN: %clang_cc1 -triple x86_64-linux -emit-llvm -x c++ -std=c++11 < %s | FileCheck %s --check-prefixes=CHECK,CHECK-CPP
+ 
+ struct half1 {
+   _Float16 a;
+diff --git b/clang/test/CodeGen/X86/fp16-complex.c a/clang/test/CodeGen/X86/avx512fp16-complex.c
+similarity index 96%
+rename from clang/test/CodeGen/X86/fp16-complex.c
+rename to clang/test/CodeGen/X86/avx512fp16-complex.c
+index ebb290c976e7..8a6b50eb0056 100644
+--- b/clang/test/CodeGen/X86/fp16-complex.c
++++ a/clang/test/CodeGen/X86/avx512fp16-complex.c
+@@ -1,5 +1,4 @@
+ // RUN: %clang_cc1 %s -O0 -emit-llvm -triple x86_64-unknown-unknown -target-feature +avx512fp16 -o - | FileCheck %s --check-prefix=X86
+-// RUN: %clang_cc1 %s -O0 -emit-llvm -triple x86_64-unknown-unknown -o - | FileCheck %s --check-prefix=X86
+ 
+ _Float16 _Complex add_half_rr(_Float16 a, _Float16 b) {
+   // X86-LABEL: @add_half_rr(
+diff --git b/clang/test/Sema/Float16.c a/clang/test/Sema/Float16.c
+index 34f0af71c791..ff0bf9043a67 100644
+--- b/clang/test/Sema/Float16.c
++++ a/clang/test/Sema/Float16.c
+@@ -1,9 +1,8 @@
+-// RUN: %clang_cc1 -fsyntax-only -verify -triple x86_64-linux-pc %s -DHAVE
++// RUN: %clang_cc1 -fsyntax-only -verify -triple x86_64-linux-pc %s
+ // RUN: %clang_cc1 -fsyntax-only -verify -triple x86_64-linux-pc -target-feature +avx512fp16 %s -DHAVE
+ // RUN: %clang_cc1 -fsyntax-only -verify -triple spir-unknown-unknown %s -DHAVE
+ // RUN: %clang_cc1 -fsyntax-only -verify -triple armv7a-linux-gnu %s -DHAVE
+ // RUN: %clang_cc1 -fsyntax-only -verify -triple aarch64-linux-gnu %s -DHAVE
+-// RUN: %clang_cc1 -fsyntax-only -verify -triple i386-pc-linux-gnu %s
+ 
+ #ifndef HAVE
+ // expected-error@+2{{_Float16 is not supported on this target}}
+diff --git b/clang/test/Sema/conversion-target-dep.c a/clang/test/Sema/conversion-target-dep.c
+index 6c14750c4d20..e16685fa0674 100644
+--- b/clang/test/Sema/conversion-target-dep.c
++++ a/clang/test/Sema/conversion-target-dep.c
+@@ -6,7 +6,7 @@
+ 
+ long double ld;
+ double d;
+-_Float16 f16;
++_Float16 f16; // x86-error {{_Float16 is not supported on this target}}
+ 
+ int main() {
+   ld = d; // x86-warning {{implicit conversion increases floating-point precision: 'double' to 'long double'}}
+diff --git b/clang/test/SemaCXX/Float16.cpp a/clang/test/SemaCXX/Float16.cpp
+index c5fdc7af58a3..f27c3839854e 100644
+--- b/clang/test/SemaCXX/Float16.cpp
++++ a/clang/test/SemaCXX/Float16.cpp
+@@ -1,8 +1,7 @@
+-// RUN: %clang_cc1 -fsyntax-only -verify -triple x86_64-linux-pc %s -DHAVE
++// RUN: %clang_cc1 -fsyntax-only -verify -triple x86_64-linux-pc %s
+ // RUN: %clang_cc1 -fsyntax-only -verify -triple spir-unknown-unknown %s -DHAVE
+ // RUN: %clang_cc1 -fsyntax-only -verify -triple armv7a-linux-gnu %s -DHAVE
+ // RUN: %clang_cc1 -fsyntax-only -verify -triple aarch64-linux-gnu %s -DHAVE
+-// RUN: %clang_cc1 -fsyntax-only -verify -triple i386-pc-linux-gnu %s
+ 
+ #ifdef HAVE
+ // expected-no-diagnostics
