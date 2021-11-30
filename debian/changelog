@@ -1,3 +1,9 @@
+llvm-toolchain-13 (1:13.0.0-11) unstable; urgency=medium
+
+  * Add a manpage for git-clang-format
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Nov 2021 22:52:39 +0100
+
 llvm-toolchain-13 (1:13.0.0-10) unstable; urgency=medium
 
   * Add back -DLLVM_VERSION_SUFFIX=. Useless for 13 but necessary for snapshot
