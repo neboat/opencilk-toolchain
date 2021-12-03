@@ -8,6 +8,8 @@ llvm-toolchain-snapshot (1:14~++20211113111058+6a40854ce507-1~exp1) experimental
 
   * experimental New snapshot release
   * Adjust the libomp5 symbols
+  * Remove some old mach lld libraries. Remove upstream in 9e3552523ebd3385487e01e3e7af37b8c0efaf57
+    liblldReaderWriter.a liblldDriver.a liblldYAML.a liblldCore.a liblldMachOOld.a
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 13 Nov 2021 23:15:48 +0100
 
