@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:14~++20211203095542+8e2b37339672-1~exp1) expermental; urgency=medium
+llvm-toolchain-snapshot (1:14~++20211203095542+8e2b37339672-1~exp1) experimental; urgency=medium
 
   * New snapshot release
   * Remove some old mach lld libraries. Remove upstream in 9e3552523ebd3385487e01e3e7af37b8c0efaf57
