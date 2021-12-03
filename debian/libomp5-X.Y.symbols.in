@@ -302,6 +302,14 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_atomic_32@VERSION 0.20130412
  __kmpc_atomic_4@VERSION 0.20130412
  __kmpc_atomic_8@VERSION 0.20130412
+ __kmpc_atomic_bool_1_cas@VERSION 14
+ __kmpc_atomic_bool_1_cas_cpt@VERSION 14
+ __kmpc_atomic_bool_2_cas@VERSION 14
+ __kmpc_atomic_bool_2_cas_cpt@VERSION 14
+ __kmpc_atomic_bool_4_cas@VERSION 14
+ __kmpc_atomic_bool_4_cas_cpt@VERSION 14
+ __kmpc_atomic_bool_8_cas@VERSION 14
+ __kmpc_atomic_bool_8_cas_cpt@VERSION 14
  __kmpc_atomic_cmplx10_add@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_cmplx10_add_cpt@VERSION 0.20130412
  __kmpc_atomic_cmplx10_div@VERSION 0.20130412
@@ -680,7 +688,9 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float10_div_rev@VERSION 0.20130412
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float10_div_rev_fp@VERSION 4.0
  __kmpc_atomic_float10_max@VERSION 14
+ __kmpc_atomic_float10_max_cpt@VERSION 14
  __kmpc_atomic_float10_min@VERSION 14
+ __kmpc_atomic_float10_min_cpt@VERSION 14
  __kmpc_atomic_float10_mul@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float10_mul_cpt@VERSION 0.20130412
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float10_mul_cpt_fp@VERSION 4.0
@@ -782,6 +792,14 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float8_swp@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float8_wr@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_start@VERSION 0.20130412
+ __kmpc_atomic_val_1_cas@VERSION 14
+ __kmpc_atomic_val_1_cas_cpt@VERSION 14
+ __kmpc_atomic_val_2_cas@VERSION 14
+ __kmpc_atomic_val_2_cas_cpt@VERSION 14
+ __kmpc_atomic_val_4_cas@VERSION 14
+ __kmpc_atomic_val_4_cas_cpt@VERSION 14
+ __kmpc_atomic_val_8_cas@VERSION 14
+ __kmpc_atomic_val_8_cas_cpt@VERSION 14
  __kmpc_barrier@VERSION 0.20130412
  __kmpc_barrier_master@VERSION 0.20130412
  __kmpc_barrier_master_nowait@VERSION 0.20130412
@@ -830,7 +848,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_end_ordered@VERSION 0.20130412
  __kmpc_end_reduce@VERSION 0.20130412
  __kmpc_end_reduce_nowait@VERSION 0.20130412
- __kmpc_end_scope@VERSION 1:14~++20210924100737+f3f25ffc04c0
+ __kmpc_end_scope@VERSION 14
  __kmpc_end_serialized_parallel@VERSION 0.20130412
  __kmpc_end_single@VERSION 0.20130412
  __kmpc_end_taskgroup@VERSION 0.20130412
@@ -883,7 +901,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_realloc@VERSION 12
  __kmpc_reduce@VERSION 0.20130412
  __kmpc_reduce_nowait@VERSION 0.20130412
- __kmpc_scope@VERSION 1:14~++20210924100737+f3f25ffc04c0
+ __kmpc_scope@VERSION 14
  __kmpc_serialized_parallel@VERSION 0.20130412
  __kmpc_set_default_allocator@VERSION 8
  __kmpc_set_lock@VERSION 0.20130412
@@ -997,7 +1015,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  kmpc_set_stacksize@VERSION 0.20130412
  kmpc_set_stacksize_s@VERSION 0.20130412
  kmpc_unset_affinity_mask_proc@VERSION 0.20130412
-#MISSING: 14# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)libomp_start_tool@VERSION 1:14~++20210924100737+f3f25ffc04c0
+#MISSING: 14# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)libomp_start_tool@VERSION 14
  omp_aligned_alloc@VERSION 14
  omp_aligned_calloc@VERSION 14
  omp_alloc@VERSION 8
