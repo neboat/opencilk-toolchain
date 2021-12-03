@@ -136,11 +136,16 @@ libcxx-armhf-ftbfs.diff
 lower-python-dep.diff
 scan-build-py-fix-default-bin.diff
 
-libclc-llvm-spirv.diff omp-riscv64.patch test-disable-lldb-i386.diff 
-unbreak-atomic-mips.diff llvm-fix-lld-linker-check.diff 
-compilerrt-fix-warn-xray-testing.diff openmp-fix-runtimes-build.diff 
-libclc-fix-prepare_builtins-rpath.diff 
-libcxx-libatomic-only-with-gcc-rtlib.diff 
-libcxxabi-fix-link-builtins.diff llvm-runtimes-builtins-build-check.diff 
-compilerrt-builtins-arch-fix-armhf.diff 
-compilerrt-build-scudo-standalone-option.diff disable-float16.diff
+libclc-llvm-spirv.diff
+omp-riscv64.patch
+test-disable-lldb-i386.diff
+unbreak-atomic-mips.diff
+llvm-fix-lld-linker-check.diff
+compilerrt-fix-warn-xray-testing.diff
+openmp-fix-runtimes-build.diff
+libclc-fix-prepare_builtins-rpath.diff
+libcxx-libatomic-only-with-gcc-rtlib.diff
+libcxxabi-fix-link-builtins.diff
+llvm-runtimes-builtins-build-check.diff
+compilerrt-builtins-arch-fix-armhf.diff
+compilerrt-build-scudo-standalone-option.diff
