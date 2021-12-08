@@ -171,8 +171,10 @@ BASE="llvm-toolchain-${MAJOR_VERSION}_${VERSION}"
 FILENAME="${BASE}.orig.tar.xz"
 
 cp -R llvm-toolchain-integration-test-suite llvm-project/integration-test-suite
+# Argument to compress faster (for the cost of time)
+export XZ_OPT="-4 -T$(nproc)"
 echo "Compressing to $FILENAME"
-tar Jcf $CURRENT_PATH/"$FILENAME" --exclude .git --exclude build-llvm --transform="s|llvm-project|$BASE|" -C $EXPORT_PATH llvm-project
+time tar Jcf $CURRENT_PATH/"$FILENAME" --exclude .git --exclude build-llvm --transform="s|llvm-project|$BASE|" -C $EXPORT_PATH llvm-project
 rm -rf llvm-project/integration-test-suite
 
 export DEBFULLNAME="Sylvestre Ledru"
