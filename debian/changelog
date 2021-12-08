@@ -1,11 +1,8 @@
-llvm-toolchain-13 (1:13.0.0-11) unstable; urgency=medium
+llvm-toolchain-13 (1:13.0.1~+rc1-1~exp1) experimental; urgency=medium
 
+  * New testing release
+  * Use parallel + -4 for the xz tarballs compression to make it faster
   * Add manpages for git-clang-format & run-clang-tidy
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Nov 2021 22:52:39 +0100
-
-llvm-toolchain-13 (1:13.0.0-10) unstable; urgency=medium
-
   * Add back -DLLVM_VERSION_SUFFIX=. Useless for 13 but necessary for snapshot
     Otherwise, it adds "git" to the libs
 
