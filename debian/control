@@ -37,6 +37,7 @@ Package: clang-13
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang-common-13-dev (= ${binary:Version}),
+ llvm-13-linker-tools (= ${binary:Version}),
  libclang1-13 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-13-dev, python3
