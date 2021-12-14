@@ -3,6 +3,7 @@ llvm-toolchain-snapshot (1:14~++20211203095542+8e2b37339672-1~exp1) experimental
   * New snapshot release
   * Remove some old mach lld libraries. Remove upstream in 9e3552523ebd3385487e01e3e7af37b8c0efaf57
     liblldReaderWriter.a liblldDriver.a liblldYAML.a liblldCore.a liblldMachOOld.a
+  * Also install llvm-debuginfod-find in llvm-14
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 03 Dec 2021 13:19:39 +0100
 

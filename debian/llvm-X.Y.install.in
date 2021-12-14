@@ -76,6 +76,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/yaml2obj
 usr/lib/llvm-@LLVM_VERSION@/bin/verify-uselistorder
 usr/lib/llvm-@LLVM_VERSION@/bin/sanstats
 usr/lib/llvm-@LLVM_VERSION@/bin/dsymutil
+usr/lib/llvm-@LLVM_VERSION@/bin/llvm-debuginfod-find
 
 usr/bin/llvm-PerfectShuffle-@LLVM_VERSION@
 usr/bin/llvm-addr2line-@LLVM_VERSION@
@@ -150,3 +151,4 @@ usr/bin/yaml2obj-*
 usr/bin/verify-uselistorder-*
 usr/bin/sanstats-*
 usr/bin/dsymutil-*
+usr/bin/llvm-debuginfod-find-*
