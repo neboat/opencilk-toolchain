@@ -149,3 +149,5 @@ libcxx-libatomic-only-with-gcc-rtlib.diff
 libcxxabi-fix-link-builtins.diff
 llvm-runtimes-builtins-build-check.diff
 compilerrt-builtins-arch-fix-armhf.diff
+use-gold-for-compiler-rt-when-set.diff
+
