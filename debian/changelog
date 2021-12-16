@@ -1,8 +1,12 @@
 llvm-toolchain-13 (1:13.0.1~+rc1-1~exp2) experimental; urgency=medium
 
   * Bring back the dependency clang => llvm-13-linker-tools
+  * Unbreak llvm-toolchain-13 on buster.
+    -fuse-ld=gold wasn't passed to compiler-rt. it was using bfd.
+    And binutils shipping in buster has a bug preventing this to work:
+    https://github.com/llvm/llvm-project/issues/42339
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 12 Dec 2021 09:52:17 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Dec 2021 14:28:09 +0100
 
 llvm-toolchain-13 (1:13.0.1~+rc1-1~exp1) experimental; urgency=medium
 
