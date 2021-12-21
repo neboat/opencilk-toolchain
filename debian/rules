@@ -559,7 +559,7 @@ override_dh_auto_configure: preconfigure
 	-DBOOTSTRAP_LLVM_INSTALL_UTILS=ON \
 	-DBOOTSTRAP_LLVM_VERSION_SUFFIX= \
 	-DBOOTSTRAP_LLVM_POLLY_LINK_INTO_TOOLS=ON \
-	-DBOOTSTRAP_LLVM_EXPERIMENTAL_TARGETS_TO_BUILD="AVR;M68k" \
+	-DBOOTSTRAP_LLVM_EXPERIMENTAL_TARGETS_TO_BUILD="M68k" \
 	-DBOOTSTRAP_LLVM_LINK_LLVM_DYLIB=ON \
 	-DBOOTSTRAP_CLANG_LINK_CLANG_DYLIB=ON \
 	-DBOOTSTRAP_LIBCLANG_LIBRARY_VERSION=$(SONAME_EXT) \
@@ -679,7 +679,7 @@ endif
 	help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1 || true
 	help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1 || true
 
-	CMDS="llvm-dwarfdump llvm-mc llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb clang-format clang-repl clang clang++ clang-tblgen clang-check clang-cpp clang-tidy clang-apply-replacements clang-rename clang-query pp-trace sancov lli modularize clang-include-fixer find-all-symbols clang-reorder-fields ld.lld llvm-tblgen clang-change-namespace clang-offload-bundler clangd clang-nvlink-wrapper git-clang-format run-clang-tidy"; \
+	CMDS="llvm-dwarfdump llvm-mc llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb clang-format clang clang++ clang-tblgen clang-check clang-cpp clang-tidy clang-apply-replacements clang-rename clang-query pp-trace sancov lli modularize clang-include-fixer find-all-symbols clang-reorder-fields ld.lld llvm-tblgen clang-change-namespace clang-offload-bundler clangd clang-repl clang-nvlink-wrapper git-clang-format run-clang-tidy"; \
 	for f in $$CMDS; do \
 		echo "Generating manpage of $$f"; \
 		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-info --version-string=$(LLVM_VERSION) $(TARGET_BUILD_STAGE2)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1 || true; \

@@ -203,6 +203,18 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
+llvm-toolchain-13 (1:13.0.1~+rc1-1~exp2) experimental; urgency=medium
+
+  * Bring back the dependency clang => llvm-13-linker-tools
+  * Unbreak llvm-toolchain-13 on buster.
+    -fuse-ld=gold wasn't passed to compiler-rt. it was using bfd.
+    And binutils shipping in buster has a bug preventing this to work:
+    https://github.com/llvm/llvm-project/issues/42339
+  * Remove AVR from LLVM_EXPERIMENTAL_TARGETS_TO_BUILD. stable since 11
+    https://releases.llvm.org/11.0.0/docs/ReleaseNotes.html#changes-to-the-avr-target
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Dec 2021 14:28:09 +0100
+
 llvm-toolchain-13 (1:13.0.1~+rc1-1~exp1) experimental; urgency=medium
 
   * New testing release

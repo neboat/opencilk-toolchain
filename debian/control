@@ -37,6 +37,7 @@ Package: clang-14
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang-common-14-dev (= ${binary:Version}),
+ llvm-14-linker-tools (= ${binary:Version}),
  libclang1-14 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-14-dev, python3
