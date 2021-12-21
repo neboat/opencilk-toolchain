@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:14~++20211203095542+8e2b37339672-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:14~++20211221121559+9e3ae8d296aa-1~exp1) experimental; urgency=medium
 
   * New snapshot release
   * Remove some old mach lld libraries. Remove upstream in 9e3552523ebd3385487e01e3e7af37b8c0efaf57
@@ -69,6 +69,61 @@ llvm-toolchain-snapshot (1:14~++20211113102219+b5ff187b7b51-1~exp1) experimental
   * Merge migration to 2stage runtimes build 13 => 14
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 13 Nov 2021 10:26:41 +0100
+
+llvm-toolchain-snapshot (1:14~++20211111061527+d56b171ee965-1~exp1) experimental; urgency=medium
+
+  * Remove the triple patch. it is causing the library search path to fail.
+    Add a test in debian/qualify-clang.sh to verify we don't regress
+  * Fix the "all" build
+  * Disable LIBCXX_USE_COMPILER_RT on s390x, armel and x32 as it fails. See bug 52022
+  * Adjust the libomp_start_tool visibility on armhf
+  * Be more flexible to install libomptarget-*.bc
+    (ex: libomptarget-new-nvptx-*.bc are new)
+  * Force the i386 triple -DLLVM_HOST_TRIPLE=i386-linux-gnu
+    Sometimes, on i386, the library detection is failing (often on z3
+    or ffi)
+    'Could NOT find Z3:'
+  * Add '-DCMAKE_FIND_DEBUG_MODE=true' to help wit debugging
+  * Disable the build of libclc on old Ubuntu (Groovy & focal)
+    as llvm-spir is too old on these version.
+    See bug #52200
+  * Adjust the sphinx build as the makefile have been removed
+  * If lua is available on the system at built time, a lua lldb binding
+    was created. It was leading to some build failures depending
+    on the package installed on the build system.
+    Force the deactivation of the lua build when lldb is built.
+  * libomp: add new symbols
+    - GOMP_5.0.1
+    - GOMP_alloc
+    - GOMP_free
+    - __kmpc_aligned_alloc
+    - __kmpc_atomic_bool_1_cas
+    - __kmpc_atomic_bool_1_cas_cpt
+    - __kmpc_atomic_bool_2_cas
+    - __kmpc_atomic_bool_2_cas_cpt
+    - __kmpc_atomic_bool_4_cas
+    - __kmpc_atomic_bool_4_cas_cpt
+    - __kmpc_atomic_bool_8_cas
+    - __kmpc_atomic_bool_8_cas_cpt
+    - __kmpc_atomic_float10_max
+    - __kmpc_atomic_float10_max_cpt
+    - __kmpc_atomic_float10_min
+    - __kmpc_atomic_float10_min_cpt
+    - __kmpc_atomic_val_1_cas
+    - __kmpc_atomic_val_1_cas_cpt
+    - __kmpc_atomic_val_2_cas
+    - __kmpc_atomic_val_2_cas_cpt
+    - __kmpc_atomic_val_4_cas
+    - __kmpc_atomic_val_4_cas_cpt
+    - __kmpc_atomic_val_8_cas
+    - __kmpc_atomic_val_8_cas_cpt
+    - omp_aligned_alloc
+    - omp_aligned_calloc
+
+  [ Erik Maciejewski ]
+  * Merge migration to 2stage runtimes build 13 => 14
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 11 Nov 2021 18:19:57 +0100
 
 llvm-toolchain-snapshot (1:14~++20210926041028+6063e6b499c7-1~exp1) experimental; urgency=medium
 
