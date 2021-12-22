@@ -1,9 +1,6 @@
 llvm-toolchain-snapshot (1:14~++20211221121559+9e3ae8d296aa-1~exp2) experimental; urgency=medium
 
   * libomp: adjust the missing symbols
-
- --
-
 llvm-toolchain-snapshot (1:14~++20211221121559+9e3ae8d296aa-1~exp1) experimental; urgency=medium
 
   * New snapshot release
@@ -273,6 +270,8 @@ llvm-toolchain-13 (1:13.0.1~+rc1-1~exp2) experimental; urgency=medium
     https://github.com/llvm/llvm-project/issues/42339
   * Remove AVR from LLVM_EXPERIMENTAL_TARGETS_TO_BUILD. stable since 11
     https://releases.llvm.org/11.0.0/docs/ReleaseNotes.html#changes-to-the-avr-target
+  * Use the version suffix when calling wasm-ld => wasm-ld-13
+    https://bugzilla.mozilla.org/show_bug.cgi?id=1747145
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Dec 2021 14:28:09 +0100
 

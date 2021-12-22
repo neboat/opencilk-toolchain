@@ -149,3 +149,4 @@ libcxxabi-fix-link-builtins.diff
 llvm-runtimes-builtins-build-check.diff
 compilerrt-builtins-arch-fix-armhf.diff
 compilerrt-build-scudo-standalone-option.diff
+wasm-ld-path.diff

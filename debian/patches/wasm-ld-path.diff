@@ -1,0 +1,27 @@
+Index: llvm-toolchain-13-13.0.1~+rc1/clang/lib/Driver/ToolChains/WebAssembly.h
+===================================================================
+--- llvm-toolchain-13-13.0.1~+rc1.orig/clang/lib/Driver/ToolChains/WebAssembly.h
++++ llvm-toolchain-13-13.0.1~+rc1/clang/lib/Driver/ToolChains/WebAssembly.h
+@@ -10,9 +10,13 @@
+ #define LLVM_CLANG_LIB_DRIVER_TOOLCHAINS_WEBASSEMBLY_H
+ 
+ #include "Gnu.h"
++#include "llvm/Config/llvm-config.h" // for LLVM_VERSION_MAJOR
+ #include "clang/Driver/Tool.h"
+ #include "clang/Driver/ToolChain.h"
+ 
++#define TOSTR2(X) #X
++#define TOSTR(X) TOSTR2(X)
++
+ namespace clang {
+ namespace driver {
+ namespace tools {
+@@ -67,7 +71,7 @@ private:
+                            llvm::opt::ArgStringList &CmdArgs) const override;
+   SanitizerMask getSupportedSanitizers() const override;
+ 
+-  const char *getDefaultLinker() const override { return "wasm-ld"; }
++  const char *getDefaultLinker() const override { return "wasm-ld-" TOSTR(LLVM_VERSION_MAJOR); }
+ 
+   Tool *buildLinker() const override;
+ 
