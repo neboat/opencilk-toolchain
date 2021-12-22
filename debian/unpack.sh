@@ -1,7 +1,9 @@
 set -e
 ORIG_VERSION=13
-MAJOR_VERSION=13.0.0 # 8.0.1
+MAJOR_VERSION=13.0.1 # 8.0.1
+
 REV=`ls -1 *${ORIG_VERSION}_${MAJOR_VERSION}*~+*xz | grep -v rc|tail -1|perl -ne 'print "$1\n" if /~\+(.*)\.orig/;'  | sort -ru`
+echo $REV
 
 VERSION=$REV
 
