@@ -522,6 +522,15 @@ clang-$VERSION -flto=thin -O2 foo.c main.c -o foo
 ./foo > /dev/null
 clang-$VERSION -flto=thin -O2 foo.c main.c -c
 
+# understand LTO files
+# see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=919020
+clang-$VERSION foo.c -flto -c
+file foo.o|grep -q "LLVM IR bitcode"
+if ! nm foo.o|grep -q "00000000 T foo"; then
+    echo "gold linker isn't understood"
+    exit 1
+fi
+
 echo "Testing lld-$VERSION ..."
 
 if test ! -f /usr/bin/lld-$VERSION; then
@@ -531,7 +540,7 @@ fi
 clang-$VERSION -fuse-ld=lld -O2 foo.c main.c -o foo
 ./foo > /dev/null
 
-if ls -al1 /usr/bin/ld.lld|grep ld.lld-$VERSION; then
+if ls -al1 /usr/bin/ld.lld|grep -q ld.lld-$VERSION; then
 # https://bugs.llvm.org/show_bug.cgi?id=40659
 # -fuse-ld=lld will call lld
 # Mismatch of version can fail the check
