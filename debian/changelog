@@ -9,6 +9,9 @@ llvm-toolchain-13 (1:13.0.1~+rc1-1~exp2) experimental; urgency=medium
     https://releases.llvm.org/11.0.0/docs/ReleaseNotes.html#changes-to-the-avr-target
   * Use the version suffix when calling wasm-ld => wasm-ld-13
     https://bugzilla.mozilla.org/show_bug.cgi?id=1747145
+  * Fix run-clang-tidy symlink. it moved from /usr/lib/llvm-13/share/clang/run-clang-tidy
+    to /usr/lib/llvm-13/bin/run-clang-tidy
+    (Closes: #1001748)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Dec 2021 14:28:09 +0100
 
