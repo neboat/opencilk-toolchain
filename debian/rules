@@ -383,7 +383,7 @@ endif
 GENERATOR=Ninja
 
 # enables cmake build targets like stage2-[target_name]
-ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-sanitizer;llvm-config;test-suite
+ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-mlir;check-sanitizer;llvm-config;test-suite
 
 %:
 	dh $@ $(DH_OPTIONS)
@@ -969,6 +969,9 @@ endif
 
 # Libcxxabi
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxxabi || true
+
+# MLIR
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-mlir || true
 
 # Libclc
 	ninja $(VERBOSE) -C libclc/build test || true
