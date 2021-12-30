@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 # polly & lldb aren't enabled for every platform
-PROJECTS = clang;clang-tools-extra;lld;cross-project-tests
+PROJECTS = clang;clang-tools-extra;lld;cross-project-tests;mlir
 # openmp & libunwind aren't enabled for every platform
 RUNTIMES = compiler-rt;libcxx;libcxxabi
 
@@ -705,6 +705,9 @@ override_dh_auto_install:
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libExampleIRTransforms.a
 	# Remove an example - introduced in https://reviews.llvm.org/D61446
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libBye.a
+
+	# should not be installed (mlir)
+	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/objects-Release/
 
 	cp $(TARGET_BUILD_STAGE2)/bin/clang-query $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin
 
