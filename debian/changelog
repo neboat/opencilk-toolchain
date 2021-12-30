@@ -266,7 +266,10 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
 llvm-toolchain-13 (1:13.0.1~+rc1-1~exp3) experimental; urgency=medium
 
-  * Build & ship mlir too
+  * Build and ship MLIR as 3 new packages (libmlir-13-dev, libmlir-13
+    and mlir-13-toolso
+  * Install bfd plugins in
+    /usr/lib/bfd-plugins/LLVMgold-@LLVM_VERSION@.so
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 30 Dec 2021 12:04:43 +0100
 
