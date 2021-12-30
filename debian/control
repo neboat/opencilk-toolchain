@@ -757,7 +757,7 @@ Description: production-quality unwinder
 
 # ------------- mlir -------------
 
-Package: mlir-13-tools
+Package: mlir-14-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Multi-Level Intermediate Representation tools
@@ -768,7 +768,7 @@ Description: Multi-Level Intermediate Representation tools
  .
  This package provides tools.
 
-Package: libmlir-13
+Package: libmlir-14
 Section: libs
 Architecture: any
 Multi-Arch: same
@@ -784,13 +784,13 @@ Description: Multi-Level Intermediate Representation library
  specific compilers, and aid in connecting existing compilers together.
 
 
-Package: libmlir-13-dev
+Package: libmlir-14-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends:
  ${misc:Depends},
- libmlir-13 (= ${binary:Version})
+ libmlir-14 (= ${binary:Version})
 Breaks: libmlir-dev
 Provides: libmlir-x.y-dev
 Conflicts: libmlir-x.y-dev
