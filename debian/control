@@ -758,3 +758,51 @@ Description: production-quality unwinder
  The low level libunwind API was designed to work either in-process (aka local)
  or to operate on another process (aka remote), but only the local path has
  been implemented. Remote unwinding remains as future work.
+
+# ------------- mlir -------------
+
+Package: mlir-13-tools
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Multi-Level Intermediate Representation tools
+ Novel approach to building reusable and extensible compiler infrastructure.
+ MLIR aims to address software fragmentation, improve compilation for
+ heterogeneous hardware, significantly reduce the cost of building domain
+ specific compilers, and aid in connecting existing compilers together.
+ .
+ This package provides tools.
+
+Package: libmlir-13
+Section: libs
+Architecture: any
+Multi-Arch: same
+Depends: ${shlibs:Depends},
+ ${misc:Depends}
+Provides: libmlir-x.y
+Conflicts: libmlir-x.y
+Replaces: libmlir-x.y
+Description: Multi-Level Intermediate Representation library
+ Novel approach to building reusable and extensible compiler infrastructure.
+ MLIR aims to address software fragmentation, improve compilation for
+ heterogeneous hardware, significantly reduce the cost of building domain
+ specific compilers, and aid in connecting existing compilers together.
+
+
+Package: libmlir-13-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends:
+ ${misc:Depends},
+ libmlir-13 (= ${binary:Version})
+Breaks: libmlir-dev
+Provides: libmlir-x.y-dev
+Conflicts: libmlir-x.y-dev
+Replaces: libmlir-dev, libmlir-x.y-dev
+Description: Multi-Level Intermediate Representation library
+ Novel approach to building reusable and extensible compiler infrastructure.
+ MLIR aims to address software fragmentation, improve compilation for
+ heterogeneous hardware, significantly reduce the cost of building domain
+ specific compilers, and aid in connecting existing compilers together.
+
+
