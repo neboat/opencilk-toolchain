@@ -1,7 +1,7 @@
 llvm-toolchain-13 (1:13.0.1~+rc1-1~exp3) experimental; urgency=medium
 
   * Build and ship MLIR as 3 new packages (libmlir-13-dev, libmlir-13
-    and mlir-13-toolso
+    and mlir-13-tools)
   * Install bfd plugins in
     /usr/lib/bfd-plugins/LLVMgold-@LLVM_VERSION@.so
 
