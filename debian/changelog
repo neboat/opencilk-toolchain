@@ -1,8 +1,8 @@
 llvm-toolchain-13 (1:13.0.1~+rc1-1~exp4) experimental; urgency=medium
 
-  * Fix the cmake with the mlir introducing
+  * Fix the cmake file with the mlir introducing
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 03 Jan 2022 14:21:10 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 06 Jan 2022 14:30:59 +0100
 
 llvm-toolchain-13 (1:13.0.1~+rc1-1~exp3) experimental; urgency=medium
 
