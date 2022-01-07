@@ -26,9 +26,6 @@ debug-jit-path.diff
 do-not-fail-on-unexpected-pass.diff
 disable-display-PASS-UNSUPPORTED-XFAIL.diff
 
-# llvm-config
-0001-llvm-cmake-resolve-symlinks-in-LLVMConfig.cmake.patch
-
 # Lib names
 0044-soname.diff
 lldb-soname.diff
