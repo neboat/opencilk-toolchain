@@ -285,11 +285,14 @@ ifeq (mipsel,$(DEB_HOST_ARCH))
 	RUN_TEST=no
 endif
 
+SCAN_BUILD=no
 ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # enable the build using scan-build
 # The package are installed through the variable declarations:
 # OTHERMIRROR="deb http://llvm.org/apt/unstable/ llvm-toolchain main"
 # EXTRAPACKAGES="clang-X"
+	SCAN_BUILD=yes
+	patch -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff
 	PRE_PROCESS=scan-build-$(LLVM_VERSION) --show-description -analyzer-config stable-report-filename=true
 # -enable-checker optin.performance.Padding
 	PRE_PROCESS_CONF=scan-build-$(LLVM_VERSION)
@@ -587,7 +590,9 @@ debian-full-build:
 # Check the stage 2 build worked
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \
 		echo "clang hasn't been built using clang. Bye bye. Check that the stage2 build has been done."; \
-		exit 2; \
+		if test "$(SCAN_BUILD)" = "no"; then \
+			exit 2; \
+		fi; \
 	fi
 	if ldd $(TARGET_BUILD_STAGE2)/lib/libclang-$(LLVM_VERSION).so.1|grep -q libclang-cpp-$(LLVM_VERSION); then \
 		echo "libclang-$(LLVM_VERSION).so.1 depends on libclang-cpp. Should not be the case"; \
@@ -1046,6 +1051,9 @@ override_dh_auto_clean:
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
 		rm -f $$f2; \
 	done
+	if test "$(SCAN_BUILD)" = "yes"; then \
+		patch -R -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff||true; \
+	fi
 	: # for some reason, the docs are written to debian/usr and debian/man ...
 	rm -rf debian/usr debian/man
 
