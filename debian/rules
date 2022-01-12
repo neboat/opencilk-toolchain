@@ -292,7 +292,7 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # OTHERMIRROR="deb http://llvm.org/apt/unstable/ llvm-toolchain main"
 # EXTRAPACKAGES="clang-X"
 	SCAN_BUILD=yes
-	patch -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff
+	PATCH ?= $(shell patch -f -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff)
 	PRE_PROCESS=scan-build-$(LLVM_VERSION) --show-description -analyzer-config stable-report-filename=true
 # -enable-checker optin.performance.Padding
 	PRE_PROCESS_CONF=scan-build-$(LLVM_VERSION)
@@ -1052,7 +1052,7 @@ override_dh_auto_clean:
 		rm -f $$f2; \
 	done
 	if test "$(SCAN_BUILD)" = "yes"; then \
-		patch -R -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff||true; \
+		patch -f -R -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff||true; \
 	fi
 	: # for some reason, the docs are written to debian/usr and debian/man ...
 	rm -rf debian/usr debian/man
