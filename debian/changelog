@@ -1,3 +1,9 @@
+llvm-toolchain-13 (1:13.0.1~+rc1-1~exp5) UNRELEASED; urgency=medium
+
+  * Explicitly link against -latomic on all ports, not only the Linux ones.
+
+ -- Samuel Thibault <sthibault@debian.org>  Mon, 10 Jan 2022 21:36:34 +0100
+
 llvm-toolchain-13 (1:13.0.1~+rc1-1~exp4) experimental; urgency=medium
 
   * Fix the cmake file with the mlir introducing
