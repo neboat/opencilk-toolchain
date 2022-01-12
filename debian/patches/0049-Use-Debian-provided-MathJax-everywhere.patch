@@ -46,7 +46,7 @@ Index: llvm-toolchain-snapshot_14~++20220112110040+612f5ed88231/clang/docs/analy
 +++ llvm-toolchain-snapshot_14~++20220112110040+612f5ed88231/clang/docs/analyzer/conf.py
 @@ -123,6 +123,9 @@ html_theme = 'haiku'
  # so a file named "default.css" will overwrite the builtin "default.css".
- html_static_path = []
+ html_static_path = ['_static']
  
 +# Use Debian-provided MathJax
 +mathjax_path = '/usr/share/javascript/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
@@ -60,7 +60,7 @@ Index: llvm-toolchain-snapshot_14~++20220112110040+612f5ed88231/clang/docs/conf.
 +++ llvm-toolchain-snapshot_14~++20220112110040+612f5ed88231/clang/docs/conf.py
 @@ -141,6 +141,9 @@ html_theme = 'haiku'
  # so a file named "default.css" will overwrite the builtin "default.css".
- html_static_path = []
+ html_static_path = ['_static']
  
 +# Use Debian-provided MathJax
 +mathjax_path = '/usr/share/javascript/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
