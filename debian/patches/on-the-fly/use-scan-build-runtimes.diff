@@ -9,9 +9,9 @@ Index: llvm-toolchain-snapshot_14~++20220105111900+cdbad62c526c/clang/CMakeLists
 -    -DCMAKE_CXX_COMPILER=${LLVM_RUNTIME_OUTPUT_INTDIR}/${CXX_COMPILER}
 -    -DCMAKE_C_COMPILER=${LLVM_RUNTIME_OUTPUT_INTDIR}/${C_COMPILER}
 -    -DCMAKE_ASM_COMPILER=${LLVM_RUNTIME_OUTPUT_INTDIR}/${C_COMPILER}
-+    -DCMAKE_CXX_COMPILER=/usr/share/clang/scan-build-${LLVM_PACKAGE_VERSION}/libexec/c++-analyzer
-+    -DCMAKE_C_COMPILER=/usr/share/clang/scan-build-${LLVM_PACKAGE_VERSION}/libexec/ccc-analyzer
-+    -DCMAKE_ASM_COMPILER=/usr/share/clang/scan-build-${LLVM_PACKAGE_VERSION}/libexec/ccc-analyzer
++    -DCMAKE_CXX_COMPILER=/usr/share/clang/scan-build-${CLANG_VERSION_MAJOR}/libexec/c++-analyzer
++    -DCMAKE_C_COMPILER=/usr/share/clang/scan-build-${CLANG_VERSION_MAJOR}/libexec/ccc-analyzer
++    -DCMAKE_ASM_COMPILER=/usr/share/clang/scan-build-${CLANG_VERSION_MAJOR}/libexec/ccc-analyzer
      -DCMAKE_ASM_COMPILER_ID=Clang)
  
    # cmake requires CMAKE_LINKER to be specified if the compiler is MSVC-like,

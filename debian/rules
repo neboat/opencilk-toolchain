@@ -461,7 +461,7 @@ override_dh_auto_configure: preconfigure
 	sed -e "s|@DEB_PATCHSETVERSION@|$(DEBIAN_REVISION)|" \
 		debian/debian_path.h > clang/include/clang/Debian/debian_path.h
 	if test "$(SCAN_BUILD)" = "yes"; then \
-		patch -f -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff; \
+		patch -f -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff||true; \
 	fi
 
 	# Configure coverity (we need the compilers) + work around perf issues
