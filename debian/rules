@@ -292,7 +292,7 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 # OTHERMIRROR="deb http://llvm.org/apt/unstable/ llvm-toolchain main"
 # EXTRAPACKAGES="clang-X"
 	SCAN_BUILD=yes
-	PATCH ?= $(shell patch -f -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff)
+
 	PRE_PROCESS=scan-build-$(LLVM_VERSION) --show-description -analyzer-config stable-report-filename=true
 # -enable-checker optin.performance.Padding
 	PRE_PROCESS_CONF=scan-build-$(LLVM_VERSION)
@@ -460,6 +460,9 @@ override_dh_auto_configure: preconfigure
 	mkdir -p clang/include/clang/Debian
 	sed -e "s|@DEB_PATCHSETVERSION@|$(DEBIAN_REVISION)|" \
 		debian/debian_path.h > clang/include/clang/Debian/debian_path.h
+	if test "$(SCAN_BUILD)" = "yes"; then \
+		patch -f -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff; \
+	fi
 
 	# Configure coverity (we need the compilers) + work around perf issues
 	-(if test $(COVERITY_ENABLE) -eq 1; then \
