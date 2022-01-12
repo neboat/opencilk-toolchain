@@ -185,6 +185,10 @@ ifneq (,$(filter $(DEB_HOST_ARCH),x32))
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_DEFAULT_TARGET_TRIPLE=x86_64-linux-gnux32
 endif
 
+ifneq (,$(filter $(DEB_HOST_ARCH),hurd-i386))
+  STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
+endif
+
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) ge 4.8-20121128-1~ ; echo $$?),0)
 	control_vars = '-Vdep:devlibs=libstdc++-$(GCC_VERSION)-dev, libgcc-$(GCC_VERSION)-dev' \
 		'-Vdep:devlibs-objc=libobjc-$(GCC_VERSION)-dev'
