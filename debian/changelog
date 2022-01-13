@@ -1,7 +1,13 @@
 llvm-toolchain-13 (1:13.0.1~+rc1-1~exp5) UNRELEASED; urgency=medium
 
+  [ Samuel Thibault ]
   * Explicitly link against -latomic on all ports, not only the Linux ones.
+  * Stop hardcoding -DCMAKE_SYSTEM_NAME=Linux as cmake parameter, as it breaks
+    stage2 builds on non-Linux architectures
 
+  [ Pino Toscano ]
+  * debian/rules: Disable 64bit runtime build on hurd-i386 (Closes: #1003081).
+ 
  -- Samuel Thibault <sthibault@debian.org>  Mon, 10 Jan 2022 21:36:34 +0100
 
 llvm-toolchain-13 (1:13.0.1~+rc1-1~exp4) experimental; urgency=medium
