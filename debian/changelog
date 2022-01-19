@@ -1,9 +1,13 @@
 llvm-toolchain-snapshot (1:14~++20220116120030+696f9706f34d-1~exp1) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * Remove lldb-instr to match upstream change 4609e30f5001cfcba59d1f2f90ce72ebfda6e61f
   * Ugly workaround to enable scan-build on runtimes
     debian/patches/use-scan-build-runtimes.diff
   * Python 2 => 3 to unbreak the 'scanbuild_py_makefile.txt' test
+
+  [ Samuel Thibault ]
+  * Explicitly link against -latomic on hurd-i386 as well.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 16 Jan 2022 00:00:49 +0100
 
