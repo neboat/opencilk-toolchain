@@ -7,8 +7,11 @@ llvm-toolchain-13 (1:13.0.1~+rc1-1~exp5) UNRELEASED; urgency=medium
 
   [ Pino Toscano ]
   * debian/rules: Disable 64bit runtime build on hurd-i386 (Closes: #1003081).
- 
- -- Samuel Thibault <sthibault@debian.org>  Mon, 10 Jan 2022 21:36:34 +0100
+
+  [ Sylvestre Ledru ]
+  * Lower the debhelper dep to 10 for debian stretch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 19 Jan 2022 23:46:10 +0100
 
 llvm-toolchain-13 (1:13.0.1~+rc1-1~exp4) experimental; urgency=medium
 
