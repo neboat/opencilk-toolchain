@@ -4,6 +4,7 @@ llvm-toolchain-12 (1:12.0.1-18) unstable; urgency=medium
     -fuse-ld=gold wasn't passed to compiler-rt. it was using bfd.
     And binutils shipping in buster has a bug preventing this to work:
     https://github.com/llvm/llvm-project/issues/42339
+  * Rename ocaml-nox => ocaml-base (Closes: #1002608)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Dec 2021 17:49:22 +0100
 
