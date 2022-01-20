@@ -10,6 +10,7 @@ llvm-toolchain-13 (1:13.0.1~+rc1-1~exp5) UNRELEASED; urgency=medium
 
   [ Sylvestre Ledru ]
   * Lower the debhelper dep to 10 for debian stretch
+  * Rename ocaml-nox => ocaml-base (Closes: #1002609)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 19 Jan 2022 23:46:10 +0100
 
