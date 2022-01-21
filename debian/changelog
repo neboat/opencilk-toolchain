@@ -12,6 +12,7 @@ llvm-toolchain-13 (1:13.0.1~+rc3-1~exp1) experimental; urgency=medium
   * New rc
   * Lower the debhelper dep to 10 for debian stretch
   * Rename ocaml-nox => ocaml-base (Closes: #1002609)
+  * Remove Build-Conflicts: ocaml
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 13 Jan 2022 21:17:23 +0100
 
