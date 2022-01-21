@@ -1,4 +1,4 @@
-llvm-toolchain-13 (1:13.0.1~+rc1-1~exp5) UNRELEASED; urgency=medium
+llvm-toolchain-13 (1:13.0.1~+rc3-1~exp1) experimental; urgency=medium
 
   [ Samuel Thibault ]
   * Explicitly link against -latomic on all ports, not only the Linux ones.
@@ -9,10 +9,11 @@ llvm-toolchain-13 (1:13.0.1~+rc1-1~exp5) UNRELEASED; urgency=medium
   * debian/rules: Disable 64bit runtime build on hurd-i386 (Closes: #1003081).
 
   [ Sylvestre Ledru ]
+  * New rc
   * Lower the debhelper dep to 10 for debian stretch
   * Rename ocaml-nox => ocaml-base (Closes: #1002609)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 19 Jan 2022 23:46:10 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 13 Jan 2022 21:17:23 +0100
 
 llvm-toolchain-13 (1:13.0.1~+rc1-1~exp4) experimental; urgency=medium
 
