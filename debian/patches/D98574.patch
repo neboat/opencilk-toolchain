@@ -1,21 +1,20 @@
---- llvm-toolchain-snapshot-13~++20210129063721+010b176cdefb.orig/clang/lib/Basic/Targets/Sparc.cpp
-+++ llvm-toolchain-snapshot-13~++20210129063721+010b176cdefb/clang/lib/Basic/Targets/Sparc.cpp
-@@ -156,9 +156,12 @@ void SparcV8TargetInfo::getTargetDefines
+Index: llvm-toolchain-snapshot_14~++20220121115143+653b007dc186/clang/lib/Basic/Targets/Sparc.cpp
+===================================================================
+--- llvm-toolchain-snapshot_14~++20220121115143+653b007dc186.orig/clang/lib/Basic/Targets/Sparc.cpp
++++ llvm-toolchain-snapshot_14~++20220121115143+653b007dc186/clang/lib/Basic/Targets/Sparc.cpp
+@@ -156,6 +156,11 @@ void SparcV8TargetInfo::getTargetDefines
        Builder.defineMacro("__sparcv8__");
        break;
      case CG_V9:
--      Builder.defineMacro("__sparcv9");
--      Builder.defineMacro("__sparcv9__");
-       Builder.defineMacro("__sparc_v9__");
 +      // Linux doesn't need these variants, but the BSDs do.
 +      if (getTriple().getOS() != llvm::Triple::Linux) {
 +        Builder.defineMacro("__sparcv9");
 +        Builder.defineMacro("__sparcv9__");
 +      }
+       Builder.defineMacro("__sparc_v9__");
        break;
      }
-   }
-@@ -239,13 +242,17 @@ void SparcV8TargetInfo::getTargetDefines
+@@ -237,13 +242,17 @@ void SparcV8TargetInfo::getTargetDefines
  void SparcV9TargetInfo::getTargetDefines(const LangOptions &Opts,
                                           MacroBuilder &Builder) const {
    SparcTargetInfo::getTargetDefines(Opts, Builder);
