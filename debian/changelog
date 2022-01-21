@@ -5,6 +5,7 @@ llvm-toolchain-12 (1:12.0.1-18) unstable; urgency=medium
     And binutils shipping in buster has a bug preventing this to work:
     https://github.com/llvm/llvm-project/issues/42339
   * Rename ocaml-nox => ocaml-base (Closes: #1002608)
+  * Remove Build-Conflicts: ocaml
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Dec 2021 17:49:22 +0100
 
