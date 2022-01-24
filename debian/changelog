@@ -1,6 +1,6 @@
 llvm-toolchain-snapshot (1:14~++20220123085548+413684313d9d-1~exp2) experimental; urgency=medium
 
-  * Hide some symbols for omp/arm64
+  * Hide some symbols for omp/arm*
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 24 Jan 2022 13:56:35 +0100
 
