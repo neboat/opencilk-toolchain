@@ -196,12 +196,6 @@ ifneq (,$(filter $(DEB_HOST_ARCH),hurd-i386))
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
 endif
 
-LLDB_PYTHON_UNSUPPORTED_DISTRO := stretch
-# Don't enable lld python for old distros
-ifeq (,$(filter $(DISTRO), $(LLDB_PYTHON_UNSUPPORTED_DISTRO)))
-  STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_PYTHON=OFF
-endif
-
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) ge 4.8-20121128-1~ ; echo $$?),0)
 	control_vars = '-Vdep:devlibs=libstdc++-$(GCC_VERSION)-dev, libgcc-$(GCC_VERSION)-dev' \
 		'-Vdep:devlibs-objc=libobjc-$(GCC_VERSION)-dev'
@@ -339,6 +333,12 @@ else
 	STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_LUA=OFF
 	PROJECTS+=;lldb
 endif
+
+ifneq (,$(filter $(DISTRO),stretch))
+# Don't enable lld python for old distros
+  STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_PYTHON=OFF
+endif
+
 
 LLD_ENABLE=yes
 
