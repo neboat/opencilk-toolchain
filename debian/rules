@@ -978,9 +978,6 @@ override_dh_auto_test:
 endif
 
 
-override_dh_testroot:
-	# Override for Debian stretch
-
 override_dh_gencontrol:
 	dh_gencontrol -- $(control_vars)
 
