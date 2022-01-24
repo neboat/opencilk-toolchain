@@ -92,6 +92,11 @@ ifneq (,$(filter $(DEB_HOST_ARCH),sparc sparc64))
 STAGE_1_CMAKE_EXTRA += -DLLVM_PARALLEL_LINK_JOBS=4
 endif
 
+ifneq (,$(filter $(DISTRO),stretch))
+# Help to find the fakeroot path
+	export LD_LIBRARY_PATH := $(LD_LIBRARY_PATH):/usr/lib/x86_64-linux-gnu/libfakeroot/
+endif
+
 ifneq (,$(filter $(DEB_HOST_ARCH),i386 armel mipsel powerpc powerpcspe riscv64))
 # For some reason, in the stage2 build, when clang is used to compile
 # itself. The atomic detection is failing on armel and riscv64. Forcing the inclusion
@@ -392,6 +397,8 @@ preconfigure:
 	@echo "LLVM_VERSION=$(LLVM_VERSION)"
 	@echo "LLVM_VERSION_FULL=$(LLVM_VERSION_FULL)"
 	@echo "LLVM_VERSION_SNAPSHOT=$(LLVM_VERSION_SNAPSHOT)"
+	@echo "PATH=$(PATH)"
+	@echo "LD_LIBRARY_PATH=$(LD_LIBRARY_PATH)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
