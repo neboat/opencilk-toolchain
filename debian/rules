@@ -1,3 +1,4 @@
+
 #!/usr/bin/make -f
 
 # polly & lldb aren't enabled for every platform
@@ -94,7 +95,7 @@ endif
 
 ifneq (,$(filter $(DISTRO),stretch))
 # Help to find the fakeroot path
-	export LD_LIBRARY_PATH := $(LD_LIBRARY_PATH):/usr/lib/x86_64-linux-gnu/libfakeroot/
+	export LD_LIBRARY_PATH := $$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/libfakeroot/
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),i386 armel mipsel powerpc powerpcspe riscv64))
