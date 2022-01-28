@@ -1,17 +1,15 @@
-Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/libcxx/include/atomic
+Index: llvm-toolchain-snapshot_14~++20220128082735+c962b3fdf8dd/libcxx/include/atomic
 ===================================================================
---- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/libcxx/include/atomic
-+++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/libcxx/include/atomic
-@@ -2675,10 +2675,15 @@ typedef conditional<_LIBCPP_CONTENTION_L
- typedef conditional<_LIBCPP_CONTENTION_LOCK_FREE, __cxx_contention_t, unsigned char>::type      __libcpp_unsigned_lock_free;
- #else
-     // No signed/unsigned lock-free types
-+#define NO_LOCK_FREE
+--- llvm-toolchain-snapshot_14~++20220128082735+c962b3fdf8dd.orig/libcxx/include/atomic
++++ llvm-toolchain-snapshot_14~++20220128082735+c962b3fdf8dd/libcxx/include/atomic
+@@ -2696,9 +2696,13 @@ typedef conditional<_LIBCPP_CONTENTION_L
  #endif
  
+ #if !defined(_LIBCPP_NO_LOCK_FREE_TYPES)
 +#ifndef NO_LOCK_FREE
  typedef atomic<__libcpp_signed_lock_free> atomic_signed_lock_free;
  typedef atomic<__libcpp_unsigned_lock_free> atomic_unsigned_lock_free;
+ #endif
 +#endif
 +
 +#undef NO_LOCK_FREE
