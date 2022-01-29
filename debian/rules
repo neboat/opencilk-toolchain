@@ -125,6 +125,18 @@ ZARCH=z13
 endif
 STAGE_2_CMAKE_EXTRA += -DCLANG_SYSTEMZ_DEFAULT_ARCH=$(ZARCH)
 
+# clangd remote index support requires GRPC & protobuf.
+# Enable if minimum tested versions are available.
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libgrpc++-dev) gt 1.30.0; echo $$?),0)
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' protobuf-compiler-grpc) gt 1.30.0; echo $$?),0)
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libprotobuf-dev) gt 3.12.0; echo $$?),0)
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' protobuf-compiler) gt 3.12.0; echo $$?),0)
+STAGE_2_CMAKE_EXTRA += -DCLANGD_ENABLE_REMOTE=ON
+endif
+endif
+endif
+endif
+
 export CC=gcc-$(GCC_VERSION)
 export CXX=g++-$(GCC_VERSION)
 
