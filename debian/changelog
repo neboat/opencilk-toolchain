@@ -2,9 +2,6 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp2) unstable; ur
 
   * Install new llvm-remark-size-diff in llvm-X.Y
   * Install clang-pseudo in clang-tools-X.Y
-
- --
-
 llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) UNRELEASED; urgency=medium
 
   * snapshot is now 15. 14 is in it own branch now
@@ -13,7 +10,7 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) UNRELEASED; 
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 02 Feb 2022 21:38:42 +0100
 
-llvm-toolchain-snapshot (1:14~++20220123085548+413684313d9d-1~exp2) experimental; urgency=medium
+llvm-toolchain-14 (1:14~++20220123085548+413684313d9d-1~exp2) experimental; urgency=medium
 
   * Hide some symbols for omp/arm* and other archs
 
