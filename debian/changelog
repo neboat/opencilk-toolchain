@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:14~++20220123085548+413684313d9d-1~exp2) experimental; urgency=medium
+llvm-toolchain-14 (1:14~++20220123085548+413684313d9d-1~exp2) experimental; urgency=medium
 
   * Hide some symbols for omp/arm* and other archs
 
