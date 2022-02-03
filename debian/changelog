@@ -1,3 +1,9 @@
+llvm-toolchain-13 (1:13.0.1-1) unstable; urgency=medium
+
+  * New stable release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 03 Feb 2022 10:21:56 +0100
+
 llvm-toolchain-13 (1:13.0.1~+rc3-1~exp1) experimental; urgency=medium
 
   [ Samuel Thibault ]
