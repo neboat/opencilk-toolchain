@@ -1,15 +1,6 @@
 #!/bin/sh
-# This script will create the following tarballs:
-# llvm-toolchain-snapshot-3.2_3.2repack.orig-clang.tar.bz2
-# llvm-toolchain-snapshot-3.2_3.2repack.orig-clang-extra.tar.bz2
-# llvm-toolchain-snapshot-3.2_3.2repack.orig-compiler-rt.tar.bz2
-# llvm-toolchain-snapshot-3.2_3.2repack.orig-lld.tar.bz2
-# llvm-toolchain-snapshot-3.2_3.2repack.orig-lldb.tar.bz2
-# llvm-toolchain-snapshot-3.2_3.2repack.orig-polly.tar.bz2
-# llvm-toolchain-snapshot-3.2_3.2repack.orig-openmp.tar.bz2
-# llvm-toolchain-snapshot-3.2_3.2repack.orig-libcxx.tar.bz2
-# llvm-toolchain-snapshot-3.2_3.2repack.orig-libcxxabi.tar.bz2
-# llvm-toolchain-snapshot-3.2_3.2repack.orig.tar.bz2
+# This script will create the following tarball:
+# llvm-toolchain-XX_XX\~+20200120101212+de4b2a7fad6.orig.tar.xz
 
 set -e
 
