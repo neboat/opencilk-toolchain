@@ -41,7 +41,7 @@ reset_repo ()
 
 PATH_DEBIAN="$(pwd)/$(dirname $0)/../"
 cd "$PATH_DEBIAN"
-
+echo $PATH_DEBIAN
 git stash && git pull && git stash apply || true
 
 MAJOR_VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
