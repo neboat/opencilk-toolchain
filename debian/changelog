@@ -1,6 +1,7 @@
 llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp2) unstable; urgency=medium
 
   * Install new llvm-remark-size-diff in llvm-X.Y
+  * Install clang-pseudo in clang-tools-X.Y
 
  --
 
