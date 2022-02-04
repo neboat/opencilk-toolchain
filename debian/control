@@ -29,8 +29,8 @@ Build-Depends: debhelper (>= 9.0), cmake, ninja-build,
 Build-Conflicts: oprofile
 Standards-Version: 4.2.1
 Homepage: https://www.llvm.org/
-Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b snapshot
-Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/snapshot
+Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b 12
+Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/12
 
 # ------------- clang -------------
 
