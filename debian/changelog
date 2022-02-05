@@ -301,6 +301,22 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
+llvm-toolchain-13 (1:13.0.1-2) unstable; urgency=medium
+
+  * mlir: use the cmake option to avoid installing object files
+    MLIR_INSTALL_AGGREGATE_OBJECTS
+    Closes upstream #53134
+  * Build clangd with GRPC support
+    Thanks to Sam McCall for the patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 05 Jan 2022 23:21:56 +0100
+
+llvm-toolchain-13 (1:13.0.1-1) unstable; urgency=medium
+
+  * New stable release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 03 Feb 2022 10:21:56 +0100
+
 llvm-toolchain-13 (1:13.0.1~+rc3-1~exp1) experimental; urgency=medium
 
   [ Samuel Thibault ]
@@ -626,6 +642,30 @@ llvm-toolchain-snapshot (1:13~++20201124100523+245052ac3080-1~exp1) experimental
   * Add upstream patch D92052 to fix a gcn offload compiler issue with gcc (Closes: #975692)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jan 2021 16:02:16 +0100
+
+llvm-toolchain-12 (1:12.0.1-19) UNRELEASED; urgency=medium
+
+  * Build clangd with GRPC support
+    Thanks to Sam McCall for the patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 29 Jan 2022 10:17:38 +0100
+
+llvm-toolchain-12 (1:12.0.1-18) unstable; urgency=medium
+
+  * Unbreak llvm-toolchain-12 on buster.
+    -fuse-ld=gold wasn't passed to compiler-rt. it was using bfd.
+    And binutils shipping in buster has a bug preventing this to work:
+    https://github.com/llvm/llvm-project/issues/42339
+  * Rename ocaml-nox => ocaml-base (Closes: #1002608)
+  * Remove Build-Conflicts: ocaml
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Dec 2021 17:49:22 +0100
+
+llvm-toolchain-12 (1:12.0.1-17) unstable; urgency=medium
+
+  * Rebuild to workaround the coinstallability issue (Closes: #996858)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Nov 2021 19:32:51 +0100
 
 llvm-toolchain-12 (1:12.0.1-16) unstable; urgency=medium
 

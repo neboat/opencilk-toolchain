@@ -124,6 +124,18 @@ ZARCH=z13
 endif
 STAGE_2_CMAKE_EXTRA += -DCLANG_SYSTEMZ_DEFAULT_ARCH=$(ZARCH)
 
+# clangd remote index support requires GRPC & protobuf.
+# Enable if minimum tested versions are available.
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libgrpc++-dev) gt 1.30.0; echo $$?),0)
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' protobuf-compiler-grpc) gt 1.30.0; echo $$?),0)
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libprotobuf-dev) gt 3.12.0; echo $$?),0)
+ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' protobuf-compiler) gt 3.12.0; echo $$?),0)
+STAGE_2_CMAKE_EXTRA += -DCLANGD_ENABLE_REMOTE=ON
+endif
+endif
+endif
+endif
+
 export CC=gcc-$(GCC_VERSION)
 export CXX=g++-$(GCC_VERSION)
 
@@ -273,6 +285,10 @@ ifeq ($(LIBUNWIND_ENABLE),yes)
   STAGE_ALL_CMAKE_EXTRA += -DOPENMP_USE_LLVM_UNWINDER=ON
 endif
 endif
+
+# Do not install objects
+STAGE_ALL_CMAKE_EXTRA += -DMLIR_INSTALL_AGGREGATE_OBJECTS=OFF
+
 
 RUN_TEST=yes
 ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
@@ -424,6 +440,8 @@ preconfigure:
 	@echo "LLVM_VERSION=$(LLVM_VERSION)"
 	@echo "LLVM_VERSION_FULL=$(LLVM_VERSION_FULL)"
 	@echo "LLVM_VERSION_SNAPSHOT=$(LLVM_VERSION_SNAPSHOT)"
+	@echo "PATH=$(PATH)"
+	@echo "LD_LIBRARY_PATH=$(LD_LIBRARY_PATH)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
@@ -715,7 +733,7 @@ override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
 	rm -rf $(find $(TARGET_BUILD) -wholename '*CMakeFiles*' -not -name CMakeLists.txt -a -name "*.dir" -type d)
 	# install/fast enables a make install without recompiling temporary files
-	DESTDIR=$(DEB_INST)/ ninja -C $(TARGET_BUILD) $(VERBOSE) stage2-install
+	LD_LIBRARY_PATH=$(STAGE_2_LIB_DIR) DESTDIR=$(DEB_INST)/ ninja -C $(TARGET_BUILD) $(VERBOSE) stage2-install
 
 	# Not used on Linux.
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/argdumper
@@ -727,8 +745,8 @@ override_dh_auto_install:
 	# Remove an example - introduced in https://reviews.llvm.org/D61446
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libBye.a
 
-	# should not be installed (mlir)
-	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/objects-Release/
+	# Remove unused clangd lib
+	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libRemoteIndexProto.a $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libRemoteIndexServiceProto.a $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libMonitoringServiceProto.a
 
 	cp $(TARGET_BUILD_STAGE2)/bin/clang-query $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin
 
