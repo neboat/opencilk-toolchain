@@ -3,6 +3,8 @@ llvm-toolchain-13 (1:13.0.1-2) unstable; urgency=medium
   * mlir: use the cmake option to avoid installing object files
     MLIR_INSTALL_AGGREGATE_OBJECTS
     Closes upstream #53134
+  * Build clangd with GRPC support
+    Thanks to Sam McCall for the patch
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 05 Jan 2022 23:21:56 +0100
 
