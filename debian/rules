@@ -262,6 +262,10 @@ ifeq ($(LIBUNWIND_ENABLE),yes)
 endif
 endif
 
+# Do not install objects
+STAGE_ALL_CMAKE_EXTRA += -DMLIR_INSTALL_AGGREGATE_OBJECTS=OFF
+
+
 RUN_TEST=yes
 ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	RUN_TEST=no
@@ -686,9 +690,6 @@ override_dh_auto_install:
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libExampleIRTransforms.a
 	# Remove an example - introduced in https://reviews.llvm.org/D61446
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libBye.a
-
-	# should not be installed (mlir)
-	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/objects-Release/
 
 	cp $(TARGET_BUILD_STAGE2)/bin/clang-query $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin
 
