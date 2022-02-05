@@ -706,7 +706,7 @@ override_dh_auto_install:
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libBye.a
 
 	# Remove unused clangd lib
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libRemoteIndexProto.a $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libRemoteIndexServiceProto.a
+	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libRemoteIndexProto.a $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libRemoteIndexServiceProto.a $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libMonitoringServiceProto.a
 
 	cp $(TARGET_BUILD_STAGE2)/bin/clang-query $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin
 
