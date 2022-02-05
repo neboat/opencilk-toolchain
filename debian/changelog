@@ -6,6 +6,7 @@ llvm-toolchain-14 (1:14~++20220202101403+91632c8ac97f-1~exp2) experimental; urge
     Closes upstream #53134
   * Build clangd with GRPC support
     Thanks to Sam McCall for the patch
+  * Revert e80c52986e1bb3afa6a92c58b1cb897877923a66 to be able to build on stretch
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 05 Feb 2022 14:28:59 +0100
 
