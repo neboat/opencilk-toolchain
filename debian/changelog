@@ -331,6 +331,30 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
 
+llvm-toolchain-12 (1:12.0.1-19) UNRELEASED; urgency=medium
+
+  * Build clangd with GRPC support
+    Thanks to Sam McCall for the patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 29 Jan 2022 10:17:38 +0100
+
+llvm-toolchain-12 (1:12.0.1-18) unstable; urgency=medium
+
+  * Unbreak llvm-toolchain-12 on buster.
+    -fuse-ld=gold wasn't passed to compiler-rt. it was using bfd.
+    And binutils shipping in buster has a bug preventing this to work:
+    https://github.com/llvm/llvm-project/issues/42339
+  * Rename ocaml-nox => ocaml-base (Closes: #1002608)
+  * Remove Build-Conflicts: ocaml
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Dec 2021 17:49:22 +0100
+
+llvm-toolchain-12 (1:12.0.1-17) unstable; urgency=medium
+
+  * Rebuild to workaround the coinstallability issue (Closes: #996858)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Nov 2021 19:32:51 +0100
+
 llvm-toolchain-12 (1:12.0.1-16) unstable; urgency=medium
 
   [ Erik Maciejewski ]

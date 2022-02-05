@@ -23,7 +23,8 @@ Build-Depends: debhelper (>= 10.0), cmake, ninja-build,
     dh-exec, dh-ocaml [amd64 arm64 armhf ppc64el riscv64 s390x],
     libpfm4-dev [linux-any], python3-setuptools, libz3-dev,
     llvm-spirv [ amd64 arm64 armel armhf mips64el mipsel ppc64el s390x ] <!stage1> | hello [!i386],
-    spirv-tools [ linux-any ] | hello [ !i386]
+    spirv-tools [ linux-any ] | hello [ !i386],
+    libgrpc++-dev, libprotobuf-dev, protobuf-compiler, protobuf-compiler-grpc
 # "| hello" is for older buster/bionic distros without spirv support
 Build-Conflicts: oprofile
 Standards-Version: 4.2.1
