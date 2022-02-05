@@ -1,3 +1,14 @@
+llvm-toolchain-14 (1:14~++20220202101403+91632c8ac97f-1~exp2) experimental; urgency=medium
+
+  Changes for 13:
+  * mlir: use the cmake option to avoid installing object files
+    MLIR_INSTALL_AGGREGATE_OBJECTS
+    Closes upstream #53134
+  * Build clangd with GRPC support
+    Thanks to Sam McCall for the patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 05 Feb 2022 14:28:59 +0100
+
 llvm-toolchain-14 (1:14~++20220202101403+91632c8ac97f-1~exp1) experimental; urgency=medium
 
   * snapshot = 15, first 14 package
