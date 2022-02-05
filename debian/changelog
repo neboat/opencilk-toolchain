@@ -2,6 +2,14 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp2) unstable; ur
 
   * Install new llvm-remark-size-diff in llvm-X.Y
   * Install clang-pseudo in clang-tools-X.Y
+  * mlir: use the cmake option to avoid installing object files
+    MLIR_INSTALL_AGGREGATE_OBJECTS
+    Closes upstream #53134
+  * Build clangd with GRPC support
+    Thanks to Sam McCall for the patch
+
+ --
+
 llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) UNRELEASED; urgency=medium
 
   * snapshot is now 15. 14 is in it own branch now
