@@ -152,3 +152,4 @@ compilerrt-builtins-arch-fix-armhf.diff
 compilerrt-build-scudo-standalone-option.diff
 use-gold-for-compiler-rt-when-set.diff
 wasm-ld-path.diff
+fix-typo.diff
