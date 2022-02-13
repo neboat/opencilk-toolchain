@@ -1,4 +1,4 @@
-Source: llvm-toolchain-14
+Source: llvm-toolchain-snapshot
 Section: devel
 Priority: optional
 Rules-Requires-Root: no
