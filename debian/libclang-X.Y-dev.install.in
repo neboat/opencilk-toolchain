@@ -9,3 +9,4 @@ usr/lib/llvm-@LLVM_VERSION@/lib/libfindAllSymbols.a
 # clangd
 usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexProto.a
 usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexServiceProto.a
+usr/lib/llvm-@LLVM_VERSION@/lib/libMonitoringServiceProto.a
