@@ -1856,13 +1856,6 @@ llvm-toolchain-snapshot (1:11~++20200621103028+10b0539772d-1~exp1) UNRELEASED; u
   * Upstream change ad97ccf6b26a29262c9cbf5b3e7f6e84c6dcf55f
     broke clangd-atomic-cmake.patch causing some undef symbol on
     i386 and atomic
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 21 Jun 2020 10:33:23 +0200
 
