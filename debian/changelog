@@ -315,6 +315,18 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
+llvm-toolchain-13 (1:13.0.1-3) unstable; urgency=medium
+
+  * Fix a typo in an header (closes: #1005195)
+
+  * Also install usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexProto.a
+    usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexServiceProto.a
+    usr/lib/llvm-@LLVM_VERSION@/lib/libMonitoringServiceProto.a
+    in libclang-X.Y-dev
+    (Closes: #1005666)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 08 Feb 2022 21:39:18 +0100
+
 llvm-toolchain-13 (1:13.0.1-2) unstable; urgency=medium
 
   * mlir: use the cmake option to avoid installing object files
@@ -657,7 +669,15 @@ llvm-toolchain-snapshot (1:13~++20201124100523+245052ac3080-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jan 2021 16:02:16 +0100
 
-llvm-toolchain-12 (1:12.0.1-19) UNRELEASED; urgency=medium
+llvm-toolchain-12 (1:12.0.1-20) unstable; urgency=medium
+
+  * Also install usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexProto.a
+    usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexServiceProto.a
+    in libclang-X.Y-dev
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Feb 2022 14:04:40 +0100
+
+llvm-toolchain-12 (1:12.0.1-19) unstable; urgency=medium
 
   * Build clangd with GRPC support
     Thanks to Sam McCall for the patch
