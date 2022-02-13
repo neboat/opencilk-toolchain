@@ -339,7 +339,15 @@ llvm-toolchain-snapshot (1:13~++20210129063721+010b176cdefb-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 30 Jan 2021 17:31:15 +0100
 
-llvm-toolchain-12 (1:12.0.1-19) UNRELEASED; urgency=medium
+llvm-toolchain-12 (1:12.0.1-20) unstable; urgency=medium
+
+  * Also install usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexProto.a
+    usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexServiceProto.a
+    in libclang-X.Y-dev
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Feb 2022 14:04:40 +0100
+
+llvm-toolchain-12 (1:12.0.1-19) unstable; urgency=medium
 
   * Build clangd with GRPC support
     Thanks to Sam McCall for the patch

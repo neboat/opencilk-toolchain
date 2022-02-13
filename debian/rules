@@ -705,9 +705,12 @@ override_dh_auto_install:
 	# Remove an example - introduced in https://reviews.llvm.org/D61446
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libBye.a
 
+<<<<<<< HEAD
 	# Remove unused clangd lib
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libRemoteIndexProto.a $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libRemoteIndexServiceProto.a $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libMonitoringServiceProto.a
 
+=======
+>>>>>>> origin/12
 	cp $(TARGET_BUILD_STAGE2)/bin/clang-query $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin
 
 	# Only run on executable, not script
