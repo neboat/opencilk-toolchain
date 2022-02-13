@@ -1,5 +1,7 @@
-llvm-toolchain-14 (1:14~++20220202101403+91632c8ac97f-1~exp2) experimental; urgency=medium
+llvm-toolchain-14 (1:14.0.0~+rc1-1) unstable; urgency=medium
 
+  * First testing release of 14
+  * Upload to unstable
   Changes for 13:
   * mlir: use the cmake option to avoid installing object files
     MLIR_INSTALL_AGGREGATE_OBJECTS
@@ -8,7 +10,7 @@ llvm-toolchain-14 (1:14~++20220202101403+91632c8ac97f-1~exp2) experimental; urge
     Thanks to Sam McCall for the patch
   * Revert e80c52986e1bb3afa6a92c58b1cb897877923a66 to be able to build on stretch
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 05 Feb 2022 14:28:59 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 10 Feb 2022 09:25:26 +0100
 
 llvm-toolchain-14 (1:14~++20220202101403+91632c8ac97f-1~exp1) experimental; urgency=medium
 
