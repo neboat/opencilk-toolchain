@@ -7,9 +7,6 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp2) unstable; ur
     Closes upstream #53134
   * Build clangd with GRPC support
     Thanks to Sam McCall for the patch
-
- --
-
 llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) UNRELEASED; urgency=medium
 
   * snapshot is now 15. 14 is in it own branch now
@@ -17,6 +14,37 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) UNRELEASED; 
   * experimental New snapshot release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 02 Feb 2022 21:38:42 +0100
+
+llvm-toolchain-14 (1:14.0.0~+rc1-2) unstable; urgency=medium
+
+  * Also install usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexProto.a
+    usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexServiceProto.a
+    usr/lib/llvm-@LLVM_VERSION@/lib/libMonitoringServiceProto.a
+    in libclang-X.Y-dev
+    (Closes: #1005666)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Feb 2022 14:17:02 +0100
+
+llvm-toolchain-14 (1:14.0.0~+rc1-1) unstable; urgency=medium
+
+  * First testing release of 14
+  * Upload to unstable
+  Changes for 13:
+  * mlir: use the cmake option to avoid installing object files
+    MLIR_INSTALL_AGGREGATE_OBJECTS
+    Closes upstream #53134
+  * Build clangd with GRPC support
+    Thanks to Sam McCall for the patch
+  * Revert e80c52986e1bb3afa6a92c58b1cb897877923a66 to be able to build on stretch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 10 Feb 2022 09:25:26 +0100
+
+llvm-toolchain-14 (1:14~++20220202101403+91632c8ac97f-1~exp1) experimental; urgency=medium
+
+  * snapshot = 15, first 14 package
+  * Ship clang-linker-wrapper in clang-tools-X.Y
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 02 Feb 2022 22:14:13 +0100
 
 llvm-toolchain-14 (1:14~++20220128082735+c962b3fdf8dd-1~exp1) UNRELEASED; urgency=medium
 
@@ -320,6 +348,34 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
     otherwise
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
+
+llvm-toolchain-13 (1:13.0.1-3) unstable; urgency=medium
+
+  * Fix a typo in an header (closes: #1005195)
+
+  * Also install usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexProto.a
+    usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexServiceProto.a
+    usr/lib/llvm-@LLVM_VERSION@/lib/libMonitoringServiceProto.a
+    in libclang-X.Y-dev
+    (Closes: #1005666)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 08 Feb 2022 21:39:18 +0100
+
+llvm-toolchain-13 (1:13.0.1-2) unstable; urgency=medium
+
+  * mlir: use the cmake option to avoid installing object files
+    MLIR_INSTALL_AGGREGATE_OBJECTS
+    Closes upstream #53134
+  * Build clangd with GRPC support
+    Thanks to Sam McCall for the patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 05 Jan 2022 23:21:56 +0100
+
+llvm-toolchain-13 (1:13.0.1-1) unstable; urgency=medium
+
+  * New stable release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 03 Feb 2022 10:21:56 +0100
 
 llvm-toolchain-13 (1:13.0.1~+rc3-1~exp1) experimental; urgency=medium
 
@@ -646,6 +702,38 @@ llvm-toolchain-snapshot (1:13~++20201124100523+245052ac3080-1~exp1) experimental
   * Add upstream patch D92052 to fix a gcn offload compiler issue with gcc (Closes: #975692)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jan 2021 16:02:16 +0100
+
+llvm-toolchain-12 (1:12.0.1-20) unstable; urgency=medium
+
+  * Also install usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexProto.a
+    usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexServiceProto.a
+    in libclang-X.Y-dev
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Feb 2022 14:04:40 +0100
+
+llvm-toolchain-12 (1:12.0.1-19) unstable; urgency=medium
+
+  * Build clangd with GRPC support
+    Thanks to Sam McCall for the patch
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 29 Jan 2022 10:17:38 +0100
+
+llvm-toolchain-12 (1:12.0.1-18) unstable; urgency=medium
+
+  * Unbreak llvm-toolchain-12 on buster.
+    -fuse-ld=gold wasn't passed to compiler-rt. it was using bfd.
+    And binutils shipping in buster has a bug preventing this to work:
+    https://github.com/llvm/llvm-project/issues/42339
+  * Rename ocaml-nox => ocaml-base (Closes: #1002608)
+  * Remove Build-Conflicts: ocaml
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Dec 2021 17:49:22 +0100
+
+llvm-toolchain-12 (1:12.0.1-17) unstable; urgency=medium
+
+  * Rebuild to workaround the coinstallability issue (Closes: #996858)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Nov 2021 19:32:51 +0100
 
 llvm-toolchain-12 (1:12.0.1-16) unstable; urgency=medium
 
