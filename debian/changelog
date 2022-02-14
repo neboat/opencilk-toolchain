@@ -14,13 +14,10 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp2) unstable; ur
 
 llvm-toolchain-14 (1:14.0.0~+rc1-2) unstable; urgency=medium
 
-  * Also install usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexProto.a
-    usr/lib/llvm-@LLVM_VERSION@/lib/libRemoteIndexServiceProto.a
-    usr/lib/llvm-@LLVM_VERSION@/lib/libMonitoringServiceProto.a
-    in libclang-X.Y-dev
-    (Closes: #1005666)
+  *  Also path LD_LIBRARY_PATH for install
+     when cmake binary backport like on bionic s390x (for apt.llvm.org)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Feb 2022 14:17:02 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 14 Feb 2022 21:19:44 +0100
 
 llvm-toolchain-14 (1:14.0.0~+rc1-1) unstable; urgency=medium
 
