@@ -1,9 +1,10 @@
-llvm-toolchain-14 (1:14.0.0~+rc1-2) UNRELEASED; urgency=medium
+llvm-toolchain-14 (1:14.0.0~+rc2-1~exp1) unstable; urgency=medium
 
-  *  Also path LD_LIBRARY_PATH for install
-     when cmake binary backport like on bionic s390x (for apt.llvm.org)
+  * New snapshot release
+  * Also path LD_LIBRARY_PATH for install
+    when cmake binary backport like on bionic s390x (for apt.llvm.org)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 14 Feb 2022 21:19:44 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 04 Mar 2022 20:06:44 +0100
 
 llvm-toolchain-14 (1:14.0.0~+rc1-1) unstable; urgency=medium
 
