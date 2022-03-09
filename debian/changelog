@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:15~++20220309104405+e75f1d3c07ed-1~exp1) UNRELEASED; urgency=medium
+
+  * Try to unbreak the build (issue #54242)
+    MLIR undef issue
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 09 Mar 2022 22:45:06 +0100
+
 llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp2) unstable; urgency=medium
 
   * Install new llvm-remark-size-diff in llvm-X.Y
@@ -68,6 +75,7 @@ llvm-toolchain-snapshot (1:14~++20220123085548+413684313d9d-1~exp1) experimental
   * Explicitly link against -latomic on hurd-i386 as well.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 23 Jan 2022 20:48:09 +0100
+
 
 llvm-toolchain-snapshot (1:14~++20220107114130+3a604fdbcd5f-1~exp1) experimental; urgency=medium
 

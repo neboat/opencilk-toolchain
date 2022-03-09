@@ -1,0 +1,13 @@
+Index: llvm-toolchain-snapshot_15~++20220309104405+e75f1d3c07ed/mlir/lib/ExecutionEngine/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_15~++20220309104405+e75f1d3c07ed.orig/mlir/lib/ExecutionEngine/CMakeLists.txt
++++ llvm-toolchain-snapshot_15~++20220309104405+e75f1d3c07ed/mlir/lib/ExecutionEngine/CMakeLists.txt
+@@ -27,7 +27,7 @@ add_mlir_library(MLIRExecutionEngine
+   ExecutionEngine.cpp
+   OptUtils.cpp
+ 
+-  EXCLUDE_FROM_LIBMLIR
++#  EXCLUDE_FROM_LIBMLIR
+ 
+   ADDITIONAL_HEADER_DIRS
+   ${MLIR_MAIN_INCLUDE_DIR}/mlir/ExecutionEngine
