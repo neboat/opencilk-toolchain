@@ -1,3 +1,9 @@
+llvm-toolchain-14 (1:14.0.0~+rc2-2) unstable; urgency=medium
+
+  * Add an ugly workaround for Ubuntu jammy (some python files are installed in local/lib)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 11 Mar 2022 18:28:07 +0100
+
 llvm-toolchain-14 (1:14.0.0~+rc2-1~exp1) unstable; urgency=medium
 
   * New snapshot release
