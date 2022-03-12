@@ -886,6 +886,15 @@ endif
 		fi; \
 	fi
 
+# For some reasons, from Ubuntu jammy, python stuff are installed in /local/lib, move it back
+	if test -d $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local/lib/; then \
+		mv $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local/lib/* $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
+		rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/six.py; \
+		ls $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local/; \
+		rmdir $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local/lib; \
+		rmdir $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local; \
+	fi
+
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
 	rm -rf $(TARGET_BUILD)
