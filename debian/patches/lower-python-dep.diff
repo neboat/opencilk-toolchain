@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/llvm/cmake/modules/HandleLLVMOptions.cmake
+Index: llvm-toolchain-snapshot_15~++20220314071859+3b61587c9e27/llvm/cmake/modules/HandleLLVMOptions.cmake
 ===================================================================
---- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/llvm/cmake/modules/HandleLLVMOptions.cmake
-+++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/llvm/cmake/modules/HandleLLVMOptions.cmake
-@@ -1213,8 +1213,8 @@ if(LLVM_USE_RELATIVE_PATHS_IN_FILES)
+--- llvm-toolchain-snapshot_15~++20220314071859+3b61587c9e27.orig/llvm/cmake/modules/HandleLLVMOptions.cmake
++++ llvm-toolchain-snapshot_15~++20220314071859+3b61587c9e27/llvm/cmake/modules/HandleLLVMOptions.cmake
+@@ -1236,8 +1236,8 @@ if(LLVM_USE_RELATIVE_PATHS_IN_FILES)
  endif()
  
  if(LLVM_INCLUDE_TESTS)

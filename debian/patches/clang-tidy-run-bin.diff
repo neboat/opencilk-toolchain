@@ -1,16 +1,14 @@
-Index: llvm-toolchain-snapshot_15~++20211115120952+5b4bfd8c2415/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
+Index: llvm-toolchain-snapshot_15~++20220314071859+3b61587c9e27/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
 ===================================================================
---- llvm-toolchain-snapshot_15~++20211115120952+5b4bfd8c2415.orig/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
-+++ llvm-toolchain-snapshot_15~++20211115120952+5b4bfd8c2415/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
-@@ -194,10 +194,10 @@ def main():
+--- llvm-toolchain-snapshot_15~++20220314071859+3b61587c9e27.orig/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
++++ llvm-toolchain-snapshot_15~++20220314071859+3b61587c9e27/clang-tools-extra/clang-tidy/tool/run-clang-tidy.py
+@@ -219,8 +219,10 @@ def main():
                        action='store_true', help='allow alpha checkers from '
                                                  'clang-analyzer.')
    parser.add_argument('-clang-tidy-binary', metavar='PATH',
--                      default='clang-tidy',
 +                      default='clang-tidy-15',
                        help='path to clang-tidy binary')
    parser.add_argument('-clang-apply-replacements-binary', metavar='PATH',
--                      default='clang-apply-replacements',
 +                      default='clang-apply-replacements-15',
                        help='path to clang-apply-replacements binary')
    parser.add_argument('-checks', default=None,
