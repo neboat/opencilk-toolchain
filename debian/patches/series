@@ -149,3 +149,4 @@ compilerrt-build-scudo-standalone-option.diff
 wasm-ld-path.diff
 python3-scan-build.py
 issue-54242.diff
+revert-update-doc.diff
