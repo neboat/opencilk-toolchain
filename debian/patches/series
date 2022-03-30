@@ -150,3 +150,7 @@ wasm-ld-path.diff
 python3-scan-build.py
 revert-update-doc.diff
 fix-typo.diff
+
+# libc++ patches from upstream (post version 14.0.0)
+0001-libc-Add-workaround-to-avoid-breaking-users-of-span-.patch
+0002-libc-Re-enable-workaround-for-pre-ranges-CTAD-in-std.patch
