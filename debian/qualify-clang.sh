@@ -353,6 +353,8 @@ echo "#include <fenv.h>" > foo.cc
 NBLINES=$(clang++-$VERSION -P -E foo.cc|wc -l)
 if test $NBLINES -lt 100; then
     echo "Error: more than 100 lines should be returned"
+    echo "output:"
+    clang++-$VERSION -P -E foo.cc
     exit 42
 fi
 
