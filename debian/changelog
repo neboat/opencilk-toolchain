@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:15~++20220309105819+8bef17ed59aa-1~exp2) UNRELEASED; urgency=medium
+
+  * Disable libclc when spir is below 12
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 04 Apr 2022 13:17:43 +0200
+
 llvm-toolchain-snapshot (1:15~++20220309105819+8bef17ed59aa-1~exp1) experimental; urgency=medium
 
   * Try to unbreak the build (issue #54242)
