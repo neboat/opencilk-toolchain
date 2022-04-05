@@ -646,6 +646,7 @@ endif
 	touch $@
 
 debian-libclc-build:
+ifeq (${LLVM_SPIRV_INSTALLED},yes)
 # Builds libclc
 	mkdir -p libclc/build
 	echo "Using cmake: $(CMAKE_BIN)"
@@ -665,6 +666,7 @@ debian-libclc-build:
 	-DLLVM_CONFIG=$(STAGE_2_BIN_DIR)/llvm-config \
 	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
 	ninja $(NJOBS) $(VERBOSE)
+endif
 	touch $@
 
 override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build
@@ -803,8 +805,9 @@ endif
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/six.py
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
-
+ifeq (${LLVM_SPIRV_INSTALLED},yes)
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libclc/build install
+endif
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
@@ -1021,8 +1024,10 @@ endif
 # MLIR
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-mlir || true
 
+ifeq (${LLVM_SPIRV_INSTALLED},yes)
 # Libclc
 	ninja $(VERBOSE) -C libclc/build test || true
+endif
 
 # LLDB tests
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
