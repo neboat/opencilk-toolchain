@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/clang/lib/Basic/FileManager.cpp
+Index: llvm-toolchain-snapshot_15~++20220406092530+ec2de7490813/clang/lib/Basic/FileManager.cpp
 ===================================================================
---- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/clang/lib/Basic/FileManager.cpp
-+++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/clang/lib/Basic/FileManager.cpp
-@@ -592,6 +592,12 @@ FileManager::getNoncachedStatValue(Strin
+--- llvm-toolchain-snapshot_15~++20220406092530+ec2de7490813.orig/clang/lib/Basic/FileManager.cpp
++++ llvm-toolchain-snapshot_15~++20220406092530+ec2de7490813/clang/lib/Basic/FileManager.cpp
+@@ -599,6 +599,12 @@ FileManager::getNoncachedStatValue(Strin
    return std::error_code();
  }
  
@@ -13,13 +13,13 @@ Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/clang/lib/Basic/
 +
 +
  void FileManager::GetUniqueIDMapping(
-                    SmallVectorImpl<const FileEntry *> &UIDToFiles) const {
+     SmallVectorImpl<const FileEntry *> &UIDToFiles) const {
    UIDToFiles.clear();
-Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/lldb/include/lldb/lldb-defines.h
+Index: llvm-toolchain-snapshot_15~++20220406092530+ec2de7490813/lldb/include/lldb/lldb-defines.h
 ===================================================================
---- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/lldb/include/lldb/lldb-defines.h
-+++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/lldb/include/lldb/lldb-defines.h
-@@ -27,6 +27,11 @@
+--- llvm-toolchain-snapshot_15~++20220406092530+ec2de7490813.orig/lldb/include/lldb/lldb-defines.h
++++ llvm-toolchain-snapshot_15~++20220406092530+ec2de7490813/lldb/include/lldb/lldb-defines.h
+@@ -15,6 +15,11 @@
  #define INT32_MAX 2147483647
  #endif
  
@@ -31,10 +31,10 @@ Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/lldb/include/lld
  #if !defined(UINT32_MAX)
  #define UINT32_MAX 4294967295U
  #endif
-Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/polly/lib/External/ppcg/cuda_common.c
+Index: llvm-toolchain-snapshot_15~++20220406092530+ec2de7490813/polly/lib/External/ppcg/cuda_common.c
 ===================================================================
---- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/polly/lib/External/ppcg/cuda_common.c
-+++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/polly/lib/External/ppcg/cuda_common.c
+--- llvm-toolchain-snapshot_15~++20220406092530+ec2de7490813.orig/polly/lib/External/ppcg/cuda_common.c
++++ llvm-toolchain-snapshot_15~++20220406092530+ec2de7490813/polly/lib/External/ppcg/cuda_common.c
 @@ -15,6 +15,11 @@
  #include "cuda_common.h"
  #include "ppcg.h"
