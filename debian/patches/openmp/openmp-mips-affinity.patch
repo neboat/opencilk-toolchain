@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/openmp/runtime/src/kmp_affinity.h
+Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/openmp/runtime/src/kmp_affinity.h
 ===================================================================
---- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/openmp/runtime/src/kmp_affinity.h
-+++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/openmp/runtime/src/kmp_affinity.h
-@@ -231,28 +231,29 @@ public:
+--- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/openmp/runtime/src/kmp_affinity.h
++++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/openmp/runtime/src/kmp_affinity.h
+@@ -232,28 +232,29 @@ public:
  #elif __NR_sched_getaffinity != 223
  #error Wrong code for getaffinity system call.
  #endif /* __NR_sched_getaffinity */

@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_14~++20220121115143+653b007dc186/clang/lib/Basic/Targets/Sparc.cpp
+Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/Basic/Targets/Sparc.cpp
 ===================================================================
---- llvm-toolchain-snapshot_14~++20220121115143+653b007dc186.orig/clang/lib/Basic/Targets/Sparc.cpp
-+++ llvm-toolchain-snapshot_14~++20220121115143+653b007dc186/clang/lib/Basic/Targets/Sparc.cpp
+--- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/clang/lib/Basic/Targets/Sparc.cpp
++++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/Basic/Targets/Sparc.cpp
 @@ -156,6 +156,11 @@ void SparcV8TargetInfo::getTargetDefines
        Builder.defineMacro("__sparcv8__");
        break;

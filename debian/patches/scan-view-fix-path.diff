@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/tools/scan-view/bin/scan-view
+Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/tools/scan-view/bin/scan-view
 ===================================================================
---- llvm-toolchain-snapshot_11~++20200326111000+4673699a470.orig/clang/tools/scan-view/bin/scan-view
-+++ llvm-toolchain-snapshot_11~++20200326111000+4673699a470/clang/tools/scan-view/bin/scan-view
+--- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/clang/tools/scan-view/bin/scan-view
++++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/tools/scan-view/bin/scan-view
 @@ -65,7 +65,7 @@ def start_browser(port, options):
  
  def run(port, options, root):

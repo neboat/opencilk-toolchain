@@ -1,10 +1,10 @@
 Description: fuzzer: EMULATION_ARGUMENT is also required when building on i386 for x86_64
 Author: Adrian Bunk <bunk@debian.org>
 
-Index: llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/compiler-rt/lib/fuzzer/CMakeLists.txt
+Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/compiler-rt/lib/fuzzer/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415.orig/compiler-rt/lib/fuzzer/CMakeLists.txt
-+++ llvm-toolchain-snapshot_14~++20211114120952+5b4bfd8c2415/compiler-rt/lib/fuzzer/CMakeLists.txt
+--- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/compiler-rt/lib/fuzzer/CMakeLists.txt
++++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/compiler-rt/lib/fuzzer/CMakeLists.txt
 @@ -140,6 +140,8 @@ if(OS_NAME MATCHES "Linux|Fuchsia" AND
    macro(partially_link_libcxx name dir arch)
      if(${arch} MATCHES "i386")

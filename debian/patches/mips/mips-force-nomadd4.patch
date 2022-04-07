@@ -6,10 +6,10 @@ support both, we have to disabled those instructions.
 For that, the patch below basically corresponds to the --with-madd4=no
 used on the GCC side.
 
-Index: llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9/clang/lib/Basic/Targets/Mips.h
+Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/Basic/Targets/Mips.h
 ===================================================================
---- llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9.orig/clang/lib/Basic/Targets/Mips.h
-+++ llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9/clang/lib/Basic/Targets/Mips.h
+--- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/clang/lib/Basic/Targets/Mips.h
++++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/Basic/Targets/Mips.h
 @@ -332,6 +332,8 @@ public:
          HasMSA = true;
        else if (Feature == "+nomadd4")
@@ -19,48 +19,3 @@ Index: llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9/clang/lib/Basic/
        else if (Feature == "+fp64")
          FPMode = FP64;
        else if (Feature == "-fp64")
-Index: llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9/llvm/lib/Target/Mips/MipsSubtarget.cpp
-===================================================================
---- llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9.orig/llvm/lib/Target/Mips/MipsSubtarget.cpp
-+++ llvm-toolchain-snapshot_14~++20211003054316+d6482df683b9/llvm/lib/Target/Mips/MipsSubtarget.cpp
-@@ -80,7 +80,7 @@ MipsSubtarget::MipsSubtarget(const Tripl
-       InMips16HardFloat(Mips16HardFloat), InMicroMipsMode(false), HasDSP(false),
-       HasDSPR2(false), HasDSPR3(false), AllowMixed16_32(Mixed16_32 || Mips_Os16),
-       Os16(Mips_Os16), HasMSA(false), UseTCCInDIV(false), HasSym32(false),
--      HasEVA(false), DisableMadd4(false), HasMT(false), HasCRC(false),
-+      HasEVA(false), DisableMadd4(true), HasMT(false), HasCRC(false),
-       HasVirt(false), HasGINV(false), UseIndirectJumpsHazard(false),
-       StackAlignOverride(StackAlignOverride), TM(TM), TargetTriple(TT),
-       TSInfo(), InstrInfo(MipsInstrInfo::create(
-@@ -91,6 +91,9 @@ MipsSubtarget::MipsSubtarget(const Tripl
-   if (MipsArchVersion == MipsDefault)
-     MipsArchVersion = Mips32;
- 
-+  if (hasMips32r6() || hasMips64r6())
-+    DisableMadd4 = false;
-+
-   // Don't even attempt to generate code for MIPS-I and MIPS-V. They have not
-   // been tested and currently exist for the integrated assembler only.
-   if (MipsArchVersion == Mips1)
-@@ -238,6 +241,7 @@ MipsSubtarget &
- MipsSubtarget::initializeSubtargetDependencies(StringRef CPU, StringRef FS,
-                                                const TargetMachine &TM) {
-   StringRef CPUName = MIPS_MC::selectMipsCPU(TM.getTargetTriple(), CPU);
-+  SubtargetFeatures Features(FS);
- 
-   // Parse features string.
-   ParseSubtargetFeatures(CPUName, /*TuneCPU*/ CPUName, FS);
-@@ -260,6 +264,13 @@ MipsSubtarget::initializeSubtargetDepend
-     report_fatal_error("64-bit code requested on a subtarget that doesn't "
-                        "support it!");
- 
-+  for (const std::string &Feature : Features.getFeatures()) {
-+    if (Feature == "+nomadd4")
-+      DisableMadd4 = true;
-+    else if (Feature == "-nomadd4")
-+      DisableMadd4 = false;
-+  }
-+
-   return *this;
- }
- 

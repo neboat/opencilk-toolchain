@@ -12,10 +12,10 @@ Partially addresses PR37128
  cmake/modules/CMakeLists.txt | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-Index: llvm-toolchain-snapshot_14~++20220107111239+f38873537bf7/cmake/Modules/FindPrefixFromConfig.cmake
+Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/cmake/Modules/FindPrefixFromConfig.cmake
 ===================================================================
---- llvm-toolchain-snapshot_14~++20220107111239+f38873537bf7.orig/cmake/Modules/FindPrefixFromConfig.cmake
-+++ llvm-toolchain-snapshot_14~++20220107111239+f38873537bf7/cmake/Modules/FindPrefixFromConfig.cmake
+--- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/cmake/Modules/FindPrefixFromConfig.cmake
++++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/cmake/Modules/FindPrefixFromConfig.cmake
 @@ -28,10 +28,13 @@
  function(find_prefix_from_config out_var prefix_var path_to_leave)
    set(config_code
