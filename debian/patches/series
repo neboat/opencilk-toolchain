@@ -9,7 +9,6 @@ clang-analyzer-force-version.diff
 
 declare_clear_cache.diff
 unwind-chain-inclusion.diff
-atomic_library_1.diff
 
 # Path updates
 python-clangpath.diff
