@@ -646,6 +646,7 @@ endif
 	touch $@
 
 debian-libclc-build:
+ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 # Builds libclc
 	mkdir -p libclc/build
 	echo "Using cmake: $(CMAKE_BIN)"
@@ -665,6 +666,9 @@ debian-libclc-build:
 	-DLLVM_CONFIG=$(STAGE_2_BIN_DIR)/llvm-config \
 	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
 	ninja $(NJOBS) $(VERBOSE)
+else
+	echo "libclc isn't built LLVM_SPIRV_INSTALLED=$(LLVM_SPIRV_INSTALLED)"
+endif
 	touch $@
 
 override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build
