@@ -808,7 +808,9 @@ endif
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
+ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libclc/build install
+endif
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
