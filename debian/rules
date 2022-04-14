@@ -473,7 +473,8 @@ preconfigure:
 	# Conditionally enable *.spv files. Debian buster and Ubuntu 18.04
 	# don't have llvm-spirv to create the *.spv files.
 	if test "$(LLVM_SPIRV_INSTALLED)" = "yes"; then \
-		sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install; \
+		echo "" > debian/libclc-$(LLVM_VERSION).install; \
+		echo "" > debian/libclc-$(LLVM_VERSION)-dev.install; \
 	fi
 	if test "$(DISTRO)" = "stretch"; then \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
