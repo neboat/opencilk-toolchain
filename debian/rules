@@ -1027,8 +1027,10 @@ endif
 # MLIR
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-mlir || true
 
+ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 # Libclc
 	ninja $(VERBOSE) -C libclc/build test || true
+endif
 
 # LLDB tests
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
