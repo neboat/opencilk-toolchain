@@ -221,7 +221,7 @@ endif
 ifeq ($(shell command -v llvm-spirv),)
 LLVM_SPIRV_INSTALLED = no
 else
-	ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' llvm-spirv) gt 12.0.0 ; echo $$?),0)
+	ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' llvm-spirv) gt 14.0.0 ; echo $$?),0)
 # Too old llvm-spirv version are failing. See #52200
 		LLVM_SPIRV_INSTALLED = yes
 	else

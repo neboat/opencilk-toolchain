@@ -1,6 +1,7 @@
 llvm-toolchain-snapshot (1:15~++20220309105819+8bef17ed59aa-1~exp2) UNRELEASED; urgency=medium
 
-  * Disable libclc when spir is below 12
+  * Disable libclc when spir is below 14
+    Explicit load/store type does not match pointee type of pointer operand (Producer: 'LLVM15.0.0' Reader: 'LLVM 13.0.1')
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 04 Apr 2022 13:17:43 +0200
 
