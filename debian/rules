@@ -472,7 +472,7 @@ preconfigure:
 
 	# Conditionally enable *.spv files. Debian buster and Ubuntu 18.04
 	# don't have llvm-spirv to create the *.spv files.
-	if test "$(LLVM_SPIRV_INSTALLED)" = "yes"; then \
+	if test "$(LLVM_SPIRV_INSTALLED)" = "no"; then \
 		echo "" > debian/libclc-$(LLVM_VERSION).install; \
 		echo "" > debian/libclc-$(LLVM_VERSION)-dev.install; \
 	fi
