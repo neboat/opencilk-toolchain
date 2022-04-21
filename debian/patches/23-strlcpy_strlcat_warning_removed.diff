@@ -7,11 +7,11 @@
  clang/test/Sema/warn-strlcpycat-size.c                    |   55 --------------
  6 files changed, 25 insertions(+), 78 deletions(-)
 
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/include/clang/Basic/Builtins.def
+Index: llvm-toolchain-snapshot_15~++20220421090631+00c511b35195/clang/include/clang/Basic/Builtins.def
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/clang/include/clang/Basic/Builtins.def
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/include/clang/Basic/Builtins.def
-@@ -616,8 +616,8 @@ BUILTIN(__builtin___memset_chk, "v*v*izz
+--- llvm-toolchain-snapshot_15~++20220421090631+00c511b35195.orig/clang/include/clang/Basic/Builtins.def
++++ llvm-toolchain-snapshot_15~++20220421090631+00c511b35195/clang/include/clang/Basic/Builtins.def
+@@ -619,8 +619,8 @@ BUILTIN(__builtin___memset_chk, "v*v*izz
  BUILTIN(__builtin___stpcpy_chk, "c*c*cC*z", "nF")
  BUILTIN(__builtin___strcat_chk, "c*c*cC*z", "nF")
  BUILTIN(__builtin___strcpy_chk, "c*c*cC*z", "nF")
@@ -22,7 +22,7 @@ Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/include/cl
  BUILTIN(__builtin___strncat_chk, "c*c*cC*zz", "nF")
  BUILTIN(__builtin___strncpy_chk, "c*c*cC*zz", "nF")
  BUILTIN(__builtin___stpncpy_chk, "c*c*cC*zz", "nF")
-@@ -1133,8 +1133,8 @@ LIBBUILTIN(getcontext, "iK*",     "fjT",
+@@ -1136,8 +1136,8 @@ LIBBUILTIN(getcontext, "iK*",     "fjT",
  LIBBUILTIN(_longjmp, "vJi",       "frT",   "setjmp.h", ALL_GNU_LANGUAGES)
  LIBBUILTIN(siglongjmp, "vSJi",    "frT",   "setjmp.h", ALL_GNU_LANGUAGES)
  // non-standard but very common
@@ -33,11 +33,11 @@ Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/include/cl
  //   id objc_msgSend(id, SEL, ...)
  LIBBUILTIN(objc_msgSend, "GGH.",   "f",     "objc/message.h", OBJC_LANG)
  // long double objc_msgSend_fpret(id self, SEL op, ...)
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/AST/Decl.cpp
+Index: llvm-toolchain-snapshot_15~++20220421090631+00c511b35195/clang/lib/AST/Decl.cpp
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/clang/lib/AST/Decl.cpp
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/AST/Decl.cpp
-@@ -4080,13 +4080,13 @@ unsigned FunctionDecl::getMemoryFunction
+--- llvm-toolchain-snapshot_15~++20220421090631+00c511b35195.orig/clang/lib/AST/Decl.cpp
++++ llvm-toolchain-snapshot_15~++20220421090631+00c511b35195/clang/lib/AST/Decl.cpp
+@@ -4118,13 +4118,13 @@ unsigned FunctionDecl::getMemoryFunction
    case Builtin::BImemmove:
      return Builtin::BImemmove;
  
@@ -57,10 +57,10 @@ Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/AST/De
  
    case Builtin::BI__builtin_memcmp:
    case Builtin::BImemcmp:
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/Sema/SemaChecking.cpp
+Index: llvm-toolchain-snapshot_15~++20220421090631+00c511b35195/clang/lib/Sema/SemaChecking.cpp
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/clang/lib/Sema/SemaChecking.cpp
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/Sema/SemaChecking.cpp
+--- llvm-toolchain-snapshot_15~++20220421090631+00c511b35195.orig/clang/lib/Sema/SemaChecking.cpp
++++ llvm-toolchain-snapshot_15~++20220421090631+00c511b35195/clang/lib/Sema/SemaChecking.cpp
 @@ -899,8 +899,8 @@ void Sema::checkFortifiedBuiltinMemoryFu
    case Builtin::BI__builtin___memcpy_chk:
    case Builtin::BI__builtin___memmove_chk:
@@ -72,7 +72,7 @@ Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/Sema/S
    case Builtin::BI__builtin___strncat_chk:
    case Builtin::BI__builtin___strncpy_chk:
    case Builtin::BI__builtin___stpncpy_chk:
-@@ -5564,10 +5564,10 @@ bool Sema::CheckFunctionCall(FunctionDec
+@@ -5593,10 +5593,10 @@ bool Sema::CheckFunctionCall(FunctionDec
    switch (CMId) {
    case 0:
      return false;
@@ -85,10 +85,10 @@ Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/Sema/S
    case Builtin::BIstrncat:
      CheckStrncatArguments(TheCall, FnInfo);
      break;
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
+Index: llvm-toolchain-snapshot_15~++20220421090631+00c511b35195/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
+--- llvm-toolchain-snapshot_15~++20220421090631+00c511b35195.orig/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
++++ llvm-toolchain-snapshot_15~++20220421090631+00c511b35195/clang/lib/StaticAnalyzer/Checkers/GenericTaintChecker.cpp
 @@ -668,10 +668,10 @@ void GenericTaintChecker::initTaintRules
  
        {{CDF_MaybeBuiltin, {BI.getName(Builtin::BIstrncat)}},
@@ -102,11 +102,11 @@ Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/Static
        {{CDF_MaybeBuiltin, {"snprintf"}},
         TR::Prop({{1}, 3}, {{0, ReturnValueIndex}})},
        {{CDF_MaybeBuiltin, {"sprintf"}},
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/test/Sema/builtins.c
+Index: llvm-toolchain-snapshot_15~++20220421090631+00c511b35195/clang/test/Sema/builtins.c
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/clang/test/Sema/builtins.c
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/test/Sema/builtins.c
-@@ -199,11 +199,9 @@ void test18(void) {
+--- llvm-toolchain-snapshot_15~++20220421090631+00c511b35195.orig/clang/test/Sema/builtins.c
++++ llvm-toolchain-snapshot_15~++20220421090631+00c511b35195/clang/test/Sema/builtins.c
+@@ -198,11 +198,9 @@ void test18(void) {
  
    ptr = __builtin___memccpy_chk(dst, src, '\037', sizeof(src), sizeof(dst));
    result = __builtin___strlcpy_chk(dst, src, sizeof(dst), sizeof(dst));
@@ -118,40 +118,26 @@ Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/test/Sema/
  }
  
  void no_ms_builtins(void) {
-@@ -217,29 +215,6 @@ void unavailable(void) {
-   __builtin_operator_delete(0); // expected-error {{'__builtin_operator_delete' is only available in C++}}
+@@ -217,6 +215,7 @@ void unavailable(void) {
  }
  
--// rdar://18259539
--size_t strlcpy(char * restrict dst, const char * restrict src, size_t size);
--size_t strlcat(char * restrict dst, const char * restrict src, size_t size);
--
--void Test19(void)
--{
--        static char b[40];
--        static char buf[20];
--
--        strlcpy(buf, b, sizeof(b)); // expected-warning {{size argument in 'strlcpy' call appears to be size of the source; expected the size of the destination}} \\
--                                    // expected-note {{change size argument to be the size of the destination}}
--        __builtin___strlcpy_chk(buf, b, sizeof(b), __builtin_object_size(buf, 0)); // expected-warning {{size argument in '__builtin___strlcpy_chk' call appears to be size of the source; expected the size of the destination}} \
--                                    // expected-note {{change size argument to be the size of the destination}} \
--				    // expected-warning {{'strlcpy' will always overflow; destination buffer has size 20, but size argument is 40}}
--
--        strlcat(buf, b, sizeof(b)); // expected-warning {{size argument in 'strlcat' call appears to be size of the source; expected the size of the destination}} \
--                                    // expected-note {{change size argument to be the size of the destination}}
--				    
--        __builtin___strlcat_chk(buf, b, sizeof(b), __builtin_object_size(buf, 0)); // expected-warning {{size argument in '__builtin___strlcat_chk' call appears to be size of the source; expected the size of the destination}} \
--                                                                                   // expected-note {{change size argument to be the size of the destination}} \
--				                                                   // expected-warning {{'strlcat' will always overflow; destination buffer has size 20, but size argument is 40}}
--}
--
+ // rdar://18259539
++/*
+ size_t strlcpy(char * restrict dst, const char * restrict src, size_t size);
+ size_t strlcat(char * restrict dst, const char * restrict src, size_t size);
+ 
+@@ -238,6 +237,7 @@ void Test19(void)
+                                                                                    // expected-note {{change size argument to be the size of the destination}} \
+ 				                                                   // expected-warning {{'strlcat' will always overflow; destination buffer has size 20, but size argument is 40}}
+ }
++*/
+ 
  // rdar://11076881
  char * Test20(char *p, const char *in, unsigned n)
- {
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/test/Sema/warn-strlcpycat-size.c
+Index: llvm-toolchain-snapshot_15~++20220421090631+00c511b35195/clang/test/Sema/warn-strlcpycat-size.c
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/clang/test/Sema/warn-strlcpycat-size.c
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/test/Sema/warn-strlcpycat-size.c
+--- llvm-toolchain-snapshot_15~++20220421090631+00c511b35195.orig/clang/test/Sema/warn-strlcpycat-size.c
++++ llvm-toolchain-snapshot_15~++20220421090631+00c511b35195/clang/test/Sema/warn-strlcpycat-size.c
 @@ -1,55 +0,0 @@
 -// RUN: %clang_cc1 -Wstrlcpy-strlcat-size -verify -fsyntax-only %s
 -
