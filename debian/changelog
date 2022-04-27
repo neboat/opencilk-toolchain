@@ -1,3 +1,9 @@
+llvm-toolchain-14 (1:14.0.2-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Apr 2022 08:36:00 +0200
+
 llvm-toolchain-14 (1:14.0.1-1) unstable; urgency=medium
 
   * New upstream release

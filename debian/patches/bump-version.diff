@@ -1,0 +1,13 @@
+Index: llvm-toolchain-14-14.0.2/llvm/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-14-14.0.2.orig/llvm/CMakeLists.txt
++++ llvm-toolchain-14-14.0.2/llvm/CMakeLists.txt
+@@ -17,7 +17,7 @@ if(NOT DEFINED LLVM_VERSION_MINOR)
+   set(LLVM_VERSION_MINOR 0)
+ endif()
+ if(NOT DEFINED LLVM_VERSION_PATCH)
+-  set(LLVM_VERSION_PATCH 1)
++  set(LLVM_VERSION_PATCH 2)
+ endif()
+ if(NOT DEFINED LLVM_VERSION_SUFFIX)
+   set(LLVM_VERSION_SUFFIX)
