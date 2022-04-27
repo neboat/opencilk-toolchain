@@ -494,13 +494,6 @@ override_dh_auto_configure: preconfigure
 	if test "$(SCAN_BUILD)" = "yes"; then \
 		patch -f -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff||true; \
 	fi
-# Don't apply these patches when building for apt.llvm.org
-	if test "$(LLVM_VERSION)" = "14"; then \
-		if echo $(LLVM_VERSION_SNAPSHOT)|grep -v "~exp"; then \
-			patch -f -p1 < debian/patches/0001-libc-Add-workaround-to-avoid-breaking-users-of-span-.patch||true; \
-			patch -f -p1 < debian/patches/0002-libc-Re-enable-workaround-for-pre-ranges-CTAD-in-std.patch||true; \
-		fi; \
-	fi
 
 	# Configure coverity (we need the compilers) + work around perf issues
 	-(if test $(COVERITY_ENABLE) -eq 1; then \
@@ -1101,13 +1094,6 @@ override_dh_auto_clean:
 	done
 	if test "$(SCAN_BUILD)" = "yes"; then \
 		patch -f -R -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff||true; \
-	fi
-# Don't apply these patches when building for apt.llvm.org
-	if test "$(LLVM_VERSION)" = "14"; then \
-		if echo $(LLVM_VERSION_SNAPSHOT)|grep -v "~exp"; then \
-			patch -f -p1 < debian/patches/0001-libc-Add-workaround-to-avoid-breaking-users-of-span-.patch||true; \
-			patch -f -p1 < debian/patches/0002-libc-Re-enable-workaround-for-pre-ranges-CTAD-in-std.patch||true; \
-		fi; \
 	fi
 	: # for some reason, the docs are written to debian/usr and debian/man ...
 	rm -rf debian/usr debian/man
