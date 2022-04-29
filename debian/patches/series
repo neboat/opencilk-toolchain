@@ -150,4 +150,3 @@ wasm-ld-path.diff
 python3-scan-build.py
 revert-update-doc.diff
 fix-typo.diff
-bump-version.diff
