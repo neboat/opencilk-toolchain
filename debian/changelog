@@ -2,6 +2,7 @@ llvm-toolchain-14 (1:14.0.3-2) UNRELEASED; urgency=medium
 
   * Fix an autopkgtest on arm (Closes:# 1010716)
     Thanks to Pino Toscano for the patch
+  * Fix the search path for hip (Closes: #1010467)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 09 May 2022 20:40:39 +0200
 

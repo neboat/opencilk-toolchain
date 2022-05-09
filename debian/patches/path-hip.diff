@@ -1,0 +1,119 @@
+From 6730b44480fcce18bfbbae0c46719250e9eae425 Mon Sep 17 00:00:00 2001
+From: "Yaxun (Sam) Liu" <yaxun.liu@amd.com>
+Date: Wed, 9 Mar 2022 09:10:17 -0500
+Subject: [PATCH] [HIP] Fix HIP include path
+
+The clang compiler prepends the HIP header include paths to the search
+list using -internal-isystem when building for the HIP language. This
+prevents warnings related to things like reserved identifiers when
+including the HIP headers even when ROCm is installed in a non-system
+directory, such as /opt/rocm.
+
+However, when HIP is installed in /usr, then the prepended include
+path would be /usr/include. That is a problem, because the C standard
+library headers are stored in /usr/include and the C++ standard
+library headers must come before the C library headers in the search
+path list (because the C++ standard library headers use #include_next
+to include the C standard library headers).
+
+While the HIP wrapper headers _do_ need to be earlier in the search
+than the C++ headers, those headers get their own subdirectory and
+their own explicit -internal-isystem argument. This include path is for
+<hip/hip_runtime_api.h> and <hip/hip_runtime.h>, which do not require a
+particular search ordering with respect to the C or C++ headers. Thus,
+HIP include path is added after other system include paths.
+
+With contribution from Cordell Bloor.
+
+Reviewed by: Artem Belevich
+
+Differential Revision: https://reviews.llvm.org/D120132
+---
+ clang/lib/Driver/ToolChains/AMDGPU.cpp |  2 +-
+ clang/test/Driver/hip-include-path.hip | 10 +++++-----
+ clang/test/Driver/rocm-detect.hip      |  6 +++---
+ 3 files changed, 9 insertions(+), 9 deletions(-)
+
+Index: llvm-toolchain-14-14.0.0/clang/lib/Driver/ToolChains/AMDGPU.cpp
+===================================================================
+--- llvm-toolchain-14-14.0.0.orig/clang/lib/Driver/ToolChains/AMDGPU.cpp
++++ llvm-toolchain-14-14.0.0/clang/lib/Driver/ToolChains/AMDGPU.cpp
+@@ -510,7 +510,7 @@ void RocmInstallationDetector::AddHIPInc
+     return;
+   }
+ 
+-  CC1Args.push_back("-internal-isystem");
++  CC1Args.push_back("-idirafter");
+   CC1Args.push_back(DriverArgs.MakeArgString(getIncludePath()));
+   if (UsesRuntimeWrapper)
+     CC1Args.append({"-include", "__clang_hip_runtime_wrapper.h"});
+Index: llvm-toolchain-14-14.0.0/clang/test/Driver/hip-include-path.hip
+===================================================================
+--- llvm-toolchain-14-14.0.0.orig/clang/test/Driver/hip-include-path.hip
++++ llvm-toolchain-14-14.0.0/clang/test/Driver/hip-include-path.hip
+@@ -19,24 +19,24 @@
+ // COMMON-LABEL: "{{[^"]*}}clang{{[^"]*}}" "-cc1"
+ // CLANG-SAME: "-internal-isystem" "{{[^"]*}}/lib{{[^"]*}}/clang/{{[^"]*}}/include/cuda_wrappers"
+ // NOCLANG-NOT: "{{[^"]*}}/lib{{[^"]*}}/clang/{{[^"]*}}/include/cuda_wrappers"
+-// HIP-SAME: "-internal-isystem" "{{[^"]*}}Inputs/rocm/include"
+-// NOHIP-NOT: "{{.*}}Inputs/rocm/include"
++// HIP-SAME: "-idirafter" "{{[^"]*}}Inputs/rocm/include"
+ // HIP-SAME: "-include" "__clang_hip_runtime_wrapper.h"
+ // NOHIP-NOT: "-include" "__clang_hip_runtime_wrapper.h"
+ // skip check of standard C++ include path
+ // CLANG-SAME: "-internal-isystem" "{{[^"]*}}/lib{{[^"]*}}/clang/{{[^"]*}}/include"
+ // NOCLANG-NOT: "{{[^"]*}}/lib{{[^"]*}}/clang/{{[^"]*}}/include"
++// NOHIP-NOT: "{{.*}}Inputs/rocm/include"
+ 
+ // COMMON-LABEL: "{{[^"]*}}clang{{[^"]*}}" "-cc1"
+ // CLANG-SAME: "-internal-isystem" "{{[^"]*}}/lib{{[^"]*}}/clang/{{[^"]*}}/include/cuda_wrappers"
+ // NOCLANG-NOT: "{{[^"]*}}/lib{{[^"]*}}/clang/{{[^"]*}}/include/cuda_wrappers"
+-// HIP-SAME: "-internal-isystem" "{{[^"]*}}Inputs/rocm/include"
+-// NOHIP-NOT: "{{.*}}Inputs/rocm/include"
++// HIP-SAME: "-idirafter" "{{[^"]*}}Inputs/rocm/include"
+ // HIP-SAME: "-include" "__clang_hip_runtime_wrapper.h"
+ // NOHIP-NOT: "-include" "__clang_hip_runtime_wrapper.h"
+ // skip check of standard C++ include path
+ // CLANG-SAME: "-internal-isystem" "{{[^"]*}}/lib{{[^"]*}}/clang/{{[^"]*}}/include"
+ // NOCLANG-NOT: "{{[^"]*}}/lib{{[^"]*}}/clang/{{[^"]*}}/include"
++// NOHIP-NOT: "{{.*}}Inputs/rocm/include"
+ 
+ // RUN: %clang -c -### -target x86_64-unknown-linux-gnu --cuda-gpu-arch=gfx900 \
+ // RUN:   -std=c++11 --rocm-path=%S/Inputs/rocm -nogpulib %s 2>&1 \
+@@ -45,7 +45,7 @@
+ // ROCM35-LABEL: "{{[^"]*}}clang{{[^"]*}}" "-cc1"
+ // ROCM35-NOT: "{{[^"]*}}/lib{{[^"]*}}/clang/{{[^"]*}}/include/cuda_wrappers"
+ // ROCM35-SAME: "-internal-isystem" "{{[^"]*}}/lib{{[^"]*}}/clang/{{[^"]*}}"
+-// ROCM35-SAME: "-internal-isystem" "{{[^"]*}}Inputs/rocm/include"
++// ROCM35-SAME: "-idirafter" "{{[^"]*}}Inputs/rocm/include"
+ // ROCM35-NOT: "-include" "__clang_hip_runtime_wrapper.h"
+ // skip check of standard C++ include path
+ // ROCM35-SAME: "-internal-isystem" "{{[^"]*}}/lib{{[^"]*}}/clang/{{[^"]*}}/include"
+Index: llvm-toolchain-14-14.0.0/clang/test/Driver/rocm-detect.hip
+===================================================================
+--- llvm-toolchain-14-14.0.0.orig/clang/test/Driver/rocm-detect.hip
++++ llvm-toolchain-14-14.0.0/clang/test/Driver/rocm-detect.hip
+@@ -90,7 +90,7 @@
+ // SPACK: Found HIP installation: [[DIR]]/hip-4.0.0-5f63slrursbrvfe2txrrjkynbsywsob5, version 4.0.20214-a2917cd
+ // SPACK: "-triple" "amdgcn-amd-amdhsa"
+ // SPACK-SAME: "-mlink-builtin-bitcode" "[[DIR]]/llvm-amdgpu-4.0.0-ieagcs7inf7runpyfvepqkurasoglq4z/amdgcn/bitcode/hip.bc"
+-// SPACK-SAME: "-internal-isystem" "[[DIR]]/hip-4.0.0-5f63slrursbrvfe2txrrjkynbsywsob5/include"
++// SPACK-SAME: "-idirafter" "[[DIR]]/hip-4.0.0-5f63slrursbrvfe2txrrjkynbsywsob5/include"
+ 
+ // SPACK-MULT: InstalledDir: [[DIR:.*]]/llvm-amdgpu-4.0.0-ieagcs7inf7runpyfvepqkurasoglq4z/bin
+ // SPACK-MULT-DAG: Cannot use SPACK package hip-4.0.0 at [[DIR]] due to multiple installations for the same version
+@@ -101,12 +101,12 @@
+ // SPACK-SET: Found HIP installation: [[DIR]]/hip-4.0.0-abcd, version 4.0.20214-a2917cd
+ // SPACK-SET: "-triple" "amdgcn-amd-amdhsa"
+ // SPACK-SET-SAME: "-mlink-builtin-bitcode" "[[DIR]]/llvm-amdgpu-4.0.0-ieagcs7inf7runpyfvepqkurasoglq4z/amdgcn/bitcode/hip.bc"
+-// SPACK-SET-SAME: "-internal-isystem" "[[DIR]]/hip-4.0.0-abcd/include"
++// SPACK-SET-SAME: "-idirafter" "[[DIR]]/hip-4.0.0-abcd/include"
+ 
+ // SPACK-MISS: InstalledDir: [[DIR:.*]]/llvm-amdgpu-4.0.0-ieagcs7inf7runpyfvepqkurasoglq4z/bin
+ // SPACK-MISS-DAG: SPACK package hip-4.0.0 not found at [[DIR]]
+ // SPACK-MISS-NOT: Found HIP installation: [[DIR]]/hip-4.0.0-5f63slrursbrvfe2txrrjkynbsywsob5, version 4.0.20214-a2917cd
+-// SPACK-MISS-NOT: "-internal-isystem" "[[DIR]]/hip-4.0.0-5f63slrursbrvfe2txrrjkynbsywsob5/include"
++// SPACK-MISS-NOT: "-idirafter" "[[DIR]]/hip-4.0.0-5f63slrursbrvfe2txrrjkynbsywsob5/include"
+ 
+ // SPACK-MISS-SILENT-NOT: SPACK package hip-{{.*}} not found at
+ // SPACK-MISS-SILENT-NOT: Found HIP installation
