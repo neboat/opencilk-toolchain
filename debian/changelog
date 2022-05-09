@@ -1,9 +1,12 @@
-llvm-toolchain-snapshot (1:15~++20220501105142+3c7522899128-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp1) experimental; urgency=medium
 
+  * New snapshot release
   * Disable libclc when spir is below 14
     Explicit load/store type does not match pointee type of pointer operand (Producer: 'LLVM15.0.0' Reader: 'LLVM 13.0.1')
+  * Add the option -DLLVM_ENABLE_CURL=ON
+    See https://github.com/llvm/llvm-project/issues/55289
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 04 Apr 2022 13:17:43 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 09 May 2022 22:57:11 +0200
 
 llvm-toolchain-snapshot (1:15~++20220309105819+8bef17ed59aa-1~exp1) experimental; urgency=medium
 
