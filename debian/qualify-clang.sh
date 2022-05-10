@@ -329,6 +329,13 @@ if ! llvm-dis-$VERSION < foo.bc|grep -q "lli foo"; then
     exit 1
 fi
 
+# test if this is built with CURL
+llvm-debuginfod-find-$VERSION --executable=1 5d016364c1cb69dd &> foo.log || true
+if grep -q "No working HTTP" foo.log; then
+    echo "llvm-debuginfod-find isn't built with curl support"
+    exit 1
+fi
+
 echo '#include <stddef.h>' > foo.c
 clang-$VERSION -c foo.c
 
