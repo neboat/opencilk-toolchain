@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp2) experimental; urgency=medium
+
+  * Install new binary clang-offload-packager in
+    clang-tools-15
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 11 May 2022 19:49:31 +0200
+
 llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp1) experimental; urgency=medium
 
   * New snapshot release
