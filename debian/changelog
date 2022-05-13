@@ -1,3 +1,10 @@
+llvm-toolchain-14 (1:14.0.3-3) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Enable GRPC build dependency only on supported targets
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Fri, 13 May 2022 21:12:14 +0200
+
 llvm-toolchain-14 (1:14.0.3-2) unstable; urgency=medium
 
   * Fix an autopkgtest on arm (Closes:# 1010716)
