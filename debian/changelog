@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp3) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Enable GRPC build dependency only on supported targets
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Fri, 13 May 2022 20:59:36 +0200
+
 llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp2) experimental; urgency=medium
 
   * Install new binary clang-offload-packager in
