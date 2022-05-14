@@ -3,7 +3,10 @@ llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp3) UNRELEASED; 
   [ John Paul Adrian Glaubitz ]
   * Enable GRPC build dependency only on supported targets
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Fri, 13 May 2022 20:59:36 +0200
+  [ Sylvestre Ledru ]
+  * Add usr/lib/llvm-15/lib/libomptarget.devicertl.a to libomp-X-dev
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 14 May 2022 23:56:58 +0200
 
 llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp2) experimental; urgency=medium
 
