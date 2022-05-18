@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp3.1) UNRELEASED; urgency=medium
+
+  *  Install new binary tblgen-lsp-server into mlir-15-tools
+
+ -- Roman Lebedev <lebedev.ri@gmail.com>  Wed, 18 May 2022 10:36:49 +0300
+
 llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp3) UNRELEASED; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
