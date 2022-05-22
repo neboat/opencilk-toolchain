@@ -11,6 +11,7 @@ llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp3) UNRELEASED; 
 
   [ Sylvestre Ledru ]
   * Add usr/lib/llvm-15/lib/libomptarget.devicertl.a to libomp-X-dev
+    only for [amd64 ppc64el arm64]
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 14 May 2022 23:56:58 +0200
 
