@@ -1,9 +1,3 @@
-llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp3.1) UNRELEASED; urgency=medium
-
-  *  Install new binary tblgen-lsp-server into mlir-15-tools
-
- -- Roman Lebedev <lebedev.ri@gmail.com>  Wed, 18 May 2022 10:36:49 +0300
-
 llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp3) UNRELEASED; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
@@ -13,7 +7,10 @@ llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp3) UNRELEASED; 
   * Add usr/lib/llvm-15/lib/libomptarget.devicertl.a to libomp-X-dev
     only for [amd64 ppc64el arm64]
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 14 May 2022 23:56:58 +0200
+  [ Roman Lebedev ]
+  * Install new binary tblgen-lsp-server into mlir-15-tools
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 22 May 2022 10:28:28 +0200
 
 llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp2) experimental; urgency=medium
 
