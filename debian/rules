@@ -858,6 +858,7 @@ endif
 
 # Also disable mlir-* checks in the cmake
 	sed -i '/_IMPORT_CHECK_TARGETS \(mlir-\|MLIR|tblgen-lsp-server\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
+	sed -i '/_IMPORT_CHECK_FILES_FOR_\(mlir-\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 
 # Disable CMake's package validation checks for binaries that may not be installed
 	sed -i 's|.*_IMPORT_CHECK_FILES_FOR_.*/bin/.*)|#&|' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
