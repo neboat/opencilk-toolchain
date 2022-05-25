@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/compiler-rt/lib/sanitizer_common/sanitizer_symbolizer_posix_libcdep.cpp
+Index: llvm-toolchain-snapshot_15~++20220525112612+8919447c71ab/compiler-rt/lib/sanitizer_common/sanitizer_symbolizer_posix_libcdep.cpp
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/compiler-rt/lib/sanitizer_common/sanitizer_symbolizer_posix_libcdep.cpp
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/compiler-rt/lib/sanitizer_common/sanitizer_symbolizer_posix_libcdep.cpp
+--- llvm-toolchain-snapshot_15~++20220525112612+8919447c71ab.orig/compiler-rt/lib/sanitizer_common/sanitizer_symbolizer_posix_libcdep.cpp
++++ llvm-toolchain-snapshot_15~++20220525112612+8919447c71ab/compiler-rt/lib/sanitizer_common/sanitizer_symbolizer_posix_libcdep.cpp
 @@ -25,6 +25,10 @@
  #include "sanitizer_symbolizer_internal.h"
  #include "sanitizer_symbolizer_libbacktrace.h"
@@ -16,16 +16,16 @@ Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/compiler-rt/lib/
 @@ -452,7 +456,7 @@ static SymbolizerTool *ChooseExternalSym
      return new(*allocator) AtosSymbolizer(found_path, allocator);
    }
- #endif  // SANITIZER_MAC
+ #endif  // SANITIZER_APPLE
 -  if (const char *found_path = FindPathToBinary("llvm-symbolizer")) {
 +  if (const char *found_path = "/usr/bin/llvm-symbolizer-" TOSTR(LLVM_VERSION_MAJOR)) {
      VReport(2, "Using llvm-symbolizer found at: %s\n", found_path);
      return new(*allocator) LLVMSymbolizer(found_path, allocator);
    }
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/compiler-rt/lib/sanitizer_common/CMakeLists.txt
+Index: llvm-toolchain-snapshot_15~++20220525112612+8919447c71ab/compiler-rt/lib/sanitizer_common/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/compiler-rt/lib/sanitizer_common/CMakeLists.txt
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/compiler-rt/lib/sanitizer_common/CMakeLists.txt
+--- llvm-toolchain-snapshot_15~++20220525112612+8919447c71ab.orig/compiler-rt/lib/sanitizer_common/CMakeLists.txt
++++ llvm-toolchain-snapshot_15~++20220525112612+8919447c71ab/compiler-rt/lib/sanitizer_common/CMakeLists.txt
 @@ -202,6 +202,7 @@ set(SANITIZER_IMPL_HEADERS
    )
  
