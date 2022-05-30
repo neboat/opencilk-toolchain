@@ -154,3 +154,9 @@ compilerrt-build-scudo-standalone-option.diff
 use-gold-for-compiler-rt-when-set.diff
 wasm-ld-path.diff
 fix-typo.diff
+fix-merge-MergeFunctions-scheduling.diff
+
+# Fix llvm-objcopy for arm64
+llvm-objcopy-COFF-Consider-section-flags-when-adding.patch
+yaml2obj-COFF-Allow-variable-number-of-directories.patch
+llvm-objcopy-COFF-Fix-test-for-debug-dir-presence.patch
