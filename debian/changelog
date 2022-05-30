@@ -1,10 +1,23 @@
-llvm-toolchain-13 (1:13.0.1-4) UNRELEASED; urgency=medium
+llvm-toolchain-13 (1:13.0.1-5) UNRELEASED; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Enable GRPC build dependency only on supported targets
   * Exclude lib{Monitoring,RemoteIndex}*Proto.a on m68k and sparc64
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Fri, 13 May 2022 21:04:32 +0200
+  [ Gianfranco Costamagna ]
+  * fix grpc architectures, avoiding to install them where not available
+  * Break/Replaces the Ubuntu library that moved GRPC binaries into the wrong location
+  * newline/tab fix in rules
+  * fix GRPC installation in port architectures
+  * Add patches from Upstream/Ubuntu to: * Backport upstream patches to allow building EFI images for Ubuntu Core   for arm64 (LP: #1960300) * d/p/risc/riscv-insn-support.patch: Backport assembler .insn support on riscv64   for rustc 1.59.0 (LP: #1973041)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 26 May 2022 09:30:17 +0200
+
+llvm-toolchain-13 (1:13.0.1-4) unstable; urgency=medium
+
+  * Backport D115098 for Rust 1.59 (Closes: #1010150)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 09 May 2022 20:47:26 +0200
 
 llvm-toolchain-13 (1:13.0.1-3) unstable; urgency=medium
 
