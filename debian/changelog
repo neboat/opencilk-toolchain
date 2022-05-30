@@ -1,9 +1,22 @@
-llvm-toolchain-14 (1:14.0.3-3) UNRELEASED; urgency=medium
+llvm-toolchain-14 (1:14.0.4-2) unstable; urgency=low
+
+  * Merge from Debian unstable. Remaining changes:
+  * Add breaks/replaces for grpc binaries being placed in another package in Ubuntu
+  * Fix GRPC installation for ports architectures
+  * Add support for Ubuntu kinetic
+  * rules: take some patches from Ubuntu to save extra space during build
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 29 May 2022 12:53:47 +0200
+
+llvm-toolchain-14 (1:14.0.4-1) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Enable GRPC build dependency only on supported targets
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Fri, 13 May 2022 21:12:14 +0200
+  [ Sylvestre Ledru ]
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 25 May 2022 08:49:20 +0200
 
 llvm-toolchain-14 (1:14.0.3-2) unstable; urgency=medium
 
