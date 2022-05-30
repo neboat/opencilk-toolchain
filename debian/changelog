@@ -1,4 +1,4 @@
-llvm-toolchain-13 (1:13.0.1-5) UNRELEASED; urgency=medium
+llvm-toolchain-13 (1:13.0.1-5) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Enable GRPC build dependency only on supported targets
@@ -9,7 +9,9 @@ llvm-toolchain-13 (1:13.0.1-5) UNRELEASED; urgency=medium
   * Break/Replaces the Ubuntu library that moved GRPC binaries into the wrong location
   * newline/tab fix in rules
   * fix GRPC installation in port architectures
-  * Add patches from Upstream/Ubuntu to: * Backport upstream patches to allow building EFI images for Ubuntu Core   for arm64 (LP: #1960300) * d/p/risc/riscv-insn-support.patch: Backport assembler .insn support on riscv64   for rustc 1.59.0 (LP: #1973041)
+  * Add patches from Upstream/Ubuntu to:
+    - Backport upstream patches to allow building EFI images for Ubuntu Core
+       for arm64 (LP: #1960300)
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 26 May 2022 09:30:17 +0200
 
