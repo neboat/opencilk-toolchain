@@ -150,3 +150,4 @@ python3-scan-build.py
 issue-54242.diff
 revert-update-doc.diff
 unwind-force-pthread-dl.diff
+ubuntu-kinetic.patch
