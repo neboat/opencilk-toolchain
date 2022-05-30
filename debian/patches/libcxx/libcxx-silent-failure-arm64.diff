@@ -1,19 +1,19 @@
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/libcxx/test/std/thread/thread.condition/thread.condition.condvar/wait_for.pass.cpp
+Index: llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678/libcxx/test/std/thread/thread.condition/thread.condition.condvar/wait_for.pass.cpp
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/libcxx/test/std/thread/thread.condition/thread.condition.condvar/wait_for.pass.cpp
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/libcxx/test/std/thread/thread.condition/thread.condition.condvar/wait_for.pass.cpp
+--- llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678.orig/libcxx/test/std/thread/thread.condition/thread.condition.condvar/wait_for.pass.cpp
++++ llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678/libcxx/test/std/thread/thread.condition/thread.condition.condvar/wait_for.pass.cpp
 @@ -8,6 +8,7 @@
  //
- // UNSUPPORTED: libcpp-has-no-threads
+ // UNSUPPORTED: no-threads
  // ALLOW_RETRIES: 2
 +// XFAIL: *
  
  // <condition_variable>
  
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/libcxx/test/std/thread/thread.mutex/thread.lock/thread.lock.shared/thread.lock.shared.locking/lock.pass.cpp
+Index: llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678/libcxx/test/std/thread/thread.mutex/thread.lock/thread.lock.shared/thread.lock.shared.locking/lock.pass.cpp
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/libcxx/test/std/thread/thread.mutex/thread.lock/thread.lock.shared/thread.lock.shared.locking/lock.pass.cpp
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/libcxx/test/std/thread/thread.mutex/thread.lock/thread.lock.shared/thread.lock.shared.locking/lock.pass.cpp
+--- llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678.orig/libcxx/test/std/thread/thread.mutex/thread.lock/thread.lock.shared/thread.lock.shared.locking/lock.pass.cpp
++++ llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678/libcxx/test/std/thread/thread.mutex/thread.lock/thread.lock.shared/thread.lock.shared.locking/lock.pass.cpp
 @@ -11,7 +11,7 @@
  // ALLOW_RETRIES: 2
  

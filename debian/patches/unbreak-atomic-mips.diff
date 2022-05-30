@@ -1,11 +1,11 @@
-Index: llvm-toolchain-13-13.0.0/compiler-rt/lib/scudo/standalone/CMakeLists.txt
+Index: llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678/compiler-rt/lib/scudo/standalone/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-13-13.0.0.orig/compiler-rt/lib/scudo/standalone/CMakeLists.txt
-+++ llvm-toolchain-13-13.0.0/compiler-rt/lib/scudo/standalone/CMakeLists.txt
-@@ -137,6 +137,13 @@ append_list_if(COMPILER_RT_HAS_LIBPTHREA
-
- append_list_if(FUCHSIA zircon SCUDO_LINK_LIBS)
-
+--- llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678.orig/compiler-rt/lib/scudo/standalone/CMakeLists.txt
++++ llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678/compiler-rt/lib/scudo/standalone/CMakeLists.txt
+@@ -144,6 +144,13 @@ if(COMPILER_RT_DEFAULT_TARGET_ARCH MATCH
+   list(APPEND SCUDO_LINK_LIBS atomic)
+ endif()
+ 
 +if(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mips" OR
 +   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mips64" OR
 +   CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "mipsel" OR
@@ -16,4 +16,3 @@ Index: llvm-toolchain-13-13.0.0/compiler-rt/lib/scudo/standalone/CMakeLists.txt
  if(COMPILER_RT_HAS_SCUDO_STANDALONE)
    add_compiler_rt_object_libraries(RTScudoStandalone
      ARCHS ${SCUDO_STANDALONE_SUPPORTED_ARCH}
-

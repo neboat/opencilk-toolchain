@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_13~++20210325124256+06411edb9fca/clang/lib/Driver/ToolChains/Linux.cpp
+Index: llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678/clang/lib/Driver/ToolChains/Linux.cpp
 ===================================================================
---- llvm-toolchain-snapshot_13~++20210325124256+06411edb9fca.orig/clang/lib/Driver/ToolChains/Linux.cpp
-+++ llvm-toolchain-snapshot_13~++20210325124256+06411edb9fca/clang/lib/Driver/ToolChains/Linux.cpp
+--- llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678.orig/clang/lib/Driver/ToolChains/Linux.cpp
++++ llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678/clang/lib/Driver/ToolChains/Linux.cpp
 @@ -115,6 +115,10 @@ std::string Linux::getMultiarchTriple(co
        return "mips64el-linux-gnu";
      break;
@@ -11,5 +11,5 @@ Index: llvm-toolchain-snapshot_13~++20210325124256+06411edb9fca/clang/lib/Driver
 +      return "riscv64-linux-gnu";
 +    break;
    case llvm::Triple::ppc:
-     if (D.getVFS().exists(SysRoot + "/lib/powerpc-linux-gnuspe"))
+     if (D.getVFS().exists(concat(SysRoot, "/lib/powerpc-linux-gnuspe")))
        return "powerpc-linux-gnuspe";
