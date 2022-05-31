@@ -1,6 +1,11 @@
+llvm-toolchain-14 (1:14.0.4-3) unstable; urgency=medium
+
+  * Fix GRPC installation path and files
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 31 May 2022 12:09:28 +0200
+
 llvm-toolchain-14 (1:14.0.4-2) unstable; urgency=low
 
-  * Merge from Debian unstable. Remaining changes:
   * Add breaks/replaces for grpc binaries being placed in another package in Ubuntu
   * Fix GRPC installation for ports architectures
   * Add support for Ubuntu kinetic
