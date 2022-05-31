@@ -602,6 +602,7 @@ override_dh_auto_configure: preconfigure
 	-DBOOTSTRAP_LLVM_POLLY_LINK_INTO_TOOLS=ON \
 	-DBOOTSTRAP_LLVM_EXPERIMENTAL_TARGETS_TO_BUILD="M68k" \
 	-DBOOTSTRAP_LLVM_LINK_LLVM_DYLIB=ON \
+    -DBOOTSTRAP_LLVM_ENABLE_CURL=ON \
 	-DBOOTSTRAP_CLANG_LINK_CLANG_DYLIB=ON \
 	-DBOOTSTRAP_LIBCLANG_LIBRARY_VERSION=$(SONAME_EXT) \
 	-DBOOTSTRAP_LIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=ON \
@@ -808,6 +809,7 @@ endif
 
 # Probably useless
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/six.py
+	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local/lib/python*/*-packages/six.py
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
@@ -1110,5 +1112,7 @@ override_dh_auto_clean:
 	fi
 	: # for some reason, the docs are written to debian/usr and debian/man ...
 	rm -rf debian/usr debian/man
+	: # remove extra stamps
+	rm -f debian-*-build
 
 .PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libclc-build
