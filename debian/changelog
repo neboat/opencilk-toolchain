@@ -2,6 +2,7 @@ llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp4) UNRELEASED; 
 
   [ John Paul Adrian Glaubitz ]
   * Enable GRPC build dependency only on supported targets
+  * Disable compiler-rt built-ins on x32
 
   [ Sylvestre Ledru ]
   * Add usr/lib/llvm-15/lib/libomptarget.devicertl.a to libomp-X-dev
