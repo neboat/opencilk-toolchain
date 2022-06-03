@@ -126,10 +126,12 @@ STAGE_2_CMAKE_EXTRA += -DCLANG_SYSTEMZ_DEFAULT_ARCH=$(ZARCH)
 
 # clangd remote index support requires GRPC & protobuf.
 # Enable if minimum tested versions are available.
+CLANGD_GRPC_INSTALLED=no
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libgrpc++-dev) gt 1.30.0; echo $$?),0)
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' protobuf-compiler-grpc) gt 1.30.0; echo $$?),0)
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libprotobuf-dev) gt 3.12.0; echo $$?),0)
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' protobuf-compiler) gt 3.12.0; echo $$?),0)
+CLANGD_GRPC_INSTALLED=yes
 STAGE_2_CMAKE_EXTRA += -DCLANGD_ENABLE_REMOTE=ON
 endif
 endif
@@ -482,6 +484,11 @@ preconfigure:
 	fi
 	if test "$(DISTRO)" = "stretch"; then \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
+	fi
+
+	# Conditionally enable install clangd grpc files
+	if test "$(CLANGD_GRPC_INSTALLED)" = "yes"; then \
+		sed -i -e "s|#grpc\ ||g" debian/debian/libclang-$(LLVM_VERSION)-dev.install; \
 	fi
 
 # Override this two targets. They are trying to manage the .in conversion for me
