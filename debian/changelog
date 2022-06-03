@@ -3,7 +3,10 @@ llvm-toolchain-14 (1:14.0.4-4) UNRELEASED; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * Disable compiler-rt built-ins on x32
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Wed, 01 Jun 2022 07:34:47 +0200
+  [ Sylvestre Ledru ]
+  * Only install grpc files libclang-X.Y-dev when grpc built
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 03 Jun 2022 10:52:10 +0200
 
 llvm-toolchain-14 (1:14.0.4-3) unstable; urgency=medium
 
