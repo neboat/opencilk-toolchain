@@ -113,9 +113,6 @@ hurd/hurd-pathmax.diff
 930008-arm.diff
 bootstrap-fix-include-next.diff
 
-# riscv64
-risc/clang-riscv64-multiarch.diff
-
 # sparc64
 D98574.patch
 D98575.patch
