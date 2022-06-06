@@ -6,6 +6,9 @@ llvm-toolchain-14 (1:14.0.4-4) unstable; urgency=medium
   [ Sylvestre Ledru ]
   * Only install grpc files libclang-X.Y-dev when grpc built
 
+  [ Michael Biebl ]
+  * Add support for systemd-binfmt (Closes: #1012368)
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 03 Jun 2022 10:52:10 +0200
 
 llvm-toolchain-14 (1:14.0.4-3) unstable; urgency=medium
@@ -400,12 +403,6 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
     otherwise
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
-
-llvm-toolchain-13 (1:13.0.1-7) UNRELEASED; urgency=medium
-
-  * Add support for systemd-binfmt (Closes: #1012367)
-
- -- Michael Biebl <biebl@debian.org>  Mon, 06 Jun 2022 01:19:25 +0200
 
 llvm-toolchain-13 (1:13.0.1-6) unstable; urgency=medium
 
