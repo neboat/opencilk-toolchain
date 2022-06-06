@@ -1012,7 +1012,7 @@ ifeq (${RUN_TEST},yes)
 ARCH_LLVM_TEST_OK := i386 amd64
 
 override_dh_auto_test:
-    echo "Running tests: $(RUN_TEST)"
+	echo "Running tests: $(RUN_TEST)"
 # LLVM tests
 ifneq (,$(findstring $(DEB_HOST_ARCH),$(ARCH_LLVM_TEST_OK)))
 # logs the output to check-llvm_build_log.txt for validation through autopkgtest
