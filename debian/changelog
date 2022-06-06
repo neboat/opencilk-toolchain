@@ -14,7 +14,10 @@ llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp4) UNRELEASED; 
   [ Roman Lebedev ]
   * Install new binary tblgen-lsp-server into mlir-15-tools
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 22 May 2022 14:08:29 +0200
+  [ Michael Biebl ]
+  * Add support for systemd-binfmt (Closes: #1012370)
+
+-- Sylvestre Ledru <sylvestre@debian.org>  Sun, 22 May 2022 14:08:29 +0200
 
 llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp2) experimental; urgency=medium
 
