@@ -116,6 +116,7 @@ bootstrap-fix-include-next.diff
 
 # riscv64
 risc/clang-riscv64-multiarch.diff
+risc/riscv-insn-support.patch
 
 # sparc64
 D98574.patch
