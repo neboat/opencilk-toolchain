@@ -114,7 +114,6 @@ hurd/hurd-pathmax.diff
 bootstrap-fix-include-next.diff
 
 # sparc64
-D98574.patch
 D98575.patch
 
 # bug 939472
