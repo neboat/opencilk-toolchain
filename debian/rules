@@ -92,10 +92,6 @@ COMPILER_RT_USE_BUILTINS_LIBRARY := ON
 LIBCXX_EXCEPTIONS := ON
 LIBCXX_USE_COMPILER_RT := ON
 
-ifneq (,$(filter $(DEB_HOST_ARCH),sparc sparc64))
-STAGE_1_CMAKE_EXTRA += -DLLVM_PARALLEL_LINK_JOBS=4
-endif
-
 ifneq (,$(filter $(DEB_HOST_ARCH),i386 hurd-i386 kfreebsd-i386 armel mipsel powerpc powerpcspe riscv64))
 # For some reason, in the stage2 build, when clang is used to compile
 # itself. The atomic detection is failing on armel and riscv64. Forcing the inclusion
@@ -189,6 +185,10 @@ endif
 ifneq (,$(filter $(DEB_HOST_ARCH),powerpc))
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=powerpc-linux-gnu
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
+endif
+
+ifneq (,$(filter $(DEB_HOST_ARCH),sparc sparc64))
+  STAGE_ALL_CMAKE_EXTRA += -DLLVM_PARALLEL_LINK_JOBS=4
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
