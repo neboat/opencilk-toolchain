@@ -113,9 +113,6 @@ hurd/hurd-pathmax.diff
 930008-arm.diff
 bootstrap-fix-include-next.diff
 
-# sparc64
-D98575.patch
-
 # bug 939472
 #try-to-unbreak-thinlto.diff
 #D67877-cmake-clang-example.patch

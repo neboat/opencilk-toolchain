@@ -6,6 +6,7 @@ llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp4) UNRELEASED; 
   * Limit parallel link jobs for all stages on sparc and sparc64
   * Built compiler-rt for default target only on sparc and sparc64
   * Drop sparc64-specific patch D98574.patch
+  * Drop sparc64-specific patch D98575.patch
 
   [ Sylvestre Ledru ]
   * Add usr/lib/llvm-15/lib/libomptarget.devicertl.a to libomp-X-dev
