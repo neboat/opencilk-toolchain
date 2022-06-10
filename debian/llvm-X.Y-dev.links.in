@@ -17,3 +17,5 @@ usr/lib/llvm-@LLVM_VERSION@/ usr/lib/llvm-@LLVM_VERSION@/build/Debug+Asserts
 
 usr/lib/llvm-@LLVM_VERSION@/lib/cmake/llvm usr/lib/llvm-@LLVM_VERSION@/cmake
 usr/lib/llvm-@LLVM_VERSION@/lib/cmake/llvm usr/lib/llvm-@LLVM_VERSION@/share/llvm/cmake
+
+usr/lib/llvm-@LLVM_VERSION@/lib/cmake/llvm/llvm-driver-template.cpp.in usr/lib/llvm-@LLVM_VERSION@/cmake/llvm-driver-template.cpp.in
