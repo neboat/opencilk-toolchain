@@ -4,6 +4,7 @@ Depends: @, cmake, make, g++, file, dpkg-dev
 # dbgsym packages not being available in testing
 # clang-14-dbgsym, libclang1-14-dbgsym
 Restrictions: allow-stderr
+Architecture: amd64 arm64 i386
 
 Tests: integration-test-suite-test
 Depends: @, cmake, make, g++, libstdc++-10-dev

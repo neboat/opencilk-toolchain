@@ -1,13 +1,20 @@
-llvm-toolchain-14 (1:14.0.4-4) unstable; urgency=medium
+llvm-toolchain-14 (1:14.0.5-1) unstable; urgency=medium
+
+  * New upstream release
+  * Only install grpc files libclang-X.Y-dev when grpc built
 
   [ John Paul Adrian Glaubitz ]
   * Disable compiler-rt built-ins on x32
 
-  [ Sylvestre Ledru ]
-  * Only install grpc files libclang-X.Y-dev when grpc built
-
   [ Michael Biebl ]
   * Add support for systemd-binfmt (Closes: #1012368)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 11 Jun 2022 09:09:03 +0200
+
+llvm-toolchain-14 (1:14.0.4-4) unstable; urgency=medium
+
+  * autopkgtest: Restrict debian/qualify-clang.sh on
+    amd64 arm64 i386
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 03 Jun 2022 10:52:10 +0200
 
