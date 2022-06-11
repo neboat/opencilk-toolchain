@@ -10,6 +10,7 @@ usr/lib/llvm-@LLVM_VERSION@/include/llvm/      usr/include/llvm-@LLVM_VERSION@/
 usr/lib/llvm-@LLVM_VERSION@/include/llvm-c/	usr/include/llvm-c-@LLVM_VERSION@/
 # Explicit debian/tmp since there are multiple declarations
 debian/tmp/usr/lib/llvm-@LLVM_VERSION@/lib/cmake/llvm/*.cmake
+debian/tmp/usr/lib/llvm-@LLVM_VERSION@/lib/cmake/llvm/llvm-driver-template.cpp.in
 
 llvm/utils/vim/indent/llvm-@LLVM_VERSION@.vim		        usr/share/vim/addons/indent/
 
