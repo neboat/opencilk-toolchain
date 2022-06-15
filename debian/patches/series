@@ -117,8 +117,6 @@ bootstrap-fix-include-next.diff
 #try-to-unbreak-thinlto.diff
 #D67877-cmake-clang-example.patch
 
-x86-fuzzer.patch
-
 python3-shebang.patch
 print-lldb-path.patch
 libcxx-armhf-ftbfs.diff
