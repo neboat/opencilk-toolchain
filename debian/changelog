@@ -1,7 +1,14 @@
+llvm-toolchain-14 (1:14.0.6-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 25 Jun 2022 09:56:23 +0200
+
 llvm-toolchain-14 (1:14.0.5-1) unstable; urgency=medium
 
   * New upstream release
   * Only install grpc files libclang-X.Y-dev when grpc built
+  * Remove cv-insn-support.patch (applied upstream)
 
   [ John Paul Adrian Glaubitz ]
   * Disable compiler-rt built-ins on x32
