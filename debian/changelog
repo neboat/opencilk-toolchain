@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:15~++20220625103012+3d37e785c77a-1~exp2) experimental; urgency=medium
+
+  * On Debian stretch, force the usage of g++-7
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Jul 2022 18:16:34 +0200
+
 llvm-toolchain-snapshot (1:15~++20220625103012+3d37e785c77a-1~exp1) experimental; urgency=medium
 
   [ John Paul Adrian Glaubitz ]

@@ -104,6 +104,13 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++
 	GCC_VERSION := 4.9
 endif
 
+ifneq (,$(filter $(DISTRO),stretch))
+# from llvm 15, we need gcc at least 7
+  GCC_VERSION := 7
+# Don't enable lld python for old distros
+  STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_PYTHON=OFF
+endif
+
 Z3_FLAG = -DLLVM_ENABLE_Z3_SOLVER=OFF
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' libz3-dev) gt 4.7.0; echo $$?),0)
 # no ocaml support in main for Ubuntu
@@ -361,11 +368,6 @@ ifeq (,$(filter-out $(LLDB_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 else
 	STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_LUA=OFF
 	PROJECTS+=;lldb
-endif
-
-ifneq (,$(filter $(DISTRO),stretch))
-# Don't enable lld python for old distros
-  STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_PYTHON=OFF
 endif
 
 
