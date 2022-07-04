@@ -1,6 +1,5 @@
 llvm-toolchain-snapshot (1:15~++20220625103012+3d37e785c77a-1~exp2) experimental; urgency=medium
 
-  * On Debian stretch, force the usage of g++-7
   * Force the SSE2 on amd64 for compiler-rt/builtin:
     https://reviews.llvm.org/D107082#3626632
 

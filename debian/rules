@@ -106,7 +106,8 @@ endif
 
 ifneq (,$(filter $(DISTRO),stretch))
 # from llvm 15, we need gcc at least 7
-  GCC_VERSION := 7
+# No need for now. keeping in case we do in the future
+#  GCC_VERSION := 7
 # Don't enable lld python for old distros
   STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_PYTHON=OFF
 endif
