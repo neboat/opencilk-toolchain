@@ -7,7 +7,7 @@ Index: llvm-toolchain-snapshot-15~++20220703041804+e1f61d864214/compiler-rt/lib/
      append_list_if(COMPILER_RT_ENABLE_CET -fcf-protection=full BUILTIN_CFLAGS)
    endif()
 -
-+  if(${CMAKE_SYSTEM_NAME} MATCHES "x86_64")
++  if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86_64")
 +  append_list_if(COMPILER_RT_HAS_FLOAT16 -msse2 -DCOMPILER_RT_HAS_FLOAT16 BUILTIN_CFLAGS)
 +  else ()
    append_list_if(COMPILER_RT_HAS_FLOAT16 -DCOMPILER_RT_HAS_FLOAT16 BUILTIN_CFLAGS)
