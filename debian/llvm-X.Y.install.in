@@ -14,6 +14,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/llvm-cxxmap
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-diff
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-dis
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-dwarfdump
+usr/lib/llvm-@LLVM_VERSION@/bin/llvm-dwarfutil
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-dwp
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-exegesis
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-extract
@@ -99,6 +100,7 @@ usr/bin/llvm-diff-@LLVM_VERSION@
 usr/bin/llvm-dis-@LLVM_VERSION@
 usr/bin/llvm-dlltool-@LLVM_VERSION@
 usr/bin/llvm-dwarfdump-@LLVM_VERSION@
+usr/bin/llvm-dwarfutil-@LLVM_VERSION@
 usr/bin/llvm-dwp-@LLVM_VERSION@
 usr/bin/llvm-exegesis-@LLVM_VERSION@
 usr/bin/llvm-extract-@LLVM_VERSION@
