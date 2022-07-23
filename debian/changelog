@@ -4,6 +4,8 @@ llvm-toolchain-snapshot (1:15~++20220721024144+5e856a8578c1-1~exp1) UNRELEASED; 
     https://reviews.llvm.org/D107082#3626632
   * Ship llvm-debuginfod & llvm-dwarfutil in llvm-X.Y
   * Install usr/lib/llvm-15/lib/libomptarget.so.15 in libomp5-15
+    And libomptarget.rtl.amdgpu.so.15, libomptarget.rtl.cuda.so.15 and
+    libomptarget.rtl.x86_64.so.15
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Jul 2022 23:01:11 +0200
 
