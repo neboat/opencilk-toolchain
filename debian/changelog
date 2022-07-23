@@ -1,3 +1,12 @@
+llvm-toolchain-14 (1:14.0.6-2) unstable; urgency=medium
+
+  [ Sam McCall ]
+  * Add conventional symlink to libc++ headers in /usr/include/c++/v1
+    See https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/-/merge_requests/95
+    for more information
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 23 Jul 2022 23:01:02 +0200
+
 llvm-toolchain-14 (1:14.0.6-1) unstable; urgency=medium
 
   * New upstream release
@@ -417,6 +426,18 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
     otherwise
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
+
+llvm-toolchain-13 (1:13.0.1-7) unstable; urgency=medium
+
+  [ Michael Biebl ]
+  * Add support for systemd-binfmt (Closes: #1012367)
+
+  [ Sam McCall ]
+  * Add conventional symlink to libc++ headers in /usr/include/c++/v1
+    See https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/-/merge_requests/95
+    for more information
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 22 Jul 2022 15:10:20 +0200
 
 llvm-toolchain-13 (1:13.0.1-6) unstable; urgency=medium
 
