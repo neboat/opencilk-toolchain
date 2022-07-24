@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:15~++20220721024144+5e856a8578c1-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:15~++20220721024144+5e856a8578c1-1~exp1) experimental; urgency=medium
 
   * Force the SSE2 on amd64 for compiler-rt/builtin:
     https://reviews.llvm.org/D107082#3626632
@@ -6,10 +6,15 @@ llvm-toolchain-snapshot (1:15~++20220721024144+5e856a8578c1-1~exp1) UNRELEASED; 
   * Install usr/lib/llvm-15/lib/libomptarget.so.15 in libomp5-15
     And libomptarget.rtl.amdgpu.so.15, libomptarget.rtl.cuda.so.15 and
     libomptarget.rtl.x86_64.so.15
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 24 Jul 2022 14:15:19 +0200
-
-llvm-toolchain-snapshot (1:15~++20220625103012+3d37e785c77a-1~exp1) experimental; urgency=medium
+  * Add usr/lib/llvm-15/lib/libomptarget.devicertl.a to libomp-X-dev
+    only for [amd64 ppc64el arm64]
+  * On Debian Buster, unwind fails to link because pthread & dl aren't found.
+    Force the declaration as it is probably the case for every Debian & Ubuntu anyway.
+    See unwind-force-pthread-dl.diff & https://github.com/llvm/llvm-project/issues/55629
+  * Install llvm-driver-template.cpp.in in llvm-X.Y-dev
+  * Remove debian/patches/x86-fuzzer.patch (done differently upstream)
+  * Install UnicodeNameMappingGenerator in llvm-X.Y-tools
+  * Disable libclc when spir is below 12
 
   [ John Paul Adrian Glaubitz ]
   * Enable GRPC build dependency only on supported targets
@@ -19,23 +24,13 @@ llvm-toolchain-snapshot (1:15~++20220625103012+3d37e785c77a-1~exp1) experimental
   * Drop sparc64-specific patch D98574.patch
   * Drop sparc64-specific patch D98575.patch
 
-  [ Sylvestre Ledru ]
-  * Add usr/lib/llvm-15/lib/libomptarget.devicertl.a to libomp-X-dev
-    only for [amd64 ppc64el arm64]
-  * On Debian Buster, unwind fails to link because pthread & dl aren't found.
-    Force the declaration as it is probably the case for every Debian & Ubuntu anyway.
-    See unwind-force-pthread-dl.diff & https://github.com/llvm/llvm-project/issues/55629
-  * Install llvm-driver-template.cpp.in in llvm-X.Y-dev
-  * Remove debian/patches/x86-fuzzer.patch (done differently upstream)
-  * Install UnicodeNameMappingGenerator in llvm-X.Y-tools
-
   [ Roman Lebedev ]
   * Install new binary tblgen-lsp-server into mlir-15-tools
 
   [ Michael Biebl ]
   * Add support for systemd-binfmt (Closes: #1012370)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 25 Jun 2022 22:31:51 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 24 Jul 2022 14:19:42 +0200
 
 llvm-toolchain-snapshot (1:15~++20220616015847+a4c805600ef2-1~exp1) UNRELEASED; urgency=medium
 
@@ -80,15 +75,6 @@ llvm-toolchain-snapshot (1:15~++20220509105605+460fc79a080b-1~exp1) experimental
     See https://github.com/llvm/llvm-project/issues/55289
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 09 May 2022 22:57:11 +0200
-
-llvm-toolchain-snapshot (1:15~++20220407012940+46f0e2ceb487-1~exp1) UNRELEASED; urgency=medium
-
-  * Disable libclc when spir is below 12
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 07 Apr 2022 13:29:51 +0200
 
 llvm-toolchain-snapshot (1:15~++20220309105819+8bef17ed59aa-1~exp1) experimental; urgency=medium
 
