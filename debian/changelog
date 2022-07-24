@@ -1,12 +1,3 @@
-llvm-toolchain-snapshot (1:15~++20220724113059+7feab85df8e8-1~exp1) UNRELEASED; urgency=medium
-
-  * Force the SSE2 on amd64 for compiler-rt/builtin:
-    https://reviews.llvm.org/D107082#3626632
-  * Ship llvm-debuginfod & llvm-dwarfutil in llvm-X.Y
-  * Install usr/lib/llvm-15/lib/libomptarget.so.15 in libomp5-15
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 24 Jul 2022 11:31:19 +0200
-
 llvm-toolchain-snapshot (1:15~++20220721024144+5e856a8578c1-1~exp1) UNRELEASED; urgency=medium
 
   * Force the SSE2 on amd64 for compiler-rt/builtin:
@@ -16,7 +7,7 @@ llvm-toolchain-snapshot (1:15~++20220721024144+5e856a8578c1-1~exp1) UNRELEASED; 
     And libomptarget.rtl.amdgpu.so.15, libomptarget.rtl.cuda.so.15 and
     libomptarget.rtl.x86_64.so.15
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Jul 2022 23:01:11 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 24 Jul 2022 14:15:19 +0200
 
 llvm-toolchain-snapshot (1:15~++20220625103012+3d37e785c77a-1~exp1) experimental; urgency=medium
 
