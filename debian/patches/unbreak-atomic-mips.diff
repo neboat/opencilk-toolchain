@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678/compiler-rt/lib/scudo/standalone/CMakeLists.txt
+Index: llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8/compiler-rt/lib/scudo/standalone/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678.orig/compiler-rt/lib/scudo/standalone/CMakeLists.txt
-+++ llvm-toolchain-snapshot_15~++20220530092849+bcf3d5248678/compiler-rt/lib/scudo/standalone/CMakeLists.txt
-@@ -144,6 +144,13 @@ if(COMPILER_RT_DEFAULT_TARGET_ARCH MATCH
+--- llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8.orig/compiler-rt/lib/scudo/standalone/CMakeLists.txt
++++ llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8/compiler-rt/lib/scudo/standalone/CMakeLists.txt
+@@ -145,6 +145,13 @@ if(COMPILER_RT_DEFAULT_TARGET_ARCH MATCH
    list(APPEND SCUDO_LINK_LIBS atomic)
  endif()
  

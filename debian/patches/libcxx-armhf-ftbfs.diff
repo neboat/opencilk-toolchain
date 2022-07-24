@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/libcxx/include/atomic
+Index: llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8/libcxx/include/atomic
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/libcxx/include/atomic
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/libcxx/include/atomic
-@@ -2683,9 +2683,13 @@ typedef conditional<_LIBCPP_CONTENTION_L
+--- llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8.orig/libcxx/include/atomic
++++ llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8/libcxx/include/atomic
+@@ -2687,9 +2687,13 @@ typedef conditional<_LIBCPP_CONTENTION_L
  #endif
  
  #if !defined(_LIBCPP_NO_LOCK_FREE_TYPES)

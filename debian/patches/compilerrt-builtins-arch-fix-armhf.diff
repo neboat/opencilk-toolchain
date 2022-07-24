@@ -1,9 +1,9 @@
 fix builtins armhf default arch detection by adding the same armhf triple
 handling use for compiler-rt
-Index: llvm-toolchain-snapshot_14~++20220105111900+cdbad62c526c/compiler-rt/lib/builtins/CMakeLists.txt
+Index: llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8/compiler-rt/lib/builtins/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_14~++20220105111900+cdbad62c526c.orig/compiler-rt/lib/builtins/CMakeLists.txt
-+++ llvm-toolchain-snapshot_14~++20220105111900+cdbad62c526c/compiler-rt/lib/builtins/CMakeLists.txt
+--- llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8.orig/compiler-rt/lib/builtins/CMakeLists.txt
++++ llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8/compiler-rt/lib/builtins/CMakeLists.txt
 @@ -27,6 +27,11 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURR
  
    load_llvm_config()
