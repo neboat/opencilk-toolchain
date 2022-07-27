@@ -1,11 +1,10 @@
-llvm-toolchain-15 (1:15~++20220727091416+d77882e66779-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-15 (1:15~++20220727091640+d77882e66779-1~exp1) UNRELEASED; urgency=medium
 
   * main is now 16. Creating a branch for 15.
   * clang doesn't have a specific SONAME anymore.
     See https://reviews.llvm.org/D129160 for the rational
-  * experimental New snapshot release
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jul 2022 09:14:49 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jul 2022 09:27:50 +0200
 
 llvm-toolchain-snapshot (1:15~++20220724113059+7feab85df8e8-1~exp1) experimental; urgency=medium
 
