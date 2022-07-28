@@ -141,3 +141,4 @@ issue-54242.diff
 revert-update-doc.diff
 unwind-force-pthread-dl.diff
 force-sse2-compiler-rt.diff
+revert-openmp-path.diff
