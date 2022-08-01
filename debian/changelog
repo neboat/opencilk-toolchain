@@ -1,6 +1,8 @@
 llvm-toolchain-15 (1:15.0.0~+rc1-1~exp1) experimental; urgency=medium
 
   * First testing release of 15
+  * Remove 'debian/patches/revert-openmp-path.diff'
+    applied upstream
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 01 Aug 2022 09:30:39 +0200
 
