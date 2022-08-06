@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8/llvm/cmake/modules/HandleLLVMOptions.cmake
+Index: llvm-toolchain-snapshot_16~++20220806085305+0c9258612b67/llvm/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8.orig/llvm/cmake/modules/HandleLLVMOptions.cmake
-+++ llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8/llvm/cmake/modules/HandleLLVMOptions.cmake
-@@ -1255,8 +1255,8 @@ if(LLVM_USE_RELATIVE_PATHS_IN_FILES)
- endif()
+--- llvm-toolchain-snapshot_16~++20220806085305+0c9258612b67.orig/llvm/CMakeLists.txt
++++ llvm-toolchain-snapshot_16~++20220806085305+0c9258612b67/llvm/CMakeLists.txt
+@@ -763,8 +763,8 @@ set(LLVM_PROFDATA_FILE "" CACHE FILEPATH
+   "Profiling data file to use when compiling in order to improve runtime performance.")
  
  if(LLVM_INCLUDE_TESTS)
 -  # Lit test suite requires at least python 3.6
