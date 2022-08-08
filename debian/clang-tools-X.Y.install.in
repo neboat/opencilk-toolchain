@@ -36,6 +36,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/clang-nvlink-wrapper
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-linker-wrapper
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-pseudo
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-offload-packager
+usr/lib/llvm-@LLVM_VERSION@/bin/clang-tblgen
 
 usr/lib/llvm-@LLVM_VERSION@/bin/analyze-build
 usr/lib/llvm-@LLVM_VERSION@/bin/intercept-build
@@ -100,3 +101,4 @@ usr/bin/clang-nvlink-wrapper-@LLVM_VERSION@
 usr/bin/clang-linker-wrapper-@LLVM_VERSION@
 usr/bin/clang-pseudo-@LLVM_VERSION@
 usr/bin/clang-offload-packager-@LLVM_VERSION@
+usr/bin/clang-tblgen-@LLVM_VERSION@

@@ -3,6 +3,7 @@ llvm-toolchain-snapshot (1:16~++20220727093617+17fb879764dc-1~exp1) experimental
   * Main is now 16. A branch for 15 has been created
   * clang doesn't have a specific SONAME anymore.
     See https://reviews.llvm.org/D129160 for the rational
+  * Install clang-tblgen in clang-tools-X.Y
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jul 2022 21:36:27 +0200
 
