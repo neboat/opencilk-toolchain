@@ -106,6 +106,7 @@ ifneq (,$(filter $(DISTRO),stretch))
 #  GCC_VERSION := 7
 # Don't enable lld python for old distros
   STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_PYTHON=OFF
+  USE_CLANG = yes
 endif
 
 Z3_FLAG = -DLLVM_ENABLE_Z3_SOLVER=OFF
@@ -138,8 +139,15 @@ endif
 endif
 endif
 
+ifeq ($(USE_CLANG),yes)
+# For Debian stretch, gcc isn't available, let's use clang
+# itself to build itself.
+export CC=clang-14
+export CXX=clang++-14
+else
 export CC=gcc-$(GCC_VERSION)
 export CXX=g++-$(GCC_VERSION)
+endif
 
 opt_flags = -O2 -DNDEBUG -g1
 
