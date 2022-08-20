@@ -7,6 +7,35 @@ llvm-toolchain-snapshot (1:16~++20220727093617+17fb879764dc-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jul 2022 21:36:27 +0200
 
+llvm-toolchain-15 (1:15.0.0~+rc2-1~exp2) experimental; urgency=medium
+
+  * For Debian Stretch for apt.llvm.org, use clang-14 to build
+    itself as gcc 7 isn't available
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 20 Aug 2022 13:22:23 +0200
+
+llvm-toolchain-15 (1:15.0.0~+rc2-1~exp1) experimental; urgency=medium
+
+  * Second testing release of 15
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 09 Aug 2022 17:47:53 +0200
+
+llvm-toolchain-15 (1:15.0.0~+rc1-1~exp1) experimental; urgency=medium
+
+  * First testing release of 15
+  * Remove 'debian/patches/revert-openmp-path.diff'
+    applied upstream
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 01 Aug 2022 09:30:39 +0200
+
+llvm-toolchain-15 (1:15~++20220727091640+d77882e66779-1~exp1) experimental; urgency=medium
+
+  * main is now 16. Creating a branch for 15.
+  * clang doesn't have a specific SONAME anymore.
+    See https://reviews.llvm.org/D129160 for the rational
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jul 2022 09:27:50 +0200
+
 llvm-toolchain-snapshot (1:15~++20220724113059+7feab85df8e8-1~exp1) experimental; urgency=medium
 
   * New snapshot release
