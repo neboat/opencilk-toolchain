@@ -114,8 +114,7 @@ ifneq (,$(filter $(DISTRO),stretch))
 # Only enabled for stage 1, for stage2, it will use the local libc++ version
   STAGE_1_CMAKE_EXTRA += -DCLANG_DEFAULT_CXX_STDLIB=libc++
   STAGE_1_CMAKE_EXTRA += -DLLVM_ENABLE_LIBCXX=ON
-  STAGE_1_CXXFLAGS += -I/usr/lib/llvm-14/include/c++/v1/ -stdlib=libc++
-  STAGE_1_LDFLAGS += -stdlib=libc++
+  STAGE_1_CXXFLAGS += -I/usr/lib/llvm-14/include/c++/v1/
   USE_CLANG_PACKAGE_TO_BUILD_ITSELF = yes
 else
 # For all other deb/ubuntu, use libstdc++
