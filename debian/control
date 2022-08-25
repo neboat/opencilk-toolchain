@@ -805,5 +805,3 @@ Description: Multi-Level Intermediate Representation library
  MLIR aims to address software fragmentation, improve compilation for
  heterogeneous hardware, significantly reduce the cost of building domain
  specific compilers, and aid in connecting existing compilers together.
-
-
