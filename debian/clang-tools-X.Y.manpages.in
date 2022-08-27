@@ -10,4 +10,3 @@ debian/man/find-all-symbols-@LLVM_VERSION@.1
 debian/man/clang-include-fixer-@LLVM_VERSION@.1
 debian/man/clang-reorder-fields-@LLVM_VERSION@.1
 debian/man/clang-repl-@LLVM_VERSION@.1
-debian/man/clang-nvlink-wrapper-@LLVM_VERSION@.1
