@@ -10,9 +10,6 @@ llvm-toolchain-15 (1:15.0.0~+rc3-1~exp1) experimental; urgency=medium
   * New snapshot release
   * For Debian Stretch for apt.llvm.org, use clang-14 to build
     itself as gcc 7 isn't available
-  * Remove -DBUILTINS_CMAKE_ARGS & -DRUNTIMES_CMAKE_ARGS from the cmake
-    call. It is done by -DBOOTSTRAP_RUNTIMES_CMAKE_ARGS &
-    -DBOOTSTRAP_BUILTINS_CMAKE_ARGS instead
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 25 Aug 2022 13:32:14 +0200
 
