@@ -1,8 +1,8 @@
 suppress warnings for xray and testing when not enabled
-Index: llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
+Index: llvm-toolchain-snapshot_16~++20220829104310+329b972d416a/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8.orig/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
-+++ llvm-toolchain-snapshot_15~++20220724113059+7feab85df8e8/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
+--- llvm-toolchain-snapshot_16~++20220829104310+329b972d416a.orig/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
++++ llvm-toolchain-snapshot_16~++20220829104310+329b972d416a/compiler-rt/cmake/Modules/CompilerRTUtils.cmake
 @@ -324,15 +324,15 @@ macro(load_llvm_config)
  
      # Detect if we have the LLVMXRay and TestingSupport library installed and
