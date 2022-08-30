@@ -118,6 +118,12 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Feb 2022 23:25:57 +0100
 
+llvm-toolchain-14 (1:14.0.6-3) UNRELEASED; urgency=medium
+
+  * Fix a typo to silent lintian (Closes: #1018770)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Aug 2022 16:10:33 +0200
+
 llvm-toolchain-14 (1:14.0.6-2) unstable; urgency=medium
 
   [ Sam McCall ]
