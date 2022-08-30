@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:16~++20220827102413+640e2bae5090-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:16~++20220830053930+25fdcb8e6ce3-1~exp1) experimental; urgency=medium
 
   * Main is now 16. A branch for 15 has been created
   * clang doesn't have a specific SONAME anymore.
@@ -9,7 +9,7 @@ llvm-toolchain-snapshot (1:16~++20220827102413+640e2bae5090-1~exp1) experimental
     the future for for now, it is Debian/stretch only
   * Remove clang-offload-wrapper & clang-nvlink-wrapper like upstream
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 27 Aug 2022 22:25:31 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Aug 2022 17:40:55 +0200
 
 llvm-toolchain-snapshot (1:16~++20220731055325+02b3a358926e-1~exp1) experimental; urgency=medium
 
