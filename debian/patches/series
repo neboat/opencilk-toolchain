@@ -151,3 +151,4 @@ python3-scan-build.py
 revert-update-doc.diff
 fix-typo.diff
 ubuntu-kinetic.patch
+fix-typo-1018770.diff

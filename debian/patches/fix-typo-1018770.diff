@@ -1,0 +1,20 @@
+Index: llvm-toolchain-14-14.0.6/llvm/include/llvm/Target/TargetMachine.h
+===================================================================
+--- llvm-toolchain-14-14.0.6.orig/llvm/include/llvm/Target/TargetMachine.h
++++ llvm-toolchain-14-14.0.6/llvm/include/llvm/Target/TargetMachine.h
+@@ -439,13 +439,13 @@ public:
+                                      raw_pwrite_stream &, raw_pwrite_stream *,
+                                      CodeGenFileType, CGPassBuilderOption,
+                                      PassInstrumentationCallbacks *) {
+-    return make_error<StringError>("buildCodeGenPipeline is not overriden",
++    return make_error<StringError>("buildCodeGenPipeline is not overridden",
+                                    inconvertibleErrorCode());
+   }
+ 
+   virtual std::pair<StringRef, bool> getPassNameFromLegacyName(StringRef) {
+     llvm_unreachable(
+-        "getPassNameFromLegacyName parseMIRPipeline is not overriden");
++        "getPassNameFromLegacyName parseMIRPipeline is not overridden");
+   }
+ 
+   /// Add passes to the specified pass manager to get machine code emitted with
