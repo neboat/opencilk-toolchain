@@ -23,12 +23,12 @@ llvm-toolchain-snapshot (1:16~++20220731055325+02b3a358926e-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jul 2022 21:36:27 +0200
 
-llvm-toolchain-15 (1:15.0.0~+rc3-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-15 (1:15.0.0~+rc3-1~exp2) experimental; urgency=medium
 
   * Update of the build dep from llvm-spirv => llvm-spirv-14
     as it is now versionned. It should build libclc
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 26 Aug 2022 11:03:17 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 31 Aug 2022 17:10:33 +0200
 
 llvm-toolchain-15 (1:15.0.0~+rc3-1~exp1) experimental; urgency=medium
 
