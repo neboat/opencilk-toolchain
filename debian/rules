@@ -243,10 +243,11 @@ else
 	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev'
 endif
 
-ifeq ($(shell command -v llvm-spirv-14),)
+LLVM_SPIR_VERSION=14
+ifeq ($(shell command -v llvm-spirv-$(LLVM_SPIR_VERSION)),)
 LLVM_SPIRV_INSTALLED = no
 else
-	ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' llvm-spirv-14) gt 14.0.0 ; echo $$?),0)
+	ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' llvm-spirv-$(LLVM_SPIR_VERSION)) gt 14.0.0 ; echo $$?),0)
 # Too old llvm-spirv version are failing. See #52200
 		LLVM_SPIRV_INSTALLED = yes
 	else
@@ -698,6 +699,7 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	-DCMAKE_INSTALL_DATADIR=lib \
 	-DCMAKE_INSTALL_INCLUDEDIR=include \
 	-DLLVM_CONFIG=$(STAGE_2_BIN_DIR)/llvm-config \
+	-DLLVM_SPIRV=/usr/bin/llvm-spirv-$(LLVM_SPIR_VERSION) \
 	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
 	ninja $(NJOBS) $(VERBOSE)
 else

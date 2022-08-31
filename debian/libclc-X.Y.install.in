@@ -1,2 +1,2 @@
 usr/lib/clc/*.bc
-#spv usr/lib/clc/*.spv
+usr/lib/clc/*.spv
