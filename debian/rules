@@ -803,7 +803,8 @@ override_dh_auto_install:
 
 	: # libclang
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && \
-	ln -s libclang-$(LLVM_VERSION).so.$(LLVM_VERSION) libclang.so.$(SONAME_EXT)
+	ln -s libclang-$(LLVM_VERSION).so.$(LLVM_VERSION) libclang.so.$(SONAME_EXT) && \
+	ln -s libclang-$(LLVM_VERSION).so.$(LLVM_VERSION) libclang-$(LLVM_VERSION).so.$(SONAME_EXT)
 
 	if test "$(LIBUNWIND_ENABLE)" = yes; then \
 		mkdir -p debian/tmp/usr/include/libunwind; \
