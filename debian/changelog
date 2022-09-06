@@ -1,9 +1,10 @@
-llvm-toolchain-15 (1:15.0.0~+rc3-1~exp3) UNRELEASED; urgency=medium
+llvm-toolchain-15 (1:15.0.0-1) unstable; urgency=medium
 
+  * New stable release
   * syscall-mips64el-def.diff: fix the call to undeclared function 'syscall';
     on mips
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 02 Sep 2022 11:43:11 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 06 Sep 2022 09:13:19 +0200
 
 llvm-toolchain-15 (1:15.0.0~+rc3-1~exp2) experimental; urgency=medium
 
