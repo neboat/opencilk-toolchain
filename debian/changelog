@@ -1,6 +1,6 @@
 llvm-toolchain-15 (1:15.0.0-2) experimental; urgency=medium
 
-  * Fix build on ppc64 and riscv64
+  * Fix build on ppc64 and riscv64 (Closes: #1019582)
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 12 Sep 2022 17:58:08 +0200
 
