@@ -13,6 +13,7 @@ llvm-toolchain-snapshot (1:16~++20220830053930+25fdcb8e6ce3-1~exp1) experimental
     and to have more consistency.
   * Install usr/lib/llvm-@LLVM_VERSION@/share/gdb/python/ompd/ in libomp-16-dev
   * Remove ompt-multiplex.h from libomp
+  * Install llvm-remarkutil in llvm-X.Y
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Aug 2022 17:40:55 +0200
 
