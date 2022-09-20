@@ -24,11 +24,11 @@ Differential Revision: https://reviews.llvm.org/D101773
  2 files changed, 33 insertions(+)
  create mode 100644 llvm/test/MC/Mips/mips_lo16.s
 
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/llvm/lib/MC/ELFObjectWriter.cpp
+Index: llvm-toolchain-snapshot_16~++20220920091612+a7d2409bac7f/llvm/lib/MC/ELFObjectWriter.cpp
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/llvm/lib/MC/ELFObjectWriter.cpp
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/llvm/lib/MC/ELFObjectWriter.cpp
-@@ -1367,6 +1367,17 @@ bool ELFObjectWriter::shouldRelocateWith
+--- llvm-toolchain-snapshot_16~++20220920091612+a7d2409bac7f.orig/llvm/lib/MC/ELFObjectWriter.cpp
++++ llvm-toolchain-snapshot_16~++20220920091612+a7d2409bac7f/llvm/lib/MC/ELFObjectWriter.cpp
+@@ -1369,6 +1369,17 @@ bool ELFObjectWriter::shouldRelocateWith
        if (TargetObjectWriter->getEMachine() == ELF::EM_MIPS &&
            !hasRelocationAddend())
          return true;
