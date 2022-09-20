@@ -1,3 +1,10 @@
+llvm-toolchain-15 (1:15.0.1-1~exp2) UNRELEASED; urgency=medium
+
+  * Unbreak the clang symlink. See
+    https://github.com/llvm/llvm-project/issues/57857
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 21 Sep 2022 00:20:54 +0200
+
 llvm-toolchain-15 (1:15.0.1-1~exp1) experimental; urgency=medium
 
   * New upstream release
