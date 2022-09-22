@@ -143,3 +143,5 @@ revert-update-doc.diff
 unwind-force-pthread-dl.diff
 force-sse2-compiler-rt.diff
 fix-typo-1018770.diff
+bolt.patch
+bolt-disable-emit-relocs.patch
