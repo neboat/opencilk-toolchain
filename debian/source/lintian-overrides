@@ -21,6 +21,7 @@ source: source-is-missing llvm/test/*
 source: source-is-missing lldb/test/*
 source: source-is-missing lld/test/*
 source: source-is-missing clang/test/Driver/Inputs/dummy-elf.o
+source: source-is-missing clang/test/CodeGen/Inputs/memprof.exe
 
 # By design
 source: invalid-arch-string-in-source-relation riscv64*
