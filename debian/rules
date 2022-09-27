@@ -260,7 +260,8 @@ else
 	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev'
 endif
 
-LLVM_SPIR_VERSION=14
+# Needs 16 because of opaque pointers
+LLVM_SPIR_VERSION=16
 ifeq ($(shell command -v llvm-spirv-$(LLVM_SPIR_VERSION)),)
 LLVM_SPIRV_INSTALLED = no
 else
