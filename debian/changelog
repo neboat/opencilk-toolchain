@@ -1,3 +1,9 @@
+llvm-toolchain-15 (1:15.0.1-1) unstable; urgency=medium
+
+  * Upload to unstable now that we have removed 12 from the archive
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 04 Oct 2022 09:24:55 +0200
+
 llvm-toolchain-15 (1:15.0.1-1~exp2) experimental; urgency=medium
 
   * Unbreak the clang symlink. See
