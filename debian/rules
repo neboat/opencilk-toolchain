@@ -270,7 +270,7 @@ endif
 
 BOLT_ARCHS := amd64 arm64
 ifneq (,$(filter $(DEB_HOST_ARCH),$(BOLT_ARCHS)))
-    PROJECTS += ;bolt
+#    PROJECTS += ;bolt
 endif
 
 CODECOVERAGE=no
