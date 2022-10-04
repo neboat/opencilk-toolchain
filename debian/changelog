@@ -1,3 +1,9 @@
+llvm-toolchain-15 (1:15.0.2-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 04 Oct 2022 12:46:25 +0200
+
 llvm-toolchain-15 (1:15.0.1-1) unstable; urgency=medium
 
   * Upload to unstable now that we have removed 12 from the archive
