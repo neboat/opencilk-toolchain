@@ -434,8 +434,6 @@ ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/
 endif
 
-GENERATOR=Ninja
-
 # enables cmake build targets like stage2-[target_name]
 ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-mlir;check-sanitizer;llvm-config;test-suite
 
@@ -565,7 +563,7 @@ override_dh_auto_configure: preconfigure
 	echo "Using cmake: $(CMAKE_BIN)"; \
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH \
 	$(PRE_PROCESS_CONF) $(CMAKE_BIN) -S llvm/ -B $(TARGET_BUILD) \
-	-G $(GENERATOR) \
+	-G Ninja \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 	-DLLVM_VERSION_SUFFIX= \
 	-DCMAKE_SUPPRESS_REGENERATION=ON \
@@ -695,7 +693,7 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	echo "Using cmake: $(CMAKE_BIN)"
 	cd libclc/build && \
 	$(CMAKE_BIN) ../ \
-	-G $(GENERATOR) \
+	-G Ninja \
 	-DCMAKE_C_COMPILER=$(STAGE_2_BIN_DIR)/clang \
 	-DCMAKE_CXX_COMPILER=$(STAGE_2_BIN_DIR)/clang++ \
 	-DCMAKE_C_FLAGS="$(opt_flags) $(STAGE_2_CFLAGS)" \
