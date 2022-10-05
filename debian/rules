@@ -50,7 +50,7 @@ include /usr/share/dpkg/buildflags.mk
 
 # We use a stage2 build. It means that a first clang is built using gcc,
 # a second clang is built with the first
-# And the various compoments are built using the second clang.
+# And the various components are built using the second clang.
 # See https://llvm.org/docs/AdvancedBuilds.html
 
 # collect additional flags for all stages all builds
@@ -345,7 +345,6 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 	SCAN_BUILD=yes
 
 	PRE_PROCESS=scan-build-$(LLVM_VERSION) --show-description -analyzer-config stable-report-filename=true
-# -enable-checker optin.performance.Padding
 	PRE_PROCESS_CONF=scan-build-$(LLVM_VERSION)
 # no need to run tests in this case
 	RUN_TEST=no
