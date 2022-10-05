@@ -322,7 +322,7 @@ STAGE_ALL_CMAKE_EXTRA += -DMLIR_INSTALL_AGGREGATE_OBJECTS=OFF
 
 
 RUN_TEST=yes
-ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+ifeq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 	RUN_TEST=no
 endif
 ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
