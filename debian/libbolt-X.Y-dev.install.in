@@ -1,4 +1,2 @@
 usr/lib/llvm-@LLVM_VERSION@/lib/libbolt_rt_hugify.a
 usr/lib/llvm-@LLVM_VERSION@/lib/libbolt_rt_instr.a
-usr/lib/llvm-@LLVM_VERSION@/lib/libbolt_rt_instr_osx.a
-
