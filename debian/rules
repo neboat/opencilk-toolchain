@@ -713,7 +713,38 @@ else
 endif
 	touch $@
 
-override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build
+debian-rtlib-wasm-build:
+	echo "Using cmake: $(CMAKE_BIN)"
+	for build in wasm32 wasm64; do \
+		mkdir -p build-compiler-rt-$$build; \
+		$(CMAKE_BIN) -B build-compiler-rt-$$build -S compiler-rt/lib/builtins/ \
+		-G Ninja \
+		-DCMAKE_C_COMPILER_TARGET=$$build-unknown-unknown \
+		-DCMAKE_CXX_COMPILER_TARGET=$$build-unknown-unknown \
+		-DCMAKE_ASM_COMPILER_TARGET=$$build-unknown-unknown \
+		-DCMAKE_C_COMPILER=$(STAGE_2_BIN_DIR)/clang \
+		-DCMAKE_CXX_COMPILER=$(STAGE_2_BIN_DIR)/clang++ \
+		-DCMAKE_C_FLAGS="$(opt_flags) $(STAGE_2_CFLAGS)" \
+		-DCMAKE_CXX_FLAGS="$(opt_flags) $(STAGE_2_CXXFLAGS)" \
+		-DCMAKE_SHARED_LINKER_FLAGS="$(STAGE_2_LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
+		-DCMAKE_MODULE_LINKER_FLAGS="$(STAGE_2_LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
+		-DCMAKE_EXE_LINKER_FLAGS="$(STAGE_2_LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
+		-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL) \
+		-DCMAKE_INSTALL_DATADIR=lib \
+		-DCMAKE_INSTALL_INCLUDEDIR=include \
+		-DLLVM_CONFIG_PATH=$(STAGE_2_BIN_DIR)/llvm-config \
+		-DCOMPILER_RT_STANDALONE_BUILD=ON \
+		-DCOMPILER_RT_BAREMETAL_BUILD=ON \
+		-DCOMPILER_RT_INCLUDE_TESTS=OFF \
+		-DCOMPILER_RT_USE_LIBCXX=OFF \
+		-DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
+		-DCOMPILER_RT_DEFAULT_TARGET_TRIPLE=$$build-unknown-unknown \
+		-DCOMPILER_RT_OS_DIR=wasi; \
+		ninja -C build-compiler-rt-$$build $(NJOBS) $(VERBOSE); \
+	done
+	touch $@
+
+override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build debian-rtlib-wasm-build
 
 override_dh_prep: build_doc
 	dh_prep
@@ -859,6 +890,9 @@ endif
 ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libclc/build install
 endif
+
+	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm32 install
+	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm64 install
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
@@ -1007,7 +1041,9 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' bin
 	: # for some reasons, the +x might be removed
 	chmod -f +x $(CURDIR)/debian/*/usr/lib/llvm-$(LLVM_VERSION)/bin/* || true
 else
-	dh_strip -a -v
+	# GNU strip doesn't recognize WebAssembly binaries, and actually corrupts them.
+	# llvm-strip (as of 15.0.2) fails with --strip-debug (but works with --strip-all)
+	dh_strip -a -v -Xlibclang_rt.builtins-wasm32.a -Xlibclang_rt.builtins-wasm64.a
 endif
 
 override_dh_install:
@@ -1143,6 +1179,7 @@ override_dh_auto_clean:
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
 	rm -rf libclc/build
+	rm -rf build-compiler-rt-wasm32 build-compiler-rt-wasm64
 	if test -f lld/docs/ld.lld-$(LLVM_VERSION).1; then \
 		mv lld/docs/ld.lld-$(LLVM_VERSION).1 lld/docs/ld.lld.1; \
 	fi
@@ -1158,4 +1195,4 @@ override_dh_auto_clean:
 	: # remove extra stamps
 	rm -f debian-*-build
 
-.PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libclc-build
+.PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libclc-build debian-rtlib-wasm-build
