@@ -1366,6 +1366,12 @@ if dpkg -l|grep -q wasi-libc; then
     }
 EOF
     clang-$VERSION -target wasm32-unknown-wasi -o printf printf.c
+    file printf &> foo.log
+    if ! grep -q "WebAssembly" foo.log; then
+        echo "the generated file isn't a WebAssembly file?"
+        exit 1
+    fi
+    rm -f printf.c printf
 fi
 
 echo '
