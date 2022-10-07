@@ -149,6 +149,7 @@ compilerrt-build-scudo-standalone-option.diff
 wasm-ld-path.diff
 python3-scan-build.py
 wasm-compiler-rt-default.diff
+wasm-sysroot-usr.diff
 issue-54242.diff
 revert-update-doc.diff
 fix-typo.diff
