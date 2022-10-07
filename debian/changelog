@@ -2,7 +2,7 @@ llvm-toolchain-14 (1:14.0.6-3) unstable; urgency=medium
 
   * Fix a typo to silent lintian (Closes: #1018770)
 
-  [ Faidon Liamboti ]
+  [ Faidon Liambotis ]
   * Add better support for the WebAssembly (wasm32/wasm64) targets:
     - Ship compiler-rt for the wasm32 and wasm64 targets. (Closes: #1010932)
     - Add patch wasm-compiler-rt-default.diff to default to compiler-rt for
