@@ -1,3 +1,15 @@
+llvm-toolchain-15 (1:15.0.2-2~exp2) UNRELEASED; urgency=medium
+
+  * Add better support for the WebAssembly (wasm32/wasm64) targets:
+    - Ship compiler-rt for the wasm32 and wasm64 targets. (Closes: #1010932)
+    - Add patch wasm-compiler-rt-default.diff to default to compiler-rt for
+      these targets. libgcc does not currently exist for WebAssembly in neither
+      Debian nor upstream, and therefore compiler-rt is the only option.
+    - Add patch wasm-sysroot-usr.diff to support a system-installed (i.e. shipped
+      in /usr) wasi-libc. (Closes: #1020746)
+
+ -- Faidon Liambotis <paravoid@debian.org>  Fri, 07 Oct 2022 16:44:57 +0300
+
 llvm-toolchain-15 (1:15.0.2-2~exp1) experimental; urgency=medium
 
   * Ship bolt
