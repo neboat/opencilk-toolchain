@@ -73,6 +73,9 @@ libcxx/libcxxabi-arm-ehabi-fix.patch
 libcxx/libcxx-silent-test-libcxx.diff
 libcxx/libcxx-silent-failure-ppc64el.diff
 libcxx/libcxx-silent-failure-arm64.diff
+libcxx/libcxx-libatomic-only-with-gcc-rtlib.diff
+libcxx/libcxxabi-fix-link-builtins.diff
+libcxx/libcxx-armhf-ftbfs.diff
 
 # Change default optims
 mips/mips-fpxx-enable.diff
@@ -129,7 +132,6 @@ x86-fuzzer.patch
 
 python3-shebang.patch
 print-lldb-path.patch
-libcxx-armhf-ftbfs.diff
 lower-python-dep.diff
 scan-build-py-fix-default-bin.diff
 
@@ -141,8 +143,6 @@ llvm-fix-lld-linker-check.diff
 compilerrt-fix-warn-xray-testing.diff
 openmp-fix-runtimes-build.diff
 libclc-fix-prepare_builtins-rpath.diff
-libcxx-libatomic-only-with-gcc-rtlib.diff
-libcxxabi-fix-link-builtins.diff
 llvm-runtimes-builtins-build-check.diff
 compilerrt-builtins-arch-fix-armhf.diff
 compilerrt-build-scudo-standalone-option.diff
