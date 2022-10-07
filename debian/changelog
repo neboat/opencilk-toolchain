@@ -1,7 +1,7 @@
 llvm-toolchain-14 (1:14.0.6-3) unstable; urgency=medium
 
-<<<<<<<
   * Fix a typo to silent lintian (Closes: #1018770)
+  * Fix some hardcoded paths (Closes: #1020847)
 
   [ Faidon Liambotis ]
   * Add better support for the WebAssembly (wasm32/wasm64) targets:
@@ -11,20 +11,6 @@ llvm-toolchain-14 (1:14.0.6-3) unstable; urgency=medium
       Debian nor upstream, and therefore compiler-rt is the only option.
     - Add patch wasm-sysroot-usr.diff to support a system-installed (i.e. shipped
       in /usr) wasi-libc. (Closes: #1020746)
-=======
-  * Fix a typo to silent lintian (Closes: #1018770)
-  * Fix some hardcoded paths (Closes: #1020847)
-
-  [ Faidon Liamboti ]
-  * Add better support for the WebAssembly (wasm32/wasm64) targets:
-    - Ship compiler-rt for the wasm32 and wasm64 targets. (Closes: #1010932)
-    - Add patch wasm-compiler-rt-default.diff to default to compiler-rt for
-      these targets. libgcc does not currently exist for WebAssembly in neither
-      Debian nor upstream, and therefore compiler-rt is the only option.
-    - Add patch wasm-sysroot-usr.diff to support a system-installed (i.e. shipped
-      in /usr) wasi-libc. (Closes: #1020746)
->>>>>>>
-
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Aug 2022 16:10:33 +0200
 
