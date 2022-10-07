@@ -1357,6 +1357,17 @@ else
     echo "clang-$VERSION-dbgsym isn't installed"
 fi
 
+if dpkg -l|grep -q wasi-libc; then
+    cat <<EOF > printf.c
+    #include <stdio.h>
+    int main(int argc, char *argv[])
+    {
+    printf("%s\n", "Hello world!");
+    }
+EOF
+    clang-$VERSION -target wasm32-unknown-wasi -o printf printf.c
+fi
+
 echo '
 #include <vector>
 int main (void)
