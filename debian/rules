@@ -27,7 +27,7 @@ DEBIAN_REVISION := $(shell dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.
 ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
   NJOBS := -j $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
 else
-  NJOBS := $(shell nproc)
+  NJOBS := -j $(shell nproc)
 endif
 
 VENDOR=$(shell lsb_release -is)
