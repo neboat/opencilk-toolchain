@@ -3,6 +3,9 @@ llvm-toolchain-14 (1:14.0.6-3) unstable; urgency=medium
   * Fix a typo to silent lintian (Closes: #1018770)
   * Fix some hardcoded paths (Closes: #1020847)
 
+  [ Witold Baryluk ]
+  * Allow libunwind-dev to be coinstallable (Closes: #1004112)
+
   [ Faidon Liambotis ]
   * Add better support for the WebAssembly (wasm32/wasm64) targets:
     - Ship compiler-rt for the wasm32 and wasm64 targets. (Closes: #1010932)

@@ -750,9 +750,8 @@ Multi-Arch: same
 Depends:
  ${misc:Depends},
  libunwind-14 (= ${binary:Version})
-Breaks: libunwind-dev
-Provides: libunwind-x.y-dev
-Conflicts: libunwind-x.y-dev
+Provides: libunwind-dev, libunwind-x.y-dev
+Conflicts: libunwind-dev, libunwind-x.y-dev
 Replaces: libunwind-dev, libunwind-x.y-dev
 Description: production-quality unwinder
  libunwind is a production-quality unwinder, with platform support for DWARF
