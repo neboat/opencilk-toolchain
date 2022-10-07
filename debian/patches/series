@@ -156,7 +156,6 @@ wasm/wasm-ld-path.diff
 wasm/wasm-compiler-rt-default.diff
 wasm/wasm-sysroot-usr.diff
 
-issue-54242.diff
 revert-update-doc.diff
 fix-typo.diff
 ubuntu-kinetic.patch
