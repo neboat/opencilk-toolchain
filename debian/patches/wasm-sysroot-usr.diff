@@ -1,0 +1,62 @@
+--- a/clang/lib/Driver/ToolChains/WebAssembly.cpp
++++ b/clang/lib/Driver/ToolChains/WebAssembly.cpp
+@@ -174,7 +174,7 @@ WebAssembly::WebAssembly(const Driver &D
+ 
+   getProgramPaths().push_back(getDriver().getInstalledDir());
+ 
+-  auto SysRoot = getDriver().SysRoot;
++  std::string SysRoot = computeSysRoot();
+   if (getTriple().getOS() == llvm::Triple::UnknownOS) {
+     // Theoretically an "unknown" OS should mean no standard libraries, however
+     // it could also mean that a custom set of libraries is in use, so just add
+@@ -402,6 +402,7 @@ void WebAssembly::AddClangSystemIncludeA
+     return;
+ 
+   const Driver &D = getDriver();
++  std::string SysRoot = computeSysRoot();
+ 
+   if (!DriverArgs.hasArg(options::OPT_nobuiltininc)) {
+     SmallString<128> P(D.ResourceDir);
+@@ -427,10 +428,10 @@ void WebAssembly::AddClangSystemIncludeA
+ 
+   if (getTriple().getOS() != llvm::Triple::UnknownOS) {
+     const std::string MultiarchTriple =
+-        getMultiarchTriple(D, getTriple(), D.SysRoot);
+-    addSystemInclude(DriverArgs, CC1Args, D.SysRoot + "/include/" + MultiarchTriple);
++        getMultiarchTriple(D, getTriple(), SysRoot);
++    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/include/" + MultiarchTriple);
+   }
+-  addSystemInclude(DriverArgs, CC1Args, D.SysRoot + "/include");
++  addSystemInclude(DriverArgs, CC1Args, SysRoot + "/include");
+ }
+ 
+ void WebAssembly::AddClangCXXStdlibIncludeArgs(const ArgList &DriverArgs,
+@@ -478,6 +479,17 @@ Tool *WebAssembly::buildLinker() const {
+   return new tools::wasm::Linker(*this);
+ }
+ 
++std::string WebAssembly::computeSysRoot() const {
++  if (!getDriver().SysRoot.empty())
++    return getDriver().SysRoot;
++
++  std::string Path = "/usr";
++  if (getVFS().exists(Path))
++    return Path;
++
++  return std::string();
++}
++
+ void WebAssembly::addLibCxxIncludePaths(
+     const llvm::opt::ArgList &DriverArgs,
+     llvm::opt::ArgStringList &CC1Args) const {
+--- a/clang/lib/Driver/ToolChains/WebAssembly.h
++++ b/clang/lib/Driver/ToolChains/WebAssembly.h
+@@ -89,6 +89,8 @@ private:
+                              llvm::opt::ArgStringList &CC1Args) const;
+   void addLibStdCXXIncludePaths(const llvm::opt::ArgList &DriverArgs,
+                                 llvm::opt::ArgStringList &CC1Args) const;
++
++  std::string computeSysRoot() const override;
+ };
+ 
+ } // end namespace toolchains
