@@ -2,6 +2,7 @@ llvm-toolchain-14 (1:14.0.6-3) unstable; urgency=medium
 
   * Fix a typo to silent lintian (Closes: #1018770)
   * Fix some hardcoded paths (Closes: #1020847)
+  * Suggest wasi-libc for clang
 
   [ Witold Baryluk ]
   * Allow libunwind-dev to be coinstallable (Closes: #1004112)
