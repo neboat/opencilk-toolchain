@@ -894,6 +894,9 @@ endif
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm32 install
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm64 install
 
+	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm32 install
+	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm64 install
+
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
 	cd $(DEB_INST)/usr/bin/; \
@@ -940,6 +943,7 @@ endif
 	sed -i '/_IMPORT_CHECK_TARGETS \(mlir-\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 	sed -i '/_IMPORT_CHECK_TARGETS tblgen-lsp-server/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 	sed -i '/_IMPORT_CHECK_FILES_FOR_\(mlir-\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
+	sed -i '/_cmake_import_check_files_for_mli/ {s|^|#|}' /usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-release.cmake
 
 # Disable CMake's package validation checks for binaries that may not be installed
 	sed -i 's|.*_IMPORT_CHECK_FILES_FOR_.*/bin/.*)|#&|' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake

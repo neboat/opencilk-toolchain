@@ -1,0 +1,72 @@
+Index: llvm-toolchain-14-14.0.6/clang/lib/Driver/ToolChains/WebAssembly.cpp
+===================================================================
+--- llvm-toolchain-14-14.0.6.orig/clang/lib/Driver/ToolChains/WebAssembly.cpp
++++ llvm-toolchain-14-14.0.6/clang/lib/Driver/ToolChains/WebAssembly.cpp
+@@ -16,6 +16,7 @@
+ #include "clang/Driver/Options.h"
+ #include "llvm/Support/FileSystem.h"
+ #include "llvm/Support/Path.h"
++#include "llvm/Support/VirtualFileSystem.h"
+ #include "llvm/Option/ArgList.h"
+ 
+ using namespace clang::driver;
+@@ -172,7 +173,7 @@ WebAssembly::WebAssembly(const Driver &D
+ 
+   getProgramPaths().push_back(getDriver().getInstalledDir());
+ 
+-  auto SysRoot = getDriver().SysRoot;
++  std::string SysRoot = computeSysRoot();
+   if (getTriple().getOS() == llvm::Triple::UnknownOS) {
+     // Theoretically an "unknown" OS should mean no standard libraries, however
+     // it could also mean that a custom set of libraries is in use, so just add
+@@ -396,6 +397,7 @@ void WebAssembly::AddClangSystemIncludeA
+     return;
+ 
+   const Driver &D = getDriver();
++  std::string SysRoot = computeSysRoot();
+ 
+   if (!DriverArgs.hasArg(options::OPT_nobuiltininc)) {
+     SmallString<128> P(D.ResourceDir);
+@@ -421,10 +423,10 @@ void WebAssembly::AddClangSystemIncludeA
+ 
+   if (getTriple().getOS() != llvm::Triple::UnknownOS) {
+     const std::string MultiarchTriple =
+-        getMultiarchTriple(D, getTriple(), D.SysRoot);
+-    addSystemInclude(DriverArgs, CC1Args, D.SysRoot + "/include/" + MultiarchTriple);
++        getMultiarchTriple(D, getTriple(), SysRoot);
++    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/include/" + MultiarchTriple);
+   }
+-  addSystemInclude(DriverArgs, CC1Args, D.SysRoot + "/include");
++  addSystemInclude(DriverArgs, CC1Args, SysRoot + "/include");
+ }
+ 
+ void WebAssembly::AddClangCXXStdlibIncludeArgs(const ArgList &DriverArgs,
+@@ -467,3 +469,15 @@ SanitizerMask WebAssembly::getSupportedS
+ Tool *WebAssembly::buildLinker() const {
+   return new tools::wasm::Linker(*this);
+ }
++
++std::string WebAssembly::computeSysRoot() const {
++  if (!getDriver().SysRoot.empty())
++    return getDriver().SysRoot;
++
++  std::string Path = "/usr";
++  if (getVFS().exists(Path))
++    return Path;
++
++  return std::string();
++}
++
+Index: llvm-toolchain-14-14.0.6/clang/lib/Driver/ToolChains/WebAssembly.h
+===================================================================
+--- llvm-toolchain-14-14.0.6.orig/clang/lib/Driver/ToolChains/WebAssembly.h
++++ llvm-toolchain-14-14.0.6/clang/lib/Driver/ToolChains/WebAssembly.h
+@@ -80,6 +80,8 @@ private:
+   std::string getMultiarchTriple(const Driver &D,
+                                  const llvm::Triple &TargetTriple,
+                                  StringRef SysRoot) const override;
++
++  std::string computeSysRoot() const override;
+ };
+ 
+ } // end namespace toolchains

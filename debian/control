@@ -47,7 +47,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-15-dev, python3
 # libomp-15-dev
-Suggests: clang-15-doc
+Suggests: clang-15-doc, wasi-libc
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -748,9 +748,8 @@ Multi-Arch: same
 Depends:
  ${misc:Depends},
  libunwind-15 (= ${binary:Version})
-Breaks: libunwind-dev
-Provides: libunwind-x.y-dev
-Conflicts: libunwind-x.y-dev
+Provides: libunwind-dev, libunwind-x.y-dev
+Conflicts: libunwind-dev, libunwind-x.y-dev
 Replaces: libunwind-dev, libunwind-x.y-dev
 Description: production-quality unwinder
  libunwind is a production-quality unwinder, with platform support for DWARF

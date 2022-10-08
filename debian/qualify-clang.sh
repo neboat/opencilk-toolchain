@@ -1357,6 +1357,23 @@ else
     echo "clang-$VERSION-dbgsym isn't installed"
 fi
 
+if dpkg -l|grep -q wasi-libc; then
+    cat <<EOF > printf.c
+    #include <stdio.h>
+    int main(int argc, char *argv[])
+    {
+    printf("%s\n", "Hello world!");
+    }
+EOF
+    clang-$VERSION -target wasm32-unknown-wasi -o printf printf.c
+    file printf &> foo.log
+    if ! grep -q "WebAssembly" foo.log; then
+        echo "the generated file isn't a WebAssembly file?"
+        exit 1
+    fi
+    rm -f printf.c printf
+fi
+
 echo '
 #include <vector>
 int main (void)
