@@ -25,9 +25,9 @@ SONAME_OPENMP	:= 5
 # Manage the case when the version is 3.5~svn213052-1~exp1 or 3.4.2-1
 DEBIAN_REVISION := $(shell dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\3,p")
 ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
-  NJOBS := -j $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
+  NJOBS := $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
 else
-  NJOBS := -j $(shell nproc)
+  NJOBS := $(shell nproc)
 endif
 
 VENDOR=$(shell lsb_release -is)
@@ -657,7 +657,7 @@ debian-full-build:
 	echo "Using cmake: $(CMAKE_BIN)"
 #	linker hack so stage2 can link against stage1 libs at runtime
 	LD_LIBRARY_PATH=$(STAGE_1_LIB_DIR):$$LD_LIBRARY_PATH \
-	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) $(NJOBS) --target stage2
+	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) -j $(NJOBS) --target stage2
 
 # Check the stage 2 build worked
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \
@@ -809,6 +809,10 @@ endif
 override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
 	rm -rf $(find $(TARGET_BUILD) -wholename '*CMakeFiles*' -not -name CMakeLists.txt -a -name "*.dir" -type d)
+
+	# with LTO, .a contains llvm ir instead of native code. So, recompile them
+	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(LLVM_VERSION) bash debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
+
 	# install/fast enables a make install without recompiling temporary files
 	LD_LIBRARY_PATH=$(STAGE_2_LIB_DIR):$$LD_LIBRARY_PATH DESTDIR=$(DEB_INST)/ ninja -C $(TARGET_BUILD) $(VERBOSE) stage2-install
 

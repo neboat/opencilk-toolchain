@@ -516,7 +516,7 @@ if (1==1) {
 return 0;}' > foo.c
 rm foo bar.cc
 
-clang-$VERSION -flto foo.c -o foo
+clang-$VERSION -flto foo.c -opaque-pointers -o foo
 ./foo > /dev/null
 
 clang-$VERSION -fuse-ld=gold foo.c -o foo
@@ -533,7 +533,7 @@ clang-$VERSION -flto=thin -O2 foo.c main.c -c
 # see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=919020
 clang-$VERSION foo.c -flto -c
 file foo.o|grep -q "LLVM IR bitcode"
-if ! nm foo.o|grep -q "00000000 T foo"; then
+if ! llvm-nm-$VERSION foo.o|grep -q "T foo"; then
     echo "gold linker isn't understood"
     exit 1
 fi
