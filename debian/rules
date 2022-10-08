@@ -454,7 +454,6 @@ preconfigure:
 
 	if test "$(DISTRO)" = "bookworm" -a "$(LLVM_SPIRV_INSTALLED)" = "no"; then \
 		echo "llvm spriv isn't detected while it should probably for this distro"; \
-		exit 1; \
 	fi
 
 	@echo "DEB_HOST_MULTIARCH=$(DEB_HOST_MULTIARCH)"
