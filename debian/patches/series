@@ -135,7 +135,6 @@ openmp-fix-runtimes-build.diff
 libclc-fix-prepare_builtins-rpath.diff
 llvm-runtimes-builtins-build-check.diff
 issue-54242.diff
-python3-scan-build.py
 
 # compiler-rt
 compiler-rt/compilerrt-fix-warn-xray-testing.diff
