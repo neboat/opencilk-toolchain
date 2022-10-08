@@ -1,3 +1,9 @@
+llvm-toolchain-15 (1:15.0.2-2~exp3) UNRELEASED; urgency=medium
+
+  * Build using LTO
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 08 Oct 2022 15:06:37 +0200
+
 llvm-toolchain-15 (1:15.0.2-2~exp2) experimental; urgency=medium
 
   * Fix a typo to silent lintian (Closes: #1018770)
@@ -16,7 +22,7 @@ llvm-toolchain-15 (1:15.0.2-2~exp2) experimental; urgency=medium
     - Add patch wasm-sysroot-usr.diff to support a system-installed (i.e. shipped
       in /usr) wasi-libc. (Closes: #1020746)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 08 Oct 2022 10:06:32 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 06 Oct 2022 17:04:24 +0200
 
 llvm-toolchain-15 (1:15.0.2-2~exp1) experimental; urgency=medium
 

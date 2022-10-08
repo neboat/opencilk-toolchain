@@ -400,7 +400,7 @@ ifeq (,$(filter $(DEB_HOST_ARCH), armhf))
 # * LLVM_ENABLE_LTO doesn't work with gcc >= 9 (option not accepted)
 # * BOOTSTRAP_LLVM_ENABLE_LTO is producing some large binary
 #   See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=943623
-#	STAGE_2_CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
+	STAGE_2_CMAKE_EXTRA += -DLLVM_ENABLE_LTO="On"
 endif
 endif
 
