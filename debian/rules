@@ -680,7 +680,7 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 	cd $(TARGET_BUILD); \
 	CFLAGS="$(opt_flags) $(STAGE_2_CFLAGS)"; \
 	echo $$CFLAGS; \
-	$(STAGE_2_BIN_DIR)/clang++ -c $$CFLAGS -std=c++11 $(BASE_PATH)/compiler-rt/lib/fuzzer/*.cpp -IFuzzer; \
+	$(STAGE_2_BIN_DIR)/clang++ -c $$CFLAGS -std=c++17 $(BASE_PATH)/compiler-rt/lib/fuzzer/*.cpp -IFuzzer; \
 	ar ruv libFuzzer.a Fuzzer*.o
 endif
 	touch $@
