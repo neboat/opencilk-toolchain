@@ -706,7 +706,7 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	-DLLVM_CONFIG=$(STAGE_2_BIN_DIR)/llvm-config \
 	-DLLVM_SPIRV=/usr/bin/llvm-spirv-$(LLVM_SPIR_VERSION) \
 	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
-	ninja $(NJOBS) $(VERBOSE)
+	ninja -j $(NJOBS) $(VERBOSE)
 else
 	echo "libclc isn't built LLVM_SPIRV_INSTALLED=$(LLVM_SPIRV_INSTALLED)"
 endif
@@ -739,7 +739,7 @@ debian-rtlib-wasm-build:
 		-DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
 		-DCOMPILER_RT_DEFAULT_TARGET_TRIPLE=$$build-unknown-unknown \
 		-DCOMPILER_RT_OS_DIR=wasi; \
-		ninja -C build-compiler-rt-$$build $(NJOBS) $(VERBOSE); \
+		ninja -C build-compiler-rt-$$build -j $(NJOBS) $(VERBOSE); \
 	done
 	touch $@
 
