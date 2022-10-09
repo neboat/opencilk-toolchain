@@ -47,7 +47,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-16-dev, python3
 # libomp-16-dev
-Suggests: clang-16-doc
+Suggests: clang-16-doc, wasi-libc
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -751,9 +751,8 @@ Multi-Arch: same
 Depends:
  ${misc:Depends},
  libunwind-16 (= ${binary:Version})
-Breaks: libunwind-dev
-Provides: libunwind-x.y-dev
-Conflicts: libunwind-x.y-dev
+Provides: libunwind-dev, libunwind-x.y-dev
+Conflicts: libunwind-dev, libunwind-x.y-dev
 Replaces: libunwind-dev, libunwind-x.y-dev
 Description: production-quality unwinder
  libunwind is a production-quality unwinder, with platform support for DWARF
@@ -808,3 +807,24 @@ Description: Multi-Level Intermediate Representation library
  MLIR aims to address software fragmentation, improve compilation for
  heterogeneous hardware, significantly reduce the cost of building domain
  specific compilers, and aid in connecting existing compilers together.
+
+
+# ------------- bolt -------------
+
+Package: bolt-15
+Architecture: amd64
+# Disable on arm64 because libbolt_rt_hugify.a isn't generated
+Depends: ${shlibs:Depends}, ${misc:Depends}, libbolt-15-dev (= ${binary:Version}),
+Pre-Depends: ${misc:Pre-Depends}
+Description: Post-link optimizer
+ TODO
+
+
+
+Package: libbolt-15-dev
+Section: libdevel
+Architecture: amd64
+#arm64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Post-link optimizer
+ TODO

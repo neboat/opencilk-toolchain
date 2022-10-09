@@ -25,7 +25,7 @@ SONAME_OPENMP	:= 5
 # Manage the case when the version is 3.5~svn213052-1~exp1 or 3.4.2-1
 DEBIAN_REVISION := $(shell dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\3,p")
 ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
-  NJOBS := -j $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
+  NJOBS := $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
 else
   NJOBS := $(shell nproc)
 endif
@@ -50,7 +50,7 @@ include /usr/share/dpkg/buildflags.mk
 
 # We use a stage2 build. It means that a first clang is built using gcc,
 # a second clang is built with the first
-# And the various compoments are built using the second clang.
+# And the various components are built using the second clang.
 # See https://llvm.org/docs/AdvancedBuilds.html
 
 # collect additional flags for all stages all builds
@@ -286,6 +286,12 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 endif
 endif
 
+BOLT_ARCHS := amd64
+# arm64
+ifneq (,$(filter $(DEB_HOST_ARCH),$(BOLT_ARCHS)))
+    PROJECTS += ;bolt
+endif
+
 CODECOVERAGE=no
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 # enable the code coverage
@@ -335,7 +341,7 @@ STAGE_ALL_CMAKE_EXTRA += -DMLIR_INSTALL_AGGREGATE_OBJECTS=OFF
 
 
 RUN_TEST=yes
-ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+ifeq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 	RUN_TEST=no
 endif
 ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
@@ -358,7 +364,6 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 	SCAN_BUILD=yes
 
 	PRE_PROCESS=scan-build-$(LLVM_VERSION) --show-description -analyzer-config stable-report-filename=true
-# -enable-checker optin.performance.Padding
 	PRE_PROCESS_CONF=scan-build-$(LLVM_VERSION)
 # no need to run tests in this case
 	RUN_TEST=no
@@ -413,7 +418,7 @@ ifeq (,$(filter $(DEB_HOST_ARCH), armhf))
 # * LLVM_ENABLE_LTO doesn't work with gcc >= 9 (option not accepted)
 # * BOOTSTRAP_LLVM_ENABLE_LTO is producing some large binary
 #   See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=943623
-#	STAGE_2_CMAKE_EXTRA += -DLLVM_ENABLE_LTO="Thin"
+	STAGE_2_CMAKE_EXTRA += -DLLVM_ENABLE_LTO="On"
 endif
 endif
 
@@ -448,8 +453,6 @@ ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/
 endif
 
-GENERATOR=Ninja
-
 # enables cmake build targets like stage2-[target_name]
 ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-mlir;check-sanitizer;llvm-config;test-suite
 
@@ -465,6 +468,10 @@ preconfigure:
 	if ! grep -qs '/proc ' /proc/mounts; then \
 		echo "/proc needs to be mounted"; \
 		exit 1; \
+	fi
+
+	if test "$(DISTRO)" = "bookworm" -a "$(LLVM_SPIRV_INSTALLED)" = "no"; then \
+		echo "llvm spriv isn't detected while it should probably for this distro"; \
 	fi
 
 	@echo "DEB_HOST_MULTIARCH=$(DEB_HOST_MULTIARCH)"
@@ -577,7 +584,7 @@ override_dh_auto_configure: preconfigure
 	echo "Using cmake: $(CMAKE_BIN)"; \
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH \
 	$(PRE_PROCESS_CONF) $(CMAKE_BIN) -S llvm/ -B $(TARGET_BUILD) \
-	-G $(GENERATOR) \
+	-G Ninja \
 	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
 	-DLLVM_VERSION_SUFFIX= \
 	-DCMAKE_SUPPRESS_REGENERATION=ON \
@@ -662,14 +669,13 @@ override_dh_auto_configure: preconfigure
 		exit 1; \
 	fi
 
-# ninja
 VERBOSE=-v
 
 debian-full-build:
 	echo "Using cmake: $(CMAKE_BIN)"
 #	linker hack so stage2 can link against stage1 libs at runtime
 	LD_LIBRARY_PATH=$(STAGE_1_LIB_DIR):$$LD_LIBRARY_PATH \
-	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) $(NJOBS) --target stage2
+	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) -j $(NJOBS) --target stage2
 
 # Check the stage 2 build worked
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \
@@ -693,7 +699,7 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 	cd $(TARGET_BUILD); \
 	CFLAGS="$(opt_flags) $(STAGE_2_CFLAGS)"; \
 	echo $$CFLAGS; \
-	$(STAGE_2_BIN_DIR)/clang++ -c $$CFLAGS -std=c++11 $(BASE_PATH)/compiler-rt/lib/fuzzer/*.cpp -IFuzzer; \
+	$(STAGE_2_BIN_DIR)/clang++ -c $$CFLAGS -std=c++17 $(BASE_PATH)/compiler-rt/lib/fuzzer/*.cpp -IFuzzer || exit 1; \
 	ar ruv libFuzzer.a Fuzzer*.o
 endif
 	touch $@
@@ -705,7 +711,7 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	echo "Using cmake: $(CMAKE_BIN)"
 	cd libclc/build && \
 	$(CMAKE_BIN) ../ \
-	-G $(GENERATOR) \
+	-G Ninja \
 	-DCMAKE_C_COMPILER=$(STAGE_2_BIN_DIR)/clang \
 	-DCMAKE_CXX_COMPILER=$(STAGE_2_BIN_DIR)/clang++ \
 	-DCMAKE_C_FLAGS="$(opt_flags) $(STAGE_2_CFLAGS)" \
@@ -719,13 +725,44 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	-DLLVM_CONFIG=$(STAGE_2_BIN_DIR)/llvm-config \
 	-DLLVM_SPIRV=/usr/bin/llvm-spirv-$(LLVM_SPIR_VERSION) \
 	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
-	ninja $(NJOBS) $(VERBOSE)
+	ninja -j $(NJOBS) $(VERBOSE)
 else
 	echo "libclc isn't built LLVM_SPIRV_INSTALLED=$(LLVM_SPIRV_INSTALLED)"
 endif
 	touch $@
 
-override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build
+debian-rtlib-wasm-build:
+	echo "Using cmake: $(CMAKE_BIN)"
+	for build in wasm32 wasm64; do \
+		mkdir -p build-compiler-rt-$$build; \
+		$(CMAKE_BIN) -B build-compiler-rt-$$build -S compiler-rt/lib/builtins/ \
+		-G Ninja \
+		-DCMAKE_C_COMPILER_TARGET=$$build-unknown-unknown \
+		-DCMAKE_CXX_COMPILER_TARGET=$$build-unknown-unknown \
+		-DCMAKE_ASM_COMPILER_TARGET=$$build-unknown-unknown \
+		-DCMAKE_C_COMPILER=$(STAGE_2_BIN_DIR)/clang \
+		-DCMAKE_CXX_COMPILER=$(STAGE_2_BIN_DIR)/clang++ \
+		-DCMAKE_C_FLAGS="$(opt_flags) $(STAGE_2_CFLAGS)" \
+		-DCMAKE_CXX_FLAGS="$(opt_flags) $(STAGE_2_CXXFLAGS)" \
+		-DCMAKE_SHARED_LINKER_FLAGS="$(STAGE_2_LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
+		-DCMAKE_MODULE_LINKER_FLAGS="$(STAGE_2_LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
+		-DCMAKE_EXE_LINKER_FLAGS="$(STAGE_2_LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
+		-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL) \
+		-DCMAKE_INSTALL_DATADIR=lib \
+		-DCMAKE_INSTALL_INCLUDEDIR=include \
+		-DLLVM_CONFIG_PATH=$(STAGE_2_BIN_DIR)/llvm-config \
+		-DCOMPILER_RT_STANDALONE_BUILD=ON \
+		-DCOMPILER_RT_BAREMETAL_BUILD=ON \
+		-DCOMPILER_RT_INCLUDE_TESTS=OFF \
+		-DCOMPILER_RT_USE_LIBCXX=OFF \
+		-DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
+		-DCOMPILER_RT_DEFAULT_TARGET_TRIPLE=$$build-unknown-unknown \
+		-DCOMPILER_RT_OS_DIR=wasi; \
+		ninja -C build-compiler-rt-$$build -j $(NJOBS) $(VERBOSE); \
+	done
+	touch $@
+
+override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build debian-rtlib-wasm-build
 
 override_dh_prep: build_doc
 	dh_prep
@@ -790,6 +827,10 @@ endif
 override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
 	rm -rf $(find $(TARGET_BUILD) -wholename '*CMakeFiles*' -not -name CMakeLists.txt -a -name "*.dir" -type d)
+
+	# with LTO, .a contains llvm ir instead of native code. So, recompile them
+	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(LLVM_VERSION) bash debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
+
 	# install/fast enables a make install without recompiling temporary files
 	LD_LIBRARY_PATH=$(STAGE_2_LIB_DIR):$$LD_LIBRARY_PATH DESTDIR=$(DEB_INST)/ ninja -C $(TARGET_BUILD) $(VERBOSE) stage2-install
 
@@ -863,9 +904,20 @@ endif
 	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
+	# workaround issue https://github.com/llvm/llvm-project/issues/57101
+	find debian/tmp -iname 'libbolt_rt*.a' -path '*/build-llvm/*' -delete
+	# Remove an osx file
+	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libbolt_rt_instr_osx.a
+
 ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libclc/build install
 endif
+
+	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm32 install
+	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm64 install
+
+	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm32 install
+	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm64 install
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
@@ -914,6 +966,8 @@ endif
 	sed -i '/_IMPORT_CHECK_TARGETS tblgen-lsp-server/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 	sed -i '/_IMPORT_CHECK_TARGETS mlir-tblgen/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 	sed -i '/_IMPORT_CHECK_FILES_FOR_\(mlir-\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
+	sed -i '/_cmake_import_check_files_for_mli/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-release.cmake
+	sed -i '/_cmake_import_check_files_for_MLIR/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-release.cmake
 
 # Disable CMake's package validation checks for binaries that may not be installed
 	sed -i 's|.*_IMPORT_CHECK_FILES_FOR_.*/bin/.*)|#&|' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
@@ -1015,7 +1069,9 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' bin
 	: # for some reasons, the +x might be removed
 	chmod -f +x $(CURDIR)/debian/*/usr/lib/llvm-$(LLVM_VERSION)/bin/* || true
 else
-	dh_strip -a -v
+	# GNU strip doesn't recognize WebAssembly binaries, and actually corrupts them.
+	# llvm-strip (as of 15.0.2) fails with --strip-debug (but works with --strip-all)
+	dh_strip -a -v -Xlibclang_rt.builtins-wasm32.a -Xlibclang_rt.builtins-wasm64.a
 endif
 
 override_dh_install:
@@ -1151,6 +1207,7 @@ override_dh_auto_clean:
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
 	rm -rf libclc/build
+	rm -rf build-compiler-rt-wasm32 build-compiler-rt-wasm64
 	if test -f lld/docs/ld.lld-$(LLVM_VERSION).1; then \
 		mv lld/docs/ld.lld-$(LLVM_VERSION).1 lld/docs/ld.lld.1; \
 	fi
@@ -1166,4 +1223,4 @@ override_dh_auto_clean:
 	: # remove extra stamps
 	rm -f debian-*-build
 
-.PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libclc-build
+.PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libclc-build debian-rtlib-wasm-build

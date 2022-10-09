@@ -26,10 +26,95 @@ llvm-toolchain-snapshot (1:16~++20220731055325+02b3a358926e-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jul 2022 21:36:27 +0200
 
+llvm-toolchain-15 (1:15.0.2-2~exp4) UNRELEASED; urgency=medium
+
+  * Only ship libbolt_rt_hugify.a & libbolt_rt_instr.a on amd64
+  * fix the cmake detection with libmlir
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 09 Oct 2022 20:09:46 +0200
+
+llvm-toolchain-15 (1:15.0.2-2~exp3) experimental; urgency=medium
+
+  * Build using LTO - better performances of the llvm-toolchain
+    binaires
+  * Build libfuzzer with C++ 17 ot unbreak it
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 08 Oct 2022 15:06:37 +0200
+
+llvm-toolchain-15 (1:15.0.2-2~exp2) experimental; urgency=medium
+
+  * Fix a typo to silent lintian (Closes: #1018770)
+  * Fix some hardcoded paths (Closes: #1020847)
+  * Suggest wasi-libc for clang
+
+  [ Witold Baryluk ]
+  * Allow libunwind-dev to be coinstallable (Closes: #1004112)
+
+  [ Faidon Liambotis ]
+  * Add better support for the WebAssembly (wasm32/wasm64) targets:
+    - Ship compiler-rt for the wasm32 and wasm64 targets. (Closes: #1010932)
+    - Add patch wasm-compiler-rt-default.diff to default to compiler-rt for
+      these targets. libgcc does not currently exist for WebAssembly in neither
+      Debian nor upstream, and therefore compiler-rt is the only option.
+    - Add patch wasm-sysroot-usr.diff to support a system-installed (i.e. shipped
+      in /usr) wasi-libc. (Closes: #1020746)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 06 Oct 2022 17:04:24 +0200
+
+llvm-toolchain-15 (1:15.0.2-2~exp1) experimental; urgency=medium
+
+  * Ship bolt
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 04 Oct 2022 15:21:19 +0200
+
+llvm-toolchain-15 (1:15.0.2-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 04 Oct 2022 12:46:25 +0200
+
+llvm-toolchain-15 (1:15.0.1-1) unstable; urgency=medium
+
+  * Upload to unstable now that we have removed 12 from the archive
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 04 Oct 2022 09:24:55 +0200
+
+llvm-toolchain-15 (1:15.0.1-1~exp2) experimental; urgency=medium
+
+  * Unbreak the clang symlink. See
+    https://github.com/llvm/llvm-project/issues/57857
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 21 Sep 2022 00:20:54 +0200
+
+llvm-toolchain-15 (1:15.0.1-1~exp1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 20 Sep 2022 08:55:01 +0200
+
+llvm-toolchain-15 (1:15.0.0-2) experimental; urgency=medium
+
+  * Fix build on ppc64 and riscv64 (Closes: #1019582)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 12 Sep 2022 17:58:08 +0200
+
+llvm-toolchain-15 (1:15.0.0-1~exp1) experimental; urgency=medium
+
+  * New stable release
+  * syscall-mips64el-def.diff: fix the call to undeclared function 'syscall';
+    on mips
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 06 Sep 2022 09:13:19 +0200
+
 llvm-toolchain-15 (1:15.0.0~+rc3-1~exp2) experimental; urgency=medium
 
+<<<<<<<
   * Update of the build dep from llvm-spirv => llvm-spirv-14
     as it is now versionned. It should build libclc
+=======
+  * Update of the build dep from llvm-spirv => llvm-spirv-14
+    as it is now versioned. It should build libclc
+>>>>>>>
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 31 Aug 2022 17:10:33 +0200
 
@@ -125,9 +210,23 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Feb 2022 23:25:57 +0100
 
-llvm-toolchain-14 (1:14.0.6-3) UNRELEASED; urgency=medium
+llvm-toolchain-14 (1:14.0.6-3) unstable; urgency=medium
 
   * Fix a typo to silent lintian (Closes: #1018770)
+  * Fix some hardcoded paths (Closes: #1020847)
+  * Suggest wasi-libc for clang
+
+  [ Witold Baryluk ]
+  * Allow libunwind-dev to be coinstallable (Closes: #1004112)
+
+  [ Faidon Liambotis ]
+  * Add better support for the WebAssembly (wasm32/wasm64) targets:
+    - Ship compiler-rt for the wasm32 and wasm64 targets. (Closes: #1010932)
+    - Add patch wasm-compiler-rt-default.diff to default to compiler-rt for
+      these targets. libgcc does not currently exist for WebAssembly in neither
+      Debian nor upstream, and therefore compiler-rt is the only option.
+    - Add patch wasm-sysroot-usr.diff to support a system-installed (i.e. shipped
+      in /usr) wasi-libc. (Closes: #1020746)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Aug 2022 16:10:33 +0200
 
@@ -337,7 +436,7 @@ llvm-toolchain-snapshot (1:14~++20211113102219+b5ff187b7b51-1~exp1) experimental
     Sometimes, on i386, the library detection is failing (often on z3
     or ffi)
     'Could NOT find Z3:'
-  * Add '-DCMAKE_FIND_DEBUG_MODE=true' to help wit debugging
+  * Add '-DCMAKE_FIND_DEBUG_MODE=true' to help with debugging
   * Disable the build of libclc on old Ubuntu (Groovy & focal)
     as llvm-spir is too old on these version.
     See bug #52200
@@ -393,7 +492,7 @@ llvm-toolchain-snapshot (1:14~++20211111061527+d56b171ee965-1~exp1) experimental
     Sometimes, on i386, the library detection is failing (often on z3
     or ffi)
     'Could NOT find Z3:'
-  * Add '-DCMAKE_FIND_DEBUG_MODE=true' to help wit debugging
+  * Add '-DCMAKE_FIND_DEBUG_MODE=true' to help with debugging
   * Disable the build of libclc on old Ubuntu (Groovy & focal)
     as llvm-spir is too old on these version.
     See bug #52200
@@ -2184,7 +2283,7 @@ llvm-toolchain-10 (1:10.0.0~+rc6-1) unstable; urgency=medium
 
 llvm-toolchain-10 (1:10.0.0~+rc5-1) unstable; urgency=medium
 
-  * Fith RC release
+  * Fifth RC release
   * Make autopkgtest/qualify-clang.sh work on arm64
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 19 Mar 2020 15:59:43 +0100
@@ -4590,7 +4689,7 @@ llvm-toolchain-snapshot (1:3.9~svn274438-1) unstable; urgency=medium
 llvm-toolchain-snapshot (1:3.9~svn260851-1) unstable; urgency=medium
 
   * New snapshot
-  * Switch to 3.9 (remove lldb-3.9-dev as it was a transitionnal pkg)
+  * Switch to 3.9 (remove lldb-3.9-dev as it was a transitional pkg)
   * Update the clang description for something more accurate (C++-11, 14, etc)
   * Cmake migration. Done by Andrew Wilkins. Many thanks to him
     - Update patches to set SONAME in CMake build

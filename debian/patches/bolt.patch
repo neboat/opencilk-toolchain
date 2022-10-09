@@ -1,0 +1,177 @@
+Index: llvm-toolchain-15-15.0.1/bolt/lib/Core/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/lib/Core/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/lib/Core/CMakeLists.txt
+@@ -24,6 +24,7 @@ add_llvm_library(LLVMBOLTCore
+   ParallelUtilities.cpp
+   Relocation.cpp
+ 
++  DISABLE_LLVM_LINK_LLVM_DYLIB
+   LINK_LIBS
+   ${LLVM_PTHREAD_LIB}
+   )
+Index: llvm-toolchain-15-15.0.1/bolt/lib/Passes/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/lib/Passes/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/lib/Passes/CMakeLists.txt
+@@ -46,6 +46,8 @@ add_llvm_library(LLVMBOLTPasses
+   VeneerElimination.cpp
+   RetpolineInsertion.cpp
+ 
++  DISABLE_LLVM_LINK_LLVM_DYLIB
++
+   LINK_LIBS
+   ${LLVM_PTHREAD_LIB}
+ 
+Index: llvm-toolchain-15-15.0.1/bolt/lib/Profile/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/lib/Profile/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/lib/Profile/CMakeLists.txt
+@@ -7,6 +7,8 @@ add_llvm_library(LLVMBOLTProfile
+   YAMLProfileReader.cpp
+   YAMLProfileWriter.cpp
+ 
++  DISABLE_LLVM_LINK_LLVM_DYLIB
++
+   LINK_COMPONENTS
+   Support
+   )
+Index: llvm-toolchain-15-15.0.1/bolt/lib/Rewrite/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/lib/Rewrite/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/lib/Rewrite/CMakeLists.txt
+@@ -33,6 +33,8 @@ add_llvm_library(LLVMBOLTRewrite
+   MachORewriteInstance.cpp
+   RewriteInstance.cpp
+ 
++  DISABLE_LLVM_LINK_LLVM_DYLIB
++
+   LINK_LIBS
+   ${LLVM_PTHREAD_LIB}
+   )
+Index: llvm-toolchain-15-15.0.1/bolt/lib/RuntimeLibs/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/lib/RuntimeLibs/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/lib/RuntimeLibs/CMakeLists.txt
+@@ -10,6 +10,8 @@ add_llvm_library(LLVMBOLTRuntimeLibs
+   RuntimeLibrary.cpp
+   HugifyRuntimeLibrary.cpp
+   InstrumentationRuntimeLibrary.cpp
++
++  DISABLE_LLVM_LINK_LLVM_DYLIB
+   )
+ 
+ target_link_libraries(LLVMBOLTRuntimeLibs
+Index: llvm-toolchain-15-15.0.1/bolt/lib/Target/AArch64/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/lib/Target/AArch64/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/lib/Target/AArch64/CMakeLists.txt
+@@ -8,6 +8,8 @@ set(LLVM_LINK_COMPONENTS
+ add_llvm_library(LLVMBOLTTargetAArch64
+   AArch64MCPlusBuilder.cpp
+ 
++  DISABLE_LLVM_LINK_LLVM_DYLIB
++
+   DEPENDS
+   AArch64CommonTableGen
+   )
+Index: llvm-toolchain-15-15.0.1/bolt/lib/Target/X86/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/lib/Target/X86/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/lib/Target/X86/CMakeLists.txt
+@@ -11,6 +11,8 @@ add_llvm_library(LLVMBOLTTargetX86
+   X86MCPlusBuilder.cpp
+   X86MCSymbolizer.cpp
+ 
++  DISABLE_LLVM_LINK_LLVM_DYLIB
++
+   DEPENDS
+   X86CommonTableGen
+   )
+Index: llvm-toolchain-15-15.0.1/bolt/lib/Utils/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/lib/Utils/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/lib/Utils/CMakeLists.txt
+@@ -2,6 +2,8 @@ add_llvm_library(LLVMBOLTUtils
+   CommandLineOpts.cpp
+   Utils.cpp
+ 
++  DISABLE_LLVM_LINK_LLVM_DYLIB
++
+   LINK_LIBS
+   ${LLVM_PTHREAD_LIB}
+ 
+Index: llvm-toolchain-15-15.0.1/bolt/tools/driver/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/tools/driver/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/tools/driver/CMakeLists.txt
+@@ -14,6 +14,8 @@ endif()
+ add_bolt_tool(llvm-bolt
+   llvm-bolt.cpp
+ 
++  DISABLE_LLVM_LINK_LLVM_DYLIB
++
+   DEPENDS
+   ${BOLT_DRIVER_DEPS}
+   )
+Index: llvm-toolchain-15-15.0.1/bolt/tools/heatmap/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/tools/heatmap/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/tools/heatmap/CMakeLists.txt
+@@ -7,6 +7,7 @@ set(LLVM_LINK_COMPONENTS
+ 
+ add_bolt_tool(llvm-bolt-heatmap
+   heatmap.cpp
++  DISABLE_LLVM_LINK_LLVM_DYLIB
+   )
+ 
+ target_link_libraries(llvm-bolt-heatmap
+Index: llvm-toolchain-15-15.0.1/bolt/tools/llvm-bolt-fuzzer/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/tools/llvm-bolt-fuzzer/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/tools/llvm-bolt-fuzzer/CMakeLists.txt
+@@ -5,4 +5,6 @@ set(LLVM_LINK_COMPONENTS
+ 
+ add_llvm_fuzzer(llvm-bolt-fuzzer
+   llvm-bolt-fuzzer.cpp
++
++  DISABLE_LLVM_LINK_LLVM_DYLIB
+   )
+Index: llvm-toolchain-15-15.0.1/bolt/tools/merge-fdata/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/tools/merge-fdata/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/tools/merge-fdata/CMakeLists.txt
+@@ -3,6 +3,8 @@ set(LLVM_LINK_COMPONENTS Support)
+ add_bolt_tool(merge-fdata
+   merge-fdata.cpp
+ 
++  DISABLE_LLVM_LINK_LLVM_DYLIB
++
+   DEPENDS
+   intrinsics_gen
+ )
+Index: llvm-toolchain-15-15.0.1/bolt/unittests/Core/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/unittests/Core/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/unittests/Core/CMakeLists.txt
+@@ -9,6 +9,8 @@ add_bolt_unittest(CoreTests
+   BinaryContext.cpp
+   MCPlusBuilder.cpp
+   DynoStats.cpp
++
++  DISABLE_LLVM_LINK_LLVM_DYLIB
+   )
+ 
+ target_link_libraries(CoreTests
+Index: llvm-toolchain-15-15.0.1/bolt/unittests/Profile/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-15-15.0.1.orig/bolt/unittests/Profile/CMakeLists.txt
++++ llvm-toolchain-15-15.0.1/bolt/unittests/Profile/CMakeLists.txt
+@@ -1,5 +1,7 @@
+ add_bolt_unittest(ProfileTests
+   DataAggregator.cpp
++
++  DISABLE_LLVM_LINK_LLVM_DYLIB
+   )
+ 
+ target_link_libraries(ProfileTests

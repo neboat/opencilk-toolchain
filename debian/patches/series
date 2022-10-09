@@ -72,11 +72,15 @@ libcxx/libcxxabi-arm-ehabi-fix.patch
 libcxx/libcxx-silent-test-libcxx.diff
 libcxx/libcxx-silent-failure-ppc64el.diff
 libcxx/libcxx-silent-failure-arm64.diff
+libcxx/libcxx-libatomic-only-with-gcc-rtlib.diff
+libcxx/libcxxabi-fix-link-builtins.diff
+libcxx/libcxx-armhf-ftbfs.diff
 
 # Change default optims
 mips/mips-fpxx-enable.diff
 mips/mips-force-nomadd4.patch
 mips/mips-D101773-reloc.patch
+mips/syscall-mips64el-def.diff
 
 26-set-correct-float-abi.diff
 clang-baseline-fix-i386.patch
@@ -119,7 +123,6 @@ bootstrap-fix-include-next.diff
 
 python3-shebang.patch
 print-lldb-path.patch
-libcxx-armhf-ftbfs.diff
 lower-python-dep.diff
 scan-build-py-fix-default-bin.diff
 
@@ -128,16 +131,22 @@ omp-riscv64.patch
 test-disable-lldb-i386.diff
 unbreak-atomic-mips.diff
 llvm-fix-lld-linker-check.diff
-compilerrt-fix-warn-xray-testing.diff
 openmp-fix-runtimes-build.diff
 libclc-fix-prepare_builtins-rpath.diff
-libcxx-libatomic-only-with-gcc-rtlib.diff
-libcxxabi-fix-link-builtins.diff
 llvm-runtimes-builtins-build-check.diff
-compilerrt-builtins-arch-fix-armhf.diff
-compilerrt-build-scudo-standalone-option.diff
-wasm-ld-path.diff
 issue-54242.diff
+
+# compiler-rt
+compiler-rt/compilerrt-fix-warn-xray-testing.diff
+compiler-rt/compilerrt-builtins-arch-fix-armhf.diff
+compiler-rt/compilerrt-build-scudo-standalone-option.diff
+
+
+# wasm patches
+wasm/wasm-ld-path.diff
+wasm/wasm-compiler-rt-default.diff
+wasm/wasm-sysroot-usr.diff
+
 revert-update-doc.diff
 unwind-force-pthread-dl.diff
 force-sse2-compiler-rt.diff
