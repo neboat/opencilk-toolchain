@@ -1,3 +1,9 @@
+llvm-toolchain-15 (1:15.0.2-2~exp4) UNRELEASED; urgency=medium
+
+  * Only ship libbolt_rt_hugify.a & libbolt_rt_instr.a on amd64
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 09 Oct 2022 20:09:46 +0200
+
 llvm-toolchain-15 (1:15.0.2-2~exp3) experimental; urgency=medium
 
   * Build using LTO - better performances of the llvm-toolchain
