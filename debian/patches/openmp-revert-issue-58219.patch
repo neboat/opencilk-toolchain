@@ -1,0 +1,119 @@
+diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/CMakeLists.txt llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/CMakeLists.txt
+--- llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/CMakeLists.txt	2022-10-09 20:53:09.000000000 +0200
++++ llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/CMakeLists.txt	2022-10-10 08:27:06.380043484 +0200
+@@ -32,7 +32,7 @@
+   find_program(LINK_TOOL llvm-link PATHS ${LLVM_TOOLS_BINARY_DIR} NO_DEFAULT_PATH)
+   find_program(OPT_TOOL opt PATHS ${LLVM_TOOLS_BINARY_DIR} NO_DEFAULT_PATH)
+   find_program(EXTRACT_TOOL llvm-extract PATHS ${LLVM_TOOLS_BINARY_DIR} NO_DEFAULT_PATH)
+-  if ((NOT CLANG_TOOL) OR (NOT LINK_TOOL) OR (NOT OPT_TOOL) OR (NOT EXTRACT_TOOL) OR (NOT PACKAGER_TOOL))
++  if ((NOT CLANG_TOOL) OR (NOT LINK_TOOL) OR (NOT OPT_TOOL))
+     libomptarget_say("Not building DeviceRTL. Missing clang: ${CLANG_TOOL}, llvm-link: ${LINK_TOOL}, opt: ${OPT_TOOL}, llvm-extract: ${EXTRACT_TOOL}, or clang-offload-packager: ${PACKAGER_TOOL}")
+     return()
+   else()
+@@ -45,7 +45,6 @@
+   set(PACKAGER_TOOL $<TARGET_FILE:clang-offload-packager>)
+   set(LINK_TOOL $<TARGET_FILE:llvm-link>)
+   set(OPT_TOOL $<TARGET_FILE:opt>)
+-  set(EXTRACT_TOOL $<TARGET_FILE:llvm-extract>)
+   libomptarget_say("Building DeviceRTL. Using clang from in-tree build")
+ else()
+   libomptarget_say("Not building DeviceRTL. No appropriate clang found")
+@@ -116,7 +115,6 @@
+ set(clang_opt_flags -O3 -mllvm -openmp-opt-disable -DSHARED_SCRATCHPAD_SIZE=512)
+ set(link_opt_flags  -O3        -openmp-opt-disable)
+ set(link_export_flag -passes=internalize -internalize-public-api-file=${source_directory}/exports)
+-set(link_extract_flag --func='__keep_alive' --delete)
+ 
+ # Prepend -I to each list element
+ set (LIBOMPTARGET_LLVM_INCLUDE_DIRS_DEVICERTL "${LIBOMPTARGET_LLVM_INCLUDE_DIRS}")
+@@ -192,18 +190,11 @@
+       COMMENT "Optimizing LLVM bitcode ${bclib_name}"
+   )
+ 
+-  add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/extracted_${bclib_name}
+-      COMMAND ${EXTRACT_TOOL} ${link_extract_flag} ${CMAKE_CURRENT_BINARY_DIR}/${bclib_name}
+-                      -o ${CMAKE_CURRENT_BINARY_DIR}/extracted_${bclib_name}
+-      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${bclib_name}
+-      COMMENT "Extracting LLVM bitcode ${bclib_name}"
+-  )
+-
+   # Package the bitcode in the bitcode and embed it in an ELF for the static library
+   add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/packaged_${bclib_name}
+       COMMAND ${PACKAGER_TOOL} -o ${CMAKE_CURRENT_BINARY_DIR}/packaged_${bclib_name}
+-        "--image=file=${CMAKE_CURRENT_BINARY_DIR}/extracted_${bclib_name},triple=${target_triple},arch=${target_cpu},kind=openmp"
+-      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/extracted_${bclib_name}
++        "--image=file=${CMAKE_CURRENT_BINARY_DIR}/${bclib_name},triple=${target_triple},arch=${target_cpu},kind=openmp"
++      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${bclib_name}
+       COMMENT "Packaging LLVM offloading binary ${bclib_name}.out"
+   )
+ 
+Seulement dans llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL: CMakeLists.txt.orig
+Seulement dans llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL: CMakeLists.txt.rej
+diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/include/Types.h llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/include/Types.h
+--- llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/include/Types.h	2022-10-07 09:37:47.000000000 +0200
++++ llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/include/Types.h	2022-10-10 08:26:27.683947306 +0200
+@@ -213,6 +213,13 @@
+ #define CONSTANT(NAME)                                                         \
+   [[clang::address_space(4)]] NAME [[clang::loader_uninitialized]]
+ 
++// Attribute to keep alive certain definition for the bitcode library.
++#ifdef LIBOMPTARGET_BC_TARGET
++#define KEEP_ALIVE __attribute__((used, retain))
++#else
++#define KEEP_ALIVE
++#endif
++
+ ///}
+ 
+ #endif
+diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/exports llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/exports
+--- llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/exports	2022-10-07 09:37:47.000000000 +0200
++++ llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/exports	2022-10-10 08:26:27.687947317 +0200
+@@ -2,9 +2,6 @@
+ *llvm_*
+ __kmpc_*
+ 
+-__keep_alive
+-IsSPMDMode
+-
+ memcmp
+ printf
+ __assert_fail
+diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Mapping.cpp llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Mapping.cpp
+--- llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Mapping.cpp	2022-10-07 09:37:47.000000000 +0200
++++ llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Mapping.cpp	2022-10-10 08:26:27.687947317 +0200
+@@ -276,7 +276,7 @@
+ 
+ // TODO: This is a workaround for initialization coming from kernels outside of
+ //       the TU. We will need to solve this more correctly in the future.
+-int __attribute__((weak)) SHARED(IsSPMDMode);
++int __attribute__((weak)) KEEP_ALIVE SHARED(IsSPMDMode);
+ 
+ void mapping::init(bool IsSPMD) {
+   if (mapping::isInitialThreadInLevel0(IsSPMD))
+diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Utils.cpp llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Utils.cpp
+--- llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Utils.cpp	2022-10-07 09:37:47.000000000 +0200
++++ llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Utils.cpp	2022-10-10 08:26:27.687947317 +0200
+@@ -19,17 +19,16 @@
+ 
+ using namespace _OMP;
+ 
+-extern "C" __attribute__((weak)) int IsSPMDMode;
+-
++namespace _OMP {
+ /// Helper to keep code alive without introducing a performance penalty.
+-extern "C" __attribute__((weak, optnone, cold, used, retain)) void
+-__keep_alive() {
++__attribute__((weak, optnone, cold)) KEEP_ALIVE void keepAlive() {
+   __kmpc_get_hardware_thread_id_in_block();
+   __kmpc_get_hardware_num_threads_in_block();
+   __kmpc_get_warp_size();
+-  __kmpc_barrier_simple_spmd(nullptr, IsSPMDMode);
+-  __kmpc_barrier_simple_generic(nullptr, IsSPMDMode);
++  __kmpc_barrier_simple_spmd(nullptr, 0);
++  __kmpc_barrier_simple_generic(nullptr, 0);
+ }
++} // namespace _OMP
+ 
+ namespace impl {
+ 

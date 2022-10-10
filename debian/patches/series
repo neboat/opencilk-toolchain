@@ -152,3 +152,4 @@ unwind-force-pthread-dl.diff
 force-sse2-compiler-rt.diff
 bolt-disable-emit-relocs.patch
 
+openmp-revert-issue-58219.patch
