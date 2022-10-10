@@ -745,8 +745,8 @@ ifeq (${COMPILER_RT_WASM_ENABLE},yes)
 		-DCOMPILER_RT_USE_LIBCXX=OFF \
 		-DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
 		-DCOMPILER_RT_DEFAULT_TARGET_TRIPLE=$$build-unknown-unknown \
-		-DCOMPILER_RT_OS_DIR=wasi; \
-		ninja -C build-compiler-rt-$$build -j $(NJOBS) $(VERBOSE); \
+		-DCOMPILER_RT_OS_DIR=wasi || exit 1; \
+		ninja -C build-compiler-rt-$$build -j $(NJOBS) $(VERBOSE) || exit 1; \
 	done
 else
 	echo "Skip on this arch"
