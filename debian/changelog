@@ -177,6 +177,14 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Feb 2022 23:25:57 +0100
 
+llvm-toolchain-14 (1:14.0.6-4) unstable; urgency=medium
+
+  * fix the cmake detection with libmlir
+  * Don't build wasm target on arm64 armel mips64el mipsel ppc64el armhf
+    for now
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 10 Oct 2022 13:47:25 +0200
+
 llvm-toolchain-14 (1:14.0.6-3) unstable; urgency=medium
 
   * Fix a typo to silent lintian (Closes: #1018770)
