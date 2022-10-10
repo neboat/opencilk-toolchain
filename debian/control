@@ -811,17 +811,17 @@ Description: Multi-Level Intermediate Representation library
 
 # ------------- bolt -------------
 
-Package: bolt-15
+Package: bolt-16
 Architecture: amd64
 # Disable on arm64 because libbolt_rt_hugify.a isn't generated
-Depends: ${shlibs:Depends}, ${misc:Depends}, libbolt-15-dev (= ${binary:Version}),
+Depends: ${shlibs:Depends}, ${misc:Depends}, libbolt-16-dev (= ${binary:Version}),
 Pre-Depends: ${misc:Pre-Depends}
 Description: Post-link optimizer
  TODO
 
 
 
-Package: libbolt-15-dev
+Package: libbolt-16-dev
 Section: libdevel
 Architecture: amd64
 #arm64
