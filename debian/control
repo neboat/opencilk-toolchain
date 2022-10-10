@@ -828,4 +828,3 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Post-link optimizer
  It achieves the improvements by optimizing application's code layout based on
  execution profile gathered by sampling profiler.
-

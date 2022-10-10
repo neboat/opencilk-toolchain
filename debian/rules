@@ -497,6 +497,8 @@ preconfigure:
 	@echo "RUNTIMES_CXXFLAGS=$(RUNTIMES_CXXFLAGS)"
 	@echo "STAGE_1_CXXFLAGS=$(STAGE_1_CXXFLAGS)"
 	@echo "STAGE_2_CFLAGS=$(STAGE_2_CFLAGS)"
+	@echo "LIBFUZZER_ENABLE=$(LIBFUZZER_ENABLE)"
+	@echo "COMPILER_RT_WASM_ENABLE=$(COMPILER_RT_WASM_ENABLE)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
@@ -515,7 +517,8 @@ preconfigure:
 		debian/libomp-$(LLVM_VERSION)-dev.install \
 		debian/llvm-$(LLVM_VERSION)-dev.install \
 		debian/llvm-$(LLVM_VERSION)-linker-tools.install \
-		debian/llvm-$(LLVM_VERSION)-linker-tools.links
+		debian/llvm-$(LLVM_VERSION)-linker-tools.links \
+		debian/libbolt-$(LLVM_VERSION)-dev.install
 
 	# workaround the breaks/replaces/conflicts introduced with the omp-device-info move
 	# we update the version to make it work with apt.llvm.org
@@ -764,8 +767,8 @@ ifeq (${COMPILER_RT_WASM_ENABLE},yes)
 		-DCOMPILER_RT_USE_LIBCXX=OFF \
 		-DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
 		-DCOMPILER_RT_DEFAULT_TARGET_TRIPLE=$$build-unknown-unknown \
-		-DCOMPILER_RT_OS_DIR=wasi; \
-		ninja -C build-compiler-rt-$$build -j $(NJOBS) $(VERBOSE); \
+		-DCOMPILER_RT_OS_DIR=wasi || exit 1; \
+		ninja -C build-compiler-rt-$$build -j $(NJOBS) $(VERBOSE) || exit 1; \
 	done
 else
 	echo "Skip on this arch"
