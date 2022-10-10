@@ -67,7 +67,7 @@ void test() {
 scan-build-$VERSION -o scan-build gcc -c foo.c &> /dev/null || true
 scan-build-$VERSION -o scan-build clang-$VERSION -c foo.c &> /dev/null
 scan-build-$VERSION --exclude non-existing/ --exclude /tmp/ -v clang-$VERSION -c foo.c &> /dev/null
-scan-build-$VERSION --exclude $(pwd) -v clang-$VERSION -c foo.c &> foo.log
+scan-build-$VERSION --exclude $(realpath $(pwd)) -v clang-$VERSION -c foo.c &> foo.log
 if ! grep -q -E "scan-build: 0 bugs found." foo.log; then
     echo "scan-build --exclude didn't ignore the defect"
     exit 42
