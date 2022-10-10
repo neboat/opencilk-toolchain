@@ -993,6 +993,7 @@ extern "C" void plugin() {
 EOF
 clang++-$VERSION -shared -o plugin.so -fvisibility=hidden foo.cpp -static-libstdc++ || true
 clang++-$VERSION -shared -o plugin.so -fvisibility=hidden foo.cpp -stdlib=libc++ -static-libstdc++ ||true
+rm -f plugin.so
 
 # Bug 889832
 echo '#include <iostream>
