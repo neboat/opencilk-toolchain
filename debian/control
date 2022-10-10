@@ -814,9 +814,8 @@ Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, libbolt-15-dev (= ${binary:Version}),
 Pre-Depends: ${misc:Pre-Depends}
 Description: Post-link optimizer
- TODO
-
-
+ It achieves the improvements by optimizing application's code layout based on
+ execution profile gathered by sampling profiler.
 
 Package: libbolt-15-dev
 Section: libdevel
@@ -824,4 +823,6 @@ Architecture: amd64
 #arm64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Post-link optimizer
- TODO
+ It achieves the improvements by optimizing application's code layout based on
+ execution profile gathered by sampling profiler.
+
