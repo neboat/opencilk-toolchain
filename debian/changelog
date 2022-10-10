@@ -1,4 +1,4 @@
-llvm-toolchain-15 (1:15.0.2-2~exp4) UNRELEASED; urgency=medium
+llvm-toolchain-15 (1:15.0.2-2~exp4) experimental; urgency=medium
 
   * Only ship libbolt_rt_hugify.a & libbolt_rt_instr.a on amd64
   * fix the cmake detection with libmlir
