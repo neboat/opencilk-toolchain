@@ -496,7 +496,8 @@ preconfigure:
 		debian/libomp-$(LLVM_VERSION)-dev.install \
 		debian/llvm-$(LLVM_VERSION)-dev.install \
 		debian/llvm-$(LLVM_VERSION)-linker-tools.install \
-		debian/llvm-$(LLVM_VERSION)-linker-tools.links
+		debian/llvm-$(LLVM_VERSION)-linker-tools.links \
+		debian/libbolt-$(LLVM_VERSION)-dev.install
 
 	# workaround the breaks/replaces/conflicts introduced with the omp-device-info move
 	# we update the version to make it work with apt.llvm.org
