@@ -1,3 +1,9 @@
+llvm-toolchain-14 (1:14.0.6-5) unstable; urgency=medium
+
+  * Update of the build dep llvm-spirv => llvm-spirv-14
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 11 Oct 2022 08:39:18 +0200
+
 llvm-toolchain-14 (1:14.0.6-4) unstable; urgency=medium
 
   * fix the cmake detection with libmlir
