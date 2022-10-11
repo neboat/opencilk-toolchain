@@ -413,17 +413,15 @@ ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 	STAGE_2_CMAKE_EXTRA += -DLLVM_USE_PERF=ON -DLLVM_ENABLE_LIBPFM=ON
 endif
 
+LTO_ENABLE=no
 # Only enable it for archs supporting gold
 ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
-# armhf is not yet quite ready for Thin, it FTBFS
-# see https://buildd.debian.org/status/fetch.php?pkg=llvm-toolchain-8&arch=armhf&ver=1%3A8.0.1%7E%2Brc2-1%7Eexp1&stamp=1560334266&raw=0
-ifeq (,$(filter $(DEB_HOST_ARCH), armhf))
-# Use BOOTSTRAP_LLVM_ENABLE_LTO to make sure that it isn't used
-# when running stage1 with gcc
-# For now, disable ThinLTO usage because:
-# * LLVM_ENABLE_LTO doesn't work with gcc >= 9 (option not accepted)
-# * BOOTSTRAP_LLVM_ENABLE_LTO is producing some large binary
-#   See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=943623
+# LTO requires a bunch of memory. Don't do it everywhere
+LTO_DISABLE_ARCHS := i386 armhf s390x ppc64 x32
+ifeq (,$(filter-out $(LTO_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
+	LTO_ENABLE=no
+else
+	LTO_ENABLE=yes
 	STAGE_2_CMAKE_EXTRA += -DLLVM_ENABLE_LTO="On"
 endif
 endif
@@ -498,6 +496,7 @@ preconfigure:
 	@echo "STAGE_1_CXXFLAGS=$(STAGE_1_CXXFLAGS)"
 	@echo "STAGE_2_CFLAGS=$(STAGE_2_CFLAGS)"
 	@echo "LIBFUZZER_ENABLE=$(LIBFUZZER_ENABLE)"
+	@echo "LTO_ENABLE=$(LTO_ENABLE)"
 	@echo "COMPILER_RT_WASM_ENABLE=$(COMPILER_RT_WASM_ENABLE)"
 
 	for f in debian/*.in; do \
@@ -843,8 +842,10 @@ override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
 	rm -rf $(find $(TARGET_BUILD) -wholename '*CMakeFiles*' -not -name CMakeLists.txt -a -name "*.dir" -type d)
 
+ifeq (${LTO_ENABLE},yes)
 	# with LTO, .a contains llvm ir instead of native code. So, recompile them
 	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(LLVM_VERSION) bash debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
+endif
 
 	# install/fast enables a make install without recompiling temporary files
 	LD_LIBRARY_PATH=$(STAGE_2_LIB_DIR):$$LD_LIBRARY_PATH DESTDIR=$(DEB_INST)/ ninja -C $(TARGET_BUILD) $(VERBOSE) stage2-install
