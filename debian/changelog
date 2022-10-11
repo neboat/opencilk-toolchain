@@ -1,3 +1,9 @@
+llvm-toolchain-15 (1:15.0.2-2~exp5) experimental; urgency=medium
+
+  * Only enable LTO for some archs
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 11 Oct 2022 09:15:56 +0200
+
 llvm-toolchain-15 (1:15.0.2-2~exp4) experimental; urgency=medium
 
   * Only ship libbolt_rt_hugify.a & libbolt_rt_instr.a on amd64
