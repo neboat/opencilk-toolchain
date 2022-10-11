@@ -1,7 +1,8 @@
-diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/CMakeLists.txt llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/CMakeLists.txt
---- llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/CMakeLists.txt	2022-10-09 20:53:09.000000000 +0200
-+++ llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/CMakeLists.txt	2022-10-10 08:27:06.380043484 +0200
-@@ -32,7 +32,7 @@
+Index: llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e/openmp/libomptarget/DeviceRTL/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e.orig/openmp/libomptarget/DeviceRTL/CMakeLists.txt
++++ llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e/openmp/libomptarget/DeviceRTL/CMakeLists.txt
+@@ -32,7 +32,7 @@ if (LLVM_DIR)
    find_program(LINK_TOOL llvm-link PATHS ${LLVM_TOOLS_BINARY_DIR} NO_DEFAULT_PATH)
    find_program(OPT_TOOL opt PATHS ${LLVM_TOOLS_BINARY_DIR} NO_DEFAULT_PATH)
    find_program(EXTRACT_TOOL llvm-extract PATHS ${LLVM_TOOLS_BINARY_DIR} NO_DEFAULT_PATH)
@@ -10,7 +11,7 @@ diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libom
      libomptarget_say("Not building DeviceRTL. Missing clang: ${CLANG_TOOL}, llvm-link: ${LINK_TOOL}, opt: ${OPT_TOOL}, llvm-extract: ${EXTRACT_TOOL}, or clang-offload-packager: ${PACKAGER_TOOL}")
      return()
    else()
-@@ -45,7 +45,6 @@
+@@ -45,7 +45,6 @@ elseif (LLVM_TOOL_CLANG_BUILD AND NOT CM
    set(PACKAGER_TOOL $<TARGET_FILE:clang-offload-packager>)
    set(LINK_TOOL $<TARGET_FILE:llvm-link>)
    set(OPT_TOOL $<TARGET_FILE:opt>)
@@ -18,7 +19,7 @@ diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libom
    libomptarget_say("Building DeviceRTL. Using clang from in-tree build")
  else()
    libomptarget_say("Not building DeviceRTL. No appropriate clang found")
-@@ -116,7 +115,6 @@
+@@ -116,7 +115,6 @@ set(src_files
  set(clang_opt_flags -O3 -mllvm -openmp-opt-disable -DSHARED_SCRATCHPAD_SIZE=512)
  set(link_opt_flags  -O3        -openmp-opt-disable)
  set(link_export_flag -passes=internalize -internalize-public-api-file=${source_directory}/exports)
@@ -26,33 +27,31 @@ diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libom
  
  # Prepend -I to each list element
  set (LIBOMPTARGET_LLVM_INCLUDE_DIRS_DEVICERTL "${LIBOMPTARGET_LLVM_INCLUDE_DIRS}")
-@@ -192,18 +190,11 @@
-       COMMENT "Optimizing LLVM bitcode ${bclib_name}"
+@@ -189,17 +187,11 @@ function(compileDeviceRTLLibrary target_
    )
+   add_dependencies(${bclib_name} internalized_${bclib_name})
  
--  add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/extracted_${bclib_name}
+-  add_custom_target(extracted_${bclib_name}
 -      COMMAND ${EXTRACT_TOOL} ${link_extract_flag} ${CMAKE_CURRENT_BINARY_DIR}/${bclib_name}
 -                      -o ${CMAKE_CURRENT_BINARY_DIR}/extracted_${bclib_name}
--      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${bclib_name}
 -      COMMENT "Extracting LLVM bitcode ${bclib_name}"
 -  )
+-  add_dependencies(extracted_${bclib_name} ${bclib_name})
 -
    # Package the bitcode in the bitcode and embed it in an ELF for the static library
-   add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/packaged_${bclib_name}
+   add_custom_target(packaged_${bclib_name}
        COMMAND ${PACKAGER_TOOL} -o ${CMAKE_CURRENT_BINARY_DIR}/packaged_${bclib_name}
 -        "--image=file=${CMAKE_CURRENT_BINARY_DIR}/extracted_${bclib_name},triple=${target_triple},arch=${target_cpu},kind=openmp"
--      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/extracted_${bclib_name}
 +        "--image=file=${CMAKE_CURRENT_BINARY_DIR}/${bclib_name},triple=${target_triple},arch=${target_cpu},kind=openmp"
 +      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${bclib_name}
        COMMENT "Packaging LLVM offloading binary ${bclib_name}.out"
    )
- 
-Seulement dans llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL: CMakeLists.txt.orig
-Seulement dans llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL: CMakeLists.txt.rej
-diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/include/Types.h llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/include/Types.h
---- llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/include/Types.h	2022-10-07 09:37:47.000000000 +0200
-+++ llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/include/Types.h	2022-10-10 08:26:27.683947306 +0200
-@@ -213,6 +213,13 @@
+   add_dependencies(packaged_${bclib_name} extracted_${bclib_name})
+Index: llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e/openmp/libomptarget/DeviceRTL/include/Types.h
+===================================================================
+--- llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e.orig/openmp/libomptarget/DeviceRTL/include/Types.h
++++ llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e/openmp/libomptarget/DeviceRTL/include/Types.h
+@@ -213,6 +213,13 @@ enum OMPTgtExecModeFlags : int8_t {
  #define CONSTANT(NAME)                                                         \
    [[clang::address_space(4)]] NAME [[clang::loader_uninitialized]]
  
@@ -66,10 +65,11 @@ diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libom
  ///}
  
  #endif
-diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/exports llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/exports
---- llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/exports	2022-10-07 09:37:47.000000000 +0200
-+++ llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/exports	2022-10-10 08:26:27.687947317 +0200
-@@ -2,9 +2,6 @@
+Index: llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e/openmp/libomptarget/DeviceRTL/src/exports
+===================================================================
+--- llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e.orig/openmp/libomptarget/DeviceRTL/src/exports
++++ llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e/openmp/libomptarget/DeviceRTL/src/exports
+@@ -2,9 +2,6 @@ omp_*
  *llvm_*
  __kmpc_*
  
@@ -79,10 +79,11 @@ diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libom
  memcmp
  printf
  __assert_fail
-diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Mapping.cpp llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Mapping.cpp
---- llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Mapping.cpp	2022-10-07 09:37:47.000000000 +0200
-+++ llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Mapping.cpp	2022-10-10 08:26:27.687947317 +0200
-@@ -276,7 +276,7 @@
+Index: llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e/openmp/libomptarget/DeviceRTL/src/Mapping.cpp
+===================================================================
+--- llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e.orig/openmp/libomptarget/DeviceRTL/src/Mapping.cpp
++++ llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e/openmp/libomptarget/DeviceRTL/src/Mapping.cpp
+@@ -276,7 +276,7 @@ uint32_t mapping::getNumberOfProcessorEl
  
  // TODO: This is a workaround for initialization coming from kernels outside of
  //       the TU. We will need to solve this more correctly in the future.
@@ -91,9 +92,10 @@ diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libom
  
  void mapping::init(bool IsSPMD) {
    if (mapping::isInitialThreadInLevel0(IsSPMD))
-diff -u -r llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Utils.cpp llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Utils.cpp
---- llvm-toolchain-snapshot_16~++20221010082738+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Utils.cpp	2022-10-07 09:37:47.000000000 +0200
-+++ llvm-toolchain-snapshot_16~++20221010081930+a835b92e6c30/openmp/libomptarget/DeviceRTL/src/Utils.cpp	2022-10-10 08:26:27.687947317 +0200
+Index: llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e/openmp/libomptarget/DeviceRTL/src/Utils.cpp
+===================================================================
+--- llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e.orig/openmp/libomptarget/DeviceRTL/src/Utils.cpp
++++ llvm-toolchain-snapshot_16~++20221011091748+8d4ebd1a7c9e/openmp/libomptarget/DeviceRTL/src/Utils.cpp
 @@ -19,17 +19,16 @@
  
  using namespace _OMP;
