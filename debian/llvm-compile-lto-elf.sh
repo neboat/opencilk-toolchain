@@ -1,9 +1,24 @@
 #!/usr/bin/bash -eu
 
 # Initial version:
-# https://src.fedoraproject.org/rpms/redhat-rpm-config/blob/rawhide/f/brp-llvm-compile-lto-elf
+# https://src.fedoraproject.org/rpms/redhat-rpm-config/blob/rawhide/f/brp-llvm-compile-lto-elf
 
 CLANG_FLAGS=$@
+
+if test -z $P_TO_LLVM; then
+    echo "P_TO_LLVM isn't set"
+    exit 1
+fi
+
+if test -z $NJOBS; then
+    echo "NJOBS isn't set"
+    exit 1
+fi
+
+if test -z $VERSION; then
+    echo "VERSION isn't set"
+    exit 1
+fi
 
 NCPUS=$NJOBS
 
@@ -40,6 +55,5 @@ check_convert_bitcode () {
 
 echo "Checking for LLVM bitcode artifacts"
 export -f check_convert_bitcode
-export P
-find "${P_TO_LLVM}/debian/" -type f -name "*.[ao]" -print0 | \
+find "$P_TO_LLVM/debian/" -type f -name "*.[ao]" -print0 | \
   xargs -0 -r -n1 -P$NCPUS bash -c "check_convert_bitcode \$@ $CLANG_FLAGS" ARG0

@@ -823,7 +823,7 @@ override_dh_auto_install:
 
 ifeq (${LTO_ENABLE},yes)
 	# with LTO, .a contains llvm ir instead of native code. So, recompile them
-	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(LLVM_VERSION) bash debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
+	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(LLVM_VERSION) bash -v debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
 endif
 
 	# install/fast enables a make install without recompiling temporary files
