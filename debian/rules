@@ -403,8 +403,10 @@ LTO_DISABLE_ARCHS := i386 armhf s390x ppc64 x32
 ifeq (,$(filter-out $(LTO_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 	LTO_ENABLE=no
 else
-	LTO_ENABLE=yes
-	STAGE_2_CMAKE_EXTRA += -DLLVM_ENABLE_LTO="On"
+# Disable for now because of
+# https://github.com/llvm/llvm-project/issues/58317#issuecomment-1276190743
+	# LTO_ENABLE=yes
+	# STAGE_2_CMAKE_EXTRA += -DLLVM_ENABLE_LTO="On"
 endif
 endif
 

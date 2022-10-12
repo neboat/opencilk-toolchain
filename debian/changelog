@@ -1,3 +1,9 @@
+llvm-toolchain-15 (1:15.0.2-2~exp6) experimental; urgency=medium
+
+  * Disable LTO for now
+
+ --
+
 llvm-toolchain-15 (1:15.0.2-2~exp5) experimental; urgency=medium
 
   * Only enable LTO for some archs
