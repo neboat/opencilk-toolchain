@@ -420,6 +420,12 @@ ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/
 endif
 
+# if sccache is installed in the chroot, use it
+ifeq ($(shell test -e ~/sccache && echo -n yes),yes)
+	export SCCACHE_GCS_KEY_PATH=secret-gcp-storage.json
+	STAGE_1_CMAKE_EXTRA += -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
+endif
+
 GENERATOR=Ninja
 
 # enables cmake build targets like stage2-[target_name]
