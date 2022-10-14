@@ -43,7 +43,7 @@ llvm-toolchain-snapshot (1:16~++20220731055325+02b3a358926e-1~exp1) experimental
 llvm-toolchain-15 (1:15.0.2-2~exp6) experimental; urgency=medium
 
   * Disable LTO for now
-  * don't search for llvm-bolt in cmake
+  * don't search for llvm-bolt & merge-fdata in cmake
     https://github.com/llvm/llvm-project/issues/58317
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 12 Oct 2022 16:19:03 +0200
