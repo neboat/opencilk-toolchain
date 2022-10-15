@@ -421,9 +421,9 @@ ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 endif
 
 # if sccache is installed in the chroot, use it
-ifeq ($(shell test -e ~/sccache && echo -n yes),yes)
+ifeq ($(shell test -e /tmp/sccache && echo -n yes),yes)
 	export SCCACHE_GCS_KEY_PATH=secret-gcp-storage.json
-	STAGE_1_CMAKE_EXTRA += -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
+	STAGE_1_CMAKE_EXTRA += -DCMAKE_C_COMPILER_LAUNCHER=/tmp/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/tmp/sccache
 endif
 
 GENERATOR=Ninja
