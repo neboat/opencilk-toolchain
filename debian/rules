@@ -425,6 +425,8 @@ ifeq ($(shell test -e /tmp/sccache && echo -n yes),yes)
 	export SCCACHE_GCS_KEY_PATH=secret-gcp-storage.json
 	export SCCACHE_GCS_BUCKET=apt-llvm-org-sccache
 	export SCCACHE_GCS_RW_MODE=READ_WRITE
+	export SCCACHE_LOG=sccache=debug
+	export SCCACHE_ERROR_LOG=/tmp/sccache.log
 	STAGE_1_CMAKE_EXTRA += -DCMAKE_C_COMPILER_LAUNCHER=/tmp/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/tmp/sccache
 endif
 
@@ -651,6 +653,7 @@ debian-full-build:
 # If we used sccache, shows stats
 	if test -f /tmp/sccache; then \
 		/tmp/sccache --show-stats; \
+		cat /tmp/sccache.log; \
 	fi
 
 # Check the stage 2 build worked
