@@ -424,6 +424,7 @@ endif
 ifeq ($(shell test -e /tmp/sccache && echo -n yes),yes)
 	export SCCACHE_GCS_KEY_PATH=secret-gcp-storage.json
 	export SCCACHE_GCS_BUCKET=apt-llvm-org-sccache
+	export SCCACHE_GCS_RW_MODE=READ_WRITE
 	STAGE_1_CMAKE_EXTRA += -DCMAKE_C_COMPILER_LAUNCHER=/tmp/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/tmp/sccache
 endif
 
