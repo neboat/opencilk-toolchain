@@ -422,12 +422,14 @@ endif
 
 # if sccache is installed in the chroot, use it
 ifeq ($(shell test -e /tmp/sccache && echo -n yes),yes)
+ifneq (,$(filter $(DISTRO),bullseye))
 	export SCCACHE_GCS_KEY_PATH=secret-gcp-storage.json
 	export SCCACHE_GCS_BUCKET=apt-llvm-org-sccache
 	export SCCACHE_GCS_RW_MODE=READ_WRITE
 	export SCCACHE_LOG=sccache=debug
 	export SCCACHE_ERROR_LOG=/tmp/sccache.log
 	STAGE_1_CMAKE_EXTRA += -DCMAKE_C_COMPILER_LAUNCHER=/tmp/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/tmp/sccache
+endif
 endif
 
 GENERATOR=Ninja
