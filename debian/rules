@@ -543,12 +543,6 @@ override_dh_auto_configure: preconfigure
 			--xml-option append_arg:"replace/llvm::AlignOf<NextTy>::Alignment/(llvm::AlignOf<NextTy>::Alignment)"; \
 	fi)
 
-# If we use sccache, create temporary conf file
-	if test -f /tmp/sccache; then \
-       mkdir -p ~/.config/sccache/; \
-       touch ~/.config/sccache/config; \
-	fi
-
 # Fails with No target "unwind_static"
 #    -DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
 #    -DLIBCXXABI_STATICALLY_LINK_UNWINDER_IN_SHARED_LIBRARY=OFF \
