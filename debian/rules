@@ -421,14 +421,14 @@ ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 endif
 
 # if sccache is installed in the chroot, use it
-ifeq ($(shell test -e /tmp/sccache/sccache && echo -n yes),yes)
+ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
 ifneq (,$(filter $(DISTRO),bullseye))
-	export SCCACHE_GCS_KEY_PATH=/tmp/sccache/secret-gcp-storage.json
+	export SCCACHE_GCS_KEY_PATH=/opt/sccache/secret-gcp-storage.json
 	export SCCACHE_GCS_BUCKET=apt-llvm-org-sccache
 	export SCCACHE_GCS_RW_MODE=READ_WRITE
 	export SCCACHE_LOG=sccache=debug
-	export SCCACHE_ERROR_LOG=/tmp/sccache/sccache.log
-	STAGE_1_CMAKE_EXTRA += -DCMAKE_C_COMPILER_LAUNCHER=/tmp/sccache/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/tmp/sccache/sccache
+	export SCCACHE_ERROR_LOG=/opt/sccache/sccache.log
+	STAGE_1_CMAKE_EXTRA += -DCMAKE_C_COMPILER_LAUNCHER=/opt/sccache/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/opt/sccache/sccache
 endif
 endif
 
@@ -647,19 +647,19 @@ override_dh_auto_configure: preconfigure
 VERBOSE=-v
 
 debian-full-build:
-	if test ! -f /tmp/sccache/secret-gcp-storage.json -a -f /tmp/sccache/sccache; then \
-		echo "Could not find /tmp/sccache/secret-gcp-storage.json"; \
+	if test ! -f /opt/sccache/secret-gcp-storage.json -a -f /opt/sccache/sccache; then \
+		echo "Could not find /opt/sccache/secret-gcp-storage.json"; \
 	fi
 
 	echo "Using cmake: $(CMAKE_BIN)"
 #	linker hack so stage2 can link against stage1 libs at runtime
 	LD_LIBRARY_PATH=$(STAGE_1_LIB_DIR):$$LD_LIBRARY_PATH \
-	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) $(NJOBS) --target stage2||cat /tmp/sccache/sccache.log
+	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) $(NJOBS) --target stage2||cat /opt/sccache/sccache.log
 
 # If we used sccache, shows stats
-	if test -f /tmp/sccache/sccache; then \
-		/tmp/sccache/sccache --show-stats; \
-		cat /tmp/sccache/sccache.log; \
+	if test -f /opt/sccache/sccache; then \
+		/opt/sccache/sccache --show-stats; \
+		cat /opt/sccache/sccache.log; \
 	fi
 
 # Check the stage 2 build worked
