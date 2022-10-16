@@ -427,8 +427,6 @@ ifeq ($(shell test -e /tmp/sccache && echo -n yes),yes)
 	export SCCACHE_GCS_RW_MODE=READ_WRITE
 	export SCCACHE_LOG=sccache=debug
 	export SCCACHE_ERROR_LOG=/tmp/sccache.log
-	mkdir -p ~/.config/sccache/
-	touch ~/.config/sccache/config
 	STAGE_1_CMAKE_EXTRA += -DCMAKE_C_COMPILER_LAUNCHER=/tmp/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/tmp/sccache
 endif
 
@@ -544,6 +542,12 @@ override_dh_auto_configure: preconfigure
 			--xml-option append_arg:"--ppp_translator" \
 			--xml-option append_arg:"replace/llvm::AlignOf<NextTy>::Alignment/(llvm::AlignOf<NextTy>::Alignment)"; \
 	fi)
+
+# If we use sccache, create temporary conf file
+	if test -f /tmp/sccache; then \
+       mkdir -p ~/.config/sccache/; \
+       touch ~/.config/sccache/config; \
+	fi
 
 # Fails with No target "unwind_static"
 #    -DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
