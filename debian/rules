@@ -648,7 +648,7 @@ debian-full-build:
 	echo "Using cmake: $(CMAKE_BIN)"
 #	linker hack so stage2 can link against stage1 libs at runtime
 	LD_LIBRARY_PATH=$(STAGE_1_LIB_DIR):$$LD_LIBRARY_PATH \
-	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) $(NJOBS) --target stage2
+	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) $(NJOBS) --target stage2||cat /tmp/sccache.log
 
 # If we used sccache, shows stats
 	if test -f /tmp/sccache; then \
