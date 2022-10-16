@@ -517,6 +517,7 @@ override_dh_auto_configure: preconfigure
 	if test -f /opt/sccache/sccache; then \
 		touch $$CCACHE_ERROR_LOG; \
 		ls -al /opt/sccache/*; \
+		ls -al /usr/bin/g++-*; \
 	fi
 	echo "Using gcc: "
 	$(CC) -v
