@@ -516,6 +516,7 @@ override_dh_ocaml:
 override_dh_auto_configure: preconfigure
 	if test -f /opt/sccache/sccache; then \
 		touch $CCACHE_ERROR_LOG; \
+		ls -al /opt/sccache/*; \
 	fi
 	echo "Using gcc: "
 	$(CC) -v
@@ -657,12 +658,12 @@ debian-full-build:
 	echo "Using cmake: $(CMAKE_BIN)"
 #	linker hack so stage2 can link against stage1 libs at runtime
 	LD_LIBRARY_PATH=$(STAGE_1_LIB_DIR):$$LD_LIBRARY_PATH \
-	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) $(NJOBS) --target stage2||cat /opt/sccache/sccache.log
+	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) $(NJOBS) --target stage2||cat $SCCACHE_ERROR_LOG
 
 # If we used sccache, shows stats
 	if test -f /opt/sccache/sccache; then \
 		/opt/sccache/sccache --show-stats; \
-		cat /opt/sccache/sccache.log; \
+		cat $SCCACHE_ERROR_LOG; \
 	fi
 
 # Check the stage 2 build worked
