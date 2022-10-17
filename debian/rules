@@ -982,8 +982,8 @@ endif
 	sed -i '/_IMPORT_CHECK_TARGETS \(mlir-\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 	sed -i '/_IMPORT_CHECK_TARGETS tblgen-lsp-server/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 	sed -i '/_IMPORT_CHECK_TARGETS mlir-tblgen/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
-	sed -i '/_IMPORT_CHECK_FILES_FOR_\(mlir\|llvm-bat-dump\|llvm-bolt\|merge-fdata\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
-	sed -i '/_cmake_import_check_files_for_\(mlir\|llvm-bat-dump\|llvm-bolt\|merge-fdata\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
+	sed -i '/_IMPORT_CHECK_FILES_FOR_\(mlir\|tblgen-lsp-server|\llvm-bat-dump\|llvm-bolt\|merge-fdata\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
+	sed -i '/_cmake_import_check_files_for_\(mlir\|tblgen-lsp-server\|llvm-bat-dump\|llvm-bolt\|merge-fdata\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 
 # Disable CMake's package validation checks for binaries that may not be installed
 	sed -i 's|.*_IMPORT_CHECK_FILES_FOR_.*/bin/.*)|#&|' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
