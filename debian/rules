@@ -426,6 +426,7 @@ ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
 	SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=/opt/sccache/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/opt/sccache/sccache
 	STAGE_1_CMAKE_EXTRA += $(SCCACHE_CMAKE)
 	SCCACHE_ENABLE=yes
+	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
 endif
 
 GENERATOR=Ninja
