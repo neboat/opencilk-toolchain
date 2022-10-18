@@ -1,8 +1,9 @@
 llvm-toolchain-snapshot (1:16~++20221014074853+2c72d90ecc69-1~exp2) experimental; urgency=medium
 
   * Install llvm-debuginfo-analyzer in llvm-X.Y
+  * Install clang-include-cleaner in clang-tools-X.Y
 
- --
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 18 Oct 2022 22:07:45 +0200
 
 llvm-toolchain-snapshot (1:16~++20221014074853+2c72d90ecc69-1~exp1) experimental; urgency=medium
 
