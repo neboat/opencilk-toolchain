@@ -665,6 +665,7 @@ debian-full-build:
 
 # If we used sccache, shows stats
 	if test -f /opt/sccache/sccache; then \
+		ls -al /opt/sccache/; \
 		/opt/sccache/sccache --show-stats; \
 		cat $$SCCACHE_ERROR_LOG; \
 	fi
