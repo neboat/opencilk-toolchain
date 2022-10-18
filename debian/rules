@@ -420,6 +420,7 @@ ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/
 endif
 
+SCCACHE_ENABLE=no
 # if sccache is installed in the chroot, use it
 ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
 ifneq (,$(filter $(DISTRO),bullseye))
@@ -429,6 +430,7 @@ ifneq (,$(filter $(DISTRO),bullseye))
 	export SCCACHE_LOG=sccache=debug
 	export SCCACHE_ERROR_LOG=/opt/sccache/sccache.log
 	STAGE_1_CMAKE_EXTRA += -DCMAKE_C_COMPILER_LAUNCHER=/opt/sccache/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/opt/sccache/sccache
+	SCCACHE_ENABLE=yes
 endif
 endif
 
@@ -558,7 +560,9 @@ override_dh_auto_configure: preconfigure
 #-    to libc++ when libunwind is built
 #-    Matches what is done on brew:
 #-    https://bit.ly/3kDNpC9
-
+ifeq (${SCCACHE_ENABLE},yes)
+	SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=/opt/sccache/sccache.log SCCACHE_GCS_KEY_PATH=/opt/sccache/secret-gcp-storage.json SCCACHE_GCS_BUCKET=apt-llvm-org-sccache SCCACHE_GCS_RW_MODE=READ_WRITE /opt/sccache/sccache --start-server
+endif
 	echo "Running tests: $(RUN_TEST)"
 	echo "Using cmake: $(CMAKE_BIN)"; \
 	SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=/opt/sccache/sccache.log \
