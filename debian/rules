@@ -423,15 +423,8 @@ endif
 SCCACHE_ENABLE=no
 # if sccache is installed in the chroot, use it
 ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
-ifneq (,$(filter $(DISTRO),bullseye))
-	export SCCACHE_GCS_KEY_PATH=/opt/sccache/secret-gcp-storage.json
-	export SCCACHE_GCS_BUCKET=apt-llvm-org-sccache
-	export SCCACHE_GCS_RW_MODE=READ_WRITE
-	export SCCACHE_LOG=sccache=debug
-	export SCCACHE_ERROR_LOG=/opt/sccache/sccache.log
 	STAGE_1_CMAKE_EXTRA += -DCMAKE_C_COMPILER_LAUNCHER=/opt/sccache/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/opt/sccache/sccache
 	SCCACHE_ENABLE=yes
-endif
 endif
 
 GENERATOR=Ninja
@@ -566,7 +559,6 @@ ifeq (${SCCACHE_ENABLE},yes)
 endif
 	echo "Running tests: $(RUN_TEST)"
 	echo "Using cmake: $(CMAKE_BIN)"; \
-	SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=/opt/sccache/sccache.log \
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH \
 	$(PRE_PROCESS_CONF) $(CMAKE_BIN) -S llvm/ -B $(TARGET_BUILD) \
 	-G $(GENERATOR) \
@@ -659,10 +651,6 @@ endif
 VERBOSE=-v
 
 debian-full-build:
-	if test ! -f /opt/sccache/secret-gcp-storage.json -a -f /opt/sccache/sccache; then \
-		echo "Could not find /opt/sccache/secret-gcp-storage.json"; \
-	fi
-
 	echo "Using cmake: $(CMAKE_BIN)"
 #	linker hack so stage2 can link against stage1 libs at runtime
 	LD_LIBRARY_PATH=$(STAGE_1_LIB_DIR):$$LD_LIBRARY_PATH \
@@ -671,9 +659,7 @@ debian-full-build:
 # If we used sccache, shows stats
 	if test -f /opt/sccache/sccache; then \
 		ls -al /opt/sccache/; \
-		ls -al /opt/sccache/sccache /usr/bin/g++-10 /usr/bin/*g++-10 llvm/lib/Support/CodeGenCoverage.cpp; \
 		/opt/sccache/sccache --show-stats; \
-		cat $$SCCACHE_ERROR_LOG; \
 	fi
 
 # Check the stage 2 build worked
