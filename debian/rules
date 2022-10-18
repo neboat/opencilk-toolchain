@@ -666,7 +666,7 @@ debian-full-build:
 # If we used sccache, shows stats
 	if test -f /opt/sccache/sccache; then \
 		ls -al /opt/sccache/; \
-		ls -al /opt/sccache/sccache /usr/bin/g++-10 llvm/lib/Support/CodeGenCoverage.cpp; \
+		ls -al /opt/sccache/sccache /usr/bin/g++-10 /usr/bin/*g++-10 llvm/lib/Support/CodeGenCoverage.cpp; \
 		/opt/sccache/sccache --show-stats; \
 		cat $$SCCACHE_ERROR_LOG; \
 	fi
