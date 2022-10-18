@@ -1,7 +1,13 @@
+llvm-toolchain-15 (1:15.0.3-1~exp1) experimental; urgency=medium
+
+  * New stable release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 18 Oct 2022 14:04:32 +0200
+
 llvm-toolchain-15 (1:15.0.2-2~exp6) experimental; urgency=medium
 
   * Disable LTO for now
-  * don't search for llvm-bolt & merge-fdata in cmake
+  * don't search for llvm-bolt, merge-fdata, etc in cmake
     https://github.com/llvm/llvm-project/issues/58317
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 12 Oct 2022 16:19:03 +0200
