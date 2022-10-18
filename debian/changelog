@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:16~++20221014074853+2c72d90ecc69-1~exp2) experimental; urgency=medium
+
+  * Install llvm-debuginfo-analyzer in llvm-X.Y
+
+ --
+
 llvm-toolchain-snapshot (1:16~++20221014074853+2c72d90ecc69-1~exp1) experimental; urgency=medium
 
   * New snapshot release
