@@ -658,13 +658,6 @@ debian-full-build:
 	LD_LIBRARY_PATH=$(STAGE_1_LIB_DIR):$$LD_LIBRARY_PATH \
 	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) $(NJOBS) --target stage2
 
-# If we used sccache, shows stats
-	if test -f /opt/sccache/sccache; then \
-		ls -al /opt/sccache/; \
-		cat /opt/sccache/sccache.log; \
-		/opt/sccache/sccache --show-stats; \
-	fi
-
 # Check the stage 2 build worked
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \
 		echo "clang hasn't been built using clang. Bye bye. Check that the stage2 build has been done."; \
@@ -747,7 +740,17 @@ else
 endif
 	touch $@
 
-override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build debian-rtlib-wasm-build
+
+sccache-stats:
+# If we used sccache, shows stats
+	if test -f /opt/sccache/sccache; then \
+		ls -al /opt/sccache/; \
+		cat /opt/sccache/sccache.log; \
+		/opt/sccache/sccache --show-stats; \
+	fi
+	touch $@
+
+override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build debian-rtlib-wasm-build sccache-stats
 
 override_dh_prep: build_doc
 	dh_prep
