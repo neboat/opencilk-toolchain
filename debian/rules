@@ -555,7 +555,7 @@ override_dh_auto_configure: preconfigure
 #-    https://bit.ly/3kDNpC9
 ifeq (${SCCACHE_ENABLE},yes)
 # Just in case...
-	/opt/sccache/sccache --stop-server
+	/opt/sccache/sccache --stop-server||true
 # Start the sccache server with the right set of options to use GCP
 	SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=/opt/sccache/sccache.log SCCACHE_GCS_KEY_PATH=/opt/sccache/secret-gcp-storage.json SCCACHE_GCS_BUCKET=apt-llvm-org-sccache SCCACHE_GCS_RW_MODE=READ_WRITE /opt/sccache/sccache --start-server
 endif
