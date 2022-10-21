@@ -1264,7 +1264,7 @@ fi
 
 
 opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
-opt-$VERSION -basic-aa -polly-ast -analyze matmul.preopt.ll -polly-process-unprofitable > /dev/null
+opt-$VERSION -basic-aa -polly-ast matmul.preopt.ll -polly-process-unprofitable > /dev/null
 if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
     echo "Install llvm-$VERSION-tools"
     exit 42
