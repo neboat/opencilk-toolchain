@@ -154,3 +154,4 @@ fix-typo-1018770.diff
 bolt.patch
 bolt-disable-emit-relocs.patch
 D124841-fix-powerpc-miscompile.patch
+mips/mips-assert-size.diff
