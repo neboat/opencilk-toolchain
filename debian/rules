@@ -853,11 +853,6 @@ override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
 	rm -rf $(find $(TARGET_BUILD) -wholename '*CMakeFiles*' -not -name CMakeLists.txt -a -name "*.dir" -type d)
 
-ifeq (${LTO_ENABLE},yes)
-	# with LTO, .a contains llvm ir instead of native code. So, recompile them
-	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(LLVM_VERSION) bash -v debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
-endif
-
 	# install/fast enables a make install without recompiling temporary files
 	LD_LIBRARY_PATH=$(STAGE_2_LIB_DIR):$$LD_LIBRARY_PATH DESTDIR=$(DEB_INST)/ ninja -C $(TARGET_BUILD) $(VERBOSE) stage2-install
 
@@ -1111,7 +1106,16 @@ endif
 endif
 	dh_install --fail-missing
 
-override_dh_installdeb:
+
+repack_a_llvm_ir:
+ifeq (${LTO_ENABLE},yes)
+# with LTO, .a contains llvm ir instead of native code. So, recompile them
+	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(LLVM_VERSION) bash -v debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
+endif
+	touch $@
+
+
+override_dh_installdeb: repack_a_llvm_ir
 # Managed by the package
 	dh_installdeb -a
 
