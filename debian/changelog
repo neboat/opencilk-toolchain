@@ -1,3 +1,9 @@
+llvm-toolchain-15 (1:15.0.3-1~exp3) experimental; urgency=medium
+
+  * Bring back LTO
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 22 Oct 2022 15:48:48 +0200
+
 llvm-toolchain-15 (1:15.0.3-1~exp2) experimental; urgency=medium
 
   * Fix autopkgtest (remove move stuff from the cmake search)
