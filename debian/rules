@@ -441,6 +441,15 @@ ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/
 endif
 
+SCCACHE_ENABLE=no
+# if sccache is installed in the chroot, use it
+ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
+	SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=/opt/sccache/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/opt/sccache/sccache
+	STAGE_1_CMAKE_EXTRA += $(SCCACHE_CMAKE)
+	SCCACHE_ENABLE=yes
+	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
+endif
+
 # enables cmake build targets like stage2-[target_name]
 ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-mlir;check-sanitizer;llvm-config;test-suite
 
@@ -530,8 +539,12 @@ override_dh_ocamlclean:
 override_dh_ocaml:
 
 override_dh_auto_configure: preconfigure
+	if test -f /opt/sccache/sccache; then \
+		ls -al /opt/sccache/*; \
+	fi
 	echo "Using gcc: "
 	$(CC) -v
+	$(CXX) -v
 	mkdir -p $(TARGET_BUILD)
 	mkdir -p clang/include/clang/Debian
 	sed -e "s|@DEB_PATCHSETVERSION@|$(DEBIAN_REVISION)|" \
@@ -568,7 +581,12 @@ override_dh_auto_configure: preconfigure
 #-    to libc++ when libunwind is built
 #-    Matches what is done on brew:
 #-    https://bit.ly/3kDNpC9
-
+ifeq (${SCCACHE_ENABLE},yes)
+# Just in case...
+	/opt/sccache/sccache --stop-server||true
+# Start the sccache server with the right set of options to use GCP
+	SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=/opt/sccache/sccache.log SCCACHE_GCS_KEY_PATH=/opt/sccache/secret-gcp-storage.json SCCACHE_GCS_BUCKET=apt-llvm-org-sccache SCCACHE_GCS_RW_MODE=READ_WRITE /opt/sccache/sccache --start-server
+endif
 	echo "Running tests: $(RUN_TEST)"
 	echo "Using cmake: $(CMAKE_BIN)"; \
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH \
@@ -703,6 +721,7 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	cd libclc/build && \
 	$(CMAKE_BIN) ../ \
 	-G Ninja \
+	$(SCCACHE_CMAKE) \
 	-DCMAKE_C_COMPILER=$(STAGE_2_BIN_DIR)/clang \
 	-DCMAKE_CXX_COMPILER=$(STAGE_2_BIN_DIR)/clang++ \
 	-DCMAKE_C_FLAGS="$(opt_flags) $(STAGE_2_CFLAGS)" \
@@ -729,6 +748,7 @@ ifeq (${COMPILER_RT_WASM_ENABLE},yes)
 		mkdir -p build-compiler-rt-$$build; \
 		$(CMAKE_BIN) -B build-compiler-rt-$$build -S compiler-rt/lib/builtins/ \
 		-G Ninja \
+		$(SCCACHE_CMAKE) \
 		-DCMAKE_C_COMPILER_TARGET=$$build-unknown-unknown \
 		-DCMAKE_CXX_COMPILER_TARGET=$$build-unknown-unknown \
 		-DCMAKE_ASM_COMPILER_TARGET=$$build-unknown-unknown \
@@ -757,7 +777,17 @@ else
 endif
 	touch $@
 
-override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build debian-rtlib-wasm-build
+
+sccache-stats:
+# If we used sccache, shows stats
+	if test -f /opt/sccache/sccache; then \
+		ls -al /opt/sccache/; \
+		cat /opt/sccache/sccache.log; \
+		/opt/sccache/sccache --show-stats; \
+	fi
+	touch $@
+
+override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build debian-rtlib-wasm-build sccache-stats
 
 override_dh_prep: build_doc
 	dh_prep
