@@ -1,3 +1,9 @@
+llvm-toolchain-14 (1:14.0.6-6) unstable; urgency=medium
+
+  * Unbreak the cmake detection (Closes: #1021857, #1022414)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 23 Oct 2022 16:07:45 +0200
+
 llvm-toolchain-14 (1:14.0.6-5) unstable; urgency=medium
 
   * Update of the build dep llvm-spirv => llvm-spirv-14
