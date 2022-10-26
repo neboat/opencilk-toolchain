@@ -8,6 +8,7 @@ llvm-toolchain-13 (1:13.0.1-8) UNRELEASED; urgency=medium
   [ Jordan Justen ]
   * d/rules: Call bash to use 'command -v' to location llvm-spirv executable
   * d/rules: Set LLVM_SPIRV with cmake for libclc
+  * d/patches: Drop libclc-llvm-spirv.diff now that we are setting LLVM_SPIRV
 
  -- Jordan Justen <jljusten@debian.org>  Wed, 26 Oct 2022 10:13:59 -0700
 
