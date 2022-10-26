@@ -214,16 +214,22 @@ else
 	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev'
 endif
 
-LLVM_SPIRV := $(shell bash -c "command -v llvm-spirv" 2>/dev/null)
+LLVM_SPIRV := $(shell bash -c "command -v llvm-spirv llvm-spirv-$(LLVM_VERSION)" 2>/dev/null)
 
 ifndef LLVM_SPIRV
 	LLVM_SPIRV_INSTALLED = no
 else
-	ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' llvm-spirv) gt 10.0.0 ; echo $$?),0)
-# Too old llvm-spirv version are failing. See #52200
-		LLVM_SPIRV_INSTALLED = yes
+	# if executable is llvm-spirv without a -$(LLVM_VERSION) suffix
+	ifeq ($(LLVM_SPIRV:-$(LLVM_VERSION)=),$(LLVM_SPIRV))
+		# Too old llvm-spirv version are failing. See #52200
+		ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' llvm-spirv) gt 10.0.0 ; echo $$?),0)
+			LLVM_SPIRV_INSTALLED = yes
+		else
+			LLVM_SPIRV_INSTALLED = no
+		endif
 	else
-		LLVM_SPIRV_INSTALLED = no
+		# llvm-spirv renamed llvm-spirv-$(LLVM_VERSION) as of llvm-spirv-13
+		LLVM_SPIRV_INSTALLED = yes
 	endif
 endif
 
