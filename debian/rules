@@ -429,6 +429,11 @@ ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
 endif
 
+# Disable sccache on bionic
+ifneq (,$(filter $(DISTRO),bionic))
+	SCCACHE_ENABLE=no
+endif
+
 GENERATOR=Ninja
 
 # enables cmake build targets like stage2-[target_name]
