@@ -237,8 +237,10 @@ else
 endif
 
 LIBCLC_TARGETS_TO_BUILD="amdgcn--;amdgcn--amdhsa;amdgcn-mesa-mesa3d;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl"
+LIBCLC_TARGETS_LLVM_SPIRV := ""
 ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	LIBCLC_TARGETS_TO_BUILD := $(LIBCLC_TARGETS_TO_BUILD)";spirv-mesa3d-;spirv64-mesa3d-"
+	LIBCLC_TARGETS_LLVM_SPIRV := "-DLLVM_SPIRV=$(LLVM_SPIRV)"
 endif
 
 BINUTILS_GOLD_ARCHS := amd64 arm64 armhf i386 ppc64 ppc64el x32 s390x hurd-i386 kfreebsd-amd64 kfreebsd-i386
@@ -707,7 +709,8 @@ debian-libclc-build:
 	-DCMAKE_INSTALL_DATADIR=lib \
 	-DCMAKE_INSTALL_INCLUDEDIR=include \
 	-DLLVM_CONFIG=$(STAGE_2_BIN_DIR)/llvm-config \
-	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
+	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD) \
+	$(LIBCLC_TARGETS_LLVM_SPIRV); \
 	ninja $(NJOBS) $(VERBOSE)
 	touch $@
 
