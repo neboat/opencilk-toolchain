@@ -63,7 +63,6 @@ disable-error-xray.diff
 
 # OpenMP
 openmp/openmp-check-execstack.diff
-openmp/openmp-mips-affinity.patch
 
 # libcxx
 libcxx/libcxxabi-test-don-t-fail-extended-long-double.patch
