@@ -244,8 +244,10 @@ else
 endif
 
 LLVM_SPIRV_VERSION=14
-ifeq ($(shell command -v llvm-spirv-$(LLVM_SPIRV_VERSION)),)
-LLVM_SPIRV_INSTALLED = no
+LLVM_SPIRV := $(shell bash -c "command -v llvm-spirv-$(LLVM_SPIRV_VERSION)" 2>/dev/null)
+
+ifndef LLVM_SPIRV
+	LLVM_SPIRV_INSTALLED = no
 else
 	ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' llvm-spirv-$(LLVM_SPIRV_VERSION)) gt 14.0.0 ; echo $$?),0)
 # Too old llvm-spirv version are failing. See #52200
