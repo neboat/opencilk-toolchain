@@ -5,6 +5,7 @@ llvm-toolchain-15 (1:15.0.3-3) UNRELEASED; urgency=medium
   * d/rules: Call bash to use 'command -v' to locate llvm-spirv executable
   * debian: Bump llvm-spirv to 15 to match the llvm version
   * d/rules: Set LLVM_SPIRV with cmake for libclc
+  * d/patches: Drop libclc-llvm-spirv.diff now that we are setting LLVM_SPIRV
 
  -- Jordan Justen <jljusten@debian.org>  Sun, 30 Oct 2022 00:26:40 -0700
 
