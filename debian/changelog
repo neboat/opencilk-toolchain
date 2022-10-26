@@ -1,3 +1,10 @@
+llvm-toolchain-14 (1:14.0.6-7) UNRELEASED; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * disable sccache on bionic
+
+ -- Jordan Justen <jljusten@debian.org>  Wed, 26 Oct 2022 10:13:59 -0700
+
 llvm-toolchain-14 (1:14.0.6-6) unstable; urgency=medium
 
   * Unbreak the cmake detection (Closes: #1021857, #1022414)
