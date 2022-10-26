@@ -5,6 +5,9 @@ llvm-toolchain-13 (1:13.0.1-8) UNRELEASED; urgency=medium
     as llvm-spir is too old on these version.
     See bug #52200
 
+  [ Jordan Justen ]
+  * d/rules: Call bash to use 'command -v' to location llvm-spirv executable
+
  -- Jordan Justen <jljusten@debian.org>  Wed, 26 Oct 2022 10:13:59 -0700
 
 llvm-toolchain-13 (1:13.0.1-7) unstable; urgency=medium
