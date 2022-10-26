@@ -223,8 +223,10 @@ else
 	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev'
 endif
 
-ifeq ($(shell command -v llvm-spirv),)
-LLVM_SPIRV_INSTALLED = no
+LLVM_SPIRV := $(shell bash -c "command -v llvm-spirv" 2>/dev/null)
+
+ifndef LLVM_SPIRV
+	LLVM_SPIRV_INSTALLED = no
 else
 	ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' llvm-spirv) gt 10.0.0 ; echo $$?),0)
 # Too old llvm-spirv version are failing. See #52200
