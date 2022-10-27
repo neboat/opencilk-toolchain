@@ -3,6 +3,13 @@ llvm-toolchain-14 (1:14.0.6-7) unstable; urgency=medium
   * Disable the cmake search for all binaries
     (cmake_import_check_files_for.*/bin/). Dunno why it regressed
     but we wasted too much time on this.
+  * disable sccache on bionic
+
+  [ Jordan Justen ]
+  * d/rules: Call bash to use 'command -v' to location llvm-spirv executable
+  * d/rules: Set LLVM_SPIRV with cmake for libclc
+  * d/patches: Drop libclc-llvm-spirv.diff now that we are setting LLVM_SPIRV
+  * d/rules: Check for llvm-spirv with version suffix
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 27 Oct 2022 12:47:19 +0200
 
