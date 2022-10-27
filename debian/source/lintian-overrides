@@ -18,6 +18,7 @@ source: source-is-missing llgo/third_party/gofrontend/libgo/go/debug/dwarf/testd
 source: source-is-missing llgo/third_party/gofrontend/libgo/go/debug/elf/testdata/gcc-*-exec
 source: source-is-missing llgo/third_party/gofrontend/libgo/go/debug/elf/testdata/*.obj
 source: source-is-missing llvm/test/*
+source: source-is-missing llvm/unittests/*
 source: source-is-missing lldb/test/*
 source: source-is-missing lld/test/*
 source: source-is-missing clang/test/Driver/Inputs/dummy-elf.o
