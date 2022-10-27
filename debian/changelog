@@ -1,4 +1,4 @@
-llvm-toolchain-13 (1:13.0.1-8) UNRELEASED; urgency=medium
+llvm-toolchain-13 (1:13.0.1-8) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
   * Disable the build of libclc on old Ubuntu (Groovy & focal)
