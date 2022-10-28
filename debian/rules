@@ -243,7 +243,7 @@ else
 	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev'
 endif
 
-LLVM_SPIRV_VERSION=14
+LLVM_SPIRV_VERSION := $(LLVM_VERSION)
 LLVM_SPIRV := $(shell bash -c "command -v llvm-spirv-$(LLVM_SPIRV_VERSION)" 2>/dev/null)
 
 ifndef LLVM_SPIRV
