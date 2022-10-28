@@ -329,7 +329,7 @@ OPENMP_ENABLE=yes
 ifneq (,$(filter $(DEB_HOST_ARCH), m68k mipsel powerpc powerpcspe sparc64 s390x x32))
   OPENMP_ENABLE=no
 else
-  RUNTIMES+=;openmp
+  PROJECTS+=;openmp
   STAGE_ALL_CMAKE_EXTRA += -DLIBOMP_LIBFLAGS="-lm"
 ifeq ($(LIBUNWIND_ENABLE),yes)
   STAGE_ALL_CMAKE_EXTRA += -DOPENMP_USE_LLVM_UNWINDER=ON
@@ -684,10 +684,8 @@ VERBOSE=-v
 debian-full-build:
 	echo "Using cmake: $(CMAKE_BIN)"
 # linker hack so stage2 can link against stage1 libs at runtime
-# build llvm-extract first to workaround
-# https://github.com/llvm/llvm-project/issues/58219
 	LD_LIBRARY_PATH=$(STAGE_1_LIB_DIR):$$LD_LIBRARY_PATH \
-	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) -j $(NJOBS) --target llvm-extract stage2
+	VERBOSE=1 $(PRE_PROCESS) $(CMAKE_BIN) --build $(TARGET_BUILD) -j $(NJOBS) --target stage2
 
 # Check the stage 2 build worked
 	if ! readelf --string-dump .comment  $(TARGET_BUILD_STAGE2)/bin/clang 2>&1|grep -q "clang version"; then \

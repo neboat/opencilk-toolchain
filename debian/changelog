@@ -2,8 +2,9 @@ llvm-toolchain-snapshot (1:16~++20221014074853+2c72d90ecc69-1~exp2) experimental
 
   * Install llvm-debuginfo-analyzer in llvm-X.Y
   * Install clang-include-cleaner in clang-tools-X.Y
+  * Build of openmp: use PROJECTS instead of RUNTIMES
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 18 Oct 2022 22:07:45 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 28 Oct 2022 09:19:39 +0200
 
 llvm-toolchain-snapshot (1:16~++20221014074853+2c72d90ecc69-1~exp1) experimental; urgency=medium
 
