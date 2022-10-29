@@ -482,6 +482,27 @@ llvm-toolchain-snapshot (1:14~++20210715093511+afc760ef3527-1~exp2) unstable; ur
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Aug 2021 08:40:58 +0200
 
+llvm-toolchain-13 (1:13.0.1-9) UNRELEASED; urgency=medium
+
+  * d/rules: Don't send an empty string to cmake when llvm-spirv is not found
+
+ -- Jordan Justen <jljusten@debian.org>  Fri, 28 Oct 2022 10:17:57 -0700
+
+llvm-toolchain-13 (1:13.0.1-8) unstable; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * Disable the build of libclc on old Ubuntu (Groovy & focal)
+    as llvm-spir is too old on these version.
+    See bug #52200
+
+  [ Jordan Justen ]
+  * d/rules: Call bash to use 'command -v' to location llvm-spirv executable
+  * d/rules: Set LLVM_SPIRV with cmake for libclc
+  * d/patches: Drop libclc-llvm-spirv.diff now that we are setting LLVM_SPIRV
+  * d/rules: Check for llvm-spirv with version suffix
+
+ -- Jordan Justen <jljusten@debian.org>  Wed, 26 Oct 2022 10:13:59 -0700
+
 llvm-toolchain-13 (1:13.0.1-7) unstable; urgency=medium
 
   [ Michael Biebl ]
