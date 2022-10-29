@@ -1,6 +1,7 @@
 llvm-toolchain-15 (1:15.0.3-3) UNRELEASED; urgency=medium
 
-  * UNRELEASED
+  [ Jordan Justen ]
+  * d/rules: Rename LLVM_SPIR_VERSION to LLVM_SPIRV_VERSION
 
  -- Jordan Justen <jljusten@debian.org>  Sun, 30 Oct 2022 00:26:40 -0700
 
