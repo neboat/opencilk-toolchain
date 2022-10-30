@@ -245,6 +245,10 @@ endif
 
 LLVM_SPIRV_VERSION := $(LLVM_VERSION)
 LLVM_SPIRV := $(shell bash -c "command -v llvm-spirv-$(LLVM_SPIRV_VERSION)" 2>/dev/null)
+ifndef LLVM_SPIRV
+	LLVM_SPIRV_VERSION := $(shell expr $(LLVM_VERSION) - 1)
+	LLVM_SPIRV := $(shell bash -c "command -v llvm-spirv-$(LLVM_SPIRV_VERSION)" 2>/dev/null)
+endif
 
 ifndef LLVM_SPIRV
 	LLVM_SPIRV_INSTALLED = no
