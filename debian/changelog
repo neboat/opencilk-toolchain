@@ -7,6 +7,8 @@ llvm-toolchain-15 (1:15.0.3-3) UNRELEASED; urgency=medium
   * d/rules: Set LLVM_SPIRV with cmake for libclc
   * d/patches: Drop libclc-llvm-spirv.diff now that we are setting LLVM_SPIRV
   * d/rules: Restore building libclc .bc output without spir-v support
+  * d/rules: Check for previous version of llvm-spirv as well
+  * d/control: Add llvm-spirv-14 as an alternative to llvm-spirv-15
 
  -- Jordan Justen <jljusten@debian.org>  Sun, 30 Oct 2022 00:26:40 -0700
 
