@@ -136,7 +136,6 @@ llvm-runtimes-builtins-build-check.diff
 issue-54242.diff
 
 # compiler-rt
-compiler-rt/compilerrt-fix-warn-xray-testing.diff
 compiler-rt/compilerrt-builtins-arch-fix-armhf.diff
 compiler-rt/compilerrt-build-scudo-standalone-option.diff
 
