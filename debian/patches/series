@@ -27,7 +27,7 @@ disable-display-PASS-UNSUPPORTED-XFAIL.diff
 
 # Lib names
 0044-soname.diff
-lldb-soname.diff
+lldb/lldb-soname.diff
 #lldb-libname.diff
 openmp-soname.diff
 
@@ -122,12 +122,12 @@ bootstrap-fix-include-next.diff
 #D67877-cmake-clang-example.patch
 
 python3-shebang.patch
-print-lldb-path.patch
+lldb/print-lldb-path.patch
 lower-python-dep.diff
 scan-build-py-fix-default-bin.diff
 
 omp-riscv64.patch
-test-disable-lldb-i386.diff
+lldb/test-disable-lldb-i386.diff
 unbreak-atomic-mips.diff
 llvm-fix-lld-linker-check.diff
 openmp-fix-runtimes-build.diff
@@ -154,5 +154,5 @@ bolt.patch
 bolt-disable-emit-relocs.patch
 D124841-fix-powerpc-miscompile.patch
 mips/mips-assert-size.diff
-lldb-swig.diff
-lldb-swig-2.diff
+lldb/lldb-swig.diff
+lldb/lldb-swig-2.diff
