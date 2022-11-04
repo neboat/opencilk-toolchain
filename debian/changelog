@@ -1,4 +1,4 @@
-llvm-toolchain-15 (1:15.0.3-3) UNRELEASED; urgency=medium
+llvm-toolchain-15 (1:15.0.4-1) unstable; urgency=medium
 
   [ Jordan Justen ]
   * d/rules: Rename LLVM_SPIR_VERSION to LLVM_SPIRV_VERSION
@@ -10,7 +10,11 @@ llvm-toolchain-15 (1:15.0.3-3) UNRELEASED; urgency=medium
   * d/rules: Check for previous version of llvm-spirv as well
   * d/control: Add llvm-spirv-14 as an alternative to llvm-spirv-15
 
- -- Jordan Justen <jljusten@debian.org>  Sun, 30 Oct 2022 00:26:40 -0700
+  [ Sylvestre Ledru ]
+  * New upstream release (Closes: #1023455)
+  * Cherry-pick patches to fix the FTBFS with swig + lldb (Closes: #1023444)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 02 Nov 2022 08:50:23 +0100
 
 llvm-toolchain-15 (1:15.0.3-2) unstable; urgency=medium
 

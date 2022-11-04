@@ -154,3 +154,5 @@ bolt.patch
 bolt-disable-emit-relocs.patch
 D124841-fix-powerpc-miscompile.patch
 mips/mips-assert-size.diff
+lldb-swig.diff
+lldb-swig-2.diff
