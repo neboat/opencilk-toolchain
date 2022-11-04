@@ -1,3 +1,9 @@
+llvm-toolchain-14 (1:14.0.6-8) UNRELEASED; urgency=medium
+
+  * Fix the lldb swig issues (closes: #1023444)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 04 Nov 2022 19:36:56 +0100
+
 llvm-toolchain-14 (1:14.0.6-7) unstable; urgency=medium
 
   * Disable the cmake search for all binaries
