@@ -1,5 +1,4 @@
 # Debian versions
-0003-Debian-version-info-and-bugreport.patch
 clang-format-version.diff
 clang-analyzer-force-version.diff
 
