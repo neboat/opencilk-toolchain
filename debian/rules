@@ -92,6 +92,12 @@ COMPILER_RT_USE_BUILTINS_LIBRARY := ON
 LIBCXX_EXCEPTIONS := ON
 LIBCXX_USE_COMPILER_RT := ON
 
+# We want to set the clang extra version ONLY in stage 2
+# because we want the clang stage 1 to be as reproducible as possible
+# when building with sccache (because this tool do a hash using the
+# compiler binary and other things)
+STAGE_2_CMAKE_EXTRA += -DCLANG_REPOSITORY_STRING=$(DEBIAN_REVISION)
+
 ifneq (,$(filter $(DEB_HOST_ARCH),sparc sparc64))
 STAGE_1_CMAKE_EXTRA += -DLLVM_PARALLEL_LINK_JOBS=4
 endif
@@ -523,9 +529,6 @@ override_dh_auto_configure: preconfigure
 	$(CC) -v
 	$(CXX) -v
 	mkdir -p $(TARGET_BUILD)
-	mkdir -p clang/include/clang/Debian
-	sed -e "s|@DEB_PATCHSETVERSION@|$(DEBIAN_REVISION)|" \
-		debian/debian_path.h > clang/include/clang/Debian/debian_path.h
 	if test "$(SCAN_BUILD)" = "yes"; then \
 		patch -f -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff||true; \
 	fi
@@ -1171,7 +1174,7 @@ override_dh_gencontrol:
 
 
 override_dh_auto_clean:
-	rm -rf $(TARGET_BUILD) tools/clang/include/clang/Debian/debian_path.h llvm/docs/_build/ clang/docs/_build tools/clang/docs/_html/
+	rm -rf $(TARGET_BUILD) llvm/docs/_build/ clang/docs/_build tools/clang/docs/_html/
 # QA tools
 	rm -rf cov-int/ reports/
 	rm -f `ls debian/*.in|sed -e "s|.in$$||g"`
