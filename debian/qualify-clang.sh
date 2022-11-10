@@ -1374,6 +1374,9 @@ EOF
     fi
     rm -f printf.c printf
 fi
+echo '#include <algorithm>' > foo.cpp
+# Fails for now
+clang++-$VERSION --target=wasm32-wasi -o foo.o -c foo.cpp||true
 
 echo '
 #include <vector>
