@@ -1,17 +1,12 @@
-llvm-toolchain-snapshot (1:16~++20221029101856+b203511c4fc1-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:16~++20221111053703+a77a02aa5794-1~exp1) UNRELEASED; urgency=medium
 
-  * experimental New snapshot release
-  * mlir: Disable test because of
+  * New snapshot release
+  * mlir: Disable test on i386 because of
     https://github.com/llvm/llvm-project/issues/58357
   * Install llvm-debuginfo-analyzer in llvm-X.Y
   * Install clang-include-cleaner in clang-tools-X.Y
   * Build of openmp: use PROJECTS instead of RUNTIMES
-
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 29 Oct 2022 22:24:47 +0200
-
-llvm-toolchain-snapshot (1:16~++20221014074853+2c72d90ecc69-1~exp1) experimental; urgency=medium
-
-  * New snapshot release
+    See https://github.com/llvm/llvm-project/issues/58219
   * Install usr/lib/llvm-16/include/__libunwind_config.h
     usr/lib/llvm-16/include/libunwind.h
     usr/lib/llvm-16/include/mach-o/compact_unwind_encoding.h
@@ -20,8 +15,10 @@ llvm-toolchain-snapshot (1:16~++20221014074853+2c72d90ecc69-1~exp1) experimental
     usr/lib/llvm-16/include/unwind_itanium.h
     in libunwind-X.Y-dev
   * Install llvm-bat-dump in bolt-X.Y
+  * disable-openmpd.diff: Disable the test of openmpd
+    because of https://github.com/llvm/llvm-project/issues/58941
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 15 Oct 2022 10:01:55 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 11 Nov 2022 17:43:40 +0100
 
 llvm-toolchain-snapshot (1:16~++20220830053930+25fdcb8e6ce3-1~exp1) experimental; urgency=medium
 
