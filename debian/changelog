@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:16~++20221111053703+a77a02aa5794-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:16~++20221111053703+a77a02aa5794-1~exp1) experimental; urgency=medium
 
   * New snapshot release
   * mlir: Disable test on i386 because of

@@ -250,7 +250,9 @@ ifndef LLVM_SPIRV
 	LLVM_SPIRV_VERSION := $(shell expr $(LLVM_VERSION) - 1)
 	LLVM_SPIRV := $(shell bash -c "command -v llvm-spirv-$(LLVM_SPIRV_VERSION)" 2>/dev/null)
 endif
-
+# For now, disable spir because it needs
+# 16 because of opaque pointers
+LLVM_SPIRV =
 ifndef LLVM_SPIRV
 	LLVM_SPIRV_INSTALLED = no
 else
