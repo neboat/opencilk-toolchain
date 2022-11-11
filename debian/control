@@ -688,45 +688,42 @@ Description: LLVM low level support for a standard C++ library (development file
 
 # ------------- libclc -------------
 
-# COMMENTED because needs llvm spir 16 at least
-# Because of opaque pointers
+Package: libclc-16
+Section: libs
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+ libclc-16-dev (= ${binary:Version}),
+ libclang-common-16-dev,
+Breaks: libclc-amdgcn, libclc-ptx, libclc-r600
+Provides: libclc-x.y
+Conflicts: libclc-x.y
+Replaces: libclc-x.y, libclc-amdgcn, libclc-ptx, libclc-r600,
+Description: OpenCL C language implementation - platform support
+ libclc is an open implementation of the OpenCL C programming language,
+ as specified by the OpenCL 1.1 Specification.
+ .
+ This package contains support for the amdgcn (AMD GPU), PTX and r600
+ platforms.
 
-# Package: libclc-16
-# Section: libs
-# Architecture: all
-# Multi-Arch: foreign
-# Depends:
-#  ${misc:Depends},
-#  libclc-16-dev (= ${binary:Version}),
-#  libclang-common-16-dev,
-# Breaks: libclc-amdgcn, libclc-ptx, libclc-r600
-# Provides: libclc-x.y
-# Conflicts: libclc-x.y
-# Replaces: libclc-x.y, libclc-amdgcn, libclc-ptx, libclc-r600,
-# Description: OpenCL C language implementation - platform support
-#  libclc is an open implementation of the OpenCL C programming language,
-#  as specified by the OpenCL 1.1 Specification.
-#  .
-#  This package contains support for the amdgcn (AMD GPU), PTX and r600
-#  platforms.
+Package: libclc-16-dev
+Section: libdevel
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+Breaks: libclc-dev
+Provides: libclc-x.y-dev
+Conflicts: libclc-x.y-dev
+Replaces: libclc-dev, libclc-x.y-dev
+Description: OpenCL C language implementation - development files
+ libclc is an open implementation of the OpenCL C programming language,
+ as specified by the OpenCL 1.1 Specification.
+ .
+ This package contains development header files.
 
-# Package: libclc-16-dev
-# Section: libdevel
-# Architecture: all
-# Multi-Arch: foreign
-# Depends:
-#  ${misc:Depends},
-# Breaks: libclc-dev
-# Provides: libclc-x.y-dev
-# Conflicts: libclc-x.y-dev
-# Replaces: libclc-dev, libclc-x.y-dev
-# Description: OpenCL C language implementation - development files
-#  libclc is an open implementation of the OpenCL C programming language,
-#  as specified by the OpenCL 1.1 Specification.
-#  .
-#  This package contains development header files.
-
-# ------------- libunwind -------------
+# ------------- LIBUNWIND -------------
 
 Package: libunwind-16
 Section: libs
