@@ -1,6 +1,4 @@
 # Debian versions
-19-clang_debian_version.patch
-0003-Debian-version-info-and-bugreport.patch
 clang-format-version.diff
 clang-analyzer-force-version.diff
 
@@ -27,7 +25,7 @@ disable-display-PASS-UNSUPPORTED-XFAIL.diff
 
 # Lib names
 0044-soname.diff
-lldb-soname.diff
+lldb/lldb-soname.diff
 #lldb-libname.diff
 openmp-soname.diff
 
@@ -121,13 +119,12 @@ bootstrap-fix-include-next.diff
 #D67877-cmake-clang-example.patch
 
 python3-shebang.patch
-print-lldb-path.patch
+lldb/print-lldb-path.patch
 lower-python-dep.diff
 scan-build-py-fix-default-bin.diff
 
-libclc-llvm-spirv.diff
 omp-riscv64.patch
-test-disable-lldb-i386.diff
+lldb/test-disable-lldb-i386.diff
 unbreak-atomic-mips.diff
 llvm-fix-lld-linker-check.diff
 openmp-fix-runtimes-build.diff
@@ -149,3 +146,4 @@ revert-update-doc.diff
 unwind-force-pthread-dl.diff
 force-sse2-compiler-rt.diff
 bolt-disable-emit-relocs.patch
+

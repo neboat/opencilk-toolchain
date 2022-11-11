@@ -93,37 +93,21 @@ COMPILER_RT_USE_BUILTINS_LIBRARY := ON
 LIBCXX_EXCEPTIONS := ON
 LIBCXX_USE_COMPILER_RT := ON
 
+# We want to set the clang extra version ONLY in stage 2
+# because we want the clang stage 1 to be as reproducible as possible
+# when building with sccache (because this tool do a hash using the
+# compiler binary and other things)
+STAGE_2_CMAKE_EXTRA += -DCLANG_REPOSITORY_STRING=$(DEBIAN_REVISION)
+
+ifneq (,$(filter $(DEB_HOST_ARCH),sparc sparc64))
+STAGE_1_CMAKE_EXTRA += -DLLVM_PARALLEL_LINK_JOBS=4
+endif
+
 ifneq (,$(filter $(DEB_HOST_ARCH),i386 hurd-i386 kfreebsd-i386 armel mipsel powerpc powerpcspe riscv64))
 # For some reason, in the stage2 build, when clang is used to compile
 # itself. The atomic detection is failing on armel and riscv64. Forcing the inclusion
 # everywhere and in all stages
 LDFLAGS_EXTRA += -latomic
-endif
-
-ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' g++-$(GCC_VERSION)) lt 4.9-20140411-1~ ; echo $$?),0)
-# Too old version of gcc. Force 4.9
-	GCC_VERSION := 4.9
-endif
-
-ifneq (,$(filter $(DISTRO),stretch))
-# from llvm 15, we need gcc at least 7
-# No need for now. keeping in case we do in the future
-#  GCC_VERSION := 7
-# Don't enable lld python for old distros
-  STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_PYTHON=OFF
-# Only enabled for stage 1, for stage2, it will use the local libc++ version
-  STAGE_1_CMAKE_EXTRA += -DCLANG_DEFAULT_CXX_STDLIB=libc++
-  STAGE_1_CMAKE_EXTRA += -DLLVM_ENABLE_LIBCXX=ON
-  STAGE_1_CXXFLAGS += -I/usr/lib/llvm-14/include/c++/v1/
-  USE_CLANG_PACKAGE_TO_BUILD_ITSELF = yes
-else
-# For all other deb/ubuntu, use libstdc++
-# TODO: At some point, we might want to use libc++
-  CMAKE_EXTRA += -DCLANG_DEFAULT_CXX_STDLIB=libstdc++
-# For some reasons, adding these to the arg on stretch
-# breaks the build
-  CMAKE_EXTRA += -DBUILTINS_CMAKE_ARGS="-DCMAKE_C_FLAGS=$(STAGE_1_CFLAGS);-DCMAKE_CXX_FLAGS=$(STAGE_1_CXXFLAGS);-DCMAKE_EXE_LINKER_FLAGS=$(STAGE_1_LDFLAGS);-DCMAKE_SHARED_LINKER_FLAGS=$(STAGE_1_LDFLAGS);-DCMAKE_MODULE_LINKER_FLAGS=$(STAGE_1_LDFLAGS);-DCMAKE_BUILD_TYPE=Release;-DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF"
-  CMAKE_EXTRA += -DRUNTIMES_CMAKE_ARGS="-DCMAKE_C_FLAGS=$(STAGE_1_CFLAGS);-DCMAKE_CXX_FLAGS=$(STAGE_1_CXXFLAGS);-DCMAKE_EXE_LINKER_FLAGS=$(STAGE_1_LDFLAGS);-DCMAKE_SHARED_LINKER_FLAGS=$(STAGE_1_LDFLAGS);-DCMAKE_MODULE_LINKER_FLAGS=$(STAGE_1_LDFLAGS);-DCMAKE_BUILD_TYPE=Release;-DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF"
 endif
 
 Z3_FLAG = -DLLVM_ENABLE_Z3_SOLVER=OFF
@@ -260,12 +244,17 @@ else
 	control_vars = '-Vdep:devlibs=libstdc++6-$(GCC_VERSION)-dev'
 endif
 
-# Needs 16 because of opaque pointers
-LLVM_SPIR_VERSION=16
-ifeq ($(shell command -v llvm-spirv-$(LLVM_SPIR_VERSION)),)
-LLVM_SPIRV_INSTALLED = no
+LLVM_SPIRV_VERSION := $(LLVM_VERSION)
+LLVM_SPIRV := $(shell bash -c "command -v llvm-spirv-$(LLVM_SPIRV_VERSION)" 2>/dev/null)
+ifndef LLVM_SPIRV
+	LLVM_SPIRV_VERSION := $(shell expr $(LLVM_VERSION) - 1)
+	LLVM_SPIRV := $(shell bash -c "command -v llvm-spirv-$(LLVM_SPIRV_VERSION)" 2>/dev/null)
+endif
+
+ifndef LLVM_SPIRV
+	LLVM_SPIRV_INSTALLED = no
 else
-	ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' llvm-spirv-$(LLVM_SPIR_VERSION)) gt 16.0.0 ; echo $$?),0)
+	ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' llvm-spirv-$(LLVM_SPIRV_VERSION)) gt 14.0.0 ; echo $$?),0)
 # Too old llvm-spirv version are failing. See #52200
 		LLVM_SPIRV_INSTALLED = yes
 	else
@@ -274,8 +263,10 @@ else
 endif
 
 LIBCLC_TARGETS_TO_BUILD="amdgcn--;amdgcn--amdhsa;amdgcn-mesa-mesa3d;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl"
+LIBCLC_LLVM_SPIRV =
 ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	LIBCLC_TARGETS_TO_BUILD := $(LIBCLC_TARGETS_TO_BUILD)";spirv-mesa3d-;spirv64-mesa3d-"
+	LIBCLC_LLVM_SPIRV = "-DLLVM_SPIRV=$(LLVM_SPIRV)"
 endif
 
 BINUTILS_GOLD_ARCHS := amd64 arm64 armhf i386 ppc64 ppc64el x32 s390x hurd-i386 kfreebsd-amd64 kfreebsd-i386
@@ -423,8 +414,8 @@ ifeq (,$(filter-out $(LTO_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
 else
 # Disable for now because of
 # https://github.com/llvm/llvm-project/issues/58317#issuecomment-1276190743
-	# LTO_ENABLE=yes
-	# STAGE_2_CMAKE_EXTRA += -DLLVM_ENABLE_LTO="On"
+#	LTO_ENABLE=yes
+#	STAGE_2_CMAKE_EXTRA += -DLLVM_ENABLE_LTO="On"
 endif
 endif
 
@@ -457,6 +448,15 @@ CMAKE_BIN=cmake
 ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 	CMAKE_BIN=/tmp/cmake/bin/cmake
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/tmp/cmake/bin/
+endif
+
+SCCACHE_ENABLE=no
+# if sccache is installed in the chroot, use it
+ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
+	SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=/opt/sccache/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/opt/sccache/sccache
+	STAGE_1_CMAKE_EXTRA += $(SCCACHE_CMAKE)
+	SCCACHE_ENABLE=yes
+	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
 endif
 
 # enables cmake build targets like stage2-[target_name]
@@ -530,12 +530,12 @@ preconfigure:
 		fi; \
 	fi
 
-	# Conditionally enable *.spv files. Debian buster and Ubuntu 18.04
-	# don't have llvm-spirv to create the *.spv files.
-	if test "$(LLVM_SPIRV_INSTALLED)" = "no"; then \
-		echo "" > debian/libclc-$(LLVM_VERSION).install; \
-		echo "" > debian/libclc-$(LLVM_VERSION)-dev.install; \
-	fi
+ifdef LLVM_SPIRV
+	# llvm-spirv was found, so we can enable *.spv files. Debian
+	# buster and Ubuntu 18.04 don't have llvm-spirv to create the
+	# *.spv files.
+	sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install
+endif
 	if test "$(DISTRO)" = "stretch"; then \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
 	fi
@@ -551,12 +551,13 @@ override_dh_ocamlclean:
 override_dh_ocaml:
 
 override_dh_auto_configure: preconfigure
+	if test -f /opt/sccache/sccache; then \
+		ls -al /opt/sccache/*; \
+	fi
 	echo "Using gcc: "
 	$(CC) -v
+	$(CXX) -v
 	mkdir -p $(TARGET_BUILD)
-	mkdir -p clang/include/clang/Debian
-	sed -e "s|@DEB_PATCHSETVERSION@|$(DEBIAN_REVISION)|" \
-		debian/debian_path.h > clang/include/clang/Debian/debian_path.h
 	if test "$(SCAN_BUILD)" = "yes"; then \
 		patch -f -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff||true; \
 	fi
@@ -589,7 +590,12 @@ override_dh_auto_configure: preconfigure
 #-    to libc++ when libunwind is built
 #-    Matches what is done on brew:
 #-    https://bit.ly/3kDNpC9
-
+ifeq (${SCCACHE_ENABLE},yes)
+# Just in case...
+	/opt/sccache/sccache --stop-server||true
+# Start the sccache server with the right set of options to use GCP
+	SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=/opt/sccache/sccache.log SCCACHE_GCS_KEY_PATH=/opt/sccache/secret-gcp-storage.json SCCACHE_GCS_BUCKET=apt-llvm-org-sccache SCCACHE_GCS_RW_MODE=READ_WRITE /opt/sccache/sccache --start-server
+endif
 	echo "Running tests: $(RUN_TEST)"
 	echo "Using cmake: $(CMAKE_BIN)"; \
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH \
@@ -715,13 +721,13 @@ endif
 	touch $@
 
 debian-libclc-build:
-ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 # Builds libclc
 	mkdir -p libclc/build
 	echo "Using cmake: $(CMAKE_BIN)"
 	cd libclc/build && \
 	$(CMAKE_BIN) ../ \
 	-G Ninja \
+	$(SCCACHE_CMAKE) \
 	-DCMAKE_C_COMPILER=$(STAGE_2_BIN_DIR)/clang \
 	-DCMAKE_CXX_COMPILER=$(STAGE_2_BIN_DIR)/clang++ \
 	-DCMAKE_C_FLAGS="$(opt_flags) $(STAGE_2_CFLAGS)" \
@@ -733,11 +739,11 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	-DCMAKE_INSTALL_DATADIR=lib \
 	-DCMAKE_INSTALL_INCLUDEDIR=include \
 	-DLLVM_CONFIG=$(STAGE_2_BIN_DIR)/llvm-config \
-	-DLLVM_SPIRV=/usr/bin/llvm-spirv-$(LLVM_SPIR_VERSION) \
+	$(LIBCLC_LLVM_SPIRV) \
 	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
 	ninja -j $(NJOBS) $(VERBOSE)
-else
-	echo "libclc isn't built LLVM_SPIRV_INSTALLED=$(LLVM_SPIRV_INSTALLED)"
+ifndef LLVM_SPIRV
+	echo "libclc built without SPIRV (.spv) outputs because llvm-spirv wasn't found"
 endif
 	touch $@
 
@@ -748,6 +754,7 @@ ifeq (${COMPILER_RT_WASM_ENABLE},yes)
 		mkdir -p build-compiler-rt-$$build; \
 		$(CMAKE_BIN) -B build-compiler-rt-$$build -S compiler-rt/lib/builtins/ \
 		-G Ninja \
+		$(SCCACHE_CMAKE) \
 		-DCMAKE_C_COMPILER_TARGET=$$build-unknown-unknown \
 		-DCMAKE_CXX_COMPILER_TARGET=$$build-unknown-unknown \
 		-DCMAKE_ASM_COMPILER_TARGET=$$build-unknown-unknown \
@@ -776,7 +783,16 @@ else
 endif
 	touch $@
 
-override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build debian-rtlib-wasm-build
+
+sccache-stats:
+# If we used sccache, shows stats
+	if test -f /opt/sccache/sccache; then \
+		ls -al /opt/sccache/; \
+		/opt/sccache/sccache --show-stats; \
+	fi
+	touch $@
+
+override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build debian-rtlib-wasm-build sccache-stats
 
 override_dh_prep: build_doc
 	dh_prep
@@ -841,11 +857,6 @@ endif
 override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
 	rm -rf $(find $(TARGET_BUILD) -wholename '*CMakeFiles*' -not -name CMakeLists.txt -a -name "*.dir" -type d)
-
-ifeq (${LTO_ENABLE},yes)
-	# with LTO, .a contains llvm ir instead of native code. So, recompile them
-	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(LLVM_VERSION) bash -v debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
-endif
 
 	# install/fast enables a make install without recompiling temporary files
 	LD_LIBRARY_PATH=$(STAGE_2_LIB_DIR):$$LD_LIBRARY_PATH DESTDIR=$(DEB_INST)/ ninja -C $(TARGET_BUILD) $(VERBOSE) stage2-install
@@ -925,9 +936,7 @@ endif
 	# Remove an osx file
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libbolt_rt_instr_osx.a
 
-ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libclc/build install
-endif
 
 ifeq (${COMPILER_RT_WASM_ENABLE},yes)
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm32 install
@@ -978,10 +987,11 @@ endif
 
 # Also disable mlir-* checks in the cmake
 	sed -i '/_IMPORT_CHECK_TARGETS \(mlir-\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
-	sed -i '/_IMPORT_CHECK_TARGETS tblgen-lsp-server/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
-	sed -i '/_IMPORT_CHECK_TARGETS mlir-tblgen/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
-	sed -i '/_IMPORT_CHECK_FILES_FOR_\(mlir\|tblgen-lsp-server\|llvm-bat-dump\|llvm-bolt\|merge-fdata\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
-	sed -i '/_cmake_import_check_files_for_\(mlir\|tblgen-lsp-server\|llvm-bat-dump\|llvm-bolt\|merge-fdata\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
+
+	sed -i '/_cmake_import_check_files_for_.*\/bin\/.*/ {s|^|#|}'  $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
+	sed -i '/_IMPORT_CHECK_FILES_FOR_.*\/bin\/.*/ {s|^|#|}'  $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
+	sed -i '/_IMPORT_CHECK_FILES_FOR_\(mlir-\|Polly\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
+	sed -i '/_cmake_import_check_files_for_\(mlir\|Polly\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
 
 # Disable CMake's package validation checks for binaries that may not be installed
 	sed -i 's|.*_IMPORT_CHECK_FILES_FOR_.*/bin/.*)|#&|' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
@@ -1101,7 +1111,16 @@ endif
 endif
 	dh_install --fail-missing
 
-override_dh_installdeb:
+
+repack_a_llvm_ir:
+ifeq (${LTO_ENABLE},yes)
+# with LTO, .a contains llvm ir instead of native code. So, recompile them
+	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(LLVM_VERSION) bash -v debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
+endif
+	touch $@
+
+
+override_dh_installdeb: repack_a_llvm_ir
 # Managed by the package
 	dh_installdeb -a
 
@@ -1159,10 +1178,8 @@ ifeq (,$(filter $(DEB_HOST_ARCH), i386))
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-mlir || true
 endif
 
-ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 # Libclc
 	ninja $(VERBOSE) -C libclc/build test || true
-endif
 
 # LLDB tests
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
@@ -1210,7 +1227,7 @@ override_dh_gencontrol:
 
 
 override_dh_auto_clean:
-	rm -rf $(TARGET_BUILD) tools/clang/include/clang/Debian/debian_path.h llvm/docs/_build/ clang/docs/_build tools/clang/docs/_html/
+	rm -rf $(TARGET_BUILD) llvm/docs/_build/ clang/docs/_build tools/clang/docs/_html/
 # QA tools
 	rm -rf cov-int/ reports/
 	rm -f `ls debian/*.in|sed -e "s|.in$$||g"`

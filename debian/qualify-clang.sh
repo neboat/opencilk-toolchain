@@ -1264,7 +1264,7 @@ fi
 
 
 opt-$VERSION -S -polly-canonicalize matmul.s > matmul.preopt.ll > /dev/null
-opt-$VERSION -basic-aa -polly-ast -analyze matmul.preopt.ll -polly-process-unprofitable > /dev/null
+opt-$VERSION -basic-aa -polly-ast matmul.preopt.ll -polly-process-unprofitable > /dev/null
 if test ! -f /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py; then
     echo "Install llvm-$VERSION-tools"
     exit 42
@@ -1374,6 +1374,9 @@ EOF
     fi
     rm -f printf.c printf
 fi
+echo '#include <algorithm>' > foo.cpp
+# Fails for now
+clang++-$VERSION --target=wasm32-wasi -o foo.o -c foo.cpp||true
 
 echo '
 #include <vector>
