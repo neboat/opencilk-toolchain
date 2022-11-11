@@ -288,6 +288,7 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) experimental
 llvm-toolchain-14 (1:14.0.6-8) unstable; urgency=medium
 
   * Fix the lldb swig issues (closes: #1023444)
+  * Enable LLVM_USE_RELATIVE_PATHS_IN_DEBUG_INFO to help with caching
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 04 Nov 2022 19:36:56 +0100
 
