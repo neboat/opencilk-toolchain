@@ -252,7 +252,7 @@ ifndef LLVM_SPIRV
 endif
 # For now, disable spir because it needs
 # 16 because of opaque pointers
-LLVM_SPIRV =
+undefine LLVM_SPIRV
 ifndef LLVM_SPIRV
 	LLVM_SPIRV_INSTALLED = no
 else
