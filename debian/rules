@@ -782,7 +782,6 @@ sccache-stats:
 # If we used sccache, shows stats
 	if test -f /opt/sccache/sccache; then \
 		ls -al /opt/sccache/; \
-		cat /opt/sccache/sccache.log; \
 		/opt/sccache/sccache --show-stats; \
 	fi
 	touch $@
