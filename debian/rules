@@ -755,7 +755,8 @@ sccache-stats:
 # If we used sccache, shows stats
 	if test -f /opt/sccache/sccache; then \
 		ls -al /opt/sccache/; \
-		/opt/sccache/sccache --show-stats; \
+		/opt/sccache/sccache --stats-format json --show-stats > /tmp/buildd/sccache-stats.json; \
+		cat /tmp/buildd/sccache-stats.json; \
 	fi
 	touch $@
 
@@ -1169,7 +1170,7 @@ override_dh_auto_test:
 endif
 
 
-override_dh_gencontrol:
+override_dh_gencontrol: sccache-stats
 	dh_gencontrol -- $(control_vars)
 
 
