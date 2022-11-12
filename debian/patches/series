@@ -146,5 +146,3 @@ revert-update-doc.diff
 unwind-force-pthread-dl.diff
 force-sse2-compiler-rt.diff
 bolt-disable-emit-relocs.patch
-
-disable-openmpd.diff
