@@ -1201,4 +1201,4 @@ override_dh_auto_clean:
 	: # remove extra stamps
 	rm -f debian-*-build
 
-.PHONY: override_dh_strip preconfigure debian-full-build debian-libfuzzer-build debian-libclc-build debian-rtlib-wasm-build
+.PHONY: override_dh_strip preconfigure
