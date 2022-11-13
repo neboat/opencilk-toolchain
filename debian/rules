@@ -302,12 +302,6 @@ ifeq ($(LIBUNWIND_ENABLE),yes)
 endif
 endif
 
-COMPILER_RT_WASM_ENABLE=yes
-
-ifneq (,$(filter $(DEB_HOST_ARCH), arm64 armel mips64el mipsel ppc64el armhf))
-	COMPILER_RT_WASM_ENABLE=no
-endif
-
 # Do not install objects
 STAGE_ALL_CMAKE_EXTRA += -DMLIR_INSTALL_AGGREGATE_OBJECTS=OFF
 
@@ -716,7 +710,6 @@ debian-libclc-build:
 	touch $@
 
 debian-rtlib-wasm-build:
-ifeq (${COMPILER_RT_WASM_ENABLE},yes)
 	echo "Using cmake: $(CMAKE_BIN)"
 	for build in wasm32 wasm64; do \
 		mkdir -p build-compiler-rt-$$build; \
@@ -746,9 +739,6 @@ ifeq (${COMPILER_RT_WASM_ENABLE},yes)
 		-DCOMPILER_RT_OS_DIR=wasi; \
 		ninja -C build-compiler-rt-$$build $(NJOBS) $(VERBOSE); \
 	done
-else
-	echo "Skip on this arch"
-endif
 	touch $@
 
 
@@ -901,10 +891,9 @@ endif
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libclc/build install
-ifeq (${COMPILER_RT_WASM_ENABLE},yes)
+
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm32 install
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-compiler-rt-wasm64 install
-endif
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
