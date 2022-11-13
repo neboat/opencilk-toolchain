@@ -27,7 +27,7 @@ Index: llvm-toolchain-14-14.0.6/clang/lib/Driver/ToolChains/WebAssembly.cpp
  
    if (!DriverArgs.hasArg(options::OPT_nobuiltininc)) {
      SmallString<128> P(D.ResourceDir);
-@@ -419,12 +421,20 @@ void WebAssembly::AddClangSystemIncludeA
+@@ -419,27 +421,39 @@ void WebAssembly::AddClangSystemIncludeA
      return;
    }
  
@@ -51,7 +51,30 @@ Index: llvm-toolchain-14-14.0.6/clang/lib/Driver/ToolChains/WebAssembly.cpp
  }
  
  void WebAssembly::AddClangCXXStdlibIncludeArgs(const ArgList &DriverArgs,
-@@ -467,3 +477,15 @@ SanitizerMask WebAssembly::getSupportedS
+                                                ArgStringList &CC1Args) const {
++  std::string SysRoot = computeSysRoot();
++
+   if (!DriverArgs.hasArg(options::OPT_nostdlibinc) &&
+       !DriverArgs.hasArg(options::OPT_nostdincxx)) {
+     if (getTriple().getOS() != llvm::Triple::UnknownOS) {
+       const std::string MultiarchTriple =
+-          getMultiarchTriple(getDriver(), getTriple(), getDriver().SysRoot);
++          getMultiarchTriple(getDriver(), getTriple(), SysRoot);
+       addSystemInclude(DriverArgs, CC1Args,
+-                       getDriver().SysRoot + "/include/" + MultiarchTriple +
++                       SysRoot + "/include/" + MultiarchTriple +
+                            "/c++/v1");
+     }
+-    addSystemInclude(DriverArgs, CC1Args,
+-                     getDriver().SysRoot + "/include/c++/v1");
++
++    // don't include the host architecture's headers in the search path
++    if (!getDriver().SysRoot.empty())
++      addSystemInclude(DriverArgs, CC1Args, SysRoot + "/include/c++/v1");
+   }
+ }
+ 
+@@ -467,3 +481,15 @@ SanitizerMask WebAssembly::getSupportedS
  Tool *WebAssembly::buildLinker() const {
    return new tools::wasm::Linker(*this);
  }
