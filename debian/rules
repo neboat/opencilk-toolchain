@@ -752,7 +752,12 @@ sccache-stats:
 	fi
 	touch $@
 
-override_dh_auto_build: debian-full-build debian-libfuzzer-build debian-libclc-build debian-rtlib-wasm-build sccache-stats
+override_dh_auto_build: \
+  debian-full-build \
+  debian-libfuzzer-build \
+  debian-libclc-build \
+  debian-rtlib-wasm-build \
+  sccache-stats
 
 override_dh_prep: build_doc
 	dh_prep
