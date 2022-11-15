@@ -1,3 +1,11 @@
+llvm-toolchain-14 (1:14.0.6-9) unstable; urgency=medium
+
+  * Disable the MLIR testsuite run because of a freeze
+    (Closes: #1024154)
+    See https://github.com/llvm/llvm-project/issues/58357
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 15 Nov 2022 18:23:44 +0100
+
 llvm-toolchain-14 (1:14.0.6-8) unstable; urgency=medium
 
   * Fix the lldb swig issues (closes: #1023444)
