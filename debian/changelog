@@ -235,10 +235,19 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Feb 2022 23:25:57 +0100
 
+llvm-toolchain-14 (1:14.0.6-9) unstable; urgency=medium
+
+  * Disable the MLIR testsuite run because of a freeze
+    (Closes: #1024154)
+    See https://github.com/llvm/llvm-project/issues/58357
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 15 Nov 2022 18:23:44 +0100
+
 llvm-toolchain-14 (1:14.0.6-8) unstable; urgency=medium
 
   * Fix the lldb swig issues (closes: #1023444)
   * Enable LLVM_USE_RELATIVE_PATHS_IN_DEBUG_INFO to help with caching
+  * Adjust to protobuf 3.21 (Closes: #1023533)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 04 Nov 2022 19:36:56 +0100
 
@@ -2092,13 +2101,6 @@ llvm-toolchain-snapshot (1:11~++20200621103028+10b0539772d-1~exp1) UNRELEASED; u
   * Upstream change ad97ccf6b26a29262c9cbf5b3e7f6e84c6dcf55f
     broke clangd-atomic-cmake.patch causing some undef symbol on
     i386 and atomic
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
-  * experimental New snapshot release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 21 Jun 2020 10:33:23 +0200
 
