@@ -453,6 +453,7 @@ ifeq ($(shell test -e /tmp/cmake/bin/cmake && echo -n yes),yes)
 endif
 
 SCCACHE_ENABLE=no
+SCCACHE_CMAKE =
 # if sccache is installed in the chroot, use it
 ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
 	SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=/opt/sccache/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/opt/sccache/sccache
@@ -791,7 +792,9 @@ sccache-stats:
 # If we used sccache, shows stats
 	if test -f /opt/sccache/sccache; then \
 		ls -al /opt/sccache/; \
-		/opt/sccache/sccache --show-stats; \
+		mkdir -p /tmp/buildd/source/; \
+		/opt/sccache/sccache --stats-format json --show-stats > /tmp/buildd/source/sccache-stats.json; \
+		cat /tmp/buildd/source/sccache-stats.json; \
 	fi
 	touch $@
 
@@ -1175,7 +1178,7 @@ endif
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxxabi || true
 
 # MLIR
-ifeq (,$(filter $(DEB_HOST_ARCH), i386))
+ifeq (,$(filter $(DEB_HOST_ARCH), i386 x32))
 # Do not run MLIR test on i386 because of
 # https://github.com/llvm/llvm-project/issues/58357
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-mlir || true
@@ -1225,7 +1228,7 @@ override_dh_auto_test:
 endif
 
 
-override_dh_gencontrol:
+override_dh_gencontrol: sccache-stats
 	dh_gencontrol -- $(control_vars)
 
 
