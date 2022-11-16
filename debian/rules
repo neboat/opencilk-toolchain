@@ -756,8 +756,9 @@ sccache-stats:
 # If we used sccache, shows stats
 	if test -f /opt/sccache/sccache; then \
 		ls -al /opt/sccache/; \
-		/opt/sccache/sccache --stats-format json --show-stats > /tmp/buildd/sccache-stats.json; \
-		cat /tmp/buildd/sccache-stats.json; \
+		mkdir -p /tmp/buildd/source/; \
+		/opt/sccache/sccache --stats-format json --show-stats > /tmp/buildd/source/sccache-stats.json; \
+		cat /tmp/buildd/source/sccache-stats.json; \
 	fi
 	touch $@
 
