@@ -1,21 +1,21 @@
-Index: llvm-toolchain-snapshot_16~++20220920091612+a7d2409bac7f/llvm/include/llvm/Support/ARMTargetParser.def
+Index: llvm-toolchain-snapshot_16~++20221117090012+7b6fe711b210/llvm/include/llvm/Support/ARMTargetParser.def
 ===================================================================
---- llvm-toolchain-snapshot_16~++20220920091612+a7d2409bac7f.orig/llvm/include/llvm/Support/ARMTargetParser.def
-+++ llvm-toolchain-snapshot_16~++20220920091612+a7d2409bac7f/llvm/include/llvm/Support/ARMTargetParser.def
-@@ -68,7 +68,7 @@ ARM_ARCH("armv6kz", ARMV6KZ, "6KZ", "v6k
- ARM_ARCH("armv6-m", ARMV6M, "6-M", "v6m", ARMBuildAttrs::CPUArch::v6_M,
+--- llvm-toolchain-snapshot_16~++20221117090012+7b6fe711b210.orig/llvm/include/llvm/Support/ARMTargetParser.def
++++ llvm-toolchain-snapshot_16~++20221117090012+7b6fe711b210/llvm/include/llvm/Support/ARMTargetParser.def
+@@ -68,7 +68,7 @@ ARM_ARCH("armv6kz", ARMV6KZ, "6KZ", "+v6
+ ARM_ARCH("armv6-m", ARMV6M, "6-M", "+v6m", ARMBuildAttrs::CPUArch::v6_M,
            FK_NONE, ARM::AEK_NONE)
- ARM_ARCH("armv7-a", ARMV7A, "7-A", "v7", ARMBuildAttrs::CPUArch::v7,
+ ARM_ARCH("armv7-a", ARMV7A, "7-A", "+v7", ARMBuildAttrs::CPUArch::v7,
 -          FK_NEON, ARM::AEK_DSP)
 +          FK_VFPV3_D16 /* Hard float */, ARM::AEK_DSP)
- ARM_ARCH("armv7ve", ARMV7VE, "7VE", "v7ve", ARMBuildAttrs::CPUArch::v7,
+ ARM_ARCH("armv7ve", ARMV7VE, "7VE", "+v7ve", ARMBuildAttrs::CPUArch::v7,
            FK_NEON, (ARM::AEK_SEC | ARM::AEK_MP | ARM::AEK_VIRT |
            ARM::AEK_HWDIVARM | ARM::AEK_HWDIVTHUMB | ARM::AEK_DSP))
-Index: llvm-toolchain-snapshot_16~++20220920091612+a7d2409bac7f/llvm/lib/Target/ARM/ARM.td
+Index: llvm-toolchain-snapshot_16~++20221117090012+7b6fe711b210/llvm/lib/Target/ARM/ARM.td
 ===================================================================
---- llvm-toolchain-snapshot_16~++20220920091612+a7d2409bac7f.orig/llvm/lib/Target/ARM/ARM.td
-+++ llvm-toolchain-snapshot_16~++20220920091612+a7d2409bac7f/llvm/lib/Target/ARM/ARM.td
-@@ -892,7 +892,8 @@ def ARMv6sm   : Architecture<"armv6s-m",
+--- llvm-toolchain-snapshot_16~++20221117090012+7b6fe711b210.orig/llvm/lib/Target/ARM/ARM.td
++++ llvm-toolchain-snapshot_16~++20221117090012+7b6fe711b210/llvm/lib/Target/ARM/ARM.td
+@@ -900,7 +900,8 @@ def ARMv6sm   : Architecture<"armv6s-m",
                                                         FeatureStrictAlign]>;
  
  def ARMv7a    : Architecture<"armv7-a",   "ARMv7a",   [HasV7Ops,
