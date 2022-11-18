@@ -1,3 +1,20 @@
+llvm-toolchain-14 (1:14.0.6-10) UNRELEASED; urgency=medium
+
+  * More WebAssembly (wasm32/wasm64) work:
+    - Update patch wasm-sysroot-usr to stop including /usr/include when
+      building for the non-OS (unknown) wasm targets, to avoid inadvertently
+      including the host's (glibc) headers.
+    - Re-enable builds on all architectures, previously disabled for
+      arm64 armel mips64el mipsel ppc64el armhf in 1:14.0.6-4, due to an FTBFS
+      related to the /usr/include issue above.
+    - Update patch wasm-sysroot-usr to adjust system include paths for C++
+      headers as well.
+    - Build libc++ and libc++abi for wasm32-wasi, generating two new binary
+      packages, and introducing a build dependency on wasi-libc.
+    - Misc code organization fixes to debian/rules.
+
+ -- Faidon Liambotis <paravoid@debian.org>  Fri, 18 Nov 2022 08:21:02 +0200
+
 llvm-toolchain-14 (1:14.0.6-9) unstable; urgency=medium
 
   * Disable the MLIR testsuite run because of a freeze
