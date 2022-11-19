@@ -398,6 +398,11 @@ else
 	PROJECTS+=;lldb
 endif
 
+ifneq (,$(filter $(DISTRO),buster))
+# Don't enable lld python for old distros
+  STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_PYTHON=OFF
+endif
+
 
 LLD_ENABLE=yes
 
@@ -539,13 +544,14 @@ ifdef LLVM_SPIRV
 	# *.spv files.
 	sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install
 endif
-	if test "$(DISTRO)" = "stretch"; then \
+	if test "$(DISTRO)" = "buster"; then \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
 	fi
 
 	# Conditionally enable install clangd grpc files
 	if test "$(CLANGD_GRPC_INSTALLED)" = "yes"; then \
 		sed -i -e "s|#grpc\ ||g" debian/libclang-$(LLVM_VERSION)-dev.install; \
+		mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/; \
 	fi
 
 # Override this two targets. They are trying to manage the .in conversion for me
