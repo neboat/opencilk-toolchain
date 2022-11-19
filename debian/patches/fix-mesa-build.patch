@@ -1,0 +1,217 @@
+From f970b007e55d6dab6d84d98a39658a58019eb06e Mon Sep 17 00:00:00 2001
+From: David Green <david.green@arm.com>
+Date: Wed, 2 Nov 2022 22:34:05 +0000
+Subject: [PATCH] [ARM] Fix vector ule zero lowering
+
+The instruction icmp ule <4 x i32> %0, zeroinitializer will usually be
+simplified to icmp eq <4 x i32> %0, zeroinitializer. It is not
+guaranteed though, and the code for lowering vector compares could pick
+the wrong form of the instruction if this happened. I've tried to make
+the code more explicit about the supported conditions.
+
+This fixes NEON being unable to select VCMPZ with HS conditions, and
+fixes some incorrect MVE patterns.
+
+Fixes #58514.
+
+Differential Revision: https://reviews.llvm.org/D136447
+---
+ llvm/lib/Target/ARM/ARMISelLowering.cpp  | 18 +++++++-------
+ llvm/test/CodeGen/ARM/vcmpz.ll           | 30 ++++++++++++++++--------
+ llvm/test/CodeGen/Thumb2/mve-pred-and.ll |  3 ++-
+ llvm/test/CodeGen/Thumb2/mve-pred-or.ll  |  3 ++-
+ llvm/test/CodeGen/Thumb2/mve-pred-xor.ll |  3 ++-
+ llvm/test/CodeGen/Thumb2/mve-vcmpz.ll    | 18 +++++++++-----
+ 6 files changed, 47 insertions(+), 28 deletions(-)
+
+diff --git a/llvm/lib/Target/ARM/ARMISelLowering.cpp b/llvm/lib/Target/ARM/ARMISelLowering.cpp
+index c84fe4d66197..b822f15ed193 100644
+--- a/llvm/lib/Target/ARM/ARMISelLowering.cpp
++++ b/llvm/lib/Target/ARM/ARMISelLowering.cpp
+@@ -6829,25 +6829,25 @@ static SDValue LowerVSETCC(SDValue Op, SelectionDAG &DAG,
+ 
+   // If one of the operands is a constant vector zero, attempt to fold the
+   // comparison to a specialized compare-against-zero form.
+-  SDValue SingleOp;
+-  if (ISD::isBuildVectorAllZeros(Op1.getNode()))
+-    SingleOp = Op0;
+-  else if (ISD::isBuildVectorAllZeros(Op0.getNode())) {
++  if (ISD::isBuildVectorAllZeros(Op0.getNode()) &&
++      (Opc == ARMCC::GE || Opc == ARMCC::GT || Opc == ARMCC::EQ ||
++       Opc == ARMCC::NE)) {
+     if (Opc == ARMCC::GE)
+       Opc = ARMCC::LE;
+     else if (Opc == ARMCC::GT)
+       Opc = ARMCC::LT;
+-    SingleOp = Op1;
++    std::swap(Op0, Op1);
+   }
+ 
+   SDValue Result;
+-  if (SingleOp.getNode()) {
+-    Result = DAG.getNode(ARMISD::VCMPZ, dl, CmpVT, SingleOp,
++  if (ISD::isBuildVectorAllZeros(Op1.getNode()) &&
++      (Opc == ARMCC::GE || Opc == ARMCC::GT || Opc == ARMCC::LE ||
++       Opc == ARMCC::LT || Opc == ARMCC::NE || Opc == ARMCC::EQ))
++    Result = DAG.getNode(ARMISD::VCMPZ, dl, CmpVT, Op0,
+                          DAG.getConstant(Opc, dl, MVT::i32));
+-  } else {
++  else
+     Result = DAG.getNode(ARMISD::VCMP, dl, CmpVT, Op0, Op1,
+                          DAG.getConstant(Opc, dl, MVT::i32));
+-  }
+ 
+   Result = DAG.getSExtOrTrunc(Result, dl, VT);
+ 
+diff --git a/llvm/test/CodeGen/ARM/vcmpz.ll b/llvm/test/CodeGen/ARM/vcmpz.ll
+index f800346a6b56..51b5d28d8192 100644
+--- a/llvm/test/CodeGen/ARM/vcmpz.ll
++++ b/llvm/test/CodeGen/ARM/vcmpz.ll
+@@ -174,11 +174,16 @@ define arm_aapcs_vfpcc <4 x i32> @vcmpz_zr_ult(<4 x i32> %0) {
+   ret <4 x i32> %3
+ }
+ 
+-;define arm_aapcs_vfpcc <4 x i32> @vcmpz_zr_ule(<4 x i32> %0) {
+-;  %2 = icmp ule <4 x i32> %0, zeroinitializer
+-;  %3 = sext <4 x i1> %2 to <4 x i32>
+-;  ret <4 x i32> %3
+-;}
++define arm_aapcs_vfpcc <4 x i32> @vcmpz_zr_ule(<4 x i32> %0) {
++; CHECK-LABEL: vcmpz_zr_ule:
++; CHECK:       @ %bb.0:
++; CHECK-NEXT:    vmov.i32 q8, #0x0
++; CHECK-NEXT:    vcge.u32 q0, q8, q0
++; CHECK-NEXT:    bx lr
++  %2 = icmp ule <4 x i32> %0, zeroinitializer
++  %3 = sext <4 x i1> %2 to <4 x i32>
++  ret <4 x i32> %3
++}
+ 
+ define arm_aapcs_vfpcc <4 x i32> @vcmpz_zr_ugt(<4 x i32> %0) {
+ ; CHECK-LABEL: vcmpz_zr_ugt:
+@@ -294,8 +299,13 @@ define arm_aapcs_vfpcc <4 x i32> @vcmpz_zl_ugt(<4 x i32> %0) {
+   ret <4 x i32> %3
+ }
+ 
+-;define arm_aapcs_vfpcc <4 x i32> @vcmpz_zl_uge(<4 x i32> %0) {
+-;  %2 = icmp uge <4 x i32> zeroinitializer, %0
+-;  %3 = sext <4 x i1> %2 to <4 x i32>
+-;  ret <4 x i32> %3
+-;}
++define arm_aapcs_vfpcc <4 x i32> @vcmpz_zl_uge(<4 x i32> %0) {
++; CHECK-LABEL: vcmpz_zl_uge:
++; CHECK:       @ %bb.0:
++; CHECK-NEXT:    vmov.i32 q8, #0x0
++; CHECK-NEXT:    vcge.u32 q0, q8, q0
++; CHECK-NEXT:    bx lr
++  %2 = icmp uge <4 x i32> zeroinitializer, %0
++  %3 = sext <4 x i1> %2 to <4 x i32>
++  ret <4 x i32> %3
++}
+diff --git a/llvm/test/CodeGen/Thumb2/mve-pred-and.ll b/llvm/test/CodeGen/Thumb2/mve-pred-and.ll
+index e745fafdbea7..e8d5eadabf7f 100644
+--- a/llvm/test/CodeGen/Thumb2/mve-pred-and.ll
++++ b/llvm/test/CodeGen/Thumb2/mve-pred-and.ll
+@@ -122,8 +122,9 @@ entry:
+ define arm_aapcs_vfpcc <4 x i32> @cmpulez_v4i1(<4 x i32> %a, <4 x i32> %b) {
+ ; CHECK-LABEL: cmpulez_v4i1:
+ ; CHECK:       @ %bb.0: @ %entry
++; CHECK-NEXT:    vmov.i32 q2, #0x0
+ ; CHECK-NEXT:    vpt.i32 eq, q0, zr
+-; CHECK-NEXT:    vcmpt.u32 cs, q1, zr
++; CHECK-NEXT:    vcmpt.u32 cs, q2, q1
+ ; CHECK-NEXT:    vpsel q0, q0, q1
+ ; CHECK-NEXT:    bx lr
+ entry:
+diff --git a/llvm/test/CodeGen/Thumb2/mve-pred-or.ll b/llvm/test/CodeGen/Thumb2/mve-pred-or.ll
+index cb3f554e21b0..435ddf0a6e57 100644
+--- a/llvm/test/CodeGen/Thumb2/mve-pred-or.ll
++++ b/llvm/test/CodeGen/Thumb2/mve-pred-or.ll
+@@ -123,7 +123,8 @@ entry:
+ define arm_aapcs_vfpcc <4 x i32> @cmpulez_v4i1(<4 x i32> %a, <4 x i32> %b) {
+ ; CHECK-LABEL: cmpulez_v4i1:
+ ; CHECK:       @ %bb.0: @ %entry
+-; CHECK-NEXT:    vcmp.u32 cs, q1, zr
++; CHECK-NEXT:    vmov.i32 q2, #0x0
++; CHECK-NEXT:    vcmp.u32 cs, q2, q1
+ ; CHECK-NEXT:    vpnot
+ ; CHECK-NEXT:    vpst
+ ; CHECK-NEXT:    vcmpt.i32 ne, q0, zr
+diff --git a/llvm/test/CodeGen/Thumb2/mve-pred-xor.ll b/llvm/test/CodeGen/Thumb2/mve-pred-xor.ll
+index e5fef332034f..0ff262e6b53a 100644
+--- a/llvm/test/CodeGen/Thumb2/mve-pred-xor.ll
++++ b/llvm/test/CodeGen/Thumb2/mve-pred-xor.ll
+@@ -151,7 +151,8 @@ entry:
+ define arm_aapcs_vfpcc <4 x i32> @cmpulez_v4i1(<4 x i32> %a, <4 x i32> %b) {
+ ; CHECK-LABEL: cmpulez_v4i1:
+ ; CHECK:       @ %bb.0: @ %entry
+-; CHECK-NEXT:    vcmp.u32 cs, q1, zr
++; CHECK-NEXT:    vmov.i32 q2, #0x0
++; CHECK-NEXT:    vcmp.u32 cs, q2, q1
+ ; CHECK-NEXT:    vmrs r0, p0
+ ; CHECK-NEXT:    vcmp.i32 eq, q0, zr
+ ; CHECK-NEXT:    vmrs r1, p0
+diff --git a/llvm/test/CodeGen/Thumb2/mve-vcmpz.ll b/llvm/test/CodeGen/Thumb2/mve-vcmpz.ll
+index fcb9d136307f..aaf49c76a07a 100644
+--- a/llvm/test/CodeGen/Thumb2/mve-vcmpz.ll
++++ b/llvm/test/CodeGen/Thumb2/mve-vcmpz.ll
+@@ -110,7 +110,8 @@ entry:
+ define arm_aapcs_vfpcc <4 x i32> @vcmp_ulez_v4i32(<4 x i32> %src, <4 x i32> %a, <4 x i32> %b) {
+ ; CHECK-LABEL: vcmp_ulez_v4i32:
+ ; CHECK:       @ %bb.0: @ %entry
+-; CHECK-NEXT:    vcmp.u32 cs, q0, zr
++; CHECK-NEXT:    vmov.i32 q3, #0x0
++; CHECK-NEXT:    vcmp.u32 cs, q3, q0
+ ; CHECK-NEXT:    vpsel q0, q1, q2
+ ; CHECK-NEXT:    bx lr
+ entry:
+@@ -229,7 +230,8 @@ entry:
+ define arm_aapcs_vfpcc <8 x i16> @vcmp_ulez_v8i16(<8 x i16> %src, <8 x i16> %a, <8 x i16> %b) {
+ ; CHECK-LABEL: vcmp_ulez_v8i16:
+ ; CHECK:       @ %bb.0: @ %entry
+-; CHECK-NEXT:    vcmp.u16 cs, q0, zr
++; CHECK-NEXT:    vmov.i32 q3, #0x0
++; CHECK-NEXT:    vcmp.u16 cs, q3, q0
+ ; CHECK-NEXT:    vpsel q0, q1, q2
+ ; CHECK-NEXT:    bx lr
+ entry:
+@@ -348,7 +350,8 @@ entry:
+ define arm_aapcs_vfpcc <16 x i8> @vcmp_ulez_v16i8(<16 x i8> %src, <16 x i8> %a, <16 x i8> %b) {
+ ; CHECK-LABEL: vcmp_ulez_v16i8:
+ ; CHECK:       @ %bb.0: @ %entry
+-; CHECK-NEXT:    vcmp.u8 cs, q0, zr
++; CHECK-NEXT:    vmov.i32 q3, #0x0
++; CHECK-NEXT:    vcmp.u8 cs, q3, q0
+ ; CHECK-NEXT:    vpsel q0, q1, q2
+ ; CHECK-NEXT:    bx lr
+ entry:
+@@ -489,7 +492,8 @@ entry:
+ define arm_aapcs_vfpcc <4 x i32> @vcmp_r_ugez_v4i32(<4 x i32> %src, <4 x i32> %a, <4 x i32> %b) {
+ ; CHECK-LABEL: vcmp_r_ugez_v4i32:
+ ; CHECK:       @ %bb.0: @ %entry
+-; CHECK-NEXT:    vcmp.u32 cs, q0, zr
++; CHECK-NEXT:    vmov.i32 q3, #0x0
++; CHECK-NEXT:    vcmp.u32 cs, q3, q0
+ ; CHECK-NEXT:    vpsel q0, q1, q2
+ ; CHECK-NEXT:    bx lr
+ entry:
+@@ -608,7 +612,8 @@ entry:
+ define arm_aapcs_vfpcc <8 x i16> @vcmp_r_ugez_v8i16(<8 x i16> %src, <8 x i16> %a, <8 x i16> %b) {
+ ; CHECK-LABEL: vcmp_r_ugez_v8i16:
+ ; CHECK:       @ %bb.0: @ %entry
+-; CHECK-NEXT:    vcmp.u16 cs, q0, zr
++; CHECK-NEXT:    vmov.i32 q3, #0x0
++; CHECK-NEXT:    vcmp.u16 cs, q3, q0
+ ; CHECK-NEXT:    vpsel q0, q1, q2
+ ; CHECK-NEXT:    bx lr
+ entry:
+@@ -727,7 +732,8 @@ entry:
+ define arm_aapcs_vfpcc <16 x i8> @vcmp_r_ugez_v16i8(<16 x i8> %src, <16 x i8> %a, <16 x i8> %b) {
+ ; CHECK-LABEL: vcmp_r_ugez_v16i8:
+ ; CHECK:       @ %bb.0: @ %entry
+-; CHECK-NEXT:    vcmp.u8 cs, q0, zr
++; CHECK-NEXT:    vmov.i32 q3, #0x0
++; CHECK-NEXT:    vcmp.u8 cs, q3, q0
+ ; CHECK-NEXT:    vpsel q0, q1, q2
+ ; CHECK-NEXT:    bx lr
+ entry:
