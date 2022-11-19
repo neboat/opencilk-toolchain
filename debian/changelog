@@ -1,10 +1,14 @@
-llvm-toolchain-15 (1:15.0.5-2) UNRELEASED; urgency=medium
+llvm-toolchain-15 (1:15.0.5-2) unstable; urgency=medium
 
+  [ Gianfranco Costamagna ]
   * Add libomp target library to mips64el (Closes: #1023101)
   * Explictly depend on spirv-14 for mips64el, to ease bootstrapping
     on buildds (this should be dropped once we build a spirv-15 in archive)
   * Cherry-pick two upstream patches to unblock mesa build on arm* (Closes:
     #1022577)
+
+  [ Sylvestre Ledru ]
+  * store the sccache results in /tmp/buildd/source/sccache-stats.json
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 19 Nov 2022 23:25:04 +0100
 
