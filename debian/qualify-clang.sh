@@ -1361,22 +1361,34 @@ fi
 if dpkg -l|grep -q wasi-libc; then
     cat <<EOF > printf.c
     #include <stdio.h>
-    int main(int argc, char *argv[])
-    {
-    printf("%s\n", "Hello world!");
+    int main(int argc, char *argv[]) {
+      printf("%s\n", "Hello World!");
     }
 EOF
-    clang-$VERSION -target wasm32-unknown-wasi -o printf printf.c
+    # wasi-libc supports only wasm32 right now
+    clang-$VERSION -target wasm32-wasi -o printf printf.c
     file printf &> foo.log
     if ! grep -q "WebAssembly" foo.log; then
         echo "the generated file isn't a WebAssembly file?"
         exit 1
     fi
     rm -f printf.c printf
+
+    cat <<EOF > cout.cpp
+    #include <iostream>
+    int main() {
+      std::cout << "Hello World!" << std::endl;
+    }
+EOF
+    # libcxx requires wasi-libc, which only exists for wasm32 right now
+    clang++-$VERSION --target=wasm32-wasi -o cout cout.cpp
+    file cout &> foo.log
+    if ! grep -q "WebAssembly" foo.log; then
+        echo "the generated file isn't a WebAssembly file?"
+        exit 1
+    fi
+    rm -f cout.cpp cout
 fi
-echo '#include <algorithm>' > foo.cpp
-# Fails for now
-clang++-$VERSION --target=wasm32-wasi -o foo.o -c foo.cpp||true
 
 echo '
 #include <vector>
