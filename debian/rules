@@ -544,14 +544,16 @@ ifdef LLVM_SPIRV
 	# *.spv files.
 	sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install
 endif
+# Disable the python binding for buster. not sure why it regressed
+# regressed de4364f1ecaa..0745b0c0354a
 	if test "$(DISTRO)" = "buster"; then \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
+		mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/; \
 	fi
 
 	# Conditionally enable install clangd grpc files
 	if test "$(CLANGD_GRPC_INSTALLED)" = "yes"; then \
 		sed -i -e "s|#grpc\ ||g" debian/libclang-$(LLVM_VERSION)-dev.install; \
-		mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/; \
 	fi
 
 # Override this two targets. They are trying to manage the .in conversion for me
