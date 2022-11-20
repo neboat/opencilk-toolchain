@@ -544,12 +544,9 @@ ifdef LLVM_SPIRV
 	# *.spv files.
 	sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install
 endif
-# Disable the python binding for buster. not sure why it regressed
-# regressed de4364f1ecaa..0745b0c0354a
+
 	if test "$(DISTRO)" = "buster"; then \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
-		mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/; \
-		touch $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/empty; \
 	fi
 
 	# Conditionally enable install clangd grpc files
@@ -1050,6 +1047,13 @@ endif
 		ls $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local/; \
 		rmdir $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local/lib; \
 		rmdir $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local; \
+	fi
+
+# Disable the python binding for buster. not sure why it regressed
+# regressed de4364f1ecaa..0745b0c0354a
+	if test "$(DISTRO)" = "buster"; then \
+		mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/; \
+		touch $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/empty; \
 	fi
 
 # Delete the target build directory to save some space on the build systems
