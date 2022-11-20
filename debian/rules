@@ -889,14 +889,14 @@ endif
 
 	mkdir -p debian/man/
 	ls -al clang/tools/scan-view/bin/scan-view
-	-clang/tools/scan-view/bin/scan-view --help
-	-help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1
-	-help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1
+	clang/tools/scan-view/bin/scan-view --help || true
+	help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1 || true
+	help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1 || true
 
 	CMDS="llvm-dwarfdump llvm-mc llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb clang-format clang clang++ clang-tblgen clang-check clang-cpp clang-tidy clang-apply-replacements clang-rename clang-query pp-trace sancov lli modularize clang-include-fixer find-all-symbols clang-reorder-fields ld.lld llvm-tblgen clang-change-namespace clang-offload-bundler clangd clang-repl clang-nvlink-wrapper git-clang-format run-clang-tidy"; \
 	for f in $$CMDS; do \
 		echo "Generating manpage of $$f"; \
-		-LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-info --version-string=$(LLVM_VERSION) $(TARGET_BUILD_STAGE2)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
+		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-info --version-string=$(LLVM_VERSION) $(TARGET_BUILD_STAGE2)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1 || true; \
 	done
 	if test "$(OPENMP_ENABLE)" = yes; then \
 		cd openmp/runtime && doxygen doc/doxygen/config; cd -; \
@@ -1125,15 +1125,15 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' bin
 	if test ! -f $(CURDIR)/strip; then \
 		ln -s $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/bin/llvm-strip $(CURDIR)/strip; \
 	fi
-	-ls -al $(CURDIR)/debian/.debhelper/*/dbgsym-root/usr/lib/debug/.build-id/*/*
+	ls -al $(CURDIR)/debian/.debhelper/*/dbgsym-root/usr/lib/debug/.build-id/*/*|| true
 	: # On some old version of Debian (stretch) and Ubuntu, Rules-Requires-Root isn't supported
 	: # Sometime, it fails because of chown: changing ownership of 'debian/.debhelper/clang-7/dbgsym-root/usr/lib/debug/.build-id/37/ba506ae9d2f82219bf5c552f7c09853052b2b0.debug': Operation not permitted
 	: # Therefore, continue when we encounter an error
-	-PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot dh_strip -a -v
+	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot dh_strip -a -v || true
 	: # Remove the workaround
 	rm $(CURDIR)/strip
 	: # for some reasons, the +x might be removed
-	-chmod -f +x $(CURDIR)/debian/*/usr/lib/llvm-$(LLVM_VERSION)/bin/*
+	chmod -f +x $(CURDIR)/debian/*/usr/lib/llvm-$(LLVM_VERSION)/bin/* || true
 else
 	# GNU strip doesn't recognize WebAssembly binaries, and actually corrupts them.
 	# llvm-strip (as of 15.0.2) fails with --strip-debug (but works with --strip-all)
@@ -1188,38 +1188,38 @@ ifneq (,$(findstring $(DEB_HOST_ARCH),$(ARCH_LLVM_TEST_OK)))
 # logs the output to check-llvm_build_log.txt for validation through autopkgtest
 	ninja $(VERBOSE) -C $(TARGET_BUILD) stage2-check-llvm | tee check-llvm_build_log.txt
 else
-	-ninja $(VERBOSE) -C $(TARGET_BUILD) stage2-check-llvm
+	ninja $(VERBOSE) -C $(TARGET_BUILD) stage2-check-llvm || true
 endif
 
 # Clang tests
-	-ninja $(VERBOSE) -C $(TARGET_BUILD) stage2-check-clang
+	ninja $(VERBOSE) -C $(TARGET_BUILD) stage2-check-clang || true
 
 # Clang extra tests (ex: clang-tidy)
-	-ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-clang-tools
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-clang-tools || true
 
 # LLD tests
 ifeq (${LLD_ENABLE},yes)
-	-ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-lld
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-lld || true
 endif
 
 # Sanitizer
-	-ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-sanitizer
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-sanitizer || true
 
 # Libcxx
-	-ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxx
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxx || true
 
 # Libcxxabi
-	-ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxxabi
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxxabi || true
 
 # MLIR
 ifeq (,$(filter $(DEB_HOST_ARCH), i386 x32))
 # Do not run MLIR test on i386 because of
 # https://github.com/llvm/llvm-project/issues/58357
-	-ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-mlir
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-mlir || true
 endif
 
 # Libclc
-	-ninja $(VERBOSE) -C libclc/build test
+	ninja $(VERBOSE) -C libclc/build test || true
 
 # LLDB tests
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
@@ -1230,7 +1230,7 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 			ln -s lldb/_lldb.so; \
 		fi
 	if test "$(CODECOVERAGE)" = "no"; then \
-	-LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ ninja $(VERBOSE) -C $(TARGET_BUILD) check-lldb; \
+	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ ninja $(VERBOSE) -C $(TARGET_BUILD) check-lldb || true; \
 	fi
 	# remove the workaround
 	rm $(CURDIR)/$(TARGET_BUILD)/lib/python*/*-packages/_lldb.so
@@ -1239,7 +1239,7 @@ endif
 
 # Polly tests
 #ifeq (${POLLY_ENABLE},yes)
-#	-ninja -C $(TARGET_BUILD) check-polly
+#	ninja -C $(TARGET_BUILD) check-polly || true
 #endif
 
 # Managed by debian build system
