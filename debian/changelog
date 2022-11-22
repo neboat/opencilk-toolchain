@@ -1,3 +1,9 @@
+llvm-toolchain-15 (1:15.0.5-4) unstable; urgency=medium
+
+  * Explicitly depend on spirv-14 for riscv64, to bootstrap spirv there.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 22 Nov 2022 10:58:27 +0100
+
 llvm-toolchain-15 (1:15.0.5-3) unstable; urgency=medium
 
   * Depend again on spirv-15 for mips64el.
