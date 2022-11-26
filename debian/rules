@@ -751,7 +751,7 @@ debian-libclc-build:
 	-DLLVM_CMAKE_DIR=$(STAGE_2_BIN_DIR)/../ \
 	$(LIBCLC_LLVM_SPIRV) \
 	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
-	ninja -j $(NJOBS) $(VERBOSE)
+	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(STAGE_2_LIB_DIR) ninja -j $(NJOBS) $(VERBOSE)
 ifndef LLVM_SPIRV
 	echo "libclc built without SPIRV (.spv) outputs because llvm-spirv wasn't found"
 endif
