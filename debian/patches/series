@@ -131,6 +131,7 @@ openmp-fix-runtimes-build.diff
 libclc-fix-prepare_builtins-rpath.diff
 llvm-runtimes-builtins-build-check.diff
 issue-54242.diff
+protobuf_3.21.patch
 
 # compiler-rt
 compiler-rt/compilerrt-builtins-arch-fix-armhf.diff
@@ -146,4 +147,3 @@ revert-update-doc.diff
 unwind-force-pthread-dl.diff
 force-sse2-compiler-rt.diff
 bolt-disable-emit-relocs.patch
-protobuf_3.21.patch
