@@ -1,3 +1,10 @@
+llvm-toolchain-15 (1:15.0.6-2) unstable; urgency=medium
+
+  * Fix build on riscv64 by disabling WASM for now.
+  * Explicitly depend on spirv-14 for riscv64, to bootstrap spirv there.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 30 Nov 2022 15:31:52 +0100
+
 llvm-toolchain-15 (1:15.0.6-1) unstable; urgency=medium
 
   * New upstream release

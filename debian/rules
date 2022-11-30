@@ -324,7 +324,7 @@ endif
 
 COMPILER_RT_WASM_ENABLE=yes
 
-ifneq (,$(filter $(DEB_HOST_ARCH), arm64 armel mips64el mipsel ppc64el armhf))
+ifneq (,$(filter $(DEB_HOST_ARCH), arm64 armel mips64el mipsel ppc64el armhf riscv64))
 	COMPILER_RT_WASM_ENABLE=no
 endif
 
