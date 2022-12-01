@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_16~++20220829104310+329b972d416a/compiler-rt/lib/builtins/CMakeLists.txt
+Index: llvm-toolchain-snapshot_16~++20221201113805+5e50b8089aee/compiler-rt/lib/builtins/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_16~++20220829104310+329b972d416a.orig/compiler-rt/lib/builtins/CMakeLists.txt
-+++ llvm-toolchain-snapshot_16~++20220829104310+329b972d416a/compiler-rt/lib/builtins/CMakeLists.txt
-@@ -709,8 +709,11 @@ else ()
+--- llvm-toolchain-snapshot_16~++20221201113805+5e50b8089aee.orig/compiler-rt/lib/builtins/CMakeLists.txt
++++ llvm-toolchain-snapshot_16~++20221201113805+5e50b8089aee/compiler-rt/lib/builtins/CMakeLists.txt
+@@ -742,8 +742,11 @@ else ()
    if (COMPILER_RT_HAS_FCF_PROTECTION_FLAG)
      append_list_if(COMPILER_RT_ENABLE_CET -fcf-protection=full BUILTIN_CFLAGS)
    endif()
