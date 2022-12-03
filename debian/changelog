@@ -5,6 +5,8 @@ llvm-toolchain-snapshot (1:16~++20221111053703+a77a02aa5794-1~exp2) experimental
     /usr/lib/llvm-16/lib/clang/16/
   * Workaround some missing files on buster
   * Replace LLVM_CONFIG by LLVM_CMAKE_DIR
+  * Bring back -DBUILTINS_CMAKE_ARGS & -DRUNTIMES_CMAKE_ARGS options
+    https://github.com/llvm/llvm-project/issues/59097
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 19 Nov 2022 10:16:49 +0100
 
