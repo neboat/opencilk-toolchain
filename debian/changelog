@@ -1,27 +1,13 @@
-llvm-toolchain-14 (1:14.0.6-10~exp1) experimental; urgency=medium
-
-  * More WebAssembly (wasm32/wasm64) work:
-    - Update patch wasm-sysroot-usr to stop including /usr/include when
-      building for the non-OS (unknown) wasm targets, to avoid inadvertently
-      including the host's (glibc) headers.
-    - Re-enable builds on all architectures, previously disabled for
-      arm64 armel mips64el mipsel ppc64el armhf in 1:14.0.6-4, due to an FTBFS
-      related to the /usr/include issue above.
-    - Update patch wasm-sysroot-usr to adjust system include paths for C++
-      headers as well.
-    - Build libc++ and libc++abi for wasm32-wasi, generating two new binary
-      packages, and introducing a build dependency on wasi-libc.
-    - Misc code organization fixes to debian/rules.
-
- -- Faidon Liambotis <paravoid@debian.org>  Fri, 18 Nov 2022 08:21:02 +0200
-
 llvm-toolchain-14 (1:14.0.6-9) unstable; urgency=medium
 
+  * Cherry-pick upstream commit c081bf4098c729afacf20303cc9df62bf13c3362
+    to fix chromium failure in basic_string (Closes: #1025394)
   * Disable the MLIR testsuite run because of a freeze
     (Closes: #1024154)
     See https://github.com/llvm/llvm-project/issues/58357
+  * Disable wasm on riscv64
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 15 Nov 2022 18:23:44 +0100
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 04 Dec 2022 09:03:06 +0100
 
 llvm-toolchain-14 (1:14.0.6-8) unstable; urgency=medium
 
@@ -1873,6 +1859,13 @@ llvm-toolchain-snapshot (1:11~++20200621103028+10b0539772d-1~exp1) UNRELEASED; u
   * Upstream change ad97ccf6b26a29262c9cbf5b3e7f6e84c6dcf55f
     broke clangd-atomic-cmake.patch causing some undef symbol on
     i386 and atomic
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
+  * experimental New snapshot release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 21 Jun 2020 10:33:23 +0200
 

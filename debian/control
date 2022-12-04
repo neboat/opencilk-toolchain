@@ -24,7 +24,6 @@ Build-Depends: debhelper (>= 10.0), cmake, ninja-build,
     libpfm4-dev [linux-any], python3-setuptools, libz3-dev,
     llvm-spirv-14 [ amd64 arm64 armel armhf mips64el mipsel ppc64el s390x ] <!stage1> | hello [!i386],
     spirv-tools [ linux-any ] | hello [ !i386],
-    wasi-libc,
     libcurl4-dev,
     libgrpc++-dev [amd64 arm64 armel armhf mips64el mipsel ppc64 ppc64el powerpc riscv64 s390x],
     protobuf-compiler-grpc [amd64 arm64 armel armhf mips64el mipsel ppc64 ppc64el powerpc riscv64 s390x],
@@ -649,29 +648,6 @@ Description: LLVM C++ Standard library (development files)
      as exception objects, rtti and memory allocation.
    * Extensive unit tests.
 
-Package: libc++-14-dev-wasm32
-Section: libdevel
-Architecture: all
-Multi-Arch: foreign
-Depends: wasi-libc, libc++abi-14-dev-wasm32, ${misc:Depends}
-Provides: libc++-x.y-dev-wasm32
-Conflicts: libc++-x.y-dev-wasm32
-Replaces: libc++-x.y-dev-wasm32
-Description: LLVM C++ Standard library (WASI)
- libc++ is another implementation of the C++ standard library
- .
- Features and Goals
- .
-   * Correctness as defined by the C++ standards.
-   * Fast execution.
-   * Minimal memory use.
-   * Fast compile times.
-   * ABI compatibility with gcc's libstdc++ for some low-level features such
-     as exception objects, rtti and memory allocation.
-   * Extensive unit tests.
- .
- This package provides a version for the 32-bit WebAssembly System Interface.
-
 # ------------- libcxxabi -------------
 
 Package: libc++abi1-14
@@ -710,25 +686,6 @@ Description: LLVM low level support for a standard C++ library (development file
  .
    * Correctness as defined by the C++ standards.
    * Provide a portable sublayer to ease the porting of libc++
-
-Package: libc++abi-14-dev-wasm32
-Section: libdevel
-Architecture: all
-Multi-Arch: foreign
-Depends: wasi-libc, ${misc:Depends}
-Provides: libc++abi-x.y-dev-wasm32
-Conflicts: libc++abi-x.y-dev-wasm32
-Replaces: libc++abi-x.y-dev-wasm32
-Description: LLVM low level support for a standard C++ library (WASI)
- libc++abi is another implementation of low level support for a standard C++
- library.
- .
- Features and Goals
- .
-   * Correctness as defined by the C++ standards.
-   * Provide a portable sublayer to ease the porting of libc++
- .
- This package provides a version for the 32-bit WebAssembly System Interface.
 
 # ------------- libclc -------------
 
