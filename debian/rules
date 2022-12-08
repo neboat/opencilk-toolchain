@@ -902,6 +902,7 @@ endif
 		cd openmp/runtime && doxygen doc/doxygen/config; cd -; \
 		cd openmp/runtime/doc/doxygen/generated/html/ && rm jquery.js && ln -s /usr/share/javascript/jquery/jquery.js; \
 	fi
+	touch $@
 
 override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
@@ -1082,6 +1083,7 @@ endif
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
 	rm -rf $(TARGET_BUILD)
+	touch $@
 
 
 override_dh_makeshlibs:
