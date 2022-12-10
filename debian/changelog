@@ -1,3 +1,9 @@
+llvm-toolchain-14 (1:14.0.6-10~exp2) UNRELEASED; urgency=medium
+
+  * transform debian/control into debian/control.in
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 10 Dec 2022 16:34:17 +0100
+
 llvm-toolchain-14 (1:14.0.6-10~exp1) experimental; urgency=medium
 
   * More WebAssembly (wasm32/wasm64) work:
