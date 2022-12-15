@@ -1,24 +1,7 @@
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/Driver/ToolChains/Arch/Mips.cpp
+Index: llvm-toolchain-snapshot_16~++20221215021827+7b36538156b7/llvm/lib/Target/Mips/MipsSubtarget.cpp
 ===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/clang/lib/Driver/ToolChains/Arch/Mips.cpp
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/clang/lib/Driver/ToolChains/Arch/Mips.cpp
-@@ -467,10 +467,10 @@ bool mips::isFP64ADefault(const llvm::Tr
- 
- bool mips::isFPXXDefault(const llvm::Triple &Triple, StringRef CPUName,
-                          StringRef ABIName, mips::FloatABI FloatABI) {
--  if (Triple.getVendor() != llvm::Triple::ImaginationTechnologies &&
-+/*  if (Triple.getVendor() != llvm::Triple::ImaginationTechnologies &&
-       Triple.getVendor() != llvm::Triple::MipsTechnologies &&
-       !Triple.isAndroid())
--    return false;
-+    return false;*/
- 
-   if (ABIName != "32")
-     return false;
-Index: llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/llvm/lib/Target/Mips/MipsSubtarget.cpp
-===================================================================
---- llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487.orig/llvm/lib/Target/Mips/MipsSubtarget.cpp
-+++ llvm-toolchain-snapshot_15~++20220407011631+46f0e2ceb487/llvm/lib/Target/Mips/MipsSubtarget.cpp
+--- llvm-toolchain-snapshot_16~++20221215021827+7b36538156b7.orig/llvm/lib/Target/Mips/MipsSubtarget.cpp
++++ llvm-toolchain-snapshot_16~++20221215021827+7b36538156b7/llvm/lib/Target/Mips/MipsSubtarget.cpp
 @@ -81,7 +81,7 @@ MipsSubtarget::MipsSubtarget(const Tripl
        InMips16HardFloat(Mips16HardFloat), InMicroMipsMode(false), HasDSP(false),
        HasDSPR2(false), HasDSPR3(false), AllowMixed16_32(Mixed16_32 || Mips_Os16),
