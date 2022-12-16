@@ -1,5 +1,6 @@
 llvm-toolchain-snapshot (1:16~++20221111053703+a77a02aa5794-1~exp2) experimental; urgency=medium
 
+<<<<<<<
   * Adjust some path since upstream changed the path from
     /usr/lib/llvm-16/lib/clang/16.0.0/ to
     /usr/lib/llvm-16/lib/clang/16/
@@ -8,6 +9,15 @@ llvm-toolchain-snapshot (1:16~++20221111053703+a77a02aa5794-1~exp2) experimental
   * Bring back -DBUILTINS_CMAKE_ARGS & -DRUNTIMES_CMAKE_ARGS options
     https://github.com/llvm/llvm-project/issues/59097
   * unbreak a symlink to fix to libclang
+=======
+  * Adjust some path since upstream changed the path from
+    /usr/lib/llvm-16/lib/clang/16.0.0/ to
+    /usr/lib/llvm-16/lib/clang/16/
+  * Add a symlink /usr/lib/x86_64-linux-gnu/{libclang-16.so.16.0.0 => libclang-16.so.1}
+    Expected by program like the firefox build system
+  * Workaround some missing files on buster
+  * Replace LLVM_CONFIG by LLVM_CMAKE_DIR
+>>>>>>>
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 19 Nov 2022 10:16:49 +0100
 
