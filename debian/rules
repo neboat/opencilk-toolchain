@@ -1297,8 +1297,10 @@ override_dh_auto_clean:
 		mv lld/docs/ld.lld-$(LLVM_VERSION).1 lld/docs/ld.lld.1; \
 	fi
 	for f in debian/*.in; do \
-		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
-		rm -f $$f2; \
+		if ! echo $$f|grep control; then \
+			f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
+			rm -f $$f2; \
+		fi; \
 	done
 	if test "$(SCAN_BUILD)" = "yes"; then \
 		patch -f -R -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff||true; \
