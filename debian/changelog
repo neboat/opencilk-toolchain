@@ -2,6 +2,7 @@ llvm-toolchain-14 (1:14.0.6-10~exp3) UNRELEASED; urgency=medium
 
   * Transform debian/control into debian/control.in (preparation for
     flang support)
+  * Do not install wasm-libc if doesn't exist
 
   [ Faidon Liambotis ]
   * Try to unbreak the builds with wasm
