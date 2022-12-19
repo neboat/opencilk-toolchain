@@ -1284,7 +1284,7 @@ override_dh_auto_clean:
 	rm -rf $(TARGET_BUILD) llvm/docs/_build/ clang/docs/_build tools/clang/docs/_html/
 # QA tools
 	rm -rf cov-int/ reports/
-	rm -f `ls debian/*.in|sed -e "s|.in$$||g"`
+	rm -f `ls debian/*.in|grep -v control.in|sed -e "s|.in$$||g"`
 	find utils -name '*.pyc' | xargs -r rm -f
 	# Use -I because a test has a space in its name
 	find lldb/test -iname '*.pyc' | xargs -I{} -r rm -f {}
