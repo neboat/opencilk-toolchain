@@ -1,4 +1,4 @@
-llvm-toolchain-14 (1:14.0.6-10~exp3) UNRELEASED; urgency=medium
+llvm-toolchain-14 (1:14.0.6-10~exp3) experimental; urgency=medium
 
   * Transform debian/control into debian/control.in (preparation for
     flang support)
