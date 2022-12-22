@@ -119,7 +119,6 @@ bootstrap-fix-include-next.diff
 #D67877-cmake-clang-example.patch
 
 python3-shebang.patch
-lldb/print-lldb-path.patch
 lower-python-dep.diff
 scan-build-py-fix-default-bin.diff
 
