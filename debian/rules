@@ -490,7 +490,7 @@ preconfigure:
 	chmod +x \
 		debian/clang-tools-$(LLVM_VERSION).install \
 		debian/libclang-$(LLVM_VERSION)-dev.install \
-		debian/libclang-common-$(LLVM_VERSION)-dev.install \
+		debian/libclang-rt-$(LLVM_VERSION)-dev.install \
 		debian/libomp-$(LLVM_VERSION)-dev.install \
 		debian/llvm-$(LLVM_VERSION)-dev.install \
 		debian/llvm-$(LLVM_VERSION)-linker-tools.install \
@@ -932,6 +932,8 @@ override_dh_auto_install:
 
 	# Only run on executable, not script
 	chrpath -d `find $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary'|cut -d: -f1`
+	# To fix custom-library-search-path
+	chrpath -d $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)*/lib/linux/*.so
 
 	: # libclang
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && \
@@ -1308,6 +1310,6 @@ override_dh_auto_clean:
 	: # for some reason, the docs are written to debian/usr and debian/man ...
 	rm -rf debian/usr debian/man
 	: # remove extra stamps
-	rm -f debian-*-build
+	rm -f debian-*-build override_dh_auto_install sccache-stats build_doc
 
 .PHONY: override_dh_strip preconfigure

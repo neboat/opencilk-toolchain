@@ -16,7 +16,7 @@ Build-Depends: debhelper (>= 10.0), cmake, ninja-build,
     lcov, procps, help2man, zlib1g-dev,
     g++-multilib [amd64 i386 kfreebsd-amd64 mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
     libjs-mathjax, python3-recommonmark,
-    doxygen, gfortran,
+    doxygen,
     ocaml-base [amd64 arm64 armhf ppc64el riscv64 s390x] | ocaml-nox [amd64 arm64 armhf ppc64el riscv64 s390x],
     ocaml-findlib [amd64 arm64 armhf ppc64el riscv64 s390x],
     libctypes-ocaml-dev [amd64 arm64 armhf ppc64el riscv64 s390x],
@@ -167,9 +167,10 @@ Description: Clang library - Development package
  libclang1-@LLVM_VERSION@.
 
 Package: libclang-common-@LLVM_VERSION@-dev
-Architecture: any
+Architecture: all
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@LLVM_VERSION@ (= ${binary:Version})
+Recommends: libclang-rt-@LLVM_VERSION@-dev (>= 14.0.6-10~exp4)
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -178,8 +179,47 @@ Description: Clang library - Common development package
  Clang implements all of the ISO C++ 1998, 11, 14 and 17 standards and also
  provides most of the support of C++20.
  .
- This package contains the Clang generic headers and some libraries
- (profiling, etc).
+ This package contains the Clang generic headers.
+
+Package: libclang-rt-@LLVM_VERSION@-dev
+Architecture: any
+Multi-Arch: same
+Section: libdevel
+Breaks: libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp4)
+Replaces: libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp4)
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Compiler-rt - development package
+ This package provides various libraries:
+ .
+   * builtins - Simple libraries that provide implementation of the
+     low-level target-specific hooks required by code generation
+     and other runtime components.
+   * sanitizer runtimes - AddressSanitizer, ThreadSanitizer,
+     UndefinedBehaviorSanitizer, MemorySanitizer, LeakSanitizer
+     DataFlowSanitizer, etc
+   * profile - Library which is used to collect coverage information.
+
+Package: libclang-rt-@LLVM_VERSION@-dev-wasm32
+Architecture: all
+Multi-Arch: foreign
+Section: libdevel
+Breaks: libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp4)
+Replaces: libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp4)
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: libclang-common-@LLVM_VERSION@-dev (>= 14.0.6-10~exp4)
+Description: Compiler-rt - wasm32 builtins
+ Provides the compiler-rt builtins for WebAssembly 32 bits
+
+Package: libclang-rt-@LLVM_VERSION@-dev-wasm64
+Architecture: all
+Multi-Arch: foreign
+Section: libdevel
+Breaks: libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp4)
+Replaces: libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp4)
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: libclang-common-@LLVM_VERSION@-dev (>= 14.0.6-10~exp4)
+Description: Compiler-rt - development package
+ Provides the compiler-rt builtins for WebAssembly 32 bits
 
 Package: libclang-cpp@LLVM_VERSION@
 Section: libs
