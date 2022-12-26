@@ -1389,6 +1389,8 @@ EOF
         exit 1
     fi
     rm -f cout.cpp cout
+else
+    echo "wasi-libc not installed"
 fi
 
 echo '
