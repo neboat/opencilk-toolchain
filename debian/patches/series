@@ -161,3 +161,4 @@ lldb/lldb-swig.diff
 lldb/lldb-swig-2.diff
 protobuf_3.21.patch
 basic_string.patch
+link-grpc.diff

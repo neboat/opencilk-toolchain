@@ -1,10 +1,12 @@
-llvm-toolchain-14 (1:14.0.6-10~exp4) UNRELEASED; urgency=medium
+llvm-toolchain-14 (1:14.0.6-10~exp4) experimental; urgency=medium
 
   * Move the compiler-rt content into a new package called
     libclang-rt-X.Y-dev (including polly)
   * the wasm targets are shipped into libclang-rt-14-dev-wasm32
     and libclang-rt-14-dev-wasm64
   * libclang-common-X.Y-dev arch moved to all
+  * link-grpc.diff: add the detection of other libs necessary for
+    grpc (Closes: #1025529)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 21 Dec 2022 13:48:40 +0100
 
