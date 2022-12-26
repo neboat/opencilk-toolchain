@@ -5,6 +5,8 @@ llvm-toolchain-14 (1:14.0.6-10~exp4) experimental; urgency=medium
   * the wasm targets are shipped into libclang-rt-14-dev-wasm32
     and libclang-rt-14-dev-wasm64
   * libclang-common-X.Y-dev arch moved to all
+    then ${binary:Version} => ${source:Version}
+    to avoid not-binnmuable-any-depends-all
   * link-grpc.diff: add the detection of other libs necessary for
     grpc (Closes: #1025529)
 
