@@ -169,7 +169,7 @@ Description: Clang library - Development package
 Package: libclang-common-@LLVM_VERSION@-dev
 Architecture: all
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@LLVM_VERSION@ (= ${source:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@LLVM_VERSION@ (>= ${source:Version})
 Recommends: libclang-rt-@LLVM_VERSION@-dev (>= 14.0.6-10~exp4)
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
