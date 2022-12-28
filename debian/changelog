@@ -1,3 +1,9 @@
+llvm-toolchain-14 (1:14.0.6-10~exp5) UNRELEASED; urgency=medium
+
+  * Fix the libclang-rt-14-dev-wasm64 description
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Dec 2022 12:35:04 +0100
+
 llvm-toolchain-14 (1:14.0.6-10~exp4) experimental; urgency=medium
 
   * Move the compiler-rt content into a new package called

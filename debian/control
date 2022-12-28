@@ -218,8 +218,8 @@ Breaks: libclang-common-14-dev (<< 14.0.6-10~exp4)
 Replaces: libclang-common-14-dev (<< 14.0.6-10~exp4)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: libclang-common-14-dev (>= 14.0.6-10~exp4)
-Description: Compiler-rt - development package
- Provides the compiler-rt builtins for WebAssembly 32 bits
+Description: Compiler-rt - wasm64 builtins
+ Provides the compiler-rt builtins for WebAssembly 64 bits
 
 Package: libclang-cpp14
 Section: libs
