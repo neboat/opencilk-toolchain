@@ -1212,11 +1212,11 @@ clang++-$VERSION foo.cpp -unwindlib=libunwind -rtlib=compiler-rt -I/usr/include/
 ./a.out||true
 
 if test ! -f /usr/lib/llvm-$VERSION/include/polly/LinkAllPasses.h; then
-    echo "Install libclang-common-$VERSION-dev for polly";
+    echo "Install libpolly-$VERSION-dev for polly";
     exit -1;
 fi
 
-echo "Testing polly (libclang-common-$VERSION-dev) ..."
+echo "Testing polly (libpolly-$VERSION-dev) ..."
 
 # Polly
 echo "
