@@ -1057,12 +1057,12 @@ endif
 
 # Manage the polly files. Sometimes, we build them. Sometimes not.
 	if test "$(POLLY_ENABLE)" = yes; then \
-		mkdir -p $(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/ $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly/; \
+		mkdir -p $(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/ $(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly/; \
 		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPolly* \
-		$(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
-		rm -rf $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly; \
+		$(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
+		rm -rf $(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly; \
 		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/include/polly/ \
-		$(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/; \
+		$(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/; \
 	fi
 
 	mkdir -p $(CURDIR)/debian/usr/share/doc/llvm-$(LLVM_VERSION)-doc/ $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/
@@ -1155,8 +1155,8 @@ endif
 override_dh_install:
 ifeq (${POLLY_ENABLE},yes)
 # only for arch:any builds
-ifneq (,$(filter libclang-common-$(LLVM_VERSION)-dev, $(shell dh_listpackages)))
-	dh_install -p libclang-common-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly
+ifneq (,$(filter libpolly-$(LLVM_VERSION)-dev, $(shell dh_listpackages)))
+	dh_install -p libpolly-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly
 # On old Debian & Ubuntu, removing the files is necessary
 	rm -rf debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
 else

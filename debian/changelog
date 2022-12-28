@@ -1,5 +1,6 @@
 llvm-toolchain-14 (1:14.0.6-10~exp5) UNRELEASED; urgency=medium
 
+  * Create a libpolly-X.Y-dev package
   * Fix the libclang-rt-14-dev-wasm64 description
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Dec 2022 12:35:04 +0100

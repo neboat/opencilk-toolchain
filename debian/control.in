@@ -181,6 +181,8 @@ Description: Clang library - Common development package
  .
  This package contains the Clang generic headers.
 
+# ------------- compiler-rt -------------
+
 Package: libclang-rt-@LLVM_VERSION@-dev
 Architecture: any
 Multi-Arch: same
@@ -220,6 +222,21 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: libclang-common-@LLVM_VERSION@-dev (>= 14.0.6-10~exp4)
 Description: Compiler-rt - wasm64 builtins
  Provides the compiler-rt builtins for WebAssembly 64 bits
+
+# ------------- polly -------------
+
+Package: libpolly-@LLVM_VERSION@-dev
+Architecture: any
+Multi-Arch: same
+Section: libdevel
+Breaks: libclang-rt-@LLVM_VERSION@-dev (<< 14.0.6-10~exp5), libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp5)
+Replaces: libclang-rt-@LLVM_VERSION@-dev (<< 14.0.6-10~exp5), libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp5)
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: High-level loop and data-locality optimizer
+ Uses an abstract mathematical representation based on integer polyhedra
+ to analyze and optimize the memory access pattern of a program
+
+# ------------- clang libraries -------------
 
 Package: libclang-cpp@LLVM_VERSION@
 Section: libs
