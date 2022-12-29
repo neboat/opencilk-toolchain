@@ -35,20 +35,18 @@ Index: llvm-toolchain-snapshot_16~++20221227120055+36d70a6aea6b/clang/cmake/modu
 ===================================================================
 --- llvm-toolchain-snapshot_16~++20221227120055+36d70a6aea6b.orig/clang/cmake/modules/AddGRPC.cmake
 +++ llvm-toolchain-snapshot_16~++20221227120055+36d70a6aea6b/clang/cmake/modules/AddGRPC.cmake
-@@ -5,7 +5,13 @@ function(generate_clang_protos_library L
+@@ -4,8 +4,13 @@ function(generate_clang_protos_library L
+   # Take the first two args and forward the remaining to generate_proto_sources.
    cmake_parse_arguments(PARSE_ARGV 2 PROTO "" "" "")
    generate_proto_sources(ProtoSource ${ProtoFile} ${PROTO_UNPARSED_ARGUMENTS})
++  set(LINKED_GRPC_LIBRARIES protobuf gpr grpc grpc++)
  
--  add_clang_library(${LibraryName} ${ProtoSource}
--    PARTIAL_SOURCES_INTENDED
--    LINK_LIBS PUBLIC grpc++ protobuf)
 +  if (ABSL_SYNCHRONIZATION_LIBRARY)
-+    add_clang_library(${LibraryName} ${ProtoSource}
-+      PARTIAL_SOURCES_INTENDED
-+      LINK_LIBS PUBLIC protobuf gpr grpc absl_synchronization grpc++)
-+  else()
-+    add_clang_library(${LibraryName} ${ProtoSource}
-+      PARTIAL_SOURCES_INTENDED
-+      LINK_LIBS PUBLIC protobuf gpr grpc grpc++)
++    list(APPEND LINKED_GRPC_LIBRARIES absl_synchronization)
 +  endif()
+   add_clang_library(${LibraryName} ${ProtoSource}
+     PARTIAL_SOURCES_INTENDED
+-    LINK_LIBS PUBLIC grpc++ protobuf)
++    LINK_LIBS PUBLIC  ${LINKED_GRPC_LIBRARIES})
++
  endfunction()
