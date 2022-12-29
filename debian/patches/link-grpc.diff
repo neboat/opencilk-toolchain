@@ -2,36 +2,29 @@ Index: llvm-toolchain-snapshot_16~++20221227120055+36d70a6aea6b/cmake/Modules/Fi
 ===================================================================
 --- llvm-toolchain-snapshot_16~++20221227120055+36d70a6aea6b.orig/cmake/Modules/FindGRPC.cmake
 +++ llvm-toolchain-snapshot_16~++20221227120055+36d70a6aea6b/cmake/Modules/FindGRPC.cmake
-@@ -82,11 +82,30 @@ else()
+@@ -82,11 +82,26 @@ else()
      endif()
    endif()
    if(NOT TARGET grpc++)
--    find_library(GRPC_LIBRARY grpc++ ${GRPC_OPTS} REQUIRED)
-+    find_library(GRPCPP_LIBRARY grpc++ ${GRPC_OPTS} REQUIRED)
-     add_library(grpc++ UNKNOWN IMPORTED GLOBAL)
--    message(STATUS "Using grpc++: " ${GRPC_LIBRARY})
--    set_target_properties(grpc++ PROPERTIES IMPORTED_LOCATION ${GRPC_LIBRARY})
-+    message(STATUS "Using grpc++: " ${GRPCPP_LIBRARY})
-+    set_target_properties(grpc++ PROPERTIES IMPORTED_LOCATION ${GRPCPP_LIBRARY})
-     target_include_directories(grpc++ INTERFACE ${GRPC_INCLUDE_PATHS})
-+
-+    # On some distro (ex: Debian/Ubuntu), libgrpc++ doesn't have direct references
-+    # to it dependencies. Needs to link against gpr, grpc and absl_synchronization
-+    find_library(GPR_LIBRARY gpr ${GRPC_OPTS} REQUIRED)
++    find_library(GPR_LIBRARY gpr $GRPC_OPTS REQUIRED)
 +    add_library(gpr UNKNOWN IMPORTED GLOBAL)
 +    message(STATUS "Using gpr: " ${GPR_LIBRARY})
 +    set_target_properties(gpr PROPERTIES IMPORTED_LOCATION ${GPR_LIBRARY})
 +
-+    find_library(GRPC_LIBRARY grpc ${GRPC_OPTS} REQUIRED)
+     find_library(GRPC_LIBRARY grpc++ ${GRPC_OPTS} REQUIRED)
+     add_library(grpc++ UNKNOWN IMPORTED GLOBAL)
+     message(STATUS "Using grpc++: " ${GRPC_LIBRARY})
+     set_target_properties(grpc++ PROPERTIES IMPORTED_LOCATION ${GRPC_LIBRARY})
+     target_include_directories(grpc++ INTERFACE ${GRPC_INCLUDE_PATHS})
++    find_library(GRPC2_LIBRARY grpc $GRPC_OPTS REQUIRED)
 +    add_library(grpc UNKNOWN IMPORTED GLOBAL)
-+    message(STATUS "Using grpc: " ${GRPC_LIBRARY})
-+    set_target_properties(grpc PROPERTIES IMPORTED_LOCATION ${GRPC_LIBRARY})
++    message(STATUS "Using grpc: " ${GRPC2_LIBRARY})
++    set_target_properties(grpc PROPERTIES IMPORTED_LOCATION ${GRPC2_LIBRARY})
 +
-+    find_library(ABSL_SYNCHRONIZATION_LIBRARY absl_synchronization ${GRPC_OPTS} REQUIRED)
++    find_library(ABSL_SYNCHRONIZATION_LIBRARY absl_synchronization $GRPC_OPTS REQUIRED)
 +    add_library(absl_synchronization UNKNOWN IMPORTED GLOBAL)
-+    message(STATUS "Using absl_synchronization: " ${ABSL_SYNCHRONIZATION})
++    message(STATUS "Using absl_synchronization: " ${ABSL_SYNCHRONIZATION_LIBRARY})
 +    set_target_properties(absl_synchronization PROPERTIES IMPORTED_LOCATION ${ABSL_SYNCHRONIZATION_LIBRARY})
-+
 +
      if (ENABLE_GRPC_REFLECTION)
        find_library(GRPC_REFLECTION_LIBRARY grpc++_reflection ${GRPC_OPTS} REQUIRED)
@@ -45,5 +38,5 @@ Index: llvm-toolchain-snapshot_16~++20221227120055+36d70a6aea6b/clang/cmake/modu
    add_clang_library(${LibraryName} ${ProtoSource}
      PARTIAL_SOURCES_INTENDED
 -    LINK_LIBS PUBLIC grpc++ protobuf)
-+    LINK_LIBS PUBLIC grpc++ protobuf gpr grpc absl_synchronization)
++    LINK_LIBS PUBLIC protobuf gpr grpc absl_synchronization grpc++)
  endfunction()
