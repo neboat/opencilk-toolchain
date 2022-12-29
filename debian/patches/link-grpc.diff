@@ -2,7 +2,7 @@ Index: llvm-toolchain-snapshot_16~++20221227120055+36d70a6aea6b/cmake/Modules/Fi
 ===================================================================
 --- llvm-toolchain-snapshot_16~++20221227120055+36d70a6aea6b.orig/cmake/Modules/FindGRPC.cmake
 +++ llvm-toolchain-snapshot_16~++20221227120055+36d70a6aea6b/cmake/Modules/FindGRPC.cmake
-@@ -82,11 +82,26 @@ else()
+@@ -82,11 +82,28 @@ else()
      endif()
    endif()
    if(NOT TARGET grpc++)
@@ -21,10 +21,12 @@ Index: llvm-toolchain-snapshot_16~++20221227120055+36d70a6aea6b/cmake/Modules/Fi
 +    message(STATUS "Using grpc: " ${GRPC2_LIBRARY})
 +    set_target_properties(grpc PROPERTIES IMPORTED_LOCATION ${GRPC2_LIBRARY})
 +
-+    find_library(ABSL_SYNCHRONIZATION_LIBRARY absl_synchronization $GRPC_OPTS REQUIRED)
-+    add_library(absl_synchronization UNKNOWN IMPORTED GLOBAL)
-+    message(STATUS "Using absl_synchronization: " ${ABSL_SYNCHRONIZATION_LIBRARY})
-+    set_target_properties(absl_synchronization PROPERTIES IMPORTED_LOCATION ${ABSL_SYNCHRONIZATION_LIBRARY})
++    find_library(ABSL_SYNCHRONIZATION_LIBRARY absl_synchronization $GRPC_OPTS QUIET)
++    if (ABSL_SYNCHRONIZATION_LIBRARY)
++      add_library(absl_synchronization UNKNOWN IMPORTED GLOBAL)
++      message(STATUS "Using absl_synchronization: " ${ABSL_SYNCHRONIZATION_LIBRARY})
++      set_target_properties(absl_synchronization PROPERTIES IMPORTED_LOCATION ${ABSL_SYNCHRONIZATION_LIBRARY})
++    endif()
 +
      if (ENABLE_GRPC_REFLECTION)
        find_library(GRPC_REFLECTION_LIBRARY grpc++_reflection ${GRPC_OPTS} REQUIRED)
