@@ -157,3 +157,4 @@ protobuf_3.21.patch
 # upstream cherry-pick for mesa build
 add-arm-vcmpz-test.patch
 fix-mesa-build.patch
+link-grpc.diff

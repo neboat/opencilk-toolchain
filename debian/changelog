@@ -1,3 +1,10 @@
+llvm-toolchain-15 (1:15.0.6-4) unstable; urgency=medium
+
+  * link-grpc.diff: add the detection of other libs necessary for
+    grpc (Closes: #1025530)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Jan 2023 15:46:39 +0100
+
 llvm-toolchain-15 (1:15.0.6-3) unstable; urgency=medium
 
   * Build on spirv-15 for riscv64 too.
