@@ -1,3 +1,9 @@
+llvm-toolchain-14 (1:14.0.6-10~exp6) UNRELEASED; urgency=medium
+
+  * Move libPolly in libpolly-X.Y-dev for real
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Jan 2023 11:42:14 +0100
+
 llvm-toolchain-14 (1:14.0.6-10~exp5) experimental; urgency=medium
 
   * Create a libpolly-X.Y-dev package

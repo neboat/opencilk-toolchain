@@ -229,8 +229,8 @@ Package: libpolly-@LLVM_VERSION@-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-rt-@LLVM_VERSION@-dev (<< 14.0.6-10~exp5), libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp5)
-Replaces: libclang-rt-@LLVM_VERSION@-dev (<< 14.0.6-10~exp5), libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp5)
+Breaks: libclang-rt-@LLVM_VERSION@-dev (<< 14.0.6-10~exp6), libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp5)
+Replaces: libclang-rt-@LLVM_VERSION@-dev (<< 14.0.6-10~exp6), libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: High-level loop and data-locality optimizer
  Uses an abstract mathematical representation based on integer polyhedra
