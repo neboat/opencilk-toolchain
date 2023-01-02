@@ -1400,6 +1400,8 @@ else
     echo "clang-$VERSION-dbgsym isn't installed"
 fi
 
+echo "Testing wasm support ..."
+
 if dpkg -l|grep -q wasi-libc; then
     cat <<EOF > printf.c
     #include <stdio.h>
