@@ -806,7 +806,7 @@ build-wasm/libcxx-%-wasi: build-wasm/compiler-rt-%
 	#   ships.
 	mkdir -p "$@"
 	$(CMAKE_BIN) -B "$@" -S runtimes \
-		-G $(GENERATOR) \
+		-G Ninja \
 		$(SCCACHE_CMAKE) \
 		-DCMAKE_C_COMPILER_WORKS=ON \
 		-DCMAKE_CXX_COMPILER_WORKS=ON \
