@@ -928,3 +928,27 @@ Description: Post-link optimizer
  It achieves the improvements by optimizing application's code layout based on
  execution profile gathered by sampling profiler.
 
+# ------------- flang -------------
+
+Package: flang-15
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
+Provides: fortran-compiler, gfortran-mod-15
+Description: Fortran compiler
+ TODO
+
+Package: libflang1-15
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Description: Flang library
+ TODO
+
+
+Package: libflang-15-dev
+Architecture: any
+Section: libdevel
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
+Description: Flang library - Development package
+ TODO
