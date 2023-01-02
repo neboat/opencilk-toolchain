@@ -187,8 +187,8 @@ Package: libclang-rt-14-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-common-14-dev (<< 14.0.6-10~exp4)
-Replaces: libclang-common-14-dev (<< 14.0.6-10~exp4)
+Breaks: libclang-common-14-dev (<< 1:14.0.6-10~exp4)
+Replaces: libclang-common-14-dev (<< 1:14.0.6-10~exp4)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Compiler-rt - development package
  This package provides various libraries:
@@ -205,8 +205,8 @@ Package: libclang-rt-14-dev-wasm32
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Breaks: libclang-common-14-dev (<< 14.0.6-10~exp4)
-Replaces: libclang-common-14-dev (<< 14.0.6-10~exp4)
+Breaks: libclang-common-14-dev (<< 1:14.0.6-10~exp4)
+Replaces: libclang-common-14-dev (<< 1:14.0.6-10~exp4)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: libclang-common-14-dev (>= 14.0.6-10~exp4)
 Description: Compiler-rt - wasm32 builtins
@@ -216,8 +216,8 @@ Package: libclang-rt-14-dev-wasm64
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Breaks: libclang-common-14-dev (<< 14.0.6-10~exp4)
-Replaces: libclang-common-14-dev (<< 14.0.6-10~exp4)
+Breaks: libclang-common-14-dev (<< 1:14.0.6-10~exp4)
+Replaces: libclang-common-14-dev (<< 1:14.0.6-10~exp4)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: libclang-common-14-dev (>= 14.0.6-10~exp4)
 Description: Compiler-rt - wasm64 builtins
@@ -229,8 +229,8 @@ Package: libpolly-14-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-rt-14-dev (<< 14.0.6-10~exp6), libclang-common-14-dev (<< 14.0.6-10~exp6)
-Replaces: libclang-rt-14-dev (<< 14.0.6-10~exp6), libclang-common-14-dev (<< 14.0.6-10~exp6)
+Breaks: libclang-rt-14-dev (<< 1:14.0.6-10~exp6), libclang-common-14-dev (<< 1:14.0.6-10~exp5)
+Replaces: libclang-rt-14-dev (<< 1:14.0.6-10~exp6), libclang-common-14-dev (<< 1:14.0.6-10~exp5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: High-level loop and data-locality optimizer
  Uses an abstract mathematical representation based on integer polyhedra
