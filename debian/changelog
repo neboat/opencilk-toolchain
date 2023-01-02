@@ -301,13 +301,71 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Feb 2022 23:25:57 +0100
 
+llvm-toolchain-14 (1:14.0.6-10~exp6) UNRELEASED; urgency=medium
+
+  * Move libPolly in libpolly-X.Y-dev for real
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Jan 2023 11:42:14 +0100
+
+llvm-toolchain-14 (1:14.0.6-10~exp5) experimental; urgency=medium
+
+  * Create a libpolly-X.Y-dev package
+  * Fix the libclang-rt-14-dev-wasm64 description
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Dec 2022 12:35:04 +0100
+
+llvm-toolchain-14 (1:14.0.6-10~exp4) experimental; urgency=medium
+
+  * Move the compiler-rt content into a new package called
+    libclang-rt-X.Y-dev (including polly)
+  * the wasm targets are shipped into libclang-rt-14-dev-wasm32
+    and libclang-rt-14-dev-wasm64
+  * libclang-common-X.Y-dev arch moved to all
+    then ${binary:Version} => ${source:Version}
+    to avoid not-binnmuable-any-depends-all
+  * link-grpc.diff: add the detection of other libs necessary for
+    grpc (Closes: #1025529)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 21 Dec 2022 13:48:40 +0100
+
+llvm-toolchain-14 (1:14.0.6-10~exp3) experimental; urgency=medium
+
+  * Transform debian/control into debian/control.in (preparation for
+    flang support)
+  * Do not install wasm-libc if doesn't exist
+
+  [ Faidon Liambotis ]
+  * Try to unbreak the builds with wasm
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 19 Dec 2022 11:09:58 +0100
+
+llvm-toolchain-14 (1:14.0.6-10~exp1) experimental; urgency=medium
+
+  * More WebAssembly (wasm32/wasm64) work:
+    - Update patch wasm-sysroot-usr to stop including /usr/include when
+      building for the non-OS (unknown) wasm targets, to avoid inadvertently
+      including the host's (glibc) headers.
+    - Re-enable builds on all architectures, previously disabled for
+      arm64 armel mips64el mipsel ppc64el armhf in 1:14.0.6-4, due to an FTBFS
+      related to the /usr/include issue above.
+    - Update patch wasm-sysroot-usr to adjust system include paths for C++
+      headers as well.
+    - Build libc++ and libc++abi for wasm32-wasi, generating two new binary
+      packages, and introducing a build dependency on wasi-libc.
+    - Misc code organization fixes to debian/rules.
+
+ -- Faidon Liambotis <paravoid@debian.org>  Fri, 18 Nov 2022 08:21:02 +0200
+
 llvm-toolchain-14 (1:14.0.6-9) unstable; urgency=medium
 
+  * Cherry-pick upstream commit c081bf4098c729afacf20303cc9df62bf13c3362
+    to fix chromium failure in basic_string (Closes: #1025394)
   * Disable the MLIR testsuite run because of a freeze
     (Closes: #1024154)
     See https://github.com/llvm/llvm-project/issues/58357
+  * Disable wasm on riscv64
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 15 Nov 2022 18:23:44 +0100
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 04 Dec 2022 09:03:06 +0100
 
 llvm-toolchain-14 (1:14.0.6-8) unstable; urgency=medium
 

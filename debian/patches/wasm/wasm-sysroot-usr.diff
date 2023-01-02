@@ -17,17 +17,25 @@
  
    if (!DriverArgs.hasArg(options::OPT_nobuiltininc)) {
      SmallString<128> P(D.ResourceDir);
-@@ -427,10 +428,10 @@ void WebAssembly::AddClangSystemIncludeA
+@@ -427,10 +428,18 @@ void WebAssembly::AddClangSystemIncludeA
  
++  // add the multiarch path on e.g. wasm32-wasi
    if (getTriple().getOS() != llvm::Triple::UnknownOS) {
      const std::string MultiarchTriple =
 -        getMultiarchTriple(D, getTriple(), D.SysRoot);
 -    addSystemInclude(DriverArgs, CC1Args, D.SysRoot + "/include/" + MultiarchTriple);
 +        getMultiarchTriple(D, getTriple(), SysRoot);
++    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/local/include/" + MultiarchTriple);
++    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/local/include");
 +    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/include/" + MultiarchTriple);
    }
 -  addSystemInclude(DriverArgs, CC1Args, D.SysRoot + "/include");
-+  addSystemInclude(DriverArgs, CC1Args, SysRoot + "/include");
++
++  // also add the non-multiarch path, only on a known OS (as above), or when
++  // a sysroot is given, for backwards compatibility with the original driver
++  if (getTriple().getOS() != llvm::Triple::UnknownOS ||
++      !getDriver().SysRoot.empty())
++    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/include");
  }
  
  void WebAssembly::AddClangCXXStdlibIncludeArgs(const ArgList &DriverArgs,

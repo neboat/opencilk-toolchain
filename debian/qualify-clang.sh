@@ -9,7 +9,8 @@ VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 DETAILED_VERSION=$(dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1\2\3,p")
 DEB_HOST_ARCH=$(dpkg-architecture -qDEB_HOST_ARCH)
 
-LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clangd-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}_${DETAILED_VERSION}_amd64.deb clang-tidy-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclc-${VERSION}_${DETAILED_VERSION}_all.deb libclc-${VERSION}-dev_${DETAILED_VERSION}_all.deb llvm-${VERSION}-linker-tools_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libmlir-${VERSION}_${DETAILED_VERSION}_amd64.deb libmlir-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb bolt-${VERSION}_${DETAILED_VERSION}_amd64.deb libbolt-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb"
+LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_all.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clangd-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}_${DETAILED_VERSION}_amd64.deb clang-tidy-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclc-${VERSION}_${DETAILED_VERSION}_all.deb libclc-${VERSION}-dev_${DETAILED_VERSION}_all.deb llvm-${VERSION}-linker-tools_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libmlir-${VERSION}_${DETAILED_VERSION}_amd64.deb libmlir-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-rt-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-rt-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libclang-rt-${VERSION}-dev-wasm64_${DETAILED_VERSION}_all.deb libc++abi-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libc++-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libpolly-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  bolt-${VERSION}_${DETAILED_VERSION}_amd64.deb libbolt-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb"
+
 echo "To install everything:"
 echo "sudo apt --purge remove 'libomp5-*' 'libc++*dev' 'libc++*' 'python3-lldb-*' 'libunwind-*' 'libclc-*' 'libclc-*dev' 'libmlir-*'"
 echo "sudo dpkg -i $LIST"
@@ -1211,11 +1212,11 @@ clang++-$VERSION foo.cpp -unwindlib=libunwind -rtlib=compiler-rt -I/usr/include/
 ./a.out||true
 
 if test ! -f /usr/lib/llvm-$VERSION/include/polly/LinkAllPasses.h; then
-    echo "Install libclang-common-$VERSION-dev for polly";
+    echo "Install libpolly-$VERSION-dev for polly";
     exit -1;
 fi
 
-echo "Testing polly (libclang-common-$VERSION-dev) ..."
+echo "Testing polly (libpolly-$VERSION-dev) ..."
 
 # Polly
 echo "
@@ -1361,22 +1362,36 @@ fi
 if dpkg -l|grep -q wasi-libc; then
     cat <<EOF > printf.c
     #include <stdio.h>
-    int main(int argc, char *argv[])
-    {
-    printf("%s\n", "Hello world!");
+    int main(int argc, char *argv[]) {
+      printf("%s\n", "Hello World!");
     }
 EOF
-    clang-$VERSION -target wasm32-unknown-wasi -o printf printf.c
+    # wasi-libc supports only wasm32 right now
+    clang-$VERSION -target wasm32-wasi -o printf printf.c
     file printf &> foo.log
     if ! grep -q "WebAssembly" foo.log; then
         echo "the generated file isn't a WebAssembly file?"
         exit 1
     fi
     rm -f printf.c printf
+
+    cat <<EOF > cout.cpp
+    #include <iostream>
+    int main() {
+      std::cout << "Hello World!" << std::endl;
+    }
+EOF
+    # libcxx requires wasi-libc, which only exists for wasm32 right now
+    clang++-$VERSION --target=wasm32-wasi -o cout cout.cpp
+    file cout &> foo.log
+    if ! grep -q "WebAssembly" foo.log; then
+        echo "the generated file isn't a WebAssembly file?"
+        exit 1
+    fi
+    rm -f cout.cpp cout
+else
+    echo "wasi-libc not installed"
 fi
-echo '#include <algorithm>' > foo.cpp
-# Fails for now
-clang++-$VERSION --target=wasm32-wasi -o foo.o -c foo.cpp||true
 
 echo '
 #include <vector>
