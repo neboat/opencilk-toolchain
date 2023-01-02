@@ -33,7 +33,7 @@ Build-Depends: debhelper (>= 10.0), cmake, ninja-build,
     protobuf-compiler [amd64 arm64 armel armhf mips64el mipsel ppc64 ppc64el powerpc riscv64 s390x]
 # "| hello" is for older buster/bionic distros without spirv support
 Build-Conflicts: oprofile
-Standards-Version: 4.2.1
+Standards-Version: 4.6.2
 Homepage: https://www.llvm.org/
 Vcs-Git: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain.git -b @BRANCH_NAME@
 Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/@BRANCH_NAME@
@@ -169,7 +169,7 @@ Package: libclang-common-@LLVM_VERSION@-dev
 Architecture: all
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@LLVM_VERSION@ (>= ${source:Version})
-Recommends: libclang-rt-@LLVM_VERSION@-dev (>= 14.0.6-10~exp4)
+Recommends: libclang-rt-@LLVM_VERSION@-dev (>= 1:15.0.6-5)
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
