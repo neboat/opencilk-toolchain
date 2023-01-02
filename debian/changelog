@@ -1,3 +1,23 @@
+llvm-toolchain-15 (1:15.0.6-5) unstable; urgency=medium
+
+  * Several changes coming from the branch -14:
+  * wasm support significantly improved with several packages:
+    - libc++-15-dev-wasm32
+    - libc++abi-15-dev-wasm32
+    - libclang-rt-15-dev-wasm32
+    - libclang-rt-15-dev-wasm64
+    It is now as easy as:
+    $ apt install clang-15 lld-15 libclang-rt-15-dev-wasm32 wasi-libc
+    $ clang-15 --target=wasm32-wasi helloworld.c -o helloworld.wasm
+    Many thanks to Faidon Liambotis
+  * libclang-common-15-dev splitted into different packages:
+    - libclang-rt-15-dev
+    - libpolly-15-dev
+    - libclang-rt-15-dev-wasm32
+    - libclang-rt-15-dev-wasm64
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 02 Jan 2023 13:49:46 +0100
+
 llvm-toolchain-15 (1:15.0.6-4) unstable; urgency=medium
 
   * link-grpc.diff: add the detection of other libs necessary for
