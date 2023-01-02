@@ -774,7 +774,7 @@ build-wasm/compiler-rt-%:
 		-DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
 		-DCOMPILER_RT_DEFAULT_TARGET_TRIPLE=$(cpu)-unknown-unknown \
 		-DCOMPILER_RT_OS_DIR=wasi
-	ninja -C "$@" $(NJOBS) $(VERBOSE)
+	ninja -C "$@" -j $(NJOBS) $(VERBOSE)
 
 build-wasm/libcxx-%-wasi: cpu = $(@:build-wasm/libcxx-%-wasi=%)
 build-wasm/libcxx-%-wasi: build-wasm/compiler-rt-%
@@ -852,7 +852,7 @@ build-wasm/libcxx-%-wasi: build-wasm/compiler-rt-%
 		-DLIBCXXABI_HAS_PTHREAD_API:BOOL=OFF \
 		-DLIBCXXABI_HAS_EXTERNAL_THREAD_API:BOOL=OFF \
 		-DLIBCXXABI_BUILD_EXTERNAL_THREAD_LIBRARY:BOOL=OFF
-	ninja -C "$@" $(NJOBS) $(VERBOSE)
+	ninja -C "$@" -j $(NJOBS) $(VERBOSE)
 
 # Build compiler-rt for wasm32 and wasm64. Build libcxx only for wasm32, as
 # libcxx requires wasi-libc, which only exists for wasm32 right now.
