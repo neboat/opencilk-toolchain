@@ -22,7 +22,8 @@ Build-Depends: debhelper (>= 10.0), cmake, ninja-build,
     libctypes-ocaml-dev [amd64 arm64 armhf ppc64el riscv64 s390x],
     dh-exec, dh-ocaml [amd64 arm64 armhf ppc64el riscv64 s390x],
     libpfm4-dev [linux-any], python3-setuptools, libz3-dev,
-    llvm-spirv-14 [ amd64 arm64 armel armhf mips64el mipsel ppc64el s390x ] <!stage1> | hello [!i386],
+    llvm-spirv-15 [ amd64 arm64 armel armhf mips64el mipsel ppc64el riscv64 s390x ] <!stage1> |
+    llvm-spirv-14 [ amd64 arm64 armel armhf mips64el mipsel ppc64el riscv64 s390x ] <!stage1> | hello [!i386],
     spirv-tools [ linux-any ] | hello [ !i386],
     wasi-libc | hello [ !i386],
     libcurl4-dev,
@@ -185,8 +186,8 @@ Package: libclang-rt-@LLVM_VERSION@-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
-Replaces: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
+Breaks: libclang-common-@LLVM_VERSION@-dev (<< 1:15.0.6-5)
+Replaces: libclang-common-@LLVM_VERSION@-dev (<< 1:15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Compiler-rt - development package
  This package provides various libraries:
@@ -203,8 +204,8 @@ Package: libclang-rt-@LLVM_VERSION@-dev-wasm32
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Breaks: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
-Replaces: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
+Breaks: libclang-common-@LLVM_VERSION@-dev (<< 1:15.0.6-5)
+Replaces: libclang-common-@LLVM_VERSION@-dev (<< 1:15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: libclang-common-@LLVM_VERSION@-dev (>= 15.0.6-5)
 Description: Compiler-rt - wasm32 builtins
@@ -214,8 +215,8 @@ Package: libclang-rt-@LLVM_VERSION@-dev-wasm64
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Breaks: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
-Replaces: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
+Breaks: libclang-common-@LLVM_VERSION@-dev (<< 1:15.0.6-5)
+Replaces: libclang-common-@LLVM_VERSION@-dev (<< 1:15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: libclang-common-@LLVM_VERSION@-dev (>= 15.0.6-5)
 Description: Compiler-rt - wasm64 builtins
@@ -227,8 +228,8 @@ Package: libpolly-@LLVM_VERSION@-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
-Replaces: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
+Breaks: libclang-common-@LLVM_VERSION@-dev (<< 1:15.0.6-5)
+Replaces: libclang-common-@LLVM_VERSION@-dev (<< 1:15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: High-level loop and data-locality optimizer
  Uses an abstract mathematical representation based on integer polyhedra

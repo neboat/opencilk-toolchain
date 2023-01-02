@@ -43,15 +43,9 @@ Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/15
 Package: clang-15
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
-<<<<<<< HEAD
- ${dep:devlibs-objc}, libclang-common-15-dev (= ${binary:Version}),
+ ${dep:devlibs-objc}, libclang-common-15-dev (= ${source:Version}),
  llvm-15-linker-tools (= ${binary:Version}),
  libclang1-15 (= ${binary:Version}), libc6-dev, binutils
-=======
- ${dep:devlibs-objc}, libclang-common-14-dev (= ${source:Version}),
- llvm-14-linker-tools (= ${binary:Version}),
- libclang1-14 (= ${binary:Version}), libc6-dev, binutils
->>>>>>> origin/14
 Provides: c-compiler, objc-compiler, c++-compiler
 Recommends: llvm-15-dev, python3
 # libomp-15-dev
@@ -108,11 +102,7 @@ Description: clang-based C++ linter tool
 Package: clangd-15
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
-<<<<<<< HEAD
- libclang-common-15-dev (= ${binary:Version})
-=======
- libclang-common-14-dev (= ${source:Version})
->>>>>>> origin/14
+ libclang-common-15-dev (= ${source:Version})
 Description: Language server that provides IDE-like features to editors
  clangd understands your C++ code and adds smart features to your editor:
   - code completion
@@ -162,15 +152,8 @@ Package: libclang-15-dev
 Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
-<<<<<<< HEAD
  ${dep:devlibs-objc}, libclang1-15 (= ${binary:Version}),
- libclang-common-15-dev (= ${binary:Version})
-=======
- ${dep:devlibs-objc}, libclang1-14 (= ${binary:Version}),
- libclang-common-14-dev (= ${source:Version})
-Breaks: llvm-14-dev (<< 1:14.0.4-2)
-Replaces: llvm-14-dev (<< 1:14.0.4-2)
->>>>>>> origin/14
+ libclang-common-15-dev (= ${source:Version})
 Description: Clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -182,18 +165,11 @@ Description: Clang library - Development package
  This package contains the Clang headers to develop extensions over
  libclang1-15.
 
-<<<<<<< HEAD
 Package: libclang-common-15-dev
-Architecture: any
-Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm15 (= ${binary:Version})
-=======
-Package: libclang-common-14-dev
 Architecture: all
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm14 (>= ${source:Version})
-Recommends: libclang-rt-14-dev (>= 14.0.6-10~exp4)
->>>>>>> origin/14
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm15 (>= ${source:Version})
+Recommends: libclang-rt-15-dev (>= 14.0.6-10~exp4)
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -206,12 +182,12 @@ Description: Clang library - Common development package
 
 # ------------- compiler-rt -------------
 
-Package: libclang-rt-14-dev
+Package: libclang-rt-15-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-common-14-dev (<< 14.0.6-10~exp4)
-Replaces: libclang-common-14-dev (<< 14.0.6-10~exp4)
+Breaks: libclang-common-15-dev (<< 1:15.0.6-5)
+Replaces: libclang-common-15-dev (<< 1:15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Compiler-rt - development package
  This package provides various libraries:
@@ -224,36 +200,36 @@ Description: Compiler-rt - development package
      DataFlowSanitizer, etc
    * profile - Library which is used to collect coverage information.
 
-Package: libclang-rt-14-dev-wasm32
+Package: libclang-rt-15-dev-wasm32
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Breaks: libclang-common-14-dev (<< 14.0.6-10~exp4)
-Replaces: libclang-common-14-dev (<< 14.0.6-10~exp4)
+Breaks: libclang-common-15-dev (<< 1:15.0.6-5)
+Replaces: libclang-common-15-dev (<< 1:15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libclang-common-14-dev (>= 14.0.6-10~exp4)
+Recommends: libclang-common-15-dev (>= 15.0.6-5)
 Description: Compiler-rt - wasm32 builtins
  Provides the compiler-rt builtins for WebAssembly 32 bits
 
-Package: libclang-rt-14-dev-wasm64
+Package: libclang-rt-15-dev-wasm64
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Breaks: libclang-common-14-dev (<< 14.0.6-10~exp4)
-Replaces: libclang-common-14-dev (<< 14.0.6-10~exp4)
+Breaks: libclang-common-15-dev (<< 1:15.0.6-5)
+Replaces: libclang-common-15-dev (<< 1:15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libclang-common-14-dev (>= 14.0.6-10~exp4)
+Recommends: libclang-common-15-dev (>= 15.0.6-5)
 Description: Compiler-rt - wasm64 builtins
  Provides the compiler-rt builtins for WebAssembly 64 bits
 
 # ------------- polly -------------
 
-Package: libpolly-14-dev
+Package: libpolly-15-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-rt-14-dev (<< 14.0.6-10~exp6), libclang-common-14-dev (<< 14.0.6-10~exp6)
-Replaces: libclang-rt-14-dev (<< 14.0.6-10~exp6), libclang-common-14-dev (<< 14.0.6-10~exp6)
+Breaks: libclang-common-15-dev (<< 1:15.0.6-5)
+Replaces: libclang-common-15-dev (<< 1:15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: High-level loop and data-locality optimizer
  Uses an abstract mathematical representation based on integer polyhedra
@@ -729,11 +705,11 @@ Description: LLVM C++ Standard library (development files)
      as exception objects, rtti and memory allocation.
    * Extensive unit tests.
 
-Package: libc++-14-dev-wasm32
+Package: libc++-15-dev-wasm32
 Section: libdevel
 Architecture: all
 Multi-Arch: foreign
-Depends: wasi-libc, libc++abi-14-dev-wasm32, ${misc:Depends}
+Depends: wasi-libc, libc++abi-15-dev-wasm32, ${misc:Depends}
 Provides: libc++-x.y-dev-wasm32
 Conflicts: libc++-x.y-dev-wasm32
 Replaces: libc++-x.y-dev-wasm32
@@ -791,7 +767,7 @@ Description: LLVM low level support for a standard C++ library (development file
    * Correctness as defined by the C++ standards.
    * Provide a portable sublayer to ease the porting of libc++
 
-Package: libc++abi-14-dev-wasm32
+Package: libc++abi-15-dev-wasm32
 Section: libdevel
 Architecture: all
 Multi-Arch: foreign
@@ -929,6 +905,7 @@ Description: Multi-Level Intermediate Representation library
  MLIR aims to address software fragmentation, improve compilation for
  heterogeneous hardware, significantly reduce the cost of building domain
  specific compilers, and aid in connecting existing compilers together.
+
 
 
 # ------------- bolt -------------
