@@ -1,7 +1,7 @@
 llvm-toolchain-14 (1:14.0.6-10) unstable; urgency=medium
 
   * Upload to unstable
-  * Add misisng epoch (Closes: #1027699)
+  * Add missing epoch (Closes: #1027699)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Jan 2023 15:42:15 +0100
 
