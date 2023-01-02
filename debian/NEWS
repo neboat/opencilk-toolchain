@@ -1,4 +1,4 @@
-llvm-toolchain-14 (1:15.0.6-5) unstable; urgency=medium
+llvm-toolchain-15 (1:15.0.6-5) unstable; urgency=medium
 
   * libclang-common-X.Y-dev has been splitted into libclang-rt-X.Y-dev,
     libpolly-X.Y-dev, libclang-rt-14-dev-wasm32 and libclang-rt-14-dev-wasm64
