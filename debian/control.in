@@ -170,7 +170,7 @@ Package: libclang-common-@LLVM_VERSION@-dev
 Architecture: all
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@LLVM_VERSION@ (>= ${source:Version})
-Recommends: libclang-rt-@LLVM_VERSION@-dev (>= 14.0.6-10~exp4)
+Recommends: libclang-rt-@LLVM_VERSION@-dev (>= 1:14.0.6-10~exp4)
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -208,7 +208,7 @@ Section: libdevel
 Breaks: libclang-common-@LLVM_VERSION@-dev (<< 1:14.0.6-10~exp4)
 Replaces: libclang-common-@LLVM_VERSION@-dev (<< 1:14.0.6-10~exp4)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libclang-common-@LLVM_VERSION@-dev (>= 14.0.6-10~exp4)
+Recommends: libclang-common-@LLVM_VERSION@-dev (>= 1:14.0.6-10~exp4)
 Description: Compiler-rt - wasm32 builtins
  Provides the compiler-rt builtins for WebAssembly 32 bits
 
@@ -219,7 +219,7 @@ Section: libdevel
 Breaks: libclang-common-@LLVM_VERSION@-dev (<< 1:14.0.6-10~exp4)
 Replaces: libclang-common-@LLVM_VERSION@-dev (<< 1:14.0.6-10~exp4)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libclang-common-@LLVM_VERSION@-dev (>= 14.0.6-10~exp4)
+Recommends: libclang-common-@LLVM_VERSION@-dev (>= 1:14.0.6-10~exp4)
 Description: Compiler-rt - wasm64 builtins
  Provides the compiler-rt builtins for WebAssembly 64 bits
 
