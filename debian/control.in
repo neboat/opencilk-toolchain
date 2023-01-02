@@ -153,8 +153,6 @@ Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang1-@LLVM_VERSION@ (= ${binary:Version}),
  libclang-common-@LLVM_VERSION@-dev (= ${source:Version})
-Breaks: llvm-@LLVM_VERSION@-dev (<< 1:14.0.4-2)
-Replaces: llvm-@LLVM_VERSION@-dev (<< 1:14.0.4-2)
 Description: Clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -187,8 +185,8 @@ Package: libclang-rt-@LLVM_VERSION@-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp4)
-Replaces: libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp4)
+Breaks: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
+Replaces: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Compiler-rt - development package
  This package provides various libraries:
@@ -205,10 +203,10 @@ Package: libclang-rt-@LLVM_VERSION@-dev-wasm32
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Breaks: libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp4)
-Replaces: libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp4)
+Breaks: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
+Replaces: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libclang-common-@LLVM_VERSION@-dev (>= 14.0.6-10~exp4)
+Recommends: libclang-common-@LLVM_VERSION@-dev (>= 15.0.6-5)
 Description: Compiler-rt - wasm32 builtins
  Provides the compiler-rt builtins for WebAssembly 32 bits
 
@@ -216,10 +214,10 @@ Package: libclang-rt-@LLVM_VERSION@-dev-wasm64
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Breaks: libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp4)
-Replaces: libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp4)
+Breaks: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
+Replaces: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libclang-common-@LLVM_VERSION@-dev (>= 14.0.6-10~exp4)
+Recommends: libclang-common-@LLVM_VERSION@-dev (>= 15.0.6-5)
 Description: Compiler-rt - wasm64 builtins
  Provides the compiler-rt builtins for WebAssembly 64 bits
 
@@ -229,8 +227,8 @@ Package: libpolly-@LLVM_VERSION@-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-rt-@LLVM_VERSION@-dev (<< 14.0.6-10~exp6), libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp5)
-Replaces: libclang-rt-@LLVM_VERSION@-dev (<< 14.0.6-10~exp6), libclang-common-@LLVM_VERSION@-dev (<< 14.0.6-10~exp5)
+Breaks: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
+Replaces: libclang-common-@LLVM_VERSION@-dev (<< 15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: High-level loop and data-locality optimizer
  Uses an abstract mathematical representation based on integer polyhedra
@@ -622,10 +620,10 @@ Section: libdevel
 Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
 Depends: libomp5-@LLVM_VERSION@ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Suggests: libomp-@LLVM_VERSION@-doc
-Breaks: libiomp-dev (<< 3.7-1), libomp-dev (<< 44), llvm-@LLVM_VERSION@ (<< 1:14~++20211011113307+f7ca54289c14)
+Breaks: libiomp-dev (<< 3.7-1), libomp-dev (<< 44)
 Provides: libomp-x.y-dev
 Conflicts: libomp-x.y-dev
-Replaces: libomp-x.y-dev, llvm-@LLVM_VERSION@ (<< 1:14~++20211011113307+f7ca54289c14)
+Replaces: libomp-x.y-dev
 Description: LLVM OpenMP runtime - dev package
  The runtime is the part of the OpenMP implementation that your code is
  linked against, and that manages the multiple threads in an OpenMP program
