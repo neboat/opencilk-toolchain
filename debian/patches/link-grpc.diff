@@ -21,7 +21,7 @@ Index: llvm-toolchain-15-15.0.6/llvm/cmake/modules/FindGRPC.cmake
 +    message(STATUS "Using grpc: " ${GRPC2_LIBRARY})
 +    set_target_properties(grpc PROPERTIES IMPORTED_LOCATION ${GRPC2_LIBRARY})
 +
-+    find_library(ABSL_SYNCHRONIZATION_LIBRARY absl_synchronization $GRPC_OPTSk
++    find_library(ABSL_SYNCHRONIZATION_LIBRARY absl_synchronization $GRPC_OPTS)
 +    if (ABSL_SYNCHRONIZATION_LIBRARY)
 +      add_library(absl_synchronization UNKNOWN IMPORTED GLOBAL)
 +      message(STATUS "Using absl_synchronization: " ${ABSL_SYNCHRONIZATION_LIBRARY})
