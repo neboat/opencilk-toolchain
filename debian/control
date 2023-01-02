@@ -207,7 +207,7 @@ Section: libdevel
 Breaks: libclang-common-15-dev (<< 1:15.0.6-5)
 Replaces: libclang-common-15-dev (<< 1:15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libclang-common-15-dev (>= 15.0.6-5)
+Recommends: libclang-common-15-dev (>= 1:15.0.6-5)
 Description: Compiler-rt - wasm32 builtins
  Provides the compiler-rt builtins for WebAssembly 32 bits
 
@@ -218,7 +218,7 @@ Section: libdevel
 Breaks: libclang-common-15-dev (<< 1:15.0.6-5)
 Replaces: libclang-common-15-dev (<< 1:15.0.6-5)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libclang-common-15-dev (>= 15.0.6-5)
+Recommends: libclang-common-15-dev (>= 1:15.0.6-5)
 Description: Compiler-rt - wasm64 builtins
  Provides the compiler-rt builtins for WebAssembly 64 bits
 
