@@ -932,10 +932,14 @@ Description: Post-link optimizer
 
 Package: flang-15
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
+Depends: ${sh libs:Depends}, ${misc:Depends}, ${dep:devlibs},
 Provides: fortran-compiler, gfortran-mod-15
 Description: Fortran compiler
- TODO
+ Ground-up implementation of a Fortran front end written in
+ modern C++.
+ .
+ While it is capable of generating executables for a number
+ of examples, some functionalities are still missing.
 
 Package: libflang1-15
 Section: libs
@@ -943,7 +947,13 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Description: Flang library
- TODO
+ Ground-up implementation of a Fortran front end written in
+ modern C++.
+ .
+ While it is capable of generating executables for a number
+ of examples, some functionalities are still missing.
+ .
+ This package contains the flang cmake.
 
 
 Package: libflang-15-dev
@@ -951,4 +961,10 @@ Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
 Description: Flang library - Development package
- TODO
+ Ground-up implementation of a Fortran front end written in
+ modern C++.
+ .
+ While it is capable of generating executables for a number
+ of examples, some functionalities are still missing.
+ .
+ This package contains the flang libraries and headers.
