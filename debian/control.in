@@ -932,7 +932,7 @@ Description: Post-link optimizer
 
 Package: flang-@LLVM_VERSION@
 Architecture: any
-Depends: ${sh libs:Depends}, ${misc:Depends}, ${dep:devlibs},
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
 Provides: fortran-compiler, gfortran-mod-15
 Description: Fortran compiler
  Ground-up implementation of a Fortran front end written in
