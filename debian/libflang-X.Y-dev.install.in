@@ -1,3 +1,4 @@
+usr/lib/llvm-@LLVM_VERSION@/lib/cmake/flang/
 usr/lib/llvm-@LLVM_VERSION@/include/flang/
 usr/lib/llvm-@LLVM_VERSION@/lib/libflang*.a
 usr/lib/llvm-@LLVM_VERSION@/lib/libflangFrontendTool.a

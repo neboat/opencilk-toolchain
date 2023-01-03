@@ -941,21 +941,6 @@ Description: Fortran compiler
  While it is capable of generating executables for a number
  of examples, some functionalities are still missing.
 
-Package: libflang1-@LLVM_VERSION@
-Section: libs
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Pre-Depends: ${misc:Pre-Depends}
-Description: Flang library
- Ground-up implementation of a Fortran front end written in
- modern C++.
- .
- While it is capable of generating executables for a number
- of examples, some functionalities are still missing.
- .
- This package contains the flang cmake.
-
-
 Package: libflang-@LLVM_VERSION@-dev
 Architecture: any
 Section: libdevel
