@@ -931,7 +931,9 @@ Description: Post-link optimizer
 # ------------- flang -------------
 
 Package: flang-15
-Architecture: any
+# no 32bit support
+# https://github.com/llvm/llvm-project/issues/59845
+Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 s390x ppc64 sparc64 riscv64
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
 Provides: fortran-compiler, gfortran-mod-15
 Description: Fortran compiler
@@ -942,7 +944,7 @@ Description: Fortran compiler
  of examples, some functionalities are still missing.
 
 Package: libflang-15-dev
-Architecture: any
+Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 s390x ppc64 sparc64 riscv64
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
 Description: Flang library - Development package
