@@ -279,9 +279,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 endif
 endif
 
-BOLT_ARCHS := amd64
-# arm64
-ifneq (,$(filter $(DEB_HOST_ARCH),$(BOLT_ARCHS)))
+ifneq (,$(filter bolt-$(LLVM_VERSION), $(shell dh_listpackages)))
     PROJECTS += ;bolt
 endif
 
