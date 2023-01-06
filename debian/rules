@@ -285,6 +285,11 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(BOLT_ARCHS)))
     PROJECTS += ;bolt
 endif
 
+# flang is only for 64bits
+ifneq (,$(filter flang-$(LLVM_VERSION), $(shell dh_listpackages)))
+    PROJECTS += ;flang
+endif
+
 CODECOVERAGE=no
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 # enable the code coverage

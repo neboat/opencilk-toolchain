@@ -1,3 +1,11 @@
+llvm-toolchain-15 (1:15.0.6-5~exp2) experimental; urgency=medium
+
+  * Restrict flang on 64bits archs:
+    (amd64 arm64 mips64el ppc64el kfreebsd-amd64 s390x ppc64 sparc64 riscv64)
+    See: https://github.com/llvm/llvm-project/issues/59845
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Jan 2023 13:19:48 +0100
+
 llvm-toolchain-15 (1:15.0.6-5~exp1) experimental; urgency=medium
 
   * Add flang-15 and libraries support
