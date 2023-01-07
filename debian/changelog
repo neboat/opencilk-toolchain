@@ -1,6 +1,10 @@
 llvm-toolchain-14 (1:14.0.6-11) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * Update SV to 4.6.2
+
+  [ Gianfranco Costamagna ]
+  * Fix riscv64 build by adding spirv again (from @paravoid)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 02 Jan 2023 13:54:51 +0100
 
