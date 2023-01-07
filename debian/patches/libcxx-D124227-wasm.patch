@@ -7,6 +7,9 @@ Subject: [PATCH] [libcxx] Remove static inline and make use of
 After feedback from D122861, do the same thing with some of the other headers. Try to move the
 headers so they have a similar style and way of doing things.
 
++ also applies:
+https://reviews.llvm.org/D141208
+
 Reviewed By: ldionne, daltenty
 
 Differential Revision: https://reviews.llvm.org/D124227
@@ -152,7 +155,7 @@ Index: llvm-toolchain-14-14.0.6~++20230104093240+f28c006a5895/libcxx/include/__s
 -                                            wchar_t **endptr, int base,
 -                                            locale_t) {
 -  return wcstoull(nptr, endptr, base);
-+inline _LIBCPP_HIDE_FROM_ABI long long
++inline _LIBCPP_HIDE_FROM_ABI unsigned long long
 +wcstoull_l(const wchar_t *nptr, wchar_t **endptr, int base, locale_t) {
 +  return ::wcstoull(nptr, endptr, base);
  }
