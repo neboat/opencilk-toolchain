@@ -927,3 +927,30 @@ Description: Post-link optimizer
  It achieves the improvements by optimizing application's code layout based on
  execution profile gathered by sampling profiler.
 
+# ------------- flang -------------
+
+Package: flang-15
+# no 32bit support
+# https://github.com/llvm/llvm-project/issues/59845
+Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 s390x ppc64 sparc64 riscv64
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
+Provides: fortran-compiler, gfortran-mod-15
+Description: Fortran compiler
+ Ground-up implementation of a Fortran front end written in
+ modern C++.
+ .
+ While it is capable of generating executables for a number
+ of examples, some functionalities are still missing.
+
+Package: libflang-15-dev
+Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 s390x ppc64 sparc64 riscv64
+Section: libdevel
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
+Description: Flang library - Development package
+ Ground-up implementation of a Fortran front end written in
+ modern C++.
+ .
+ While it is capable of generating executables for a number
+ of examples, some functionalities are still missing.
+ .
+ This package contains the flang libraries and headers.
