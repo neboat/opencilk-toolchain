@@ -323,7 +323,11 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) experimental
 
 llvm-toolchain-14 (1:14.0.6-11) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * Update SV to 4.6.2
+
+  [ Gianfranco Costamagna ]
+  * Fix riscv64 build by adding spirv again (from @paravoid)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 02 Jan 2023 13:54:51 +0100
 
