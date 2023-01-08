@@ -5,5 +5,7 @@ llvm-toolchain-15 (1:15.0.6-5) unstable; urgency=medium
     compiler-rt and polly moved to libclang-rt-X.Y-dev
     libclang-common-X.Y-dev is now arch:any and contains headers
     libclang-common-X.Y-dev recommends libclang-rt-X.Y-dev
+  * As a ride along, flang is packaged as part of the llvm-toolchain
+    packages.
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Dec 2022 12:36:23 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Jan 2023 12:32:33 +0100
