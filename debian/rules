@@ -373,6 +373,12 @@ else
 	PROJECTS+=;lldb
 endif
 
+LIBCXX_WASM_ENABLE=yes
+LIBCXX_WASM_DISABLE_DISTRO := bionic buster focal bullseye
+ifeq (,$(filter-out $(WASM_DISABLE_DISTRO), $(DISTRO)))
+  LIBCXX_WASM_ENABLE=no
+endif
+
 ifneq (,$(filter $(DISTRO),stretch))
 # Don't enable lld python for old distros
   STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_PYTHON=OFF
@@ -510,6 +516,12 @@ preconfigure:
 	if test "$(LLVM_SPIRV_INSTALLED)" = "yes"; then \
 		sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install; \
 	fi
+
+	# disable libc++-X.Y-dev-wasm32.install.in on old distro
+	if test "$(LIBCXX_WASM_ENABLE)" = "no"; then \
+		echo "" > debian/libc++-$(LLVM_VERSION)-dev-wasm32.install; \
+	fi
+
 	if test "$(DISTRO)" = "stretch"; then \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
 	fi
@@ -750,6 +762,9 @@ build-wasm/compiler-rt-%:
 
 build-wasm/libcxx-%-wasi: cpu = $(@:build-wasm/libcxx-%-wasi=%)
 build-wasm/libcxx-%-wasi: build-wasm/compiler-rt-%
+ifeq (${LIBCXX_WASM_ENABLE},yes)
+	@echo "Skipping libcxx-*-wasi on this distro $(DISTRO)"
+else
 	@echo "Building libcxx for $(cpu)"
 	@echo "Using cmake: $(CMAKE_BIN)"
 
@@ -825,6 +840,7 @@ build-wasm/libcxx-%-wasi: build-wasm/compiler-rt-%
 		-DLIBCXXABI_HAS_EXTERNAL_THREAD_API:BOOL=OFF \
 		-DLIBCXXABI_BUILD_EXTERNAL_THREAD_LIBRARY:BOOL=OFF
 	ninja -C "$@" $(NJOBS) $(VERBOSE)
+endif
 
 # Build compiler-rt for wasm32 and wasm64. Build libcxx only for wasm32, as
 # libcxx requires wasi-libc, which only exists for wasm32 right now.

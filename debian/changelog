@@ -2,6 +2,7 @@ llvm-toolchain-14 (1:14.0.6-11) UNRELEASED; urgency=medium
 
   [ Sylvestre Ledru ]
   * Update SV to 4.6.2
+  * Disable libc++-$(LLVM_VERSION)-dev-wasm32 on old Debian & Ubuntu
 
   [ Gianfranco Costamagna ]
   * Fix riscv64 build by adding spirv again (from @paravoid)
