@@ -1010,9 +1010,10 @@ endif
 
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/compiler-rt-wasm32 install
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/compiler-rt-wasm64 install
-ifeq (${LIBCXX_WASM_ENABLE},yes)
-	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/libcxx-wasm32-wasi install
-endif
+	if test -d build-wasm/libcxx-wasm32-wasi; then \
+		DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/libcxx-wasm32-wasi install; \
+	fi
+
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
