@@ -374,8 +374,9 @@ else
 endif
 
 LIBCXX_WASM_ENABLE=yes
+
 LIBCXX_WASM_DISABLE_DISTRO := bionic buster focal bullseye
-ifeq (,$(filter-out $(WASM_DISABLE_DISTRO), $(DISTRO)))
+ifeq (,$(filter-out $(LIBCXX_WASM_DISABLE_DISTRO), $(DISTRO)))
   LIBCXX_WASM_ENABLE=no
 endif
 
