@@ -481,6 +481,7 @@ preconfigure:
 	@echo "LLVM_VERSION_SNAPSHOT=$(LLVM_VERSION_SNAPSHOT)"
 	@echo "PATH=$(PATH)"
 	@echo "LD_LIBRARY_PATH=$(LD_LIBRARY_PATH)"
+	@echo "LIBCXX_WASM_ENABLE=$(LIBCXX_WASM_ENABLE)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
