@@ -762,7 +762,7 @@ build-wasm/compiler-rt-%:
 		-DCOMPILER_RT_OS_DIR=wasi
 	ninja -C "$@" $(NJOBS) $(VERBOSE)
 
-ifeq ($(LIBCXX_WASM_ENABLE, "no"))
+ifeq ($(LIBCXX_WASM_ENABLE), no)
 build-wasm/libcxx-%-wasi: build-wasm/compiler-rt-%
 	@echo "Skipping libcxx-*-wasi on this distro $(DISTRO)"
 else
