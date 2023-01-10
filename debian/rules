@@ -375,6 +375,9 @@ endif
 
 LIBCXX_WASM_ENABLE=yes
 LIBCXX_WASM_DISABLE_DISTRO := bionic buster focal bullseye
+# Either wasi-libc doesn't exist / too old
+# or we have this bug
+# https://sourceware.org/bugzilla/show_bug.cgi?id=27558
 ifeq (,$(filter-out $(LIBCXX_WASM_DISABLE_DISTRO), $(DISTRO)))
   LIBCXX_WASM_ENABLE=no
 endif
