@@ -1189,14 +1189,16 @@ else
 endif
 endif
 	dh_install --fail-missing
-# Move the libc+ abi files from libc++ to libc++-abi for the wasm32 packages
+# Move the libc++ abi files from libc++ to libc++-abi for the wasm32 packages
 # These packages are arch: all, so only do so when the packages are built
 ifneq (,$(filter libc++-$(LLVM_VERSION)-dev-wasm32, $(shell dh_listpackages)))
 	mkdir -p $(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1
-	mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h \
-	   $(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h
-	mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h \
-	   $(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h
+	if test -f $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; then \
+		mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h \
+			$(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; \
+		mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h \
+			$(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h; \
+	fi
 endif
 
 
