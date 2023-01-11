@@ -395,6 +395,14 @@ else
 	PROJECTS+=;lldb
 endif
 
+LIBCXX_WASM_ENABLE=yes
+LIBCXX_WASM_DISABLE_DISTRO := bionic buster focal bullseye jammy
+# Either wasi-libc doesn't exist / too old
+# or we have this bug
+# https://sourceware.org/bugzilla/show_bug.cgi?id=27558
+ifeq (,$(filter-out $(LIBCXX_WASM_DISABLE_DISTRO), $(DISTRO)))
+  LIBCXX_WASM_ENABLE=no
+endif
 
 LLD_ENABLE=yes
 
@@ -497,6 +505,7 @@ preconfigure:
 	@echo "LIBFUZZER_ENABLE=$(LIBFUZZER_ENABLE)"
 	@echo "LTO_ENABLE=$(LTO_ENABLE)"
 	@echo "COMPILER_RT_WASM_ENABLE=$(COMPILER_RT_WASM_ENABLE)"
+	@echo "LIBCXX_WASM_ENABLE=$(LIBCXX_WASM_ENABLE)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
@@ -534,6 +543,12 @@ ifdef LLVM_SPIRV
 	# *.spv files.
 	sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install
 endif
+	# disable libc++-X.Y-dev-wasm32.install.in on old distro
+	if test "$(LIBCXX_WASM_ENABLE)" = "no"; then \
+		echo "" > debian/libc++-$(LLVM_VERSION)-dev-wasm32.install; \
+		echo "" > debian/libc++abi-$(LLVM_VERSION)-dev-wasm32.install; \
+	fi
+
 	if test "$(DISTRO)" = "stretch"; then \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
 	fi
@@ -779,6 +794,10 @@ build-wasm/compiler-rt-%:
 		-DCOMPILER_RT_OS_DIR=wasi
 	ninja -C "$@" -j $(NJOBS) $(VERBOSE)
 
+ifeq ($(LIBCXX_WASM_ENABLE), no)
+build-wasm/libcxx-%-wasi: build-wasm/compiler-rt-%
+	@echo "Skipping libcxx-*-wasi on this distro $(DISTRO)"
+else
 build-wasm/libcxx-%-wasi: cpu = $(@:build-wasm/libcxx-%-wasi=%)
 build-wasm/libcxx-%-wasi: build-wasm/compiler-rt-%
 	@echo "Building libcxx for $(cpu)"
@@ -856,6 +875,7 @@ build-wasm/libcxx-%-wasi: build-wasm/compiler-rt-%
 		-DLIBCXXABI_HAS_EXTERNAL_THREAD_API:BOOL=OFF \
 		-DLIBCXXABI_BUILD_EXTERNAL_THREAD_LIBRARY:BOOL=OFF
 	ninja -C "$@" -j $(NJOBS) $(VERBOSE)
+endif
 
 # Build compiler-rt for wasm32 and wasm64. Build libcxx only for wasm32, as
 # libcxx requires wasi-libc, which only exists for wasm32 right now.
@@ -1031,7 +1051,10 @@ endif
 
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/compiler-rt-wasm32 install
 	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/compiler-rt-wasm64 install
-	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/libcxx-wasm32-wasi install
+	if test -d build-wasm/libcxx-wasm32-wasi; then \
+		DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/libcxx-wasm32-wasi install; \
+	fi
+
 
 # Rename binaries
 	mkdir -p $(DEB_INST)/usr/bin/
@@ -1201,14 +1224,16 @@ else
 endif
 endif
 	dh_install --fail-missing
-# Move the libc+ abi files from libc++ to libc++-abi for the wasm32 packages
+# Move the libc++ abi files from libc++ to libc++-abi for the wasm32 packages
 # These packages are arch: all, so only do so when the packages are built
 ifneq (,$(filter libc++-$(LLVM_VERSION)-dev-wasm32, $(shell dh_listpackages)))
 	mkdir -p $(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1
-	mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h \
-	   $(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h
-	mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h \
-	   $(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h
+	if test -f $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; then \
+		mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h \
+			$(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; \
+		mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h \
+			$(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h; \
+	fi
 endif
 
 
