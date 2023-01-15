@@ -707,8 +707,8 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 	cd $(TARGET_BUILD); \
 	CFLAGS="$(opt_flags) $(STAGE_2_CFLAGS)"; \
 	echo $$CFLAGS; \
-	for file in $(BASE_PATH)/compiler-rt/lib/fuzzer/*.cpp; do \
-		$(SCCACHE_CMD) $(STAGE_2_BIN_DIR)/clang++ -c $$CFLAGS -std=c++11 $file -IFuzzer; \
+	for sourcefile in $(BASE_PATH)/compiler-rt/lib/fuzzer/*.cpp; do \
+		$(SCCACHE_CMD) $(STAGE_2_BIN_DIR)/clang++ -c $$CFLAGS -std=c++11 $$sourcefile -IFuzzer; \
 	done; \
 	ar ruv libFuzzer.a Fuzzer*.o
 endif
