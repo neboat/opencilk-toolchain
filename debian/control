@@ -168,7 +168,7 @@ Description: Clang library - Development package
 Package: libclang-common-16-dev
 Architecture: all
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm15 (>= ${source:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm16 (>= ${source:Version})
 Recommends: libclang-rt-16-dev (>= 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
@@ -823,7 +823,7 @@ Description: OpenCL C language implementation - development files
  .
  This package contains development header files.
 
-# ------------- LIBUNWIND -------------
+# ------------- libunwind -------------
 
 Package: libunwind-16
 Section: libs
@@ -934,7 +934,7 @@ Package: flang-16
 # https://github.com/llvm/llvm-project/issues/59845
 Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 s390x ppc64 sparc64 riscv64
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
-Provides: fortran-compiler, gfortran-mod-16
+Provides: fortran-compiler, gfortran-mod-15
 Description: Fortran compiler
  Ground-up implementation of a Fortran front end written in
  modern C++.
@@ -954,4 +954,3 @@ Description: Flang library - Development package
  of examples, some functionalities are still missing.
  .
  This package contains the flang libraries and headers.
-
