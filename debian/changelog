@@ -2,6 +2,7 @@ llvm-toolchain-snapshot (1:16~++20230115053056+df5fc4504b86-1~exp1) experimental
 
   * TODO update of the content
   * ship libHLFIRTransforms & libHLFIRDialect in libflang
+  * Also install liborc_rt-x86_64.a in libclang-rt
   * Adjust some path since upstream changed the path from
     /usr/lib/llvm-16/lib/clang/16.0.0/ to
     /usr/lib/llvm-16/lib/clang/16/
