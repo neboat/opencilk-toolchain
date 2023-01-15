@@ -1,5 +1,7 @@
 llvm-toolchain-snapshot (1:16~++20230115053056+df5fc4504b86-1~exp1) experimental; urgency=medium
 
+  * TODO update of the content
+  * ship libHLFIRTransforms & libHLFIRDialect in libflang
   * Adjust some path since upstream changed the path from
     /usr/lib/llvm-16/lib/clang/16.0.0/ to
     /usr/lib/llvm-16/lib/clang/16/
