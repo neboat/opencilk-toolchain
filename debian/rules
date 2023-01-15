@@ -461,9 +461,11 @@ SCCACHE_ENABLE=no
 SCCACHE_CMAKE =
 # if sccache is installed in the chroot, use it
 ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
-	SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=/opt/sccache/sccache -DCMAKE_CXX_COMPILER_LAUNCHER=/opt/sccache/sccache
 	STAGE_1_CMAKE_EXTRA += $(SCCACHE_CMAKE)
 	SCCACHE_ENABLE=yes
+	SCCACHE_PATH=/opt/sccache/
+	SCCACHE_CMD=$(SCCACHE_PATH)/sccache
+	SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=$(SCCACHE_CMD) -DCMAKE_CXX_COMPILER_LAUNCHER=$(SCCACHE_CMD)
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
 endif
 
@@ -564,8 +566,8 @@ override_dh_ocamlclean:
 override_dh_ocaml:
 
 override_dh_auto_configure: preconfigure
-	if test -f /opt/sccache/sccache; then \
-		ls -al /opt/sccache/*; \
+	if test -f $(SCCACHE_CMD); then \
+		ls -al $(SCCACHE_PATH)*; \
 	fi
 	echo "Using gcc: "
 	$(CC) -v
@@ -605,9 +607,9 @@ override_dh_auto_configure: preconfigure
 #-    https://bit.ly/3kDNpC9
 ifeq (${SCCACHE_ENABLE},yes)
 # Just in case...
-	/opt/sccache/sccache --stop-server||true
+	$(SCCACHE_CMD) --stop-server||true
 # Start the sccache server with the right set of options to use GCP
-	SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=/opt/sccache/sccache.log SCCACHE_GCS_KEY_PATH=/opt/sccache/secret-gcp-storage.json SCCACHE_GCS_BUCKET=apt-llvm-org-sccache SCCACHE_GCS_RW_MODE=READ_WRITE /opt/sccache/sccache --start-server
+	SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=$(SCCACHE_PATH)/sccache.log SCCACHE_GCS_KEY_PATH=$(SCCACHE_PATH)/secret-gcp-storage.json SCCACHE_GCS_BUCKET=apt-llvm-org-sccache SCCACHE_GCS_RW_MODE=READ_WRITE $(SCCACHE_CMD) --start-server
 endif
 	echo "Running tests: $(RUN_TEST)"
 	echo "Using cmake: $(CMAKE_BIN)"; \
@@ -731,7 +733,9 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 	cd $(TARGET_BUILD); \
 	CFLAGS="$(opt_flags) $(STAGE_2_CFLAGS)"; \
 	echo $$CFLAGS; \
-	$(STAGE_2_BIN_DIR)/clang++ -c $$CFLAGS -std=c++17 $(BASE_PATH)/compiler-rt/lib/fuzzer/*.cpp -IFuzzer || exit 1; \
+	for sourcefile in $(BASE_PATH)/compiler-rt/lib/fuzzer/*.cpp; do \
+		$(SCCACHE_CMD) $(STAGE_2_BIN_DIR)/clang++ -c $$CFLAGS -std=c++17 $$sourcefile -IFuzzer || exit 1; \
+	done; \
 	ar ruv libFuzzer.a Fuzzer*.o
 endif
 	touch $@
@@ -887,10 +891,10 @@ debian-wasm-build: \
 
 sccache-stats:
 # If we used sccache, shows stats
-	if test -f /opt/sccache/sccache; then \
-		ls -al /opt/sccache/; \
+	if test -f $(SCCACHE_CMD); then \
+		ls -al $(SCCACHE_PATH)/; \
 		mkdir -p /tmp/buildd/source/; \
-		/opt/sccache/sccache --stats-format json --show-stats > /tmp/buildd/source/sccache-stats.json; \
+		$(SCCACHE_CMD) --stats-format json --show-stats > /tmp/buildd/source/sccache-stats.json; \
 		cat /tmp/buildd/source/sccache-stats.json; \
 	fi
 	touch $@
