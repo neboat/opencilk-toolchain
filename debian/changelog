@@ -6,11 +6,13 @@ llvm-toolchain-14 (1:14.0.6-11) UNRELEASED; urgency=medium
     bionic buster focal bullseye jammy
     either wasi-libc isn't available or too old or we face bug
     https://sourceware.org/bugzilla/show_bug.cgi?id=27558
+  * adjust the lintian override format with the []
 
   [ Gianfranco Costamagna ]
   * Fix riscv64 build by adding spirv again (from @paravoid)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 11 Jan 2023 10:58:32 +0100
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 15 Jan 2023 09:40:55 +0100
 
 llvm-toolchain-14 (1:14.0.6-10) unstable; urgency=medium
 
