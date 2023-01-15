@@ -63,6 +63,113 @@ llvm-toolchain-snapshot (1:16~++20220731055325+02b3a358926e-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jul 2022 21:36:27 +0200
 
+llvm-toolchain-15 (1:15.0.7-2) UNRELEASED; urgency=medium
+
+  * Adjust some lintian overrides
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 15 Jan 2023 10:54:41 +0100
+
+llvm-toolchain-15 (1:15.0.7-1) unstable; urgency=medium
+
+  * New upstream release
+  * Upload to unstable
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Jan 2023 12:31:57 +0100
+
+llvm-toolchain-15 (1:15.0.6-5~exp3) experimental; urgency=medium
+
+  * Don't always build flang
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 07 Jan 2023 23:46:18 +0100
+
+llvm-toolchain-15 (1:15.0.6-5~exp2) experimental; urgency=medium
+
+  * Restrict flang on 64bits archs:
+    (amd64 arm64 mips64el ppc64el kfreebsd-amd64 s390x ppc64 sparc64 riscv64)
+    See: https://github.com/llvm/llvm-project/issues/59845
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Jan 2023 13:19:48 +0100
+
+llvm-toolchain-15 (1:15.0.6-5~exp1) experimental; urgency=medium
+
+  * Add flang-15 and libraries support
+  * Several changes coming from the branch -14:
+  * wasm support significantly improved with several packages:
+    - libc++-15-dev-wasm32
+    - libc++abi-15-dev-wasm32
+    - libclang-rt-15-dev-wasm32
+    - libclang-rt-15-dev-wasm64
+    It is now as easy as:
+    $ apt install clang-15 lld-15 libclang-rt-15-dev-wasm32 wasi-libc
+    $ clang-15 --target=wasm32-wasi helloworld.c -o helloworld.wasm
+    Many thanks to Faidon Liambotis
+  * libclang-common-15-dev splitted into different packages:
+    - libclang-rt-15-dev
+    - libpolly-15-dev
+    - libclang-rt-15-dev-wasm32
+    - libclang-rt-15-dev-wasm64
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 03 Jan 2023 00:40:25 +0100
+
+llvm-toolchain-15 (1:15.0.6-4) unstable; urgency=medium
+
+  * link-grpc.diff: add the detection of other libs necessary for
+    grpc (Closes: #1025530)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Jan 2023 15:46:39 +0100
+
+llvm-toolchain-15 (1:15.0.6-3) unstable; urgency=medium
+
+  * Build on spirv-15 for riscv64 too.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 30 Nov 2022 16:15:42 +0100
+
+llvm-toolchain-15 (1:15.0.6-2) unstable; urgency=medium
+
+  * Fix build on riscv64 by disabling WASM for now.
+  * Explicitly depend on spirv-14 for riscv64, to bootstrap spirv there.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 30 Nov 2022 15:31:52 +0100
+
+llvm-toolchain-15 (1:15.0.6-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 29 Nov 2022 15:25:58 +0100
+
+llvm-toolchain-15 (1:15.0.5-5) unstable; urgency=medium
+
+  * Add riscv64 to spirv-15 supported list, now that the bootstrap is
+    finished.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 22 Nov 2022 12:41:35 +0100
+
+llvm-toolchain-15 (1:15.0.5-4) unstable; urgency=medium
+
+  * Explicitly depend on spirv-14 for riscv64, to bootstrap spirv there.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 22 Nov 2022 10:58:27 +0100
+
+llvm-toolchain-15 (1:15.0.5-3) unstable; urgency=medium
+
+  * Depend again on spirv-15 for mips64el.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 20 Nov 2022 06:54:23 +0100
+
+llvm-toolchain-15 (1:15.0.5-2) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Add libomp target library to mips64el (Closes: #1023101)
+  * Explictly depend on spirv-14 for mips64el, to ease bootstrapping
+    on buildds (this should be dropped once we build a spirv-15 in archive)
+  * Cherry-pick two upstream patches to unblock mesa build on arm* (Closes:
+    #1022577)
+
+  [ Sylvestre Ledru ]
+  * store the sccache results in /tmp/buildd/source/sccache-stats.json
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 19 Nov 2022 23:25:04 +0100
+
 llvm-toolchain-15 (1:15.0.5-1) unstable; urgency=medium
 
   * New upstream release
@@ -307,13 +414,94 @@ llvm-toolchain-snapshot (1:15~++20220202093833+1a3137dc8451-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 13 Feb 2022 23:25:57 +0100
 
+llvm-toolchain-14 (1:14.0.6-11) UNRELEASED; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * Update SV to 4.6.2
+  * Disable libc++-$(LLVM_VERSION)-dev-wasm32 on old Debian & Ubuntu:
+    bionic buster focal bullseye jammy
+    either wasi-libc isn't available or too old or we face bug
+    https://sourceware.org/bugzilla/show_bug.cgi?id=27558
+  * adjust the lintian override format with the []
+
+  [ Gianfranco Costamagna ]
+  * Fix riscv64 build by adding spirv again (from @paravoid)
+
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 15 Jan 2023 09:40:55 +0100
+
+llvm-toolchain-14 (1:14.0.6-10) unstable; urgency=medium
+
+  * Upload to unstable
+  * Add missing epoch (Closes: #1027699)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Jan 2023 15:42:15 +0100
+
+llvm-toolchain-14 (1:14.0.6-10~exp6) experimental; urgency=medium
+
+  * Move libPolly in libpolly-X.Y-dev for real
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 01 Jan 2023 15:42:04 +0100
+
+llvm-toolchain-14 (1:14.0.6-10~exp5) experimental; urgency=medium
+
+  * Create a libpolly-X.Y-dev package
+  * Fix the libclang-rt-14-dev-wasm64 description
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Dec 2022 12:35:04 +0100
+
+llvm-toolchain-14 (1:14.0.6-10~exp4) experimental; urgency=medium
+
+  * Move the compiler-rt content into a new package called
+    libclang-rt-X.Y-dev (including polly)
+  * the wasm targets are shipped into libclang-rt-14-dev-wasm32
+    and libclang-rt-14-dev-wasm64
+  * libclang-common-X.Y-dev arch moved to all
+    then ${binary:Version} => ${source:Version}
+    to avoid not-binnmuable-any-depends-all
+  * link-grpc.diff: add the detection of other libs necessary for
+    grpc (Closes: #1025529)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 21 Dec 2022 13:48:40 +0100
+
+llvm-toolchain-14 (1:14.0.6-10~exp3) experimental; urgency=medium
+
+  * Transform debian/control into debian/control.in (preparation for
+    flang support)
+  * Do not install wasm-libc if doesn't exist
+
+  [ Faidon Liambotis ]
+  * Try to unbreak the builds with wasm
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 19 Dec 2022 11:09:58 +0100
+
+llvm-toolchain-14 (1:14.0.6-10~exp1) experimental; urgency=medium
+
+  * More WebAssembly (wasm32/wasm64) work:
+    - Update patch wasm-sysroot-usr to stop including /usr/include when
+      building for the non-OS (unknown) wasm targets, to avoid inadvertently
+      including the host's (glibc) headers.
+    - Re-enable builds on all architectures, previously disabled for
+      arm64 armel mips64el mipsel ppc64el armhf in 1:14.0.6-4, due to an FTBFS
+      related to the /usr/include issue above.
+    - Update patch wasm-sysroot-usr to adjust system include paths for C++
+      headers as well.
+    - Build libc++ and libc++abi for wasm32-wasi, generating two new binary
+      packages, and introducing a build dependency on wasi-libc.
+    - Misc code organization fixes to debian/rules.
+
+ -- Faidon Liambotis <paravoid@debian.org>  Fri, 18 Nov 2022 08:21:02 +0200
+
 llvm-toolchain-14 (1:14.0.6-9) unstable; urgency=medium
 
+  * Cherry-pick upstream commit c081bf4098c729afacf20303cc9df62bf13c3362
+    to fix chromium failure in basic_string (Closes: #1025394)
   * Disable the MLIR testsuite run because of a freeze
     (Closes: #1024154)
     See https://github.com/llvm/llvm-project/issues/58357
+  * Disable wasm on riscv64
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 15 Nov 2022 18:23:44 +0100
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 04 Dec 2022 09:03:06 +0100
 
 llvm-toolchain-14 (1:14.0.6-8) unstable; urgency=medium
 

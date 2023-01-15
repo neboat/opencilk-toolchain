@@ -48,4 +48,3 @@ diff --git a/cmake/Modules/FindGRPC.cmake b/cmake/Modules/FindGRPC.cmake
      if (ENABLE_GRPC_REFLECTION)
        find_library(GRPC_REFLECTION_LIBRARY grpc++_reflection ${GRPC_OPTS} REQUIRED)
        add_library(grpc++_reflection UNKNOWN IMPORTED GLOBAL)
-

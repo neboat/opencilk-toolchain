@@ -9,9 +9,14 @@ The current snapshot release is maintained in the "snapshot" branch.
 The easiest way to get all branches is probably to have one
 clone per version:
 
-for f in 8 9 10 snapshot; do
+for f in 14 15 snapshot; do
     git clone git@salsa.debian.org:pkg-llvm-team/llvm-toolchain.git -b $f $f
 done
+
+debian/control is generated from debian/control.in by running:
+
+ebian/rules preconfigure
+
 
 Steps for manually building a snapshot release
 ==============================================
@@ -78,6 +83,7 @@ Additional maintainer scripts
 The script qualify-clang.sh that is found at the git debian/ directory
 should be used to quickly test a newly built package. It runs a short
 set of sanity-check tests and regression tests.
+It is executed in autopkgtest.
 
 The script releases/snapshot/debian/prepare-new-release.sh is used when
 preparing a new point release. It automatically replaces version numbers
