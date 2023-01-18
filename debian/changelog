@@ -14,6 +14,7 @@ llvm-toolchain-snapshot (1:16~++20230115053056+df5fc4504b86-1~exp1) experimental
   * Add a symlink /usr/lib/x86_64-linux-gnu/{libclang-16.so.16.0.0 => libclang-16.so.1}
     Expected by program like the firefox build system
   * ship amdgpu-arch & nvptx-arch in clang-tools
+  * ship llvm-omp-kernel-replay in libomp-X.Y-dev
   * Disable flang on s390x. Seems that it is breaking
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 19 Nov 2022 10:16:49 +0100

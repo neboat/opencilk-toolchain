@@ -14,6 +14,9 @@
 usr/lib/llvm-@LLVM_VERSION@/lib/cmake/openmp/*.cmake
 
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-omp-device-info
+usr/lib/llvm-@LLVM_VERSION@/bin/llvm-omp-kernel-replay
+
 usr/bin/llvm-omp-device-info-@LLVM_VERSION@
+usr/bin/llvm-omp-kernel-replay-@LLVM_VERSION@
 
 usr/lib/llvm-@LLVM_VERSION@/share/gdb/python/ompd/
