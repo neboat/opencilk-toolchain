@@ -36,8 +36,10 @@ usr/lib/llvm-@LLVM_VERSION@/bin/clang-pseudo
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-offload-packager
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-tblgen
 usr/lib/llvm-@LLVM_VERSION@/bin/clang-include-cleaner
+usr/lib/llvm-@LLVM_VERSION@/bin/clang-stat-cache
 usr/lib/llvm-@LLVM_VERSION@/bin/amdgpu-arch
 usr/lib/llvm-@LLVM_VERSION@/bin/nvptx-arch
+
 
 usr/lib/llvm-@LLVM_VERSION@/bin/analyze-build
 usr/lib/llvm-@LLVM_VERSION@/bin/intercept-build
@@ -102,5 +104,6 @@ usr/bin/clang-pseudo-@LLVM_VERSION@
 usr/bin/clang-offload-packager-@LLVM_VERSION@
 usr/bin/clang-tblgen-@LLVM_VERSION@
 usr/bin/clang-include-cleaner-@LLVM_VERSION@
+usr/bin/clang-stat-cache-@LLVM_VERSION@
 usr/bin/amdgpu-arch-@LLVM_VERSION@
 usr/bin/nvptx-arch-@LLVM_VERSION@
