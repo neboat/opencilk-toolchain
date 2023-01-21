@@ -17,7 +17,6 @@ llvm-toolchain-snapshot (1:16~++20230115053056+df5fc4504b86-1~exp1) experimental
   * ship llvm-omp-kernel-replay in libomp-X.Y-dev
   * Disable flang on s390x. Seems that it is breaking
   * compiler-rt: Only build liborc on amd64 & arm64
-  * Ship clang-stat-cache in clang-tools-X.Y
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 19 Nov 2022 10:16:49 +0100
 
