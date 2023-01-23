@@ -477,6 +477,7 @@ ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
 	STAGE_ALL_CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
 # no need to run tests in this case
 	RUN_TEST=no
+	SCCACHE_ENABLE=no
 else
 	COVERITY_ENABLE=0
 endif
