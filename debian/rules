@@ -478,6 +478,7 @@ ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
 # no need to run tests in this case
 	RUN_TEST=no
 	SCCACHE_ENABLE=no
+	SCCACHE_CMAKE=
 else
 	COVERITY_ENABLE=0
 endif
