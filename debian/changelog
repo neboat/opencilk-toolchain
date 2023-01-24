@@ -16,7 +16,7 @@ llvm-toolchain-snapshot (1:16~++20230115053056+df5fc4504b86-1~exp1) experimental
   * ship amdgpu-arch & nvptx-arch in clang-tools
   * ship llvm-omp-kernel-replay in libomp-X.Y-dev
   * Disable flang on s390x. Seems that it is breaking
-  * compiler-rt: Only build liborc on amd64 & arm64
+  * compiler-rt: Only build liborc on amd64, i386 & arm64
   * Don't build omptarget on i386
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 19 Nov 2022 10:16:49 +0100
