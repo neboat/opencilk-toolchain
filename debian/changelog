@@ -1,6 +1,6 @@
-llvm-toolchain-snapshot (1:16~++20230115053056+df5fc4504b86-1~exp1) experimental; urgency=medium
+llvm-toolchain-16 (1:16~++20230115053056+df5fc4504b86-1~exp1) experimental; urgency=medium
 
-  * TODO update of the content
+  * Branching of 16 (snapshot is now 17)
   * ship libHLFIRTransforms & libHLFIRDialect in libflang
   * Also install liborc_rt-x86_64.a in libclang-rt
   * Adjust some path since upstream changed the path from
