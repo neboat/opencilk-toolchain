@@ -1,4 +1,4 @@
-llvm-toolchain-snapshot (1:17~++20230115053056+df5fc4504b86-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental; urgency=medium
 
   * Snapshot is now 17
   * ship libHLFIRTransforms & libHLFIRDialect in libflang
@@ -19,7 +19,7 @@ llvm-toolchain-snapshot (1:17~++20230115053056+df5fc4504b86-1~exp1) experimental
   * compiler-rt: Only build liborc on amd64, i386 & arm64
   * Don't build omptarget on i386
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 19 Nov 2022 10:16:49 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 28 Jan 2023 18:07:40 +0100
 
 llvm-toolchain-snapshot (1:16~++20221111053703+a77a02aa5794-1~exp1) experimental; urgency=medium
 
