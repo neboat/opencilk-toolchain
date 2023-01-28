@@ -580,6 +580,14 @@ endif
 		sed -i -e "s|#grpc\ ||g" debian/libclang-$(LLVM_VERSION)-dev.install; \
 	fi
 
+	if ! dh_listpackages|grep -q clang-$(LLVM_VERSION); then \
+		echo "Could not find clang-$(LLVM_VERSION) in the list of packages"; \
+		echo "Refresh debian/control ?"; \
+		echo "Package list:"; \
+		dh_listpackages; \
+		exit 1; \
+	fi
+
 # Override this two targets. They are trying to manage the .in conversion for me
 override_dh_ocamlinit:
 override_dh_ocamlclean:
