@@ -13,7 +13,7 @@ Index: llvm-toolchain-snapshot_16~++20220407011631+46f0e2ceb487/clang/tools/clan
                        '-style=file, but can not find the .clang-format'
                        'file to use.')
 -  parser.add_argument('-binary', default='clang-format',
-+  parser.add_argument('-binary', default='clang-format-16',
++  parser.add_argument('-binary', default='clang-format-17',
                        help='location of binary to use for clang-format')
    args = parser.parse_args()
  
@@ -26,7 +26,7 @@ Index: llvm-toolchain-snapshot_16~++20220407011631+46f0e2ceb487/clang/tools/clan
  
  (defcustom clang-format-executable
 -  (or (executable-find "clang-format")
-+  (or (executable-find "clang-format-16")
++  (or (executable-find "clang-format-17")
        "clang-format")
    "Location of the clang-format executable.
  
