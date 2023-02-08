@@ -1,3 +1,9 @@
+llvm-toolchain-16 (1:16.0.0~+rc2-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 08 Feb 2023 19:40:52 +0100
+
 llvm-toolchain-16 (1:16.0.0~+rc1-1~exp1) experimental; urgency=medium
 
   * First rc of 16
