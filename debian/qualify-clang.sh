@@ -1665,6 +1665,18 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libclangBasic.a; then
     exit 1
 fi
 
+# check that the hip language is functioning
+echo "Testing HIP language ..."
+echo "if this fails, please run"
+echo "apt-get install hipcc"
+if test $VERSION -eq 15; then
+  cat > foo.hip <<EOF
+#include <hip/hip_runtime_api.h>
+int main() { return 0; }
+EOF
+  clang++-15 -x hip -lamdhip64 foo.hip
+fi
+
 #clean up
 rm -f a.out bar crash-* foo foo.* lldb-cmd.txt main.* test_fuzzer.cc foo.* o
 rm -rf output matmul.* *profraw opt.ll a.json default.profdata test test.cpp
