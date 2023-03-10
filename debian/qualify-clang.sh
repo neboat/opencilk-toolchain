@@ -1674,7 +1674,7 @@ if test $VERSION -eq 15; then
 #include <hip/hip_runtime_api.h>
 int main() { return 0; }
 EOF
-  clang++-15 -x hip -lamdhip64 foo.hip
+  clang++-$VERSION -x hip -lamdhip64 foo.hip
 fi
 
 #clean up
