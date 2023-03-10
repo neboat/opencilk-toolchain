@@ -1667,14 +1667,13 @@ fi
 
 # check that the hip language is functioning
 echo "Testing HIP language ..."
-echo "if this fails, please run"
-echo "apt-get install hipcc"
-if test $VERSION -eq 15; then
+if dpkg -l|grep -q hipcc; then
   cat > foo.hip <<EOF
 #include <hip/hip_runtime_api.h>
 int main() { return 0; }
 EOF
   clang++-$VERSION -x hip -lamdhip64 foo.hip
+  rm -f foo.hip hip
 fi
 
 #clean up
