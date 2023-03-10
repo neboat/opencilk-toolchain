@@ -15,10 +15,10 @@ Differential Revision: https://reviews.llvm.org/D135796
  clang/test/Driver/hip-version.hip      |  8 +++++
  3 files changed, 41 insertions(+), 10 deletions(-)
 
-diff --git a/clang/lib/Driver/ToolChains/AMDGPU.cpp b/clang/lib/Driver/ToolChains/AMDGPU.cpp
-index 6246568710916..261594171564e 100644
---- a/clang/lib/Driver/ToolChains/AMDGPU.cpp
-+++ b/clang/lib/Driver/ToolChains/AMDGPU.cpp
+Index: llvm-toolchain-15-15.0.7/clang/lib/Driver/ToolChains/AMDGPU.cpp
+===================================================================
+--- llvm-toolchain-15-15.0.7.orig/clang/lib/Driver/ToolChains/AMDGPU.cpp
++++ llvm-toolchain-15-15.0.7/clang/lib/Driver/ToolChains/AMDGPU.cpp
 @@ -10,12 +10,14 @@
  #include "CommonArgs.h"
  #include "clang/Basic/TargetID.h"
@@ -34,7 +34,7 @@ index 6246568710916..261594171564e 100644
  #include "llvm/Support/LineIterator.h"
  #include "llvm/Support/Path.h"
  #include "llvm/Support/VirtualFileSystem.h"
-@@ -306,6 +308,14 @@ RocmInstallationDetector::getInstallationPathCandidates() {
+@@ -306,6 +308,14 @@ RocmInstallationDetector::getInstallatio
      ROCmSearchDirs.emplace_back(D.SysRoot + "/opt/" + LatestROCm,
                                  /*StrictChecking=*/true);
  
@@ -49,11 +49,13 @@ index 6246568710916..261594171564e 100644
    DoPrintROCmSearchDirs();
    return ROCmSearchDirs;
  }
-@@ -461,18 +471,30 @@ void RocmInstallationDetector::detectHIPRuntime() {
+@@ -461,18 +471,30 @@ void RocmInstallationDetector::detectHIP
      llvm::sys::path::append(IncludePath, "include");
      LibPath = InstallPath;
      llvm::sys::path::append(LibPath, "lib");
--
++    SharePath = InstallPath;
++    llvm::sys::path::append(SharePath, "share");
+ 
 -    llvm::ErrorOr<std::unique_ptr<llvm::MemoryBuffer>> VersionFile =
 -        FS.getBufferForFile(BinPath + "/.hipVersion");
 -    if (!VersionFile && Candidate.StrictChecking)
@@ -61,9 +63,6 @@ index 6246568710916..261594171564e 100644
 -
 -    if (HIPVersionArg.empty() && VersionFile)
 -      if (parseHIPVersionFile((*VersionFile)->getBuffer()))
-+    SharePath = InstallPath;
-+    llvm::sys::path::append(SharePath, "share");
-+
 +    // If HIP version file can be found and parsed, use HIP version from there.
 +    for (const auto &VersionFilePath :
 +         {std::string(SharePath) + "/hip/version",
@@ -90,11 +89,11 @@ index 6246568710916..261594171564e 100644
    }
    HasHIPRuntime = false;
  }
-diff --git a/clang/lib/Driver/ToolChains/ROCm.h b/clang/lib/Driver/ToolChains/ROCm.h
-index 33baaa887043e..b16deecdebec5 100644
---- a/clang/lib/Driver/ToolChains/ROCm.h
-+++ b/clang/lib/Driver/ToolChains/ROCm.h
-@@ -107,6 +107,7 @@ class RocmInstallationDetector {
+Index: llvm-toolchain-15-15.0.7/clang/lib/Driver/ToolChains/ROCm.h
+===================================================================
+--- llvm-toolchain-15-15.0.7.orig/clang/lib/Driver/ToolChains/ROCm.h
++++ llvm-toolchain-15-15.0.7/clang/lib/Driver/ToolChains/ROCm.h
+@@ -107,6 +107,7 @@ private:
    SmallString<0> LibPath;
    SmallString<0> LibDevicePath;
    SmallString<0> IncludePath;
@@ -102,12 +101,12 @@ index 33baaa887043e..b16deecdebec5 100644
    llvm::StringMap<std::string> LibDeviceMap;
  
    // Libraries that are always linked.
-diff --git a/clang/test/Driver/hip-version.hip b/clang/test/Driver/hip-version.hip
-index a9bac813a9195..4ef9e4ade0881 100644
---- a/clang/test/Driver/hip-version.hip
-+++ b/clang/test/Driver/hip-version.hip
+Index: llvm-toolchain-15-15.0.7/clang/test/Driver/hip-version.hip
+===================================================================
+--- llvm-toolchain-15-15.0.7.orig/clang/test/Driver/hip-version.hip
++++ llvm-toolchain-15-15.0.7/clang/test/Driver/hip-version.hip
 @@ -9,6 +9,14 @@
- // RUN:   --target=amdgcn-amd-amdhsa \
+ // RUN:   -target amdgcn-amd-amdhsa \
  // RUN:   | FileCheck -check-prefixes=FOUND %s
  
 +// RUN: rm -rf %t/Inputs
