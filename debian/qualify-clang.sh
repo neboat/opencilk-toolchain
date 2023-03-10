@@ -1672,7 +1672,7 @@ if dpkg -l|grep -q hipcc; then
 #include <hip/hip_runtime_api.h>
 int main() { return 0; }
 EOF
-  clang++-$VERSION -x hip -lamdhip64 foo.hip
+  clang++-$VERSION --rocm-path=/usr -x hip -lamdhip64 foo.hip
   rm -f foo.hip hip
 fi
 
