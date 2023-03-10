@@ -159,4 +159,6 @@ add-arm-vcmpz-test.patch
 fix-mesa-build.patch
 link-grpc.diff
 
-amdgpu-nonlinux.patch
+amdgpu/nonlinux.patch
+amdgpu/usr-search-paths.patch
+amdgpu/bitcode-multiarch.patch
