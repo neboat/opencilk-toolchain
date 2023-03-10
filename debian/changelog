@@ -1,6 +1,8 @@
-llvm-toolchain-15 (1:15.0.7-2) UNRELEASED; urgency=medium
+llvm-toolchain-15 (1:15.0.7-2) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
+  * Yeah, we would like to have this version in bookworm
+    (Closes: #1032316)
   * Adjust some lintian overrides
   * Disable flang on s390x. Seems that it is breaking
 
