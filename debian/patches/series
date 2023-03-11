@@ -150,5 +150,4 @@ bolt-disable-emit-relocs.patch
 link-grpc.diff
 
 amdgpu/nonlinux.patch
-amdgpu/usr-search-paths.patch
 amdgpu/bitcode-multiarch.patch
