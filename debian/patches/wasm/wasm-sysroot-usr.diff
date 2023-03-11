@@ -57,6 +57,33 @@
  void WebAssembly::addLibCxxIncludePaths(
      const llvm::opt::ArgList &DriverArgs,
      llvm::opt::ArgStringList &CC1Args) const {
+@@ -499,7 +519,9 @@ void WebAssembly::addLibCxxIncludePaths(
+   }
+ 
+   // Second add the generic one.
+-  addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version);
++  // don't include the host architecture's headers in the search path
++  if (!getDriver().SysRoot.empty())
++    addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version);
+ }
+ 
+ void WebAssembly::addLibStdCXXIncludePaths(
+@@ -546,8 +568,11 @@ void WebAssembly::addLibStdCXXIncludePat
+     addSystemInclude(DriverArgs, CC1Args, TargetDir);
+   }
+ 
+-  // Second add the generic one.
+-  addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version);
+-  // Third the backward one.
+-  addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version + "/backward");
++  // don't include the host architecture's headers in the search path
++  if (!getDriver().SysRoot.empty()) {
++    // Second add the generic one.
++    addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version);
++    // Third the backward one.
++    addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version + "/backward");
++  }
+ }
 --- a/clang/lib/Driver/ToolChains/WebAssembly.h
 +++ b/clang/lib/Driver/ToolChains/WebAssembly.h
 @@ -89,6 +89,8 @@ private:
