@@ -1,3 +1,9 @@
+llvm-toolchain-15 (1:15.0.7-3) unstable; urgency=medium
+
+  * Disable the flang autopkgtests on unsupported architectures
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 12 Mar 2023 11:19:54 +0100
+
 llvm-toolchain-15 (1:15.0.7-2) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
