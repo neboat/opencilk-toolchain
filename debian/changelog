@@ -96,6 +96,18 @@ llvm-toolchain-snapshot (1:16~++20220731055325+02b3a358926e-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jul 2022 21:36:27 +0200
 
+llvm-toolchain-15 (1:15.0.7-4) UNRELEASED; urgency=medium
+
+  * Fix debian/libclang1-15.symbols soname
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Mar 2023 21:45:46 +0100
+
+llvm-toolchain-15 (1:15.0.7-3) unstable; urgency=medium
+
+  * Disable the flang autopkgtests on unsupported architectures
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 12 Mar 2023 11:19:54 +0100
+
 llvm-toolchain-15 (1:15.0.7-2) unstable; urgency=medium
 
   * Adjust some lintian overrides

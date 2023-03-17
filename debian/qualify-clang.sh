@@ -1077,8 +1077,10 @@ g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-
 ./o > /dev/null
 fi
 
-echo "Testing flang-$VERSION (Fortran) ..."
-echo 'program math
+
+if dpkg -l|grep -q flang-$VERSION; then
+    echo "Testing flang-$VERSION (Fortran) ..."
+    echo 'program math
   implicit none
   real :: x, y
   x = 3.14
@@ -1086,15 +1088,15 @@ echo 'program math
   print *, "x + y = ", x + y
 end program math
 ' > foo.f90
-flang-new-$VERSION foo.f90 -o foo && ./foo &> foo.log
-if ! grep -q "x + y =" foo.log 2>&1; then
-    echo "flang: Could not find the expected output"
-    exit -1
-fi
+    flang-new-$VERSION foo.f90 -o foo && ./foo &> foo.log
+    if ! grep -q "x + y =" foo.log 2>&1; then
+        echo "flang: Could not find the expected output"
+        exit -1
+    fi
 
 
-# testing with a shared libraries
-echo '
+    # testing with a shared libraries
+    echo '
 module hello_world
   contains
     subroutine say_hello()
@@ -1102,21 +1104,25 @@ module hello_world
     end subroutine say_hello
 end module hello_world
 ' > lib.f90
-flang-new-$VERSION -c lib.f90  -fpie
-flang-new-$VERSION -shared  -fpie -o libflib.so lib.o
+    flang-new-$VERSION -c lib.f90  -fpie
+    flang-new-$VERSION -shared  -fpie -o libflib.so lib.o
 
-echo '
+    echo '
 program main
    use hello_world
    call say_hello()
 end program main' > foo.f90
-flang-new-$VERSION foo.f90 -L. -lflib -o foo
-LD_LIBRARY_PATH=. ./foo &> foo.log
-if ! grep -q "Hello, World!" foo.log 2>&1; then
-    echo "flang: lib didn't work"
-    exit -1
+    flang-new-$VERSION foo.f90 -L. -lflib -o foo
+    LD_LIBRARY_PATH=. ./foo &> foo.log
+    if ! grep -q "Hello, World!" foo.log 2>&1; then
+        echo "flang: lib didn't work"
+        exit -1
+    fi
+    rm -f foo.log foo.f90 foo libflib.so
+else
+    echo "Skipping esting flang-$VERSION (Fortran) ..."
+    echo "doesn't exist on this arch"
 fi
-rm -f foo.log foo.f90 foo libflib.so
 
 # libclc
 echo "Testing libclc-$VERSION-dev ..."

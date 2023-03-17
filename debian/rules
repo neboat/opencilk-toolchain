@@ -467,25 +467,6 @@ ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
 	endif
 endif
 
-ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
-# enable the build using coverity
-# pbuilder contains BINDMOUNTS="/opt/cov-analysis/"
-# And we have some pbuilder hooks to configure and pack the result
-# Where the binaries are installed on the jenkins instance
-	PRE_PROCESS=PATH=$$PATH:/opt/cov-analysis/bin/ cov-build --dir cov-int
-# We don't want to check the temporary files produced by the configure
-	PRE_PROCESS_CONF=
-	COVERITY_ENABLE=1
-	CONFIGURE_EXTRA += --enable-assertions
-	STAGE_ALL_CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
-# no need to run tests in this case
-	RUN_TEST=no
-	SCCACHE_ENABLE=no
-	SCCACHE_CMAKE=
-else
-	COVERITY_ENABLE=0
-endif
-
 # enables cmake build targets like stage2-[target_name]
 ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-mlir;check-sanitizer;llvm-config;test-suite
 
