@@ -456,31 +456,15 @@ SCCACHE_ENABLE=no
 SCCACHE_CMAKE =
 # if sccache is installed in the chroot, use it
 ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
-	STAGE_1_CMAKE_EXTRA += $(SCCACHE_CMAKE)
-	SCCACHE_ENABLE=yes
-	SCCACHE_PATH=/opt/sccache/
-	SCCACHE_CMD=$(SCCACHE_PATH)/sccache
-	SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=$(SCCACHE_CMD) -DCMAKE_CXX_COMPILER_LAUNCHER=$(SCCACHE_CMD)
-	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
-endif
-
-ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
-# enable the build using coverity
-# pbuilder contains BINDMOUNTS="/opt/cov-analysis/"
-# And we have some pbuilder hooks to configure and pack the result
-# Where the binaries are installed on the jenkins instance
-	PRE_PROCESS=PATH=$$PATH:/opt/cov-analysis/bin/ cov-build --dir cov-int
-# We don't want to check the temporary files produced by the configure
-	PRE_PROCESS_CONF=
-	COVERITY_ENABLE=1
-	CONFIGURE_EXTRA += --enable-assertions
-	STAGE_ALL_CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
-# no need to run tests in this case
-	RUN_TEST=no
-	SCCACHE_ENABLE=no
-	SCCACHE_CMAKE=
-else
-	COVERITY_ENABLE=0
+	# check that it is working on this OS
+	ifeq ($(shell /opt/sccache/sccache --version && echo -n yes),yes)
+		STAGE_1_CMAKE_EXTRA += $(SCCACHE_CMAKE)
+		SCCACHE_ENABLE=yes
+		SCCACHE_PATH=/opt/sccache/
+		SCCACHE_CMD=$(SCCACHE_PATH)/sccache
+		SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=$(SCCACHE_CMD) -DCMAKE_CXX_COMPILER_LAUNCHER=$(SCCACHE_CMD)
+		export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
+	endif
 endif
 
 # enables cmake build targets like stage2-[target_name]
@@ -1016,8 +1000,10 @@ override_dh_auto_install:
 
 	# Only run on executable, not script
 	chrpath -d `find $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary'|cut -d: -f1`
+ifeq (,$(filter $(DEB_HOST_ARCH), powerpc powerpcspe))
 	# To fix custom-library-search-path
 	chrpath -d $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)*/lib/linux/*.so
+endif
 
 	: # libclang
 	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && \
