@@ -1,3 +1,9 @@
+llvm-toolchain-16 (1:16.0.0-1~exp1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 18 Mar 2023 21:41:44 +0100
+
 llvm-toolchain-16 (1:16.0.0~+rc4-1~exp1) experimental; urgency=medium
 
   * New snapshot release
@@ -144,6 +150,12 @@ llvm-toolchain-15 (1:15.0.7-2) unstable; urgency=medium
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 15 Jan 2023 10:54:41 +0100
 
+llvm-toolchain-15 (1:15.0.7-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 13 Jan 2023 15:12:11 +0100
+
 llvm-toolchain-15 (1:15.0.7-1) unstable; urgency=medium
 
   * New upstream release
@@ -164,6 +176,12 @@ llvm-toolchain-15 (1:15.0.6-5~exp2) experimental; urgency=medium
     See: https://github.com/llvm/llvm-project/issues/59845
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 06 Jan 2023 13:19:48 +0100
+
+llvm-toolchain-15 (1:15.0.6~++20230102020141+088f33605d8a-1~exp1) UNRELEASED; urgency=medium
+
+  * experimental New snapshot release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 02 Jan 2023 14:01:53 +0100
 
 llvm-toolchain-15 (1:15.0.6-5~exp1) experimental; urgency=medium
 
@@ -246,11 +264,14 @@ llvm-toolchain-15 (1:15.0.5-2) unstable; urgency=medium
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 19 Nov 2022 23:25:04 +0100
 
 llvm-toolchain-15 (1:15.0.5-1) unstable; urgency=medium
+llvm-toolchain-15 (1:15.0.5-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release
   * Remove the swig patches (applied upstream)
+  * experimental New snapshot release
+  * experimental New snapshot release
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Nov 2022 09:11:01 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Nov 2022 09:02:30 +0100
 
 llvm-toolchain-15 (1:15.0.4-1) unstable; urgency=medium
 
