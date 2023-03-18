@@ -155,7 +155,7 @@ else
 fi
 
 # cleanup
-rm -rf */www/
+rm -rf */www/ build/ build-llvm/
 
 cd ../
 BASE="llvm-toolchain-${MAJOR_VERSION}_${VERSION}"
