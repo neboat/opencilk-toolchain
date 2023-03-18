@@ -1,6 +1,7 @@
 llvm-toolchain-15 (1:15.0.7-4) UNRELEASED; urgency=medium
 
   * Fix debian/libclang1-15.symbols soname
+  * Remove build artifacts if any
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 15 Mar 2023 21:45:46 +0100
 
