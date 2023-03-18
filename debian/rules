@@ -576,6 +576,9 @@ override_dh_auto_configure: preconfigure
 	$(CC) -v
 	$(CXX) -v
 	mkdir -p $(TARGET_BUILD)
+# remove in case of artifact
+	rm -rf build
+
 	if test "$(SCAN_BUILD)" = "yes"; then \
 		patch -f -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff||true; \
 	fi
