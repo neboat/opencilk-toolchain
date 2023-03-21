@@ -1,3 +1,16 @@
+llvm-toolchain-16 (1:16.0.0-1~exp2) experimental; urgency=medium
+
+  [ Matthias Klose <doko@ubuntu.com> ]
+  * Install liborc_rt-armhf.a on armhf.
+  * Don't ship gdb scripts for ompd on armhf.
+  * Don't run MLIR tests on armhf, timeouts on the buildds.
+
+  [ Gianfranco Costamagna ]
+  * Try to use gold linker on riscv64, to see if the build goes to
+    the end successfully
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 21 Mar 2023 09:41:39 +0100
+
 llvm-toolchain-16 (1:16.0.0-1~exp1) experimental; urgency=medium
 
   * New upstream release
