@@ -1,4 +1,4 @@
-llvm-toolchain-16 (1:16.0.0-1~exp3) UNRELEASED; urgency=medium
+llvm-toolchain-16 (1:16.0.0-1~exp3) experimental; urgency=medium
 
   * Revert gold linker on riscv64, FTBFS
 
