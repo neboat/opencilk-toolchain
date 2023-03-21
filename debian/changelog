@@ -1,3 +1,9 @@
+llvm-toolchain-16 (1:16.0.0-1~exp3) UNRELEASED; urgency=medium
+
+  * Revert gold linker on riscv64, FTBFS
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 21 Mar 2023 11:27:33 +0100
+
 llvm-toolchain-16 (1:16.0.0-1~exp2) experimental; urgency=medium
 
   [ Matthias Klose <doko@ubuntu.com> ]
