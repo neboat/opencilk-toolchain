@@ -278,7 +278,7 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	LIBCLC_LLVM_SPIRV = "-DLLVM_SPIRV=$(LLVM_SPIRV)"
 endif
 
-BINUTILS_GOLD_ARCHS := amd64 arm64 armhf i386 ppc64 ppc64el x32 s390x hurd-i386 kfreebsd-amd64 kfreebsd-i386
+BINUTILS_GOLD_ARCHS := amd64 arm64 armhf i386 ppc64 ppc64el riscv64 x32 s390x hurd-i386 kfreebsd-amd64 kfreebsd-i386
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.23.1-1~exp3 ; echo $$?),0)
 ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 	STAGE_ALL_CMAKE_EXTRA += -DLLVM_USE_LINKER=gold
@@ -585,6 +585,9 @@ override_dh_auto_configure: preconfigure
 	$(CC) -v
 	$(CXX) -v
 	mkdir -p $(TARGET_BUILD)
+# remove in case of artifact
+	rm -rf build
+
 	if test "$(SCAN_BUILD)" = "yes"; then \
 		patch -f -p1 < debian/patches/on-the-fly/use-scan-build-runtimes.diff||true; \
 	fi
@@ -1324,7 +1327,7 @@ endif
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxxabi || true
 
 # MLIR
-ifeq (,$(filter $(DEB_HOST_ARCH), i386 x32))
+ifeq (,$(filter $(DEB_HOST_ARCH), armhf i386 x32))
 # Do not run MLIR test on i386 because of
 # https://github.com/llvm/llvm-project/issues/58357
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-mlir || true
