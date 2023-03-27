@@ -21,6 +21,21 @@ llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 28 Jan 2023 18:07:40 +0100
 
+llvm-toolchain-16 (1:16.0.0-1~exp5) experimental; urgency=medium
+
+  * Don't ship liborc on armel too
+  * Install ASAN symbolize on riscv64
+  * Limit parallel building to 3 on riscv64, should speed up extremely slow builds due to too many concurrent threads
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 27 Mar 2023 08:53:13 +0200
+
+llvm-toolchain-16 (1:16.0.0-1~exp4) experimental; urgency=medium
+
+  * Use 16 for wasm libs instead of 16.0.0
+    https://github.com/llvm/llvm-project/issues/61550
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 22 Mar 2023 23:36:45 +0100
+
 llvm-toolchain-16 (1:16.0.0-1~exp3) experimental; urgency=medium
 
   * Revert gold linker on riscv64, FTBFS
