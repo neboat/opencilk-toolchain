@@ -1,3 +1,9 @@
+llvm-toolchain-16 (1:16.0.1-1~exp1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 05 Apr 2023 13:25:21 +0200
+
 llvm-toolchain-16 (1:16.0.0-1~exp5) experimental; urgency=medium
 
   * Don't ship liborc on armel too
