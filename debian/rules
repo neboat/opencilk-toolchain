@@ -515,6 +515,7 @@ preconfigure:
 	@echo "LTO_ENABLE=$(LTO_ENABLE)"
 	@echo "COMPILER_RT_WASM_ENABLE=$(COMPILER_RT_WASM_ENABLE)"
 	@echo "LIBCXX_WASM_ENABLE=$(LIBCXX_WASM_ENABLE)"
+	@echo "SCCACHE_ENABLE=$(SCCACHE_ENABLE)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
