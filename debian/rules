@@ -461,14 +461,14 @@ SCCACHE_ENABLE=no
 SCCACHE_CMAKE =
 # if sccache is installed in the chroot, use it
 ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
-	STAGE_1_CMAKE_EXTRA += $(SCCACHE_CMAKE)
-	SCCACHE_ENABLE=yes
-	SCCACHE_PATH=/opt/sccache/
-	SCCACHE_CMD=$(SCCACHE_PATH)/sccache
-	SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=$(SCCACHE_CMD) -DCMAKE_CXX_COMPILER_LAUNCHER=$(SCCACHE_CMD)
-	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
-else
-$(info ************  Cannot find /opt/sccache/sccache ************)
+	ifneq (,$(filter $(DEB_HOST_ARCH),i386 amd64))
+		STAGE_1_CMAKE_EXTRA += $(SCCACHE_CMAKE)
+		SCCACHE_ENABLE=yes
+		SCCACHE_PATH=/opt/sccache/
+		SCCACHE_CMD=$(SCCACHE_PATH)/sccache
+		SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=$(SCCACHE_CMD) -DCMAKE_CXX_COMPILER_LAUNCHER=$(SCCACHE_CMD)
+		export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
+	endif
 endif
 
 # enables cmake build targets like stage2-[target_name]
