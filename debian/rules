@@ -470,7 +470,8 @@ ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
 		SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=$(SCCACHE_CMD) -DCMAKE_CXX_COMPILER_LAUNCHER=$(SCCACHE_CMD)
 		export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
 	else
-$(info ************   /opt/sccache/sccache --version does no work ************)
+		D=$(shell /opt/sccache/sccache --version)
+$(info ************   /opt/sccache/sccache --version does no work $D ************)
 	endif
 else
 $(info ************  cannot find /opt/sccache/sccache ************)
