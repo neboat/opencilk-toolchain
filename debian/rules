@@ -469,7 +469,11 @@ ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
 		SCCACHE_CMD=$(SCCACHE_PATH)/sccache
 		SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=$(SCCACHE_CMD) -DCMAKE_CXX_COMPILER_LAUNCHER=$(SCCACHE_CMD)
 		export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
+	else
+$(info ************   /opt/sccache/sccache --version does no work ************)
 	endif
+else
+$(info ************  cannot find /opt/sccache/sccache ************)
 endif
 
 # enables cmake build targets like stage2-[target_name]
