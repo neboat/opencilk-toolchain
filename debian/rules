@@ -461,8 +461,7 @@ SCCACHE_ENABLE=no
 SCCACHE_CMAKE =
 # if sccache is installed in the chroot, use it
 ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
-	# check that it is working on this OS
-	ifeq ($(shell /opt/sccache/sccache --version && echo -n yes),yes)
+	ifneq (,$(filter $(DEB_HOST_ARCH),i386 amd64))
 		STAGE_1_CMAKE_EXTRA += $(SCCACHE_CMAKE)
 		SCCACHE_ENABLE=yes
 		SCCACHE_PATH=/opt/sccache/
@@ -493,6 +492,7 @@ preconfigure:
 		echo "llvm spriv isn't detected while it should probably for this distro"; \
 	fi
 
+	@echo "DEB_BUILD_OPTIONS=$(DEB_BUILD_OPTIONS)"
 	@echo "DEB_HOST_MULTIARCH=$(DEB_HOST_MULTIARCH)"
 	@echo "DEB_HOST_GNU_TYPE=$(DEB_HOST_GNU_TYPE)"
 	@echo "DEB_HOST_ARCH_BITS=$(DEB_HOST_ARCH_BITS)"
@@ -506,7 +506,7 @@ preconfigure:
 	@echo "LLVM_VERSION_FULL=$(LLVM_VERSION_FULL)"
 	@echo "LLVM_VERSION_SNAPSHOT=$(LLVM_VERSION_SNAPSHOT)"
 	@echo "PATH=$(PATH)"
-	@echo "LD_LIBRARY_PATH=$(LD_LIBRARY_PATH)"
+	@echo "LD_LIBRARY_PATH=$$LD_LIBRARY_PATH"
 	@echo "RUNTIMES_CXXFLAGS=$(RUNTIMES_CXXFLAGS)"
 	@echo "STAGE_1_CXXFLAGS=$(STAGE_1_CXXFLAGS)"
 	@echo "STAGE_2_CFLAGS=$(STAGE_2_CFLAGS)"
@@ -514,6 +514,7 @@ preconfigure:
 	@echo "LTO_ENABLE=$(LTO_ENABLE)"
 	@echo "COMPILER_RT_WASM_ENABLE=$(COMPILER_RT_WASM_ENABLE)"
 	@echo "LIBCXX_WASM_ENABLE=$(LIBCXX_WASM_ENABLE)"
+	@echo "SCCACHE_ENABLE=$(SCCACHE_ENABLE)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
@@ -575,9 +576,9 @@ override_dh_ocamlclean:
 override_dh_ocaml:
 
 override_dh_auto_configure: preconfigure
-	if test -f $(SCCACHE_CMD); then \
-		ls -al $(SCCACHE_PATH)*; \
-	fi
+ifeq (${SCCACHE_ENABLE},yes)
+	ls -al $(SCCACHE_PATH)*
+endif
 	echo "Using gcc: "
 	$(CC) -v
 	$(CXX) -v
