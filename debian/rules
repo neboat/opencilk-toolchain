@@ -482,8 +482,6 @@ PROJECTS_LIST := $(shell echo "$(PROJECTS)"|sed -e "s| ||g")
 RUNTIMES_LIST := $(shell echo "$(RUNTIMES)"|sed -e "s| ||g")
 
 preconfigure:
-	/opt/sccache/sccache||true
-	/opt/sccache/sccache --version||true
 	if ! grep -qs '/proc ' /proc/mounts; then \
 		echo "/proc needs to be mounted"; \
 		exit 1; \
