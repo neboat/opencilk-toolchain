@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_16~++20210717105643+f95d26006e06/clang/tools/scan-build-py/lib/libscanbuild/arguments.py
+Index: llvm-toolchain-snapshot_17~++20210717105643+f95d26006e06/clang/tools/scan-build-py/lib/libscanbuild/arguments.py
 ===================================================================
---- llvm-toolchain-snapshot_16~++20210717105643+f95d26006e06.orig/clang/tools/scan-build-py/lib/libscanbuild/arguments.py
-+++ llvm-toolchain-snapshot_16~++20210717105643+f95d26006e06/clang/tools/scan-build-py/lib/libscanbuild/arguments.py
+--- llvm-toolchain-snapshot_17~++20210717105643+f95d26006e06.orig/clang/tools/scan-build-py/lib/libscanbuild/arguments.py
++++ llvm-toolchain-snapshot_17~++20210717105643+f95d26006e06/clang/tools/scan-build-py/lib/libscanbuild/arguments.py
 @@ -266,7 +266,7 @@ def create_analyze_parser(from_build_com
          '--use-analyzer',
          metavar='<path>',
