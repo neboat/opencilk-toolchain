@@ -207,7 +207,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),powerpc))
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
 endif
 
-# more than 4 jobs causes OOM in Ubuntu and slows down build process.
+# more than 2 jobs causes OOM in Ubuntu and slows down build process.
 ifneq (,$(filter $(DEB_HOST_ARCH),riscv64))
   NJOBS=2
 endif

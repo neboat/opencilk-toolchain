@@ -1,3 +1,15 @@
+llvm-toolchain-16 (1:16.0.1-1~exp2) experimental; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * cherry pick changes from snapshot for sccache
+
+  [ Gianfranco Costamagna ]
+  * Use parallel=2 on riscv64
+  * Add omptarget again to optional interfaces (Closes: #1033933)
+  * Adapt test when llvm is built without Z3 support (error message changed)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 11 Apr 2023 14:09:36 +0200
+
 llvm-toolchain-16 (1:16.0.1-1~exp1) experimental; urgency=medium
 
   * New upstream release
