@@ -209,7 +209,7 @@ endif
 
 # more than 4 jobs causes OOM in Ubuntu and slows down build process.
 ifneq (,$(filter $(DEB_HOST_ARCH),riscv64))
-  NJOBS=3
+  NJOBS=2
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),sparc))
