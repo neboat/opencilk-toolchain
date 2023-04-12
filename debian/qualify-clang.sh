@@ -1138,7 +1138,8 @@ if test ! -f /usr/lib/clc/polaris10-amdgcn-mesa-mesa3d.bc; then
     exit 1
 fi
 
-LLVM_CONFIG=llvm-config-$VERSION /usr/lib/llvm-$VERSION/share/libclc/check_external_calls.sh /usr/lib/clc/amdgcn--amdhsa.bc > /dev/null
+BINDIR=$(llvm-config-$VERSION --bindir)
+/usr/lib/llvm-$VERSION/share/libclc/check_external_calls.sh /usr/lib/clc/amdgcn--amdhsa.bc $BINDIR > /dev/null
 
 # libunwind
 echo "Testing libunwind-$VERSION-dev ..."
