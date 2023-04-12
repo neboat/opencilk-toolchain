@@ -1,6 +1,8 @@
 llvm-toolchain-15 (1:15.0.7-5) unstable; urgency=medium
 
   * Remove old code to manage Debian stretch
+  * Force the replacement of new Ubuntu packages introduced in
+    https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-15/+bug/2008755
 
  --
 
