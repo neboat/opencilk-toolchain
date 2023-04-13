@@ -540,7 +540,7 @@ preconfigure:
 	# Yeah, this is ugly but I don't know how to do better
 	if test "$(DISTRO)" = "jammy" -o "$(DISTRO)" = "kinetic"; then \
 		if test "$(LLVM_VERSION)" = "15"; then \
-			sed -i -e "s|(<< 1:15.0.6-5)|(<< 1:15.0.7-1)|g" debian/control; \
+			sed -i -e "s|libclang-common-15-dev (<< 1:15.0.6-5)|libclang-common-15-dev (<< 1:15.0.6-5), libclang-common-15-dev (= 1:15.0.7-0ubuntu0.22.04.1)|g" debian/control; \
 		fi; \
 	fi
 
