@@ -2,10 +2,10 @@ include required runtimes as dependencies to openmp targets to make sure
 they are built first when included as part of a runtimes build since openmp
 can depend on them
 <<<<<<< Updated upstream
-Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/llvm/runtimes/CMakeLists.txt
+Index: llvm-toolchain-snapshot_17~++20230501082440+687542413531/llvm/runtimes/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4.orig/llvm/runtimes/CMakeLists.txt
-+++ llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/llvm/runtimes/CMakeLists.txt
+--- llvm-toolchain-snapshot_17~++20230501082440+687542413531.orig/llvm/runtimes/CMakeLists.txt
++++ llvm-toolchain-snapshot_17~++20230501082440+687542413531/llvm/runtimes/CMakeLists.txt
 @@ -236,6 +236,7 @@ function(runtime_default_target)
                                        -DLLVM_ENABLE_PROJECTS_USED=${LLVM_ENABLE_PROJECTS_USED}
                                        -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=${LLVM_ENABLE_PER_TARGET_RUNTIME_DIR}
@@ -23,10 +23,10 @@ Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/llvm/runtimes/CM
      # We need to add the runtimes as a dependency because compiler-rt can be
      # built as part of runtimes and we need the profile runtime for PGO
      add_dependencies(clang-bootstrap-deps runtimes)
-Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/CMakeLists.txt
+Index: llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4.orig/openmp/CMakeLists.txt
-+++ llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/CMakeLists.txt
+--- llvm-toolchain-snapshot_17~++20230501082440+687542413531.orig/openmp/CMakeLists.txt
++++ llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/CMakeLists.txt
 @@ -91,6 +91,28 @@ else()
    set(LIBOMP_HEADERS_INSTALL_PATH "${OPENMP_INSTALL_LIBDIR}/clang/${CLANG_VERSION}/include")
  endif()
@@ -56,10 +56,10 @@ Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/CMakeList
  # Build host runtime library, after LIBOMPTARGET variables are set since they are needed
  # to enable time profiling support in the OpenMP runtime.
  add_subdirectory(runtime)
-Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/libomptarget/plugins/CMakeLists.txt
+Index: llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/libomptarget/plugins/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4.orig/openmp/libomptarget/plugins/CMakeLists.txt
-+++ llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/libomptarget/plugins/CMakeLists.txt
+--- llvm-toolchain-snapshot_17~++20230501082440+687542413531.orig/openmp/libomptarget/plugins/CMakeLists.txt
++++ llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/libomptarget/plugins/CMakeLists.txt
 @@ -48,6 +48,8 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "${tma
        NO_INSTALL_RPATH
      )
@@ -69,10 +69,10 @@ Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/libomptar
      # Install plugin under the lib destination folder.
      install(TARGETS "omptarget.rtl.${tmachine_libname}"
        LIBRARY DESTINATION "${OPENMP_INSTALL_LIBDIR}")
-Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/libomptarget/plugins/cuda/CMakeLists.txt
+Index: llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/libomptarget/plugins/cuda/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4.orig/openmp/libomptarget/plugins/cuda/CMakeLists.txt
-+++ llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/libomptarget/plugins/cuda/CMakeLists.txt
+--- llvm-toolchain-snapshot_17~++20230501082440+687542413531.orig/openmp/libomptarget/plugins/cuda/CMakeLists.txt
++++ llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/libomptarget/plugins/cuda/CMakeLists.txt
 @@ -55,6 +55,8 @@ endif()
  target_compile_definitions(omptarget.rtl.cuda PRIVATE TARGET_NAME="CUDA")
  target_include_directories(omptarget.rtl.cuda PRIVATE ${LIBOMPTARGET_INCLUDE_DIR})
@@ -82,13 +82,13 @@ Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/libomptar
  # Install plugin under the lib destination folder.
  install(TARGETS omptarget.rtl.cuda LIBRARY DESTINATION "${OPENMP_INSTALL_LIBDIR}")
  set_target_properties(omptarget.rtl.cuda PROPERTIES 
-Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/libomptarget/src/CMakeLists.txt
+Index: llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/libomptarget/src/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4.orig/openmp/libomptarget/src/CMakeLists.txt
-+++ llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/libomptarget/src/CMakeLists.txt
-@@ -35,7 +35,9 @@ add_llvm_library(omptarget
-   PRIVATE
-   "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exports"
+--- llvm-toolchain-snapshot_17~++20230501082440+687542413531.orig/openmp/libomptarget/src/CMakeLists.txt
++++ llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/libomptarget/src/CMakeLists.txt
+@@ -32,7 +32,9 @@ add_llvm_library(omptarget
+   Object
+ 
    NO_INSTALL_RPATH
 -)
 +  )
@@ -96,11 +96,11 @@ Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/libomptar
 +
  target_include_directories(omptarget PRIVATE ${LIBOMPTARGET_INCLUDE_DIR})
  
- # libomptarget.so needs to be aware of where the plugins live as they
-Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/runtime/CMakeLists.txt
+ if (LIBOMP_HAVE_VERSION_SCRIPT_FLAG)
+Index: llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/runtime/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4.orig/openmp/runtime/CMakeLists.txt
-+++ llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/runtime/CMakeLists.txt
+--- llvm-toolchain-snapshot_17~++20230501082440+687542413531.orig/openmp/runtime/CMakeLists.txt
++++ llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/runtime/CMakeLists.txt
 @@ -292,6 +292,10 @@ if(LIBOMP_STATS)
    set(LIBOMP_USE_STDCPPLIB TRUE)
  endif()
@@ -112,10 +112,10 @@ Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/runtime/C
  # Shared library can be switched to a static library
  set(LIBOMP_ENABLE_SHARED TRUE CACHE BOOL
    "Shared library instead of static library?")
-Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/runtime/src/CMakeLists.txt
+Index: llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/runtime/src/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4.orig/openmp/runtime/src/CMakeLists.txt
-+++ llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/runtime/src/CMakeLists.txt
+--- llvm-toolchain-snapshot_17~++20230501082440+687542413531.orig/openmp/runtime/src/CMakeLists.txt
++++ llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/runtime/src/CMakeLists.txt
 @@ -140,6 +140,7 @@ set_source_files_properties(${LIBOMP_GNU
  if(NOT ${LIBOMP_USE_STDCPPLIB})
    set(LIBOMP_LINKER_LANGUAGE C)
@@ -133,10 +133,10 @@ Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/runtime/s
  # Get the library's location within the build tree for the unit tester
  if(NOT WIN32)
    get_target_property(LIBOMP_LIBRARY_DIR omp LIBRARY_OUTPUT_DIRECTORY)
-Index: llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/tools/archer/CMakeLists.txt
+Index: llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/tools/archer/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4.orig/openmp/tools/archer/CMakeLists.txt
-+++ llvm-toolchain-snapshot_17~++20230411103725+b8917ac62ad4/openmp/tools/archer/CMakeLists.txt
+--- llvm-toolchain-snapshot_17~++20230501082440+687542413531.orig/openmp/tools/archer/CMakeLists.txt
++++ llvm-toolchain-snapshot_17~++20230501082440+687542413531/openmp/tools/archer/CMakeLists.txt
 @@ -15,6 +15,9 @@ if(LIBOMP_OMPT_SUPPORT AND LIBOMP_ARCHER
    target_link_libraries(archer ${CMAKE_DL_LIBS})
    add_library(archer_static STATIC ompt-tsan.cpp)
