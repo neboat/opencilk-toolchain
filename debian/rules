@@ -778,6 +778,8 @@ endif
 	touch $@
 
 debian-libclc-build:
+# workaround missing files on i386
+	cd $(TARGET_BUILD_STAGE2) && ninja opt llvm-link
 # Builds libclc
 	mkdir -p libclc/build
 	echo "Using cmake: $(CMAKE_BIN)"
