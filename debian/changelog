@@ -1,9 +1,10 @@
-llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:17~++20230517014958+7ce3d9228ff1-1~exp1) experimental; urgency=medium
 
   * llvm-debuginfod not installed anymore
     https://github.com/llvm/llvm-project/commit/8ac330bde40e9e0a0b2d0708ba6c7888fb1ce225
+  * experimental New snapshot release
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 30 Mar 2023 11:23:10 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 17 May 2023 13:50:09 +0200
 
 llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental; urgency=medium
 
