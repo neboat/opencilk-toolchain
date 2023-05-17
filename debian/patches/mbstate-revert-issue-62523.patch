@@ -14,22 +14,22 @@ Date:   Mon Apr 17 09:38:38 2023 -0700
     
     Differential Revision: https://reviews.llvm.org/D148542
 
-Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/CMakeLists.txt
+Index: llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd.orig/libcxx/include/CMakeLists.txt
-+++ llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/CMakeLists.txt
-@@ -622,7 +622,6 @@ set(files
-   __ranges/views.h
-   __ranges/zip_view.h
-   __split_buffer
--  __std_mbstate_t.h
-   __string/char_traits.h
-   __string/constexpr_c_functions.h
-   __string/extern_template_lists.h
-Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/__locale
+--- llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287.orig/libcxx/include/CMakeLists.txt
++++ llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/CMakeLists.txt
+@@ -462,7 +462,6 @@ set(files
+   __locale_dir/locale_base_api/bsd_locale_defaults.h
+   __locale_dir/locale_base_api/bsd_locale_fallbacks.h
+   __locale_dir/locale_base_api/locale_guard.h
+-  __mbstate_t.h
+   __mdspan/extents.h
+   __memory/addressof.h
+   __memory/align.h
+Index: llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/__locale
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd.orig/libcxx/include/__locale
-+++ llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/__locale
+--- llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287.orig/libcxx/include/__locale
++++ llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/__locale
 @@ -26,8 +26,6 @@
  
  #ifndef _LIBCPP_HAS_NO_WIDE_CHARACTERS
@@ -39,10 +39,10 @@ Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/_
  #endif
  
  #if defined(_LIBCPP_MSVCRT_LIKE)
-Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/__mbstate_t.h
+Index: llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/__mbstate_t.h
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd.orig/libcxx/include/__mbstate_t.h
-+++ llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/__mbstate_t.h
+--- llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287.orig/libcxx/include/__mbstate_t.h
++++ llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/__mbstate_t.h
 @@ -16,27 +16,29 @@
  #  pragma GCC system_header
  #endif
@@ -88,9 +88,9 @@ Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/_
 +_LIBCPP_END_NAMESPACE_STD
 +
  #endif // _LIBCPP___MBSTATE_T_H
-Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/__std_mbstate_t.h
+Index: llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/__std_mbstate_t.h
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd.orig/libcxx/include/__std_mbstate_t.h
+--- llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287.orig/libcxx/include/__std_mbstate_t.h
 +++ /dev/null
 @@ -1,29 +0,0 @@
 -// -*- C++ -*-
@@ -122,10 +122,10 @@ Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/_
 -_LIBCPP_END_NAMESPACE_STD
 -
 -#endif // _LIBCPP___STD_MBSTATE_T_H
-Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/iosfwd
+Index: llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/iosfwd
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd.orig/libcxx/include/iosfwd
-+++ llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/iosfwd
+--- llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287.orig/libcxx/include/iosfwd
++++ llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/iosfwd
 @@ -103,7 +103,7 @@ using u32streampos = fpos<char_traits<ch
  #include <__fwd/sstream.h>
  #include <__fwd/streambuf.h>
@@ -135,11 +135,11 @@ Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/i
  #include <version>
  
  #if !defined(_LIBCPP_HAS_NO_PRAGMA_SYSTEM_HEADER)
-Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/module.modulemap.in
+Index: llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/module.modulemap.in
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd.orig/libcxx/include/module.modulemap.in
-+++ llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/module.modulemap.in
-@@ -1755,7 +1755,6 @@ module std [system] {
+--- llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287.orig/libcxx/include/module.modulemap.in
++++ llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/module.modulemap.in
+@@ -1793,7 +1793,6 @@ module std [system] {
    module __mbstate_t         { private header "__mbstate_t.h"       export * }
    module __node_handle       { private header "__node_handle"       export * }
    module __split_buffer      { private header "__split_buffer"      export * }
@@ -147,10 +147,10 @@ Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/m
    module __threading_support {         header "__threading_support" export * }
    module __tree              {         header "__tree"              export * }
    module __undef_macros      {         header "__undef_macros"      export * }
-Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/uchar.h
+Index: llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/uchar.h
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd.orig/libcxx/include/uchar.h
-+++ llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/uchar.h
+--- llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287.orig/libcxx/include/uchar.h
++++ llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/uchar.h
 @@ -42,12 +42,10 @@ size_t c32rtomb(char* s, char32_t c32, m
  
  // Some platforms don't implement <uchar.h> and we don't want to give a hard
@@ -165,10 +165,10 @@ Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/u
  # include <stddef.h>
  #endif
  
-Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/wchar.h
+Index: llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/wchar.h
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd.orig/libcxx/include/wchar.h
-+++ llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/wchar.h
+--- llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287.orig/libcxx/include/wchar.h
++++ llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/include/wchar.h
 @@ -122,8 +122,6 @@ size_t wcsrtombs(char* restrict dst, con
  
  #  if __has_include_next(<wchar.h>)
@@ -178,22 +178,22 @@ Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/include/w
  #  endif
  
  // Determine whether we have const-correct overloads for wcschr and friends.
-Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/test/libcxx/private_headers.verify.cpp
+Index: llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/test/libcxx/private_headers.verify.cpp
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd.orig/libcxx/test/libcxx/private_headers.verify.cpp
-+++ llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/test/libcxx/private_headers.verify.cpp
-@@ -620,7 +620,6 @@ END-SCRIPT
+--- llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287.orig/libcxx/test/libcxx/private_headers.verify.cpp
++++ llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/test/libcxx/private_headers.verify.cpp
+@@ -625,7 +625,6 @@ END-SCRIPT
  #include <__ranges/views.h> // expected-error@*:* {{use of private header from outside its module: '__ranges/views.h'}}
  #include <__ranges/zip_view.h> // expected-error@*:* {{use of private header from outside its module: '__ranges/zip_view.h'}}
  #include <__split_buffer> // expected-error@*:* {{use of private header from outside its module: '__split_buffer'}}
 -#include <__std_mbstate_t.h> // expected-error@*:* {{use of private header from outside its module: '__std_mbstate_t.h'}}
- #include <__string/char_traits.h> // expected-error@*:* {{use of private header from outside its module: '__string/char_traits.h'}}
- #include <__string/constexpr_c_functions.h> // expected-error@*:* {{use of private header from outside its module: '__string/constexpr_c_functions.h'}}
- #include <__string/extern_template_lists.h> // expected-error@*:* {{use of private header from outside its module: '__string/extern_template_lists.h'}}
-Index: llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/utils/generate_iwyu_mapping.py
+ #include <__stop_token/atomic_unique_lock.h> // expected-error@*:* {{use of private header from outside its module: '__stop_token/atomic_unique_lock.h'}}
+ #include <__stop_token/intrusive_list_view.h> // expected-error@*:* {{use of private header from outside its module: '__stop_token/intrusive_list_view.h'}}
+ #include <__stop_token/intrusive_shared_ptr.h> // expected-error@*:* {{use of private header from outside its module: '__stop_token/intrusive_shared_ptr.h'}}
+Index: llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/utils/generate_iwyu_mapping.py
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd.orig/libcxx/utils/generate_iwyu_mapping.py
-+++ llvm-toolchain-snapshot_17~++20230512092652+af161ffc7fdd/libcxx/utils/generate_iwyu_mapping.py
+--- llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287.orig/libcxx/utils/generate_iwyu_mapping.py
++++ llvm-toolchain-snapshot_17~++20230517091838+e335e8a43287/libcxx/utils/generate_iwyu_mapping.py
 @@ -56,12 +56,11 @@ def generate_map(include):
          elif i == '__pstl_memory': continue
          elif i == '__pstl_numeric': continue
