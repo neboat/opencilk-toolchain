@@ -1,0 +1,14 @@
+Index: llvm-toolchain-snapshot_17~++20230517080653+e9a17453ee55/libcxx/i>
+===================================================================
+--- llvm-toolchain-snapshot_17~++20230517080653+e9a17453ee55.orig/libcxx>
++++ llvm-toolchain-snapshot_17~++20230517080653+e9a17453ee55/libcxx/incl>
+@@ -122,6 +122,8 @@ size_t wcsrtombs(char* restrict dst, con
+ #define __CORRECT_ISO_CPP_WCHAR_H_PROTO
+ #endif
+
++#define __DEFINED_mbstate_t
++
+ #  if __has_include_next(<wchar.h>)
+ #    include_next <wchar.h>
+ #  else
+

@@ -1,7 +1,8 @@
-diff --git a/clang/cmake/modules/AddGRPC.cmake b/clang/cmake/modules/AddGRPC.cmake
---- a/clang/cmake/modules/AddGRPC.cmake
-+++ b/clang/cmake/modules/AddGRPC.cmake
-@@ -4,8 +4,13 @@
+Index: llvm-toolchain-snapshot_17~++20230517080653+e9a17453ee55/clang/cmake/modules/AddGRPC.cmake
+===================================================================
+--- llvm-toolchain-snapshot_17~++20230517080653+e9a17453ee55.orig/clang/cmake/modules/AddGRPC.cmake
++++ llvm-toolchain-snapshot_17~++20230517080653+e9a17453ee55/clang/cmake/modules/AddGRPC.cmake
+@@ -4,8 +4,13 @@ function(generate_clang_protos_library L
    # Take the first two args and forward the remaining to generate_proto_sources.
    cmake_parse_arguments(PARSE_ARGV 2 PROTO "" "" "")
    generate_proto_sources(ProtoSource ${ProtoFile} ${PROTO_UNPARSED_ARGUMENTS})
@@ -16,10 +17,11 @@ diff --git a/clang/cmake/modules/AddGRPC.cmake b/clang/cmake/modules/AddGRPC.cma
 +    LINK_LIBS PUBLIC  ${LINKED_GRPC_LIBRARIES})
 +
  endfunction()
-diff --git a/cmake/Modules/FindGRPC.cmake b/cmake/Modules/FindGRPC.cmake
---- a/cmake/Modules/FindGRPC.cmake
-+++ b/cmake/Modules/FindGRPC.cmake
-@@ -82,11 +82,28 @@
+Index: llvm-toolchain-snapshot_17~++20230517080653+e9a17453ee55/cmake/Modules/FindGRPC.cmake
+===================================================================
+--- llvm-toolchain-snapshot_17~++20230517080653+e9a17453ee55.orig/cmake/Modules/FindGRPC.cmake
++++ llvm-toolchain-snapshot_17~++20230517080653+e9a17453ee55/cmake/Modules/FindGRPC.cmake
+@@ -82,11 +82,28 @@ else()
      endif()
    endif()
    if(NOT TARGET grpc++)
