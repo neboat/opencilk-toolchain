@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_14~++20211105102832+020ca1747d6c/llvm/unittests/Support/Path.cpp
+Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/llvm/unittests/Support/Path.cpp
 ===================================================================
---- llvm-toolchain-snapshot_14~++20211105102832+020ca1747d6c.orig/llvm/unittests/Support/Path.cpp
-+++ llvm-toolchain-snapshot_14~++20211105102832+020ca1747d6c/llvm/unittests/Support/Path.cpp
-@@ -677,7 +677,7 @@ protected:
+--- llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79.orig/llvm/unittests/Support/Path.cpp
++++ llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/llvm/unittests/Support/Path.cpp
+@@ -679,7 +679,7 @@ protected:
      sys::path::append(NonExistantFile, "1B28B495C16344CB9822E588CD4C3EF0");
    }
  
@@ -11,7 +11,7 @@ Index: llvm-toolchain-snapshot_14~++20211105102832+020ca1747d6c/llvm/unittests/S
  };
  
  TEST_F(FileSystemTest, Unique) {
-@@ -761,7 +761,8 @@ TEST_F(FileSystemTest, RealPath) {
+@@ -763,7 +763,8 @@ TEST_F(FileSystemTest, RealPath) {
  
    // This can fail if $HOME is not set and getpwuid fails.
    bool Result = llvm::sys::path::home_directory(HomeDir);
@@ -21,7 +21,7 @@ Index: llvm-toolchain-snapshot_14~++20211105102832+020ca1747d6c/llvm/unittests/S
      checkSeparators(HomeDir);
      ASSERT_NO_ERROR(fs::real_path(HomeDir, Expected));
      checkSeparators(Expected);
-@@ -770,6 +771,7 @@ TEST_F(FileSystemTest, RealPath) {
+@@ -772,6 +773,7 @@ TEST_F(FileSystemTest, RealPath) {
      ASSERT_NO_ERROR(fs::real_path("~/", Actual, true));
      EXPECT_EQ(Expected, Actual);
    }
