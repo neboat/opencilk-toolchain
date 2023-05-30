@@ -1203,6 +1203,9 @@ endif
 		touch $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/empty; \
 	fi
 
+# Remove some mlir example
+	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libMyExtensionCh*.a
+
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
 	rm -rf $(TARGET_BUILD)
