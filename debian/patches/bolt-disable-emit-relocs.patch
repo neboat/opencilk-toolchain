@@ -1,9 +1,9 @@
-Index: llvm-toolchain-snapshot_16~++20230104114047+37228b1baa48/bolt/tools/merge-fdata/CMakeLists.txt
+Index: llvm-toolchain-snapshot_17~++20230601055733+ee6ec2c5f1a5/bolt/tools/merge-fdata/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_16~++20230104114047+37228b1baa48.orig/bolt/tools/merge-fdata/CMakeLists.txt
-+++ llvm-toolchain-snapshot_16~++20230104114047+37228b1baa48/bolt/tools/merge-fdata/CMakeLists.txt
-@@ -18,6 +18,6 @@ install(PROGRAMS
-   )
+--- llvm-toolchain-snapshot_17~++20230601055733+ee6ec2c5f1a5.orig/bolt/tools/merge-fdata/CMakeLists.txt
++++ llvm-toolchain-snapshot_17~++20230601055733+ee6ec2c5f1a5/bolt/tools/merge-fdata/CMakeLists.txt
+@@ -12,6 +12,6 @@ add_bolt_tool(merge-fdata
+ add_dependencies(bolt merge-fdata)
  
  # Emit relocations for BOLT meta test (bolt/test/runtime/meta-merge-fdata.test)
 -if (BOLT_INCLUDE_TESTS AND UNIX AND NOT APPLE)
