@@ -5,8 +5,10 @@ llvm-toolchain-snapshot (1:17~++20230603110125+d072d110227d-1~exp1) experimental
   * New snapshot release
   * Yet a new element (omp) to disable in cmake detection. Upstream #62622
   * remove some mlir example (libMyExtensionCh*.a)
+  * Try to pass MAKE_C_COMPILER_LAUNCHER and CMAKE_CXX_COMPILER_LAUNCHER
+    in CLANG_BOOTSTRAP_PASSTHROUGH for sccache in stage2
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 03 Jun 2023 11:01:35 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 09 Jun 2023 13:25:01 +0200
 
 llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental; urgency=medium
 
