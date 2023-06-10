@@ -1,0 +1,13 @@
+Index: llvm-toolchain-snapshot_17~++20230610085902+8e44b849da1c/llvm/lib/CodeGen/MachineScheduler.cpp
+===================================================================
+--- llvm-toolchain-snapshot_17~++20230610085902+8e44b849da1c.orig/llvm/lib/CodeGen/MachineScheduler.cpp
++++ llvm-toolchain-snapshot_17~++20230610085902+8e44b849da1c/llvm/lib/CodeGen/MachineScheduler.cpp
+@@ -2813,7 +2813,7 @@ LLVM_DUMP_METHOD void SchedBoundary::dum
+       dbgs() << ResName << "(" << UnitIdx << ") = ";
+       if (SchedModel && SchedModel->enableIntervals()) {
+         if (ReservedResourceSegments.count(StartIdx + UnitIdx))
+-          dbgs() << ReservedResourceSegments.at(StartIdx + UnitIdx);
++          dbgs() << "ReservedResourceSegments.at(StartIdx + UnitIdx)";
+         else
+           dbgs() << "{ }\n";
+       } else
