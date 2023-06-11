@@ -9,6 +9,7 @@ llvm-toolchain-15 (1:15.0.7-5~exp3) UNRELEASED; urgency=medium
 llvm-toolchain-15 (1:15.0.7-5~exp2) experimental; urgency=medium
 
   * Also apply the workround of issue #62621 for focal
+    and to include libpolly-15-dev
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 10 Jun 2023 11:52:14 +0200
 
