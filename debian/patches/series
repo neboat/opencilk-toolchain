@@ -151,3 +151,4 @@ link-grpc.diff
 
 amdgpu/nonlinux.patch
 #amdgpu/bitcode-multiarch.patch
+ubuntu-releases.patch
