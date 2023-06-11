@@ -1,0 +1,36 @@
+Description: Update the list of Ubuntu release names
+Forwarded: no
+Author: Graham Inggs <ginggs@debian.org>
+Last-Update: 2023-04-29
+
+--- a/clang/include/clang/Driver/Distro.h
++++ b/clang/include/clang/Driver/Distro.h
+@@ -76,6 +76,8 @@
+     UbuntuImpish,
+     UbuntuJammy,
+     UbuntuKinetic,
++    UbuntuLunar,
++    UbuntuMantic,
+     UnknownDistro
+   };
+ 
+@@ -127,7 +129,7 @@
+   }
+ 
+   bool IsUbuntu() const {
+-    return DistroVal >= UbuntuHardy && DistroVal <= UbuntuKinetic;
++    return DistroVal >= UbuntuHardy && DistroVal <= UbuntuMantic;
+   }
+ 
+   bool IsAlpineLinux() const { return DistroVal == AlpineLinux; }
+--- a/clang/lib/Driver/Distro.cpp
++++ b/clang/lib/Driver/Distro.cpp
+@@ -92,6 +92,8 @@
+                     .Case("impish", Distro::UbuntuImpish)
+                     .Case("jammy", Distro::UbuntuJammy)
+                     .Case("kinetic", Distro::UbuntuKinetic)
++                    .Case("lunar", Distro::UbuntuLunar)
++                    .Case("mantic", Distro::UbuntuMantic)
+                     .Default(Distro::UnknownDistro);
+   return Version;
+ }

@@ -1,3 +1,11 @@
+llvm-toolchain-15 (1:15.0.7-5~exp3) UNRELEASED; urgency=medium
+
+  [ Graham Inggs ]
+  * debian/patches/ubuntu-releases.patch: Update the list of
+    Ubuntu release names
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 11 Jun 2023 09:26:23 +0200
+
 llvm-toolchain-15 (1:15.0.7-5~exp2) experimental; urgency=medium
 
   * Also apply the workround of issue #62621 for focal
