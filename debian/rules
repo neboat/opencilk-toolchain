@@ -187,10 +187,6 @@ endif
 ifneq (,$(filter $(DEB_HOST_ARCH),i386))
 # Sometimes, i386 needs help with the triple
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=i386-linux-gnu
-endif
-
-ifneq (,$(filter $(DEB_HOST_ARCH),i386))
-# Sometimes, i386 needs help with the triple
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=i386-linux-gnu
 endif
 
