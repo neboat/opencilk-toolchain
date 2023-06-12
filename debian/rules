@@ -157,8 +157,6 @@ export CC=gcc-$(GCC_VERSION)
 export CXX=g++-$(GCC_VERSION)
 endif
 
-opt_flags = -O2 -DNDEBUG -g1
-
 ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabi
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
@@ -187,10 +185,6 @@ endif
 ifneq (,$(filter $(DEB_HOST_ARCH),i386))
 # Sometimes, i386 needs help with the triple
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=i386-linux-gnu
-endif
-
-ifneq (,$(filter $(DEB_HOST_ARCH),i386))
-# Sometimes, i386 needs help with the triple
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=i386-linux-gnu
 endif
 
@@ -210,6 +204,9 @@ endif
 # more than 2 jobs causes OOM in Ubuntu and slows down build process.
 ifneq (,$(filter $(DEB_HOST_ARCH),riscv64))
   NJOBS=2
+  opt_flags = -O2 -DNDEBUG -g0
+else
+  opt_flags = -O2 -DNDEBUG -g1
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),sparc))

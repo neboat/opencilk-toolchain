@@ -33,6 +33,37 @@ llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 28 Jan 2023 18:07:40 +0100
 
+llvm-toolchain-16 (1:16.0.5-1~exp2) UNRELEASED; urgency=medium
+
+  * Add patch from llvm-15 (Graham Inggs) to update Ubuntu releases names
+    to include Ubuntu mantic
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 11 Jun 2023 09:32:08 +0200
+
+llvm-toolchain-16 (1:16.0.5-1~exp1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 03 Jun 2023 12:00:55 +0200
+
+llvm-toolchain-16 (1:16.0.4-1~exp1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 17 May 2023 09:25:29 +0200
+
+llvm-toolchain-16 (1:16.0.3-1~exp1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 03 May 2023 10:38:19 +0200
+
+llvm-toolchain-16 (1:16.0.2-1~exp1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 22 Apr 2023 22:57:25 +0200
+
 llvm-toolchain-16 (1:16.0.1-1~exp2) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
@@ -219,6 +250,31 @@ llvm-toolchain-15 (1:15.0.7-2) unstable; urgency=medium
   [ Gianfranco Costamagna ]
   * Update print lldb python patch, following what was done
     in automake for newer python
+  [ Sylvestre Ledru ]
+  * Yeah, we would like to have this version in bookworm
+    (Closes: #1032316)
+  * Adjust some lintian overrides
+  * Disable flang on s390x. Seems that it is breaking
+
+  [ Gianfranco Costamagna ]
+  * Update print lldb python patch, following what was done
+    in automake for newer python
+
+  [ Samuel Thibault ]
+  * Fix disabling amdgpu on non-Linux.
+
+  [ John Paul Adrian Glaubitz ]
+  * Don't run chrpath for libclang on powerpc and powerpcspe
+
+  [ Faidon Liambotis ]
+  * Update the wasm-sysroot-usr.diff patch to restore functionality that was
+    accidentally dropped when the patch was forward-ported from 14 to 15. This
+    resolves an issue in which clang++ builds would fail if libc++-15-dev was
+    installed alongside libc++-15-dev-wasm32. (Closes: #1029010, #1032317)
+
+  [ Cordell Bloor ]
+  * Backport support for HIP in /usr and add Debian paths
+    for rocm-device-libs to search list (Closes: #1031808)
 
   [ Samuel Thibault ]
   * Fix disabling amdgpu on non-Linux.
