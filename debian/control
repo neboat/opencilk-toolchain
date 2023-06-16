@@ -415,7 +415,7 @@ Description: Modular compiler and toolchain technologies, IR interpreter
 Package: llvm-16-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev, ${misc:Depends},
- llvm-16 (= ${binary:Version}), libllvm16 (= ${binary:Version}), libtinfo-dev,
+ llvm-16 (= ${binary:Version}), libllvm16 (= ${binary:Version}), libncurses-dev,
  llvm-16-tools (= ${binary:Version}), libclang-cpp16 (= ${binary:Version}),
  libz3-dev, libxml2-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
