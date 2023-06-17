@@ -281,7 +281,7 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 endif
 
 # gold linker is producing broken clang on powerpc https://sourceware.org/bugzilla/show_bug.cgi?id=30536
-BINUTILS_GOLD_ARCHS := amd64 arm64 armhf i386 x32 s390x hurd-i386 kfreebsd-amd64 kfreebsd-i386
+BINUTILS_GOLD_ARCHS := amd64 arm64 armhf i386 x32 s390x powerpc hurd-i386 kfreebsd-amd64 kfreebsd-i386
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.23.1-1~exp3 ; echo $$?),0)
 ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 	STAGE_ALL_CMAKE_EXTRA += -DLLVM_USE_LINKER=gold
