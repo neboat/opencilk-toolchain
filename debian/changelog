@@ -1,6 +1,5 @@
 llvm-toolchain-16 (1:16.0.6-2) UNRELEASED; urgency=medium
 
-<<<<<<<
   * Remove debian/NEWS to fix debian-news-entry-has-unknown-version
   * Fix libomp-16-doc: documentation-package-not-architecture-independent
   * Fix llvm-16-dev: depends-on-obsolete-package Depends: libtinfo-dev => libncurses-dev
@@ -14,19 +13,6 @@ llvm-toolchain-16 (1:16.0.6-2) UNRELEASED; urgency=medium
   * Try to unbreak HURD
   * Add back powerpc to gold architectures
   * Use bfd linker on p*pc*
-=======
-  * Remove debian/NEWS to fix debian-news-entry-has-unknown-version
-  * Fix libomp-16-doc: documentation-package-not-architecture-independent
-  * Fix llvm-16-dev: depends-on-obsolete-package
-    Depends: libtinfo-dev => libncurses-dev
-  * Enable Xtensa experimental backend (Closes: #1033911)
-  * Fix the path /usr/lib/llvm-16/lib/clang/16/ (Closes: #1036623)
-
-  [ Gianfranco Costamagna ]
-  * Try to unbreak HURD
-  * Add back powerpc to gold architectures
-  * Use bfd linker on p*pc*
->>>>>>>
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 16 Jun 2023 08:30:52 +0200
 
