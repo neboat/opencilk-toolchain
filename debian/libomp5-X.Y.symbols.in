@@ -282,13 +282,17 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmp_acquire_queuing_lock@VERSION 0.20130715
  __kmp_acquire_tas_lock@VERSION 0.20130715
  __kmp_acquire_ticket_lock@VERSION 0.20130715
+ __kmp_debugging@VERSION 1:16.0.2-1~
  __kmp_fork_call@VERSION 0.20130715
  __kmp_get_reduce_method@VERSION 0.20130412
  __kmp_invoke_microtask@VERSION 0.20130715
  __kmp_itt_fini_ittlib@VERSION 0.20130715
  __kmp_itt_init_ittlib@VERSION 0.20130715
+ __kmp_omp_debug_struct_info@VERSION 1:16.0.2-1~
+ __kmp_reap_monitor@VERSION 1:16.0.2-1~
  __kmp_reap_worker@VERSION 0.20130715
  __kmp_release_64@VERSION 0.20140926
+ __kmp_reset_stats@VERSION 1:16.0.2-1~
  __kmp_thread_pool@VERSION 0.20130412
  __kmp_wait_4@VERSION 9
  __kmp_wait_64@VERSION 0.20140926
@@ -811,6 +815,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_cancel_barrier@VERSION 0.20131209
  __kmpc_cancellationpoint@VERSION 0.20131209
  __kmpc_copyprivate@VERSION 0.20130412
+ __kmpc_copyprivate_light@VERSION 1:16.0.2-1~
  __kmpc_critical@VERSION 0.20130412
  __kmpc_critical_with_hint@VERSION 3.8.0
  __kmpc_destroy_allocator@VERSION 9
@@ -849,6 +854,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_end_reduce@VERSION 0.20130412
  __kmpc_end_reduce_nowait@VERSION 0.20130412
  __kmpc_end_scope@VERSION 14
+ __kmpc_end_sections@VERSION 1:16.0.2-1~
  __kmpc_end_serialized_parallel@VERSION 0.20130412
  __kmpc_end_single@VERSION 0.20130412
  __kmpc_end_taskgroup@VERSION 0.20130412
@@ -860,6 +866,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_for_static_init_8@VERSION 0.20130412
  __kmpc_for_static_init_8u@VERSION 0.20130412
  __kmpc_fork_call@VERSION 0.20130412
+ __kmpc_fork_call_if@VERSION 1:16.0.2-1~
  __kmpc_fork_teams@VERSION 0.20130715
  __kmpc_free@VERSION 8
  __kmpc_get_default_allocator@VERSION 8
@@ -877,7 +884,10 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_invoke_task_func@VERSION 0.20130412
  __kmpc_masked@VERSION 13
  __kmpc_master@VERSION 0.20130412
+ __kmpc_next_section@VERSION 1:16.0.2-1~
  __kmpc_ok_to_fork@VERSION 0.20130412
+ __kmpc_omp_get_target_async_handle_ptr@VERSION 1:16.0.2-1~
+ __kmpc_omp_has_task_team@VERSION 1:16.0.2-1~
  __kmpc_omp_reg_task_with_affinity@VERSION 8
  __kmpc_omp_target_task_alloc@VERSION 9
  __kmpc_omp_task@VERSION 0.20130412
@@ -887,6 +897,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_omp_task_parts@VERSION 0.20130412
  __kmpc_omp_task_with_deps@VERSION 0.20130912
  __kmpc_omp_taskwait@VERSION 0.20130412
+ __kmpc_omp_taskwait_deps_51@VERSION 1:16.0.2-1~
  __kmpc_omp_taskyield@VERSION 0.20130412
  __kmpc_omp_wait_deps@VERSION 0.20130912
  __kmpc_ordered@VERSION 0.20130412
@@ -902,6 +913,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_reduce@VERSION 0.20130412
  __kmpc_reduce_nowait@VERSION 0.20130412
  __kmpc_scope@VERSION 14
+ __kmpc_sections_init@VERSION 1:16.0.2-1~
  __kmpc_serialized_parallel@VERSION 0.20130412
  __kmpc_set_default_allocator@VERSION 8
  __kmpc_set_lock@VERSION 0.20130412
@@ -1086,6 +1098,18 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_get_initial_device@VERSION 8
  omp_get_initial_device_@OMP_4.5 13
  omp_get_initial_device_@VERSION 8
+ omp_get_interop_int@VERSION 1:16.0.2-1~
+ omp_get_interop_int_@VERSION 1:16.0.2-1~
+ omp_get_interop_name@VERSION 1:16.0.2-1~
+ omp_get_interop_name_@VERSION 1:16.0.2-1~
+ omp_get_interop_ptr@VERSION 1:16.0.2-1~
+ omp_get_interop_ptr_@VERSION 1:16.0.2-1~
+ omp_get_interop_rc_desc@VERSION 1:16.0.2-1~
+ omp_get_interop_rc_desc_@VERSION 1:16.0.2-1~
+ omp_get_interop_str@VERSION 1:16.0.2-1~
+ omp_get_interop_str_@VERSION 1:16.0.2-1~
+ omp_get_interop_type_desc@VERSION 1:16.0.2-1~
+ omp_get_interop_type_desc_@VERSION 1:16.0.2-1~
  omp_get_level@OMP_3.0 0.20131209
  omp_get_level@VERSION 0.20130412
  omp_get_level_@OMP_3.0 0.20131209
@@ -1112,6 +1136,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_get_num_devices@VERSION 8
  omp_get_num_devices_@OMP_4.0 8
  omp_get_num_devices_@VERSION 8
+ omp_get_num_interop_properties@VERSION 1:16.0.2-1~
+ omp_get_num_interop_properties_@VERSION 1:16.0.2-1~
  omp_get_num_places@OMP_4.5 7
  omp_get_num_places@VERSION 3.9.0
  omp_get_num_places_@OMP_4.5 7
@@ -1186,6 +1212,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_get_wtime_@VERSION 0.20130412
  omp_high_bw_mem_alloc@VERSION 8
  omp_high_bw_mem_space@VERSION 9
+ omp_in_explicit_task@VERSION 1:16.0.2-1~
+ omp_in_explicit_task_@VERSION 1:16.0.2-1~
  omp_in_final@OMP_3.1 0.20131209
  omp_in_final@VERSION 0.20130412
  omp_in_final_@OMP_3.1 0.20131209
@@ -1314,4 +1342,5 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  ompc_set_nested@VERSION 0.20130412
  ompc_set_num_threads@VERSION 0.20130412
  ompc_set_schedule@VERSION 0.20130412
+ ompt_libomp_connect@VERSION 1:16.0.2-1~
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)ompt_start_tool@VERSION 6.0
