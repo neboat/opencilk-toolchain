@@ -5,6 +5,7 @@ llvm-toolchain-16 (1:16.0.6-2) UNRELEASED; urgency=medium
   * Fix llvm-16-dev: depends-on-obsolete-package Depends: libtinfo-dev => libncurses-dev
   * Enable Xtensa experimental backend (Closes: #1033911)
   * Fix the path /usr/lib/llvm-16/lib/clang/16/ (Closes: #1036623)
+  * Refresh the list of symbol of libclang1-16
 
   [ Gianfranco Costamagna ]
   * Try to unbreak HURD
