@@ -49,7 +49,7 @@ llvm-toolchain-16 (1:16.0.6-2) unstable; urgency=medium
   * Add back powerpc to gold architectures
   * Use bfd linker on p*pc*
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 24 Jun 2023 20:45:34 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 14 Jun 2023 08:06:04 +0200
 
 llvm-toolchain-16 (1:16.0.6-1) unstable; urgency=medium
 
