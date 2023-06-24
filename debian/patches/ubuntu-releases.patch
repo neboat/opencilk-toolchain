@@ -1,0 +1,38 @@
+Description: Update the list of Ubuntu release names
+Forwarded: no
+Author: Graham Inggs <ginggs@debian.org>
+Last-Update: 2023-04-29
+
+Index: llvm-toolchain-16-16.0.5/clang/include/clang/Driver/Distro.h
+===================================================================
+--- llvm-toolchain-16-16.0.5.orig/clang/include/clang/Driver/Distro.h
++++ llvm-toolchain-16-16.0.5/clang/include/clang/Driver/Distro.h
+@@ -77,6 +77,7 @@
+     UbuntuJammy,
+     UbuntuKinetic,
+     UbuntuLunar,
++    UbuntuMantic,
+     UnknownDistro
+   };
+ 
+@@ -128,7 +129,7 @@
+   }
+ 
+   bool IsUbuntu() const {
+-    return DistroVal >= UbuntuHardy && DistroVal <= UbuntuLunar;
++    return DistroVal >= UbuntuHardy && DistroVal <= UbuntuMantic;
+   }
+ 
+   bool IsAlpineLinux() const { return DistroVal == AlpineLinux; }
+Index: llvm-toolchain-16-16.0.5/clang/lib/Driver/Distro.cpp
+===================================================================
+--- llvm-toolchain-16-16.0.5.orig/clang/lib/Driver/Distro.cpp
++++ llvm-toolchain-16-16.0.5/clang/lib/Driver/Distro.cpp
+@@ -93,6 +93,7 @@
+                     .Case("jammy", Distro::UbuntuJammy)
+                     .Case("kinetic", Distro::UbuntuKinetic)
+                     .Case("lunar", Distro::UbuntuLunar)
++                    .Case("mantic", Distro::UbuntuMantic)
+                     .Default(Distro::UnknownDistro);
+   return Version;
+ }
