@@ -1,4 +1,4 @@
-llvm-toolchain-15 (1:15.0.7-5~exp3) UNRELEASED; urgency=medium
+llvm-toolchain-15 (1:15.0.7-5) unstable; urgency=medium
 
   [ Graham Inggs ]
   * debian/patches/ubuntu-releases.patch: Update the list of
@@ -7,11 +7,12 @@ llvm-toolchain-15 (1:15.0.7-5~exp3) UNRELEASED; urgency=medium
   [ Gianfranco Costamagna ]
   * Add powerpc to GOLD architectures
   * Cherry-pick upstream fix for newer cmake-related build failure
+  * Cherry-pick upstream fix for HIP search path depending on os-release (Closes: #1037452)
 
   [ Steve Langasek ]
   * debian/rules: disable -Wl,-Bsymbolic-functions for libomp.  LP: #2016471.
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 24 Jun 2023 20:02:22 +0200
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 24 Jun 2023 20:04:59 +0200
 
 llvm-toolchain-15 (1:15.0.7-5~exp2) experimental; urgency=medium
 
