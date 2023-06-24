@@ -33,12 +33,40 @@ llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 28 Jan 2023 18:07:40 +0100
 
-llvm-toolchain-16 (1:16.0.5-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-16 (1:16.0.6-2) unstable; urgency=medium
 
+  * Remove debian/NEWS to fix debian-news-entry-has-unknown-version
+  * Fix libomp-16-doc: documentation-package-not-architecture-independent
+  * Fix llvm-16-dev: depends-on-obsolete-package Depends: libtinfo-dev => libncurses-dev
+  * Enable Xtensa experimental backend (Closes: #1033911)
+  * Fix the path /usr/lib/llvm-16/lib/clang/16/ (Closes: #1036623)
+  * Refresh the list of symbol of libclang1-16
+  * Refresh the list of symbol for libomp.so.5
+  * Add symbols files for libomptarget.rtl* and libomptarget.so
+
+  [ Gianfranco Costamagna ]
+  * Try to unbreak HURD
+  * Add back powerpc to gold architectures
+  * Use bfd linker on p*pc*
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 24 Jun 2023 20:45:34 +0200
+
+llvm-toolchain-16 (1:16.0.6-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 14 Jun 2023 08:06:04 +0200
+
+llvm-toolchain-16 (1:16.0.5-1) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
   * Add patch from llvm-15 (Graham Inggs) to update Ubuntu releases names
     to include Ubuntu mantic
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 11 Jun 2023 09:32:08 +0200
+  [ Sylvestre Ledru ]
+  * Upload to unstable
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 11 Jun 2023 13:15:48 +0200
 
 llvm-toolchain-16 (1:16.0.5-1~exp1) experimental; urgency=medium
 
@@ -220,7 +248,40 @@ llvm-toolchain-snapshot (1:16~++20220731055325+02b3a358926e-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jul 2022 21:36:27 +0200
 
-llvm-toolchain-15 (1:15.0.7-4) UNRELEASED; urgency=medium
+llvm-toolchain-15 (1:15.0.7-5) unstable; urgency=medium
+
+  [ Graham Inggs ]
+  * debian/patches/ubuntu-releases.patch: Update the list of
+    Ubuntu release names
+
+  [ Gianfranco Costamagna ]
+  * Add powerpc to GOLD architectures
+  * Cherry-pick upstream fix for newer cmake-related build failure
+  * Cherry-pick upstream fix for HIP search path depending on os-release (Closes: #1037452)
+
+  [ Steve Langasek ]
+  * debian/rules: disable -Wl,-Bsymbolic-functions for libomp.  LP: #2016471.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 24 Jun 2023 20:04:59 +0200
+
+llvm-toolchain-15 (1:15.0.7-5~exp2) experimental; urgency=medium
+
+  * Also apply the workround of issue #62621 for focal
+    and to include libpolly-15-dev
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 10 Jun 2023 11:52:14 +0200
+
+llvm-toolchain-15 (1:15.0.7-5~exp1) experimental; urgency=medium
+
+  * Remove old code to manage Debian stretch
+  * Force the replacement of new Ubuntu packages introduced in
+    https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-15/+bug/2008755
+  * Adjust LIBCXXABI_ARM_EHABI => _LIBCXXABI_ARM_EHABI
+    Issue: https://github.com/llvm/llvm-project/issues/59240
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 04 Jun 2023 11:35:54 +0200
+
+llvm-toolchain-15 (1:15.0.7-4) unstable; urgency=medium
 
   * Fix debian/libclang1-15.symbols soname
   * Remove build artifacts if any
@@ -235,12 +296,6 @@ llvm-toolchain-15 (1:15.0.7-3) unstable; urgency=medium
 
 llvm-toolchain-15 (1:15.0.7-2) unstable; urgency=medium
 
-  * Adjust some lintian overrides
-  * Disable flang on s390x. Seems that it is breaking
-
-  [ Gianfranco Costamagna ]
-  * Update print lldb python patch, following what was done
-    in automake for newer python
   [ Sylvestre Ledru ]
   * Yeah, we would like to have this version in bookworm
     (Closes: #1032316)
@@ -250,31 +305,6 @@ llvm-toolchain-15 (1:15.0.7-2) unstable; urgency=medium
   [ Gianfranco Costamagna ]
   * Update print lldb python patch, following what was done
     in automake for newer python
-  [ Sylvestre Ledru ]
-  * Yeah, we would like to have this version in bookworm
-    (Closes: #1032316)
-  * Adjust some lintian overrides
-  * Disable flang on s390x. Seems that it is breaking
-
-  [ Gianfranco Costamagna ]
-  * Update print lldb python patch, following what was done
-    in automake for newer python
-
-  [ Samuel Thibault ]
-  * Fix disabling amdgpu on non-Linux.
-
-  [ John Paul Adrian Glaubitz ]
-  * Don't run chrpath for libclang on powerpc and powerpcspe
-
-  [ Faidon Liambotis ]
-  * Update the wasm-sysroot-usr.diff patch to restore functionality that was
-    accidentally dropped when the patch was forward-ported from 14 to 15. This
-    resolves an issue in which clang++ builds would fail if libc++-15-dev was
-    installed alongside libc++-15-dev-wasm32. (Closes: #1029010, #1032317)
-
-  [ Cordell Bloor ]
-  * Backport support for HIP in /usr and add Debian paths
-    for rocm-device-libs to search list (Closes: #1031808)
 
   [ Samuel Thibault ]
   * Fix disabling amdgpu on non-Linux.
@@ -411,10 +441,8 @@ llvm-toolchain-15 (1:15.0.5-1) unstable; urgency=medium
 
   * New upstream release
   * Remove the swig patches (applied upstream)
-  * experimental New snapshot release
-  * experimental New snapshot release
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Nov 2022 09:02:30 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 16 Nov 2022 09:11:01 +0100
 
 llvm-toolchain-15 (1:15.0.4-1) unstable; urgency=medium
 
@@ -557,7 +585,7 @@ llvm-toolchain-15 (1:15.0.0-1~exp1) experimental; urgency=medium
 llvm-toolchain-15 (1:15.0.0~+rc3-1~exp2) experimental; urgency=medium
 
   * Update of the build dep from llvm-spirv => llvm-spirv-14
-    as it is now versionned. It should build libclc
+    as it is now versioned. It should build libclc
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 31 Aug 2022 17:10:33 +0200
 

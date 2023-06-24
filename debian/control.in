@@ -415,7 +415,7 @@ Description: Modular compiler and toolchain technologies, IR interpreter
 Package: llvm-@LLVM_VERSION@-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev, ${misc:Depends},
- llvm-@LLVM_VERSION@ (= ${binary:Version}), libllvm@LLVM_VERSION@ (= ${binary:Version}), libtinfo-dev,
+ llvm-@LLVM_VERSION@ (= ${binary:Version}), libllvm@LLVM_VERSION@ (= ${binary:Version}), libncurses-dev,
  llvm-@LLVM_VERSION@-tools (= ${binary:Version}), libclang-cpp@LLVM_VERSION@ (= ${binary:Version}),
  libz3-dev, libxml2-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
@@ -646,7 +646,7 @@ Description: LLVM OpenMP runtime
 
 Package: libomp-@LLVM_VERSION@-doc
 Section: doc
-Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
+Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
 Replaces: libiomp-x.y-doc
 Breaks: libiomp-x.y-doc

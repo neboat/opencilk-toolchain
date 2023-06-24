@@ -1,5 +1,6 @@
 libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  (optional)LLVM_13@LLVM_13 1:15.0.7-3
+ (optional)LLVM_16@LLVM_16 1:16.0.2-1
  clang_BlockCommandComment_getArgText@LLVM_13 1:5.0~svn298832-1~
  clang_BlockCommandComment_getCommandName@LLVM_13 1:5.0~svn298832-1~
  clang_BlockCommandComment_getNumArgs@LLVM_13 1:5.0~svn298832-1~
@@ -8,21 +9,24 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_CXCursorSet_insert@LLVM_13 1:5.0~svn298832-1~
  clang_CXIndex_getGlobalOptions@LLVM_13 1:5.0~svn298832-1~
  clang_CXIndex_setGlobalOptions@LLVM_13 1:5.0~svn298832-1~
- clang_CXIndex_setInvocationEmissionPathOption@LLVM_13 1:6.0~svn320926-1~
- clang_CXRewriter_create@LLVM_13 1:12~++20200906115111+ff218cbc84f-1~
- clang_CXRewriter_dispose@LLVM_13 1:12~++20200906115111+ff218cbc84f-1~
- clang_CXRewriter_insertTextBefore@LLVM_13 1:12~++20200906115111+ff218cbc84f-1~
- clang_CXRewriter_overwriteChangedFiles@LLVM_13 1:12~++20200906115111+ff218cbc84f-1~
- clang_CXRewriter_removeText@LLVM_13 1:12~++20200906115111+ff218cbc84f-1~
- clang_CXRewriter_replaceText@LLVM_13 1:12~++20200906115111+ff218cbc84f-1~
- clang_CXRewriter_writeMainFileToStdOut@LLVM_13 1:12~++20200906115111+ff218cbc84f-1~
+ clang_CXIndex_setInvocationEmissionPathOption@LLVM_13 1:5.0~svn298832-1~
+ clang_CXRewriter_create@LLVM_13 1:5.0~svn298832-1~
+ clang_CXRewriter_dispose@LLVM_13 1:5.0~svn298832-1~
+ clang_CXRewriter_insertTextBefore@LLVM_13 1:5.0~svn298832-1~
+ clang_CXRewriter_overwriteChangedFiles@LLVM_13 1:5.0~svn298832-1~
+ clang_CXRewriter_removeText@LLVM_13 1:5.0~svn298832-1~
+ clang_CXRewriter_replaceText@LLVM_13 1:5.0~svn298832-1~
+ clang_CXRewriter_writeMainFileToStdOut@LLVM_13 1:5.0~svn298832-1~
  clang_CXXConstructor_isConvertingConstructor@LLVM_13 1:5.0~svn298832-1~
  clang_CXXConstructor_isCopyConstructor@LLVM_13 1:5.0~svn298832-1~
  clang_CXXConstructor_isDefaultConstructor@LLVM_13 1:5.0~svn298832-1~
  clang_CXXConstructor_isMoveConstructor@LLVM_13 1:5.0~svn298832-1~
  clang_CXXField_isMutable@LLVM_13 1:5.0~svn298832-1~
  clang_CXXMethod_isConst@LLVM_13 1:5.0~svn298832-1~
+ clang_CXXMethod_isCopyAssignmentOperator@LLVM_16 1:16.0.2-1~
  clang_CXXMethod_isDefaulted@LLVM_13 1:5.0~svn298832-1~
+ clang_CXXMethod_isDeleted@LLVM_16 1:16.0.2-1~
+ clang_CXXMethod_isMoveAssignmentOperator@LLVM_16 1:16.0.2-1~
  clang_CXXMethod_isPureVirtual@LLVM_13 1:5.0~svn298832-1~
  clang_CXXMethod_isStatic@LLVM_13 1:5.0~svn298832-1~
  clang_CXXMethod_isVirtual@LLVM_13 1:5.0~svn298832-1~
@@ -184,6 +188,7 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_constructUSR_ObjCMethod@LLVM_13 1:5.0~svn298832-1~
  clang_constructUSR_ObjCProperty@LLVM_13 1:5.0~svn298832-1~
  clang_constructUSR_ObjCProtocol@LLVM_13 1:5.0~svn298832-1~
+ clang_createAPISet@LLVM_16 1:16.0.2-1~
  clang_createCXCursorSet@LLVM_13 1:5.0~svn298832-1~
  clang_createIndex@LLVM_13 1:5.0~svn298832-1~
  clang_createTranslationUnit2@LLVM_13 1:5.0~svn298832-1~
@@ -194,6 +199,7 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_defaultEditingTranslationUnitOptions@LLVM_13 1:5.0~svn298832-1~
  clang_defaultReparseOptions@LLVM_13 1:5.0~svn298832-1~
  clang_defaultSaveOptions@LLVM_13 1:5.0~svn298832-1~
+ clang_disposeAPISet@LLVM_16 1:16.0.2-1~
  clang_disposeCXCursorSet@LLVM_13 1:5.0~svn298832-1~
  clang_disposeCXPlatformAvailability@LLVM_13 1:5.0~svn298832-1~
  clang_disposeCXTUResourceUsage@LLVM_13 1:5.0~svn298832-1~
@@ -305,6 +311,7 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_getLocation@LLVM_13 1:5.0~svn298832-1~
  clang_getLocationForOffset@LLVM_13 1:5.0~svn298832-1~
  clang_getModuleForFile@LLVM_13 1:5.0~svn298832-1~
+ clang_getNonReferenceType@LLVM_16 1:16.0.2-1~
  clang_getNullCursor@LLVM_13 1:5.0~svn298832-1~
  clang_getNullLocation@LLVM_13 1:5.0~svn298832-1~
  clang_getNullRange@LLVM_13 1:5.0~svn298832-1~
@@ -327,6 +334,8 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_getSkippedRanges@LLVM_13 1:5.0~svn298832-1~
  clang_getSpecializedCursorTemplate@LLVM_13 1:5.0~svn298832-1~
  clang_getSpellingLocation@LLVM_13 1:5.0~svn298832-1~
+ clang_getSymbolGraphForCursor@LLVM_16 1:16.0.2-1~
+ clang_getSymbolGraphForUSR@LLVM_16 1:16.0.2-1~
  clang_getTUResourceUsageName@LLVM_13 1:5.0~svn298832-1~
  clang_getTemplateCursorKind@LLVM_13 1:5.0~svn298832-1~
  clang_getToken@LLVM_13 1:7~svn334604-1~
@@ -342,6 +351,7 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_getTypeSpelling@LLVM_13 1:5.0~svn298832-1~
  clang_getTypedefDeclUnderlyingType@LLVM_13 1:5.0~svn298832-1~
  clang_getTypedefName@LLVM_13 1:5.0~+rc1~
+ clang_getUnqualifiedType@LLVM_16 1:16.0.2-1~
  clang_hashCursor@LLVM_13 1:5.0~svn298832-1~
  clang_indexLoc_getCXSourceLocation@LLVM_13 1:5.0~svn298832-1~
  clang_indexLoc_getFileLocation@LLVM_13 1:5.0~svn298832-1~

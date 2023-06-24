@@ -415,7 +415,7 @@ Description: Modular compiler and toolchain technologies, IR interpreter
 Package: llvm-17-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev, ${misc:Depends},
- llvm-17 (= ${binary:Version}), libllvm17 (= ${binary:Version}), libtinfo-dev,
+ llvm-17 (= ${binary:Version}), libllvm17 (= ${binary:Version}), libncurses-dev,
  llvm-17-tools (= ${binary:Version}), libclang-cpp17 (= ${binary:Version}),
  libz3-dev, libxml2-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
@@ -646,7 +646,7 @@ Description: LLVM OpenMP runtime
 
 Package: libomp-17-doc
 Section: doc
-Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
+Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
 Replaces: libiomp-x.y-doc
 Breaks: libiomp-x.y-doc

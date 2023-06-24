@@ -148,3 +148,7 @@ unwind-force-pthread-dl.diff
 force-sse2-compiler-rt.diff
 bolt-disable-emit-relocs.patch
 link-grpc.diff
+
+ubuntu-releases.patch
+new-cmake-build-fix.patch
+HIP-search-path-fix.patch
