@@ -177,6 +177,9 @@ ifneq (,$(filter $(DEB_HOST_ARCH),i386))
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=i386-linux-gnu
 endif
 
+# https://bugs.launchpad.net/bugs/2016471
+STAGE_2_CMAKE_EXTRA += -DLIBOMP_LDFLAGS=-Wl,-Bno-symbolic
+
 ifneq (,$(filter $(DEB_HOST_ARCH),i386))
 # Sometimes, i386 needs help with the triple
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=i386-linux-gnu
