@@ -4,7 +4,14 @@ llvm-toolchain-15 (1:15.0.7-5~exp3) UNRELEASED; urgency=medium
   * debian/patches/ubuntu-releases.patch: Update the list of
     Ubuntu release names
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 11 Jun 2023 09:26:23 +0200
+  [ Gianfranco Costamagna ]
+  * Add powerpc to GOLD architectures
+  * Cherry-pick upstream fix for newer cmake-related build failure
+
+  [ Steve Langasek ]
+  * debian/rules: disable -Wl,-Bsymbolic-functions for libomp.  LP: #2016471.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 24 Jun 2023 20:02:22 +0200
 
 llvm-toolchain-15 (1:15.0.7-5~exp2) experimental; urgency=medium
 
