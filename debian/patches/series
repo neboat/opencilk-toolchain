@@ -164,3 +164,4 @@ amdgpu/usr-search-paths.patch
 amdgpu/bitcode-multiarch.patch
 ubuntu-releases.patch
 new-cmake-build-fix.patch
+HIP-search-path-fix.patch
