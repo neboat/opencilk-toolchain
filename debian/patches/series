@@ -150,5 +150,6 @@ bolt-disable-emit-relocs.patch
 link-grpc.diff
 
 amdgpu/nonlinux.patch
-#amdgpu/bitcode-multiarch.patch
 ubuntu-releases.patch
+new-cmake-build-fix.patch
+HIP-search-path-fix.patch

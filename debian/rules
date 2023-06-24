@@ -147,15 +147,8 @@ endif
 endif
 endif
 
-ifeq ($(USE_CLANG_PACKAGE_TO_BUILD_ITSELF),yes)
-# For Debian stretch, gcc isn't available, let's use clang
-# itself to build itself.
-export CC=clang-14
-export CXX=clang++-14
-else
 export CC=gcc-$(GCC_VERSION)
 export CXX=g++-$(GCC_VERSION)
-endif
 
 ifneq (,$(findstring $(DEB_HOST_ARCH),armel))
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=arm-linux-gnueabi
@@ -188,7 +181,8 @@ ifneq (,$(filter $(DEB_HOST_ARCH),i386))
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=i386-linux-gnu
 endif
 
-
+# https://bugs.launchpad.net/bugs/2016471
+STAGE_2_CMAKE_EXTRA += -DLIBOMP_LDFLAGS=-Wl,-Bno-symbolic
 
 ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
 # avoid an issue with search path on mips64el
@@ -545,6 +539,15 @@ preconfigure:
 		fi; \
 	fi
 
+	# workaround the breaks/replaces/conflicts
+	# https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-15/+bug/2008755
+	# Yeah, this is ugly but I don't know how to do better
+	if test "$(DISTRO)" = "jammy" -o "$(DISTRO)" = "kinetic" -o "$(DISTRO)" = "focal"; then \
+		if test "$(LLVM_VERSION)" = "15"; then \
+			sed -i -e "s|libclang-common-15-dev (<< 1:15.0.6-5)|libclang-common-15-dev (<< 1:15.0.6-5), libclang-common-15-dev (= 1:15.0.7-0ubuntu0.22.04.1), libpolly-15-dev (= 1:15.0.7-0ubuntu0.22.04.1)|g" debian/control; \
+		fi; \
+	fi
+
 ifdef LLVM_SPIRV
 	# llvm-spirv was found, so we can enable *.spv files. Debian
 	# buster and Ubuntu 18.04 don't have llvm-spirv to create the
@@ -556,10 +559,6 @@ endif
 	if test "$(LIBCXX_WASM_ENABLE)" = "no"; then \
 		echo "" > debian/libc++-$(LLVM_VERSION)-dev-wasm32.install; \
 		echo "" > debian/libc++abi-$(LLVM_VERSION)-dev-wasm32.install; \
-	fi
-
-	if test "$(DISTRO)" = "buster"; then \
-		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
 	fi
 
 	# Conditionally enable install clangd grpc files
