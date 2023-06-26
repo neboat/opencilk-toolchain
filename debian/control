@@ -562,7 +562,7 @@ Description: LLVM-based linker, header files
 Package: lldb-16
 Architecture: amd64 arm64 armel armhf i386 ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32
 # ia64 hurd powerpc powerpcspe ppc64 alpha riscv64 s390x sparc64 mipsel mips64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm16 (= ${binary:Version}), llvm-16-dev,
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm16 (= ${binary:Version}),
  python3-lldb-16
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger

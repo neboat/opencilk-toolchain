@@ -1,11 +1,15 @@
 llvm-toolchain-16 (1:16.0.6-3) unstable; urgency=medium
 
+<<<<<<<
   [ Sylvestre Ledru ]
   * Only pass -Bno-symbolic if it exists
 
   [ Gianfranco Costamagna ]
   * Revert LIBCXXABI_ARM_EHABI => _LIBCXXABI_ARM_EHABI change,
     FTBFS on arm*.
+=======
+  * lldb-16: lldb no longer depend on llvm-dev (Closes: #1039490)
+>>>>>>>
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 27 Jun 2023 08:58:16 +0200
 
