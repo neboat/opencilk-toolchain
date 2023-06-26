@@ -213,6 +213,12 @@ llvm-toolchain-snapshot (1:16~++20220731055325+02b3a358926e-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 27 Jul 2022 21:36:27 +0200
 
+llvm-toolchain-15 (1:15.0.7-6) UNRELEASED; urgency=medium
+
+  * Only pass -Bno-symbolic if it exists
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 26 Jun 2023 10:13:40 +0200
+
 llvm-toolchain-15 (1:15.0.7-5) unstable; urgency=medium
 
   [ Graham Inggs ]
