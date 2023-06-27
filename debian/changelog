@@ -33,6 +33,17 @@ llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 28 Jan 2023 18:07:40 +0100
 
+llvm-toolchain-16 (1:16.0.6-3) unstable; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * Only pass -Bno-symbolic if it exists
+
+  [ Gianfranco Costamagna ]
+  * Revert LIBCXXABI_ARM_EHABI => _LIBCXXABI_ARM_EHABI change,
+    FTBFS on arm*.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 27 Jun 2023 08:58:16 +0200
+
 llvm-toolchain-16 (1:16.0.6-2) unstable; urgency=medium
 
   * Remove debian/NEWS to fix debian-news-entry-has-unknown-version
