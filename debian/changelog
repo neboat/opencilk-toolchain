@@ -1,3 +1,10 @@
+llvm-toolchain-16 (1:16.0.6-3) unstable; urgency=medium
+
+  * Revert LIBCXXABI_ARM_EHABI => _LIBCXXABI_ARM_EHABI change,
+    FTBFS on arm*.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 27 Jun 2023 08:58:16 +0200
+
 llvm-toolchain-16 (1:16.0.6-2) unstable; urgency=medium
 
   * Remove debian/NEWS to fix debian-news-entry-has-unknown-version
