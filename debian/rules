@@ -1213,6 +1213,7 @@ endif
 	if test "$(DISTRO)" = "buster"; then \
 		mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/; \
 		touch $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/empty; \
+		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
 	fi
 
 # Remove some mlir example
