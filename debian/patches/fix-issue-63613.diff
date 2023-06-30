@@ -1,11 +1,12 @@
-Index: llvm-toolchain-snapshot_17~++20230630093049+0446bfcc5ca2/libcxx/src/filesystem/posix_compat.h
+Index: llvm-toolchain-snapshot_17~++20230630021901+d32fb5e5f51d/libcxx/src/filesystem/posix_compat.h
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230630093049+0446bfcc5ca2.orig/libcxx/src/filesystem/posix_compat.h
-+++ llvm-toolchain-snapshot_17~++20230630093049+0446bfcc5ca2/libcxx/src/filesystem/posix_compat.h
-@@ -39,6 +39,7 @@
+--- llvm-toolchain-snapshot_17~++20230630021901+d32fb5e5f51d.orig/libcxx/src/filesystem/posix_compat.h
++++ llvm-toolchain-snapshot_17~++20230630021901+d32fb5e5f51d/libcxx/src/filesystem/posix_compat.h
+@@ -39,6 +39,8 @@
  # include <fcntl.h>
  # include <unistd.h>
  # include <sys/stat.h>
++# include <features.h>
 +# include <sys/cdefs.h>
  # include <sys/statvfs.h>
  # include <sys/time.h>
