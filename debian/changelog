@@ -8,6 +8,7 @@ llvm-toolchain-snapshot (1:17~++20230603110125+d072d110227d-1~exp1) experimental
   * Try to pass MAKE_C_COMPILER_LAUNCHER and CMAKE_CXX_COMPILER_LAUNCHER
     in CLANG_BOOTSTRAP_PASSTHROUGH for sccache in stage2
   * Disable python3-lldb-17 for buster (it has been this way for a while)
+  * Try to workaround issue 63613
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 09 Jun 2023 13:25:01 +0200
 

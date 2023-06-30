@@ -149,3 +149,4 @@ force-sse2-compiler-rt.diff
 bolt-disable-emit-relocs.patch
 link-grpc.diff
 
+fix-issue-63613.diff
