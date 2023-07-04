@@ -477,8 +477,19 @@ if ! ldd o 2>&1|grep -q  libclang-cpp; then
 fi
 ./o > /dev/null
 
-# Check that the symlink is correct
-ls -al /usr/lib/llvm-$VERSION/lib/libclang-cpp.so.$VERSION > /dev/null
+check_symlink() {
+    P="/usr/lib/llvm-$VERSION/lib/$1"
+    if test ! -e $P; then
+        echo "invalid symlink $P"
+        ls -al $P
+        exit 1
+    fi
+}
+
+check_symlink "libclang-cpp.so.$VERSION"
+check_symlink "libclang-$VERSION.so"
+check_symlink "libclang.so"
+
 
 echo "Testing code coverage ..."
 
