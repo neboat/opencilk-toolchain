@@ -535,15 +535,6 @@ preconfigure:
 		debian/llvm-$(LLVM_VERSION)-linker-tools.links \
 		debian/libbolt-$(LLVM_VERSION)-dev.install
 
-	# workaround the breaks/replaces/conflicts introduced with the omp-device-info move
-	# we update the version to make it work with apt.llvm.org
-	# Yeah, this is ugly but I don't know how to do better
-	if test "$(LLVM_VERSION)" = "13"; then \
-		if echo "$(LLVM_VERSION_SNAPSHOT)"|grep -q "++"; then \
-			sed -i -e "s|(<< 1:13.0.0-4)|(<< 1:13.0.0~++20211013044936)|g" debian/control; \
-		fi; \
-	fi
-
 	# workaround the breaks/replaces/conflicts
 	# https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-15/+bug/2008755
 	# Yeah, this is ugly but I don't know how to do better
