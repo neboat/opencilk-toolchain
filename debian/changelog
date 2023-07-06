@@ -261,7 +261,7 @@ llvm-toolchain-15 (1:15.0.7-5) unstable; urgency=medium
 
 llvm-toolchain-15 (1:15.0.7-5~exp2) experimental; urgency=medium
 
-  * Also apply the workround of issue #62621 for focal
+  * Also apply the workaround of issue #62621 for focal
     and to include libpolly-15-dev
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 10 Jun 2023 11:52:14 +0200
@@ -365,7 +365,7 @@ llvm-toolchain-15 (1:15.0.6-5~exp1) experimental; urgency=medium
     $ apt install clang-15 lld-15 libclang-rt-15-dev-wasm32 wasi-libc
     $ clang-15 --target=wasm32-wasi helloworld.c -o helloworld.wasm
     Many thanks to Faidon Liambotis
-  * libclang-common-15-dev splitted into different packages:
+  * libclang-common-15-dev split into different packages:
     - libclang-rt-15-dev
     - libpolly-15-dev
     - libclang-rt-15-dev-wasm32
@@ -422,7 +422,7 @@ llvm-toolchain-15 (1:15.0.5-2) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Add libomp target library to mips64el (Closes: #1023101)
-  * Explictly depend on spirv-14 for mips64el, to ease bootstrapping
+  * Explicitly depend on spirv-14 for mips64el, to ease bootstrapping
     on buildds (this should be dropped once we build a spirv-15 in archive)
   * Cherry-pick two upstream patches to unblock mesa build on arm* (Closes:
     #1022577)
@@ -4292,7 +4292,7 @@ llvm-toolchain-7 (1:7-6~exp1) experimental; urgency=medium
     opt-viewer.py needs it
   * Add back libomp5-X.Y.symbols.in (untested)
   * Fix the install of clang bash completion
-  * Start the work on bootstraping clang
+  * Start the work on bootstrapping clang
     - bootstrap-with-openmp-version-export-missing.diff: fix a link issue
       https://bugs.llvm.org/show_bug.cgi?id=39200
     - bootstrap-fix-include-next.diff: Fix an include issue at bootstrap phase
