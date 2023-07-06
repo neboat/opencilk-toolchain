@@ -490,6 +490,10 @@ check_symlink "libclang-cpp.so.$VERSION"
 check_symlink "libclang-$VERSION.so"
 check_symlink "libclang.so"
 
+echo "Testing python clang ..."
+
+python3 -c 'from ctypes import *; import clang.cindex; config = clang.cindex.Config(); verfunc = config.lib.clang_getClangVersion; verfunc.restype = c_char_p ; print(verfunc())'
+
 
 echo "Testing code coverage ..."
 
