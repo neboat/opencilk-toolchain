@@ -1,3 +1,10 @@
+llvm-toolchain-snapshot (1:17~++20230603110125+d072d110227d-1~exp2) UNRELEASED; urgency=medium
+
+  * Install usr/lib/llvm-17/lib/clang/17/include/llvm_libc_wrappers/*.h
+    in libclang-common-X.Y-dev
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 08 Jul 2023 16:12:47 +0200
+
 llvm-toolchain-snapshot (1:17~++20230603110125+d072d110227d-1~exp1) experimental; urgency=medium
 
   * llvm-debuginfod not installed anymore
