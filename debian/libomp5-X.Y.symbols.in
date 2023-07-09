@@ -808,6 +808,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_begin@VERSION 0.20130412
  __kmpc_bound_num_threads@VERSION 0.20130412
  __kmpc_bound_thread_num@VERSION 0.20130412
+ __kmpc_calc_original_ivs_rectang@VERSION 17
  __kmpc_calloc@VERSION 12
  __kmpc_cancel@VERSION 0.20131209
  __kmpc_cancel_barrier@VERSION 0.20131209
@@ -858,6 +859,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_end_taskgroup@VERSION 0.20130412
  __kmpc_error@VERSION 13
  __kmpc_flush@VERSION 0.20130412
+ __kmpc_for_collapsed_init@VERSION 17
  __kmpc_for_static_fini@VERSION 0.20130412
  __kmpc_for_static_init_4@VERSION 0.20130412
  __kmpc_for_static_init_4u@VERSION 0.20130412
@@ -901,6 +903,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  __kmpc_ordered@VERSION 0.20130412
  __kmpc_pause_resource@VERSION 9
  __kmpc_pop_num_threads@VERSION 0.20130412
+ __kmpc_process_loop_nest_rectang@VERSION 17
  __kmpc_proxy_task_completed@VERSION 0.20150401
  __kmpc_proxy_task_completed_ooo@VERSION 0.20150401
  __kmpc_push_num_teams@VERSION 0.20130715
@@ -1342,7 +1345,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  ompc_set_schedule@VERSION 0.20130412
  ompt_libomp_connect@VERSION 17
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)ompt_start_tool@VERSION 6.0
-libomptarget.rtl.amdgpu.nextgen.so.17 libomp5-17 #MINVER#
+libomptarget.rtl.amdgpu.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  VERS1.0@VERS1.0 17
  __tgt_rtl_create_event@VERS1.0 17
  __tgt_rtl_data_alloc@VERS1.0 17
@@ -1379,28 +1382,7 @@ libomptarget.rtl.amdgpu.nextgen.so.17 libomp5-17 #MINVER#
  __tgt_rtl_sync_event@VERS1.0 17
  __tgt_rtl_synchronize@VERS1.0 17
  __tgt_rtl_wait_event@VERS1.0 17
-libomptarget.rtl.amdgpu.so.17 libomp5-17 #MINVER#
- VERS1.0@VERS1.0 17
- __tgt_rtl_data_alloc@VERS1.0 17
- __tgt_rtl_data_delete@VERS1.0 17
- __tgt_rtl_data_lock@VERS1.0 17
- __tgt_rtl_data_retrieve@VERS1.0 17
- __tgt_rtl_data_retrieve_async@VERS1.0 17
- __tgt_rtl_data_submit@VERS1.0 17
- __tgt_rtl_data_submit_async@VERS1.0 17
- __tgt_rtl_data_unlock@VERS1.0 17
- __tgt_rtl_deinit_plugin@VERS1.0 17
- __tgt_rtl_init_device@VERS1.0 17
- __tgt_rtl_init_plugin@VERS1.0 17
- __tgt_rtl_init_requires@VERS1.0 17
- __tgt_rtl_is_valid_binary@VERS1.0 17
- __tgt_rtl_is_valid_binary_info@VERS1.0 17
- __tgt_rtl_launch_kernel@VERS1.0 17
- __tgt_rtl_load_binary@VERS1.0 17
- __tgt_rtl_number_of_devices@VERS1.0 17
- __tgt_rtl_print_device_info@VERS1.0 17
- __tgt_rtl_synchronize@VERS1.0 17
-libomptarget.rtl.cuda.nextgen.so.17 libomp5-17 #MINVER#
+libomptarget.rtl.cuda.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  VERS1.0@VERS1.0 17
  __tgt_rtl_create_event@VERS1.0 17
  __tgt_rtl_data_alloc@VERS1.0 17
@@ -1437,44 +1419,8 @@ libomptarget.rtl.cuda.nextgen.so.17 libomp5-17 #MINVER#
  __tgt_rtl_sync_event@VERS1.0 17
  __tgt_rtl_synchronize@VERS1.0 17
  __tgt_rtl_wait_event@VERS1.0 17
-libomptarget.rtl.cuda.so.17 libomp5-17 #MINVER#
+libomptarget.rtl.x86_64.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  VERS1.0@VERS1.0 17
- __tgt_rtl_create_event@VERS1.0 17
- __tgt_rtl_data_alloc@VERS1.0 17
- __tgt_rtl_data_delete@VERS1.0 17
- __tgt_rtl_data_exchange@VERS1.0 17
- __tgt_rtl_data_exchange_async@VERS1.0 17
- __tgt_rtl_data_retrieve@VERS1.0 17
- __tgt_rtl_data_retrieve_async@VERS1.0 17
- __tgt_rtl_data_submit@VERS1.0 17
- __tgt_rtl_data_submit_async@VERS1.0 17
- __tgt_rtl_deinit_device@VERS1.0 17
- __tgt_rtl_destroy_event@VERS1.0 17
- __tgt_rtl_init_async_info@VERS1.0 17
- __tgt_rtl_init_device@VERS1.0 17
- __tgt_rtl_init_device_info@VERS1.0 17
- __tgt_rtl_init_requires@VERS1.0 17
- __tgt_rtl_is_data_exchangable@VERS1.0 17
- __tgt_rtl_is_valid_binary@VERS1.0 17
- __tgt_rtl_is_valid_binary_info@VERS1.0 17
- __tgt_rtl_launch_kernel@VERS1.0 17
- __tgt_rtl_load_binary@VERS1.0 17
- __tgt_rtl_number_of_devices@VERS1.0 17
- __tgt_rtl_print_device_info@VERS1.0 17
- __tgt_rtl_query_async@VERS1.0 17
- __tgt_rtl_record_event@VERS1.0 17
- __tgt_rtl_release_async_info@VERS1.0 17
- __tgt_rtl_run_target_region@VERS1.0 17
- __tgt_rtl_run_target_region_async@VERS1.0 17
- __tgt_rtl_run_target_team_region@VERS1.0 17
- __tgt_rtl_run_target_team_region_async@VERS1.0 17
- __tgt_rtl_set_info_flag@VERS1.0 17
- __tgt_rtl_sync_event@VERS1.0 17
- __tgt_rtl_synchronize@VERS1.0 17
- __tgt_rtl_wait_event@VERS1.0 17
-libomptarget.rtl.x86_64.nextgen.so.17 libomp5-17 #MINVER#
- VERS1.0@VERS1.0 17
- __tgt_rtl_create_event@VERS1.0 17
  __tgt_rtl_data_alloc@VERS1.0 17
  __tgt_rtl_data_delete@VERS1.0 17
  __tgt_rtl_data_exchange@VERS1.0 17
@@ -1509,19 +1455,7 @@ libomptarget.rtl.x86_64.nextgen.so.17 libomp5-17 #MINVER#
  __tgt_rtl_sync_event@VERS1.0 17
  __tgt_rtl_synchronize@VERS1.0 17
  __tgt_rtl_wait_event@VERS1.0 17
-libomptarget.rtl.x86_64.so.17 libomp5-17 #MINVER#
- VERS1.0@VERS1.0 17
- __tgt_rtl_data_alloc@VERS1.0 17
- __tgt_rtl_data_delete@VERS1.0 17
- __tgt_rtl_data_retrieve@VERS1.0 17
- __tgt_rtl_data_submit@VERS1.0 17
- __tgt_rtl_init_device@VERS1.0 17
- __tgt_rtl_is_valid_binary@VERS1.0 17
- __tgt_rtl_launch_kernel@VERS1.0 17
- __tgt_rtl_load_binary@VERS1.0 17
- __tgt_rtl_number_of_devices@VERS1.0 17
- __tgt_rtl_print_device_info@VERS1.0 17
-libomptarget.so.17 libomp5-17 #MINVER#
+libomptarget.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  VERS1.0@VERS1.0 17
  __kmpc_push_target_tripcount@VERS1.0 17
  __kmpc_push_target_tripcount_mapper@VERS1.0 17
@@ -1584,4 +1518,7 @@ libomptarget.so.17 libomp5-17 #MINVER#
  omp_target_free@VERS1.0 17
  omp_target_is_present@VERS1.0 17
  omp_target_memcpy@VERS1.0 17
+ omp_target_memcpy_async@VERS1.0 17
  omp_target_memcpy_rect@VERS1.0 17
+ omp_target_memcpy_rect_async@VERS1.0 17
+ ompt_libomptarget_connect@VERS1.0 17
