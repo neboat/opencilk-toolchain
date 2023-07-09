@@ -26,6 +26,7 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_CXXMethod_isCopyAssignmentOperator@LLVM_16 1:16.0.2-1~
  clang_CXXMethod_isDefaulted@LLVM_13 1:5.0~svn298832-1~
  clang_CXXMethod_isDeleted@LLVM_16 1:16.0.2-1~
+ clang_CXXMethod_isExplicit@LLVM_17 1:17
  clang_CXXMethod_isMoveAssignmentOperator@LLVM_16 1:16.0.2-1~
  clang_CXXMethod_isPureVirtual@LLVM_13 1:5.0~svn298832-1~
  clang_CXXMethod_isStatic@LLVM_13 1:5.0~svn298832-1~
@@ -191,6 +192,7 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_createAPISet@LLVM_16 1:16.0.2-1~
  clang_createCXCursorSet@LLVM_13 1:5.0~svn298832-1~
  clang_createIndex@LLVM_13 1:5.0~svn298832-1~
+ clang_createIndexWithOptions@LLVM_17 1:17-
  clang_createTranslationUnit2@LLVM_13 1:5.0~svn298832-1~
  clang_createTranslationUnit@LLVM_13 1:5.0~svn298832-1~
  clang_createTranslationUnitFromSourceFile@LLVM_13 1:5.0~svn298832-1~
@@ -230,6 +232,7 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_getArgType@LLVM_13 1:5.0~svn298832-1~
  clang_getArrayElementType@LLVM_13 1:5.0~svn298832-1~
  clang_getArraySize@LLVM_13 1:5.0~svn298832-1~
+ clang_getBinaryOperatorKindSpelling@LLVM_17 1:17
  clang_getBuildSessionTimestamp@LLVM_13 1:5.0~svn298832-1~
  clang_getCString@LLVM_13 1:5.0~svn298832-1~
  clang_getCXTUResourceUsage@LLVM_13 1:5.0~svn298832-1~
@@ -251,6 +254,7 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_getCompletionPriority@LLVM_13 1:5.0~svn298832-1~
  clang_getCursor@LLVM_13 1:5.0~svn298832-1~
  clang_getCursorAvailability@LLVM_13 1:5.0~svn298832-1~
+ clang_getCursorBinaryOperatorKind@LLVM_17 1:17
  clang_getCursorCompletionString@LLVM_13 1:5.0~svn298832-1~
  clang_getCursorDefinition@LLVM_13 1:5.0~svn298832-1~
  clang_getCursorDisplayName@LLVM_13 1:5.0~svn298832-1~
@@ -273,6 +277,7 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_getCursorTLSKind@LLVM_13 1:6.0~svn320926-1~
  clang_getCursorType@LLVM_13 1:5.0~svn298832-1~
  clang_getCursorUSR@LLVM_13 1:5.0~svn298832-1~
+ clang_getCursorUnaryOperatorKind@LLVM_17 1:17
  clang_getCursorVisibility@LLVM_13 1:5.0~svn298832-1~
  clang_getDeclObjCTypeEncoding@LLVM_13 1:5.0~svn298832-1~
  clang_getDefinitionSpellingAndExtent@LLVM_13 1:5.0~svn298832-1~
@@ -351,6 +356,7 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_getTypeSpelling@LLVM_13 1:5.0~svn298832-1~
  clang_getTypedefDeclUnderlyingType@LLVM_13 1:5.0~svn298832-1~
  clang_getTypedefName@LLVM_13 1:5.0~+rc1~
+ clang_getUnaryOperatorKindSpelling@LLVM_17 1:17
  clang_getUnqualifiedType@LLVM_16 1:16.0.2-1~
  clang_hashCursor@LLVM_13 1:5.0~svn298832-1~
  clang_indexLoc_getCXSourceLocation@LLVM_13 1:5.0~svn298832-1~
