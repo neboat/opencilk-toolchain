@@ -1,10 +1,11 @@
-llvm-toolchain-16 (1:16.0.6-4) UNRELEASED; urgency=medium
+llvm-toolchain-16 (1:16.0.6-5) UNRELEASED; urgency=medium
 
   * lldb-16: lldb no longer depend on llvm-dev (Closes: #1039490)
   * Unbreak the libclang links (Closes: #1040205)
     And add tests to make sure we don't regress
+  * Fix the libclang-16.so symbol file
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 06 Jul 2023 17:12:40 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 09 Jul 2023 15:08:24 +0200
 
 llvm-toolchain-16 (1:16.0.6-3) unstable; urgency=medium
 
