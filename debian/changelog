@@ -3,6 +3,13 @@ llvm-toolchain-snapshot (1:17~++20230701095046+dc6c8b8d1e35-1~exp2) UNRELEASED; 
   * Install usr/lib/llvm-17/lib/clang/17/include/llvm_libc_wrappers/*.h
     in libclang-common-X.Y-dev
   * fix the libclang & libomp5 symbol files
+  * Add new symbol to libclang1:
+    clang_CXXMethod_isExplicit 
+    clang_createIndexWithOptions 
+    clang_getBinaryOperatorKindSpelling 
+    clang_getCursorBinaryOperatorKind 
+    clang_getCursorUnaryOperatorKind 
+    clang_getUnaryOperatorKindSpelling
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 09 Jul 2023 15:15:34 +0200
 
