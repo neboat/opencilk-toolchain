@@ -192,7 +192,7 @@ libclang-@LLVM_VERSION@.so.@LLVM_VERSION_FULL@ libclang1-@LLVM_VERSION@ #MINVER#
  clang_createAPISet@LLVM_16 1:16.0.2-1~
  clang_createCXCursorSet@LLVM_13 1:5.0~svn298832-1~
  clang_createIndex@LLVM_13 1:5.0~svn298832-1~
- clang_createIndexWithOptions@LLVM_17 1:17-
+ clang_createIndexWithOptions@LLVM_17 1:17
  clang_createTranslationUnit2@LLVM_13 1:5.0~svn298832-1~
  clang_createTranslationUnit@LLVM_13 1:5.0~svn298832-1~
  clang_createTranslationUnitFromSourceFile@LLVM_13 1:5.0~svn298832-1~
