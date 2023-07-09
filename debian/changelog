@@ -1,11 +1,12 @@
-llvm-toolchain-snapshot (1:17~++20230603110125+d072d110227d-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-snapshot (1:17~++20230701095046+dc6c8b8d1e35-1~exp2) UNRELEASED; urgency=medium
 
   * Install usr/lib/llvm-17/lib/clang/17/include/llvm_libc_wrappers/*.h
     in libclang-common-X.Y-dev
+  * fix the libclang & libomp5 symbol files
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 08 Jul 2023 16:12:47 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 09 Jul 2023 15:15:34 +0200
 
-llvm-toolchain-snapshot (1:17~++20230603110125+d072d110227d-1~exp1) experimental; urgency=medium
+llvm-toolchain-snapshot (1:17~++20230701095046+dc6c8b8d1e35-1~exp1) experimental; urgency=medium
 
   * llvm-debuginfod not installed anymore
     https://github.com/llvm/llvm-project/commit/8ac330bde40e9e0a0b2d0708ba6c7888fb1ce225
@@ -17,7 +18,7 @@ llvm-toolchain-snapshot (1:17~++20230603110125+d072d110227d-1~exp1) experimental
   * Disable python3-lldb-17 for buster (it has been this way for a while)
   * Try to workaround issue 63613
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 09 Jun 2023 13:25:01 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 04 Jul 2023 13:16:48 +0200
 
 llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental; urgency=medium
 
