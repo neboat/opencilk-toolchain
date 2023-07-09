@@ -181,11 +181,6 @@ ifneq (,$(filter $(DEB_HOST_ARCH),i386))
   CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=i386-linux-gnu
 endif
 
-ifneq (,$(filter $(DEB_HOST_ARCH),i386))
-# Sometimes, i386 needs help with the triple
-  CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=i386-linux-gnu
-endif
-
 ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
 # avoid an issue with search path on mips64el
 # https://bugs.llvm.org/show_bug.cgi?id=41204
@@ -556,24 +551,6 @@ preconfigure:
 		debian/llvm-$(LLVM_VERSION)-linker-tools.install \
 		debian/llvm-$(LLVM_VERSION)-linker-tools.links \
 		debian/libbolt-$(LLVM_VERSION)-dev.install
-
-	# workaround the breaks/replaces/conflicts introduced with the omp-device-info move
-	# we update the version to make it work with apt.llvm.org
-	# Yeah, this is ugly but I don't know how to do better
-	if test "$(LLVM_VERSION)" = "13"; then \
-		if echo "$(LLVM_VERSION_SNAPSHOT)"|grep -q "++"; then \
-			sed -i -e "s|(<< 1:13.0.0-4)|(<< 1:13.0.0~++20211013044936)|g" debian/control; \
-		fi; \
-	fi
-
-	# workaround the breaks/replaces/conflicts
-	# https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-15/+bug/2008755
-	# Yeah, this is ugly but I don't know how to do better
-	if test "$(DISTRO)" = "jammy" -o "$(DISTRO)" = "kinetic" -o "$(DISTRO)" = "focal"; then \
-		if test "$(LLVM_VERSION)" = "15"; then \
-			sed -i -e "s|libclang-common-15-dev (<< 1:15.0.6-5)|libclang-common-15-dev (<< 1:15.0.6-5), libclang-common-15-dev (= 1:15.0.7-0ubuntu0.22.04.1), libpolly-15-dev (= 1:15.0.7-0ubuntu0.22.04.1)|g" debian/control; \
-		fi; \
-	fi
 
 ifdef LLVM_SPIRV
 	# llvm-spirv was found, so we can enable *.spv files. Debian
@@ -1044,11 +1021,6 @@ ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 	chrpath -d $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)*/lib/linux/*.so
 endif
 endif
-
-	: # libclang
-	cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/ && \
-	ln -s libclang-$(LLVM_VERSION).so.$(LLVM_VERSION) libclang.so.$(SONAME_EXT) && \
-	ln -s libclang-$(LLVM_VERSION).so.$(LLVM_VERSION) libclang-$(LLVM_VERSION).so.$(SONAME_EXT)
 
 	if test "$(LIBUNWIND_ENABLE)" = yes; then \
 		mkdir -p debian/tmp/usr/include/libunwind; \

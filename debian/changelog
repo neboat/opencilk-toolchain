@@ -50,6 +50,23 @@ llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 28 Jan 2023 18:07:40 +0100
 
+llvm-toolchain-16 (1:16.0.6-5) UNRELEASED; urgency=medium
+
+  [ Samuel Thibault ]
+  * Fix hurd build by fixing Linux-specific lines.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sun, 09 Jul 2023 17:03:24 +0200
+
+llvm-toolchain-16 (1:16.0.6-4) unstable; urgency=medium
+
+  * lldb-16: lldb no longer depend on llvm-dev (Closes: #1039490)
+  * Unbreak the libclang links (Closes: #1040205)
+    And add tests to make sure we don't regress
+  * Fix the libclang-16.so symbol file
+  * Remove broken symlinks (closes: #857680)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 09 Jul 2023 15:08:24 +0200
+
 llvm-toolchain-16 (1:16.0.6-3) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
@@ -305,7 +322,7 @@ llvm-toolchain-15 (1:15.0.7-5) unstable; urgency=medium
 
 llvm-toolchain-15 (1:15.0.7-5~exp2) experimental; urgency=medium
 
-  * Also apply the workround of issue #62621 for focal
+  * Also apply the workaround of issue #62621 for focal
     and to include libpolly-15-dev
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 10 Jun 2023 11:52:14 +0200
@@ -409,7 +426,7 @@ llvm-toolchain-15 (1:15.0.6-5~exp1) experimental; urgency=medium
     $ apt install clang-15 lld-15 libclang-rt-15-dev-wasm32 wasi-libc
     $ clang-15 --target=wasm32-wasi helloworld.c -o helloworld.wasm
     Many thanks to Faidon Liambotis
-  * libclang-common-15-dev splitted into different packages:
+  * libclang-common-15-dev split into different packages:
     - libclang-rt-15-dev
     - libpolly-15-dev
     - libclang-rt-15-dev-wasm32
@@ -466,7 +483,7 @@ llvm-toolchain-15 (1:15.0.5-2) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Add libomp target library to mips64el (Closes: #1023101)
-  * Explictly depend on spirv-14 for mips64el, to ease bootstrapping
+  * Explicitly depend on spirv-14 for mips64el, to ease bootstrapping
     on buildds (this should be dropped once we build a spirv-15 in archive)
   * Cherry-pick two upstream patches to unblock mesa build on arm* (Closes:
     #1022577)
@@ -4336,7 +4353,7 @@ llvm-toolchain-7 (1:7-6~exp1) experimental; urgency=medium
     opt-viewer.py needs it
   * Add back libomp5-X.Y.symbols.in (untested)
   * Fix the install of clang bash completion
-  * Start the work on bootstraping clang
+  * Start the work on bootstrapping clang
     - bootstrap-with-openmp-version-export-missing.diff: fix a link issue
       https://bugs.llvm.org/show_bug.cgi?id=39200
     - bootstrap-fix-include-next.diff: Fix an include issue at bootstrap phase
