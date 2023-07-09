@@ -11,6 +11,9 @@ llvm-toolchain-snapshot (1:17~++20230709044550+c54ff51be9c1-1~exp1) experimental
     clang_getCursorUnaryOperatorKind
     clang_getUnaryOperatorKindSpelling
 
+  [ Samuel Thibault ]
+  * Fix hurd build by fixing Linux-specific lines.
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 09 Jul 2023 15:15:34 +0200
 
 llvm-toolchain-snapshot (1:17~++20230701095046+dc6c8b8d1e35-1~exp1) experimental; urgency=medium
