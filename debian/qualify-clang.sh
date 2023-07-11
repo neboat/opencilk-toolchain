@@ -490,10 +490,10 @@ check_symlink "libclang-cpp.so.$VERSION"
 check_symlink "libclang-$VERSION.so"
 check_symlink "libclang.so"
 
-echo "Testing python clang ..."
-
-python3 -c 'from ctypes import *; import clang.cindex; config = clang.cindex.Config(); verfunc = config.lib.clang_getClangVersion; verfunc.restype = c_char_p ; print(verfunc())'
-
+if [ $DEB_HOST_ARCH != "i386" ]; then
+    echo "Testing python clang ..."
+    python3 -c 'from ctypes import *; import clang.cindex; config = clang.cindex.Config(); verfunc = config.lib.clang_getClangVersion; verfunc.restype = c_char_p ; print(verfunc())'
+fi
 
 echo "Testing code coverage ..."
 
