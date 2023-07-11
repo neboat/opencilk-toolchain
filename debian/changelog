@@ -3,7 +3,10 @@ llvm-toolchain-16 (1:16.0.6-5) UNRELEASED; urgency=medium
   [ Samuel Thibault ]
   * Fix hurd build by fixing Linux-specific lines.
 
- -- Samuel Thibault <sthibault@debian.org>  Sun, 09 Jul 2023 17:03:24 +0200
+  [ Sylvestre Ledru ]
+  * set -DCMAKE_SYSTEM_NAME=Generic to build wasm to fix upstream #63799
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 11 Jul 2023 22:28:59 +0200
 
 llvm-toolchain-16 (1:16.0.6-4) unstable; urgency=medium
 

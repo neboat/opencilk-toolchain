@@ -788,6 +788,7 @@ build-wasm/compiler-rt-%:
 	$(CMAKE_BIN) -B "$@" -S compiler-rt/lib/builtins/ \
 		-G Ninja \
 		$(SCCACHE_CMAKE) \
+		-DCMAKE_SYSTEM_NAME=Generic \
 		-DCMAKE_C_COMPILER_TARGET=$(cpu)-unknown-unknown \
 		-DCMAKE_CXX_COMPILER_TARGET=$(cpu)-unknown-unknown \
 		-DCMAKE_ASM_COMPILER_TARGET=$(cpu)-unknown-unknown \
