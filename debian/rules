@@ -367,6 +367,23 @@ ifneq (,$(filter scan-build,$(DEB_BUILD_OPTIONS)))
 	STAGE_ALL_CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
 endif
 
+ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
+# enable the build using coverity
+# pbuilder contains BINDMOUNTS="/opt/cov-analysis/"
+# And we have some pbuilder hooks to configure and pack the result
+# Where the binaries are installed on the jenkins instance
+        PRE_PROCESS=PATH=$$PATH:/opt/cov-analysis/bin/ cov-build --dir cov-int
+# We don't want to check the temporary files produced by the configure
+        PRE_PROCESS_CONF=
+        COVERITY_ENABLE=1
+        CONFIGURE_EXTRA += --enable-assertions
+        STAGE_ALL_CMAKE_EXTRA += -DLLVM_ENABLE_ASSERTIONS=ON
+# no need to run tests in this case
+        RUN_TEST=no
+else
+        COVERITY_ENABLE=0
+endif
+
 LLDB_ENABLE=yes
 LLDB_DISABLE_ARCHS := hurd-i386 ia64 powerpc powerpcspe ppc64 riscv64 sparc64 mips64el mipsel
 # hurd has threading issues
@@ -798,6 +815,7 @@ build-wasm/compiler-rt-%:
 	$(CMAKE_BIN) -B "$@" -S compiler-rt/lib/builtins/ \
 		-G Ninja \
 		$(SCCACHE_CMAKE) \
+		-DCMAKE_SYSTEM_NAME=Generic \
 		-DCMAKE_C_COMPILER_TARGET=$(cpu)-unknown-unknown \
 		-DCMAKE_CXX_COMPILER_TARGET=$(cpu)-unknown-unknown \
 		-DCMAKE_ASM_COMPILER_TARGET=$(cpu)-unknown-unknown \
