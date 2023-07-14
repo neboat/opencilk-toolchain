@@ -2,6 +2,7 @@ llvm-toolchain-16 (1:16.0.6-5) UNRELEASED; urgency=medium
 
   [ Samuel Thibault ]
   * Fix hurd build by fixing Linux-specific lines.
+  * Fix wasi-libc build-deps on i386 !linux-i386
 
   [ Sylvestre Ledru ]
   * set -DCMAKE_SYSTEM_NAME=Generic to build wasm to fix upstream #63799
