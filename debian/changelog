@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:17~++20230709044550+c54ff51be9c1-1~exp2) experimental; urgency=medium
+
+  * Also install llvm-debuginfod in llvm-X.Y
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 15 Jul 2023 11:09:12 +0200
+
 llvm-toolchain-snapshot (1:17~++20230709044550+c54ff51be9c1-1~exp1) experimental; urgency=medium
 
   * Install usr/lib/llvm-17/lib/clang/17/include/llvm_libc_wrappers/*.h
