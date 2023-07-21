@@ -1041,7 +1041,8 @@ endif
 # Because of hurd, we are more flexible in what we include in libclang-X.Y-rt
 # but we don't want to install wasi files into libclang-rt as they have their own package
 # So, we remove this directory from the package
-	rm -f $(CURDIR)/debian/libclang-rt-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/wasi/
+	rm -f $(CURDIR)/debian/libclang-rt-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/lib/wasi/
+
 
 # Create this fake directory to make the install libclang-common-dev happy
 # under the unsupported archs of compiler-rt
