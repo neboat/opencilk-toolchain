@@ -1266,7 +1266,7 @@ ifneq (,$(filter libc++-$(LLVM_VERSION)-dev-wasm32, $(shell dh_listpackages)))
 # Because of hurd, we are more flexible in what we include in libclang-X.Y-rt
 # but we don't want to install wasi files into libclang-rt as they have their own package
 # So, we remove this directory from the package
-	rm -f $(CURDIR)/debian/libclang-rt-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/lib/wasi/
+	rm -fr $(CURDIR)/debian/libclang-rt-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/lib/wasi/
 endif
 
 
