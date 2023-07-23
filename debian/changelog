@@ -1,4 +1,4 @@
-llvm-toolchain-16 (1:16.0.6-5) UNRELEASED; urgency=medium
+llvm-toolchain-16 (1:16.0.6-5) unstable; urgency=medium
 
   [ Samuel Thibault ]
   * Fix hurd build by fixing Linux-specific lines.
