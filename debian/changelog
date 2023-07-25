@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:18~++20230724083402+862b93a8095c-1~exp2) experimental; urgency=medium
+
+  * snapshot is now 18
+
+ --
+
 llvm-toolchain-snapshot (1:17~++20230724083402+862b93a8095c-1~exp1) experimental; urgency=medium
 
   * Fix for real the libclang-rt-17-dev issue
