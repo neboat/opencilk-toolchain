@@ -1002,7 +1002,7 @@ endif
 		echo "Generating manpage of $$f"; \
 		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-info --version-string=$(LLVM_VERSION) $(TARGET_BUILD_STAGE2)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1 || true; \
 	done
-	# Create the following directory regardless as libomp-16-doc
+	# Create the following directory regardless as libomp-XX-doc
 	# is Architecture: all
 	mkdir -p openmp/runtime/doc/doxygen/generated/html/
 
