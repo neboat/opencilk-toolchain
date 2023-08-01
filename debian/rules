@@ -192,9 +192,8 @@ ifneq (,$(filter $(DEB_HOST_ARCH),powerpc))
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
 endif
 
-# more than 2 jobs causes OOM in Ubuntu and slows down build process.
+# debug symbols OOM in Ubuntu Ubuntu and slows down build process.
 ifneq (,$(filter $(DEB_HOST_ARCH),riscv64))
-  NJOBS=2
   opt_flags = -O2 -DNDEBUG -g0
 else
   opt_flags = -O2 -DNDEBUG -g1
