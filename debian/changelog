@@ -1,3 +1,9 @@
+llvm-toolchain-16 (1:16.0.6-8) unstable; urgency=medium
+
+  * Make sure flang-16 depends on libflang-16-dev (Closes: #1041202)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 02 Aug 2023 09:30:36 +0200
+
 llvm-toolchain-16 (1:16.0.6-7) unstable; urgency=medium
 
   * Use spirv-16 to build llvm. This should fix libclc-16 content
