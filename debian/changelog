@@ -1,3 +1,11 @@
+llvm-toolchain-16 (1:16.0.6-7) unstable; urgency=medium
+
+  * Use spirv-16 to build llvm. This should fix libclc-16 content
+    and fix mesa build
+  * Don't reduce parallel builds anymore on riscv64
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 02 Aug 2023 09:10:31 +0200
+
 llvm-toolchain-16 (1:16.0.6-6) unstable; urgency=medium
 
   * Do the delete of wasi in libclang-rt regardless (Closes: #1041834)
