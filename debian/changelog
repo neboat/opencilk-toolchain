@@ -1,3 +1,10 @@
+llvm-toolchain-16 (1:16.0.6-9) unstable; urgency=medium
+
+  * Really enable spirv, and disable spirv on mips* since it's not yet
+    bootstrapped. Thanks <tjaalton> for the patch
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 03 Aug 2023 14:20:06 +0200
+
 llvm-toolchain-16 (1:16.0.6-8) unstable; urgency=medium
 
   * Make sure flang-16 depends on libflang-16-dev (Closes: #1041202)
