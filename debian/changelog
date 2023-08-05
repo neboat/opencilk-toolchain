@@ -2,6 +2,7 @@ llvm-toolchain-snapshot (1:18~++20230726101950+e00e0b6fb004-1~exp2) UNRELEASED; 
 
   * snapshot is now 18
   * Remove llvm-remark-size-diff & llvm-tapi-diff from llvm-X.Y-dev
+  * Remove lldb-disable-swig-error.diff - no longer necessary
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 05 Aug 2023 09:00:30 +0200
 
