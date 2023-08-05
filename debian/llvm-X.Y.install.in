@@ -49,7 +49,6 @@ usr/lib/llvm-@LLVM_VERSION@/bin/llvm-split
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-stress
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-strings
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-symbolizer
-usr/lib/llvm-@LLVM_VERSION@/bin/llvm-tapi-diff
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-tblgen
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-undname
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-xray
@@ -79,7 +78,6 @@ usr/lib/llvm-@LLVM_VERSION@/bin/sanstats
 usr/lib/llvm-@LLVM_VERSION@/bin/dsymutil
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-debuginfod-find
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-debuginfod
-usr/lib/llvm-@LLVM_VERSION@/bin/llvm-remark-size-diff
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-remarkutil
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-debuginfo-analyzer
 
@@ -144,7 +142,6 @@ usr/bin/llvm-stress-@LLVM_VERSION@
 usr/bin/llvm-strings-@LLVM_VERSION@
 usr/bin/llvm-strip-@LLVM_VERSION@
 usr/bin/llvm-symbolizer-@LLVM_VERSION@
-usr/bin/llvm-tapi-diff-@LLVM_VERSION@
 usr/bin/llvm-tblgen-@LLVM_VERSION@
 usr/bin/llvm-undname-@LLVM_VERSION@
 usr/bin/llvm-windres-@LLVM_VERSION@
@@ -160,5 +157,4 @@ usr/bin/sanstats-*
 usr/bin/dsymutil-*
 usr/bin/llvm-debuginfod-find-*
 usr/bin/llvm-debuginfod-@LLVM_VERSION@
-usr/bin/llvm-remark-size-diff-*
 usr/bin/llvm-debuginfo-analyzer-@LLVM_VERSION@
