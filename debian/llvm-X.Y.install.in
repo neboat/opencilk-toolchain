@@ -80,6 +80,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/llvm-debuginfod-find
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-debuginfod
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-remarkutil
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-debuginfo-analyzer
+usr/lib/llvm-@LLVM_VERSION@/bin/llvm-readtap
 
 usr/bin/llvm-PerfectShuffle-@LLVM_VERSION@
 usr/bin/llvm-addr2line-@LLVM_VERSION@
@@ -142,6 +143,7 @@ usr/bin/llvm-stress-@LLVM_VERSION@
 usr/bin/llvm-strings-@LLVM_VERSION@
 usr/bin/llvm-strip-@LLVM_VERSION@
 usr/bin/llvm-symbolizer-@LLVM_VERSION@
+usr/bin/llvm-readtapi-@LLVM_VERSION@
 usr/bin/llvm-tblgen-@LLVM_VERSION@
 usr/bin/llvm-undname-@LLVM_VERSION@
 usr/bin/llvm-windres-@LLVM_VERSION@
