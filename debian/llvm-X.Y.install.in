@@ -80,7 +80,7 @@ usr/lib/llvm-@LLVM_VERSION@/bin/llvm-debuginfod-find
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-debuginfod
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-remarkutil
 usr/lib/llvm-@LLVM_VERSION@/bin/llvm-debuginfo-analyzer
-usr/lib/llvm-@LLVM_VERSION@/bin/llvm-readtap
+usr/lib/llvm-@LLVM_VERSION@/bin/llvm-readtapi
 
 usr/bin/llvm-PerfectShuffle-@LLVM_VERSION@
 usr/bin/llvm-addr2line-@LLVM_VERSION@
