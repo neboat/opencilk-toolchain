@@ -1,3 +1,10 @@
+llvm-toolchain-16 (1:16.0.6-10) unstable; urgency=medium
+
+  * update test to depend on libstdc++-13-dev
+  * Also ignore mlir test on armel, hang
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 07 Aug 2023 11:01:06 +0200
+
 llvm-toolchain-16 (1:16.0.6-9) unstable; urgency=medium
 
   * Really enable spirv, and disable spirv on mips* since it's not yet
