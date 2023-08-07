@@ -1326,7 +1326,7 @@ endif
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxxabi || true
 
 # MLIR
-ifeq (,$(filter $(DEB_HOST_ARCH), armhf i386 x32))
+ifeq (,$(filter $(DEB_HOST_ARCH), armel armhf i386 x32))
 # Do not run MLIR test on i386 because of
 # https://github.com/llvm/llvm-project/issues/58357
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-mlir || true
