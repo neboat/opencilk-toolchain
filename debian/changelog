@@ -1,5 +1,10 @@
-llvm-toolchain-17 (1:17~++20230724083402+862b93a8095c-1~exp1) experimental; urgency=medium
+llvm-toolchain-17 (1:17.0.0~+rc2-1~exp1) experimental; urgency=medium
 
+  * New snapshot release:
+  * Fix the libclang-rt-17-dev: ships
+    /usr/lib[...]/wasi/libclang_rt.builtins-wasm*.a, already in
+    libclang-rt-17-dev-wasm* (closes: #1041388)
+  * Also install llvm-debuginfod in llvm-X.Y
   * Fix for real the libclang-rt-17-dev issue
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 24 Jul 2023 08:33:29 +0200
