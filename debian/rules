@@ -221,6 +221,13 @@ ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
   LIBCXX_USE_COMPILER_RT := OFF
 endif
 
+ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
+  STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
+  STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
+  COMPILER_RT_USE_BUILTINS_LIBRARY := OFF
+  LIBCXX_USE_COMPILER_RT := OFF
+endif
+
 ifneq (,$(filter $(DEB_HOST_ARCH),x32))
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=x86_64-linux-gnux32
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_DEFAULT_TARGET_TRIPLE=x86_64-linux-gnux32
@@ -306,7 +313,7 @@ endif
 
 # Enable libunwind (or not)
 LIBUNWIND_ENABLE=yes
-ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel m68k mipsel hurd-i386 powerpc sparc sparc64 x32))
+ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel m68k mipsel mips64el hurd-i386 powerpc sparc sparc64 x32))
   LIBUNWIND_ENABLE=no
 # do not use compiler-rt builtins for libcxx (libcxxabi) when libunwind is
 # disabled since the gnu implementation in libgcc_s will then be required

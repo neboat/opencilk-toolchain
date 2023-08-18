@@ -689,7 +689,7 @@ Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: libc++1-@LLVM_VERSION@ (= ${binary:Version}), ${misc:Depends},
- libunwind-@LLVM_VERSION@-dev [amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64]
+ libunwind-@LLVM_VERSION@-dev [amd64 arm64 armhf i386 ppc64el ppc64 riscv64]
 Breaks: libc++-dev (<< 44)
 Provides: libc++-x.y-dev
 Conflicts: libc++-x.y-dev
@@ -829,7 +829,7 @@ Description: OpenCL C language implementation - development files
 
 Package: libunwind-@LLVM_VERSION@
 Section: libs
-Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
+Architecture: amd64 arm64 armhf i386 ppc64el ppc64 riscv64
 Multi-Arch: same
 Depends: ${shlibs:Depends},
  ${misc:Depends}
@@ -846,7 +846,7 @@ Description: production-quality unwinder
 
 Package: libunwind-@LLVM_VERSION@-dev
 Section: libdevel
-Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
+Architecture: amd64 arm64 armhf i386 ppc64el ppc64 riscv64
 Multi-Arch: same
 Depends:
  ${misc:Depends},
