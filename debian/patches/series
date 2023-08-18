@@ -153,3 +153,4 @@ amdgpu/nonlinux.patch
 ubuntu-releases.patch
 new-cmake-build-fix.patch
 HIP-search-path-fix.patch
+D158066.patch
