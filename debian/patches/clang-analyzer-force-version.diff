@@ -10,7 +10,7 @@ Index: llvm-toolchain-snapshot_17~++20211117120952+5b4bfd8c2417/clang/tools/scan
  
    $Clang = $ENV{'CLANG_CXX'};
 -  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++'; }
-+  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++-17'; }
++  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang++-18'; }
  
    $IsCXX = 1
  }
@@ -19,7 +19,7 @@ Index: llvm-toolchain-snapshot_17~++20211117120952+5b4bfd8c2417/clang/tools/scan
  
    $Clang = $ENV{'CLANG'};
 -  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang'; }
-+  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang-17'; }
++  if (!defined $Clang || ! -x $Clang) { $Clang = 'clang-18'; }
  
    $IsCXX = 0
  }

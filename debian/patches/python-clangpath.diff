@@ -11,7 +11,7 @@ Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/bindings/p
              file = "libclang.dll"
          else:
 -            file = "libclang.so"
-+            file = "libclang-17.so"
++            file = "libclang-18.so"
  
          if Config.library_path:
              file = Config.library_path + "/" + file

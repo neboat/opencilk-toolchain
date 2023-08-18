@@ -13,7 +13,7 @@ Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/tools/clan
      parser.add_argument(
          "-binary",
 -        default="clang-format",
-+        default="clang-format-17",
++        default="clang-format-18",
          help="location of binary to use for clang-format",
      )
      args = parser.parse_args()
@@ -26,7 +26,7 @@ Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/tools/clan
  
  (defcustom clang-format-executable
 -  (or (executable-find "clang-format")
-+  (or (executable-find "clang-format-17")
++  (or (executable-find "clang-format-18")
        "clang-format")
    "Location of the clang-format executable.
  
@@ -39,7 +39,7 @@ Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/tools/clan
  # set g:clang_format_path to the path to clang-format if it is not on the path
  # Change this to the full path if clang-format is not on the path.
 -binary = "clang-format"
-+binary = "clang-format-17"
++binary = "clang-format-18"
  if vim.eval('exists("g:clang_format_path")') == "1":
      binary = vim.eval("g:clang_format_path")
  

@@ -6,7 +6,7 @@ Index: llvm-toolchain-snapshot_17~++20200326172000+4673699a470/clang/tools/scan-
  kMaxPortsToTry = 100
  
  ###
-+BASE_DIR = '/usr/share/clang/scan-view-17'
++BASE_DIR = '/usr/share/clang/scan-view-18'
  
  
  def url_is_up(url):
