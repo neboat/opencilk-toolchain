@@ -1,3 +1,13 @@
+llvm-toolchain-16 (1:16.0.6-11) unstable; urgency=medium
+
+  * debian/patches/D158066.patch:
+    - upstream fix for Debian bug: #1049362
+  * Also build-depend on libzstd-dev (Closes: #1047718)
+  * Explicitly depend on libcurl4-openssl-dev, since nss is being removed.
+    (Closes: #1043552)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 17 Aug 2023 10:19:13 +0200
+
 llvm-toolchain-16 (1:16.0.6-10) unstable; urgency=medium
 
   * update test to depend on libstdc++-13-dev
