@@ -1,3 +1,10 @@
+llvm-toolchain-16 (1:16.0.6-12) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Disable wasm support on powerpc and powerpcspe
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Wed, 30 Aug 2023 11:34:13 +0200
+
 llvm-toolchain-16 (1:16.0.6-11) unstable; urgency=medium
 
   * debian/patches/D158066.patch:
