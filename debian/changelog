@@ -2,6 +2,7 @@ llvm-toolchain-snapshot (1:18~++20230818040015+c931f2e6fd0c-1~exp2) UNRELEASED; 
 
   [ John Paul Adrian Glaubitz ]
   * Disable wasm support on powerpc and powerpcspe
+  * Remove powerpc from BINUTILS_GOLD_ARCHS again
 
  -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Wed, 30 Aug 2023 11:49:01 +0200
 
