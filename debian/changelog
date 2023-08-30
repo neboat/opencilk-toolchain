@@ -2,6 +2,7 @@ llvm-toolchain-16 (1:16.0.6-12) UNRELEASED; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Disable wasm support on powerpc and powerpcspe
+  * Remove powerpc from BINUTILS_GOLD_ARCHS again
 
  -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Wed, 30 Aug 2023 11:34:13 +0200
 
