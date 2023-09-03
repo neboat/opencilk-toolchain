@@ -1,10 +1,13 @@
-llvm-toolchain-16 (1:16.0.6-12) UNRELEASED; urgency=medium
+llvm-toolchain-16 (1:16.0.6-12) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Disable wasm support on powerpc and powerpcspe
   * Remove powerpc from BINUTILS_GOLD_ARCHS again
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Wed, 30 Aug 2023 11:34:13 +0200
+  [ Sylvestre Ledru ]
+  * Disable python3-lldb on mips64el to unnreak the build
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Sep 2023 14:06:19 +0200
 
 llvm-toolchain-16 (1:16.0.6-11) unstable; urgency=medium
 
