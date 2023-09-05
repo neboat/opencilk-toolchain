@@ -816,6 +816,10 @@ build-wasm/compiler-rt-%:
 	@echo "Building compiler-rt for $(cpu)"
 	@echo "Using cmake: $(CMAKE_BIN)"
 	mkdir -p "$@"
+# remove unsupported flags
+	STAGE_2_CFLAGS=`echo $(STAGE_2_CFLAGS) | sed 's/-fcf-protection//g'`
+	STAGE_2_CXXFLAGS=`echo $(STAGE_2_CXXFLAGS) | sed 's/-fcf-protection//g'`
+
 	$(CMAKE_BIN) -B "$@" -S compiler-rt/lib/builtins/ \
 		-G Ninja \
 		$(SCCACHE_CMAKE) \
