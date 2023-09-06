@@ -5,7 +5,7 @@ llvm-toolchain-16 (1:16.0.6-12) unstable; urgency=medium
   * Remove powerpc from BINUTILS_GOLD_ARCHS again
 
   [ Sylvestre Ledru ]
-  * Disable python3-lldb on mips64el to unnreak the build
+  * Disable python3-lldb on mips64el to unbreak the build
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Sep 2023 14:06:19 +0200
 
