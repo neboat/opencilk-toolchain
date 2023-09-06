@@ -1,6 +1,8 @@
 llvm-toolchain-17 (1:17.0.0~+rc4-1~exp2) experimental; urgency=medium
 
   * Strip -fcf-protection for wasm build - new flag added in dpkg 1.22
+  * Explicitly depend on libcurl4-openssl-dev
+    Thanks to Samuel Henrique for the fix
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Sep 2023 22:44:15 +0200
 
@@ -12,7 +14,7 @@ llvm-toolchain-17 (1:17.0.0~+rc4-1~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
   * new upstream release
-  * Disable python3-lldb on mips64el to unnreak the build
+  * Disable python3-lldb on mips64el to unbreak the build
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 05 Sep 2023 14:42:18 +0200
 
