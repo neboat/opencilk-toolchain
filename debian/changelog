@@ -1,22 +1,11 @@
 llvm-toolchain-16 (1:16.0.6-12) unstable; urgency=medium
 
-<<<<<<<
   [ John Paul Adrian Glaubitz ]
   * Disable wasm support on powerpc and powerpcspe
   * Remove powerpc from BINUTILS_GOLD_ARCHS again
 
   [ Sylvestre Ledru ]
   * Disable python3-lldb on mips64el to unbreak the build
-=======
-  [ John Paul Adrian Glaubitz ]
-  * Disable wasm support on powerpc and powerpcspe
-  * Remove powerpc from BINUTILS_GOLD_ARCHS again
-
-  [ Sylvestre Ledru ]
-  * Disable python3-lldb on mips64el to unnreak the build
-  * Explicitly depend on libcurl4-openssl-dev. Thanks to
-    Samuel Henrique for the patches
->>>>>>>
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Sep 2023 14:06:19 +0200
 
