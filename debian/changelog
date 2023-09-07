@@ -1,3 +1,10 @@
+llvm-toolchain-17 (1:17.0.0~+rc4-1~exp3) experimental; urgency=medium
+
+  * Update control file
+  * Fixup build failures from 16 branch
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 07 Sep 2023 23:04:28 +0200
+
 llvm-toolchain-17 (1:17.0.0~+rc4-1~exp2) experimental; urgency=medium
 
   * Strip -fcf-protection for wasm build - new flag added in dpkg 1.22
