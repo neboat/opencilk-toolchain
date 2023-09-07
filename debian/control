@@ -934,7 +934,7 @@ Package: flang-17
 # no 32bit support
 # https://github.com/llvm/llvm-project/issues/59845
 Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 ppc64 sparc64 riscv64
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libflang-16-dev (= ${binary:Version}),
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libflang-17-dev (= ${binary:Version}),
 Provides: fortran-compiler, gfortran-mod-15
 Description: Fortran compiler
  Ground-up implementation of a Fortran front end written in
