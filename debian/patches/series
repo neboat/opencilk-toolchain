@@ -51,7 +51,6 @@ scan-view-fix-path.diff
 fix-scan-view-path.diff
 
 # lldb
-lldb/lldb-link-atomic-cmake.patch
 lldb/lldb-addversion-suffix-to-llvm-server-exec.patch
 lldb/lldb-missing-install.diff
 lldb/lldb-disable-swig-error.diff

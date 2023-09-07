@@ -96,6 +96,62 @@ llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 28 Jan 2023 18:07:40 +0100
 
+llvm-toolchain-16 (1:16.0.6-13) UNRELEASED; urgency=medium
+
+  * Also runtime-depend on {libzstd,zlib1g}-dev, from Paravoid (Closes:
+    #1047718)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 07 Sep 2023 01:43:23 +0200
+
+llvm-toolchain-16 (1:16.0.6-12) unstable; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Disable wasm support on powerpc and powerpcspe
+  * Remove powerpc from BINUTILS_GOLD_ARCHS again
+
+  [ Sylvestre Ledru ]
+  * Disable python3-lldb on mips64el to unbreak the build
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 03 Sep 2023 14:06:19 +0200
+
+llvm-toolchain-16 (1:16.0.6-11) unstable; urgency=medium
+
+  * debian/patches/D158066.patch:
+    - upstream fix for Debian bug: #1049362
+  * Also build-depend on libzstd-dev (Closes: #1047718)
+  * Explicitly depend on libcurl4-openssl-dev, since nss is being removed.
+    (Closes: #1043552)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 17 Aug 2023 10:19:13 +0200
+
+llvm-toolchain-16 (1:16.0.6-10) unstable; urgency=medium
+
+  * update test to depend on libstdc++-13-dev
+  * Also ignore mlir test on armel, hang
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 07 Aug 2023 11:01:06 +0200
+
+llvm-toolchain-16 (1:16.0.6-9) unstable; urgency=medium
+
+  * Really enable spirv, and disable spirv on mips* since it's not yet
+    bootstrapped. Thanks <tjaalton> for the patch
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 03 Aug 2023 14:20:06 +0200
+
+llvm-toolchain-16 (1:16.0.6-8) unstable; urgency=medium
+
+  * Make sure flang-16 depends on libflang-16-dev (Closes: #1041202)
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 02 Aug 2023 09:30:36 +0200
+
+llvm-toolchain-16 (1:16.0.6-7) unstable; urgency=medium
+
+  * Use spirv-16 to build llvm. This should fix libclc-16 content
+    and fix mesa build
+  * Don't reduce parallel builds anymore on riscv64
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 02 Aug 2023 09:10:31 +0200
+
 llvm-toolchain-16 (1:16.0.6-6) unstable; urgency=medium
 
   * Do the delete of wasi in libclang-rt regardless (Closes: #1041834)
