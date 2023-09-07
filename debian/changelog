@@ -1,4 +1,4 @@
-llvm-toolchain-16 (1:16.0.6-13) UNRELEASED; urgency=medium
+llvm-toolchain-16 (1:16.0.6-13) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Also runtime-depend on {libzstd,zlib1g}-dev, from Paravoid (Closes:
