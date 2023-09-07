@@ -13,7 +13,8 @@ Build-Depends: debhelper (>= 10.0), cmake, ninja-build,
     binutils-dev,
     libxml2-dev,
     libjsoncpp-dev, pkg-config,
-    lcov, procps, help2man, zlib1g-dev,
+    lcov, procps, help2man,
+    zlib1g-dev, libzstd-dev,
     g++-multilib [amd64 i386 kfreebsd-amd64 mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
     libjs-mathjax, python3-recommonmark,
     doxygen,
@@ -22,8 +23,7 @@ Build-Depends: debhelper (>= 10.0), cmake, ninja-build,
     libctypes-ocaml-dev [amd64 arm64 armhf ppc64el riscv64 s390x],
     dh-exec, dh-ocaml [amd64 arm64 armhf ppc64el riscv64 s390x],
     libpfm4-dev [linux-any], python3-setuptools, libz3-dev,
-    llvm-spirv-15 [ amd64 arm64 armel armhf mips64el mipsel ppc64el riscv64 s390x ] <!stage1> |
-    llvm-spirv-14 [ amd64 arm64 armel armhf mips64el mipsel ppc64el riscv64 s390x ] <!stage1> | hello [!i386],
+    llvm-spirv-16 [ amd64 arm64 armel armhf ppc64el riscv64 s390x ] <!stage1> | hello [!i386],
     spirv-tools [ linux-any ] | hello [ !i386],
     wasi-libc | hello [ !any-i386],
     libcurl4-openssl-dev | libcurl-dev,
@@ -547,7 +547,7 @@ Section: libdevel
 Architecture: amd64 arm64 armel armhf i386 mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64
 # ia64 hurd powerpc have been removed
 Depends: ${shlibs:Depends}, ${misc:Depends}, lld-18 (= ${binary:Version}),
- liblld-18 (= ${binary:Version})
+ liblld-18 (= ${binary:Version}), libzstd-dev, zlib1g-dev
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker, header files
  LLD is a new, high-performance linker. It is built as a set of reusable
@@ -687,8 +687,8 @@ Package: libc++-18-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libc++1-18 (= ${binary:Version}), ${misc:Depends},
- libunwind-18-dev [amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64]
+Depends: libc++1-17 (= ${binary:Version}), ${misc:Depends},
+ libunwind-17-dev [amd64 arm64 armhf i386 ppc64el ppc64 riscv64]
 Breaks: libc++-dev (<< 44)
 Provides: libc++-x.y-dev
 Conflicts: libc++-x.y-dev
@@ -828,7 +828,7 @@ Description: OpenCL C language implementation - development files
 
 Package: libunwind-18
 Section: libs
-Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
+Architecture: amd64 arm64 armhf i386 ppc64el ppc64 riscv64
 Multi-Arch: same
 Depends: ${shlibs:Depends},
  ${misc:Depends}
@@ -845,7 +845,7 @@ Description: production-quality unwinder
 
 Package: libunwind-18-dev
 Section: libdevel
-Architecture: amd64 arm64 armhf i386 mips64el ppc64el ppc64 riscv64
+Architecture: amd64 arm64 armhf i386 ppc64el ppc64 riscv64
 Multi-Arch: same
 Depends:
  ${misc:Depends},
@@ -934,7 +934,7 @@ Package: flang-18
 # no 32bit support
 # https://github.com/llvm/llvm-project/issues/59845
 Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 ppc64 sparc64 riscv64
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libflang-16-dev (= ${binary:Version}),
 Provides: fortran-compiler, gfortran-mod-15
 Description: Fortran compiler
  Ground-up implementation of a Fortran front end written in

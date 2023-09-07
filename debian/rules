@@ -192,9 +192,8 @@ ifneq (,$(filter $(DEB_HOST_ARCH),powerpc))
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
 endif
 
-# more than 2 jobs causes OOM in Ubuntu and slows down build process.
+# debug symbols OOM in Ubuntu Ubuntu and slows down build process.
 ifneq (,$(filter $(DEB_HOST_ARCH),riscv64))
-  NJOBS=2
   opt_flags = -O2 -DNDEBUG -g0
 else
   opt_flags = -O2 -DNDEBUG -g1
@@ -217,6 +216,13 @@ ifneq (,$(filter $(DEB_HOST_ARCH),s390x))
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
   LIBCXX_EXCEPTIONS := OFF
 # disable compiler-rt builtins (not supported for s390x)
+  STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
+  COMPILER_RT_USE_BUILTINS_LIBRARY := OFF
+  LIBCXX_USE_COMPILER_RT := OFF
+endif
+
+ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
+  STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON
   STAGE_ALL_CMAKE_EXTRA += -DCOMPILER_RT_BUILD_BUILTINS=OFF
   COMPILER_RT_USE_BUILTINS_LIBRARY := OFF
   LIBCXX_USE_COMPILER_RT := OFF
@@ -250,9 +256,6 @@ ifndef LLVM_SPIRV
 	LLVM_SPIRV_VERSION := $(shell expr $(LLVM_VERSION) - 1)
 	LLVM_SPIRV := $(shell bash -c "command -v llvm-spirv-$(LLVM_SPIRV_VERSION)" 2>/dev/null)
 endif
-# For now, disable spir because it needs
-# 16 because of opaque pointers
-undefine LLVM_SPIRV
 ifndef LLVM_SPIRV
 	LLVM_SPIRV_INSTALLED = no
 else
@@ -310,7 +313,7 @@ endif
 
 # Enable libunwind (or not)
 LIBUNWIND_ENABLE=yes
-ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel m68k mipsel hurd-i386 powerpc sparc sparc64 x32))
+ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel m68k mipsel mips64el hurd-i386 powerpc sparc sparc64 x32))
   LIBUNWIND_ENABLE=no
 # do not use compiler-rt builtins for libcxx (libcxxabi) when libunwind is
 # disabled since the gnu implementation in libgcc_s will then be required
@@ -1368,7 +1371,7 @@ endif
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxxabi || true
 
 # MLIR
-ifeq (,$(filter $(DEB_HOST_ARCH), armhf i386 x32))
+ifeq (,$(filter $(DEB_HOST_ARCH), armel armhf i386 x32))
 # Do not run MLIR test on i386 because of
 # https://github.com/llvm/llvm-project/issues/58357
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-mlir || true
