@@ -423,6 +423,12 @@ ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 	STAGE_2_CMAKE_EXTRA += -DLLVM_USE_PERF=ON -DLLVM_ENABLE_LIBPFM=ON
 endif
 
+LLVM_ENABLE_ZSTD_DISABLE_DISTRO := bionic buster
+# Disable zstd on old distro, fails on lld
+ifeq (,$(filter-out $(LLVM_ENABLE_ZSTD_DISABLE_DISTRO), $(DISTRO)))
+       STAGE_ALL_CMAKE_EXTRA += -DLLVM_ENABLE_ZSTD=OFF
+endif
+
 LTO_ENABLE=no
 # Only enable it for archs supporting gold
 ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
