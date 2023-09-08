@@ -1,7 +1,6 @@
 llvm-toolchain-snapshot (1:18~++20230907020249+c16adb0dcb1f-1~exp1) UNRELEASED; urgency=medium
 
   * experimental New snapshot release
-  * experimental New snapshot release
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 07 Sep 2023 14:04:25 +0200
 
