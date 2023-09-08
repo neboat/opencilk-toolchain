@@ -423,6 +423,12 @@ ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 	STAGE_2_CMAKE_EXTRA += -DLLVM_USE_PERF=ON -DLLVM_ENABLE_LIBPFM=ON
 endif
 
+LLVM_ENABLE_ZSTD_DISABLE_DISTRO := bionic buster
+# Disable zstd on old distro, fails on lld
+ifeq (,$(filter-out $(LLVM_ENABLE_ZSTD_DISABLE_DISTRO), $(DISTRO)))
+       STAGE_ALL_CMAKE_EXTRA += -DLLVM_ENABLE_ZSTD=OFF
+endif
+
 LTO_ENABLE=no
 # Only enable it for archs supporting gold
 ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
@@ -815,8 +821,8 @@ endif
 	touch $@
 
 # Remove some new flags introduced by dpkg 1.22.0;
-STAGE_2_WASM_CFLAGS := $(shell echo $(STAGE_2_CFLAGS) | sed -e "s/-fcf-protection//g")
-STAGE_2_WASM_CXXFLAGS := $(shell echo $(STAGE_2_CXXFLAGS) | sed -e "s/-fcf-protection//g")
+STAGE_2_WASM_CFLAGS := $(shell echo $(STAGE_2_CFLAGS) | sed -e "s/-fcf-protection//g" -e "s/-mbranch-protection=standard//g")
+STAGE_2_WASM_CXXFLAGS := $(shell echo $(STAGE_2_CXXFLAGS) | sed -e "s/-fcf-protection//g" -e "s/-mbranch-protection=standard//g")
 
 build-wasm/compiler-rt-%: cpu = $(@:build-wasm/compiler-rt-%=%)
 build-wasm/compiler-rt-%:
@@ -896,8 +902,8 @@ build-wasm/libcxx-%-wasi: build-wasm/compiler-rt-%
 		-DCMAKE_CXX_COMPILER=$(STAGE_2_BIN_DIR)/clang++ \
 		-DCMAKE_AR=$(STAGE_2_BIN_DIR)/llvm-ar \
 		-DCMAKE_RANLIB=$(STAGE_2_BIN_DIR)/llvm-ranlib \
-		-DCMAKE_C_FLAGS="$(opt_flags) $(STAGE_2_CFLAGS) -fno-stack-protector" \
-		-DCMAKE_CXX_FLAGS="$(opt_flags) $(STAGE_2_CXXFLAGS) -fno-stack-protector" \
+		-DCMAKE_C_FLAGS="$(opt_flags) $(STAGE_2_WASM_CFLAGS) -fno-stack-protector" \
+		-DCMAKE_CXX_FLAGS="$(opt_flags) $(STAGE_2_WASM_CXXFLAGS) -fno-stack-protector" \
 		-DCMAKE_SHARED_LINKER_FLAGS="$(LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
 		-DCMAKE_MODULE_LINKER_FLAGS="$(LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
 		-DCMAKE_EXE_LINKER_FLAGS="$(LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
