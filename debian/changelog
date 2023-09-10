@@ -1,5 +1,9 @@
 llvm-toolchain-17 (1:17.0.0~+rc4-1~exp4) experimental; urgency=medium
 
+  [ Gianfranco Costamagna ]
+  * Don't depend on spirv, the version 16 is too old to work
+
+  [ Sylvestre Ledru ]
   * Also ignore "-mbranch-protection=standard" (used on arm64)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 08 Sep 2023 13:49:38 +0200
