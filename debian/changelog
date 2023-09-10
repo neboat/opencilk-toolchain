@@ -1,9 +1,13 @@
-llvm-toolchain-16 (1:16.0.6-14) UNRELEASED; urgency=medium
+llvm-toolchain-16 (1:16.0.6-14) unstable; urgency=medium
 
+  [ Sylvestre Ledru ]
   * On bionic & buster, for apt.llvm.org, pass -DLLVM_ENABLE_ZSTD=OFF
     as libzstd is too old
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 08 Sep 2023 17:26:20 +0200
+  [ Gianfranco Costamagna ]
+  * Add i386 and mips64el to spirv architectures.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 10 Sep 2023 08:14:36 +0200
 
 llvm-toolchain-16 (1:16.0.6-13) unstable; urgency=medium
 
