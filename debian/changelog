@@ -1,3 +1,9 @@
+llvm-toolchain-16 (1:16.0.6-15exp1) experimental; urgency=medium
+
+  * Try to build mips64el
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 12 Sep 2023 19:48:32 +0200
+
 llvm-toolchain-16 (1:16.0.6-15) unstable; urgency=medium
 
   * Second attempt to refresh D158066.patch (Closes: #1049362)
