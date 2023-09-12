@@ -1,7 +1,6 @@
 llvm-toolchain-16 (1:16.0.6-15) unstable; urgency=medium
 
   * Second attempt to refresh D158066.patch (Closes: #1049362)
-  * Second attempt to fix mips64el without loosing ompd
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 11 Sep 2023 15:40:42 +0200
 
