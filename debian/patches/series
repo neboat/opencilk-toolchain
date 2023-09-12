@@ -152,5 +152,5 @@ amdgpu/nonlinux.patch
 ubuntu-releases.patch
 new-cmake-build-fix.patch
 HIP-search-path-fix.patch
-D158066.patch
+D158066-simd-ppc64el.patch
 mips64el-ompt.patch
