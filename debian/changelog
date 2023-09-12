@@ -1,4 +1,4 @@
-llvm-toolchain-17 (1:17.0.0~+rc4-1~exp5) UNRELEASED; urgency=medium
+llvm-toolchain-17 (1:17.0.0~+rc4-1~exp5) experimental; urgency=medium
 
   * debian/patches/D158066.patch:
     - cherry-pick change from 1:16.0.6-11
