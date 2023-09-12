@@ -1,3 +1,11 @@
+llvm-toolchain-17 (1:17.0.0~+rc4-1~exp5) UNRELEASED; urgency=medium
+
+  * debian/patches/D158066.patch:
+    - cherry-pick change from 1:16.0.6-11
+  * Make sure at least spirv 17 is used, FTBFS with older version
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 12 Sep 2023 08:51:38 +0200
+
 llvm-toolchain-17 (1:17.0.0~+rc4-1~exp4) experimental; urgency=medium
 
   [ Gianfranco Costamagna ]
