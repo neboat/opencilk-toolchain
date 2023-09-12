@@ -148,4 +148,4 @@ force-sse2-compiler-rt.diff
 bolt-disable-emit-relocs.patch
 link-grpc.diff
 D158066-simd-ppc64el.patch
-mips64el-ompt.patch
+#mips64el-ompt.patch
