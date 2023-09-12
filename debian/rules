@@ -1217,7 +1217,7 @@ endif
 
 # Disable the python binding for buster. not sure why it regressed
 # regressed de4364f1ecaa..0745b0c0354a
-	if test "$(DISTRO)" = "buster" -o "$(DISTRO)" = "bionic" -o "$(DEB_HOST_ARCH)" = "mips64el"; then \
+	if test "$(DISTRO)" = "buster" -o "$(DISTRO)" = "bionic"; then \
 		mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/; \
 		touch $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/empty; \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
