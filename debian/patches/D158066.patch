@@ -17,10 +17,23 @@ Index: llvm-toolchain-16-16.0.6/clang/include/clang/Basic/BuiltinsPPC.def
  BUILTIN(__builtin_ppc_insert_exp, "ddULLi", "")
  BUILTIN(__builtin_ppc_fmsub, "dddd", "")
  BUILTIN(__builtin_ppc_fmsubs, "ffff", "")
-Index: llvm-toolchain-16-16.0.6/clang/lib/CodeGen/CGBuiltin.cpp
-===================================================================
---- llvm-toolchain-16-16.0.6.orig/clang/lib/CodeGen/CGBuiltin.cpp
-+++ llvm-toolchain-16-16.0.6/clang/lib/CodeGen/CGBuiltin.cpp
+diff --git a/clang/lib/Basic/Targets/PPC.cpp b/clang/lib/Basic/Targets/PPC.cpp
+--- a/clang/lib/Basic/Targets/PPC.cpp
++++ b/clang/lib/Basic/Targets/PPC.cpp
+@@ -260,6 +260,10 @@
+   Builder.defineMacro("__builtin_minfe", "__builtin_ppc_minfe");
+   Builder.defineMacro("__builtin_minfl", "__builtin_ppc_minfl");
+   Builder.defineMacro("__builtin_minfs", "__builtin_ppc_minfs");
++  Builder.defineMacro("__builtin_mffs", "__builtin_ppc_mffs");
++  Builder.defineMacro("__builtin_mffsl", "__builtin_ppc_mffsl");
++  Builder.defineMacro("__builtin_mtfsf", "__builtin_ppc_mtfsf");
++  Builder.defineMacro("__builtin_set_fpscr_rn", "__builtin_ppc_set_fpscr_rn");
+ }
+ 
+ /// PPCTargetInfo::getTargetDefines - Return a set of the PowerPC-specific
+diff --git a/clang/lib/CodeGen/CGBuiltin.cpp b/clang/lib/CodeGen/CGBuiltin.cpp
+--- a/clang/lib/CodeGen/CGBuiltin.cpp
++++ b/clang/lib/CodeGen/CGBuiltin.cpp
 @@ -16742,6 +16742,11 @@
      Value *Op1 = EmitScalarExpr(E->getArg(1));
      return Builder.CreateFDiv(Op0, Op1, "swdiv");
@@ -33,10 +46,9 @@ Index: llvm-toolchain-16-16.0.6/clang/lib/CodeGen/CGBuiltin.cpp
    }
  }
  
-Index: llvm-toolchain-16-16.0.6/clang/lib/Headers/ppc_wrappers/smmintrin.h
-===================================================================
---- llvm-toolchain-16-16.0.6.orig/clang/lib/Headers/ppc_wrappers/smmintrin.h
-+++ llvm-toolchain-16-16.0.6/clang/lib/Headers/ppc_wrappers/smmintrin.h
+diff --git a/clang/lib/Headers/ppc_wrappers/smmintrin.h b/clang/lib/Headers/ppc_wrappers/smmintrin.h
+--- a/clang/lib/Headers/ppc_wrappers/smmintrin.h
++++ b/clang/lib/Headers/ppc_wrappers/smmintrin.h
 @@ -14,7 +14,7 @@
  
  #ifndef NO_WARN_X86_INTRINSICS
@@ -160,10 +172,9 @@ Index: llvm-toolchain-16-16.0.6/clang/lib/Headers/ppc_wrappers/smmintrin.h
    }
    return (__m128)__r;
  }
-Index: llvm-toolchain-16-16.0.6/clang/test/CodeGen/PowerPC/builtins-ppc.c
-===================================================================
---- llvm-toolchain-16-16.0.6.orig/clang/test/CodeGen/PowerPC/builtins-ppc.c
-+++ llvm-toolchain-16-16.0.6/clang/test/CodeGen/PowerPC/builtins-ppc.c
+diff --git a/clang/test/CodeGen/PowerPC/builtins-ppc.c b/clang/test/CodeGen/PowerPC/builtins-ppc.c
+--- a/clang/test/CodeGen/PowerPC/builtins-ppc.c
++++ b/clang/test/CodeGen/PowerPC/builtins-ppc.c
 @@ -1,5 +1,8 @@
  // REQUIRES: powerpc-registered-target
 -// RUN: %clang_cc1 -triple powerpc-unknown-unknown -emit-llvm %s -o - | FileCheck %s
@@ -196,11 +207,65 @@ Index: llvm-toolchain-16-16.0.6/clang/test/CodeGen/PowerPC/builtins-ppc.c
    res = __builtin_setflm(res);
  }
  
-Index: llvm-toolchain-16-16.0.6/clang/test/CodeGen/PowerPC/ppc-smmintrin.c
-===================================================================
---- llvm-toolchain-16-16.0.6.orig/clang/test/CodeGen/PowerPC/ppc-smmintrin.c
-+++ llvm-toolchain-16-16.0.6/clang/test/CodeGen/PowerPC/ppc-smmintrin.c
-@@ -239,44 +239,48 @@
+diff --git a/clang/test/CodeGen/PowerPC/ppc-emmintrin.c b/clang/test/CodeGen/PowerPC/ppc-emmintrin.c
+--- a/clang/test/CodeGen/PowerPC/ppc-emmintrin.c
++++ b/clang/test/CodeGen/PowerPC/ppc-emmintrin.c
+@@ -8,6 +8,11 @@
+ // RUN: %clang -S -emit-llvm -target powerpc64le-unknown-linux-gnu -mcpu=pwr10 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
+ // RUN:   -ffp-contract=off -fno-discard-value-names -mllvm -disable-llvm-optzns -o - | llvm-cxxfilt -n | FileCheck %s --check-prefixes=CHECK-P10
+ 
++// RUN: %clang -x c++ -S -emit-llvm -target powerpc64le-unknown-linux-gnu -mcpu=pwr8 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
++// RUN:   -ffp-contract=off -fno-discard-value-names -mllvm -disable-llvm-optzns -fsyntax-only
++// RUN: %clang -x c++ -S -emit-llvm -target powerpc64le-unknown-linux-gnu -mcpu=pwr10 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
++// RUN:   -ffp-contract=off -fno-discard-value-names -mllvm -disable-llvm-optzns -fsyntax-only
++
+ // RUN: %clang -S -emit-llvm -target powerpc64-ibm-aix -mcpu=pwr8 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
+ // RUN:   -ffp-contract=off -fno-discard-value-names -mllvm -disable-llvm-optzns -o - | llvm-cxxfilt -n | FileCheck %s --check-prefixes=CHECK,CHECK-BE
+ // RUN: %clang -S -emit-llvm -target powerpc64-ibm-aix -mcpu=pwr10 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
+diff --git a/clang/test/CodeGen/PowerPC/ppc-mmintrin.c b/clang/test/CodeGen/PowerPC/ppc-mmintrin.c
+--- a/clang/test/CodeGen/PowerPC/ppc-mmintrin.c
++++ b/clang/test/CodeGen/PowerPC/ppc-mmintrin.c
+@@ -9,6 +9,11 @@
+ // RUN: %clang -S -emit-llvm -target powerpc64le-unknown-linux-gnu -mcpu=pwr9 -DNO_WARN_X86_INTRINSICS %s \
+ // RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -o - | llvm-cxxfilt -n| FileCheck %s --check-prefixes=CHECK-P9,CHECK,CHECK-LE
+ 
++// RUN: %clang -x c++ -S -emit-llvm -target powerpc64le-unknown-linux-gnu -mcpu=pwr8 -DNO_WARN_X86_INTRINSICS %s \
++// RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -fsyntax-only
++// RUN: %clang -x c++ -S -emit-llvm -target powerpc64le-unknown-linux-gnu -mcpu=pwr9 -DNO_WARN_X86_INTRINSICS %s \
++// RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -fsyntax-only
++
+ // RUN: %clang -S -emit-llvm -target powerpc64-unknown-freebsd13.0 -mcpu=pwr8 -DNO_WARN_X86_INTRINSICS %s \
+ // RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -o - | llvm-cxxfilt -n | FileCheck %s --check-prefixes=CHECK-P8,CHECK,CHECK-BE
+ // RUN: %clang -S -emit-llvm -target powerpc64le-unknown-freebsd13.0 -mcpu=pwr8 -DNO_WARN_X86_INTRINSICS %s \
+diff --git a/clang/test/CodeGen/PowerPC/ppc-pmmintrin.c b/clang/test/CodeGen/PowerPC/ppc-pmmintrin.c
+--- a/clang/test/CodeGen/PowerPC/ppc-pmmintrin.c
++++ b/clang/test/CodeGen/PowerPC/ppc-pmmintrin.c
+@@ -13,6 +13,9 @@
+ // RUN: %clang -S -emit-llvm -target powerpc64-ibm-aix -mcpu=pwr8 -DNO_MM_MALLOC -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
+ // RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -o - | llvm-cxxfilt -n | FileCheck %s
+ 
++// RUN: %clang -x c++ -S -emit-llvm -target powerpc64le-gnu-linux -mcpu=pwr8 -DNO_MM_MALLOC -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
++// RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -fsyntax-only
++
+ #include <pmmintrin.h>
+ 
+ __m128d resd, md1, md2;
+diff --git a/clang/test/CodeGen/PowerPC/ppc-smmintrin.c b/clang/test/CodeGen/PowerPC/ppc-smmintrin.c
+--- a/clang/test/CodeGen/PowerPC/ppc-smmintrin.c
++++ b/clang/test/CodeGen/PowerPC/ppc-smmintrin.c
+@@ -15,6 +15,11 @@
+ // RUN: %clang -S -emit-llvm -target powerpc64-unknown-linux-gnu -mcpu=pwr10 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
+ // RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -o - | llvm-cxxfilt -n | FileCheck %s --check-prefix=P10
+ 
++// RUN: %clang -x c++ -S -emit-llvm -target powerpc64le-unknown-linux-gnu -mcpu=pwr8 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
++// RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -fsyntax-only
++// RUN: %clang -x c++ -S -emit-llvm -target powerpc64le-unknown-linux-gnu -mcpu=pwr10 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
++// RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -fsyntax-only
++
+ // RUN: %clang -S -emit-llvm -target powerpc64le-unknown-freebsd13.0 -mcpu=pwr8 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
+ // RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -o - | llvm-cxxfilt -n | FileCheck %s
+ // RUN: %clang -S -emit-llvm -target powerpc64-unknown-freebsd13.0 -mcpu=pwr8 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
+@@ -239,44 +244,48 @@
  // CHECK-LABEL: @test_round
  
  // CHECK-LABEL: define available_externally <4 x float> @_mm_round_ps(<4 x float> noundef %{{[0-9a-zA-Z_.]+}}, i32 noundef signext %{{[0-9a-zA-Z_.]+}})
@@ -263,3 +328,29 @@ Index: llvm-toolchain-16-16.0.6/clang/test/CodeGen/PowerPC/ppc-smmintrin.c
  
  // CHECK-LABEL: define available_externally <2 x double> @_mm_round_sd(<2 x double> noundef %{{[0-9a-zA-Z_.]+}}, <2 x double> noundef %{{[0-9a-zA-Z_.]+}}, i32 noundef signext %{{[0-9a-zA-Z_.]+}})
  // CHECK: call <2 x double> @_mm_round_pd(<2 x double> noundef %{{[0-9a-zA-Z_.]+}}, i32 noundef signext %{{[0-9a-zA-Z_.]+}})
+diff --git a/clang/test/CodeGen/PowerPC/ppc-tmmintrin.c b/clang/test/CodeGen/PowerPC/ppc-tmmintrin.c
+--- a/clang/test/CodeGen/PowerPC/ppc-tmmintrin.c
++++ b/clang/test/CodeGen/PowerPC/ppc-tmmintrin.c
+@@ -13,6 +13,9 @@
+ // RUN: %clang -S -emit-llvm -target powerpc64-ibm-aix -mcpu=pwr8 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
+ // RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -o - | llvm-cxxfilt -n | FileCheck %s --check-prefixes=CHECK,CHECK-BE
+ 
++// RUN: %clang -x c++ -S -emit-llvm -target powerpc64le-gnu-linux -mcpu=pwr8 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
++// RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -fsyntax-only
++
+ #include <tmmintrin.h>
+ 
+ __m64 res, m1, m2;
+diff --git a/clang/test/CodeGen/PowerPC/ppc-x86gprintrin.c b/clang/test/CodeGen/PowerPC/ppc-x86gprintrin.c
+--- a/clang/test/CodeGen/PowerPC/ppc-x86gprintrin.c
++++ b/clang/test/CodeGen/PowerPC/ppc-x86gprintrin.c
+@@ -12,6 +12,9 @@
+ // RUN: %clang -S -emit-llvm -target powerpc64-ibm-aix -mcpu=pwr7 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
+ // RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -o - | llvm-cxxfilt -n | FileCheck %s
+ 
++// RUN: %clang -x c++ -S -emit-llvm -target powerpc64le-unknown-linux-gnu -mcpu=pwr7 -ffreestanding -DNO_WARN_X86_INTRINSICS %s \
++// RUN:   -fno-discard-value-names -mllvm -disable-llvm-optzns -fsyntax-only
++
+ #include <x86gprintrin.h>
+ 
+ unsigned short us;
