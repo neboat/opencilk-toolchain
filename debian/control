@@ -166,7 +166,7 @@ Description: Clang library - Development package
  libclang1-17.
 
 Package: libclang-common-17-dev
-Architecture: all
+Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm17 (>= ${source:Version}),
  libllvm17 (<< ${source:Version}.1~)
