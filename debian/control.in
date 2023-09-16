@@ -166,7 +166,7 @@ Description: Clang library - Development package
  libclang1-@LLVM_VERSION@.
 
 Package: libclang-common-@LLVM_VERSION@-dev
-Architecture: all
+Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@LLVM_VERSION@ (>= ${source:Version}),
  libllvm@LLVM_VERSION@ (<< ${source:Version}.1~)
