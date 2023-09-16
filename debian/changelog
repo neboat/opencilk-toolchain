@@ -1,12 +1,16 @@
 llvm-toolchain-16 (1:16.0.6-16) UNRELEASED; urgency=medium
 
   * Make libclang-common-16-dev arch:any (Closes: #1041455)
+    It was arch:all because all the code isn't arch dependant
+    However, it causes issues for cross build.
+    So, back to any
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 16 Sep 2023 10:39:22 +0200
 
 llvm-toolchain-16 (1:16.0.6-15) unstable; urgency=medium
 
   * Second attempt to refresh D158066.patch (Closes: #1049362)
+    (SIMD compatibility headers on ppc64el)
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 11 Sep 2023 15:40:42 +0200
 
