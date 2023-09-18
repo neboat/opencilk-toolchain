@@ -1,3 +1,9 @@
+llvm-toolchain-17 (1:17.0.0~+rc4-1~exp6) experimental; urgency=medium
+
+  * Enable again python3-lldb on bionic (apt.llvm.org)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 18 Sep 2023 11:22:37 +0200
+
 llvm-toolchain-17 (1:17.0.0~+rc4-1~exp5) experimental; urgency=medium
 
   * debian/patches/D158066.patch:
