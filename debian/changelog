@@ -1,11 +1,15 @@
 llvm-toolchain-16 (1:16.0.6-16) UNRELEASED; urgency=medium
 
+  [ Gianfranco Costamagna ]
   * Make libclang-common-16-dev arch:any (Closes: #1041455)
     It was arch:all because all the code isn't arch dependant
     However, it causes issues for cross build.
     So, back to any
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Sat, 16 Sep 2023 10:39:22 +0200
+  [ Sylvestre Ledru ]
+  * Bring back old version of spirv - necessary for apt.llvm.org
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 19 Sep 2023 12:04:45 +0200
 
 llvm-toolchain-16 (1:16.0.6-15) unstable; urgency=medium
 
