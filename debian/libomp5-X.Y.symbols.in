@@ -1421,6 +1421,7 @@ libomptarget.rtl.cuda.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_wait_event@VERS1.0 17
 libomptarget.rtl.x86_64.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  VERS1.0@VERS1.0 17
+ __tgt_rtl_create_event@VERS1.0 1:17.0.1-1
  __tgt_rtl_data_alloc@VERS1.0 17
  __tgt_rtl_data_delete@VERS1.0 17
  __tgt_rtl_data_exchange@VERS1.0 17
