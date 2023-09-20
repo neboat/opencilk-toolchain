@@ -1,8 +1,8 @@
-llvm-toolchain-17 (1:17.0.0-1~exp1) UNRELEASED; urgency=medium
+llvm-toolchain-17 (1:17.0.1-1~exp1) experimental; urgency=medium
 
-  * New snapshot release
+  * New upstream release
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 19 Sep 2023 10:42:01 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 19 Sep 2023 10:43:02 +0200
 
 llvm-toolchain-17 (1:17.0.0~+rc4-1~exp6) experimental; urgency=medium
 
