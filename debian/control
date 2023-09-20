@@ -43,7 +43,7 @@ Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/17
 Package: clang-17
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang-common-17-dev (= ${binary:Version}),
+ ${dep:devlibs-objc}, libclang-common-17-dev (= ${source:Version}),
  llvm-17-linker-tools (= ${binary:Version}),
  libclang1-17 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
@@ -166,7 +166,7 @@ Description: Clang library - Development package
  libclang1-17.
 
 Package: libclang-common-17-dev
-Architecture: any
+Architecture: all
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm17 (>= ${source:Version}),
  libllvm17 (<< ${source:Version}.1~)
