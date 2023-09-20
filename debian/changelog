@@ -4,7 +4,8 @@ llvm-toolchain-16 (1:16.0.6-16) UNRELEASED; urgency=medium
   * Make libclang-common-16-dev arch:any (Closes: #1041455)
     It was arch:all because all the code isn't arch dependant
     However, it causes issues for cross build.
-    So, back to any
+    So, back to any and libclang-common-@LLVM_VERSION@-dev (= ${binary:Version})
+    instead of source
 
   [ Sylvestre Ledru ]
   * Bring back old version of spirv - necessary for apt.llvm.org
