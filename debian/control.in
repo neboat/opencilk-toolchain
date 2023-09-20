@@ -43,7 +43,7 @@ Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/@BRANCH_
 Package: clang-@LLVM_VERSION@
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang-common-@LLVM_VERSION@-dev (= ${source:Version}),
+ ${dep:devlibs-objc}, libclang-common-@LLVM_VERSION@-dev (= ${binary:Version}),
  llvm-@LLVM_VERSION@-linker-tools (= ${binary:Version}),
  libclang1-@LLVM_VERSION@ (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
