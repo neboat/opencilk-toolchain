@@ -35,7 +35,6 @@ silent-more-tests.diff
 silent-MCJIIT-tests.diff
 silent-gold-utils.diff
 silent-test-failing-codeverage.diff
-silent-amd-tet.diff
 silent-test-macho.diff
 silent-llvm-isel-fuzzer.diff
 remove-test-freezing.diff
