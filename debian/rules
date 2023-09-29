@@ -415,7 +415,7 @@ endif
 DOC_GENERATION=yes
 DOC_GENERATION_DISTRO := buster bullseye bionic focal
 # LLVM upstream moved to myst_parser but it isn't available on old distro
-ifeq (,$(filter-out $(DISABLE_DOC_GENERATION_DISTRO), $(DISTRO)))
+ifeq (,$(filter-out $(DOC_GENERATION_DISTRO), $(DISTRO)))
   DOC_GENERATION=no
 endif
 
