@@ -412,6 +412,13 @@ ifeq (,$(filter-out $(LIBCXX_WASM_DISABLE_DISTRO), $(DISTRO)))
   LIBCXX_WASM_ENABLE=no
 endif
 
+DOC_GENERATION=yes
+DOC_GENERATION_DISTRO := buster bullseye bionic focal
+# LLVM upstream moved to myst_parser but it isn't available on old distro
+ifeq (,$(filter-out $(DISABLE_DOC_GENERATION_DISTRO), $(DISTRO)))
+  DOC_GENERATION=no
+endif
+
 ifneq (,$(filter $(DEB_HOST_ARCH),powerpc powerpcspe))
   LIBCXX_WASM_ENABLE=no
 endif
@@ -967,6 +974,10 @@ override_dh_auto_build: \
 override_dh_prep: build_doc
 	dh_prep
 
+ifeq ($(DOC_GENERATION), no)
+build_doc:
+	@echo "Don't build doc on this distro $(DISTRO)"
+else
 build_doc:
 	BUILDDIR="_build"; \
 	ALLSPHINXOPTS="-d $$BUILDDIR/doctrees ."; \
@@ -1028,6 +1039,7 @@ endif
 		cd openmp/runtime/doc/doxygen/generated/html/ && rm jquery.js && ln -s /usr/share/javascript/jquery/jquery.js; \
 	fi
 	touch $@
+endif
 
 override_dh_auto_install:
 	# Clean up temporary files to make sure the install works
