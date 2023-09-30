@@ -1214,6 +1214,8 @@ endif
 		cp -R $(TARGET_BUILD_STAGE2)/docs/html $(CURDIR)/debian/usr/share/doc/llvm-$(LLVM_VERSION)-doc/; \
 		cp -R $(TARGET_BUILD_STAGE2)/tools/clang/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/; \
 		cp -R $(TARGET_BUILD_STAGE2)/tools/clang/tools/extra/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/clang-extra; \
+	else \
+		mkdir -p llvm/docs/_build/html; \
 	fi
 
 # Rename OCaml bindings
