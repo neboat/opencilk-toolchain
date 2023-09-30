@@ -3,6 +3,7 @@ llvm-toolchain-snapshot (1:18~++20230921012857+4cf8da94198d-1~exp1) UNRELEASED; 
   * replace python3-recommonmark by myst-parser
     to follow upstream change b7ff03206d668cd5a620a9d4e1b22ea112ed56e3
     And disable generation of the doc on old distro
+  * Also install readtapi => llvm-readtapi symlink
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 25 Sep 2023 21:51:52 +0200
 
