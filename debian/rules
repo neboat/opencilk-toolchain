@@ -977,6 +977,7 @@ override_dh_prep: build_doc
 
 ifeq ($(DOC_GENERATION), no)
 build_doc:
+	mkdir -p $(CURDIR)/tools/clang/stage2-bins/docs/ocamldoc/html/
 	@echo "Don't build doc on this distro $(DISTRO)"
 else
 build_doc:
