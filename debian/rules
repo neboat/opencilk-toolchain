@@ -821,8 +821,8 @@ endif
 	touch $@
 
 # Remove some new flags introduced by dpkg 1.22.0;
-STAGE_2_WASM_CFLAGS := $(shell echo $(STAGE_2_CFLAGS) | sed -e "s/-fcf-protection//g" -e "s/-mbranch-protection=standard//g")
-STAGE_2_WASM_CXXFLAGS := $(shell echo $(STAGE_2_CXXFLAGS) | sed -e "s/-fcf-protection//g" -e "s/-mbranch-protection=standard//g")
+STAGE_2_WASM_CFLAGS := $(filter-out -march=% -mfpu=% -fcf-protection% -mbranch-protection%, $(STAGE_2_CFLAGS))
+STAGE_2_WASM_CXXFLAGS := $(filter-out -march=% -mfpu=% -fcf-protection% -mbranch-protection%, $(STAGE_2_CXXFLAGS))
 
 build-wasm/compiler-rt-%: cpu = $(@:build-wasm/compiler-rt-%=%)
 build-wasm/compiler-rt-%:
