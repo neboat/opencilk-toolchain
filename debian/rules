@@ -1216,7 +1216,7 @@ endif
 		cp -R $(TARGET_BUILD_STAGE2)/tools/clang/tools/extra/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/clang-extra; \
 	else \
 		mkdir -p llvm/docs/_build/html clang/docs/_build/html/ tools/clang/tools/extra/docs/html openmp/runtime/doc/doxygen/generated/html/ debian/man/ clang/docs/_build/man/ llvm/docs/_build/man/; \
-		touch clang/docs/_build/man/clang-$(LLVM_VERSION).1 debian/man/lldb-$(LLVM_VERSION).1 debian/man/clang-format-diff-$(LLVM_VERSION).1 debian/man/clangd-$(LLVM_VERSION).1 llvm/docs/_build/man/foo.1 debian/man/llvm-dwarfdump-$(LLVM_VERSION).1 debian/man/lli-$(LLVM_VERSION).1 debian/man/clang-check-$(LLVM_VERSION).1; \
+		rm debian/*$(LLVM_VERSION)*manpages; \
 	fi
 
 # Rename OCaml bindings
