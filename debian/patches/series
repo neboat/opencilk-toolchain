@@ -154,5 +154,4 @@ new-cmake-build-fix.patch
 HIP-search-path-fix.patch
 D158066-simd-ppc64el.patch
 
-# LoongArch patches
-D142688.diff
+D142688-loong64.diff
