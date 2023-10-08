@@ -6,6 +6,7 @@ llvm-toolchain-17 (1:17.0.2-1~exp2) UNRELEASED; urgency=medium
   * Limit the parallel links to 2 on riscv64.
   * d/rules: Be less noisy when building without grpc.
   * Build-depend on libncurses-dev instead of libncurses5-dev.
+  * Use a stamps subdirectory for all build stamps.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 04 Oct 2023 09:46:49 +0200
 

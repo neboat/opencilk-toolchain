@@ -525,7 +525,7 @@ ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clan
 PROJECTS_LIST := $(shell echo "$(PROJECTS)"|sed -e "s| ||g")
 RUNTIMES_LIST := $(shell echo "$(RUNTIMES)"|sed -e "s| ||g")
 
-preconfigure:
+stamps/preconfigure:
 	if ! grep -qs '/proc ' /proc/mounts; then \
 		echo "/proc needs to be mounted"; \
 		exit 1; \
@@ -608,13 +608,16 @@ endif
 		dh_listpackages; \
 		exit 1; \
 	fi
+	@mkdir -p stamps
+	touch $@
 
 # Override this two targets. They are trying to manage the .in conversion for me
 override_dh_ocamlinit:
 override_dh_ocamlclean:
 override_dh_ocaml:
 
-override_dh_auto_configure: preconfigure
+override_dh_auto_configure: stamps/configure
+stamps/configure: stamps/preconfigure
 ifeq (${SCCACHE_ENABLE},yes)
 	ls -al $(SCCACHE_PATH)*
 endif
@@ -754,10 +757,12 @@ endif
 		echo "mismatch of version. Found: $$FOUND_VERSION / Expected: $(LLVM_VERSION_FULL)"; \
 		exit 1; \
 	fi
+	@mkdir -p stamps
+	touch $@
 
 VERBOSE=-v
 
-debian-full-build:
+stamps/debian-full-build:
 	echo "Using cmake: $(CMAKE_BIN)"
 # linker hack so stage2 can link against stage1 libs at runtime
 	LD_LIBRARY_PATH=$(STAGE_1_LIB_DIR):$$LD_LIBRARY_PATH \
@@ -780,7 +785,7 @@ debian-full-build:
 	fi
 	touch $@
 
-debian-libfuzzer-build:
+stamps/debian-libfuzzer-build:
 ifeq (${LIBFUZZER_ENABLE},yes)
 	cd $(TARGET_BUILD); \
 	CFLAGS="$(opt_flags) $(STAGE_2_CFLAGS)"; \
@@ -792,7 +797,7 @@ ifeq (${LIBFUZZER_ENABLE},yes)
 endif
 	touch $@
 
-debian-libclc-build:
+stamps/debian-libclc-build:
 # workaround missing files on i386
 	cd $(TARGET_BUILD_STAGE2) && ninja opt llvm-link llvm-as
 # Builds libclc
@@ -942,13 +947,13 @@ endif
 
 # Build compiler-rt for wasm32 and wasm64. Build libcxx only for wasm32, as
 # libcxx requires wasi-libc, which only exists for wasm32 right now.
-debian-wasm-build: \
+stamps/debian-wasm-build: \
   build-wasm/compiler-rt-wasm32 \
   build-wasm/libcxx-wasm32-wasi \
   build-wasm/compiler-rt-wasm64
 	touch $@
 
-sccache-stats:
+stamps/sccache-stats:
 # If we used sccache, shows stats
 	if test -f $(SCCACHE_CMD); then \
 		ls -al $(SCCACHE_PATH)/; \
@@ -959,16 +964,16 @@ sccache-stats:
 	touch $@
 
 override_dh_auto_build: \
-  debian-full-build \
-  debian-libfuzzer-build \
-  $(if $(filter libclc-%, $(shell dh_listpackages)),debian-libclc-build) \
-  $(if $(filter %-wasm32 %-wasm64, $(shell dh_listpackages)),debian-wasm-build) \
-  sccache-stats
+  stamps/debian-full-build \
+  stamps/debian-libfuzzer-build \
+  $(if $(filter libclc-%, $(shell dh_listpackages)),stamps/debian-libclc-build) \
+  $(if $(filter %-wasm32 %-wasm64, $(shell dh_listpackages)),stamps/debian-wasm-build) \
+  stamps/sccache-stats
 
-override_dh_prep: build_doc
+override_dh_prep: stamps/build_doc
 	dh_prep
 
-build_doc:
+stamps/build_doc:
 	BUILDDIR="_build"; \
 	ALLSPHINXOPTS="-d $$BUILDDIR/doctrees ."; \
 	cd $(CURDIR)/llvm/docs && \
@@ -1236,6 +1241,7 @@ endif
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
 	rm -rf $(TARGET_BUILD)
+# FIXME: why a stamp for dh_override_install ?
 	touch $@
 
 
@@ -1323,7 +1329,7 @@ endif
 # So, we remove this directory from the package
 	rm -fr $(CURDIR)/debian/libclang-rt-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/lib/wasi/
 
-repack_a_llvm_ir:
+stamps/repack_a_llvm_ir:
 ifeq (${LTO_ENABLE},yes)
 # with LTO, .a contains llvm ir instead of native code. So, recompile them
 	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(LLVM_VERSION) bash -v debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
@@ -1331,7 +1337,7 @@ endif
 	touch $@
 
 
-override_dh_installdeb: repack_a_llvm_ir
+override_dh_installdeb: stamps/repack_a_llvm_ir
 # Managed by the package
 	dh_installdeb -a
 
@@ -1434,7 +1440,7 @@ override_dh_auto_test:
 endif
 
 
-override_dh_gencontrol: sccache-stats
+override_dh_gencontrol: stamps/sccache-stats
 	dh_gencontrol -- $(control_vars)
 
 
@@ -1466,6 +1472,7 @@ override_dh_auto_clean:
 	: # for some reason, the docs are written to debian/usr and debian/man ...
 	rm -rf debian/usr debian/man
 	: # remove extra stamps
-	rm -f debian-*-build override_dh_auto_install sccache-stats build_doc
+	rm -f override_dh_auto_install
+	rm -rf stamps
 
 .PHONY: override_dh_strip preconfigure
