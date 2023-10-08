@@ -44,6 +44,10 @@ DH_VERSION := $(shell dpkg -s debhelper | grep '^Version' | awk '{print $$2}')
 
 include /usr/share/dpkg/architecture.mk
 
+# this contains all packages to be built. Note that for at least the clean target,
+# this always includes the binary-indep packages.
+packages := $(shell dh_listpackages)
+
 CONFIGURE_EXTRA =
 
 # dpkg-buildflags support
@@ -283,12 +287,12 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 endif
 endif
 
-ifneq (,$(filter bolt-$(LLVM_VERSION), $(shell dh_listpackages)))
+ifneq (,$(filter bolt-$(LLVM_VERSION), $(packages)))
     PROJECTS += ;bolt
 endif
 
 # flang is only for 64bits
-ifneq (,$(filter flang-$(LLVM_VERSION), $(shell dh_listpackages)))
+ifneq (,$(filter flang-$(LLVM_VERSION), $(packages)))
     PROJECTS += ;flang
 endif
 
@@ -966,8 +970,8 @@ stamps/sccache-stats:
 override_dh_auto_build: \
   stamps/debian-full-build \
   stamps/debian-libfuzzer-build \
-  $(if $(filter libclc-%, $(shell dh_listpackages)),stamps/debian-libclc-build) \
-  $(if $(filter %-wasm32 %-wasm64, $(shell dh_listpackages)),stamps/debian-wasm-build) \
+  $(if $(filter libclc-%, $(packages)),stamps/debian-libclc-build) \
+  $(if $(filter %-wasm32 %-wasm64, $(packages)),stamps/debian-wasm-build) \
   stamps/sccache-stats
 
 override_dh_prep: stamps/build_doc
@@ -1304,7 +1308,7 @@ endif
 override_dh_install:
 ifeq (${POLLY_ENABLE},yes)
 # only for arch:any builds
-ifneq (,$(filter libpolly-$(LLVM_VERSION)-dev, $(shell dh_listpackages)))
+ifneq (,$(filter libpolly-$(LLVM_VERSION)-dev, $(packages)))
 	dh_install -p libpolly-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly
 # On old Debian & Ubuntu, removing the files is necessary
 	rm -rf debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
@@ -1315,7 +1319,7 @@ endif
 	dh_install --fail-missing
 # Move the libc++ abi files from libc++ to libc++-abi for the wasm32 packages
 # These packages are arch: all, so only do so when the packages are built
-ifneq (,$(filter libc++-$(LLVM_VERSION)-dev-wasm32, $(shell dh_listpackages)))
+ifneq (,$(filter libc++-$(LLVM_VERSION)-dev-wasm32, $(packages)))
 	mkdir -p $(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1
 	if test -f $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; then \
 		mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h \
