@@ -15,6 +15,8 @@ llvm-toolchain-16 (1:16.0.6-16) UNRELEASED; urgency=medium
 
   [ Li Chen ]
   * Add support for loongarch64 (Closes: #1053658)
+  * Cherry-pick upstream patch D142688 to fix the build failure on loong64
+    (Closes: #1053655)
 
   [ Matthias Klose ]
   * Disable the clc and wasm builds when not building binary indep packages.
