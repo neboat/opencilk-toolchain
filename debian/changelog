@@ -19,6 +19,7 @@ llvm-toolchain-16 (1:16.0.6-16ubuntu1) UNRELEASED; urgency=medium
   [ Matthias Klose ]
   * Disable the clc and wasm builds when not building binary indep packages.
   * Limit the parallel links to 2 on riscv64.
+  * d/rules: Be less noisy when building without grpc.
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Oct 2023 09:11:38 +0200
 
