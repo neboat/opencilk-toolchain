@@ -13,7 +13,10 @@ llvm-toolchain-16 (1:16.0.6-16) UNRELEASED; urgency=medium
   [ Alexandre Detiste ]
   * Remove python-six as dep
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 19 Sep 2023 12:04:45 +0200
+  [ Li Chen ]
+  * Add support for loongarch64 (Closes: #1053658)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Oct 2023 09:11:38 +0200
 
 llvm-toolchain-16 (1:16.0.6-15) unstable; urgency=medium
 
