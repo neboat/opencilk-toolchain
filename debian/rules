@@ -195,6 +195,7 @@ endif
 # debug symbols OOM in Ubuntu Ubuntu and slows down build process.
 ifneq (,$(filter $(DEB_HOST_ARCH),riscv64))
   opt_flags = -O2 -DNDEBUG -g0
+  STAGE_ALL_CMAKE_EXTRA += -DLLVM_PARALLEL_LINK_JOBS=2
 else
   opt_flags = -O2 -DNDEBUG -g1
 endif
@@ -933,8 +934,8 @@ sccache-stats:
 override_dh_auto_build: \
   debian-full-build \
   debian-libfuzzer-build \
-  debian-libclc-build \
-  debian-wasm-build \
+  $(if $(filter libclc-%, $(shell dh_listpackages)),debian-libclc-build) \
+  $(if $(filter %-wasm32 %-wasm64, $(shell dh_listpackages)),debian-wasm-build) \
   sccache-stats
 
 override_dh_prep: build_doc
@@ -1085,10 +1086,16 @@ endif
 	# Remove an osx file
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libbolt_rt_instr_osx.a
 
-	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libclc/build install
+	if test -d libclc/build; then \
+		DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libclc/build install; \
+	fi
 
-	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/compiler-rt-wasm32 install
-	DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/compiler-rt-wasm64 install
+	if test -d build-wasm/compiler-rt-wasm32; then \
+		DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/compiler-rt-wasm32 install; \
+	fi
+	if test -d build-wasm/compiler-rt-wasm64; then \
+		DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/compiler-rt-wasm64 install; \
+	fi
 	if test -d build-wasm/libcxx-wasm32-wasi; then \
 		DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C build-wasm/libcxx-wasm32-wasi install; \
 	fi
