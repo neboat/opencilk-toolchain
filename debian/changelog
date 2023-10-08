@@ -1,4 +1,4 @@
-llvm-toolchain-16 (1:16.0.6-16ubuntu1) UNRELEASED; urgency=medium
+llvm-toolchain-16 (1:16.0.6-16) UNRELEASED; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Make libclang-common-16-dev arch:any (Closes: #1041455)
