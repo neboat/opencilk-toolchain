@@ -546,6 +546,14 @@ stamps/preconfigure:
 		echo "llvm spriv isn't detected while it should probably for this distro"; \
 	fi
 
+	@echo "Memory:"
+	@if [ -e /proc/meminfo ]; then \
+		cat /proc/meminfo | grep -E '(Mem|Swap)Free|Cached'; \
+	else \
+		echo "  No memory info available"; \
+	fi
+	@echo "Processors: $$(cat /proc/cpuinfo | grep --count '^processor')"
+
 	@echo "DEB_BUILD_OPTIONS=$(DEB_BUILD_OPTIONS)"
 	@echo "DEB_HOST_MULTIARCH=$(DEB_HOST_MULTIARCH)"
 	@echo "DEB_HOST_GNU_TYPE=$(DEB_HOST_GNU_TYPE)"
