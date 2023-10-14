@@ -1,13 +1,5 @@
 llvm-toolchain-16 (1:16.0.6-16) unstable; urgency=medium
 
-  [ Gianfranco Costamagna ]
-  * Make libclang-common-16-dev arch:any (Closes: #1041455)
-    It was arch:all because all the code isn't arch dependant
-    However, it causes issues for cross build.
-    So, back to any and libclang-common-@LLVM_VERSION@-dev (= ${binary:Version})
-    instead of source
-
-  [ Sylvestre Ledru ]
   * Bring back old version of spirv - necessary for apt.llvm.org
 
   [ Alexandre Detiste ]
@@ -23,7 +15,7 @@ llvm-toolchain-16 (1:16.0.6-16) unstable; urgency=medium
   * Limit the parallel links to 2 on riscv64.
   * d/rules: Be less noisy when building without grpc.
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 08 Oct 2023 09:11:38 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 14 Oct 2023 18:37:48 +0200
 
 llvm-toolchain-16 (1:16.0.6-15) unstable; urgency=medium
 

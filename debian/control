@@ -45,7 +45,7 @@ Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/16
 Package: clang-16
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang-common-16-dev (= ${binary:Version}),
+ ${dep:devlibs-objc}, libclang-common-16-dev (= ${source:Version}),
  llvm-16-linker-tools (= ${binary:Version}),
  libclang1-16 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
@@ -168,7 +168,7 @@ Description: Clang library - Development package
  libclang1-16.
 
 Package: libclang-common-16-dev
-Architecture: any
+Architecture: all
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm16 (>= ${source:Version}),
  libllvm16 (<< ${source:Version}.1~)
