@@ -27,26 +27,37 @@ else
   BRANCH_NAME=$(LLVM_VERSION)
 endif
 
+VENDOR=$(shell lsb_release -is)
+DISTRO=$(shell lsb_release -sc)
+
 SONAME_EXT      := 1
 SONAME_OPENMP	:= 5
 # Manage the case when the version is 3.5~svn213052-1~exp1 or 3.4.2-1
 DEBIAN_REVISION := $(shell dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\3,p")
 ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
-  NJOBS := $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
+  NCPUS := $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
 else
-  NJOBS := $(shell nproc)
+  NCPUS := $(shell nproc)
 endif
-
-VENDOR=$(shell lsb_release -is)
-DISTRO=$(shell lsb_release -sc)
-
-DH_VERSION := $(shell dpkg -s debhelper | grep '^Version' | awk '{print $$2}')
-
-include /usr/share/dpkg/architecture.mk
 
 # this contains all packages to be built. Note that for at least the clean target,
 # this always includes the binary-indep packages.
 packages := $(shell dh_listpackages)
+
+# flang has some memory hogs, of up to 6.2gb per process. Limit the parallel jobs
+# based on the available memory
+ifneq (,$(filter flang-$(LLVM_VERSION), $(packages)))
+  MEM_PER_CPU=3900
+else
+  MEM_PER_CPU=2100
+endif
+NJOBS := $(shell mt=`awk '/^MemTotal/ { print $$2 }' /proc/meminfo`; \
+		awk -vn=$(NCPUS) -vmt=$$mt -vm=$(MEM_PER_CPU) \
+		  'END { mt/=1024; n2 = int(mt/m); print n==1 ? 1 : n2<n+1 ? n2 : n+1}' < /dev/null)
+
+DH_VERSION := $(shell dpkg -s debhelper | grep '^Version' | awk '{print $$2}')
+
+include /usr/share/dpkg/architecture.mk
 
 CONFIGURE_EXTRA =
 
@@ -553,6 +564,7 @@ stamps/preconfigure:
 		echo "  No memory info available"; \
 	fi
 	@echo "Processors: $$(cat /proc/cpuinfo | grep --count '^processor')"
+	@echo "Used Processors: $(NJOBS) (out of $(NCPUS)), $(MEM_PER_CPU)kb/processor"
 
 	@echo "DEB_BUILD_OPTIONS=$(DEB_BUILD_OPTIONS)"
 	@echo "DEB_HOST_MULTIARCH=$(DEB_HOST_MULTIARCH)"
