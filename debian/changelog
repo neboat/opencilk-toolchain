@@ -1,3 +1,11 @@
+llvm-toolchain-17 (1:17.0.3-1~exp2) UNRELEASED; urgency=medium
+
+  [ Matthias Klose ]
+  * Limit the number of parallel processes based on the available memory
+    and the packages to be built (flang has some memory hogs).
+
+ -- Matthias Klose <doko@debian.org>  Wed, 18 Oct 2023 15:00:25 +0200
+
 llvm-toolchain-17 (1:17.0.3-1~exp1) experimental; urgency=medium
 
   [ Matthias Klose ]
