@@ -1,3 +1,9 @@
+llvm-toolchain-16 (1:16.0.6-17) unstable; urgency=medium
+
+  * Try to fix the wasm path detection (Closes: #1052002)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 19 Oct 2023 22:37:29 +0200
+
 llvm-toolchain-16 (1:16.0.6-16) unstable; urgency=medium
 
   * Bring back old version of spirv - necessary for apt.llvm.org
