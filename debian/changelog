@@ -1,3 +1,10 @@
+llvm-toolchain-16 (1:16.0.6-17exp1) experimental; urgency=medium
+
+  * Fixup the move from all to any
+  * Update debian/README documentation
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 24 Oct 2023 12:38:21 +0200
+
 llvm-toolchain-16 (1:16.0.6-17) unstable; urgency=medium
 
   * Try to fix the wasm path detection (Closes: #1052002)
