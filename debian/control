@@ -104,7 +104,7 @@ Description: clang-based C++ linter tool
 Package: clangd-16
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
- libclang-common-16-dev (= ${source:Version})
+ libclang-common-16-dev (= ${binary:Version})
 Description: Language server that provides IDE-like features to editors
  clangd understands your C++ code and adds smart features to your editor:
   - code completion
@@ -155,7 +155,7 @@ Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang1-16 (= ${binary:Version}),
- libclang-common-16-dev (= ${source:Version})
+ libclang-common-16-dev (= ${binary:Version})
 Description: Clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -170,8 +170,7 @@ Description: Clang library - Development package
 Package: libclang-common-16-dev
 Architecture: any
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm16 (>= ${source:Version}),
- libllvm16 (<< ${source:Version}.1~)
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm16 (= ${binary:Version})
 Recommends: libclang-rt-16-dev (>= 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
