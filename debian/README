@@ -9,13 +9,13 @@ The current snapshot release is maintained in the "snapshot" branch.
 The easiest way to get all branches is probably to have one
 clone per version:
 
-for f in 14 15 snapshot; do
+for f in 14 15 16 17 snapshot; do
     git clone git@salsa.debian.org:pkg-llvm-team/llvm-toolchain.git -b $f $f
 done
 
 debian/control is generated from debian/control.in by running:
 
-ebian/rules preconfigure
+debian/rules preconfigure
 
 
 Steps for manually building a snapshot release
