@@ -1,11 +1,11 @@
 llvm-toolchain-snapshot (1:18~++20230921012857+4cf8da94198d-1~exp1) UNRELEASED; urgency=medium
 
-<<<<<<<
   [ Sylvestre Ledru ]
   * replace python3-recommonmark by myst-parser
     to follow upstream change b7ff03206d668cd5a620a9d4e1b22ea112ed56e3
     And disable generation of the doc on old distro
   * Ship tblgen-to-irdl as part of mlir-tools
+  * Rename lldb-vscode => lldb-dap
 
   [ Matthias Klose ]
   * Consolidate the build flags for the wasm builds.
@@ -18,14 +18,6 @@ llvm-toolchain-snapshot (1:18~++20230921012857+4cf8da94198d-1~exp1) UNRELEASED; 
   * d/rules/preconfigure: Print info about build environment.
   * Limit the number of parallel processes based on the available memory
     and the packages to be built (flang has some memory hogs).
-=======
-  * replace python3-recommonmark by myst-parser
-    to follow upstream change b7ff03206d668cd5a620a9d4e1b22ea112ed56e3
-    And disable generation of the doc on old distro
-  * Also install readtapi => llvm-readtapi symlink
-  * Ship tblgen-to-irdl as part of mlir-tools
-  * Rename lldb-vscode => lldb-dap
->>>>>>>
 
  -- Matthias Klose <doko@debian.org>  Sun, 08 Oct 2023 08:10:51 +0200
 
