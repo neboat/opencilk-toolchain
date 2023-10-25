@@ -15,7 +15,7 @@ done
 
 debian/control is generated from debian/control.in by running:
 
-ebian/rules preconfigure
+debian/rules preconfigure
 
 
 Steps for manually building a snapshot release

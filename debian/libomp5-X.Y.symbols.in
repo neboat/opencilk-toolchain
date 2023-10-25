@@ -379,8 +379,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_end@VERSION 0.20130412
  (arch=!ppc64 !ppc64el)__kmpc_atomic_fixed1_add@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_add_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed1_add_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_fixed1_add_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed1_add_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_fixed1_add_fp@VERSION 0.20130412
  __kmpc_atomic_fixed1_andb@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_andb_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed1_andl@VERSION 0.20130412
@@ -402,9 +402,9 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_min_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed1_mul@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_mul_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed1_mul_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed1_mul_cpt_fp@VERSION 4.0
  __kmpc_atomic_fixed1_mul_float8@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_fixed1_mul_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_fixed1_mul_fp@VERSION 0.20130412
  __kmpc_atomic_fixed1_neqv@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_neqv_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed1_orb@VERSION 0.20130412
@@ -432,8 +432,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_wr@VERSION 0.20130412
  __kmpc_atomic_fixed1_xor@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_xor_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed1u_add_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)__kmpc_atomic_fixed1u_add_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed1u_add_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf !loong64)__kmpc_atomic_fixed1u_add_fp@VERSION 4.0
  __kmpc_atomic_fixed1u_div@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1u_div_cpt@VERSION 0.20130412
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed1u_div_cpt_fp@VERSION 4.0
@@ -454,8 +454,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf !arm64)__kmpc_atomic_fixed1u_sub_rev_fp@VERSION 5.0
  __kmpc_atomic_fixed2_add@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed2_add_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed2_add_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_fixed2_add_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed2_add_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_fixed2_add_fp@VERSION 0.20130412
  __kmpc_atomic_fixed2_andb@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed2_andb_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed2_andl@VERSION 0.20130412
@@ -477,9 +477,9 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed2_min_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed2_mul@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed2_mul_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed2_mul_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed2_mul_cpt_fp@VERSION 4.0
  __kmpc_atomic_fixed2_mul_float8@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_fixed2_mul_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_fixed2_mul_fp@VERSION 0.20130412
  __kmpc_atomic_fixed2_neqv@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed2_neqv_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed2_orb@VERSION 0.20130412
@@ -507,8 +507,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed2_wr@VERSION 0.20130412
  __kmpc_atomic_fixed2_xor@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed2_xor_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed2u_add_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)__kmpc_atomic_fixed2u_add_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed2u_add_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf !loong64)__kmpc_atomic_fixed2u_add_fp@VERSION 4.0
  __kmpc_atomic_fixed2u_div@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed2u_div_cpt@VERSION 0.20130412
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed2u_div_cpt_fp@VERSION 4.0
@@ -529,8 +529,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf !arm64)__kmpc_atomic_fixed2u_sub_rev_fp@VERSION 5.0
  __kmpc_atomic_fixed4_add@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed4_add_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed4_add_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_fixed4_add_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed4_add_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_fixed4_add_fp@VERSION 0.20130412
  __kmpc_atomic_fixed4_andb@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed4_andb_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed4_andl@VERSION 0.20130412
@@ -552,9 +552,9 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed4_min_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed4_mul@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed4_mul_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed4_mul_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed4_mul_cpt_fp@VERSION 4.0
  __kmpc_atomic_fixed4_mul_float8@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_fixed4_mul_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_fixed4_mul_fp@VERSION 0.20130412
  __kmpc_atomic_fixed4_neqv@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed4_neqv_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed4_orb@VERSION 0.20130412
@@ -582,8 +582,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed4_wr@VERSION 0.20130412
  __kmpc_atomic_fixed4_xor@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed4_xor_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed4u_add_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)__kmpc_atomic_fixed4u_add_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed4u_add_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf !loong64)__kmpc_atomic_fixed4u_add_fp@VERSION 4.0
  (arch=!ppc64 !ppc64el)__kmpc_atomic_fixed4u_div@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed4u_div_cpt@VERSION 0.20130412
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed4u_div_cpt_fp@VERSION 4.0
@@ -604,8 +604,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf !arm64)__kmpc_atomic_fixed4u_sub_rev_fp@VERSION 5.0
  (arch=!ppc64 !ppc64el)__kmpc_atomic_fixed8_add@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed8_add_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed8_add_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_fixed8_add_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed8_add_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_fixed8_add_fp@VERSION 0.20130412
  __kmpc_atomic_fixed8_andb@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed8_andb_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed8_andl@VERSION 0.20130412
@@ -627,9 +627,9 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed8_min_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed8_mul@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed8_mul_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed8_mul_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed8_mul_cpt_fp@VERSION 4.0
  __kmpc_atomic_fixed8_mul_float8@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_fixed8_mul_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_fixed8_mul_fp@VERSION 0.20130412
  __kmpc_atomic_fixed8_neqv@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed8_neqv_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed8_orb@VERSION 0.20130412
@@ -657,8 +657,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed8_wr@VERSION 0.20130412
  __kmpc_atomic_fixed8_xor@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed8_xor_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed8u_add_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)__kmpc_atomic_fixed8u_add_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed8u_add_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf !loong64)__kmpc_atomic_fixed8u_add_fp@VERSION 4.0
  __kmpc_atomic_fixed8u_div@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed8u_div_cpt@VERSION 0.20130412
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed8u_div_cpt_fp@VERSION 4.0
@@ -695,8 +695,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float10_min_cpt@VERSION 14
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_float10_mul@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float10_mul_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float10_mul_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_float10_mul_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float10_mul_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_float10_mul_fp@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float10_rd@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_float10_sub@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float10_sub_cpt@VERSION 0.20130412
@@ -708,30 +708,30 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float10_sub_rev_fp@VERSION 4.0
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_float10_swp@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float10_wr@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_float16_add@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_add_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_float16_div@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_div_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_div_cpt_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_div_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_float16_max@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_max_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_float16_min@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_min_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_float16_mul@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_mul_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_rd@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_float16_sub@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_sub_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_sub_cpt_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_sub_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_swp@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float16_wr@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_float16_add@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_add_cpt@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_float16_div@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_div_cpt@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_div_cpt_rev@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_div_rev@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_float16_max@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_max_cpt@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_float16_min@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_min_cpt@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_float16_mul@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_mul_cpt@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_rd@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_float16_sub@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_sub_cpt@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_sub_cpt_rev@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_sub_rev@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_swp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float16_wr@VERSION 0.20130412
  __kmpc_atomic_float4_add@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float4_add_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float4_add_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float4_add_cpt_fp@VERSION 4.0
  (arch=!ppc64 !ppc64el)__kmpc_atomic_float4_add_float8@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_float4_add_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_float4_add_fp@VERSION 0.20130412
  __kmpc_atomic_float4_div@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float4_div_cpt@VERSION 0.20130412
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float4_div_cpt_fp@VERSION 4.0
@@ -747,9 +747,9 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float4_min_cpt@VERSION 0.20130412
  __kmpc_atomic_float4_mul@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float4_mul_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float4_mul_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float4_mul_cpt_fp@VERSION 4.0
  __kmpc_atomic_float4_mul_float8@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_float4_mul_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_float4_mul_fp@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float4_rd@VERSION 0.20130412
  __kmpc_atomic_float4_sub@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float4_sub_cpt@VERSION 0.20130412
@@ -764,8 +764,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float4_wr@VERSION 0.20130412
  __kmpc_atomic_float8_add@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float8_add_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float8_add_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_float8_add_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float8_add_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_float8_add_fp@VERSION 0.20130412
  __kmpc_atomic_float8_div@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float8_div_cpt@VERSION 0.20130412
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float8_div_cpt_fp@VERSION 4.0
@@ -780,8 +780,8 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float8_min_cpt@VERSION 0.20130412
  __kmpc_atomic_float8_mul@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float8_mul_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float8_mul_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_float8_mul_fp@VERSION 0.20130412
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_float8_mul_cpt_fp@VERSION 4.0
+#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_float8_mul_fp@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float8_rd@VERSION 0.20130412
  __kmpc_atomic_float8_sub@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float8_sub_cpt@VERSION 0.20130412
@@ -1028,7 +1028,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  kmpc_set_stacksize@VERSION 0.20130412
  kmpc_set_stacksize_s@VERSION 0.20130412
  kmpc_unset_affinity_mask_proc@VERSION 0.20130412
-#MISSING: 14# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)libomp_start_tool@VERSION 14
+#MISSING: 14# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf !loong64)libomp_start_tool@VERSION 14
  omp_aligned_alloc@VERSION 14
  omp_aligned_calloc@VERSION 14
  omp_alloc@VERSION 8
@@ -1306,7 +1306,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_set_schedule_@VERSION 0.20130412
  omp_set_teams_thread_limit@VERSION 13
  omp_set_teams_thread_limit_@VERSION 13
-#MISSING: 8# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)omp_state_info@VERSION 6.0
+#MISSING: 8# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)omp_state_info@VERSION 6.0
  omp_test_lock@OMP_1.0 0.20131209
  omp_test_lock@OMP_3.0 0.20131209
  omp_test_lock@VERSION 0.20130412
