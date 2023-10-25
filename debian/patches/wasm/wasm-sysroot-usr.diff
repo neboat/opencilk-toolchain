@@ -28,12 +28,22 @@ Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/lib/Driver
      const std::string MultiarchTriple =
 -        getMultiarchTriple(D, getTriple(), D.SysRoot);
 -    addSystemInclude(DriverArgs, CC1Args, D.SysRoot + "/include/" + MultiarchTriple);
+-  }
+-  addSystemInclude(DriverArgs, CC1Args, D.SysRoot + "/include");
 +        getMultiarchTriple(D, getTriple(), SysRoot);
 +    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/local/include/" + MultiarchTriple);
 +    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/local/include");
 +    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/include/" + MultiarchTriple);
-   }
--  addSystemInclude(DriverArgs, CC1Args, D.SysRoot + "/include");
++	std::string LibPath = SysRoot	+ "/include";
++	std::string Version = detectLibcxxVersion(LibPath);
++
++	if (!getDriver().SysRoot.empty()) {
++		// Second add the generic one.
++		addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version);
++		// Third the backward one.
++		addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version + "/backward");
++	}
++  }
 +
 +  // also add the non-multiarch path, only on a known OS (as above), or when
 +  // a sysroot is given, for backwards compatibility with the original driver

@@ -1224,7 +1224,7 @@ endif
 	sed -i '/_cmake_import_check_files_for_.*\/bin\/.*/ {s|^|#|}'  $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
 	sed -i '/_IMPORT_CHECK_FILES_FOR_.*\/bin\/.*/ {s|^|#|}'  $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
 	sed -i '/_IMPORT_CHECK_FILES_FOR_\(mlir-\|Polly\|MLIR\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
-	sed -i '/_cmake_import_check_files_for_\(mlir\|Polly\|MLIR\|omptarget\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
+	sed -i '/_cmake_import_check_files_for_\(mlir\|Polly\|MLIR\|omp\|omptarget\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
 
 # Disable CMake's package validation checks for binaries that may not be installed
 	sed -i 's|.*_IMPORT_CHECK_FILES_FOR_.*/bin/.*)|#&|' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
@@ -1277,7 +1277,7 @@ endif
 
 # Disable the python binding for buster. not sure why it regressed
 # regressed de4364f1ecaa..0745b0c0354a
-	if test "$(DISTRO)" = "buster" -o "$(DISTRO)" = "bionic" -o "$(DEB_HOST_ARCH)" = "mips64el"; then \
+	if test "$(DISTRO)" = "buster" -o "$(DEB_HOST_ARCH)" = "mips64el"; then \
 		mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/; \
 		touch $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/empty; \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
