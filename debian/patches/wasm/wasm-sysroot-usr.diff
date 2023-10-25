@@ -19,7 +19,7 @@ Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/lib/Driver
  
    if (!DriverArgs.hasArg(options::OPT_nobuiltininc)) {
      SmallString<128> P(D.ResourceDir);
-@@ -425,12 +426,20 @@ void WebAssembly::AddClangSystemIncludeA
+@@ -425,12 +426,29 @@ void WebAssembly::AddClangSystemIncludeA
      return;
    }
  
