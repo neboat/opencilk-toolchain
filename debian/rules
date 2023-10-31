@@ -210,7 +210,6 @@ endif
 # debug symbols OOM in Ubuntu Ubuntu and slows down build process.
 ifneq (,$(filter $(DEB_HOST_ARCH),riscv64))
   opt_flags = -O2 -DNDEBUG -g0
-  STAGE_ALL_CMAKE_EXTRA += -DLLVM_PARALLEL_LINK_JOBS=2
 else
   opt_flags = -O2 -DNDEBUG -g1
 endif
