@@ -183,6 +183,8 @@ llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental
 llvm-toolchain-16 (1:16.0.6-18) UNRELEASED; urgency=medium
 
   * Upload to sid
+  [ Steve Langasek ]
+  * Add noble as supported Ubuntu release
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 25 Oct 2023 08:10:35 +0200
 
