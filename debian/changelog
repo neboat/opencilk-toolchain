@@ -8,13 +8,17 @@ llvm-toolchain-snapshot (1:18~++20230921012857+4cf8da94198d-1~exp1) UNRELEASED; 
   * Rename lldb-vscode => lldb-dap
   * Ship tblgen-to-irdl as part of mlir-tools
 
-llvm-toolchain-17 (1:17.0.3-1~exp2) UNRELEASED; urgency=medium
+llvm-toolchain-17 (1:17.0.4-1) unstable; urgency=medium
 
   [ Matthias Klose ]
   * Limit the number of parallel processes based on the available memory
     and the packages to be built (flang has some memory hogs).
 
- -- Matthias Klose <doko@debian.org>  Wed, 18 Oct 2023 15:00:25 +0200
+  [ Sylvestre Ledru ]
+  * New supstream release
+  * Upload to unstable
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 31 Oct 2023 11:39:22 +0100
 
 llvm-toolchain-17 (1:17.0.3-1~exp1) experimental; urgency=medium
 
@@ -215,6 +219,8 @@ llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental
 llvm-toolchain-16 (1:16.0.6-18) UNRELEASED; urgency=medium
 
   * Upload to sid
+  [ Steve Langasek ]
+  * Add noble as supported Ubuntu release
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 25 Oct 2023 08:10:35 +0200
 
