@@ -4,6 +4,9 @@ llvm-toolchain-16 (1:16.0.6-18) UNRELEASED; urgency=medium
   [ Steve Langasek ]
   * Add noble as supported Ubuntu release
 
+  [ John Paul Adrian Glaubitz ]
+  * Don't run chrpath for libclang on sparc and sparc64
+
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 25 Oct 2023 08:10:35 +0200
 
 llvm-toolchain-16 (1:16.0.6-17exp1) experimental; urgency=medium
