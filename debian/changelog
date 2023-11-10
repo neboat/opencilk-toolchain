@@ -3,6 +3,9 @@ llvm-toolchain-17 (1:17.0.4-2) UNRELEASED; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * Don't run chrpath for libclang on sparc and sparc64
 
+  [ Matthias Klose ]
+  * Build-depend on llvm-spirv-17.
+
  -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Thu, 09 Nov 2023 10:07:49 +0100
 
 llvm-toolchain-17 (1:17.0.4-1) unstable; urgency=medium
