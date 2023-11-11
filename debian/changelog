@@ -11,6 +11,7 @@ llvm-toolchain-snapshot (1:18~++20230921012857+4cf8da94198d-1~exp1) UNRELEASED; 
   [ Matthias Klose ]
   * Limit the number of parallel processes based on the available memory
     and the packages to be built (flang has some memory hogs).
+  * Also install liborc_rt*.a on ppc64 and ppc64el.
 
   [ Sylvestre Ledru ]
   * New supstream release
