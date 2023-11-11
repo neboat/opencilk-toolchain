@@ -577,12 +577,12 @@ preconfigure:
 		debian/llvm-$(LLVM_VERSION)-linker-tools.links \
 		debian/libbolt-$(LLVM_VERSION)-dev.install
 
-ifdef LLVM_SPIRV
 	# llvm-spirv was found, so we can enable *.spv files. Debian
 	# buster and Ubuntu 18.04 don't have llvm-spirv to create the
 	# *.spv files.
-	sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install
-endif
+	if test "$(LLVM_SPIRV_INSTALLED)" = "no"; then \
+		sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install; \
+	fi
 
 	# disable libc++-X.Y-dev-wasm32.install.in on old distro
 	if test "$(LIBCXX_WASM_ENABLE)" = "no"; then \
