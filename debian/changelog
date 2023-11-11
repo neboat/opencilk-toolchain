@@ -4,8 +4,9 @@ llvm-toolchain-16 (1:16.0.6-18) unstable; urgency=medium
   * Upload to sid
 
   [ Sylvestre Ledru ]
-  * Do not build spirv features on bookworm as the spirv compiler
-    is too old:
+  * Change the logic to disable SPIRV. Disable it on most of the versions because
+    it needs llvm-spirv-16.
+    Enabled on trixie/sid, Ubuntu Mantic
     FAILED: spirv-mesa3d-.spv /build/source/libclc/build/spirv-mesa3d-.spv
     cd /build/source/libclc/build && /usr/bin/llvm-spirv-15
        --spirv-max-version=1.1 -o spirv-mesa3d-.spv builtins.link.spirv-mesa3d-.bc
