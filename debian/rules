@@ -399,9 +399,13 @@ else
 	PROJECTS+=;lldb
 endif
 
-ifneq (,$(filter $(DISTRO),buster))
+LLDB_PYTHON_DISABLE_DISTRO := bionic buster
+LLDB_PYTHON_ENABLE=yes
+# Disable zstd on old distro, fails on lld
+ifeq (,$(filter-out $(LLDB_PYTHON_DISABLE_DISTRO), $(DISTRO)))
 # Don't enable lld python for old distros
   STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_PYTHON=OFF
+  LLDB_PYTHON_ENABLE=no
 endif
 
 LIBCXX_WASM_ENABLE=yes
@@ -1201,6 +1205,8 @@ endif
 	if test "$(DISTRO)" = "buster" -o "$(DISTRO)" = "bionic" -o "$(DEB_HOST_ARCH)" = "mips64el"; then \
 		mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/; \
 		touch $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/empty; \
+	fi
+	if test "$(LLDB_PYTHON_ENABLE)" = no; then \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
 	fi
 
