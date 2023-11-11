@@ -1,13 +1,26 @@
 llvm-toolchain-16 (1:16.0.6-18) UNRELEASED; urgency=medium
 
+  [ Gianfranco Costamagna ]
   * Upload to sid
+
+  [ Sylvestre Ledru ]
+  * Do not build spirv features on bookworm as the spirv compiler
+    is too old:
+    FAILED: spirv-mesa3d-.spv /build/source/libclc/build/spirv-mesa3d-.spv
+    cd /build/source/libclc/build && /usr/bin/llvm-spirv-15
+       --spirv-max-version=1.1 -o spirv-mesa3d-.spv builtins.link.spirv-mesa3d-.bc
+    Unknown attribute kind (86) (Producer: 'LLVM16.0.6' Reader: 'LLVM 15.0.6')
+
+
   [ Steve Langasek ]
   * Add noble as supported Ubuntu release
 
   [ John Paul Adrian Glaubitz ]
   * Don't run chrpath for libclang on sparc and sparc64
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 25 Oct 2023 08:10:35 +0200
+  [ Sylvestre Ledru ]
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 11 Nov 2023 09:57:35 +0100
 
 llvm-toolchain-16 (1:16.0.6-17exp1) experimental; urgency=medium
 
