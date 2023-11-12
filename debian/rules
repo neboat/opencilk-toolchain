@@ -272,22 +272,27 @@ ifndef LLVM_SPIRV
 	LLVM_SPIRV_VERSION := $(shell expr $(LLVM_VERSION) - 1)
 	LLVM_SPIRV := $(shell bash -c "command -v llvm-spirv-$(LLVM_SPIRV_VERSION)" 2>/dev/null)
 endif
+
+# Disable spirv support for most of the distro versions
+# It needs llvm-spirv-16 and it is rarely available
+# Be prescritive
+SPIRV_DISABLE_DISTRO := bionic buster lunar jammy focal buster bullseye bookworm
 ifndef LLVM_SPIRV
 	LLVM_SPIRV_INSTALLED = no
 else
-	ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' llvm-spirv-$(LLVM_SPIRV_VERSION)) gt 17.0.0 ; echo $$?),0)
+	ifeq (,$(filter-out $(SPIRV_DISABLE_DISTRO), $(DISTRO)))
 # Too old llvm-spirv version are failing. See #52200
-		LLVM_SPIRV_INSTALLED = yes
-	else
 		LLVM_SPIRV_INSTALLED = no
+	else
+		LLVM_SPIRV_INSTALLED = yes
 	endif
 endif
 
-LIBCLC_TARGETS_TO_BUILD="amdgcn--;amdgcn--amdhsa;amdgcn-mesa-mesa3d;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl"
+LIBCLC_TARGETS_TO_BUILD=amdgcn--;amdgcn--amdhsa;amdgcn-mesa-mesa3d;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl
 LIBCLC_LLVM_SPIRV =
 ifeq ($(LLVM_SPIRV_INSTALLED),yes)
-	LIBCLC_TARGETS_TO_BUILD := $(LIBCLC_TARGETS_TO_BUILD)";spirv-mesa3d-;spirv64-mesa3d-"
-	LIBCLC_LLVM_SPIRV = "-DLLVM_SPIRV=$(LLVM_SPIRV)"
+	LIBCLC_TARGETS_TO_BUILD := $(LIBCLC_TARGETS_TO_BUILD);spirv-mesa3d-;spirv64-mesa3d-
+	LIBCLC_LLVM_SPIRV = -DLLVM_SPIRV=$(LLVM_SPIRV)
 endif
 
 BINUTILS_GOLD_ARCHS := amd64 arm64 armhf i386 ppc64 ppc64el x32 s390x hurd-i386 kfreebsd-amd64 kfreebsd-i386
@@ -414,9 +419,13 @@ else
 	PROJECTS+=;lldb
 endif
 
-ifneq (,$(filter $(DISTRO),buster))
+LLDB_PYTHON_DISABLE_DISTRO := bionic buster
+LLDB_PYTHON_ENABLE=yes
+# Disable zstd on old distro, fails on lld
+ifeq (,$(filter-out $(LLDB_PYTHON_DISABLE_DISTRO), $(DISTRO)))
 # Don't enable lld python for old distros
   STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_PYTHON=OFF
+  LLDB_PYTHON_ENABLE=no
 endif
 
 LIBCXX_WASM_ENABLE=yes
@@ -582,6 +591,7 @@ stamps/preconfigure:
 	@echo "COMPILER_RT_WASM_ENABLE=$(COMPILER_RT_WASM_ENABLE)"
 	@echo "LIBCXX_WASM_ENABLE=$(LIBCXX_WASM_ENABLE)"
 	@echo "SCCACHE_ENABLE=$(SCCACHE_ENABLE)"
+	@echo "LLVM_SPIRV=$(LLVM_SPIRV)"
 	@echo "LLVM_SPIRV_INSTALLED=$(LLVM_SPIRV_INSTALLED)"
 
 	for f in debian/*.in; do \
@@ -607,12 +617,12 @@ stamps/preconfigure:
 		debian/llvm-$(LLVM_VERSION)-linker-tools.links \
 		debian/libbolt-$(LLVM_VERSION)-dev.install
 
-ifdef LLVM_SPIRV
 	# llvm-spirv was found, so we can enable *.spv files. Debian
 	# buster and Ubuntu 18.04 don't have llvm-spirv to create the
 	# *.spv files.
-	sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install
-endif
+	if test "$(LLVM_SPIRV_INSTALLED)" = "yes"; then \
+		sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install; \
+	fi
 
 	# disable libc++-X.Y-dev-wasm32.install.in on old distro
 	if test "$(LIBCXX_WASM_ENABLE)" = "no"; then \
@@ -843,7 +853,7 @@ stamps/debian-libclc-build:
 	-DCMAKE_INSTALL_INCLUDEDIR=include \
 	-DLLVM_CMAKE_DIR=$(STAGE_2_BIN_DIR)/../ \
 	$(LIBCLC_LLVM_SPIRV) \
-	-DLIBCLC_TARGETS_TO_BUILD=$(LIBCLC_TARGETS_TO_BUILD); \
+	-DLIBCLC_TARGETS_TO_BUILD="$(LIBCLC_TARGETS_TO_BUILD)"; \
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(STAGE_2_LIB_DIR) ninja -j $(NJOBS) $(VERBOSE)
 ifndef LLVM_SPIRV
 	echo "libclc built without SPIRV (.spv) outputs because llvm-spirv wasn't found"
@@ -1256,6 +1266,8 @@ endif
 	if test "$(DISTRO)" = "buster" -o "$(DEB_HOST_ARCH)" = "mips64el"; then \
 		mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/; \
 		touch $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/empty; \
+	fi
+	if test "$(LLDB_PYTHON_ENABLE)" = no; then \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
 	fi
 
