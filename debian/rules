@@ -580,7 +580,7 @@ preconfigure:
 	# llvm-spirv was found, so we can enable *.spv files. Debian
 	# buster and Ubuntu 18.04 don't have llvm-spirv to create the
 	# *.spv files.
-	if test "$(LLVM_SPIRV_INSTALLED)" = "no"; then \
+	if test "$(LLVM_SPIRV_INSTALLED)" = "yes"; then \
 		sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install; \
 	fi
 
