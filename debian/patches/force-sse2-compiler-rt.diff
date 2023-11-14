@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_18~++20231101090856+e144ae54dcb9/compiler-rt/lib/builtins/CMakeLists.txt
+Index: llvm-toolchain-snapshot_18~++20231114093943+6229cd0272a8/compiler-rt/lib/builtins/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_18~++20231101090856+e144ae54dcb9.orig/compiler-rt/lib/builtins/CMakeLists.txt
-+++ llvm-toolchain-snapshot_18~++20231101090856+e144ae54dcb9/compiler-rt/lib/builtins/CMakeLists.txt
+--- llvm-toolchain-snapshot_18~++20231114093943+6229cd0272a8.orig/compiler-rt/lib/builtins/CMakeLists.txt
++++ llvm-toolchain-snapshot_18~++20231114093943+6229cd0272a8/compiler-rt/lib/builtins/CMakeLists.txt
 @@ -764,6 +764,12 @@ else ()
      append_list_if(COMPILER_RT_ENABLE_CET -fcf-protection=full BUILTIN_CFLAGS)
    endif()
@@ -13,5 +13,5 @@ Index: llvm-toolchain-snapshot_18~++20231101090856+e144ae54dcb9/compiler-rt/lib/
 +  endif()
 +
    append_list_if(COMPILER_RT_HAS_STD_C11_FLAG -std=c11 BUILTIN_CFLAGS)
+   append_list_if(COMPILER_RT_HAS_WBUILTIN_DECLARATION_MISMATCH_FLAG -Werror=builtin-declaration-mismatch BUILTIN_CFLAGS)
  
-   # Don't embed directives for picking any specific CRT
