@@ -47,7 +47,7 @@ packages := $(shell dh_listpackages)
 # flang has some memory hogs, of up to 6.2gb per process. Limit the parallel jobs
 # based on the available memory
 ifneq (,$(filter flang-$(LLVM_VERSION), $(packages)))
-  MEM_PER_CPU=3900
+  MEM_PER_CPU=4500
 else
   MEM_PER_CPU=2100
 endif
