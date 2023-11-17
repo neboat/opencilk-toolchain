@@ -274,7 +274,7 @@ ifndef LLVM_SPIRV
 endif
 
 # Disable spirv support for most of the distro versions
-# It needs llvm-spirv-16 and it is rarely available
+# It needs llvm-spirv-17 and it is rarely available
 # Be prescritive
 SPIRV_DISABLE_DISTRO := bionic buster lunar jammy focal buster bullseye bookworm
 ifndef LLVM_SPIRV
