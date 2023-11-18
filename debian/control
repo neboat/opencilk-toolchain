@@ -711,7 +711,8 @@ Package: libc++-16-dev-wasm32
 Section: libdevel
 Architecture: all
 Multi-Arch: foreign
-Depends: wasi-libc, libc++abi-16-dev-wasm32, ${misc:Depends}
+Depends: wasi-libc, libc++abi-16-dev-wasm32, ${misc:Depends},
+ libc++-16-dev
 Provides: libc++-x.y-dev-wasm32
 Conflicts: libc++-x.y-dev-wasm32
 Replaces: libc++-x.y-dev-wasm32
