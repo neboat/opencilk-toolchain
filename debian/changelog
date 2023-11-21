@@ -8,6 +8,7 @@ llvm-toolchain-17 (1:17.0.5-2) UNRELEASED; urgency=medium
   [ Sylvestre Ledru ]
   * Add a symlink for libc++experimental.a to /usr/lib/*/libc++experimental.a
     to fix https://github.com/llvm/llvm-project/issues/72753
+  * try to relax the wasi-libc dep declaration for apt.llvm.org
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 20 Nov 2023 19:34:35 +0100
 
