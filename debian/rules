@@ -628,7 +628,7 @@ stamps/preconfigure:
 	if test "$(LIBCXX_WASM_ENABLE)" = "no"; then \
 		echo "" > debian/libc++-$(LLVM_VERSION)-dev-wasm32.install; \
 		echo "" > debian/libc++abi-$(LLVM_VERSION)-dev-wasm32.install; \
-	else; \
+	else \
 		if ! dpkg -l|grep -q wasi-libc; then \
 			echo "Could not find wasi-libc on the system"; \
 			echo "Please check that the package is available on the system"; \
