@@ -632,6 +632,7 @@ stamps/preconfigure:
 		if ! dpkg -l|grep -q wasi-libc; then \
 			echo "Could not find wasi-libc on the system"; \
 			echo "Please check that the package is available on the system"; \
+			echo "it might be that the 'hello' package is installed by another constraint"; \
 			exit 1; \
 		fi; \
 	fi
