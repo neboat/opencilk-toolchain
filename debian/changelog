@@ -12,13 +12,14 @@ llvm-toolchain-16 (1:16.0.6-18) unstable; urgency=medium
        --spirv-max-version=1.1 -o spirv-mesa3d-.spv builtins.link.spirv-mesa3d-.bc
     Unknown attribute kind (86) (Producer: 'LLVM16.0.6' Reader: 'LLVM 15.0.6')
   * For Ubuntu bionic, improve the deactivation of lldb python
-  * Make libc++-16-dev-wasm32 depends on libc++-16-dev (Closes: #1052002)
 
   [ Steve Langasek ]
   * Add noble as supported Ubuntu release
 
   [ John Paul Adrian Glaubitz ]
   * Don't run chrpath for libclang on sparc and sparc64
+
+  [ Sylvestre Ledru ]
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 11 Nov 2023 09:57:35 +0100
 
