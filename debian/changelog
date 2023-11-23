@@ -1,3 +1,12 @@
+llvm-toolchain-16 (1:16.0.6-19) UNRELEASED; urgency=medium
+
+  * Revert my ugly fix for 1052002.
+
+  [ Faidon Liambotis ]
+  * Improve the fix for the bug 1052002.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 23 Nov 2023 16:27:52 +0100
+
 llvm-toolchain-16 (1:16.0.6-18) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
