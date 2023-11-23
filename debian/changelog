@@ -4,6 +4,7 @@ llvm-toolchain-17 (1:17.0.5-2) UNRELEASED; urgency=medium
   * Further limit the number of parallel processes
   * Don't build-depend on llvm-spirv-17 on armel and mipsel (LLVM 17 is not
     yet built on these architectures).
+  * Fix stripping build flags on Ubuntu/ppc64el.
 
   [ Sylvestre Ledru ]
   * Add a symlink for libc++experimental.a to /usr/lib/*/libc++experimental.a
