@@ -13,12 +13,14 @@ GXX_VERSIONED_PACKAGE    := $(shell dpkg-query -W -f '$${Depends}' g++ | grep -o
 GXX_VERSIONED_EXECUTABLE := $(shell dpkg -L $(GXX_VERSIONED_PACKAGE) | grep '/usr/bin/g++-[0-9][0-9.]*' | xargs ls -d | tail -n1 )
 GCC_VERSION              := $(subst /usr/bin/g++-,,$(GXX_VERSIONED_EXECUTABLE))
 
+LLVM_EPOCH := 1:
 LLVM_VERSION   := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 LLVM_VERSION_FULL := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1,p")
 LLVM_VERSION_SNAPSHOT := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:(.*),\1,p")
 ifeq ($(LLVM_VERSION),$(LLVM_VERSION_FULL))
 	LLVM_VERSION_FULL := $(LLVM_VERSION).0.0
 endif
+LLVM_VERSION_NEXT := $(shell echo $(LLVM_VERSION_FULL) | awk -F. '{ OFS="."; $$NF+=1; print}')
 
 SOURCE_NAME := $(shell dpkg-parsechangelog -S Source)
 ifneq (,$(findstring snapshot,$(SOURCE_NAME)))
@@ -604,7 +606,9 @@ stamps/preconfigure:
 		sed -e 's|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|g' \
 			-e "s|@BRANCH_NAME@|$(BRANCH_NAME)|g" \
 			-e "s|@OCAML_STDLIB_DIR@|$(OCAML_STDLIB_DIR)|g" \
+			-e "s|@LLVM_EPOCH@|$(LLVM_EPOCH)|g" \
 			-e "s|@LLVM_VERSION_FULL@|$(LLVM_VERSION_FULL)|g" \
+			-e "s|@LLVM_VERSION_NEXT@|$(LLVM_VERSION_NEXT)|g" \
 			-e "s|@LLVM_VERSION@|$(LLVM_VERSION)|g" $$f > $$f2; \
 	done
 
