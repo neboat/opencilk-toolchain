@@ -19,6 +19,9 @@ llvm-toolchain-snapshot (1:18~++20230921012857+4cf8da94198d-1~exp1) UNRELEASED; 
   * New supstream release
   * Upload to unstable
 
+  [ John Paul Adrian Glaubitz ]
+  * Don't install *clang_rt* on sparc and sparc64
+
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 31 Oct 2023 11:39:22 +0100
 
 llvm-toolchain-17 (1:17.0.3-1~exp1) experimental; urgency=medium
