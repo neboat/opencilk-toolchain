@@ -6,6 +6,7 @@ llvm-toolchain-17 (1:17.0.5-2) UNRELEASED; urgency=medium
     yet built on these architectures).
   * Fix stripping build flags on Ubuntu/ppc64el.
   * libclang1-17: Only encode the major version in the soname. Closes: #1056126.
+  * libclang1-17: Provide a symlink for the last soname with the full version.
 
   [ Sylvestre Ledru ]
   * Add a symlink for libc++experimental.a to /usr/lib/*/libc++experimental.a
