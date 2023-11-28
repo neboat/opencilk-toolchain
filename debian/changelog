@@ -7,6 +7,8 @@ llvm-toolchain-snapshot (1:18~++20230921012857+4cf8da94198d-1~exp1) UNRELEASED; 
   * Ship tblgen-to-irdl as part of mlir-tools
   * Rename lldb-vscode => lldb-dap
   * Ship tblgen-to-irdl as part of mlir-tools
+  * Remove __tgt_rtl_deinit_plugin & __tgt_rtl_deinit_device symbols from
+    openmp https://github.com/llvm/llvm-project/pull/73557
 
   [ Matthias Klose ]
   * Limit the number of parallel processes based on the available memory
@@ -14,10 +16,6 @@ llvm-toolchain-snapshot (1:18~++20230921012857+4cf8da94198d-1~exp1) UNRELEASED; 
   * Also install liborc_rt*.a on ppc64 and ppc64el.
   * Fix stripping build flags on Ubuntu/ppc64el.
   * libclang1-18: Only encode the major version in the soname. See #1056126.
-
-  [ Sylvestre Ledru ]
-  * New supstream release
-  * Upload to unstable
 
   [ John Paul Adrian Glaubitz ]
   * Don't install *clang_rt* on sparc and sparc64
