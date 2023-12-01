@@ -2,7 +2,7 @@ llvm-toolchain-17 (1:17.0.6-2) UNRELEASED; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Add new cmake-clang-test to spot issues such as
-    Debina bug #1057151
+    Debian bug #1057151
   * Fix cmake file (Closes: #1057151)
 
   [ Matthias Klose ]
