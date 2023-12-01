@@ -53,7 +53,7 @@ ifneq (,$(filter flang-$(LLVM_VERSION), $(packages)))
 else
   MEM_PER_CPU=2100
 endif
-NJOBS := $(shell mt=`awk '/^MemTotal/ { print $$2 }' /proc/meminfo`; \
+NJOBS := $(shell mt=`awk '/^(MemAvail|SwapFree)/ { mt += $$2 } END {print mt}' /proc/meminfo`; \
 		awk -vn=$(NCPUS) -vmt=$$mt -vm=$(MEM_PER_CPU) \
 		  'END { mt/=1024; n2 = int(mt/m); print n==1 ? 1 : n2<n+1 ? n2 : n+1}' < /dev/null)
 
