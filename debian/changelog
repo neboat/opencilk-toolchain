@@ -19,6 +19,9 @@ llvm-toolchain-snapshot (1:18~++20230921012857+4cf8da94198d-1~exp1) UNRELEASED; 
   * Restore the patch for D148945, searching /usr/lib/llvm-18/lib by default.
     Addresses: #1056580.
   * Also use the free swap to determine the number of parallel processes.
+  * Set the cpu defaults for the ARM32 architectures:
+    - armel: arm9e. Closes: #1056115.
+    - armhf: cortex-a7.
 
   [ John Paul Adrian Glaubitz ]
   * Don't install *clang_rt* on sparc and sparc64

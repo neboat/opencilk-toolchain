@@ -1,0 +1,18 @@
+--- a/llvm/lib/TargetParser/ARMTargetParser.cpp
++++ b/llvm/lib/TargetParser/ARMTargetParser.cpp
+@@ -603,6 +603,15 @@ StringRef ARM::getARMCPUForArch(const ll
+     if (MArch == "v7k")
+       return "cortex-a7";
+     break;
++  case llvm::Triple::Linux:
++    switch (Triple.getEnvironment()) {
++    case llvm::Triple::GNUEABI:
++      return "arm9e"; // armv5te
++    case llvm::Triple::GNUEABIHF:
++      return "cortex-a7"; // armv7-a
++    default:
++      return "armv5";
++    }
+   default:
+     break;
+   }
