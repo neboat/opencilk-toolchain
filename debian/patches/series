@@ -151,3 +151,4 @@ D158066-simd-ppc64el.patch
 ubuntu-releases.patch
 libclang-major-version-only.diff
 D148945-revert.diff
+arm32-defaults.diff
