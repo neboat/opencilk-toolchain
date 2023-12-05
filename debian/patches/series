@@ -147,4 +147,3 @@ bolt-disable-emit-relocs.patch
 link-grpc.diff
 libclang-major-version-only.diff
 D148945-revert.diff
-arm32-defaults.diff
