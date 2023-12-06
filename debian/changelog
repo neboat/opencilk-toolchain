@@ -19,6 +19,7 @@ llvm-toolchain-17 (1:17.0.6-2) UNRELEASED; urgency=medium
   [ Sylvestre Ledru ]
   * Move the symlink /usr/lib/*/libc++experimental.a from libc++abi-17-dev
     to libc++-17-dev
+  * Remove some old break/replaces from 16
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Dec 2023 11:19:17 +0100
 

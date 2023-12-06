@@ -187,8 +187,6 @@ Package: libclang-rt-@LLVM_VERSION@-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-common-@LLVM_VERSION@-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
-Replaces: libclang-common-@LLVM_VERSION@-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Compiler-rt - development package
  This package provides various libraries:
@@ -205,10 +203,7 @@ Package: libclang-rt-@LLVM_VERSION@-dev-wasm32
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Breaks: libclang-common-@LLVM_VERSION@-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
-Replaces: libclang-common-@LLVM_VERSION@-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libclang-common-@LLVM_VERSION@-dev (>= 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Description: Compiler-rt - wasm32 builtins
  Provides the compiler-rt builtins for WebAssembly 32 bits
 
@@ -216,10 +211,7 @@ Package: libclang-rt-@LLVM_VERSION@-dev-wasm64
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Breaks: libclang-common-@LLVM_VERSION@-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
-Replaces: libclang-common-@LLVM_VERSION@-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libclang-common-@LLVM_VERSION@-dev (>= 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Description: Compiler-rt - wasm64 builtins
  Provides the compiler-rt builtins for WebAssembly 64 bits
 
@@ -229,8 +221,6 @@ Package: libpolly-@LLVM_VERSION@-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-common-@LLVM_VERSION@-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
-Replaces: libclang-common-@LLVM_VERSION@-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: High-level loop and data-locality optimizer
  Uses an abstract mathematical representation based on integer polyhedra
