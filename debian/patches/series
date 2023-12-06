@@ -152,4 +152,4 @@ ubuntu-releases.patch
 libclang-major-version-only.diff
 D148945-revert.diff
 arm32-defaults.diff
-D158491.diff
+mips/D154390-pre-R6.diff
