@@ -1376,6 +1376,7 @@ clang++-$VERSION -O2 -fprofile-instr-use=foo.profdata foo.cc -o foo
 # https://bugs.llvm.org/show_bug.cgi?id=44870
 cat <<EOF > foo.cpp
 #include <clang/CodeGen/BackendUtil.h>
+#include <llvm/Support/VirtualFileSystem.h>
 
 using namespace clang;
 
@@ -1389,8 +1390,9 @@ int main() {
   llvm::Module* m;
   BackendAction* action;
   std::unique_ptr<raw_pwrite_stream> AsmOutStream;
+  IntrusiveRefCntPtr<llvm::vfs::FileSystem> VFS;
 
-  EmitBackendOutput(*diags, *hsOpts, *cgOpts, *tOpts, *lOpts, *tDesc, m, *action, std::move(AsmOutStream));
+  EmitBackendOutput(*diags, *hsOpts, *cgOpts, *tOpts, *lOpts, *tDesc, m, *action, VFS, std::move(AsmOutStream));
 }
 EOF
 clang++-$VERSION foo.cpp -o test -lclangBasic -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangCodeGen -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangFrontend -lclangDriver -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -lclangBasic -ldl  /usr/lib/llvm-$VERSION/lib/libLLVM-$VERSION.so -lclangCodeGen -lclangDriver -lclangFrontend -lclangFrontendTool -lclangRewriteFrontend -lclangARCMigrate -lclangStaticAnalyzerFrontend -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangCrossTU -lclangIndex -lclangParse -lclangSerialization -lclangSema -lclangAnalysis -lclangEdit -lclangFormat -lclangToolingInclusions -lclangToolingCore -lclangRewrite -lclangASTMatchers -lclangAST -lclangLex -ldl  -I /usr/lib/llvm-$VERSION/include/ -L/usr/lib/llvm-$VERSION/lib/ -lPolly -lPollyISL

@@ -20,8 +20,9 @@ llvm-toolchain-17 (1:17.0.6-2) UNRELEASED; urgency=medium
   * Move the symlink /usr/lib/*/libc++experimental.a from libc++abi-17-dev
     to libc++-17-dev
   * Remove some old break/replaces from 16
+  * Fix the EmitBackendOutput test in debian/qualify-clang.sh
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Dec 2023 11:19:17 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Dec 2023 15:09:55 +0100
 
 llvm-toolchain-17 (1:17.0.6-1) unstable; urgency=medium
 
