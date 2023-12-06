@@ -21,6 +21,7 @@ llvm-toolchain-17 (1:17.0.6-2) UNRELEASED; urgency=medium
     to libc++-17-dev
   * Remove some old break/replaces from 16
   * Fix the EmitBackendOutput test in debian/qualify-clang.sh
+  * Also add back /usr/lib/llvm-17/lib/libclang-17.so.1
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Dec 2023 15:09:55 +0100
 
