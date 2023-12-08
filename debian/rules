@@ -624,6 +624,13 @@ stamps/preconfigure:
 		debian/llvm-$(LLVM_VERSION)-linker-tools.links \
 		debian/libbolt-$(LLVM_VERSION)-dev.install
 
+	# workaround the breaks/replaces/conflicts introduced with the libc++ move
+	# we update the version to make it work with apt.llvm.org
+	# Yeah, this is ugly but I don't know how to do better
+	if test "$(LLVM_VERSION)" = "17"; then \
+		sed -i -e "s|(<< 1:17.0.6-2)|(<< 1:17.0.6~++20231206041259)|g" debian/control; \
+	fi
+
 	# llvm-spirv was found, so we can enable *.spv files. Debian
 	# buster and Ubuntu 18.04 don't have llvm-spirv to create the
 	# *.spv files.
