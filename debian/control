@@ -186,8 +186,6 @@ Package: libclang-rt-18-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-common-18-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
-Replaces: libclang-common-18-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Compiler-rt - development package
  This package provides various libraries:
@@ -204,10 +202,7 @@ Package: libclang-rt-18-dev-wasm32
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Breaks: libclang-common-18-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
-Replaces: libclang-common-18-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libclang-common-18-dev (>= 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Description: Compiler-rt - wasm32 builtins
  Provides the compiler-rt builtins for WebAssembly 32 bits
 
@@ -215,10 +210,7 @@ Package: libclang-rt-18-dev-wasm64
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Breaks: libclang-common-18-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
-Replaces: libclang-common-18-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libclang-common-18-dev (>= 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Description: Compiler-rt - wasm64 builtins
  Provides the compiler-rt builtins for WebAssembly 64 bits
 
@@ -228,8 +220,6 @@ Package: libpolly-18-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Breaks: libclang-common-18-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
-Replaces: libclang-common-18-dev (<< 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: High-level loop and data-locality optimizer
  Uses an abstract mathematical representation based on integer polyhedra
@@ -688,10 +678,10 @@ Architecture: any
 Multi-Arch: same
 Depends: libc++1-18 (= ${binary:Version}), ${misc:Depends},
  libunwind-18-dev [amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64]
-Breaks: libc++-dev (<< 44), libc++abi-17-dev (<< 1:18~++20231203101651+e3b3c91dd0bb-1)
+Breaks: libc++-dev (<< 44), libc++abi-18-dev (<< 1:18~++20231211102647+75193b192ad9-1)
 Provides: libc++-x.y-dev
 Conflicts: libc++-x.y-dev
-Replaces: libc++-x.y-dev, libc++abi-17-dev (<< 1:18~++20231203101651+e3b3c91dd0bb-1)
+Replaces: libc++-x.y-dev, libc++abi-18-dev (<< 1:18~++20231211102647+75193b192ad9-1)
 Description: LLVM C++ Standard library (development files)
  libc++ is another implementation of the C++ standard library
  .
