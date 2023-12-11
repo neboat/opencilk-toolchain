@@ -216,7 +216,6 @@ endif
 # debug symbols OOM in Ubuntu Ubuntu and slows down build process.
 ifneq (,$(filter $(DEB_HOST_ARCH),riscv64))
   opt_flags = -O2 -DNDEBUG -g0
-  STAGE_ALL_CMAKE_EXTRA += -DLLVM_PARALLEL_LINK_JOBS=2
 else
   opt_flags = -O2 -DNDEBUG -g1
 endif
@@ -632,6 +631,13 @@ stamps/preconfigure:
 		debian/llvm-$(LLVM_VERSION)-linker-tools.install \
 		debian/llvm-$(LLVM_VERSION)-linker-tools.links \
 		debian/libbolt-$(LLVM_VERSION)-dev.install
+
+	# workaround the breaks/replaces/conflicts introduced with the libc++ move
+	# we update the version to make it work with apt.llvm.org
+	# Yeah, this is ugly but I don't know how to do better
+	if test "$(LLVM_VERSION)" = "17"; then \
+		sed -i -e "s|(<< 1:17.0.6-2)|(<< 1:17.0.6~++20231206041259)|g" debian/control; \
+	fi
 
 	# llvm-spirv was found, so we can enable *.spv files. Debian
 	# buster and Ubuntu 18.04 don't have llvm-spirv to create the
@@ -1253,9 +1259,6 @@ endif
 
 # Disable CMake's package validation checks for binaries that may not be installed
 	sed -i 's|.*_IMPORT_CHECK_FILES_FOR_.*/bin/.*)|#&|' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
-
-# Adjust to the existing symlink. See #994827 #1057151
-	sed -i "s|libclang-$(LLVM_VERSION).so.$(LLVM_VERSION).*\"|libclang-$(LLVM_VERSION).so.$(LLVM_VERSION)\"|" $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
 
 # Managed in python*-lldb-X.Y.links.in
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/lldb/_lldb.so

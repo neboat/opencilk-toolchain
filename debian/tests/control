@@ -11,8 +11,11 @@ Depends: @, cmake, make, g++, libstdc++-13-dev
 Restrictions: allow-stderr
 Architecture: amd64 arm64
 
-Tests: cmake-test
+Tests: cmake-llvm-test
 Depends: gcc, build-essential, cmake, llvm-17-dev
+
+Tests: cmake-clang-test
+Depends: gcc, build-essential, cmake, llvm-17-dev, clang-17, libclang-17-dev
 
 Test-Command: python3 -c "import lldb; print(lldb.__file__); print(lldb)"
 Depends: python3-lldb-17

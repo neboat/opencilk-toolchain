@@ -29,3 +29,4 @@ Index: llvm-toolchain-snapshot_18~++20231209112655+5c8755f9f40e/llvm/tools/llvm-
    list(REMOVE_DUPLICATES LIB_NAMES)
    if("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
      set(LIB_NAMES -Wl,-all_load ${LIB_NAMES})
+

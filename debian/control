@@ -688,10 +688,10 @@ Architecture: any
 Multi-Arch: same
 Depends: libc++1-18 (= ${binary:Version}), ${misc:Depends},
  libunwind-18-dev [amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64]
-Breaks: libc++-dev (<< 44)
+Breaks: libc++-dev (<< 44), libc++abi-17-dev (<< 1:18~++20231203101651+e3b3c91dd0bb-1)
 Provides: libc++-x.y-dev
 Conflicts: libc++-x.y-dev
-Replaces: libc++-x.y-dev
+Replaces: libc++-x.y-dev, libc++abi-17-dev (<< 1:18~++20231203101651+e3b3c91dd0bb-1)
 Description: LLVM C++ Standard library (development files)
  libc++ is another implementation of the C++ standard library
  .

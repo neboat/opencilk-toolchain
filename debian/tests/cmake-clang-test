@@ -18,19 +18,9 @@ fi
 
 cd "$AUTOPKGTEST_TMP"
 cat <<EOF > CMakeLists.txt
-cmake_minimum_required(VERSION 3.7)
-project(cmake-test)
-find_package(LLVM $LLVM_VERSION REQUIRED
-  COMPONENTS
-    Analysis
-    BitReader
-    BitWriter
-    Core
-    Support
-    TransformUtils
-    llvm-as
-    llvm-dis
-)
+cmake_minimum_required(VERSION 3.22)
+project(cmake-clang-test)
+find_package(Clang)
 
 EOF
 
