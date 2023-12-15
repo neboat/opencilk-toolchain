@@ -1,8 +1,16 @@
-llvm-toolchain-17 (1:17.0.6-3) UNRELEASED; urgency=medium
+llvm-toolchain-17 (1:17.0.6-4) UNRELEASED; urgency=medium
 
-  * libclang1-17: Remove the full version symlinks.
+ [ Matthias Klose ]
+ * libclang1-17: Remove the full version symlinks.
 
- -- Matthias Klose <doko@debian.org>  Mon, 11 Dec 2023 22:54:48 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 09 Jan 2024 09:42:35 +0100
+
+llvm-toolchain-17 (1:17.0.6-3) unstable; urgency=medium
+
+  * Cherry pick the wasm fix from 16
+    (Closes: #1057838)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 15 Dec 2023 18:51:57 +0100
 
 llvm-toolchain-17 (1:17.0.6-2) unstable; urgency=medium
 
