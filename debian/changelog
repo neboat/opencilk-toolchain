@@ -1,3 +1,9 @@
+llvm-toolchain-snapshot (1:18~++20231211102647+75193b192ad9-1~exp2) experimental; urgency=medium
+
+  * refresh libomp5 symbol list
+
+ --
+
 llvm-toolchain-snapshot (1:18~++20231211102647+75193b192ad9-1~exp1) experimental; urgency=medium
 
   [ Matthias Klose ]
