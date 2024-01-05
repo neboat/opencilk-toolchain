@@ -678,6 +678,7 @@ Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: libc++1-@LLVM_VERSION@ (= ${binary:Version}), ${misc:Depends},
+ libc++abi-@LLVM_VERSION@-dev (= ${binary:Version}),
  libunwind-@LLVM_VERSION@-dev [amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64]
 Breaks: libc++-dev (<< 44), libc++abi-@LLVM_VERSION@-dev (<< 1:17.0.6-2)
 Provides: libc++-x.y-dev
