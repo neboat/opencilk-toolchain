@@ -44,7 +44,9 @@ Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/17
 Package: clang-17
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang-common-17-dev (= ${binary:Version}),
+ ${dep:devlibs-objc},
+ libllvm17 (= ${binary:Version}),
+ libclang-common-17-dev (= ${source:Version}),
  llvm-17-linker-tools (= ${binary:Version}),
  libclang1-17 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
@@ -92,7 +94,8 @@ Description: Tool to format C/C++/Obj-C code
 Package: clang-tidy-17
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
- libllvm17 (= ${binary:Version}), libclang-common-17-dev,
+ libllvm17 (= ${binary:Version}),
+ libclang-common-17-dev (= ${source:Version}),
  clang-tools-17, python3-yaml
 Description: clang-based C++ linter tool
  Provide an extensible framework for diagnosing and fixing typical programming
@@ -103,7 +106,8 @@ Description: clang-based C++ linter tool
 Package: clangd-17
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
- libclang-common-17-dev (= ${binary:Version})
+ libllvm17 (= ${binary:Version}),
+ libclang-common-17-dev (= ${source:Version}),
 Description: Language server that provides IDE-like features to editors
  clangd understands your C++ code and adds smart features to your editor:
   - code completion
@@ -154,7 +158,7 @@ Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang1-17 (= ${binary:Version}),
- libclang-common-17-dev (= ${binary:Version})
+ libclang-common-17-dev (= ${source:Version})
 Description: Clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -167,9 +171,10 @@ Description: Clang library - Development package
  libclang1-17.
 
 Package: libclang-common-17-dev
-Architecture: any
+Architecture: all
+Multi-Arch: foreign
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm17 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends},
 Recommends: libclang-rt-17-dev (>= 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
