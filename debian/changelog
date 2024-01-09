@@ -1,7 +1,7 @@
 llvm-toolchain-17 (1:17.0.6-4) unstable; urgency=medium
 
- [ Matthias Klose ]
- * libclang1-17: Remove the full version symlinks.
+  [ Matthias Klose ]
+  * libclang1-17: Remove the full version symlinks.
 
   [ Faidon Liambotis ]
   * Enable COMPILER_RT_DEFAULT_TARGET_ONLY for all archs
