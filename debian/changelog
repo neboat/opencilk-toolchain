@@ -1,9 +1,16 @@
-llvm-toolchain-17 (1:17.0.6-4) UNRELEASED; urgency=medium
+llvm-toolchain-17 (1:17.0.6-4) unstable; urgency=medium
 
  [ Matthias Klose ]
  * libclang1-17: Remove the full version symlinks.
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 09 Jan 2024 09:42:35 +0100
+  [ Faidon Liambotis ]
+  * Enable COMPILER_RT_DEFAULT_TARGET_ONLY for all archs
+  * Enable COMPILER_RT_BUILD_BUILTINS for armel
+  * Drop two unreferenced debian/patches
+  * Mark documentation packages as Multi-Arch: foreign
+  * Convert libclang-common-*-dev to Arch: all/M-A: foreign
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 09 Jan 2024 09:45:17 +0100
 
 llvm-toolchain-17 (1:17.0.6-3) unstable; urgency=medium
 
