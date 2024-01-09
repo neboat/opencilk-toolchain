@@ -44,7 +44,9 @@ Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/@BRANCH_
 Package: clang-@LLVM_VERSION@
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang-common-@LLVM_VERSION@-dev (= ${binary:Version}),
+ ${dep:devlibs-objc},
+ libllvm@LLVM_VERSION@ (= ${binary:Version}),
+ libclang-common-@LLVM_VERSION@-dev (= ${source:Version}),
  llvm-@LLVM_VERSION@-linker-tools (= ${binary:Version}),
  libclang1-@LLVM_VERSION@ (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
@@ -92,7 +94,8 @@ Description: Tool to format C/C++/Obj-C code
 Package: clang-tidy-@LLVM_VERSION@
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
- libllvm@LLVM_VERSION@ (= ${binary:Version}), libclang-common-@LLVM_VERSION@-dev,
+ libllvm@LLVM_VERSION@ (= ${binary:Version}),
+ libclang-common-@LLVM_VERSION@-dev (= ${source:Version}),
  clang-tools-@LLVM_VERSION@, python3-yaml
 Description: clang-based C++ linter tool
  Provide an extensible framework for diagnosing and fixing typical programming
@@ -103,7 +106,8 @@ Description: clang-based C++ linter tool
 Package: clangd-@LLVM_VERSION@
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
- libclang-common-@LLVM_VERSION@-dev (= ${binary:Version})
+ libllvm@LLVM_VERSION@ (= ${binary:Version}),
+ libclang-common-@LLVM_VERSION@-dev (= ${source:Version}),
 Description: Language server that provides IDE-like features to editors
  clangd understands your C++ code and adds smart features to your editor:
   - code completion
@@ -155,7 +159,7 @@ Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang1-@LLVM_VERSION@ (= ${binary:Version}),
- libclang-common-@LLVM_VERSION@-dev (= ${binary:Version})
+ libclang-common-@LLVM_VERSION@-dev (= ${source:Version})
 Description: Clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -168,9 +172,10 @@ Description: Clang library - Development package
  libclang1-@LLVM_VERSION@.
 
 Package: libclang-common-@LLVM_VERSION@-dev
-Architecture: any
+Architecture: all
+Multi-Arch: foreign
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@LLVM_VERSION@ (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends},
 Recommends: libclang-rt-@LLVM_VERSION@-dev (>= 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
