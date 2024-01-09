@@ -1655,7 +1655,8 @@ fi
 echo "if it fails, please run"
 echo "apt-get install libc6-dev:i386 libgcc-5-dev:i386 libc6-dev-x32 libx32gcc-5-dev libx32gcc-9-dev"
 for SYSTEM in ""; do
-    for MARCH in -m64 -m32 -mx32 "-m32 -march=i686"; do
+    # add "-m32 -march=i686" -m32 -mx32 to test multiarch with i386
+    for MARCH in -m64; do
         for LIB in --rtlib=compiler-rt -fsanitize=address -fsanitize=thread -fsanitize=memory -fsanitize=undefined -fsanitize=dataflow; do # -fsanitize=efficiency-working-set; do
             if test "$MARCH" == "-m32" -o "$MARCH" == "-mx32"; then
                 if test $LIB == "-fsanitize=thread" -o $LIB == "-fsanitize=memory" -o $LIB == "-fsanitize=dataflow" -o $LIB == "-fsanitize=address" -o $LIB == "-fsanitize=undefined"; then

@@ -1,5 +1,8 @@
 llvm-toolchain-17 (1:17.0.6-4) unstable; urgency=medium
 
+  * debian/qualify-clang.sh: remove the compiler-rt test of i386
+    use libclang-rt-17-dev:i386 instead
+
   [ Matthias Klose ]
   * libclang1-17: Remove the full version symlinks.
 
@@ -10,7 +13,7 @@ llvm-toolchain-17 (1:17.0.6-4) unstable; urgency=medium
   * Mark documentation packages as Multi-Arch: foreign
   * Convert libclang-common-*-dev to Arch: all/M-A: foreign
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 09 Jan 2024 09:45:17 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 09 Jan 2024 13:03:56 +0100
 
 llvm-toolchain-17 (1:17.0.6-3) unstable; urgency=medium
 
