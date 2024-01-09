@@ -116,6 +116,7 @@ Description: Language server that provides IDE-like features to editors
 
 Package: clang-@LLVM_VERSION@-doc
 Architecture: all
+Multi-Arch: foreign
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-mathjax
 Description: C, C++ and Objective-C compiler - Documentation
@@ -314,7 +315,8 @@ Description: Clang Python Bindings
  This binding package provides access to the Clang compiler and libraries.
 
 Package: clang-@LLVM_VERSION@-examples
-Architecture: any
+Architecture: all
+Multi-Arch: foreign
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Clang examples
@@ -470,6 +472,7 @@ Description: Modular compiler and toolchain technologies, OCaml bindings
 Package: llvm-@LLVM_VERSION@-doc
 Section: doc
 Architecture: all
+Multi-Arch: foreign
 Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
 Description: Modular compiler and toolchain technologies, documentation
  LLVM is a collection of libraries and tools that make it easy to build
@@ -637,6 +640,7 @@ Description: LLVM OpenMP runtime
 Package: libomp-@LLVM_VERSION@-doc
 Section: doc
 Architecture: all
+Multi-Arch: foreign
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
 Replaces: libiomp-x.y-doc
 Breaks: libiomp-x.y-doc
