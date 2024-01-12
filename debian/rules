@@ -344,6 +344,8 @@ ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel m68k mipsel mips64el hurd-i386 po
 # do not use compiler-rt builtins for libcxx (libcxxabi) when libunwind is
 # disabled since the gnu implementation in libgcc_s will then be required
   LIBCXX_USE_COMPILER_RT := OFF
+# See https://github.com/llvm/llvm-project/issues/77846
+  STAGE_ALL_CMAKE_EXTRA += -DLIBCXXABI_USE_LLVM_UNWINDER=OFF
 else
   RUNTIMES += ;libunwind
   STAGE_ALL_CMAKE_EXTRA += -DLIBCXXABI_USE_LLVM_UNWINDER=ON
