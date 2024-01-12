@@ -542,15 +542,16 @@ SCCACHE_CMAKE =
 # if sccache is installed in the chroot, use it
 ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
 	ifneq (,$(filter $(DEB_HOST_ARCH),i386 amd64))
-		STAGE_1_CMAKE_EXTRA += $(SCCACHE_CMAKE)
-		SCCACHE_ENABLE=yes
-		SCCACHE_PATH=/opt/sccache/
-		SCCACHE_CMD=$(SCCACHE_PATH)/sccache
-		SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=$(SCCACHE_CMD) -DCMAKE_CXX_COMPILER_LAUNCHER=$(SCCACHE_CMD)
-		export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
-	endif
+        ifeq ($(COVERITY_ENABLE),0)  # Only enable SCCache if Coverity is not enabled
+		    STAGE_1_CMAKE_EXTRA += $(SCCACHE_CMAKE)
+		    SCCACHE_ENABLE=yes
+		    SCCACHE_PATH=/opt/sccache/
+		    SCCACHE_CMD=$(SCCACHE_PATH)/sccache
+		    SCCACHE_CMAKE = -DCMAKE_C_COMPILER_LAUNCHER=$(SCCACHE_CMD) -DCMAKE_CXX_COMPILER_LAUNCHER=$(SCCACHE_CMD)
+		    export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/opt/sccache
+	    endif
+    endif
 endif
-
 # enables cmake build targets like stage2-[target_name]
 ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-mlir;check-sanitizer;llvm-config;test-suite
 
