@@ -1,3 +1,10 @@
+llvm-toolchain-17 (1:17.0.6-6) UNRELEASED; urgency=medium
+
+  [ chenli ]
+  * Enable flang on loong64
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 15 Jan 2024 08:56:16 +0100
+
 llvm-toolchain-17 (1:17.0.6-5) unstable; urgency=medium
 
   [ Faidon Liambotis ]
