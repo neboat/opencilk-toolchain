@@ -1,3 +1,12 @@
+llvm-toolchain-17 (1:17.0.6-5) unstable; urgency=medium
+
+  [ Faidon Liambotis ]
+  * Revert "Enable COMPILER_RT_BUILD_BUILTINS for armel"
+  * Fix i386 FTBFS resulting from COMPILER_RT_DEFAULT_TARGET_ONLY
+    (Closes: #1060440)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 11 Jan 2024 14:15:09 +0100
+
 llvm-toolchain-17 (1:17.0.6-4) unstable; urgency=medium
 
   * debian/qualify-clang.sh: remove the compiler-rt test of i386
