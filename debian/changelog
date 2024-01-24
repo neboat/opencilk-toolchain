@@ -1,5 +1,6 @@
-llvm-toolchain-snapshot (1:18~++20231211102647+75193b192ad9-1~exp2) experimental; urgency=medium
+llvm-toolchain-18 (1:18~++20231211102647+75193b192ad9-1~exp2) experimental; urgency=medium
 
+  * Branching of 18
   * refresh libomp5 symbol list
   * For the usage of -DLIBCXXABI_USE_LLVM_UNWINDER=OFF when we don't build unwind
     https://github.com/llvm/llvm-project/issues/77846
