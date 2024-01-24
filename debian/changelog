@@ -1,4 +1,4 @@
-llvm-toolchain-18 (1:18~++20240124033649+22683463740e-1~exp1) experimental; urgency=medium
+llvm-toolchain-18 (1:18~++20240124100819+22683463740e-1~exp1) experimental; urgency=medium
 
   * Branching of 18
   * refresh libomp5 symbol list
@@ -7,7 +7,7 @@ llvm-toolchain-18 (1:18~++20240124033649+22683463740e-1~exp1) experimental; urge
   * remove the unconditionnaly defined -DLIBUNWIND_USE_COMPILER_RT=ON
   * Also pass -DLIBCXXABI_USE_LLVM_UNWINDER:BOOL=OFF to libcxx-wasm32-wasi builds
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 12 Jan 2024 18:33:31 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 24 Jan 2024 22:14:15 +0100
 
 llvm-toolchain-snapshot (1:18~++20231211102647+75193b192ad9-1~exp1) experimental; urgency=medium
 
