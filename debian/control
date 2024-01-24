@@ -40,16 +40,18 @@ Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/snapshot
 
 # ------------- clang -------------
 
-Package: clang-18
+Package: clang-19
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang-common-18-dev (= ${binary:Version}),
- llvm-18-linker-tools (= ${binary:Version}),
- libclang1-18 (= ${binary:Version}), libc6-dev, binutils
+ ${dep:devlibs-objc},
+ libllvm19 (= ${binary:Version}),
+ libclang-common-19-dev (= ${source:Version}),
+ llvm-19-linker-tools (= ${binary:Version}),
+ libclang1-19 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
-Recommends: llvm-18-dev, python3
-# libomp-18-dev
-Suggests: clang-18-doc, wasi-libc
+Recommends: llvm-19-dev, python3
+# libomp-19-dev
+Suggests: clang-19-doc, wasi-libc
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -58,9 +60,9 @@ Description: C, C++ and Objective-C compiler
  Clang implements all of the ISO C++ 1998, 11, 14 and 17 standards and also
  provides most of the support of C++20.
 
-Package: clang-tools-18
+Package: clang-tools-19
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, clang-18 (= ${binary:Version}),
+Depends: ${shlibs:Depends}, ${misc:Depends}, clang-19 (= ${binary:Version}),
  python3
 Description: clang-based tools for C/C++ developments
  Clang project is a C, C++, Objective C and Objective C++ front-end
@@ -72,10 +74,10 @@ Description: clang-based tools for C/C++ developments
  .
  This package contains some clang-based tools like scan-build, clang-cl, etc.
 
-Package: clang-format-18
+Package: clang-format-19
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
- libllvm18 (= ${binary:Version})
+ libllvm19 (= ${binary:Version})
 Description: Tool to format C/C++/Obj-C code
  Clang-format is both a library and a stand-alone tool with the goal of
  automatically reformatting C++ sources files according to configurable
@@ -88,21 +90,23 @@ Description: Tool to format C/C++/Obj-C code
  .
  This package also provides vim and emacs plugins.
 
-Package: clang-tidy-18
+Package: clang-tidy-19
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
- libllvm18 (= ${binary:Version}), libclang-common-18-dev,
- clang-tools-18, python3-yaml
+ libllvm19 (= ${binary:Version}),
+ libclang-common-19-dev (= ${source:Version}),
+ clang-tools-19, python3-yaml
 Description: clang-based C++ linter tool
  Provide an extensible framework for diagnosing and fixing typical programming
  errors, like style violations, interface misuse, or bugs that can be deduced
  via static analysis. clang-tidy is modular and provides a convenient interface
  for writing new checks.
 
-Package: clangd-18
+Package: clangd-19
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
- libclang-common-18-dev (= ${binary:Version})
+ libllvm19 (= ${binary:Version}),
+ libclang-common-19-dev (= ${source:Version}),
 Description: Language server that provides IDE-like features to editors
  clangd understands your C++ code and adds smart features to your editor:
   - code completion
@@ -113,8 +117,9 @@ Description: Language server that provides IDE-like features to editors
  clangd is a language server that implements the Language Server Protocol;
  it can work with many editors through a plugin.
 
-Package: clang-18-doc
+Package: clang-19-doc
 Architecture: all
+Multi-Arch: foreign
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-mathjax
 Description: C, C++ and Objective-C compiler - Documentation
@@ -127,7 +132,7 @@ Description: C, C++ and Objective-C compiler - Documentation
  .
  This package contains the documentation.
 
-Package: libclang1-18
+Package: libclang1-19
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -148,12 +153,12 @@ Description: C interface to the Clang library
  locations with elements within the AST, and other facilities that support
  Clang-based development tools.
 
-Package: libclang-18-dev
+Package: libclang-19-dev
 Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang1-18 (= ${binary:Version}),
- libclang-common-18-dev (= ${binary:Version})
+ ${dep:devlibs-objc}, libclang1-19 (= ${binary:Version}),
+ libclang-common-19-dev (= ${source:Version})
 Description: Clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -163,13 +168,14 @@ Description: Clang library - Development package
  provides most of the support of C++20.
  .
  This package contains the Clang headers to develop extensions over
- libclang1-18.
+ libclang1-19.
 
-Package: libclang-common-18-dev
-Architecture: any
+Package: libclang-common-19-dev
+Architecture: all
+Multi-Arch: foreign
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm18 (= ${binary:Version})
-Recommends: libclang-rt-18-dev (>= 1:16~++20230115053056+df5fc4504b86-1~exp1)
+Depends: ${shlibs:Depends}, ${misc:Depends},
+Recommends: libclang-rt-19-dev (>= 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -182,7 +188,7 @@ Description: Clang library - Common development package
 
 # ------------- compiler-rt -------------
 
-Package: libclang-rt-18-dev
+Package: libclang-rt-19-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
@@ -198,7 +204,7 @@ Description: Compiler-rt - development package
      DataFlowSanitizer, etc
    * profile - Library which is used to collect coverage information.
 
-Package: libclang-rt-18-dev-wasm32
+Package: libclang-rt-19-dev-wasm32
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
@@ -206,7 +212,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Compiler-rt - wasm32 builtins
  Provides the compiler-rt builtins for WebAssembly 32 bits
 
-Package: libclang-rt-18-dev-wasm64
+Package: libclang-rt-19-dev-wasm64
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
@@ -216,7 +222,7 @@ Description: Compiler-rt - wasm64 builtins
 
 # ------------- polly -------------
 
-Package: libpolly-18-dev
+Package: libpolly-19-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
@@ -227,10 +233,10 @@ Description: High-level loop and data-locality optimizer
 
 # ------------- clang libraries -------------
 
-Package: libclang-cpp18
+Package: libclang-cpp19
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm18 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm19 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Description: C++ interface to the Clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
@@ -248,12 +254,12 @@ Description: C++ interface to the Clang library
  locations with elements within the AST, and other facilities that support
  Clang-based development tools.
 
-Package: libclang-cpp18-dev
+Package: libclang-cpp19-dev
 Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- libclang-cpp18 (= ${binary:Version})
-# Move of libclang-cpp.so into libclang-cpp18.dev
+ libclang-cpp19 (= ${binary:Version})
+# Move of libclang-cpp.so into libclang-cpp19.dev
 Description: C++ interface to the Clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -274,10 +280,10 @@ Description: C++ interface to the Clang library
  linker at build time.
 
 
-Package: libfuzzer-18-dev
+Package: libfuzzer-19-dev
 Architecture: linux-any
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, clang-18 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, clang-19 (= ${binary:Version})
 Description: Library for coverage-guided fuzz testing
  LibFuzzer is a library for in-process, coverage-guided, evolutionary fuzzing
  of other libraries.
@@ -295,10 +301,10 @@ Description: Library for coverage-guided fuzz testing
  instrumentation.
 
 
-Package: python3-clang-18
+Package: python3-clang-19
 Section: python
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python3, libclang-18-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3, libclang-19-dev
 Replaces: python-clang-x.y,
 Conflicts: python-clang-x.y
 Provides: python-clang-x.y
@@ -312,8 +318,9 @@ Description: Clang Python Bindings
  .
  This binding package provides access to the Clang compiler and libraries.
 
-Package: clang-18-examples
-Architecture: any
+Package: clang-19-examples
+Architecture: all
+Multi-Arch: foreign
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Clang examples
@@ -328,7 +335,7 @@ Description: Clang examples
 
 # ------------- LLVM -------------
 
-Package: libllvm18
+Package: libllvm19
 Architecture: any
 Section: libs
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -341,7 +348,7 @@ Description: Modular compiler and toolchain technologies, runtime library
  .
  This package contains the LLVM runtime library.
 
-Package: llvm-18-linker-tools
+Package: llvm-19-linker-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Modular compiler and toolchain technologies - Plugins
@@ -351,13 +358,13 @@ Description: Modular compiler and toolchain technologies - Plugins
  .
  This package contains the LLVMgold and LLVMPolly linker plugins.
 
-Package: llvm-18
+Package: llvm-19
 Architecture: any
-Suggests: llvm-18-doc
-Depends: llvm-18-runtime (= ${binary:Version}),
- llvm-18-linker-tools (= ${binary:Version}),
+Suggests: llvm-19-doc
+Depends: llvm-19-runtime (= ${binary:Version}),
+ llvm-19-linker-tools (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
-Recommends: llvm-18-dev
+Recommends: llvm-19-dev
 Description: Modular compiler and toolchain technologies
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -381,7 +388,7 @@ Description: Modular compiler and toolchain technologies
  a young scheme front-end, and Java support is in development. LLVM can
  generate code for X96, SparcV10, PowerPC or many other architectures.
 
-Package: llvm-18-runtime
+Package: llvm-19-runtime
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: binfmt-support | systemd
@@ -401,11 +408,11 @@ Description: Modular compiler and toolchain technologies, IR interpreter
  This package provides the minimal required to execute programs in LLVM
  format.
 
-Package: llvm-18-dev
+Package: llvm-19-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev, ${misc:Depends},
- llvm-18 (= ${binary:Version}), libllvm18 (= ${binary:Version}), libncurses-dev,
- llvm-18-tools (= ${binary:Version}), libclang-cpp18 (= ${binary:Version}),
+ llvm-19 (= ${binary:Version}), libllvm19 (= ${binary:Version}), libncurses-dev,
+ llvm-19-tools (= ${binary:Version}), libclang-cpp19 (= ${binary:Version}),
  libz3-dev, libxml2-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
@@ -423,7 +430,7 @@ Description: Modular compiler and toolchain technologies, libraries and headers
  This package provides the libraries and headers to develop applications
  using llvm.
 
-Package: llvm-18-tools
+Package: llvm-19-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
  python3-pygments, python3-yaml,
@@ -443,11 +450,11 @@ Description: Modular compiler and toolchain technologies, tools
  .
  This package provides tools for testing.
 
-Package: libllvm-18-ocaml-dev
+Package: libllvm-19-ocaml-dev
 Section: ocaml
 Architecture: amd64 arm64 armhf ppc64el s390x riscv64
-Suggests: llvm-18-doc
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-18-dev (= ${binary:Version})
+Suggests: llvm-19-doc
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${ocaml:Depends}, llvm-19-dev (= ${binary:Version})
 Replaces: libllvm-x.y-ocaml-dev
 Conflicts: libllvm-x.y-ocaml-dev
 Provides: ${ocaml:Provides}, libllvm-x.y-ocaml-dev
@@ -466,9 +473,10 @@ Description: Modular compiler and toolchain technologies, OCaml bindings
  .
  This package provides the OCaml bindings to develop applications using llvm.
 
-Package: llvm-18-doc
+Package: llvm-19-doc
 Section: doc
 Architecture: all
+Multi-Arch: foreign
 Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
 Description: Modular compiler and toolchain technologies, documentation
  LLVM is a collection of libraries and tools that make it easy to build
@@ -485,10 +493,10 @@ Description: Modular compiler and toolchain technologies, documentation
  .
  This package contains all documentation (extensive).
 
-Package: llvm-18-examples
+Package: llvm-19-examples
 Section: doc
 Architecture: all
-Depends: ${misc:Depends}, llvm-18-dev (>= ${source:Version}), llvm-18-dev (<< ${source:Version}+c~)
+Depends: ${misc:Depends}, llvm-19-dev (>= ${source:Version}), llvm-19-dev (<< ${source:Version}+c~)
 Description: Modular compiler and toolchain technologies, examples
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -508,20 +516,20 @@ Description: Modular compiler and toolchain technologies, examples
 
 # ------------- lld -------------
 
-Package: lld-18
+Package: lld-19
 Architecture: amd64 arm64 armel armhf i386 mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64 loong64
 # ia64 hurd powerpc have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm18 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm19 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker
  LLD is a new, high-performance linker. It is built as a set of reusable
  components which highly leverage existing libraries in the larger LLVM
  Project.
 
-Package: liblld-18
+Package: liblld-19
 Architecture: amd64 arm64 armel armhf i386 mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64 loong64
 # ia64 hurd powerpc have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm18 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm19 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: libs
 Description: LLVM-based linker, library
@@ -531,12 +539,12 @@ Description: LLVM-based linker, library
  .
  This package contains the LLD runtime library.
 
-Package: liblld-18-dev
+Package: liblld-19-dev
 Section: libdevel
 Architecture: amd64 arm64 armel armhf i386 mipsel mips64el ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 riscv64 loong64
 # ia64 hurd powerpc have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, lld-18 (= ${binary:Version}),
- liblld-18 (= ${binary:Version}), libzstd-dev, zlib1g-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, lld-19 (= ${binary:Version}),
+ liblld-19 (= ${binary:Version}), libzstd-dev, zlib1g-dev
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker, header files
  LLD is a new, high-performance linker. It is built as a set of reusable
@@ -548,21 +556,21 @@ Description: LLVM-based linker, header files
 
 # ------------- lldb -------------
 
-Package: lldb-18
+Package: lldb-19
 Architecture: amd64 arm64 armel armhf i386 ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32 loong64
 # ia64 hurd powerpc powerpcspe ppc64 alpha riscv64 s390x sparc64 mipsel mips64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm18 (= ${binary:Version}),
- python3-lldb-18
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm19 (= ${binary:Version}),
+ python3-lldb-19
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger
  LLDB is a next generation, high-performance debugger. It is built as a set of
  reusable components which highly leverage existing libraries in the larger LLVM
  Project, such as the Clang expression parser and LLVM disassembler.
 
-Package: liblldb-18
+Package: liblldb-19
 Architecture: amd64 arm64 armel armhf i386 ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32 loong64
 # ia64 hurd powerpc powerpcspe ppc64 alpha riscv64 s390x sparc64 mipsel mips64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm18 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm19 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Section: libs
 Description: Next generation, high-performance debugger, library
@@ -572,11 +580,11 @@ Description: Next generation, high-performance debugger, library
  .
  This package contains the LLDB runtime library.
 
-Package: python3-lldb-18
+Package: python3-lldb-19
 Section: python
 Architecture: amd64 arm64 armel armhf i386 ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32 loong64
 # ia64 hurd powerpc powerpcspe ppc64 alpha riscv64 s390x sparc64 mipsel mips64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}, liblldb-18 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}, liblldb-19 (= ${binary:Version})
 Conflicts: python3-lldb-x.y
 Replaces: python3-lldb-x.y
 Provides: python3-lldb-x.y
@@ -588,11 +596,11 @@ Description: Next generation, high-performance debugger, python3 lib
  .
  This binding package provides access to lldb.
 
-Package: liblldb-18-dev
+Package: liblldb-19-dev
 Section: libdevel
 Architecture: amd64 arm64 armel armhf i386 ppc64el kfreebsd-amd64 kfreebsd-i386 s390 s390x sparc hppa m68k sh4 x32 loong64
 # ia64 hurd powerpc powerpcspe ppc64 alpha riscv64 s390x sparc64 mipsel mips64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-18 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-19 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Description: Next generation, high-performance debugger, header files
  LLDB is a next generation, high-performance debugger. It is built as a set of
@@ -606,11 +614,11 @@ Description: Next generation, high-performance debugger, header files
 # 44 because it was the first version in which openmp & libc++ have been
 # managed in llvm-defaults
 
-Package: libomp-18-dev
+Package: libomp-19-dev
 Section: libdevel
 Architecture: amd64 arm64 armhf i386 loong64 mips64el ppc64el ppc64 riscv64
-Depends: libomp5-18 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Suggests: libomp-18-doc
+Depends: libomp5-19 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Suggests: libomp-19-doc
 Breaks: libiomp-dev (<< 3.7-1), libomp-dev (<< 44)
 Provides: libomp-x.y-dev
 Conflicts: libomp-x.y-dev
@@ -620,7 +628,7 @@ Description: LLVM OpenMP runtime - dev package
  linked against, and that manages the multiple threads in an OpenMP program
  while it is executing.
 
-Package: libomp5-18
+Package: libomp5-19
 Multi-Arch: same
 Architecture: amd64 arm64 armhf i386 loong64 mips64el ppc64el ppc64 riscv64
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -633,9 +641,10 @@ Description: LLVM OpenMP runtime
  linked against, and that manages the multiple threads in an OpenMP program
  while it is executing.
 
-Package: libomp-18-doc
+Package: libomp-19-doc
 Section: doc
 Architecture: all
+Multi-Arch: foreign
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
 Replaces: libiomp-x.y-doc
 Breaks: libiomp-x.y-doc
@@ -648,7 +657,7 @@ Description: LLVM OpenMP runtime - Documentation
 
 # ------------- libcxx -------------
 
-Package: libc++1-18
+Package: libc++1-19
 Section: libs
 Architecture: any
 Multi-Arch: same
@@ -672,16 +681,17 @@ Description: LLVM C++ Standard library
      as exception objects, rtti and memory allocation.
    * Extensive unit tests.
 
-Package: libc++-18-dev
+Package: libc++-19-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libc++1-18 (= ${binary:Version}), ${misc:Depends},
- libunwind-18-dev [amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64]
-Breaks: libc++-dev (<< 44), libc++abi-18-dev (<< 1:18~++20231211102647+75193b192ad9-1)
+Depends: libc++1-19 (= ${binary:Version}), ${misc:Depends},
+ libc++abi-19-dev (= ${binary:Version}),
+ libunwind-19-dev [amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64]
+Breaks: libc++-dev (<< 44), libc++abi-19-dev (<< 1:19~++20231211102647+75193b192ad9-1)
 Provides: libc++-x.y-dev
 Conflicts: libc++-x.y-dev
-Replaces: libc++-x.y-dev, libc++abi-18-dev (<< 1:18~++20231211102647+75193b192ad9-1)
+Replaces: libc++-x.y-dev, libc++abi-19-dev (<< 1:19~++20231211102647+75193b192ad9-1)
 Description: LLVM C++ Standard library (development files)
  libc++ is another implementation of the C++ standard library
  .
@@ -695,11 +705,11 @@ Description: LLVM C++ Standard library (development files)
      as exception objects, rtti and memory allocation.
    * Extensive unit tests.
 
-Package: libc++-18-dev-wasm32
+Package: libc++-19-dev-wasm32
 Section: libdevel
 Architecture: all
 Multi-Arch: foreign
-Depends: wasi-libc, libc++abi-18-dev-wasm32, ${misc:Depends}
+Depends: wasi-libc, libc++abi-19-dev-wasm32, ${misc:Depends}
 Provides: libc++-x.y-dev-wasm32
 Conflicts: libc++-x.y-dev-wasm32
 Replaces: libc++-x.y-dev-wasm32
@@ -720,7 +730,7 @@ Description: LLVM C++ Standard library (WASI)
 
 # ------------- libcxxabi -------------
 
-Package: libc++abi1-18
+Package: libc++abi1-19
 Section: libs
 Architecture: any
 Multi-Arch: same
@@ -739,11 +749,11 @@ Description: LLVM low level support for a standard C++ library
    * Correctness as defined by the C++ standards.
    * Provide a portable sublayer to ease the porting of libc++
 
-Package: libc++abi-18-dev
+Package: libc++abi-19-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libc++abi1-18 (= ${binary:Version}), ${misc:Depends}
+Depends: libc++abi1-19 (= ${binary:Version}), ${misc:Depends}
 Breaks: libc++abi-dev (<= 44)
 Provides: libc++abi-x.y-dev
 Conflicts: libc++abi-x.y-dev
@@ -757,7 +767,7 @@ Description: LLVM low level support for a standard C++ library (development file
    * Correctness as defined by the C++ standards.
    * Provide a portable sublayer to ease the porting of libc++
 
-Package: libc++abi-18-dev-wasm32
+Package: libc++abi-19-dev-wasm32
 Section: libdevel
 Architecture: all
 Multi-Arch: foreign
@@ -778,14 +788,14 @@ Description: LLVM low level support for a standard C++ library (WASI)
 
 # ------------- libclc -------------
 
-Package: libclc-18
+Package: libclc-19
 Section: libs
 Architecture: all
 Multi-Arch: foreign
 Depends:
  ${misc:Depends},
- libclc-18-dev (= ${binary:Version}),
- libclang-common-18-dev,
+ libclc-19-dev (= ${binary:Version}),
+ libclang-common-19-dev,
 Breaks: libclc-amdgcn, libclc-ptx, libclc-r600
 Provides: libclc-x.y
 Conflicts: libclc-x.y
@@ -797,7 +807,7 @@ Description: OpenCL C language implementation - platform support
  This package contains support for the amdgcn (AMD GPU), PTX and r600
  platforms.
 
-Package: libclc-18-dev
+Package: libclc-19-dev
 Section: libdevel
 Architecture: all
 Multi-Arch: foreign
@@ -815,7 +825,7 @@ Description: OpenCL C language implementation - development files
 
 # ------------- libunwind -------------
 
-Package: libunwind-18
+Package: libunwind-19
 Section: libs
 Architecture: amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64
 Multi-Arch: same
@@ -832,13 +842,13 @@ Description: production-quality unwinder
  or to operate on another process (aka remote), but only the local path has
  been implemented. Remote unwinding remains as future work.
 
-Package: libunwind-18-dev
+Package: libunwind-19-dev
 Section: libdevel
 Architecture: amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64
 Multi-Arch: same
 Depends:
  ${misc:Depends},
- libunwind-18 (= ${binary:Version})
+ libunwind-19 (= ${binary:Version})
 Provides: libunwind-dev, libunwind-x.y-dev
 Conflicts: libunwind-dev, libunwind-x.y-dev
 Replaces: libunwind-dev, libunwind-x.y-dev
@@ -852,7 +862,7 @@ Description: production-quality unwinder
 
 # ------------- mlir -------------
 
-Package: mlir-18-tools
+Package: mlir-19-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Multi-Level Intermediate Representation tools
@@ -863,7 +873,7 @@ Description: Multi-Level Intermediate Representation tools
  .
  This package provides tools.
 
-Package: libmlir-18
+Package: libmlir-19
 Section: libs
 Architecture: any
 Multi-Arch: same
@@ -879,13 +889,13 @@ Description: Multi-Level Intermediate Representation library
  specific compilers, and aid in connecting existing compilers together.
 
 
-Package: libmlir-18-dev
+Package: libmlir-19-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends:
  ${misc:Depends},
- libmlir-18 (= ${binary:Version})
+ libmlir-19 (= ${binary:Version})
 Breaks: libmlir-dev
 Provides: libmlir-x.y-dev
 Conflicts: libmlir-x.y-dev
@@ -899,16 +909,16 @@ Description: Multi-Level Intermediate Representation library
 
 # ------------- bolt -------------
 
-Package: bolt-18
+Package: bolt-19
 Architecture: amd64
 # Disable on arm64 because libbolt_rt_hugify.a isn't generated
-Depends: ${shlibs:Depends}, ${misc:Depends}, libbolt-18-dev (= ${binary:Version}),
+Depends: ${shlibs:Depends}, ${misc:Depends}, libbolt-19-dev (= ${binary:Version}),
 Pre-Depends: ${misc:Pre-Depends}
 Description: Post-link optimizer
  It achieves the improvements by optimizing application's code layout based on
  execution profile gathered by sampling profiler.
 
-Package: libbolt-18-dev
+Package: libbolt-19-dev
 Section: libdevel
 Architecture: amd64
 #arm64
@@ -919,11 +929,11 @@ Description: Post-link optimizer
 
 # ------------- flang -------------
 
-Package: flang-18
+Package: flang-19
 # no 32bit support
 # https://github.com/llvm/llvm-project/issues/59845
-Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 ppc64 sparc64 riscv64
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libflang-18-dev (= ${binary:Version}),
+Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 ppc64 sparc64 riscv64 loong64
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libflang-19-dev (= ${binary:Version}),
 Provides: fortran-compiler, gfortran-mod-15
 Description: Fortran compiler
  Ground-up implementation of a Fortran front end written in
@@ -932,8 +942,8 @@ Description: Fortran compiler
  While it is capable of generating executables for a number
  of examples, some functionalities are still missing.
 
-Package: libflang-18-dev
-Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 ppc64 sparc64 riscv64
+Package: libflang-19-dev
+Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 ppc64 sparc64 riscv64 loong64
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
 Description: Flang library - Development package

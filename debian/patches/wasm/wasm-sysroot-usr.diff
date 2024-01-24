@@ -1,7 +1,7 @@
-Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/lib/Driver/ToolChains/WebAssembly.cpp
+Index: llvm-toolchain-16-16.0.6/clang/lib/Driver/ToolChains/WebAssembly.cpp
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79.orig/clang/lib/Driver/ToolChains/WebAssembly.cpp
-+++ llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/lib/Driver/ToolChains/WebAssembly.cpp
+--- llvm-toolchain-16-16.0.6.orig/clang/lib/Driver/ToolChains/WebAssembly.cpp
++++ llvm-toolchain-16-16.0.6/clang/lib/Driver/ToolChains/WebAssembly.cpp
 @@ -174,7 +174,7 @@ WebAssembly::WebAssembly(const Driver &D
  
    getProgramPaths().push_back(getDriver().getInstalledDir());
@@ -19,7 +19,7 @@ Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/lib/Driver
  
    if (!DriverArgs.hasArg(options::OPT_nobuiltininc)) {
      SmallString<128> P(D.ResourceDir);
-@@ -425,12 +426,29 @@ void WebAssembly::AddClangSystemIncludeA
+@@ -425,12 +426,20 @@ void WebAssembly::AddClangSystemIncludeA
      return;
    }
  
@@ -28,22 +28,12 @@ Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/lib/Driver
      const std::string MultiarchTriple =
 -        getMultiarchTriple(D, getTriple(), D.SysRoot);
 -    addSystemInclude(DriverArgs, CC1Args, D.SysRoot + "/include/" + MultiarchTriple);
--  }
--  addSystemInclude(DriverArgs, CC1Args, D.SysRoot + "/include");
 +        getMultiarchTriple(D, getTriple(), SysRoot);
 +    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/local/include/" + MultiarchTriple);
 +    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/local/include");
 +    addSystemInclude(DriverArgs, CC1Args, SysRoot + "/include/" + MultiarchTriple);
-+	std::string LibPath = SysRoot	+ "/include";
-+	std::string Version = detectLibcxxVersion(LibPath);
-+
-+	if (!getDriver().SysRoot.empty()) {
-+		// Second add the generic one.
-+		addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version);
-+		// Third the backward one.
-+		addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version + "/backward");
-+	}
-+  }
+   }
+-  addSystemInclude(DriverArgs, CC1Args, D.SysRoot + "/include");
 +
 +  // also add the non-multiarch path, only on a known OS (as above), or when
 +  // a sysroot is given, for backwards compatibility with the original driver
@@ -53,7 +43,7 @@ Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/lib/Driver
  }
  
  void WebAssembly::AddClangCXXStdlibIncludeArgs(const ArgList &DriverArgs,
-@@ -481,6 +490,17 @@ Tool *WebAssembly::buildLinker() const {
+@@ -478,6 +487,17 @@ Tool *WebAssembly::buildLinker() const {
    return new tools::wasm::Linker(*this);
  }
  
@@ -71,18 +61,37 @@ Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/lib/Driver
  void WebAssembly::addLibCxxIncludePaths(
      const llvm::opt::ArgList &DriverArgs,
      llvm::opt::ArgStringList &CC1Args) const {
-@@ -502,7 +522,9 @@ void WebAssembly::addLibCxxIncludePaths(
+@@ -488,18 +508,22 @@ void WebAssembly::addLibCxxIncludePaths(
+       getMultiarchTriple(D, getTriple(), SysRoot);
+   bool IsKnownOs = (getTriple().getOS() != llvm::Triple::UnknownOS);
+ 
+-  std::string Version = detectLibcxxVersion(LibPath);
+-  if (Version.empty())
+-    return;
+-
+   // First add the per-target include path if the OS is known.
+   if (IsKnownOs) {
+-    std::string TargetDir = LibPath + "/" + MultiarchTriple + "/c++/" + Version;
+-    addSystemInclude(DriverArgs, CC1Args, TargetDir);
++    std::string Version = detectLibcxxVersion(LibPath + "/" + MultiarchTriple);
++    if (!Version.empty()) {
++      std::string TargetDir = LibPath + "/" + MultiarchTriple + "/c++/" + Version;
++      addSystemInclude(DriverArgs, CC1Args, TargetDir);
++    }
    }
  
    // Second add the generic one.
 -  addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version);
 +  // don't include the host architecture's headers in the search path
-+  if (!getDriver().SysRoot.empty())
-+    addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version);
++  if (!getDriver().SysRoot.empty()) {
++    std::string Version = detectLibcxxVersion(LibPath);
++    if (!Version.empty())
++      addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version);
++  }
  }
  
  void WebAssembly::addLibStdCXXIncludePaths(
-@@ -549,8 +571,11 @@ void WebAssembly::addLibStdCXXIncludePat
+@@ -546,8 +570,11 @@ void WebAssembly::addLibStdCXXIncludePat
      addSystemInclude(DriverArgs, CC1Args, TargetDir);
    }
  
@@ -98,10 +107,10 @@ Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/lib/Driver
 +    addSystemInclude(DriverArgs, CC1Args, LibPath + "/c++/" + Version + "/backward");
 +  }
  }
-Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/lib/Driver/ToolChains/WebAssembly.h
+Index: llvm-toolchain-16-16.0.6/clang/lib/Driver/ToolChains/WebAssembly.h
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79.orig/clang/lib/Driver/ToolChains/WebAssembly.h
-+++ llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/clang/lib/Driver/ToolChains/WebAssembly.h
+--- llvm-toolchain-16-16.0.6.orig/clang/lib/Driver/ToolChains/WebAssembly.h
++++ llvm-toolchain-16-16.0.6/clang/lib/Driver/ToolChains/WebAssembly.h
 @@ -89,6 +89,8 @@ private:
                               llvm::opt::ArgStringList &CC1Args) const;
    void addLibStdCXXIncludePaths(const llvm::opt::ArgList &DriverArgs,

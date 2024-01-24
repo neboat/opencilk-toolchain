@@ -43,7 +43,9 @@ Vcs-Browser: https://salsa.debian.org/pkg-llvm-team/llvm-toolchain/tree/@BRANCH_
 Package: clang-@LLVM_VERSION@
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang-common-@LLVM_VERSION@-dev (= ${binary:Version}),
+ ${dep:devlibs-objc},
+ libllvm@LLVM_VERSION@ (= ${binary:Version}),
+ libclang-common-@LLVM_VERSION@-dev (= ${source:Version}),
  llvm-@LLVM_VERSION@-linker-tools (= ${binary:Version}),
  libclang1-@LLVM_VERSION@ (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler
@@ -91,7 +93,8 @@ Description: Tool to format C/C++/Obj-C code
 Package: clang-tidy-@LLVM_VERSION@
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
- libllvm@LLVM_VERSION@ (= ${binary:Version}), libclang-common-@LLVM_VERSION@-dev,
+ libllvm@LLVM_VERSION@ (= ${binary:Version}),
+ libclang-common-@LLVM_VERSION@-dev (= ${source:Version}),
  clang-tools-@LLVM_VERSION@, python3-yaml
 Description: clang-based C++ linter tool
  Provide an extensible framework for diagnosing and fixing typical programming
@@ -102,7 +105,8 @@ Description: clang-based C++ linter tool
 Package: clangd-@LLVM_VERSION@
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
- libclang-common-@LLVM_VERSION@-dev (= ${binary:Version})
+ libllvm@LLVM_VERSION@ (= ${binary:Version}),
+ libclang-common-@LLVM_VERSION@-dev (= ${source:Version}),
 Description: Language server that provides IDE-like features to editors
  clangd understands your C++ code and adds smart features to your editor:
   - code completion
@@ -115,6 +119,7 @@ Description: Language server that provides IDE-like features to editors
 
 Package: clang-@LLVM_VERSION@-doc
 Architecture: all
+Multi-Arch: foreign
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-mathjax
 Description: C, C++ and Objective-C compiler - Documentation
@@ -153,7 +158,7 @@ Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang1-@LLVM_VERSION@ (= ${binary:Version}),
- libclang-common-@LLVM_VERSION@-dev (= ${binary:Version})
+ libclang-common-@LLVM_VERSION@-dev (= ${source:Version})
 Description: Clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -166,9 +171,10 @@ Description: Clang library - Development package
  libclang1-@LLVM_VERSION@.
 
 Package: libclang-common-@LLVM_VERSION@-dev
-Architecture: any
+Architecture: all
+Multi-Arch: foreign
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@LLVM_VERSION@ (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends},
 Recommends: libclang-rt-@LLVM_VERSION@-dev (>= 1:16~++20230115053056+df5fc4504b86-1~exp1)
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
@@ -313,7 +319,8 @@ Description: Clang Python Bindings
  This binding package provides access to the Clang compiler and libraries.
 
 Package: clang-@LLVM_VERSION@-examples
-Architecture: any
+Architecture: all
+Multi-Arch: foreign
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Clang examples
@@ -469,6 +476,7 @@ Description: Modular compiler and toolchain technologies, OCaml bindings
 Package: llvm-@LLVM_VERSION@-doc
 Section: doc
 Architecture: all
+Multi-Arch: foreign
 Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
 Description: Modular compiler and toolchain technologies, documentation
  LLVM is a collection of libraries and tools that make it easy to build
@@ -636,6 +644,7 @@ Description: LLVM OpenMP runtime
 Package: libomp-@LLVM_VERSION@-doc
 Section: doc
 Architecture: all
+Multi-Arch: foreign
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
 Replaces: libiomp-x.y-doc
 Breaks: libiomp-x.y-doc
@@ -677,6 +686,7 @@ Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: libc++1-@LLVM_VERSION@ (= ${binary:Version}), ${misc:Depends},
+ libc++abi-@LLVM_VERSION@-dev (= ${binary:Version}),
  libunwind-@LLVM_VERSION@-dev [amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64]
 Breaks: libc++-dev (<< 44), libc++abi-@LLVM_VERSION@-dev (<< 1:18~++20231211102647+75193b192ad9-1)
 Provides: libc++-x.y-dev
@@ -922,7 +932,7 @@ Description: Post-link optimizer
 Package: flang-@LLVM_VERSION@
 # no 32bit support
 # https://github.com/llvm/llvm-project/issues/59845
-Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 ppc64 sparc64 riscv64
+Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 ppc64 sparc64 riscv64 loong64
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libflang-@LLVM_VERSION@-dev (= ${binary:Version}),
 Provides: fortran-compiler, gfortran-mod-15
 Description: Fortran compiler
@@ -933,7 +943,7 @@ Description: Fortran compiler
  of examples, some functionalities are still missing.
 
 Package: libflang-@LLVM_VERSION@-dev
-Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 ppc64 sparc64 riscv64
+Architecture: amd64 arm64 mips64el ppc64el kfreebsd-amd64 ppc64 sparc64 riscv64 loong64
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
 Description: Flang library - Development package
