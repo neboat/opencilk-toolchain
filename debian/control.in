@@ -688,10 +688,10 @@ Multi-Arch: same
 Depends: libc++1-@LLVM_VERSION@ (= ${binary:Version}), ${misc:Depends},
  libc++abi-@LLVM_VERSION@-dev (= ${binary:Version}),
  libunwind-@LLVM_VERSION@-dev [amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64]
-Breaks: libc++-dev (<< 44), libc++abi-@LLVM_VERSION@-dev (<< 1:18~++20231211102647+75193b192ad9-1)
+Breaks: libc++-dev (<< 44)
 Provides: libc++-x.y-dev
 Conflicts: libc++-x.y-dev
-Replaces: libc++-x.y-dev, libc++abi-@LLVM_VERSION@-dev (<< 1:18~++20231211102647+75193b192ad9-1)
+Replaces: libc++-x.y-dev
 Description: LLVM C++ Standard library (development files)
  libc++ is another implementation of the C++ standard library
  .
