@@ -175,7 +175,7 @@ Architecture: all
 Multi-Arch: foreign
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends},
-Recommends: libclang-rt-@LLVM_VERSION@-dev (>= 1:16~++20230115053056+df5fc4504b86-1~exp1)
+Recommends: libclang-rt-@LLVM_VERSION@-dev
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -619,7 +619,7 @@ Section: libdevel
 Architecture: amd64 arm64 armhf i386 loong64 mips64el ppc64el ppc64 riscv64
 Depends: libomp5-@LLVM_VERSION@ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Suggests: libomp-@LLVM_VERSION@-doc
-Breaks: libiomp-dev (<< 3.7-1), libomp-dev (<< 44)
+Breaks: libiomp-dev (<< 3.7-1)
 Provides: libomp-x.y-dev
 Conflicts: libomp-x.y-dev
 Replaces: libomp-x.y-dev
@@ -632,7 +632,6 @@ Package: libomp5-@LLVM_VERSION@
 Multi-Arch: same
 Architecture: amd64 arm64 armhf i386 loong64 mips64el ppc64el ppc64 riscv64
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Breaks: libomp5 (<< 44)
 Provides: libomp-x.y
 Conflicts: libomp-x.y
 Replaces: libomp-x.y
@@ -664,7 +663,6 @@ Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: clang
-Breaks: libc++1 (<< 44)
 Provides: libc++-x.y
 Conflicts: libc++-x.y
 Replaces: libc++-x.y
@@ -688,7 +686,6 @@ Multi-Arch: same
 Depends: libc++1-@LLVM_VERSION@ (= ${binary:Version}), ${misc:Depends},
  libc++abi-@LLVM_VERSION@-dev (= ${binary:Version}),
  libunwind-@LLVM_VERSION@-dev [amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64]
-Breaks: libc++-dev (<< 44)
 Provides: libc++-x.y-dev
 Conflicts: libc++-x.y-dev
 Replaces: libc++-x.y-dev
@@ -736,7 +733,6 @@ Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Breaks: libc++abi1 (<< 44)
 Provides: libc++abi-x.y
 Conflicts: libc++abi-x.y
 Replaces: libc++abi-x.y
