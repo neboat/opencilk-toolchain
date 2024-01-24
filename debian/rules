@@ -509,7 +509,7 @@ SCCACHE_ENABLE=no
 SCCACHE_CMAKE =
 # if sccache is installed in the chroot, use it
 ifeq ($(shell test -e /opt/sccache/sccache && echo -n yes),yes)
-	ifneq (,$(filter $(DEB_HOST_ARCH),i386 amd64))
+	ifneq (,$(filter $(DEB_HOST_ARCH),i386 amd64 s390x))
 		STAGE_1_CMAKE_EXTRA += $(SCCACHE_CMAKE)
 		SCCACHE_ENABLE=yes
 		SCCACHE_PATH=/opt/sccache/
@@ -710,8 +710,13 @@ endif
 ifeq (${SCCACHE_ENABLE},yes)
 # Just in case...
 	$(SCCACHE_CMD) --stop-server||true
+ifneq (,$(filter $(DEB_HOST_ARCH),i386 amd64))
 # Start the sccache server with the right set of options to use GCP
-	SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=$(SCCACHE_PATH)/sccache.log SCCACHE_GCS_KEY_PATH=$(SCCACHE_PATH)/secret-gcp-storage.json SCCACHE_GCS_BUCKET=apt-llvm-org-sccache SCCACHE_GCS_RW_MODE=READ_WRITE $(SCCACHE_CMD) --start-server
+		SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=$(SCCACHE_PATH)/sccache.log SCCACHE_GCS_KEY_PATH=$(SCCACHE_PATH)/secret-gcp-storage.json SCCACHE_GCS_BUCKET=apt-llvm-org-sccache SCCACHE_GCS_RW_MODE=READ_WRITE $(SCCACHE_CMD) --start-server
+else
+# on s390x machine, use a local cache
+	SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=$(SCCACHE_PATH)/sccache.log SCCACHE_DIR=/opt/sccache/cache/ SCCACHE_DIRECT=true $(SCCACHE_CMD) --start-server
+endif
 endif
 	echo "Running tests: $(RUN_TEST)"
 	echo "Using cmake: $(CMAKE_BIN)"; \
