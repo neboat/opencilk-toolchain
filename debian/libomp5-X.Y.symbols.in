@@ -1364,6 +1364,8 @@ libomptarget.rtl.amdgpu.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_data_submit_async@VERS1.0 17
  __tgt_rtl_data_unlock@VERS1.0 17
  __tgt_rtl_destroy_event@VERS1.0 17
+ __tgt_rtl_get_function@VERS1.0 18
+ __tgt_rtl_get_global@VERS1.0 18
  __tgt_rtl_init_async_info@VERS1.0 17
  __tgt_rtl_init_device@VERS1.0 17
  __tgt_rtl_init_device_info@VERS1.0 17
@@ -1371,6 +1373,7 @@ libomptarget.rtl.amdgpu.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_init_requires@VERS1.0 17
  __tgt_rtl_initialize_record_replay@VERS1.0 18
  __tgt_rtl_is_data_exchangable@VERS1.0 17
+ __tgt_rtl_is_valid_binary@VERS1.0 18
  __tgt_rtl_launch_kernel@VERS1.0 17
  __tgt_rtl_load_binary@VERS1.0 17
  __tgt_rtl_number_of_devices@VERS1.0 17
@@ -1382,6 +1385,7 @@ libomptarget.rtl.amdgpu.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_supports_empty_images@VERS1.0 17
  __tgt_rtl_sync_event@VERS1.0 17
  __tgt_rtl_synchronize@VERS1.0 17
+ __tgt_rtl_use_auto_zero_copy@VERS1.0 18
  __tgt_rtl_wait_event@VERS1.0 17
 libomptarget.rtl.cuda.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  VERS1.0@VERS1.0 17
@@ -1399,6 +1403,8 @@ libomptarget.rtl.cuda.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_data_submit_async@VERS1.0 17
  __tgt_rtl_data_unlock@VERS1.0 17
  __tgt_rtl_destroy_event@VERS1.0 17
+ __tgt_rtl_get_function@VERS1.0 18
+ __tgt_rtl_get_global@VERS1.0 18
  __tgt_rtl_init_async_info@VERS1.0 17
  __tgt_rtl_init_device@VERS1.0 17
  __tgt_rtl_init_device_info@VERS1.0 17
@@ -1406,6 +1412,7 @@ libomptarget.rtl.cuda.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_init_requires@VERS1.0 17
  __tgt_rtl_initialize_record_replay@VERS1.0 18
  __tgt_rtl_is_data_exchangable@VERS1.0 17
+ __tgt_rtl_is_valid_binary@VERS1.0 18
  __tgt_rtl_launch_kernel@VERS1.0 17
  __tgt_rtl_load_binary@VERS1.0 17
  __tgt_rtl_number_of_devices@VERS1.0 17
@@ -1417,6 +1424,7 @@ libomptarget.rtl.cuda.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_supports_empty_images@VERS1.0 17
  __tgt_rtl_sync_event@VERS1.0 17
  __tgt_rtl_synchronize@VERS1.0 17
+ __tgt_rtl_use_auto_zero_copy@VERS1.0 18
  __tgt_rtl_wait_event@VERS1.0 17
 libomptarget.rtl.x86_64.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  VERS1.0@VERS1.0 17
@@ -1434,6 +1442,8 @@ libomptarget.rtl.x86_64.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_data_submit_async@VERS1.0 17
  __tgt_rtl_data_unlock@VERS1.0 17
  __tgt_rtl_destroy_event@VERS1.0 17
+ __tgt_rtl_get_function@VERS1.0 18
+ __tgt_rtl_get_global@VERS1.0 18
  __tgt_rtl_init_async_info@VERS1.0 17
  __tgt_rtl_init_device@VERS1.0 17
  __tgt_rtl_init_device_info@VERS1.0 17
@@ -1441,6 +1451,7 @@ libomptarget.rtl.x86_64.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_init_requires@VERS1.0 17
  __tgt_rtl_initialize_record_replay@VERS1.0 18
  __tgt_rtl_is_data_exchangable@VERS1.0 17
+ __tgt_rtl_is_valid_binary@VERS1.0 18
  __tgt_rtl_launch_kernel@VERS1.0 17
  __tgt_rtl_load_binary@VERS1.0 17
  __tgt_rtl_number_of_devices@VERS1.0 17
@@ -1452,6 +1463,7 @@ libomptarget.rtl.x86_64.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_supports_empty_images@VERS1.0 17
  __tgt_rtl_sync_event@VERS1.0 17
  __tgt_rtl_synchronize@VERS1.0 17
+ __tgt_rtl_use_auto_zero_copy@VERS1.0 18
  __tgt_rtl_wait_event@VERS1.0 17
 libomptarget.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
  VERS1.0@VERS1.0 17
