@@ -1,12 +1,8 @@
-llvm-toolchain-18 (1:18~++20240126094319+0991d3c7b53d-1~exp2) UNRELEASED; urgency=medium
-
-  * control: Avoid hello build-dep getting pulled in on buildds.
-
- -- Samuel Thibault <sthibault@debian.org>  Sat, 27 Jan 2024 19:41:35 +0100
-
-llvm-toolchain-18 (1:18~++20240126094319+0991d3c7b53d-1~exp1) experimental; urgency=medium
+llvm-toolchain-18 (1:18.1.0~++20240126095841+0991d3c7b53d-1~exp1) experimental; urgency=medium
 
   * Branching of 18
+    note that it is normal that the versionning starts from 18.1
+    See https://discourse.llvm.org/t/rfc-name-the-first-release-from-a-branch-n-1-0-instead-of-n-0-0/75384
   * refresh libomp5 symbol list
   * For the usage of -DLIBCXXABI_USE_LLVM_UNWINDER=OFF when we don't build unwind
     https://github.com/llvm/llvm-project/issues/77846
@@ -14,6 +10,12 @@ llvm-toolchain-18 (1:18~++20240126094319+0991d3c7b53d-1~exp1) experimental; urge
   * Also pass -DLIBCXXABI_USE_LLVM_UNWINDER:BOOL=OFF to libcxx-wasm32-wasi builds
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 26 Jan 2024 09:44:56 +0100
+
+llvm-toolchain-18 (1:18~++20240126094319+0991d3c7b53d-1~exp2) UNRELEASED; urgency=medium
+
+  * control: Avoid hello build-dep getting pulled in on buildds.
+
+ -- Samuel Thibault <sthibault@debian.org>  Sat, 27 Jan 2024 19:41:35 +0100
 
 llvm-toolchain-snapshot (1:18~++20231211102647+75193b192ad9-1~exp1) experimental; urgency=medium
 
