@@ -1,12 +1,15 @@
-llvm-toolchain-18 (1:18.1.0-rc1-1~exp2) experimental; urgency=medium
+llvm-toolchain-18 (1:18.1.0~rc1-1) unstable; urgency=medium
 
   [ Samuel Thibault ]
   * control: Avoid hello build-dep getting pulled in on buildds.
 
+  [ Gianfranco Costamagna ]
+  * Fixup rc versioning, and go for sid
+
   [ Sylvestre Ledru ]
   * hwasan_symbolize is now built also on i386
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Jan 2024 20:47:12 +0100
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 31 Jan 2024 10:36:07 +0100
 
 llvm-toolchain-18 (1:18.1.0-rc1-1~exp1) experimental; urgency=medium
 
