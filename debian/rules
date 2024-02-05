@@ -5,6 +5,8 @@ PROJECTS = clang;clang-tools-extra;lld;cross-project-tests;mlir
 # openmp & libunwind aren't enabled for every platform
 RUNTIMES = compiler-rt;libcxx;libcxxabi
 
+export DEB_BUILD_MAINT_OPTIONS=abi=+time64
+
 TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
 DEB_INST		:= $(CURDIR)/debian/tmp/
