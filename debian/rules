@@ -5,6 +5,7 @@ PROJECTS = clang;clang-tools-extra;lld;cross-project-tests;mlir
 # openmp & libunwind aren't enabled for every platform
 RUNTIMES = compiler-rt;libcxx;libcxxabi
 
+# remove once the time64_t transition starts
 export DEB_BUILD_MAINT_OPTIONS=abi=+time64
 
 TARGET_BUILD	:= build-llvm
