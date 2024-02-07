@@ -20,7 +20,7 @@ cd "$AUTOPKGTEST_TMP"
 cat <<EOF > CMakeLists.txt
 cmake_minimum_required(VERSION 3.22)
 project(cmake-llvm-test)
-find_package(LLVM $LLVM_VERSION REQUIRED
+find_package(LLVM $LLVM_VERSION.1 REQUIRED
   COMPONENTS
     Analysis
     BitReader

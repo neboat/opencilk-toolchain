@@ -20,7 +20,7 @@ cd "$AUTOPKGTEST_TMP"
 cat <<EOF > CMakeLists.txt
 cmake_minimum_required(VERSION 3.22)
 project(cmake-clang-test)
-find_package(Clang)
+find_package(Clang $LLVM_VERSION.1 REQUIRED)
 
 EOF
 
