@@ -5,9 +5,6 @@ PROJECTS = clang;clang-tools-extra;lld;cross-project-tests;mlir
 # openmp & libunwind aren't enabled for every platform
 RUNTIMES = compiler-rt;libcxx;libcxxabi
 
-# remove once the time64_t transition starts
-export DEB_BUILD_MAINT_OPTIONS=abi=+time64
-
 TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
 DEB_INST		:= $(CURDIR)/debian/tmp/
@@ -68,7 +65,9 @@ CONFIGURE_EXTRA =
 
 # dpkg-buildflags support
 # disable fixfilepath in favor of the llvm-project supplied flavor, disable lto
-export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto
+# remove once the time64_t transition starts
+export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto abi=+time64
+
 # these are handled on a per stage / build basis
 ifeq ($(VENDOR)-$(DEB_HOST_ARCH),Ubuntu-ppc64el)
   export DEB_CFLAGS_MAINT_STRIP = -g -O3
