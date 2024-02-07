@@ -3,7 +3,10 @@ llvm-toolchain-16 (1:16.0.6-20) UNRELEASED; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * Don't install *clang_rt* on sparc and sparc64
 
- -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sat, 25 Nov 2023 11:17:15 +0100
+  [ Matthias Klose ]
+  * Remove unused import of imp module in scan-view, removed in Python 3.12.
+
+ -- Matthias Klose <doko@debian.org>  Wed, 07 Feb 2024 23:48:33 +0100
 
 llvm-toolchain-16 (1:16.0.6-19) unstable; urgency=medium
 
