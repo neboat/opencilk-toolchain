@@ -1,3 +1,13 @@
+llvm-toolchain-18 (1:18.1.0~rc1-3) unstable; urgency=medium
+
+  * Fix previus upload, time64 is effective only in one specific place of
+    rules file
+  * Fix some test using still clang-17
+  * Switch testing to 18 line
+  * Fix an underlinking on qualify-clang.sh
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 07 Feb 2024 15:05:08 +0100
+
 llvm-toolchain-18 (1:18.1.0~rc1-2) unstable; urgency=medium
 
   [ Steve Langasek ]
