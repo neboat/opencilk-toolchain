@@ -1,5 +1,6 @@
 llvm-toolchain-18 (1:18.1.0~rc2-3) unstable; urgency=medium
 
+  * Try gold linker on mips64el
   * Add also lfs on top of time64, to fix FTBFS on 32bit
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 08 Feb 2024 16:38:35 +0100
