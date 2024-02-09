@@ -1,15 +1,13 @@
-llvm-toolchain-18 (1:18.1.0~rc2-3) unstable; urgency=medium
+llvm-toolchain-18 (1:18.1.0~rc2-2) unstable; urgency=medium
 
+  [ Gianfranco Costamagna ]
   * Try gold linker on mips64el
   * Add also lfs on top of time64, to fix FTBFS on 32bit
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 08 Feb 2024 16:38:35 +0100
-
-llvm-toolchain-18 (1:18.1.0~rc2-2) unstable; urgency=medium
-
+  [ Sylvestre Ledru ]
   * add new symbols in libomp5
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 26 Jan 2024 12:02:45 +0100
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 08 Feb 2024 16:38:35 +0100
 
 llvm-toolchain-18 (1:18.1.0~rc2-1) unstable; urgency=medium
 
