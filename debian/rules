@@ -724,7 +724,7 @@ ifeq (${SCCACHE_ENABLE},yes)
 	$(SCCACHE_CMD) --stop-server||true
 ifneq (,$(filter $(DEB_HOST_ARCH),i386 amd64))
 # Start the sccache server with the right set of options to use GCP
-		SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=$(SCCACHE_PATH)/sccache.log SCCACHE_GCS_KEY_PATH=$(SCCACHE_PATH)/secret-gcp-storage.json SCCACHE_GCS_BUCKET=apt-llvm-org-sccache SCCACHE_GCS_RW_MODE=READ_WRITE $(SCCACHE_CMD) --start-server
+	SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=$(SCCACHE_PATH)/sccache.log SCCACHE_GCS_KEY_PATH=$(SCCACHE_PATH)/secret-gcp-storage.json SCCACHE_GCS_BUCKET=apt-llvm-org-sccache SCCACHE_GCS_RW_MODE=READ_WRITE $(SCCACHE_CMD) --start-server
 else
 # on s390x machine, use a local cache
 	SCCACHE_CACHE_SIZE=20G SCCACHE_LOG=sccache=debug SCCACHE_ERROR_LOG=$(SCCACHE_PATH)/sccache.log SCCACHE_DIR=/opt/sccache/cache/ SCCACHE_DIRECT=true $(SCCACHE_CMD) --start-server
