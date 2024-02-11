@@ -66,7 +66,12 @@ CONFIGURE_EXTRA =
 # dpkg-buildflags support
 # disable fixfilepath in favor of the llvm-project supplied flavor, disable lto
 # remove +time64,+lfs once the time64_t transition starts
-export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto abi=+time64,+lfs
+export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto
+
+ifeq ($(DEB_BUILD_ARCH_BITS),64)
+    export DEB_BUILD_MAINT_OPTIONS += abi=+time64,+lfs
+endif
+
 
 # these are handled on a per stage / build basis
 ifeq ($(VENDOR)-$(DEB_HOST_ARCH),Ubuntu-ppc64el)
