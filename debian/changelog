@@ -2,6 +2,7 @@ llvm-toolchain-18 (1:18.1.0~rc2-4) UNRELEASED; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Install *clang_rt* on sparc and sparc64
+  * Run chrpath for libclang on sparc and sparc64
 
  -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Fri, 16 Feb 2024 09:53:15 +0100
 
