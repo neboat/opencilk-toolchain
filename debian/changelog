@@ -1,5 +1,6 @@
 llvm-toolchain-18 (1:18.1.0~rc2-5) UNRELEASED; urgency=medium
 
+<<<<<<<
   [ John Paul Adrian Glaubitz ]
   * Install *clang_rt* on sparc and sparc64
   * Run chrpath for libclang on sparc and sparc64
@@ -9,6 +10,15 @@ llvm-toolchain-18 (1:18.1.0~rc2-5) UNRELEASED; urgency=medium
     see https://discourse.llvm.org/t/libc-c-23-module-installation-support/77061/1
     Ship libc++-18-dev /usr/lib/llvm-18/lib/libc++.modules.json /usr/lib/llvm-18/include/c++/v1/std.compat.cppm
     /usr/lib/llvm-18/include/c++/v1/std.cppm
+=======
+  [ John Paul Adrian Glaubitz ]
+  * Install *clang_rt* on sparc and sparc64
+  * Run chrpath for libclang on sparc and sparc64
+
+  [ Sylvestre Ledru ]
+  * add -DLIBCXX_INSTALL_MODULES=ON to install libc++ C++-20 modules
+    see https://discourse.llvm.org/t/libc-c-23-module-installation-support/77061/1
+>>>>>>>
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 19 Feb 2024 16:21:34 +0100
 
