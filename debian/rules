@@ -3,7 +3,7 @@
 # polly & lldb aren't enabled for every platform
 PROJECTS = clang;clang-tools-extra;lld;cross-project-tests;mlir
 # openmp & libunwind aren't enabled for every platform
-RUNTIMES = compiler-rt;libcxx;libcxxabi
+RUNTIMES = compiler-rt;libcxx;libcxxabi;libc
 
 TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
@@ -553,7 +553,7 @@ ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
 endif
 
 # enables cmake build targets like stage2-[target_name]
-ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-mlir;check-sanitizer;llvm-config;test-suite
+ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-mlir;check-libc;check-sanitizer;llvm-config;test-suite
 
 %:
 	dh $@ $(DH_OPTIONS)
@@ -1472,6 +1472,9 @@ endif
 
 # Libcxx
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxx || true
+
+# Libc
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libc || true
 
 # Libcxxabi
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxxabi || true
