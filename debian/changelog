@@ -4,7 +4,7 @@ llvm-toolchain-18 (1:18.1.0~rc2-4) unstable; urgency=medium
   * Revert gold linker on mips64el
   * Disable stack protector on mips64el
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 09 Feb 2024 20:59:07 +0100
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 22 Feb 2024 17:58:05 +0100
 
 llvm-toolchain-18 (1:18.1.0~rc2-3) unstable; urgency=medium
 
