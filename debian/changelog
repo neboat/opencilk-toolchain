@@ -10,6 +10,8 @@ llvm-toolchain-18 (1:18.1.0~rc4-1) unstable; urgency=medium
     see https://discourse.llvm.org/t/libc-c-23-module-installation-support/77061/1
   * Add a new package libllvmlibc-18-dev to ship LLVM libc (experimental for now)
     (amd64, arm64 and armhf)
+  * Also install usr/lib/llvm-19/lib/libLLVM.so.1
+    and usr/lib/llvm-19/lib/libLLVM.so.18.0
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Feb 2024 11:08:41 +0100
 
