@@ -956,3 +956,13 @@ Description: Flang library - Development package
  of examples, some functionalities are still missing.
  .
  This package contains the flang libraries and headers.
+
+# ------------- LLVM libc -------------
+
+Package: libllvmlibc-@LLVM_VERSION@-dev
+Section: libdevel
+Architecture: any
+Description: LLVM C Library - dev package
+ Implementation of the C standard library targeting C17 and above.
+ .
+ This is an experimental project. Don't use in production.
