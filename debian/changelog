@@ -1,3 +1,10 @@
+llvm-toolchain-18 (1:18.1.0~rc2-4) unstable; urgency=medium
+
+  * Fix 32bit builds, exclude i386, don't build clang-rt there
+  * Revert gold linker on mips64el
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 09 Feb 2024 20:59:07 +0100
+
 llvm-toolchain-18 (1:18.1.0~rc2-3) unstable; urgency=medium
 
   * Add abi=+time64,+lfs only on 64bits system
