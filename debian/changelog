@@ -1,15 +1,17 @@
-llvm-toolchain-18 (1:18.1.0~rc2-5) UNRELEASED; urgency=medium
+llvm-toolchain-18 (1:18.1.0~rc3-1) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Install *clang_rt* on sparc and sparc64
   * Run chrpath for libclang on sparc and sparc64
 
   [ Sylvestre Ledru ]
+  * New snapshot release
   * add -DLIBCXX_INSTALL_MODULES=ON to install libc++ C++-20 modules
     see https://discourse.llvm.org/t/libc-c-23-module-installation-support/77061/1
   * Add a new package libllvmlibc-18-dev to ship LLVM libc (experimental for now)
+    (amd64, arm64 and armhf)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 19 Feb 2024 16:21:34 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Feb 2024 08:43:07 +0100
 
 llvm-toolchain-18 (1:18.1.0~rc2-4) unstable; urgency=medium
 
