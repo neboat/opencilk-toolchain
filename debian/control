@@ -961,7 +961,7 @@ Description: Flang library - Development package
 
 Package: libllvmlibc-18-dev
 Section: libdevel
-Architecture: any
+Architecture: amd64 arm64 armhf
 Description: LLVM C Library - dev package
  Implementation of the C standard library targeting C17 and above.
  .
