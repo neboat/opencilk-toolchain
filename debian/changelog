@@ -1,4 +1,4 @@
-llvm-toolchain-18 (1:18.1.0~rc3-1) unstable; urgency=medium
+llvm-toolchain-18 (1:18.1.0~rc4-1) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
   * Install *clang_rt* on sparc and sparc64
@@ -11,7 +11,7 @@ llvm-toolchain-18 (1:18.1.0~rc3-1) unstable; urgency=medium
   * Add a new package libllvmlibc-18-dev to ship LLVM libc (experimental for now)
     (amd64, arm64 and armhf)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 27 Feb 2024 08:43:07 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 28 Feb 2024 11:08:41 +0100
 
 llvm-toolchain-18 (1:18.1.0~rc2-4) unstable; urgency=medium
 
