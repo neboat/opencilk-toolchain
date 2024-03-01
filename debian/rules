@@ -321,7 +321,7 @@ ifneq (,$(filter bolt-$(LLVM_VERSION), $(packages)))
     PROJECTS += ;bolt
 endif
 
-ifneq (,$(filter libllvmlibc--$(LLVM_VERSION)-dev, $(packages)))
+ifneq (,$(filter libllvmlibc-$(LLVM_VERSION)-dev, $(packages)))
     RUNTIMES += ;libc
 endif
 
