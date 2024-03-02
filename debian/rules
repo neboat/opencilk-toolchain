@@ -477,19 +477,11 @@ ifeq (,$(filter-out $(LLVM_ENABLE_ZSTD_DISABLE_DISTRO), $(DISTRO)))
        STAGE_ALL_CMAKE_EXTRA += -DLLVM_ENABLE_ZSTD=OFF
 endif
 
-LTO_ENABLE=no
-# Only enable it for archs supporting gold
-ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
-# LTO requires a bunch of memory. Don't do it everywhere
-LTO_DISABLE_ARCHS := i386 armhf s390x ppc64 x32
-ifeq (,$(filter-out $(LTO_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
-	LTO_ENABLE=no
-else
-# Disable for now because of
-# https://github.com/llvm/llvm-project/issues/58317#issuecomment-1276190743
-#	LTO_ENABLE=yes
-#	STAGE_2_CMAKE_EXTRA += -DLLVM_ENABLE_LTO="On"
-endif
+THINLTO_ENABLE=no
+THINLTO_ARCHS := amd64 arm64
+ifneq (,$(filter $(DEB_HOST_ARCH),$(THINLTO_ARCHS)))
+	BOOTSTRAP_CMAKE_EXTRA +=-DBOOTSTRAP_LLVM_ENABLE_LTO=Thin
+	THINLTO_ENABLE=yes
 endif
 
 # https://bugs.launchpad.net/bugs/2016471
@@ -612,7 +604,7 @@ stamps/preconfigure:
 	@echo "STAGE_1_CXXFLAGS=$(STAGE_1_CXXFLAGS)"
 	@echo "STAGE_2_CFLAGS=$(STAGE_2_CFLAGS)"
 	@echo "LIBFUZZER_ENABLE=$(LIBFUZZER_ENABLE)"
-	@echo "LTO_ENABLE=$(LTO_ENABLE)"
+	@echo "THINLTO_ENABLE=$(THINLTO_ENABLE)"
 	@echo "COMPILER_RT_WASM_ENABLE=$(COMPILER_RT_WASM_ENABLE)"
 	@echo "LIBCXX_WASM_ENABLE=$(LIBCXX_WASM_ENABLE)"
 	@echo "SCCACHE_ENABLE=$(SCCACHE_ENABLE)"
@@ -1430,7 +1422,7 @@ endif
 	rm -fr $(CURDIR)/debian/libclang-rt-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/lib/wasi/
 
 stamps/repack_a_llvm_ir:
-ifeq (${LTO_ENABLE},yes)
+ifeq (${THINLTO_ENABLE},yes)
 # with LTO, .a contains llvm ir instead of native code. So, recompile them
 	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(LLVM_VERSION) bash -v debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
 endif
