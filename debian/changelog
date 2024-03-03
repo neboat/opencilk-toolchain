@@ -1,7 +1,10 @@
-llvm-toolchain-16 (1:16.0.6-21) UNRELEASED; urgency=medium
+llvm-toolchain-16 (1:16.0.6-21) unstable; urgency=medium
 
   [ Steve Langasek ]
   * Rename libraries for 64-bit time_t transition.
+
+   [ Gianfranco Costamagna ]
+   * Fix 32bit builds
 
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 03 Mar 2024 12:02:57 +0100
 
