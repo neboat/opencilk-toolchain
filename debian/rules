@@ -34,7 +34,6 @@ else
   else
     RUNTIMES = compiler-rt;libcxx;libcxxabi
     ifeq ($(DEB_HOST_ARCH),mips64el)
-      export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto hardening=-stackprotector,-stackprotectorstrong
       CFLAGS_EXTRA += -mxgot
       CXXFLAGS_EXTRA += -mxgot
     endif
