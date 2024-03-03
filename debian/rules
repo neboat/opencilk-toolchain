@@ -3,7 +3,6 @@
 # polly & lldb aren't enabled for every platform
 PROJECTS = clang;clang-tools-extra;lld;cross-project-tests;mlir
 # openmp & libunwind aren't enabled for every platform
-RUNTIMES = compiler-rt;libcxx;libcxxabi
 
 TARGET_BUILD	:= build-llvm
 TARGET_BUILD_STAGE2    := $(TARGET_BUILD)/tools/clang/stage2-bins
@@ -21,6 +20,25 @@ ifeq ($(LLVM_VERSION),$(LLVM_VERSION_FULL))
 	LLVM_VERSION_FULL := $(LLVM_VERSION).0.0
 endif
 LLVM_VERSION_NEXT := $(shell echo $(LLVM_VERSION_FULL) | awk -F. '{ OFS="."; $$NF+=1; print}')
+
+# dpkg-buildflags support
+# disable fixfilepath in favor of the llvm-project supplied flavor, disable lto
+export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto
+ifeq ($(DEB_HOST_ARCH),i386)
+  RUNTIMES = compiler-rt;libcxx;libcxxabi
+else
+  ifeq ($(DEB_HOST_ARCH_BITS),32)
+    RUNTIMES = libcxx;libcxxabi
+    skip_packages = -Nlibclang-rt-$(LLVM_VERSION)-dev
+  else
+    RUNTIMES = compiler-rt;libcxx;libcxxabi
+    ifeq ($(DEB_HOST_ARCH),mips64el)
+      export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto hardening=-stackprotector,-stackprotectorstrong
+      CFLAGS_EXTRA += -mxgot
+      CXXFLAGS_EXTRA += -mxgot
+    endif
+  endif
+endif
 
 SOURCE_NAME := $(shell dpkg-parsechangelog -S Source)
 ifneq (,$(findstring snapshot,$(SOURCE_NAME)))
@@ -63,9 +81,6 @@ include /usr/share/dpkg/architecture.mk
 
 CONFIGURE_EXTRA =
 
-# dpkg-buildflags support
-# disable fixfilepath in favor of the llvm-project supplied flavor, disable lto
-export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto
 # these are handled on a per stage / build basis
 ifeq ($(VENDOR)-$(DEB_HOST_ARCH),Ubuntu-ppc64el)
   export DEB_CFLAGS_MAINT_STRIP = -g -O3
@@ -1112,7 +1127,7 @@ override_dh_auto_install:
 ifeq (,$(filter $(DEB_HOST_ARCH), powerpc powerpcspe sparc sparc64))
 ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 	# To fix custom-library-search-path
-	chrpath -d $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)*/lib/linux/*.so
+	chrpath -d $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)*/lib/linux/*.so || true
 endif
 endif
 
@@ -1364,7 +1379,7 @@ else
 	rm -rf $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
 endif
 endif
-	dh_install --fail-missing
+	dh_install --fail-missing ${skip_packages}
 # Move the libc++ abi files from libc++ to libc++-abi for the wasm32 packages
 # These packages are arch: all, so only do so when the packages are built
 ifneq (,$(filter libc++-$(LLVM_VERSION)-dev-wasm32, $(packages)))
@@ -1492,8 +1507,11 @@ override_dh_auto_test:
 endif
 
 
+override_dh_builddeb:
+	dh_builddeb ${skip_packages}
+
 override_dh_gencontrol: stamps/sccache-stats
-	dh_gencontrol -- $(control_vars)
+	dh_gencontrol ${skip_packages} -- $(control_vars)
 
 
 override_dh_auto_clean:
