@@ -24,14 +24,12 @@ LLVM_VERSION_NEXT := $(shell echo $(LLVM_VERSION_FULL) | awk -F. '{ OFS="."; $$N
 
 # dpkg-buildflags support
 # disable fixfilepath in favor of the llvm-project supplied flavor, disable lto
-# remove +time64,+lfs once the time64_t transition starts
+export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto
 ifeq ($(DEB_HOST_ARCH),i386)
   RUNTIMES = compiler-rt;libcxx;libcxxabi
-  export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto
 else
   ifeq ($(DEB_HOST_ARCH_BITS),32)
     RUNTIMES = libcxx;libcxxabi
-    export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto abi=+time64,+lfs
     skip_packages = -Nlibclang-rt-$(LLVM_VERSION)-dev
   else
     RUNTIMES = compiler-rt;libcxx;libcxxabi
@@ -39,8 +37,6 @@ else
       export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto hardening=-stackprotector,-stackprotectorstrong
       CFLAGS_EXTRA += -mxgot
       CXXFLAGS_EXTRA += -mxgot
-    else
-      export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto
     endif
   endif
 endif
