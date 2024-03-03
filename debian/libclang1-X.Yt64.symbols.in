@@ -1,4 +1,4 @@
-libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
+libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@t64 #MINVER#
  (optional)LLVM_13@LLVM_13 1:15.0.7-3
  (optional)LLVM_16@LLVM_16 1:16.0.2-1
  (optional)LLVM_17@LLVM_17 1:17.0.1-1
