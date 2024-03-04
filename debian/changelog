@@ -1,3 +1,9 @@
+llvm-toolchain-17 (1:17.0.6-7) unstable; urgency=medium
+
+  * Fix mxgot export on mips64el
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 04 Mar 2024 16:09:18 +0100
+
 llvm-toolchain-17 (1:17.0.6-6) unstable; urgency=medium
 
   [ chenli ]
