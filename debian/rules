@@ -33,10 +33,6 @@ else
     skip_packages = -Nlibclang-rt-$(LLVM_VERSION)-dev
   else
     RUNTIMES = compiler-rt;libcxx;libcxxabi
-    ifeq ($(DEB_HOST_ARCH),mips64el)
-      CFLAGS_EXTRA += -mxgot
-      CXXFLAGS_EXTRA += -mxgot
-    endif
   endif
 endif
 
@@ -219,6 +215,8 @@ ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
 # avoid an issue with search path on mips64el
 # https://bugs.llvm.org/show_bug.cgi?id=41204
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=mips64el-linux-gnuabi64
+  CFLAGS_EXTRA += -mxgot
+  CXXFLAGS_EXTRA += -mxgot
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),powerpc))
