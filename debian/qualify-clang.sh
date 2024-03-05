@@ -1015,6 +1015,52 @@ rm -f plugin.so
 echo '#include <iostream>
 int main() {}'  | clang++-$VERSION -std=c++1z  -x c++ -stdlib=libc++ -
 
+# testing C++ libc++ modules
+cat << EOF > foo.cpp
+import std;
+import std.compat;
+
+int main() {
+  std::cout << "Hello modular world\n";
+  ::printf("Hello compat modular world\n");
+}
+EOF
+
+# Builds the std module
+clang++-$VERSION -std=c++20 \
+	-nostdinc++ \
+	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+	-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
+	--precompile -o std.pcm \
+	-c /usr/lib/llvm-$VERSION/share/libc++/v1/std.cppm
+
+# Builds the std.compat module
+clang++-$VERSION -std=c++20 \
+	-nostdinc++ \
+	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+	-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
+	--precompile -o std.compat.pcm \
+	-fmodule-file=std=std.pcm \
+	-c /usr/lib/llvm-$VERSION/share/libc++/v1/std.compat.cppm
+
+# Builds the test application
+clang++-$VERSION -std=c++20 \
+	-nostdinc++ \
+	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+	-L /usr/lib/llvm-$VERSION/lib \
+	-fmodule-file=std=std.pcm \
+	-fmodule-file=std.compat=std.compat.pcm \
+	std.pcm \
+	std.compat.pcm \
+	-lc++ \
+	foo.cpp
+
+# Runs the test application
+# The output should be
+#   Hello modular world
+#   Hello compat modular world
+./a.out
+
 if test ! -f /usr/lib/llvm-$VERSION/include/cxxabi.h; then
     echo "Install libc++abi-$VERSION-dev";
     exit -1;
