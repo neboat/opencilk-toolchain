@@ -1,3 +1,9 @@
+llvm-toolchain-17 (1:17.0.6-8) UNRELEASED; urgency=medium
+
+  * Make libclang-common-17-dev architecture dependent.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 05 Mar 2024 23:42:57 +0100
+
 llvm-toolchain-17 (1:17.0.6-7) unstable; urgency=medium
 
   * Fix mxgot export on mips64el
