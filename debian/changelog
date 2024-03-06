@@ -1,3 +1,10 @@
+llvm-toolchain-18 (1:18.1.0-2) unstable; urgency=medium
+
+  * Uncomment wrong removal of rm code from last upload.
+    - this should fix the current FTBFS
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 06 Mar 2024 21:49:10 +0100
+
 llvm-toolchain-18 (1:18.1.0-1) unstable; urgency=medium
 
   * New stable release
