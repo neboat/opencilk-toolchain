@@ -479,10 +479,11 @@ endif
 
 THINLTO_ENABLE=no
 THINLTO_ARCHS := amd64 arm64
-ifneq (,$(filter $(DEB_HOST_ARCH),$(THINLTO_ARCHS)))
-	BOOTSTRAP_CMAKE_EXTRA +=-DBOOTSTRAP_LLVM_ENABLE_LTO=Thin
-	THINLTO_ENABLE=yes
-endif
+# Needs more work, disabling for now
+#ifneq (,$(filter $(DEB_HOST_ARCH),$(THINLTO_ARCHS)))
+#	BOOTSTRAP_CMAKE_EXTRA +=-DBOOTSTRAP_LLVM_ENABLE_LTO=Thin
+#	THINLTO_ENABLE=yes
+#endif
 
 # https://bugs.launchpad.net/bugs/2016471
 ifeq (,$(filter-out $(LTO_DISABLE_ARCHS), $(DEB_HOST_ARCH)))
