@@ -486,7 +486,7 @@ check_symlink() {
     fi
 }
 
-check_symlink "libclang-cpp.so.$VERSION"
+check_symlink "libclang-cpp.so"
 check_symlink "libclang-$VERSION.so"
 check_symlink "libclang.so"
 
