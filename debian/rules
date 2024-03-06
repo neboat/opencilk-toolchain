@@ -15,7 +15,7 @@ GCC_VERSION              := $(subst /usr/bin/g++-,,$(GXX_VERSIONED_EXECUTABLE))
 LLVM_EPOCH := 1:
 LLVM_VERSION   := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 LLVM_VERSION_FULL := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1,p")
-LLVM_VERSION_MINOR := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:[0-9]+\.([0-9]+)\.[0-9]+.*,\1,p")
+LLVM_VERSION_MINOR := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:[0-9]+\.(.*)\..*,\1,p")
 LLVM_VERSION_SNAPSHOT := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:(.*),\1,p")
 ifeq ($(LLVM_VERSION),$(LLVM_VERSION_FULL))
 	LLVM_VERSION_FULL := $(LLVM_VERSION).0.0
@@ -317,8 +317,11 @@ ifneq (,$(filter bolt-$(LLVM_VERSION), $(packages)))
     PROJECTS += ;bolt
 endif
 
+LIBC_ENABLE=no
 ifneq (,$(filter libllvmlibc-$(LLVM_VERSION)-dev, $(packages)))
+	BOOTSTRAP_CMAKE_EXTRA += -DBOOTSTRAP_LIBC_INCLUDE_DOCS=ON
     RUNTIMES += ;libc
+	LIBC_ENABLE=yes
 endif
 
 # flang is only for 64bits
@@ -621,7 +624,7 @@ stamps/preconfigure:
 			-e "s|@OCAML_STDLIB_DIR@|$(OCAML_STDLIB_DIR)|g" \
 			-e "s|@LLVM_EPOCH@|$(LLVM_EPOCH)|g" \
 			-e "s|@LLVM_VERSION_FULL@|$(LLVM_VERSION_FULL)|g" \
-			-e "s|@LLVM_VERSION_MINOR@|$(LLVM_VERSION_MINOR)|g" \
+            -e "s|@LLVM_VERSION_MINOR@|$(LLVM_VERSION_MINOR)|g" \
 			-e "s|@LLVM_VERSION_NEXT@|$(LLVM_VERSION_NEXT)|g" \
 			-e "s|@LLVM_VERSION@|$(LLVM_VERSION)|g" $$f > $$f2; \
 	done
@@ -1333,7 +1336,7 @@ endif
 
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
-	rm -rf $(TARGET_BUILD)
+#	rm -rf $(TARGET_BUILD)
 # FIXME: why a stamp for dh_override_install ?
 	touch $@
 
