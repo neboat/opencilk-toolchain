@@ -4,7 +4,8 @@ llvm-toolchain-18 (1:18.1.0~rc4-2) UNRELEASED; urgency=medium
   * Disable libllvmlibc-18-dev on armhf (Closes: #1065503)
 
   [ Matthias Klose ]
-  * Make libclang-common-18-dev architecture dependent.
+  * Make libclang-common-18-dev architecture dependent, mark profile and xray
+    include files as optional on armel and armhf.
 
   [ Gianfranco Costamagna ]
   * Simplify rules file now that time64_t is default.
