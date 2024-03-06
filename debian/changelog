@@ -1,3 +1,9 @@
+llvm-toolchain-18 (1:18.1.0~rc4-3) unstable; urgency=medium
+
+  * Add a test to verify C++ modules tests
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 06 Mar 2024 11:21:59 +0100
+
 llvm-toolchain-18 (1:18.1.0~rc4-2) unstable; urgency=medium
 
   [ Sylvestre Ledru ]

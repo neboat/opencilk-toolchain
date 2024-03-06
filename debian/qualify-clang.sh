@@ -1092,6 +1092,59 @@ g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-
 ./o > /dev/null
 fi
 
+# Test C++ modules with the libc++
+cat << EOF > foo.cpp
+import std; // When importing std.compat it's not needed to import std.
+import std.compat;
+
+int main() {
+  std::cout << "Hello modular world\n";
+  ::printf("Hello compat modular world\n");
+}
+EOF
+
+# Builds the std module
+clang-$VERSION -std=c++20 \
+	-nostdinc++ \
+	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+	-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
+	--precompile -o std.pcm \
+	-c /usr/lib/llvm-$VERSION/share/libc++/v1/std.cppm
+
+# Builds the std.compat module
+clang-$VERSION -std=c++20 \
+	-nostdinc++ \
+	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+	-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
+	--precompile -o std.compat.pcm \
+	-fmodule-file=std=std.pcm \
+	-c /usr/lib/llvm-$VERSION/share/libc++/v1/std.compat.cppm
+
+# Builds the test application
+clang-$VERSION -std=c++20 \
+	-nostdinc++ \
+	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+	-L /usr/lib/llvm-$VERSION/lib \
+	-fmodule-file=std=std.pcm \
+	-fmodule-file=std.compat=std.compat.pcm \
+	std.pcm \
+	std.compat.pcm \
+	-lc++ \
+	foo.cpp
+
+# Runs the test application
+# The output should be
+#   Hello modular world
+#   Hello compat modular world
+./a.out > foo.log
+if ! grep -q -E "Hello modular world" foo.log 2>&1; then
+    echo "c++ modules didn't work"
+    exit 1
+fi
+if ! grep -q -E "Hello compat modular world" foo.log 2>&1; then
+    echo "c++ modules didn't work"
+    exit 1
+fi
 
 if dpkg -l|grep -q flang-$VERSION; then
     echo "Testing flang-$VERSION (Fortran) ..."
