@@ -1,0 +1,169 @@
+From 2075c7d921f07d148f096c10f57c3bc43b239870 Mon Sep 17 00:00:00 2001
+From: Louis Dionne <ldionne.2@gmail.com>
+Date: Wed, 13 Dec 2023 13:57:48 -0500
+Subject: [PATCH 2/2] [runtimes] Don't link against compiler-rt explicitly when
+ we use -nostdlib++ (#75089)
+
+When we use the -nostdlib++ flag, we don't need to explicitly link
+against compiler-rt, since the compiler already links against it by
+default. This simplifies the flags that we need to use when building
+with Clang and GCC, and opens the door to further simplifications since
+most platforms won't need to detect whether libgcc and libgcc_s are
+supported anymore.
+
+Furthermore, on platforms where -nostdlib++ is used, this patch prevents
+manually linking compiler-rt *before* other system libraries. For
+example, Apple platforms have several compiler-rt symbols defined in
+libSystem.dylib. If we manually link against compiler-rt, we end up
+overriding the default link order preferred by the compiler and
+potentially using the symbols from the clang-provided libclang_rt.a
+library instead of the system provided one.
+
+Note that we don't touch how libunwind links against compiler-rt when it
+builds the .so/.a because libunwind currently doesn't use -nodefaultlibs
+and we want to avoid rocking the boat too much.
+
+rdar://119506163
+---
+ libcxx/CMakeLists.txt           | 30 ++++++++++++++++--------------
+ libcxx/cmake/config-ix.cmake    |  7 ++++++-
+ libcxxabi/cmake/config-ix.cmake |  7 ++++++-
+ libcxxabi/src/CMakeLists.txt    |  5 ++++-
+ libunwind/cmake/config-ix.cmake |  7 ++++++-
+ 5 files changed, 38 insertions(+), 18 deletions(-)
+
+diff --git a/libcxx/CMakeLists.txt b/libcxx/CMakeLists.txt
+index e1f12549c9ec..3423348decfb 100644
+--- a/libcxx/CMakeLists.txt
++++ b/libcxx/CMakeLists.txt
+@@ -666,20 +666,22 @@ function(cxx_link_system_libraries target)
+     target_link_libraries(${target} PRIVATE rt)
+   endif()
+ 
+-  if (LIBCXX_USE_COMPILER_RT)
+-    find_compiler_rt_library(builtins LIBCXX_BUILTINS_LIBRARY)
+-    if (LIBCXX_BUILTINS_LIBRARY)
+-      target_link_libraries(${target} PRIVATE "${LIBCXX_BUILTINS_LIBRARY}")
+-    endif()
+-  elseif (LIBCXX_HAS_GCC_LIB)
+-    target_link_libraries(${target} PRIVATE gcc)
+-    if (LIBCXX_HAS_ATOMIC_LIB)
+-      target_link_libraries(${target} PRIVATE atomic)
+-    endif()
+-  elseif (LIBCXX_HAS_GCC_S_LIB)
+-    target_link_libraries(${target} PRIVATE gcc_s)
+-    if (LIBCXX_HAS_ATOMIC_LIB)
+-      target_link_libraries(${target} PRIVATE atomic)
++  if (MSVC)
++    if (LIBCXX_USE_COMPILER_RT)
++      find_compiler_rt_library(builtins LIBCXX_BUILTINS_LIBRARY)
++      if (LIBCXX_BUILTINS_LIBRARY)
++        target_link_libraries(${target} PRIVATE "${LIBCXX_BUILTINS_LIBRARY}")
++      endif()
++    elseif (LIBCXX_HAS_GCC_LIB)
++      target_link_libraries(${target} PRIVATE gcc)
++      if (LIBCXX_HAS_ATOMIC_LIB)
++        target_link_libraries(${target} PRIVATE atomic)
++      endif()
++    elseif (LIBCXX_HAS_GCC_S_LIB)
++      target_link_libraries(${target} PRIVATE gcc_s)
++      if (LIBCXX_HAS_ATOMIC_LIB)
++        target_link_libraries(${target} PRIVATE atomic)
++      endif()
+     endif()
+   endif()
+ 
+diff --git a/libcxx/cmake/config-ix.cmake b/libcxx/cmake/config-ix.cmake
+index 3bae53643683..19b112f36318 100644
+--- a/libcxx/cmake/config-ix.cmake
++++ b/libcxx/cmake/config-ix.cmake
+@@ -53,7 +53,9 @@ else()
+   endif()
+ endif()
+ 
+-if (CXX_SUPPORTS_NOSTDLIBXX_FLAG OR C_SUPPORTS_NODEFAULTLIBS_FLAG)
++# Only link against compiler-rt manually if we use -nodefaultlibs, since
++# otherwise the compiler will do the right thing on its own.
++if (NOT CXX_SUPPORTS_NOSTDLIBXX_FLAG AND C_SUPPORTS_NODEFAULTLIBS_FLAG)
+   if (LIBCXX_HAS_C_LIB)
+     list(APPEND CMAKE_REQUIRED_LIBRARIES c)
+   endif ()
+@@ -84,6 +86,9 @@ if (CXX_SUPPORTS_NOSTDLIBXX_FLAG OR C_SUPPORTS_NODEFAULTLIBS_FLAG)
+                         moldname mingwex msvcrt)
+     list(APPEND CMAKE_REQUIRED_LIBRARIES ${MINGW_LIBRARIES})
+   endif()
++endif()
++
++if (CXX_SUPPORTS_NOSTDLIBXX_FLAG OR C_SUPPORTS_NODEFAULTLIBS_FLAG)
+   if (CMAKE_C_FLAGS MATCHES -fsanitize OR CMAKE_CXX_FLAGS MATCHES -fsanitize)
+     set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -fno-sanitize=all")
+   endif ()
+diff --git a/libcxxabi/cmake/config-ix.cmake b/libcxxabi/cmake/config-ix.cmake
+index f4ee8946c1fe..a5daf6e48f77 100644
+--- a/libcxxabi/cmake/config-ix.cmake
++++ b/libcxxabi/cmake/config-ix.cmake
+@@ -33,7 +33,9 @@ else()
+   endif()
+ endif()
+ 
+-if (CXX_SUPPORTS_NOSTDLIBXX_FLAG OR C_SUPPORTS_NODEFAULTLIBS_FLAG)
++# Only link against compiler-rt manually if we use -nodefaultlibs, since
++# otherwise the compiler will do the right thing on its own.
++if (NOT CXX_SUPPORTS_NOSTDLIBXX_FLAG AND C_SUPPORTS_NODEFAULTLIBS_FLAG)
+   if (LIBCXXABI_HAS_C_LIB)
+     list(APPEND CMAKE_REQUIRED_LIBRARIES c)
+   endif ()
+@@ -67,6 +69,9 @@ if (CXX_SUPPORTS_NOSTDLIBXX_FLAG OR C_SUPPORTS_NODEFAULTLIBS_FLAG)
+                         moldname mingwex msvcrt)
+     list(APPEND CMAKE_REQUIRED_LIBRARIES ${MINGW_LIBRARIES})
+   endif()
++endif()
++
++if (CXX_SUPPORTS_NOSTDLIBXX_FLAG OR C_SUPPORTS_NODEFAULTLIBS_FLAG)
+   if (CMAKE_C_FLAGS MATCHES -fsanitize OR CMAKE_CXX_FLAGS MATCHES -fsanitize)
+     set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -fno-sanitize=all")
+   endif ()
+diff --git a/libcxxabi/src/CMakeLists.txt b/libcxxabi/src/CMakeLists.txt
+index 54002bafa0e2..a5fe833a10e2 100644
+--- a/libcxxabi/src/CMakeLists.txt
++++ b/libcxxabi/src/CMakeLists.txt
+@@ -167,7 +167,10 @@ if (LIBCXXABI_USE_LLVM_UNWINDER)
+     target_link_libraries(cxxabi_shared_objects PUBLIC unwind_shared)
+   endif()
+ endif()
+-target_link_libraries(cxxabi_shared_objects PRIVATE cxx-headers ${LIBCXXABI_BUILTINS_LIBRARY} ${LIBCXXABI_SHARED_LIBRARIES} ${LIBCXXABI_LIBRARIES})
++target_link_libraries(cxxabi_shared_objects PRIVATE cxx-headers ${LIBCXXABI_LIBRARIES} ${LIBCXXABI_SHARED_LIBRARIES})
++if (NOT CXX_SUPPORTS_NOSTDLIBXX_FLAG)
++  target_link_libraries(cxxabi_shared_objects PRIVATE ${LIBCXXABI_BUILTINS_LIBRARY})
++endif()
+ target_link_libraries(cxxabi_shared_objects PUBLIC cxxabi-headers)
+ set_target_properties(cxxabi_shared_objects
+   PROPERTIES
+diff --git a/libunwind/cmake/config-ix.cmake b/libunwind/cmake/config-ix.cmake
+index d311477f02c6..d07c441bbd8a 100644
+--- a/libunwind/cmake/config-ix.cmake
++++ b/libunwind/cmake/config-ix.cmake
+@@ -41,7 +41,9 @@ else()
+   endif()
+ endif()
+ 
+-if (CXX_SUPPORTS_NOSTDLIBXX_FLAG OR C_SUPPORTS_NODEFAULTLIBS_FLAG)
++# Only link against compiler-rt manually if we use -nodefaultlibs, since
++# otherwise the compiler will do the right thing on its own.
++if (NOT CXX_SUPPORTS_NOSTDLIBXX_FLAG AND C_SUPPORTS_NODEFAULTLIBS_FLAG)
+   if (LIBUNWIND_HAS_C_LIB)
+     list(APPEND CMAKE_REQUIRED_LIBRARIES c)
+   endif ()
+@@ -71,6 +73,9 @@ if (CXX_SUPPORTS_NOSTDLIBXX_FLAG OR C_SUPPORTS_NODEFAULTLIBS_FLAG)
+                         moldname mingwex msvcrt)
+     list(APPEND CMAKE_REQUIRED_LIBRARIES ${MINGW_LIBRARIES})
+   endif()
++endif()
++
++if (CXX_SUPPORTS_NOSTDLIBXX_FLAG OR C_SUPPORTS_NODEFAULTLIBS_FLAG)
+   if (CMAKE_C_FLAGS MATCHES -fsanitize OR CMAKE_CXX_FLAGS MATCHES -fsanitize)
+     set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -fno-sanitize=all")
+   endif ()
+-- 
+2.44.0
+
