@@ -65,4 +65,4 @@ export -f check_convert_bitcode
 # Deduplicate by device:inode to avoid processing hardlinks in parallel.
 find "$P_TO_LLVM/debian/" -type f -name "*.[ao]" -printf "%D:%i %p\n" | \
   awk '!seen[$1]++' | cut -d" " -f2- | \
-  xargs -d"\n" -r -n1 -P$NCPUS sh -c "check_convert_bitcode \$@ $CLANG_FLAGS" ARG0
+  xargs -d"\n" -r -n1 -P$NCPUS bash -c "check_convert_bitcode \$@ $CLANG_FLAGS" ARG0
