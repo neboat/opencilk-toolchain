@@ -3,6 +3,11 @@ llvm-toolchain-16 (1:16.0.6-22) unstable; urgency=medium
   [ Gianfranco Costamagna ]
   * Disable tests on mips64el
 
+  [ Matthias Klose ]
+  * Make libclang-common-18-dev architecture dependent, mark profile and xray
+    include files as optional on armel and armhf.
+  * Fix sanitizer build on 32bit time_t64 architectures.
+
  -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 06 Mar 2024 08:38:53 +0100
 
 llvm-toolchain-16 (1:16.0.6-21) unstable; urgency=medium
