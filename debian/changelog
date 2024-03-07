@@ -10,8 +10,9 @@ llvm-toolchain-17 (1:17.0.6-8) UNRELEASED; urgency=medium
   [ Matthias Klose ]
   * Make libclang-common-18-dev architecture dependent, mark profile and xray
     include files as optional on armel and armhf.
+  * Fix sanitizer build on 32bit time_t64 architectures.
 
- -- Zixing Liu <zixing.liu@canonical.com>  Wed, 06 Mar 2024 17:27:22 -0700
+ -- Matthias Klose <doko@debian.org>  Thu, 07 Mar 2024 16:56:50 +0100
 
 llvm-toolchain-17 (1:17.0.6-7) unstable; urgency=medium
 
