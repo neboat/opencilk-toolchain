@@ -1,3 +1,9 @@
+llvm-toolchain-18 (1:18.1.0-3) UNRELEASED; urgency=medium
+
+  * Fix sanitizer build on 32bit time_t64 architectures.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 07 Mar 2024 17:02:04 +0100
+
 llvm-toolchain-18 (1:18.1.0-2) unstable; urgency=medium
 
   * Uncomment wrong removal of rm code from last upload.
