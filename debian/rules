@@ -25,7 +25,6 @@ LLVM_VERSION_NEXT := $(shell echo $(LLVM_VERSION_FULL) | awk -F. '{ OFS="."; $$N
 # dpkg-buildflags support
 # disable fixfilepath in favor of the llvm-project supplied flavor, disable lto
 export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto
-
 RUNTIMES = compiler-rt;libcxx;libcxxabi
 
 SOURCE_NAME := $(shell dpkg-parsechangelog -S Source)
@@ -1138,7 +1137,7 @@ override_dh_auto_install:
 ifeq (,$(filter $(DEB_HOST_ARCH), powerpc powerpcspe))
 ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 	# To fix custom-library-search-path
-	chrpath -d $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)*/lib/linux/*.so || true
+	chrpath -d $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)*/lib/linux/*.so
 endif
 endif
 
