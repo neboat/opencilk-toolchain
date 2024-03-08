@@ -1,6 +1,8 @@
 llvm-toolchain-18 (1:18.1.0-3) UNRELEASED; urgency=medium
 
   * Fix sanitizer build on 32bit time_t64 architectures.
+  * Enable compiler-rt runtime again for 32bit time_t64 architectures.
+  * Revert: mark profile and xray include files as optional on armel and armhf.
 
  -- Matthias Klose <doko@debian.org>  Thu, 07 Mar 2024 17:02:04 +0100
 
