@@ -1,15 +1,13 @@
 llvm-toolchain-17 (1:17.0.6-8) UNRELEASED; urgency=medium
 
-  [ Zixing Liu ]
   * d/p/fix-unwind-detection-logic.patch: use an upstream patch to fix
     libunwind detection logic when compiler-rt is disabled.
   * d/p/runtimes-Don-t-link-against-compiler-rt-explicitly.patch: Backport
     LLVM patch #75089 to fix compiler rt linkage.
   * d/rules: Disable LIBUNWIND_USE_COMPILER_RT when COMPILER_RT is disabled.
 
-  [ Matthias Klose ]
-  * Make libclang-common-18-dev architecture dependent, mark profile and xray
-    include files as optional on armel and armhf.
+  [ Matthias Klose ] 
+  * Make libclang-common-17-dev architecture dependent.
 
  -- Zixing Liu <zixing.liu@canonical.com>  Wed, 06 Mar 2024 17:27:22 -0700
 
