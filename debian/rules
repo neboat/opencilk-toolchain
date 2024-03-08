@@ -311,7 +311,10 @@ endif
 LIBC_ENABLE=no
 LIBC_DISABLE_DISTRO := bionic
 ifneq (,$(filter libllvmlibc-$(LLVM_VERSION)-dev, $(packages)))
-ifneq (,$(filter $(DISTRO),$(LIBC_DISABLE_DISTRO)))
+ifeq (,$(filter-out $(LIBC_DISABLE_DISTRO), $(DISTRO)))
+# disable libc on bionic. See https://github.com/llvm/llvm-project/issues/82467
+	LIBC_ENABLE=no
+else
 	BOOTSTRAP_CMAKE_EXTRA += -DBOOTSTRAP_LIBC_INCLUDE_DOCS=ON
     RUNTIMES += ;libc
 	LIBC_ENABLE=yes
