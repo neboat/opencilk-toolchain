@@ -8,8 +8,7 @@ llvm-toolchain-17 (1:17.0.6-8) UNRELEASED; urgency=medium
   * d/rules: Disable LIBUNWIND_USE_COMPILER_RT when COMPILER_RT is disabled.
 
   [ Matthias Klose ]
-  * Make libclang-common-18-dev architecture dependent, mark profile and xray
-    include files as optional on armel and armhf.
+  * Make libclang-common-18-dev architecture dependent.
   * Fix sanitizer build on 32bit time_t64 architectures.
   * Enable compiler-rt runtime again for 32bit time_t64 architectures.
 
