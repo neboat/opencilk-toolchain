@@ -7,6 +7,7 @@ llvm-toolchain-18 (1:18.1.0-3) UNRELEASED; urgency=medium
 
   [ Sylvestre Ledru ]
   * Disable libc on bionic for apt.llvm.org
+  * Try to address a link issue with libclang-cpp.so.18 (GH: #83986)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 08 Mar 2024 20:27:05 +0100
 
