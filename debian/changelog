@@ -1,9 +1,9 @@
-llvm-toolchain-17 (1:17.0.6-8) UNRELEASED; urgency=medium
+llvm-toolchain-17 (1:17.0.6-8) unstable; urgency=medium
 
-  [ Matthias Klose ] 
+  [ Matthias Klose ]
   * Make libclang-common-17-dev architecture dependent.
 
- -- Zixing Liu <zixing.liu@canonical.com>  Wed, 06 Mar 2024 17:27:22 -0700
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 08 Mar 2024 15:52:58 +0100
 
 llvm-toolchain-17 (1:17.0.6-7) unstable; urgency=medium
 
