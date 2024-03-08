@@ -309,10 +309,13 @@ ifneq (,$(filter bolt-$(LLVM_VERSION), $(packages)))
 endif
 
 LIBC_ENABLE=no
+LIBC_DISABLE_DISTRO := bionic
 ifneq (,$(filter libllvmlibc-$(LLVM_VERSION)-dev, $(packages)))
+ifneq (,$(filter $(DISTRO),$(LIBC_DISABLE_DISTRO)))
 	BOOTSTRAP_CMAKE_EXTRA += -DBOOTSTRAP_LIBC_INCLUDE_DOCS=ON
     RUNTIMES += ;libc
 	LIBC_ENABLE=yes
+endif
 endif
 
 # flang is only for 64bits
