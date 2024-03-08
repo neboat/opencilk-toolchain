@@ -1115,7 +1115,7 @@ override_dh_auto_install:
 ifeq (,$(filter $(DEB_HOST_ARCH), powerpc powerpcspe sparc sparc64))
 ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 	# To fix custom-library-search-path
-	chrpath -d $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)*/lib/linux/*.so || true
+	chrpath -d $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)*/lib/linux/*.so
 endif
 endif
 
