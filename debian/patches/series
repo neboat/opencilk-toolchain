@@ -135,7 +135,6 @@ protobuf_3.21.patch
 # compiler-rt
 compiler-rt/compilerrt-builtins-arch-fix-armhf.diff
 compiler-rt/compilerrt-build-scudo-standalone-option.diff
-fix-unwind-detection-logic.patch
 
 # wasm patches
 wasm/wasm-ld-path.diff
