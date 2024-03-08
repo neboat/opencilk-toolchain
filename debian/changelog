@@ -2,15 +2,10 @@ llvm-toolchain-17 (1:17.0.6-8) unstable; urgency=medium
 
   [ Matthias Klose ]
   * Make libclang-common-17-dev architecture dependent.
-<<<<<<< HEAD
-
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 08 Mar 2024 15:52:58 +0100
-=======
   * Fix sanitizer build on 32bit time_t64 architectures.
   * Enable compiler-rt runtime again for 32bit time_t64 architectures.
 
  -- Matthias Klose <doko@debian.org>  Fri, 08 Mar 2024 14:52:29 +0100
->>>>>>> origin/17
 
 llvm-toolchain-17 (1:17.0.6-7) unstable; urgency=medium
 
