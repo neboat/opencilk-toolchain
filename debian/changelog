@@ -1,4 +1,7 @@
-llvm-toolchain-17 (1:17.0.6-8) unstable; urgency=medium
+llvm-toolchain-17 (1:17.0.6-9) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Bump version to -9, the -8 is already used in Ubuntu
 
   [ Matthias Klose ]
   * Make libclang-common-17-dev architecture dependent.
