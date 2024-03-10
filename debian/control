@@ -107,7 +107,7 @@ Package: clangd-17
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  libllvm17t64 (= ${binary:Version}),
- libclang-common-17-dev (= ${source:Version}),
+ libclang-common-17-dev (= ${binary:Version}),
 Description: Language server that provides IDE-like features to editors
  clangd understands your C++ code and adds smart features to your editor:
   - code completion
