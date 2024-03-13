@@ -1328,6 +1328,10 @@ endif
 	if test "$(LLDB_PYTHON_ENABLE)" = no; then \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
 	fi
+# if libc isn't built, remove what we want to install
+	if test "$(LIBC_ENABLE)" = no; then \
+		echo "" > debian/libllvmlibc-$(LLVM_VERSION)-dev.install; \
+	fi
 
 # Remove some mlir example
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libMyExtensionCh*.a
@@ -1481,7 +1485,9 @@ endif
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxx || true
 
 # Libc
+ifeq (${LIBC_ENABLE},yes)
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libc || true
+endif
 
 # Libcxxabi
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxxabi || true
