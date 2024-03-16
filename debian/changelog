@@ -2,6 +2,7 @@ llvm-toolchain-18 (1:18.1.1-2) UNRELEASED; urgency=medium
 
   * Build-depend on llvm-spirv-18 instead of llvm-spirv-17.
   * Add a stage1 profile to disable curl, grpc and spirv.
+  * Build with --as-needed.
 
  -- Matthias Klose <doko@debian.org>  Tue, 12 Mar 2024 18:21:05 +0100
 
