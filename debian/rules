@@ -85,7 +85,7 @@ include /usr/share/dpkg/buildflags.mk
 # collect additional flags for all stages all builds
 CFLAGS_EXTRA = -Wno-unused-command-line-argument
 CXXFLAGS_EXTRA = -Wno-unused-command-line-argument
-LDFLAGS_EXTRA = -Wl,--build-id
+LDFLAGS_EXTRA = -Wl,--build-id,--as-needed
 
 # collect all flags for stage 1 toolchain build only
 STAGE_1_CFLAGS = $(CFLAGS) $(CFLAGS_EXTRA) $(CPPFLAGS)
