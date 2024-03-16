@@ -3,6 +3,8 @@ llvm-toolchain-16 (1:16.0.6-24) UNRELEASED; urgency=medium
   [ Matthias Klose ]
   * Add a stage1 profile to disable curl, grpc and spirv.
   * Build with --as-needed.
+  * ASan: move allocator base to avoid conflict with high-entropy ASLR
+    for x86-64 Linux. Patch taken from LLVM 17.
 
  -- Matthias Klose <doko@debian.org>  Sat, 16 Mar 2024 22:12:22 +0100
 
