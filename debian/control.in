@@ -5,7 +5,7 @@ Rules-Requires-Root: no
 Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
 Uploaders: Sylvestre Ledru <sylvestre@debian.org>, Gianfranco Costamagna <locutusofborg@debian.org>
 Build-Depends: debhelper (>= 10.0), cmake, ninja-build,
-    chrpath, texinfo, sharutils,
+    chrpath, texinfo, sharutils, mold,
     libelf-dev,
     libffi-dev,
     lsb-release, patchutils, diffstat, xz-utils, python3-dev,
