@@ -303,14 +303,23 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 endif
 
 # Use mold as a linker. Faster than the other.
-# This will need to be updated for apt.llvm.org as mold isn't available everywhere.
-STAGE_ALL_CMAKE_EXTRA += -DLLVM_USE_LINKER=mold
+MOLD_DISABLE_DISTRO := bionic buster focal buster bullseye
+ifeq (,$(filter-out $(LIBC_DISABLE_DISTRO), $(DISTRO)))
+# mold is too old on this distro
+	MOLD_ENABLE=no
+else
+	MOLD_ENABLE=yes
+	STAGE_ALL_CMAKE_EXTRA += -DLLVM_USE_LINKER=mold
+endif
 
 BINUTILS_GOLD_ARCHS := amd64 arm64 armhf i386 ppc64 ppc64el x32 s390x hurd-i386 kfreebsd-amd64 kfreebsd-i386
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) ge 2.23.1-1~exp3 ; echo $$?),0)
 ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
+ifeq (${MOLD_ENABLE},no)
+# don't do it when MOLD is enabled
 	STAGE_ALL_CMAKE_EXTRA += -DLLVM_USE_LINKER=gold
 	STAGE_ALL_CMAKE_EXTRA += -DLLVM_BINUTILS_INCDIR=/usr/include/
+endif
 endif
 endif
 
@@ -620,6 +629,7 @@ stamps/preconfigure:
 	@echo "LIBCXX_WASM_ENABLE=$(LIBCXX_WASM_ENABLE)"
 	@echo "SCCACHE_ENABLE=$(SCCACHE_ENABLE)"
 	@echo "LIBC_ENABLE=$(LIBC_ENABLE)"
+	@echo "MOLD_ENABLE=$(MOLD_ENABLE)"
 	@echo "LLVM_SPIRV=$(LLVM_SPIRV)"
 	@echo "LLVM_SPIRV_INSTALLED=$(LLVM_SPIRV_INSTALLED)"
 	@echo "DOC_GENERATION=$(DOC_GENERATION)"
