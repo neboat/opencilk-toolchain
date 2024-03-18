@@ -1,11 +1,4 @@
 libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
- GOMP_1.0@GOMP_1.0 0.20131209
- GOMP_2.0@GOMP_2.0 0.20131209
- GOMP_3.0@GOMP_3.0 0.20131209
- GOMP_4.0@GOMP_4.0 0.20131209
- GOMP_4.5@GOMP_4.5 7
- GOMP_5.0.1@GOMP_5.0.1 14
- GOMP_5.0@GOMP_5.0 11
  GOMP_alloc@GOMP_5.0.1 14
  GOMP_alloc@VERSION 14
  GOMP_atomic_end@GOMP_1.0 0.20131209
@@ -262,14 +255,6 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  GOMP_teams_reg@VERSION 12
  GOMP_workshare_task_reduction_unregister@GOMP_5.0 13
  GOMP_workshare_task_reduction_unregister@VERSION 13
- OMP_1.0@OMP_1.0 0.20131209
- OMP_2.0@OMP_2.0 0.20131209
- OMP_3.0@OMP_3.0 0.20131209
- OMP_3.1@OMP_3.1 0.20131209
- OMP_4.0@OMP_4.0 0.20131209
- OMP_4.5@OMP_4.5 7
- OMP_5.0@OMP_5.0 13
- VERSION@VERSION 0.20130412
  ___kmp_allocate@VERSION 0.20130412
  ___kmp_free@VERSION 0.20130412
  __kmp_acquire_drdpa_lock@VERSION 0.20130715
@@ -327,21 +312,6 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_cmplx10_sub_rev@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_cmplx10_swp@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_cmplx10_wr@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_cmplx16_add@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_cmplx16_add_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_cmplx16_div@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_cmplx16_div_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_cmplx16_div_cpt_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_cmplx16_div_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_cmplx16_mul@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_cmplx16_mul_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_cmplx16_rd@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_cmplx16_sub@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_cmplx16_sub_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_cmplx16_sub_cpt_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_cmplx16_sub_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_cmplx16_swp@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_cmplx16_wr@VERSION 0.20130412
  __kmpc_atomic_cmplx4_add@VERSION 0.20130412
  __kmpc_atomic_cmplx4_add_cmplx8@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_cmplx4_add_cpt@VERSION 0.20130412
@@ -379,21 +349,15 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_end@VERSION 0.20130412
  (arch=!ppc64 !ppc64el)__kmpc_atomic_fixed1_add@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_add_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed1_add_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_fixed1_add_fp@VERSION 0.20130412
  __kmpc_atomic_fixed1_andb@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_andb_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed1_andl@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_andl_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed1_div@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_div_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed1_div_cpt_fp@VERSION 4.0
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_fixed1_div_cpt_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed1_div_cpt_rev_fp@VERSION 4.0
  __kmpc_atomic_fixed1_div_float8@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_fixed1_div_fp@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_fixed1_div_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed1_div_rev_fp@VERSION 4.0
  __kmpc_atomic_fixed1_eqv@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_eqv_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed1_max@VERSION 0.20130412
@@ -402,9 +366,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_min_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed1_mul@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_mul_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed1_mul_cpt_fp@VERSION 4.0
  __kmpc_atomic_fixed1_mul_float8@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf !loong64)__kmpc_atomic_fixed1_mul_fp@VERSION 0.20130412
  __kmpc_atomic_fixed1_neqv@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_neqv_cpt@VERSION 0.20130412
  __kmpc_atomic_fixed1_orb@VERSION 0.20130412
@@ -422,21 +384,14 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_fixed1_shr_rev@VERSION 0.20130412
  __kmpc_atomic_fixed1_sub@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_sub_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed1_sub_cpt_fp@VERSION 4.0
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_fixed1_sub_cpt_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed1_sub_cpt_rev_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_fixed1_sub_fp@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_fixed1_sub_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed1_sub_rev_fp@VERSION 4.0
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_fixed1_swp@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_wr@VERSION 0.20130412
  __kmpc_atomic_fixed1_xor@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1_xor_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)__kmpc_atomic_fixed1u_add_cpt_fp@VERSION 4.0
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf !loong64)__kmpc_atomic_fixed1u_add_fp@VERSION 4.0
  __kmpc_atomic_fixed1u_div@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_fixed1u_div_cpt@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed1u_div_cpt_fp@VERSION 4.0
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_fixed1u_div_cpt_rev@VERSION 0.20130412
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_fixed1u_div_cpt_rev_fp@VERSION 4.0
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_fixed1u_div_fp@VERSION 0.20130412
@@ -790,7 +745,6 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float8_sub_cpt_rev_fp@VERSION 4.0
 #MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !armel !armhf)__kmpc_atomic_float8_sub_fp@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_float8_sub_rev@VERSION 0.20130412
-#MISSING: 7# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf)__kmpc_atomic_float8_sub_rev_fp@VERSION 4.0
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64 !loong64)__kmpc_atomic_float8_swp@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_float8_wr@VERSION 0.20130412
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !riscv64)__kmpc_atomic_start@VERSION 0.20130412
@@ -1031,7 +985,6 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  kmpc_set_stacksize@VERSION 0.20130412
  kmpc_set_stacksize_s@VERSION 0.20130412
  kmpc_unset_affinity_mask_proc@VERSION 0.20130412
-#MISSING: 14# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf !loong64)libomp_start_tool@VERSION 14
  omp_aligned_alloc@VERSION 14
  omp_aligned_calloc@VERSION 14
  omp_alloc@VERSION 8
@@ -1309,7 +1262,6 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  omp_set_schedule_@VERSION 0.20130412
  omp_set_teams_thread_limit@VERSION 13
  omp_set_teams_thread_limit_@VERSION 13
-#MISSING: 8# (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !arm64 !armel !armhf !loong64)omp_state_info@VERSION 6.0
  omp_test_lock@OMP_1.0 0.20131209
  omp_test_lock@OMP_3.0 0.20131209
  omp_test_lock@VERSION 0.20130412
@@ -1348,190 +1300,186 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  ompc_set_schedule@VERSION 0.20130412
  ompt_libomp_connect@VERSION 17
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)ompt_start_tool@VERSION 6.0
-libomptarget.rtl.amdgpu.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
- VERS1.0@VERS1.0 17
- __tgt_rtl_create_event@VERS1.0 17
- __tgt_rtl_data_alloc@VERS1.0 17
- __tgt_rtl_data_delete@VERS1.0 17
- __tgt_rtl_data_exchange@VERS1.0 17
- __tgt_rtl_data_exchange_async@VERS1.0 17
- __tgt_rtl_data_lock@VERS1.0 17
- __tgt_rtl_data_notify_mapped@VERS1.0 17
- __tgt_rtl_data_notify_unmapped@VERS1.0 17
- __tgt_rtl_data_retrieve@VERS1.0 17
- __tgt_rtl_data_retrieve_async@VERS1.0 17
- __tgt_rtl_data_submit@VERS1.0 17
- __tgt_rtl_data_submit_async@VERS1.0 17
- __tgt_rtl_data_unlock@VERS1.0 17
- __tgt_rtl_destroy_event@VERS1.0 17
+libomptarget.rtl.amdgpu.so.@LLVM_VERSION@.1 libomp5-@LLVM_VERSION@ #MINVER#
+ __tgt_rtl_create_event@VERS1.0 18
+ __tgt_rtl_data_alloc@VERS1.0 18
+ __tgt_rtl_data_delete@VERS1.0 18
+ __tgt_rtl_data_exchange@VERS1.0 18
+ __tgt_rtl_data_exchange_async@VERS1.0 18
+ __tgt_rtl_data_lock@VERS1.0 18
+ __tgt_rtl_data_notify_mapped@VERS1.0 18
+ __tgt_rtl_data_notify_unmapped@VERS1.0 18
+ __tgt_rtl_data_retrieve@VERS1.0 18
+ __tgt_rtl_data_retrieve_async@VERS1.0 18
+ __tgt_rtl_data_submit@VERS1.0 18
+ __tgt_rtl_data_submit_async@VERS1.0 18
+ __tgt_rtl_data_unlock@VERS1.0 18
+ __tgt_rtl_destroy_event@VERS1.0 18
  __tgt_rtl_get_function@VERS1.0 18
  __tgt_rtl_get_global@VERS1.0 18
- __tgt_rtl_init_async_info@VERS1.0 17
- __tgt_rtl_init_device@VERS1.0 17
- __tgt_rtl_init_device_info@VERS1.0 17
- __tgt_rtl_init_plugin@VERS1.0 17
- __tgt_rtl_init_requires@VERS1.0 17
+ __tgt_rtl_init_async_info@VERS1.0 18
+ __tgt_rtl_init_device@VERS1.0 18
+ __tgt_rtl_init_device_info@VERS1.0 18
+ __tgt_rtl_init_plugin@VERS1.0 18
+ __tgt_rtl_init_requires@VERS1.0 18
  __tgt_rtl_initialize_record_replay@VERS1.0 18
- __tgt_rtl_is_data_exchangable@VERS1.0 17
+ __tgt_rtl_is_data_exchangable@VERS1.0 18
  __tgt_rtl_is_valid_binary@VERS1.0 18
- __tgt_rtl_launch_kernel@VERS1.0 17
- __tgt_rtl_load_binary@VERS1.0 17
- __tgt_rtl_number_of_devices@VERS1.0 17
- __tgt_rtl_print_device_info@VERS1.0 17
- __tgt_rtl_query_async@VERS1.0 17
- __tgt_rtl_record_event@VERS1.0 17
+ __tgt_rtl_launch_kernel@VERS1.0 18
+ __tgt_rtl_load_binary@VERS1.0 18
+ __tgt_rtl_number_of_devices@VERS1.0 18
+ __tgt_rtl_print_device_info@VERS1.0 18
+ __tgt_rtl_query_async@VERS1.0 18
+ __tgt_rtl_record_event@VERS1.0 18
  __tgt_rtl_set_device_offset@VERS1.0 18
- __tgt_rtl_set_info_flag@VERS1.0 17
- __tgt_rtl_supports_empty_images@VERS1.0 17
- __tgt_rtl_sync_event@VERS1.0 17
- __tgt_rtl_synchronize@VERS1.0 17
+ __tgt_rtl_set_info_flag@VERS1.0 18
+ __tgt_rtl_supports_empty_images@VERS1.0 18
+ __tgt_rtl_sync_event@VERS1.0 18
+ __tgt_rtl_synchronize@VERS1.0 18
  __tgt_rtl_use_auto_zero_copy@VERS1.0 18
- __tgt_rtl_wait_event@VERS1.0 17
-libomptarget.rtl.cuda.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
- VERS1.0@VERS1.0 17
- __tgt_rtl_create_event@VERS1.0 17
- __tgt_rtl_data_alloc@VERS1.0 17
- __tgt_rtl_data_delete@VERS1.0 17
- __tgt_rtl_data_exchange@VERS1.0 17
- __tgt_rtl_data_exchange_async@VERS1.0 17
- __tgt_rtl_data_lock@VERS1.0 17
- __tgt_rtl_data_notify_mapped@VERS1.0 17
- __tgt_rtl_data_notify_unmapped@VERS1.0 17
- __tgt_rtl_data_retrieve@VERS1.0 17
- __tgt_rtl_data_retrieve_async@VERS1.0 17
- __tgt_rtl_data_submit@VERS1.0 17
- __tgt_rtl_data_submit_async@VERS1.0 17
- __tgt_rtl_data_unlock@VERS1.0 17
- __tgt_rtl_destroy_event@VERS1.0 17
+ __tgt_rtl_wait_event@VERS1.0 18
+libomptarget.rtl.cuda.so.@LLVM_VERSION@.1 libomp5-@LLVM_VERSION@ #MINVER#
+ __tgt_rtl_create_event@VERS1.0 18
+ __tgt_rtl_data_alloc@VERS1.0 18
+ __tgt_rtl_data_delete@VERS1.0 18
+ __tgt_rtl_data_exchange@VERS1.0 18
+ __tgt_rtl_data_exchange_async@VERS1.0 18
+ __tgt_rtl_data_lock@VERS1.0 18
+ __tgt_rtl_data_notify_mapped@VERS1.0 18
+ __tgt_rtl_data_notify_unmapped@VERS1.0 18
+ __tgt_rtl_data_retrieve@VERS1.0 18
+ __tgt_rtl_data_retrieve_async@VERS1.0 18
+ __tgt_rtl_data_submit@VERS1.0 18
+ __tgt_rtl_data_submit_async@VERS1.0 18
+ __tgt_rtl_data_unlock@VERS1.0 18
+ __tgt_rtl_destroy_event@VERS1.0 18
  __tgt_rtl_get_function@VERS1.0 18
  __tgt_rtl_get_global@VERS1.0 18
- __tgt_rtl_init_async_info@VERS1.0 17
- __tgt_rtl_init_device@VERS1.0 17
- __tgt_rtl_init_device_info@VERS1.0 17
- __tgt_rtl_init_plugin@VERS1.0 17
- __tgt_rtl_init_requires@VERS1.0 17
+ __tgt_rtl_init_async_info@VERS1.0 18
+ __tgt_rtl_init_device@VERS1.0 18
+ __tgt_rtl_init_device_info@VERS1.0 18
+ __tgt_rtl_init_plugin@VERS1.0 18
+ __tgt_rtl_init_requires@VERS1.0 18
  __tgt_rtl_initialize_record_replay@VERS1.0 18
- __tgt_rtl_is_data_exchangable@VERS1.0 17
+ __tgt_rtl_is_data_exchangable@VERS1.0 18
  __tgt_rtl_is_valid_binary@VERS1.0 18
- __tgt_rtl_launch_kernel@VERS1.0 17
- __tgt_rtl_load_binary@VERS1.0 17
- __tgt_rtl_number_of_devices@VERS1.0 17
- __tgt_rtl_print_device_info@VERS1.0 17
- __tgt_rtl_query_async@VERS1.0 17
- __tgt_rtl_record_event@VERS1.0 17
+ __tgt_rtl_launch_kernel@VERS1.0 18
+ __tgt_rtl_load_binary@VERS1.0 18
+ __tgt_rtl_number_of_devices@VERS1.0 18
+ __tgt_rtl_print_device_info@VERS1.0 18
+ __tgt_rtl_query_async@VERS1.0 18
+ __tgt_rtl_record_event@VERS1.0 18
  __tgt_rtl_set_device_offset@VERS1.0 18
- __tgt_rtl_set_info_flag@VERS1.0 17
- __tgt_rtl_supports_empty_images@VERS1.0 17
- __tgt_rtl_sync_event@VERS1.0 17
- __tgt_rtl_synchronize@VERS1.0 17
+ __tgt_rtl_set_info_flag@VERS1.0 18
+ __tgt_rtl_supports_empty_images@VERS1.0 18
+ __tgt_rtl_sync_event@VERS1.0 18
+ __tgt_rtl_synchronize@VERS1.0 18
  __tgt_rtl_use_auto_zero_copy@VERS1.0 18
- __tgt_rtl_wait_event@VERS1.0 17
-libomptarget.rtl.x86_64.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
- VERS1.0@VERS1.0 17
- __tgt_rtl_create_event@VERS1.0 1:17.0.1-1
- __tgt_rtl_data_alloc@VERS1.0 17
- __tgt_rtl_data_delete@VERS1.0 17
- __tgt_rtl_data_exchange@VERS1.0 17
- __tgt_rtl_data_exchange_async@VERS1.0 17
- __tgt_rtl_data_lock@VERS1.0 17
- __tgt_rtl_data_notify_mapped@VERS1.0 17
- __tgt_rtl_data_notify_unmapped@VERS1.0 17
- __tgt_rtl_data_retrieve@VERS1.0 17
- __tgt_rtl_data_retrieve_async@VERS1.0 17
- __tgt_rtl_data_submit@VERS1.0 17
- __tgt_rtl_data_submit_async@VERS1.0 17
- __tgt_rtl_data_unlock@VERS1.0 17
- __tgt_rtl_destroy_event@VERS1.0 17
+ __tgt_rtl_wait_event@VERS1.0 18
+libomptarget.rtl.x86_64.so.@LLVM_VERSION@.1 libomp5-@LLVM_VERSION@ #MINVER#
+ __tgt_rtl_create_event@VERS1.0 18
+ __tgt_rtl_data_alloc@VERS1.0 18
+ __tgt_rtl_data_delete@VERS1.0 18
+ __tgt_rtl_data_exchange@VERS1.0 18
+ __tgt_rtl_data_exchange_async@VERS1.0 18
+ __tgt_rtl_data_lock@VERS1.0 18
+ __tgt_rtl_data_notify_mapped@VERS1.0 18
+ __tgt_rtl_data_notify_unmapped@VERS1.0 18
+ __tgt_rtl_data_retrieve@VERS1.0 18
+ __tgt_rtl_data_retrieve_async@VERS1.0 18
+ __tgt_rtl_data_submit@VERS1.0 18
+ __tgt_rtl_data_submit_async@VERS1.0 18
+ __tgt_rtl_data_unlock@VERS1.0 18
+ __tgt_rtl_destroy_event@VERS1.0 18
  __tgt_rtl_get_function@VERS1.0 18
  __tgt_rtl_get_global@VERS1.0 18
- __tgt_rtl_init_async_info@VERS1.0 17
- __tgt_rtl_init_device@VERS1.0 17
- __tgt_rtl_init_device_info@VERS1.0 17
- __tgt_rtl_init_plugin@VERS1.0 17
- __tgt_rtl_init_requires@VERS1.0 17
+ __tgt_rtl_init_async_info@VERS1.0 18
+ __tgt_rtl_init_device@VERS1.0 18
+ __tgt_rtl_init_device_info@VERS1.0 18
+ __tgt_rtl_init_plugin@VERS1.0 18
+ __tgt_rtl_init_requires@VERS1.0 18
  __tgt_rtl_initialize_record_replay@VERS1.0 18
- __tgt_rtl_is_data_exchangable@VERS1.0 17
+ __tgt_rtl_is_data_exchangable@VERS1.0 18
  __tgt_rtl_is_valid_binary@VERS1.0 18
- __tgt_rtl_launch_kernel@VERS1.0 17
- __tgt_rtl_load_binary@VERS1.0 17
- __tgt_rtl_number_of_devices@VERS1.0 17
- __tgt_rtl_print_device_info@VERS1.0 17
- __tgt_rtl_query_async@VERS1.0 17
- __tgt_rtl_record_event@VERS1.0 17
+ __tgt_rtl_launch_kernel@VERS1.0 18
+ __tgt_rtl_load_binary@VERS1.0 18
+ __tgt_rtl_number_of_devices@VERS1.0 18
+ __tgt_rtl_print_device_info@VERS1.0 18
+ __tgt_rtl_query_async@VERS1.0 18
+ __tgt_rtl_record_event@VERS1.0 18
  __tgt_rtl_set_device_offset@VERS1.0 18
- __tgt_rtl_set_info_flag@VERS1.0 17
- __tgt_rtl_supports_empty_images@VERS1.0 17
- __tgt_rtl_sync_event@VERS1.0 17
- __tgt_rtl_synchronize@VERS1.0 17
+ __tgt_rtl_set_info_flag@VERS1.0 18
+ __tgt_rtl_supports_empty_images@VERS1.0 18
+ __tgt_rtl_sync_event@VERS1.0 18
+ __tgt_rtl_synchronize@VERS1.0 18
  __tgt_rtl_use_auto_zero_copy@VERS1.0 18
- __tgt_rtl_wait_event@VERS1.0 17
-libomptarget.so.@LLVM_VERSION@ libomp5-@LLVM_VERSION@ #MINVER#
- VERS1.0@VERS1.0 17
- __kmpc_push_target_tripcount@VERS1.0 17
- __kmpc_push_target_tripcount_mapper@VERS1.0 17
+ __tgt_rtl_wait_event@VERS1.0 18
+libomptarget.so.@LLVM_VERSION@.1 libomp5-@LLVM_VERSION@ #MINVER#
+ __kmpc_push_target_tripcount@VERS1.0 18
+ __kmpc_push_target_tripcount_mapper@VERS1.0 18
  __tgt_activate_record_replay@VERS1.0 18
- __tgt_init_all_rtls@VERS1.0 17
- __tgt_interop_destroy@VERS1.0 17
- __tgt_interop_init@VERS1.0 17
- __tgt_interop_use@VERS1.0 17
- __tgt_mapper_num_components@VERS1.0 17
- __tgt_print_device_info@VERS1.0 17
- __tgt_push_mapper_component@VERS1.0 17
- __tgt_register_lib@VERS1.0 17
- __tgt_register_requires@VERS1.0 17
- __tgt_set_info_flag@VERS1.0 17
- __tgt_target@VERS1.0 17
- __tgt_target_data_begin@VERS1.0 17
- __tgt_target_data_begin_mapper@VERS1.0 17
- __tgt_target_data_begin_nowait@VERS1.0 17
- __tgt_target_data_begin_nowait_mapper@VERS1.0 17
- __tgt_target_data_end@VERS1.0 17
- __tgt_target_data_end_mapper@VERS1.0 17
- __tgt_target_data_end_nowait@VERS1.0 17
- __tgt_target_data_end_nowait_mapper@VERS1.0 17
- __tgt_target_data_update@VERS1.0 17
- __tgt_target_data_update_mapper@VERS1.0 17
- __tgt_target_data_update_nowait@VERS1.0 17
- __tgt_target_data_update_nowait_mapper@VERS1.0 17
- __tgt_target_kernel@VERS1.0 17
- __tgt_target_kernel_nowait@VERS1.0 17
- __tgt_target_kernel_replay@VERS1.0 17
- __tgt_target_mapper@VERS1.0 17
- __tgt_target_nowait@VERS1.0 17
- __tgt_target_nowait_mapper@VERS1.0 17
- __tgt_target_nowait_query@VERS1.0 17
- __tgt_target_teams@VERS1.0 17
- __tgt_target_teams_mapper@VERS1.0 17
- __tgt_target_teams_nowait@VERS1.0 17
- __tgt_target_teams_nowait_mapper@VERS1.0 17
- __tgt_unregister_lib@VERS1.0 17
- llvm_omp_target_alloc_device@VERS1.0 17
- llvm_omp_target_alloc_host@VERS1.0 17
- llvm_omp_target_alloc_shared@VERS1.0 17
- llvm_omp_target_dynamic_shared_alloc@VERS1.0 17
- llvm_omp_target_free_device@VERS1.0 17
- llvm_omp_target_free_host@VERS1.0 17
- llvm_omp_target_free_shared@VERS1.0 17
- llvm_omp_target_lock_mem@VERS1.0 17
- llvm_omp_target_unlock_mem@VERS1.0 17
- omp_get_device_num@VERS1.0 17
- omp_get_initial_device@VERS1.0 17
- omp_get_interop_int@VERS1.0 17
- omp_get_interop_name@VERS1.0 17
- omp_get_interop_ptr@VERS1.0 17
- omp_get_interop_str@VERS1.0 17
- omp_get_interop_type_desc@VERS1.0 17
- omp_get_mapped_ptr@VERS1.0 17
- omp_get_num_devices@VERS1.0 17
- omp_target_alloc@VERS1.0 17
- omp_target_associate_ptr@VERS1.0 17
- omp_target_disassociate_ptr@VERS1.0 17
- omp_target_free@VERS1.0 17
- omp_target_is_present@VERS1.0 17
- omp_target_memcpy@VERS1.0 17
- omp_target_memcpy_async@VERS1.0 17
- omp_target_memcpy_rect@VERS1.0 17
- omp_target_memcpy_rect_async@VERS1.0 17
+ __tgt_init_all_rtls@VERS1.0 18
+ __tgt_interop_destroy@VERS1.0 18
+ __tgt_interop_init@VERS1.0 18
+ __tgt_interop_use@VERS1.0 18
+ __tgt_mapper_num_components@VERS1.0 18
+ __tgt_print_device_info@VERS1.0 18
+ __tgt_push_mapper_component@VERS1.0 18
+ __tgt_register_lib@VERS1.0 18
+ __tgt_register_requires@VERS1.0 18
+ __tgt_set_info_flag@VERS1.0 18
+ __tgt_target@VERS1.0 18
+ __tgt_target_data_begin@VERS1.0 18
+ __tgt_target_data_begin_mapper@VERS1.0 18
+ __tgt_target_data_begin_nowait@VERS1.0 18
+ __tgt_target_data_begin_nowait_mapper@VERS1.0 18
+ __tgt_target_data_end@VERS1.0 18
+ __tgt_target_data_end_mapper@VERS1.0 18
+ __tgt_target_data_end_nowait@VERS1.0 18
+ __tgt_target_data_end_nowait_mapper@VERS1.0 18
+ __tgt_target_data_update@VERS1.0 18
+ __tgt_target_data_update_mapper@VERS1.0 18
+ __tgt_target_data_update_nowait@VERS1.0 18
+ __tgt_target_data_update_nowait_mapper@VERS1.0 18
+ __tgt_target_kernel@VERS1.0 18
+ __tgt_target_kernel_nowait@VERS1.0 18
+ __tgt_target_kernel_replay@VERS1.0 18
+ __tgt_target_mapper@VERS1.0 18
+ __tgt_target_nowait@VERS1.0 18
+ __tgt_target_nowait_mapper@VERS1.0 18
+ __tgt_target_nowait_query@VERS1.0 18
+ __tgt_target_teams@VERS1.0 18
+ __tgt_target_teams_mapper@VERS1.0 18
+ __tgt_target_teams_nowait@VERS1.0 18
+ __tgt_target_teams_nowait_mapper@VERS1.0 18
+ __tgt_unregister_lib@VERS1.0 18
+ llvm_omp_target_alloc_device@VERS1.0 18
+ llvm_omp_target_alloc_host@VERS1.0 18
+ llvm_omp_target_alloc_shared@VERS1.0 18
+ llvm_omp_target_dynamic_shared_alloc@VERS1.0 18
+ llvm_omp_target_free_device@VERS1.0 18
+ llvm_omp_target_free_host@VERS1.0 18
+ llvm_omp_target_free_shared@VERS1.0 18
+ llvm_omp_target_lock_mem@VERS1.0 18
+ llvm_omp_target_unlock_mem@VERS1.0 18
+ omp_get_device_num@VERS1.0 18
+ omp_get_initial_device@VERS1.0 18
+ omp_get_interop_int@VERS1.0 18
+ omp_get_interop_name@VERS1.0 18
+ omp_get_interop_ptr@VERS1.0 18
+ omp_get_interop_str@VERS1.0 18
+ omp_get_interop_type_desc@VERS1.0 18
+ omp_get_mapped_ptr@VERS1.0 18
+ omp_get_num_devices@VERS1.0 18
+ omp_target_alloc@VERS1.0 18
+ omp_target_associate_ptr@VERS1.0 18
+ omp_target_disassociate_ptr@VERS1.0 18
+ omp_target_free@VERS1.0 18
+ omp_target_is_present@VERS1.0 18
+ omp_target_memcpy@VERS1.0 18
+ omp_target_memcpy_async@VERS1.0 18
+ omp_target_memcpy_rect@VERS1.0 18
+ omp_target_memcpy_rect_async@VERS1.0 18
  omp_target_memset@VERS1.0 18
  omp_target_memset_async@VERS1.0 18
- ompt_libomptarget_connect@VERS1.0 17
+ ompt_libomptarget_connect@VERS1.0 18
