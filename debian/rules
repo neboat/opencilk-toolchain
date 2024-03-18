@@ -303,7 +303,7 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 endif
 
 # Use mold as a linker. Faster than the other.
-MOLD_DISABLE_DISTRO := bionic buster focal buster bullseye
+MOLD_DISABLE_DISTRO := bionic buster focal buster bullseye bookworm
 ifeq (,$(filter-out $(LIBC_DISABLE_DISTRO), $(DISTRO)))
 # mold is too old on this distro
 	MOLD_ENABLE=no
