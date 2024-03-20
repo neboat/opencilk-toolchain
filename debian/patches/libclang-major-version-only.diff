@@ -1,6 +1,8 @@
---- a/clang/tools/libclang/CMakeLists.txt
-+++ b/clang/tools/libclang/CMakeLists.txt
-@@ -196,7 +196,7 @@
+Index: llvm-toolchain-18_18.1.2/clang/tools/libclang/CMakeLists.txt
+===================================================================
+--- llvm-toolchain-18_18.1.2.orig/clang/tools/libclang/CMakeLists.txt
++++ llvm-toolchain-18_18.1.2/clang/tools/libclang/CMakeLists.txt
+@@ -208,7 +208,7 @@ if(ENABLE_SHARED)
                   OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/libclang.map)
  
      set_target_properties(libclang PROPERTIES

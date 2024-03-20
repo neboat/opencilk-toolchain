@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/libunwind/CMakeLists.txt
+Index: llvm-toolchain-18_18.1.2/libunwind/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79.orig/libunwind/CMakeLists.txt
-+++ llvm-toolchain-snapshot_17~++20230523093327+96a003b9bf79/libunwind/CMakeLists.txt
-@@ -277,14 +277,17 @@ if (MSVC)
+--- llvm-toolchain-18_18.1.2.orig/libunwind/CMakeLists.txt
++++ llvm-toolchain-18_18.1.2/libunwind/CMakeLists.txt
+@@ -301,14 +301,17 @@ if (MSVC)
    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
  endif()
  

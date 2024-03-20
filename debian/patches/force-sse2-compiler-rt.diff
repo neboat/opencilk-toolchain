@@ -1,8 +1,8 @@
-Index: llvm-toolchain-snapshot_18~++20231114093943+6229cd0272a8/compiler-rt/lib/builtins/CMakeLists.txt
+Index: llvm-toolchain-18_18.1.2/compiler-rt/lib/builtins/CMakeLists.txt
 ===================================================================
---- llvm-toolchain-snapshot_18~++20231114093943+6229cd0272a8.orig/compiler-rt/lib/builtins/CMakeLists.txt
-+++ llvm-toolchain-snapshot_18~++20231114093943+6229cd0272a8/compiler-rt/lib/builtins/CMakeLists.txt
-@@ -764,6 +764,12 @@ else ()
+--- llvm-toolchain-18_18.1.2.orig/compiler-rt/lib/builtins/CMakeLists.txt
++++ llvm-toolchain-18_18.1.2/compiler-rt/lib/builtins/CMakeLists.txt
+@@ -772,6 +772,12 @@ else ()
      append_list_if(COMPILER_RT_ENABLE_CET -fcf-protection=full BUILTIN_CFLAGS)
    endif()
  
