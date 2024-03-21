@@ -156,4 +156,4 @@ D158066-simd-ppc64el.patch
 D142688-loong64.diff
 remove-unused-imp-module.diff
 libsanitizer-timebits.diff
-fb77ca05ffb4f8e666878f2f6718a9fb4d686839.diff
+asan-allocator.diff
