@@ -634,6 +634,7 @@ stamps/preconfigure:
 	@echo "LLVM_SPIRV=$(LLVM_SPIRV)"
 	@echo "LLVM_SPIRV_INSTALLED=$(LLVM_SPIRV_INSTALLED)"
 	@echo "DOC_GENERATION=$(DOC_GENERATION)"
+	@echo "control_vars=$(control_vars)"
 
 	for f in debian/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
