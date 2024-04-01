@@ -1,3 +1,10 @@
+llvm-toolchain-17 (1:17.0.6-10) unstable; urgency=medium
+
+  * Disable Loongson SIMD Extension (LSX) and Loongson
+    Advanced SIMD Extension (LASX) on 17 (Closes: #1068169)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 01 Apr 2024 10:33:46 +0200
+
 llvm-toolchain-17 (1:17.0.6-9) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
