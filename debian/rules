@@ -307,10 +307,11 @@ MOLD_DISABLE_DISTRO := bionic buster focal buster bullseye bookworm
 ifeq (,$(filter-out $(MOLD_DISABLE_DISTRO), $(DISTRO)))
 # mold is too old on this distro
 	MOLD_ENABLE=no
-else
-	MOLD_ENABLE=yes
-	STAGE_ALL_CMAKE_EXTRA += -DLLVM_USE_LINKER=mold
-	control_vars += ', mold'
+#else
+# disable mold until https://github.com/rui314/mold/issues/1224 is fixed
+#	MOLD_ENABLE=yes
+#	STAGE_ALL_CMAKE_EXTRA += -DLLVM_USE_LINKER=mold
+#	control_vars += ', mold'
 endif
 
 BINUTILS_GOLD_ARCHS := amd64 arm64 armhf i386 ppc64 ppc64el x32 s390x hurd-i386 kfreebsd-amd64 kfreebsd-i386
