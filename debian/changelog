@@ -1,3 +1,9 @@
+llvm-toolchain-16 (1:16.0.6-25) UNRELEASED; urgency=medium
+
+  * Fix libomp symbols file for t64.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 14 Apr 2024 11:55:50 +0200
+
 llvm-toolchain-16 (1:16.0.6-24) unstable; urgency=medium
 
   [ Matthias Klose ]

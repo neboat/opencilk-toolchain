@@ -1344,7 +1344,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@t64 #MINVER#
  ompc_set_schedule@VERSION 0.20130412
  ompt_libomp_connect@VERSION 1:16.0.2-1~
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)ompt_start_tool@VERSION 6.0
-libomptarget.rtl.amdgpu.nextgen.so.16 libomp5-16 #MINVER# [amd64 arm64]
+libomptarget.rtl.amdgpu.nextgen.so.16 libomp5-@LLVM_VERSION@t64 #MINVER# [amd64 arm64]
  VERS1.0@VERS1.0 1:16.0.2-1~
  __tgt_rtl_create_event@VERS1.0 1:16.0.2-1~
  __tgt_rtl_data_alloc@VERS1.0 1:16.0.2-1~
@@ -1379,7 +1379,7 @@ libomptarget.rtl.amdgpu.nextgen.so.16 libomp5-16 #MINVER# [amd64 arm64]
  __tgt_rtl_sync_event@VERS1.0 1:16.0.2-1~
  __tgt_rtl_synchronize@VERS1.0 1:16.0.2-1~
  __tgt_rtl_wait_event@VERS1.0 1:16.0.2-1~
-libomptarget.rtl.amdgpu.so.16 libomp5-16 #MINVER# [amd64 arm64]
+libomptarget.rtl.amdgpu.so.16 libomp5-@LLVM_VERSION@t64 #MINVER# [amd64 arm64]
  VERS1.0@VERS1.0 1:16.0.2-1~
  __tgt_rtl_data_alloc@VERS1.0 1:16.0.2-1~
  __tgt_rtl_data_delete@VERS1.0 1:16.0.2-1~
@@ -1400,7 +1400,7 @@ libomptarget.rtl.amdgpu.so.16 libomp5-16 #MINVER# [amd64 arm64]
  __tgt_rtl_number_of_devices@VERS1.0 1:16.0.2-1~
  __tgt_rtl_print_device_info@VERS1.0 1:16.0.2-1~
  __tgt_rtl_synchronize@VERS1.0 1:16.0.2-1~
-libomptarget.rtl.cuda.nextgen.so.16 libomp5-16 #MINVER#
+libomptarget.rtl.cuda.nextgen.so.16 libomp5-@LLVM_VERSION@t64 #MINVER#
  VERS1.0@VERS1.0 1:16.0.2-1~
  __tgt_rtl_create_event@VERS1.0 1:16.0.2-1~
  __tgt_rtl_data_alloc@VERS1.0 1:16.0.2-1~
@@ -1435,7 +1435,7 @@ libomptarget.rtl.cuda.nextgen.so.16 libomp5-16 #MINVER#
  __tgt_rtl_sync_event@VERS1.0 1:16.0.2-1~
  __tgt_rtl_synchronize@VERS1.0 1:16.0.2-1~
  __tgt_rtl_wait_event@VERS1.0 1:16.0.2-1~
-libomptarget.rtl.cuda.so.16 libomp5-16 #MINVER# [amd64 arm64]
+libomptarget.rtl.cuda.so.16 libomp5-@LLVM_VERSION@t64 #MINVER# [amd64 arm64]
  VERS1.0@VERS1.0 1:16.0.2-1~
  __tgt_rtl_create_event@VERS1.0 1:16.0.2-1~
  __tgt_rtl_data_alloc@VERS1.0 1:16.0.2-1~
@@ -1470,7 +1470,7 @@ libomptarget.rtl.cuda.so.16 libomp5-16 #MINVER# [amd64 arm64]
  __tgt_rtl_sync_event@VERS1.0 1:16.0.2-1~
  __tgt_rtl_synchronize@VERS1.0 1:16.0.2-1~
  __tgt_rtl_wait_event@VERS1.0 1:16.0.2-1~
-libomptarget.rtl.x86_64.nextgen.so.16 libomp5-16 #MINVER# [amd64 arm64]
+libomptarget.rtl.x86_64.nextgen.so.16 libomp5-@LLVM_VERSION@t64 #MINVER# [amd64 arm64]
  VERS1.0@VERS1.0 1:16.0.2-1~
  __tgt_rtl_create_event@VERS1.0 1:16.0.2-1~
  __tgt_rtl_data_alloc@VERS1.0 1:16.0.2-1~
@@ -1505,7 +1505,7 @@ libomptarget.rtl.x86_64.nextgen.so.16 libomp5-16 #MINVER# [amd64 arm64]
  __tgt_rtl_sync_event@VERS1.0 1:16.0.2-1~
  __tgt_rtl_synchronize@VERS1.0 1:16.0.2-1~
  __tgt_rtl_wait_event@VERS1.0 1:16.0.2-1~
-libomptarget.rtl.x86_64.so.16 libomp5-16 #MINVER# [amd64 arm64]
+libomptarget.rtl.x86_64.so.16 libomp5-@LLVM_VERSION@t64 #MINVER# [amd64 arm64]
  VERS1.0@VERS1.0 1:16.0.2-1~
  __tgt_rtl_data_alloc@VERS1.0 1:16.0.2-1~
  __tgt_rtl_data_delete@VERS1.0 1:16.0.2-1~
@@ -1517,7 +1517,7 @@ libomptarget.rtl.x86_64.so.16 libomp5-16 #MINVER# [amd64 arm64]
  __tgt_rtl_load_binary@VERS1.0 1:16.0.2-1~
  __tgt_rtl_number_of_devices@VERS1.0 1:16.0.2-1~
  __tgt_rtl_print_device_info@VERS1.0 1:16.0.2-1~
-libomptarget.so.16 libomp5-16 #MINVER# [amd64 arm64]
+libomptarget.so.16 libomp5-@LLVM_VERSION@t64 #MINVER# [amd64 arm64]
  VERS1.0@VERS1.0 1:16.0.2-1~
  __kmpc_push_target_tripcount@VERS1.0 1:16.0.2-1~
  __kmpc_push_target_tripcount_mapper@VERS1.0 1:16.0.2-1~
