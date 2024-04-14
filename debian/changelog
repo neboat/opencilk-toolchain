@@ -1,3 +1,9 @@
+llvm-toolchain-17 (1:17.0.6-11) UNRELEASED; urgency=medium
+
+  * Fix libomp symbols file for t64.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 14 Apr 2024 12:00:52 +0200
+
 llvm-toolchain-17 (1:17.0.6-10) unstable; urgency=medium
 
   * Disable Loongson SIMD Extension (LSX) and Loongson
