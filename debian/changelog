@@ -1,4 +1,4 @@
-llvm-toolchain-16 (1:16.0.6-24) UNRELEASED; urgency=medium
+llvm-toolchain-16 (1:16.0.6-24) unstable; urgency=medium
 
   [ Matthias Klose ]
   * Add a stage1 profile to disable curl, grpc and spirv.
