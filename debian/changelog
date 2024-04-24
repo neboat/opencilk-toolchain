@@ -1,4 +1,4 @@
-llvm-toolchain-16 (1:16.0.6-25) UNRELEASED; urgency=medium
+llvm-toolchain-16 (1:16.0.6-25) unstable; urgency=medium
 
   * Fix libomp symbols file for t64.
 
