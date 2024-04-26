@@ -86,7 +86,13 @@ include /usr/share/dpkg/buildflags.mk
 # collect additional flags for all stages all builds
 CFLAGS_EXTRA = -Wno-unused-command-line-argument
 CXXFLAGS_EXTRA = -Wno-unused-command-line-argument
+
+ifeq (,$(filter $(DEB_HOST_ARCH), armel))
 LDFLAGS_EXTRA = -Wl,--build-id,--as-needed
+else
+# fails on armel. we are getting some missing latomic
+LDFLAGS_EXTRA = -Wl,--build-id
+endif
 
 # collect all flags for stage 1 toolchain build only
 STAGE_1_CFLAGS = $(CFLAGS) $(CFLAGS_EXTRA) $(CPPFLAGS)
