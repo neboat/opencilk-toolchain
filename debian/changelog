@@ -1,3 +1,9 @@
+llvm-toolchain-16 (1:16.0.6-26) unstable; urgency=medium
+
+  * Disable --as-needed on armel
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 27 Apr 2024 01:12:00 +0200
+
 llvm-toolchain-16 (1:16.0.6-25) unstable; urgency=medium
 
   * Fix libomp symbols file for t64.
