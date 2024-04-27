@@ -26,6 +26,11 @@ LLVM_VERSION_NEXT := $(shell echo $(LLVM_VERSION_FULL) | awk -F. '{ OFS="."; $$N
 export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto
 RUNTIMES = compiler-rt;libcxx;libcxxabi
 
+# dpkg-buildflags support
+# disable fixfilepath in favor of the llvm-project supplied flavor, disable lto
+export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto
+RUNTIMES = compiler-rt;libcxx;libcxxabi
+
 SOURCE_NAME := $(shell dpkg-parsechangelog -S Source)
 ifneq (,$(findstring snapshot,$(SOURCE_NAME)))
   BRANCH_NAME=snapshot
@@ -85,7 +90,13 @@ include /usr/share/dpkg/buildflags.mk
 # collect additional flags for all stages all builds
 CFLAGS_EXTRA = -Wno-unused-command-line-argument
 CXXFLAGS_EXTRA = -Wno-unused-command-line-argument
+
+ifeq (,$(filter $(DEB_HOST_ARCH), armel))
 LDFLAGS_EXTRA = -Wl,--build-id,--as-needed
+else
+# fails on armel. we are getting some missing latomic
+LDFLAGS_EXTRA = -Wl,--build-id
+endif
 
 # collect all flags for stage 1 toolchain build only
 STAGE_1_CFLAGS = $(CFLAGS) $(CFLAGS_EXTRA) $(CPPFLAGS)
@@ -592,6 +603,7 @@ stamps/preconfigure:
 	@echo "RUNTIMES_CXXFLAGS=$(RUNTIMES_CXXFLAGS)"
 	@echo "STAGE_1_CXXFLAGS=$(STAGE_1_CXXFLAGS)"
 	@echo "STAGE_2_CFLAGS=$(STAGE_2_CFLAGS)"
+	@echo "LDFLAGS_EXTRA=$(LDFLAGS_EXTRA)"
 	@echo "LIBFUZZER_ENABLE=$(LIBFUZZER_ENABLE)"
 	@echo "LTO_ENABLE=$(LTO_ENABLE)"
 	@echo "COMPILER_RT_WASM_ENABLE=$(COMPILER_RT_WASM_ENABLE)"

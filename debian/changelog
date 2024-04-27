@@ -330,6 +330,74 @@ llvm-toolchain-snapshot (1:17~++20230128060150+75153adeda1a-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 28 Jan 2023 18:07:40 +0100
 
+llvm-toolchain-16 (1:16.0.6-26) unstable; urgency=medium
+
+  * Disable --as-needed on armel
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 27 Apr 2024 01:12:00 +0200
+
+llvm-toolchain-16 (1:16.0.6-25) unstable; urgency=medium
+
+  * Fix libomp symbols file for t64.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 14 Apr 2024 11:55:50 +0200
+
+llvm-toolchain-16 (1:16.0.6-24) unstable; urgency=medium
+
+  [ Matthias Klose ]
+  * Add a stage1 profile to disable curl, grpc and spirv.
+  * Build with --as-needed.
+  * ASan: move allocator base to avoid conflict with high-entropy ASLR
+    for x86-64 Linux. Patch taken from LLVM 17.
+
+ -- Matthias Klose <doko@debian.org>  Sat, 16 Mar 2024 22:12:22 +0100
+
+llvm-toolchain-16 (1:16.0.6-23) unstable; urgency=medium
+
+  [ Matthias Klose ]
+  * Fix sanitizer build on 32bit time_t64 architectures.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 11 Mar 2024 22:48:48 +0100
+
+llvm-toolchain-16 (1:16.0.6-22) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Disable tests on mips64el
+
+  [ Matthias Klose ]
+  * Fix sanitizer build on 32bit time_t64 architectures.
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 06 Mar 2024 08:38:53 +0100
+
+llvm-toolchain-16 (1:16.0.6-21) unstable; urgency=medium
+
+  [ Steve Langasek ]
+  * Rename libraries for 64-bit time_t transition.
+
+   [ Gianfranco Costamagna ]
+   * Fix 32bit builds
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Sun, 03 Mar 2024 12:02:57 +0100
+
+llvm-toolchain-16 (1:16.0.6-20) unstable; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Don't install *clang_rt* on sparc and sparc64
+
+  [ Matthias Klose ]
+  * Remove unused import of imp module in scan-view, removed in Python 3.12.
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sat, 24 Feb 2024 08:54:59 +0100
+
+llvm-toolchain-16 (1:16.0.6-19) unstable; urgency=medium
+
+  * Revert my ugly fix for 1052002.
+
+  [ Faidon Liambotis ]
+  * Improve the fix for the bug 1052002.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 23 Nov 2023 16:27:52 +0100
+
 llvm-toolchain-16 (1:16.0.6-18) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
