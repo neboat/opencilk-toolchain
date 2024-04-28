@@ -1,6 +1,8 @@
 llvm-toolchain-17 (1:17.0.6-11) unstable; urgency=medium
 
   * Disable --as-needed on armel
+  * Pass LLVM_EXPERIMENTAL_TARGETS_TO_BUILD to stage 1 to (try to) build M68k
+    (Closes: #1067646)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 28 Apr 2024 18:00:09 +0200
 
