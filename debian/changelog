@@ -1,3 +1,9 @@
+llvm-toolchain-17 (1:17.0.6-11) unstable; urgency=medium
+
+  * Disable --as-needed on armel
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 28 Apr 2024 18:00:09 +0200
+
 llvm-toolchain-17 (1:17.0.6-10) unstable; urgency=medium
 
   [ Matthias Klose ]
