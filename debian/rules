@@ -302,6 +302,7 @@ ifeq ($(LLVM_SPIRV_INSTALLED),yes)
 	LIBCLC_LLVM_SPIRV = -DLLVM_SPIRV=$(LLVM_SPIRV)
 endif
 
+MOLD_ENABLE=no
 # Use mold as a linker. Faster than the other.
 MOLD_DISABLE_DISTRO := bionic buster focal buster bullseye bookworm
 ifeq (,$(filter-out $(MOLD_DISABLE_DISTRO), $(DISTRO)))
