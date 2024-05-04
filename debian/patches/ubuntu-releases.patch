@@ -1,13 +1,19 @@
-Description: Update the list of Ubuntu release names
-Forwarded: no
-Author: Graham Inggs <ginggs@debian.org>
-Last-Update: 2023-04-29
+From 6266b964202336a02f40007928719e060bc81694 Mon Sep 17 00:00:00 2001
+From: Graham Inggs <ginggs@debian.org>
+Date: Wed, 1 Nov 2023 20:59:53 +0100
+Subject: [PATCH] Add support of the next Ubuntu (Ubuntu 24.04 - Noble Numbat)
 
-Index: llvm-toolchain-17-17.0.3/clang/include/clang/Driver/Distro.h
-===================================================================
---- llvm-toolchain-17-17.0.3.orig/clang/include/clang/Driver/Distro.h
-+++ llvm-toolchain-17-17.0.3/clang/include/clang/Driver/Distro.h
-@@ -78,6 +78,7 @@
+Co-authored-by: Sylvestre Ledru <sylvestre@debian.org>
+---
+ clang/include/clang/Driver/Distro.h | 3 ++-
+ clang/lib/Driver/Distro.cpp         | 1 +
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/clang/include/clang/Driver/Distro.h b/clang/include/clang/Driver/Distro.h
+index 8291f6575a7114..a8de94163e8b0b 100644
+--- a/clang/include/clang/Driver/Distro.h
++++ b/clang/include/clang/Driver/Distro.h
+@@ -78,6 +78,7 @@ class Distro {
      UbuntuKinetic,
      UbuntuLunar,
      UbuntuMantic,
@@ -15,7 +21,7 @@ Index: llvm-toolchain-17-17.0.3/clang/include/clang/Driver/Distro.h
      UnknownDistro
    };
  
-@@ -129,7 +130,7 @@
+@@ -129,7 +130,7 @@ class Distro {
    }
  
    bool IsUbuntu() const {
@@ -24,15 +30,59 @@ Index: llvm-toolchain-17-17.0.3/clang/include/clang/Driver/Distro.h
    }
  
    bool IsAlpineLinux() const { return DistroVal == AlpineLinux; }
-Index: llvm-toolchain-17-17.0.3/clang/lib/Driver/Distro.cpp
-===================================================================
---- llvm-toolchain-17-17.0.3.orig/clang/lib/Driver/Distro.cpp
-+++ llvm-toolchain-17-17.0.3/clang/lib/Driver/Distro.cpp
-@@ -94,6 +94,7 @@
+diff --git a/clang/lib/Driver/Distro.cpp b/clang/lib/Driver/Distro.cpp
+index 005c31bd38893c..36f828f8cae26d 100644
+--- a/clang/lib/Driver/Distro.cpp
++++ b/clang/lib/Driver/Distro.cpp
+@@ -94,6 +94,7 @@ static Distro::DistroType DetectLsbRelease(llvm::vfs::FileSystem &VFS) {
                      .Case("kinetic", Distro::UbuntuKinetic)
                      .Case("lunar", Distro::UbuntuLunar)
                      .Case("mantic", Distro::UbuntuMantic)
 +                    .Case("noble", Distro::UbuntuNoble)
+                     .Default(Distro::UnknownDistro);
+   return Version;
+ }
+From 90bd7234e36e5b3d63155f481b739ea463985631 Mon Sep 17 00:00:00 2001
+From: Sylvestre Ledru <sylvestre@debian.org>
+Date: Thu, 2 May 2024 22:54:08 +0200
+Subject: [PATCH] Add support of the next Ubuntu (Ubuntu 24.10 - Oracular
+ Oriol)
+
+---
+ clang/include/clang/Driver/Distro.h | 3 ++-
+ clang/lib/Driver/Distro.cpp         | 1 +
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/clang/include/clang/Driver/Distro.h b/clang/include/clang/Driver/Distro.h
+index a8de94163e8b0b..1404e168684821 100644
+--- a/clang/include/clang/Driver/Distro.h
++++ b/clang/include/clang/Driver/Distro.h
+@@ -79,6 +79,7 @@ class Distro {
+     UbuntuLunar,
+     UbuntuMantic,
+     UbuntuNoble,
++    UbuntuOracular,
+     UnknownDistro
+   };
+ 
+@@ -130,7 +131,7 @@ class Distro {
+   }
+ 
+   bool IsUbuntu() const {
+-    return DistroVal >= UbuntuHardy && DistroVal <= UbuntuNoble;
++    return DistroVal >= UbuntuHardy && DistroVal <= UbuntuOracular;
+   }
+ 
+   bool IsAlpineLinux() const { return DistroVal == AlpineLinux; }
+diff --git a/clang/lib/Driver/Distro.cpp b/clang/lib/Driver/Distro.cpp
+index a7e7f169dc1419..6f49e641104ccd 100644
+--- a/clang/lib/Driver/Distro.cpp
++++ b/clang/lib/Driver/Distro.cpp
+@@ -95,6 +95,7 @@ static Distro::DistroType DetectLsbRelease(llvm::vfs::FileSystem &VFS) {
+                     .Case("lunar", Distro::UbuntuLunar)
+                     .Case("mantic", Distro::UbuntuMantic)
+                     .Case("noble", Distro::UbuntuNoble)
++                    .Case("oracular", Distro::UbuntuOracular)
                      .Default(Distro::UnknownDistro);
    return Version;
  }
