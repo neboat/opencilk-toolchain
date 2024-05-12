@@ -2,6 +2,7 @@ llvm-toolchain-18 (1:18.1.5-3) unstable; urgency=medium
 
   * Do not try to install gold on riscv64 (Closes: #1070909)
     Thanks to Aurelien Jarno for the fix
+  * Disable --as-needed on armel (Closes: #1070811)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 12 May 2024 09:03:09 +0200
 
