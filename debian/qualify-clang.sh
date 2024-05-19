@@ -1082,7 +1082,7 @@ int main() { }' > foo.cpp
 # Force the usage of libc++abi
 clang++-$VERSION -stdlib=libc++ -lc++abi foo.cpp -o o
 ./o > /dev/null
-if ! ldd o 2>&1|grep -q  libc++abi.so.1; then
+if ! ldd o 2>&1|grep -q libc++abi.so.1; then
     echo "not linked against libc++abi.so.1"
     exit -1
 fi
