@@ -1059,7 +1059,16 @@ clang++-$VERSION -std=c++20 \
 # The output should be
 #   Hello modular world
 #   Hello compat modular world
-./a.out
+./a.out > foo.log
+
+if ! grep -q -E "Hello modular world" foo.log 2>&1; then
+    echo "c++ modules didn't work"
+    exit 1
+fi
+if ! grep -q -E "Hello compat modular world" foo.log 2>&1; then
+    echo "c++ modules didn't work"
+    exit 1
+fi
 
 if test ! -f /usr/lib/llvm-$VERSION/include/cxxabi.h; then
     echo "Install libc++abi-$VERSION-dev";
