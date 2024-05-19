@@ -1075,6 +1075,10 @@ if test ! -f /usr/lib/llvm-$VERSION/include/cxxabi.h; then
     exit -1;
 fi
 
+# Recreate a C++ without modules
+echo '#include <chrono>
+int main() { }' > foo.cpp
+
 # Force the usage of libc++abi
 clang++-$VERSION -stdlib=libc++ -lc++abi foo.cpp -o o
 ./o > /dev/null
