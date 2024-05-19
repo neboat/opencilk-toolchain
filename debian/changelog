@@ -2,6 +2,7 @@ llvm-toolchain-18 (1:18.1.6-1) unstable; urgency=medium
 
   * New upstream release
   * Don't install gold on mips64el armel loong64
+  * Unbreak autopkgtest
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 19 May 2024 09:27:44 +0200
 
