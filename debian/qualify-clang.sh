@@ -1252,7 +1252,8 @@ else
 fi
 
 # libc
-echo "Testing llvmlibc-$VERSION-dev ..."
+if dpkg -l|grep -q libllvmlibc-$VERSION-dev; then
+echo "Testing libllvmlibc-$VERSION-dev ..."
 echo '
 #include <math.h>
 int main(void)
@@ -1287,6 +1288,10 @@ fi
 
 BINDIR=$(llvm-config-$VERSION --bindir)
 /usr/lib/llvm-$VERSION/share/libclc/check_external_calls.sh /usr/lib/clc/amdgcn--amdhsa.bc $BINDIR > /dev/null
+else
+    echo "Skipping testing libllvmlibc-$VERSION-dev ..."
+    echo "doesn't exist on this arch"
+fi
 
 # libunwind
 echo "Testing libunwind-$VERSION-dev ..."
