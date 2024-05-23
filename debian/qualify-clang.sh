@@ -1247,7 +1247,7 @@ end program main' > foo.f90
     fi
     rm -f foo.log foo.f90 foo libflib.so
 else
-    echo "Skipping esting flang-$VERSION (Fortran) ..."
+    echo "Skipping testing flang-$VERSION (Fortran) ..."
     echo "doesn't exist on this arch"
 fi
 
