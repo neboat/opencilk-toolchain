@@ -1194,13 +1194,13 @@ endif
 endif
 
 	if test "$(LIBUNWIND_ENABLE)" = yes; then \
-		mkdir -p debian/tmp/usr/include/libunwind; \
-		cp -R libunwind/include/* debian/tmp/usr/include/libunwind/; \
+		mkdir -p $(DEB_INST)/usr/include/libunwind; \
+		cp -R libunwind/include/* $(DEB_INST)/usr/include/libunwind/; \
 	fi
 
 	: # libomp
 	if test "$(OPENMP_ENABLE)" = yes; then \
-		cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib; \
+		cd $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib; \
 		ln -s libomp.so.$(SONAME_OPENMP) libomp.so; \
 		cp libomp.so.$(SONAME_OPENMP) libomp-$(LLVM_VERSION).so.$(SONAME_OPENMP); \
 	fi
@@ -1249,7 +1249,7 @@ endif
 	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
 
 	# workaround issue https://github.com/llvm/llvm-project/issues/57101
-	find debian/tmp -iname 'libbolt_rt*.a' -path '*/build-llvm/*' -delete
+	find $(DEB_INST) -iname 'libbolt_rt*.a' -path '*/build-llvm/*' -delete
 	# Remove an osx file
 	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libbolt_rt_instr_osx.a
 
@@ -1450,9 +1450,9 @@ ifeq (${POLLY_ENABLE},yes)
 ifneq (,$(filter libpolly-$(LLVM_VERSION)-dev, $(packages)))
 	dh_install -p libpolly-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly
 # On old Debian & Ubuntu, removing the files is necessary
-	rm -rf debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
+	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
 else
-	rm -rf $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
+	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
 endif
 endif
 	dh_install --fail-missing ${skip_packages}
@@ -1484,7 +1484,7 @@ override_dh_installdeb: stamps/repack_a_llvm_ir
 # Managed by the package
 	dh_installdeb -a
 
-	rm -f $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/lldb/__init__.pyc $(CURDIR)/debian/python*-lldb-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/lldb/__init__.pyc
+	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/lldb/__init__.pyc $(CURDIR)/debian/python*-lldb-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/lldb/__init__.pyc
 	rm -f $(CURDIR)/debian/clang-$(LLVM_VERSION)-examples/usr/share/doc/clang-$(LLVM_VERSION)-examples/examples/*Make*
 
 # the openmp header files moved to the same path as lib clang headers.
