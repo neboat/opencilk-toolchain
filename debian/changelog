@@ -1,6 +1,9 @@
 llvm-toolchain-18 (1:18.1.6-2) UNRELEASED; urgency=medium
 
+  [ Sylvestre Ledru ]
   * autopkgtest: only run libllvmlibc test on supported archs
+
+  [ John Paul Adrian Glaubitz ]
   * Don't install Gold plugin on sparc64
 
  -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Fri, 31 May 2024 10:40:10 +0200
