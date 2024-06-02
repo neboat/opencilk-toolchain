@@ -1,4 +1,7 @@
 libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ libclang1-@LLVM_VERSION@ #MINVER#
+ LLVM_13@LLVM_13 1:18
+ LLVM_16@LLVM_16 1:18
+ LLVM_17@LLVM_17 1:18
  clang_BlockCommandComment_getArgText@LLVM_13 1:5.0~svn298832-1~
  clang_BlockCommandComment_getCommandName@LLVM_13 1:5.0~svn298832-1~
  clang_BlockCommandComment_getNumArgs@LLVM_13 1:5.0~svn298832-1~

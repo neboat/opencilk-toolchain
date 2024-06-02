@@ -1,4 +1,11 @@
 libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
+ GOMP_1.0@GOMP_1.0 18
+ GOMP_2.0@GOMP_2.0 18
+ GOMP_3.0@GOMP_3.0 18
+ GOMP_4.0@GOMP_4.0 18
+ GOMP_4.5@GOMP_4.5 18
+ GOMP_5.0.1@GOMP_5.0.1 18
+ GOMP_5.0@GOMP_5.0 18
  GOMP_alloc@GOMP_5.0.1 14
  GOMP_alloc@VERSION 14
  GOMP_atomic_end@GOMP_1.0 0.20131209
@@ -255,6 +262,14 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  GOMP_teams_reg@VERSION 12
  GOMP_workshare_task_reduction_unregister@GOMP_5.0 13
  GOMP_workshare_task_reduction_unregister@VERSION 13
+ OMP_1.0@OMP_1.0 18
+ OMP_2.0@OMP_2.0 18
+ OMP_3.0@OMP_3.0 18
+ OMP_3.1@OMP_3.1 18
+ OMP_4.0@OMP_4.0 18
+ OMP_4.5@OMP_4.5 18
+ OMP_5.0@OMP_5.0 18
+ VERSION@VERSION 18
  ___kmp_allocate@VERSION 0.20130412
  ___kmp_free@VERSION 0.20130412
  __kmp_acquire_drdpa_lock@VERSION 0.20130715
@@ -1166,6 +1181,7 @@ libomp.so.5 libomp5-@LLVM_VERSION@ #MINVER#
  ompt_libomp_connect@VERSION 17
  (arch=!mips !mipsel !ppc64 !ppc64el !mips64 !mips64el !armel !armhf)ompt_start_tool@VERSION 6.0
 libomptarget.rtl.amdgpu.so.@LLVM_VERSION@.1 libomp5-@LLVM_VERSION@ #MINVER#
+ VERS1.0@VERS1.0 18
  __tgt_rtl_create_event@VERS1.0 18
  __tgt_rtl_data_alloc@VERS1.0 18
  __tgt_rtl_data_delete@VERS1.0 18
@@ -1204,6 +1220,7 @@ libomptarget.rtl.amdgpu.so.@LLVM_VERSION@.1 libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_use_auto_zero_copy@VERS1.0 18
  __tgt_rtl_wait_event@VERS1.0 18
 libomptarget.rtl.cuda.so.@LLVM_VERSION@.1 libomp5-@LLVM_VERSION@ #MINVER#
+ VERS1.0@VERS1.0 18
  __tgt_rtl_create_event@VERS1.0 18
  __tgt_rtl_data_alloc@VERS1.0 18
  __tgt_rtl_data_delete@VERS1.0 18
@@ -1242,6 +1259,7 @@ libomptarget.rtl.cuda.so.@LLVM_VERSION@.1 libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_use_auto_zero_copy@VERS1.0 18
  __tgt_rtl_wait_event@VERS1.0 18
 libomptarget.rtl.x86_64.so.@LLVM_VERSION@.1 libomp5-@LLVM_VERSION@ #MINVER#
+ VERS1.0@VERS1.0 18
  __tgt_rtl_create_event@VERS1.0 18
  __tgt_rtl_data_alloc@VERS1.0 18
  __tgt_rtl_data_delete@VERS1.0 18
@@ -1280,6 +1298,7 @@ libomptarget.rtl.x86_64.so.@LLVM_VERSION@.1 libomp5-@LLVM_VERSION@ #MINVER#
  __tgt_rtl_use_auto_zero_copy@VERS1.0 18
  __tgt_rtl_wait_event@VERS1.0 18
 libomptarget.so.@LLVM_VERSION@.1 libomp5-@LLVM_VERSION@ #MINVER#
+ VERS1.0@VERS1.0 18
  __kmpc_push_target_tripcount@VERS1.0 18
  __kmpc_push_target_tripcount_mapper@VERS1.0 18
  __tgt_activate_record_replay@VERS1.0 18
