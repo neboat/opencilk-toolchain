@@ -866,6 +866,9 @@ endif
 		exit 1; \
 	fi
 	@mkdir -p stamps
+# Detect the triple
+	TRIPLE=`grep LLVM_DEFAULT_TARGET_TRIPLE build-llvm/CMakeCache.txt|cut -d= -f2`; \
+	sed -i -e "s|@DEB_HOST_MULTIARCH_LLVM@|$$TRIPLE|g" debian/*.links
 	touch $@
 
 VERBOSE=-v

@@ -1,5 +1,6 @@
 llvm-toolchain-18 (1:18.1.6-2~exp1) experimental; urgency=medium
 
+<<<<<<<
   [ Sylvestre Ledru ]
   * Enable LLVM_ENABLE_PER_TARGET_RUNTIME_DIR
     to move the libraries into multi archi directories
@@ -12,6 +13,16 @@ llvm-toolchain-18 (1:18.1.6-2~exp1) experimental; urgency=medium
   * Disable LLVM testsuite on x32
   * Install liborc_rt-x86_64.a on x32
   * Install hwasan_symbolize on x32
+=======
+  * Enable LLVM_ENABLE_PER_TARGET_RUNTIME_DIR
+    to move the libraries into multi archi directories
+    (Closes: #1067699, #1067005)
+    (LP: #2063207)
+  * Introduce the new variable @DEB_HOST_MULTIARCH_LLVM@ in the build system
+    because the LLVM triple is different than Debian
+    x86_64-pc-linux-gnu instead of x86_64-linux-gnu
+  * autopkgtest: only run libllvmlibc test on supported archs
+>>>>>>>
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 31 May 2024 23:00:43 +0200
 
