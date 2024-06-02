@@ -1,1 +1,1 @@
-usr/lib/llvm-@LLVM_VERSION@/lib/libc++abi.so.*
+usr/lib/llvm-@LLVM_VERSION@/lib/*/libc++abi.so.*

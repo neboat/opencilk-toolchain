@@ -8,6 +8,7 @@ fi
 VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
 DETAILED_VERSION=$(dpkg-parsechangelog |  sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1\2\3,p")
 DEB_HOST_ARCH=$(dpkg-architecture -qDEB_HOST_ARCH)
+ARCH=$(clang-$VERSION -dumpmachine)
 
 LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-clang-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clangd-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}_${DETAILED_VERSION}_amd64.deb clang-tidy-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclc-${VERSION}_${DETAILED_VERSION}_all.deb libclc-${VERSION}-dev_${DETAILED_VERSION}_all.deb llvm-${VERSION}-linker-tools_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libmlir-${VERSION}_${DETAILED_VERSION}_amd64.deb libmlir-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-rt-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-rt-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libclang-rt-${VERSION}-dev-wasm64_${DETAILED_VERSION}_all.deb libc++abi-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libc++-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libpolly-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  bolt-${VERSION}_${DETAILED_VERSION}_amd64.deb libbolt-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb flang-${VERSION}_${DETAILED_VERSION}_amd64.deb libflang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libllvmlibc-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb "
 
@@ -472,8 +473,8 @@ echo "Testing linking clang-cpp ..."
 
 clang-$VERSION -lclang-cpp$VERSION -v foo.cpp -o o &> /dev/null || true
 if ! ldd o 2>&1|grep -q  libclang-cpp; then
-	echo "Didn't link against libclang-cpp$VERSION"
-	exit 42
+    echo "Didn't link against libclang-cpp$VERSION"
+    exit 42
 fi
 ./o > /dev/null
 
@@ -942,7 +943,7 @@ if test ! -f /usr/lib/llvm-$VERSION/include/c++/v1/vector; then
     exit -1;
 fi
 
-if test ! -f /usr/lib/llvm-$VERSION/lib/libc++abi.so; then
+if test ! -f /usr/lib/llvm-$VERSION/lib/$ARCH/libc++abi.so; then
     echo "Install libc++abi-$VERSION-dev";
     exit -1;
 fi
@@ -1029,7 +1030,8 @@ EOF
 # Builds the std module
 clang++-$VERSION -std=c++20 \
 	-nostdinc++ \
-	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+	-isystem /usr/lib/llvm-$VERSION/include/$ARCH/c++/v1/ \
+    -isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
 	-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
 	--precompile -o std.pcm \
 	-c /usr/lib/llvm-$VERSION/share/libc++/v1/std.cppm
@@ -1037,7 +1039,8 @@ clang++-$VERSION -std=c++20 \
 # Builds the std.compat module
 clang++-$VERSION -std=c++20 \
 	-nostdinc++ \
-	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+	-isystem /usr/lib/llvm-$VERSION/include/$ARCH/c++/v1/ \
+    -isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
 	-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
 	--precompile -o std.compat.pcm \
 	-fmodule-file=std=std.pcm \
@@ -1146,7 +1149,8 @@ int main(void)
 clang-$VERSION -Wconversion -Werror foo.c &> /dev/null || true
 
 if test -f /usr/bin/g++; then
-g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
+g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -I/usr/lib/llvm-$VERSION/include/$ARCH/c++/v1/ \
+    -L/usr/lib/llvm-$VERSION/lib/ \
     foo.cpp -nodefaultlibs -std=c++17 -lc++ -lc++abi -lm -lc -lgcc_s -lgcc|| true
 ./o > /dev/null
 fi
@@ -1166,6 +1170,7 @@ EOF
 clang-$VERSION -std=c++20 \
 	-nostdinc++ \
 	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+    -isystem /usr/lib/llvm-$VERSION/include/$ARCH/c++/v1/ \
 	-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
 	--precompile -o std.pcm \
 	-c /usr/lib/llvm-$VERSION/share/libc++/v1/std.cppm
@@ -1174,6 +1179,7 @@ clang-$VERSION -std=c++20 \
 clang-$VERSION -std=c++20 \
 	-nostdinc++ \
 	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+    -isystem /usr/lib/llvm-$VERSION/include/$ARCH/c++/v1/ \
 	-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
 	--precompile -o std.compat.pcm \
 	-fmodule-file=std=std.pcm \
@@ -1183,6 +1189,7 @@ clang-$VERSION -std=c++20 \
 clang-$VERSION -std=c++20 \
 	-nostdinc++ \
 	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+    -isystem /usr/lib/llvm-$VERSION/include/$ARCH/c++/v1/ \
 	-L /usr/lib/llvm-$VERSION/lib \
 	-fmodule-file=std=std.pcm \
 	-fmodule-file=std.compat=std.compat.pcm \
@@ -1406,7 +1413,7 @@ int main(int, char**) {
   return -2;
 }
 '> foo.cpp
-clang++-$VERSION foo.cpp /usr/lib/llvm-$VERSION/lib/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl
+clang++-$VERSION foo.cpp /usr/lib/llvm-$VERSION/lib/$ARCH/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl
 ./a.out||true
 clang++-$VERSION foo.cpp -unwindlib=libunwind -rtlib=compiler-rt -I/usr/include/libunwind -ldl
 ./a.out||true
