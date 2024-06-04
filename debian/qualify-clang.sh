@@ -30,6 +30,12 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libLLVM-$VERSION.so; then
     exit 1
 fi
 
+if test -f /usr/lib/llvm-$VERSION/lib/libLLVM.so; then
+    echo "/usr/lib/llvm-$VERSION/lib/libLLVM.so found."
+    echo "Break the build as it breaks the coinstalability"
+    exit 1
+fi
+
 echo "Testing llvm-$VERSION and llvm-$VERSION-dev ..."
 llvm-config-$VERSION --link-shared --libs &> /dev/null
 
