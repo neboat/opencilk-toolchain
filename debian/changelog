@@ -16,6 +16,9 @@ llvm-toolchain-18 (1:18.1.8-2~exp1) experimental; urgency=medium
   [ Sylvestre Ledru ]
   * Enable LLVM_ENABLE_PER_TARGET_RUNTIME_DIR
     to move the libraries into multi archi directories
+  * Bring back libLLVM to be installed in /usr/lib/llvm-18/lib/libLLVM-18.so
+    instead of /usr/lib/llvm-18/lib/libLLVM.so
+    This should make the packages co installable again
     (Closes: #1067699, #1067005)
     (LP: #2063207)
   * Introduce the new variable @DEB_HOST_MULTIARCH_LLVM@ in the build system

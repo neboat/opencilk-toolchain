@@ -152,3 +152,4 @@ mips/D154390-pre-R6.diff
 libsanitizer-timebits.diff
 ubuntu-releases.patch
 clang-record-gcc-switches-by-default.patch
+rename-libllvm.diff

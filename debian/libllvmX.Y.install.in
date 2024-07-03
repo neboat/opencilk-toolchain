@@ -1,2 +1,2 @@
-usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM.so.1
-usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM.so.@LLVM_VERSION@.1
+usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM-@LLVM_VERSION@.so.1
+usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM-@LLVM_VERSION@.so.@LLVM_VERSION@.1
