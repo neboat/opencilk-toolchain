@@ -584,7 +584,7 @@ ifneq (,$(filter coverity,$(DEB_BUILD_OPTIONS)))
 endif
 
 # enables cmake build targets like stage2-[target_name]
-ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-libcxx;check-libcxxabi;check-mlir;check-libc;check-sanitizer;llvm-config;test-suite
+ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clang-tools;check-lld;check-cxx;check-cxxabi;check-mlir;check-libc;llvm-config;test-suite
 
 %:
 	dh $@ $(DH_OPTIONS)
@@ -1521,19 +1521,16 @@ ifeq (${LLD_ENABLE},yes)
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-lld || true
 endif
 
-# Sanitizer
-	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-sanitizer || true
-
-# Libcxx
-	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxx || true
+# Cxx
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-cxx || true
 
 # Libc
 ifeq (${LIBC_ENABLE},yes)
 	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libc || true
 endif
 
-# Libcxxabi
-	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-libcxxabi || true
+# Cxxabi
+	ninja $(VERBOSE) -C $(TARGET_BUILD_STAGE2) check-cxxabi || true
 
 # MLIR
 ifeq (,$(filter $(DEB_HOST_ARCH), armel armhf i386 x32))
