@@ -1,16 +1,3 @@
-llvm-toolchain-18 (1:18.1.8-2~exp2) UNRELEASED; urgency=medium
-
-  [ Zixing Liu <zixing.liu@canonical.com> ]
-  * d/p/clang-record-gcc-switches-by-default.patch: add a patch to force clang
-    record gcc switches by default
-
-  [ Gianfranco Costamagna ]
-  * Rename check-libcxxabi in check-cxxabi.
-  * Rename check-libcxx in check-cxx
-  * Drop removed check-sanitizer (Closes: #1073201)
-
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Wed, 03 Jul 2024 08:05:35 +0200
-
 llvm-toolchain-18 (1:18.1.8-2~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
@@ -38,6 +25,15 @@ llvm-toolchain-18 (1:18.1.8-2~exp1) experimental; urgency=medium
 
   [ Aurelien Jarno ]
   * Enable lldb on riscv64.
+
+  [ Zixing Liu <zixing.liu@canonical.com> ]
+  * d/p/clang-record-gcc-switches-by-default.patch: add a patch to force clang
+    record gcc switches by default
+
+  [ Gianfranco Costamagna ]
+  * Rename check-libcxxabi in check-cxxabi.
+  * Rename check-libcxx in check-cxx
+  * Drop removed check-sanitizer (Closes: #1073201)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 01 Jul 2024 22:27:25 +0200
 
