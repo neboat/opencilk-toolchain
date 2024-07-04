@@ -475,6 +475,12 @@ echo '#include <chrono>
 int main() { }' > foo.cpp
 clang++-$VERSION -std=c++11 foo.cpp
 
+if test -f /usr/lib/llvm-$VERSION/lib/libclang.so.1; then
+    echo "/usr/lib/llvm-$VERSION/lib/libclang.so.1 found."
+    echo "Break the build as it breaks the coinstalability"
+    exit 1
+fi
+
 echo "Testing linking clang-cpp ..."
 
 clang-$VERSION -lclang-cpp$VERSION -v foo.cpp -o o &> /dev/null || true
