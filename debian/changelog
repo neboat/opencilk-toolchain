@@ -1,3 +1,13 @@
+llvm-toolchain-18 (1:18.1.8-2~exp2) experimental; urgency=medium
+
+  * Change the LLVM_HOST_TRIPLE option from i386-linux-gnu to
+    i386-pc-linux-gnu
+    and arm-linux-gnueabihf to arm-pc-linux-gnueabihf
+    Otherwise, it will fail with:
+    Cannot find builtins library for the target architecture
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 07 Jul 2024 00:38:27 +0200
+
 llvm-toolchain-18 (1:18.1.8-2~exp1) experimental; urgency=medium
 
   [ Sylvestre Ledru ]
