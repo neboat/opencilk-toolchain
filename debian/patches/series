@@ -154,3 +154,4 @@ arm32-defaults.diff
 mips/D154390-pre-R6.diff
 libsanitizer-timebits.diff
 D154931-revert-loong64.patch
+link-with-package-metadata.diff
