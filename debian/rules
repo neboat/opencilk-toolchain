@@ -219,7 +219,7 @@ ifneq (,$(filter $(DEB_HOST_ARCH),mips64el))
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),powerpc))
-  STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=powerpc-linux-gnu
+  STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=powerpc-pc-linux-gnu
 endif
 
 # debug symbols OOM in Ubuntu Ubuntu and slows down build process.
@@ -230,12 +230,12 @@ else
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),sparc))
-  STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=sparc-linux-gnu
+  STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=sparc-pc-linux-gnu
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_PARALLEL_LINK_JOBS=4
 endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),sparc64))
-  STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=sparc64-linux-gnu
+  STAGE_ALL_CMAKE_EXTRA += -DLLVM_HOST_TRIPLE=sparc64-pc-linux-gnu
   STAGE_ALL_CMAKE_EXTRA += -DLLVM_PARALLEL_LINK_JOBS=4
 endif
 
