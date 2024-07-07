@@ -1,0 +1,36 @@
+--- a/clang/lib/Driver/ToolChains/Linux.cpp
++++ b/clang/lib/Driver/ToolChains/Linux.cpp
+@@ -287,6 +287,33 @@ Linux::Linux(const Driver &D, const llvm
+   ExtraOpts.push_back("--build-id");
+ #endif
+ 
++  if (Distro.IsDebian() && Distro >= Distro::DebianTrixie
++      || Distro.IsUbuntu() && Distro >= Distro::UbuntuNoble)
++  {
++    const char *deb_build_os_release_id = getenv ("DEB_BUILD_OS_RELEASE_ID");
++    const char *deb_source = getenv ("DEB_SOURCE");
++    const char *deb_version = getenv ("DEB_VERSION");
++    const char *deb_host_arch = getenv ("DEB_HOST_ARCH");
++    const char *no_pkg_metadata = getenv ("NO_PKG_METADATA");
++
++    if (no_pkg_metadata) {
++      // don't issue --package-metadata option
++    } else if (!deb_build_os_release_id && !deb_source && !deb_version && !deb_host_arch) {
++      // no environment set for package metadata
++    } else if (!(deb_build_os_release_id && deb_source && deb_version && deb_host_arch)) {
++      // incomple environment
++      // FIXME: emit error
++    } else {
++      ExtraOpts.push_back(std::string("--package-metadata={")
++			  + "\"type\":\"deb\","
++			  + "\"os\":\"" + deb_build_os_release_id + "\","
++			  + "\"name\":\"" + deb_source + "\","
++			  + "\"version\":\"" + deb_version + "\","
++			  + "\"architecture\":\"" + deb_host_arch + "\""
++			  + "}");
++    }
++  }
++
+   // The selection of paths to try here is designed to match the patterns which
+   // the GCC driver itself uses, as this is part of the GCC-compatible driver.
+   // This was determined by running GCC in a fake filesystem, creating all

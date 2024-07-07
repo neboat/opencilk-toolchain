@@ -1,3 +1,14 @@
+llvm-toolchain-18 (1:18.1.8-2~exp3) UNRELEASED; urgency=medium
+
+  [ Matthias Klose ]
+  * Pass --package-metadata on distros with supporting linkers (starting
+    with Debian trixie and Ubuntu noble).
+    The package metadata is constructed from the environment variables
+    DEB_BUILD_OS_RELEASE_ID, DEB_SOURCE, DEB_VERSION and DEB_HOST_ARCH.
+    Setting NO_PKG_METADATA=1 disables the generation of the package metadata.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 07 Jul 2024 16:40:35 +0200
+
 llvm-toolchain-18 (1:18.1.8-2~exp2) experimental; urgency=medium
 
   * Change the LLVM_HOST_TRIPLE option from i386-linux-gnu to
