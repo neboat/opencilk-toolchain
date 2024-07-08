@@ -1,4 +1,4 @@
-llvm-toolchain-18 (1:18.1.8-2~exp3) UNRELEASED; urgency=medium
+llvm-toolchain-18 (1:18.1.8-2) unstable; urgency=medium
 
   [ Matthias Klose ]
   * Pass --package-metadata on distros with supporting linkers (starting
