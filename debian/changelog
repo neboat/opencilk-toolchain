@@ -1,3 +1,9 @@
+llvm-toolchain-18 (1:18.1.8-3) UNRELEASED; urgency=medium
+
+  * Construct the --package-metadata option just from ELF_PACKAGE_METADATA.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 11 Jul 2024 09:26:34 +0200
+
 llvm-toolchain-18 (1:18.1.8-2) unstable; urgency=medium
 
   [ Matthias Klose ]
