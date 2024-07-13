@@ -485,8 +485,8 @@ echo "Testing linking clang-cpp ..."
 
 clang-$VERSION -lclang-cpp$VERSION -v foo.cpp -o o &> /dev/null || true
 if ! ldd o 2>&1|grep -q  libclang-cpp; then
-    echo "Didn't link against libclang-cpp$VERSION"
-    exit 42
+	echo "Didn't link against libclang-cpp$VERSION"
+	exit 42
 fi
 ./o > /dev/null
 
@@ -955,7 +955,7 @@ if test ! -f /usr/lib/llvm-$VERSION/include/c++/v1/vector; then
     exit -1;
 fi
 
-if test ! -f /usr/lib/llvm-$VERSION/lib/$ARCH/libc++abi.so; then
+if test ! -f /usr/lib/llvm-$VERSION/lib/libc++abi.so; then
     echo "Install libc++abi-$VERSION-dev";
     exit -1;
 fi
@@ -1042,8 +1042,7 @@ EOF
 # Builds the std module
 clang++-$VERSION -std=c++20 \
 	-nostdinc++ \
-	-isystem /usr/lib/llvm-$VERSION/include/$ARCH/c++/v1/ \
-    -isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
 	-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
 	--precompile -o std.pcm \
 	-c /usr/lib/llvm-$VERSION/share/libc++/v1/std.cppm
@@ -1051,8 +1050,7 @@ clang++-$VERSION -std=c++20 \
 # Builds the std.compat module
 clang++-$VERSION -std=c++20 \
 	-nostdinc++ \
-	-isystem /usr/lib/llvm-$VERSION/include/$ARCH/c++/v1/ \
-    -isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
 	-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
 	--precompile -o std.compat.pcm \
 	-fmodule-file=std=std.pcm \
@@ -1161,8 +1159,7 @@ int main(void)
 clang-$VERSION -Wconversion -Werror foo.c &> /dev/null || true
 
 if test -f /usr/bin/g++; then
-g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -I/usr/lib/llvm-$VERSION/include/$ARCH/c++/v1/ \
-    -L/usr/lib/llvm-$VERSION/lib/ \
+g++ -nostdinc++ -I/usr/lib/llvm-$VERSION/bin/../include/c++/v1/ -L/usr/lib/llvm-$VERSION/lib/ \
     foo.cpp -nodefaultlibs -std=c++17 -lc++ -lc++abi -lm -lc -lgcc_s -lgcc|| true
 ./o > /dev/null
 fi
@@ -1182,7 +1179,6 @@ EOF
 clang-$VERSION -std=c++20 \
 	-nostdinc++ \
 	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
-    -isystem /usr/lib/llvm-$VERSION/include/$ARCH/c++/v1/ \
 	-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
 	--precompile -o std.pcm \
 	-c /usr/lib/llvm-$VERSION/share/libc++/v1/std.cppm
@@ -1191,7 +1187,6 @@ clang-$VERSION -std=c++20 \
 clang-$VERSION -std=c++20 \
 	-nostdinc++ \
 	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
-    -isystem /usr/lib/llvm-$VERSION/include/$ARCH/c++/v1/ \
 	-Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
 	--precompile -o std.compat.pcm \
 	-fmodule-file=std=std.pcm \
@@ -1201,7 +1196,6 @@ clang-$VERSION -std=c++20 \
 clang-$VERSION -std=c++20 \
 	-nostdinc++ \
 	-isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
-    -isystem /usr/lib/llvm-$VERSION/include/$ARCH/c++/v1/ \
 	-L /usr/lib/llvm-$VERSION/lib \
 	-fmodule-file=std=std.pcm \
 	-fmodule-file=std.compat=std.compat.pcm \
@@ -1425,7 +1419,7 @@ int main(int, char**) {
   return -2;
 }
 '> foo.cpp
-clang++-$VERSION foo.cpp /usr/lib/llvm-$VERSION/lib/$ARCH/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl
+clang++-$VERSION foo.cpp /usr/lib/llvm-$VERSION/lib/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl
 ./a.out||true
 clang++-$VERSION foo.cpp -unwindlib=libunwind -rtlib=compiler-rt -I/usr/include/libunwind -ldl
 ./a.out||true
