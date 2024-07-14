@@ -3,6 +3,7 @@ llvm-toolchain-18 (1:18.1.8-3) UNRELEASED; urgency=medium
   * Revert LLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON
     9ca35f30383d89e4fdd45d15e0eb82c832df4b8c
     For causing https://github.com/llvm/llvm-project/issues/96210
+  * Disable LLDB_BUILD_INTEL_PT on Ubuntu bionic
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 13 Jul 2024 10:26:40 +0200
 
