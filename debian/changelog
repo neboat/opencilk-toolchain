@@ -1,5 +1,9 @@
 llvm-toolchain-18 (1:18.1.8-3) UNRELEASED; urgency=medium
 
+  [ Matthias Klose ]
+  * Construct the --package-metadata option just from ELF_PACKAGE_METADATA.
+
+  [ Sylvestre Ledru ]
   * Revert LLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON
     9ca35f30383d89e4fdd45d15e0eb82c832df4b8c
     For causing https://github.com/llvm/llvm-project/issues/96210
