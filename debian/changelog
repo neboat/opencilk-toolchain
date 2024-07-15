@@ -1,15 +1,20 @@
-llvm-toolchain-18 (1:18.1.8-3) UNRELEASED; urgency=medium
+llvm-toolchain-18 (1:18.1.8-4) UNRELEASED; urgency=medium
 
   [ Matthias Klose ]
   * Construct the --package-metadata option just from ELF_PACKAGE_METADATA.
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 15 Jul 2024 12:30:36 +0200
+
+llvm-toolchain-18 (1:18.1.8-3) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
   * Revert LLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON
     9ca35f30383d89e4fdd45d15e0eb82c832df4b8c
     For causing https://github.com/llvm/llvm-project/issues/96210
   * Disable LLDB_BUILD_INTEL_PT on Ubuntu bionic
+  * Make libllvm co-installable again (Closes: #1076131)
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 13 Jul 2024 10:26:40 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 15 Jul 2024 09:49:47 +0200
 
 llvm-toolchain-18 (1:18.1.8-2) unstable; urgency=medium
 
