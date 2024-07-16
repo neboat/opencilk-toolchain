@@ -1,9 +1,13 @@
 llvm-toolchain-18 (1:18.1.8-4) UNRELEASED; urgency=medium
 
+  * fix the symlinks after LLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF
+    Probably caused
+    https://github.com/llvm/llvm-project/issues/99017
+
   [ Matthias Klose ]
   * Construct the --package-metadata option just from ELF_PACKAGE_METADATA.
 
- -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 15 Jul 2024 12:30:36 +0200
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 16 Jul 2024 18:02:17 +0200
 
 llvm-toolchain-18 (1:18.1.8-3) unstable; urgency=medium
 
