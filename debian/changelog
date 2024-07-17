@@ -1,8 +1,10 @@
-llvm-toolchain-18 (1:18.1.8-4) UNRELEASED; urgency=medium
+llvm-toolchain-18 (1:18.1.8-4) unstable; urgency=medium
 
   * fix the symlinks after LLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF
     Probably caused
     https://github.com/llvm/llvm-project/issues/99017
+  * Move back /usr/lib/llvm-18/lib/libLLVM-18.so.1 to libllvm18 (Closes: #1076469)
+    And add breaks/replaces to make sure the upgrade goes smoothly
 
   [ Matthias Klose ]
   * Construct the --package-metadata option just from ELF_PACKAGE_METADATA.
