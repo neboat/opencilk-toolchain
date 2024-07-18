@@ -678,11 +678,13 @@ stamps/preconfigure:
 		debian/llvm-$(LLVM_VERSION)-linker-tools.links \
 		debian/libbolt-$(LLVM_VERSION)-dev.install
 
-	# workaround the breaks/replaces/conflicts introduced with the libc++ move
+	# workaround the breaks/replaces/conflicts introduced with the libllvm move
 	# we update the version to make it work with apt.llvm.org
 	# Yeah, this is ugly but I don't know how to do better
 	if test "$(LLVM_VERSION)" = "18"; then \
+		if echo $(LLVM_VERSION_SNAPSHOT)| grep -q "~++"; then \
 		sed -i -e "s| (<< 1:18.1.8-4)|(<< 1:18.1.8~++20240717045021)|g" debian/control; \
+		fi; \
 	fi
 
 	# llvm-spirv was found, so we can enable *.spv files. Debian
