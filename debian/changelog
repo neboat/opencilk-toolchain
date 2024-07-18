@@ -1,3 +1,10 @@
+llvm-toolchain-18 (1:18.1.8-5) unstable; urgency=medium
+
+  * Fix the broken Breaks/replaces for apt.llvm.org
+    Closes: https://github.com/llvm/llvm-project/issues/99502
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2024 22:02:44 +0200
+
 llvm-toolchain-18 (1:18.1.8-4) unstable; urgency=medium
 
   * fix the symlinks after LLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF
