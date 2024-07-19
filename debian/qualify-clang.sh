@@ -36,6 +36,12 @@ if test -f /usr/lib/llvm-$VERSION/lib/libLLVM.so; then
     exit 1
 fi
 
+NBLINES=$(dpkg -L libllvm$VERSION|grep libLLVM.so.$VERSION.1|wc -l)
+if test $NBLINES -eq 0; then
+    echo "libLLVM.so.$VERSION.1 should exist. Could not find it in libllvm$VERSION"
+    exit 1
+fi
+
 echo "Testing llvm-$VERSION and llvm-$VERSION-dev ..."
 llvm-config-$VERSION --link-shared --libs &> /dev/null
 
