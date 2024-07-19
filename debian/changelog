@@ -3,6 +3,7 @@ llvm-toolchain-18 (1:18.1.8-5) unstable; urgency=medium
   * Fix the broken Breaks/replaces for apt.llvm.org
     Closes: https://github.com/llvm/llvm-project/issues/99502
   * Bring back libLLVM.so.18.1 as symlink library
+    (LP: #2073604)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 18 Jul 2024 22:02:44 +0200
 
