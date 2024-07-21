@@ -1,3 +1,10 @@
+llvm-toolchain-18 (1:18.1.8-6) UNRELEASED; urgency=medium
+
+  [ John Paul Adrian Glaubitz ]
+  * Make regexp to grep for LLVM_DEFAULT_TARGET_TRIPLE less ambigious
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sun, 21 Jul 2024 23:25:02 +0200
+
 llvm-toolchain-18 (1:18.1.8-5) unstable; urgency=medium
 
   * Fix the broken Breaks/replaces for apt.llvm.org
