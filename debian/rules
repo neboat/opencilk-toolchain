@@ -301,6 +301,8 @@ else
 endif
 endif
 
+LLVM_SPIRV_INSTALLED = no
+
 LIBCLC_TARGETS_TO_BUILD=amdgcn--;amdgcn--amdhsa;amdgcn-mesa-mesa3d;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl
 LIBCLC_LLVM_SPIRV =
 ifeq ($(LLVM_SPIRV_INSTALLED),yes)

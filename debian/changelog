@@ -4,6 +4,7 @@ llvm-toolchain-18 (1:18.1.8-5) unstable; urgency=medium
     Closes: https://github.com/llvm/llvm-project/issues/99502
   * Bring back libLLVM.so.18.1 as symlink library
     (LP: #2073604)
+  * temporary disable spirv to unbreak the build
 
   [ John Paul Adrian Glaubitz ]
   * Make regexp to grep for LLVM_DEFAULT_TARGET_TRIPLE less ambigious
