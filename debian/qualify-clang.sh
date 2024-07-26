@@ -30,8 +30,11 @@ if test ! -f /usr/lib/llvm-$VERSION/lib/libLLVM-$VERSION.so; then
     exit 1
 fi
 
-if test -f /usr/lib/llvm-$VERSION/lib/libLLVM.so; then
-    echo "/usr/lib/llvm-$VERSION/lib/libLLVM.so found."
+NBLINES=$(ls -1 /usr/lib/llvm-$VERSION/lib/libLLVM*.so*|wc -l)
+if test $NBLINES -ne 0; then
+    echo "Found some libLLVM into /usr/lib/llvm-$VERSION/lib/"
+    echo "See:"
+    ls -al /usr/lib/llvm-$VERSION/lib/libLLVM*.so*
     echo "Break the build as it breaks the coinstalability"
     exit 1
 fi
