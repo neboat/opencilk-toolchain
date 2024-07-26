@@ -1,6 +1,7 @@
 llvm-toolchain-18 (1:18.1.8-6) unstable; urgency=medium
 
   * Make libllvm multi arch ready again ... (Closes: #1076131)
+  * bring back spirv
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Fri, 26 Jul 2024 17:34:31 +0200
 
