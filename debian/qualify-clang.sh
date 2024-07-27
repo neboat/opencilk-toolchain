@@ -30,7 +30,9 @@ if test ! -e /usr/lib/llvm-$VERSION/lib/libLLVMObject.a; then
     exit 1
 fi
 
-NBLINES=$(ls -1 /usr/lib/llvm-$VERSION/lib/libLLVM*.so*|wc -l)
+# allow usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM-@LLVM_VERSION@*.so
+# as it is in llvm-X.Y-dev
+NBLINES=$(ls -1 /usr/lib/llvm-$VERSION/lib/libLLVM*.so*|grep -v llvm-$VERSION/lib/libLLVM-$VERSION*.so|wc -l)
 if test $NBLINES -ne 0; then
     echo "Found some libLLVM into /usr/lib/llvm-$VERSION/lib/"
     echo "See:"
