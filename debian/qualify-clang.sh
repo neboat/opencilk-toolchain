@@ -25,7 +25,9 @@ if test ! -f /usr/bin/llvm-config-$VERSION; then
     echo "Install llvm-$VERSION & llvm-$VERSION-dev"
     exit 1
 fi
-if test ! -f /usr/lib/llvm-$VERSION/lib/libLLVM-$VERSION.so; then
+ls -al /usr/lib/llvm-$VERSION/lib/libLLVM-$VERSION.so
+
+if test ! -e /usr/lib/llvm-$VERSION/lib/libLLVMObject.a; then
     echo "Install llvm-$VERSION-dev"
     exit 1
 fi
