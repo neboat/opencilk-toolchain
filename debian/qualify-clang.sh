@@ -33,12 +33,12 @@ fi
 # allow usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM-@LLVM_VERSION@*.so
 # as it is in llvm-X.Y-dev
 NBLINES=$(ls -1 /usr/lib/llvm-$VERSION/lib/libLLVM*.so*|wc -l)
-if test $NBLINES -ne 1; then
+if test $NBLINES -ne 2; then
     echo "Found some libLLVM into /usr/lib/llvm-$VERSION/lib/"
     echo "See:"
     ls -al /usr/lib/llvm-$VERSION/lib/libLLVM*.so*
     echo "Break the build as it breaks the coinstalability"
-    echo "we should have only one for llvm-X.Y-dev"
+    echo "we should have only two for llvm-X.Y-dev"
     exit 1
 fi
 
