@@ -1,3 +1,9 @@
+llvm-toolchain-18 (1:18.1.8-8) unstable; urgency=medium
+
+  * Fix breaks/replaces (Closes: #1077587)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Jul 2024 10:48:59 +0200
+
 llvm-toolchain-18 (1:18.1.8-7) unstable; urgency=medium
 
   * Unbreak the cmake tools

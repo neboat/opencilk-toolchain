@@ -683,7 +683,7 @@ stamps/preconfigure:
 	# Yeah, this is ugly but I don't know how to do better
 	if test "$(LLVM_VERSION)" = "18"; then \
 		if echo $(LLVM_VERSION_SNAPSHOT)| grep -q "~++"; then \
-		sed -i -e "s| (<< 1:18.1.8-4)|(<< 1:18.1.8~++20240717045021)|g" debian/control; \
+		sed -i -e "s| (<< 1:18.1.8-8)|(<< 1:18.1.8~++20240730104741)|g" debian/control; \
 		fi; \
 	fi
 
