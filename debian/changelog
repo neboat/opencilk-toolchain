@@ -1,6 +1,11 @@
 llvm-toolchain-18 (1:18.1.8-8) unstable; urgency=medium
 
+  [ Sylvestre Ledru ]
   * Fix breaks/replaces (Closes: #1077587)
+
+  [ Gianfranco Costamagna ]
+  * Merge llvm-toolchain-17 1:17.0.6-13 into llvm-18 branch
+    - Make SVE types available in device targets (Closes: #1076578)
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 30 Jul 2024 10:48:59 +0200
 
