@@ -1,10 +1,14 @@
-llvm-toolchain-18 (1:18.1.8-9) UNRELEASED; urgency=medium
+llvm-toolchain-18 (1:18.1.8-9) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
   * Mention in changelog also the SVE fixes from llvm-17
   * Drop mips D154390 patch, already upstream
 
- -- Gianfranco Costamagna <locutusofborg@debian.org>  Thu, 01 Aug 2024 12:15:23 +0200
+
+  [ Sylvestre Ledru ]
+  * Really fix breaks/replaces (Closes: #1077587)
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sat, 03 Aug 2024 20:07:17 +0200
 
 llvm-toolchain-18 (1:18.1.8-8) unstable; urgency=medium
 

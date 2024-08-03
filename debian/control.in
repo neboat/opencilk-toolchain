@@ -422,6 +422,8 @@ Depends: ${shlibs:Depends}, libffi-dev, ${misc:Depends},
  llvm-@LLVM_VERSION@ (= ${binary:Version}), libllvm@LLVM_VERSION@ (= ${binary:Version}), libncurses-dev,
  llvm-@LLVM_VERSION@-tools (= ${binary:Version}), libclang-cpp@LLVM_VERSION@ (= ${binary:Version}),
  libz3-dev, libxml2-dev
+Breaks: libllvm@LLVM_VERSION@ (<< 1:18.1.8-9)
+Replaces: libllvm@LLVM_VERSION@ (<< 1:18.1.8-9)
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
