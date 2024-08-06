@@ -154,3 +154,4 @@ clang-record-gcc-switches-by-default.patch
 rename-libllvm.diff
 link-with-package-metadata.diff
 llvm-toolchain-17-sve-types-aux-target.diff
+env-lld-package-metadata.diff

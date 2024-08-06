@@ -1,3 +1,10 @@
+llvm-toolchain-18 (1:18.1.8-10) UNRELEASED; urgency=medium
+
+  * ld.lld: When no package-metadata option is given, fall-back
+    to the envvar ELF_PACKAGE_METADATA.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 06 Aug 2024 16:13:21 +0200
+
 llvm-toolchain-18 (1:18.1.8-9) unstable; urgency=medium
 
   [ Gianfranco Costamagna ]
