@@ -917,8 +917,7 @@ Description: Multi-Level Intermediate Representation library
 # ------------- bolt -------------
 
 Package: bolt-@LLVM_VERSION@
-Architecture: amd64
-# Disable on arm64 because libbolt_rt_hugify.a isn't generated
+Architecture: amd64 arm64
 Depends: ${shlibs:Depends}, ${misc:Depends}, libbolt-@LLVM_VERSION@-dev (= ${binary:Version}),
 Pre-Depends: ${misc:Pre-Depends}
 Description: Post-link optimizer
@@ -927,8 +926,7 @@ Description: Post-link optimizer
 
 Package: libbolt-@LLVM_VERSION@-dev
 Section: libdevel
-Architecture: amd64
-#arm64
+Architecture: amd64 arm64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Post-link optimizer
  It achieves the improvements by optimizing application's code layout based on
