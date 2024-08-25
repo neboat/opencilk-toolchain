@@ -59,7 +59,7 @@ Retrieving a specific branch or release candidate with orig-tar.sh
 When using orig-tar.sh, if you need to retrieve a specific branch, you can pass
 the branch name as the first argument. For example, to get the 10 release
 branch at
-  https://github.com/llvm/llvm-project/branches
+  https://github.com/OpenCilk/opencilk-project/branches
 you should use,
 
   $ sh 10/debian/orig-tar.sh release/10.x
@@ -67,7 +67,7 @@ you should use,
 To retrieve a specific release candidate, you can pass the branch name as the
 first argument, and the tag rc number as the second argument. For example, to
 get the 9.0.1 release candidate rc3 at
-  https://github.com/llvm/llvm-project/tags
+  https://github.com/OpenCilk/opencilk-project/tags
 you should use,
 
   $ sh 10/debian/orig-tar.sh 10.0.1 rc3

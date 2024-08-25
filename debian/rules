@@ -23,7 +23,7 @@ endif
 LLVM_VERSION_NEXT := $(shell echo $(LLVM_VERSION_FULL) | awk -F. '{ OFS="."; $$NF+=1; print}')
 
 # dpkg-buildflags support
-# disable fixfilepath in favor of the llvm-project supplied flavor, disable lto
+# disable fixfilepath in favor of the opencilk-project supplied flavor, disable lto
 export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto
 RUNTIMES = compiler-rt;libcxx;libcxxabi
 
