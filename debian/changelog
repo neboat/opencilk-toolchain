@@ -3,6 +3,8 @@ llvm-toolchain-19 (1:19.1.5-2) UNRELEASED; urgency=medium
   [ Sylvestre Ledru ]
   * Remove the capability to be able to disable C++ Exceptions in libc++
   * Bring back C++ exceptions on s390x for libc++ (LP: #2086782)
+  * Disable -Bsymbolic-function on Ubuntu for causing:
+   https://github.com/llvm/llvm-project/issues/59432#issuecomment-2500694332
 
   [ Matthias Klose ]
   * bolt: Disable the check for /proc/self/map_files. Might not be available
