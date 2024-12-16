@@ -138,3 +138,4 @@ link-with-package-metadata.diff
 env-lld-package-metadata.diff
 mips-mlir-xgot.diff
 ubuntu-plucky.patch
+bolt-disable-proc-check.diff
