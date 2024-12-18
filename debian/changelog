@@ -1,6 +1,8 @@
-llvm-toolchain-19 (1:19.1.5-2) UNRELEASED; urgency=medium
+llvm-toolchain-19 (1:19.1.6-1) unstable; urgency=medium
 
   [ Sylvestre Ledru ]
+  * New upstream release. Should be the last of 19
+    And the one in the next Debian release
   * Remove the capability to be able to disable C++ Exceptions in libc++
   * Bring back C++ exceptions on s390x for libc++ (LP: #2086782)
   * Disable -Bsymbolic-function on Ubuntu for causing:
@@ -11,7 +13,7 @@ llvm-toolchain-19 (1:19.1.5-2) UNRELEASED; urgency=medium
     on build machines. LP: #2084316.
   * Fix compatibility with Python 3.13. Closes: #1084638.
 
- -- Matthias Klose <doko@debian.org>  Fri, 13 Dec 2024 10:29:05 +0100
+ -- Sylvestre Ledru <sylvestre@debian.org>  Wed, 18 Dec 2024 10:01:43 +0100
 
 llvm-toolchain-19 (1:19.1.5-1) unstable; urgency=medium
 
