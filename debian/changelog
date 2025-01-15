@@ -7,9 +7,6 @@ llvm-toolchain-19 (1:19.1.7-1) unstable; urgency=medium
   * New upstream release
   * Rewrite qualify-clang.sh with bats
     Might fail on some archs
-  * Cherry-pick https://github.com/llvm/llvm-project/pull/122463
-    https://github.com/llvm/llvm-project/issues/110374
-    to be allow Firefox to build on armhf
   * Tests: integration-test-suite-test
     Remove explicit dep libstdc++-14
 
