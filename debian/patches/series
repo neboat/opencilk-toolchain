@@ -140,4 +140,3 @@ mips-mlir-xgot.diff
 ubuntu-plucky.patch
 bolt-disable-proc-check.diff
 python3.13-quote.diff
-cherry-pick-122463-armhf.diff

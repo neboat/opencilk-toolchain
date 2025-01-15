@@ -10,6 +10,8 @@ llvm-toolchain-19 (1:19.1.7-1) unstable; urgency=medium
   * Cherry-pick https://github.com/llvm/llvm-project/pull/122463
     https://github.com/llvm/llvm-project/issues/110374
     to be allow Firefox to build on armhf
+  * Tests: integration-test-suite-test
+    Remove explicit dep libstdc++-14
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 14 Jan 2025 14:16:47 +0100
 
