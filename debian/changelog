@@ -368,6 +368,16 @@ llvm-toolchain-snapshot (1:19~++20240125092523+41fe98a6e7e5-1~exp1) experimental
 
  -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 25 Jan 2024 14:51:10 +0100
 
+llvm-toolchain-18 (1:18.1.8-15) unstable; urgency=medium
+
+  [ Matthias Klose ]
+  * d/t/control: Remove explicit dependency on libstdc++-N-dev.
+
+  [ Sylvestre Ledru ]
+  * Skip some autopkgtests on non intel cpu
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Thu, 16 Jan 2025 14:16:06 +0100
+
 llvm-toolchain-18 (1:18.1.0~rc4-1) unstable; urgency=medium
 
   [ John Paul Adrian Glaubitz ]
