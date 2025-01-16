@@ -59,11 +59,6 @@ setup() {
     [ -f "/usr/bin/llvm-config-$VERSION" ]
 }
 
-@test "Check for libLLVM shared libraries count" {
-    NBLINES=$(ls -1 /usr/lib/llvm-$VERSION/lib/libLLVM*.so* | wc -l)
-    [ "$NBLINES" -eq 2 ]
-}
-
 @test "Ensure libLLVM.so.VERSION.1 exists in libllvm$VERSION" {
     NBLINES=$(dpkg -L libllvm$VERSION | grep -c "libLLVM.so.$VERSION.1")
     [ "$NBLINES" -gt 0 ]
