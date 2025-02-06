@@ -1,3 +1,10 @@
+llvm-toolchain-19 (1:19.1.7-2) UNRELEASED; urgency=medium
+
+  [ Sylvestre Ledru ]
+  * Skip some autopkgtests on non intel cpu. Closes: #1094233.
+
+ -- Matthias Klose <doko@debian.org>  Thu, 06 Feb 2025 11:41:30 +0100
+
 llvm-toolchain-19 (1:19.1.7-1) unstable; urgency=medium
 
   [ Matthias Klose ]
