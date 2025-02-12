@@ -52,7 +52,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  llvm-19-linker-tools (= ${binary:Version}),
  libclang1-19 (= ${binary:Version}), libc6-dev, binutils
 Provides: c-compiler, objc-compiler, c++-compiler, objc++-compiler
-Recommends: llvm-19-dev, python3
+Recommends: llvm-19-dev, python3, clang-tools-19
 # libomp-19-dev
 Suggests: clang-19-doc, wasi-libc
 Description: C, C++ and Objective-C compiler
