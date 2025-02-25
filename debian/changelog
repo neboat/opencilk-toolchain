@@ -5,6 +5,7 @@ llvm-toolchain-19 (1:19.1.7-2) unstable; urgency=medium
   * clang-19 recommends clang-tools-19
     https://github.com/llvm/llvm-project/issues/117333
   * Also add binutils-gold in the integration-test-suite-test testsuite
+  * Add binutils-gold as build dep
 
   [ Matthias Klose ]
   * d/t/control.in: Add binutils-gold as explicit test dependency.
