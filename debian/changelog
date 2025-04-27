@@ -1,3 +1,11 @@
+llvm-toolchain-19 (1:19.1.7-5) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Drop Multi-Arch: same from packages installing to non-multiarch paths.
+    (Closes: #1100981)
+
+ -- Yuce Kurum <hyucek@gmail.com>  Sun, 27 Apr 2025 14:30:26 +0200
+
 llvm-toolchain-19 (1:19.1.7-4) unstable; urgency=medium
 
   * Remove "Provides: libunwind-dev" (Closes: #1100481)

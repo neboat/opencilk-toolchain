@@ -194,7 +194,6 @@ Description: Clang library - Common development package
 
 Package: libclang-rt-19-dev
 Architecture: any
-Multi-Arch: same
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Compiler-rt - development package
@@ -228,7 +227,6 @@ Description: Compiler-rt - wasm64 builtins
 
 Package: libpolly-19-dev
 Architecture: any
-Multi-Arch: same
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: High-level loop and data-locality optimizer
@@ -346,7 +344,6 @@ Architecture: any
 Section: libs
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Multi-Arch: same
 Breaks: llvm-19-dev (<< 1:19.1.0~++rc3-1~exp2)
 Replaces: llvm-19-dev (<< 1:19.1.0~++rc3-1~exp2)
 Description: Modular compiler and toolchain technologies, runtime library
@@ -636,7 +633,6 @@ Description: LLVM OpenMP runtime - dev package
  while it is executing.
 
 Package: libomp5-19
-Multi-Arch: same
 Architecture: amd64 arm64 armhf ppc64 ppc64el hurd-amd64 loong64 mips64el riscv64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Provides: ${t64:Provides}, libomp-x.y
@@ -666,7 +662,6 @@ Description: LLVM OpenMP runtime - Documentation
 Package: libc++1-19
 Section: libs
 Architecture: any
-Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: clang
@@ -689,7 +684,6 @@ Description: LLVM C++ Standard library
 Package: libc++-19-dev
 Section: libdevel
 Architecture: any
-Multi-Arch: same
 Depends: libc++1-19 (= ${binary:Version}), ${misc:Depends},
  libc++abi-19-dev (= ${binary:Version}),
  libunwind-19-dev [amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64]
@@ -737,7 +731,6 @@ Description: LLVM C++ Standard library (WASI)
 Package: libc++abi1-19
 Section: libs
 Architecture: any
-Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Provides: ${t64:Provides}, libc++abi-x.y
@@ -755,7 +748,6 @@ Description: LLVM low level support for a standard C++ library
 Package: libc++abi-19-dev
 Section: libdevel
 Architecture: any
-Multi-Arch: same
 Depends: libc++abi1-19 (= ${binary:Version}), ${misc:Depends}
 Breaks: libc++abi-dev (<= 44)
 Provides: libc++abi-x.y-dev
@@ -831,7 +823,6 @@ Description: OpenCL C language implementation - development files
 Package: libunwind-19
 Section: libs
 Architecture: amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64
-Multi-Arch: same
 Depends: ${shlibs:Depends},
  ${misc:Depends}
 Provides: ${t64:Provides}, libunwind-x.y
@@ -848,7 +839,6 @@ Description: production-quality unwinder
 Package: libunwind-19-dev
 Section: libdevel
 Architecture: amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64
-Multi-Arch: same
 Depends:
  ${misc:Depends},
  libunwind-19 (= ${binary:Version})
@@ -879,7 +869,6 @@ Description: Multi-Level Intermediate Representation tools
 Package: libmlir-19
 Section: libs
 Architecture: any
-Multi-Arch: same
 Depends: ${shlibs:Depends},
  ${misc:Depends}
 Provides: ${t64:Provides}, libmlir-x.y
@@ -895,7 +884,6 @@ Description: Multi-Level Intermediate Representation library
 Package: libmlir-19-dev
 Section: libdevel
 Architecture: any
-Multi-Arch: same
 Depends:
  ${misc:Depends},
  libmlir-19 (= ${binary:Version})
