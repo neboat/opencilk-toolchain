@@ -1,0 +1,6 @@
+--- a/llvm/bindings/ocaml/transforms/CMakeLists.txt
++++ b/llvm/bindings/ocaml/transforms/CMakeLists.txt
+@@ -1,4 +1,3 @@
+ add_subdirectory(passbuilder)
+-add_subdirectory(tapir_opts)
+ add_subdirectory(utils)
