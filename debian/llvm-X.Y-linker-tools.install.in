@@ -1,4 +1,4 @@
 #!/usr/bin/dh-exec
 
-usr/lib/llvm-@LLVM_VERSION@/lib/libLTO.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@
-[!powerpc] usr/lib/llvm-@LLVM_VERSION@/lib/LLVM*.so
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/libLTO.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@
+[!powerpc] usr/lib/opencilk-@OPENCILK_VERSION@/lib/LLVM*.so

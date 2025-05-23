@@ -675,6 +675,8 @@ ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clan
 PROJECTS_LIST := $(shell echo "$(PROJECTS)"|sed -e "s| ||g")
 RUNTIMES_LIST := $(shell echo "$(RUNTIMES)"|sed -e "s| ||g")
 
+VERSION_TAG := $(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION)
+
 stamps/preconfigure:
 	if ! grep -qs '/proc ' /proc/mounts; then \
 		echo "/proc needs to be mounted"; \
@@ -724,7 +726,7 @@ stamps/preconfigure:
 	@echo "DOC_GENERATION=$(DOC_GENERATION)"
 
 	for f in debian/*.in debian/tests/*.in; do \
-		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION)/'); \
+		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(VERSION_TAG)/'); \
 		echo "$$f => $$f2"; \
 		sed -e 's|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|g' \
 			-e "s|@USAGE_BUILD_DEP@|$(USAGE_BUILD_DEP)|g" \
@@ -773,13 +775,13 @@ stamps/preconfigure:
 	# buster and Ubuntu 18.04 don't have llvm-spirv to create the
 	# *.spv files.
 	if test "$(LLVM_SPIRV_INSTALLED)" = "yes"; then \
-		sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION).install; \
+		sed -i -e "s|#spv\ ||g" debian/libclc-$(VERSION_TAG).install; \
 	fi
 
 	# disable libc++-X.Y-dev-wasm32.install.in on old distro
 	if test "$(LIBCXX_WASM_ENABLE)" = "no"; then \
-		echo "" > debian/libc++-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION)-dev-wasm32.install; \
-		echo "" > debian/libc++abi-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION)-dev-wasm32.install; \
+		echo "" > debian/libc++-$(VERSION_TAG)-dev-wasm32.install; \
+		echo "" > debian/libc++abi-$(VERSION_TAG)-dev-wasm32.install; \
 	else \
 		if ! dpkg -l|grep -q wasi-libc; then \
 			echo "Could not find wasi-libc on the system"; \
@@ -790,16 +792,16 @@ stamps/preconfigure:
 	fi
 
 	if test "$(LLVM_LIBC_ENABLE)" = "no"; then \
-		echo "" > debian/libllvmlibc-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION)-dev.install; \
+		echo "" > debian/libllvmlibc-$(VERSION_TAG)-dev.install; \
 	fi
 
 	# Conditionally enable install clangd grpc files
 	if test "$(CLANGD_GRPC_INSTALLED)" = "yes"; then \
-		sed -i -e "s|#grpc\ ||g" debian/libclang-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION)-dev.install; \
+		sed -i -e "s|#grpc\ ||g" debian/libclang-$(VERSION_TAG)-dev.install; \
 	fi
 
-	if ! dh_listpackages|grep -q clang-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION); then \
-		echo "Could not find clang-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION) in the list of packages"; \
+	if ! dh_listpackages|grep -q clang-$(VERSION_TAG); then \
+		echo "Could not find clang-$(VERSION_TAG) in the list of packages"; \
 		echo "Refresh debian/control ?"; \
 		echo "Package list:"; \
 		dh_listpackages; \

@@ -1,2 +1,2 @@
-/usr/lib/llvm-@LLVM_VERSION@/build/unittests
-/usr/lib/llvm-@LLVM_VERSION@/build/utils/lit/
+/usr/lib/opencilk-@OPENCILK_VERSION@/build/unittests
+/usr/lib/opencilk-@OPENCILK_VERSION@/build/utils/lit/

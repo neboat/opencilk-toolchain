@@ -1,2 +1,2 @@
-usr/lib/llvm-@LLVM_VERSION@/include/lld
-usr/lib/llvm-@LLVM_VERSION@/lib/cmake/lld/*.cmake
+usr/lib/opencilk-@OPENCILK_VERSION@/include/lld
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/cmake/lld/*.cmake

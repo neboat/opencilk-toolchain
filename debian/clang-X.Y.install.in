@@ -1,10 +1,10 @@
-usr/lib/llvm-@LLVM_VERSION@/bin/clang
-usr/lib/llvm-@LLVM_VERSION@/bin/clang++
-usr/lib/llvm-@LLVM_VERSION@/bin/clang-cpp
+usr/lib/opencilk-@OPENCILK_VERSION@/bin/clang
+usr/lib/opencilk-@OPENCILK_VERSION@/bin/clang++
+usr/lib/opencilk-@OPENCILK_VERSION@/bin/clang-cpp
 
 #usr/share/man/man1/clang.1     usr/share/man/man1/
-usr/lib/llvm-@LLVM_VERSION@/lib/cmake/clang/*.cmake
-usr/lib/llvm-@LLVM_VERSION@/share/clang/bash-autocomplete.sh
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/cmake/clang/*.cmake
+usr/lib/opencilk-@OPENCILK_VERSION@/share/clang/bash-autocomplete.sh
 
 usr/bin/clang-@LLVM_VERSION@
 usr/bin/clang++-@LLVM_VERSION@

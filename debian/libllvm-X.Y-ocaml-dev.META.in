@@ -1,7 +1,7 @@
 description = "Low Level Virtual Machine bindings"
 version = "@LLVM_VERSION@"
 
-directory = "+llvm-@LLVM_VERSION@"
+directory = "+opencilk-@OPENCILK_VERSION@"
 
 archive(byte)   = "llvm.cma"
 archive(native) = "llvm.cmxa"

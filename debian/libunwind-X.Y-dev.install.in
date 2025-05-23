@@ -1,5 +1,5 @@
-usr/lib/llvm-@LLVM_VERSION@/lib/libunwind.so
-usr/lib/llvm-@LLVM_VERSION@/lib/libunwind.a
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/libunwind.so
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/libunwind.a
 usr/include/libunwind
-usr/lib/llvm-@LLVM_VERSION@/include/*unwind*
-usr/lib/llvm-@LLVM_VERSION@/include/mach-o/
+usr/lib/opencilk-@OPENCILK_VERSION@/include/*unwind*
+usr/lib/opencilk-@OPENCILK_VERSION@/include/mach-o/

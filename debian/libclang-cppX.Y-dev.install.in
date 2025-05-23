@@ -1,1 +1,1 @@
-usr/lib/llvm-@LLVM_VERSION@/lib/libclang-cpp.so
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/libclang-cpp.so

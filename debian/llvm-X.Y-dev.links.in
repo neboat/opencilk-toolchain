@@ -1,16 +1,16 @@
-usr/include/llvm-c-@LLVM_VERSION@/llvm-c usr/lib/llvm-@LLVM_VERSION@/include/llvm-c
-usr/include/llvm-@LLVM_VERSION@/llvm usr/lib/llvm-@LLVM_VERSION@/include/llvm
-usr/include/llvm-c-@LLVM_VERSION@/llvm-c usr/lib/llvm-@LLVM_VERSION@/build/include/llvm-c
-usr/include/llvm-@LLVM_VERSION@/llvm usr/lib/llvm-@LLVM_VERSION@/build/include/llvm
+usr/include/llvm-c-@LLVM_VERSION@/llvm-c usr/lib/opencilk-@OPENCILK_VERSION@/include/llvm-c
+usr/include/opencilk-@OPENCILK_VERSION@/llvm usr/lib/opencilk-@OPENCILK_VERSION@/include/llvm
+usr/include/llvm-c-@LLVM_VERSION@/llvm-c usr/lib/opencilk-@OPENCILK_VERSION@/build/include/llvm-c
+usr/include/opencilk-@OPENCILK_VERSION@/llvm usr/lib/opencilk-@OPENCILK_VERSION@/build/include/llvm
 
-usr/lib/llvm-@LLVM_VERSION@/include/ usr/lib/llvm-@LLVM_VERSION@/build/include
-usr/lib/llvm-@LLVM_VERSION@/lib/     usr/lib/llvm-@LLVM_VERSION@/build/lib
-usr/lib/llvm-@LLVM_VERSION@/share/   usr/lib/llvm-@LLVM_VERSION@/build/share
-usr/lib/llvm-@LLVM_VERSION@/ usr/lib/llvm-@LLVM_VERSION@/build/Release
-usr/lib/llvm-@LLVM_VERSION@/ usr/lib/llvm-@LLVM_VERSION@/build/Debug+Asserts
+usr/lib/opencilk-@OPENCILK_VERSION@/include/ usr/lib/opencilk-@OPENCILK_VERSION@/build/include
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/     usr/lib/opencilk-@OPENCILK_VERSION@/build/lib
+usr/lib/opencilk-@OPENCILK_VERSION@/share/   usr/lib/opencilk-@OPENCILK_VERSION@/build/share
+usr/lib/opencilk-@OPENCILK_VERSION@/ usr/lib/opencilk-@OPENCILK_VERSION@/build/Release
+usr/lib/opencilk-@OPENCILK_VERSION@/ usr/lib/opencilk-@OPENCILK_VERSION@/build/Debug+Asserts
 
-usr/lib/llvm-@LLVM_VERSION@/lib/cmake/llvm usr/lib/llvm-@LLVM_VERSION@/cmake
-usr/lib/llvm-@LLVM_VERSION@/lib/cmake/llvm usr/lib/llvm-@LLVM_VERSION@/share/llvm/cmake
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/cmake/llvm usr/lib/opencilk-@OPENCILK_VERSION@/cmake
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/cmake/llvm usr/lib/opencilk-@OPENCILK_VERSION@/share/llvm/cmake
 
 # FIXME: CMake requires this file, but for what? Fix LLVMExports.cmake instead?
 #
@@ -20,7 +20,7 @@ usr/lib/llvm-@LLVM_VERSION@/lib/cmake/llvm usr/lib/llvm-@LLVM_VERSION@/share/llv
 #     "/usr/lib/llvm-19/lib/libLLVM.so.1"
 #
 #  but this file does not exist.
-usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@ usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM.so.1
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/libLLVM.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@ usr/lib/opencilk-@OPENCILK_VERSION@/lib/libLLVM.so.1
 
 # symlink to the soname in the llvm libdir
-usr/lib/@DEB_HOST_MULTIARCH@/libLLVM.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@ usr/lib/llvm-@LLVM_VERSION@/lib/libLLVM.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@
+usr/lib/@DEB_HOST_MULTIARCH@/libLLVM.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@ usr/lib/opencilk-@OPENCILK_VERSION@/lib/libLLVM.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@

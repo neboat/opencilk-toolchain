@@ -1,8 +1,8 @@
-usr/lib/llvm-@LLVM_VERSION@/bin/ld.lld*
-usr/lib/llvm-@LLVM_VERSION@/bin/ld64.lld*
-usr/lib/llvm-@LLVM_VERSION@/bin/lld-*
-usr/lib/llvm-@LLVM_VERSION@/bin/lld
-usr/lib/llvm-@LLVM_VERSION@/bin/wasm-ld
+usr/lib/opencilk-@OPENCILK_VERSION@/bin/ld.lld*
+usr/lib/opencilk-@OPENCILK_VERSION@/bin/ld64.lld*
+usr/lib/opencilk-@OPENCILK_VERSION@/bin/lld-*
+usr/lib/opencilk-@OPENCILK_VERSION@/bin/lld
+usr/lib/opencilk-@OPENCILK_VERSION@/bin/wasm-ld
 
 
 usr/bin/lld-link-@LLVM_VERSION@

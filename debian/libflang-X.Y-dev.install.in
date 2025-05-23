@@ -1,8 +1,8 @@
-usr/lib/llvm-@LLVM_VERSION@/lib/cmake/flang/
-usr/lib/llvm-@LLVM_VERSION@/include/flang/
-usr/lib/llvm-@LLVM_VERSION@/lib/libflang*.a
-usr/lib/llvm-@LLVM_VERSION@/lib/libflangFrontendTool.a
-usr/lib/llvm-@LLVM_VERSION@/lib/libFIR*.a
-usr/lib/llvm-@LLVM_VERSION@/lib/libHLFIR*.a
-usr/lib/llvm-@LLVM_VERSION@/lib/libFortran*.a
-usr/lib/llvm-@LLVM_VERSION@/lib/libCUF*.a
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/cmake/flang/
+usr/lib/opencilk-@OPENCILK_VERSION@/include/flang/
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/libflang*.a
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/libflangFrontendTool.a
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/libFIR*.a
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/libHLFIR*.a
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/libFortran*.a
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/libCUF*.a
