@@ -1,22 +1,28 @@
 set -e
-ORIG_VERSION=19
-MAJOR_VERSION=19.1.7 # 8.0.1
+ORIG_VERSION=3
+MAJOR_VERSION=3.0 # 8.0.1
 REV=`ls -1 *${ORIG_VERSION}_${MAJOR_VERSION}*~+*xz | tail -1|perl -ne 'print "$1\n" if /~\+(.*)\.orig/;'  | sort -ru`
 
 VERSION=$REV
 
 if test -z "$VERSION"; then
 	echo "Could not find the version"
-	exit 0
+# 	exit 0
+    LLVM_ARCHIVE=opencilk-toolchain-${ORIG_VERSION}_$MAJOR_VERSION.orig.tar.xz
+    echo "unpack of $LLVM_ARCHIVE"
+    tar Jxf $LLVM_ARCHIVE
+    cd opencilk-toolchain-${ORIG_VERSION}_$MAJOR_VERSION/
+else
+    LLVM_ARCHIVE=opencilk-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~+$VERSION.orig.tar.xz
+    echo "unpack of $LLVM_ARCHIVE"
+    tar Jxf $LLVM_ARCHIVE
+    cd opencilk-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~+$VERSION/
 fi
-LLVM_ARCHIVE=llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~+$VERSION.orig.tar.xz
-echo "unpack of $LLVM_ARCHIVE"
-tar Jxf $LLVM_ARCHIVE
-cd llvm-toolchain-${ORIG_VERSION}_$MAJOR_VERSION~+$VERSION/
 
 # VER_FOUND=$(grep "LLVM_VERSION_MAJOR " cmake/Modules/LLVMVersion.cmake|awk '{print $2}'|cut -d\) -f1)
-VER_FOUND="$(grep -oP 'set\(\s*LLVM_VERSION_(MAJOR|MINOR|PATCH)\s\K[0-9]+' cmake/Modules/LLVMVersion.cmake | paste -sd '.')"
-if test "${MAJOR_VERSION}" != "$VER_FOUND" -a "${MAJOR_VERSION}.0.0" != "$VER_FOUND" -a "${MAJOR_VERSION}.0.0git" != "$VER_FOUND" -a "${MAJOR_VERSION}git" != "$VER_FOUND"; then
+# VER_FOUND="$(grep -oP 'set\(\s*LLVM_VERSION_(MAJOR|MINOR|PATCH)\s\K[0-9]+' cmake/Modules/LLVMVersion.cmake | paste -sd '.')"
+VER_FOUND="$(grep -oP 'set\(\s*OPENCILK_VERSION_(MAJOR|MINOR|PATCH)\s\K[0-9]+' cmake/Modules/LLVMVersion.cmake | paste -sd '.')"
+if test "${MAJOR_VERSION}" != "$VER_FOUND" -a "${MAJOR_VERSION}.0" != "$VER_FOUND" -a "${MAJOR_VERSION}.0.0" != "$VER_FOUND" -a "${MAJOR_VERSION}.0.0git" != "$VER_FOUND" -a "${MAJOR_VERSION}git" != "$VER_FOUND"; then
     echo "Mismatch of version"
     echo "Expected $MAJOR_VERSION / Found $VER_FOUND"
     echo "Update unpack.sh"
