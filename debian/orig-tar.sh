@@ -24,6 +24,8 @@ if test -n "${JENKINS_HOME}"; then
 fi
 
 GIT_BASE_URL=https://github.com/OpenCilk/opencilk-project
+GIT_CHEETAH_URL=https://github.com/OpenCilk/cheetah
+GIT_CILKTOOLS_URL=https://github.com/OpenCilk/productivity-tools
 GIT_TOOLCHAIN_CHECK=https://github.com/opencollab/llvm-toolchain-integration-test-suite.git
 
 reset_repo ()
@@ -61,7 +63,7 @@ echo "MAJOR_VERSION=$MAJOR_VERSION / CURRENT_VERSION=$CURRENT_VERSION"
 if test -n "$1"; then
 # https://github.com/OpenCilk/opencilk-project/tree/release/9.x
 # For example: sh 4.0/debian/orig-tar.sh release/9.x
-    BRANCH=$1
+    BRANCH="opencilk/v$1"
     if ! echo "$1"|grep -q "dev/\|release/"; then
         # The first argument is NOT a branch, means that it is a stable release
         FINAL_RELEASE=true
@@ -72,8 +74,8 @@ else
     cd "$PATH_DEBIAN"
     SOURCE=$(dpkg-parsechangelog |grep ^Source|awk '{print $2}')
     cd - &> /dev/null
-    if test "$SOURCE" != "llvm-toolchain-snapshot"; then
-       echo "Checkout of the main is only available for llvm-toolchain-snapshot"
+    if test "$SOURCE" != "opencilk-toolchain-snapshot"; then
+       echo "Checkout of the main is only available for opencilk-toolchain-snapshot"
        exit 1
     fi
     BRANCH="main"
@@ -84,7 +86,7 @@ if test -n "$1" -a -n "$2"; then
 # For example: sh 4.0/debian/orig-tar.sh 4.0.1 rc3
 # or  sh 9/debian/orig-tar.sh 9.0.0
     TAG=$2
-    RCRELEASE="true"
+    # RCRELEASE="true"
     EXACT_VERSION=$1
     BRANCH=$TAG
 fi
@@ -100,6 +102,26 @@ else
     # Download it
     echo "Cloning the repo in $EXPORT_PATH/opencilk-project"
     git clone $GIT_BASE_URL $EXPORT_PATH/opencilk-project
+fi
+
+if test -d $EXPORT_PATH/cheetah; then
+    echo "Updating repo in $EXPORT_PATH/cheetah"
+    # Update it
+    reset_repo $EXPORT_PATH/cheetah $BRANCH
+else
+    # Download it
+    echo "Cloning the repo in $EXPORT_PATH/cheetah"
+    git clone $GIT_CHEETAH_URL $EXPORT_PATH/cheetah
+fi
+
+if test -d $EXPORT_PATH/cilktools; then
+    echo "Updating repo in $EXPORT_PATH/cilktools"
+    # Update it
+    reset_repo $EXPORT_PATH/cilktools $BRANCH
+else
+    # Download it
+    echo "Cloning the repo in $EXPORT_PATH/cilktools"
+    git clone $GIT_CHEETAH_URL $EXPORT_PATH/cilktools
 fi
 
 if test -d $EXPORT_PATH/llvm-toolchain-integration-test-suite; then
@@ -132,7 +154,7 @@ if test -z  "$TAG" -a -z "$FINAL_RELEASE"; then
         # In general, in Debian, we will keep X until X.0.1 is released (or rc in experimental)
         # However, on apt.llvm.org, we will update the version to have X.0.1
         # This code is doing that.
-        CURRENT_VERSION="$(grep -oP 'set\(\s*LLVM_VERSION_(MAJOR|MINOR|PATCH)\s\K[0-9]+' cmake/Modules/LLVMVersion.cmake | paste -sd '.')"
+        CURRENT_VERSION="$(grep -oP 'set\(\s*OPENCILK_VERSION_(MAJOR|MINOR|PATCH)\s\K[0-9]+' cmake/Modules/LLVMVersion.cmake | paste -sd '.')"
     fi
     # the + is here to make sure that this version is considered more recent than the svn
     # dpkg --compare-versions 10~svn374977-1~exp1 lt 10~+2019-svn374977-1~exp1
@@ -145,7 +167,7 @@ else
         echo "Mismatch in version: Dir=$MAJOR_VERSION Provided=$EXACT_VERSION"
         exit 1
     fi
-    # git_tag="llvmorg-$EXACT_VERSION"
+    git_tag="opencilk/v$EXACT_VERSION"
     VERSION=$EXACT_VERSION
     if test -n "$TAG"; then
         git_tag="$TAG"
@@ -161,13 +183,17 @@ fi
 rm -rf */www/ build/ build-llvm/
 
 cd ../
-BASE="llvm-toolchain-${MAJOR_VERSION}_${VERSION}"
+BASE="opencilk-toolchain-${MAJOR_VERSION}_${VERSION}"
 FILENAME="${BASE}.orig.tar.xz"
+cp -R cheetah opencilk-project/cheetah
+cp -R cilktools opencilk-project/cilktools
 cp -R llvm-toolchain-integration-test-suite opencilk-project/integration-test-suite
 # Argument to compress faster (for the cost of time)
 export XZ_OPT="-4 -T$(nproc)"
 echo "Compressing to $FILENAME"
 time tar Jcf $CURRENT_PATH/"$FILENAME" --exclude .git --exclude .gitattributes --exclude .git-blame-ignore-revs --exclude .gitignore --exclude .github --exclude build-llvm --transform="s|opencilk-project|$BASE|" -C $EXPORT_PATH opencilk-project
+rm -rf opencilk-project/cheetah
+rm -rf opencilk-project/cilktools
 rm -rf opencilk-project/integration-test-suite
 
 export DEBFULLNAME="Tao B. Schardl"
