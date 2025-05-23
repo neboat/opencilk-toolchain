@@ -63,10 +63,11 @@ echo "MAJOR_VERSION=$MAJOR_VERSION / CURRENT_VERSION=$CURRENT_VERSION"
 if test -n "$1"; then
 # https://github.com/OpenCilk/opencilk-project/tree/release/9.x
 # For example: sh 4.0/debian/orig-tar.sh release/9.x
-    BRANCH="opencilk/v$1"
+    BRANCH="$1"
     if ! echo "$1"|grep -q "dev/\|release/"; then
         # The first argument is NOT a branch, means that it is a stable release
         FINAL_RELEASE=true
+        BRANCH="opencilk/v$1"
         EXACT_VERSION=$1
     fi
 else
@@ -121,7 +122,7 @@ if test -d $EXPORT_PATH/cilktools; then
 else
     # Download it
     echo "Cloning the repo in $EXPORT_PATH/cilktools"
-    git clone $GIT_CHEETAH_URL $EXPORT_PATH/cilktools
+    git clone $GIT_CILKTOOLS_URL $EXPORT_PATH/cilktools
 fi
 
 if test -d $EXPORT_PATH/llvm-toolchain-integration-test-suite; then
@@ -134,6 +135,7 @@ else
 fi
 
 cd $EXPORT_PATH/opencilk-project
+LLVM_VERSION="$(grep -oP 'set\(\s*LLVM_VERSION_(MAJOR|MINOR|PATCH)\s\K[0-9]+' cmake/Modules/LLVMVersion.cmake | paste -sd '.')"
 if test -z  "$TAG" -a -z "$FINAL_RELEASE"; then
     # Building a branch
     git checkout $BRANCH
@@ -168,7 +170,7 @@ else
         exit 1
     fi
     git_tag="opencilk/v$EXACT_VERSION"
-    VERSION=$EXACT_VERSION
+    VERSION="$EXACT_VERSION~+$LLVM_VERSION"
     if test -n "$TAG"; then
         git_tag="$TAG"
         OPENCILK_VERSION_FILENAME=$(echo "$TAG" | sed -rne "s,/,-,p")
