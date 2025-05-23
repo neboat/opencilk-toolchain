@@ -14,6 +14,7 @@ GCC_VERSION              := $(subst /usr/bin/g++-,,$(GXX_VERSIONED_EXECUTABLE))
 
 PKG_VERSION := $(shell dpkg-parsechangelog | awk '/^Version:/ {print $$2}')
 LLVM_EPOCH := 1:
+OPENCILK_VERSION := $(shell echo $(PKG_VERSION) | sed -rne "s,^1:([0-9]+).*,\1,p")
 OPENCILK_FULL_VERSION := $(shell echo $(PKG_VERSION) | sed -rne "s,^1:([0-9.]+)(~|-)(.*),\1,p")
 LLVM_VERSION   := $(shell echo $(PKG_VERSION) | sed -rne "s,^1:$(OPENCILK_FULL_VERSION)~\+([0-9]+).*,\1,p")
 LLVM_VERSION_FULL := $(shell echo $(PKG_VERSION) | sed -rne "s,^1:$(OPENCILK_FULL_VERSION)~\+([0-9.]+)(~|-)(.*),\1,p")
@@ -48,7 +49,7 @@ SOURCE_NAME := $(shell dpkg-parsechangelog -S Source)
 ifneq (,$(findstring snapshot,$(SOURCE_NAME)))
   BRANCH_NAME=snapshot
 else
-  BRANCH_NAME=$(LLVM_VERSION)
+  BRANCH_NAME=$(OPENCILK_VERSION)
 endif
 
 VENDOR=$(shell lsb_release -is)
@@ -723,7 +724,7 @@ stamps/preconfigure:
 	@echo "DOC_GENERATION=$(DOC_GENERATION)"
 
 	for f in debian/*.in debian/tests/*.in; do \
-		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
+		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION)/'); \
 		echo "$$f => $$f2"; \
 		sed -e 's|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|g' \
 			-e "s|@USAGE_BUILD_DEP@|$(USAGE_BUILD_DEP)|g" \
@@ -736,6 +737,7 @@ stamps/preconfigure:
 			-e "s|@BRANCH_NAME@|$(BRANCH_NAME)|g" \
 			-e "s|@OCAML_STDLIB_DIR@|$(OCAML_STDLIB_DIR)|g" \
 			-e "s|@LLVM_EPOCH@|$(LLVM_EPOCH)|g" \
+			-e "s|@OPENCILK_VERSION@|$(OPENCILK_VERSION)|g" \
 			-e "s|@LLVM_VERSION_FULL@|$(LLVM_VERSION_FULL)|g" \
 			-e "s|@LLVM_VERSION_MINOR@|$(LLVM_VERSION_MINOR)|g" \
 			-e "s|@LLVM_VERSION_NEXT@|$(LLVM_VERSION_NEXT)|g" \
@@ -771,13 +773,13 @@ stamps/preconfigure:
 	# buster and Ubuntu 18.04 don't have llvm-spirv to create the
 	# *.spv files.
 	if test "$(LLVM_SPIRV_INSTALLED)" = "yes"; then \
-		sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION).install; \
+		sed -i -e "s|#spv\ ||g" debian/libclc-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION).install; \
 	fi
 
 	# disable libc++-X.Y-dev-wasm32.install.in on old distro
 	if test "$(LIBCXX_WASM_ENABLE)" = "no"; then \
-		echo "" > debian/libc++-$(LLVM_VERSION)-dev-wasm32.install; \
-		echo "" > debian/libc++abi-$(LLVM_VERSION)-dev-wasm32.install; \
+		echo "" > debian/libc++-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION)-dev-wasm32.install; \
+		echo "" > debian/libc++abi-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION)-dev-wasm32.install; \
 	else \
 		if ! dpkg -l|grep -q wasi-libc; then \
 			echo "Could not find wasi-libc on the system"; \
@@ -788,16 +790,16 @@ stamps/preconfigure:
 	fi
 
 	if test "$(LLVM_LIBC_ENABLE)" = "no"; then \
-		echo "" > debian/libllvmlibc-$(LLVM_VERSION)-dev.install; \
+		echo "" > debian/libllvmlibc-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION)-dev.install; \
 	fi
 
 	# Conditionally enable install clangd grpc files
 	if test "$(CLANGD_GRPC_INSTALLED)" = "yes"; then \
-		sed -i -e "s|#grpc\ ||g" debian/libclang-$(LLVM_VERSION)-dev.install; \
+		sed -i -e "s|#grpc\ ||g" debian/libclang-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION)-dev.install; \
 	fi
 
-	if ! dh_listpackages|grep -q clang-$(LLVM_VERSION); then \
-		echo "Could not find clang-$(LLVM_VERSION) in the list of packages"; \
+	if ! dh_listpackages|grep -q clang-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION); then \
+		echo "Could not find clang-$(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION) in the list of packages"; \
 		echo "Refresh debian/control ?"; \
 		echo "Package list:"; \
 		dh_listpackages; \
@@ -870,7 +872,7 @@ endif
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH \
 	$(PRE_PROCESS_CONF) $(CMAKE_BIN) -S llvm/ -B $(TARGET_BUILD) \
 	-G Ninja \
-	-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
+	-DCMAKE_INSTALL_PREFIX=/usr/lib/opencilk-$(OPENCILK_VERSION) \
 	-DLLVM_VERSION_SUFFIX= \
 	-DCMAKE_SUPPRESS_REGENERATION=ON \
 	-DCMAKE_BUILD_TYPE=Release \
@@ -982,7 +984,7 @@ stamps/debian-full-build:
 		echo "libclang-$(LLVM_VERSION).so.1 depends on libclang-cpp. Should not be the case"; \
 		exit 2; \
 	fi
-	if test -e $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libclang-$(LLVM_VERSION).so.1; then \
+	if test -e $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libclang-$(LLVM_VERSION).so.1; then \
 		echo "libclang-$(LLVM_VERSION).so.1 link is broken"; \
 		exit 2; \
 	fi
@@ -1052,7 +1054,7 @@ build-wasm/compiler-rt-%:
 		-DCMAKE_SHARED_LINKER_FLAGS="$(STAGE_2_LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
 		-DCMAKE_MODULE_LINKER_FLAGS="$(STAGE_2_LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
 		-DCMAKE_EXE_LINKER_FLAGS="$(STAGE_2_LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
-		-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION) \
+		-DCMAKE_INSTALL_PREFIX=/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION) \
 		-DCMAKE_INSTALL_DATADIR=lib \
 		-DCMAKE_INSTALL_INCLUDEDIR=include \
 		-DLLVM_CMAKE_DIR=$(STAGE_2_BIN_DIR)/../ \
@@ -1116,7 +1118,7 @@ build-wasm/libcxx-%-wasi: build-wasm/compiler-rt-%
 		-DCMAKE_SHARED_LINKER_FLAGS="$(LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
 		-DCMAKE_MODULE_LINKER_FLAGS="$(LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
 		-DCMAKE_EXE_LINKER_FLAGS="$(LDFLAGS) -L$(STAGE_2_LIB_DIR)" \
-		-DCMAKE_INSTALL_PREFIX=/usr/lib/llvm-$(LLVM_VERSION) \
+		-DCMAKE_INSTALL_PREFIX=/usr/lib/opencilk-$(OPENCILK_VERSION) \
 		-DCMAKE_INSTALL_INCLUDEDIR=include/$(cpu)-wasi \
 		-DLLVM_LIBDIR_SUFFIX=/$(cpu)-wasi \
 		-DLLVM_CONFIG=$(STAGE_2_BIN_DIR)/llvm-config \
@@ -1232,7 +1234,7 @@ endif
 	CMDS="llvm-dwarfdump llvm-mc llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb clang-format clang clang++ clang-tblgen clang-check clang-cpp clang-tidy clang-apply-replacements clang-rename clang-query pp-trace sancov lli modularize clang-include-fixer find-all-symbols clang-reorder-fields ld.lld llvm-tblgen clang-change-namespace clang-offload-bundler clangd clang-repl git-clang-format run-clang-tidy"; \
 	for f in $$CMDS; do \
 		echo "Generating manpage of $$f"; \
-		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-info --version-string=$(LLVM_VERSION) $(TARGET_BUILD_STAGE2)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1 || true; \
+		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-info --version-string=$(LLVM_VERSION) $(TARGET_BUILD_STAGE2)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1 || true; \
 	done
 	# Create the following directory regardless as libomp-XX-doc
 	# is Architecture: all
@@ -1253,23 +1255,23 @@ override_dh_auto_install:
 	LD_LIBRARY_PATH=$(STAGE_2_LIB_DIR):$$LD_LIBRARY_PATH DESTDIR=$(DEB_INST)/ ninja -C $(TARGET_BUILD) $(VERBOSE) stage2-install
 
 	# Not used on Linux.
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/argdumper
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/clang/clang-format-bbedit.applescript
+	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/bin/argdumper
+	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/share/clang/clang-format-bbedit.applescript
 	# Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
 	rm -f $(DEB_INST)/usr/share/clang/scan-build-$(LLVM_VERSION)/libexec/*.bat $(DEB_INST)/usr/share/clang/scan-build-$(LLVM_VERSION)/bin/*.bat
 
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libExampleIRTransforms.a
+	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libExampleIRTransforms.a
 	# Remove an example - introduced in https://reviews.llvm.org/D61446
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libBye.a
+	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libBye.a
 
-	cp $(TARGET_BUILD_STAGE2)/bin/clang-query $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin
+	cp $(TARGET_BUILD_STAGE2)/bin/clang-query $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/bin
 
 	# Only run on executable, not script
-	chrpath -d `find $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/ -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary'|cut -d: -f1`
+	chrpath -d `find $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/bin/ -type f -executable -exec file -i '{}' \; | grep 'x-executable; charset=binary'|cut -d: -f1`
 ifeq (,$(filter $(DEB_HOST_ARCH), powerpc))
 ifneq (,$(filter $(DEB_HOST_ARCH_OS),linux))
 	# To fix custom-library-search-path
-	chrpath -d $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)*/lib/linux/*.so || true
+	chrpath -d $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)*/lib/linux/*.so || true
 endif
 endif
 
@@ -1280,7 +1282,7 @@ endif
 
 	: # libomp
 	if test "$(OPENMP_ENABLE)" = yes; then \
-		cd debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib; \
+		cd debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib; \
 		ln -s libomp.so.$(SONAME_OPENMP) libomp.so; \
 		cp libomp.so.$(SONAME_OPENMP) libomp-$(LLVM_VERSION).so.$(SONAME_OPENMP); \
 	fi
@@ -1294,44 +1296,44 @@ endif
 	cp compiler-rt/lib/asan/scripts/asan_symbolize.py $(CURDIR)/debian/clang-$(LLVM_VERSION)/usr/bin/asan_symbolize-$(LLVM_VERSION)
 
 ifeq (${LIBFUZZER_ENABLE},yes)
-	mkdir -p $(CURDIR)/debian/libfuzzer-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/
-	cp -v $(TARGET_BUILD)/libFuzzer.a $(CURDIR)/debian/libfuzzer-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/
+	mkdir -p $(CURDIR)/debian/libfuzzer-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/
+	cp -v $(TARGET_BUILD)/libFuzzer.a $(CURDIR)/debian/libfuzzer-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/
 endif
 
 # Because of hurd, we are more flexible in what we include in libclang-X.Y-rt
 # but we don't want to install wasi files into libclang-rt as they have their own package
 # So, we remove this directory from the package
-	rm -f $(CURDIR)/debian/libclang-rt-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/wasi/
+	rm -f $(CURDIR)/debian/libclang-rt-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/wasi/
 
 # Create this fake directory to make the install libclang-common-dev happy
 # under the unsupported archs of compiler-rt
 	mkdir -p $(DEB_INST)/usr/lib/clang/$(LLVM_VERSION)/lib
-	mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/lib/
-	mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/lib/clang_linux/
+	mkdir -p $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/lib/
+	mkdir -p $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/lib/clang_linux/
 	mkdir -p $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/clang_linux/
-	mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/share/
+	mkdir -p $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/share/
 # On some archs, the sanitizers are not built. As we explicitly includes some txt files, create
 # a fake txt to make sure it doesn't fail
-	echo "The *.txt files, if available, contain helper to override some of the errors messages." > $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/README.txt
-	echo "Please visit https://github.com/google/sanitizers/wiki/AddressSanitizer for help" >> $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/README.txt
+	echo "The *.txt files, if available, contain helper to override some of the errors messages." > $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/README.txt
+	echo "Please visit https://github.com/google/sanitizers/wiki/AddressSanitizer for help" >> $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/README.txt
 # Path changed. Make a copy of it
-	cp $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/README.txt $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/share/README.txt
+	cp $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/README.txt $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/share/README.txt
 
 # Remove things that CMake  install but which aren't packaged yet,
 # or are packaged from the source or build tree.
-	mv $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/clang-$(LLVM_VERSION) \
-	   $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/bin/clang
+	mv $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/bin/clang-$(LLVM_VERSION) \
+	   $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/bin/clang
 
 # Probably useless
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/six.py
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local/lib/python*/*-packages/six.py
-	rm -rf $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/__pycache__/ \
-	$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/build/utils/lit/lit/*/__pycache__/
+	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/python*/*-packages/six.py
+	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/local/lib/python*/*-packages/six.py
+	rm -rf $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/build/utils/lit/lit/__pycache__/ \
+	$(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/build/utils/lit/lit/*/__pycache__/
 
 	# workaround issue https://github.com/llvm/llvm-project/issues/57101
 	find debian/tmp -iname 'libbolt_rt*.a' -path '*/build-llvm/*' -delete
 	# Remove an osx file
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libbolt_rt_instr_osx.a
+	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libbolt_rt_instr_osx.a
 
 	if test -d libclc/build; then \
 		DESTDIR=$(DEB_INST) ninja $(VERBOSE) -C libclc/build install; \
@@ -1352,7 +1354,7 @@ endif
 	mkdir -p $(DEB_INST)/usr/bin/
 	cd $(DEB_INST)/usr/bin/; \
 	rm -f *; \
-	for f in ../lib/llvm-$(LLVM_VERSION)/bin/*; do \
+	for f in ../lib/opencilk-$(OPENCILK_VERSION)/bin/*; do \
 		ln -s $$f `basename $$f`-$(LLVM_VERSION); \
 		echo "Link $$f to `basename $$f`-$(LLVM_VERSION)"; \
 	done
@@ -1385,45 +1387,45 @@ endif
 	cp -fR $(CURDIR)/clang/tools/scan-view clang/tools/scan-view-$(LLVM_VERSION)
 
 # Remove some license files
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/include/llvm/Support/LICENSE.TXT
+	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/include/llvm/Support/LICENSE.TXT
 
 # Disable CMake's LLVMExports package validation checks for target files that we may remove.
 	sed -i \
 	  -e '/_\(cmake_import_check_targets\|IMPORT_CHECK_TARGETS\) \(Polly\|sancov\|llvm-omp-device-info\|LibcTableGenUtil\|omptarget\|omp\)/ {s|^|#|}' \
-	  $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
+	  $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 
 # the obscure libLLVM.so.1 file ...
 	sed -i \
 	  -e '/_\(cmake_import_check_targets\|IMPORT_CHECK_TARGETS\) LLVM/ {s|^|#|}' \
 	  -e '/_\(cmake_import_check_targets\|IMPORT_CHECK_TARGETS\)_.*\/libLLVM\.so\.1.*/ {s|^|#|}' \
-	  $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
+	  $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 
 # Also disable mlir-* checks in the cmake
 	sed -i \
 	  -e '/_\(cmake_import_check_targets\|IMPORT_CHECK_TARGETS\) \(mlir-\|MLIR\)/ {s|^|#|}' \
-	  $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
+	  $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 
 	sed -i \
 	  -e '/_\(cmake_import_check_files_for\|IMPORT_CHECK_FILES_FOR\)_.*\/bin\/.*/ {s|^|#|}' \
-	  $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake \
-	  $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
+	  $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake \
+	  $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
 
 	sed -i \
 	  -e '/_\(cmake_import_check_files_for\|IMPORT_CHECK_FILES_FOR\)_\(mlir\|Polly\|MLIR\|LibcTableGenUtil\|omp\|omptarget\)/ {s|^|#|}' \
-	  $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake \
-	  $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
+	  $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake \
+	  $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/clang/ClangTargets-*.cmake
 
 # Managed in python*-lldb-X.Y.links.in
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/lldb/_lldb.so
+	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/python*/*-packages/lldb/_lldb.so
 
 # Manage the polly files. Sometimes, we build them. Sometimes not.
 	if test "$(POLLY_ENABLE)" = yes; then \
-		mkdir -p $(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/ $(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly/; \
-		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPolly* \
-		$(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
-		rm -rf $(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly; \
-		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/include/polly/ \
-		$(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/; \
+		mkdir -p $(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/ $(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/polly/; \
+		mv -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libPolly* \
+		$(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/; \
+		rm -rf $(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/polly; \
+		mv -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/include/polly/ \
+		$(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/; \
 	fi
 
 	mkdir -p $(CURDIR)/debian/usr/share/doc/llvm-$(LLVM_VERSION)-doc/ $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/
@@ -1439,35 +1441,35 @@ endif
 # Rename OCaml bindings
 	if test "$(OCAML_ENABLE)" = yes; then \
 		mkdir -p "$(DEB_INST)$(OCAML_STDLIB_DIR)"; \
-		mkdir -p "$(DEB_INST)usr/lib/llvm-$(LLVM_VERSION)/docs/ocaml/html/html"; \
-		mkdir -p "$(DEB_INST)usr/lib/llvm-$(LLVM_VERSION)/share/doc/llvm/ocaml-html/"; \
-		if test -d "$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ocaml"; then \
-			mv -f "$(DEB_INST)usr/lib/llvm-$(LLVM_VERSION)/lib/ocaml" \
+		mkdir -p "$(DEB_INST)usr/lib/opencilk-$(OPENCILK_VERSION)/docs/ocaml/html/html"; \
+		mkdir -p "$(DEB_INST)usr/lib/opencilk-$(OPENCILK_VERSION)/share/doc/llvm/ocaml-html/"; \
+		if test -d "$(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/ocaml"; then \
+			mv -f "$(DEB_INST)usr/lib/opencilk-$(OPENCILK_VERSION)/lib/ocaml" \
 			"$(DEB_INST)$(OCAML_STDLIB_DIR)/llvm-$(LLVM_VERSION)"; \
 		fi; \
 	fi
 
 # For some reasons, from Ubuntu jammy, python stuff are installed in /local/lib, move it back
-	if test -d $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local/lib/; then \
-		mv $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local/lib/* $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
-		rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/six.py; \
-		ls $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local/; \
-		rmdir $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local/lib; \
-		rmdir $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/local; \
+	if test -d $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/local/lib/; then \
+		mv $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/local/lib/* $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/; \
+		rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/python*/*-packages/six.py; \
+		ls $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/local/; \
+		rmdir $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/local/lib; \
+		rmdir $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/local; \
 	fi
 
 # Disable the python binding for buster. not sure why it regressed
 # regressed de4364f1ecaa..0745b0c0354a
 	if test "$(DISTRO)" = "buster" -o "$(DEB_HOST_ARCH)" = "mips64el"; then \
-		mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/; \
-		touch $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/share/gdb/python/ompd/empty; \
+		mkdir -p $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/share/gdb/python/ompd/; \
+		touch $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/share/gdb/python/ompd/empty; \
 	fi
 	if test "$(LLDB_PYTHON_ENABLE)" = no; then \
 		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
 	fi
 
 # Remove some mlir example
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libMyExtensionCh*.a
+	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libMyExtensionCh*.a
 
 # Delete the target build directory to save some space on the build systems
 # All the files have been installed in $(CURDIR)/debian/tmp/ already
@@ -1498,7 +1500,7 @@ endif
 
 override_dh_shlibdeps:
 # Ignore asan libraries. They would trigger dependencies to multiarch libraries
-	dh_shlibdeps -l$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/ -Xlibclang_rt.asan -Xlibclang_rt.asan -Xlibclang_rt.asan-*.so -Xlibclang_rt.asan-*.so
+	dh_shlibdeps -l$(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/ -Xlibclang_rt.asan -Xlibclang_rt.asan -Xlibclang_rt.asan-*.so -Xlibclang_rt.asan-*.so
 
 override_dh_installman:
 	if test -f lld/docs/ld.lld.1; then \
@@ -1528,17 +1530,17 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' bin
 	: # use llvm-strip instead
 	: # Workaround some issues with stripping by using llvm's
 	if test ! -f $(CURDIR)/strip; then \
-		ln -s $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/bin/llvm-strip $(CURDIR)/strip; \
+		ln -s $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/lib/opencilk-$(OPENCILK_VERSION)/bin/llvm-strip $(CURDIR)/strip; \
 	fi
 	ls -al $(CURDIR)/debian/.debhelper/*/dbgsym-root/usr/lib/debug/.build-id/*/*|| true
 	: # On some old version of Debian (stretch) and Ubuntu, Rules-Requires-Root isn't supported
 	: # Sometime, it fails because of chown: changing ownership of 'debian/.debhelper/clang-7/dbgsym-root/usr/lib/debug/.build-id/37/ba506ae9d2f82219bf5c552f7c09853052b2b0.debug': Operation not permitted
 	: # Therefore, continue when we encounter an error
-	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot dh_strip -a -v || true
+	PATH=$(CURDIR)/:$$PATH LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/:/usr/lib/*/libfakeroot dh_strip -a -v || true
 	: # Remove the workaround
 	rm $(CURDIR)/strip
 	: # for some reasons, the +x might be removed
-	chmod -f +x $(CURDIR)/debian/*/usr/lib/llvm-$(LLVM_VERSION)/bin/* || true
+	chmod -f +x $(CURDIR)/debian/*/usr/lib/opencilk-$(OPENCILK_VERSION)/bin/* || true
 else
 	# GNU strip doesn't recognize WebAssembly binaries, and actually corrupts them.
 	# llvm-strip (as of 15.0.2) fails with --strip-debug (but works with --strip-all)
@@ -1547,43 +1549,43 @@ endif
 
 override_dh_install:
 	: # fix libLLVM.so.1 install, install it under the SONAME
-	-ls -l debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM*.so*
-	test -f debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM.so.1
+	-ls -l debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libLLVM*.so*
+	test -f debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libLLVM.so.1
 
-	if [ -f debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM.so.1 ] && [ ! -h debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM.so.1 ]; then \
-	  soname=$$(objdump -p debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM.so.1 | awk '/ *SONAME / {print $$2}'); \
-	  rm -f debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/$$soname; \
-	  mv debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM.so.1 debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/$$soname; \
-	  ln -sf $$soname debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM-$(LLVM_VERSION).so; \
-	  ln -sf $$soname debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVM.so; \
+	if [ -f debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libLLVM.so.1 ] && [ ! -h debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libLLVM.so.1 ]; then \
+	  soname=$$(objdump -p debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libLLVM.so.1 | awk '/ *SONAME / {print $$2}'); \
+	  rm -f debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/$$soname; \
+	  mv debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libLLVM.so.1 debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/$$soname; \
+	  ln -sf $$soname debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libLLVM-$(LLVM_VERSION).so; \
+	  ln -sf $$soname debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libLLVM.so; \
 	fi
 
 ifeq (${POLLY_ENABLE},yes)
 # only for arch:any builds
 ifneq (,$(filter libpolly-$(LLVM_VERSION)-dev, $(packages)))
-	dh_install -p libpolly-$(LLVM_VERSION)-dev usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly
+	dh_install -p libpolly-$(LLVM_VERSION)-dev usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/polly/*.cmake usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/polly
 # On old Debian & Ubuntu, removing the files is necessary
-	rm -rf debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
+	rm -rf debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/polly/*.cmake
 else
-	rm -rf $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/polly/*.cmake
+	rm -rf $(CURDIR)/debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/polly/*.cmake
 endif
 endif
 	dh_install --fail-missing ${skip_packages}
 # Move the libc++ abi files from libc++ to libc++-abi for the wasm32 packages
 # These packages are arch: all, so only do so when the packages are built
 ifneq (,$(filter libc++-$(LLVM_VERSION)-dev-wasm32, $(packages)))
-	mkdir -p $(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1
-	if test -f $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; then \
-		mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h \
-			$(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; \
-		mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h \
-			$(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/llvm-$(LLVM_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h; \
+	mkdir -p $(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1
+	if test -f $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; then \
+		mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h \
+			$(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; \
+		mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h \
+			$(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h; \
 	fi
 endif
 # Because of hurd, we are more flexible in what we include in libclang-X.Y-rt
 # but we don't want to install wasi files into libclang-rt as they have their own package
 # So, we remove this directory from the package
-	rm -fr $(CURDIR)/debian/libclang-rt-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/lib/wasi/
+	rm -fr $(CURDIR)/debian/libclang-rt-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/lib/wasi/
 
 	if [ -d debian/llvm-$(LLVM_VERSION)/usr/share/doc/llvm-$(LLVM_VERSION) ]; then \
 	  for svg in usage-*.svg; do \
@@ -1605,19 +1607,19 @@ override_dh_installdeb: stamps/repack_a_llvm_ir
 # Managed by the package
 	dh_installdeb -a
 
-	rm -f $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/lldb/__init__.pyc $(CURDIR)/debian/python*-lldb-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/*-packages/lldb/__init__.pyc
+	rm -f $(CURDIR)/debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/python*/*-packages/lldb/__init__.pyc $(CURDIR)/debian/python*-lldb-$(LLVM_VERSION)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/python*/*-packages/lldb/__init__.pyc
 	rm -f $(CURDIR)/debian/clang-$(LLVM_VERSION)-examples/usr/share/doc/clang-$(LLVM_VERSION)-examples/examples/*Make*
 
 # the openmp header files moved to the same path as lib clang headers.
 # To make sure they aren't conflicting ( https://bugs.llvm.org/show_bug.cgi?id=46977 )
 # Remove them from the libclang-common package
-	rm -f $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION)/include/omp*.h
+	rm -f $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/include/omp*.h
 
 # Remove some libc++ abi files in the libc++ file. See bug #969274
-	rm -f $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/c++/__cxxabi_config.h $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/c++/cxxabi.h
+	rm -f $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/c++/__cxxabi_config.h $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/c++/cxxabi.h
 
 # Remove auto generated python pyc
-	find $(CURDIR)/debian/llvm-$(LLVM_VERSION)-tools/usr/lib/llvm-$(LLVM_VERSION)/ -name '*.pyc' | xargs -r rm -f
+	find $(CURDIR)/debian/llvm-$(LLVM_VERSION)-tools/usr/lib/opencilk-$(OPENCILK_VERSION)/ -name '*.pyc' | xargs -r rm -f
 
 ifeq (${RUN_TEST},yes)
 # List of the archs we know we have 100 % tests working
