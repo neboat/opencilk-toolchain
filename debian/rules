@@ -736,6 +736,7 @@ stamps/preconfigure:
 			-e "s|@OCAML_ARCHS@|$(OCAML_ARCHS)|g" \
 			-e "s|@OMP_ARCHS@|$(OMP_ARCHS)|g" \
 			-e "s|@FLANG_ARCHS@|$(FLANG_ARCHS)|g" \
+			-e "s|@CILK_ARCHS@|$(CILK_ARCHS)|g" \
 			-e "s|@BRANCH_NAME@|$(BRANCH_NAME)|g" \
 			-e "s|@OCAML_STDLIB_DIR@|$(OCAML_STDLIB_DIR)|g" \
 			-e "s|@LLVM_EPOCH@|$(LLVM_EPOCH)|g" \

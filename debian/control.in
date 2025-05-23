@@ -957,7 +957,7 @@ Description: LLVM C Library - dev package
 # ------------- Cilk -------------
 
 Package: libopencilk-@LLVM_VERSION@-opencilk-@OPENCILK_VERSION@-dev
-Architecture: amd64 arm64
+Architecture: @CILK_ARCHS@
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: OpenCilk runtime library - dev package
@@ -971,7 +971,7 @@ Description: OpenCilk runtime library - dev package
  OpenCilk programs.
 
 Package: libcilktools-@LLVM_VERSION@-opencilk-@OPENCILK_VERSION@-dev
-Architecture: amd64 arm64
+Architecture: @CILK_ARCHS@
 Section: libdevel
 Depends: libclang-rt-@LLVM_VERSION@-opencilk-@OPENCILK_VERSION@-dev (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: OpenCilk program-analysis tools - dev package
