@@ -1,0 +1,8 @@
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/include/cilk/cilk.h
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/include/cilk/cilk_api.h
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/include/cilk/cilk_stub.h
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/include/cilk/holder.h
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/include/cilk/opadd_reducer.h
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/include/cilk/ostream_reducer.h
+
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/libopencilk*

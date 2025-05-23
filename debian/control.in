@@ -953,3 +953,31 @@ Description: LLVM C Library - dev package
  Implementation of the C standard library targeting C17 and above.
  .
  This is an experimental project. Don't use in production.
+
+# ------------- Cilk -------------
+
+Package: libopencilk-@LLVM_VERSION@-opencilk-@OPENCILK_VERSION@-dev
+Architecture: amd64 arm64
+Section: libdevel
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: OpenCilk runtime library - dev package
+ OpenCilk's runtime scheduler for multicore CPUs.
+ .
+ OpenCilk's runtime library implements a provably efficient
+ randomized work-stealing scheduler to automatically load
+ balance Cilk task-parallel computation on multicore CPUs.
+ .
+ This package also provides the compiler-runtime ABI to compile
+ OpenCilk programs.
+
+Package: libcilktools-@LLVM_VERSION@-opencilk-@OPENCILK_VERSION@-dev
+Architecture: amd64 arm64
+Section: libdevel
+Depends: libclang-rt-@LLVM_VERSION@-opencilk-@OPENCILK_VERSION@-dev (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: OpenCilk program-analysis tools - dev package
+ OpenCilk's tool suite for dynamic task-parallel program analysis.
+ .
+ This package provides the Cilksan race detector and the Cilkscale
+ scalability analyzer, including their runtime libraries and API
+ header files.  This package also provides scripts to help
+ benchmark or debug Cilk programs.
