@@ -1,1 +1,1 @@
-clang/docs/_build/man/clang-@LLVM_VERSION@.1
+clang/docs/_build/man/clang-@VERSION_TAG@.1

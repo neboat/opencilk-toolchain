@@ -1,6 +1,6 @@
 usr/bin/mlir-*
-usr/bin/tblgen-lsp-server-@LLVM_VERSION@
-usr/bin/tblgen-to-irdl-@LLVM_VERSION@
+usr/bin/tblgen-lsp-server-@VERSION_TAG@
+usr/bin/tblgen-to-irdl-@VERSION_TAG@
 
 usr/lib/opencilk-@OPENCILK_VERSION@/bin/mlir-*
 usr/lib/opencilk-@OPENCILK_VERSION@/bin/tblgen-lsp-server

@@ -1,2 +1,2 @@
-debian/man/clang-tidy-@LLVM_VERSION@.1
-debian/man/run-clang-tidy-@LLVM_VERSION@.1
+debian/man/clang-tidy-@VERSION_TAG@.1
+debian/man/run-clang-tidy-@VERSION_TAG@.1

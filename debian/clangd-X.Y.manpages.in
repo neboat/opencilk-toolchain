@@ -1,1 +1,1 @@
-debian/man/clangd-@LLVM_VERSION@.1
+debian/man/clangd-@VERSION_TAG@.1

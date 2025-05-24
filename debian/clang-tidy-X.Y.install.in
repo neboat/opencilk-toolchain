@@ -2,5 +2,5 @@ usr/lib/opencilk-@OPENCILK_VERSION@/bin/clang-tidy
 usr/lib/opencilk-@OPENCILK_VERSION@/bin/run-clang-tidy
 usr/lib/opencilk-@OPENCILK_VERSION@/share/clang/clang-tidy-diff.py
 
-usr/bin/clang-tidy-@LLVM_VERSION@
-usr/bin/run-clang-tidy-@LLVM_VERSION@
+usr/bin/clang-tidy-@VERSION_TAG@
+usr/bin/run-clang-tidy-@VERSION_TAG@

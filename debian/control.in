@@ -55,7 +55,6 @@ Provides: c-compiler, objc-compiler, c++-compiler, objc++-compiler
 Recommends: llvm-@VERSION_TAG@-dev, python3, clang-tools-@VERSION_TAG@
 # libomp-@VERSION_TAG@-dev
 Suggests: clang-@VERSION_TAG@-doc, wasi-libc
-Conflicts: clang-@LLVM_VERSION@
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -68,7 +67,6 @@ Package: clang-tools-@VERSION_TAG@
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, clang-@VERSION_TAG@ (= ${binary:Version}),
  python3
-Conflicts: clang-tools-@LLVM_VERSION@
 Description: clang-based tools for C/C++ developments
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -83,7 +81,6 @@ Package: clang-format-@VERSION_TAG@
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
  libllvm@VERSION_TAG@ (= ${binary:Version})
-Conflicts: clang-format-@LLVM_VERSION@
 Description: Tool to format C/C++/Obj-C code
  Clang-format is both a library and a stand-alone tool with the goal of
  automatically reformatting C++ sources files according to configurable
@@ -102,7 +99,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
  libllvm@VERSION_TAG@ (= ${binary:Version}),
  libclang-common-@VERSION_TAG@-dev (= ${binary:Version}),
  clang-tools-@VERSION_TAG@, python3-yaml
-Conflicts: clang-tidy-@LLVM_VERSION@
 Description: clang-based C++ linter tool
  Provide an extensible framework for diagnosing and fixing typical programming
  errors, like style violations, interface misuse, or bugs that can be deduced
@@ -114,7 +110,6 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  libllvm@VERSION_TAG@ (= ${binary:Version}),
  libclang-common-@VERSION_TAG@-dev (= ${binary:Version}),
-Conflicts: clangd-@LLVM_VERSION@
 Description: Language server that provides IDE-like features to editors
  clangd understands your C++ code and adds smart features to your editor:
   - code completion
@@ -130,7 +125,6 @@ Architecture: all
 Multi-Arch: foreign
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-mathjax
-Conflicts: clang-@LLVM_VERSION@-doc
 Description: C, C++ and Objective-C compiler - Documentation
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -147,7 +141,6 @@ Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Conflicts: libclang1-@LLVM_VERSION@
 Description: C interface to the Clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -170,7 +163,6 @@ Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang1-@VERSION_TAG@ (= ${binary:Version}),
  libclang-common-@VERSION_TAG@-dev (= ${binary:Version})
-Conflicts: libclang-@LLVM_VERSION@-dev
 Description: Clang library - Development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -187,7 +179,6 @@ Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends},
-Conflicts: libclang-common-@LLVM_VERSION@-dev
 Recommends: libclang-rt-@VERSION_TAG@-dev
 Description: Clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
@@ -250,7 +241,6 @@ Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@VERSION_TAG@ (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
-Conflicts: libclang-cpp@LLVM_VERSION@
 Description: C++ interface to the Clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -272,7 +262,6 @@ Architecture: any
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  libclang-cpp@VERSION_TAG@ (= ${binary:Version})
-Conflicts: libclang-cpp@LLVM_VERSION@-dev
 # Move of libclang-cpp.so into libclang-cpp@VERSION_TAG@.dev
 Description: C++ interface to the Clang library
  Clang project is a C, C++, Objective C and Objective C++ front-end
@@ -357,7 +346,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Breaks: llvm-@VERSION_TAG@-dev (<< 1:19.1.0~++rc3-1~exp2)
 Replaces: llvm-@VERSION_TAG@-dev (<< 1:19.1.0~++rc3-1~exp2)
-Conflicts: llvm-@LLVM_VERSION@
 Description: Modular compiler and toolchain technologies, runtime library
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -368,7 +356,6 @@ Description: Modular compiler and toolchain technologies, runtime library
 Package: llvm-@VERSION_TAG@-linker-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Conflicts: llvm-@LLVM_VERSION@-linker-tools
 Description: Modular compiler and toolchain technologies - Plugins
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -382,7 +369,6 @@ Suggests: llvm-@VERSION_TAG@-doc
 Depends: llvm-@VERSION_TAG@-runtime (= ${binary:Version}),
  llvm-@VERSION_TAG@-linker-tools (= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
-Conflicts: llvm-@LLVM_VERSION@
 Recommends: llvm-@VERSION_TAG@-dev
 Description: Modular compiler and toolchain technologies
  LLVM is a collection of libraries and tools that make it easy to build
@@ -410,7 +396,6 @@ Description: Modular compiler and toolchain technologies
 Package: llvm-@VERSION_TAG@-runtime
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Conflicts: llvm-@LLVM_VERSION@-runtime
 Recommends: binfmt-support | systemd
 Description: Modular compiler and toolchain technologies, IR interpreter
  LLVM is a collection of libraries and tools that make it easy to build
@@ -436,7 +421,6 @@ Depends: ${shlibs:Depends}, libffi-dev, ${misc:Depends},
  libxml2-dev, @Z3_DEV_DEP@
 Breaks: libllvm@VERSION_TAG@ (<< 1:19.1.0-4)
 Replaces: libllvm@VERSION_TAG@ (<< 1:19.1.0-4)
-Conflicts: llvm-@LLVM_VERSION@-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -458,7 +442,6 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3,
  python3-pygments, python3-yaml,
 # Because of yaml-bench
-Conflicts: llvm-@LLVM_VERSION@-tools
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -502,7 +485,6 @@ Section: doc
 Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
-Conflicts: llvm-@LLVM_VERSION@-doc
 Description: Modular compiler and toolchain technologies, documentation
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -876,7 +858,6 @@ Description: production-quality unwinder
 Package: mlir-@VERSION_TAG@-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Conflicts: mlir-@LLVM_VERSION@
 Description: Multi-Level Intermediate Representation tools
  Novel approach to building reusable and extensible compiler infrastructure.
  MLIR aims to address software fragmentation, improve compilation for
@@ -923,7 +904,6 @@ Package: bolt-@VERSION_TAG@
 Architecture: amd64 arm64
 Depends: ${shlibs:Depends}, ${misc:Depends}, libbolt-@VERSION_TAG@-dev (= ${binary:Version}),
 Pre-Depends: ${misc:Pre-Depends}
-Conflicts: bolt-@LLVM_VERSION@
 Description: Post-link optimizer
  It achieves the improvements by optimizing application's code layout based on
  execution profile gathered by sampling profiler.
@@ -944,7 +924,6 @@ Package: flang-@VERSION_TAG@
 Architecture: @FLANG_ARCHS@
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libflang-@VERSION_TAG@-dev (= ${binary:Version}),
 Provides: fortran-compiler, gfortran-mod-15
-Conflicts: flang-@LLVM_VERSION@
 Description: Fortran compiler
  Ground-up implementation of a Fortran front end written in
  modern C++.
@@ -956,7 +935,6 @@ Package: libflang-@VERSION_TAG@-dev
 Architecture: @FLANG_ARCHS@
 Section: libdevel
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
-Conflicts: libflang-@LLVM_VERSION@-dev
 Description: Flang library - Development package
  Ground-up implementation of a Fortran front end written in
  modern C++.
@@ -971,7 +949,6 @@ Description: Flang library - Development package
 Package: libllvmlibc-@VERSION_TAG@-dev
 Section: libdevel
 Architecture: amd64 arm64 armhf
-Conflicts: libllvmlibc-@LLVM_VERSION@-dev
 Description: LLVM C Library - dev package
  Implementation of the C standard library targeting C17 and above.
  .

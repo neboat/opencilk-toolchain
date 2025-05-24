@@ -1,5 +1,5 @@
 # I know and I am not planning to change that yet.
-libclang1-@VERSION_TAG@: package-name-doesnt-match-sonames libclang-@LLVM_VERSION@-1
+libclang1-@VERSION_TAG@: package-name-doesnt-match-sonames libclang-@VERSION_TAG@-1
 # Provided as transition
 libclang1-@VERSION_TAG@: dev-pkg-without-shlib-symlink usr/lib/*/libclang-@LLVM_VERSION@.so.1 usr/lib/*/libclang.so
-libclang1-@VERSION_TAG@: ldconfig-symlink-missing-for-shlib usr/lib/*/libclang-LLVM_VERSION@.so usr/lib/*/libclang-LLVM_VERSION@.so.1 libclang-LLVM_VERSION@.so
+libclang1-@VERSION_TAG@: ldconfig-symlink-missing-for-shlib usr/lib/*/libclang-@LLVM_VERSION@.so usr/lib/*/libclang-@LLVM_VERSION@.so.1 libclang-@LLVM_VERSION@.so

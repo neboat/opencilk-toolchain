@@ -5,11 +5,11 @@ set -e
 if test "$1" = "remove"; then
     if command -v update-binfmts >/dev/null; then
         update-binfmts --package llvm-@VERSION_TAG@-runtime \
-            --remove llvm-@VERSION_TAG@-runtime.binfmt /usr/bin/lli-@LLVM_VERSION@ || true
+            --remove llvm-@VERSION_TAG@-runtime.binfmt /usr/bin/lli-@VERSION_TAG@ || true
         if test -f /var/lib/binfmts/llvm-@VERSION_TAG@.binfmt; then
             # Purge old file
             update-binfmts --package llvm-@VERSION_TAG@-runtime \
-                --remove llvm-@VERSION_TAG@.binfmt /usr/bin/lli-@LLVM_VERSION@ || true
+                --remove llvm-@VERSION_TAG@.binfmt /usr/bin/lli-@VERSION_TAG@ || true
         fi
     fi
 fi

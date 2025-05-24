@@ -26,6 +26,8 @@ ifeq ($(LLVM_VERSION),$(LLVM_VERSION_FULL))
 endif
 LLVM_VERSION_NEXT := $(shell echo $(LLVM_VERSION_FULL) | awk -F. '{ OFS="."; $$NF+=1; print}')
 
+VERSION_TAG := $(LLVM_VERSION)-oc$(OPENCILK_VERSION)
+
 # dpkg-buildflags support
 # disable fixfilepath in favor of the opencilk-project supplied flavor, disable lto
 # remove +time64,+lfs once the time64_t transition starts
@@ -384,11 +386,11 @@ ifneq (,$(filter $(DEB_HOST_ARCH),$(BINUTILS_GOLD_ARCHS)))
 endif
 endif
 
-ifneq (,$(filter bolt-$(LLVM_VERSION), $(packages)))
+ifneq (,$(filter bolt-$(VERSION_TAG), $(packages)))
     PROJECTS += ;bolt
 endif
 
-ifneq (,$(filter libllvmlibc-$(LLVM_VERSION)-dev, $(packages)))
+ifneq (,$(filter libllvmlibc-$(VERSION_TAG)-dev, $(packages)))
 	LLVM_LIBC_ENABLE=yes
 	LLVM_LIBC_DISABLE_DISTRO := bionic
 	ifeq (,$(filter $(DISTRO), $(LLVM_LIBC_DISABLE_DISTRO)))
@@ -674,8 +676,6 @@ ENABLED_STAGE2_CMAKE_BUILD_TARGETS = check-all;check-llvm;check-clang;check-clan
 # For some reasons, some spaces are added, removing them
 PROJECTS_LIST := $(shell echo "$(PROJECTS)"|sed -e "s| ||g")
 RUNTIMES_LIST := $(shell echo "$(RUNTIMES)"|sed -e "s| ||g")
-
-VERSION_TAG := $(LLVM_VERSION)-opencilk-$(OPENCILK_VERSION)
 
 stamps/preconfigure:
 	if ! grep -qs '/proc ' /proc/mounts; then \
@@ -1214,14 +1214,14 @@ endif
 	if test -d $$d; then \
 		cd $$d; \
 		for f in *.1; do \
-			echo "$$f"|grep $(LLVM_VERSION) || mv $$f `echo $$f|sed "s|\.1|-$(LLVM_VERSION).1|"`; \
+			echo "$$f"|grep $(LLVM_VERSION) || mv $$f `echo $$f|sed "s|\.1|-$(VERSION_TAG).1|"`; \
 		done; \
 	else \
 		echo "could not find $$d"; \
 	fi
 # the clang doc generation only generates clang manpage
 # When it will do more, we should move that in the loop above
-	cd $(CURDIR)/clang/docs/_build/man/ && mv clang.1 clang-$(LLVM_VERSION).1
+	cd $(CURDIR)/clang/docs/_build/man/ && mv clang.1 clang-$(VERSION_TAG).1
 
 # Remove the copy of jquery. See bug #701087
 	for d in $(TARGET_BUILD_STAGE2)/docs/html/_static/ $(TARGET_BUILD_STAGE2)/tools/clang/docs/html/_static/ $(TARGET_BUILD_STAGE2)/tools/clang/tools/extra/docs/html/_static/; do \
@@ -1232,13 +1232,13 @@ endif
 	mkdir -p debian/man/
 	ls -al clang/tools/scan-view/bin/scan-view
 	clang/tools/scan-view/bin/scan-view --help || true
-	help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1 || true
-	help2man --no-info --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1 || true
+	help2man --no-info --version-string=$(VERSION_TAG) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(VERSION_TAG).1 || true
+	help2man --no-info --version-string=$(VERSION_TAG) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(VERSION_TAG).1 || true
 
 	CMDS="llvm-dwarfdump llvm-mc llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb clang-format clang clang++ clang-tblgen clang-check clang-cpp clang-tidy clang-apply-replacements clang-rename clang-query pp-trace sancov lli modularize clang-include-fixer find-all-symbols clang-reorder-fields ld.lld llvm-tblgen clang-change-namespace clang-offload-bundler clangd clang-repl git-clang-format run-clang-tidy"; \
 	for f in $$CMDS; do \
 		echo "Generating manpage of $$f"; \
-		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-info --version-string=$(LLVM_VERSION) $(TARGET_BUILD_STAGE2)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1 || true; \
+		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --no-info --version-string=$(VERSION_TAG) $(TARGET_BUILD_STAGE2)/bin/$$f > debian/man/$$f-$(VERSION_TAG).1 || true; \
 	done
 	# Create the following directory regardless as libomp-XX-doc
 	# is Architecture: all
@@ -1262,7 +1262,7 @@ override_dh_auto_install:
 	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/bin/argdumper
 	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/share/clang/clang-format-bbedit.applescript
 	# Remove bat files https://bugs.llvm.org/show_bug.cgi?id=30755
-	rm -f $(DEB_INST)/usr/share/clang/scan-build-$(LLVM_VERSION)/libexec/*.bat $(DEB_INST)/usr/share/clang/scan-build-$(LLVM_VERSION)/bin/*.bat
+	rm -f $(DEB_INST)/usr/share/clang/scan-build-$(VERSION_TAG)/libexec/*.bat $(DEB_INST)/usr/share/clang/scan-build-$(VERSION_TAG)/bin/*.bat
 
 	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libExampleIRTransforms.a
 	# Remove an example - introduced in https://reviews.llvm.org/D61446
@@ -1288,7 +1288,7 @@ endif
 	if test "$(OPENMP_ENABLE)" = yes; then \
 		cd debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib; \
 		ln -s libomp.so.$(SONAME_OPENMP) libomp.so; \
-		cp libomp.so.$(SONAME_OPENMP) libomp-$(LLVM_VERSION).so.$(SONAME_OPENMP); \
+		cp libomp.so.$(SONAME_OPENMP) libomp-$(VERSION_TAG).so.$(SONAME_OPENMP); \
 	fi
 
 # Remove artifact (where compiler-rt is built)
@@ -1296,18 +1296,18 @@ endif
 #	cd $(TARGET_BUILD)/tools/clang/runtime/compiler-rt/clang_linux && rm -rf $$(find . -mindepth 2 -maxdepth 2 -type d) && rm -rf $$(find -empty) && rm -rf */.dir; \
 #	fi
 
-	mkdir -p $(CURDIR)/debian/clang-$(LLVM_VERSION)/usr/bin/
-	cp compiler-rt/lib/asan/scripts/asan_symbolize.py $(CURDIR)/debian/clang-$(LLVM_VERSION)/usr/bin/asan_symbolize-$(LLVM_VERSION)
+	mkdir -p $(CURDIR)/debian/clang-$(VERSION_TAG)/usr/bin/
+	cp compiler-rt/lib/asan/scripts/asan_symbolize.py $(CURDIR)/debian/clang-$(VERSION_TAG)/usr/bin/asan_symbolize-$(VERSION_TAG)
 
 ifeq (${LIBFUZZER_ENABLE},yes)
-	mkdir -p $(CURDIR)/debian/libfuzzer-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/
-	cp -v $(TARGET_BUILD)/libFuzzer.a $(CURDIR)/debian/libfuzzer-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/
+	mkdir -p $(CURDIR)/debian/libfuzzer-$(VERSION_TAG)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/
+	cp -v $(TARGET_BUILD)/libFuzzer.a $(CURDIR)/debian/libfuzzer-$(VERSION_TAG)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/
 endif
 
 # Because of hurd, we are more flexible in what we include in libclang-X.Y-rt
 # but we don't want to install wasi files into libclang-rt as they have their own package
 # So, we remove this directory from the package
-	rm -f $(CURDIR)/debian/libclang-rt-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/wasi/
+	rm -f $(CURDIR)/debian/libclang-rt-$(VERSION_TAG)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/wasi/
 
 # Create this fake directory to make the install libclang-common-dev happy
 # under the unsupported archs of compiler-rt
@@ -1359,36 +1359,36 @@ endif
 	cd $(DEB_INST)/usr/bin/; \
 	rm -f *; \
 	for f in ../lib/opencilk-$(OPENCILK_VERSION)/bin/*; do \
-		ln -s $$f `basename $$f`-$(LLVM_VERSION); \
-		echo "Link $$f to `basename $$f`-$(LLVM_VERSION)"; \
+		ln -s $$f `basename $$f`-$(VERSION_TAG); \
+		echo "Link $$f to `basename $$f`-$(VERSION_TAG)"; \
 	done
 
 # Rename some stuff with the version name
-	cp $(CURDIR)/clang/tools/scan-build/man/scan-build.1 $(CURDIR)/clang/tools/scan-build/man/scan-build-$(LLVM_VERSION).1
+	cp $(CURDIR)/clang/tools/scan-build/man/scan-build.1 $(CURDIR)/clang/tools/scan-build/man/scan-build-$(VERSION_TAG).1
 
 	# copy the vim files (except that tablegen does not exist for indent
 	VIM_DIRS="ftdetect ftplugin syntax indent"; \
 	for dir in $$VIM_DIRS; do \
-		cp -f $(CURDIR)/llvm/utils/vim/$$dir/llvm.vim $(CURDIR)/llvm/utils/vim/$$dir/llvm-$(LLVM_VERSION).vim; \
+		cp -f $(CURDIR)/llvm/utils/vim/$$dir/llvm.vim $(CURDIR)/llvm/utils/vim/$$dir/llvm-$(VERSION_TAG).vim; \
 		if test -f $(CURDIR)/llvm/utils/vim/$$dir/tablegen.vim; then \
-			cp -f $(CURDIR)/llvm/utils/vim/$$dir/tablegen.vim $(CURDIR)/llvm/utils/vim/$$dir/tablegen-$(LLVM_VERSION).vim; \
+			cp -f $(CURDIR)/llvm/utils/vim/$$dir/tablegen.vim $(CURDIR)/llvm/utils/vim/$$dir/tablegen-$(VERSION_TAG).vim; \
 		fi; \
 	done
-	cp -f $(CURDIR)/llvm/utils/vim/vimrc $(CURDIR)/llvm/utils/vim/llvm-$(LLVM_VERSION)-vimrc
+	cp -f $(CURDIR)/llvm/utils/vim/vimrc $(CURDIR)/llvm/utils/vim/llvm-$(VERSION_TAG)-vimrc
 
-	cp -f $(CURDIR)/clang/tools/clang-format/clang-format-diff.py $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
+	cp -f $(CURDIR)/clang/tools/clang-format/clang-format-diff.py $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(VERSION_TAG)
 
-	cp -f $(CURDIR)/clang/tools/clang-format/clang-format.py clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
+	cp -f $(CURDIR)/clang/tools/clang-format/clang-format.py clang/tools/clang-format/clang-format-$(VERSION_TAG).py
 
-	rm -rf clang/tools/scan-build-$(LLVM_VERSION)
-	cp -fR $(CURDIR)/clang/tools/scan-build clang/tools/scan-build-$(LLVM_VERSION)
+	rm -rf clang/tools/scan-build-$(VERSION_TAG)
+	cp -fR $(CURDIR)/clang/tools/scan-build clang/tools/scan-build-$(VERSION_TAG)
 
-	rm -rf clang/tools/scan-build-py-$(LLVM_VERSION)
-	cp -fR $(CURDIR)/clang/tools/scan-build-py clang/tools/scan-build-py-$(LLVM_VERSION)
-	chmod +x clang/tools/scan-build-py-$(LLVM_VERSION)/bin/*
+	rm -rf clang/tools/scan-build-py-$(VERSION_TAG)
+	cp -fR $(CURDIR)/clang/tools/scan-build-py clang/tools/scan-build-py-$(VERSION_TAG)
+	chmod +x clang/tools/scan-build-py-$(VERSION_TAG)/bin/*
 
-	rm -rf clang/tools/scan-view-$(LLVM_VERSION)
-	cp -fR $(CURDIR)/clang/tools/scan-view clang/tools/scan-view-$(LLVM_VERSION)
+	rm -rf clang/tools/scan-view-$(VERSION_TAG)
+	cp -fR $(CURDIR)/clang/tools/scan-view clang/tools/scan-view-$(VERSION_TAG)
 
 # Remove some license files
 	rm -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/include/llvm/Support/LICENSE.TXT
@@ -1424,22 +1424,22 @@ endif
 
 # Manage the polly files. Sometimes, we build them. Sometimes not.
 	if test "$(POLLY_ENABLE)" = yes; then \
-		mkdir -p $(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/ $(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/polly/; \
+		mkdir -p $(CURDIR)/debian/libclang-$(VERSION_TAG)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/ $(CURDIR)/debian/libpolly-$(VERSION_TAG)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/polly/; \
 		mv -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/libPolly* \
-		$(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/; \
-		rm -rf $(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/polly; \
+		$(CURDIR)/debian/libpolly-$(VERSION_TAG)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/; \
+		rm -rf $(CURDIR)/debian/libpolly-$(VERSION_TAG)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/polly; \
 		mv -f $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/include/polly/ \
-		$(CURDIR)/debian/libpolly-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/; \
+		$(CURDIR)/debian/libpolly-$(VERSION_TAG)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/; \
 	fi
 
-	mkdir -p $(CURDIR)/debian/usr/share/doc/llvm-$(LLVM_VERSION)-doc/ $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/
+	mkdir -p $(CURDIR)/debian/usr/share/doc/llvm-$(VERSION_TAG)-doc/ $(CURDIR)/debian/usr/share/doc/clang-$(VERSION_TAG)-doc/
 	if test "$(DOC_GENERATION)" = yes; then \
-		cp -R $(TARGET_BUILD_STAGE2)/docs/html $(CURDIR)/debian/usr/share/doc/llvm-$(LLVM_VERSION)-doc/; \
-		cp -R $(TARGET_BUILD_STAGE2)/tools/clang/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/; \
-		cp -R $(TARGET_BUILD_STAGE2)/tools/clang/tools/extra/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/clang-extra; \
+		cp -R $(TARGET_BUILD_STAGE2)/docs/html $(CURDIR)/debian/usr/share/doc/llvm-$(VERSION_TAG)-doc/; \
+		cp -R $(TARGET_BUILD_STAGE2)/tools/clang/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(VERSION_TAG)-doc/; \
+		cp -R $(TARGET_BUILD_STAGE2)/tools/clang/tools/extra/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(VERSION_TAG)-doc/clang-extra; \
 	else \
 		mkdir -p llvm/docs/_build/html clang/docs/_build/html/ tools/clang/tools/extra/docs/html openmp/runtime/doc/doxygen/generated/html/ debian/man/ clang/docs/_build/man/ llvm/docs/_build/man/; \
-		rm debian/*$(LLVM_VERSION)*manpages; \
+		rm debian/*$(VERSION_TAG)*manpages; \
 	fi
 
 # Rename OCaml bindings
@@ -1449,7 +1449,7 @@ endif
 		mkdir -p "$(DEB_INST)usr/lib/opencilk-$(OPENCILK_VERSION)/share/doc/llvm/ocaml-html/"; \
 		if test -d "$(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/ocaml"; then \
 			mv -f "$(DEB_INST)usr/lib/opencilk-$(OPENCILK_VERSION)/lib/ocaml" \
-			"$(DEB_INST)$(OCAML_STDLIB_DIR)/llvm-$(LLVM_VERSION)"; \
+			"$(DEB_INST)$(OCAML_STDLIB_DIR)/llvm-$(VERSION_TAG)"; \
 		fi; \
 	fi
 
@@ -1469,7 +1469,7 @@ endif
 		touch $(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/share/gdb/python/ompd/empty; \
 	fi
 	if test "$(LLDB_PYTHON_ENABLE)" = no; then \
-		echo "" > debian/python3-lldb-$(LLVM_VERSION).install; \
+		echo "" > debian/python3-lldb-$(VERSION_TAG).install; \
 	fi
 
 # Remove some mlir example
@@ -1486,19 +1486,19 @@ endif
 LLVM_RELEASE := $(LLVM_EPOCH)$(LLVM_VERSION).$(LLVM_VERSION_MINOR).0
 override_dh_makeshlibs:
 ifneq (,$(findstring ~,$(PKG_VERSION)))
-	dh_makeshlibs -plibclang$(SONAME_EXT)-$(LLVM_VERSION)
-	dh_makeshlibs -pliblldb-$(LLVM_VERSION)
-	dh_makeshlibs -plibllvm$(LLVM_VERSION)
-	dh_makeshlibs -plibomp$(SONAME_OPENMP)-$(LLVM_VERSION)
+	dh_makeshlibs -plibclang$(SONAME_EXT)-$(VERSION_TAG)
+	dh_makeshlibs -pliblldb-$(VERSION_TAG)
+	dh_makeshlibs -plibllvm$(VERSION_TAG)
+	dh_makeshlibs -plibomp$(SONAME_OPENMP)-$(VERSION_TAG)
 else
-	dh_makeshlibs -plibclang$(SONAME_EXT)-$(LLVM_VERSION) \
-		'-Vlibclang$(SONAME_EXT)-$(LLVM_VERSION) (>= $(LLVM_RELEASE))'
-	dh_makeshlibs -pliblldb-$(LLVM_VERSION) \
-		'-Vliblldb-$(LLVM_VERSION) (>= $(LLVM_RELEASE))'
-	dh_makeshlibs -plibllvm$(LLVM_VERSION) \
-		'-Vlibllvm$(LLVM_VERSION) (>= $(LLVM_RELEASE))'
-	dh_makeshlibs -plibomp$(SONAME_OPENMP)-$(LLVM_VERSION) \
-		'-Vlibomp$(SONAME_OPENMP)-$(LLVM_VERSION) (>= $(LLVM_RELEASE))'
+	dh_makeshlibs -plibclang$(SONAME_EXT)-$(VERSION_TAG) \
+		'-Vlibclang$(SONAME_EXT)-$(VERSION_TAG) (>= $(LLVM_RELEASE))'
+	dh_makeshlibs -pliblldb-$(VERSION_TAG) \
+		'-Vliblldb-$(VERSION_TAG) (>= $(LLVM_RELEASE))'
+	dh_makeshlibs -plibllvm$(VERSION_TAG) \
+		'-Vlibllvm$(VERSION_TAG) (>= $(LLVM_RELEASE))'
+	dh_makeshlibs -plibomp$(SONAME_OPENMP)-$(VERSION_TAG) \
+		'-Vlibomp$(SONAME_OPENMP)-$(VERSION_TAG) (>= $(LLVM_RELEASE))'
 endif
 	dh_makeshlibs --remaining-packages -V
 
@@ -1508,11 +1508,11 @@ override_dh_shlibdeps:
 
 override_dh_installman:
 	if test -f lld/docs/ld.lld.1; then \
-	mv lld/docs/ld.lld.1 lld/docs/ld.lld-$(LLVM_VERSION).1; \
+	mv lld/docs/ld.lld.1 lld/docs/ld.lld-$(VERSION_TAG).1; \
 	fi
 	dh_installman
 # Make sure that lli manpage is only in llvm-3.2-runtime (See #697117)
-	rm -f $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/share/man/man1/lli*
+	rm -f $(CURDIR)/debian/llvm-$(VERSION_TAG)/usr/share/man/man1/lli*
 
 
 override_dh_strip:
@@ -1520,13 +1520,13 @@ override_dh_strip:
 	find $(TARGET_BUILD) \( -name '*.o' -o -name '*.a' \) -type f | xargs -r rm -f
 ifeq (0, $(strip $(shell dpkg --compare-versions $(DH_VERSION) ge 9.20160114; echo $$?)))
 	: # If we don't have the right version of debhelper, don't run the option
-	dh_strip -p libclang$(SONAME_EXT)-$(LLVM_VERSION) --dbgsym-migration='libclang$(SONAME_EXT)-$(LLVM_VERSION)-dbg'
-	dh_strip -p libllvm$(LLVM_VERSION) --dbgsym-migration='libllvm$(LLVM_VERSION)-dbg'
-	dh_strip -p liblldb-$(LLVM_VERSION) --dbgsym-migration='liblldb-$(LLVM_VERSION)-dbg'
-	dh_strip -p libomp$(SONAME_OPENMP)-$(LLVM_VERSION) --dbgsym-migration='libomp$(SONAME_OPENMP)-$(LLVM_VERSION)-dbg'
+	dh_strip -p libclang$(SONAME_EXT)-$(VERSION_TAG) --dbgsym-migration='libclang$(SONAME_EXT)-$(VERSION_TAG)-dbg'
+	dh_strip -p libllvm$(VERSION_TAG) --dbgsym-migration='libllvm$(VERSION_TAG)-dbg'
+	dh_strip -p liblldb-$(VERSION_TAG) --dbgsym-migration='liblldb-$(VERSION_TAG)-dbg'
+	dh_strip -p libomp$(SONAME_OPENMP)-$(VERSION_TAG) --dbgsym-migration='libomp$(SONAME_OPENMP)-$(VERSION_TAG)-dbg'
 endif
 # ifeq (${LLD_ENABLE},yes)
-# 	PATH=$(CURDIR)/:$$PATH dh_strip -p liblld-$(LLVM_VERSION) --dbg-package=liblld-$(LLVM_VERSION)-dbg
+# 	PATH=$(CURDIR)/:$$PATH dh_strip -p liblld-$(VERSION_TAG) --dbg-package=liblld-$(VERSION_TAG)-dbg
 # endif
 ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' binutils) lt 2.31.1-11 ; echo $$?),0)
 	: # building with clang, binutils/strip has hard time stripping some libs because of
@@ -1534,7 +1534,7 @@ ifeq ($(shell dpkg --compare-versions $(shell dpkg-query -W -f '$${Version}' bin
 	: # use llvm-strip instead
 	: # Workaround some issues with stripping by using llvm's
 	if test ! -f $(CURDIR)/strip; then \
-		ln -s $(CURDIR)/debian/llvm-$(LLVM_VERSION)/usr/lib/opencilk-$(OPENCILK_VERSION)/bin/llvm-strip $(CURDIR)/strip; \
+		ln -s $(CURDIR)/debian/llvm-$(VERSION_TAG)/usr/lib/opencilk-$(OPENCILK_VERSION)/bin/llvm-strip $(CURDIR)/strip; \
 	fi
 	ls -al $(CURDIR)/debian/.debhelper/*/dbgsym-root/usr/lib/debug/.build-id/*/*|| true
 	: # On some old version of Debian (stretch) and Ubuntu, Rules-Requires-Root isn't supported
@@ -1566,8 +1566,8 @@ override_dh_install:
 
 ifeq (${POLLY_ENABLE},yes)
 # only for arch:any builds
-ifneq (,$(filter libpolly-$(LLVM_VERSION)-dev, $(packages)))
-	dh_install -p libpolly-$(LLVM_VERSION)-dev usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/polly/*.cmake usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/polly
+ifneq (,$(filter libpolly-$(VERSION_TAG)-dev, $(packages)))
+	dh_install -p libpolly-$(VERSION_TAG)-dev usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/polly/*.cmake usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/polly
 # On old Debian & Ubuntu, removing the files is necessary
 	rm -rf debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/cmake/polly/*.cmake
 else
@@ -1577,32 +1577,32 @@ endif
 	dh_install --fail-missing ${skip_packages}
 # Move the libc++ abi files from libc++ to libc++-abi for the wasm32 packages
 # These packages are arch: all, so only do so when the packages are built
-ifneq (,$(filter libc++-$(LLVM_VERSION)-dev-wasm32, $(packages)))
-	mkdir -p $(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1
-	if test -f $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; then \
-		mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h \
-			$(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; \
-		mv $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h \
-			$(CURDIR)/debian/libc++abi-$(LLVM_VERSION)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h; \
+ifneq (,$(filter libc++-$(VERSION_TAG)-dev-wasm32, $(packages)))
+	mkdir -p $(CURDIR)/debian/libc++abi-$(VERSION_TAG)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1
+	if test -f $(CURDIR)/debian/libc++-$(VERSION_TAG)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; then \
+		mv $(CURDIR)/debian/libc++-$(VERSION_TAG)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h \
+			$(CURDIR)/debian/libc++abi-$(VERSION_TAG)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/__cxxabi_config.h; \
+		mv $(CURDIR)/debian/libc++-$(VERSION_TAG)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h \
+			$(CURDIR)/debian/libc++abi-$(VERSION_TAG)-dev-wasm32/usr/lib/opencilk-$(OPENCILK_VERSION)/include/wasm32-wasi/c++/v1/cxxabi.h; \
 	fi
 endif
 # Because of hurd, we are more flexible in what we include in libclang-X.Y-rt
 # but we don't want to install wasi files into libclang-rt as they have their own package
 # So, we remove this directory from the package
-	rm -fr $(CURDIR)/debian/libclang-rt-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/lib/wasi/
+	rm -fr $(CURDIR)/debian/libclang-rt-$(VERSION_TAG)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/lib/wasi/
 
-	if [ -d debian/llvm-$(LLVM_VERSION)/usr/share/doc/llvm-$(LLVM_VERSION) ]; then \
+	if [ -d debian/llvm-$(VERSION_TAG)/usr/share/doc/llvm-$(VERSION_TAG) ]; then \
 	  for svg in usage-*.svg; do \
 	    [ -f $$svg ] || continue; \
 	    xz -9v $$svg; \
-	    cp -p $$svg.xz debian/llvm-$(LLVM_VERSION)/usr/share/doc/llvm-$(LLVM_VERSION)/.; \
+	    cp -p $$svg.xz debian/llvm-$(VERSION_TAG)/usr/share/doc/llvm-$(VERSION_TAG)/.; \
 	  done; \
 	fi
 
 stamps/repack_a_llvm_ir:
 ifeq (${LTO_ENABLE},yes)
 # with LTO, .a contains llvm ir instead of native code. So, recompile them
-	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(LLVM_VERSION) bash -v debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
+	NJOBS="$(NJOBS)" P_TO_LLVM="$(CURDIR)" VERSION=$(VERSION_TAG) bash -v debian/llvm-compile-lto-elf.sh $(CXXFLAGS_EXTRA)
 endif
 	touch $@
 
@@ -1611,19 +1611,19 @@ override_dh_installdeb: stamps/repack_a_llvm_ir
 # Managed by the package
 	dh_installdeb -a
 
-	rm -f $(CURDIR)/debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/python*/*-packages/lldb/__init__.pyc $(CURDIR)/debian/python*-lldb-$(LLVM_VERSION)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/python*/*-packages/lldb/__init__.pyc
-	rm -f $(CURDIR)/debian/clang-$(LLVM_VERSION)-examples/usr/share/doc/clang-$(LLVM_VERSION)-examples/examples/*Make*
+	rm -f $(CURDIR)/debian/tmp/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/python*/*-packages/lldb/__init__.pyc $(CURDIR)/debian/python*-lldb-$(VERSION_TAG)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/python*/*-packages/lldb/__init__.pyc
+	rm -f $(CURDIR)/debian/clang-$(VERSION_TAG)-examples/usr/share/doc/clang-$(VERSION_TAG)-examples/examples/*Make*
 
 # the openmp header files moved to the same path as lib clang headers.
 # To make sure they aren't conflicting ( https://bugs.llvm.org/show_bug.cgi?id=46977 )
 # Remove them from the libclang-common package
-	rm -f $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/include/omp*.h
+	rm -f $(CURDIR)/debian/libclang-common-$(VERSION_TAG)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/include/omp*.h
 
 # Remove some libc++ abi files in the libc++ file. See bug #969274
-	rm -f $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/c++/__cxxabi_config.h $(CURDIR)/debian/libc++-$(LLVM_VERSION)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/c++/cxxabi.h
+	rm -f $(CURDIR)/debian/libc++-$(VERSION_TAG)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/c++/__cxxabi_config.h $(CURDIR)/debian/libc++-$(VERSION_TAG)-dev/usr/lib/opencilk-$(OPENCILK_VERSION)/include/c++/cxxabi.h
 
 # Remove auto generated python pyc
-	find $(CURDIR)/debian/llvm-$(LLVM_VERSION)-tools/usr/lib/opencilk-$(OPENCILK_VERSION)/ -name '*.pyc' | xargs -r rm -f
+	find $(CURDIR)/debian/llvm-$(VERSION_TAG)-tools/usr/lib/opencilk-$(OPENCILK_VERSION)/ -name '*.pyc' | xargs -r rm -f
 
 ifeq (${RUN_TEST},yes)
 # List of the archs we know we have 100 % tests working
@@ -1728,17 +1728,17 @@ override_dh_auto_clean:
 	find utils -name '*.pyc' | xargs -r rm -f
 	# Use -I because a test has a space in its name
 	find lldb/test -iname '*.pyc' | xargs -I{} -r rm -f {}
-	rm -f $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim
-	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
-	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
+	rm -f $(CURDIR)/utils/vim/llvm-$(VERSION_TAG).vim $(CURDIR)/utils/vim/tablegen-$(VERSION_TAG).vim
+	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(VERSION_TAG)
+	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-$(VERSION_TAG).py
 	rm -rf libclc/build
 	rm -rf build-wasm
-	if test -f lld/docs/ld.lld-$(LLVM_VERSION).1; then \
-		mv lld/docs/ld.lld-$(LLVM_VERSION).1 lld/docs/ld.lld.1; \
+	if test -f lld/docs/ld.lld-$(VERSION_TAG).1; then \
+		mv lld/docs/ld.lld-$(VERSION_TAG).1 lld/docs/ld.lld.1; \
 	fi
 	for f in debian/*.in; do \
 		if ! echo $$f|grep control; then \
-			f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(LLVM_VERSION)/'); \
+			f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(VERSION_TAG)/'); \
 			rm -f $$f2; \
 		fi; \
 	done

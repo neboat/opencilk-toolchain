@@ -16,7 +16,7 @@ usr/lib/opencilk-@OPENCILK_VERSION@/lib/cmake/openmp/*.cmake
 [amd64 hurd-amd64 arm64 ppc64el ppc64] usr/lib/opencilk-@OPENCILK_VERSION@/bin/llvm-omp-device-info
 [amd64 hurd-amd64 arm64 ppc64el ppc64] usr/lib/opencilk-@OPENCILK_VERSION@/bin/llvm-omp-kernel-replay
 
-[amd64 hurd-amd64 arm64 ppc64el ppc64] usr/bin/llvm-omp-device-info-@LLVM_VERSION@
-[amd64 hurd-amd64 arm64 ppc64el ppc64] usr/bin/llvm-omp-kernel-replay-@LLVM_VERSION@
+[amd64 hurd-amd64 arm64 ppc64el ppc64] usr/bin/llvm-omp-device-info-@VERSION_TAG@
+[amd64 hurd-amd64 arm64 ppc64el ppc64] usr/bin/llvm-omp-kernel-replay-@VERSION_TAG@
 
 [!armhf !hurd-amd64] usr/lib/opencilk-@OPENCILK_VERSION@/share/gdb/python/ompd/

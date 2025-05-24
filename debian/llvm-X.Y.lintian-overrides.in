@@ -1,10 +1,10 @@
 # I know but well...
-llvm-@VERSION_TAG@: manpage-has-useless-whatis-entry *usr/share/man/man1/llvm-dwarfdump-@LLVM_VERSION@.1.gz*
-llvm-@VERSION_TAG@: manpage-has-useless-whatis-entry *usr/share/man/man1/llvm-mc-@LLVM_VERSION@.1.gz*
-llvm-@VERSION_TAG@: manpage-has-useless-whatis-entry *usr/share/man/man1/llvm-objdump-@LLVM_VERSION@.1.gz*
-llvm-@VERSION_TAG@: manpage-has-useless-whatis-entry *usr/share/man/man1/llvm-rtdyld-@LLVM_VERSION@.1.gz*
-llvm-@VERSION_TAG@: manpage-has-useless-whatis-entry *usr/share/man/man1/llvm-size-@LLVM_VERSION@.1.gz*
-llvm-@VERSION_TAG@: manpage-has-useless-whatis-entry *usr/share/man/man1/llvm-ranlib-@LLVM_VERSION@.1.gz*
+llvm-@VERSION_TAG@: manpage-has-useless-whatis-entry *usr/share/man/man1/llvm-dwarfdump-@VERSION_TAG@.1.gz*
+llvm-@VERSION_TAG@: manpage-has-useless-whatis-entry *usr/share/man/man1/llvm-mc-@VERSION_TAG@.1.gz*
+llvm-@VERSION_TAG@: manpage-has-useless-whatis-entry *usr/share/man/man1/llvm-objdump-@VERSION_TAG@.1.gz*
+llvm-@VERSION_TAG@: manpage-has-useless-whatis-entry *usr/share/man/man1/llvm-rtdyld-@VERSION_TAG@.1.gz*
+llvm-@VERSION_TAG@: manpage-has-useless-whatis-entry *usr/share/man/man1/llvm-size-@VERSION_TAG@.1.gz*
+llvm-@VERSION_TAG@: manpage-has-useless-whatis-entry *usr/share/man/man1/llvm-ranlib-@VERSION_TAG@.1.gz*
 # Does not link otherwise
 llvm-@VERSION_TAG@: embedded-library *usr/lib/opencilk-@OPENCILK_VERSION@/bin/bugpoint: libjsoncpp*
 llvm-@VERSION_TAG@: embedded-library *usr/lib/opencilk-@OPENCILK_VERSION@/bin/opt: libjsoncpp*

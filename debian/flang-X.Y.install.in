@@ -4,9 +4,9 @@ usr/lib/opencilk-@OPENCILK_VERSION@/bin/fir-opt
 usr/lib/opencilk-@OPENCILK_VERSION@/bin/flang-new
 usr/lib/opencilk-@OPENCILK_VERSION@/bin/tco
 
-usr/bin/bbc-@LLVM_VERSION@
-usr/bin/f18-parse-demo-@LLVM_VERSION@
-usr/bin/fir-opt-@LLVM_VERSION@
-usr/bin/flang-new-@LLVM_VERSION@
-usr/bin/tco-@LLVM_VERSION@
+usr/bin/bbc-@VERSION_TAG@
+usr/bin/f18-parse-demo-@VERSION_TAG@
+usr/bin/fir-opt-@VERSION_TAG@
+usr/bin/flang-new-@VERSION_TAG@
+usr/bin/tco-@VERSION_TAG@
 

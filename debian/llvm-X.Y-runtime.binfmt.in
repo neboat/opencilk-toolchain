@@ -1,3 +1,3 @@
 package llvm-@VERSION_TAG@-runtime
-interpreter /usr/bin/lli-@LLVM_VERSION@
+interpreter /usr/bin/lli-@VERSION_TAG@
 magic BC

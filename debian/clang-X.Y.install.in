@@ -6,7 +6,7 @@ usr/lib/opencilk-@OPENCILK_VERSION@/bin/clang-cpp
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/cmake/clang/*.cmake
 usr/lib/opencilk-@OPENCILK_VERSION@/share/clang/bash-autocomplete.sh
 
-usr/bin/clang-@LLVM_VERSION@
-usr/bin/clang++-@LLVM_VERSION@
-usr/bin/clang-cpp-@LLVM_VERSION@
+usr/bin/clang-@VERSION_TAG@
+usr/bin/clang++-@VERSION_TAG@
+usr/bin/clang-cpp-@VERSION_TAG@
 

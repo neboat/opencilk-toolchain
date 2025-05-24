@@ -5,8 +5,8 @@ usr/lib/opencilk-@OPENCILK_VERSION@/bin/lld
 usr/lib/opencilk-@OPENCILK_VERSION@/bin/wasm-ld
 
 
-usr/bin/lld-link-@LLVM_VERSION@
-usr/bin/ld.lld-@LLVM_VERSION@
-usr/bin/ld64.lld*-@LLVM_VERSION@
-usr/bin/lld-@LLVM_VERSION@*
-usr/bin/wasm-ld-@LLVM_VERSION@
+usr/bin/lld-link-@VERSION_TAG@
+usr/bin/ld.lld-@VERSION_TAG@
+usr/bin/ld64.lld*-@VERSION_TAG@
+usr/bin/lld-@VERSION_TAG@*
+usr/bin/wasm-ld-@VERSION_TAG@

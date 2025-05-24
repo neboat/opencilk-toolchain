@@ -1,3 +1,3 @@
 usr/lib/opencilk-@OPENCILK_VERSION@/bin/clangd
-usr/bin/clangd-@LLVM_VERSION@
+usr/bin/clangd-@VERSION_TAG@
 

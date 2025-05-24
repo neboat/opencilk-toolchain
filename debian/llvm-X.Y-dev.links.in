@@ -1,16 +1,16 @@
-usr/include/llvm-c-@VERSION_TAG@/llvm-c usr/lib/llvm-@VERSION_TAG@/include/llvm-c
-usr/include/llvm-@VERSION_TAG@/llvm usr/lib/llvm-@VERSION_TAG@/include/llvm
-usr/include/llvm-c-@VERSION_TAG@/llvm-c usr/lib/llvm-@VERSION_TAG@/build/include/llvm-c
-usr/include/llvm-@VERSION_TAG@/llvm usr/lib/llvm-@VERSION_TAG@/build/include/llvm
+usr/include/opencilk-c-@OPENCILK_VERSION@/llvm-c usr/lib/opencilk-@OPENCILK_VERSION@/include/llvm-c
+usr/include/opencilk-@OPENCILK_VERSION@/llvm usr/lib/opencilk-@OPENCILK_VERSION@/include/llvm
+usr/include/opencilk-c-@OPENCILK_VERSION@/llvm-c usr/lib/opencilk-@OPENCILK_VERSION@/build/include/llvm-c
+usr/include/opencilk-@OPENCILK_VERSION@/llvm usr/lib/opencilk-@OPENCILK_VERSION@/build/include/llvm
 
-usr/lib/opencilk-@OPENCILK_VERSION@/include/ usr/lib/llvm-@VERSION_TAG@/build/include
-usr/lib/opencilk-@OPENCILK_VERSION@/lib/     usr/lib/llvm-@VERSION_TAG@/build/lib
-usr/lib/opencilk-@OPENCILK_VERSION@/share/   usr/lib/llvm-@VERSION_TAG@/build/share
-usr/lib/opencilk-@OPENCILK_VERSION@/ usr/lib/llvm-@VERSION_TAG@/build/Release
-usr/lib/opencilk-@OPENCILK_VERSION@/ usr/lib/llvm-@VERSION_TAG@/build/Debug+Asserts
+usr/lib/opencilk-@OPENCILK_VERSION@/include/ usr/lib/opencilk-@OPENCILK_VERSION@/build/include
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/     usr/lib/opencilk-@OPENCILK_VERSION@/build/lib
+usr/lib/opencilk-@OPENCILK_VERSION@/share/   usr/lib/opencilk-@OPENCILK_VERSION@/build/share
+usr/lib/opencilk-@OPENCILK_VERSION@/ usr/lib/opencilk-@OPENCILK_VERSION@/build/Release
+usr/lib/opencilk-@OPENCILK_VERSION@/ usr/lib/opencilk-@OPENCILK_VERSION@/build/Debug+Asserts
 
-usr/lib/opencilk-@OPENCILK_VERSION@/lib/cmake/llvm usr/lib/llvm-@VERSION_TAG@/cmake
-usr/lib/opencilk-@OPENCILK_VERSION@/lib/cmake/llvm usr/lib/llvm-@VERSION_TAG@/share/llvm/cmake
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/cmake/llvm usr/lib/opencilk-@OPENCILK_VERSION@/cmake
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/cmake/llvm usr/lib/opencilk-@OPENCILK_VERSION@/share/llvm/cmake
 
 # FIXME: CMake requires this file, but for what? Fix LLVMExports.cmake instead?
 #

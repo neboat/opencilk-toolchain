@@ -66,46 +66,46 @@ usr/lib/opencilk-@OPENCILK_VERSION@/libexec/intercept-cc
 # See compiler-rt/cmake/Modules/AllSupportedArchDefs.cmake / HWASAN_SUPPORTED_ARCH
 [amd64 arm64 riscv64 i386 x32] usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@/bin/hwasan_symbolize
 
-clang/tools/scan-build-@LLVM_VERSION@      usr/share/clang/
-clang/tools/scan-view-@LLVM_VERSION@       usr/share/clang/
+clang/tools/scan-build-@VERSION_TAG@      usr/share/clang/
+clang/tools/scan-view-@VERSION_TAG@       usr/share/clang/
 
-usr/bin/scan-build-py-@LLVM_VERSION@
-usr/bin/analyze-build-@LLVM_VERSION@
-usr/bin/intercept-build-@LLVM_VERSION@
+usr/bin/scan-build-py-@VERSION_TAG@
+usr/bin/analyze-build-@VERSION_TAG@
+usr/bin/intercept-build-@VERSION_TAG@
 
 usr/lib/opencilk-@OPENCILK_VERSION@/share/clang/run-find-all-symbols.py
 usr/lib/opencilk-@OPENCILK_VERSION@/share/clang/clang-include-fixer.py
 usr/lib/opencilk-@OPENCILK_VERSION@/share/clang/clang-include-fixer.el
-usr/bin/clang-check-@LLVM_VERSION@
-usr/bin/clang-apply-replacements-@LLVM_VERSION@
-usr/bin/clang-query-@LLVM_VERSION@
-usr/bin/clang-rename-@LLVM_VERSION@
-usr/bin/sancov-@LLVM_VERSION@
-usr/bin/clang-cl-@LLVM_VERSION@
-usr/bin/modularize-@LLVM_VERSION@
-usr/bin/scan-build-@LLVM_VERSION@
-usr/bin/scan-view-@LLVM_VERSION@
-usr/bin/c-index-test-@LLVM_VERSION@
-usr/bin/clang-offload-bundler-@LLVM_VERSION@
-usr/bin/clang-reorder-fields-@LLVM_VERSION@
-usr/bin/find-all-symbols-@LLVM_VERSION@
-usr/bin/clang-include-fixer-@LLVM_VERSION@
-usr/bin/clang-change-namespace-@LLVM_VERSION@
-usr/bin/clang-refactor-@LLVM_VERSION@
-usr/bin/diagtool-@LLVM_VERSION@
-usr/bin/hmaptool-@LLVM_VERSION@
-usr/bin/clang-extdef-mapping-@LLVM_VERSION@
-usr/bin/clang-doc-@LLVM_VERSION@
-usr/bin/clang-scan-deps-@LLVM_VERSION@
-usr/bin/clang-move-@LLVM_VERSION@
-usr/bin/pp-trace-@LLVM_VERSION@
-usr/bin/clang-repl-@LLVM_VERSION@
-usr/bin/clang-linker-wrapper-@LLVM_VERSION@
-usr/bin/clang-pseudo-@LLVM_VERSION@
-usr/bin/clang-offload-packager-@LLVM_VERSION@
-usr/bin/clang-tblgen-@LLVM_VERSION@
-usr/bin/clang-include-cleaner-@LLVM_VERSION@
-usr/bin/amdgpu-arch-@LLVM_VERSION@
-usr/bin/nvptx-arch-@LLVM_VERSION@
-usr/bin/clang-installapi-@LLVM_VERSION@
-usr/bin/clang-nvlink-wrapper-@LLVM_VERSION@
+usr/bin/clang-check-@VERSION_TAG@
+usr/bin/clang-apply-replacements-@VERSION_TAG@
+usr/bin/clang-query-@VERSION_TAG@
+usr/bin/clang-rename-@VERSION_TAG@
+usr/bin/sancov-@VERSION_TAG@
+usr/bin/clang-cl-@VERSION_TAG@
+usr/bin/modularize-@VERSION_TAG@
+usr/bin/scan-build-@VERSION_TAG@
+usr/bin/scan-view-@VERSION_TAG@
+usr/bin/c-index-test-@VERSION_TAG@
+usr/bin/clang-offload-bundler-@VERSION_TAG@
+usr/bin/clang-reorder-fields-@VERSION_TAG@
+usr/bin/find-all-symbols-@VERSION_TAG@
+usr/bin/clang-include-fixer-@VERSION_TAG@
+usr/bin/clang-change-namespace-@VERSION_TAG@
+usr/bin/clang-refactor-@VERSION_TAG@
+usr/bin/diagtool-@VERSION_TAG@
+usr/bin/hmaptool-@VERSION_TAG@
+usr/bin/clang-extdef-mapping-@VERSION_TAG@
+usr/bin/clang-doc-@VERSION_TAG@
+usr/bin/clang-scan-deps-@VERSION_TAG@
+usr/bin/clang-move-@VERSION_TAG@
+usr/bin/pp-trace-@VERSION_TAG@
+usr/bin/clang-repl-@VERSION_TAG@
+usr/bin/clang-linker-wrapper-@VERSION_TAG@
+usr/bin/clang-pseudo-@VERSION_TAG@
+usr/bin/clang-offload-packager-@VERSION_TAG@
+usr/bin/clang-tblgen-@VERSION_TAG@
+usr/bin/clang-include-cleaner-@VERSION_TAG@
+usr/bin/amdgpu-arch-@VERSION_TAG@
+usr/bin/nvptx-arch-@VERSION_TAG@
+usr/bin/clang-installapi-@VERSION_TAG@
+usr/bin/clang-nvlink-wrapper-@VERSION_TAG@
