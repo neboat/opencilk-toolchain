@@ -1,1 +1,1 @@
-llvm/docs/_build/html usr/share/doc/opencilk-@OPENCILK_VERSION@-doc/
+llvm/docs/_build/html usr/share/doc/llvm-@VERSION_TAG@-doc/

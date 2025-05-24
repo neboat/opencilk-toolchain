@@ -4,6 +4,6 @@ usr/lib/opencilk-@OPENCILK_VERSION@/bin/lli-child-target
 usr/bin/lli-@LLVM_VERSION@
 usr/bin/lli-child-target-@LLVM_VERSION@
 
-debian/llvm-@LLVM_VERSION@-opencilk-@OPENCILK_VERSION@-runtime.binfmt                  usr/share/binfmts/
-debian/llvm-@LLVM_VERSION@-opencilk-@OPENCILK_VERSION@-runtime.binfmt.conf             usr/lib/binfmt.d/
+debian/llvm-@LVERSION_TAG@-runtime.binfmt                  usr/share/binfmts/
+debian/llvm-@VERSION_TAG@-runtime.binfmt.conf             usr/lib/binfmt.d/
 

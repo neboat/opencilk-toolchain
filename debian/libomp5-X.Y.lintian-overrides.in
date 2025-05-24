@@ -1,1 +1,1 @@
-libomp5-@LLVM_VERSION@: arch-dependent-file-not-in-arch-specific-directory *usr/lib/opencilk-@OPENCILK_VERSION@/lib/libomp.so.5*
+libomp5-@VERSION_TAG@: arch-dependent-file-not-in-arch-specific-directory *usr/lib/opencilk-@OPENCILK_VERSION@/lib/libomp.so.5*

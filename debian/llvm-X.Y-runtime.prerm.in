@@ -4,12 +4,12 @@ set -e
 
 if test "$1" = "remove"; then
     if command -v update-binfmts >/dev/null; then
-        update-binfmts --package opencilk-@OPENCILK_VERSION@-runtime \
-            --remove opencilk-@OPENCILK_VERSION@-runtime.binfmt /usr/bin/lli-@LLVM_VERSION@ || true
-        if test -f /var/lib/binfmts/opencilk-@OPENCILK_VERSION@.binfmt; then
+        update-binfmts --package llvm-@VERSION_TAG@-runtime \
+            --remove llvm-@VERSION_TAG@-runtime.binfmt /usr/bin/lli-@LLVM_VERSION@ || true
+        if test -f /var/lib/binfmts/llvm-@VERSION_TAG@.binfmt; then
             # Purge old file
-            update-binfmts --package opencilk-@OPENCILK_VERSION@-runtime \
-                --remove opencilk-@OPENCILK_VERSION@.binfmt /usr/bin/lli-@LLVM_VERSION@ || true
+            update-binfmts --package llvm-@VERSION_TAG@-runtime \
+                --remove llvm-@VERSION_TAG@.binfmt /usr/bin/lli-@LLVM_VERSION@ || true
         fi
     fi
 fi

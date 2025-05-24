@@ -1,2 +1,2 @@
-libclang-rt-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory *usr/lib/opencilk-@OPENCILK_VERSION@/lib/*
-libclang-rt-@LLVM_VERSION@-dev: no-code-sections *usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/linux/libclang_rt.asan_static-i386.a*
+libclang-rt-@VERSION_TAG@-dev: arch-dependent-file-not-in-arch-specific-directory *usr/lib/opencilk-@OPENCILK_VERSION@/lib/*
+libclang-rt-@VERSION_TAG@-dev: no-code-sections *usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/linux/libclang_rt.asan_static-i386.a*

@@ -1,2 +1,2 @@
 # It is in the section ocaml which is fine.
-libopencilk-@OPENCILK_VERSION@-ocaml-dev: wrong-section-according-to-package-name libopencilk-@OPENCILK_VERSION@-ocaml-dev => libdevel
+libllvm-@VERSION_TAG@-ocaml-dev: wrong-section-according-to-package-name libllvm-@VERSION_TAG@-ocaml-dev => libdevel

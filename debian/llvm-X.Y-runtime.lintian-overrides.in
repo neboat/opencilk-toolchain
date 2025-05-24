@@ -1,1 +1,1 @@
-opencilk-@OPENCILK_VERSION@-runtime: binary-without-manpage *usr/bin/lli-child-target-@LLVM_VERSION@*
+llvm-@VERSION_TAG@-runtime: binary-without-manpage *usr/bin/lli-child-target-@LLVM_VERSION@*

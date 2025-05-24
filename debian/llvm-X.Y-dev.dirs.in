@@ -1,5 +1,5 @@
-/usr/lib/opencilk-@OPENCILK_VERSION@/lib
-/usr/lib/opencilk-@OPENCILK_VERSION@/build
-/usr/lib/opencilk-@OPENCILK_VERSION@/include
-usr/share/doc/opencilk-@OPENCILK_VERSION@-dev
-usr/share/emacs/site-lisp/opencilk-@OPENCILK_VERSION@
+/usr/lib/llvm-@VERSION_TAG@/lib
+/usr/lib/llvm-@VERSION_TAG@/build
+/usr/lib/llvm-@VERSION_TAG@/include
+usr/share/doc/llvm-@VERSION_TAG@-dev
+usr/share/emacs/site-lisp/llvm-@VERSION_TAG@

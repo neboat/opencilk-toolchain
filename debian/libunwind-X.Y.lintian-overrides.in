@@ -1,1 +1,1 @@
-libunwind-@LLVM_VERSION@: arch-dependent-file-not-in-arch-specific-directory *usr/lib/opencilk-@OPENCILK_VERSION@/lib/libunwind.so.1.0*
+libunwind-@VERSION_TAG@: arch-dependent-file-not-in-arch-specific-directory *usr/lib/opencilk-@OPENCILK_VERSION@/lib/libunwind.so.1.0*

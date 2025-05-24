@@ -1,1 +1,1 @@
-libpolly-@LLVM_VERSION@-dev: arch-dependent-file-not-in-arch-specific-directory *usr/lib/opencilk-@OPENCILK_VERSION@/lib/libPolly*.a*
+libpolly-@VERSION_TAG@-dev: arch-dependent-file-not-in-arch-specific-directory *usr/lib/opencilk-@OPENCILK_VERSION@/lib/libPolly*.a*

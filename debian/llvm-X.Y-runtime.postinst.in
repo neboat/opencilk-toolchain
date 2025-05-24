@@ -4,7 +4,7 @@ set -e
 
 if test "$1" = "configure"; then
 	if command -v update-binfmts >/dev/null; then
-        update-binfmts --import opencilk-@OPENCILK_VERSION@-runtime.binfmt || true
+        update-binfmts --import llvm-@VERSION_TAG@-runtime.binfmt || true
     fi
 fi
 

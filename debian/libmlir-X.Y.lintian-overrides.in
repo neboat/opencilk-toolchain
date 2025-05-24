@@ -1,1 +1,1 @@
-libmlir-@LLVM_VERSION@: arch-dependent-file-not-in-arch-specific-directory *usr/lib/opencilk-@OPENCILK_VERSION@/lib/*
+libmlir-@VERSION_TAG@: arch-dependent-file-not-in-arch-specific-directory *usr/lib/opencilk-@OPENCILK_VERSION@/lib/*

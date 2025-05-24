@@ -745,6 +745,7 @@ stamps/preconfigure:
 			-e "s|@LLVM_VERSION_MINOR@|$(LLVM_VERSION_MINOR)|g" \
 			-e "s|@LLVM_VERSION_NEXT@|$(LLVM_VERSION_NEXT)|g" \
 			-e "s|@LLVM_VERSION@|$(LLVM_VERSION)|g" \
+			-e "s|@VERSION_TAG@|$(VERSION_TAG)|g" \
 			-e $(BD_ALT_HELLO_SUBST) \
 			$$f > $$f2; \
 		if grep -q -m 1 '^#! */.*bin/' $$f; then \

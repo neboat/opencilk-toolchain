@@ -1,1 +1,1 @@
-:opencilk-@OPENCILK_VERSION@-runtime.binfmt:M::BC::/usr/bin/lli-@LLVM_VERSION@:
+:llvm-@VERSION_TAG@-runtime.binfmt:M::BC::/usr/bin/lli-@LLVM_VERSION@:
