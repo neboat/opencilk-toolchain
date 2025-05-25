@@ -973,7 +973,7 @@ Description: OpenCilk runtime library - dev package
 Package: libcilktools-19-oc3-dev
 Architecture: amd64 arm64
 Section: libdevel
-Depends: libclang-rt-19-oc3-dev (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: libopencilk-19-oc3-dev (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: OpenCilk program-analysis tools - dev package
  OpenCilk's tool suite for dynamic task-parallel program analysis.
  .

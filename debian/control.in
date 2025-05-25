@@ -973,7 +973,7 @@ Description: OpenCilk runtime library - dev package
 Package: libcilktools-@VERSION_TAG@-dev
 Architecture: @CILK_ARCHS@
 Section: libdevel
-Depends: libclang-rt-@VERSION_TAG@-dev (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: libopencilk-@VERSION_TAG@-dev (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: OpenCilk program-analysis tools - dev package
  OpenCilk's tool suite for dynamic task-parallel program analysis.
  .
