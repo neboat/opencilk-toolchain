@@ -2042,6 +2042,184 @@ EOF
     assert_failure "Execution of signal handler with dynamic libunwind failed"
 }
 
+@test "Test compilation of Cilk programs" {
+    # Create the C++ source file for signal handling
+    cat > "${BATS_TMPDIR}/cilktest.c" <<EOF
+#include <stdio.h>
+int fib(int n) {
+    if (n < 2) return n;
+    int x, y;
+    cilk_scope {
+        x = cilk_spawn fib(n-1);
+        y = fib(n-2);
+    }
+    return x + y;
+}
+int main() {
+    int n = 20;
+    printf("fib(%d) = %d\\n", n, fib(n));
+    return 0;
+}
+EOF
+
+    cat > "${BATS_TMPDIR}/cilktest.cpp" <<EOF
+#include <iostream>
+int fib(int n) {
+    if (n < 2) return n;
+    int x, y;
+    cilk_scope {
+        x = cilk_spawn fib(n-1);
+        y = fib(n-2);
+    }
+    return x + y;
+}
+int main() {
+    int n = 20;
+    std::cout << "fib(" << n << ") = " << fib(n) << std::endl;
+    return 0;
+}
+EOF
+
+    # Compile the Cilk C program
+    run clang-$VERSION "${BATS_TMPDIR}/cilktest.c" -fopencilk -o "${BATS_TMPDIR}/cilktest"
+    assert_success "Compilation of Cilk C program failed"
+
+    # Run the Cilk C program
+    run "${BATS_TMPDIR}/cilktest"
+    assert_output "fib(20) = 6765"
+
+    # Compile the Cilk C++ program
+    run clang++-$VERSION "${BATS_TMPDIR}/cilktest.cpp" -fopencilk -o "${BATS_TMPDIR}/cilktest-cpp"
+    assert_success "Compilation of Cilk C program failed"
+
+    # Run the Cilk C++ program
+    run "${BATS_TMPDIR}/cilktest-cpp"
+    assert_output "fib(20) = 6765"
+}
+
+@test "Test Cilksan" {
+    # Create the C++ source file for signal handling
+    cat > "${BATS_TMPDIR}/cilktest.c" <<EOF
+#include <stdio.h>
+int fib(int n) {
+    if (n < 2) return n;
+    int x, y;
+    cilk_scope {
+        x = cilk_spawn fib(n-1);
+        y = fib(n-2);
+    }
+    return x + y;
+}
+int main() {
+    int n = 20;
+    printf("fib(%d) = %d\\n", n, fib(n));
+    return 0;
+}
+EOF
+
+    cat > "${BATS_TMPDIR}/cilktest.cpp" <<EOF
+#include <iostream>
+int fib(int n) {
+    if (n < 2) return n;
+    int x, y;
+    cilk_scope {
+        x = cilk_spawn fib(n-1);
+        y = fib(n-2);
+    }
+    return x + y;
+}
+int main() {
+    int n = 20;
+    std::cout << "fib(" << n << ") = " << fib(n) << std::endl;
+    return 0;
+}
+EOF
+
+    cat > "${BATS_TMPDIR}/expected_result" <<EOF
+Running Cilksan race detector.
+fib(20) = 6765
+
+Cilksan detected 0 distinct races.
+Cilksan suppressed 0 duplicate race reports.
+EOF
+
+    # Compile the Cilk C program with Cilksan
+    run clang-$VERSION "${BATS_TMPDIR}/cilktest.c" -fopencilk -fsanitize=cilk -o "${BATS_TMPDIR}/cilktest"
+    assert_success "Compilation of Cilk C program with Cilksan failed"
+
+    # Run the Cilk C program
+    run "${BATS_TMPDIR}/cilktest" 2>&1
+    cat "${BATS_TMPDIR}/expected_result" | assert_output
+
+    # Compile the Cilk C++ program with Cilksan
+    run clang++-$VERSION "${BATS_TMPDIR}/cilktest.cpp" -fopencilk -fsanitize=cilk -o "${BATS_TMPDIR}/cilktest-cpp"
+    assert_success "Compilation of Cilk C program with Cilksan failed"
+
+    # Run the Cilk C++ program
+    run "${BATS_TMPDIR}/cilktest-cpp" 2>&1
+    cat "${BATS_TMPDIR}/expected_result" | assert_output
+}
+
+@test "Test Cilkscale" {
+    # Create the C++ source file for signal handling
+    cat > "${BATS_TMPDIR}/cilktest.c" <<EOF
+#include <stdio.h>
+int fib(int n) {
+    if (n < 2) return n;
+    int x, y;
+    cilk_scope {
+        x = cilk_spawn fib(n-1);
+        y = fib(n-2);
+    }
+    return x + y;
+}
+int main() {
+    int n = 20;
+    printf("fib(%d) = %d\\n", n, fib(n));
+    return 0;
+}
+EOF
+
+    cat > "${BATS_TMPDIR}/cilktest.cpp" <<EOF
+#include <iostream>
+int fib(int n) {
+    if (n < 2) return n;
+    int x, y;
+    cilk_scope {
+        x = cilk_spawn fib(n-1);
+        y = fib(n-2);
+    }
+    return x + y;
+}
+int main() {
+    int n = 20;
+    std::cout << "fib(" << n << ") = " << fib(n) << std::endl;
+    return 0;
+}
+EOF
+
+    cat > "${BATS_TMPDIR}/expected_result" <<EOF
+fib(20) = 6765
+tag,work
+EOF
+
+    # Compile the Cilk C program with Cilksan
+    run clang-$VERSION "${BATS_TMPDIR}/cilktest.c" -fopencilk -fcilktool=cilkscale -o "${BATS_TMPDIR}/cilktest"
+    assert_success "Compilation of Cilk C program with Cilkscale failed"
+
+    # Run the Cilk C program
+    run "${BATS_TMPDIR}/cilktest"
+    cat "${BATS_TMPDIR}/expected_result" | assert_output -p
+
+    # Compile the Cilk C++ program with Cilksan
+    run clang++-$VERSION "${BATS_TMPDIR}/cilktest.cpp" -fopencilk -fcilktool=cilkscale -o "${BATS_TMPDIR}/cilktest-cpp"
+    assert_success "Compilation of Cilk C program with Cilkscale failed"
+
+    # Run the Cilk C++ program
+    run "${BATS_TMPDIR}/cilktest-cpp"
+    cat "${BATS_TMPDIR}/expected_result" | assert_output -p
+}
+
 teardown() {
     rm -f clangd.json *.o foo* crash-* *profraw hello* a.out polly_test.c
     rm -rf scan-build output
