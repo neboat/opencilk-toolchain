@@ -6,12 +6,15 @@ setup() {
     load '/usr/lib/bats/bats-assert/load'
 
     # Common setup
-    VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
+    OPENCILK_VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
+    OPENCILK_FULL_VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1,p")
+    LLVM_VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)~\+([0-9]+).*,\2,p")
+    VERSION="${LLVM_VERSION}-oc${OPENCILK_VERSION}"
     DETAILED_VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1\2\3,p")
     DEB_HOST_ARCH=$(dpkg-architecture -qDEB_HOST_ARCH)
 
     # Define the package list
-    LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-clang-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clangd-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}_${DETAILED_VERSION}_amd64.deb clang-tidy-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclc-${VERSION}_${DETAILED_VERSION}_all.deb libclc-${VERSION}-dev_${DETAILED_VERSION}_all.deb llvm-${VERSION}-linker-tools_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libmlir-${VERSION}_${DETAILED_VERSION}_amd64.deb libmlir-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-rt-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-rt-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libclang-rt-${VERSION}-dev-wasm64_${DETAILED_VERSION}_all.deb libc++abi-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libc++-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libpolly-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  bolt-${VERSION}_${DETAILED_VERSION}_amd64.deb libbolt-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb flang-${VERSION}_${DETAILED_VERSION}_amd64.deb libflang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libllvmlibc-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb"
+    LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-clang-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clangd-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}_${DETAILED_VERSION}_amd64.deb clang-tidy-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclc-${VERSION}_${DETAILED_VERSION}_all.deb libclc-${VERSION}-dev_${DETAILED_VERSION}_all.deb llvm-${VERSION}-linker-tools_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libmlir-${VERSION}_${DETAILED_VERSION}_amd64.deb libmlir-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-rt-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-rt-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libclang-rt-${VERSION}-dev-wasm64_${DETAILED_VERSION}_all.deb libc++abi-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libc++-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libpolly-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  bolt-${VERSION}_${DETAILED_VERSION}_amd64.deb libbolt-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb flang-${VERSION}_${DETAILED_VERSION}_amd64.deb libflang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libllvmlibc-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libopencilk-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb"
 }
 
 @test "Print LLVM installation information" {
@@ -71,7 +74,7 @@ setup() {
 
 @test "nm recognizes libLLVMBitWriter.a format" {
     # Test https://bugs.llvm.org/show_bug.cgi?id=40059
-    run nm /usr/lib/llvm-$VERSION/lib/libLLVMBitWriter.a
+    run nm /usr/lib/opencilk-$OPENCILK_VERSION/lib/libLLVMBitWriter.a
     refute_output -p 'File format not recognized'
 }
 
@@ -475,7 +478,7 @@ EOF
     assert_success "ASan compilation failed"
 
     # Run the program with external symbolizer path and verbose mode enabled
-    ASAN_OPTIONS=verbosity=2:external_symbolizer_path=/usr/lib/llvm-$VERSION/bin/llvm-symbolizer \
+    ASAN_OPTIONS=verbosity=2:external_symbolizer_path=/usr/lib/opencilk-$OPENCILK_VERSION/bin/llvm-symbolizer \
        run "${BATS_TMPDIR}/symbolizer_test"
     assert_failure
 
@@ -626,7 +629,7 @@ EOF
     assert_success
     # help with the path
     cp "${BATS_TMPDIR}/polly_test.c" .
-    run /usr/lib/llvm-$VERSION/share/opt-viewer/opt-viewer.py -source-dir ${BATS_TMPDIR}/ ${BATS_TMPDIR}/polly_test.opt.yaml -o ${BATS_TMPDIR}/output > /dev/null
+    run /usr/lib/opencilk-$OPENCILK_VERSION/share/opt-viewer/opt-viewer.py -source-dir ${BATS_TMPDIR}/ ${BATS_TMPDIR}/polly_test.opt.yaml -o ${BATS_TMPDIR}/output > /dev/null
     assert_success
 
     run grep -q "inlined into" ${BATS_TMPDIR}/output/*polly_test.c.html
@@ -634,7 +637,7 @@ EOF
 }
 
 @test "Test libpolly package presence" {
-    run test -f "/usr/lib/llvm-$VERSION/include/polly/LinkAllPasses.h"
+    run test -f "/usr/lib/opencilk-$OPENCILK_VERSION/include/polly/LinkAllPasses.h"
     assert_success
 }
 
@@ -920,7 +923,7 @@ skip_if_arch() {
 # ===================== libfuzzer
 
 @test "Test libFuzzer presence" {
-    run test -f "/usr/lib/llvm-$VERSION/lib/libFuzzer.a"
+    run test -f "/usr/lib/opencilk-$OPENCILK_VERSION/lib/libFuzzer.a"
     assert_success
 }
 @test "Test libFuzzer compilation and execution across architectures" {
@@ -979,7 +982,7 @@ EOF
     assert_failure
     assert_output -p "libFuzzer: deadly signal"
 
-    run clang++-$VERSION -fsanitize=address -fsanitize-coverage=edge,trace-pc "${BATS_TMPDIR}/fuzzer_test.cc" /usr/lib/llvm-$VERSION/lib/libFuzzer.a -o "${BATS_TMPDIR}/fuzzer_test_explicit"
+    run clang++-$VERSION -fsanitize=address -fsanitize-coverage=edge,trace-pc "${BATS_TMPDIR}/fuzzer_test.cc" /usr/lib/opencilk-$OPENCILK_VERSION/lib/libFuzzer.a -o "${BATS_TMPDIR}/fuzzer_test_explicit"
     assert_success "Fuzzer compilation with explicit linking failed"
     run "${BATS_TMPDIR}/fuzzer_test_explicit"
     assert_output -e "(Test unit written|PreferSmall)"
@@ -1158,8 +1161,8 @@ EOF
 }
 
 @test "Test libclang library versions" {
-    run test ! -f "/usr/lib/llvm-$VERSION/lib/libclang.so.1"
-    assert_success "/usr/lib/llvm-$VERSION/lib/libclang.so.1 found. - Break the build as it breaks the coinstalability"
+    run test ! -f "/usr/lib/opencilk-$OPENCILK_VERSION/lib/libclang.so.1"
+    assert_success "/usr/lib/opencilk-$OPENCILK_VERSION/lib/libclang.so.1 found. - Break the build as it breaks the coinstalability"
 }
 
 @test "Test clang-cpp linking" {
@@ -1197,7 +1200,7 @@ EOF
     skip_if_arch "i386"
     echo "
 from ctypes import *
-libclang='/usr/lib/llvm-$VERSION/lib/libclang-$VERSION.so.1'
+libclang='/usr/lib/opencilk-$OPENCILK_VERSION/lib/libclang-$VERSION.so.1'
 lib = CDLL(libclang)
 fun = lib.clang_getAddressSpace
 print(fun)
@@ -1382,27 +1385,27 @@ EOF
     # Build the std module
     run clang++-$VERSION -std=c++20 \
         -nostdinc++ \
-        -isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+        -isystem /usr/lib/opencilk-$OPENCILK_VERSION/include/c++/v1/ \
         -Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
         --precompile -o "${BATS_TMPDIR}/std.pcm" \
-        -c /usr/lib/llvm-$VERSION/share/libc++/v1/std.cppm
+        -c /usr/lib/opencilk-$OPENCILK_VERSION/share/libc++/v1/std.cppm
     assert_success "Compilation of std module failed"
 
     # Build the std.compat module
     run clang++-$VERSION -std=c++20 \
         -nostdinc++ \
-        -isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
+        -isystem /usr/lib/opencilk-$OPENCILK_VERSION/include/c++/v1/ \
         -Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
         --precompile -o "${BATS_TMPDIR}/std.compat.pcm" \
         -fmodule-file=std="${BATS_TMPDIR}/std.pcm" \
-        -c /usr/lib/llvm-$VERSION/share/libc++/v1/std.compat.cppm
+        -c /usr/lib/opencilk-$OPENCILK_VERSION/share/libc++/v1/std.compat.cppm
     assert_success "Compilation of std.compat module failed"
 
     # Build the test application
     run clang++-$VERSION -std=c++20 \
         -nostdinc++ \
-        -isystem /usr/lib/llvm-$VERSION/include/c++/v1/ \
-        -L /usr/lib/llvm-$VERSION/lib \
+        -isystem /usr/lib/opencilk-$OPENCILK_VERSION/include/c++/v1/ \
+        -L /usr/lib/opencilk-$OPENCILK_VERSION/lib \
         -fmodule-file=std="${BATS_TMPDIR}/std.pcm" \
         -fmodule-file=std.compat="${BATS_TMPDIR}/std.compat.pcm" \
         "${BATS_TMPDIR}/std.pcm" \
@@ -1440,7 +1443,7 @@ int main(void)
 EOF
 
     # Compile the C program statically with libllvmlibc
-    run clang-$VERSION -static -nostdlib -nolibc -L/usr/lib/llvm-$VERSION/lib/ -lllvmlibc \
+    run clang-$VERSION -static -nostdlib -nolibc -L/usr/lib/opencilk-$OPENCILK_VERSION/lib/ -lllvmlibc \
         "${BATS_TMPDIR}/main.c" -o "${BATS_TMPDIR}/foo"
     assert_success "Compilation with libllvmlibc failed"
 
@@ -2023,7 +2026,7 @@ int main(int, char**) {
 EOF
 
     # Compile the program with libunwind statically
-    run clang++-$VERSION "${BATS_TMPDIR}/signal_test.cpp" /usr/lib/llvm-$VERSION/lib/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl -o "${BATS_TMPDIR}/signal_test_static"
+    run clang++-$VERSION "${BATS_TMPDIR}/signal_test.cpp" /usr/lib/opencilk-$OPENCILK_VERSION/lib/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl -o "${BATS_TMPDIR}/signal_test_static"
     assert_success "Compilation of signal handler with static libunwind failed"
 
     # Run the statically linked program (should exit gracefully)
