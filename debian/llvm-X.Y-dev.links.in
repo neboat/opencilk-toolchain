@@ -23,4 +23,4 @@ usr/lib/opencilk-@OPENCILK_VERSION@/lib/cmake/llvm usr/lib/opencilk-@OPENCILK_VE
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/libLLVM.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@ usr/lib/opencilk-@OPENCILK_VERSION@/lib/libLLVM.so.1
 
 # symlink to the soname in the llvm libdir
-usr/lib/@DEB_HOST_MULTIARCH@/libLLVM.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@ usr/lib/opencilk-@OPENCILK_VERSION@/lib/libLLVM.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@
+# usr/lib/@DEB_HOST_MULTIARCH@/libLLVM.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@ usr/lib/opencilk-@OPENCILK_VERSION@/lib/libLLVM.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@

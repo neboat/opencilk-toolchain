@@ -35,7 +35,8 @@ ifeq ($(DEB_HOST_ARCH_CPU),i386)
   RUNTIMES = compiler-rt;libcxx;libcxxabi
   export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto
 else
-  RUNTIMES = compiler-rt;libcxx;libcxxabi
+  # RUNTIMES = compiler-rt;libcxx;libcxxabi
+  RUNTIMES = compiler-rt
   ifeq ($(DEB_HOST_ARCH_BITS),32)
     export DEB_BUILD_MAINT_OPTIONS = reproducible=-fixfilepath,-fixdebugpath optimize=-lto abi=+time64,+lfs
   else
@@ -404,9 +405,9 @@ ifneq ($(LLVM_LIBC_ENABLE),no)
     $(info LLVM libc disabled for $(DISTRO))
 endif
 
-ifneq (,$(filter $(DEB_HOST_ARCH), $(FLANG_ARCHS)))
-    PROJECTS += ;flang
-endif
+# ifneq (,$(filter $(DEB_HOST_ARCH), $(FLANG_ARCHS)))
+#     PROJECTS += ;flang
+# endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH), $(CILK_ARCHS)))
     RUNTIMES += ;cheetah;cilktools
@@ -425,43 +426,43 @@ ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 endif
 
 # Enable polly (or not)
-POLLY_ENABLE=yes
-ifneq (,$(filter $(DEB_HOST_ARCH), powerpc))
-  POLLY_ENABLE=no
-else
-  PROJECTS+=;polly
-endif
+POLLY_ENABLE=no # yes
+# ifneq (,$(filter $(DEB_HOST_ARCH), powerpc))
+#   POLLY_ENABLE=no
+# else
+#   PROJECTS+=;polly
+# endif
 
 # Enable libunwind (or not)
-LIBUNWIND_ENABLE=yes
-ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel m68k mipsel mips64el hurd-i386 hurd-amd64 powerpc sparc sparc64 x32))
-  LIBUNWIND_ENABLE=no
-# do not use compiler-rt builtins for libcxx (libcxxabi) when libunwind is
-# disabled since the gnu implementation in libgcc_s will then be required
-  LIBCXX_USE_COMPILER_RT := OFF
-# See https://github.com/llvm/llvm-project/issues/77846
-  STAGE_ALL_CMAKE_EXTRA += -DLIBCXXABI_USE_LLVM_UNWINDER=OFF
-else
-  RUNTIMES += ;libunwind
-  STAGE_ALL_CMAKE_EXTRA += -DLIBCXXABI_USE_LLVM_UNWINDER=ON
-endif
+LIBUNWIND_ENABLE=no # yes
+# ifneq (,$(filter $(DEB_HOST_ARCH), s390x armel m68k mipsel mips64el hurd-i386 hurd-amd64 powerpc sparc sparc64 x32))
+#   LIBUNWIND_ENABLE=no
+# # do not use compiler-rt builtins for libcxx (libcxxabi) when libunwind is
+# # disabled since the gnu implementation in libgcc_s will then be required
+#   LIBCXX_USE_COMPILER_RT := OFF
+# # See https://github.com/llvm/llvm-project/issues/77846
+#   STAGE_ALL_CMAKE_EXTRA += -DLIBCXXABI_USE_LLVM_UNWINDER=OFF
+# else
+#   RUNTIMES += ;libunwind
+#   STAGE_ALL_CMAKE_EXTRA += -DLIBCXXABI_USE_LLVM_UNWINDER=ON
+# endif
 
 # Enable openmp (or not)
 OMP_OFFLOAD_ARCHS = amd64 arm64 armhf ppc64 ppc64el hurd-amd64
 OMP_ARCHS = $(OMP_OFFLOAD_ARCHS) loong64 mips64el riscv64
-OPENMP_ENABLE=yes
-ifeq (,$(filter $(DEB_HOST_ARCH), $(OMP_ARCHS)))
-  OPENMP_ENABLE=no
-else
-  RUNTIMES += ;openmp
-  ifneq (,$(filter $(DEB_HOST_ARCH), $(OMP_OFFLOAD_ARCHS)))
-      RUNTIMES += ;offload
-  endif
-  STAGE_ALL_CMAKE_EXTRA += -DLIBOMP_LIBFLAGS="-lm"
-ifeq ($(LIBUNWIND_ENABLE),yes)
-  STAGE_ALL_CMAKE_EXTRA += -DOPENMP_USE_LLVM_UNWINDER=ON
-endif
-endif
+OPENMP_ENABLE=no # yes
+# ifeq (,$(filter $(DEB_HOST_ARCH), $(OMP_ARCHS)))
+#   OPENMP_ENABLE=no
+# else
+#   RUNTIMES += ;openmp
+#   ifneq (,$(filter $(DEB_HOST_ARCH), $(OMP_OFFLOAD_ARCHS)))
+#       RUNTIMES += ;offload
+#   endif
+#   STAGE_ALL_CMAKE_EXTRA += -DLIBOMP_LIBFLAGS="-lm"
+# ifeq ($(LIBUNWIND_ENABLE),yes)
+#   STAGE_ALL_CMAKE_EXTRA += -DOPENMP_USE_LLVM_UNWINDER=ON
+# endif
+# endif
 
 # Do not install objects
 STAGE_ALL_CMAKE_EXTRA += -DMLIR_INSTALL_AGGREGATE_OBJECTS=OFF
@@ -518,10 +519,10 @@ endif
 LLDB_ENABLE=no
 # hurd has threading issues
 LLDB_ARCHS := amd64 arm64 armel armhf i386 loong64 m68k ppc64el riscv64 s390x x32
-ifneq (,$(filter $(DEB_HOST_ARCH),$(LLDB_ARCHS)))
-	STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_LUA=OFF
-	PROJECTS+=;lldb
-endif
+# ifneq (,$(filter $(DEB_HOST_ARCH),$(LLDB_ARCHS)))
+# 	STAGE_ALL_CMAKE_EXTRA += -DLLDB_ENABLE_LUA=OFF
+# 	PROJECTS+=;lldb
+# endif
 
 ifneq (,$(filter $(DEB_HOST_ARCH),i386 amd64))
 	INTEL_PT_DISABLE_DISTRO := bionic
@@ -542,7 +543,7 @@ ifeq (,$(filter-out $(LLDB_PYTHON_DISABLE_DISTRO), $(DISTRO)))
 endif
 
 LIBCXX_WASM_ENABLE=yes
-LIBCXX_WASM_DISABLE_DISTRO := bionic buster focal bullseye jammy
+LIBCXX_WASM_DISABLE_DISTRO := bionic buster focal bullseye jammy noble
 # Either wasi-libc doesn't exist / too old
 # or we have this bug
 # https://sourceware.org/bugzilla/show_bug.cgi?id=27558
@@ -1176,9 +1177,9 @@ stamps/sccache-stats:
 override_dh_auto_build: \
   stamps/debian-full-build \
   stamps/debian-libfuzzer-build \
-  $(if $(filter libclc-%, $(packages)),stamps/debian-libclc-build) \
-  $(if $(filter %-wasm32 %-wasm64, $(packages)),stamps/debian-wasm-build) \
   stamps/sccache-stats
+  # $(if $(filter libclc-%, $(packages)),stamps/debian-libclc-build) \
+  # $(if $(filter %-wasm32 %-wasm64, $(packages)),stamps/debian-wasm-build) \
 
 override_dh_prep: stamps/build_doc
 	dh_prep

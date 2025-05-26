@@ -1,1 +1,1 @@
-usr/lib/opencilk-@OPENCILK_VERSION@/lib/libc++abi.so  /usr/lib/@DEB_HOST_MULTIARCH@/libc++abi.so
+# usr/lib/opencilk-@OPENCILK_VERSION@/lib/libc++abi.so  /usr/lib/@DEB_HOST_MULTIARCH@/libc++abi.so

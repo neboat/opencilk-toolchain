@@ -207,31 +207,31 @@ Description: Compiler-rt - development package
      DataFlowSanitizer, etc
    * profile - Library which is used to collect coverage information.
 
-Package: libclang-rt-@VERSION_TAG@-dev-wasm32
-Architecture: all
-Multi-Arch: foreign
-Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Compiler-rt - wasm32 builtins
- Provides the compiler-rt builtins for WebAssembly 32 bits
+# Package: libclang-rt-@VERSION_TAG@-dev-wasm32
+# Architecture: all
+# Multi-Arch: foreign
+# Section: libdevel
+# Depends: ${shlibs:Depends}, ${misc:Depends}
+# Description: Compiler-rt - wasm32 builtins
+#  Provides the compiler-rt builtins for WebAssembly 32 bits
 
-Package: libclang-rt-@VERSION_TAG@-dev-wasm64
-Architecture: all
-Multi-Arch: foreign
-Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Compiler-rt - wasm64 builtins
- Provides the compiler-rt builtins for WebAssembly 64 bits
+# Package: libclang-rt-@VERSION_TAG@-dev-wasm64
+# Architecture: all
+# Multi-Arch: foreign
+# Section: libdevel
+# Depends: ${shlibs:Depends}, ${misc:Depends}
+# Description: Compiler-rt - wasm64 builtins
+#  Provides the compiler-rt builtins for WebAssembly 64 bits
 
 # ------------- polly -------------
 
-Package: libpolly-@VERSION_TAG@-dev
-Architecture: any
-Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: High-level loop and data-locality optimizer
- Uses an abstract mathematical representation based on integer polyhedra
- to analyze and optimize the memory access pattern of a program
+# Package: libpolly-@VERSION_TAG@-dev
+# Architecture: any
+# Section: libdevel
+# Depends: ${shlibs:Depends}, ${misc:Depends}
+# Description: High-level loop and data-locality optimizer
+#  Uses an abstract mathematical representation based on integer polyhedra
+#  to analyze and optimize the memory access pattern of a program
 
 # ------------- clang libraries -------------
 
@@ -563,295 +563,295 @@ Description: LLVM-based linker, header files
 
 # ------------- lldb -------------
 
-Package: lldb-@VERSION_TAG@
-Architecture: @LLDB_ARCHS@
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@VERSION_TAG@ (= ${binary:Version}),
- python3-lldb-@VERSION_TAG@
-Pre-Depends: ${misc:Pre-Depends}
-Description: Next generation, high-performance debugger
- LLDB is a next generation, high-performance debugger. It is built as a set of
- reusable components which highly leverage existing libraries in the larger LLVM
- Project, such as the Clang expression parser and LLVM disassembler.
+# Package: lldb-@VERSION_TAG@
+# Architecture: @LLDB_ARCHS@
+# Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@VERSION_TAG@ (= ${binary:Version}),
+#  python3-lldb-@VERSION_TAG@
+# Pre-Depends: ${misc:Pre-Depends}
+# Description: Next generation, high-performance debugger
+#  LLDB is a next generation, high-performance debugger. It is built as a set of
+#  reusable components which highly leverage existing libraries in the larger LLVM
+#  Project, such as the Clang expression parser and LLVM disassembler.
 
-Package: liblldb-@VERSION_TAG@
-Provides: ${t64:Provides}
-Architecture: @LLDB_ARCHS@
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@VERSION_TAG@ (= ${binary:Version})
-Pre-Depends: ${misc:Pre-Depends}
-Section: libs
-Description: Next generation, high-performance debugger, library
- LLDB is a next generation, high-performance debugger. It is built as a set of
- reusable components which highly leverage existing libraries in the larger LLVM
- Project, such as the Clang expression parser and LLVM disassembler.
- .
- This package contains the LLDB runtime library.
+# Package: liblldb-@VERSION_TAG@
+# Provides: ${t64:Provides}
+# Architecture: @LLDB_ARCHS@
+# Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm@VERSION_TAG@ (= ${binary:Version})
+# Pre-Depends: ${misc:Pre-Depends}
+# Section: libs
+# Description: Next generation, high-performance debugger, library
+#  LLDB is a next generation, high-performance debugger. It is built as a set of
+#  reusable components which highly leverage existing libraries in the larger LLVM
+#  Project, such as the Clang expression parser and LLVM disassembler.
+#  .
+#  This package contains the LLDB runtime library.
 
-Package: python3-lldb-@VERSION_TAG@
-Section: python
-Architecture: @LLDB_ARCHS@
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}, liblldb-@VERSION_TAG@ (= ${binary:Version})
-Conflicts: python3-lldb-x.y
-Replaces: python3-lldb-x.y
-Provides: python3-lldb-x.y
-Pre-Depends: ${misc:Pre-Depends}
-Description: Next generation, high-performance debugger, python3 lib
- LLDB is a next generation, high-performance debugger. It is built as a set of
- reusable components which highly leverage existing libraries in the larger LLVM
- Project, such as the Clang expression parser and LLVM disassembler.
- .
- This binding package provides access to lldb.
+# Package: python3-lldb-@VERSION_TAG@
+# Section: python
+# Architecture: @LLDB_ARCHS@
+# Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}, liblldb-@VERSION_TAG@ (= ${binary:Version})
+# Conflicts: python3-lldb-x.y
+# Replaces: python3-lldb-x.y
+# Provides: python3-lldb-x.y
+# Pre-Depends: ${misc:Pre-Depends}
+# Description: Next generation, high-performance debugger, python3 lib
+#  LLDB is a next generation, high-performance debugger. It is built as a set of
+#  reusable components which highly leverage existing libraries in the larger LLVM
+#  Project, such as the Clang expression parser and LLVM disassembler.
+#  .
+#  This binding package provides access to lldb.
 
-Package: liblldb-@VERSION_TAG@-dev
-Section: libdevel
-Architecture: @LLDB_ARCHS@
-Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-@VERSION_TAG@ (= ${binary:Version})
-Pre-Depends: ${misc:Pre-Depends}
-Description: Next generation, high-performance debugger, header files
- LLDB is a next generation, high-performance debugger. It is built as a set of
- reusable components which highly leverage existing libraries in the larger LLVM
- Project, such as the Clang expression parser and LLVM disassembler.
- .
- This package provides the header files to build extension over lldb.
+# Package: liblldb-@VERSION_TAG@-dev
+# Section: libdevel
+# Architecture: @LLDB_ARCHS@
+# Depends: ${shlibs:Depends}, ${misc:Depends}, lldb-@VERSION_TAG@ (= ${binary:Version})
+# Pre-Depends: ${misc:Pre-Depends}
+# Description: Next generation, high-performance debugger, header files
+#  LLDB is a next generation, high-performance debugger. It is built as a set of
+#  reusable components which highly leverage existing libraries in the larger LLVM
+#  Project, such as the Clang expression parser and LLVM disassembler.
+#  .
+#  This package provides the header files to build extension over lldb.
 
 
 # ------------- openmp -------------
 # 44 because it was the first version in which openmp & libc++ have been
 # managed in llvm-defaults
 
-Package: libomp-@VERSION_TAG@-dev
-Section: libdevel
-Architecture: @OMP_ARCHS@
-Depends: libomp5-@VERSION_TAG@ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Suggests: libomp-@VERSION_TAG@-doc
-Breaks: libiomp-dev (<< 3.7-1)
-Provides: libomp-x.y-dev
-Conflicts: libomp-x.y-dev
-Replaces: libomp-x.y-dev
-Description: LLVM OpenMP runtime - dev package
- The runtime is the part of the OpenMP implementation that your code is
- linked against, and that manages the multiple threads in an OpenMP program
- while it is executing.
+# Package: libomp-@VERSION_TAG@-dev
+# Section: libdevel
+# Architecture: @OMP_ARCHS@
+# Depends: libomp5-@VERSION_TAG@ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+# Suggests: libomp-@VERSION_TAG@-doc
+# Breaks: libiomp-dev (<< 3.7-1)
+# Provides: libomp-x.y-dev
+# Conflicts: libomp-x.y-dev
+# Replaces: libomp-x.y-dev
+# Description: LLVM OpenMP runtime - dev package
+#  The runtime is the part of the OpenMP implementation that your code is
+#  linked against, and that manages the multiple threads in an OpenMP program
+#  while it is executing.
 
-Package: libomp5-@VERSION_TAG@
-Architecture: @OMP_ARCHS@
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Provides: ${t64:Provides}, libomp-x.y
-Conflicts: libomp-x.y
-Replaces: libomp-x.y
-Description: LLVM OpenMP runtime
- The runtime is the part of the OpenMP implementation that your code is
- linked against, and that manages the multiple threads in an OpenMP program
- while it is executing.
+# Package: libomp5-@VERSION_TAG@
+# Architecture: @OMP_ARCHS@
+# Depends: ${shlibs:Depends}, ${misc:Depends}
+# Provides: ${t64:Provides}, libomp-x.y
+# Conflicts: libomp-x.y
+# Replaces: libomp-x.y
+# Description: LLVM OpenMP runtime
+#  The runtime is the part of the OpenMP implementation that your code is
+#  linked against, and that manages the multiple threads in an OpenMP program
+#  while it is executing.
 
-Package: libomp-@VERSION_TAG@-doc
-Section: doc
-Architecture: all
-Multi-Arch: foreign
-Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
-Replaces: libiomp-x.y-doc
-Breaks: libiomp-x.y-doc
-Description: LLVM OpenMP runtime - Documentation
- The runtime is the part of the OpenMP implementation that your code is
- linked against, and that manages the multiple threads in an OpenMP program
- while it is executing.
- .
- This package contains the documentation of this package.
+# Package: libomp-@VERSION_TAG@-doc
+# Section: doc
+# Architecture: all
+# Multi-Arch: foreign
+# Depends: ${shlibs:Depends}, ${misc:Depends}, libjs-jquery
+# Replaces: libiomp-x.y-doc
+# Breaks: libiomp-x.y-doc
+# Description: LLVM OpenMP runtime - Documentation
+#  The runtime is the part of the OpenMP implementation that your code is
+#  linked against, and that manages the multiple threads in an OpenMP program
+#  while it is executing.
+#  .
+#  This package contains the documentation of this package.
 
 # ------------- libcxx -------------
 
-Package: libc++1-@VERSION_TAG@
-Section: libs
-Architecture: any
-Pre-Depends: ${misc:Pre-Depends}
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Suggests: clang
-Provides: ${t64:Provides}, libc++-x.y
-Conflicts: libc++-x.y
-Replaces: libc++-x.y
-Description: LLVM C++ Standard library
- libc++ is another implementation of the C++ standard library.
- .
- Features and Goals
- .
-   * Correctness as defined by the C++ standards.
-   * Fast execution.
-   * Minimal memory use.
-   * Fast compile times.
-   * ABI compatibility with gcc's libstdc++ for some low-level features such
-     as exception objects, rtti and memory allocation.
-   * Extensive unit tests.
+# Package: libc++1-@VERSION_TAG@
+# Section: libs
+# Architecture: any
+# Pre-Depends: ${misc:Pre-Depends}
+# Depends: ${shlibs:Depends}, ${misc:Depends}
+# Suggests: clang
+# Provides: ${t64:Provides}, libc++-x.y
+# Conflicts: libc++-x.y
+# Replaces: libc++-x.y
+# Description: LLVM C++ Standard library
+#  libc++ is another implementation of the C++ standard library.
+#  .
+#  Features and Goals
+#  .
+#    * Correctness as defined by the C++ standards.
+#    * Fast execution.
+#    * Minimal memory use.
+#    * Fast compile times.
+#    * ABI compatibility with gcc's libstdc++ for some low-level features such
+#      as exception objects, rtti and memory allocation.
+#    * Extensive unit tests.
 
-Package: libc++-@VERSION_TAG@-dev
-Section: libdevel
-Architecture: any
-Depends: libc++1-@VERSION_TAG@ (= ${binary:Version}), ${misc:Depends},
- libc++abi-@VERSION_TAG@-dev (= ${binary:Version}),
- libunwind-@VERSION_TAG@-dev [amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64]
-Provides: libc++-x.y-dev
-Conflicts: libc++-x.y-dev
-Replaces: libc++-x.y-dev
-Description: LLVM C++ Standard library (development files)
- libc++ is another implementation of the C++ standard library
- .
- Features and Goals
- .
-   * Correctness as defined by the C++ standards.
-   * Fast execution.
-   * Minimal memory use.
-   * Fast compile times.
-   * ABI compatibility with gcc's libstdc++ for some low-level features such
-     as exception objects, rtti and memory allocation.
-   * Extensive unit tests.
+# Package: libc++-@VERSION_TAG@-dev
+# Section: libdevel
+# Architecture: any
+# Depends: libc++1-@VERSION_TAG@ (= ${binary:Version}), ${misc:Depends},
+#  libc++abi-@VERSION_TAG@-dev (= ${binary:Version}),
+#  libunwind-@VERSION_TAG@-dev [amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64]
+# Provides: libc++-x.y-dev
+# Conflicts: libc++-x.y-dev
+# Replaces: libc++-x.y-dev
+# Description: LLVM C++ Standard library (development files)
+#  libc++ is another implementation of the C++ standard library
+#  .
+#  Features and Goals
+#  .
+#    * Correctness as defined by the C++ standards.
+#    * Fast execution.
+#    * Minimal memory use.
+#    * Fast compile times.
+#    * ABI compatibility with gcc's libstdc++ for some low-level features such
+#      as exception objects, rtti and memory allocation.
+#    * Extensive unit tests.
 
-Package: libc++-@VERSION_TAG@-dev-wasm32
-Section: libdevel
-Architecture: all
-Multi-Arch: foreign
-Depends: wasi-libc, libc++abi-@VERSION_TAG@-dev-wasm32, ${misc:Depends}
-Provides: libc++-x.y-dev-wasm32
-Conflicts: libc++-x.y-dev-wasm32
-Replaces: libc++-x.y-dev-wasm32
-Description: LLVM C++ Standard library (WASI)
- libc++ is another implementation of the C++ standard library
- .
- Features and Goals
- .
-   * Correctness as defined by the C++ standards.
-   * Fast execution.
-   * Minimal memory use.
-   * Fast compile times.
-   * ABI compatibility with gcc's libstdc++ for some low-level features such
-     as exception objects, rtti and memory allocation.
-   * Extensive unit tests.
- .
- This package provides a version for the 32-bit WebAssembly System Interface.
+# Package: libc++-@VERSION_TAG@-dev-wasm32
+# Section: libdevel
+# Architecture: all
+# Multi-Arch: foreign
+# Depends: wasi-libc, libc++abi-@VERSION_TAG@-dev-wasm32, ${misc:Depends}
+# Provides: libc++-x.y-dev-wasm32
+# Conflicts: libc++-x.y-dev-wasm32
+# Replaces: libc++-x.y-dev-wasm32
+# Description: LLVM C++ Standard library (WASI)
+#  libc++ is another implementation of the C++ standard library
+#  .
+#  Features and Goals
+#  .
+#    * Correctness as defined by the C++ standards.
+#    * Fast execution.
+#    * Minimal memory use.
+#    * Fast compile times.
+#    * ABI compatibility with gcc's libstdc++ for some low-level features such
+#      as exception objects, rtti and memory allocation.
+#    * Extensive unit tests.
+#  .
+#  This package provides a version for the 32-bit WebAssembly System Interface.
 
 # ------------- libcxxabi -------------
 
-Package: libc++abi1-@VERSION_TAG@
-Section: libs
-Architecture: any
-Pre-Depends: ${misc:Pre-Depends}
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Provides: ${t64:Provides}, libc++abi-x.y
-Conflicts: libc++abi-x.y
-Replaces: libc++abi-x.y
-Description: LLVM low level support for a standard C++ library
- libc++abi is another implementation of low level support for a standard C++
- library.
- .
- Features and Goals
- .
-   * Correctness as defined by the C++ standards.
-   * Provide a portable sublayer to ease the porting of libc++
+# Package: libc++abi1-@VERSION_TAG@
+# Section: libs
+# Architecture: any
+# Pre-Depends: ${misc:Pre-Depends}
+# Depends: ${shlibs:Depends}, ${misc:Depends}
+# Provides: ${t64:Provides}, libc++abi-x.y
+# Conflicts: libc++abi-x.y
+# Replaces: libc++abi-x.y
+# Description: LLVM low level support for a standard C++ library
+#  libc++abi is another implementation of low level support for a standard C++
+#  library.
+#  .
+#  Features and Goals
+#  .
+#    * Correctness as defined by the C++ standards.
+#    * Provide a portable sublayer to ease the porting of libc++
 
-Package: libc++abi-@VERSION_TAG@-dev
-Section: libdevel
-Architecture: any
-Depends: libc++abi1-@VERSION_TAG@ (= ${binary:Version}), ${misc:Depends}
-Breaks: libc++abi-dev (<= 44)
-Provides: libc++abi-x.y-dev
-Conflicts: libc++abi-x.y-dev
-Replaces: libc++abi-x.y-dev
-Description: LLVM low level support for a standard C++ library (development files)
- libc++abi is another implementation of low level support for a standard C++
- library.
- .
- Features and Goals
- .
-   * Correctness as defined by the C++ standards.
-   * Provide a portable sublayer to ease the porting of libc++
+# Package: libc++abi-@VERSION_TAG@-dev
+# Section: libdevel
+# Architecture: any
+# Depends: libc++abi1-@VERSION_TAG@ (= ${binary:Version}), ${misc:Depends}
+# Breaks: libc++abi-dev (<= 44)
+# Provides: libc++abi-x.y-dev
+# Conflicts: libc++abi-x.y-dev
+# Replaces: libc++abi-x.y-dev
+# Description: LLVM low level support for a standard C++ library (development files)
+#  libc++abi is another implementation of low level support for a standard C++
+#  library.
+#  .
+#  Features and Goals
+#  .
+#    * Correctness as defined by the C++ standards.
+#    * Provide a portable sublayer to ease the porting of libc++
 
-Package: libc++abi-@VERSION_TAG@-dev-wasm32
-Section: libdevel
-Architecture: all
-Multi-Arch: foreign
-Depends: wasi-libc, ${misc:Depends}
-Provides: libc++abi-x.y-dev-wasm32
-Conflicts: libc++abi-x.y-dev-wasm32
-Replaces: libc++abi-x.y-dev-wasm32
-Description: LLVM low level support for a standard C++ library (WASI)
- libc++abi is another implementation of low level support for a standard C++
- library.
- .
- Features and Goals
- .
-   * Correctness as defined by the C++ standards.
-   * Provide a portable sublayer to ease the porting of libc++
- .
- This package provides a version for the 32-bit WebAssembly System Interface.
+# Package: libc++abi-@VERSION_TAG@-dev-wasm32
+# Section: libdevel
+# Architecture: all
+# Multi-Arch: foreign
+# Depends: wasi-libc, ${misc:Depends}
+# Provides: libc++abi-x.y-dev-wasm32
+# Conflicts: libc++abi-x.y-dev-wasm32
+# Replaces: libc++abi-x.y-dev-wasm32
+# Description: LLVM low level support for a standard C++ library (WASI)
+#  libc++abi is another implementation of low level support for a standard C++
+#  library.
+#  .
+#  Features and Goals
+#  .
+#    * Correctness as defined by the C++ standards.
+#    * Provide a portable sublayer to ease the porting of libc++
+#  .
+#  This package provides a version for the 32-bit WebAssembly System Interface.
 
 # ------------- libclc -------------
 
-Package: libclc-@VERSION_TAG@
-Section: libs
-Architecture: all
-Multi-Arch: foreign
-Depends:
- ${misc:Depends},
- libclc-@VERSION_TAG@-dev (= ${binary:Version}),
- libclang-common-@VERSION_TAG@-dev,
-Breaks: libclc-amdgcn, libclc-ptx, libclc-r600
-Provides: libclc-x.y
-Conflicts: libclc-x.y
-Replaces: libclc-x.y, libclc-amdgcn, libclc-ptx, libclc-r600,
-Description: OpenCL C language implementation - platform support
- libclc is an open implementation of the OpenCL C programming language,
- as specified by the OpenCL 1.1 Specification.
- .
- This package contains support for the amdgcn (AMD GPU), PTX and r600
- platforms.
+# Package: libclc-@VERSION_TAG@
+# Section: libs
+# Architecture: all
+# Multi-Arch: foreign
+# Depends:
+#  ${misc:Depends},
+#  libclc-@VERSION_TAG@-dev (= ${binary:Version}),
+#  libclang-common-@VERSION_TAG@-dev,
+# Breaks: libclc-amdgcn, libclc-ptx, libclc-r600
+# Provides: libclc-x.y
+# Conflicts: libclc-x.y
+# Replaces: libclc-x.y, libclc-amdgcn, libclc-ptx, libclc-r600,
+# Description: OpenCL C language implementation - platform support
+#  libclc is an open implementation of the OpenCL C programming language,
+#  as specified by the OpenCL 1.1 Specification.
+#  .
+#  This package contains support for the amdgcn (AMD GPU), PTX and r600
+#  platforms.
 
-Package: libclc-@VERSION_TAG@-dev
-Section: libdevel
-Architecture: all
-Multi-Arch: foreign
-Depends:
- ${misc:Depends},
-Breaks: libclc-dev
-Provides: libclc-x.y-dev
-Conflicts: libclc-x.y-dev
-Replaces: libclc-dev, libclc-x.y-dev
-Description: OpenCL C language implementation - development files
- libclc is an open implementation of the OpenCL C programming language,
- as specified by the OpenCL 1.1 Specification.
- .
- This package contains development header files.
+# Package: libclc-@VERSION_TAG@-dev
+# Section: libdevel
+# Architecture: all
+# Multi-Arch: foreign
+# Depends:
+#  ${misc:Depends},
+# Breaks: libclc-dev
+# Provides: libclc-x.y-dev
+# Conflicts: libclc-x.y-dev
+# Replaces: libclc-dev, libclc-x.y-dev
+# Description: OpenCL C language implementation - development files
+#  libclc is an open implementation of the OpenCL C programming language,
+#  as specified by the OpenCL 1.1 Specification.
+#  .
+#  This package contains development header files.
 
 # ------------- libunwind -------------
 
-Package: libunwind-@VERSION_TAG@
-Section: libs
-Architecture: amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64
-Depends: ${shlibs:Depends},
- ${misc:Depends}
-Provides: ${t64:Provides}, libunwind-x.y
-Conflicts: libunwind-x.y
-Replaces: libunwind-x.y
-Description: production-quality unwinder
- libunwind is a production-quality unwinder, with platform support for DWARF
- unwind info, SjLj, and ARM EHABI.
- .
- The low level libunwind API was designed to work either in-process (aka local)
- or to operate on another process (aka remote), but only the local path has
- been implemented. Remote unwinding remains as future work.
+# Package: libunwind-@VERSION_TAG@
+# Section: libs
+# Architecture: amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64
+# Depends: ${shlibs:Depends},
+#  ${misc:Depends}
+# Provides: ${t64:Provides}, libunwind-x.y
+# Conflicts: libunwind-x.y
+# Replaces: libunwind-x.y
+# Description: production-quality unwinder
+#  libunwind is a production-quality unwinder, with platform support for DWARF
+#  unwind info, SjLj, and ARM EHABI.
+#  .
+#  The low level libunwind API was designed to work either in-process (aka local)
+#  or to operate on another process (aka remote), but only the local path has
+#  been implemented. Remote unwinding remains as future work.
 
-Package: libunwind-@VERSION_TAG@-dev
-Section: libdevel
-Architecture: amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64
-Depends:
- ${misc:Depends},
- libunwind-@VERSION_TAG@ (= ${binary:Version})
-Provides: libunwind-x.y-dev
-Conflicts: libunwind-dev, libunwind-x.y-dev
-Replaces: libunwind-dev, libunwind-x.y-dev
-Description: production-quality unwinder
- libunwind is a production-quality unwinder, with platform support for DWARF
- unwind info, SjLj, and ARM EHABI.
- .
- The low level libunwind API was designed to work either in-process (aka local)
- or to operate on another process (aka remote), but only the local path has
- been implemented. Remote unwinding remains as future work.
+# Package: libunwind-@VERSION_TAG@-dev
+# Section: libdevel
+# Architecture: amd64 arm64 armhf i386 loong64 ppc64el ppc64 riscv64
+# Depends:
+#  ${misc:Depends},
+#  libunwind-@VERSION_TAG@ (= ${binary:Version})
+# Provides: libunwind-x.y-dev
+# Conflicts: libunwind-dev, libunwind-x.y-dev
+# Replaces: libunwind-dev, libunwind-x.y-dev
+# Description: production-quality unwinder
+#  libunwind is a production-quality unwinder, with platform support for DWARF
+#  unwind info, SjLj, and ARM EHABI.
+#  .
+#  The low level libunwind API was designed to work either in-process (aka local)
+#  or to operate on another process (aka remote), but only the local path has
+#  been implemented. Remote unwinding remains as future work.
 
 # ------------- mlir -------------
 
@@ -900,21 +900,21 @@ Description: Multi-Level Intermediate Representation library
 
 # ------------- bolt -------------
 
-Package: bolt-@VERSION_TAG@
-Architecture: amd64 arm64
-Depends: ${shlibs:Depends}, ${misc:Depends}, libbolt-@VERSION_TAG@-dev (= ${binary:Version}),
-Pre-Depends: ${misc:Pre-Depends}
-Description: Post-link optimizer
- It achieves the improvements by optimizing application's code layout based on
- execution profile gathered by sampling profiler.
+# Package: bolt-@VERSION_TAG@
+# Architecture: amd64 arm64
+# Depends: ${shlibs:Depends}, ${misc:Depends}, libbolt-@VERSION_TAG@-dev (= ${binary:Version}),
+# Pre-Depends: ${misc:Pre-Depends}
+# Description: Post-link optimizer
+#  It achieves the improvements by optimizing application's code layout based on
+#  execution profile gathered by sampling profiler.
 
-Package: libbolt-@VERSION_TAG@-dev
-Section: libdevel
-Architecture: amd64 arm64
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Post-link optimizer
- It achieves the improvements by optimizing application's code layout based on
- execution profile gathered by sampling profiler.
+# Package: libbolt-@VERSION_TAG@-dev
+# Section: libdevel
+# Architecture: amd64 arm64
+# Depends: ${shlibs:Depends}, ${misc:Depends}
+# Description: Post-link optimizer
+#  It achieves the improvements by optimizing application's code layout based on
+#  execution profile gathered by sampling profiler.
 
 # ------------- flang -------------
 
@@ -946,13 +946,13 @@ Description: Flang library - Development package
 
 # ------------- LLVM libc -------------
 
-Package: libllvmlibc-@VERSION_TAG@-dev
-Section: libdevel
-Architecture: amd64 arm64 armhf
-Description: LLVM C Library - dev package
- Implementation of the C standard library targeting C17 and above.
- .
- This is an experimental project. Don't use in production.
+# Package: libllvmlibc-@VERSION_TAG@-dev
+# Section: libdevel
+# Architecture: amd64 arm64 armhf
+# Description: LLVM C Library - dev package
+#  Implementation of the C standard library targeting C17 and above.
+#  .
+#  This is an experimental project. Don't use in production.
 
 # ------------- Cilk -------------
 
