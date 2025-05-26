@@ -1504,7 +1504,7 @@ endif
 
 override_dh_shlibdeps:
 # Ignore asan libraries. They would trigger dependencies to multiarch libraries
-	dh_shlibdeps -l$(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/ -Xlibclang_rt.asan -Xlibclang_rt.asan -Xlibclang_rt.asan-*.so -Xlibclang_rt.asan-*.so
+	dh_shlibdeps -l$(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/:$(DEB_INST)/usr/lib/opencilk-$(OPENCILK_VERSION)/lib/clang/$(LLVM_VERSION)/lib/linux -Xlibclang_rt.asan -Xlibclang_rt.asan -Xlibclang_rt.asan-*.so -Xlibclang_rt.asan-*.so
 
 override_dh_installman:
 	if test -f lld/docs/ld.lld.1; then \
