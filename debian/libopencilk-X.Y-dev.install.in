@@ -6,3 +6,14 @@ usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/include/cilk/opadd
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/include/cilk/ostream_reducer.h
 
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/libopencilk*
+
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/include/cilk/cilksan.h
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/include/cilk/cilkscale.h
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/include/csi/csi.h
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.cilk*
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.csi*
+
+usr/lib/opencilk-@OPENCILK_VERSION@/share/Cilkscale_vis
+usr/lib/opencilk-@OPENCILK_VERSION@/share/cilksan
+
+usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/libcilksan*

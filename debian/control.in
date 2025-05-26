@@ -968,16 +968,6 @@ Description: OpenCilk runtime library - dev package
  balance Cilk task-parallel computation on multicore CPUs.
  .
  This package also provides the compiler-runtime ABI to compile
- OpenCilk programs.
-
-Package: libcilktools-@VERSION_TAG@-dev
-Architecture: @CILK_ARCHS@
-Section: libdevel
-Depends: libopencilk-@VERSION_TAG@-dev (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Description: OpenCilk program-analysis tools - dev package
- OpenCilk's tool suite for dynamic task-parallel program analysis.
- .
- This package provides the Cilksan race detector and the Cilkscale
- scalability analyzer, including their runtime libraries and API
- header files.  This package also provides scripts to help
- benchmark or debug Cilk programs.
+ OpenCilk programs, the Cilksan race detector, the Cilkscale
+ scalability analyzer, and scripts to help benchmark and debug
+ Cilk programs.
