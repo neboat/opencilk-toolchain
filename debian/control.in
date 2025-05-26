@@ -918,31 +918,31 @@ Description: Multi-Level Intermediate Representation library
 
 # ------------- flang -------------
 
-Package: flang-@VERSION_TAG@
-# no 32bit support
-# https://github.com/llvm/llvm-project/issues/59845
-Architecture: @FLANG_ARCHS@
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libflang-@VERSION_TAG@-dev (= ${binary:Version}),
-Provides: fortran-compiler, gfortran-mod-15
-Description: Fortran compiler
- Ground-up implementation of a Fortran front end written in
- modern C++.
- .
- While it is capable of generating executables for a number
- of examples, some functionalities are still missing.
+# Package: flang-@VERSION_TAG@
+# # no 32bit support
+# # https://github.com/llvm/llvm-project/issues/59845
+# Architecture: @FLANG_ARCHS@
+# Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libflang-@VERSION_TAG@-dev (= ${binary:Version}),
+# Provides: fortran-compiler, gfortran-mod-15
+# Description: Fortran compiler
+#  Ground-up implementation of a Fortran front end written in
+#  modern C++.
+#  .
+#  While it is capable of generating executables for a number
+#  of examples, some functionalities are still missing.
 
-Package: libflang-@VERSION_TAG@-dev
-Architecture: @FLANG_ARCHS@
-Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
-Description: Flang library - Development package
- Ground-up implementation of a Fortran front end written in
- modern C++.
- .
- While it is capable of generating executables for a number
- of examples, some functionalities are still missing.
- .
- This package contains the flang libraries and headers.
+# Package: libflang-@VERSION_TAG@-dev
+# Architecture: @FLANG_ARCHS@
+# Section: libdevel
+# Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
+# Description: Flang library - Development package
+#  Ground-up implementation of a Fortran front end written in
+#  modern C++.
+#  .
+#  While it is capable of generating executables for a number
+#  of examples, some functionalities are still missing.
+#  .
+#  This package contains the flang libraries and headers.
 
 # ------------- LLVM libc -------------
 
