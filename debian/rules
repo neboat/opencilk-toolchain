@@ -1488,18 +1488,26 @@ LLVM_RELEASE := $(LLVM_EPOCH)$(LLVM_VERSION).$(LLVM_VERSION_MINOR).0
 override_dh_makeshlibs:
 ifneq (,$(findstring ~,$(PKG_VERSION)))
 	dh_makeshlibs -plibclang$(SONAME_EXT)-$(VERSION_TAG)
+ifeq ($(LLDB_ENABLE),yes)
 	dh_makeshlibs -pliblldb-$(VERSION_TAG)
+endif
 	dh_makeshlibs -plibllvm$(VERSION_TAG)
+ifeq ($(OPENMP_ENABLE),yes)
 	dh_makeshlibs -plibomp$(SONAME_OPENMP)-$(VERSION_TAG)
+endif
 else
 	dh_makeshlibs -plibclang$(SONAME_EXT)-$(VERSION_TAG) \
 		'-Vlibclang$(SONAME_EXT)-$(VERSION_TAG) (>= $(LLVM_RELEASE))'
+ifeq ($(LLDB_ENABLE),yes)
 	dh_makeshlibs -pliblldb-$(VERSION_TAG) \
 		'-Vliblldb-$(VERSION_TAG) (>= $(LLVM_RELEASE))'
+endif
 	dh_makeshlibs -plibllvm$(VERSION_TAG) \
 		'-Vlibllvm$(VERSION_TAG) (>= $(LLVM_RELEASE))'
+ifeq ($(OPENMP_ENABLE),yes)
 	dh_makeshlibs -plibomp$(SONAME_OPENMP)-$(VERSION_TAG) \
 		'-Vlibomp$(SONAME_OPENMP)-$(VERSION_TAG) (>= $(LLVM_RELEASE))'
+endif
 endif
 	dh_makeshlibs --remaining-packages -V
 
@@ -1523,8 +1531,12 @@ ifeq (0, $(strip $(shell dpkg --compare-versions $(DH_VERSION) ge 9.20160114; ec
 	: # If we don't have the right version of debhelper, don't run the option
 	dh_strip -p libclang$(SONAME_EXT)-$(VERSION_TAG) --dbgsym-migration='libclang$(SONAME_EXT)-$(VERSION_TAG)-dbg'
 	dh_strip -p libllvm$(VERSION_TAG) --dbgsym-migration='libllvm$(VERSION_TAG)-dbg'
+ifeq ($(LLDB_ENABLE),yes)
 	dh_strip -p liblldb-$(VERSION_TAG) --dbgsym-migration='liblldb-$(VERSION_TAG)-dbg'
+endif
+ifeq ($(OPENMP_ENABLE),yes)
 	dh_strip -p libomp$(SONAME_OPENMP)-$(VERSION_TAG) --dbgsym-migration='libomp$(SONAME_OPENMP)-$(VERSION_TAG)-dbg'
+endif
 endif
 # ifeq (${LLD_ENABLE},yes)
 # 	PATH=$(CURDIR)/:$$PATH dh_strip -p liblld-$(VERSION_TAG) --dbg-package=liblld-$(VERSION_TAG)-dbg
