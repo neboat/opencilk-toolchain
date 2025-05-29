@@ -26,7 +26,7 @@ ifeq ($(LLVM_VERSION),$(LLVM_VERSION_FULL))
 endif
 LLVM_VERSION_NEXT := $(shell echo $(LLVM_VERSION_FULL) | awk -F. '{ OFS="."; $$NF+=1; print}')
 
-VERSION_TAG := $(LLVM_VERSION)-oc$(OPENCILK_VERSION)
+VERSION_TAG := $(LLVM_VERSION)oc$(OPENCILK_VERSION)
 
 # dpkg-buildflags support
 # disable fixfilepath in favor of the opencilk-project supplied flavor, disable lto

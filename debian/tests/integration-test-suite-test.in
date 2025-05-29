@@ -21,11 +21,9 @@ cd "$AUTOPKGTEST_TMP"
 
 mkdir build
 cd build
-# TODO: Fix VERSION_TAG to /usr/bin/clang++-$VERSION_TAG works properly.
-#         -DCLANGXX_BINARY=/usr/bin/clang++-$VERSION_TAG \
 cmake -DLIT=/usr/lib/opencilk-$OPENCILK_VERSION/build/utils/lit/lit.py \
         -DCLANG_BINARY=/usr/bin/clang-$VERSION_TAG \
-        -DCLANGXX_BINARY=/usr/lib/opencilk-$OPENCILK_VERSION/bin/clang++ \
+        -DCLANGXX_BINARY=/usr/bin/clang++-$VERSION_TAG \
         -DCLANG_TIDY_BINARY=/usr/bin/clang-tidy-$VERSION_TAG \
         -DCLANG_FORMAT_BINARY=/usr/bin/clang-format-$VERSION_TAG \
         -DLLD_BINARY=/usr/bin/lld-$VERSION_TAG \
