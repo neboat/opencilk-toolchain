@@ -9,7 +9,7 @@ setup() {
     OPENCILK_VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).*,\1,p")
     OPENCILK_FULL_VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1,p")
     LLVM_VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)~\+([0-9]+).*,\2,p")
-    VERSION="${LLVM_VERSION}-oc${OPENCILK_VERSION}"
+    VERSION="${LLVM_VERSION}oc${OPENCILK_VERSION}"
     DETAILED_VERSION=$(dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1\2\3,p")
     DEB_HOST_ARCH=$(dpkg-architecture -qDEB_HOST_ARCH)
 
@@ -17,8 +17,13 @@ setup() {
     LIST="libomp5-${VERSION}_${DETAILED_VERSION}_amd64.deb libomp-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-lldb-${VERSION}_${DETAILED_VERSION}_amd64.deb python3-clang-${VERSION}_${DETAILED_VERSION}_amd64.deb libllvm${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb liblldb-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  libclang1-${VERSION}_${DETAILED_VERSION}_amd64.deb  libclang-common-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}_${DETAILED_VERSION}_amd64.deb  liblldb-${VERSION}_${DETAILED_VERSION}_amd64.deb  llvm-${VERSION}-runtime_${DETAILED_VERSION}_amd64.deb lld-${VERSION}_${DETAILED_VERSION}_amd64.deb libfuzzer-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++abi-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libc++1-${VERSION}_${DETAILED_VERSION}_amd64.deb libc++abi1-${VERSION}_${DETAILED_VERSION}_amd64.deb clang-${VERSION}_${DETAILED_VERSION}_amd64.deb llvm-${VERSION}-tools_${DETAILED_VERSION}_amd64.deb clang-tools-${VERSION}_${DETAILED_VERSION}_amd64.deb clangd-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}_${DETAILED_VERSION}_amd64.deb clang-tidy-${VERSION}_${DETAILED_VERSION}_amd64.deb libclang-cpp${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclc-${VERSION}_${DETAILED_VERSION}_all.deb libclc-${VERSION}-dev_${DETAILED_VERSION}_all.deb llvm-${VERSION}-linker-tools_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}_${DETAILED_VERSION}_amd64.deb libunwind-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libmlir-${VERSION}_${DETAILED_VERSION}_amd64.deb libmlir-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-rt-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libclang-rt-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libclang-rt-${VERSION}-dev-wasm64_${DETAILED_VERSION}_all.deb libc++abi-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libc++-${VERSION}-dev-wasm32_${DETAILED_VERSION}_all.deb libpolly-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb  bolt-${VERSION}_${DETAILED_VERSION}_amd64.deb libbolt-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb flang-${VERSION}_${DETAILED_VERSION}_amd64.deb libflang-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libllvmlibc-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb libopencilk-${VERSION}-dev_${DETAILED_VERSION}_amd64.deb"
 
     # Define clang and clang++ binaries to use
-    CLANG=/usr/lib/opencilk-${OPENCILK_VERSION}/bin/clang
-    CLANGPP=/usr/lib/opencilk-${OPENCILK_VERSION}/bin/clang++
+    # CLANG=/usr/lib/opencilk-${OPENCILK_VERSION}/bin/clang
+    # CLANGPP=/usr/lib/opencilk-${OPENCILK_VERSION}/bin/clang++
+    CLANG=clang-${VERSION}
+    CLANGPP=clang++-${VERSION}
+
+    # Define corresponding LLVM lib dir
+    LLVM_LIBDIR=/usr/lib/llvm-${LLVM_VERSION}/lib
 }
 
 @test "Print LLVM installation information" {
@@ -137,7 +142,7 @@ EOF
     '> ${BATS_TMPDIR}/scan_build_test.c
 
     # Run scan-build with GCC
-    run scan-build-$VERSION --use-analyzer $CLANG -o "${BATS_TMPDIR}/scan_build_output" gcc -c "${BATS_TMPDIR}/scan_build_test.c"
+    run scan-build-$VERSION --use-analyzer /usr/bin/$CLANG -o "${BATS_TMPDIR}/scan_build_output" gcc -c "${BATS_TMPDIR}/scan_build_test.c"
     assert_success
     assert_output -p "1 bug found"
 
@@ -154,7 +159,7 @@ EOF
          }
     '> ${BATS_TMPDIR}/scan_build_test.c
 
-    run scan-build-$VERSION --use-analyzer $CLANG -o scan-build $CLANG -c ${BATS_TMPDIR}/scan_build_test.c
+    run scan-build-$VERSION --use-analyzer /usr/bin/$CLANG -o scan-build $CLANG -c ${BATS_TMPDIR}/scan_build_test.c
     assert_output -p "1 bug found"
 }
 
@@ -167,7 +172,7 @@ EOF
          }
     '> ${BATS_TMPDIR}/scan_build_test.c
 
-    run scan-build-$VERSION --use-analyzer $CLANG --exclude ${BATS_TMPDIR} -v $CLANG -c ${BATS_TMPDIR}/scan_build_test.c
+    run scan-build-$VERSION --use-analyzer /usr/bin/$CLANG --exclude ${BATS_TMPDIR} -v $CLANG -c ${BATS_TMPDIR}/scan_build_test.c
     assert_success
 	assert_output -p 'scan-build: 0 bugs found.'
 }
@@ -509,6 +514,9 @@ EOF
     if ! dpkg -l | grep -q "libc++-$VERSION"; then
         skip "libc++-$VERSION not installed"
     fi
+
+    local symbolizer_path="/usr/lib/opencilk-${OPENCILK_VERSION}/bin/llvm-symbolizer"
+
     echo '#include <stdexcept>
     int main() {
         std::logic_error("");
@@ -519,7 +527,7 @@ EOF
     assert_success "Compilation with libc++ and AddressSanitizer failed"
 
     # Run the compiled binary
-    run "${BATS_TMPDIR}/sanitizer_test"
+    ASAN_OPTIONS=external_symbolizer_path="${symbolizer_path}" run "${BATS_TMPDIR}/sanitizer_test"
     assert_success "Running the binary failed with AddressSanitizer enabled"
 }
 
@@ -688,8 +696,8 @@ EOF
 
 
 @test "Test LLDB debugging with libc++" {
-    if ! dpkg -l | grep -q "lldb-$VERSION"; then
-        skip "lldb-$VERSION not installed"
+    if ! dpkg -l | grep -q "lldb-$LLVM_VERSION"; then
+        skip "lldb-$LLVM_VERSION not installed"
     fi
     # Create the C++ source file
     cat > "${BATS_TMPDIR}/foo.cpp" <<EOF
@@ -843,11 +851,11 @@ EOF
 # ===================== libc++
 
 @test "Test libc++ and libc++abi integration" {
-    if ! dpkg -l | grep -q "libc++"; then
-        skip "libc++ not installed"
+    if ! dpkg -l | grep -q "libc++-$LLVM_VERSION"; then
+        skip "libc++-$LLVM_VERSION not installed"
     fi
-    if ! dpkg -l | grep -q "libc++abi"; then
-        skip "libc++abi not installed"
+    if ! dpkg -l | grep -q "libc++abi-$LLVM_VERSION"; then
+        skip "libc++abi-$LLVM_VERSION not installed"
     fi
     echo '#include <vector>
     #include <string>
@@ -858,7 +866,7 @@ EOF
         return 0;
     }' > "${BATS_TMPDIR}/libcxx_test.cpp"
 
-    run $CLANGPP -stdlib=libc++ -lc++abi "${BATS_TMPDIR}/libcxx_test.cpp" -o "${BATS_TMPDIR}/libcxx_test"
+    run $CLANGPP -stdlib=libc++ -lc++abi -L$LLVM_LIBDIR -Wl,-rpath,$LLVM_LIBDIR "${BATS_TMPDIR}/libcxx_test.cpp" -o "${BATS_TMPDIR}/libcxx_test"
     assert_success
 
     run "${BATS_TMPDIR}/libcxx_test"
@@ -877,8 +885,8 @@ skip_if_arch() {
     if ! dpkg -l | grep -q wasi-libc; then
         skip "wasi-libc not installed"
     fi
-    if ! dpkg -l | grep -q libc++-$VERSION-dev-wasm32; then
-        skip "libc++-$VERSION-dev-wasm32 not installed"
+    if ! dpkg -l | grep -q libc++-$LLVM_VERSION-dev-wasm32; then
+        skip "libc++-$LLVM_VERSION-dev-wasm32 not installed"
     fi
 
     # Test C program compilation for WASM
@@ -903,8 +911,8 @@ skip_if_arch() {
     if ! dpkg -l | grep -q wasi-libc; then
         skip "wasi-libc not installed"
     fi
-    if ! dpkg -l | grep -q libc++-$VERSION-dev-wasm32; then
-        skip "libc++-$VERSION-dev-wasm32 not installed"
+    if ! dpkg -l | grep -q libc++-$LLVM_VERSION-dev-wasm32; then
+        skip "libc++-$LLVM_VERSION-dev-wasm32 not installed"
     fi
 
     # Test C++ program compilation for WASM
@@ -1253,32 +1261,32 @@ print(fun)
 # ===================== libc++
 
 @test "Test libc++ linking" {
-    if ! dpkg -l | grep -q "libc++"; then
-        skip "libc++ not installed"
+    if ! dpkg -l | grep -q "libc++-$LLVM_VERSION"; then
+        skip "libc++-$LLVM_VERSION not installed"
     fi
     echo '#include <vector>
     	int main() { std::vector<int> v; v.push_back(1); return 0; }' > foo.cpp
-    run $CLANGPP -stdlib=libc++ foo.cpp -o foo
+    run $CLANGPP -stdlib=libc++ -L$LLVM_LIBDIR -Wl,-rpath,$LLVM_LIBDIR foo.cpp -o foo
     assert_success
     run ./foo
 	assert_success
 }
 
 @test "Test libc++abi linking" {
-    if ! dpkg -l | grep -q "libc++abi"; then
-        skip "libc++abi not installed"
+    if ! dpkg -l | grep -q "libc++abi-$LLVM_VERSION"; then
+        skip "libc++abi-$LLVM_VERSION not installed"
     fi
     echo '#include <vector>
     	int main() { std::vector<int> v; v.push_back(1); return 0; }' > foo.cpp
-    run $CLANGPP -stdlib=libc++ -lc++abi foo.cpp -o foo
+    run $CLANGPP -stdlib=libc++ -lc++abi -L$LLVM_LIBDIR -Wl,-rpath,$LLVM_LIBDIR foo.cpp -o foo
     assert_success
     run ./foo
     assert_success
 }
 
 @test "Test libc++ compilation and linking" {
-    if ! dpkg -l | grep -q "libc++"; then
-        skip "libc++ not installed"
+    if ! dpkg -l | grep -q "libc++-$LLVM_VERSION"; then
+        skip "libc++-$LLVM_VERSION not installed"
     fi
     # Create the C++ source file
     cat > "${BATS_TMPDIR}/libcxx_test.cpp" <<EOF
@@ -1301,7 +1309,7 @@ int main(void) {
 EOF
 
     # Compile and link with libc++
-    run $CLANGPP -stdlib=libc++ "${BATS_TMPDIR}/libcxx_test.cpp" -o "${BATS_TMPDIR}/o"
+    run $CLANGPP -stdlib=libc++ -L$LLVM_LIBDIR -Wl,-rpath,$LLVM_LIBDIR "${BATS_TMPDIR}/libcxx_test.cpp" -o "${BATS_TMPDIR}/o"
     assert_success "Compilation with libc++ failed"
 
     # Check if the binary is linked against libc++.so.1
@@ -1317,7 +1325,7 @@ EOF
     assert_success "Execution of binary with libc++ failed"
 
     # Compile with libc++ and C++11 standard
-    run $CLANGPP -std=c++11 -stdlib=libc++ "${BATS_TMPDIR}/libcxx_test.cpp" -o "${BATS_TMPDIR}/o_cpp11"
+    run $CLANGPP -std=c++11 -stdlib=libc++ -L$LLVM_LIBDIR -Wl,-rpath,$LLVM_LIBDIR "${BATS_TMPDIR}/libcxx_test.cpp" -o "${BATS_TMPDIR}/o_cpp11"
     assert_success "Compilation with libc++ and C++11 failed"
 
     # Run the C++11 binary
@@ -1325,7 +1333,7 @@ EOF
     assert_success "Execution of C++11 binary with libc++ failed"
 
     # Compile with libc++, C++14 standard, and experimental features
-    run $CLANGPP -std=c++14 -stdlib=libc++ "${BATS_TMPDIR}/libcxx_test.cpp" -lc++experimental -o "${BATS_TMPDIR}/o_cpp14"
+    run $CLANGPP -std=c++14 -stdlib=libc++ -L$LLVM_LIBDIR -Wl,-rpath,$LLVM_LIBDIR "${BATS_TMPDIR}/libcxx_test.cpp" -lc++experimental -o "${BATS_TMPDIR}/o_cpp14"
     assert_success "Compilation with libc++, C++14, and experimental features failed"
 
     # Run the C++14 experimental binary
@@ -1334,8 +1342,8 @@ EOF
 }
 
 @test "Test libc++ filesystem support" {
-    if ! dpkg -l | grep -q "libc++"; then
-        skip "libc++ not installed"
+    if ! dpkg -l | grep -q "libc++-$LLVM_VERSION"; then
+        skip "libc++-$LLVM_VERSION not installed"
     fi
     echo '#include <filesystem>
     #include <type_traits>
@@ -1348,23 +1356,23 @@ EOF
         return 0;
     }' > "${BATS_TMPDIR}/filesystem_test.cpp"
 
-    run $CLANGPP -std=c++17 -stdlib=libc++ "${BATS_TMPDIR}/filesystem_test.cpp" -o "${BATS_TMPDIR}/filesystem_test"
+    run $CLANGPP -std=c++17 -stdlib=libc++ -L$LLVM_LIBDIR -Wl,-rpath,$LLVM_LIBDIR "${BATS_TMPDIR}/filesystem_test.cpp" -o "${BATS_TMPDIR}/filesystem_test"
     assert_success
 }
 
 @test "Test libc++ and libc++abi compatibility" {
-    if ! dpkg -l | grep -q "libc++"; then
-        skip "libc++ not installed"
+    if ! dpkg -l | grep -q "libc++-$LLVM_VERSION"; then
+        skip "libc++-$LLVM_VERSION not installed"
     fi
-    if ! dpkg -l | grep -q "libc++abi"; then
-        skip "libc++abi not installed"
+    if ! dpkg -l | grep -q "libc++abi-$LLVM_VERSION"; then
+        skip "libc++abi-$LLVM_VERSION not installed"
     fi
     # Create the C++ source file
     echo '#include <chrono>
 int main() { }' > "${BATS_TMPDIR}/foo.cpp"
 
     # Part 1: Compile and link with libc++ and libc++abi
-    run $CLANGPP -stdlib=libc++ -lc++abi "${BATS_TMPDIR}/foo.cpp" -o "${BATS_TMPDIR}/o_libcxxabi"
+    run $CLANGPP -stdlib=libc++ -lc++abi -L$LLVM_LIBDIR -Wl,-rpath,$LLVM_LIBDIR "${BATS_TMPDIR}/foo.cpp" -o "${BATS_TMPDIR}/o_libcxxabi"
     assert_success "Compilation with libc++ and libc++abi failed"
 
     # Execute the binary
@@ -1376,7 +1384,7 @@ int main() { }' > "${BATS_TMPDIR}/foo.cpp"
     assert_output -p "libc++abi.so.1" "Binary is not linked against libc++abi.so.1"
 
     # Part 2: Compile with libc++abi and use libstdc++ headers
-    run $CLANGPP -lc++abi "${BATS_TMPDIR}/foo.cpp" -o "${BATS_TMPDIR}/o_libstdc++"
+    run $CLANGPP -lc++abi -L$LLVM_LIBDIR -Wl,-rpath,$LLVM_LIBDIR "${BATS_TMPDIR}/foo.cpp" -o "${BATS_TMPDIR}/o_libstdc++"
     assert_success "Compilation with libc++abi and libstdc++ headers failed"
 
     # Execute the binary
@@ -1389,8 +1397,8 @@ int main() { }' > "${BATS_TMPDIR}/foo.cpp"
 }
 
 @test "Test C++ exception handling with libc++ (Bug 1586215)" {
-    if ! dpkg -l | grep -q "libc++-$VERSION"; then
-        skip "libc++-$VERSION not installed"
+    if ! dpkg -l | grep -q "libc++-$LLVM_VERSION"; then
+        skip "libc++-$LLVM_VERSION not installed"
     fi
     cat > "${BATS_TMPDIR}/foo.cpp" <<EOF
 #include <string>
@@ -1412,30 +1420,30 @@ int main()
 }
 EOF
 
-    run $CLANGPP -stdlib=libc++ -Wall -Werror "${BATS_TMPDIR}/foo.cpp" -o "${BATS_TMPDIR}/foo"
+    run $CLANGPP -stdlib=libc++ -L$LLVM_LIBDIR -Wl,-rpath,$LLVM_LIBDIR -Wall -Werror "${BATS_TMPDIR}/foo.cpp" -o "${BATS_TMPDIR}/foo"
     assert_success "Compilation with libc++ failed"
 
     run "${BATS_TMPDIR}/foo"
     assert_success "Execution of binary failed"
 }
 @test "Test inline C++ compilation with libc++ (Bug 889832)" {
-    if ! dpkg -l | grep -q "libc++"; then
-        skip "libc++ not installed"
+    if ! dpkg -l | grep -q "libc++-$LLVM_VERSION"; then
+        skip "libc++-$LLVM_VERSION not installed"
     fi
     echo '#include <iostream>
 int main() {}' > foo.cpp
-    run $CLANGPP -std=c++1z -x c++ -stdlib=libc++ foo.cpp
+    run $CLANGPP -std=c++1z -x c++ -stdlib=libc++ -L$LLVM_LIBDIR -Wl,-rpath,$LLVM_LIBDIR foo.cpp
     assert_success "Inline C++ compilation with libc++ failed"
 }
 
 @test "Test inline C++ compilation and libc++ modules (Bug 889832)" {
-    if ! dpkg -l | grep -q "libc++"; then
-        skip "libc++ not installed"
+    if ! dpkg -l | grep -q "libc++-$LLVM_VERSION"; then
+        skip "libc++=$LLVM_VERSION not installed"
     fi
 
     echo '#include <iostream>
 int main() {}' > foo.cpp
-    run $CLANGPP -std=c++1z -x c++ -stdlib=libc++ foo.cpp
+    run $CLANGPP -std=c++1z -x c++ -stdlib=libc++ -L$LLVM_LIBDIR -Wl,-rpath,$LLVM_LIBDIR foo.cpp
     assert_success "Inline C++ compilation with libc++ failed"
 
 
@@ -1452,27 +1460,28 @@ EOF
     # Build the std module
     run $CLANGPP -std=c++20 \
         -nostdinc++ \
-        -isystem /usr/lib/opencilk-$OPENCILK_VERSION/include/c++/v1/ \
+        -isystem /usr/lib/llvm-$LLVM_VERSION/include/c++/v1/ \
         -Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
         --precompile -o "${BATS_TMPDIR}/std.pcm" \
-        -c /usr/lib/opencilk-$OPENCILK_VERSION/share/libc++/v1/std.cppm
+        -c /usr/lib/llvm-$LLVM_VERSION/share/libc++/v1/std.cppm
     assert_success "Compilation of std module failed"
 
     # Build the std.compat module
     run $CLANGPP -std=c++20 \
         -nostdinc++ \
-        -isystem /usr/lib/opencilk-$OPENCILK_VERSION/include/c++/v1/ \
+        -isystem /usr/lib/llvm-$LLVM_VERSION/include/c++/v1/ \
         -Wno-reserved-module-identifier -Wno-reserved-user-defined-literal \
         --precompile -o "${BATS_TMPDIR}/std.compat.pcm" \
         -fmodule-file=std="${BATS_TMPDIR}/std.pcm" \
-        -c /usr/lib/opencilk-$OPENCILK_VERSION/share/libc++/v1/std.compat.cppm
+        -c /usr/lib/llvm-$LLVM_VERSION/share/libc++/v1/std.compat.cppm
     assert_success "Compilation of std.compat module failed"
 
     # Build the test application
     run $CLANGPP -std=c++20 \
         -nostdinc++ \
-        -isystem /usr/lib/opencilk-$OPENCILK_VERSION/include/c++/v1/ \
+        -isystem /usr/lib/llvm-$LLVM_VERSION/include/c++/v1/ \
         -L /usr/lib/opencilk-$OPENCILK_VERSION/lib \
+        -L $LLVM_LIBDIR \
         -fmodule-file=std="${BATS_TMPDIR}/std.pcm" \
         -fmodule-file=std.compat="${BATS_TMPDIR}/std.compat.pcm" \
         "${BATS_TMPDIR}/std.pcm" \
@@ -1497,8 +1506,8 @@ EOF
 }
 
 @test "Test static linking with LLVM libc (libllvmlibc)" {
-    if ! dpkg -l | grep -q "libllvmlibc-$VERSION"; then
-        skip "libllvmlibc-$VERSION not installed"
+    if ! dpkg -l | grep -q "libllvmlibc-$LLVM_VERSION"; then
+        skip "libllvmlibc-$LLVM_VERSION not installed"
     fi
     cat > "${BATS_TMPDIR}/main.c" <<EOF
 #include <math.h>
@@ -1512,7 +1521,7 @@ int main(void)
 EOF
 
     # Compile the C program statically with libllvmlibc
-    run $CLANG -static -nostdlib -nolibc -L/usr/lib/opencilk-$OPENCILK_VERSION/lib/ -lllvmlibc \
+    run $CLANG -static -nostdlib -nolibc -L$LLVM_LIBDIR -L/usr/lib/opencilk-$OPENCILK_VERSION/lib/ -lllvmlibc \
         "${BATS_TMPDIR}/main.c" -o "${BATS_TMPDIR}/foo"
     assert_success "Compilation with libllvmlibc failed"
 
@@ -1772,10 +1781,10 @@ EOF
 }
 
 @test "Test static linking and unwind library (Bug 46321)" {
-    if ! dpkg -l | grep -q "libc++"; then
+    if ! dpkg -l | grep -q "libc++-$LLVM_VERSION"; then
         skip "libc++ not installed"
     fi
-    if ! dpkg -l | grep -q "libunwind"; then
+    if ! dpkg -l | grep -q "libunwind-$LLVM_VERSION"; then
         skip "libunwind not installed"
     fi
     cat > "${BATS_TMPDIR}/test.cpp" <<EOF
@@ -1795,7 +1804,7 @@ EOF
     assert_success "Execution of static-linked binary failed"
 
     # Compile with libc++, static libstdc++, and LLD
-    run $CLANGPP -stdlib=libc++ -static-libstdc++ -fuse-ld=lld -l:libc++abi.a \
+    run $CLANGPP -stdlib=libc++ -static-libstdc++ -fuse-ld=lld -l:libc++abi.a -L $LLVM_LIBDIR \
         "${BATS_TMPDIR}/test.cpp" -o "${BATS_TMPDIR}/test_lld"
     assert_success "Compilation with LLD failed"
 
@@ -1805,7 +1814,7 @@ EOF
 
     # Compile with libc++ and nostdlib++
     run $CLANGPP -stdlib=libc++ -nostdlib++ "${BATS_TMPDIR}/test.cpp" \
-        -l:libc++.a -l:libc++abi.a -pthread -o "${BATS_TMPDIR}/test_nostdlib"
+        -l:libc++.a -l:libc++abi.a -L $LLVM_LIBDIR -pthread -o "${BATS_TMPDIR}/test_nostdlib"
     assert_success "Compilation with nostdlib++ failed"
 
     # Execute the binary
@@ -1985,8 +1994,8 @@ EOF
 }
 
 @test "Test backtrace functionality with libunwind" {
-    if ! test -f "/usr/lib/opencilk-${OPENCILK_VERSION}/lib/libunwind.a"; then
-        skip "libunwind-$VERSION not installed"
+    if ! test -f "/usr/lib/llvm-${LLVM_VERSION}/lib/libunwind.a"; then
+        skip "libunwind-$LLVM_VERSION not installed"
     fi
     # Create the C++ source file for backtrace tests
     cat > "${BATS_TMPDIR}/backtrace_test.cpp" <<EOF
@@ -2072,8 +2081,8 @@ EOF
     assert_success "Execution of backtrace test with compiler-rt failed"
 }
 @test "Test signal handling with libunwind" {
-    if ! test -f "/usr/lib/opencilk-${OPENCILK_VERSION}/lib/libunwind.a"; then
-        skip "libunwind-$VERSION not installed"
+    if ! test -f "/usr/lib/llvm-${LLVM_VERSION}/lib/libunwind.a"; then
+        skip "libunwind-$LLVM_VERSION not installed"
     fi
     # Create the C++ source file for signal handling
     cat > "${BATS_TMPDIR}/signal_test.cpp" <<EOF
@@ -2112,7 +2121,7 @@ int main(int, char**) {
 EOF
 
     # Compile the program with libunwind statically
-    run $CLANGPP "${BATS_TMPDIR}/signal_test.cpp" /usr/lib/opencilk-$OPENCILK_VERSION/lib/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl -o "${BATS_TMPDIR}/signal_test_static"
+    run $CLANGPP "${BATS_TMPDIR}/signal_test.cpp" /usr/lib/llvm-$LLVM_VERSION/lib/libunwind.a -I/usr/include/libunwind/ -lpthread -ldl -o "${BATS_TMPDIR}/signal_test_static"
     assert_success "Compilation of signal handler with static libunwind failed"
 
     # Run the statically linked program (should exit gracefully)
