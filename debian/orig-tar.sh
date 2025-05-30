@@ -199,7 +199,7 @@ rm -rf opencilk-project/cilktools
 rm -rf opencilk-project/integration-test-suite
 
 export DEBFULLNAME="Tao B. Schardl"
-export DEBEMAIL="contact@opencilk.org"
+export DEBEMAIL="neboat@mit.edu"
 cd "$PATH_DEBIAN"
 
 if test -z "$DISTRIBUTION"; then
