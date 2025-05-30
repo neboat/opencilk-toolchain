@@ -359,17 +359,18 @@ endif
 # Disable spirv support for most of the distro versions
 # It needs llvm-spirv-17 and it is rarely available
 # Be prescritive
-SPIRV_DISABLE_DISTRO := bionic buster lunar jammy noble focal buster bullseye bookworm
-ifndef LLVM_SPIRV
-	LLVM_SPIRV_INSTALLED = no
-else
-	ifeq (,$(filter-out $(SPIRV_DISABLE_DISTRO), $(DISTRO)))
-# Too old llvm-spirv version are failing. See #52200
-		LLVM_SPIRV_INSTALLED = no
-	else
-		LLVM_SPIRV_INSTALLED = yes
-	endif
-endif
+LLVM_SPIRV_INSTALLED = no
+# SPIRV_DISABLE_DISTRO := bionic buster lunar jammy noble focal buster bullseye bookworm
+# ifndef LLVM_SPIRV
+# 	LLVM_SPIRV_INSTALLED = no
+# else
+# 	ifeq (,$(filter-out $(SPIRV_DISABLE_DISTRO), $(DISTRO)))
+# # Too old llvm-spirv version are failing. See #52200
+# 		LLVM_SPIRV_INSTALLED = no
+# 	else
+# 		LLVM_SPIRV_INSTALLED = yes
+# 	endif
+# endif
 endif
 
 LIBCLC_TARGETS_TO_BUILD=amdgcn--;amdgcn--amdhsa;amdgcn-mesa-mesa3d;r600--;nvptx--;nvptx64--;nvptx--nvidiacl;nvptx64--nvidiacl
@@ -546,15 +547,15 @@ ifeq (,$(filter-out $(LLDB_PYTHON_DISABLE_DISTRO), $(DISTRO)))
   $(info LLBD Python disabled for $(DISTRO))
 endif
 
-LIBCXX_WASM_ENABLE=yes
-LIBCXX_WASM_DISABLE_DISTRO := bionic buster focal bullseye jammy noble
-# Either wasi-libc doesn't exist / too old
-# or we have this bug
-# https://sourceware.org/bugzilla/show_bug.cgi?id=27558
-ifeq (,$(filter-out $(LIBCXX_WASM_DISABLE_DISTRO), $(DISTRO)))
-  LIBCXX_WASM_ENABLE=no
-  $(info libcxx wasm disabled for $(DISTRO))
-endif
+LIBCXX_WASM_ENABLE=no # yes
+# LIBCXX_WASM_DISABLE_DISTRO := bionic buster focal bullseye jammy
+# # Either wasi-libc doesn't exist / too old
+# # or we have this bug
+# # https://sourceware.org/bugzilla/show_bug.cgi?id=27558
+# ifeq (,$(filter-out $(LIBCXX_WASM_DISABLE_DISTRO), $(DISTRO)))
+#   LIBCXX_WASM_ENABLE=no
+#   $(info libcxx wasm disabled for $(DISTRO))
+# endif
 
 DOC_GENERATION=yes
 DOC_GENERATION_DISTRO := buster bullseye bionic focal

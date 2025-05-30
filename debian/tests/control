@@ -1,8 +1,8 @@
-Test-Command: bash -v ./debian/qualify-clang.sh
+Test-Command: bash -v -c "bats ./debian/qualify-clang.sh"
 Depends: @, cmake, make, g++, file, dpkg-dev, binutils-gold, bats, bats-assert
 # Comment the dbgsym package because of bug #917528
 # dbgsym packages not being available in testing
-# clang-19-dbgsym, libclang1-19-dbgsym
+# clang-19oc3-dbgsym, libclang1-19oc3-dbgsym
 Restrictions: allow-stderr
 Architecture: amd64 arm64 i386
 
@@ -12,14 +12,14 @@ Restrictions: allow-stderr
 Architecture: amd64 arm64
 
 Tests: cmake-llvm-test
-Depends: gcc, build-essential, cmake, llvm-19-dev
+Depends: gcc, build-essential, cmake, llvm-19oc3-dev
 
 Tests: cmake-clang-test
-Depends: gcc, build-essential, cmake, llvm-19-dev, clang-19, libclang-19-dev
+Depends: gcc, build-essential, cmake, llvm-19oc3-dev, clang-19oc3, libclang-19oc3-dev
 
-Test-Command: python3 -c "import lldb; print(lldb.__file__); print(lldb)"
-Depends: python3-lldb-19
-Architecture: amd64 arm64 armel armhf i386 ppc64el riscv64 s390x
+# Test-Command: python3 -c "import lldb; print(lldb.__file__); print(lldb)"
+# Depends: python3-lldb-19oc3
+# Architecture: amd64 arm64 armel armhf i386 ppc64el riscv64 s390x
 
 Test-Command: python3 -c "import clang; print(clang.__file__); print(clang)"
-Depends: python3-clang-19
+Depends: python3-clang-19oc3

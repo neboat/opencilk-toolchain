@@ -2,6 +2,7 @@
 
 set -e
 
+OPENCILK_VERSION=3
 LLVM_VERSION=19
 
 # this is taken from libjsoncpp package
@@ -30,6 +31,7 @@ find_package(LLVM $LLVM_VERSION.1 REQUIRED
     TransformUtils
     llvm-as
     llvm-dis
+  HINTS /usr/lib/opencilk-${OPENCILK_VERSION}/
 )
 
 EOF
