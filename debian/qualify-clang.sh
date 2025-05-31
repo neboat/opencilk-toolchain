@@ -673,8 +673,8 @@ EOF
 # ===================== lldb
 
 @test "Test LLDB debugger functionality" {
-    if ! dpkg -l | grep -q "lldb-$VERSION"; then
-        skip "lldb-$VERSION not installed"
+    if ! dpkg -l | grep -q "lldb-$LLVM_VERSION"; then
+        skip "lldb-$LLVM_VERSION not installed"
     fi
     echo '#include <stdio.h>
     int main() {
@@ -690,7 +690,7 @@ EOF
     bt
     quit" > "${BATS_TMPDIR}/lldb_commands.txt"
 
-    run lldb-$VERSION -s "${BATS_TMPDIR}/lldb_commands.txt" "${BATS_TMPDIR}/lldb_test"
+    run lldb-$LLVM_VERSION -s "${BATS_TMPDIR}/lldb_commands.txt" "${BATS_TMPDIR}/lldb_test"
     assert_success
 }
 
@@ -720,7 +720,7 @@ p a
 quit
 " > "${BATS_TMPDIR}/lldb_commands.txt"
 
-    run lldb-$VERSION -s "${BATS_TMPDIR}/lldb_commands.txt" "${BATS_TMPDIR}/foo32"
+    run lldb-$LLVM_VERSION -s "${BATS_TMPDIR}/lldb_commands.txt" "${BATS_TMPDIR}/foo32"
     assert_output -p "stop reason = step over"
 }
 
