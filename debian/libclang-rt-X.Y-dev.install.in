@@ -6,17 +6,17 @@ usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.cr
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.asan*
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.builtins*
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.cfi*
-usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.ctx*
-usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.dd*
+[amd64 i386] usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.ctx*
+[amd64 i386] usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.dd*
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.dfsan*
-usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.dyndd*
+[amd64 i386] usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.dyndd*
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.fuzzer*
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.gwp*
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.hwasan*
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.lsan*
-usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.memprof*
+[amd64 i386] usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.memprof*
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.msan*
-usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.nsan*
+[amd64 i386] usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.nsan*
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.profile*
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.rtsan*
 usr/lib/opencilk-@OPENCILK_VERSION@/lib/clang/@LLVM_VERSION@*/lib/*/*clang_rt.safestack*
